@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 final class RegistrationTest extends TestCase
 {
@@ -135,7 +136,7 @@ final class RegistrationTest extends TestCase
      */
     public function setEventSetsEvent(): void
     {
-        /** @var \Tx_Seminars_Model_Event $event */
+        /** @var Event $event */
         $event = MapperRegistry::get(EventMapper::class)->getNewGhost();
         $this->subject->setEvent($event);
 
@@ -150,7 +151,7 @@ final class RegistrationTest extends TestCase
      */
     public function setSeminarSetsEvent(): void
     {
-        /** @var \Tx_Seminars_Model_Event $event */
+        /** @var Event $event */
         $event = MapperRegistry::get(EventMapper::class)->getNewGhost();
         $this->subject->setSeminar($event);
 

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -43,7 +44,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->find(1);
 
-        self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $result);
+        self::assertInstanceOf(Event::class, $result);
     }
 
     /**

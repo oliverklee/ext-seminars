@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * This test case holds tests which are specific to single events.
@@ -54,7 +55,7 @@ final class SingleEventMapperTest extends TestCase
         );
 
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $testingModel->getTopic();
@@ -68,7 +69,7 @@ final class SingleEventMapperTest extends TestCase
     public function getCategoriesForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCategories());
@@ -81,7 +82,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
@@ -103,7 +104,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -128,7 +129,7 @@ final class SingleEventMapperTest extends TestCase
     public function getEventTypeForSingleEventWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertNull($testingModel->getEventType());
@@ -143,7 +144,7 @@ final class SingleEventMapperTest extends TestCase
             ->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $eventType->getUid(),
             ]
         );
@@ -159,7 +160,7 @@ final class SingleEventMapperTest extends TestCase
     public function getPaymentMethodsForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
@@ -175,7 +176,7 @@ final class SingleEventMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'payment_methods' => 1,
             ]
         );
@@ -199,7 +200,7 @@ final class SingleEventMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'payment_methods' => 1,
             ]
         );
@@ -226,7 +227,7 @@ final class SingleEventMapperTest extends TestCase
     public function getTargetGroupsForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
@@ -239,7 +240,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -264,7 +265,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -288,7 +289,7 @@ final class SingleEventMapperTest extends TestCase
     public function getTargetGroupsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
@@ -301,7 +302,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -326,7 +327,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -352,7 +353,7 @@ final class SingleEventMapperTest extends TestCase
     public function getCheckboxesForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
@@ -365,7 +366,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
@@ -387,7 +388,7 @@ final class SingleEventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();

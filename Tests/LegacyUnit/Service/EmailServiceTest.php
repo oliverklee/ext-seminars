@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -63,7 +64,7 @@ final class EmailServiceTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var \Tx_Seminars_Model_Event
+     * @var Event
      */
     private $event = null;
 
@@ -114,7 +115,7 @@ final class EmailServiceTest extends TestCase
         $organizers = new Collection();
         $organizers->add($this->organizer);
 
-        $this->event = new \Tx_Seminars_Model_Event();
+        $this->event = new Event();
         $this->event->setData(
             [
                 'title' => 'A nice event',

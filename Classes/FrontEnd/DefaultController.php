@@ -37,6 +37,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1399,7 +1400,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideUnneededSubpartsForTopicRecords(): void
     {
-        if ($this->seminar->getRecordType() != \Tx_Seminars_Model_Event::TYPE_TOPIC) {
+        if ($this->seminar->getRecordType() != Event::TYPE_TOPIC) {
             return;
         }
 
@@ -1479,7 +1480,7 @@ class DefaultController extends TemplateHelper
             if (
                 \in_array(
                     $this->seminar->getRecordType(),
-                    [\Tx_Seminars_Model_Event::TYPE_COMPLETE, \Tx_Seminars_Model_Event::TYPE_TOPIC],
+                    [Event::TYPE_COMPLETE, Event::TYPE_TOPIC],
                     true
                 )
             ) {
@@ -3243,7 +3244,7 @@ class DefaultController extends TemplateHelper
     /**
      * Marks the given event as hidden and saves it.
      */
-    protected function hideEvent(\Tx_Seminars_Model_Event $event): void
+    protected function hideEvent(Event $event): void
     {
         $event->markAsHidden();
         $mapper = MapperRegistry::get(EventMapper::class);
@@ -3255,7 +3256,7 @@ class DefaultController extends TemplateHelper
     /**
      * Marks the given event as visible and saves it.
      */
-    protected function unhideEvent(\Tx_Seminars_Model_Event $event): void
+    protected function unhideEvent(Event $event): void
     {
         $event->markAsVisible();
         $mapper = MapperRegistry::get(EventMapper::class);
@@ -3267,7 +3268,7 @@ class DefaultController extends TemplateHelper
     /**
      * Creates a hidden copy of the given and saves it.
      */
-    protected function copyEvent(\Tx_Seminars_Model_Event $event): void
+    protected function copyEvent(Event $event): void
     {
         /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
@@ -3298,7 +3299,7 @@ class DefaultController extends TemplateHelper
      * @return string HTML  for the link to the event's single view page
      */
     public function createSingleViewLink(
-        \Tx_Seminars_Model_Event $event,
+        Event $event,
         string $linkText,
         bool $htmlspecialcharLinkText = true
     ): string {

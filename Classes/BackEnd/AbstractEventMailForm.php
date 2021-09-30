@@ -13,6 +13,7 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -39,7 +40,7 @@ abstract class AbstractEventMailForm
     private $oldEvent = null;
 
     /**
-     * @var \Tx_Seminars_Model_Event the event which this e-mail form refers to
+     * @var Event the event which this e-mail form refers to
      */
     private $event = null;
 
@@ -288,9 +289,9 @@ abstract class AbstractEventMailForm
     /**
      * Returns the event this e-mail form refers to.
      *
-     * @return \Tx_Seminars_Model_Event the event
+     * @return Event the event
      */
-    protected function getEvent(): \Tx_Seminars_Model_Event
+    protected function getEvent(): Event
     {
         return $this->event;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service;
 
+use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -25,13 +26,13 @@ class TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBu
      * Gets the single view page UID/URL from $event (if any single view page is set for
      * the event) or from the configuration.
      *
-     * @param \Tx_Seminars_Model_Event $event the event for which to get the single view page
+     * @param Event $event the event for which to get the single view page
      *
      * @return string
      *         the single view page UID/URL for $event, will be empty if neither
      *         the event nor the configuration has any single view page set
      */
-    public function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event): string
+    public function getSingleViewPageForEvent(Event $event): string
     {
         return parent::getSingleViewPageForEvent($event);
     }

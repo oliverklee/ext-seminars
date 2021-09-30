@@ -9,11 +9,12 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * This class represents a mapper for events.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Event>
+ * @extends AbstractDataMapper<Event>
  */
 class EventMapper extends AbstractDataMapper
 {
@@ -25,7 +26,7 @@ class EventMapper extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Event::class;
+    protected $modelClassName = Event::class;
 
     /**
      * @var array<string, class-string<AbstractDataMapper>>
@@ -58,14 +59,14 @@ class EventMapper extends AbstractDataMapper
     /**
      * Retrieves an event model with the publication hash provided.
      */
-    public function findByPublicationHash(string $publicationHash): ?\Tx_Seminars_Model_Event
+    public function findByPublicationHash(string $publicationHash): ?Event
     {
         if ($publicationHash === '') {
             throw new \InvalidArgumentException('The given publication hash was empty.', 1333292411);
         }
 
         try {
-            /** @var \Tx_Seminars_Model_Event $result */
+            /** @var Event $result */
             $result = $this->findSingleByWhereClause(['publication_hash' => $publicationHash]);
         } catch (NotFoundException $exception) {
             $result = null;
@@ -84,7 +85,7 @@ class EventMapper extends AbstractDataMapper
      * @param int $minimum minimum begin date as a UNIX timestamp, must be >= 0
      * @param int $maximum maximum begin date as a UNIX timestamp, must be >= $minimum
      *
-     * @return Collection<\Tx_Seminars_Model_Event> the found event models, will be empty if there are no matches
+     * @return Collection<Event> the found event models, will be empty if there are no matches
      */
     public function findAllByBeginDate(int $minimum, int $maximum): Collection
     {
@@ -124,11 +125,11 @@ class EventMapper extends AbstractDataMapper
     /**
      * Returns the next upcoming event.
      *
-     * @return \Tx_Seminars_Model_Event the next upcoming event
+     * @return Event the next upcoming event
      *
      * @throws NotFoundException
      */
-    public function findNextUpcoming(): \Tx_Seminars_Model_Event
+    public function findNextUpcoming(): Event
     {
         $columns = explode(',', $this->columns);
         $queryBuilder = $this->getQueryBuilderForTable($this->tableName);
@@ -140,11 +141,11 @@ class EventMapper extends AbstractDataMapper
             ->where(
                 $queryBuilder->expr()->neq(
                     'cancelled',
-                    $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::STATUS_CANCELED, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(Event::STATUS_CANCELED, \PDO::PARAM_INT)
                 ),
                 $queryBuilder->expr()->neq(
                     'object_type',
-                    $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(Event::TYPE_TOPIC, \PDO::PARAM_INT)
                 ),
                 $queryBuilder->expr()->gt(
                     'begin_date',
@@ -159,7 +160,7 @@ class EventMapper extends AbstractDataMapper
             throw new NotFoundException('Not found.', 1574004668);
         }
 
-        /** @var \Tx_Seminars_Model_Event $next */
+        /** @var Event $next */
         $next = $this->getModel($row);
 
         return $next;
@@ -168,7 +169,7 @@ class EventMapper extends AbstractDataMapper
     /**
      * Finds events that have the status "planned" and that have the automatic status change enabled.
      *
-     * @return Collection<\Tx_Seminars_Model_Event>
+     * @return Collection<Event>
      */
     public function findForAutomaticStatusChange(): Collection
     {
@@ -180,7 +181,7 @@ class EventMapper extends AbstractDataMapper
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'cancelled',
-                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::STATUS_PLANNED, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(Event::STATUS_PLANNED, \PDO::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'automatic_confirmation_cancelation',
@@ -202,11 +203,11 @@ class EventMapper extends AbstractDataMapper
      *
      * This method will only find complete events and dates, but no topics.
      *
-     * @return Collection<\Tx_Seminars_Model_Event>
+     * @return Collection<Event>
      */
     public function findForRegistrationDigestEmail(): Collection
     {
-        $whereClause = 'registrations <> 0 AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
+        $whereClause = 'registrations <> 0 AND object_type <> ' . Event::TYPE_TOPIC .
             ' AND hidden = 0 AND deleted = 0 ' .
             ' AND EXISTS (' .
             'SELECT * FROM tx_seminars_attendances ' .

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -68,7 +69,7 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
 
         /** @var Statement $statement */
         $statement = $this->getDatabaseConnection()->select('cancelled', 'tx_seminars_seminars', 'uid = 3');
-        self::assertSame(\Tx_Seminars_Model_Event::STATUS_CONFIRMED, $statement->fetchColumn(0));
+        self::assertSame(Event::STATUS_CONFIRMED, $statement->fetchColumn(0));
     }
 
     /**

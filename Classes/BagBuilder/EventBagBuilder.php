@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\BagBuilder;
 
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -113,10 +114,10 @@ class EventBagBuilder extends AbstractBagBuilder
 
         $this->whereClauseParts['categories'] =
             '(' .
-            '(object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type <> ' . Event::TYPE_DATE . ' AND ' .
             'tx_seminars_seminars.uid' . $uidMatcher . ')' .
             ' OR ' .
-            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type = ' . Event::TYPE_DATE . ' AND ' .
             'tx_seminars_seminars.topic' . $uidMatcher . ')' .
             ')';
     }
@@ -152,7 +153,7 @@ class EventBagBuilder extends AbstractBagBuilder
      */
     public function ignoreCanceledEvents(): void
     {
-        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED;
+        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . Event::STATUS_CANCELED;
     }
 
     /**
@@ -306,10 +307,10 @@ class EventBagBuilder extends AbstractBagBuilder
         $this->whereClauseParts['eventTypes'] = '(
             (
                 object_type IN(' .
-            \Tx_Seminars_Model_Event::TYPE_COMPLETE . ',' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
+            Event::TYPE_COMPLETE . ',' . Event::TYPE_TOPIC .
             ') AND event_type IN(' . $safeEventTypeUids . ')
             ) OR (
-                object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND EXISTS (
+                object_type = ' . Event::TYPE_DATE . ' AND EXISTS (
                     SELECT * FROM tx_seminars_seminars AS topic
                     WHERE topic.uid = tx_seminars_seminars.topic AND topic.event_type IN(' . $safeEventTypeUids . ')
                 )
@@ -413,7 +414,7 @@ class EventBagBuilder extends AbstractBagBuilder
     public function limitToTopicRecords(): void
     {
         $this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
-            '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC;
+            '.object_type = ' . Event::TYPE_TOPIC;
     }
 
     /**
@@ -450,9 +451,9 @@ class EventBagBuilder extends AbstractBagBuilder
     public function limitToDateAndSingleRecords(): void
     {
         $this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
-            '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' OR ' .
+            '.object_type = ' . Event::TYPE_DATE . ' OR ' .
             'tx_seminars_seminars.object_type = ' .
-            \Tx_Seminars_Model_Event::TYPE_COMPLETE . ')';
+            Event::TYPE_COMPLETE . ')';
     }
 
     /**
@@ -536,7 +537,7 @@ class EventBagBuilder extends AbstractBagBuilder
 
         $this->whereClauseParts['other_dates'] = '(' .
             'tx_seminars_seminars.topic = ' . $event->getTopicOrSelfUid() .
-            ' AND object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE .
+            ' AND object_type = ' . Event::TYPE_DATE .
             ' AND uid <> ' . $event->getUid() .
             ')';
     }
@@ -626,7 +627,7 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * Limits the bag to events in status $status.
      *
-     * @param int $status \Tx_Seminars_Model_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+     * @param int $status Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
      */
     public function limitToStatus(int $status): void
     {
@@ -699,8 +700,8 @@ class EventBagBuilder extends AbstractBagBuilder
             'SELECT * FROM tx_seminars_event_types, tx_seminars_seminars s1, tx_seminars_seminars s2' .
             ' WHERE (MATCH (tx_seminars_event_types.title) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)' .
             ' AND tx_seminars_event_types.uid = s1.event_type' .
-            ' AND ((s1.uid = s2.topic AND s2.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ') ' .
-            'OR (s1.uid = s2.uid AND s1.object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE . '))' .
+            ' AND ((s1.uid = s2.topic AND s2.object_type = ' . Event::TYPE_DATE . ') ' .
+            'OR (s1.uid = s2.uid AND s1.object_type <> ' . Event::TYPE_DATE . '))' .
             ' AND s2.uid = tx_seminars_seminars.uid)' .
             ')',
         ];
@@ -752,8 +753,8 @@ class EventBagBuilder extends AbstractBagBuilder
 
         $inUids = ' IN (' . \implode(',', $matchingUids) . ')';
         return [
-            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
-            '(tx_seminars_seminars.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type = ' . Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
+            '(tx_seminars_seminars.object_type = ' . Event::TYPE_DATE . ' AND ' .
             'tx_seminars_seminars.topic' . $inUids . ')',
         ];
     }
@@ -825,9 +826,9 @@ class EventBagBuilder extends AbstractBagBuilder
             'EXISTS ' .
             '(SELECT * FROM ' . 'tx_seminars_seminars s1, ' . $mmTable . ', ' . $foreignTable .
             ' WHERE ((tx_seminars_seminars.object_type = ' .
-            \Tx_Seminars_Model_Event::TYPE_DATE . ' AND s1.object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE .
+            Event::TYPE_DATE . ' AND s1.object_type <> ' . Event::TYPE_DATE .
             ' AND tx_seminars_seminars.topic = s1.uid)' .
-            ' OR (tx_seminars_seminars.object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE .
+            ' OR (tx_seminars_seminars.object_type = ' . Event::TYPE_COMPLETE .
             ' AND tx_seminars_seminars.uid = s1.uid))' .
             ' AND ' . $mmTable . '.uid_local = s1.uid' .
             ' AND ' . $mmTable . '.uid_foreign = ' . $foreignTable . '.uid' .
@@ -1103,10 +1104,10 @@ class EventBagBuilder extends AbstractBagBuilder
         }
 
         $this->whereClauseParts['eventsWithOrganizers'] =
-            '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') ' .
+            '((object_type = ' . Event::TYPE_COMPLETE . ') ' .
             'AND (tx_seminars_seminars.uid IN (' . $eventUids .
             ')) OR (' .
-            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ') AND (' .
+            '(object_type = ' . Event::TYPE_DATE . ') AND (' .
             'tx_seminars_seminars.topic IN (' . $eventUids . ')))' .
             ')';
     }
@@ -1158,11 +1159,11 @@ class EventBagBuilder extends AbstractBagBuilder
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(Event::TYPE_COMPLETE, \PDO::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(Event::TYPE_TOPIC, \PDO::PARAM_INT)
                     )
                 ),
                 $queryBuilder->expr()->eq(
@@ -1199,10 +1200,10 @@ class EventBagBuilder extends AbstractBagBuilder
         } else {
             $matchingEventsUidList = \implode(',', $matchingEventsUids);
             $this->whereClauseParts['ageLimit'] =
-                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
+                '((object_type = ' . Event::TYPE_COMPLETE . ' AND ' .
                 'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
                 'OR ' .
-                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                '(object_type = ' . Event::TYPE_DATE . ' AND ' .
                 'topic IN (' . $matchingEventsUidList . '))' .
                 ')';
         }
@@ -1223,8 +1224,8 @@ class EventBagBuilder extends AbstractBagBuilder
         $notZeroAndInRange = '(%1$s > 0 AND %1$s <= %2$u)';
         $now = $GLOBALS['SIM_EXEC_TIME'];
 
-        $whereClause = '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
-            'object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
+        $whereClause = '(object_type = ' . Event::TYPE_TOPIC . ' OR ' .
+            'object_type = ' . Event::TYPE_COMPLETE . ') AND (' .
             '(deadline_early_bird < ' . $now . ' AND ' .
             '(price_regular <= ' . $maximumPrice . ' OR ' .
             \sprintf($notZeroAndInRange, 'price_special', $maximumPrice) . ')) ' .
@@ -1258,10 +1259,10 @@ class EventBagBuilder extends AbstractBagBuilder
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
-                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
+                '((object_type = ' . Event::TYPE_COMPLETE . ' ' .
                 'AND tx_seminars_seminars.uid IN (' . $foundUids .
                 ')) OR ' .
-                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                '(object_type = ' . Event::TYPE_DATE . ' AND ' .
                 'topic IN (' . $foundUids . ')))';
         }
     }
@@ -1279,8 +1280,8 @@ class EventBagBuilder extends AbstractBagBuilder
         }
 
         $now = $GLOBALS['SIM_EXEC_TIME'];
-        $whereClause = '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
-            'object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
+        $whereClause = '(object_type = ' . Event::TYPE_TOPIC . ' OR ' .
+            'object_type = ' . Event::TYPE_COMPLETE . ') AND (' .
             '(deadline_early_bird < ' . $now . ' ' .
             'AND (price_regular >= ' . $minimumPrice . ' ' .
             'OR price_special >= ' . $minimumPrice . ')' .
@@ -1311,10 +1312,10 @@ class EventBagBuilder extends AbstractBagBuilder
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
-                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
+                '((object_type = ' . Event::TYPE_COMPLETE . ' ' .
                 'AND tx_seminars_seminars.uid IN (' . $foundUids .
                 ')) OR ' .
-                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                '(object_type = ' . Event::TYPE_DATE . ' AND ' .
                 'topic IN (' . $foundUids . ')))';
         }
     }

@@ -11,12 +11,16 @@ use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Event;
 use PHPUnit\Framework\MockObject\MockObject;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\Event
+ */
 final class EventTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Event
+     * @var Event
      */
     private $subject = null;
 
@@ -37,7 +41,7 @@ final class EventTest extends TestCase
         $this->configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
-        $this->subject = new \Tx_Seminars_Model_Event();
+        $this->subject = new Event();
     }
 
     protected function tearDown(): void
@@ -55,7 +59,7 @@ final class EventTest extends TestCase
     public function isSingleEventForSingleRecordReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertTrue(
@@ -69,7 +73,7 @@ final class EventTest extends TestCase
     public function isSingleEventForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
@@ -83,7 +87,7 @@ final class EventTest extends TestCase
     public function isSingleEventForDateRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
 
         self::assertFalse(
@@ -101,7 +105,7 @@ final class EventTest extends TestCase
     public function isEventDateForSingleRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -115,7 +119,7 @@ final class EventTest extends TestCase
     public function isEventDateForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
@@ -130,8 +134,8 @@ final class EventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => new \Tx_Seminars_Model_Event(),
+                'object_type' => Event::TYPE_DATE,
+                'topic' => new Event(),
             ]
         );
 
@@ -147,7 +151,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => null,
             ]
         );
@@ -167,11 +171,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+            Event::TYPE_COMPLETE,
             $this->subject->getRecordType()
         );
     }
@@ -182,11 +186,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::TYPE_DATE,
+            Event::TYPE_DATE,
             $this->subject->getRecordType()
         );
     }
@@ -197,11 +201,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic(): void
     {
         $this->subject->setData(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::TYPE_TOPIC,
+            Event::TYPE_TOPIC,
             $this->subject->getRecordType()
         );
     }
@@ -1076,9 +1080,9 @@ final class EventTest extends TestCase
      */
     public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $subject */
+        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getCombinedSingleViewPage']
         );
         $subject->expects(self::atLeastOnce())
@@ -1094,9 +1098,9 @@ final class EventTest extends TestCase
      */
     public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $subject */
+        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getCombinedSingleViewPage']
         );
         $subject->expects(self::atLeastOnce())
@@ -1568,7 +1572,7 @@ final class EventTest extends TestCase
         $this->subject->setData([]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_PLANNED,
+            Event::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1579,11 +1583,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusPlannedReturnsStatusPlanned(): void
     {
         $this->subject->setData(
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => Event::STATUS_PLANNED]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_PLANNED,
+            Event::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1594,11 +1598,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusCanceledReturnStatusCanceled(): void
     {
         $this->subject->setData(
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => Event::STATUS_CANCELED]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_CANCELED,
+            Event::STATUS_CANCELED,
             $this->subject->getStatus()
         );
     }
@@ -1609,11 +1613,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusConfirmedReturnsStatusConfirmed(): void
     {
         $this->subject->setData(
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => Event::STATUS_CONFIRMED]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            Event::STATUS_CONFIRMED,
             $this->subject->getStatus()
         );
     }
@@ -1633,10 +1637,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusPlannedSetsStatus(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_PLANNED,
+            Event::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1646,10 +1650,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusCanceledSetsStatus(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_CANCELED,
+            Event::STATUS_CANCELED,
             $this->subject->getStatus()
         );
     }
@@ -1659,10 +1663,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusConfirmedSetsStatus(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            Event::STATUS_CONFIRMED,
             $this->subject->getStatus()
         );
     }
@@ -1672,7 +1676,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForPlannedStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         self::assertTrue($this->subject->isPlanned());
     }
@@ -1682,7 +1686,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForCanceledStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         self::assertFalse($this->subject->isPlanned());
     }
@@ -1692,7 +1696,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForConfirmedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         self::assertFalse($this->subject->isPlanned());
     }
@@ -1702,7 +1706,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForPlannedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         self::assertFalse($this->subject->isCanceled());
     }
@@ -1712,7 +1716,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForCanceledStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         self::assertTrue($this->subject->isCanceled());
     }
@@ -1722,7 +1726,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForConfirmedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         self::assertFalse($this->subject->isCanceled());
     }
@@ -1732,7 +1736,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForPlannedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         self::assertFalse($this->subject->isConfirmed());
     }
@@ -1742,7 +1746,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForCanceledStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         self::assertFalse($this->subject->isConfirmed());
     }
@@ -1752,7 +1756,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForConfirmedStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         self::assertTrue($this->subject->isConfirmed());
     }
@@ -1762,7 +1766,7 @@ final class EventTest extends TestCase
      */
     public function cancelCanMakePlannedEventCanceled(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         $this->subject->cancel();
 
@@ -1774,7 +1778,7 @@ final class EventTest extends TestCase
      */
     public function cancelCanMakeConfirmedEventCanceled(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         $this->subject->cancel();
 
@@ -1788,7 +1792,7 @@ final class EventTest extends TestCase
      */
     public function cancelForCanceledEventNotThrowsException(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         $this->subject->cancel();
     }
@@ -1798,7 +1802,7 @@ final class EventTest extends TestCase
      */
     public function confirmCanMakePlannedEventConfirmed(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->setStatus(Event::STATUS_PLANNED);
 
         $this->subject->confirm();
 
@@ -1810,7 +1814,7 @@ final class EventTest extends TestCase
      */
     public function confirmCanMakeCanceledEventConfirmed(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->setStatus(Event::STATUS_CANCELED);
 
         $this->subject->confirm();
 
@@ -1824,7 +1828,7 @@ final class EventTest extends TestCase
      */
     public function confirmForConfirmedEventNotThrowsException(): void
     {
-        $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(Event::STATUS_CONFIRMED);
 
         $this->subject->confirm();
     }
@@ -2276,9 +2280,9 @@ final class EventTest extends TestCase
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getQueueRegistrations']
         );
         $event->method('getQueueRegistrations')
@@ -2345,9 +2349,9 @@ final class EventTest extends TestCase
      */
     public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getQueueRegistrations']
         );
         $event->method('getQueueRegistrations')
@@ -2395,9 +2399,9 @@ final class EventTest extends TestCase
      */
     public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
@@ -2419,9 +2423,9 @@ final class EventTest extends TestCase
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['seats' => 1]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
@@ -2443,9 +2447,9 @@ final class EventTest extends TestCase
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['seats' => 2]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
@@ -2467,9 +2471,9 @@ final class EventTest extends TestCase
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['seats' => 1]);
         $queueRegistrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegularRegistrations', 'getQueueRegistrations']
         );
         $event->setData([]);
@@ -2489,9 +2493,9 @@ final class EventTest extends TestCase
      */
     public function getRegisteredSeatsCountsOfflineRegistrations(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegularRegistrations']
         );
         $event->setData(['offline_attendees' => 2]);
@@ -2513,9 +2517,9 @@ final class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 0]);
@@ -2532,9 +2536,9 @@ final class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
@@ -2551,9 +2555,9 @@ final class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
@@ -2570,9 +2574,9 @@ final class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 1]);
@@ -2593,9 +2597,9 @@ final class EventTest extends TestCase
      */
     public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2613,9 +2617,9 @@ final class EventTest extends TestCase
      */
     public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2633,9 +2637,9 @@ final class EventTest extends TestCase
      */
     public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2653,9 +2657,9 @@ final class EventTest extends TestCase
      */
     public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2677,9 +2681,9 @@ final class EventTest extends TestCase
      */
     public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2696,9 +2700,9 @@ final class EventTest extends TestCase
      */
     public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2715,9 +2719,9 @@ final class EventTest extends TestCase
      */
     public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2734,9 +2738,9 @@ final class EventTest extends TestCase
      */
     public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2757,9 +2761,9 @@ final class EventTest extends TestCase
      */
     public function isFullForLessSeatsThanMaximumReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2776,9 +2780,9 @@ final class EventTest extends TestCase
      */
     public function isFullForAsManySeatsAsMaximumReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2795,9 +2799,9 @@ final class EventTest extends TestCase
      */
     public function isFullForMoreSeatsThanMaximumReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2814,9 +2818,9 @@ final class EventTest extends TestCase
      */
     public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2833,9 +2837,9 @@ final class EventTest extends TestCase
      */
     public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);

@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\RegistrationMapper
@@ -76,7 +77,7 @@ final class RegistrationMapperTest extends TestCase
             ->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
-        self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getEvent());
+        self::assertInstanceOf(Event::class, $testingModel->getEvent());
     }
 
     /**
@@ -88,7 +89,7 @@ final class RegistrationMapperTest extends TestCase
             ->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
-        self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getSeminar());
+        self::assertInstanceOf(Event::class, $testingModel->getSeminar());
     }
 
     // Tests concerning the front-end user.

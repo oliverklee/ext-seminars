@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * This test case holds all tests specific to event topics.
@@ -56,7 +57,7 @@ final class EventTopicMapperTest extends TestCase
         );
 
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         $testingModel->getTopic();
@@ -70,7 +71,7 @@ final class EventTopicMapperTest extends TestCase
     public function getCategoriesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCategories());
@@ -83,7 +84,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
@@ -105,7 +106,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
@@ -131,7 +132,7 @@ final class EventTopicMapperTest extends TestCase
     public function getEventTypeForEventTopicWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertNull($testingModel->getEventType());
@@ -146,7 +147,7 @@ final class EventTopicMapperTest extends TestCase
             ->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'event_type' => $eventType->getUid(),
             ]
         );
@@ -162,7 +163,7 @@ final class EventTopicMapperTest extends TestCase
     public function getPaymentMethodsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
@@ -177,7 +178,7 @@ final class EventTopicMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'payment_methods' => 1,
             ]
         );
@@ -201,7 +202,7 @@ final class EventTopicMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'payment_methods' => 1,
             ]
         );
@@ -226,7 +227,7 @@ final class EventTopicMapperTest extends TestCase
     public function getTargetGroupsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
@@ -239,7 +240,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -264,7 +265,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
@@ -290,7 +291,7 @@ final class EventTopicMapperTest extends TestCase
     public function getCheckboxesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
@@ -303,7 +304,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
@@ -325,7 +326,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();

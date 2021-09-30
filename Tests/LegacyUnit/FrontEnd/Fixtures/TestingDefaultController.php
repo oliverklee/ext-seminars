@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures;
 
 use OliverKlee\Seminars\FrontEnd\DefaultController;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -32,17 +33,17 @@ class TestingDefaultController extends DefaultController
         parent::processEventEditorActions();
     }
 
-    public function hideEvent(\Tx_Seminars_Model_Event $event): void
+    public function hideEvent(Event $event): void
     {
         parent::hideEvent($event);
     }
 
-    public function unhideEvent(\Tx_Seminars_Model_Event $event): void
+    public function unhideEvent(Event $event): void
     {
         parent::unhideEvent($event);
     }
 
-    public function copyEvent(\Tx_Seminars_Model_Event $event): void
+    public function copyEvent(Event $event): void
     {
         parent::copyEvent($event);
     }

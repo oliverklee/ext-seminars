@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
@@ -196,7 +197,7 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $builder = $this->getSeminarBagBuilder(Event::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
         /** @var LegacyEvent $event */
@@ -223,7 +224,7 @@ class MailNotifier extends AbstractTask
         $result = [];
 
         /** @var EventBagBuilder $builder */
-        $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $builder = $this->getSeminarBagBuilder(Event::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
         /** @var EventBag $bag */
         $bag = $builder->build();
@@ -355,7 +356,7 @@ class MailNotifier extends AbstractTask
     {
         $languageService = $this->getLanguageService();
 
-        /** @var \Tx_Seminars_Model_Event $event */
+        /** @var Event $event */
         foreach ($this->eventMapper->findForAutomaticStatusChange() as $event) {
             $statusWasChanged = $this->eventStatusService->updateStatusAndSave($event);
             if (!$statusWasChanged) {

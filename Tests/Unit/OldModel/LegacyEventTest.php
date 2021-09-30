@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Bag\OrganizerBag;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -173,11 +174,11 @@ final class LegacyEventTest extends UnitTestCase
     public function hasCheckboxesForDateWithOneCheckboxReturnsTrue(): void
     {
         $data = [
-            'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+            'object_type' => Event::TYPE_DATE,
             'checkboxes' => 1,
         ];
         $subject = LegacyEvent::fromData($data);
-        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC]);
         $subject->setTopic($topic);
 
         self::assertTrue($subject->hasCheckboxes());
@@ -261,11 +262,11 @@ final class LegacyEventTest extends UnitTestCase
     {
         $topic = LegacyEvent::fromData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'attached_files' => 'test.file',
             ]
         );
-        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         self::assertTrue($date->hasAttachedFiles());
@@ -276,8 +277,8 @@ final class LegacyEventTest extends UnitTestCase
      */
     public function hasAttachedFilesForDateAndTopicWithoutFilesReturnsFalse(): void
     {
-        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
-        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC]);
+        $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         self::assertFalse($date->hasAttachedFiles());

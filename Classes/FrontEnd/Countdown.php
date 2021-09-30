@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -51,7 +52,7 @@ class Countdown extends AbstractView
         }
 
         try {
-            /** @var \Tx_Seminars_Model_Event $event */
+            /** @var Event $event */
             $event = $this->mapper->findNextUpcoming();
 
             $message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());

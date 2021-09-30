@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Event;
+
 /**
  * This class represents a time-slot.
  */
@@ -43,9 +45,9 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns the seminar/event this time-slot belongs to.
      */
-    public function getSeminar(): ?\Tx_Seminars_Model_Event
+    public function getSeminar(): ?Event
     {
-        /** @var \Tx_Seminars_Model_Event|null $model */
+        /** @var Event|null $model */
         $model = $this->getAsModel('seminar');
 
         return $model;
@@ -54,7 +56,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Sets the seminar/event this time-slot belongs to.
      */
-    public function setSeminar(\Tx_Seminars_Model_Event $seminar): void
+    public function setSeminar(Event $seminar): void
     {
         $this->set('seminar', $seminar);
     }

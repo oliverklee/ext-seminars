@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -89,12 +90,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required & foo',
             ]
         );
@@ -124,12 +125,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -155,12 +156,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -173,7 +174,7 @@ final class RequirementsListTest extends TestCase
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required_bar',
             ]
         );
@@ -217,19 +218,19 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredEvent1,
             ]
         );
@@ -242,14 +243,14 @@ final class RequirementsListTest extends TestCase
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'title' => 'required_bar',
             ]
         );
         $requiredDate2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredEvent2,
             ]
         );

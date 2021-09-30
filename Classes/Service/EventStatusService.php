@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -31,7 +32,7 @@ class EventStatusService implements SingletonInterface
      *
      * @return bool true if the status of the given has been changed, false otherwise
      */
-    public function updateStatusAndSave(\Tx_Seminars_Model_Event $event): bool
+    public function updateStatusAndSave(Event $event): bool
     {
         if (!$event->shouldAutomaticallyConfirmOrCancel() || !$event->isPlanned()) {
             return false;
@@ -52,13 +53,13 @@ class EventStatusService implements SingletonInterface
         return $eventWasUpdated;
     }
 
-    public function cancelAndSave(\Tx_Seminars_Model_Event $event): void
+    public function cancelAndSave(Event $event): void
     {
         $event->cancel();
         $this->eventMapper->save($event);
     }
 
-    public function confirmAndSave(\Tx_Seminars_Model_Event $event): void
+    public function confirmAndSave(Event $event): void
     {
         $event->confirm();
         $this->eventMapper->save($event);

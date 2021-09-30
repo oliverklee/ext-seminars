@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 final class TimeSlotMapperTest extends TestCase
 {
@@ -177,7 +178,7 @@ final class TimeSlotMapperTest extends TestCase
 
         $model = $this->subject->find($timeSlotUid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             $model->getSeminar()
         );
     }

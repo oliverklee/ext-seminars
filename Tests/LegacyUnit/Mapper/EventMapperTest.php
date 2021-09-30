@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
@@ -727,7 +728,7 @@ final class EventMapperTest extends TestCase
         );
 
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             $this->subject->findByPublicationHash($publicationHash)
         );
     }
@@ -1027,7 +1028,7 @@ final class EventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1043,7 +1044,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => Event::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1058,7 +1059,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => Event::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1073,7 +1074,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
+            ['cancelled' => Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();

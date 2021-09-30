@@ -10,6 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -131,12 +132,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -161,12 +162,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -193,12 +194,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -226,7 +227,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -257,7 +258,7 @@ final class EventBagBuilderTest extends TestCase
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -267,7 +268,7 @@ final class EventBagBuilderTest extends TestCase
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -291,12 +292,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -327,7 +328,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -340,7 +341,7 @@ final class EventBagBuilderTest extends TestCase
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -371,12 +372,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -406,7 +407,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -433,12 +434,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -477,12 +478,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -511,7 +512,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -525,7 +526,7 @@ final class EventBagBuilderTest extends TestCase
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -556,7 +557,7 @@ final class EventBagBuilderTest extends TestCase
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -569,7 +570,7 @@ final class EventBagBuilderTest extends TestCase
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -788,7 +789,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => Event::STATUS_CONFIRMED]
         );
 
         $this->subject->ignoreCanceledEvents();
@@ -2213,7 +2214,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2222,7 +2223,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2241,7 +2242,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2250,7 +2251,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2271,7 +2272,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2280,7 +2281,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2306,7 +2307,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2331,14 +2332,14 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2359,7 +2360,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2368,7 +2369,7 @@ final class EventBagBuilderTest extends TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2397,7 +2398,7 @@ final class EventBagBuilderTest extends TestCase
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2408,7 +2409,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid2,
             ]
         );
@@ -2433,7 +2434,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
 
         $typeUid1 = $this->testingFramework->createRecord(
@@ -2442,7 +2443,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2468,14 +2469,14 @@ final class EventBagBuilderTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'event_type' => $typeUid,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -2498,14 +2499,14 @@ final class EventBagBuilderTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -2530,7 +2531,7 @@ final class EventBagBuilderTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2541,7 +2542,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'event_type' => $typeUid2,
             ]
@@ -2566,7 +2567,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2577,7 +2578,7 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'event_type' => $typeUid2,
             ]
         );
@@ -2600,7 +2601,7 @@ final class EventBagBuilderTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'event_type' => $typeUid,
             ]
         );
@@ -3226,7 +3227,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
@@ -3244,7 +3245,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
@@ -3261,7 +3262,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
         $this->subject->limitToTopicRecords();
         $bag = $this->subject->build();
@@ -3282,7 +3283,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->subject->limitToTopicRecords();
         $this->subject->removeLimitToTopicRecords();
@@ -3301,7 +3302,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
         $this->subject->limitToTopicRecords();
         $this->subject->removeLimitToTopicRecords();
@@ -3436,7 +3437,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
@@ -3454,7 +3455,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
@@ -3472,7 +3473,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->subject->limitToDateAndSingleRecords();
         $bag = $this->subject->build();
@@ -3489,7 +3490,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->subject->limitToDateAndSingleRecords();
         $this->subject->removeLimitToDateAndSingleRecords();
@@ -3699,19 +3700,19 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $dateUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -3736,19 +3737,19 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -3776,7 +3777,7 @@ final class EventBagBuilderTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => Event::TYPE_COMPLETE]
         );
         $event = new LegacyEvent($eventUid);
         $this->subject->limitToOtherDatesForTopic($event);
@@ -3789,23 +3790,23 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid1,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid2,
             ]
         );
@@ -3825,19 +3826,19 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
             ]
         );
@@ -3857,23 +3858,23 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid1,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid2,
             ]
         );
@@ -3895,19 +3896,19 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
             ]
         );
@@ -4023,7 +4024,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'avocado paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4048,7 +4049,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4189,7 +4190,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4223,7 +4224,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4252,7 +4253,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4286,7 +4287,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4315,7 +4316,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4349,7 +4350,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4378,7 +4379,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4407,7 +4408,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4431,7 +4432,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4465,7 +4466,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4538,7 +4539,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4572,7 +4573,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4601,14 +4602,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'title' => 'avocado paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4634,14 +4635,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'title' => 'paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4662,14 +4663,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'subtitle' => 'avocado paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4695,14 +4696,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'subtitle' => 'paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4723,14 +4724,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'description' => 'avocado paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4756,14 +4757,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'description' => 'paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4788,7 +4789,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4800,7 +4801,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4830,7 +4831,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4842,7 +4843,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4867,14 +4868,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4904,14 +4905,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4936,7 +4937,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'avocado paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4961,7 +4962,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'paprika event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->subject->limitToFullTextSearch('avocado');
@@ -4985,7 +4986,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5019,7 +5020,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5048,7 +5049,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5082,7 +5083,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5111,7 +5112,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5145,7 +5146,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5386,7 +5387,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         $this->subject->limitToTopicsWithoutRegistrationByUser(
@@ -5411,12 +5412,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -5443,12 +5444,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -5471,12 +5472,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -5510,12 +5511,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => 0,
             ]
@@ -5541,12 +5542,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => $this->future,
             ]
@@ -5572,12 +5573,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => $this->past,
             ]
@@ -5604,12 +5605,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -5641,12 +5642,12 @@ final class EventBagBuilderTest extends TestCase
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
@@ -5655,7 +5656,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'requirements' => 1,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5771,10 +5772,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => Event::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(Event::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5790,10 +5791,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => Event::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(Event::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5809,10 +5810,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => Event::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(Event::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5828,10 +5829,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => Event::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5847,10 +5848,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => Event::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5866,10 +5867,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => Event::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5885,10 +5886,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => Event::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(Event::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5904,10 +5905,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => Event::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(Event::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5923,10 +5924,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => Event::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(Event::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -6659,7 +6660,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -6675,7 +6676,7 @@ final class EventBagBuilderTest extends TestCase
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -7323,14 +7324,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'price_regular' => 49,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
 
@@ -7356,14 +7357,14 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'price_regular' => 51,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
 

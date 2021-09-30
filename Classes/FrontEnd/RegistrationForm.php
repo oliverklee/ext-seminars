@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -180,9 +181,9 @@ class RegistrationForm extends AbstractEditor
     /**
      * Returns the event for this registration form.
      *
-     * @return \Tx_Seminars_Model_Event
+     * @return Event
      */
-    public function getEvent(): \Tx_Seminars_Model_Event
+    public function getEvent(): Event
     {
         $eventMapper = MapperRegistry::get(EventMapper::class);
         $event = $eventMapper->find($this->getSeminar()->getUid());

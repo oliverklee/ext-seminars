@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -80,9 +81,9 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForAlreadyConfirmedEventAndFlagSetReturnsFalse(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $event->setStatus(Event::STATUS_CONFIRMED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -94,7 +95,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsReturnsTrue(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -103,7 +104,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -115,7 +116,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsConfirmsEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -124,7 +125,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -136,7 +137,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsSavesEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -145,7 +146,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);
 
@@ -157,7 +158,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagReturnsFalse(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -166,7 +167,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -178,7 +179,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagKeepsEventAsPlanned(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -187,7 +188,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -199,9 +200,9 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForAlreadyCanceledEventAndFlagSetReturnsFalse(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $event->setStatus(Event::STATUS_CANCELED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -213,7 +214,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineIsFalse(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -223,7 +224,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => 0,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -235,7 +236,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureIsFalse(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -245,7 +246,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->future,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -257,7 +258,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastIsTrue(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -267,7 +268,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -279,7 +280,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastCancelsEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -289,7 +290,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -301,7 +302,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastSavesEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData(
             [
                 'registrations' => new Collection(),
@@ -311,7 +312,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $event->setStatus(Event::STATUS_PLANNED);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);
 
@@ -323,7 +324,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function cancelAndSaveCancelsEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData([]);
 
         $this->subject->cancelAndSave($event);
@@ -336,7 +337,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function cancelAndSaveSavesEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData([]);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);
@@ -349,7 +350,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function confirmAndSaveConfirmsEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData([]);
 
         $this->subject->confirmAndSave($event);
@@ -362,7 +363,7 @@ final class EventStatusServiceTest extends TestCase
      */
     public function confirmAndSaveSavesEvent(): void
     {
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $event->setData([]);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);

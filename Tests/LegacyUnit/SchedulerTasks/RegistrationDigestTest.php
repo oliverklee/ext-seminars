@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -120,7 +121,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', false);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -161,7 +162,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -188,7 +189,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('fromName', $fromName);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -215,7 +216,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toName', $toName);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -242,7 +243,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toName', $toName);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -275,7 +276,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toName', $toName);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -311,7 +312,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -332,7 +333,7 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
-        $event = new \Tx_Seminars_Model_Event();
+        $event = new Event();
         $events->add($event);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);

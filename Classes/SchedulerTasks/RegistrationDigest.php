@@ -9,6 +9,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -122,7 +123,7 @@ class RegistrationDigest
     }
 
     /**
-     * @param Collection<\Tx_Seminars_Model_Event> $events
+     * @param Collection<Event> $events
      */
     private function buildEmail(Collection $events): MailMessage
     {
@@ -148,7 +149,7 @@ class RegistrationDigest
 
     /**
      * @param non-empty-string $templatePath in the EXT:... syntax
-     * @param Collection<\Tx_Seminars_Model_Event> $events
+     * @param Collection<Event> $events
      *
      * @return string
      */
@@ -162,7 +163,7 @@ class RegistrationDigest
     }
 
     /**
-     * @param Collection<\Tx_Seminars_Model_Event> $events
+     * @param Collection<Event> $events
      */
     private function updateDateOfLastDigest(Collection $events): void
     {

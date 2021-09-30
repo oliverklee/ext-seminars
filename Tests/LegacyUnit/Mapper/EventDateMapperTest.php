@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * This test case holds all tests specific to event dates.
@@ -51,7 +52,7 @@ final class EventDateMapperTest extends TestCase
         $this->expectException(\BadMethodCallException::class);
 
         $model = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => Event::TYPE_DATE]
         );
 
         $model->getTopic();
@@ -67,11 +68,11 @@ final class EventDateMapperTest extends TestCase
         $testingModel = $this->subject->getLoadedTestingModel(
             [
                 'topic' => $topic->getUid(),
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
             ]
         );
 
-        self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getTopic());
+        self::assertInstanceOf(Event::class, $testingModel->getTopic());
     }
 
     //////////////////////////////////////
@@ -87,7 +88,7 @@ final class EventDateMapperTest extends TestCase
 
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -104,7 +105,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -130,7 +131,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -160,7 +161,7 @@ final class EventDateMapperTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic->getUid(),
             ]
         );
@@ -178,7 +179,7 @@ final class EventDateMapperTest extends TestCase
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic->getUid(),
             ]
         );
@@ -196,7 +197,7 @@ final class EventDateMapperTest extends TestCase
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -217,7 +218,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -244,7 +245,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -273,7 +274,7 @@ final class EventDateMapperTest extends TestCase
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -290,7 +291,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -318,7 +319,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -349,7 +350,7 @@ final class EventDateMapperTest extends TestCase
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -366,7 +367,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -392,7 +393,7 @@ final class EventDateMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );

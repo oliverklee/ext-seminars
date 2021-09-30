@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -632,10 +633,10 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC]);
         $date = LegacyEvent::fromData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'attached_files' => $fileName,
             ]
         );
@@ -656,11 +657,11 @@ final class LegacyEventTest extends FunctionalTestCase
         $fileName = 'test.txt';
         $topic = LegacyEvent::fromData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'attached_files' => $fileName,
             ]
         );
-        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         $result = $date->getAttachedFiles($this->plugin);
@@ -678,14 +679,14 @@ final class LegacyEventTest extends FunctionalTestCase
         $topicFileName = 'test-topic.txt';
         $topic = LegacyEvent::fromData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
                 'attached_files' => $topicFileName,
             ]
         );
         $dateFileName = 'test-date.txt';
         $date = LegacyEvent::fromData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'attached_files' => $dateFileName,
             ]
         );
