@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a basic view.
  */
-abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper
+abstract class AbstractView extends TemplateHelper
 {
     /**
      * the relative path to the uploaded files

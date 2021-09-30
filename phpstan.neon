@@ -20,4 +20,4 @@ parameters:
     - Tests
 
   excludePaths:
-    - Classes/FrontEnd/Editor.php
+    - Classes/FrontEnd/AbstractEditor.php

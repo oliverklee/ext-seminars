@@ -17,6 +17,7 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\FrontEnd\AbstractEditor;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
@@ -27,7 +28,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows creating and editing events on the FE.
  */
-class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
+class Tx_Seminars_FrontEnd_EventEditor extends AbstractEditor
 {
     use SharedPluginConfiguration;
 

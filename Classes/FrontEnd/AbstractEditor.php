@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
 
 /**
- * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
+ * This class is the base class for any kind of front-end editor, for example the event editor or the registration form.
  */
-class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
+abstract class AbstractEditor extends AbstractView
 {
     /**
      * @var \tx_mkforms_forms_Base

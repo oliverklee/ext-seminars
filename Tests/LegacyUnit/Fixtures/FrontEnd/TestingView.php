@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd;
 
+use OliverKlee\Seminars\FrontEnd\AbstractView;
+
 /**
  * This class represents a view for testing purposes.
  */
-final class TestingView extends \Tx_Seminars_FrontEnd_AbstractView
+final class TestingView extends AbstractView
 {
     /**
      * Renders the view and returns its content.

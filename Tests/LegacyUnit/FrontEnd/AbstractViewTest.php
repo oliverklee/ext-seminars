@@ -10,7 +10,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd\TestingView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_AbstractView
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractView
  */
 final class AbstractViewTest extends TestCase
 {

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\FrontEnd\AbstractView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a category list.
  */
-class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_CategoryList extends AbstractView
 {
     /**
      * Creates an HTML list of categories.
@@ -164,7 +165,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
         }
 
         $imageConfiguration = [
-            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
+            'file' => AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
         $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
