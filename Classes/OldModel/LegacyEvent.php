@@ -10,7 +10,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
 use OliverKlee\Seminars\Bag\EventBag;
@@ -3030,7 +3030,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets this event's owner (the FE user who has created this event).
      */
-    public function getOwner(): ?FrontEndUser
+    public function getOwner(): ?OelibFrontEndUser
     {
         if (!$this->hasRecordPropertyInteger('owner_feuser')) {
             return null;

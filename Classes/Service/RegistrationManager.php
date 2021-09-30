@@ -6,7 +6,7 @@ use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
@@ -557,8 +557,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
         $registration->setCompany($company);
 
-        $validGenderMale = (string)FrontEndUser::GENDER_MALE;
-        $validGenderFemale = (string)FrontEndUser::GENDER_FEMALE;
+        $validGenderMale = (string)OelibFrontEndUser::GENDER_MALE;
+        $validGenderFemale = (string)OelibFrontEndUser::GENDER_FEMALE;
         if (
             isset($formData['gender'])
             && (
@@ -567,7 +567,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         ) {
             $gender = (int)$formData['gender'];
         } else {
-            $gender = FrontEndUser::GENDER_UNKNOWN;
+            $gender = OelibFrontEndUser::GENDER_UNKNOWN;
         }
         $registration->setGender($gender);
 

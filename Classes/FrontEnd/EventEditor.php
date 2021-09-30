@@ -14,7 +14,7 @@ use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
@@ -1366,7 +1366,7 @@ class EventEditor extends AbstractEditor
     /**
      * Gets the reviewer for new/edited records.
      */
-    protected function getReviewer(): ?BackEndUser
+    protected function getReviewer(): ?OelibBackEndUser
     {
         MapperRegistry::purgeInstance();
         return self::getLoggedInUser()->getReviewerFromGroup();

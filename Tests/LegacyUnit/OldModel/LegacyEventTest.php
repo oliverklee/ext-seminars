@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\EventBag;
@@ -5783,7 +5783,7 @@ final class LegacyEventTest extends TestCase
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
-        self::assertInstanceOf(FrontEndUser::class, $this->subject->getOwner());
+        self::assertInstanceOf(OelibFrontEndUser::class, $this->subject->getOwner());
     }
 
     /**
