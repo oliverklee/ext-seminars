@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class PlaceMapperTest extends TestCase
 {
@@ -81,6 +82,6 @@ final class PlaceMapperTest extends TestCase
             ['owner' => $frontEndUser->getUid()]
         );
 
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $testingModel->getOwner());
+        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 }

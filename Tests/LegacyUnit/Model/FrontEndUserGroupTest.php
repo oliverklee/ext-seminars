@@ -8,17 +8,18 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 final class FrontEndUserGroupTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_FrontEndUserGroup the object to test
+     * @var FrontEndUserGroup the object to test
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_FrontEndUserGroup();
+        $this->subject = new FrontEndUserGroup();
     }
 
     ///////////////////////////////////////
@@ -33,7 +34,7 @@ final class FrontEndUserGroupTest extends TestCase
         $this->subject->setData([]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->subject->getPublishSetting()
         );
     }
@@ -46,7 +47,7 @@ final class FrontEndUserGroupTest extends TestCase
         $this->subject->setData(['tx_seminars_publish_events' => 0]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->subject->getPublishSetting()
         );
     }
@@ -59,7 +60,7 @@ final class FrontEndUserGroupTest extends TestCase
         $this->subject->setData(['tx_seminars_publish_events' => 1]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+            FrontEndUserGroup::PUBLISH_HIDE_NEW,
             $this->subject->getPublishSetting()
         );
     }
@@ -72,7 +73,7 @@ final class FrontEndUserGroupTest extends TestCase
         $this->subject->setData(['tx_seminars_publish_events' => 2]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+            FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             $this->subject->getPublishSetting()
         );
     }

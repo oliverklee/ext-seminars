@@ -14,6 +14,7 @@ use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
@@ -484,7 +485,7 @@ final class MailNotifierTest extends TestCase
      */
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -514,7 +515,7 @@ final class MailNotifierTest extends TestCase
      */
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -750,7 +751,7 @@ final class MailNotifierTest extends TestCase
      */
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -782,7 +783,7 @@ final class MailNotifierTest extends TestCase
      */
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');

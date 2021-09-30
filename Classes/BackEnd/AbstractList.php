@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
+use OliverKlee\Seminars\Model\BackEndUser;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -356,11 +357,11 @@ abstract class AbstractList
     /**
      * Gets the currently logged in back-end user.
      *
-     * @return \Tx_Seminars_Model_BackEndUser the currently logged in back-end user
+     * @return BackEndUser the currently logged in back-end user
      */
-    protected function getLoggedInUser(): \Tx_Seminars_Model_BackEndUser
+    protected function getLoggedInUser(): BackEndUser
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 
         return $user;

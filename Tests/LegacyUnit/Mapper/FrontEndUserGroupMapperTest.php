@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 final class FrontEndUserGroupMapperTest extends TestCase
 {
@@ -42,7 +43,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
      */
     public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $this->subject->getNewGhost());
+        self::assertInstanceOf(FrontEndUserGroup::class, $this->subject->getNewGhost());
     }
 
     // Tests concerning the reviewer

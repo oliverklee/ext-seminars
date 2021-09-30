@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -736,7 +737,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         $user = $oldRegistration->getFrontEndUser();
-        if (!$user instanceof \Tx_Seminars_Model_FrontEndUser || !$user->hasEmailAddress()) {
+        if (!$user instanceof FrontEndUser || !$user->hasEmailAddress()) {
             return;
         }
 
@@ -1381,7 +1382,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         /** @var Salutation $salutation */
         $salutation = GeneralUtility::makeInstance(Salutation::class);
         $user = $registration->getFrontEndUser();
-        if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
+        if ($user instanceof FrontEndUser) {
             $salutationText = $salutation->getSalutation($user);
         } else {
             $salutationText = '';
@@ -1498,7 +1499,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     public function getPricesAvailableForUser(
         LegacyEvent $event,
-        \Tx_Seminars_Model_FrontEndUser $user
+        FrontEndUser $user
     ): array {
         $prices = $event->getAvailablePrices();
         if (!$this->getConfValueBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')) {

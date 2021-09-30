@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -390,7 +391,7 @@ class MailNotifier extends AbstractTask
      */
     private function useUserConfiguredLanguage(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        /** @var BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->getLanguageService()->init($user->getLanguage());
     }

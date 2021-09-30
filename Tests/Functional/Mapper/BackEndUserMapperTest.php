@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Model\BackEndUserGroup;
 
 /**
  * @covers \Tx_Seminars_Mapper_BackEndUser
@@ -54,7 +55,7 @@ final class BackEndUserMapperTest extends FunctionalTestCase
         $userGroups = $model->getGroups();
 
         $firstGroup = $userGroups->first();
-        self::assertInstanceOf(\Tx_Seminars_Model_BackEndUserGroup::class, $firstGroup);
+        self::assertInstanceOf(BackEndUserGroup::class, $firstGroup);
         self::assertSame(1, $firstGroup->getUid());
     }
 }

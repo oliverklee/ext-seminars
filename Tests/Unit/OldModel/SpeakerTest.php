@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
@@ -191,7 +192,7 @@ final class SpeakerTest extends UnitTestCase
     public function getOwnerWithOwnerReturnsOwner(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
-        /** @var \Tx_Seminars_Model_FrontEndUser $frontEndUser */
+        /** @var FrontEndUser $frontEndUser */
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
         $subject->setOwner($frontEndUser);
 

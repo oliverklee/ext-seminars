@@ -1699,7 +1699,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             }
 
             $hasAdditionalPersons = false;
-            /** @var \Tx_Seminars_Model_FrontEndUser $person */
+            /** @var FrontEndUser $person */
             foreach ($registration->getAdditionalPersons() as $person) {
                 $names[] = $person->getName();
                 $hasAdditionalPersons = true;

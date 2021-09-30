@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 
@@ -56,7 +57,7 @@ final class LegacyRegistrationTest extends UnitTestCase
      */
     public function setFrontEndUserSetsFrontEndUser(): void
     {
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
 
         $this->subject->setFrontEndUser($user);
 
@@ -240,7 +241,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     {
         $this->subject->setUserData($data);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($data);
         $this->subject->setFrontEndUser($user);
 

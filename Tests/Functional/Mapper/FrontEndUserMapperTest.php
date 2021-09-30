@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 
 /**
@@ -55,9 +57,9 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         $this->subject->load($model);
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $firstGroup */
+        /** @var FrontEndUserGroup $firstGroup */
         $firstGroup = $model->getUserGroups()->first();
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $firstGroup);
+        self::assertInstanceOf(FrontEndUserGroup::class, $firstGroup);
         self::assertSame(1, $firstGroup->getUid());
         self::assertSame('Editors', $firstGroup->getTitle());
     }
@@ -100,7 +102,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $this->getDatabaseConnection()->insertArray('fe_users', ['username' => $userName]);
 
         self::assertInstanceOf(
-            \Tx_Seminars_Model_FrontEndUser::class,
+            FrontEndUser::class,
             $this->subject->findByUserName($userName)
         );
     }

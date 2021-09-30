@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUserGroup as OelibFrontEndUserGroup;
@@ -10,7 +12,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 /**
  * This class represents a front-end user group.
  */
-class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
+class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
 {
     /**
      * @var int the publish setting to immediately publish all events edited

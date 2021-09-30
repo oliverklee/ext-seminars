@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use Tx_Seminars_Model_FrontEndUser;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -96,7 +96,7 @@ class LegacyRegistration extends AbstractModel
     private static $cachedSeminars = [];
 
     /**
-     * @var \Tx_Seminars_Model_FrontEndUser|null
+     * @var FrontEndUser|null
      */
     protected $user = null;
 
@@ -485,7 +485,7 @@ class LegacyRegistration extends AbstractModel
                 break;
             case 'name':
                 $user = $this->getFrontEndUser();
-                $result = $user instanceof \Tx_Seminars_Model_FrontEndUser ? $user->getName() : '';
+                $result = $user instanceof FrontEndUser ? $user->getName() : '';
                 break;
             case 'usergroup':
                 $repository = $this->getFrontEndUserGroupRepository();
@@ -570,9 +570,9 @@ class LegacyRegistration extends AbstractModel
         return '"' . $this->getUserData('name') . '" <' . $this->getUserData('email') . '>';
     }
 
-    public function getFrontEndUser(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getFrontEndUser(): ?FrontEndUser
     {
-        if ($this->user instanceof \Tx_Seminars_Model_FrontEndUser) {
+        if ($this->user instanceof FrontEndUser) {
             return $this->user;
         }
         $uid = $this->getUser();
@@ -587,9 +587,9 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @param Tx_Seminars_Model_FrontEndUser $user
+     * @param FrontEndUser $user
      */
-    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): void
+    public function setFrontEndUser(FrontEndUser $user): void
     {
         $this->user = $user;
     }

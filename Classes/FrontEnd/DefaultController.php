@@ -38,6 +38,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -1697,7 +1698,7 @@ class DefaultController extends TemplateHelper
             $this->limitToTimeFrameSetting($builder);
         }
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|null $user */
+        /** @var FrontEndUser|null $user */
         $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         switch ($whatToDisplay) {
@@ -2035,7 +2036,7 @@ class DefaultController extends TemplateHelper
         /** @var RegistrationBagBuilder $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
+        /** @var FrontEndUser $loggedInUser */
         $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());

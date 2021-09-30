@@ -512,7 +512,7 @@ structure:
 
 array('dear' => String, 'title' => String, 'name' => String)
 
-The second parameter is an user object \Tx_Seminars_Model_FrontEndUser.
+The second parameter is an user object FrontEndUser.
 
 Your class then needs to be included and registered like in this
 example:

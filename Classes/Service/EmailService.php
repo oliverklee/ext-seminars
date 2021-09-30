@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -72,11 +73,8 @@ class EmailService implements SingletonInterface
     /**
      * Builds the message body (including the email footer).
      */
-    protected function buildMessageBody(
-        string $rawBody,
-        Event $event,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ): string {
+    protected function buildMessageBody(string $rawBody, Event $event, FrontEndUser $user): string
+    {
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
         $organizer = $event->getFirstOrganizer();
         if ($organizer->hasEmailFooter()) {
@@ -96,11 +94,8 @@ class EmailService implements SingletonInterface
      * %eventTitle
      * %eventDate
      */
-    protected function replaceMarkers(
-        string $textWithMarkers,
-        Event $event,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ): string {
+    protected function replaceMarkers(string $textWithMarkers, Event $event, FrontEndUser $user): string
+    {
         $markers = [
             '%salutation' => $this->salutationBuilder->getSalutation($user),
             '%userName' => $user->getName(),

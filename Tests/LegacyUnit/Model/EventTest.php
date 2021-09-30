@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -3132,7 +3133,7 @@ final class EventTest extends TestCase
         $firstName = 'Oliver';
         $lastName = 'Klee';
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
         $registration = new Registration();
@@ -3156,7 +3157,7 @@ final class EventTest extends TestCase
      */
     public function getAttendeeNamesForRegistrationOnlyWithoutRegisteredThemselvesReturnsEmptyArray(): void
     {
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
 
         $registration = new Registration();
@@ -3179,10 +3180,10 @@ final class EventTest extends TestCase
         $firstName = 'Oliver';
         $lastName = 'Klee';
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
 
-        $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson = new FrontEndUser();
         $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
         $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
@@ -3207,10 +3208,10 @@ final class EventTest extends TestCase
         $firstName = 'Oliver';
         $lastName = 'Klee';
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
 
-        $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson = new FrontEndUser();
         $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
         $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
@@ -3237,7 +3238,7 @@ final class EventTest extends TestCase
      */
     public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromFreeTextField(): void
     {
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
 
         $registration = new Registration();
@@ -3266,7 +3267,7 @@ final class EventTest extends TestCase
 
         $firstName1 = 'Oliver';
         $lastName1 = 'Klee';
-        $user1 = new \Tx_Seminars_Model_FrontEndUser();
+        $user1 = new FrontEndUser();
         $user1->setData(['first_name' => $firstName1, 'last_name' => $lastName1]);
         $registration1 = new Registration();
         $registration1->setData(
@@ -3280,7 +3281,7 @@ final class EventTest extends TestCase
 
         $firstName2 = 'Jane';
         $lastName2 = 'Wolowitz';
-        $user2 = new \Tx_Seminars_Model_FrontEndUser();
+        $user2 = new FrontEndUser();
         $user2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $registration2 = new Registration();
         $registration2->setData(
@@ -3304,19 +3305,19 @@ final class EventTest extends TestCase
      */
     public function getAttendeeNamesSortsNamesFromAdditionalAttendeesFromUsersByFullName(): void
     {
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
         $additionalPersons = new Collection();
 
         $firstName1 = 'Oliver';
         $lastName1 = 'Klee';
-        $additionalPerson1 = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson1 = new FrontEndUser();
         $additionalPerson1->setData(['first_name' => $firstName1, 'last_name' => $lastName1]);
         $additionalPersons->add($additionalPerson1);
 
         $firstName2 = 'Jane';
         $lastName2 = 'Wolowitz';
-        $additionalPerson2 = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson2 = new FrontEndUser();
         $additionalPerson2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $additionalPersons->add($additionalPerson2);
 
@@ -3343,7 +3344,7 @@ final class EventTest extends TestCase
      */
     public function getAttendeeNamesForRegistrationSortAdditionalAttendeeNamesFromFreeTextField(): void
     {
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData([]);
 
         $registration = new Registration();
@@ -3371,7 +3372,7 @@ final class EventTest extends TestCase
         $firstName = 'Oliver';
         $lastName = 'Klee';
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
         $registration = new Registration();
@@ -3402,7 +3403,7 @@ final class EventTest extends TestCase
         $firstName = 'Oliver';
         $lastName = 'Klee';
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
         $registration = new Registration();

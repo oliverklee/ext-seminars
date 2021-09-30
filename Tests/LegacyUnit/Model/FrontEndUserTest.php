@@ -9,13 +9,15 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
 
 final class FrontEndUserTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_FrontEndUser the object to test
+     * @var FrontEndUser the object to test
      */
     private $subject;
 
@@ -26,7 +28,7 @@ final class FrontEndUserTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_FrontEndUser();
+        $this->subject = new FrontEndUser();
         $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
@@ -45,7 +47,7 @@ final class FrontEndUserTest extends TestCase
         $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                    'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                    'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_IMMEDIATELY,
                 ]
             );
 
@@ -54,7 +56,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->subject->getPublishSetting()
         );
     }
@@ -67,7 +69,7 @@ final class FrontEndUserTest extends TestCase
         $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                    'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+                    'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
                 ]
             );
 
@@ -76,7 +78,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+            FrontEndUserGroup::PUBLISH_HIDE_NEW,
             $this->subject->getPublishSetting()
         );
     }
@@ -89,7 +91,7 @@ final class FrontEndUserTest extends TestCase
         $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                    'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+                    'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
                 ]
             );
 
@@ -98,7 +100,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+            FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             $this->subject->getPublishSetting()
         );
     }
@@ -112,7 +114,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->subject->getPublishSetting()
         );
     }
@@ -125,14 +127,14 @@ final class FrontEndUserTest extends TestCase
         $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             ]
         );
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
             [
                 'tx_seminars_publish_events'
-                => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+                => FrontEndUserGroup::PUBLISH_HIDE_NEW,
             ]
         );
 
@@ -142,7 +144,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+            FrontEndUserGroup::PUBLISH_HIDE_NEW,
             $this->subject->getPublishSetting()
         );
     }
@@ -155,13 +157,13 @@ final class FrontEndUserTest extends TestCase
         $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
             ]
         );
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             ]
         );
 
@@ -171,7 +173,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+            FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             $this->subject->getPublishSetting()
         );
     }
@@ -184,13 +186,13 @@ final class FrontEndUserTest extends TestCase
         $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             ]
         );
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             ]
         );
 
@@ -200,7 +202,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+            FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             $this->subject->getPublishSetting()
         );
     }
@@ -213,13 +215,13 @@ final class FrontEndUserTest extends TestCase
         $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
             ]
         );
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
             ]
         );
 
@@ -229,7 +231,7 @@ final class FrontEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+            FrontEndUserGroup::PUBLISH_HIDE_NEW,
             $this->subject->getPublishSetting()
         );
     }
@@ -360,7 +362,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getReviewerFromGroupForUserWithGroupWithNoReviewerReturnsNull(): void
     {
-        $userGroup = new \Tx_Seminars_Model_FrontEndUserGroup();
+        $userGroup = new FrontEndUserGroup();
         $userGroup->setData(['tx_seminars_reviewer' => null]);
 
         $list = new Collection();
@@ -380,7 +382,7 @@ final class FrontEndUserTest extends TestCase
     {
         $backEndUser = new OelibBackEndUser();
 
-        $userGroup = new \Tx_Seminars_Model_FrontEndUserGroup();
+        $userGroup = new FrontEndUserGroup();
         $userGroup->setData(['tx_seminars_reviewer' => $backEndUser]);
 
         $list = new Collection();
@@ -401,8 +403,8 @@ final class FrontEndUserTest extends TestCase
     {
         $backEndUser = new OelibBackEndUser();
 
-        $userGroup1 = new \Tx_Seminars_Model_FrontEndUserGroup();
-        $userGroup2 = new \Tx_Seminars_Model_FrontEndUserGroup();
+        $userGroup1 = new FrontEndUserGroup();
+        $userGroup2 = new FrontEndUserGroup();
 
         $userGroup1->setData(['tx_seminars_reviewer' => null]);
         $userGroup2->setData(['tx_seminars_reviewer' => $backEndUser]);
@@ -427,8 +429,8 @@ final class FrontEndUserTest extends TestCase
         $backEndUser1 = new OelibBackEndUser();
         $backEndUser2 = new OelibBackEndUser();
 
-        $userGroup1 = new \Tx_Seminars_Model_FrontEndUserGroup();
-        $userGroup2 = new \Tx_Seminars_Model_FrontEndUserGroup();
+        $userGroup1 = new FrontEndUserGroup();
+        $userGroup2 = new FrontEndUserGroup();
 
         $userGroup1->setData(['tx_seminars_reviewer' => $backEndUser1]);
         $userGroup2->setData(['tx_seminars_reviewer' => $backEndUser2]);
@@ -854,9 +856,9 @@ final class FrontEndUserTest extends TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $subject */
+        /** @var FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Model_FrontEndUser::class,
+            FrontEndUser::class,
             ['getDefaultOrganizers']
         );
         $subject->method('getDefaultOrganizers')
@@ -876,9 +878,9 @@ final class FrontEndUserTest extends TestCase
         $organizers = new Collection();
         $organizers->add($organizer);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $subject */
+        /** @var FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Model_FrontEndUser::class,
+            FrontEndUser::class,
             ['getDefaultOrganizers']
         );
         $subject->method('getDefaultOrganizers')->willReturn($organizers);

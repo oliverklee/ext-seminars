@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -859,7 +860,7 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
+        /** @var BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
@@ -872,7 +873,7 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel(): void
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
+        /** @var BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();

@@ -7,6 +7,7 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\Country;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -167,15 +168,15 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         return $this->hasString('directions');
     }
 
-    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getOwner(): ?FrontEndUser
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        /** @var FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');
 
         return $owner;
     }
 
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
+    public function setOwner(FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }

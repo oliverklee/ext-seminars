@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -30,15 +31,15 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
         $this->setAsString('title', $title);
     }
 
-    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getOwner(): ?FrontEndUser
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        /** @var FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');
 
         return $owner;
     }
 
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
+    public function setOwner(FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }

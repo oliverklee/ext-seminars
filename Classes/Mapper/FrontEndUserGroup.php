@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 /**
  * This class represents a mapper for front-end user groups.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_FrontEndUserGroup>
+ * @extends AbstractDataMapper<FrontEndUserGroup>
  */
 class Tx_Seminars_Mapper_FrontEndUserGroup extends AbstractDataMapper
 {
@@ -20,7 +21,7 @@ class Tx_Seminars_Mapper_FrontEndUserGroup extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_FrontEndUserGroup::class;
+    protected $modelClassName = FrontEndUserGroup::class;
 
     /**
      * @var array<string, class-string<AbstractDataMapper>>
