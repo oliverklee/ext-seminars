@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -96,7 +97,7 @@ final class EventEditorTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
         ConfigurationProxy::purgeInstances();
     }
 

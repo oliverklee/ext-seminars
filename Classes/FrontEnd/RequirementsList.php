@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -112,7 +113,7 @@ class RequirementsList extends AbstractView
     private function getRequirements(): EventBag
     {
         if ($this->limitRequirementsToMissing) {
-            $result = \Tx_Seminars_Service_RegistrationManager::getInstance()
+            $result = RegistrationManager::getInstance()
                 ->getMissingRequiredTopics($this->event);
         } else {
             $result = $this->event->getRequirements();

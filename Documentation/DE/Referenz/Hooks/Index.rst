@@ -481,7 +481,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @param string $emailReason Possible values:
          *          - 'EnoughRegistrations' if the event has enough attendances
          *          - 'IsFull' if the event is fully booked
-         *          see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
+         *          see RegistrationManager::getReasonForNotification()
          */
         public function modifyAdditionalEmail(
             MailMessage $email,

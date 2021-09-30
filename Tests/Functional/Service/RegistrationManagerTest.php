@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -15,7 +16,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_Service_RegistrationManager
+ * @covers \OliverKlee\Seminars\Service\RegistrationManager
  */
 final class RegistrationManagerTest extends FunctionalTestCase
 {
@@ -36,7 +37,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Service_RegistrationManager
+     * @var RegistrationManager
      */
     private $subject = null;
 
@@ -55,13 +56,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->email = $this->createEmailMock();
 
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject = RegistrationManager::getInstance();
     }
 
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
         // Purge the FIFO buffer of mocks
         GeneralUtility::makeInstance(MailMessage::class);
         GeneralUtility::makeInstance(MailMessage::class);

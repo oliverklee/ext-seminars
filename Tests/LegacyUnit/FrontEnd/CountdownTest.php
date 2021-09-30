@@ -12,6 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\Countdown;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -63,7 +64,7 @@ final class CountdownTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController
