@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -49,8 +50,8 @@ class EventPublication extends TemplateHelper
             return $this->translate('message_publishingFailed');
         }
 
-        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Event::class);
+        /** @var EventMapper $eventMapper */
+        $eventMapper = GeneralUtility::makeInstance(EventMapper::class);
         /** @var \Tx_Seminars_Model_Event|null $event */
         $event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 

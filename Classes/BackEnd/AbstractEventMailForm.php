@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -101,7 +102,7 @@ abstract class AbstractEventMailForm
             throw new NotFoundException('There is no event with this UID.', 1333292164);
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $this->event = $mapper->find($eventUid);
     }
 

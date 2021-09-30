@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use Doctrine\DBAL\Driver\Connection;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
@@ -13,7 +15,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Event>
  */
-class Tx_Seminars_Mapper_Event extends AbstractDataMapper
+class EventMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -30,7 +32,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'topic' => \Tx_Seminars_Mapper_Event::class,
+        'topic' => EventMapper::class,
         'categories' => \Tx_Seminars_Mapper_Category::class,
         'event_type' => \Tx_Seminars_Mapper_EventType::class,
         'timeslots' => \Tx_Seminars_Mapper_TimeSlot::class,
@@ -48,8 +50,8 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
         'owner_feuser' => FrontEndUserMapper::class,
         'vips' => FrontEndUserMapper::class,
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
-        'requirements' => \Tx_Seminars_Mapper_Event::class,
-        'dependencies' => \Tx_Seminars_Mapper_Event::class,
+        'requirements' => EventMapper::class,
+        'dependencies' => EventMapper::class,
         'registrations' => \Tx_Seminars_Mapper_Registration::class,
     ];
 

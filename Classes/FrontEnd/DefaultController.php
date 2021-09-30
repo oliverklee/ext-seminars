@@ -36,6 +36,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -73,7 +74,7 @@ class DefaultController extends TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * @var \Tx_Seminars_Mapper_Event an event mapper used to retrieve event models
+     * @var EventMapper an event mapper used to retrieve event models
      */
     protected $eventMapper = null;
 
@@ -493,7 +494,7 @@ class DefaultController extends TemplateHelper
         }
 
         if ($this->eventMapper === null) {
-            $this->eventMapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Event::class);
+            $this->eventMapper = GeneralUtility::makeInstance(EventMapper::class);
         }
     }
 
@@ -673,7 +674,7 @@ class DefaultController extends TemplateHelper
      */
     protected function createSingleViewForExistingEvent(): string
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $event = $mapper->find($this->showUid);
 
         // This sets the title of the page for use in indexed search results:
@@ -1243,7 +1244,7 @@ class DefaultController extends TemplateHelper
 
         $output = '';
 
-        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(EventMapper::class);
 
         /** @var LegacyEvent $dependency */
         foreach ($this->seminar->getDependencies() as $dependency) {
@@ -1872,7 +1873,7 @@ class DefaultController extends TemplateHelper
         $result = '';
 
         if ($this->seminar->comesFromDatabase()) {
-            $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+            $mapper = MapperRegistry::get(EventMapper::class);
             $event = $mapper->find($this->getSeminar()->getUid());
 
             $cssClasses = [];
@@ -3219,7 +3220,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $event = $mapper->find($this->piVars['seminar']);
         if (!$event->isPublished()) {
             return;
@@ -3245,7 +3246,7 @@ class DefaultController extends TemplateHelper
     protected function hideEvent(\Tx_Seminars_Model_Event $event): void
     {
         $event->markAsHidden();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3257,7 +3258,7 @@ class DefaultController extends TemplateHelper
     protected function unhideEvent(\Tx_Seminars_Model_Event $event): void
     {
         $event->markAsVisible();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3274,7 +3275,7 @@ class DefaultController extends TemplateHelper
         $copy->markAsHidden();
         $copy->setRegistrations($registrations);
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $mapper->save($copy);
 
         $this->redirectToCurrentUrl();

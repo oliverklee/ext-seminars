@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\FrontEnd\EventHeadline;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -47,7 +48,7 @@ final class EventHeadlineTest extends FunctionalTestCase
 
         $this->subject = new EventHeadline(self::CONFIGURATION, new ContentObjectRenderer());
 
-        $mapper = new \Tx_Seminars_Mapper_Event();
+        $mapper = new EventMapper();
         $this->subject->injectEventMapper($mapper);
     }
 

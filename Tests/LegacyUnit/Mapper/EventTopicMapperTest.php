@@ -8,9 +8,12 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 /**
  * This test case holds all tests specific to event topics.
+ *
+ * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
 final class EventTopicMapperTest extends TestCase
 {
@@ -20,7 +23,7 @@ final class EventTopicMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $subject = null;
 
@@ -28,7 +31,7 @@ final class EventTopicMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->subject = MapperRegistry::get(EventMapper::class);
     }
 
     protected function tearDown(): void

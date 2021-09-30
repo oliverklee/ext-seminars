@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service\TestingSingleViewLinkBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -394,7 +395,7 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter(): void
     {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
 
         $subject = new TestingSingleViewLinkBuilder();
@@ -412,7 +413,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['details_page' => $pageUid]);
 
         $subject = new TestingSingleViewLinkBuilder();

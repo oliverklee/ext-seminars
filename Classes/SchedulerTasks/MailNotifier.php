@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
@@ -43,7 +44,7 @@ class MailNotifier extends AbstractTask
     protected $emailService = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     protected $eventMapper = null;
 
@@ -61,7 +62,7 @@ class MailNotifier extends AbstractTask
         $this->getConfiguration();
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $this->emailService = GeneralUtility::makeInstance(EmailService::class);
-        $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = MapperRegistry::get(EventMapper::class);
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $this->registrationDigest = $objectManager->get(RegistrationDigest::class);

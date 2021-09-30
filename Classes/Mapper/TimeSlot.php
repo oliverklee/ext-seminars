@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 /**
  * This class represents a mapper for time-slots.
@@ -28,6 +29,6 @@ class Tx_Seminars_Mapper_TimeSlot extends AbstractDataMapper
     protected $relations = [
         'speakers' => \Tx_Seminars_Mapper_Speaker::class,
         'place' => \Tx_Seminars_Mapper_Place::class,
-        'seminar' => \Tx_Seminars_Mapper_Event::class,
+        'seminar' => EventMapper::class,
     ];
 }

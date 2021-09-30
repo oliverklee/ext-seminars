@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\FrontEnd;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -81,7 +82,7 @@ class RequirementsList extends AbstractView
 
         $output = '';
 
-        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(EventMapper::class);
         /** @var LegacyEvent $requirement */
         foreach ($this->getRequirements() as $requirement) {
             $event = $eventMapper->find($requirement->getUid());

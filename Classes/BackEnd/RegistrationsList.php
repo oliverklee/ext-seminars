@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -73,7 +74,7 @@ class RegistrationsList extends AbstractList
         $this->template->setMarker('label_event_date', $languageService->getLL('registrationlist.seminar.date'));
 
         $eventUid = (int)GeneralUtility::_GP('eventUid');
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
             $this->eventUid = $eventUid;
             $event = $mapper->find($eventUid);

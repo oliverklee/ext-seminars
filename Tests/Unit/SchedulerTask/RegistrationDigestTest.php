@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 
 final class RegistrationDigestTest extends UnitTestCase
@@ -76,6 +77,6 @@ final class RegistrationDigestTest extends UnitTestCase
     {
         $this->subject->initializeObject();
 
-        self::assertInstanceOf(\Tx_Seminars_Mapper_Event::class, $this->subject->getEventMapper());
+        self::assertInstanceOf(EventMapper::class, $this->subject->getEventMapper());
     }
 }

@@ -11,7 +11,11 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\EventMapper
+ */
 final class EventMapperTest extends TestCase
 {
     /**
@@ -20,7 +24,7 @@ final class EventMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $subject = null;
 
@@ -29,7 +33,7 @@ final class EventMapperTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->subject = MapperRegistry::get(EventMapper::class);
     }
 
     protected function tearDown(): void

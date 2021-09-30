@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
@@ -62,7 +63,7 @@ final class MailNotifierTest extends TestCase
     protected $emailService = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event&MockObject
+     * @var EventMapper&MockObject
      */
     protected $eventMapper = null;
 
@@ -135,8 +136,8 @@ final class MailNotifierTest extends TestCase
         $this->emailService = $emailService;
         $subject->_set('emailService', $emailService);
 
-        /** @var \Tx_Seminars_Mapper_Event&MockObject $eventMapper */
-        $eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
+        /** @var EventMapper&MockObject $eventMapper */
+        $eventMapper = $this->createMock(EventMapper::class);
         $this->eventMapper = $eventMapper;
         $subject->_set('eventMapper', $eventMapper);
 

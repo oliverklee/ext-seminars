@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 /**
  * This test case holds all tests specific to event dates.
@@ -30,7 +31,7 @@ final class EventDateTest extends TestCase
      */
     public function getTitleWithNonEmptyTopicTitleReturnsTopicTitle(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['title' => 'Superhero']);
         $this->subject->setData(
             [
@@ -51,7 +52,7 @@ final class EventDateTest extends TestCase
      */
     public function getRawTitleWithNonEmptyTopicTitleReturnsDateTitle(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['title' => 'Superhero']);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel(['title' => 'Superhero']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -73,7 +74,7 @@ final class EventDateTest extends TestCase
      */
     public function getSubtitleForEventDateWithoutSubtitleReturnsAnEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -93,7 +94,7 @@ final class EventDateTest extends TestCase
      */
     public function getSubtitleForEventDateWithSubtitleReturnsSubtitle(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['subtitle' => 'sub title']);
         $this->subject->setData(
             [
@@ -113,7 +114,7 @@ final class EventDateTest extends TestCase
      */
     public function setSubtitleForEventDateSetsSubtitle(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -133,7 +134,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSubtitleForEventDateWithoutSubtitleReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -152,7 +153,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSubtitleForEventDateWithSubtitleReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['subtitle' => 'sub title']);
         $this->subject->setData(
             [
@@ -173,7 +174,7 @@ final class EventDateTest extends TestCase
      */
     public function getTeaserForEventDateWithoutTeaserReturnsAnEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -193,7 +194,7 @@ final class EventDateTest extends TestCase
      */
     public function getTeaserForEventDateWithTeaserReturnsTeaser(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['teaser' => 'wow, this is teasing']);
         $this->subject->setData(
             [
@@ -214,7 +215,7 @@ final class EventDateTest extends TestCase
     public function setTeaserForEventDateSetsTeaser(): void
     {
         /** @var \Tx_Seminars_Model_Event $topic */
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -234,7 +235,7 @@ final class EventDateTest extends TestCase
      */
     public function hasTeaserForEventDateWithoutTeaserReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -253,7 +254,7 @@ final class EventDateTest extends TestCase
      */
     public function hasTeaserForEventDateWithTeaserReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['teaser' => 'wow, this is teasing']);
         $this->subject->setData(
             [
@@ -274,7 +275,7 @@ final class EventDateTest extends TestCase
      */
     public function getDescriptionForEventDateWithoutDescriptionReturnsAnEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -294,7 +295,7 @@ final class EventDateTest extends TestCase
      */
     public function getDescriptionForEventDateWithDescriptionReturnsDescription(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(
                 ['description' => 'this is a great event.']
             );
@@ -316,7 +317,7 @@ final class EventDateTest extends TestCase
      */
     public function setDescriptionForEventDateSetsDescription(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -336,7 +337,7 @@ final class EventDateTest extends TestCase
      */
     public function hasDescriptionForEventDateWithoutDescriptionReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -355,7 +356,7 @@ final class EventDateTest extends TestCase
      */
     public function hasDescriptionForEventDateWithDescriptionReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(
                 ['description' => 'this is a great event.']
             );
@@ -378,7 +379,7 @@ final class EventDateTest extends TestCase
      */
     public function getCreditPointsForEventDateWithoutCreditPointsReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -398,7 +399,7 @@ final class EventDateTest extends TestCase
      */
     public function getCreditPointsForEventDateWithPositiveCreditPointsReturnsCreditPoints(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['credit_points' => 42]);
         $this->subject->setData(
             [
@@ -418,7 +419,7 @@ final class EventDateTest extends TestCase
      */
     public function setCreditPointsForEventDateWithZeroCreditPointsSetsCreditPoints(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -439,7 +440,7 @@ final class EventDateTest extends TestCase
     public function setCreditPointsForEventDateWithPositiveCreditPointsSetsCreditPoints(): void
     {
         /** @var \Tx_Seminars_Model_Event $topic */
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -459,7 +460,7 @@ final class EventDateTest extends TestCase
      */
     public function hasCreditPointsForEventDateWithoutCreditPointsReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -478,7 +479,7 @@ final class EventDateTest extends TestCase
      */
     public function hasCreditPointsForEventDateWithCreditPointsReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['credit_points' => 42]);
         $this->subject->setData(
             [
@@ -499,7 +500,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularPriceForEventDateWithoutRegularPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular' => '0.0']);
         $this->subject->setData(
             [
@@ -519,7 +520,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularPriceForEventDateWithPositiveRegularPriceReturnsRegularPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
@@ -539,7 +540,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularPriceForEventDateWithZeroRegularPriceSetsRegularPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -559,7 +560,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularPriceForEventDateWithPositiveRegularPriceSetsRegularPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -579,7 +580,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularPriceForEventDateWithoutRegularPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -598,7 +599,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularPriceForEventDateWithRegularPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
@@ -619,7 +620,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularEarlyBirdPriceForEventDateWithoutRegularEarlyBirdPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -639,7 +640,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
@@ -659,7 +660,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -679,7 +680,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -699,7 +700,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularEarlyBirdPriceForEventDateWithoutRegularEarlyBirdPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -718,7 +719,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularEarlyBirdPriceForEventDateWithRegularEarlyBirdPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
@@ -739,7 +740,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularBoardPriceForEventDateWithoutRegularBoardPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -759,7 +760,7 @@ final class EventDateTest extends TestCase
      */
     public function getRegularBoardPriceForEventDateWithPositiveRegularBoardPriceReturnsRegularBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
@@ -779,7 +780,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularBoardPriceForEventDateWithZeroRegularBoardPriceSetsRegularBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -799,7 +800,7 @@ final class EventDateTest extends TestCase
      */
     public function setRegularBoardPriceForEventDateWithPositiveRegularBoardPriceSetsRegularBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -819,7 +820,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularBoardPriceForEventDateWithoutRegularBoardPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -838,7 +839,7 @@ final class EventDateTest extends TestCase
      */
     public function hasRegularBoardPriceForEventDateWithRegularBoardPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
@@ -859,7 +860,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialPriceForEventDateWithoutSpecialPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -879,7 +880,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialPriceForEventDateWithSpecialPriceReturnsSpecialPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
@@ -899,7 +900,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialPriceForEventDateWithZeroSpecialPriceSetsSpecialPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -919,7 +920,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialPriceForEventDateWithPositiveSpecialPriceSetsSpecialPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -939,7 +940,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialPriceForEventDateWithoutSpecialPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -958,7 +959,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialPriceForEventDateWithSpecialPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
@@ -979,7 +980,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialEarlyBirdPriceForEventDateWithoutSpecialEarlyBirdPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -999,7 +1000,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
@@ -1019,7 +1020,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1039,7 +1040,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1059,7 +1060,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialEarlyBirdPriceForEventDateWithoutSpecialEarlyBirdPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1078,7 +1079,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialEarlyBirdPriceForEventDateWithSpecialEarlyBirdPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
@@ -1099,7 +1100,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialBoardPriceForEventDateWithoutSpecialBoardPriceReturnsZero(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1119,7 +1120,7 @@ final class EventDateTest extends TestCase
      */
     public function getSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsSpecialBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
@@ -1139,7 +1140,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialBoardPriceForEventDateWithZeroSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1159,7 +1160,7 @@ final class EventDateTest extends TestCase
      */
     public function setSpecialBoardPriceForEventDateWithPositiveSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1179,7 +1180,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialBoardPriceForEventDateWithoutSpecialBoardPriceReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1198,7 +1199,7 @@ final class EventDateTest extends TestCase
      */
     public function hasSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
@@ -1219,7 +1220,7 @@ final class EventDateTest extends TestCase
      */
     public function getAdditionalInformationForEventDateWithoutAdditionalInformationReturnsEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1239,7 +1240,7 @@ final class EventDateTest extends TestCase
      */
     public function getAdditionalInformationForEventDateWithAdditionalInformationReturnsAdditionalInformation(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(
                 ['additional_information' => 'this is good to know']
             );
@@ -1261,7 +1262,7 @@ final class EventDateTest extends TestCase
      */
     public function setAdditionalInformationForEventDateSetsAdditionalInformation(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1281,7 +1282,7 @@ final class EventDateTest extends TestCase
      */
     public function hasAdditionalInformationForEventDateWithoutAdditionalInformationReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1300,7 +1301,7 @@ final class EventDateTest extends TestCase
      */
     public function hasAdditionalInformationForEventDateWithAdditionalInformationReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(
                 ['additional_information' => 'this is good to know']
             );
@@ -1323,7 +1324,7 @@ final class EventDateTest extends TestCase
      */
     public function allowsMultipleRegistrationForEventDateWithUnsetAllowsMultipleRegistrationReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1342,7 +1343,7 @@ final class EventDateTest extends TestCase
      */
     public function allowsMultipleRegistrationForEventDateWithSetAllowsMultipleRegistrationReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['allows_multiple_registrations' => 1]);
         $this->subject->setData(
             [
@@ -1363,7 +1364,7 @@ final class EventDateTest extends TestCase
      */
     public function usesTerms2ForEventDateWithUnsetUseTerms2ReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1382,7 +1383,7 @@ final class EventDateTest extends TestCase
      */
     public function usesTerms2ForEventDateWithSetUseTerms2ReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['use_terms_2' => 1]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel(['use_terms_2' => 1]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1402,7 +1403,7 @@ final class EventDateTest extends TestCase
      */
     public function getNotesForEventDateWithoutNotesReturnsEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1422,7 +1423,7 @@ final class EventDateTest extends TestCase
      */
     public function getNotesForEventDateWithNotesReturnsNotes(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['notes' => 'Don\'t forget this.']);
         $this->subject->setData(
             [
@@ -1442,7 +1443,7 @@ final class EventDateTest extends TestCase
      */
     public function setNotesForEventDateSetsNotes(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1462,7 +1463,7 @@ final class EventDateTest extends TestCase
      */
     public function hasNotesForEventDateWithoutNotesReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1481,7 +1482,7 @@ final class EventDateTest extends TestCase
      */
     public function hasNotesForEventDateWithNotesReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['notes' => 'Don\'t forget this.']);
         $this->subject->setData(
             [
@@ -1502,7 +1503,7 @@ final class EventDateTest extends TestCase
      */
     public function getImageForEventDateWithoutImageReturnsEmptyString(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1522,7 +1523,7 @@ final class EventDateTest extends TestCase
      */
     public function getImageForEventDateWithImageReturnsImage(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['image' => 'file.jpg']);
         $this->subject->setData(
             [
@@ -1542,7 +1543,7 @@ final class EventDateTest extends TestCase
      */
     public function setImageForEventDateSetsImage(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1562,7 +1563,7 @@ final class EventDateTest extends TestCase
      */
     public function hasImageForEventDateWithoutImageReturnsFalse(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1581,7 +1582,7 @@ final class EventDateTest extends TestCase
      */
     public function hasImageForEventDateWithImageReturnsTrue(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['image' => 'file.jpg']);
         $this->subject->setData(
             [

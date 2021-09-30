@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTask;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -34,7 +35,7 @@ final class RegistrationDigestTest extends TestCase
     private $eventMapperProphecy = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $eventMapper = null;
 
@@ -76,7 +77,7 @@ final class RegistrationDigestTest extends TestCase
         $objectManager = $this->objectManagerProphecy->reveal();
         $this->subject->injectObjectManager($objectManager);
 
-        $this->eventMapperProphecy = $this->prophesize(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapperProphecy = $this->prophesize(EventMapper::class);
         $this->eventMapper = $this->eventMapperProphecy->reveal();
         $this->subject->setEventMapper($this->eventMapper);
 

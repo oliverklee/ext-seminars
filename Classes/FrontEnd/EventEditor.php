@@ -19,6 +19,7 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
@@ -893,7 +894,7 @@ class EventEditor extends AbstractEditor
         if ($isNew) {
             $eventIsHidden = false;
         } else {
-            $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+            $mapper = MapperRegistry::get(EventMapper::class);
             $event = $mapper->find($eventUid);
             $eventIsHidden = $event->isHidden();
         }
@@ -1343,7 +1344,7 @@ class EventEditor extends AbstractEditor
             return;
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->findByPublicationHash($this->publicationHash);
 

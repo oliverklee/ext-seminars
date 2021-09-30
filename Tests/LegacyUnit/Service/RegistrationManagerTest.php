@@ -20,6 +20,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -5955,7 +5956,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -5977,7 +5978,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -5999,7 +6000,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6021,7 +6022,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6043,7 +6044,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6064,7 +6065,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6085,7 +6086,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6262,7 +6263,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6284,7 +6285,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6306,7 +6307,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6328,7 +6329,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6350,7 +6351,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6372,7 +6373,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6394,7 +6395,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6416,7 +6417,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6666,7 +6667,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6685,7 +6686,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6704,7 +6705,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6726,7 +6727,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6745,7 +6746,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6764,7 +6765,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6783,7 +6784,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6802,7 +6803,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6824,7 +6825,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6843,7 +6844,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6862,7 +6863,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6881,7 +6882,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6900,7 +6901,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6922,7 +6923,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6941,7 +6942,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6960,7 +6961,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6979,7 +6980,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6998,7 +6999,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7020,7 +7021,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7039,7 +7040,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7058,7 +7059,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7080,7 +7081,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7099,7 +7100,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7118,7 +7119,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7137,7 +7138,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7159,7 +7160,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7181,7 +7182,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7200,7 +7201,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7219,7 +7220,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7238,7 +7239,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7257,7 +7258,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7276,7 +7277,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7295,7 +7296,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7314,7 +7315,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7333,7 +7334,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7352,7 +7353,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7371,7 +7372,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7390,7 +7391,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7409,7 +7410,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7428,7 +7429,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7447,7 +7448,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7466,7 +7467,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7485,7 +7486,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7504,7 +7505,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7523,7 +7524,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7542,7 +7543,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7561,7 +7562,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7580,7 +7581,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7599,7 +7600,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7618,7 +7619,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7637,7 +7638,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7656,7 +7657,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7675,7 +7676,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7694,7 +7695,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
