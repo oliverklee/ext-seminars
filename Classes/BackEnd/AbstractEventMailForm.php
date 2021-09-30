@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -450,7 +451,7 @@ abstract class AbstractEventMailForm
     /**
      * Calls all registered hooks for modifying the e-mail.
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
+    protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void
     {
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+use OliverKlee\Seminars\Model\Registration;
 
 /**
  * This class represents a front-end user.
@@ -180,9 +181,9 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Gets the registration record for which this user is related to as "additional registered person".
      */
-    public function getRegistration(): ?\Tx_Seminars_Model_Registration
+    public function getRegistration(): ?Registration
     {
-        /** @var \Tx_Seminars_Model_Registration|null $registration */
+        /** @var Registration|null $registration */
         $registration = $this->getAsModel('tx_seminars_registration');
 
         return $registration;
@@ -191,7 +192,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Sets the registration record for which this user is related to as "additional registered person".
      */
-    public function setRegistration(?\Tx_Seminars_Model_Registration $registration = null): void
+    public function setRegistration(?Registration $registration = null): void
     {
         $this->set('tx_seminars_registration', $registration);
     }

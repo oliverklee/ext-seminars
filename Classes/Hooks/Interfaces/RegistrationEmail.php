@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 use OliverKlee\Oelib\Templating\Template;
+use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -25,11 +26,7 @@ interface RegistrationEmail extends Hook
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
      */
-    public function modifyAttendeeEmail(
-        MailMessage $email,
-        \Tx_Seminars_Model_Registration $registration,
-        string $emailReason
-    ): void;
+    public function modifyAttendeeEmail(MailMessage $email, Registration $registration, string $emailReason): void;
 
     /**
      * Modifies the attendee "Thank you" email body just before the subpart is rendered to plain text.
@@ -47,7 +44,7 @@ interface RegistrationEmail extends Hook
      */
     public function modifyAttendeeEmailBodyPlainText(
         Template $emailTemplate,
-        \Tx_Seminars_Model_Registration $registration,
+        Registration $registration,
         string $emailReason
     ): void;
 
@@ -66,7 +63,7 @@ interface RegistrationEmail extends Hook
      */
     public function modifyAttendeeEmailBodyHtml(
         Template $emailTemplate,
-        \Tx_Seminars_Model_Registration $registration,
+        Registration $registration,
         string $emailReason
     ): void;
 
@@ -81,11 +78,7 @@ interface RegistrationEmail extends Hook
      *        - notificationOnRegistrationForQueue
      *        - notificationOnQueueUpdate
      */
-    public function modifyOrganizerEmail(
-        MailMessage $email,
-        \Tx_Seminars_Model_Registration $registration,
-        string $emailReason
-    ): void;
+    public function modifyOrganizerEmail(MailMessage $email, Registration $registration, string $emailReason): void;
 
     /**
      * Modifies the organizer additional notification email just before it is sent.
@@ -97,9 +90,5 @@ interface RegistrationEmail extends Hook
      *          - 'IsFull' if the event is fully booked
      *          see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
      */
-    public function modifyAdditionalEmail(
-        MailMessage $email,
-        \Tx_Seminars_Model_Registration $registration,
-        string $emailReason
-    ): void;
+    public function modifyAdditionalEmail(MailMessage $email, Registration $registration, string $emailReason): void;
 }

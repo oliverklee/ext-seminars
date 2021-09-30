@@ -11,11 +11,15 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\Registration
+ */
 final class RegistrationTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Registration
+     * @var Registration
      */
     private $subject;
 
@@ -29,7 +33,7 @@ final class RegistrationTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->subject = new \Tx_Seminars_Model_Registration();
+        $this->subject = new Registration();
     }
 
     protected function tearDown(): void

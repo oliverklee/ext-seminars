@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -8559,12 +8560,12 @@ final class DefaultControllerTest extends TestCase
         MapperRegistry::set(EventMapper::class, $mapper);
 
         $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
-        $registrations->add(new \Tx_Seminars_Model_Registration());
+        $registrations->add(new Registration());
         $event->setRegistrations($registrations);
 
-        /** @var Collection<\Tx_Seminars_Model_Registration> $cloneRegistrations */
+        /** @var Collection<Registration> $cloneRegistrations */
         $cloneRegistrations = new Collection();
         $hiddenClone = clone $event;
         $hiddenClone->markAsHidden();

@@ -6,13 +6,14 @@ namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
+use OliverKlee\Seminars\Model\Registration;
 use Tx_Seminars_Model_FrontEndUser;
 use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * This class represents a mapper for registrations.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Registration>
+ * @extends AbstractDataMapper<Registration>
  */
 class RegistrationMapper extends AbstractDataMapper
 {
@@ -22,9 +23,9 @@ class RegistrationMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_attendances';
 
     /**
-     * @var class-string<\Tx_Seminars_Model_Registration> the model class name for this mapper, must not be empty
+     * @var class-string<Registration> the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Registration::class;
+    protected $modelClassName = Registration::class;
 
     /**
      * @var array<string, class-string<AbstractDataMapper>>

@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -350,7 +351,7 @@ class RegistrationForm extends AbstractEditor
     /**
      * Creates additional attendees as FE users and adds them to the provided registration.
      */
-    protected function createAdditionalAttendees(\Tx_Seminars_Model_Registration $registration): void
+    protected function createAdditionalAttendees(Registration $registration): void
     {
         $allPersonsData = $this->getAdditionalRegisteredPersonsData();
         if (empty($allPersonsData)) {

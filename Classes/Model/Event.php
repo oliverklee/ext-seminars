@@ -1488,20 +1488,20 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Registration> the registrations for this event (both regular and
+     * @return Collection<Registration> the registrations for this event (both regular and
      *                       on the waiting list), will be empty if this event
      *                       has no registrations
      */
     public function getRegistrations(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = $this->getAsCollection('registrations');
 
         return $registrations;
     }
 
     /**
-     * @param Collection<\Tx_Seminars_Model_Registration> $registrations the registrations for this event
+     * @param Collection<Registration> $registrations the registrations for this event
      *        (both regular and on the waiting list), may be empty
      */
     public function setRegistrations(Collection $registrations): void
@@ -1509,7 +1509,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
         $this->set('registrations', $registrations);
     }
 
-    public function attachRegistration(\Tx_Seminars_Model_Registration $registration): void
+    public function attachRegistration(Registration $registration): void
     {
         $registration->setEvent($this);
         $this->getRegistrations()->add($registration);
@@ -1519,16 +1519,16 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
      * Gets the regular registrations for this event, i.e., the registrations
      * that are not on the waiting list.
      *
-     * @return Collection<\Tx_Seminars_Model_Registration> the regular registrations for this event, will be
+     * @return Collection<Registration> the regular registrations for this event, will be
      *                       will be empty if this event no regular
      *                       registrations
      */
     public function getRegularRegistrations(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $regularRegistrations */
+        /** @var Collection<Registration> $regularRegistrations */
         $regularRegistrations = new Collection();
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
             if (!$registration->isOnRegistrationQueue()) {
                 $regularRegistrations->add($registration);
@@ -1542,15 +1542,15 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
      * Gets the queue registrations for this event, i.e., the registrations
      * that are no regular registrations (yet).
      *
-     * @return Collection<\Tx_Seminars_Model_Registration> the queue registrations for this event, will be
+     * @return Collection<Registration> the queue registrations for this event, will be
      *                       will be empty if this event no queue registrations
      */
     public function getQueueRegistrations(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $queueRegistrations */
+        /** @var Collection<Registration> $queueRegistrations */
         $queueRegistrations = new Collection();
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
             if ($registration->isOnRegistrationQueue()) {
                 $queueRegistrations->add($registration);
@@ -1570,15 +1570,15 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Registration>
+     * @return Collection<Registration>
      */
     public function getRegistrationsAfterLastDigest(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $newerRegistrations */
+        /** @var Collection<Registration> $newerRegistrations */
         $newerRegistrations = new Collection();
         $dateOfLastDigest = $this->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp();
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
             if ($registration->getCreationDateAsUnixTimeStamp() > $dateOfLastDigest) {
                 $newerRegistrations->add($registration);
@@ -1601,7 +1601,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     {
         $registeredSeats = $this->getOfflineRegistrations();
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($this->getRegularRegistrations() as $registration) {
             $registeredSeats += $registration->getSeats();
         }
@@ -1684,7 +1684,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @param Collection<\Tx_Seminars_Model_Registration> $registrations
+     * @param Collection<Registration> $registrations
      *
      * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
      */
@@ -1692,7 +1692,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     {
         $names = [];
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($registrations as $registration) {
             if ($registration->hasRegisteredThemselves()) {
                 $names[] = $registration->getFrontEndUser()->getName();

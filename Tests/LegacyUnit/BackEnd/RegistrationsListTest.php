@@ -13,6 +13,7 @@ use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -659,7 +660,7 @@ final class RegistrationsListTest extends TestCase
 
         $hook = $this->createMock(BackEndRegistrationListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with(
-            self::isInstanceOf(\Tx_Seminars_Model_Registration::class),
+            self::isInstanceOf(Registration::class),
             self::isInstanceOf(Template::class),
             RegistrationsList::REGULAR_REGISTRATIONS
         );

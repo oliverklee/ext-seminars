@@ -38,6 +38,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -3270,7 +3271,7 @@ class DefaultController extends TemplateHelper
      */
     protected function copyEvent(Event $event): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $copy = clone $event;
         $copy->markAsHidden();

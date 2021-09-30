@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -38,7 +39,7 @@ class GeneralEventMailForm extends AbstractEventMailForm
     /**
      * Calls all registered hooks for modifying the e-mail.
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
+    protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void
     {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyGeneralEmail($registration, $eMail);

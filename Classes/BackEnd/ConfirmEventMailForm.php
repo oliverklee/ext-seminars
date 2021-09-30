@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -39,7 +40,7 @@ class ConfirmEventMailForm extends AbstractEventMailForm
     /**
      * Calls all registered hooks for modifying the e-mail.
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
+    protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void
     {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyConfirmEmail($registration, $eMail);

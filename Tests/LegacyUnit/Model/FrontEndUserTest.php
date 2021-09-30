@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
 
 final class FrontEndUserTest extends TestCase
@@ -743,7 +744,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getRegistrationReturnsRegistration(): void
     {
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $this->subject->setData(
             ['tx_seminars_registration' => $registration]
         );
@@ -759,7 +760,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function setRegistrationSetsRegistration(): void
     {
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $this->subject->setRegistration($registration);
 
         self::assertSame(

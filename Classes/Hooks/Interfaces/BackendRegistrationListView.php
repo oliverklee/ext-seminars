@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Seminars\Bag\RegistrationBag;
+use OliverKlee\Seminars\Model\Registration;
 
 /**
  * Use this interface for hooks concerning the backend registration list view.
@@ -20,15 +21,11 @@ interface BackendRegistrationListView extends Hook
      * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
      * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
      *
-     * @param \Tx_Seminars_Model_Registration $registration the registration the row is made from
+     * @param Registration $registration the registration the row is made from
      * @param Template $template the template that will be used to create the registration list
      * @param int $registrationsToShow the type of registration shown in the list
      */
-    public function modifyListRow(
-        \Tx_Seminars_Model_Registration $registration,
-        Template $template,
-        int $registrationsToShow
-    ): void;
+    public function modifyListRow(Registration $registration, Template $template, int $registrationsToShow): void;
 
     /**
      * Modifies the list heading template content just before it is rendered to HTML.
