@@ -6,10 +6,11 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\CategoryList;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_CategoryList
+ * @covers \OliverKlee\Seminars\FrontEnd\CategoryList
  */
 final class CategoryListTest extends TestCase
 {
@@ -19,7 +20,7 @@ final class CategoryListTest extends TestCase
     private const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
 
     /**
-     * @var \Tx_Seminars_FrontEnd_CategoryList
+     * @var CategoryList
      */
     private $subject = null;
 
@@ -42,7 +43,7 @@ final class CategoryListTest extends TestCase
         $this->testingFramework->createFakeFrontEnd($pageUid);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
-        $this->subject = new \Tx_Seminars_FrontEnd_CategoryList(
+        $this->subject = new CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',

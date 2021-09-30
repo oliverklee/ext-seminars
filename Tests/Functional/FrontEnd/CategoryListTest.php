@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_CategoryList
+ * @covers \OliverKlee\Seminars\FrontEnd\CategoryList
  */
 final class CategoryListTest extends FunctionalTestCase
 {
@@ -40,7 +41,7 @@ final class CategoryListTest extends FunctionalTestCase
     private $filesToDelete = [];
 
     /**
-     * @var \Tx_Seminars_FrontEnd_CategoryList
+     * @var CategoryList
      */
     private $subject = null;
 
@@ -50,7 +51,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $GLOBALS['TSFE'] = new TypoScriptFrontendController(null, 0, 0);
 
-        $this->subject = new \Tx_Seminars_FrontEnd_CategoryList(
+        $this->subject = new CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',

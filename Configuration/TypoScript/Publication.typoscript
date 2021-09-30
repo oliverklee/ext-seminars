@@ -11,12 +11,12 @@ tx_seminars_publication {
         setJS_openPic = 0
     }
 
-    includeLibs.tx_seminars_publication = EXT:seminars/Classes/FrontEnd/PublishEvent.php
+    includeLibs.tx_seminars_publication = EXT:seminars/Classes/FrontEnd/EventPublication.php
     stdWrap.wrap = <p>|</p>
 
     10 = USER
     10 {
-        userFunc = Tx_Seminars_FrontEnd_PublishEvent->render
+        userFunc = \OliverKlee\Seminars\FrontEnd\EventPublication->render
         xhtml_cleaning = all
     }
 }

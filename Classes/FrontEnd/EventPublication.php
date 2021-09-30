@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class publishes events which are hidden through editing or creation in the FE editor.
  */
-class Tx_Seminars_FrontEnd_PublishEvent extends TemplateHelper
+class EventPublication extends TemplateHelper
 {
     /**
      * @var int

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
@@ -17,7 +19,6 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
-use OliverKlee\Seminars\FrontEnd\AbstractEditor;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
@@ -28,7 +29,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows creating and editing events on the FE.
  */
-class Tx_Seminars_FrontEnd_EventEditor extends AbstractEditor
+class EventEditor extends AbstractEditor
 {
     use SharedPluginConfiguration;
 
@@ -1418,7 +1419,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends AbstractEditor
         $url = $this->cObj->typoLink_URL(
             [
                 'parameter' => $this->getFrontEndController()->id . ','
-                    . \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+                    . EventPublication::PUBLICATION_TYPE_NUMBER,
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     'tx_seminars_publication',
                     ['hash' => $this->publicationHash],
@@ -1426,7 +1427,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends AbstractEditor
                     false,
                     true
                 ),
-                'type' => \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+                'type' => EventPublication::PUBLICATION_TYPE_NUMBER,
             ]
         );
 

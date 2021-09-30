@@ -6,20 +6,21 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\EventPublication;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_PublishEvent
+ * @covers \OliverKlee\Seminars\FrontEnd\EventPublication
  */
-final class PublishEventTest extends TestCase
+final class EventPublicationTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_PublishEvent
+     * @var EventPublication
      */
     private $subject = null;
 
@@ -32,7 +33,7 @@ final class PublishEventTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->subject = new \Tx_Seminars_FrontEnd_PublishEvent();
+        $this->subject = new EventPublication();
     }
 
     protected function tearDown(): void

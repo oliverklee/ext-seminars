@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
-use OliverKlee\Seminars\FrontEnd\AbstractView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a category list.
  */
-class Tx_Seminars_FrontEnd_CategoryList extends AbstractView
+class CategoryList extends AbstractView
 {
     /**
      * Creates an HTML list of categories.

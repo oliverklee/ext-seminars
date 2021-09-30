@@ -14,6 +14,8 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\EventEditor;
+use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
@@ -6796,8 +6798,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function registrationFormHtmlspecialcharsEventTitle(): void
     {
-        $registrationFormMock = $this->createMock(\Tx_Seminars_FrontEnd_RegistrationForm::class);
-        GeneralUtility::addInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
+        $registrationFormMock = $this->createMock(RegistrationForm::class);
+        GeneralUtility::addInstance(RegistrationForm::class, $registrationFormMock);
 
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -7017,8 +7019,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function registrationFormCallsRegistrationFormHooks(): void
     {
-        $registrationFormMock = $this->createMock(\Tx_Seminars_FrontEnd_RegistrationForm::class);
-        GeneralUtility::addInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
+        $registrationFormMock = $this->createMock(RegistrationForm::class);
+        GeneralUtility::addInstance(RegistrationForm::class, $registrationFormMock);
 
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -8032,8 +8034,8 @@ final class DefaultControllerTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
 
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8053,8 +8055,8 @@ final class DefaultControllerTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage');
 
         /** @var TestingDefaultController&MockObject $subject */
@@ -8076,8 +8078,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForHideActionWithAccessGrantedCallsHideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8103,8 +8105,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
@@ -8131,8 +8133,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForHideActionWithAccessDeniedNotCallsHideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn(
             'access denied'
         );
@@ -8160,8 +8162,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForUnhideActionWithAccessGrantedCallsUnhideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8185,8 +8187,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
@@ -8211,8 +8213,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForUnhideActionWithAccessDeniedNotCallsUnhideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('access denied');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8236,8 +8238,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForCopyActionWithAccessGrantedCallsCopyEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8263,8 +8265,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForCopyActionWithUnpublishedEventAndAccessGrantedNotCallsCopyEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
@@ -8291,8 +8293,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForCopyActionWithAccessDeniedNotCallsCopyEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn(
             'access denied'
         );
@@ -8320,8 +8322,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8346,8 +8348,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor&MockObject $eventEditor */
-        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        /** @var EventEditor&MockObject $eventEditor */
+        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);

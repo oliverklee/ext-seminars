@@ -7,11 +7,12 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Seminars\FrontEnd\EventHeadline;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @author \Tx_Seminars_FrontEnd_EventHeadline
+ * @covers \OliverKlee\Seminars\FrontEnd\EventHeadline
  */
 final class EventHeadlineTest extends FunctionalTestCase
 {
@@ -31,7 +32,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_FrontEnd_EventHeadline
+     * @var EventHeadline
      */
     private $subject = null;
 
@@ -44,7 +45,7 @@ final class EventHeadlineTest extends FunctionalTestCase
         $configurationRegistry->set('plugin.tx_seminars', $con);
         $GLOBALS['TSFE'] = $this->prophesize(TypoScriptFrontendController::class)->reveal();
 
-        $this->subject = new \Tx_Seminars_FrontEnd_EventHeadline(self::CONFIGURATION, new ContentObjectRenderer());
+        $this->subject = new EventHeadline(self::CONFIGURATION, new ContentObjectRenderer());
 
         $mapper = new \Tx_Seminars_Mapper_Event();
         $this->subject->injectEventMapper($mapper);
@@ -65,7 +66,7 @@ final class EventHeadlineTest extends FunctionalTestCase
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionCode(1333614794);
 
-        $subject = new \Tx_Seminars_FrontEnd_EventHeadline([], new ContentObjectRenderer());
+        $subject = new EventHeadline([], new ContentObjectRenderer());
 
         $subject->render();
     }

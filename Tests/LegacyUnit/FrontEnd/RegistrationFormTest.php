@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -17,14 +18,14 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_RegistrationForm
+ * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
  */
 final class RegistrationFormTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_RegistrationForm
+     * @var RegistrationForm
      */
     private $subject = null;
 
@@ -77,7 +78,7 @@ final class RegistrationFormTest extends TestCase
         );
         $this->seminarUid = $this->seminar->getUid();
 
-        $this->subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $this->subject = new RegistrationForm(
             [
                 'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
                 'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
@@ -705,7 +706,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             ['showRegistrationFields' => ''],
             $this->getFrontEndController()->cObj
         );
@@ -733,7 +734,7 @@ final class RegistrationFormTest extends TestCase
         string $key,
         bool $isSelfContained
     ): void {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             ['showRegistrationFields' => $key],
             $this->getFrontEndController()->cObj
         );
@@ -752,7 +753,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             ['showRegistrationFields' => 'registered_themselves'],
             $this->getFrontEndController()->cObj
         );
@@ -767,7 +768,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             ['showRegistrationFields' => 'company, billing_address'],
             $this->getFrontEndController()->cObj
         );
@@ -927,7 +928,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration(int $configurationValue): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
@@ -1026,9 +1027,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1049,9 +1050,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1072,9 +1073,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1095,9 +1096,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1170,7 +1171,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
@@ -1201,9 +1202,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForDisabledFrontEndUserCreationReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1226,9 +1227,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForDisabledFormFieldReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1251,9 +1252,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForNoPersonsReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1276,9 +1277,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForOneValidEmailAddressReturnsTrue(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1303,9 +1304,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForOneInvalidEmailAddressReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1330,9 +1331,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForOneEmptyAddressReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1357,9 +1358,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForOneMissingAddressReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1384,9 +1385,9 @@ final class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEmailAddressesForOneValidAndOneInvalidEmailAddressReturnsFalse(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
+        /** @var RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
         $subject->method('isFormFieldEnabled')
@@ -1518,7 +1519,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'price',
@@ -1547,7 +1548,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function getRegistrationDataHtmlspecialcharsInterestsField(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
@@ -1571,7 +1572,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
@@ -1595,7 +1596,7 @@ final class RegistrationFormTest extends TestCase
      */
     public function getRegistrationDataCanContainAttendeesNames(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names',
@@ -1624,7 +1625,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1654,7 +1655,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1684,7 +1685,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1714,7 +1715,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1744,7 +1745,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1774,7 +1775,7 @@ final class RegistrationFormTest extends TestCase
             ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1935,7 +1936,7 @@ final class RegistrationFormTest extends TestCase
         $event->setMaximumAttendees(11);
         self::assertSame(11, $event->getVacancies());
 
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new RegistrationForm(
             ['maximumBookableSeats' => 3],
             $this->getFrontEndController()->cObj
         );

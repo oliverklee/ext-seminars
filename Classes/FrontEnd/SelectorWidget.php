@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
-use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -17,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class creates a selector widget.
  */
-class Tx_Seminars_FrontEnd_SelectorWidget extends AbstractView
+class SelectorWidget extends AbstractView
 {
     /**
      * needed for the list view to convert ISO codes to country names and languages
@@ -316,7 +317,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends AbstractView
     protected function getSelectorWidgetHookProvider(): HookProvider
     {
         if (!$this->selectorWidgetHookProvider instanceof SeminarSelectorWidget) {
-            $this->selectorWidgetHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarSelectorWidget::class);
+            $this->selectorWidgetHookProvider = GeneralUtility::makeInstance(
+                HookProvider::class,
+                SeminarSelectorWidget::class
+            );
         }
 
         return $this->selectorWidgetHookProvider;

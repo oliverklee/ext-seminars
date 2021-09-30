@@ -7,20 +7,21 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_RegistrationsList
+ * @covers \OliverKlee\Seminars\BackEnd\RegistrationsList
  */
 final class RegistrationsListTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_RegistrationsList
+     * @var RegistrationsList
      */
     private $subject = null;
 
@@ -64,7 +65,7 @@ final class RegistrationsListTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_FrontEnd_RegistrationsList(
+        $this->subject = new RegistrationsList(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'enableRegistration' => 1,
@@ -161,7 +162,7 @@ final class RegistrationsListTest extends TestCase
             'The value "foo" of the first parameter $whatToDisplay is not valid.'
         );
 
-        new \Tx_Seminars_FrontEnd_RegistrationsList(
+        new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo',
             0,
@@ -176,7 +177,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException(): void
     {
-        new \Tx_Seminars_FrontEnd_RegistrationsList(
+        new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
@@ -191,7 +192,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException(): void
     {
-        new \Tx_Seminars_FrontEnd_RegistrationsList(
+        new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations',
             0,
@@ -219,7 +220,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function renderWithNegativeSeminarUidReturnsHeader404(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationsList(
+        $subject = new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             -1,
@@ -238,7 +239,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function renderWithZeroSeminarUidReturnsHeader404(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationsList(
+        $subject = new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,

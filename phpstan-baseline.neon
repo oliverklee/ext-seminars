@@ -41,7 +41,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method Tx_Seminars_FrontEnd_EventEditor\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -66,7 +66,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$field of method Tx_Seminars_FrontEnd_EventEditor\\:\\:isFieldRequired\\(\\) expects array\\<string\\>, array\\<array\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$field of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:isFieldRequired\\(\\) expects array\\<string\\>, array\\<array\\> given\\.$#"
 			count: 5
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -121,12 +121,12 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method Tx_Seminars_FrontEnd_RegistrationForm\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method Tx_Seminars_FrontEnd_RegistrationForm\\:\\:getRegistration\\(\\) never returns null so it can be removed from the return typehint\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getRegistration\\(\\) never returns null so it can be removed from the return typehint\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -156,17 +156,17 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\<int, int\\>\\|string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\<int, int\\>\\|string\\> given\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\|string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\|string\\> given\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 4
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
@@ -191,22 +191,22 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateInteger\\(\\) expects array\\<array\\>, array\\<string, int\\|string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateInteger\\(\\) expects array\\<array\\>, array\\<string, int\\|string\\> given\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validatePrice\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validatePrice\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateString\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$formData of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateString\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 

@@ -572,7 +572,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         }
 
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::populateListCountries();
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListCountries();
                         )
                     }
                 }
@@ -624,7 +624,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         cache = false
                         params = newPlace_title, newPlace_address, newPlace_zip, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::createNewPlace($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewPlace($this);
                         )
                     }
                 }
@@ -640,7 +640,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 runat = ajax
                 cache = false
                 userobj.php (
-                    return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this);
+                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditPlaceModalBox($this);
                 )
             }
         }
@@ -693,7 +693,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         }
 
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::populateListCountries();
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListCountries();
                         )
                     }
                 }
@@ -750,7 +750,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         cache = false
                         params = editPlace_title, editPlace_address, editPlace_zip, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::updatePlace($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::updatePlace($this);
                         )
                     }
                 }
@@ -971,7 +971,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     class = tx-seminars-pi1-event-editor-checkbox
                     wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
                     data.userobj.php (
-                        return tx_seminars_FrontEnd_EventEditor::populateListSkills();
+                        return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListSkills();
                     )
                 }
 
@@ -1068,7 +1068,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 runat = ajax
                 cache = false
                 userobj.php (
-                    return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this);
+                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditSpeakerModalBox($this);
                 )
             }
         }
@@ -1139,7 +1139,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     class = tx-seminars-pi1-event-editor-checkbox
                     wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
                     data.userobj.php (
-                        return tx_seminars_FrontEnd_EventEditor::populateListSkills();
+                        return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListSkills();
                     )
                 }
 
@@ -1567,7 +1567,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         cache = false
                         params = newCheckbox_title
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::createNewCheckbox($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewCheckbox($this);
                         )
                     }
                 }
@@ -1583,7 +1583,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 runat = ajax
                 cache = false
                 userobj.php (
-                    return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this);
+                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditCheckboxModalBox($this);
                 )
             }
         }
@@ -1628,7 +1628,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         cache = false
                         params = editCheckbox_title, editCheckbox_uid
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::updateCheckbox($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::updateCheckbox($this);
                         )
                     }
                 }
@@ -1876,7 +1876,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         runat = ajax
                         params = newTargetGroup_title, newTargetGroup_minimum_age, newTargetGroup_maximum_age
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::createNewTargetGroup($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewTargetGroup($this);
                         )
                     }
                 }
@@ -1892,7 +1892,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 runat = ajax
                 cache = false
                 userobj.php (
-                    return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this);
+                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditTargetGroupModalBox($this);
                 )
             }
         }
@@ -1953,7 +1953,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                         cache = false
                         params = editTargetGroup_title, editTargetGroup_uid, editTargetGroup_minimum_age, editTargetGroup_maximum_age
                         userobj.php (
-                            return tx_seminars_FrontEnd_EventEditor::updateTargetGroup($this);
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::updateTargetGroup($this);
                         )
                     }
                 }
