@@ -171,16 +171,6 @@ parameters:
 			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToEventTypes\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
-			count: 11
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToPlaces\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\>, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>&class\\-string\\<stdClass\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php

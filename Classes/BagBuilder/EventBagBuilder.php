@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\BagBuilder;
+
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
  * This builder class creates customized event bags.
  *
- * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Event>
+ * @extends AbstractBagBuilder<EventBag>
  */
-class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
+class EventBagBuilder extends AbstractBagBuilder
 {
     /**
-     * @var class-string<\Tx_Seminars_Bag_Event> class name of the bag class that will be built
+     * @var class-string<EventBag> class name of the bag class that will be built
      */
-    protected $bagClassName = \Tx_Seminars_Bag_Event::class;
+    protected $bagClassName = EventBag::class;
 
     /**
      * @var string the table name of the bag to build
@@ -93,13 +95,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars_categories_mm');
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from('tx_seminars_seminars_categories_mm')
-           ->where(
-               $queryBuilder->expr()->in('uid_foreign', $categoryUids)
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid_local')
+            ->from('tx_seminars_seminars_categories_mm')
+            ->where(
+                $queryBuilder->expr()->in('uid_foreign', $categoryUids)
+            )
+            ->execute()
+            ->fetchAll();
         $directMatchUids = array_column($result, 'uid_local');
 
         if (empty($directMatchUids)) {
@@ -123,7 +125,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events at any of the places with the UIDs provided as
      * the parameter $placeUids.
      *
-     * @param string[] $uids place UIDs, set to an empty array for no limitation, need not be SQL-safe
+     * @param array<int, string|int> $uids place UIDs, set to an empty array for no limitation, need not be SQL-safe
      */
     public function limitToPlaces(array $uids = []): void
     {
@@ -291,7 +293,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events from any of the event types with the UIDs
      * provided as the parameter $eventTypeUids.
      *
-     * @param string[] $uids event type UIDs, set to an empty array for no limitation, need not be SQL-safe
+     * @param array<int, string|int> $uids event type UIDs, set to empty array for no limitation, need not be SQL-safe
      */
     public function limitToEventTypes(array $uids = []): void
     {
@@ -734,13 +736,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     {
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars');
         $result = $queryBuilder
-           ->select('uid')
-           ->from('tx_seminars_seminars')
-           ->where(
-               'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from('tx_seminars_seminars')
+            ->where(
+                'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'
+            )
+            ->execute()
+            ->fetchAll();
 
         $matchingUids = array_column($result, 'uid');
 
@@ -868,11 +870,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
         $queryBuilder = $this->getQueryBuilderForTable($foreignTable);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($foreignTable)
-           ->where($matchQueryPart)
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($foreignTable)
+            ->where($matchQueryPart)
+            ->execute()
+            ->fetchAll();
 
         $foreignUids = array_column($result, 'uid');
 
@@ -882,13 +884,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
         $queryBuilder = $this->getQueryBuilderForTable($mmTable);
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from($mmTable)
-           ->where(
-               $queryBuilder->expr()->in('uid_foreign', $foreignUids)
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid_local')
+            ->from($mmTable)
+            ->where(
+                $queryBuilder->expr()->in('uid_foreign', $foreignUids)
+            )
+            ->execute()
+            ->fetchAll();
         $localUids = array_column($result, 'uid_local');
 
         if (empty($localUids)) {
@@ -1084,13 +1086,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_seminars_organizers_mm';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->in('uid_foreign', $organizerUids)
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid_local')
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->in('uid_foreign', $organizerUids)
+            )
+            ->execute()
+            ->fetchAll();
 
         $eventUids = implode(',', array_column($result, 'uid_local'));
 
@@ -1124,52 +1126,52 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_target_groups';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->lte(
-                   'minimum_age',
-                   $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
-               ),
-               $queryBuilder->expr()->orX(
-                   $queryBuilder->expr()->eq(
-                       'maximum_age',
-                       $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
-                   ),
-                   $queryBuilder->expr()->gte(
-                       'maximum_age',
-                       $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
-                   )
-               )
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->lte(
+                    'minimum_age',
+                    $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq(
+                        'maximum_age',
+                        $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->gte(
+                        'maximum_age',
+                        $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                    )
+                )
+            )
+            ->execute()
+            ->fetchAll();
 
         $matchingTargetGroups = implode(',', array_column($result, 'uid'));
 
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->orX(
-                   $queryBuilder->expr()->eq(
-                       'object_type',
-                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
-                   ),
-                   $queryBuilder->expr()->eq(
-                       'object_type',
-                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
-                   )
-               ),
-               $queryBuilder->expr()->eq(
-                   'target_groups',
-                   $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
-               )
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq(
+                        'object_type',
+                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'object_type',
+                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                    )
+                ),
+                $queryBuilder->expr()->eq(
+                    'target_groups',
+                    $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                )
+            )
+            ->execute()
+            ->fetchAll();
 
         $eventsWithoutTargetGroup = array_column($result, 'uid');
 
@@ -1245,11 +1247,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where($whereClause)
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where($whereClause)
+            ->execute()
+            ->fetchAll();
         $foundUids = implode(',', array_column($result, 'uid'));
 
         if ($foundUids === '') {
@@ -1297,11 +1299,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where($whereClause)
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where($whereClause)
+            ->execute()
+            ->fetchAll();
 
         $foundUids = implode(',', array_column($result, 'uid'));
 

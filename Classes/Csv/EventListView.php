@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -84,8 +85,8 @@ class EventListView extends AbstractListView
      */
     protected function createCsvBodyLines(): array
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setBackEndMode();
         $builder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 
 /**
@@ -30,7 +31,7 @@ interface SeminarListView extends Hook
      */
     public function modifyEventBagBuilder(
         DefaultController $controller,
-        \Tx_Seminars_BagBuilder_Event $builder,
+        EventBagBuilder $builder,
         string $whatToDisplay
     ): void;
 

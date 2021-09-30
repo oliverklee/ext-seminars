@@ -6,11 +6,15 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\EventBag;
 
+/**
+ * @covers \OliverKlee\Seminars\Bag\EventBag
+ */
 final class EventBagTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Bag_Event
+     * @var EventBag
      */
     private $subject = null;
 
@@ -28,7 +32,7 @@ final class EventBagTest extends TestCase
             ['title' => 'test event']
         );
 
-        $this->subject = new \Tx_Seminars_Bag_Event('is_dummy_record=1');
+        $this->subject = new EventBag('is_dummy_record=1');
     }
 
     protected function tearDown(): void

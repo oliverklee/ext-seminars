@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -46,14 +48,14 @@ class EventsList extends AbstractList
 
         $this->createTableHeading();
 
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setBackEndMode();
 
         $pageData = $this->page->getPageData();
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 
-        /** @var \Tx_Seminars_Bag_Event $seminarBag */
+        /** @var EventBag $seminarBag */
         $seminarBag = $builder->build();
         $this->createListBody($seminarBag);
 
@@ -128,7 +130,7 @@ class EventsList extends AbstractList
      *
      * The table rows are set directly in the template, so nothing is returned.
      */
-    private function createListBody(\Tx_Seminars_Bag_Event $events): void
+    private function createListBody(EventBag $events): void
     {
         $tableRows = '';
 

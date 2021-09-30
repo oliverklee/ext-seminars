@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -6512,7 +6513,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getRequirementsReturnsSeminarBag(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Event::class, $this->subject->getRequirements());
+        self::assertInstanceOf(EventBag::class, $this->subject->getRequirements());
     }
 
     /**
@@ -6643,7 +6644,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getDependenciesReturnsSeminarBag(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Event::class, $this->subject->getDependencies());
+        self::assertInstanceOf(EventBag::class, $this->subject->getDependencies());
     }
 
     /**

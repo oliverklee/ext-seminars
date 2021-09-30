@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -20,8 +21,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      */
     public function render(): string
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
-        $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $seminarBagBuilder */
+        $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $seminarBagBuilder->setSourcePages(
             $this->getConfValueString('pages'),
             $this->getConfValueInteger('recursive')

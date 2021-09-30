@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -34,7 +36,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private const SUBPART_PREFIX = 'SEARCH_PART_';
 
     /**
-     * @var \Tx_Seminars_Bag_Event all seminars to show in the list view
+     * @var EventBag all seminars to show in the list view
      */
     private $seminarBag = null;
 
@@ -93,8 +95,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         );
 
         $this->instantiateStaticInfo();
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToEventTypes(
             GeneralUtility::trimExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
         );

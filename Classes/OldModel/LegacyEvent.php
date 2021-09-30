@@ -13,6 +13,8 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -3413,8 +3415,8 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_attendances.seminar' .
             ' AND tx_seminars_attendances.user = ' . $uid;
 
-        /** @var \Tx_Seminars_Bag_Event $blockingEvents */
-        $blockingEvents = GeneralUtility::makeInstance(\Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
+        /** @var EventBag $blockingEvents */
+        $blockingEvents = GeneralUtility::makeInstance(EventBag::class, $queryWhere, $additionalTables);
 
         return !$blockingEvents->isEmpty();
     }
@@ -3843,15 +3845,15 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns the required events for the current event topic, ie. topics that
      * are prerequisites for this event.
      *
-     * @return \Tx_Seminars_Bag_Event the required events, will be empty if this
+     * @return EventBag the required events, will be empty if this
      *                               event has no required events
      */
-    public function getRequirements(): \Tx_Seminars_Bag_Event
+    public function getRequirements(): EventBag
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($this->getTopicOrSelfUid());
-        /** @var \Tx_Seminars_Bag_Event $bag */
+        /** @var EventBag $bag */
         $bag = $builder->build();
 
         return $bag;
@@ -3861,15 +3863,15 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns the depending events for the current event topic, ie. topics for
      * which this event is a prerequisite.
      *
-     * @return \Tx_Seminars_Bag_Event the depending events, will be empty if
+     * @return EventBag the depending events, will be empty if
      *                               this event has no depending events
      */
-    public function getDependencies(): \Tx_Seminars_Bag_Event
+    public function getDependencies(): EventBag
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToDependingEventTopics($this->getTopicOrSelfUid());
-        /** @var \Tx_Seminars_Bag_Event $bag */
+        /** @var EventBag $bag */
         $bag = $builder->build();
 
         return $bag;
