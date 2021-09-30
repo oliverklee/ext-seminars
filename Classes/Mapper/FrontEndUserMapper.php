@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 /**
@@ -12,7 +13,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
  *
  * @extends AbstractDataMapper<FrontEndUser>
  */
-class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
+class FrontEndUserMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -29,7 +30,7 @@ class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'usergroup' => \Tx_Seminars_Mapper_FrontEndUserGroup::class,
+        'usergroup' => FrontEndUserGroupMapper::class,
         'tx_seminars_registration' => RegistrationMapper::class,
     ];
 

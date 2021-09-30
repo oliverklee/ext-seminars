@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Model\BackEndUserGroup;
 
 /**
- * @covers \Tx_Seminars_Mapper_BackEndUser
+ * @covers \OliverKlee\Seminars\Mapper\BackEndUserMapper
  */
 final class BackEndUserMapperTest extends FunctionalTestCase
 {
@@ -18,7 +19,7 @@ final class BackEndUserMapperTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_BackEndUser
+     * @var BackEndUserMapper
      */
     private $subject = null;
 
@@ -26,7 +27,7 @@ final class BackEndUserMapperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new \Tx_Seminars_Mapper_BackEndUser();
+        $this->subject = new BackEndUserMapper();
     }
 
     /**

@@ -6,12 +6,13 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 
 /**
- * @covers \Tx_Seminars_Mapper_FrontEndUser
+ * @covers \OliverKlee\Seminars\Mapper\FrontEndUserMapper
  */
 final class FrontEndUserMapperTest extends FunctionalTestCase
 {
@@ -21,7 +22,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUser
+     * @var FrontEndUserMapper
      */
     private $subject = null;
 
@@ -29,7 +30,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new \Tx_Seminars_Mapper_FrontEndUser();
+        $this->subject = new FrontEndUserMapper();
     }
 
     /**

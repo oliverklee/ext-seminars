@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
@@ -101,7 +102,7 @@ final class RegistrationMapperTest extends TestCase
     public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser(): void
     {
         $frontEndUser = MapperRegistry::
-        get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
+        get(FrontEndUserMapper::class)->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());

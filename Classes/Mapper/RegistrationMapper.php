@@ -33,13 +33,13 @@ class RegistrationMapper extends AbstractDataMapper
      */
     protected $relations = [
         'seminar' => EventMapper::class,
-        'user' => \Tx_Seminars_Mapper_FrontEndUser::class,
+        'user' => FrontEndUserMapper::class,
         'currency' => CurrencyMapper::class,
         'method_of_payment' => \Tx_Seminars_Mapper_PaymentMethod::class,
         'lodgings' => \Tx_Seminars_Mapper_Lodging::class,
         'foods' => \Tx_Seminars_Mapper_Food::class,
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
-        'additional_persons' => \Tx_Seminars_Mapper_FrontEndUser::class,
+        'additional_persons' => FrontEndUserMapper::class,
     ];
 
     /**

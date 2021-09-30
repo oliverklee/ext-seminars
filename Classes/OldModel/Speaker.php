@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -293,7 +294,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
             return null;
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
         $owner = $mapper->find($this->getRecordPropertyInteger('owner'));
 
         return $owner;

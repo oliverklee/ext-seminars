@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 
@@ -517,7 +518,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid]
         );
 
-        $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
 
@@ -544,7 +545,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['tx_seminars_registration' => $registrationUid]
         );
 
-        $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
 
@@ -562,7 +563,7 @@ final class RegistrationBagBuilderTest extends TestCase
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
 
@@ -585,7 +586,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
 
@@ -608,7 +609,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $this->subject->limitToAttendee();
         $bag = $this->subject->build();

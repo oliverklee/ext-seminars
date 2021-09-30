@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 
 /**
@@ -23,7 +24,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUser
+     * @var FrontEndUserMapper
      */
     private $userMapper = null;
 
@@ -31,7 +32,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->userMapper = new \Tx_Seminars_Mapper_FrontEndUser();
+        $this->userMapper = new FrontEndUserMapper();
         $this->subject = new RegistrationMapper();
     }
 

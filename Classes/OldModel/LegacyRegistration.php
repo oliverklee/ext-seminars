@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
@@ -580,7 +581,7 @@ class LegacyRegistration extends AbstractModel
             return null;
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
         $this->user = $mapper->find($uid);
 
         return $this->user;
@@ -605,7 +606,7 @@ class LegacyRegistration extends AbstractModel
             return false;
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
 
         return $mapper->existsModel($this->getUser());
     }

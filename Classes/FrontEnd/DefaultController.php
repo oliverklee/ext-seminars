@@ -37,6 +37,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
@@ -1354,7 +1355,7 @@ class DefaultController extends TemplateHelper
     {
         $loginManager = FrontEndLoginManager::getInstance();
         return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
-            \Tx_Seminars_Mapper_FrontEndUser::class
+            FrontEndUserMapper::class
         )->getUid() : 0;
     }
 
@@ -1700,7 +1701,7 @@ class DefaultController extends TemplateHelper
         }
 
         /** @var FrontEndUser|null $user */
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
 
         switch ($whatToDisplay) {
             case 'topic_list':
@@ -2038,7 +2039,7 @@ class DefaultController extends TemplateHelper
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
         /** @var FrontEndUser $loggedInUser */
-        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 

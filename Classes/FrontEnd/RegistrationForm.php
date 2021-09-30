@@ -12,6 +12,8 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
@@ -360,10 +362,10 @@ class RegistrationForm extends AbstractEditor
             return;
         }
 
-        $userMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $userMapper = MapperRegistry::get(FrontEndUserMapper::class);
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
-        $userGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $userGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroups = new Collection();
         $userGroupUids = GeneralUtility::intExplode(
             ',',
@@ -980,7 +982,7 @@ class RegistrationForm extends AbstractEditor
                 ) {
                     /** @var FrontEndUser $user */
                     $user = FrontEndLoginManager::getInstance()
-                        ->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+                        ->getLoggedInUser(FrontEndUserMapper::class);
                     $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
@@ -1391,7 +1393,7 @@ class RegistrationForm extends AbstractEditor
 
     protected function getLoggedInUser(): FrontEndUser
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        return FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
     }
 
     /**

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -58,7 +59,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
             return false;
         }
 
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
         $vipsGroupUid = $configuration->getAsInteger('defaultEventVipsFeGroupID');
 
         return $this->getEvent()->isUserVip($user->getUid(), $vipsGroupUid);

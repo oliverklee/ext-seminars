@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
@@ -11,7 +13,7 @@ use OliverKlee\Seminars\Model\FrontEndUserGroup;
  *
  * @extends AbstractDataMapper<FrontEndUserGroup>
  */
-class Tx_Seminars_Mapper_FrontEndUserGroup extends AbstractDataMapper
+class FrontEndUserGroupMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

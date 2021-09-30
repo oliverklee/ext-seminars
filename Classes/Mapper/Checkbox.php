@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 
 /**
  * This class represents a mapper for checkboxes.
@@ -26,6 +27,6 @@ class Tx_Seminars_Mapper_Checkbox extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'owner' => \Tx_Seminars_Mapper_FrontEndUser::class,
+        'owner' => FrontEndUserMapper::class,
     ];
 }

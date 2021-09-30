@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 
 /**
  * This class represents a mapper for speakers.
@@ -27,6 +28,6 @@ class Tx_Seminars_Mapper_Speaker extends AbstractDataMapper
      */
     protected $relations = [
         'skills' => \Tx_Seminars_Mapper_Skill::class,
-        'owner' => \Tx_Seminars_Mapper_FrontEndUser::class,
+        'owner' => FrontEndUserMapper::class,
     ];
 }
