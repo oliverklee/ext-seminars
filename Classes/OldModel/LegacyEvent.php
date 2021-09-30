@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
@@ -3036,7 +3036,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return null;
         }
 
-        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
+        $mapper = MapperRegistry::get(OelibFrontEndUserMapper::class);
         $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 
         return $owner;

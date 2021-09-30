@@ -8,7 +8,7 @@ use Doctrine\DBAL\Driver\Connection;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 
 /**
  * This class represents a mapper for events.
@@ -47,8 +47,8 @@ class EventMapper extends AbstractDataMapper
         'organizers' => \Tx_Seminars_Mapper_Organizer::class,
         'organizing_partners' => \Tx_Seminars_Mapper_Organizer::class,
         'target_groups' => \Tx_Seminars_Mapper_TargetGroup::class,
-        'owner_feuser' => FrontEndUserMapper::class,
-        'vips' => FrontEndUserMapper::class,
+        'owner_feuser' => OelibFrontEndUserMapper::class,
+        'vips' => OelibFrontEndUserMapper::class,
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
         'requirements' => EventMapper::class,
         'dependencies' => EventMapper::class,
