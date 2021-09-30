@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\PhpUnit\TestCase;
 
 final class FrontEndUserGroupTest extends TestCase
@@ -156,7 +156,7 @@ final class FrontEndUserGroupTest extends TestCase
      */
     public function hasReviewerForGroupWithReviewerReturnsTrue(): void
     {
-        $backEndUser = new BackEndUser();
+        $backEndUser = new OelibBackEndUser();
 
         $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
 
@@ -182,7 +182,7 @@ final class FrontEndUserGroupTest extends TestCase
      */
     public function getReviewerForGroupWithReviewerReturnsReviewer(): void
     {
-        $backEndUser = new BackEndUser();
+        $backEndUser = new OelibBackEndUser();
 
         $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
 

@@ -8,7 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -613,7 +613,7 @@ final class EventMapperTest extends TestCase
             ->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
 
-        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
+        self::assertInstanceOf(OelibFrontEndUser::class, $testingModel->getOwner());
     }
 
     // Tests regarding getEventManagers().
@@ -643,7 +643,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(FrontEndUser::class, $model->getEventManagers()->first());
+        self::assertInstanceOf(OelibFrontEndUser::class, $model->getEventManagers()->first());
     }
 
     /**

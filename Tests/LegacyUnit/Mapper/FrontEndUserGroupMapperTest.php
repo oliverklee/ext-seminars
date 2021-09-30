@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -59,7 +59,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
 
         $model = $this->subject->find($frontEndUserGroup->getUid());
 
-        self::assertInstanceOf(BackEndUser::class, $model->getReviewer());
+        self::assertInstanceOf(OelibBackEndUser::class, $model->getReviewer());
     }
 
     // Tests concerning the default categories

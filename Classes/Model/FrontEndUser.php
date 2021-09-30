@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
 /**
@@ -77,7 +77,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
      *
      * Will return the first reviewer found.
      */
-    public function getReviewerFromGroup(): ?BackEndUser
+    public function getReviewerFromGroup(): ?OelibBackEndUser
     {
         $result = null;
 

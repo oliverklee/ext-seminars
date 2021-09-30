@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUserGroup as OelibFrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
@@ -61,9 +61,9 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
         return $this->getReviewer() !== null;
     }
 
-    public function getReviewer(): ?BackEndUser
+    public function getReviewer(): ?OelibBackEndUser
     {
-        /** @var BackEndUser|null $reviewer */
+        /** @var OelibBackEndUser|null $reviewer */
         $reviewer = $this->getAsModel('tx_seminars_reviewer');
 
         return $reviewer;

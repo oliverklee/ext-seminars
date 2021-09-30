@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -377,7 +377,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getReviewerFromGroupForUserWithGroupWithReviewerReturnsReviewer(): void
     {
-        $backEndUser = new BackEndUser();
+        $backEndUser = new OelibBackEndUser();
 
         $userGroup = new \Tx_Seminars_Model_FrontEndUserGroup();
         $userGroup->setData(['tx_seminars_reviewer' => $backEndUser]);
@@ -398,7 +398,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getReviewerFromGroupForUserWithTwoGroupsOneWithReviewerOneWithoutReviewerReturnsReviewer(): void
     {
-        $backEndUser = new BackEndUser();
+        $backEndUser = new OelibBackEndUser();
 
         $userGroup1 = new \Tx_Seminars_Model_FrontEndUserGroup();
         $userGroup2 = new \Tx_Seminars_Model_FrontEndUserGroup();
@@ -423,8 +423,8 @@ final class FrontEndUserTest extends TestCase
      */
     public function getReviewerFromGroupForUserWithTwoGroupsWithReviewersReturnsReviewerOfFirstGroup(): void
     {
-        $backEndUser1 = new BackEndUser();
-        $backEndUser2 = new BackEndUser();
+        $backEndUser1 = new OelibBackEndUser();
+        $backEndUser2 = new OelibBackEndUser();
 
         $userGroup1 = new \Tx_Seminars_Model_FrontEndUserGroup();
         $userGroup2 = new \Tx_Seminars_Model_FrontEndUserGroup();
