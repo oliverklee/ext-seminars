@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -43,8 +44,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
 
         $eventUids = $seminarBagBuilder->build()->getUids();
 
-        /** @var \Tx_Seminars_BagBuilder_Category $categoryBagBuilder */
-        $categoryBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
+        /** @var CategoryBagBuilder $categoryBagBuilder */
+        $categoryBagBuilder = GeneralUtility::makeInstance(CategoryBagBuilder::class);
         $categoryBagBuilder->limitToEvents($eventUids);
         $categoryBag = $categoryBagBuilder->build();
 

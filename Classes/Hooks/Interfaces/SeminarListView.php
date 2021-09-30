@@ -27,8 +27,8 @@ interface SeminarListView extends Hook
      * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
      *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
      *
-     * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
-     * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+     * @see AbstractBagBuilder::getWhereClausePart()
+     * @see AbstractBagBuilder::setWhereClausePart()
      */
     public function modifyEventBagBuilder(
         DefaultController $controller,
@@ -47,8 +47,8 @@ interface SeminarListView extends Hook
      * @param DefaultController $controller the calling controller
      * @param string $whatToDisplay the flavor of list view ('my_events' only?)
      *
-     * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
-     * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+     * @see AbstractBagBuilder::getWhereClausePart()
+     * @see AbstractBagBuilder::setWhereClausePart()
      */
     public function modifyRegistrationBagBuilder(
         DefaultController $controller,

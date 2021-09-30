@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\BagBuilder;
+
 use OliverKlee\Seminars\Bag\CategoryBag;
-use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 
 /**
  * This builder class creates customized category bag objects.
  *
  * @extends AbstractBagBuilder<CategoryBag>
  */
-class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
+class CategoryBagBuilder extends AbstractBagBuilder
 {
     /**
      * @var class-string<CategoryBag> class name of the bag class that will be built

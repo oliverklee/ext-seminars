@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\SpeakerBag;
+use OliverKlee\Seminars\BagBuilder\SpeakerBagBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -47,8 +48,8 @@ class SpeakersList extends AbstractList
         $this->template->setMarker('label_full_name', $languageService->getLL('speakerlist.title'));
         $this->template->setMarker('label_skills', $languageService->getLL('speakerlist.skills'));
 
-        /** @var \Tx_Seminars_BagBuilder_Speaker $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Speaker::class);
+        /** @var SpeakerBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(SpeakerBagBuilder::class);
         $builder->showHiddenRecords();
 
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
