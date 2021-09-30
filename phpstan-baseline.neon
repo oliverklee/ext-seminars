@@ -26,11 +26,6 @@ parameters:
 			path: Classes/Csv/EventListView.php
 
 		-
-			message: "#^Parameter \\#4 \\$configurations of method tx_ameosformidable\\:\\:initFromTs\\(\\) expects bool\\|tx_rnbase_configurations, Sys25\\\\RnBase\\\\Configuration\\\\Processor given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/AbstractEditor.php
-
-		-
 			message: "#^Parameter \\#2 \\$pageId of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
