@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -81,7 +82,7 @@ final class RegistrationsListTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     ///////////////////////

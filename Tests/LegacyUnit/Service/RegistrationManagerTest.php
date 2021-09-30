@@ -26,6 +26,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -39,7 +40,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_Service_RegistrationManager
+ * @covers \OliverKlee\Seminars\Service\RegistrationManager
  */
 final class RegistrationManagerTest extends TestCase
 {
@@ -553,7 +554,7 @@ final class RegistrationManagerTest extends TestCase
     public function getInstanceReturnsRegistrationManagerInstance(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            RegistrationManager::class,
             TestingRegistrationManager::getInstance()
         );
     }

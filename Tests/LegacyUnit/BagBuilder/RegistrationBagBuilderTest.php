@@ -11,6 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder
@@ -41,7 +42,7 @@ final class RegistrationBagBuilderTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     ///////////////////////////////////////////

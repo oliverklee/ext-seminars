@@ -13,6 +13,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -110,7 +111,7 @@ final class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

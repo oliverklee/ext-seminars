@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -40,7 +41,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

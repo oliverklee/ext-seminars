@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -112,7 +113,7 @@ final class LegacyEventTest extends TestCase
         $this->testingFramework->cleanUp();
 
         ConfigurationRegistry::purgeInstance();
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     // Utility functions

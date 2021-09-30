@@ -24,6 +24,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -194,7 +195,7 @@ final class DefaultControllerTest extends TestCase
 
         ConfigurationRegistry::purgeInstance();
         ConfigurationProxy::purgeInstances();
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
@@ -696,7 +697,7 @@ final class DefaultControllerTest extends TestCase
     public function getRegistrationManagerReturnsRegistrationManager(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            RegistrationManager::class,
             $this->subject->getRegistrationManager()
         );
     }

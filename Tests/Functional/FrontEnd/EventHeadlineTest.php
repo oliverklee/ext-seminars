@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\FrontEnd\EventHeadline;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -54,7 +55,7 @@ final class EventHeadlineTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

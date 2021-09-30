@@ -9,6 +9,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -57,7 +58,7 @@ final class RequirementsListTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

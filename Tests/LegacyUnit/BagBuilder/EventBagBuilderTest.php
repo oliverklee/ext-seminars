@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Service\RegistrationManager;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\EventBagBuilder
@@ -54,7 +55,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     // Tests for the basic builder functions.

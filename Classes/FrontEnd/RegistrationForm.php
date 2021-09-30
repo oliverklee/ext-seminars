@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -1796,8 +1797,8 @@ class RegistrationForm extends AbstractEditor
         return $result;
     }
 
-    private function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
+    private function getRegistrationManager(): RegistrationManager
     {
-        return \Tx_Seminars_Service_RegistrationManager::getInstance();
+        return RegistrationManager::getInstance();
     }
 }

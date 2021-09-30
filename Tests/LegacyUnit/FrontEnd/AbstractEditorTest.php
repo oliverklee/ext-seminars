@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingEditor;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -37,7 +38,7 @@ final class AbstractEditorTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

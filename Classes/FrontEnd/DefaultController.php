@@ -42,6 +42,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -514,9 +515,9 @@ class DefaultController extends TemplateHelper
         return $this->registration;
     }
 
-    public function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
+    public function getRegistrationManager(): RegistrationManager
     {
-        return \Tx_Seminars_Service_RegistrationManager::getInstance();
+        return RegistrationManager::getInstance();
     }
 
     /**

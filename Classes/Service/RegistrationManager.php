@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Service;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
@@ -36,7 +38,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * This file does not include the locallang file in the BE because objectfromdb already does that.
  */
-class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
+class RegistrationManager extends TemplateHelper
 {
     use SharedPluginConfiguration;
 
@@ -104,7 +106,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * @return static the current Singleton instance
      */
-    public static function getInstance(): \Tx_Seminars_Service_RegistrationManager
+    public static function getInstance(): RegistrationManager
     {
         if (!self::$instance instanceof static) {
             /** @var static $instance */

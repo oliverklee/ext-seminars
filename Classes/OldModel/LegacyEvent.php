@@ -22,6 +22,7 @@ use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -2531,7 +2532,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function canSomebodyRegister(): bool
     {
-        $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $registrationManager = RegistrationManager::getInstance();
         $allowsRegistrationByDate
             = $registrationManager->allowsRegistrationByDate($this);
         $allowsRegistrationBySeats
@@ -2557,7 +2558,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function canSomebodyRegisterMessage(): string
     {
         $message = '';
-        $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $registrationManager = RegistrationManager::getInstance();
 
         if (!$this->needsRegistration()) {
             $message = $this->translate('message_noRegistrationNecessary');

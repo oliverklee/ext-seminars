@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Service\RegistrationManager;
 
 /**
  * @covers \OliverKlee\Seminars\Bag\EventBag
@@ -39,7 +40,7 @@ final class EventBagTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
     }
 
     ///////////////////////////////////////////
