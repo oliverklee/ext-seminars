@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\FrontEnd\EventEditor;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_EventEditor
+ * @covers \OliverKlee\Seminars\FrontEnd\EventEditor
  */
 final class EventEditorTest extends FunctionalTestCase
 {
@@ -46,7 +47,7 @@ final class EventEditorTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_FrontEnd_EventEditor
+     * @var EventEditor
      */
     private $subject = null;
 
@@ -111,7 +112,7 @@ final class EventEditorTest extends FunctionalTestCase
         return $mapper;
     }
 
-    private function buildSubjectWithRequiredField(string $requiredField): \Tx_Seminars_FrontEnd_EventEditor
+    private function buildSubjectWithRequiredField(string $requiredField): EventEditor
     {
         $configuration = self::CONFIGURATION;
         $configuration['requiredFrontEndEditorFields'] = $requiredField;
@@ -119,9 +120,9 @@ final class EventEditorTest extends FunctionalTestCase
         return $this->buildSubject($configuration);
     }
 
-    private function buildSubject(array $configuration): \Tx_Seminars_FrontEnd_EventEditor
+    private function buildSubject(array $configuration): EventEditor
     {
-        $subject = new \Tx_Seminars_FrontEnd_EventEditor($configuration, $this->getFrontEndController()->cObj);
+        $subject = new EventEditor($configuration, $this->getFrontEndController()->cObj);
         $subject->setTestMode();
 
         return $subject;

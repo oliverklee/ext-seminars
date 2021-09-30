@@ -6,16 +6,17 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\RequirementsList;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_RequirementsList
+ * @covers \OliverKlee\Seminars\FrontEnd\RequirementsList
  */
 final class RequirementsListTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_FrontEnd_RequirementsList
+     * @var RequirementsList
      */
     private $subject = null;
 
@@ -45,7 +46,7 @@ final class RequirementsListTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_FrontEnd_RequirementsList(
+        $this->subject = new RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $this->getFrontEndController()->cObj
         );

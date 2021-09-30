@@ -272,11 +272,11 @@ Implement the methods required by the interface:
          *
          * This function will be called for all types of seminar lists, if `displaySearchFormFields` is configured for it.
          *
-         * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
+         * @param SelectorWidget $selectorWidget
          * @param EventBag $seminarBag the seminars used to create the selector widget
          */
         public function modifySelectorWidget(
-            \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
+            SelectorWidget $selectorWidget,
             EventBag $seminarBag
         ): void {
             // Your code here
@@ -334,11 +334,11 @@ Implement the methods required by the interface:
          * Modifies the seminar registration form.
          *
          * @param DefaultController $controller the calling controller
-         * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
+         * @param RegistrationForm $registrationEditor the registration form
          */
         public function modifyRegistrationForm(
             DefaultController $controller,
-            \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
+            RegistrationForm $registrationEditor
         ): void {
             // Your code here
         }

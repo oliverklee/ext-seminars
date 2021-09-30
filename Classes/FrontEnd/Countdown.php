@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a countdown to the next upcoming event.
  */
-class Tx_Seminars_FrontEnd_Countdown extends AbstractView
+class Countdown extends AbstractView
 {
     /**
      * @var \Tx_Seminars_Mapper_Event

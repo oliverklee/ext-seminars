@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 use OliverKlee\Seminars\FrontEnd\DefaultController;
+use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 
 /**
  * Use this interface for hooks concerning the registration form.
@@ -23,10 +24,7 @@ interface SeminarRegistrationForm extends Hook
      *
      * @param DefaultController $controller the calling controller
      */
-    public function modifyRegistrationForm(
-        DefaultController $controller,
-        \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
-    ): void;
+    public function modifyRegistrationForm(DefaultController $controller, RegistrationForm $registrationEditor): void;
 
     /**
      * Modifies the footer of the seminar registration form.

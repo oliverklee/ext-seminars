@@ -9,17 +9,18 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\Countdown;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_Countdown
+ * @covers \OliverKlee\Seminars\FrontEnd\Countdown
  */
 final class CountdownTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_FrontEnd_Countdown
+     * @var Countdown
      */
     private $subject = null;
 
@@ -47,7 +48,7 @@ final class CountdownTest extends TestCase
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['findNextUpcoming'])->getMock();
         $this->mapper = $mapper;
 
-        $this->subject = new \Tx_Seminars_FrontEnd_Countdown(
+        $this->subject = new Countdown(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -77,7 +78,7 @@ final class CountdownTest extends TestCase
      */
     public function fixtureIsAFrontEndCountdownObject(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_FrontEnd_Countdown::class, $this->subject);
+        self::assertInstanceOf(Countdown::class, $this->subject);
     }
 
     ////////////////////////////////

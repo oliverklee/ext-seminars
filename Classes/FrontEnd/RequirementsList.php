@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
-use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is a view which creates the requirements lists for the front end.
  */
-class Tx_Seminars_FrontEnd_RequirementsList extends AbstractView
+class RequirementsList extends AbstractView
 {
     /**
      * @var LegacyEvent|null the event to build the requirements list for

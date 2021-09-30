@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_RegistrationForm
+ * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
  */
 final class RegistrationFormTest extends FunctionalTestCase
 {
@@ -24,7 +25,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     ];
 
     /**
-     * @var \Tx_Seminars_FrontEnd_RegistrationForm
+     * @var RegistrationForm
      */
     private $subject = null;
 
@@ -38,7 +39,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         parent::setUp();
 
         $this->contentObject = $this->prophesize(ContentObjectRenderer::class)->reveal();
-        $this->subject = new \Tx_Seminars_FrontEnd_RegistrationForm([], $this->contentObject);
+        $this->subject = new RegistrationForm([], $this->contentObject);
         $this->subject->setTestMode();
     }
 
@@ -120,7 +121,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
         $configuration = ['showRegistrationFields' => ''];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $event = LegacyEvent::fromUid(1);
         $subject->setSeminar($event);
@@ -136,7 +137,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
         $configuration = ['showRegistrationFields' => 'checkboxes'];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $event = LegacyEvent::fromUid(1);
         $subject->setSeminar($event);
@@ -152,7 +153,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
         $configuration = ['showRegistrationFields' => ''];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $event = LegacyEvent::fromUid(2);
         $subject->setSeminar($event);
@@ -168,7 +169,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
         $configuration = ['showRegistrationFields' => 'checkboxes'];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $event = LegacyEvent::fromUid(2);
         $subject->setSeminar($event);
@@ -194,7 +195,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     public function processRegistrationWithoutAdditionalAttendeesNotCreatesAdditionalUsers(): void
     {
         $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
         $subject->setTestMode();
         $subject->setFormConfiguration(['form.' => []]);
 
@@ -216,7 +217,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     {
         $email = 'max@example.com';
         $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
         $subject->setTestMode();
         $subject->setFormConfiguration(['form.' => []]);
 

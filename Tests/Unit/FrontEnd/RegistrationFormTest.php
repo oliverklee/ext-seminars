@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
+use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_RegistrationForm
+ * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
  */
 final class RegistrationFormTest extends UnitTestCase
 {
@@ -100,7 +101,7 @@ final class RegistrationFormTest extends UnitTestCase
      */
     public function getThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(self::CONFIGURATION, $this->contentObject);
+        $subject = new RegistrationForm(self::CONFIGURATION, $this->contentObject);
 
         $linkConfiguration = ['parameter' => self::PAGE_AFTER_REGISTRATION];
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -119,7 +120,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = false;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $linkConfiguration = ['parameter' => self::PAGE_AFTER_REGISTRATION];
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -138,7 +139,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $eventUid = 42;
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -167,7 +168,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $eventUid = 42;
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -196,7 +197,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->userProphecy->logoff()->shouldNotBeCalled();
@@ -213,7 +214,7 @@ final class RegistrationFormTest extends UnitTestCase
 
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = false;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->userProphecy->logoff()->shouldNotBeCalled();
@@ -228,7 +229,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = false;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->userProphecy->logoff()->shouldNotBeCalled();
@@ -245,7 +246,7 @@ final class RegistrationFormTest extends UnitTestCase
 
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->userProphecy->logoff()->shouldBeCalled();
@@ -258,7 +259,7 @@ final class RegistrationFormTest extends UnitTestCase
      */
     public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(self::CONFIGURATION, $this->contentObject);
+        $subject = new RegistrationForm(self::CONFIGURATION, $this->contentObject);
 
         $linkConfiguration = ['parameter' => self::PAGE_AFTER_UNREGISTRATION];
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -277,7 +278,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = false;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $linkConfiguration = ['parameter' => self::PAGE_AFTER_UNREGISTRATION];
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -296,7 +297,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $eventUid = 42;
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -325,7 +326,7 @@ final class RegistrationFormTest extends UnitTestCase
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm($configuration, $this->contentObject);
 
         $eventUid = 42;
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).

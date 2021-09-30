@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
-use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class represents a list of registrations for the front end.
  */
-class Tx_Seminars_FrontEnd_RegistrationsList extends AbstractView
+class RegistrationsList extends AbstractView
 {
     /**
      * @var LegacyEvent the seminar of which we want to list the

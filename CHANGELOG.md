@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - !!! Namespace all classes
-  (#1004, #1005, #1007, #1010, #1011, #1012, #1014, #1016, #1017, #1019, #1020, #1021)
+  (#1004, #1005, #1007, #1010, #1011, #1012, #1014, #1016, #1017, #1019, #1020, #1021, #1025)
 - Migrate to the new configuration check
   (#935, #937, #939, #940, #943, #944, #946, #948, #949, #950, #951, #953, #954, #955, #956, #957, #958, #959, #962)
 - Add sr_feuser_register as a dev dependency (#926)

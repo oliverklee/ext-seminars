@@ -11,6 +11,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -20,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_EventEditor
+ * @covers \OliverKlee\Seminars\FrontEnd\EventEditor
  */
 final class EventEditorTest extends TestCase
 {
@@ -38,7 +39,7 @@ final class EventEditorTest extends TestCase
     ];
 
     /**
-     * @var \Tx_Seminars_FrontEnd_EventEditor
+     * @var EventEditor
      */
     private $subject = null;
 
@@ -76,7 +77,7 @@ final class EventEditorTest extends TestCase
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->pluginConfiguration);
 
-        $this->subject = new \Tx_Seminars_FrontEnd_EventEditor(
+        $this->subject = new EventEditor(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
@@ -222,12 +223,12 @@ final class EventEditorTest extends TestCase
      * @param string $requiredField
      *        the field which should be required, may be empty
      *
-     * @return \Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
+     * @return EventEditor event editor fixture with the given
      *         field as required field
      */
-    private function getFixtureWithRequiredField(string $requiredField): \Tx_Seminars_FrontEnd_EventEditor
+    private function getFixtureWithRequiredField(string $requiredField): EventEditor
     {
-        $result = new \Tx_Seminars_FrontEnd_EventEditor(
+        $result = new EventEditor(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
@@ -2438,7 +2439,7 @@ final class EventEditorTest extends TestCase
     {
         self::assertContains(
             ['caption' => 'Deutschland', 'value' => 54],
-            \Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
+            EventEditor::populateListCountries()
         );
     }
 
@@ -2447,7 +2448,7 @@ final class EventEditorTest extends TestCase
      */
     public function populateListCountriesSortsResultsByLocalCountryName(): void
     {
-        $countries = \Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
+        $countries = EventEditor::populateListCountries();
         $positionGermany = \array_search(
             ['caption' => 'Deutschland', 'value' => 54],
             $countries,
@@ -2480,7 +2481,7 @@ final class EventEditorTest extends TestCase
 
         self::assertContains(
             ['caption' => 'Juggling', 'value' => $uid],
-            \Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
+            EventEditor::populateListSkills()
         );
     }
 
@@ -2495,7 +2496,7 @@ final class EventEditorTest extends TestCase
     {
         self::assertEquals(
             [],
-            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new Collection())
+            EventEditor::makeListToFormidableList(new Collection())
         );
     }
 
@@ -2512,7 +2513,7 @@ final class EventEditorTest extends TestCase
 
         self::assertContains(
             ['caption' => 'foo', 'value' => $targetGroup->getUid()],
-            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
+            EventEditor::makeListToFormidableList($list)
         );
     }
 
@@ -2530,7 +2531,7 @@ final class EventEditorTest extends TestCase
 
         self::assertCount(
             2,
-            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
+            EventEditor::makeListToFormidableList($list)
         );
     }
 

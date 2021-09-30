@@ -273,9 +273,9 @@ class DefaultController extends TemplateHelper
                 // The fallthrough is intended
                 // because createRegistrationsListPage() will differentiate later.
             case 'list_registrations':
-                /** @var \Tx_Seminars_FrontEnd_RegistrationsList $registrationsList */
+                /** @var RegistrationsList $registrationsList */
                 $registrationsList = GeneralUtility::makeInstance(
-                    \Tx_Seminars_FrontEnd_RegistrationsList::class,
+                    RegistrationsList::class,
                     $this->conf,
                     $this->whatToDisplay,
                     (int)$this->piVars['seminar'],
@@ -292,9 +292,9 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'countdown':
-                /** @var \Tx_Seminars_FrontEnd_Countdown $countdown */
+                /** @var Countdown $countdown */
                 $countdown = GeneralUtility::makeInstance(
-                    \Tx_Seminars_FrontEnd_Countdown::class,
+                    Countdown::class,
                     $this->conf,
                     $this->cObj
                 );
@@ -310,9 +310,9 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'category_list':
-                /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */
+                /** @var CategoryList $categoryList */
                 $categoryList = GeneralUtility::makeInstance(
-                    \Tx_Seminars_FrontEnd_CategoryList::class,
+                    CategoryList::class,
                     $this->conf,
                     $this->cObj
                 );
@@ -327,9 +327,9 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'event_headline':
-                /** @var \Tx_Seminars_FrontEnd_EventHeadline $eventHeadline */
+                /** @var EventHeadline $eventHeadline */
                 $eventHeadline = GeneralUtility::makeInstance(
-                    \Tx_Seminars_FrontEnd_EventHeadline::class,
+                    EventHeadline::class,
                     $this->conf,
                     $this->cObj
                 );
@@ -1916,9 +1916,9 @@ class DefaultController extends TemplateHelper
             }
             $this->setMarker('image', $image);
 
-            /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */
+            /** @var CategoryList $categoryList */
             $categoryList = GeneralUtility::makeInstance(
-                \Tx_Seminars_FrontEnd_CategoryList::class,
+                CategoryList::class,
                 $this->conf,
                 $this->cObj
             );
@@ -2041,12 +2041,12 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * @return \Tx_Seminars_FrontEnd_RequirementsList the object to build the requirements list with
+     * @return RequirementsList the object to build the requirements list with
      */
-    private function createRequirementsList(): \Tx_Seminars_FrontEnd_RequirementsList
+    private function createRequirementsList(): RequirementsList
     {
-        /** @var \Tx_Seminars_FrontEnd_RequirementsList $list */
-        $list = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_RequirementsList::class, $this->conf, $this->cObj);
+        /** @var RequirementsList $list */
+        $list = GeneralUtility::makeInstance(RequirementsList::class, $this->conf, $this->cObj);
         return $list;
     }
 
@@ -2118,9 +2118,9 @@ class DefaultController extends TemplateHelper
             return '';
         }
 
-        /** @var \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget */
+        /** @var SelectorWidget $selectorWidget */
         $selectorWidget = GeneralUtility::makeInstance(
-            \Tx_Seminars_FrontEnd_SelectorWidget::class,
+            SelectorWidget::class,
             $this->conf,
             $this->cObj
         );
@@ -2137,7 +2137,7 @@ class DefaultController extends TemplateHelper
         // selector widget (including the search form).
         if (\is_array($this->piVars['language'])) {
             $builder->limitToLanguages(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['language'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['language'])
             );
         }
 
@@ -2145,7 +2145,7 @@ class DefaultController extends TemplateHelper
         // @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
         if (\is_array($this->piVars['place'])) {
             $builder->limitToPlaces(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['place'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['place'])
             );
         } else {
             // TODO: This needs to be changed as soon as we are using the new
@@ -2161,19 +2161,19 @@ class DefaultController extends TemplateHelper
 
         if (\is_array($this->piVars['city'])) {
             $builder->limitToCities(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
             );
         }
         if (\is_array($this->piVars['country'])) {
             $builder->limitToCountries(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
             );
         }
         if (\is_array($this->piVars['organizer'])) {
             $builder->limitToOrganizers(
                 \implode(
                     ',',
-                    \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['organizer'])
+                    SelectorWidget::removeDummyOptionFromFormData($this->piVars['organizer'])
                 )
             );
         } else {
@@ -2189,7 +2189,7 @@ class DefaultController extends TemplateHelper
 
         if (isset($this->piVars['event_type']) && \is_array($this->piVars['event_type'])) {
             $builder->limitToEventTypes(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['event_type'])
+                SelectorWidget::removeDummyOptionFromFormData($this->piVars['event_type'])
             );
         } else {
             // TODO: This needs to be changed as soon as we are using the new
@@ -2743,9 +2743,9 @@ class DefaultController extends TemplateHelper
      */
     protected function createRegistrationForm(): string
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor */
+        /** @var RegistrationForm $registrationEditor */
         $registrationEditor = GeneralUtility::makeInstance(
-            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            RegistrationForm::class,
             $this->conf,
             $this->cObj
         );
@@ -2852,10 +2852,10 @@ class DefaultController extends TemplateHelper
     /**
      * Creates an event editor instance and returns it.
      */
-    protected function createEventEditorInstance(): \Tx_Seminars_FrontEnd_EventEditor
+    protected function createEventEditorInstance(): EventEditor
     {
-        /** @var \Tx_Seminars_FrontEnd_EventEditor $eventEditor */
-        $eventEditor = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_EventEditor::class, $this->conf, $this->cObj);
+        /** @var EventEditor $eventEditor */
+        $eventEditor = GeneralUtility::makeInstance(EventEditor::class, $this->conf, $this->cObj);
         $eventEditor->setObjectUid((int)$this->piVars['seminar']);
 
         return $eventEditor;

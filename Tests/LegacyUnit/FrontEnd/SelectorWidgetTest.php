@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -14,14 +15,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_SelectorWidget
+ * @covers \OliverKlee\Seminars\FrontEnd\SelectorWidget
  */
 final class SelectorWidgetTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_SelectorWidget
+     * @var SelectorWidget
      */
     private $subject = null;
 
@@ -40,7 +41,7 @@ final class SelectorWidgetTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->subject = new \Tx_Seminars_FrontEnd_SelectorWidget(
+        $this->subject = new SelectorWidget(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -100,7 +101,7 @@ final class SelectorWidgetTest extends TestCase
      */
     public function fixtureIsAFrontEndSelectorWidgetObject(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->subject);
+        self::assertInstanceOf(SelectorWidget::class, $this->subject);
     }
 
     ///////////////////////
@@ -259,7 +260,7 @@ final class SelectorWidgetTest extends TestCase
     {
         self::assertEquals(
             ['CH', 'DE'],
-            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            SelectorWidget::removeDummyOptionFromFormData(
                 [0, 'CH', 'DE']
             )
         );
@@ -272,7 +273,7 @@ final class SelectorWidgetTest extends TestCase
     {
         self::assertEquals(
             ['CH', 'DE'],
-            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            SelectorWidget::removeDummyOptionFromFormData(
                 ['CH', 0, 'DE']
             )
         );
@@ -285,7 +286,7 @@ final class SelectorWidgetTest extends TestCase
     {
         self::assertEquals(
             [],
-            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            SelectorWidget::removeDummyOptionFromFormData(
                 []
             )
         );
@@ -465,8 +466,8 @@ final class SelectorWidgetTest extends TestCase
      */
     public function itemsInSearchBoxAreSortedAlphabetically(): void
     {
-        /** @var \Tx_Seminars_FrontEnd_SelectorWidget&MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_FrontEnd_SelectorWidget::class)
+        /** @var SelectorWidget&MockObject $subject */
+        $subject = $this->getMockBuilder(SelectorWidget::class)
             ->setMethods(
                 [
                     'hasSearchField',

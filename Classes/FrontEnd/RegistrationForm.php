@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
@@ -9,7 +11,6 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
-use OliverKlee\Seminars\FrontEnd\AbstractEditor;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -22,7 +23,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows to create registrations on the FE.
  */
-class Tx_Seminars_FrontEnd_RegistrationForm extends AbstractEditor
+class RegistrationForm extends AbstractEditor
 {
     /**
      * the same as the class name
@@ -968,9 +969,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends AbstractEditor
                 break;
             case 'attendees_names':
                 if (
-                    $this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue(
-                        'registered_themselves'
-                    ) == '1')
+                    $this->isFormFieldEnabled('registered_themselves')
+                    && $this->getFormValue('registered_themselves') == '1'
                 ) {
                     /** @var \Tx_Seminars_Model_FrontEndUser $user */
                     $user = FrontEndLoginManager::getInstance()
