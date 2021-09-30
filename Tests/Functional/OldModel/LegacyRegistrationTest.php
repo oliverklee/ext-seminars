@@ -8,12 +8,13 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
- * @covers \Tx_Seminars_OldModel_Registration
+ * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration
  */
-final class RegistrationTest extends FunctionalTestCase
+final class LegacyRegistrationTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
@@ -33,7 +34,7 @@ final class RegistrationTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration
+     * @var LegacyRegistration
      */
     private $subject = null;
 
@@ -53,7 +54,7 @@ final class RegistrationTest extends FunctionalTestCase
         $configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        $this->subject = new \Tx_Seminars_OldModel_Registration();
+        $this->subject = new LegacyRegistration();
     }
 
     protected function tearDown(): void
@@ -68,7 +69,7 @@ final class RegistrationTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
-        $subject = \Tx_Seminars_OldModel_Registration::fromUid(1);
+        $subject = LegacyRegistration::fromUid(1);
 
         self::assertSame(4, $subject->getSeats());
         self::assertSame(1, $subject->getUser());
@@ -94,7 +95,7 @@ final class RegistrationTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
-        $subject = \Tx_Seminars_OldModel_Registration::fromUid(1);
+        $subject = LegacyRegistration::fromUid(1);
 
         $user = $subject->getFrontEndUser();
 
@@ -109,7 +110,7 @@ final class RegistrationTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
-        $subject = \Tx_Seminars_OldModel_Registration::fromUid(1);
+        $subject = LegacyRegistration::fromUid(1);
 
         $event = $subject->getSeminarObject();
 
@@ -542,7 +543,7 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function getBillingAddressWithGenderMaleContainsLabelForGenderMale(): void
     {
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 0]);
+        $subject = LegacyRegistration::fromData(['gender' => 0]);
 
         $result = $subject->getBillingAddress();
 
@@ -554,7 +555,7 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale(): void
     {
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 1]);
+        $subject = LegacyRegistration::fromData(['gender' => 1]);
 
         $result = $subject->getBillingAddress();
 
@@ -567,7 +568,7 @@ final class RegistrationTest extends FunctionalTestCase
     public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber(): void
     {
         $value = '01234-56789';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['telephone' => $value]);
+        $subject = LegacyRegistration::fromData(['telephone' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -580,7 +581,7 @@ final class RegistrationTest extends FunctionalTestCase
     public function getBillingAddressWithEmailAddressContainsEmailAddress(): void
     {
         $value = 'max@example.com';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['email' => $value]);
+        $subject = LegacyRegistration::fromData(['email' => $value]);
 
         $result = $subject->getBillingAddress();
 

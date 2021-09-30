@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\OldModel;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Seminars\OldModel\AbstractModel;
-use OliverKlee\Seminars\OldModel\LegacyEvent;
+use Tx_Seminars_Model_FrontEndUser;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -17,9 +18,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
- * This class represents a registration/attendance.
+ * This class represents an event registration.
  */
-class Tx_Seminars_OldModel_Registration extends AbstractModel
+class LegacyRegistration extends AbstractModel
 {
     /**
      * @var string[][]
@@ -46,7 +47,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * @var string
      */
-    public $prefixId = \Tx_Seminars_OldModel_Registration::class;
+    public $prefixId = LegacyRegistration::class;
 
     /**
      * @var LegacyEvent|null the event to which this registration relates

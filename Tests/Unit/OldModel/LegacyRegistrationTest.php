@@ -6,20 +6,21 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 
 /**
- * @covers \Tx_Seminars_OldModel_Registration
+ * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration
  */
-final class RegistrationTest extends UnitTestCase
+final class LegacyRegistrationTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Registration
+     * @var LegacyRegistration
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = \Tx_Seminars_OldModel_Registration::fromData([]);
+        $this->subject = LegacyRegistration::fromData([]);
     }
 
     /**
@@ -35,9 +36,9 @@ final class RegistrationTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = \Tx_Seminars_OldModel_Registration::fromData([]);
+        $result = LegacyRegistration::fromData([]);
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Registration::class, $result);
+        self::assertInstanceOf(LegacyRegistration::class, $result);
     }
 
     /**
@@ -80,7 +81,7 @@ final class RegistrationTest extends UnitTestCase
      */
     public function isOnRegistrationReturnsRegistrationQueue(): void
     {
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['registration_queue' => 1]);
+        $subject = LegacyRegistration::fromData(['registration_queue' => 1]);
 
         self::assertTrue($subject->isOnRegistrationQueue());
     }
@@ -125,7 +126,7 @@ final class RegistrationTest extends UnitTestCase
     {
         $uid = 42;
 
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['method_of_payment' => $uid]);
+        $subject = LegacyRegistration::fromData(['method_of_payment' => $uid]);
 
         self::assertSame($uid, $subject->getMethodOfPaymentUid());
     }
@@ -261,7 +262,7 @@ final class RegistrationTest extends UnitTestCase
      */
     public function hasRegisteredThemselvesReturnsRegisteredThemselves(): void
     {
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['registered_themselves' => 1]);
+        $subject = LegacyRegistration::fromData(['registered_themselves' => 1]);
 
         $result = $subject->hasRegisteredThemselves();
 
@@ -292,7 +293,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithCompanyContainsCompany(): void
     {
         $value = 'Psijic Order';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['company' => $value]);
+        $subject = LegacyRegistration::fromData(['company' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -305,7 +306,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithNameContainsName(): void
     {
         $value = 'Max Doe';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['name' => $value]);
+        $subject = LegacyRegistration::fromData(['name' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -318,7 +319,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithAddressContainsAddress(): void
     {
         $value = 'Main Street 123';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['address' => $value]);
+        $subject = LegacyRegistration::fromData(['address' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -331,7 +332,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithZipCodeContainsZipCode(): void
     {
         $value = '12345';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['zip' => $value]);
+        $subject = LegacyRegistration::fromData(['zip' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -344,7 +345,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithCityContainsCity(): void
     {
         $value = 'Big City';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['city' => $value]);
+        $subject = LegacyRegistration::fromData(['city' => $value]);
 
         $result = $subject->getBillingAddress();
 
@@ -357,7 +358,7 @@ final class RegistrationTest extends UnitTestCase
     public function getBillingAddressWithCountryContainsCountry(): void
     {
         $value = 'Takka-Tukka-Land';
-        $subject = \Tx_Seminars_OldModel_Registration::fromData(['country' => $value]);
+        $subject = LegacyRegistration::fromData(['country' => $value]);
 
         $result = $subject->getBillingAddress();
 

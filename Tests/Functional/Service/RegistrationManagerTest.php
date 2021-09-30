@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Service;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -75,7 +76,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationManagerRecords.xml');
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $registration = \Tx_Seminars_OldModel_Registration::fromUid(1);
+        $registration = LegacyRegistration::fromUid(1);
 
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);

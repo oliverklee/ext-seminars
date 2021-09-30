@@ -6,6 +6,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -224,7 +225,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     {
         $tableBody = '';
 
-        /** @var \Tx_Seminars_OldModel_Registration $registration */
+        /** @var LegacyRegistration $registration */
         foreach ($registrations as $registration) {
             /** @var string[] $cellContents */
             $cellContents = [];

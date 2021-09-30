@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -214,7 +215,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
         /** @var RegistrationBag $bag */
         $bag = $builder->build();
 
-        /** @var \Tx_Seminars_OldModel_Registration $registration */
+        /** @var LegacyRegistration $registration */
         foreach ($bag as $registration) {
             $userData = $this->createCsvColumnsForFrontEndUser($registration);
             $registrationData = $this->createCsvColumnsForRegistration($registration);
@@ -228,11 +229,11 @@ abstract class AbstractRegistrationListView extends AbstractListView
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param \Tx_Seminars_OldModel_Registration $model object that will deliver the data
+     * @param LegacyRegistration $model object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForRegistration(\Tx_Seminars_OldModel_Registration $model): array
+    protected function createCsvColumnsForRegistration(LegacyRegistration $model): array
     {
         $csvLines = [];
 
@@ -247,11 +248,11 @@ abstract class AbstractRegistrationListView extends AbstractListView
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param \Tx_Seminars_OldModel_Registration $model object that will deliver the data
+     * @param LegacyRegistration $model object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForFrontEndUser(\Tx_Seminars_OldModel_Registration $model): array
+    protected function createCsvColumnsForFrontEndUser(LegacyRegistration $model): array
     {
         $csvLines = [];
 

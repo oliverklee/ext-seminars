@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -71,7 +72,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     private $seminar = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration
+     * @var LegacyRegistration
      */
     protected $registration = null;
 
@@ -188,9 +189,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Sets the registration for which to create the unregistration form.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration to use
+     * @param LegacyRegistration $registration the registration to use
      */
-    public function setRegistration(\Tx_Seminars_OldModel_Registration $registration): void
+    public function setRegistration(LegacyRegistration $registration): void
     {
         $this->registration = $registration;
     }
@@ -198,7 +199,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the current registration object.
      */
-    private function getRegistration(): ?\Tx_Seminars_OldModel_Registration
+    private function getRegistration(): ?LegacyRegistration
     {
         return $this->registration;
     }

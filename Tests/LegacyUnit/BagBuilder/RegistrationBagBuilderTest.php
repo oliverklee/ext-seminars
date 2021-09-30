@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder
@@ -201,7 +202,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->subject->limitToPaid();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isPaid());
@@ -238,7 +239,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['datepaid' => 0]
         );
         $this->subject->limitToUnpaid();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isPaid());
@@ -276,7 +277,7 @@ final class RegistrationBagBuilderTest extends TestCase
         );
         $this->subject->limitToPaid();
         $this->subject->removePaymentLimitation();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isPaid());
@@ -293,7 +294,7 @@ final class RegistrationBagBuilderTest extends TestCase
         );
         $this->subject->limitToUnpaid();
         $this->subject->removePaymentLimitation();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isPaid());
@@ -313,7 +314,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['registration_queue' => 1]
         );
         $this->subject->limitToOnQueue();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isOnRegistrationQueue());
@@ -350,7 +351,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['registration_queue' => 0]
         );
         $this->subject->limitToRegular();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isOnRegistrationQueue());
@@ -388,7 +389,7 @@ final class RegistrationBagBuilderTest extends TestCase
         );
         $this->subject->limitToOnQueue();
         $this->subject->removeQueueLimitation();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isOnRegistrationQueue());
@@ -405,7 +406,7 @@ final class RegistrationBagBuilderTest extends TestCase
         );
         $this->subject->limitToRegular();
         $this->subject->removeQueueLimitation();
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isOnRegistrationQueue());
@@ -440,7 +441,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['seats' => 2]
         );
         $this->subject->limitToSeatsAtMost(2);
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertEquals(2, $currentModel->getSeats());
@@ -456,7 +457,7 @@ final class RegistrationBagBuilderTest extends TestCase
             ['seats' => 1]
         );
         $this->subject->limitToSeatsAtMost(2);
-        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        /** @var LegacyRegistration $currentModel */
         $currentModel = $this->subject->build()->current();
 
         self::assertEquals(1, $currentModel->getSeats());
