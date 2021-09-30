@@ -26,6 +26,11 @@ parameters:
 			path: Classes/Csv/EventListView.php
 
 		-
+			message: "#^Parameter \\#2 \\$pageId of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Comparison operation \"\\>\" between array and 0 results in an error\\.$#"
 			count: 2
 			path: Classes/FrontEnd/EventEditor.php
@@ -109,11 +114,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, array given\\.$#"
 			count: 2
 			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$pageId of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/OliverKlee/Seminars/FrontEnd/DefaultController.php
 
 		-
 			message: "#^Method Tx_Seminars_FrontEnd_RegistrationForm\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
