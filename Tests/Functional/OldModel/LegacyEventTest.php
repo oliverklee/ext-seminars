@@ -8,15 +8,16 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
- * @covers \Tx_Seminars_OldModel_Event
+ * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
-final class EventTest extends FunctionalTestCase
+final class LegacyEventTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
@@ -79,7 +80,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(1);
+        $subject = TestingLegacyEvent::fromUid(1);
         self::assertSame('event with all scalar data set', $subject->getTitle());
         self::assertSame('Cooking for beginners', $subject->getSubtitle());
         self::assertSame('Never be hungry again.', $subject->getTeaser());
@@ -124,7 +125,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
 
         self::assertSame(0, $subject->getAttendances());
     }
@@ -136,7 +137,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(2, $subject->getAttendances());
     }
@@ -148,7 +149,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
 
         self::assertSame(3, $subject->getAttendances());
     }
@@ -160,7 +161,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(5);
+        $subject = TestingLegacyEvent::fromUid(5);
 
         self::assertSame(2, $subject->getAttendances());
     }
@@ -172,7 +173,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(6);
+        $subject = TestingLegacyEvent::fromUid(6);
 
         self::assertSame(2, $subject->getAttendances());
     }
@@ -184,7 +185,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(6);
+        $subject = TestingLegacyEvent::fromUid(6);
 
         self::assertSame(3, $subject->getAttendancesOnRegistrationQueue());
     }
@@ -196,7 +197,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
 
         self::assertSame(0, $subject->getAttendancesPaid());
     }
@@ -208,7 +209,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(0, $subject->getAttendancesPaid());
     }
@@ -220,7 +221,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(7);
+        $subject = TestingLegacyEvent::fromUid(7);
 
         self::assertSame(2, $subject->getAttendancesPaid());
     }
@@ -232,7 +233,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(7);
+        $subject = TestingLegacyEvent::fromUid(7);
 
         self::assertSame(2, $subject->getAttendancesPaid());
     }
@@ -244,7 +245,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
 
         self::assertSame(3, $subject->getAttendancesNotPaid());
     }
@@ -256,7 +257,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(2, $subject->getAttendancesNotPaid());
     }
@@ -268,7 +269,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(7);
+        $subject = TestingLegacyEvent::fromUid(7);
 
         self::assertSame(0, $subject->getAttendancesNotPaid());
     }
@@ -280,7 +281,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(7);
+        $subject = TestingLegacyEvent::fromUid(7);
 
         self::assertSame(0, $subject->getAttendancesNotPaid());
     }
@@ -292,7 +293,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
         self::assertSame(0, $subject->getAttendances());
 
         $offlineRegistrations = 4;
@@ -310,7 +311,7 @@ final class EventTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $eventUid = 4;
-        $subject = TestingEvent::fromUid($eventUid);
+        $subject = TestingLegacyEvent::fromUid($eventUid);
         self::assertSame(3, $subject->getAttendances());
 
         $this->getDatabaseConnection()->insertArray('tx_seminars_attendances', ['seminar' => $eventUid, 'seats' => 2]);
@@ -326,7 +327,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
 
         self::assertSame(0, $subject->getVacancies());
     }
@@ -338,7 +339,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(9);
+        $subject = TestingLegacyEvent::fromUid(9);
 
         self::assertSame(12, $subject->getVacancies());
     }
@@ -350,7 +351,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(3, $subject->getVacancies());
     }
@@ -362,7 +363,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
 
         self::assertSame(2, $subject->getVacancies());
     }
@@ -374,7 +375,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(5);
+        $subject = TestingLegacyEvent::fromUid(5);
 
         self::assertSame(0, $subject->getVacancies());
     }
@@ -386,7 +387,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(6);
+        $subject = TestingLegacyEvent::fromUid(6);
 
         self::assertSame(2, $subject->getVacancies());
     }
@@ -398,7 +399,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(1);
+        $subject = TestingLegacyEvent::fromUid(1);
         $result = $subject->getCheckboxes();
 
         self::assertSame([], $result);
@@ -411,7 +412,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox one', 'value' => 1]];
@@ -425,7 +426,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox one', 'value' => 1]];
@@ -439,7 +440,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox two', 'value' => 2], ['caption' => 'Checkbox one', 'value' => 1]];
@@ -453,7 +454,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
-        $subject = TestingEvent::fromUid(1);
+        $subject = TestingLegacyEvent::fromUid(1);
         $result = $subject->getTargetGroupsAsArray();
 
         self::assertSame([], $result);
@@ -466,7 +467,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
         $result = $subject->getTargetGroupsAsArray();
 
         $expected = ['Target group one'];
@@ -480,7 +481,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
         $result = $subject->getTargetGroupsAsArray();
 
         $expected = ['Target group two', 'Target group one'];
@@ -494,7 +495,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
-        $subject = TestingEvent::fromUid(5);
+        $subject = TestingLegacyEvent::fromUid(5);
         $result = $subject->getTargetGroupsAsArray();
 
         $expected = ['Target group one'];
@@ -509,7 +510,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -524,7 +525,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt,test2.txt';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -539,7 +540,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -556,7 +557,7 @@ final class EventTest extends FunctionalTestCase
         $fileName = 'test.txt';
         $this->filesToDelete[] = $fileName;
         \file_put_contents($this->getInstancePath() . '/uploads/tx_seminars/' . $fileName, 'Hello!');
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -571,7 +572,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -586,7 +587,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = '.txt';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -601,7 +602,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = '.';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -616,7 +617,7 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test';
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
 
         $result = $subject->getAttachedFiles($this->plugin);
 
@@ -631,8 +632,8 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
-        $date = \Tx_Seminars_OldModel_Event::fromData(
+        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $date = LegacyEvent::fromData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => $fileName,
@@ -653,13 +654,13 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $fileName = 'test.txt';
-        $topic = \Tx_Seminars_OldModel_Event::fromData(
+        $topic = LegacyEvent::fromData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => $fileName,
             ]
         );
-        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         $result = $date->getAttachedFiles($this->plugin);
@@ -675,14 +676,14 @@ final class EventTest extends FunctionalTestCase
         $this->buildPlugin();
 
         $topicFileName = 'test-topic.txt';
-        $topic = \Tx_Seminars_OldModel_Event::fromData(
+        $topic = LegacyEvent::fromData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => $topicFileName,
             ]
         );
         $dateFileName = 'test-date.txt';
-        $date = \Tx_Seminars_OldModel_Event::fromData(
+        $date = LegacyEvent::fromData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => $dateFileName,
@@ -703,7 +704,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(1);
+        $subject = TestingLegacyEvent::fromUid(1);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame([], $result);
@@ -716,7 +717,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame([], $result);
@@ -729,7 +730,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame(['ch'], $result);
@@ -742,7 +743,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(5);
+        $subject = TestingLegacyEvent::fromUid(5);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame(['xy'], $result);
@@ -755,7 +756,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(7);
+        $subject = TestingLegacyEvent::fromUid(7);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame(['de', 'ch'], $result);
@@ -768,7 +769,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(6);
+        $subject = TestingLegacyEvent::fromUid(6);
         $result = $subject->getPlacesWithCountry();
 
         self::assertSame([], $result);
@@ -781,7 +782,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(1);
+        $subject = TestingLegacyEvent::fromUid(1);
 
         self::assertFalse($subject->hasCountry());
     }
@@ -793,7 +794,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
 
         self::assertFalse($subject->hasCountry());
     }
@@ -805,7 +806,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(6);
+        $subject = TestingLegacyEvent::fromUid(6);
 
         self::assertFalse($subject->hasCountry());
     }
@@ -817,7 +818,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(4);
+        $subject = TestingLegacyEvent::fromUid(4);
 
         self::assertTrue($subject->hasCountry());
     }
@@ -829,7 +830,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingLegacyEvent::fromUid(2);
 
         self::assertStringContainsString('The Castle', $subject->getPlaceShort());
     }
@@ -841,7 +842,7 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
-        $subject = TestingEvent::fromUid(3);
+        $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(1, \substr_count($subject->getPlaceShort(), 'The Castle'));
     }

@@ -3,18 +3,19 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
  * This aggregate class holds a bunch of event objects and allows iterating over them.
  *
- * @extends AbstractBag<\Tx_Seminars_OldModel_Event>
+ * @extends AbstractBag<LegacyEvent>
  */
 class Tx_Seminars_Bag_Event extends AbstractBag
 {
     /**
-     * @var class-string<\Tx_Seminars_OldModel_Event>
+     * @var class-string<LegacyEvent>
      */
-    protected static $modelClassName = \Tx_Seminars_OldModel_Event::class;
+    protected static $modelClassName = LegacyEvent::class;
 
     /**
      * @var string the name of the main DB table from which we get the records for this bag

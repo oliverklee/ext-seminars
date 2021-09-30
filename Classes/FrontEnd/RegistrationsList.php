@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -12,7 +13,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var \Tx_Seminars_OldModel_Event the seminar of which we want to list the
+     * @var LegacyEvent the seminar of which we want to list the
      *                          registrations
      */
     private $seminar = null;
@@ -57,7 +58,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      */
     private function createSeminar(int $seminarUid): void
     {
-        $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
+        $this->seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
     }
 
     /**

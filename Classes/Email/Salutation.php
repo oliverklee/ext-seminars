@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminar\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -77,13 +78,13 @@ class Salutation
      * @param string $introductionBegin
      *        the start of the introduction, must not be empty and contain %s as
      *        place to fill the title of the event in
-     * @param \Tx_Seminars_OldModel_Event $event the event the introduction is for
+     * @param LegacyEvent $event the event the introduction is for
      *
      * @return string the introduction with the event's title and if available date and time, will not be empty
      *
      * @throws \InvalidArgumentException
      */
-    public function createIntroduction(string $introductionBegin, \Tx_Seminars_OldModel_Event $event): string
+    public function createIntroduction(string $introductionBegin, LegacyEvent $event): string
     {
         if ($introductionBegin === '') {
             throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);

@@ -19,7 +19,8 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -58,7 +59,7 @@ final class RegistrationManagerTest extends TestCase
     private $seminarUid = 0;
 
     /**
-     * @var TestingEvent
+     * @var TestingLegacyEvent
      */
     private $seminar = null;
 
@@ -83,12 +84,12 @@ final class RegistrationManagerTest extends TestCase
     private $pi1 = null;
 
     /**
-     * @var TestingEvent
+     * @var TestingLegacyEvent
      */
     private $fullyBookedSeminar = null;
 
     /**
-     * @var TestingEvent
+     * @var TestingLegacyEvent
      */
     private $cachedSeminar = null;
 
@@ -187,7 +188,7 @@ final class RegistrationManagerTest extends TestCase
         $headerProxyFactory->enableTestMode();
         $this->headerCollector = $headerProxyFactory->getHeaderCollector();
 
-        $this->seminar = new TestingEvent($this->seminarUid);
+        $this->seminar = new TestingLegacyEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
 
         /** @var \Tx_Seminars_Service_SingleViewLinkBuilder&MockObject $linkBuilder */
@@ -256,7 +257,7 @@ final class RegistrationManagerTest extends TestCase
      */
     private function createBookedOutSeminar(): void
     {
-        $this->fullyBookedSeminar = new TestingEvent(
+        $this->fullyBookedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -447,7 +448,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createBookedOutSeminar();
 
         self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             $this->fullyBookedSeminar
         );
     }
@@ -853,7 +854,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -879,7 +880,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1059,7 +1060,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1246,7 +1247,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1375,7 +1376,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1425,7 +1426,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1468,7 +1469,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1524,7 +1525,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1571,7 +1572,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1637,7 +1638,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1700,7 +1701,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1763,7 +1764,7 @@ final class RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new TestingEvent(
+        $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -5238,7 +5239,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
 
         self::assertFalse($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }
@@ -5299,7 +5300,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
 
         self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }
@@ -5327,7 +5328,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
 
         self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }
@@ -7896,7 +7897,7 @@ final class RegistrationManagerTest extends TestCase
                 'price_special_board' => '75.00',
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
@@ -7926,7 +7927,7 @@ final class RegistrationManagerTest extends TestCase
                 'price_special_board' => '75.00',
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
@@ -7954,7 +7955,7 @@ final class RegistrationManagerTest extends TestCase
                 'price_special_board' => '75.00',
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
@@ -7984,7 +7985,7 @@ final class RegistrationManagerTest extends TestCase
                 'price_special_board' => '75.00',
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
@@ -8011,7 +8012,7 @@ final class RegistrationManagerTest extends TestCase
                 'price_regular_board' => '150.00',
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 

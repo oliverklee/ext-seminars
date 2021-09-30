@@ -6,6 +6,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -457,7 +458,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     {
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             $eventTypeUid = $event->getEventTypeUid();
             if ($eventTypeUid != 0) {
@@ -483,7 +484,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     {
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasLanguage()) {
                 // Reads the language from the event record.
@@ -620,7 +621,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     {
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasOrganizers()) {
                 /** @var \Tx_Seminars_OldModel_Organizer $organizer */
@@ -648,7 +649,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     {
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasCategories()) {
                 foreach ($event->getCategories() as $uid => $category) {

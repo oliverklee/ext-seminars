@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -29,7 +30,7 @@ abstract class AbstractEventMailForm
     private const MODULE_NAME = 'web_seminars';
 
     /**
-     * @var \Tx_Seminars_OldModel_Event the event which this e-mail form refers to
+     * @var LegacyEvent the event which this e-mail form refers to
      */
     private $oldEvent = null;
 
@@ -92,7 +93,7 @@ abstract class AbstractEventMailForm
             throw new \InvalidArgumentException('$eventUid must be > 0.');
         }
 
-        $this->oldEvent = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid);
+        $this->oldEvent = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid);
 
         if (!$this->oldEvent->comesFromDatabase()) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);
@@ -273,9 +274,9 @@ abstract class AbstractEventMailForm
     /**
      * Returns the event object.
      *
-     * @return \Tx_Seminars_OldModel_Event the event object
+     * @return LegacyEvent the event object
      */
-    protected function getOldEvent(): \Tx_Seminars_OldModel_Event
+    protected function getOldEvent(): LegacyEvent
     {
         return $this->oldEvent;
     }

@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -65,7 +66,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     private $staticInfo = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event seminar object
+     * @var LegacyEvent seminar object
      */
     private $seminar = null;
 
@@ -145,9 +146,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Sets the seminar for which to create the form.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event for which to create the form
+     * @param LegacyEvent $event the event for which to create the form
      */
-    public function setSeminar(\Tx_Seminars_OldModel_Event $event): void
+    public function setSeminar(LegacyEvent $event): void
     {
         $this->seminar = $event;
     }
@@ -155,11 +156,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the configured seminar object.
      *
-     * @return \Tx_Seminars_OldModel_Event the seminar instance
+     * @return LegacyEvent the seminar instance
      *
      * @throws \BadMethodCallException if no seminar has been set yet
      */
-    public function getSeminar(): \Tx_Seminars_OldModel_Event
+    public function getSeminar(): LegacyEvent
     {
         if ($this->seminar === null) {
             throw new \BadMethodCallException(

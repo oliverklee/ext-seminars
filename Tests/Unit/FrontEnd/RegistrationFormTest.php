@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -61,7 +62,7 @@ final class RegistrationFormTest extends UnitTestCase
     private $eventProphecy = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event
+     * @var LegacyEvent
      */
     private $event = null;
 
@@ -84,7 +85,7 @@ final class RegistrationFormTest extends UnitTestCase
         $this->session = new FakeSession();
         Session::setInstance(Session::TYPE_USER, $this->session);
 
-        $this->eventProphecy = $this->prophesize(\Tx_Seminars_OldModel_Event::class);
+        $this->eventProphecy = $this->prophesize(LegacyEvent::class);
         $this->event = $this->eventProphecy->reveal();
     }
 

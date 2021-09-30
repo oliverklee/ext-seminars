@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
  * This builder class creates customized event bags.
@@ -489,9 +490,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events on the day after the end date of the event given
      * event in the first parameter $event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event object with the end date to limit for, must have an end date
+     * @param LegacyEvent $event the event object with the end date to limit for, must have an end date
      */
-    public function limitToEventsNextDay(\Tx_Seminars_OldModel_Event $event): void
+    public function limitToEventsNextDay(LegacyEvent $event): void
     {
         if (!$event->hasEndDate()) {
             throw new \InvalidArgumentException(
@@ -520,9 +521,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to date event records of the same topic as the event
      * given in the first parameter $event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the date or topic object to find other dates of the same topic for
+     * @param LegacyEvent $event the date or topic object to find other dates of the same topic for
      */
-    public function limitToOtherDatesForTopic(\Tx_Seminars_OldModel_Event $event): void
+    public function limitToOtherDatesForTopic(LegacyEvent $event): void
     {
         if (!$event->isEventDate() && !$event->isEventTopic()) {
             throw new \InvalidArgumentException(

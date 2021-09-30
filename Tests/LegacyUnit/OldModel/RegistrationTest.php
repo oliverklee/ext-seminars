@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -171,7 +172,7 @@ final class RegistrationTest extends TestCase
      */
     public function setRegistrationDataUsesPaymentMethodUidFromSetRegistrationData(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -205,7 +206,7 @@ final class RegistrationTest extends TestCase
             'payment_methods'
         );
 
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, 0, []);
 
         self::assertSame(
@@ -322,7 +323,7 @@ final class RegistrationTest extends TestCase
      */
     public function getRegistrationDataForNotesWithCarriageReturnRemovesCarriageReturnFromNotes(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -340,7 +341,7 @@ final class RegistrationTest extends TestCase
      */
     public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -358,7 +359,7 @@ final class RegistrationTest extends TestCase
      */
     public function getRegistrationDataForMultipleAttendeeNamesReturnsAttendeeNamesWithEnumeration(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -548,7 +549,7 @@ final class RegistrationTest extends TestCase
      */
     public function commitToDbCanCreateNewRecord(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $registration = new \Tx_Seminars_OldModel_Registration();
         $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
@@ -570,7 +571,7 @@ final class RegistrationTest extends TestCase
      */
     public function commitToDbCanCreateLodgingsRelation(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $lodgingsUid = $this->testingFramework->createRecord(
             'tx_seminars_lodgings'
         );
@@ -616,7 +617,7 @@ final class RegistrationTest extends TestCase
      */
     public function commitToDbCanCreateFoodsRelation(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $foodsUid = $this->testingFramework->createRecord(
             'tx_seminars_foods'
         );
@@ -660,7 +661,7 @@ final class RegistrationTest extends TestCase
      */
     public function commitToDbCanCreateCheckboxesRelation(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $checkboxesUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes'
         );
@@ -1399,7 +1400,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUseHtmlSeparatesAttendeesNamesWithListItems(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -1417,7 +1418,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUseHtmlAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -1435,7 +1436,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUsePlainTextSeparatesAttendeesNamesWithLineFeed(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -1453,7 +1454,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUsePlainTextAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             0,
@@ -1471,7 +1472,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndNoAttendeeNamesReturnsUsersName(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             $this->feUserUid,
@@ -1490,7 +1491,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndAttendeeNamesReturnsUserInFirstPosition(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,
             $this->feUserUid,
@@ -1513,7 +1514,7 @@ final class RegistrationTest extends TestCase
     {
         $food = 'a hamburger';
 
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => $food]);
 
         self::assertSame(
@@ -1527,7 +1528,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasFoodForEmptyFoodReturnsFalse(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => '']);
 
         self::assertFalse(
@@ -1540,7 +1541,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasFoodForNonEmptyFoodReturnsTrue(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => 'two donuts']);
 
         self::assertTrue(
@@ -1557,7 +1558,7 @@ final class RegistrationTest extends TestCase
     {
         $accommodation = 'a tent in the woods';
 
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => $accommodation]);
 
         self::assertSame(
@@ -1571,7 +1572,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasAccommodationForEmptyAccommodationReturnsFalse(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => '']);
 
         self::assertFalse(
@@ -1584,7 +1585,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasAccommodationForNonEmptyAccommodationReturnsTrue(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => 'a youth hostel']);
 
         self::assertTrue(
@@ -1601,7 +1602,7 @@ final class RegistrationTest extends TestCase
     {
         $interests = 'new experiences';
 
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => $interests]);
 
         self::assertSame(
@@ -1615,7 +1616,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasInterestsForEmptyInterestsReturnsFalse(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => '']);
 
         self::assertFalse(
@@ -1628,7 +1629,7 @@ final class RegistrationTest extends TestCase
      */
     public function hasInterestsForNonEmptyInterestsReturnsTrue(): void
     {
-        $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $seminar = new LegacyEvent($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => 'meeting people']);
 
         self::assertTrue(

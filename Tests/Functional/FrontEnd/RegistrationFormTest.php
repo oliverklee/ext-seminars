@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -58,7 +59,7 @@ final class RegistrationFormTest extends FunctionalTestCase
      */
     public function setSeminarSetsSeminar(): void
     {
-        $event = new \Tx_Seminars_OldModel_Event();
+        $event = new LegacyEvent();
         $this->subject->setSeminar($event);
 
         self::assertSame($event, $this->subject->getSeminar());
@@ -71,7 +72,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(1);
+        $event = LegacyEvent::fromUid(1);
         $this->subject->setSeminar($event);
 
         $result = $this->subject->populateCheckboxes();
@@ -86,7 +87,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(2);
+        $event = LegacyEvent::fromUid(2);
         $this->subject->setSeminar($event);
 
         $result = $this->subject->populateCheckboxes();
@@ -102,7 +103,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(3);
+        $event = LegacyEvent::fromUid(3);
         $this->subject->setSeminar($event);
 
         $result = $this->subject->populateCheckboxes();
@@ -121,7 +122,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $configuration = ['showRegistrationFields' => ''];
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(1);
+        $event = LegacyEvent::fromUid(1);
         $subject->setSeminar($event);
 
         self::assertFalse($subject->hasCheckboxes());
@@ -137,7 +138,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $configuration = ['showRegistrationFields' => 'checkboxes'];
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(1);
+        $event = LegacyEvent::fromUid(1);
         $subject->setSeminar($event);
 
         self::assertFalse($subject->hasCheckboxes());
@@ -153,7 +154,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $configuration = ['showRegistrationFields' => ''];
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(2);
+        $event = LegacyEvent::fromUid(2);
         $subject->setSeminar($event);
 
         self::assertFalse($subject->hasCheckboxes());
@@ -169,7 +170,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $configuration = ['showRegistrationFields' => 'checkboxes'];
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
 
-        $event = \Tx_Seminars_OldModel_Event::fromUid(2);
+        $event = LegacyEvent::fromUid(2);
         $subject->setSeminar($event);
 
         self::assertTrue($subject->hasCheckboxes());
@@ -197,7 +198,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $subject->setTestMode();
         $subject->setFormConfiguration(['form.' => []]);
 
-        $event = \Tx_Seminars_OldModel_Event::fromData(['needs_registration' => 1]);
+        $event = LegacyEvent::fromData(['needs_registration' => 1]);
         $subject->setSeminar($event);
 
         $subject->processRegistration([]);
@@ -219,7 +220,7 @@ final class RegistrationFormTest extends FunctionalTestCase
         $subject->setTestMode();
         $subject->setFormConfiguration(['form.' => []]);
 
-        $event = \Tx_Seminars_OldModel_Event::fromData(['needs_registration' => 1]);
+        $event = LegacyEvent::fromData(['needs_registration' => 1]);
         $subject->setSeminar($event);
 
         $attendeeData = \json_encode([['Max', 'Maxowski', 'developer', $email]]);

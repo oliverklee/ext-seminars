@@ -7,23 +7,24 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\OldModel\AbstractModel;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
- * @covers \Tx_Seminars_OldModel_Event
+ * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
-final class EventTest extends UnitTestCase
+final class LegacyEventTest extends UnitTestCase
 {
     /**
-     * @var TestingEvent
+     * @var TestingLegacyEvent
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = TestingEvent::fromData(
+        $this->subject = TestingLegacyEvent::fromData(
             [
                 'title' => 'A nice event',
                 'begin_date' => mktime(10, 0, 0, 4, 8, 2020),
@@ -45,9 +46,9 @@ final class EventTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = \Tx_Seminars_OldModel_Event::fromData([]);
+        $result = LegacyEvent::fromData([]);
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Event::class, $result);
+        self::assertInstanceOf(LegacyEvent::class, $result);
     }
 
     /**
@@ -63,7 +64,7 @@ final class EventTest extends UnitTestCase
      */
     public function setTopicSetsTopic(): void
     {
-        $topic = new \Tx_Seminars_OldModel_Event();
+        $topic = new LegacyEvent();
 
         $this->subject->setTopic($topic);
 
@@ -84,7 +85,7 @@ final class EventTest extends UnitTestCase
     public function getAttendancesMinReturnsAttendancesMin(): void
     {
         $number = 4;
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_min' => $number]);
+        $subject = LegacyEvent::fromData(['attendees_min' => $number]);
 
         self::assertSame($number, $subject->getAttendancesMin());
     }
@@ -103,7 +104,7 @@ final class EventTest extends UnitTestCase
     public function getAttendancesMaxReturnsAttendancesMax(): void
     {
         $number = 4;
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_max' => $number]);
+        $subject = LegacyEvent::fromData(['attendees_max' => $number]);
 
         self::assertSame($number, $subject->getAttendancesMax());
     }
@@ -122,7 +123,7 @@ final class EventTest extends UnitTestCase
     public function getOfflineRegistrationsReturnsOfflineRegistrations(): void
     {
         $number = 4;
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => $number]);
+        $subject = LegacyEvent::fromData(['offline_attendees' => $number]);
 
         self::assertSame($number, $subject->getOfflineRegistrations());
     }
@@ -140,7 +141,7 @@ final class EventTest extends UnitTestCase
      */
     public function hasOfflineRegistrationsForOfflineRegistrationsReturnsTrue(): void
     {
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => 4]);
+        $subject = LegacyEvent::fromData(['offline_attendees' => 4]);
 
         self::assertTrue($subject->hasOfflineRegistrations());
     }
@@ -150,7 +151,7 @@ final class EventTest extends UnitTestCase
      */
     public function hasCheckboxesForSingleEventWithNoCheckboxesReturnsFalse(): void
     {
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 0]);
+        $subject = LegacyEvent::fromData(['checkboxes' => 0]);
 
         self::assertFalse($subject->hasCheckboxes());
     }
@@ -160,7 +161,7 @@ final class EventTest extends UnitTestCase
      */
     public function hasCheckboxesForSingleEventWithOneCheckboxReturnsTrue(): void
     {
-        $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 1]);
+        $subject = LegacyEvent::fromData(['checkboxes' => 1]);
 
         self::assertTrue($subject->hasCheckboxes());
     }
@@ -174,8 +175,8 @@ final class EventTest extends UnitTestCase
             'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             'checkboxes' => 1,
         ];
-        $subject = \Tx_Seminars_OldModel_Event::fromData($data);
-        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $subject = LegacyEvent::fromData($data);
+        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
         $subject->setTopic($topic);
 
         self::assertTrue($subject->hasCheckboxes());
@@ -257,13 +258,13 @@ final class EventTest extends UnitTestCase
      */
     public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue(): void
     {
-        $topic = \Tx_Seminars_OldModel_Event::fromData(
+        $topic = LegacyEvent::fromData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => 'test.file',
             ]
         );
-        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         self::assertTrue($date->hasAttachedFiles());
@@ -274,8 +275,8 @@ final class EventTest extends UnitTestCase
      */
     public function hasAttachedFilesForDateAndTopicWithoutFilesReturnsFalse(): void
     {
-        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
-        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $topic = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $date = LegacyEvent::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
         $date->setTopic($topic);
 
         self::assertFalse($date->hasAttachedFiles());

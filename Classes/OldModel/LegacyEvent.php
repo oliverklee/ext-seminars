@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\OldModel;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
@@ -19,7 +21,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a seminar (or similar event).
  */
-class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
+class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {
     use EventEmailSenderTrait;
 
@@ -28,7 +30,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @var string
      */
-    public $prefixId = \Tx_Seminars_OldModel_Event::class;
+    public $prefixId = LegacyEvent::class;
 
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -76,11 +78,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * will be null if this is not a date record
      *
-     * @var \Tx_Seminars_OldModel_Event|null
+     * @var LegacyEvent|null
      */
     private $topic = null;
 
-    public function getTopic(): ?\Tx_Seminars_OldModel_Event
+    public function getTopic(): ?LegacyEvent
     {
         if ($this->topic instanceof self) {
             return $this->topic;
@@ -98,7 +100,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $this->topic;
     }
 
-    public function setTopic(\Tx_Seminars_OldModel_Event $topic): void
+    public function setTopic(LegacyEvent $topic): void
     {
         $this->topic = $topic;
     }
@@ -2714,7 +2716,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * In case of an error, the return value will be null.
      */
-    private function loadTopic(): ?\Tx_Seminars_OldModel_Event
+    private function loadTopic(): ?LegacyEvent
     {
         return self::fromUid($this->getRecordPropertyInteger('topic'));
     }

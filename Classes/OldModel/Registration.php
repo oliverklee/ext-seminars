@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -48,7 +49,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     public $prefixId = \Tx_Seminars_OldModel_Registration::class;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event|null the event to which this registration relates
+     * @var LegacyEvent|null the event to which this registration relates
      */
     private $seminar = null;
 
@@ -89,7 +90,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     /**
      * cached seminar objects with the seminar UIDs as keys and the objects as values
      *
-     * @var \Tx_Seminars_OldModel_Event[]
+     * @var LegacyEvent[]
      */
     private static $cachedSeminars = [];
 
@@ -142,11 +143,11 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * This function must be called directly after construction or this object will not be usable.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
+     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
      * @param int $userUid UID of the FE user who wants to sign up
      * @param array $registrationData associative array with the registration data the user has just entered, may be empty
      */
-    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, int $userUid, array $registrationData): void
+    public function setRegistrationData(LegacyEvent $event, int $userUid, array $registrationData): void
     {
         $this->seminar = $event;
 
@@ -631,16 +632,16 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     /**
      * Gets the seminar to which this registration belongs.
      *
-     * @return \Tx_Seminars_OldModel_Event the seminar to which this registration belongs
+     * @return LegacyEvent the seminar to which this registration belongs
      */
-    public function getSeminarObject(): \Tx_Seminars_OldModel_Event
+    public function getSeminarObject(): LegacyEvent
     {
-        if (!$this->seminar instanceof \Tx_Seminars_OldModel_Event && $this->isOk()) {
+        if (!$this->seminar instanceof LegacyEvent && $this->isOk()) {
             $seminarUid = $this->getRecordPropertyInteger('seminar');
             if (isset(self::$cachedSeminars[$seminarUid])) {
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {
-                $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
+                $this->seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
                 self::$cachedSeminars[$seminarUid] = $this->seminar;
             }
         }

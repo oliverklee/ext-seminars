@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 
 final class FrontEndRegistrationAccessCheckTest extends TestCase
@@ -65,8 +66,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     {
         FrontEndLoginManager::getInstance()->logInUser();
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $this->subject->setEvent($event);
 
         self::assertFalse(
@@ -87,8 +88,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $event->method('isUserVip')->with(
             $userUid,
             $this->vipsGroupUid
@@ -113,8 +114,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $event->method('isUserVip')->with(
             $userUid,
             $this->vipsGroupUid
@@ -139,8 +140,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $event->method('isUserVip')->with(
             $userUid,
             $this->vipsGroupUid
@@ -165,8 +166,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $event->method('isUserVip')->with($userUid, $this->vipsGroupUid)
             ->willReturn(true);
         $this->subject->setEvent($event);
