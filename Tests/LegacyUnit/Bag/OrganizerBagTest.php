@@ -6,11 +6,15 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\OrganizerBag;
 
+/**
+ * @covers \OliverKlee\Seminars\Bag\OrganizerBag
+ */
 final class OrganizerBagTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Bag_Organizer
+     * @var OrganizerBag
      */
     private $subject = null;
 
@@ -25,7 +29,7 @@ final class OrganizerBagTest extends TestCase
 
         $this->testingFramework->createRecord('tx_seminars_organizers');
 
-        $this->subject = new \Tx_Seminars_Bag_Organizer('is_dummy_record=1');
+        $this->subject = new OrganizerBag('is_dummy_record=1');
     }
 
     protected function tearDown(): void

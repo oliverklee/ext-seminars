@@ -14,6 +14,9 @@ use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Bag\OrganizerBag;
+use OliverKlee\Seminars\Bag\SpeakerBag;
+use OliverKlee\Seminars\Bag\TimeSlotBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Core\Environment;
@@ -583,7 +586,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @param string $speakerRelation the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
      */
-    private function getSpeakerBag(string $speakerRelation = 'speakers'): \Tx_Seminars_Bag_Speaker
+    private function getSpeakerBag(string $speakerRelation = 'speakers'): SpeakerBag
     {
         switch ($speakerRelation) {
             case 'partners':
@@ -602,7 +605,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         return GeneralUtility::makeInstance(
-            \Tx_Seminars_Bag_Speaker::class,
+            SpeakerBag::class,
             $mmTable . '.uid_local = ' . $this->getUid()
             . ' AND tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
             $mmTable,
@@ -1802,7 +1805,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \BadMethodCallException
      */
-    public function getOrganizerBag(): \Tx_Seminars_Bag_Organizer
+    public function getOrganizerBag(): OrganizerBag
     {
         if (!$this->hasOrganizers()) {
             throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
@@ -1811,7 +1814,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
         $builder->limitToEvent($this->getUid());
-        /** @var \Tx_Seminars_Bag_Organizer $bag */
+        /** @var OrganizerBag $bag */
         $bag = $builder->build();
 
         return $bag;
@@ -1985,9 +1988,9 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
         $result = [];
 
-        /** @var \Tx_Seminars_Bag_Organizer $organizerBag */
+        /** @var OrganizerBag $organizerBag */
         $organizerBag = GeneralUtility::makeInstance(
-            \Tx_Seminars_Bag_Organizer::class,
+            OrganizerBag::class,
             'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
             'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
             'tx_seminars_seminars_organizing_partners_mm'
@@ -3657,11 +3660,11 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $result;
     }
 
-    public function getTimeSlots(): \Tx_Seminars_Bag_TimeSlot
+    public function getTimeSlots(): TimeSlotBag
     {
-        /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
+        /** @var TimeSlotBag $timeSlotBag */
         $timeSlotBag = GeneralUtility::makeInstance(
-            \Tx_Seminars_Bag_TimeSlot::class,
+            TimeSlotBag::class,
             'tx_seminars_timeslots.seminar = ' . $this->getUid(),
             '',
             '',

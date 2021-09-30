@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Bag\SpeakerBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -56,7 +57,7 @@ class SpeakersList extends AbstractList
 
         $tableRows = '';
 
-        /** @var \Tx_Seminars_Bag_Speaker $speakerBag */
+        /** @var SpeakerBag $speakerBag */
         foreach ($speakerBag as $this->speaker) {
             $this->template->setMarker(
                 'icon',

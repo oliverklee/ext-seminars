@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -213,10 +214,10 @@ final class LegacyEventTest extends UnitTestCase
             ]
         );
 
-        $organizerBagMock = $this->createMock(\Tx_Seminars_Bag_Organizer::class);
+        $organizerBagMock = $this->createMock(OrganizerBag::class);
         $organizerBagMock->method('current')->willReturn($organizer);
 
-        GeneralUtility::addInstance(\Tx_Seminars_Bag_Organizer::class, $organizerBagMock);
+        GeneralUtility::addInstance(OrganizerBag::class, $organizerBagMock);
         $this->subject->setEventData(['uid' => 1, 'organizers' => 1]);
 
         self::assertSame(
