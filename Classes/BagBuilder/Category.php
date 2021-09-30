@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Bag\CategoryBag;
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 
 /**
  * This builder class creates customized category bag objects.
  *
- * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Category>
+ * @extends AbstractBagBuilder<CategoryBag>
  */
 class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
 {
     /**
-     * @var class-string<\Tx_Seminars_Bag_Category> class name of the bag class that will be built
+     * @var class-string<CategoryBag> class name of the bag class that will be built
      */
-    protected $bagClassName = \Tx_Seminars_Bag_Category::class;
+    protected $bagClassName = CategoryBag::class;
 
     /**
      * @var string the table name of the bag to build

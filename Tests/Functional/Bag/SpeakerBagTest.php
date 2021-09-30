@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Functional\BagBuilder;
+namespace OliverKlee\Seminars\Tests\Functional\Bag;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Bag\SpeakerBag;
 use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
 
+/**
+ * @covers \OliverKlee\Seminars\Bag\SpeakerBag
+ */
 final class SpeakerBagTest extends FunctionalTestCase
 {
     use BagHelper;
@@ -23,7 +27,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $bag = new \Tx_Seminars_Bag_Speaker();
+        $bag = new SpeakerBag();
 
         self::assertGreaterThan(0, $bag->count());
     }
@@ -35,7 +39,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $bag = new \Tx_Seminars_Bag_Speaker();
+        $bag = new SpeakerBag();
 
         self::assertBagHasUid($bag, 1);
     }
@@ -47,7 +51,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $bag = new \Tx_Seminars_Bag_Speaker();
+        $bag = new SpeakerBag();
 
         self::assertBagNotHasUid($bag, 2);
     }
@@ -59,7 +63,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $bag = new \Tx_Seminars_Bag_Speaker('1=1', '', '', '', '', -1);
+        $bag = new SpeakerBag('1=1', '', '', '', '', -1);
 
         self::assertBagNotHasUid($bag, 2);
     }
@@ -71,7 +75,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $bag = new \Tx_Seminars_Bag_Speaker('1=1', '', '', '', '', 1);
+        $bag = new SpeakerBag('1=1', '', '', '', '', 1);
 
         self::assertBagHasUid($bag, 2);
     }

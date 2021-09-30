@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Bag\OrganizerBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -56,7 +57,7 @@ class OrganizersList extends AbstractList
 
         $tableRows = '';
 
-        /** @var \Tx_Seminars_Bag_Organizer $organizerBag */
+        /** @var OrganizerBag $organizerBag */
         foreach ($organizerBag as $this->organizer) {
             $this->template->setMarker(
                 'icon',

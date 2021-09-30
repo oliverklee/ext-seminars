@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -3959,7 +3960,7 @@ final class LegacyEventTest extends TestCase
     {
         $this->addOrganizerRelation();
 
-        self::assertInstanceOf(\Tx_Seminars_Bag_Organizer::class, $this->subject->getOrganizerBag());
+        self::assertInstanceOf(OrganizerBag::class, $this->subject->getOrganizerBag());
     }
 
     // Tests regarding the speakers

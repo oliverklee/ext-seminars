@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\Bag\AbstractBag;
+namespace OliverKlee\Seminars\Bag;
 
 /**
  * This aggregate class holds a bunch of TimeSlot objects and allows iterating over them.
  *
  * @extends AbstractBag<\Tx_Seminars_OldModel_TimeSlot>
  */
-class Tx_Seminars_Bag_TimeSlot extends AbstractBag
+class TimeSlotBag extends AbstractBag
 {
     /**
      * @var class-string<\Tx_Seminars_OldModel_TimeSlot>

@@ -8,6 +8,9 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
 
+/**
+ * @covers \OliverKlee\Seminars\Bag\AbstractBag
+ */
 final class AbstractBagTest extends TestCase
 {
     /**
