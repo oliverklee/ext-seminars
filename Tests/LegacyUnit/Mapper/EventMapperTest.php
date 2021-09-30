@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -609,7 +609,7 @@ final class EventMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)
+        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)
             ->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
 
@@ -634,7 +634,7 @@ final class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
@@ -652,7 +652,7 @@ final class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsOneEventManager(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,

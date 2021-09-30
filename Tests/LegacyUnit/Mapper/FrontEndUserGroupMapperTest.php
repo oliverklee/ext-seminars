@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
-use OliverKlee\Oelib\Mapper\BackEndUserMapper;
+use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -52,7 +52,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
      */
     public function frontEndUserGroupCanReturnBackEndUserModel(): void
     {
-        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getNewGhost();
+        $backEndUser = MapperRegistry::get(OelibBackEndUserMapper::class)->getNewGhost();
         $frontEndUserGroup = $this->subject->getLoadedTestingModel(
             ['tx_seminars_reviewer' => $backEndUser->getUid()]
         );
