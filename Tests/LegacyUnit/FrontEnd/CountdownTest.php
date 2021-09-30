@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\Countdown;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -122,7 +123,7 @@ final class CountdownTest extends TestCase
         $this->subject->injectEventMapper($this->mapper);
         $event = $this->mapper->getLoadedTestingModel(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'pid' => 0,
                 'title' => 'Test event',
                 'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,

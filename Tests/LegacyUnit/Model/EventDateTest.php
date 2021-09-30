@@ -8,20 +8,23 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 
 /**
  * This test case holds all tests specific to event dates.
+ *
+ * @covers \OliverKlee\Seminars\Model\Event
  */
 final class EventDateTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Event
+     * @var Event
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Event();
+        $this->subject = new Event();
     }
 
     // Tests concerning the title.
@@ -35,7 +38,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['title' => 'Superhero']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
                 'title' => 'Supervillain',
             ]
@@ -55,7 +58,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel(['title' => 'Superhero']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
                 'title' => 'Supervillain',
             ]
@@ -78,7 +81,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -98,7 +101,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['subtitle' => 'sub title']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -117,7 +120,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -138,7 +141,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -157,7 +160,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['subtitle' => 'sub title']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -178,7 +181,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -198,7 +201,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['teaser' => 'wow, this is teasing']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -214,11 +217,11 @@ final class EventDateTest extends TestCase
      */
     public function setTeaserForEventDateSetsTeaser(): void
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
+        /** @var Event $topic */
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -239,7 +242,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -258,7 +261,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['teaser' => 'wow, this is teasing']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -279,7 +282,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -301,7 +304,7 @@ final class EventDateTest extends TestCase
             );
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -320,7 +323,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -341,7 +344,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -362,7 +365,7 @@ final class EventDateTest extends TestCase
             );
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -383,7 +386,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -403,7 +406,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['credit_points' => 42]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -422,7 +425,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -439,11 +442,11 @@ final class EventDateTest extends TestCase
      */
     public function setCreditPointsForEventDateWithPositiveCreditPointsSetsCreditPoints(): void
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
+        /** @var Event $topic */
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -464,7 +467,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -483,7 +486,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['credit_points' => 42]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -504,7 +507,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular' => '0.0']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -524,7 +527,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -543,7 +546,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -563,7 +566,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -584,7 +587,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -603,7 +606,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -624,7 +627,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -644,7 +647,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -663,7 +666,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -683,7 +686,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -704,7 +707,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -723,7 +726,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -744,7 +747,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -764,7 +767,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -783,7 +786,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -803,7 +806,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -824,7 +827,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -843,7 +846,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -864,7 +867,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -884,7 +887,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -903,7 +906,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -923,7 +926,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -944,7 +947,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -963,7 +966,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -984,7 +987,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'topic' => $topic,
             ]
         );
@@ -1004,7 +1007,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1023,7 +1026,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1043,7 +1046,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1064,7 +1067,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1083,7 +1086,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1104,7 +1107,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1124,7 +1127,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1143,7 +1146,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1163,7 +1166,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1184,7 +1187,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1203,7 +1206,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1224,7 +1227,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1246,7 +1249,7 @@ final class EventDateTest extends TestCase
             );
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1265,7 +1268,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1286,7 +1289,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1307,7 +1310,7 @@ final class EventDateTest extends TestCase
             );
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1328,7 +1331,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1347,7 +1350,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['allows_multiple_registrations' => 1]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1368,7 +1371,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1386,7 +1389,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel(['use_terms_2' => 1]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1407,7 +1410,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1427,7 +1430,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['notes' => 'Don\'t forget this.']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1446,7 +1449,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1467,7 +1470,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1486,7 +1489,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['notes' => 'Don\'t forget this.']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1507,7 +1510,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1527,7 +1530,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['image' => 'file.jpg']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1546,7 +1549,7 @@ final class EventDateTest extends TestCase
         $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1567,7 +1570,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel([]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1586,7 +1589,7 @@ final class EventDateTest extends TestCase
             ->getLoadedTestingModel(['image' => 'file.jpg']);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1604,11 +1607,11 @@ final class EventDateTest extends TestCase
     public function getPaymentMethodsReturnsPaymentMethodsFromTopic(): void
     {
         $paymentMethods = new Collection();
-        $topic = new \Tx_Seminars_Model_Event();
+        $topic = new Event();
         $topic->setData(['payment_methods' => $paymentMethods]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1632,10 +1635,10 @@ final class EventDateTest extends TestCase
             'topics, but not on event dates.'
         );
 
-        $topic = new \Tx_Seminars_Model_Event();
+        $topic = new Event();
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -1652,11 +1655,11 @@ final class EventDateTest extends TestCase
      */
     public function getPriceOnRequestReturnsPriceOnRequestFromDopic(): void
     {
-        $topic = new \Tx_Seminars_Model_Event();
+        $topic = new Event();
         $topic->setData(['price_on_request' => true]);
         $this->subject->setData(
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );

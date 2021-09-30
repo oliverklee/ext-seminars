@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -58,7 +59,7 @@ final class RegistrationsListTest extends TestCase
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
                 'title' => 'Test event & more',
                 'attendees_max' => 10,
                 'needs_registration' => 1,

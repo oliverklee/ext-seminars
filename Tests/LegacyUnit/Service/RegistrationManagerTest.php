@@ -22,6 +22,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -1098,7 +1099,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse(): void
     {
-        $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->seminar->setStatus(Event::STATUS_CANCELED);
 
         self::assertFalse(
             $this->subject->canRegisterIfLoggedIn($this->seminar)
@@ -1287,7 +1288,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage(): void
     {
-        $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->seminar->setStatus(Event::STATUS_CANCELED);
 
         self::assertSame(
             $this->getLanguageService()->getLL('message_seminarCancelled'),
@@ -1378,13 +1379,13 @@ final class RegistrationManagerTest extends TestCase
 
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->cachedSeminar = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1402,12 +1403,12 @@ final class RegistrationManagerTest extends TestCase
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredDateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
@@ -1421,7 +1422,7 @@ final class RegistrationManagerTest extends TestCase
 
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1434,7 +1435,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1453,18 +1454,18 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1477,7 +1478,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1509,18 +1510,18 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1533,7 +1534,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1556,18 +1557,18 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1580,7 +1581,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1603,17 +1604,17 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid1,
             ]
         );
@@ -1626,12 +1627,12 @@ final class RegistrationManagerTest extends TestCase
 
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid2,
             ]
         );
@@ -1646,7 +1647,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1669,17 +1670,17 @@ final class RegistrationManagerTest extends TestCase
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredDateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid1,
             ]
         );
@@ -1696,7 +1697,7 @@ final class RegistrationManagerTest extends TestCase
 
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1709,7 +1710,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -1732,17 +1733,17 @@ final class RegistrationManagerTest extends TestCase
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
 
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $requiredDateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'topic' => $requiredTopicUid1,
             ]
         );
@@ -1759,7 +1760,7 @@ final class RegistrationManagerTest extends TestCase
 
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1772,7 +1773,7 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -2605,7 +2606,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            \Tx_Seminars_Model_Event::STATUS_CONFIRMED
+            Event::STATUS_CONFIRMED
         );
 
         $pi1 = new DefaultController();
@@ -2627,7 +2628,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            \Tx_Seminars_Model_Event::STATUS_CANCELED
+            Event::STATUS_CANCELED
         );
 
         $pi1 = new DefaultController();
@@ -2649,7 +2650,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            \Tx_Seminars_Model_Event::STATUS_PLANNED
+            Event::STATUS_PLANNED
         );
 
         $pi1 = new DefaultController();
@@ -2675,7 +2676,7 @@ final class RegistrationManagerTest extends TestCase
         );
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            \Tx_Seminars_Model_Event::STATUS_PLANNED
+            Event::STATUS_PLANNED
         );
 
         $pi1 = new DefaultController();
@@ -6108,8 +6109,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12, 'special' => 3]);
@@ -6134,8 +6135,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6160,8 +6161,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6186,8 +6187,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -6212,8 +6213,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6238,8 +6239,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6444,8 +6445,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')
@@ -6474,8 +6475,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')
@@ -6502,8 +6503,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
         $event->method('getPaymentMethods')
@@ -6525,8 +6526,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
         $event->method('getPaymentMethods')
@@ -6557,8 +6558,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')
@@ -6584,8 +6585,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')
@@ -6614,8 +6615,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')
@@ -6644,8 +6645,8 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $event->method('getPaymentMethods')

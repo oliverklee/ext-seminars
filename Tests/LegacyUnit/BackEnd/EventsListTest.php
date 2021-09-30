@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
@@ -252,7 +253,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => Event::STATUS_CANCELED,
             ]
         );
 
@@ -271,7 +272,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => Event::STATUS_CONFIRMED,
             ]
         );
 
@@ -290,7 +291,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'cancelled' => Event::STATUS_PLANNED,
             ]
         );
 
@@ -340,7 +341,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => Event::STATUS_CONFIRMED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -379,7 +380,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'cancelled' => Event::STATUS_PLANNED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -399,7 +400,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -419,7 +420,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
 
@@ -477,7 +478,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -536,7 +537,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => Event::STATUS_CONFIRMED,
             ]
         );
 
@@ -556,7 +557,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => Event::TYPE_TOPIC,
             ]
         );
 
@@ -787,7 +788,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => Event::TYPE_COMPLETE,
             ]
         );
 

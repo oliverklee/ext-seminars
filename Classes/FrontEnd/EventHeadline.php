@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -56,11 +57,11 @@ class EventHeadline extends AbstractView
      *
      * If the event has no date, just the title is returned.
      *
-     * @param \Tx_Seminars_Model_Event $event the event to get the unique event title for
+     * @param Event $event the event to get the unique event title for
      *
      * @return string the unique event title (or '' if there is an error)
      */
-    protected function getTitleAndDate(\Tx_Seminars_Model_Event $event): string
+    protected function getTitleAndDate(Event $event): string
     {
         $result = \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5);
         if (!$event->hasBeginDate()) {

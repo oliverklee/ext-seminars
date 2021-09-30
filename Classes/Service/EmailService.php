@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -44,7 +45,7 @@ class EmailService implements SingletonInterface
      *
      * @param string $body can contain %salutation which will expand to a full salutation with the user's name
      */
-    public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body): void
+    public function sendEmailToAttendees(Event $event, string $subject, string $body): void
     {
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
@@ -72,7 +73,7 @@ class EmailService implements SingletonInterface
      */
     protected function buildMessageBody(
         string $rawBody,
-        \Tx_Seminars_Model_Event $event,
+        Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
     ): string {
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
@@ -96,7 +97,7 @@ class EmailService implements SingletonInterface
      */
     protected function replaceMarkers(
         string $textWithMarkers,
-        \Tx_Seminars_Model_Event $event,
+        Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
     ): string {
         $markers = [

@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -52,7 +53,7 @@ class EventPublication extends TemplateHelper
 
         /** @var EventMapper $eventMapper */
         $eventMapper = GeneralUtility::makeInstance(EventMapper::class);
-        /** @var \Tx_Seminars_Model_Event|null $event */
+        /** @var Event|null $event */
         $event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
         if ($event !== null && $event->isHidden()) {

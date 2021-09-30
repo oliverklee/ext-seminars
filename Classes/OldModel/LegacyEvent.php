@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Bag\TimeSlotBag;
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -2582,7 +2583,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     public function isCanceled(): bool
     {
-        return $this->getStatus() === \Tx_Seminars_Model_Event::STATUS_CANCELED;
+        return $this->getStatus() === Event::STATUS_CANCELED;
     }
 
     /**
@@ -2733,7 +2734,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventDate(): bool
     {
-        return $this->getRecordPropertyInteger('object_type') === \Tx_Seminars_Model_Event::TYPE_DATE;
+        return $this->getRecordPropertyInteger('object_type') === Event::TYPE_DATE;
     }
 
     /**
@@ -2741,7 +2742,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventTopic(): bool
     {
-        return $this->getRecordPropertyInteger('object_type') === \Tx_Seminars_Model_Event::TYPE_TOPIC;
+        return $this->getRecordPropertyInteger('object_type') === Event::TYPE_TOPIC;
     }
 
     /**
@@ -3536,7 +3537,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = '';
 
-        if ($this->getRecordPropertyInteger('object_type') !== \Tx_Seminars_Model_Event::TYPE_TOPIC) {
+        if ($this->getRecordPropertyInteger('object_type') !== Event::TYPE_TOPIC) {
             $result = parent::getDate($dash);
         }
 
@@ -3889,7 +3890,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isConfirmed(): bool
     {
-        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_CONFIRMED;
+        return $this->getStatus() == Event::STATUS_CONFIRMED;
     }
 
     /**
@@ -3899,7 +3900,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isPlanned(): bool
     {
-        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_PLANNED;
+        return $this->getStatus() == Event::STATUS_PLANNED;
     }
 
     /**

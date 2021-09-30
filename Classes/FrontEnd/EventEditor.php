@@ -20,6 +20,7 @@ use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
@@ -1345,7 +1346,7 @@ class EventEditor extends AbstractEditor
         }
 
         $mapper = MapperRegistry::get(EventMapper::class);
-        /** @var \Tx_Seminars_Model_Event $event */
+        /** @var Event $event */
         $event = $mapper->findByPublicationHash($this->publicationHash);
 
         if ($event !== null && $event->isHidden()) {
@@ -1375,11 +1376,11 @@ class EventEditor extends AbstractEditor
     /**
      * Builds the content for the publishing e-mail to the reviewer.
      *
-     * @param \Tx_Seminars_Model_Event $event the event to send the publication e-mail for
+     * @param Event $event the event to send the publication e-mail for
      *
      * @return string the e-mail body for the publishing e-mail, will not be empty
      */
-    private function createEmailContent(\Tx_Seminars_Model_Event $event): string
+    private function createEmailContent(Event $event): string
     {
         $this->getTemplateCode(true);
         $this->setLabels();

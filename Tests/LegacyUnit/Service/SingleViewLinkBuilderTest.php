@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service\TestingSingleViewLinkBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -86,9 +87,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageOfEvent(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
         );
         $event->method('hasCombinedSingleViewPage')
@@ -121,9 +122,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
         );
         $event->method('hasCombinedSingleViewPage')
@@ -156,9 +157,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
         );
         $event->method('hasCombinedSingleViewPage')
@@ -191,9 +192,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingIsEmpty(): void
     {
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
+        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
         );
         $event->method('hasCombinedSingleViewPage')
@@ -309,8 +310,8 @@ final class SingleViewLinkBuilderTest extends TestCase
     public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute(): void
     {
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_Model_Event::class);
+        /** @var Event&MockObject $event */
+        $event = $this->createMock(Event::class);
 
         /** @var TestingSingleViewLinkBuilder&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -334,8 +335,8 @@ final class SingleViewLinkBuilderTest extends TestCase
         $eventUid = 19;
         $singleViewPageUid = 42;
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getUid']);
+        /** @var Event&MockObject $event */
+        $event = $this->createPartialMock(Event::class, ['getUid']);
         $event->method('getUid')
             ->willReturn($eventUid);
 
@@ -381,8 +382,8 @@ final class SingleViewLinkBuilderTest extends TestCase
         $subject->method('getContentObject')
             ->willReturn($contentObject);
 
-        /** @var \Tx_Seminars_Model_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_Model_Event::class);
+        /** @var Event&MockObject $event */
+        $event = $this->createMock(Event::class);
 
         self::assertEquals(
             $relativeUrl,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Event;
 
 final class TimeSlotTest extends TestCase
 {
@@ -130,7 +131,7 @@ final class TimeSlotTest extends TestCase
      */
     public function setSeminarSetsSeminar(): void
     {
-        $seminar = new \Tx_Seminars_Model_Event();
+        $seminar = new Event();
 
         $this->subject->setSeminar($seminar);
 

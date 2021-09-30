@@ -7,13 +7,17 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\Event
+ */
 final class EventTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Event
+     * @var Event
      */
     private $subject = null;
 
@@ -35,7 +39,7 @@ final class EventTest extends UnitTestCase
         $organizers = new Collection();
         $organizers->add($this->organizer);
 
-        $this->subject = new \Tx_Seminars_Model_Event();
+        $this->subject = new Event();
         $this->subject->setData(
             [
                 'title' => 'A nice event',

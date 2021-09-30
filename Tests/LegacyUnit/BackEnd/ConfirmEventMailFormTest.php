@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
 final class ConfirmEventMailFormTest extends TestCase
@@ -47,7 +48,7 @@ final class ConfirmEventMailFormTest extends TestCase
             [
                 'pid' => $dummySysFolderUid,
                 'title' => 'Dummy event',
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
                 'organizers' => 0,
             ]

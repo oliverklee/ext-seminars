@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -1815,7 +1816,7 @@ final class RegistrationFormTest extends TestCase
     {
         $event = $this->subject->getEvent();
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Event::class,
+            Event::class,
             $event
         );
 

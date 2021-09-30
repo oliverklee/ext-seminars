@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Configuration;
@@ -15,7 +17,7 @@ use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 /**
  * This class represents an event.
  */
-class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
+class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
 {
     use EventEmailSenderTrait;
 
@@ -76,9 +78,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     /**
      * Returns the record type of this event, which will be one of the following:
-     * - \Tx_Seminars_Model_Event::TYPE_COMPLETE
-     * - \Tx_Seminars_Model_Event::TYPE_TOPIC
-     * - \Tx_Seminars_Model_Event::TYPE_DATE
+     * - Event::TYPE_COMPLETE
+     * - Event::TYPE_TOPIC
+     * - Event::TYPE_DATE
      *
      * @return int the record type of this event, will be one of the values
      *                 mentioned above, will be >= 0
@@ -93,12 +95,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @throws \BadMethodCallException if this event is no (valid) date
      */
-    public function getTopic(): \Tx_Seminars_Model_Event
+    public function getTopic(): Event
     {
         if (!$this->isEventDate()) {
             throw new \BadMethodCallException('This function may only be called for date records.', 1333296324);
         }
-        /** @var \Tx_Seminars_Model_Event $topic */
+        /** @var Event $topic */
         $topic = $this->getAsModel('topic');
 
         return $topic;
@@ -244,7 +246,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     public function getEventType(): ?\Tx_Seminars_Model_EventType
     {
-        /** @var Tx_Seminars_Model_EventType|null $type */
+        /** @var \Tx_Seminars_Model_EventType|null $type */
         $type = $this->isEventDate() ? $this->getTopic()->getEventType() : $this->getAsModel('event_type');
 
         return $type;
@@ -1330,7 +1332,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Event>
+     * @return Collection<Event>
      */
     public function getRequirements(): Collection
     {
@@ -1339,14 +1341,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
                 $this->getTopic()->getRequirements();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_Event> $requirements */
+        /** @var Collection<Event> $requirements */
         $requirements = $this->getAsCollection('requirements');
 
         return $requirements;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Event>
+     * @return Collection<Event>
      */
     public function getDependencies(): Collection
     {
@@ -1354,7 +1356,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
             return $this->getTopic()->getDependencies();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_Event> $dependencies */
+        /** @var Collection<Event> $dependencies */
         $dependencies = $this->getAsCollection('dependencies');
 
         return $dependencies;

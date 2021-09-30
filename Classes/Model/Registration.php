@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -47,9 +48,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         $this->set('user', $user);
     }
 
-    public function getEvent(): \Tx_Seminars_Model_Event
+    public function getEvent(): Event
     {
-        /** @var \Tx_Seminars_Model_Event $event */
+        /** @var Event $event */
         $event = $this->getAsModel('seminar');
 
         return $event;
@@ -62,12 +63,12 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      *
      * @see getEvent
      */
-    public function getSeminar(): ?\Tx_Seminars_Model_Event
+    public function getSeminar(): ?Event
     {
         return $this->getEvent();
     }
 
-    public function setEvent(\Tx_Seminars_Model_Event $event): void
+    public function setEvent(Event $event): void
     {
         $this->set('seminar', $event);
     }
@@ -79,7 +80,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      *
      * @see setEvent
      */
-    public function setSeminar(\Tx_Seminars_Model_Event $event): void
+    public function setSeminar(Event $event): void
     {
         $this->setEvent($event);
     }
