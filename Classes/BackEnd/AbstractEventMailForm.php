@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -390,8 +391,8 @@ abstract class AbstractEventMailForm
         $organizer = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
 
-        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($event->getUid());
         $registrations = $registrationBagBuilder->build();
 

@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -633,8 +634,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $vacancies = $seminar->getVacancies();
 
-        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($seminar->getUid());
         $registrationBagBuilder->limitToOnQueue();
         $registrationBagBuilder->limitToSeatsAtMost($vacancies);

@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -130,8 +131,8 @@ class RegistrationsList extends AbstractList
      */
     private function setRegistrationTableMarkers(int $registrationsToShow): bool
     {
-        /** @var \Tx_Seminars_BagBuilder_Registration $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $pageData = $this->page->getPageData();
 
         switch ($registrationsToShow) {

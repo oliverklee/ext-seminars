@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
+use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -663,24 +664,24 @@ final class RegistrationsListTest extends TestCase
         );
         $hook->expects(self::exactly(2))->method('modifyListHeader')->withConsecutive(
             [
-                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(RegistrationBag::class),
                 self::isInstanceOf(Template::class),
                 RegistrationsList::REGULAR_REGISTRATIONS,
             ],
             [
-                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(RegistrationBag::class),
                 self::isInstanceOf(Template::class),
                 RegistrationsList::REGISTRATIONS_ON_QUEUE,
             ]
         );
         $hook->expects(self::exactly(2))->method('modifyList')->withConsecutive(
             [
-                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(RegistrationBag::class),
                 self::isInstanceOf(Template::class),
                 RegistrationsList::REGULAR_REGISTRATIONS,
             ],
             [
-                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(RegistrationBag::class),
                 self::isInstanceOf(Template::class),
                 RegistrationsList::REGISTRATIONS_ON_QUEUE,
             ]

@@ -171,12 +171,12 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * This function will be called for "my events" lists only.
          *
          * @param DefaultController $controller the calling controller
-         * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
+         * @param RegistrationBagBuilder $builder the bag builder
          * @param string $whatToDisplay the flavor of list view ('my_events' only?)
          */
         public function modifyRegistrationBagBuilder(
             DefaultController $controller,
-            \Tx_Seminars_BagBuilder_Registration $builder,
+            RegistrationBagBuilder $builder,
             string $whatToDisplay
         ): void {
             // Hier Ihr Code
@@ -719,14 +719,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
          * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
          *
-         * @param \Tx_Seminars_Bag_Registration $registrationBag
+         * @param RegistrationBag $registrationBag
          *        the registrationBag the heading is made for
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          */
         public function modifyListHeader(
-            \Tx_Seminars_Bag_Registration $registrationBag,
+            RegistrationBag $registrationBag,
             Template $template,
             int $registrationsToShow
         ): void {
@@ -741,14 +741,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
          * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
          *
-         * @param \Tx_Seminars_Bag_Registration $registrationBag
+         * @param RegistrationBag $registrationBag
          *        the registrationBag the table is made for
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          */
         public function modifyList(
-            \Tx_Seminars_Bag_Registration $registrationBag,
+            RegistrationBag $registrationBag,
             Template $template,
             int $registrationsToShow
         ): void {
