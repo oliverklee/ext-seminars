@@ -18,6 +18,3 @@ parameters:
   scanDirectories:
     - Classes
     - Tests
-
-  excludePaths:
-    - Classes/FrontEnd/AbstractEditor.php
