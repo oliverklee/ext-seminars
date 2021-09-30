@@ -19,6 +19,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Pelago\Emogrifier\CssInliner;
@@ -455,7 +456,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $event->getAttendances();
 
-        return MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($this->registration->getUid());
+        return MapperRegistry::get(RegistrationMapper::class)->find($this->registration->getUid());
     }
 
     /**
@@ -764,7 +765,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $eMailNotification->setBody($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($oldRegistration->getUid());
 
         $this->addCalendarAttachment($eMailNotification, $registration);
@@ -902,7 +903,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $eMailNotification->setBody($template->getSubpart('MAIL_NOTIFICATION'));
 
-        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()
@@ -958,7 +959,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $eMail->addTo($organizer->getEmailAddress(), $organizer->getName());
         }
 
-        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()
@@ -1216,7 +1217,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $footers = $event->getOrganizersFooter();
         $template->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
 
-        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()->executeHook(
@@ -1485,9 +1486,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         )->getUid() : 0;
     }
 
-    protected function getRegistrationMapper(): \Tx_Seminars_Mapper_Registration
+    protected function getRegistrationMapper(): RegistrationMapper
     {
-        return MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        return MapperRegistry::get(RegistrationMapper::class);
     }
 
     /**

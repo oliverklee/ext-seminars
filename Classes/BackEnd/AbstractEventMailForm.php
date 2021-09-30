@@ -12,6 +12,7 @@ use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -399,7 +400,7 @@ abstract class AbstractEventMailForm
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
-            $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+            $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
             /** @var LegacyRegistration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
                 $registration = $registrationMapper->find($oldRegistration->getUid());

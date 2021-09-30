@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 
 /**
  * This class represents a mapper for front-end users.
@@ -28,7 +29,7 @@ class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
      */
     protected $relations = [
         'usergroup' => \Tx_Seminars_Mapper_FrontEndUserGroup::class,
-        'tx_seminars_registration' => \Tx_Seminars_Mapper_Registration::class,
+        'tx_seminars_registration' => RegistrationMapper::class,
     ];
 
     /**
