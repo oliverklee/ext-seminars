@@ -8,6 +8,9 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder
+ */
 final class AbstractBagBuilderTest extends FunctionalTestCase
 {
     use BagHelper;

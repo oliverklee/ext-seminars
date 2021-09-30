@@ -140,8 +140,8 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * Add or alter limitations for the selection of seminars to be shown in the
          * list.
          *
-         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
-         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+         * @see AbstractBagBuilder::getWhereClausePart()
+         * @see AbstractBagBuilder::setWhereClausePart()
          *
          * This function will be called for these types of seminar lists: "topics", "seminars",
          * "my vip seminars", "my entered events", "events next day", "other dates".
@@ -165,8 +165,8 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * Add or alter limitations for the selection of seminars to be shown in the
          * list.
          *
-         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
-         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+         * @see AbstractBagBuilder::getWhereClausePart()
+         * @see AbstractBagBuilder::setWhereClausePart()
          *
          * This function will be called for "my events" lists only.
          *

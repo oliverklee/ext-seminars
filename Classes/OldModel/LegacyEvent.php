@@ -17,7 +17,9 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Bag\SpeakerBag;
 use OliverKlee\Seminars\Bag\TimeSlotBag;
+use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1811,8 +1813,8 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
         }
 
-        /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
+        /** @var OrganizerBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
         $builder->limitToEvent($this->getUid());
         /** @var OrganizerBag $bag */
         $bag = $builder->build();
@@ -3712,8 +3714,8 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        /** @var \Tx_Seminars_BagBuilder_Category $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
+        /** @var CategoryBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(CategoryBagBuilder::class);
         $builder->limitToEvents((string)$this->getTopicOrSelfUid());
         $builder->sortByRelationOrder();
 

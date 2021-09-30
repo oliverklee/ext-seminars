@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\OrganizerBag;
+use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -48,8 +49,8 @@ class OrganizersList extends AbstractList
             $this->getLanguageService()->getLL('organizerlist.title')
         );
 
-        /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
+        /** @var OrganizerBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
 
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 

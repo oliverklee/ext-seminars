@@ -10,6 +10,9 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder
+ */
 final class AbstractBagBuilderTest extends TestCase
 {
     /**

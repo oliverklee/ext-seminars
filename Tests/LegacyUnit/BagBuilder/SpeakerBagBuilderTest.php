@@ -7,11 +7,15 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\BagBuilder\SpeakerBagBuilder;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\SpeakerBagBuilder
+ */
 final class SpeakerBagBuilderTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_BagBuilder_Speaker
+     * @var SpeakerBagBuilder
      */
     private $subject = null;
 
@@ -24,7 +28,7 @@ final class SpeakerBagBuilderTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_BagBuilder_Speaker();
+        $this->subject = new SpeakerBagBuilder();
         $this->subject->setTestMode();
     }
 
