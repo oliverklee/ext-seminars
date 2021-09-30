@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class displays an event headline consisting of the event title and date.
  */
-class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_EventHeadline extends AbstractView
 {
     /**
      * @var \Tx_Seminars_Mapper_Event

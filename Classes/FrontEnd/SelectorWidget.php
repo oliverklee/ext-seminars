@@ -6,6 +6,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\FrontEnd\AbstractView;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -16,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class creates a selector widget.
  */
-class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_SelectorWidget extends AbstractView
 {
     /**
      * needed for the list view to convert ISO codes to country names and languages

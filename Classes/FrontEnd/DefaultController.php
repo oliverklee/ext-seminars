@@ -771,7 +771,7 @@ class DefaultController extends TemplateHelper
     {
         $imageConfiguration = [
             'altText' => '',
-            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+            'file' => AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
             'file.' => [
                 'width' => $this->getConfValueInteger('seminarImageSingleViewWidth'),
                 'height' => $this->getConfValueInteger('seminarImageSingleViewHeight'),
@@ -1904,7 +1904,7 @@ class DefaultController extends TemplateHelper
                 $imageConfiguration = [
                     'altText' => $this->seminar->getTitle(),
                     'titleText' => $this->seminar->getTitle(),
-                    'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+                    'file' => AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
                     'file.' => [
                         'width' => $this->getConfValueInteger('seminarImageListViewWidth') . 'c',
                         'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',
@@ -2876,7 +2876,7 @@ class DefaultController extends TemplateHelper
         }
 
         $imageConfiguration = [
-            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
+            'file' => AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
         return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);

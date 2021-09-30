@@ -6,15 +6,16 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingEditor;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_Editor
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractEditor
  */
-final class EditorTest extends TestCase
+final class AbstractEditorTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_FrontEnd_Editor
+     * @var TestingEditor
      */
     private $subject = null;
 
@@ -28,7 +29,7 @@ final class EditorTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
+        $this->subject = new TestingEditor([], $this->getFrontEndController()->cObj);
         $this->subject->setTestMode();
     }
 
@@ -63,7 +64,7 @@ final class EditorTest extends TestCase
      */
     public function isTestModeReturnsFalseForTestModeDisabled(): void
     {
-        $subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
+        $subject = new TestingEditor([], $this->getFrontEndController()->cObj);
 
         self::assertFalse(
             $subject->isTestMode()
