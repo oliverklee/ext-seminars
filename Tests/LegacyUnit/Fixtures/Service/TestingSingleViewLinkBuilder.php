@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service;
 
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class just makes some functions public for testing purposes.
  */
-class TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBuilder
+class TestingSingleViewLinkBuilder extends SingleViewLinkBuilder
 {
     /**
      * Retrieves a content object to be used for creating typolinks.

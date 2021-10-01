@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Service;
+
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Event;
@@ -13,7 +15,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 /**
  * This class provides functions for creating the link/URL to the single view page of an event.
  */
-class Tx_Seminars_Service_SingleViewLinkBuilder
+class SingleViewLinkBuilder
 {
     /**
      * a plugin instance that provides access to the flexforms plugin settings

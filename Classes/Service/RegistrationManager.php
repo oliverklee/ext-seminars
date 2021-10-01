@@ -91,7 +91,7 @@ class RegistrationManager extends TemplateHelper
     protected $registrationEmailHookProvider = null;
 
     /**
-     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder
      */
     private $linkBuilder = null;
 
@@ -1083,8 +1083,8 @@ class RegistrationManager extends TemplateHelper
         bool $useHtml = false
     ): string {
         if ($this->linkBuilder === null) {
-            /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(\Tx_Seminars_Service_SingleViewLinkBuilder::class);
+            /** @var SingleViewLinkBuilder $linkBuilder */
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
             $this->injectLinkBuilder($linkBuilder);
         }
         $this->linkBuilder->setPlugin($plugin);
@@ -1472,7 +1472,7 @@ class RegistrationManager extends TemplateHelper
         return $this->registrationEmailHookProvider;
     }
 
-    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
+    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }
