@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\SkillMapper;
+use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class SpeakerMapperTest extends TestCase
@@ -19,7 +21,7 @@ final class SpeakerMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Speaker
+     * @var SpeakerMapper
      */
     private $subject = null;
 
@@ -27,7 +29,7 @@ final class SpeakerMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_Speaker();
+        $this->subject = new SpeakerMapper();
     }
 
     protected function tearDown(): void
@@ -99,7 +101,7 @@ final class SpeakerMapperTest extends TestCase
     public function getSkillsWithOneSkillReturnsNonEmptyList(): void
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)->getNewGhost();
+        $skill = MapperRegistry::get(SkillMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
             $speakerUid,
@@ -119,7 +121,7 @@ final class SpeakerMapperTest extends TestCase
     public function getSkillsWithOneSkillReturnsOneSkill(): void
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
+        $skill = MapperRegistry::get(SkillMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',

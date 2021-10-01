@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 
 /**
  * This class represents a mapper for speakers.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Speaker>
  */
-class Tx_Seminars_Mapper_Speaker extends AbstractDataMapper
+class SpeakerMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -27,7 +28,7 @@ class Tx_Seminars_Mapper_Speaker extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'skills' => \Tx_Seminars_Mapper_Skill::class,
+        'skills' => SkillMapper::class,
         'owner' => FrontEndUserMapper::class,
     ];
 }

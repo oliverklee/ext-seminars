@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\SkillMapper;
 
 final class SkillMapperTest extends TestCase
 {
@@ -15,7 +16,7 @@ final class SkillMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Skill
+     * @var SkillMapper
      */
     private $subject = null;
 
@@ -23,7 +24,7 @@ final class SkillMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_Skill();
+        $this->subject = new SkillMapper();
     }
 
     protected function tearDown(): void

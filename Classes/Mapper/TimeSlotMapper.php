@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Seminars\Mapper\EventMapper;
 
 /**
  * This class represents a mapper for time-slots.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_TimeSlot>
  */
-class Tx_Seminars_Mapper_TimeSlot extends AbstractDataMapper
+class TimeSlotMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -27,8 +28,8 @@ class Tx_Seminars_Mapper_TimeSlot extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'speakers' => \Tx_Seminars_Mapper_Speaker::class,
-        'place' => \Tx_Seminars_Mapper_Place::class,
+        'speakers' => SpeakerMapper::class,
+        'place' => PlaceMapper::class,
         'seminar' => EventMapper::class,
     ];
 }

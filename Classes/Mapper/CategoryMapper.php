@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Category>
  */
-class Tx_Seminars_Mapper_Category extends AbstractDataMapper
+class CategoryMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

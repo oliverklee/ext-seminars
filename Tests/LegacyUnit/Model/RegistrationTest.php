@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
@@ -560,7 +561,7 @@ final class RegistrationTest extends TestCase
     public function setPaymentMethodSetsPaymentMethod(): void
     {
         /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $this->subject->setPaymentMethod($paymentMethod);
 
         self::assertSame(

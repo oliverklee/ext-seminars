@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class TargetGroupMapperTest extends TestCase
@@ -18,7 +19,7 @@ final class TargetGroupMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_TargetGroup
+     * @var TargetGroupMapper
      */
     private $subject = null;
 
@@ -26,7 +27,7 @@ final class TargetGroupMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_TargetGroup();
+        $this->subject = new TargetGroupMapper();
     }
 
     protected function tearDown(): void

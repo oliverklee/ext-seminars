@@ -2,25 +2,26 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 
 /**
- * This class represents a mapper for checkboxes.
+ * This class represents a mapper for places.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Checkbox>
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Place>
  */
-class Tx_Seminars_Mapper_Checkbox extends AbstractDataMapper
+class PlaceMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
      */
-    protected $tableName = 'tx_seminars_checkboxes';
+    protected $tableName = 'tx_seminars_sites';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<\Tx_Seminars_Model_Place> the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Checkbox::class;
+    protected $modelClassName = \Tx_Seminars_Model_Place::class;
 
     /**
      * @var array<non-empty-string, class-string>

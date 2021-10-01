@@ -35,10 +35,10 @@ class RegistrationMapper extends AbstractDataMapper
         'seminar' => EventMapper::class,
         'user' => FrontEndUserMapper::class,
         'currency' => CurrencyMapper::class,
-        'method_of_payment' => \Tx_Seminars_Mapper_PaymentMethod::class,
-        'lodgings' => \Tx_Seminars_Mapper_Lodging::class,
-        'foods' => \Tx_Seminars_Mapper_Food::class,
-        'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
+        'method_of_payment' => PaymentMethodMapper::class,
+        'lodgings' => LodgingMapper::class,
+        'foods' => FoodMapper::class,
+        'checkboxes' => CheckboxMapper::class,
         'additional_persons' => FrontEndUserMapper::class,
     ];
 

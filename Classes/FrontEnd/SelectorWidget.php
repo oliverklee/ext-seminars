@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
+use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -241,7 +242,7 @@ class SelectorWidget extends AbstractView
             ->execute()
             ->fetchAll();
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $mapper = MapperRegistry::get(PlaceMapper::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);
     }
 

@@ -8,8 +8,12 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\LodgingMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
@@ -126,7 +130,7 @@ final class RegistrationMapperTest extends TestCase
     public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance(): void
     {
         $paymentMethod = MapperRegistry::
-        get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        get(PaymentMethodMapper::class)->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $testingModel->getPaymentMethod());
@@ -150,7 +154,7 @@ final class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(LodgingMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -169,7 +173,7 @@ final class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(LodgingMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -203,7 +207,7 @@ final class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)->getNewGhost();
+        $food = MapperRegistry::get(FoodMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
@@ -221,7 +225,7 @@ final class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsOneFood(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
+        $food = MapperRegistry::get(FoodMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -255,7 +259,7 @@ final class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(CheckboxMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -277,7 +281,7 @@ final class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(CheckboxMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',

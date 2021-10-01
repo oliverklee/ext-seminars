@@ -31,7 +31,7 @@ class FrontEndUserGroupMapper extends AbstractDataMapper
      */
     protected $relations = [
         'tx_seminars_reviewer' => OelibBackEndUserMapper::class,
-        'tx_seminars_default_categories' => \Tx_Seminars_Mapper_Category::class,
-        'tx_seminars_default_organizer' => \Tx_Seminars_Mapper_Organizer::class,
+        'tx_seminars_default_categories' => CategoryMapper::class,
+        'tx_seminars_default_organizer' => OrganizerMapper::class,
     ];
 }

@@ -8,7 +8,12 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\CategoryMapper;
+use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\EventTypeMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
+use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Event;
 
 /**
@@ -109,7 +114,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
+        $category = MapperRegistry::get(CategoryMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -135,7 +140,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
+        $category = MapperRegistry::get(CategoryMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -174,7 +179,7 @@ final class EventDateMapperTest extends TestCase
      */
     public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance(): void
     {
-        $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
+        $eventType = MapperRegistry::get(EventTypeMapper::class)->getLoadedTestingModel([]);
         $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -210,7 +215,7 @@ final class EventDateMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -237,7 +242,7 @@ final class EventDateMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -295,7 +300,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
@@ -323,7 +328,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
@@ -371,7 +376,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(CheckboxMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -397,7 +402,7 @@ final class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(CheckboxMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
