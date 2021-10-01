@@ -8,6 +8,8 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\CategoryMapper;
+use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 final class FrontEndUserGroupTest extends TestCase
@@ -267,7 +269,7 @@ final class FrontEndUserGroupTest extends TestCase
     public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList(): void
     {
         $list = new Collection();
-        $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost();
+        $category = MapperRegistry::get(CategoryMapper::class)->getNewGhost();
 
         $list->add($category);
         $this->subject->setData(['tx_seminars_default_categories' => $list]);
@@ -300,7 +302,7 @@ final class FrontEndUserGroupTest extends TestCase
     public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue(): void
     {
         $list = new Collection();
-        $list->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
+        $list->add(MapperRegistry::get(CategoryMapper::class)->getNewGhost());
 
         $this->subject->setData(['tx_seminars_default_categories' => $list]);
 
@@ -318,7 +320,7 @@ final class FrontEndUserGroupTest extends TestCase
      */
     public function getDefaultOrganizerForSetOrganizerReturnsIt(): void
     {
-        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $this->subject->setData(['tx_seminars_default_organizer' => $organizer]);
 
         self::assertSame(
@@ -332,7 +334,7 @@ final class FrontEndUserGroupTest extends TestCase
      */
     public function hasDefaultOrganizerForSetOrganizerReturnsTrue(): void
     {
-        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $this->subject->setData(['tx_seminars_default_organizer' => $organizer]);
 
         self::assertTrue(

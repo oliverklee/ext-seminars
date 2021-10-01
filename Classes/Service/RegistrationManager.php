@@ -22,6 +22,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
@@ -535,7 +536,7 @@ class RegistrationManager extends TemplateHelper
                     $paymentMethodUid = isset($formData['method_of_payment'])
                         ? max(0, (int)$formData['method_of_payment']) : 0;
                     if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
-                        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
+                        $mapper = MapperRegistry::get(PaymentMethodMapper::class);
                         $paymentMethod = $mapper->find($paymentMethodUid);
                     }
                 }

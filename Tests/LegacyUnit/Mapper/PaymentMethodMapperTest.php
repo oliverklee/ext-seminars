@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 
 final class PaymentMethodMapperTest extends TestCase
 {
@@ -15,7 +16,7 @@ final class PaymentMethodMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_PaymentMethod
+     * @var PaymentMethodMapper
      */
     private $subject = null;
 
@@ -23,7 +24,7 @@ final class PaymentMethodMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_PaymentMethod();
+        $this->subject = new PaymentMethodMapper();
     }
 
     protected function tearDown(): void

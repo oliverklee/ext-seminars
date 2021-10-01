@@ -19,8 +19,19 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Mapper\CategoryMapper;
+use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\EventTypeMapper;
+use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\LodgingMapper;
+use OliverKlee\Seminars\Mapper\OrganizerMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
+use OliverKlee\Seminars\Mapper\PlaceMapper;
+use OliverKlee\Seminars\Mapper\SkillMapper;
+use OliverKlee\Seminars\Mapper\SpeakerMapper;
+use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
@@ -229,7 +240,7 @@ class EventEditor extends AbstractEditor
      */
     public function populateListCategories(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
+        $mapper = MapperRegistry::get(CategoryMapper::class);
         $categories = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($categories);
@@ -244,7 +255,7 @@ class EventEditor extends AbstractEditor
      */
     public function populateListEventTypes(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class);
+        $mapper = MapperRegistry::get(EventTypeMapper::class);
         $eventTypes = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($eventTypes);
@@ -258,7 +269,7 @@ class EventEditor extends AbstractEditor
      */
     public function populateListLodgings(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class);
+        $mapper = MapperRegistry::get(LodgingMapper::class);
         $lodgings = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($lodgings);
@@ -272,7 +283,7 @@ class EventEditor extends AbstractEditor
      */
     public function populateListFoods(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class);
+        $mapper = MapperRegistry::get(FoodMapper::class);
         $foods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($foods);
@@ -286,7 +297,7 @@ class EventEditor extends AbstractEditor
      */
     public function populateListPaymentMethods(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
+        $mapper = MapperRegistry::get(PaymentMethodMapper::class);
         $paymentMethods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($paymentMethods);
@@ -308,7 +319,7 @@ class EventEditor extends AbstractEditor
         if ($frontEndUser->hasDefaultOrganizers()) {
             $organizers = $frontEndUser->getDefaultOrganizers();
         } else {
-            $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class);
+            $mapper = MapperRegistry::get(OrganizerMapper::class);
             $organizers = $mapper->findByPageUid((string)$this->getPidForAuxiliaryRecords(), 'title ASC');
         }
 
@@ -332,7 +343,7 @@ class EventEditor extends AbstractEditor
     {
         $result = $items;
 
-        $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $placeMapper = MapperRegistry::get(PlaceMapper::class);
         $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($form !== null) {
@@ -397,7 +408,7 @@ class EventEditor extends AbstractEditor
     {
         $result = [];
 
-        $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
+        $speakerMapper = MapperRegistry::get(SpeakerMapper::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($form !== null) {
@@ -486,7 +497,7 @@ class EventEditor extends AbstractEditor
     ): array {
         $result = $items;
 
-        $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
+        $checkboxMapper = MapperRegistry::get(CheckboxMapper::class);
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($form !== null) {
@@ -556,7 +567,7 @@ class EventEditor extends AbstractEditor
     ): array {
         $result = $items;
 
-        $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
+        $targetGroupMapper = MapperRegistry::get(TargetGroupMapper::class);
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($form !== null) {
@@ -1532,7 +1543,7 @@ class EventEditor extends AbstractEditor
         $place->setData(self::createBasicAuxiliaryData());
         self::setPlaceData($place, 'newPlace_', $formData);
         $place->markAsDirty();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $mapper = MapperRegistry::get(PlaceMapper::class);
         $mapper->save($place);
 
         /** @var \formidable_mainrenderlet $renderlet */
@@ -1576,7 +1587,7 @@ class EventEditor extends AbstractEditor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $placeMapper = MapperRegistry::get(PlaceMapper::class);
 
         try {
             $place = $placeMapper->find((int)$formData['editPlace_uid']);
@@ -1726,7 +1737,7 @@ class EventEditor extends AbstractEditor
             return $form->majixExecJs('alert("$placeUid must be >= 0.");');
         }
 
-        $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $placeMapper = MapperRegistry::get(PlaceMapper::class);
 
         try {
             $place = $placeMapper->find((int)$placeUid);
@@ -1830,7 +1841,7 @@ class EventEditor extends AbstractEditor
         $speaker->setData(array_merge(self::createBasicAuxiliaryData(), ['skills' => new Collection()]));
         self::setSpeakerData($speaker, 'newSpeaker_', $formData);
         $speaker->markAsDirty();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
+        $mapper = MapperRegistry::get(SpeakerMapper::class);
         $mapper->save($speaker);
 
         // refresh all speaker listers
@@ -1855,7 +1866,7 @@ class EventEditor extends AbstractEditor
     {
         $formData = $this->removePathFromWidgetData($formData, $form);
         $frontEndUser = self::getLoggedInUser();
-        $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
+        $speakerMapper = MapperRegistry::get(SpeakerMapper::class);
 
         try {
             $speaker = $speakerMapper->find((int)$formData['editSpeaker_uid']);
@@ -1943,7 +1954,7 @@ class EventEditor extends AbstractEditor
      */
     private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData): void
     {
-        $skillMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
+        $skillMapper = MapperRegistry::get(SkillMapper::class);
         /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
         $skills = new Collection();
 
@@ -1998,7 +2009,7 @@ class EventEditor extends AbstractEditor
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
         }
 
-        $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
+        $speakerMapper = MapperRegistry::get(SpeakerMapper::class);
 
         try {
             $speaker = $speakerMapper->find((int)$speakerUid);
@@ -2088,7 +2099,7 @@ class EventEditor extends AbstractEditor
         $checkbox->setData(self::createBasicAuxiliaryData());
         self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
         $checkbox->markAsDirty();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
+        $mapper = MapperRegistry::get(CheckboxMapper::class);
         $mapper->save($checkbox);
 
         /** @var \formidable_mainrenderlet $renderlet */
@@ -2133,7 +2144,7 @@ class EventEditor extends AbstractEditor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
+        $checkboxMapper = MapperRegistry::get(CheckboxMapper::class);
 
         try {
             $checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
@@ -2224,7 +2235,7 @@ class EventEditor extends AbstractEditor
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
         }
 
-        $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
+        $checkboxMapper = MapperRegistry::get(CheckboxMapper::class);
 
         try {
             $checkbox = $checkboxMapper->find((int)$checkboxUid);
@@ -2294,7 +2305,7 @@ class EventEditor extends AbstractEditor
         $targetGroup->setData(self::createBasicAuxiliaryData());
         self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
         $targetGroup->markAsDirty();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
+        $mapper = MapperRegistry::get(TargetGroupMapper::class);
         $mapper->save($targetGroup);
 
         /** @var \formidable_mainrenderlet $renderlet */
@@ -2339,7 +2350,7 @@ class EventEditor extends AbstractEditor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
+        $targetGroupMapper = MapperRegistry::get(TargetGroupMapper::class);
 
         try {
             $targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
@@ -2456,7 +2467,7 @@ class EventEditor extends AbstractEditor
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
         }
 
-        $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
+        $targetGroupMapper = MapperRegistry::get(TargetGroupMapper::class);
 
         try {
             $targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
@@ -2529,7 +2540,7 @@ class EventEditor extends AbstractEditor
      */
     public static function populateListSkills(): array
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
+        $mapper = MapperRegistry::get(SkillMapper::class);
         $skills = $mapper->findAll('title ASC');
 
         return self::makeListToFormidableList($skills);

@@ -38,6 +38,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
@@ -921,7 +922,7 @@ class DefaultController extends TemplateHelper
 
         $this->hideSubparts('date,time', 'field_wrapper');
 
-        $timeSlotMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class);
+        $timeSlotMapper = MapperRegistry::get(TimeSlotMapper::class);
 
         $timeSlotsOutput = '';
         foreach ($this->seminar->getTimeSlotsAsArrayWithMarkers() as $timeSlotData) {

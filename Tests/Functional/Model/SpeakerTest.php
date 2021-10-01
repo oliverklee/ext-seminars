@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Model;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
@@ -18,7 +19,7 @@ final class SpeakerTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_Speaker
+     * @var SpeakerMapper
      */
     private $speakerMapper = null;
 
@@ -28,7 +29,7 @@ final class SpeakerTest extends FunctionalTestCase
 
         $this->provideAdminBackEndUserForFal();
 
-        $this->speakerMapper = new \Tx_Seminars_Mapper_Speaker();
+        $this->speakerMapper = new SpeakerMapper();
     }
 
     /**

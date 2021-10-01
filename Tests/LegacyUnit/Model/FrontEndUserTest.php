@@ -9,7 +9,9 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
+use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
@@ -579,7 +581,7 @@ final class FrontEndUserTest extends TestCase
     public function getDefaultCategoriesFromGroupForUserWithOneGroupWithCategoryReturnsThisCategory(): void
     {
         $categories = new Collection();
-        $categories->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
+        $categories->add(MapperRegistry::get(CategoryMapper::class)->getNewGhost());
 
         $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => $categories]);
@@ -599,7 +601,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithOneGroupWithTwoCategoriesReturnsTwoCategories(): void
     {
-        $categoryMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
+        $categoryMapper = MapperRegistry::get(CategoryMapper::class);
         $categories = new Collection();
         $categories->add($categoryMapper->getNewGhost());
         $categories->add($categoryMapper->getNewGhost());
@@ -627,7 +629,7 @@ final class FrontEndUserTest extends TestCase
         $userGroup1->setData(['tx_seminars_default_categories' => new Collection()]);
 
         $categories = new Collection();
-        $categories->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
+        $categories->add(MapperRegistry::get(CategoryMapper::class)->getNewGhost());
 
         $userGroup2 = $frontEndGroupMapper->getNewGhost();
         $userGroup2->setData(['tx_seminars_default_categories' => $categories]);
@@ -648,7 +650,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithTwoGroupsBothWithSameCategoryReturnsOneCategory(): void
     {
-        $categoryGhost = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost();
+        $categoryGhost = MapperRegistry::get(CategoryMapper::class)->getNewGhost();
         $categories = new Collection();
         $categories->add($categoryGhost);
 
@@ -675,7 +677,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithTwoGroupsBothWithCategoriesReturnsTwoCategories(): void
     {
-        $categoryMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
+        $categoryMapper = MapperRegistry::get(CategoryMapper::class);
         $frontEndGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
 
         $categoryGhost1 = $categoryMapper->getNewGhost();
@@ -726,7 +728,7 @@ final class FrontEndUserTest extends TestCase
     public function hasDefaultCategoriesForUserWithOneGroupWithCategoryReturnsTrue(): void
     {
         $categories = new Collection();
-        $categories->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
+        $categories->add(MapperRegistry::get(CategoryMapper::class)->getNewGhost());
 
         $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => $categories]);
@@ -807,7 +809,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultOrganizerForGroupWithDefaultOrganizerReturnsThatOrganizer(): void
     {
-        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_organizer' => $organizer]);
         $groups = new Collection();
@@ -825,11 +827,11 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultOrganizersForTwoGroupsWithDefaultOrganizersReturnsBothOrganizers(): void
     {
-        $organizer1 = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer1 = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $userGroup1 = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup1->setData(['tx_seminars_default_organizer' => $organizer1]);
 
-        $organizer2 = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer2 = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $userGroup2 = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup2->setData(['tx_seminars_default_organizer' => $organizer2]);
 
@@ -875,7 +877,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function hasDefaultOrganizersForNonEmptyDefaultOrganizersReturnsTrue(): void
     {
-        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
+        $organizer = MapperRegistry::get(OrganizerMapper::class)->getNewGhost();
         $organizers = new Collection();
         $organizers->add($organizer);
 

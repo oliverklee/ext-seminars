@@ -21,6 +21,7 @@ use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -4067,8 +4068,8 @@ class LegacyEvent extends AbstractTimeSpan
 
         $places = $this->getPlacesAsArray();
 
-        /** @var \Tx_Seminars_Mapper_Place $mapper */
-        $mapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Place::class);
+        /** @var PlaceMapper $mapper */
+        $mapper = GeneralUtility::makeInstance(PlaceMapper::class);
         return $mapper->getListOfModels($places);
     }
 

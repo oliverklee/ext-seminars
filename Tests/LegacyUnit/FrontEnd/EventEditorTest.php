@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
+use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -2507,7 +2508,7 @@ final class EventEditorTest extends TestCase
      */
     public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray(): void
     {
-        $targetGroup = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)
+        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)
             ->getLoadedTestingModel(['title' => 'foo']);
 
         $list = new Collection();
@@ -2524,8 +2525,8 @@ final class EventEditorTest extends TestCase
      */
     public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels(): void
     {
-        $targetGroup1 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
-        $targetGroup2 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
+        $targetGroup1 = MapperRegistry::get(TargetGroupMapper::class)->getLoadedTestingModel([]);
+        $targetGroup2 = MapperRegistry::get(TargetGroupMapper::class)->getLoadedTestingModel([]);
 
         $list = new Collection();
         $list->add($targetGroup1);

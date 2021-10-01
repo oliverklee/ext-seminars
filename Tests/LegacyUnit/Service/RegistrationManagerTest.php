@@ -22,6 +22,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
@@ -6445,7 +6446,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
@@ -6473,8 +6474,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod1 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
@@ -6503,7 +6504,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
@@ -6556,8 +6557,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod1 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
@@ -6585,7 +6586,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
@@ -6613,8 +6614,8 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod1 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
@@ -6645,7 +6646,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 

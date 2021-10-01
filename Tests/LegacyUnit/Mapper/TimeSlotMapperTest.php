@@ -9,6 +9,9 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\PlaceMapper;
+use OliverKlee\Seminars\Mapper\SpeakerMapper;
+use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
 
 final class TimeSlotMapperTest extends TestCase
@@ -19,7 +22,7 @@ final class TimeSlotMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_TimeSlot
+     * @var TimeSlotMapper
      */
     private $subject = null;
 
@@ -27,7 +30,7 @@ final class TimeSlotMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_TimeSlot();
+        $this->subject = new TimeSlotMapper();
     }
 
     protected function tearDown(): void
@@ -81,7 +84,7 @@ final class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)->getNewGhost();
+        $speaker = MapperRegistry::get(SpeakerMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
             $timeSlotUid,
@@ -104,7 +107,7 @@ final class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(SpeakerMapper::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
@@ -140,7 +143,7 @@ final class TimeSlotMapperTest extends TestCase
      */
     public function getPlaceWithPlaceReturnsPlaceInstance(): void
     {
-        $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)->getNewGhost();
+        $place = MapperRegistry::get(PlaceMapper::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['place' => $place->getUid()]

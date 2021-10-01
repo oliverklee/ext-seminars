@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class PlaceMapperTest extends TestCase
@@ -18,7 +19,7 @@ final class PlaceMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Place
+     * @var PlaceMapper
      */
     private $subject = null;
 
@@ -26,7 +27,7 @@ final class PlaceMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Mapper_Place();
+        $this->subject = new PlaceMapper();
     }
 
     protected function tearDown(): void
