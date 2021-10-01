@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -28,7 +29,7 @@ class RequirementsList extends AbstractView
     private $limitRequirementsToMissing = false;
 
     /**
-     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder
      */
     private $linkBuilder = null;
 
@@ -75,8 +76,8 @@ class RequirementsList extends AbstractView
         }
 
         if ($this->linkBuilder == null) {
-            /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(\Tx_Seminars_Service_SingleViewLinkBuilder::class);
+            /** @var SingleViewLinkBuilder $linkBuilder */
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
             $this->injectLinkBuilder($linkBuilder);
         }
         $this->linkBuilder->setPlugin($this);
@@ -122,7 +123,7 @@ class RequirementsList extends AbstractView
         return $result;
     }
 
-    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
+    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }

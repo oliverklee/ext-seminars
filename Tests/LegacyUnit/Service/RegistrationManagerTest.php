@@ -28,6 +28,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -199,9 +200,9 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
 
-        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder&MockObject $linkBuilder */
+        /** @var SingleViewLinkBuilder&MockObject $linkBuilder */
         $linkBuilder = $this->createPartialMock(
-            \Tx_Seminars_Service_SingleViewLinkBuilder::class,
+            SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
         );
         $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('http://singleview.example.com/');

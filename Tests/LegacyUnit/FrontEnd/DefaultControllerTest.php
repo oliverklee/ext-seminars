@@ -25,6 +25,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -170,9 +171,9 @@ final class DefaultControllerTest extends TestCase
         $this->subject->setLabels();
         $this->subject->createHelperObjects();
 
-        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder&MockObject $linkBuilder */
+        /** @var SingleViewLinkBuilder&MockObject $linkBuilder */
         $linkBuilder = $this->createPartialMock(
-            \Tx_Seminars_Service_SingleViewLinkBuilder::class,
+            SingleViewLinkBuilder::class,
             ['createRelativeUrlForEvent']
         );
         $linkBuilder->method('createRelativeUrlForEvent')

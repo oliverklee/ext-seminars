@@ -43,7 +43,9 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\ConfigurationService;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -86,7 +88,7 @@ class DefaultController extends TemplateHelper
     /**
      * configuration in plugin.tx_seminars (not plugin.tx_seminars_pi1)
      *
-     * @var \Tx_Seminars_Service_ConfigurationService
+     * @var ConfigurationService
      */
     private $configurationService = null;
 
@@ -221,7 +223,7 @@ class DefaultController extends TemplateHelper
     /**
      * a link builder instance
      *
-     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder
      */
     private $linkBuilder = null;
 
@@ -494,7 +496,7 @@ class DefaultController extends TemplateHelper
     {
         if ($this->configurationService === null) {
             $this->configurationService = GeneralUtility::makeInstance(
-                \Tx_Seminars_Service_ConfigurationService::class
+                ConfigurationService::class
             );
         }
 
@@ -524,7 +526,7 @@ class DefaultController extends TemplateHelper
     /**
      * This function is intended for testing purposes only.
      */
-    public function getConfigurationService(): ?\Tx_Seminars_Service_ConfigurationService
+    public function getConfigurationService(): ?ConfigurationService
     {
         return $this->configurationService;
     }
@@ -3320,11 +3322,11 @@ class DefaultController extends TemplateHelper
         return '<a href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' . $processedLinkText . '</a>';
     }
 
-    protected function getLinkBuilder(): \Tx_Seminars_Service_SingleViewLinkBuilder
+    protected function getLinkBuilder(): SingleViewLinkBuilder
     {
         if ($this->linkBuilder === null) {
-            /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(\Tx_Seminars_Service_SingleViewLinkBuilder::class);
+            /** @var SingleViewLinkBuilder $linkBuilder */
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
             $this->injectLinkBuilder($linkBuilder);
         }
         $this->linkBuilder->setPlugin($this);
@@ -3332,7 +3334,7 @@ class DefaultController extends TemplateHelper
         return $this->linkBuilder;
     }
 
-    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
+    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }

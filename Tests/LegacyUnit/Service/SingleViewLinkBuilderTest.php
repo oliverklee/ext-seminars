@@ -19,7 +19,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_Service_SingleViewLinkBuilder
+ * @covers \OliverKlee\Seminars\Service\SingleViewLinkBuilder
  */
 final class SingleViewLinkBuilderTest extends TestCase
 {

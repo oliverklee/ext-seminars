@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Service;
+
 use OliverKlee\Oelib\Templating\TemplateHelper;
 
 /**
  * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.
  */
-class Tx_Seminars_Service_ConfigurationService extends TemplateHelper
+class ConfigurationService extends TemplateHelper
 {
     /**
      * @var class-string same as class name
      */
-    public $prefixId = \Tx_Seminars_Service_ConfigurationService::class;
+    public $prefixId = ConfigurationService::class;
 
     /**
      * faking $this->scriptRelPath so the locallang.xlf file is found
