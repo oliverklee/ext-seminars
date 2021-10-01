@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures;
 
+use OliverKlee\Seminars\OldModel\AbstractTimeSpan;
+
 /**
  * This class represents a test object from the database.
  */
-final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
+final class TestingTimeSpan extends AbstractTimeSpan
 {
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode

@@ -42,6 +42,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\ConfigurationService;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -2927,7 +2928,7 @@ class DefaultController extends TemplateHelper
         }
 
         $result = '';
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->seminar->getOrganizerBag() as $organizer) {
             if ($organizer->hasHomepage()) {
                 $organizerTitle = $this->cObj->getTypoLink(

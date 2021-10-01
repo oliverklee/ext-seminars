@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\OldModel\LegacyCategory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -55,7 +56,7 @@ class CategoryList extends AbstractView
         if (($eventUids != '') && !$categoryBag->isEmpty()) {
             $allCategories = '';
 
-            /** @var \Tx_Seminars_OldModel_Category $category */
+            /** @var LegacyCategory $category */
             foreach ($categoryBag as $category) {
                 $link = $this->createLinkToListViewLimitedByCategory(
                     $category->getUid(),

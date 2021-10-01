@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -6048,7 +6049,7 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart(): void
     {
         $this->addLeaderRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
 
         self::assertStringContainsString(
@@ -6063,7 +6064,7 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart(): void
     {
         $this->addLeaderRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => LegacySpeaker::GENDER_FEMALE]
         );
 
         self::assertStringContainsString(
@@ -6078,7 +6079,7 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart(): void
     {
         $this->addLeaderRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
+            ['gender' => LegacySpeaker::GENDER_UNKNOWN]
         );
 
         self::assertStringContainsString(
@@ -6120,10 +6121,10 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart(): void
     {
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
 
         self::assertStringContainsString(
@@ -6138,10 +6139,10 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart(): void
     {
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => LegacySpeaker::GENDER_FEMALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => LegacySpeaker::GENDER_FEMALE]
         );
 
         self::assertStringContainsString(
@@ -6156,10 +6157,10 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType(): void
     {
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => LegacySpeaker::GENDER_FEMALE]
         );
 
         self::assertStringContainsString(
@@ -6174,10 +6175,10 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType(): void
     {
         $this->addLeaderRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
+            ['gender' => LegacySpeaker::GENDER_UNKNOWN]
         );
         $this->addLeaderRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
 
         self::assertStringContainsString(
@@ -6192,7 +6193,7 @@ final class LegacyEventTest extends TestCase
     public function getLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart(): void
     {
         $this->addTutorRelation(
-            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => LegacySpeaker::GENDER_MALE]
         );
 
         self::assertSame(

@@ -26,6 +26,7 @@ use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Database\Connection;
@@ -861,7 +862,7 @@ class RegistrationManager extends TemplateHelper
         $firstOrganizer = $event->getFirstOrganizer();
         $eMailNotification->setReplyTo($firstOrganizer->getEmailAddress(), $firstOrganizer->getName());
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($organizers as $organizer) {
             $eMailNotification->addTo($organizer->getEmailAddress(), $organizer->getName());
         }
@@ -956,7 +957,7 @@ class RegistrationManager extends TemplateHelper
             )
         );
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
             $eMail->addTo($organizer->getEmailAddress(), $organizer->getName());
         }

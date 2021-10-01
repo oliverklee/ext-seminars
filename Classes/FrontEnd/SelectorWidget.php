@@ -11,6 +11,7 @@ use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -631,7 +632,7 @@ class SelectorWidget extends AbstractView
         /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasOrganizers()) {
-                /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+                /** @var LegacyOrganizer $organizer */
                 foreach ($event->getOrganizerBag() as $organizer) {
                     $organizerUid = $organizer->getUid();
                     if (!isset($result[$organizerUid])) {

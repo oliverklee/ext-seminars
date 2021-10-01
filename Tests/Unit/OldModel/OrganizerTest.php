@@ -6,20 +6,21 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 
 /**
- * @covers \Tx_Seminars_OldModel_Organizer
+ * @covers \OliverKlee\Seminars\OldModel\LegacyOrganizer
  */
 final class OrganizerTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Organizer
+     * @var LegacyOrganizer
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_OldModel_Organizer();
+        $this->subject = new LegacyOrganizer();
     }
 
     /**
@@ -35,8 +36,8 @@ final class OrganizerTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = \Tx_Seminars_OldModel_Organizer::fromData([]);
+        $result = LegacyOrganizer::fromData([]);
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Organizer::class, $result);
+        self::assertInstanceOf(LegacyOrganizer::class, $result);
     }
 }

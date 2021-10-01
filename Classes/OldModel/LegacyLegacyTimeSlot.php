@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\OldModel;
+
 use OliverKlee\Seminars\Bag\SpeakerBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a time slot.
  */
-class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSpan
+class LegacyTimeSlot extends AbstractTimeSpan
 {
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -57,7 +59,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     public function getSpeakersShortCommaSeparated(): string
     {
         $result = [];
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag() as $speaker) {
             $result[] = $speaker->getTitle();
         }

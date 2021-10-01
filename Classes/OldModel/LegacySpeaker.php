@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\OldModel;
+
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -15,7 +16,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a speaker.
  */
-class Tx_Seminars_OldModel_Speaker extends AbstractModel
+class LegacySpeaker extends AbstractModel
 {
     /**
      * @var int the gender type for speakers without gender

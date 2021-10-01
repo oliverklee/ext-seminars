@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\OldModel\AbstractModel;
+namespace OliverKlee\Seminars\OldModel;
 
 /**
  * This class represents an event category.
  */
-class Tx_Seminars_OldModel_Category extends AbstractModel
+class LegacyCategory extends AbstractModel
 {
     /**
      * @var string the name of the SQL table this class corresponds to

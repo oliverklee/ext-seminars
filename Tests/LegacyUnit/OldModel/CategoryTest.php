@@ -6,9 +6,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\OldModel\LegacyCategory;
 
 /**
- * @covers \Tx_Seminars_OldModel_Category
+ * @covers \OliverKlee\Seminars\OldModel\LegacyCategory
  */
 final class CategoryTest extends TestCase
 {
@@ -38,7 +39,7 @@ final class CategoryTest extends TestCase
             'tx_seminars_categories',
             ['title' => $title, 'icon' => $icon]
         );
-        $subject = new \Tx_Seminars_OldModel_Category($subjectUid);
+        $subject = new LegacyCategory($subjectUid);
 
         self::assertSame($title, $subject->getTitle());
         self::assertSame($icon, $subject->getIcon());

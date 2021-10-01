@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -19,7 +20,7 @@ class OrganizersList extends AbstractList
     protected $tableName = 'tx_seminars_organizers';
 
     /**
-     * @var \Tx_Seminars_OldModel_Organizer the organizer which we want to list
+     * @var LegacyOrganizer the organizer which we want to list
      */
     private $organizer = null;
 

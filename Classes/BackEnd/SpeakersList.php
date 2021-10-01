@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\SpeakerBag;
 use OliverKlee\Seminars\BagBuilder\SpeakerBagBuilder;
+use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -19,7 +20,7 @@ class SpeakersList extends AbstractList
     protected $tableName = 'tx_seminars_speakers';
 
     /**
-     * @var \Tx_Seminars_OldModel_Speaker the speaker which we want to list
+     * @var LegacySpeaker the speaker which we want to list
      */
     private $speaker = null;
 

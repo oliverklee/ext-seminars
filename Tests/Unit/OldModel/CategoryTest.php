@@ -6,20 +6,21 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\OldModel\LegacyCategory;
 
 /**
- * @covers \Tx_Seminars_OldModel_Category
+ * @covers \OliverKlee\Seminars\OldModel\LegacyCategory
  */
 final class CategoryTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Category
+     * @var LegacyCategory
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_OldModel_Category();
+        $this->subject = new LegacyCategory();
     }
 
     /**
@@ -35,9 +36,9 @@ final class CategoryTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = \Tx_Seminars_OldModel_Category::fromData([]);
+        $result = LegacyCategory::fromData([]);
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Category::class, $result);
+        self::assertInstanceOf(LegacyCategory::class, $result);
     }
 
     /**
@@ -46,7 +47,7 @@ final class CategoryTest extends UnitTestCase
     public function getTitleReturnsTitle(): void
     {
         $title = 'Test category';
-        $subject = \Tx_Seminars_OldModel_Category::fromData(['title' => $title]);
+        $subject = LegacyCategory::fromData(['title' => $title]);
 
         self::assertSame($title, $subject->getTitle());
     }
@@ -57,7 +58,7 @@ final class CategoryTest extends UnitTestCase
     public function getIconReturnsIcon(): void
     {
         $icon = 'foo.gif';
-        $subject = \Tx_Seminars_OldModel_Category::fromData(['icon' => $icon]);
+        $subject = LegacyCategory::fromData(['icon' => $icon]);
 
         self::assertSame($icon, $subject->getIcon());
     }

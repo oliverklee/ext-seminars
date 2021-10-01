@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\OldModel\LegacySpeaker;
 
 /**
  * @covers \Tx_Seminars_Model_Speaker
@@ -16,13 +17,13 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 final class SpeakerTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Speaker
+     * @var \OliverKlee\Seminars\OldModel\LegacySpeaker
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_OldModel_Speaker();
+        $this->subject = new LegacySpeaker();
     }
 
     /**
@@ -38,9 +39,9 @@ final class SpeakerTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = \Tx_Seminars_OldModel_Speaker::fromData([]);
+        $result = LegacySpeaker::fromData([]);
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Speaker::class, $result);
+        self::assertInstanceOf(LegacySpeaker::class, $result);
     }
 
     /**
@@ -48,7 +49,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasOrganizationWithNoOrganizationReturnsFalse(): void
     {
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['organization' => '']);
+        $subject = LegacySpeaker::fromData(['organization' => '']);
 
         self::assertFalse($subject->hasOrganization());
     }
@@ -59,7 +60,7 @@ final class SpeakerTest extends UnitTestCase
     public function hasOrganizationWithOrganizationReturnsTrue(): void
     {
         $organization = 'Foo inc.';
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['organization' => $organization]);
+        $subject = LegacySpeaker::fromData(['organization' => $organization]);
 
         self::assertTrue($subject->hasOrganization());
     }
@@ -69,7 +70,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasHomepageWithNoHomepageReturnsFalse(): void
     {
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['homepage' => '']);
+        $subject = LegacySpeaker::fromData(['homepage' => '']);
 
         self::assertFalse($subject->hasHomepage());
     }
@@ -80,7 +81,7 @@ final class SpeakerTest extends UnitTestCase
     public function hasHomepageWithHomepageReturnsTrue(): void
     {
         $homepage = 'Foo inc.';
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['homepage' => $homepage]);
+        $subject = LegacySpeaker::fromData(['homepage' => $homepage]);
 
         self::assertTrue($subject->hasHomepage());
     }
@@ -90,7 +91,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasDescriptionWithNoDescriptionReturnsFalse(): void
     {
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['description' => '']);
+        $subject = LegacySpeaker::fromData(['description' => '']);
 
         self::assertFalse($subject->hasDescription());
     }
@@ -101,7 +102,7 @@ final class SpeakerTest extends UnitTestCase
     public function hasDescriptionWithDescriptionReturnsTrue(): void
     {
         $description = 'Foo inc.';
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['description' => $description]);
+        $subject = LegacySpeaker::fromData(['description' => $description]);
 
         self::assertTrue($subject->hasDescription());
     }
@@ -111,7 +112,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasSkillsInitiallyIsFalse(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
 
         self::assertFalse($subject->hasSkills());
     }
@@ -121,7 +122,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getSkillsShortWithNoSkillReturnsEmptyString(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
 
         self::assertSame('', $subject->getSkillsShort());
     }
@@ -131,7 +132,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getNumberOfSkillsReturnsNumberOfSkills(): void
     {
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['skills' => 2]);
+        $subject = LegacySpeaker::fromData(['skills' => 2]);
 
         self::assertSame(2, $subject->getNumberOfSkills());
     }
@@ -141,9 +142,9 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getGenderForNoGenderSetReturnsUnknownGenderValue(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
 
-        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN, $subject->getGender());
+        self::assertSame(LegacySpeaker::GENDER_UNKNOWN, $subject->getGender());
     }
 
     /**
@@ -151,10 +152,10 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getGenderForKnownGenderReturnsGender(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
-        $subject->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
+        $subject = new LegacySpeaker();
+        $subject->setGender(LegacySpeaker::GENDER_MALE);
 
-        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_MALE, $subject->getGender());
+        self::assertSame(LegacySpeaker::GENDER_MALE, $subject->getGender());
     }
 
     /**
@@ -162,7 +163,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
 
         self::assertFalse($subject->hasCancelationPeriod());
     }
@@ -172,7 +173,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasCancelationPeriodWithCancelationPeriodReturnsTrue(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
         $subject->setCancelationPeriod(42);
 
         self::assertTrue($subject->hasCancelationPeriod());
@@ -183,7 +184,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getOwnerWithoutOwnerReturnsNull(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
         self::assertNull($subject->getOwner());
     }
 
@@ -192,7 +193,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function getOwnerWithOwnerReturnsOwner(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
         /** @var FrontEndUser $frontEndUser */
         $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
         $subject->setOwner($frontEndUser);
@@ -205,7 +206,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasImageWithoutImageReturnsFalse(): void
     {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
+        $subject = new LegacySpeaker();
 
         self::assertFalse($subject->hasImage());
     }
@@ -215,7 +216,7 @@ final class SpeakerTest extends UnitTestCase
      */
     public function hasImageWithImageReturnsTrue(): void
     {
-        $subject = \Tx_Seminars_OldModel_Speaker::fromData(['image' => 1]);
+        $subject = LegacySpeaker::fromData(['image' => 1]);
 
         self::assertTrue($subject->hasImage());
     }

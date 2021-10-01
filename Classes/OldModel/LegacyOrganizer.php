@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\OldModel;
+
 use OliverKlee\Oelib\Interfaces\MailRole;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This class represents an organizer.
  */
-class Tx_Seminars_OldModel_Organizer extends AbstractModel implements MailRole
+class LegacyOrganizer extends AbstractModel implements MailRole
 {
     /**
      * @var string the name of the SQL table this class corresponds to

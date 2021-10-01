@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Bag;
 
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
+
 /**
  * This aggregate class holds a bunch of organizer objects and allows iterating over them.
  *
- * @extends AbstractBag<\Tx_Seminars_OldModel_Organizer>
+ * @extends AbstractBag<LegacyOrganizer>
  */
 class OrganizerBag extends AbstractBag
 {
     /**
-     * @var class-string<\Tx_Seminars_OldModel_Organizer>
+     * @var class-string<LegacyOrganizer>
      */
-    protected static $modelClassName = \Tx_Seminars_OldModel_Organizer::class;
+    protected static $modelClassName = LegacyOrganizer::class;
 
     /**
      * @var string the name of the main DB table from which we get the records for this bag
