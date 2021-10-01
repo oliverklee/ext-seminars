@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -207,7 +208,7 @@ final class LegacyEventTest extends UnitTestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
-        $organizer = \Tx_Seminars_OldModel_Organizer::fromData(
+        $organizer = LegacyOrganizer::fromData(
             [
                 'title' => 'Brain Gourmets',
                 'email' => 'organizer@example.com',

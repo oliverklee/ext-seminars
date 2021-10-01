@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Bag;
 
+use OliverKlee\Seminars\OldModel\LegacyTimeSlot;
+
 /**
  * This aggregate class holds a bunch of TimeSlot objects and allows iterating over them.
  *
- * @extends AbstractBag<\Tx_Seminars_OldModel_TimeSlot>
+ * @extends AbstractBag<LegacyTimeSlot>
  */
 class TimeSlotBag extends AbstractBag
 {
     /**
-     * @var class-string<\Tx_Seminars_OldModel_TimeSlot>
+     * @var class-string<LegacyTimeSlot>
      */
-    protected static $modelClassName = \Tx_Seminars_OldModel_TimeSlot::class;
+    protected static $modelClassName = LegacyTimeSlot::class;
 
     /**
      * @var string the name of the main DB table from which we get the records for this bag

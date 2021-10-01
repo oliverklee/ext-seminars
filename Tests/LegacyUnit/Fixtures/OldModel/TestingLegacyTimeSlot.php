@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
+use OliverKlee\Seminars\OldModel\LegacyTimeSlot;
+
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  */
-final class TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
+final class TestingLegacyTimeSlot extends LegacyTimeSlot
 {
     /**
      * Sets the place field of the time slot.

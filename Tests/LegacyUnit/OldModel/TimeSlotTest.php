@@ -8,20 +8,20 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyTimeSlot;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_OldModel_TimeSlot
+ * @covers \OliverKlee\Seminars\OldModel\LegacyTimeSlot
  */
 final class TimeSlotTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var TestingTimeSlot
+     * @var TestingLegacyTimeSlot
      */
     private $subject = null;
 
@@ -53,7 +53,7 @@ final class TimeSlotTest extends TestCase
             ]
         );
 
-        $this->subject = new TestingTimeSlot($subjectUid);
+        $this->subject = new TestingLegacyTimeSlot($subjectUid);
     }
 
     protected function tearDown(): void

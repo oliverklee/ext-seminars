@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -164,13 +165,13 @@ class MailNotifier extends AbstractTask
             $attachment = $this->getCsv($event->getUid());
         }
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
             /** @var MailMessage $mail */
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail->setFrom($sender->getEmailAddress(), $sender->getName());
             $mail->setTo($organizer->getEmailAddress(), $organizer->getName());
-            if ($replyTo instanceof \Tx_Seminars_OldModel_Organizer) {
+            if ($replyTo instanceof LegacyOrganizer) {
                 $mail->setReplyTo($replyTo->getEmailAddress(), $replyTo->getName());
             }
             $mail->setSubject($subject);

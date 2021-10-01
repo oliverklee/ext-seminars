@@ -31,7 +31,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a seminar (or similar event).
  */
-class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
+class LegacyEvent extends AbstractTimeSpan
 {
     use EventEmailSenderTrait;
 
@@ -641,7 +641,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $name = $speaker->getLinkedTitle($plugin);
             if ($speaker->hasOrganization()) {
@@ -662,7 +662,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return \implode("\n", $result);
     }
 
-    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, TemplateHelper $plugin): string
+    private function renderSpeakerImage(LegacySpeaker $speaker, TemplateHelper $plugin): string
     {
         $imageConfiguration = [
             'altText' => $plugin->translate('speakerImage.alt'),
@@ -700,7 +700,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = '';
 
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $result .= $speaker->getTitle();
             if ($speaker->hasOrganization()) {
@@ -740,7 +740,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $result[] = $speaker->getLinkedTitle($plugin);
         }
@@ -869,13 +869,13 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $result .= '_single';
         }
 
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($speakers as $speaker) {
             switch ($speaker->getGender()) {
-                case \Tx_Seminars_OldModel_Speaker::GENDER_MALE:
+                case LegacySpeaker::GENDER_MALE:
                     $hasMaleSpeakers = true;
                     break;
-                case \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE:
+                case LegacySpeaker::GENDER_FEMALE:
                     $hasFemaleSpeakers = true;
                     break;
                 default:
@@ -1825,7 +1825,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $bag;
     }
 
-    public function getFirstOrganizer(): ?\Tx_Seminars_OldModel_Organizer
+    public function getFirstOrganizer(): ?LegacyOrganizer
     {
         if (!$this->hasOrganizers()) {
             return null;
@@ -1833,7 +1833,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $organizers = $this->getOrganizerBag();
         $organizers->rewind();
-        /** @var \Tx_Seminars_OldModel_Organizer|null $current */
+        /** @var LegacyOrganizer|null $current */
         $current = $organizers->current();
 
         return $current;
@@ -1852,7 +1852,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
                 \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
@@ -1878,7 +1878,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
         }
@@ -1901,7 +1901,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = '"' . $organizer->getName() . '"' . ' <' . $organizer->getEmailAddress() . '>';
         }
@@ -1923,7 +1923,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $organizer->getEmailAddress();
         }
@@ -1945,7 +1945,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
             $emailFooter = $organizer->getEmailFooter();
             if ($emailFooter !== '') {
@@ -2001,7 +2001,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_seminars_organizing_partners_mm'
         );
 
-        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var LegacyOrganizer $organizer */
         foreach ($organizerBag as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
                 $organizer->getName(),
@@ -3433,7 +3433,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         if ($this->hasTimeslots()) {
             $timeSpans = [];
-            /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
+            /** @var LegacyTimeSlot $timeSlot */
             foreach ($this->getTimeSlots() as $timeSlot) {
                 $timeSpans[] = [
                     $timeSlot->getBeginDateAsTimestamp(),
@@ -3649,7 +3649,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = [];
 
-        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
+        /** @var LegacyTimeSlot $timeSlot */
         foreach ($this->getTimeSlots() as $timeSlot) {
             $result[] = [
                 'uid' => $timeSlot->getUid(),
@@ -3723,7 +3723,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $builder->sortByRelationOrder();
 
         $result = [];
-        /** @var \Tx_Seminars_OldModel_Category $category */
+        /** @var LegacyCategory $category */
         foreach ($builder->build() as $category) {
             $result[$category->getUid()] = ['title' => $category->getTitle(), 'icon' => $category->getIcon()];
         }
@@ -3949,7 +3949,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $beginDate = $this->getBeginDateAsTimestamp();
         $deadline = $beginDate;
-        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag() as $speaker) {
             $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Time::SECONDS_PER_DAY);
             $deadline = min($speakerDeadline, $deadline);

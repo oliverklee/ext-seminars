@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
@@ -27,7 +28,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = \Tx_Seminars_OldModel_Speaker::fromUid(1);
+        $subject = LegacySpeaker::fromUid(1);
 
         self::assertSame('Max Delagio', $subject->getTitle());
         self::assertSame('Aperture Laboratories', $subject->getOrganization());
@@ -49,7 +50,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = \Tx_Seminars_OldModel_Speaker::fromUid(4);
+        $subject = LegacySpeaker::fromUid(4);
 
         self::assertTrue($subject->hasSkills());
     }
@@ -61,7 +62,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = \Tx_Seminars_OldModel_Speaker::fromUid(4);
+        $subject = LegacySpeaker::fromUid(4);
 
         self::assertTrue($subject->hasSkills());
         self::assertSame('Speaking', $subject->getSkillsShort());
@@ -74,7 +75,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = \Tx_Seminars_OldModel_Speaker::fromUid(5);
+        $subject = LegacySpeaker::fromUid(5);
 
         self::assertSame('Speaking, TYPO3 extension development', $subject->getSkillsShort());
     }
@@ -86,7 +87,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = new \Tx_Seminars_OldModel_Speaker(1);
+        $subject = new LegacySpeaker(1);
 
         self::assertNull($subject->getImage());
     }
@@ -98,7 +99,7 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        $subject = new \Tx_Seminars_OldModel_Speaker(2);
+        $subject = new LegacySpeaker(2);
 
         self::assertNull($subject->getImage());
     }
@@ -111,7 +112,7 @@ final class SpeakerTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
         $this->provideAdminBackEndUserForFal();
 
-        $subject = new \Tx_Seminars_OldModel_Speaker(3);
+        $subject = new LegacySpeaker(3);
 
         self::assertInstanceOf(FileReference::class, $subject->getImage());
     }

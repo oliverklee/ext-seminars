@@ -6,14 +6,15 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 
 /**
- * @covers \Tx_Seminars_OldModel_Organizer
+ * @covers \OliverKlee\Seminars\OldModel\LegacyOrganizer
  */
 final class OrganizerTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Organizer
+     * @var LegacyOrganizer
      */
     private $subject;
 
@@ -25,7 +26,7 @@ final class OrganizerTest extends TestCase
     /**
      * a maximal filled organizer
      *
-     * @var \Tx_Seminars_OldModel_Organizer
+     * @var LegacyOrganizer
      */
     private $maximalFixture;
 
@@ -39,7 +40,7 @@ final class OrganizerTest extends TestCase
                 'email' => 'foo@test.com',
             ]
         );
-        $this->subject = new \Tx_Seminars_OldModel_Organizer($subjectUid);
+        $this->subject = new LegacyOrganizer($subjectUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -52,7 +53,7 @@ final class OrganizerTest extends TestCase
                 'description' => 'foo',
             ]
         );
-        $this->maximalFixture = new \Tx_Seminars_OldModel_Organizer($maximalFixtureUid);
+        $this->maximalFixture = new LegacyOrganizer($maximalFixtureUid);
     }
 
     protected function tearDown(): void

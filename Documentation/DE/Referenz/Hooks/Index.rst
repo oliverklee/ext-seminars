@@ -560,14 +560,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
          *
          * @param string $dateSpan the date span produced by `AbstractTimeSpan::getDate()`
-         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
+         * @param AbstractTimeSpan $dateTimeSpan the date provider
          * @param string $dash the glue used by `AbstractTimeSpan::getDate()` (may be HTML encoded)
          *
          * @return string the modified date span to use
          */
         public function modifyDateSpan(
             string $dateSpan,
-            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            AbstractTimeSpan $dateTimeSpan,
             string $dash
         ): string
         {
@@ -587,14 +587,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
          *
          * @param string $timeSpan the time span produced by `AbstractTimeSpan::getTime()`
-         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
+         * @param AbstractTimeSpan $dateTimeSpan the date provider
          * @param string $dash the glue used by `AbstractTimeSpan::getTime()` (may be HTML encoded)
          *
          * @return string the modified time span to use
          */
         public function modifyTimeSpan(
             string $timeSpan,
-            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            AbstractTimeSpan $dateTimeSpan,
             string $dash
         ): string
         {
