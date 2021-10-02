@@ -65,7 +65,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+    use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 
     class Tx_Seminarspaypal_Hooks_SingleView implements SeminarSingleView
     {
@@ -133,7 +133,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
+    use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 
     class Tx_Seminarspaypal_Hooks_ListView implements SeminarListView
     {
@@ -263,7 +263,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
+    use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 
     class Tx_Seminarspaypal_Hooks_EventSelectorWidget implements SeminarSelectorWidget
     {
@@ -316,7 +316,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
+    use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 
     class Tx_Seminarspaypal_Hooks_SeminarRegistrationForm implements SeminarRegistrationForm
     {
@@ -388,7 +388,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
+    use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 
     class Tx_Seminarspaypal_Hooks_RegistrationEmail implements RegistrationEmail
     {
@@ -544,7 +544,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
+    use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 
     class Tx_Seminarspaypal_Hooks_DateTimeSpan implements DateTimeSpan
     {
@@ -683,7 +683,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+    use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 
     class Tx_Seminarspaypal_Hooks_BackendRegistrationListView implements BackendRegistrationListView
     {
@@ -692,8 +692,7 @@ Implement the methods required by the interface:
          *
          * This method is called once per list row, but the row may appear in the list of regular registrations or the
          * list of registrations on queue. Check $registrationsToShow (can be one of
-         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
-         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
          *
          * @param Registration $registration
          *        the registration the row is made from
@@ -714,8 +713,7 @@ Implement the methods required by the interface:
          *
          * This method is called twice per list: First for the list of regular registrations, then for the list of
          * registrations on queue. Check $registrationsToShow (can be one of
-         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
-         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
          *
          * @param RegistrationBag $registrationBag
          *        the registrationBag the heading is made for
@@ -736,8 +734,7 @@ Implement the methods required by the interface:
          *
          * This method is called twice per list: First for the list of regular registrations, then for the list of
          * registrations on queue. Check $registrationsToShow (can be one of
-         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
-         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
          *
          * @param RegistrationBag $registrationBag
          *        the registrationBag the table is made for
@@ -773,7 +770,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
+    use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 
     class Tx_Seminarspaypal_Hooks_RegistrationListCsv implements RegistrationListCsv
     {
@@ -817,7 +814,7 @@ Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+    use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 
     class Tx_Seminarspaypal_Hooks_DataSanitization implements DataSanitization
     {
