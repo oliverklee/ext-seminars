@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\Country;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a place.
  */
-class Tx_Seminars_Model_Place extends AbstractModel implements Titled
+class Place extends AbstractModel implements Titled
 {
     /**
      * @return string our title, will not be empty

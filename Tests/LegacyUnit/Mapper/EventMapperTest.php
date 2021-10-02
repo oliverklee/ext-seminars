@@ -18,6 +18,12 @@ use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Food;
+use OliverKlee\Seminars\Model\Lodging;
+use OliverKlee\Seminars\Model\Organizer;
+use OliverKlee\Seminars\Model\Place;
+use OliverKlee\Seminars\Model\Speaker;
+use OliverKlee\Seminars\Model\TimeSlot;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
@@ -77,7 +83,7 @@ final class EventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_TimeSlot::class,
+            TimeSlot::class,
             $model->getTimeSlots()->first()
         );
     }
@@ -133,7 +139,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlaces()->first());
+        self::assertInstanceOf(Place::class, $model->getPlaces()->first());
     }
 
     /**
@@ -186,7 +192,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
+        self::assertInstanceOf(Lodging::class, $model->getLodgings()->first());
     }
 
     /**
@@ -239,7 +245,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
+        self::assertInstanceOf(Food::class, $model->getFoods()->first());
     }
 
     /**
@@ -293,7 +299,7 @@ final class EventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $model->getSpeakers()->first()
         );
     }
@@ -349,7 +355,7 @@ final class EventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $model->getPartners()->first()
         );
     }
@@ -405,7 +411,7 @@ final class EventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $model->getTutors()->first()
         );
     }
@@ -461,7 +467,7 @@ final class EventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $model->getLeaders()->first()
         );
     }
@@ -518,7 +524,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getOrganizers()->first());
+        self::assertInstanceOf(Organizer::class, $model->getOrganizers()->first());
     }
 
     /**
@@ -573,7 +579,7 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getOrganizingPartners()->first());
+        self::assertInstanceOf(Organizer::class, $model->getOrganizingPartners()->first());
     }
 
     /**

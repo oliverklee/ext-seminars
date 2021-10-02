@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\TargetGroup;
 
 /**
  * This class represents a mapper for target groups.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_TargetGroup>
+ * @extends AbstractDataMapper<TargetGroup>
  */
 class TargetGroupMapper extends AbstractDataMapper
 {
@@ -19,9 +20,9 @@ class TargetGroupMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_target_groups';
 
     /**
-     * @var class-string<\Tx_Seminars_Model_TargetGroup> the model class name for this mapper, must not be empty
+     * @var class-string<TargetGroup> the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_TargetGroup::class;
+    protected $modelClassName = TargetGroup::class;
 
     /**
      * @var array<non-empty-string, class-string>

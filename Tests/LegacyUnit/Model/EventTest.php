@@ -11,8 +11,12 @@ use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Organizer;
+use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -988,7 +992,7 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageForAvailableEventTypeWithoutSingleViewPageReturnsEmptyString(): void
     {
-        $eventType = new \Tx_Seminars_Model_EventType();
+        $eventType = new EventType();
         $eventType->setData([]);
         $this->subject->setData(
             [
@@ -1008,7 +1012,7 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageForAvailableEventTypeWithSingleViewPageReturnsSingleViewPageFromEventType(): void
     {
-        $eventType = new \Tx_Seminars_Model_EventType();
+        $eventType = new EventType();
         $eventType->setData(['single_view_page' => 42]);
         $this->subject->setData(
             [
@@ -1028,7 +1032,7 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString(): void
     {
-        $category = new \Tx_Seminars_Model_Category();
+        $category = new Category();
         $category->setData([]);
         $categories = new Collection();
         $categories->add($category);
@@ -1045,7 +1049,7 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory(): void
     {
-        $category = new \Tx_Seminars_Model_Category();
+        $category = new Category();
         $category->setData(['single_view_page' => 42]);
         $categories = new Collection();
         $categories->add($category);
@@ -1062,9 +1066,9 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory(): void
     {
-        $category1 = new \Tx_Seminars_Model_Category();
+        $category1 = new Category();
         $category1->setData(['single_view_page' => 42]);
-        $category2 = new \Tx_Seminars_Model_Category();
+        $category2 = new Category();
         $category2->setData(['single_view_page' => 12]);
         $categories = new Collection();
         $categories->add($category1);
@@ -1118,7 +1122,7 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageUsesDetailsPageInsteadOfEventTypeIfBothAreAvailable(): void
     {
-        $eventType = new \Tx_Seminars_Model_EventType();
+        $eventType = new EventType();
         $eventType->setData(['single_view_page' => 42]);
 
         $this->subject->setData(
@@ -1140,9 +1144,9 @@ final class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable(): void
     {
-        $eventType = new \Tx_Seminars_Model_EventType();
+        $eventType = new EventType();
         $eventType->setData(['single_view_page' => 42]);
-        $category = new \Tx_Seminars_Model_Category();
+        $category = new Category();
         $category->setData(['single_view_page' => 91]);
         $categories = new Collection();
         $categories->add($category);
@@ -2936,7 +2940,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setData([]);
 
-        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
+        /** @var Collection<PaymentMethod> $paymentMethods */
         $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 
@@ -3087,7 +3091,7 @@ final class EventTest extends TestCase
      */
     public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer(): void
     {
-        $organizer = new \Tx_Seminars_Model_Organizer();
+        $organizer = new Organizer();
         $organizers = new Collection();
         $organizers->add($organizer);
         $this->subject->setData(['organizers' => $organizers]);
@@ -3102,10 +3106,10 @@ final class EventTest extends TestCase
      */
     public function getFirstOrganizerForTwoOrganizersReturnsFirstOrganizer(): void
     {
-        $firstOrganizer = new \Tx_Seminars_Model_Organizer();
+        $firstOrganizer = new Organizer();
         $organizers = new Collection();
         $organizers->add($firstOrganizer);
-        $organizers->add(new \Tx_Seminars_Model_Organizer());
+        $organizers->add(new Organizer());
         $this->subject->setData(['organizers' => $organizers]);
 
         $result = $this->subject->getFirstOrganizer();

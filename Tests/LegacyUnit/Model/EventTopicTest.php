@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\PaymentMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -1844,7 +1845,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData([]);
 
-        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
+        /** @var Collection<PaymentMethod> $paymentMethods */
         $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 

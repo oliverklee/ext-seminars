@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\TargetGroup;
 
 final class TargetGroupTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_TargetGroup
+     * @var TargetGroup
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_TargetGroup();
+        $this->subject = new TargetGroup();
     }
 
     /**

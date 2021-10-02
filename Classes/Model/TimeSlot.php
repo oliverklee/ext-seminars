@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\Model\Event;
+namespace OliverKlee\Seminars\Model;
 
 /**
  * This class represents a time-slot.
  */
-class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
+class TimeSlot extends AbstractTimeSpan
 {
     /**
      * @return int our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
@@ -34,9 +34,9 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
         return $this->hasInteger('entry_date');
     }
 
-    public function getPlace(): ?\Tx_Seminars_Model_Place
+    public function getPlace(): ?Place
     {
-        /** @var \Tx_Seminars_Model_Place|null $model */
+        /** @var Place|null $model */
         $model = $this->getAsModel('place');
 
         return $model;

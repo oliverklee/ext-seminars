@@ -6,17 +6,19 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Skill;
+use OliverKlee\Seminars\Model\Speaker;
 
 final class SpeakerTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Speaker
+     * @var Speaker
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Speaker();
+        $this->subject = new Speaker();
     }
 
     ///////////////////////////////
@@ -612,7 +614,7 @@ final class SpeakerTest extends TestCase
         $this->subject->setData([]);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Speaker::GENDER_UNKNOWN,
+            Speaker::GENDER_UNKNOWN,
             $this->subject->getGender()
         );
     }
@@ -623,11 +625,11 @@ final class SpeakerTest extends TestCase
     public function getGenderWithGenderMaleReturnsMaleGender(): void
     {
         $this->subject->setData(
-            ['gender' => \Tx_Seminars_Model_Speaker::GENDER_MALE]
+            ['gender' => Speaker::GENDER_MALE]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Speaker::GENDER_MALE,
+            Speaker::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -638,11 +640,11 @@ final class SpeakerTest extends TestCase
     public function getGenderWithGenderFemaleReturnsFemaleGender(): void
     {
         $this->subject->setData(
-            ['gender' => \Tx_Seminars_Model_Speaker::GENDER_FEMALE]
+            ['gender' => Speaker::GENDER_FEMALE]
         );
 
         self::assertEquals(
-            \Tx_Seminars_Model_Speaker::GENDER_FEMALE,
+            Speaker::GENDER_FEMALE,
             $this->subject->getGender()
         );
     }
@@ -652,10 +654,10 @@ final class SpeakerTest extends TestCase
      */
     public function setGenderSetsGender(): void
     {
-        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
+        $this->subject->setGender(Speaker::GENDER_MALE);
 
         self::assertEquals(
-            \Tx_Seminars_Model_Speaker::GENDER_MALE,
+            Speaker::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -677,7 +679,7 @@ final class SpeakerTest extends TestCase
      */
     public function hasGenderWithGenderMaleReturnsTrue(): void
     {
-        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
+        $this->subject->setGender(Speaker::GENDER_MALE);
 
         self::assertTrue(
             $this->subject->hasGender()
@@ -689,7 +691,7 @@ final class SpeakerTest extends TestCase
      */
     public function hasGenderWithGenderFemaleReturnsTrue(): void
     {
-        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_FEMALE);
+        $this->subject->setGender(Speaker::GENDER_FEMALE);
 
         self::assertTrue(
             $this->subject->hasGender()
@@ -746,7 +748,7 @@ final class SpeakerTest extends TestCase
      */
     public function setSkillsSetsSkills(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
+        /** @var Collection<Skill> $skills */
         $skills = new Collection();
         $this->subject->setSkills($skills);
 

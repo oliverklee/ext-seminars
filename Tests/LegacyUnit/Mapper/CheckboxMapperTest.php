@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class CheckboxMapperTest extends TestCase
@@ -42,7 +43,7 @@ final class CheckboxMapperTest extends TestCase
      */
     public function findWithUidReturnsCheckboxInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $this->subject->find(1));
+        self::assertInstanceOf(Checkbox::class, $this->subject->find(1));
     }
 
     /**

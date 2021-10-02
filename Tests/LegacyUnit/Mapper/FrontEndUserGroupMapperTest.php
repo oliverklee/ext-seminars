@@ -10,7 +10,9 @@ use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
+use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
+use OliverKlee\Seminars\Model\Organizer;
 
 final class FrontEndUserGroupMapperTest extends TestCase
 {
@@ -84,7 +86,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
         );
 
         $model = $this->subject->find($frontEndUserGroupUid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getDefaultCategories()->first());
+        self::assertInstanceOf(Category::class, $model->getDefaultCategories()->first());
     }
 
     // Tests concerning the default organizer
@@ -102,6 +104,6 @@ final class FrontEndUserGroupMapperTest extends TestCase
         );
 
         $model = $this->subject->find($groupUid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getDefaultOrganizer());
+        self::assertInstanceOf(Organizer::class, $model->getDefaultOrganizer());
     }
 }

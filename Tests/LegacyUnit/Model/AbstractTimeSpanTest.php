@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use PHPUnit\Framework\MockObject\MockObject;
 
 final class AbstractTimeSpanTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject
+     * @var AbstractTimeSpan&MockObject
      */
     private $subject;
 
     protected function setUp(): void
     {
-        /** @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject $subject */
-        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
+        /** @var AbstractTimeSpan&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $this->subject = $subject;
     }
 

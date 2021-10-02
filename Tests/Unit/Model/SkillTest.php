@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Model\Skill;
 
 final class SkillTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Skill
+     * @var Skill
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Skill();
+        $this->subject = new Skill();
     }
 
     /**

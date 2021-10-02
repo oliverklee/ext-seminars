@@ -14,7 +14,12 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
+use OliverKlee\Seminars\Model\Category;
+use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\EventType;
+use OliverKlee\Seminars\Model\PaymentMethod;
+use OliverKlee\Seminars\Model\TargetGroup;
 
 /**
  * This test case holds tests which are specific to single events.
@@ -99,7 +104,7 @@ final class SingleEventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getCategories()->first());
+        self::assertInstanceOf(Category::class, $model->getCategories()->first());
     }
 
     /**
@@ -154,7 +159,7 @@ final class SingleEventMapperTest extends TestCase
             ]
         );
 
-        self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $testingModel->getEventType());
+        self::assertInstanceOf(EventType::class, $testingModel->getEventType());
     }
 
     // Tests regarding getPaymentMethods().
@@ -192,7 +197,7 @@ final class SingleEventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
+        self::assertInstanceOf(PaymentMethod::class, $model->getPaymentMethods()->first());
     }
 
     /**
@@ -258,7 +263,7 @@ final class SingleEventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_TargetGroup::class,
+            TargetGroup::class,
             $model->getTargetGroups()->first()
         );
     }
@@ -320,7 +325,7 @@ final class SingleEventMapperTest extends TestCase
 
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_TargetGroup::class,
+            TargetGroup::class,
             $model->getTargetGroups()->first()
         );
     }
@@ -383,7 +388,7 @@ final class SingleEventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
+        self::assertInstanceOf(Checkbox::class, $model->getCheckboxes()->first());
     }
 
     /**

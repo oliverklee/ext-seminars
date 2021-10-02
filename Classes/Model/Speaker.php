@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * This class represents an speaker.
+ * This class represents a speaker.
  */
-class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
+class Speaker extends AbstractModel implements MailRole
 {
     /**
      * @var int the gender type for speakers without gender
@@ -114,18 +115,18 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Skill>
+     * @return Collection<Skill>
      */
     public function getSkills(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
+        /** @var Collection<Skill> $skills */
         $skills = $this->getAsCollection('skills');
 
         return $skills;
     }
 
     /**
-     * @param Collection<\Tx_Seminars_Model_Skill> $skills
+     * @param Collection<Skill> $skills
      */
     public function setSkills(Collection $skills): void
     {

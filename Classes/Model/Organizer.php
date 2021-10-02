@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -9,7 +11,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 /**
  * This class represents an organizer.
  */
-class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Titled
+class Organizer extends AbstractModel implements MailRole, Titled
 {
     /**
      * @return string our name, will not be empty

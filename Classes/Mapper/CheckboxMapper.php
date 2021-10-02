@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\Checkbox;
 
 /**
  * This class represents a mapper for checkboxes.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Checkbox>
+ * @extends AbstractDataMapper<Checkbox>
  */
 class CheckboxMapper extends AbstractDataMapper
 {
@@ -21,7 +22,7 @@ class CheckboxMapper extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Checkbox::class;
+    protected $modelClassName = Checkbox::class;
 
     /**
      * @var array<non-empty-string, class-string>

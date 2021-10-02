@@ -32,10 +32,15 @@ use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
+use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
+use OliverKlee\Seminars\Model\Place;
+use OliverKlee\Seminars\Model\Skill;
+use OliverKlee\Seminars\Model\Speaker;
+use OliverKlee\Seminars\Model\TargetGroup;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -361,7 +366,7 @@ class EventEditor extends AbstractEditor
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Places'])
             && $form !== null;
 
-        /** @var \Tx_Seminars_Model_Place $place */
+        /** @var Place $place */
         foreach ($places as $place) {
             $frontEndUserIsOwner = $place->getOwner() === $frontEndUser;
 
@@ -435,7 +440,7 @@ class EventEditor extends AbstractEditor
             $activeSpeakers = $form->getDataHandler()->getStoredData(strtolower($type) . 's');
         }
 
-        /** @var \Tx_Seminars_Model_Speaker $speaker */
+        /** @var Speaker $speaker */
         foreach ($speakers as $speaker) {
             $frontEndUserIsOwner = ($speaker->getOwner() === $frontEndUser);
 
@@ -515,7 +520,7 @@ class EventEditor extends AbstractEditor
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Checkboxes'])
             && $form !== null;
 
-        /** @var \Tx_Seminars_Model_Checkbox $checkbox */
+        /** @var Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
             $frontEndUserIsOwner = ($checkbox->getOwner() === $frontEndUser);
 
@@ -585,7 +590,7 @@ class EventEditor extends AbstractEditor
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'TargetGroups'])
             && $form !== null;
 
-        /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
+        /** @var TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
             $frontEndUserIsOwner = ($targetGroup->getOwner() === $frontEndUser);
 
@@ -1538,8 +1543,8 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var \Tx_Seminars_Model_Place $place */
-        $place = GeneralUtility::makeInstance(\Tx_Seminars_Model_Place::class);
+        /** @var Place $place */
+        $place = GeneralUtility::makeInstance(Place::class);
         $place->setData(self::createBasicAuxiliaryData());
         self::setPlaceData($place, 'newPlace_', $formData);
         $place->markAsDirty();
@@ -1696,11 +1701,11 @@ class EventEditor extends AbstractEditor
     /**
      * Sets the data of a place model based on the data given in $formData.
      *
-     * @param \Tx_Seminars_Model_Place $place the place model to set the data
+     * @param Place $place the place model to set the data
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the place data
      */
-    private static function setPlaceData(\Tx_Seminars_Model_Place $place, string $prefix, array $formData): void
+    private static function setPlaceData(Place $place, string $prefix, array $formData): void
     {
         $countryUid = (int)$formData[$prefix . 'country'];
         if ($countryUid > 0) {
@@ -1833,8 +1838,8 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var \Tx_Seminars_Model_Speaker $speaker */
-        $speaker = GeneralUtility::makeInstance(\Tx_Seminars_Model_Speaker::class);
+        /** @var Speaker $speaker */
+        $speaker = GeneralUtility::makeInstance(Speaker::class);
 
         self::createBasicAuxiliaryData();
 
@@ -1948,14 +1953,14 @@ class EventEditor extends AbstractEditor
     /**
      * Sets the data of a speaker model based on the data given in $formData.
      *
-     * @param \Tx_Seminars_Model_Speaker $speaker the speaker model to set the data for
+     * @param Speaker $speaker the speaker model to set the data for
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the speaker data
      */
-    private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData): void
+    private static function setSpeakerData(Speaker $speaker, string $prefix, array $formData): void
     {
         $skillMapper = MapperRegistry::get(SkillMapper::class);
-        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
+        /** @var Collection<Skill> $skills */
         $skills = new Collection();
 
         if (is_array($formData[$prefix . 'skills'])) {
@@ -2060,7 +2065,7 @@ class EventEditor extends AbstractEditor
         $checkboxRenderlet = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills'];
         $result[] = $checkboxRenderlet->majixCheckNone();
 
-        /** @var \Tx_Seminars_Model_Skill $skill */
+        /** @var Skill $skill */
         foreach ($speaker->getSkills() as $skill) {
             $result[] = $checkboxRenderlet->majixCheckItem($skill->getUid());
         }
@@ -2094,8 +2099,8 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var \Tx_Seminars_Model_Checkbox $checkbox */
-        $checkbox = GeneralUtility::makeInstance(\Tx_Seminars_Model_Checkbox::class);
+        /** @var Checkbox $checkbox */
+        $checkbox = GeneralUtility::makeInstance(Checkbox::class);
         $checkbox->setData(self::createBasicAuxiliaryData());
         self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
         $checkbox->markAsDirty();
@@ -2210,12 +2215,12 @@ class EventEditor extends AbstractEditor
     /**
      * Sets the data of a checkbox model based on the data given in $formData.
      *
-     * @param \Tx_Seminars_Model_Checkbox $checkbox the checkbox model to set the data
+     * @param Checkbox $checkbox the checkbox model to set the data
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the checkbox data
      */
     private static function setCheckboxData(
-        \Tx_Seminars_Model_Checkbox $checkbox,
+        Checkbox $checkbox,
         string $prefix,
         array $formData
     ): void {
@@ -2300,8 +2305,8 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
-        $targetGroup = GeneralUtility::makeInstance(\Tx_Seminars_Model_TargetGroup::class);
+        /** @var TargetGroup $targetGroup */
+        $targetGroup = GeneralUtility::makeInstance(TargetGroup::class);
         $targetGroup->setData(self::createBasicAuxiliaryData());
         self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
         $targetGroup->markAsDirty();
@@ -2439,12 +2444,12 @@ class EventEditor extends AbstractEditor
      * Sets the data of a target group model based on the data given in
      * $formData.
      *
-     * @param \Tx_Seminars_Model_TargetGroup $targetGroup the target group model to set the data
+     * @param TargetGroup $targetGroup the target group model to set the data
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the target group data
      */
     private static function setTargetGroupData(
-        \Tx_Seminars_Model_TargetGroup $targetGroup,
+        TargetGroup $targetGroup,
         string $prefix,
         array $formData
     ): void {

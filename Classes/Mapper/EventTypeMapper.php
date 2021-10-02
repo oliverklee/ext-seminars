@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\EventType;
 
 /**
  * This class represents a mapper for event types.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_EventType>
+ * @extends AbstractDataMapper<EventType>
  */
 class EventTypeMapper extends AbstractDataMapper
 {
@@ -21,5 +22,5 @@ class EventTypeMapper extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_EventType::class;
+    protected $modelClassName = EventType::class;
 }

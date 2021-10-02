@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 
 /**
@@ -560,7 +561,7 @@ final class RegistrationTest extends TestCase
      */
     public function setPaymentMethodSetsPaymentMethod(): void
     {
-        /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
+        /** @var PaymentMethod $paymentMethod */
         $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $this->subject->setPaymentMethod($paymentMethod);
 

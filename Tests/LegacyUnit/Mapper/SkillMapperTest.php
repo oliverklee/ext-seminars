@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\SkillMapper;
+use OliverKlee\Seminars\Model\Skill;
 
 final class SkillMapperTest extends TestCase
 {
@@ -40,7 +41,7 @@ final class SkillMapperTest extends TestCase
     public function findWithUidReturnsSkillInstance(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Skill::class,
+            Skill::class,
             $this->subject->find(1)
         );
     }

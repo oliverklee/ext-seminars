@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Lodging;
 
 final class LodgingTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Lodging
+     * @var Lodging
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Lodging();
+        $this->subject = new Lodging();
     }
 
     /**

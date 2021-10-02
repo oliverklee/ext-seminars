@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a skill.
  */
-class Tx_Seminars_Model_Skill extends AbstractModel implements Titled
+class Skill extends AbstractModel implements Titled
 {
     /**
      * @return string our title, will not be empty

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\Food;
 
 /**
  * This class represents a mapper for food.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Food>
+ * @extends AbstractDataMapper<Food>
  */
 class FoodMapper extends AbstractDataMapper
 {
@@ -21,5 +22,5 @@ class FoodMapper extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Food::class;
+    protected $modelClassName = Food::class;
 }

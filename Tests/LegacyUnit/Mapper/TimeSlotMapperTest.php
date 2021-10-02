@@ -13,6 +13,9 @@ use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Place;
+use OliverKlee\Seminars\Model\Speaker;
+use OliverKlee\Seminars\Model\TimeSlot;
 
 final class TimeSlotMapperTest extends TestCase
 {
@@ -46,7 +49,7 @@ final class TimeSlotMapperTest extends TestCase
     public function findWithUidReturnsTimeSlotInstance(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Model_TimeSlot::class,
+            TimeSlot::class,
             $this->subject->find(1)
         );
     }
@@ -94,7 +97,7 @@ final class TimeSlotMapperTest extends TestCase
 
         $model = $this->subject->find($timeSlotUid);
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $model->getSpeakers()->first()
         );
     }
@@ -150,7 +153,7 @@ final class TimeSlotMapperTest extends TestCase
         );
 
         $model = $this->subject->find($timeSlotUid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlace());
+        self::assertInstanceOf(Place::class, $model->getPlace());
     }
 
     // Tests regarding the seminar.

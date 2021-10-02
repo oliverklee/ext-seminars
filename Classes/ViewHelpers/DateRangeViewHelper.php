@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\ViewHelpers;
 
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -21,12 +22,12 @@ class DateRangeViewHelper
      * Returns just one day if the timespan takes place on only one day.
      * Returns a date range if the timespan takes several days.
      *
-     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
+     * @param AbstractTimeSpan $timeSpan the timespan to get the date for
      * @param string $dash the character or HTML entity used to separate start date and end date
      *
      * @return string the timespan date
      */
-    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, string $dash = '&#8211;'): string
+    public function render(AbstractTimeSpan $timeSpan, string $dash = '&#8211;'): string
     {
         if (!$timeSpan->hasBeginDate()) {
             return LocalizationUtility::translate('message_willBeAnnounced', 'seminars');
