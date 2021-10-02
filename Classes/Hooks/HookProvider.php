@@ -170,7 +170,7 @@ class HookProvider
             if (!($hookInstance instanceof $this->interfaceName)) {
                 throw new \UnexpectedValueException(
                     'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
-                        ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
+                    ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
                     1448901897
                 );
             }

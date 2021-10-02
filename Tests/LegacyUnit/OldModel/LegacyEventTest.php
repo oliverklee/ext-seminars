@@ -4697,11 +4697,6 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      *
-     * @param int $registrationBegin
-     * @param int $registrationEnd
-     * @param int $checkBegin
-     * @param int $checkEnd
-     *
      * @dataProvider overlappingEventsDataProvider
      */
     public function overlappingEventsCollide(
@@ -4739,11 +4734,6 @@ final class LegacyEventTest extends TestCase
 
     /**
      * @test
-     *
-     * @param int $registrationBegin
-     * @param int $registrationEnd
-     * @param int $checkBegin
-     * @param int $checkEnd
      *
      * @dataProvider nonOverlappingEventsDataProvider
      */
@@ -4893,9 +4883,6 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      *
-     * @param int $registrationBegin
-     * @param int $registrationEnd
-     *
      * @dataProvider eventsOverlappingWithTimeSlotDataProvider
      */
     public function collidesWithEventWithTimeSlots(int $registrationBegin, int $registrationEnd): void
@@ -4937,7 +4924,6 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      *
-     * @param array $timeSlotDates
      * @dataProvider timeSlotsCollidingWithTimeSlotsDataProvider
      */
     public function timeSlotsCollideWithCollidingTimeSlots(array $timeSlotDates): void
@@ -5000,7 +4986,6 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      *
-     * @param array $timeSlotDates
      * @dataProvider timeSlotsNotCollidingWithTimeSlotsDataProvider
      */
     public function timeSlotsDoNotCollideWithCollisionFreeTimeSlots(array $timeSlotDates): void
@@ -8189,14 +8174,6 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider canViewRegistrationsListDataProvider
-     *
-     * @param bool $expected
-     * @param bool $loggedIn
-     * @param bool $isRegistered
-     * @param bool $isVip
-     * @param string $whichPlugin
-     * @param int $registrationsListPID
-     * @param int $registrationsVipListPID
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess(
         bool $expected,
@@ -8239,14 +8216,6 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider canViewRegistrationsListDataProvider
-     *
-     * @param bool $expected
-     * @param bool $loggedIn
-     * @param bool $isRegistered
-     * @param bool $isVip
-     * @param string $whichPlugin
-     * @param int $registrationsListPID
-     * @param int $registrationsVipListPID
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess(
         bool $expected,
@@ -8325,11 +8294,6 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider canViewRegistrationsForCsvExportListDataProvider
-     *
-     * @param bool $expected
-     * @param bool $loggedIn
-     * @param bool $isVip
-     * @param bool $allowCsvExportForVips
      */
     public function canViewRegistrationsListForCsvExport(
         bool $expected,
@@ -8520,14 +8484,6 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider canViewRegistrationsListDataProviderForLoggedIn
-     *
-     * @param bool $expected
-     * @param bool $loggedIn
-     * @param bool $isRegistered
-     * @param bool $isVip
-     * @param string $whichPlugin
-     * @param int $registrationsListPID
-     * @param int $registrationsVipListPID
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
         bool $expected,
@@ -8729,14 +8685,6 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider canViewRegistrationsListDataProviderForWorld
-     *
-     * @param bool $expected
-     * @param bool $loggedIn
-     * @param bool $isRegistered
-     * @param bool $isVip
-     * @param string $whichPlugin
-     * @param int $registrationsListPID
-     * @param int $registrationsVipListPID
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
         bool $expected,
@@ -8861,11 +8809,10 @@ final class LegacyEventTest extends TestCase
      * @test
      *
      * @dataProvider registrationListAccessLevelsDataProvider
-     *
-     * @param string $accessLevel
      */
-    public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(string $accessLevel): void
-    {
+    public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
+        string $accessLevel
+    ): void {
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
@@ -8917,12 +8864,11 @@ final class LegacyEventTest extends TestCase
      * @doesNotPerformAssertions
      *
      * @dataProvider registrationListParametersDataProvider
-     *
-     * @param string $whichPlugin
-     * @param string $accessLevel
      */
-    public function canViewRegistrationsListMessageWithLoginRoutesParameters(string $whichPlugin, string $accessLevel): void
-    {
+    public function canViewRegistrationsListMessageWithLoginRoutesParameters(
+        string $whichPlugin,
+        string $accessLevel
+    ): void {
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
@@ -9102,18 +9048,14 @@ final class LegacyEventTest extends TestCase
      *
      * @dataProvider hasAnyPriceDataProvider
      *
-     * @param bool $expectedHasAnyPrice
-     *        the expected return value of hasAnyPrice
+     * @param bool $expectedHasAnyPrice the expected return value of hasAnyPrice
      * @param bool $hasPriceRegular the return value of hasPriceRegular
      * @param bool $hasPriceSpecial the return value of hasPriceRegular
      * @param bool $earlyBirdApplies the return value of earlyBirdApplies
      * @param bool $hasEarlyBirdPriceRegular the return value of earlyBirdApplies
-     * @param bool $hasEarlyBirdPriceSpecial
-     *        the return value of hasEarlyBirdPriceSpecial
-     * @param bool $hasPriceRegularBoard
-     *        the return value of hasPriceRegularBoard
-     * @param bool $hasPriceSpecialBoard
-     *        the return value of hasPriceSpecialBoard
+     * @param bool $hasEarlyBirdPriceSpecial the return value of hasEarlyBirdPriceSpecial
+     * @param bool $hasPriceRegularBoard the return value of hasPriceRegularBoard
+     * @param bool $hasPriceSpecialBoard the return value of hasPriceSpecialBoard
      */
     public function hasAnyPriceWithDataProvider(
         bool $expectedHasAnyPrice,

@@ -258,7 +258,9 @@ class EventsList extends AbstractList
         }
         $label = $this->getLanguageService()->getLL($labelKey);
 
-        return '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) . 'Resources/Public/Icons/' . $icon .
+        return '<img src="/' . PathUtility::stripPathSitePrefix(
+            ExtensionManagementUtility::extPath('seminars')
+        ) . 'Resources/Public/Icons/' . $icon .
             '" title="' . $label . '" alt="' . $label . '"/>';
     }
 

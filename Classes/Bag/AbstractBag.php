@@ -222,7 +222,9 @@ abstract class AbstractBag implements \Iterator
         $sql .= $this->orderBy !== '' ? ' ORDER BY ' . $this->orderBy : '';
         $sql .= $this->limit !== '' ? ' LIMIT ' . $this->limit : '';
 
-        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)->query($sql)->fetchAll();
+        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)->query(
+            $sql
+        )->fetchAll();
 
         $this->queryHasBeenExecuted = true;
     }
@@ -311,10 +313,10 @@ abstract class AbstractBag implements \Iterator
         }
 
         $count = $queryBuilder
-           ->count('*')
-           ->where($this->queryParameters)
-           ->execute()
-           ->fetch(FetchMode::COLUMN);
+            ->count('*')
+            ->where($this->queryParameters)
+            ->execute()
+            ->fetch(FetchMode::COLUMN);
 
         $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;

@@ -313,12 +313,12 @@ class MailNotifier extends AbstractTask
 
         foreach (
             [
-            '%begin_date' => $this->getDate($event->getBeginDateAsTimestamp()),
-            '%days' => $this->getDaysBeforeBeginDate(),
-            '%event' => $event->getTitle(),
-            '%organizer' => $organizerName,
-            '%registrations' => $event->getAttendances(),
-            '%uid' => $event->getUid(),
+                '%begin_date' => $this->getDate($event->getBeginDateAsTimestamp()),
+                '%days' => $this->getDaysBeforeBeginDate(),
+                '%event' => $event->getTitle(),
+                '%organizer' => $organizerName,
+                '%registrations' => $event->getAttendances(),
+                '%uid' => $event->getUid(),
             ] as $search => $replace
         ) {
             $result = str_replace($search, $replace, $result);

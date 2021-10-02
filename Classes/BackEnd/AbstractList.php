@@ -319,7 +319,9 @@ abstract class AbstractList
             $url = $this->getRouteUrl('tce_db', $urlParameters);
             $result = '<a class="btn btn-default" href="' .
                 \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
-                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) . 'Resources/Public/Icons/' .
+                '<img src="/' . PathUtility::stripPathSitePrefix(
+                    ExtensionManagementUtility::extPath('seminars')
+                ) . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
         }
