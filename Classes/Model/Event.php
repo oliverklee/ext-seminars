@@ -17,7 +17,7 @@ use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 /**
  * This class represents an event.
  */
-class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
+class Event extends AbstractTimeSpan implements Titled
 {
     use EventEmailSenderTrait;
 
@@ -172,7 +172,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Category>
+     * @return Collection<Category>
      */
     public function getCategories(): Collection
     {
@@ -180,7 +180,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             return $this->getTopic()->getCategories();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
+        /** @var Collection<Category> $categories */
         $categories = $this->getAsCollection('categories');
 
         return $categories;
@@ -244,9 +244,9 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             : $this->hasString('description');
     }
 
-    public function getEventType(): ?\Tx_Seminars_Model_EventType
+    public function getEventType(): ?EventType
     {
-        /** @var \Tx_Seminars_Model_EventType|null $type */
+        /** @var EventType|null $type */
         $type = $this->isEventDate() ? $this->getTopic()->getEventType() : $this->getAsModel('event_type');
 
         return $type;
@@ -319,11 +319,11 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_TimeSlot>
+     * @return Collection<TimeSlot>
      */
     public function getTimeSlots(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_TimeSlot> $timeSlots */
+        /** @var Collection<TimeSlot> $timeSlots */
         $timeSlots = $this->getAsCollection('timeslots');
 
         return $timeSlots;
@@ -534,7 +534,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     {
         $result = 0;
 
-        /** @var \Tx_Seminars_Model_Category $category */
+        /** @var Category $category */
         foreach ($this->getCategories() as $category) {
             if ($category->hasSingleViewPageUid()) {
                 $result = $category->getSingleViewPageUid();
@@ -551,66 +551,66 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Place>
+     * @return Collection<Place>
      */
     public function getPlaces(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Place> $places */
+        /** @var Collection<Place> $places */
         $places = $this->getAsCollection('place');
 
         return $places;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Lodging>
+     * @return Collection<Lodging>
      */
     public function getLodgings(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Lodging> $lodgings */
+        /** @var Collection<Lodging> $lodgings */
         $lodgings = $this->getAsCollection('lodgings');
 
         return $lodgings;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Food>
+     * @return Collection<Food>
      */
     public function getFoods(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Food> $foods */
+        /** @var Collection<Food> $foods */
         $foods = $this->getAsCollection('foods');
 
         return $foods;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Speaker>
+     * @return Collection<Speaker>
      */
     public function getPartners(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Speaker> $partners */
+        /** @var Collection<Speaker> $partners */
         $partners = $this->getAsCollection('partners');
 
         return $partners;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Speaker>
+     * @return Collection<Speaker>
      */
     public function getTutors(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Speaker> $tutors */
+        /** @var Collection<Speaker> $tutors */
         $tutors = $this->getAsCollection('tutors');
 
         return $tutors;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Speaker>
+     * @return Collection<Speaker>
      */
     public function getLeaders(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Speaker> $leaders */
+        /** @var Collection<Speaker> $leaders */
         $leaders = $this->getAsCollection('leaders');
 
         return $leaders;
@@ -969,7 +969,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_PaymentMethod>
+     * @return Collection<PaymentMethod>
      */
     public function getPaymentMethods(): Collection
     {
@@ -977,7 +977,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             return $this->getTopic()->getPaymentMethods();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
+        /** @var Collection<PaymentMethod> $paymentMethods */
         $paymentMethods = $this->getAsCollection('payment_methods');
 
         return $paymentMethods;
@@ -986,7 +986,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     /**
      * Note: This function should only be called on topic or single event records, not on event dates.
      *
-     * @param Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods
+     * @param Collection<PaymentMethod> $paymentMethods
      */
     public function setPaymentMethods(Collection $paymentMethods): void
     {
@@ -1001,30 +1001,30 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Organizer>
+     * @return Collection<Organizer>
      */
     public function getOrganizers(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Organizer> $organizers */
+        /** @var Collection<Organizer> $organizers */
         $organizers = $this->getAsCollection('organizers');
 
         return $organizers;
     }
 
-    public function getFirstOrganizer(): ?\Tx_Seminars_Model_Organizer
+    public function getFirstOrganizer(): ?Organizer
     {
-        /** @var \Tx_Seminars_Model_Organizer|null $organizer */
+        /** @var Organizer|null $organizer */
         $organizer = $this->getOrganizers()->first();
 
         return $organizer;
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Organizer>
+     * @return Collection<Organizer>
      */
     public function getOrganizingPartners(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Organizer> $partners */
+        /** @var Collection<Organizer> $partners */
         $partners = $this->getAsCollection('organizing_partners');
 
         return $partners;
@@ -1116,7 +1116,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_TargetGroup>
+     * @return Collection<TargetGroup>
      */
     public function getTargetGroups(): Collection
     {
@@ -1124,7 +1124,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             return $this->getTopic()->getTargetGroups();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_TargetGroup> $targetGroups */
+        /** @var Collection<TargetGroup> $targetGroups */
         $targetGroups = $this->getAsCollection('target_groups');
 
         return $targetGroups;
@@ -1223,7 +1223,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Checkbox>
+     * @return Collection<Checkbox>
      */
     public function getCheckboxes(): Collection
     {
@@ -1231,7 +1231,7 @@ class Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
             return $this->getTopic()->getCheckboxes();
         }
 
-        /** @var Collection<\Tx_Seminars_Model_Checkbox> $checkboxes */
+        /** @var Collection<Checkbox> $checkboxes */
         $checkboxes = $this->getAsCollection('checkboxes');
 
         return $checkboxes;

@@ -25,6 +25,7 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
@@ -803,7 +804,7 @@ class RegistrationManager extends TemplateHelper
             $content .= 'DTEND' . $this->formatDateForWithZone($event->getEndDateAsUnixTimeStamp(), $timeZone) . "\r\n";
         }
         if (!$event->getPlaces()->isEmpty()) {
-            /** @var \Tx_Seminars_Model_Place $firstPlace */
+            /** @var Place $firstPlace */
             $firstPlace = $event->getPlaces()->first();
             $normalizedPlaceTitle = str_replace(
                 ["\r\n", "\n"],
@@ -1339,7 +1340,7 @@ class RegistrationManager extends TemplateHelper
         $newline = $useHtml ? '<br />' : "\n";
 
         $formattedPlaces = [];
-        /** @var \Tx_Seminars_Model_Place $place */
+        /** @var Place $place */
         foreach ($event->getPlaces() as $place) {
             $formattedPlaces[] = $this->formatPlace($place, $newline);
         }
@@ -1350,12 +1351,12 @@ class RegistrationManager extends TemplateHelper
     /**
      * Formats a place for the thank-you e-mail.
      *
-     * @param \Tx_Seminars_Model_Place $place the place to format
+     * @param Place $place the place to format
      * @param string $newline the newline to use in formatting, must be either LF or '<br />'
      *
      * @return string the formatted place, will not be empty
      */
-    private function formatPlace(\Tx_Seminars_Model_Place $place, string $newline): string
+    private function formatPlace(Place $place, string $newline): string
     {
         $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 

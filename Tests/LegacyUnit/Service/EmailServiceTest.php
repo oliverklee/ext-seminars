@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -76,7 +77,7 @@ final class EmailServiceTest extends TestCase
     private $user = null;
 
     /**
-     * @var \Tx_Seminars_Model_Organizer
+     * @var Organizer
      */
     private $organizer = null;
 
@@ -106,7 +107,7 @@ final class EmailServiceTest extends TestCase
 
         $this->email = $this->createEmailMock();
 
-        $this->organizer = new \Tx_Seminars_Model_Organizer();
+        $this->organizer = new Organizer();
         $this->organizer->setData(
             [
                 'title' => 'Brain Gourmets',

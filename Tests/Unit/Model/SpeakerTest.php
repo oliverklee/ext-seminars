@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Model\Speaker;
 
 final class SpeakerTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Speaker
+     * @var Speaker
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Speaker();
+        $this->subject = new Speaker();
     }
 
     /**

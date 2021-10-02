@@ -6,17 +6,18 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\TimeSlot;
 
 final class TimeSlotTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_TimeSlot
+     * @var TimeSlot
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_TimeSlot();
+        $this->subject = new TimeSlot();
     }
 
     ////////////////////////////////////

@@ -242,15 +242,15 @@ class Registration extends AbstractModel implements Titled
         $this->setAsInteger('datepaid', $timestamp);
     }
 
-    public function getPaymentMethod(): ?\Tx_Seminars_Model_PaymentMethod
+    public function getPaymentMethod(): ?PaymentMethod
     {
-        /** @var \Tx_Seminars_Model_PaymentMethod|null $paymentMethod */
+        /** @var PaymentMethod|null $paymentMethod */
         $paymentMethod = $this->getAsModel('method_of_payment');
 
         return $paymentMethod;
     }
 
-    public function setPaymentMethod(?\Tx_Seminars_Model_PaymentMethod $paymentMethod = null): void
+    public function setPaymentMethod(?PaymentMethod $paymentMethod = null): void
     {
         $this->set('method_of_payment', $paymentMethod);
     }
@@ -606,11 +606,11 @@ class Registration extends AbstractModel implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Lodging>
+     * @return Collection<Lodging>
      */
     public function getLodgings(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Lodging> $lodgings */
+        /** @var Collection<Lodging> $lodgings */
         $lodgings = $this->getAsCollection('lodgings');
 
         return $lodgings;
@@ -633,11 +633,11 @@ class Registration extends AbstractModel implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Food>
+     * @return Collection<Food>
      */
     public function getFoods(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Food> $foods */
+        /** @var Collection<Food> $foods */
         $foods = $this->getAsCollection('foods');
 
         return $foods;
@@ -698,11 +698,11 @@ class Registration extends AbstractModel implements Titled
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Checkbox>
+     * @return Collection<Checkbox>
      */
     public function getCheckboxes(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Checkbox> $checkboxes */
+        /** @var Collection<Checkbox> $checkboxes */
         $checkboxes = $this->getAsCollection('checkboxes');
 
         return $checkboxes;

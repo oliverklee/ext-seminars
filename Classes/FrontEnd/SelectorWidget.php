@@ -11,6 +11,7 @@ use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
+use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -45,7 +46,7 @@ class SelectorWidget extends AbstractView
     private $seminarBag = null;
 
     /**
-     * @var Collection<\Tx_Seminars_Model_Place>|null all places which are assigned to at least one event
+     * @var Collection<Place>|null all places which are assigned to at least one event
      */
     private $places = null;
 
@@ -524,7 +525,7 @@ class SelectorWidget extends AbstractView
         $result = [];
         $this->collectPlaces();
 
-        /** @var \Tx_Seminars_Model_Place $place */
+        /** @var Place $place */
         foreach ($this->places as $place) {
             $result[$place->getUid()] = $place->getTitle();
         }
@@ -548,7 +549,7 @@ class SelectorWidget extends AbstractView
         $result = [];
         $this->collectPlaces();
 
-        /** @var \Tx_Seminars_Model_Place $place */
+        /** @var Place $place */
         foreach ($this->places as $place) {
             $city = $place->getCity();
             $result[$city] = $city;
@@ -575,7 +576,7 @@ class SelectorWidget extends AbstractView
         $result = [];
         $this->collectPlaces();
 
-        /** @var \Tx_Seminars_Model_Place $place */
+        /** @var Place $place */
         foreach ($this->places as $place) {
             if ($place->hasCountry()) {
                 $countryIsoCode = $place->getCountry()->getIsoAlpha2Code();

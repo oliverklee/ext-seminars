@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Speaker;
 
 final class SpeakerMapperTest extends TestCase
 {
@@ -47,7 +48,7 @@ final class SpeakerMapperTest extends TestCase
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
         self::assertInstanceOf(
-            \Tx_Seminars_Model_Speaker::class,
+            Speaker::class,
             $this->subject->find($uid)
         );
     }

@@ -9,6 +9,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
+use OliverKlee\Seminars\Model\Organizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -22,13 +23,13 @@ final class EventTest extends UnitTestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Seminars_Model_Organizer
+     * @var Organizer
      */
     private $organizer = null;
 
     protected function setUp(): void
     {
-        $this->organizer = new \Tx_Seminars_Model_Organizer();
+        $this->organizer = new Organizer();
         $this->organizer->setData(
             [
                 'title' => 'Brain Gourmets',

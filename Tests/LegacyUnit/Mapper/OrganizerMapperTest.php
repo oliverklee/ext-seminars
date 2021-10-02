@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
+use OliverKlee\Seminars\Model\Organizer;
 
 final class OrganizerMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class OrganizerMapperTest extends TestCase
      */
     public function findWithUidReturnsOrganizerInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $this->subject->find(1));
+        self::assertInstanceOf(Organizer::class, $this->subject->find(1));
     }
 
     /**

@@ -94,13 +94,13 @@ class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
     /**
      * Gets this user group's assigned default categories.
      *
-     * @return Collection<\Tx_Seminars_Model_Category> the default categories assigned to this
+     * @return Collection<Category> the default categories assigned to this
      *                       group, will be empty if no default categories are
      *                       assigned to this group
      */
     public function getDefaultCategories(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
+        /** @var Collection<Category> $categories */
         $categories = $this->getAsCollection('tx_seminars_default_categories');
 
         return $categories;
@@ -114,9 +114,9 @@ class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
     /**
      * Returns this user group's default organizer for the FE editor.
      */
-    public function getDefaultOrganizer(): ?\Tx_Seminars_Model_Organizer
+    public function getDefaultOrganizer(): ?Organizer
     {
-        /** @var \Tx_Seminars_Model_Organizer|null $organizer */
+        /** @var Organizer|null $organizer */
         $organizer = $this->getAsModel('tx_seminars_default_organizer');
 
         return $organizer;

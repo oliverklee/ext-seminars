@@ -10,6 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\TargetGroup;
 
 final class TargetGroupMapperTest extends TestCase
 {
@@ -43,7 +44,7 @@ final class TargetGroupMapperTest extends TestCase
     public function findWithUidReturnsTargetGroupInstance(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Model_TargetGroup::class,
+            TargetGroup::class,
             $this->subject->find(1)
         );
     }

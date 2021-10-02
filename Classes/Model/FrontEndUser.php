@@ -125,13 +125,13 @@ class FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default categories assigned to this user's groups.
      *
-     * @return Collection<\Tx_Seminars_Model_Category> the categories assigned to this user's groups, will
+     * @return Collection<Category> the categories assigned to this user's groups, will
      *                       be empty if no default categories have been assigned
      *                       to any of the user's groups
      */
     public function getDefaultCategoriesFromGroup(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
+        /** @var Collection<Category> $categories */
         $categories = new Collection();
 
         /** @var FrontEndUserGroup $group */
@@ -155,13 +155,13 @@ class FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default organizers assigned to this user's groups.
      *
-     * @return Collection<\Tx_Seminars_Model_Organizer> the organizers assigned to this user's groups, will
+     * @return Collection<Organizer> the organizers assigned to this user's groups, will
      *                       be empty if no default organizers have been assigned
      *                       to any of the user's groups
      */
     public function getDefaultOrganizers(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Organizer> $organizers */
+        /** @var Collection<Organizer> $organizers */
         $organizers = new Collection();
 
         /** @var FrontEndUserGroup $group */

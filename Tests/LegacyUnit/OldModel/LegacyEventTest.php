@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -5718,7 +5719,7 @@ final class LegacyEventTest extends TestCase
     {
         $this->addPlaceRelation();
 
-        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $this->subject->getPlaces()->first());
+        self::assertInstanceOf(Place::class, $this->subject->getPlaces()->first());
     }
 
     /**

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\LodgingMapper;
+use OliverKlee\Seminars\Model\Lodging;
 
 final class LodgingMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class LodgingMapperTest extends TestCase
      */
     public function findWithUidReturnsLodgingInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $this->subject->find(1));
+        self::assertInstanceOf(Lodging::class, $this->subject->find(1));
     }
 
     /**

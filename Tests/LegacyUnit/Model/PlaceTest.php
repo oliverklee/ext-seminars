@@ -8,17 +8,18 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Place;
 
 final class PlaceTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Place
+     * @var Place
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Place();
+        $this->subject = new Place();
     }
 
     ///////////////////////////////

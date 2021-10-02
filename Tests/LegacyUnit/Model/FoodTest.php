@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Food;
 
 final class FoodTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Food
+     * @var Food
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Food();
+        $this->subject = new Food();
     }
 
     /**

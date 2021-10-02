@@ -10,6 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Place;
 
 final class PlaceMapperTest extends TestCase
 {
@@ -42,7 +43,7 @@ final class PlaceMapperTest extends TestCase
      */
     public function findWithUidReturnsPlaceInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $this->subject->find(1));
+        self::assertInstanceOf(Place::class, $this->subject->find(1));
     }
 
     /**

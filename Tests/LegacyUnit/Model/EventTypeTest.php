@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\EventType;
 
 final class EventTypeTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_EventType
+     * @var EventType
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_EventType();
+        $this->subject = new EventType();
     }
 
     /**

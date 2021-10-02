@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents an event type.
  */
-class Tx_Seminars_Model_EventType extends AbstractModel implements Titled
+class EventType extends AbstractModel implements Titled
 {
     /**
      * @return string our title, will not be empty

@@ -66,7 +66,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$organization of method Tx_Seminars_Model_Speaker\\:\\:setOrganization\\(\\) expects string, array given\\.$#"
+			message: "#^Parameter \\#1 \\$organization of method OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\:\\:setOrganization\\(\\) expects string, array given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -91,12 +91,12 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$title of method Tx_Seminars_Model_Checkbox\\:\\:setTitle\\(\\) expects string, array given\\.$#"
+			message: "#^Parameter \\#1 \\$title of method OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\:\\:setTitle\\(\\) expects string, array given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$title of method Tx_Seminars_Model_TargetGroup\\:\\:setTitle\\(\\) expects string, array given\\.$#"
+			message: "#^Parameter \\#1 \\$title of method OliverKlee\\\\Seminars\\\\Model\\\\TargetGroup\\:\\:setTitle\\(\\) expects string, array given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -136,7 +136,7 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$paymentMethod of method OliverKlee\\\\Seminars\\\\Model\\\\Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$paymentMethod of method OliverKlee\\\\Seminars\\\\Model\\\\Registration\\:\\:setPaymentMethod\\(\\) expects OliverKlee\\\\Seminars\\\\Model\\\\PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 

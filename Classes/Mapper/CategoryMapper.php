@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\Category;
 
 /**
  * This class represents a mapper for categories.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Category>
+ * @extends AbstractDataMapper<Category>
  */
 class CategoryMapper extends AbstractDataMapper
 {
@@ -21,5 +22,5 @@ class CategoryMapper extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Category::class;
+    protected $modelClassName = Category::class;
 }

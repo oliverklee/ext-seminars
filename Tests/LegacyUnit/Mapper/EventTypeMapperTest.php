@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
+use OliverKlee\Seminars\Model\EventType;
 
 final class EventTypeMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class EventTypeMapperTest extends TestCase
      */
     public function findWithUidReturnsEventTypeInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $this->subject->find(1));
+        self::assertInstanceOf(EventType::class, $this->subject->find(1));
     }
 
     /**

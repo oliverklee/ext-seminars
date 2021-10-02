@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
+use OliverKlee\Seminars\Model\PaymentMethod;
 
 final class PaymentMethodMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class PaymentMethodMapperTest extends TestCase
      */
     public function findWithUidReturnsPaymentMethodInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $this->subject->find(1));
+        self::assertInstanceOf(PaymentMethod::class, $this->subject->find(1));
     }
 
     /**

@@ -16,6 +16,9 @@ use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Food;
+use OliverKlee\Seminars\Model\Lodging;
+use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 
 /**
@@ -133,7 +136,7 @@ final class RegistrationMapperTest extends TestCase
         get(PaymentMethodMapper::class)->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
-        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $testingModel->getPaymentMethod());
+        self::assertInstanceOf(PaymentMethod::class, $testingModel->getPaymentMethod());
     }
 
     // Tests concerning the lodgings.
@@ -164,7 +167,7 @@ final class RegistrationMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
+        self::assertInstanceOf(Lodging::class, $model->getLodgings()->first());
     }
 
     /**
@@ -216,7 +219,7 @@ final class RegistrationMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
+        self::assertInstanceOf(Food::class, $model->getFoods()->first());
     }
 
     /**

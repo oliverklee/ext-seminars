@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Organizer;
 
 final class OrganizerTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_Organizer
+     * @var Organizer
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_Organizer();
+        $this->subject = new Organizer();
     }
 
     ///////////////////////////////

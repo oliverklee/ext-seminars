@@ -23,6 +23,7 @@ use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Core\Environment;
@@ -4056,12 +4057,12 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Returns the places associated with this event.
      *
-     * @return Collection<\Tx_Seminars_Model_Place>
+     * @return Collection<Place>
      */
     public function getPlaces(): Collection
     {
         if (!$this->hasPlace()) {
-            /** @var Collection<\Tx_Seminars_Model_Place> $emptyPlaces */
+            /** @var Collection<Place> $emptyPlaces */
             $emptyPlaces = new Collection();
             return $emptyPlaces;
         }

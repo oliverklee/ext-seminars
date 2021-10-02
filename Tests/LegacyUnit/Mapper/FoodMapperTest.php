@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FoodMapper;
+use OliverKlee\Seminars\Model\Food;
 
 final class FoodMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class FoodMapperTest extends TestCase
      */
     public function findWithUidReturnsFoodInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $this->subject->find(1));
+        self::assertInstanceOf(Food::class, $this->subject->find(1));
     }
 
     /**

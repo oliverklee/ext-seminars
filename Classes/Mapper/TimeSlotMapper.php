@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\TimeSlot;
 
 /**
  * This class represents a mapper for time-slots.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_TimeSlot>
+ * @extends AbstractDataMapper<TimeSlot>
  */
 class TimeSlotMapper extends AbstractDataMapper
 {
@@ -19,9 +20,9 @@ class TimeSlotMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_timeslots';
 
     /**
-     * @var class-string<\Tx_Seminars_Model_TimeSlot> the model class name for this mapper, must not be empty
+     * @var class-string<TimeSlot> the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_TimeSlot::class;
+    protected $modelClassName = TimeSlot::class;
 
     /**
      * @var array<non-empty-string, class-string>

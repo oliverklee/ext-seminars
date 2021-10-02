@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\Organizer;
 
 /**
  * This class represents a mapper for organizers.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_Organizer>
+ * @extends AbstractDataMapper<Organizer>
  */
 class OrganizerMapper extends AbstractDataMapper
 {
@@ -19,7 +20,7 @@ class OrganizerMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_organizers';
 
     /**
-     * @var class-string<\Tx_Seminars_Model_Organizer> the model class name for this mapper, must not be empty
+     * @var class-string<Organizer> the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_Organizer::class;
+    protected $modelClassName = Organizer::class;
 }

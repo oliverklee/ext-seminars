@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
+use OliverKlee\Seminars\Model\Category;
 
 final class CategoryMapperTest extends TestCase
 {
@@ -39,7 +40,7 @@ final class CategoryMapperTest extends TestCase
      */
     public function findWithUidReturnsCategoryInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $this->subject->find(1));
+        self::assertInstanceOf(Category::class, $this->subject->find(1));
     }
 
     /**

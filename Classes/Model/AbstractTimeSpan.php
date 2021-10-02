@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
  * This abstract class represents a time span.
  */
-abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
+abstract class AbstractTimeSpan extends AbstractModel
 {
     /**
      * @return int our begin date as UNIX time-stamp, will be >= 0, 0 means "no begin date"
@@ -64,11 +66,11 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * @return Collection<\Tx_Seminars_Model_Speaker>
+     * @return Collection<Speaker>
      */
     public function getSpeakers(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_Speaker> $speakers */
+        /** @var Collection<Speaker> $speakers */
         $speakers = $this->getAsCollection('speakers');
 
         return $speakers;
