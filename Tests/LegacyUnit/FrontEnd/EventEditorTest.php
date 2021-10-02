@@ -327,7 +327,10 @@ final class EventEditorTest extends TestCase
             ->count('*')
             ->from('tx_seminars_seminars')
             ->where(
-                $query->expr()->eq('uid', $query->createNamedParameter($this->subject->getObjectUid(), \PDO::PARAM_INT)),
+                $query->expr()->eq(
+                    'uid',
+                    $query->createNamedParameter($this->subject->getObjectUid(), \PDO::PARAM_INT)
+                ),
                 $query->expr()->gt('owner_feuser', $query->createNamedParameter(0, \PDO::PARAM_INT))
             )
             ->execute()

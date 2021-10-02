@@ -39,7 +39,10 @@ class Salutation
             default:
                 $gender = $user->getGender();
                 $salutationParts['dear'] = LocalizationUtility::translate('email_hello_formal_' . $gender, 'seminars');
-                $salutationParts['title'] = LocalizationUtility::translate('email_salutation_title_' . $gender, 'seminars');
+                $salutationParts['title'] = LocalizationUtility::translate(
+                    'email_salutation_title_' . $gender,
+                    'seminars'
+                );
                 $salutationParts['name'] = $user->getLastOrFullName();
         }
 

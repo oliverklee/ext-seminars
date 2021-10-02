@@ -2454,8 +2454,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid(
-        ) : 0;
+        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid() : 0;
 
         switch ($whichPlugin) {
             case 'csv_export':
