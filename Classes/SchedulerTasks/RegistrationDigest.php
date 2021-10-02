@@ -169,6 +169,7 @@ class RegistrationDigest
     {
         $now = $GLOBALS['SIM_EXEC_TIME'];
 
+        /** @var Event $event */
         foreach ($events as $event) {
             $event->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($now);
             $this->eventMapper->save($event);

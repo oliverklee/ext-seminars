@@ -23,6 +23,7 @@ use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -2194,10 +2195,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
+        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
         $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
-            && FrontEndLoginManager::getInstance()->isLoggedIn()
-            && FrontEndLoginManager::getInstance()->getLoggedInUser()
-                ->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
+            && $loggedInUser instanceof FrontEndUser
+            && $loggedInUser->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
 
         if ($isDefaultVip) {
             $isVip = true;

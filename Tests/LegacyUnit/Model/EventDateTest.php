@@ -1607,6 +1607,7 @@ final class EventDateTest extends TestCase
      */
     public function getPaymentMethodsReturnsPaymentMethodsFromTopic(): void
     {
+        /** @var Collection<PaymentMethod> $paymentMethods */
         $paymentMethods = new Collection();
         $topic = new Event();
         $topic->setData(['payment_methods' => $paymentMethods]);

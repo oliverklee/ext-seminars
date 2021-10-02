@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\ViewHelpers;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -17,7 +18,7 @@ class CommaSeparatedTitlesViewHelper
      *
      * The titles will be htmlspecialchared before being returned.
      *
-     * @param Collection<Titled> $items
+     * @param Collection<AbstractModel> $items
      *
      * @return string the titles of the elements in $list as a comma-separated list
      *         or an empty string if the list is empty

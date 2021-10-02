@@ -1585,6 +1585,7 @@ final class RegistrationTest extends TestCase
      */
     public function getAdditionalPersonsGetsAdditionalPersons(): void
     {
+        /** @var Collection<FrontEndUser> $additionalPersons */
         $additionalPersons = new Collection();
         $this->subject->setData(
             ['additional_persons' => $additionalPersons]
