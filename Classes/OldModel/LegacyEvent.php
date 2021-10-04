@@ -3125,7 +3125,7 @@ class LegacyEvent extends AbstractTimeSpan
      * payment or the gender), this function will already return the clear text
      * version.
      *
-     * @param non-empty-string $key the key of the data to retrieve (the key doesn't need to be trimmed)
+     * @param string $key the key of the data to retrieve (the key doesn't need to be trimmed)
      *
      * @return string the data retrieved from $this->recordData, may be empty
      */

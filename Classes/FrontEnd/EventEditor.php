@@ -127,7 +127,7 @@ class EventEditor extends AbstractEditor
             $dataHandler = $this->getFormCreator()->getDataHandler();
             $this->attachedFiles = GeneralUtility::trimExplode(
                 ',',
-                $dataHandler->__aStoredData['attached_files'],
+                (string)$dataHandler->__aStoredData['attached_files'],
                 true
             );
         }
@@ -333,7 +333,10 @@ class EventEditor extends AbstractEditor
 
     protected static function getLoggedInUser(): ?FrontEndUser
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        /** @var FrontEndUser|null $user */
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+
+        return $user;
     }
 
     /**
@@ -384,6 +387,7 @@ class EventEditor extends AbstractEditor
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
+                /** @var array<string, string> $editButtonHTML */
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
                     'caption' => $place->getTitle(),
@@ -454,7 +458,7 @@ class EventEditor extends AbstractEditor
             if ($isLister) {
                 $result[] = [
                     'uid' => $speaker->getUid(),
-                    'selected' => GeneralUtility::inList($activeSpeakers, $speaker->getUid()) ? 1 : 0,
+                    'selected' => GeneralUtility::inList($activeSpeakers, (string)$speaker->getUid()) ? 1 : 0,
                     'name' => $speaker->getName(),
                     'edit' => ($showEditButton && $frontEndUserIsOwner) ? 1 : 0,
                 ];
@@ -467,6 +471,7 @@ class EventEditor extends AbstractEditor
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
+                /** @var array<string, string> $editButtonHTML */
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
                     'caption' => $speaker->getName(),
@@ -491,6 +496,7 @@ class EventEditor extends AbstractEditor
      * Provides data items for the list of available checkboxes.
      *
      * @param array[] $items any pre-filled data (may be empty)
+     * @param \tx_mkforms_forms_Base|null $form
      *
      * @return array[] items with additional items from the checkboxes table as an array with the keys "caption"
      *         (for the title) and "value" (for the UID)
@@ -538,6 +544,7 @@ class EventEditor extends AbstractEditor
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
+                /** @var array<string, string> $editButtonHTML */
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
                     'caption' => $checkbox->getTitle(),
@@ -609,6 +616,7 @@ class EventEditor extends AbstractEditor
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
+                /** @var array<string, string> $editButtonHTML */
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
                     'caption' => $targetGroup->getTitle(),
@@ -729,7 +737,8 @@ class EventEditor extends AbstractEditor
      * Changes all potential decimal separators (commas and dots) in price
      * fields to dots.
      *
-     * @param array[] $formData all entered form data with the field names as keys, will be modified, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData all entered form data with the field names
+     *        as keys, will be modified
      */
     private function unifyDecimalSeparators(array &$formData): void
     {
@@ -759,15 +768,13 @@ class EventEditor extends AbstractEditor
      * FORMidable, it is possible to store the name of an invalid file in the
      * list of attachments.
      *
-     * @param array[] $formData form data, will be modified, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
      */
     private function processAttachments(array &$formData): void
     {
-        $filesToDelete = GeneralUtility::trimExplode(
-            ',',
-            $formData['delete_attached_files'],
-            true
-        );
+        /** @var string $deleteAttachedFiles */
+        $deleteAttachedFiles = $formData['delete_attached_files'];
+        $filesToDelete = GeneralUtility::trimExplode(',', $deleteAttachedFiles, true);
 
         foreach ($filesToDelete as $fileName) {
             // saves other files in the upload folder from being deleted
@@ -782,7 +789,7 @@ class EventEditor extends AbstractEditor
     /**
      * Removes all form data elements that are no fields in the seminars table.
      *
-     * @param array[] $formData form data, will be modified, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
      */
     private function purgeNonSeminarsFields(array &$formData): void
     {
@@ -870,7 +877,7 @@ class EventEditor extends AbstractEditor
      * 'owner_feuser'.
      * For objects to update, just the 'tstamp' will be refreshed.
      *
-     * @param array[] $formData form data, will be modified, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified, must not be empty
      */
     private function addAdministrativeData(array &$formData): void
     {
@@ -897,8 +904,8 @@ class EventEditor extends AbstractEditor
     /**
      * Checks the publish settings of the user and hides the event record if necessary.
      *
-     * @param array[] $formData form data, will be modified if the seminar must be hidden corresponding
-     *        to the publish settings of the user, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
+     *        if the seminar must be hidden corresponding to the publish settings of the user, must not be empty
      */
     private function checkPublishSettings(array &$formData): void
     {
@@ -932,7 +939,7 @@ class EventEditor extends AbstractEditor
      * Unifies decimal separators, processes the deletion of attachments and
      * purges non-seminars-fields.
      *
-     * @param array[] $formData form data, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData form data, must not be empty
      *
      * @return array modified form data, will not be empty
      *
@@ -977,10 +984,8 @@ class EventEditor extends AbstractEditor
             return true;
         }
 
-        $fileToCheck = array_pop(
-            GeneralUtility::trimExplode(',', $valueToCheck['value'], true)
-        );
-
+        $values = GeneralUtility::trimExplode(',', $valueToCheck['value'], true);
+        $fileToCheck = array_pop($values);
         $this->checkFileSize($fileToCheck);
         $this->checkFileType($fileToCheck);
 
@@ -1172,10 +1177,7 @@ class EventEditor extends AbstractEditor
     {
         $fieldsToShow = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString(
-                'displayFrontEndEditorFields',
-                's_fe_editing'
-            ),
+            $this->getConfValueString('displayFrontEndEditorFields', 's_fe_editing'),
             true
         );
         $this->removeCategoryIfNecessary($fieldsToShow);
@@ -1213,10 +1215,7 @@ class EventEditor extends AbstractEditor
     {
         $this->requiredFormFields = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString(
-                'requiredFrontEndEditorFields',
-                's_fe_editing'
-            )
+            $this->getConfValueString('requiredFrontEndEditorFields', 's_fe_editing')
         );
 
         $this->removeCategoryIfNecessary($this->requiredFormFields);
@@ -1260,8 +1259,8 @@ class EventEditor extends AbstractEditor
      * Checks whether a given field needs to be filled in, but hasn't been
      * filled in yet.
      *
-     * @param array[] $formData associative array containing the current value, with the key
-     *        'value' and the name, with the key 'elementName', of the form
+     * @param array<string, string|int|array<int, string|int>> $formData associative array containing the current
+     *        value, with the key 'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
      * @return bool TRUE if this field is not empty or not required, FALSE otherwise
@@ -1279,8 +1278,8 @@ class EventEditor extends AbstractEditor
      * Checks whether a given field needs to be filled in with a non-zero value,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData associative array containing the current value, with the key
-     *        'value' and the name, with the key 'elementName', of the form
+     * @param array<string, string|int|array<int, string|int>> $formData associative array containing the current
+     *        value, with the key 'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
      * @return bool TRUE if this field is not zero or not required, FALSE otherwise
@@ -1298,8 +1297,8 @@ class EventEditor extends AbstractEditor
      * Checks whether a given field needs to be filled in with a non-empty array,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData associative array containing the current value, with the key
-     *        'value' and the name, with the key 'elementName', of the form
+     * @param array<string, string|int|array<int, string|int>> $formData associative array containing the current
+     *        value, with the key 'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
      * @return bool TRUE if this field is not zero or not required, FALSE otherwise
@@ -1317,8 +1316,8 @@ class EventEditor extends AbstractEditor
      * Checks whether a given field needs to be filled in with a valid date,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData associative array containing the current value, with the key
-     *        'value' and the name, with the key 'elementName', of the form
+     * @param array<string, string|int|array<int, string|int>> $formData associative array containing the current
+     *        value, with the key 'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
      * @return bool TRUE if this field contains a valid date or if this field is not required, FALSE otherwise
@@ -1336,8 +1335,8 @@ class EventEditor extends AbstractEditor
      * Checks whether a given field needs to be filled in with a valid price,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData associative array containing the current value, with the key
-     *        'value' and the name, with the key 'elementName', of the form
+     * @param array<string, string|int|array<int, string|int>> $formData associative array containing the current
+     *        value, with the key 'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
      * @return bool TRUE if this field contains a valid price or if this field is not required, FALSE otherwise
@@ -1562,6 +1561,7 @@ class EventEditor extends AbstractEditor
         /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
+        /** @var array<string, string> $editButtonHTML */
         $editButtonHTML = $editButton->_render();
 
         /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
@@ -1645,7 +1645,8 @@ class EventEditor extends AbstractEditor
     /**
      * Validates the entered data for a place.
      *
-     * @param array[] $formData the entered form data, the key must be stripped of the "newPlace_"/"editPlace_" prefix
+     * @param array<string, string|int|array<int, string|int>> $formData the entered form data, the key must be
+     *        stripped of the "newPlace_"/"editPlace_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
@@ -1703,7 +1704,7 @@ class EventEditor extends AbstractEditor
      *
      * @param Place $place the place model to set the data
      * @param string $prefix the prefix of the form fields in $formData
-     * @param array[] $formData the form data to use for setting the place data
+     * @param array<string, string|int|array<int, string|int>> $formData form data to use for setting the place data
      */
     private static function setPlaceData(Place $place, string $prefix, array $formData): void
     {
@@ -1933,8 +1934,8 @@ class EventEditor extends AbstractEditor
     /**
      * Validates the entered data for a speaker.
      *
-     * @param array[] $formData the entered form data, the key must be stripped of the
-     *        "newSpeaker_"/"editSpeaker_" prefix
+     * @param array<string, string|int|array<int, string|int>> $formData the entered form data,
+     *        the key must be stripped of the "newSpeaker_"/"editSpeaker_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
@@ -1955,7 +1956,8 @@ class EventEditor extends AbstractEditor
      *
      * @param Speaker $speaker the speaker model to set the data for
      * @param string $prefix the prefix of the form fields in $formData
-     * @param array[] $formData the form data to use for setting the speaker data
+     * @param array<string, string|int|array<int, string|int>> $formData the form data to use for setting the
+     *        speaker data
      */
     private static function setSpeakerData(Speaker $speaker, string $prefix, array $formData): void
     {
@@ -2067,7 +2069,7 @@ class EventEditor extends AbstractEditor
 
         /** @var Skill $skill */
         foreach ($speaker->getSkills() as $skill) {
-            $result[] = $checkboxRenderlet->majixCheckItem($skill->getUid());
+            $result[] = $checkboxRenderlet->majixCheckItem((string)$skill->getUid());
         }
 
         return $result;
@@ -2118,6 +2120,7 @@ class EventEditor extends AbstractEditor
         /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
+        /** @var array<string, string> $editButtonHTML */
         $editButtonHTML = $editButton->_render();
 
         /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
@@ -2195,8 +2198,8 @@ class EventEditor extends AbstractEditor
     /**
      * Validates the entered data for a checkbox.
      *
-     * @param array[] $formData the entered form data, the key must be stripped of the
-     *        "newCheckbox_"/"editCheckbox_" prefix
+     * @param array<string, string|int|array<int, string|int>> $formData the entered form data, the key must be
+     *        stripped of the "newCheckbox_"/"editCheckbox_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
@@ -2217,7 +2220,7 @@ class EventEditor extends AbstractEditor
      *
      * @param Checkbox $checkbox the checkbox model to set the data
      * @param string $prefix the prefix of the form fields in $formData
-     * @param array[] $formData the form data to use for setting the checkbox data
+     * @param array<string, string|int|array<int, string|int>> $formData form data to use for setting checkbox data
      */
     private static function setCheckboxData(
         Checkbox $checkbox,
@@ -2324,6 +2327,7 @@ class EventEditor extends AbstractEditor
         /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
+        /** @var array<string, string> $editButtonHTML */
         $editButtonHTML = $editButton->_render();
 
         /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
@@ -2405,8 +2409,8 @@ class EventEditor extends AbstractEditor
     /**
      * Validates the entered data for a target group.
      *
-     * @param array[] $formData the entered form data, the key must be stripped of the
-     *        "newTargetGroup_"/"editTargetGroup_" prefix
+     * @param array<string, string|int|array<int, string|int>> $formData entered form data, the key must be stripped
+     *        of the "newTargetGroup_"/"editTargetGroup_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
@@ -2422,10 +2426,10 @@ class EventEditor extends AbstractEditor
             \preg_match('/^(\\d*)$/', \trim($formData['minimum_age']))
             && \preg_match('/^(\\d*)$/', \trim($formData['maximum_age']))
         ) {
-            $minimumAge = $formData['minimum_age'];
-            $maximumAge = $formData['maximum_age'];
+            $minimumAge = (int)$formData['minimum_age'];
+            $maximumAge = (int)$formData['maximum_age'];
 
-            if (($minimumAge > 0) && ($maximumAge > 0) && ($minimumAge > $maximumAge)) {
+            if ($minimumAge > 0 && $maximumAge > 0 && $minimumAge > $maximumAge) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
                     'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:' .
                     'message_targetGroupMaximumAgeSmallerThanMinimumAge'
@@ -2446,13 +2450,11 @@ class EventEditor extends AbstractEditor
      *
      * @param TargetGroup $targetGroup the target group model to set the data
      * @param string $prefix the prefix of the form fields in $formData
-     * @param array[] $formData the form data to use for setting the target group data
+     * @param array<string, string|int|array<int, string|int>> $formData form data to use for setting
+     *        the target group data
      */
-    private static function setTargetGroupData(
-        TargetGroup $targetGroup,
-        string $prefix,
-        array $formData
-    ): void {
+    private static function setTargetGroupData(TargetGroup $targetGroup, string $prefix, array $formData): void
+    {
         $targetGroup->setTitle($formData[$prefix . 'title']);
         $targetGroup->setMinimumAge((int)$formData[$prefix . 'minimum_age']);
         $targetGroup->setMaximumAge((int)$formData[$prefix . 'maximum_age']);
@@ -2616,7 +2618,8 @@ class EventEditor extends AbstractEditor
      *
      * Note: This affects only new records. Existing records (with a UID) will not be changed.
      *
-     * @param array[] $formData all entered form data with the field names as keys, will be modified, must not be empty
+     * @param array<string, string|int|array<int, string|int>> $formData all entered form data
+     *        with the field names as keys, will be modified, must not be empty
      */
     private function addCategoriesOfUser(array &$formData): void
     {
