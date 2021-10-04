@@ -43,7 +43,7 @@ class EventListView extends AbstractListView
     /**
      * Returns the keys of the fields to export.
      *
-     * @return array<int, non-empty-string>
+     * @return array<int, string>
      */
     protected function getFieldKeys(): array
     {
@@ -105,7 +105,7 @@ class EventListView extends AbstractListView
      *
      * @param LegacyEvent $event object that will deliver the data
      *
-     * @return string[] the data for the keys provided in $keys (may be empty)
+     * @return array<int, string> the data for the keys provided in $keys (may be empty)
      */
     protected function createCsvColumnsForEvent(LegacyEvent $event): array
     {

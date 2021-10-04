@@ -1563,7 +1563,7 @@ class DefaultController extends TemplateHelper
                     $result .= $this->getSubpart('ERROR_VIEW');
                     $result .= $this->getLoginLink(
                         $this->translate('message_pleaseLogIn'),
-                        $this->getFrontEndController()->id
+                        (int)$this->getFrontEndController()->id
                     );
                     $isOkay = false;
                 }
