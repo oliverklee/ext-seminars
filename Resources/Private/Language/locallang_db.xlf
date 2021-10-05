@@ -163,9 +163,6 @@
 			<trans-unit id="tx_seminars_seminars.end_date" xml:space="preserve">
 				<source>End time and date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_zone" xml:space="preserve">
-				<source>Time zone</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.time_slot_wizard" xml:space="preserve">
 				<source>Create a series of time slots</source>
 			</trans-unit>

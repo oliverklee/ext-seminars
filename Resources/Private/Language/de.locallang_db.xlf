@@ -216,10 +216,6 @@
 				<source>End time and date</source>
 				<target>Endzeit und -datum</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_zone" xml:space="preserve">
-				<source>Time zone</source>
-				<target>Zeitzone</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.timeslots" xml:space="preserve">
 				<source>Time slots</source>
 				<target>Zeitblöcke</target>

@@ -789,7 +789,6 @@ class RegistrationManager extends TemplateHelper
     private function addCalendarAttachment(MailMessage $email, Registration $registration): void
     {
         $event = $registration->getEvent();
-        $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');
 
         $content = "BEGIN:VCALENDAR\r\n" .
             "VERSION:2.0\r\n" .
@@ -800,10 +799,10 @@ class RegistrationManager extends TemplateHelper
             'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . "\r\n" .
             'SUMMARY:' . $event->getTitle() . "\r\n" .
             'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
-            'DTSTART' . $this->formatDateForWithZone($event->getBeginDateAsUnixTimeStamp(), $timeZone) . "\r\n";
+            'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
 
         if ($event->hasEndDate()) {
-            $content .= 'DTEND' . $this->formatDateForWithZone($event->getEndDateAsUnixTimeStamp(), $timeZone) . "\r\n";
+            $content .= 'DTEND:' . $this->formatDateForCalendar($event->getEndDateAsUnixTimeStamp()) . "\r\n";
         }
         if (!$event->getPlaces()->isEmpty()) {
             /** @var Place $firstPlace */
@@ -824,9 +823,9 @@ class RegistrationManager extends TemplateHelper
         $email->addPart($content, 'text/calendar; charset="utf-8"; component="vevent"; method="publish"');
     }
 
-    private function formatDateForWithZone(int $dateAsUnixTimeStamp, string $timeZone): string
+    private function formatDateForCalendar(int $dateAsUnixTimeStamp): string
     {
-        return ';TZID=/' . $timeZone . ':' . strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
+        return strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
     }
 
     /**

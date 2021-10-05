@@ -87,9 +87,6 @@ plugin.tx_seminars {
     # whether date ranges should be shortened when possible
     abbreviateDateRanges = 1
 
-    # time zone used for the iCal attachments in case an event does not have a specific time zone set
-    defaultTimeZone = Europe/Berlin
-
     # ISO 4217 alpha 3 code of the currency to be used, must be valid
     currency = EUR
 

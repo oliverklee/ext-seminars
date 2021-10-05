@@ -3562,12 +3562,8 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventStartDateWithTimeZoneFromEvent(): void
+    public function notifyAttendeeHasCalendarAttachmentWithEventStartDateFromEvent(): void
     {
-        $timeZone = 'America/Chicago';
-        $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
-        $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
-
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new DefaultController();
         $pi1->init();
@@ -3581,31 +3577,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
-        self::assertStringContainsString('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeFoEventWithoutTimeZoneHasAttachmentWithEventStartDateWithTimeZoneDefaultTimeZone(): void
-    {
-        $timeZone = 'Europe/Berlin';
-        $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        $attachments = $this->filterEmailAttachmentsByTitle($this->email, 'text/calendar');
-        self::assertNotEmpty($attachments);
-        /** @var \Swift_Mime_Attachment $attachment */
-        $attachment = $attachments[0];
-        $content = $attachment->getBody();
-        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
-        self::assertStringContainsString('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTSTART:' . $formattedDate, $content);
     }
 
     /**
@@ -3637,12 +3609,8 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventEndDateTimeZoneFromEvent(): void
+    public function notifyAttendeeHasCalendarAttachmentWithEventEndDateFromEvent(): void
     {
-        $timeZone = 'America/Chicago';
-        $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
-        $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
-
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new DefaultController();
         $pi1->init();
@@ -3656,31 +3624,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
-        self::assertStringContainsString('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForEventWithoutTimeZoneHasCalendarAttachmentWithEndDateDefaultTimeZone(): void
-    {
-        $timeZone = 'Europe/Berlin';
-        $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        $attachments = $this->filterEmailAttachmentsByTitle($this->email, 'text/calendar');
-        self::assertNotEmpty($attachments);
-        /** @var \Swift_Mime_Attachment $attachment */
-        $attachment = $attachments[0];
-        $content = $attachment->getBody();
-        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
-        self::assertStringContainsString('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTEND:' . $formattedDate, $content);
     }
 
     /**

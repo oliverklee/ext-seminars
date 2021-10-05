@@ -526,21 +526,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         defaultTimeZone
-
-   Data type
-         string
-
-   Description
-         time zone used for the iCal attachments in case an event does not have a specific time zone set
-
-   Default
-         Europe/Berlin
-
-
-.. container:: table-row
-
-   Property
          currency
 
    Data type
