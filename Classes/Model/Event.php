@@ -253,16 +253,6 @@ class Event extends AbstractTimeSpan implements Titled
         return $type;
     }
 
-    public function getTimeZone(): string
-    {
-        return $this->getAsString('time_zone');
-    }
-
-    public function setTimeZone(string $timeZone): void
-    {
-        $this->setAsString('time_zone', $timeZone);
-    }
-
     /**
      * @return string our accreditation number, will be empty if this event has
      *                no accreditation number

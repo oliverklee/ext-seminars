@@ -266,42 +266,6 @@ final class EventTest extends TestCase
         self::assertSame('Superhero', $this->subject->getTitle());
     }
 
-    // Tests regarding the time zone.
-
-    /**
-     * @test
-     */
-    public function getTimeZoneInitiallyReturnsEmptyString(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertSame('', $this->subject->getTimeZone());
-    }
-
-    /**
-     * @test
-     */
-    public function getTimeZoneReturnsTimeZone(): void
-    {
-        $value = 'Europe/Berlin';
-        $this->subject->setData(['time_zone' => $value]);
-
-        self::assertSame($value, $this->subject->getTimeZone());
-    }
-
-    /**
-     * @test
-     */
-    public function setTimeZoneSetsTimeZone(): void
-    {
-        $this->subject->setData([]);
-
-        $value = 'Europe/Berlin';
-        $this->subject->setTimeZone($value);
-
-        self::assertSame($value, $this->subject->getTimeZone());
-    }
-
     //////////////////////////////////////////////
     // Tests regarding the accreditation number.
     //////////////////////////////////////////////

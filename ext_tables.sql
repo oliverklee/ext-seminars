@@ -222,7 +222,6 @@ CREATE TABLE tx_seminars_seminars (
     credit_points int(11) unsigned DEFAULT '0' NOT NULL,
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
-    time_zone tinytext,
     timeslots int(3) unsigned DEFAULT '0' NOT NULL,
     begin_date_registration int(11) unsigned DEFAULT '0' NOT NULL,
     deadline_registration int(11) unsigned DEFAULT '0' NOT NULL,
