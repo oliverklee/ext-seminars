@@ -2009,54 +2009,16 @@ plugin.tx_seminars_pi1.form.eventEditor {
             }
         }
 
-        attached_files = renderlet:UPLOAD
-        attached_files {
-            name = attached_files
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attached_files
-            data {
-                targetdir = uploads/tx_seminars/
-                multiple = 1
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message.userobj {
-                        extension = this
-                        method = getFileUploadErrorMessage
-                    }
-                    userobj {
-                        extension = this
-                        method = checkFile
-                    }
-                }
-            }
-        }
-
-        delete_attached_files = renderlet:HIDDEN
-        delete_attached_files {
-            name = delete_attached_files
-            data.defaultvalue =
-        }
-
         submit_and_stay = renderlet:SUBMIT
         submit_and_stay {
             name = submit_and_stay
             label = ###LABEL_SAVE###
-            onclick (
-                document.getElementById("tx_seminars_pi1_seminars_proceed_file_upload").value = 1
-            )
         }
 
         btnsubmit = renderlet:SUBMIT
         btnsubmit {
             name = btnsubmit
             label = ###LABEL_SAVE_AND_BACK###
-        }
-
-        proceed_file_upload = renderlet:HIDDEN
-        proceed_file_upload {
-            name = proceed_file_upload
         }
     }
 }

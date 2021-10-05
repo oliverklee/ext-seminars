@@ -405,31 +405,6 @@
         </div>
     </fieldset>
     <!-- ###FE_EDITOR_CHECKBOX_OPTIONS### -->
-    <!-- ###FE_EDITOR_ATTACHED_FILE_BOX### -->
-    <fieldset>
-        <div class="columnlight single_column attached-files">
-            <dl>
-                <dt###ATTACHED_FILE_BOX_REQUIRED###>{attached_files.label.tag}</dt>
-                <dd>{attached_files.input}</dd>
-            </dl>
-            <!-- ###ATTACHED_FILES### -->
-            <dl id="uploaded-files">
-                <!--###SINGLE_ATTACHED_FILE### -->
-                <dt id="###SINGLE_ATTACHED_FILE_ID###">
-                    ###FILE_NAME###
-                </dt>
-                <dd>
-                    <input type="button"  id="###SINGLE_ATTACHED_FILE_ID###_button"
-                    name="###LABEL_DELETE###" value="###LABEL_DELETE###"
-                    onclick="TYPO3.seminars.markAttachmentAsDeleted('###SINGLE_ATTACHED_FILE_ID###', '###LABEL_REALLY_DELETE###\n###FILE_NAME###');" />
-                </dd>
-                <!--###SINGLE_ATTACHED_FILE### -->
-            </dl>
-            {delete_attached_files}
-            <!-- ###ATTACHED_FILES### -->
-        </div>
-    </fieldset>
-    <!-- ###FE_EDITOR_ATTACHED_FILE_BOX### -->
     <!-- ###FE_EDITOR_NOTES### -->
     <fieldset>
         <div class="column-dark">
@@ -451,7 +426,6 @@
                 {submit_and_stay}
         <!-- ###SUBMIT_AND_STAY### -->
                 {btnsubmit}
-                {proceed_file_upload}
             </dd>
         </dl>
     </div>
