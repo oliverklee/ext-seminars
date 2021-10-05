@@ -71,21 +71,21 @@ class LegacyRegistration extends AbstractModel
     /**
      * UIDs of lodging options associated with this record
      *
-     * @var int[]
+     * @var array<int, int>
      */
     protected $lodgings = [];
 
     /**
      * UIDs of food options associated with this record
      *
-     * @var int[]
+     * @var array<int, int>
      */
     protected $foods = [];
 
     /**
      * UIDs of option checkboxes associated with this record
      *
-     * @var int[]
+     * @var array<int, int>
      */
     protected $checkboxes = [];
 
@@ -227,20 +227,23 @@ class LegacyRegistration extends AbstractModel
         $this->recordData['telephone'] = $registrationData['telephone'];
         $this->recordData['email'] = $registrationData['email'];
 
-        $this->lodgings = (isset($registrationData['lodgings']) && \is_array($registrationData['lodgings']))
+        $lodgings = (isset($registrationData['lodgings']) && \is_array($registrationData['lodgings']))
             ? $registrationData['lodgings'] : [];
-        \array_walk($this->lodgings, '\\intval');
-        $this->recordData['lodgings'] = \count($this->lodgings);
+        \array_walk($lodgings, '\\intval');
+        $this->lodgings = $lodgings;
+        $this->recordData['lodgings'] = \count($lodgings);
 
-        $this->foods = (isset($registrationData['foods']) && \is_array($registrationData['foods']))
+        $foods = (isset($registrationData['foods']) && \is_array($registrationData['foods']))
             ? $registrationData['foods'] : [];
-        \array_walk($this->foods, '\\intval');
-        $this->recordData['foods'] = \count($this->foods);
+        \array_walk($foods, '\\intval');
+        $this->foods = $foods;
+        $this->recordData['foods'] = \count($foods);
 
-        $this->checkboxes = (isset($registrationData['checkboxes']) && \is_array($registrationData['checkboxes']))
+        $checkboxes = (isset($registrationData['checkboxes']) && \is_array($registrationData['checkboxes']))
             ? $registrationData['checkboxes'] : [];
-        \array_walk($this->checkboxes, '\\intval');
-        $this->recordData['checkboxes'] = \count($this->checkboxes);
+        \array_walk($checkboxes, '\\intval');
+        $this->checkboxes = $checkboxes;
+        $this->recordData['checkboxes'] = \count($checkboxes);
 
         $this->recordData['interests'] = $registrationData['interests'];
         $this->recordData['expectations'] = $registrationData['expectations'];
@@ -967,7 +970,7 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @return int[]
+     * @return array<int, int>
      */
     public function getLodgingsUids(): array
     {
@@ -1032,7 +1035,7 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @return int[]
+     * @return array<int, int>
      */
     public function getFoodsUids(): array
     {
@@ -1069,7 +1072,7 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @return int[]
+     * @return array<int, int>
      */
     public function getCheckboxesUids(): array
     {

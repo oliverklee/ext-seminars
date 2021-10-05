@@ -19,6 +19,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -42,7 +43,7 @@ final class RegistrationsListTest extends TestCase
     private $dummySysFolderPid = 0;
 
     /**
-     * @var array<int, class-string>
+     * @var array<int, class-string<MockObject>>
      */
     private $mockedClassNames = [];
 
@@ -122,6 +123,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function addMockedInstanceAddsClassnameToList(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
 
@@ -138,6 +140,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
 
@@ -151,6 +154,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);
@@ -167,6 +171,7 @@ final class RegistrationsListTest extends TestCase
      */
     public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);

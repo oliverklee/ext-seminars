@@ -25,6 +25,7 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -532,18 +533,19 @@ class RegistrationManager extends TemplateHelper
             $availablePaymentMethods = $event->getPaymentMethods();
             if (!$availablePaymentMethods->isEmpty()) {
                 if ($availablePaymentMethods->count() == 1) {
+                    /** @var PaymentMethod|null $paymentMethod */
                     $paymentMethod = $availablePaymentMethods->first();
                 } else {
                     $paymentMethodUid = isset($formData['method_of_payment'])
                         ? max(0, (int)$formData['method_of_payment']) : 0;
-                    if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
+                    if ($paymentMethodUid > 0 && $availablePaymentMethods->hasUid($paymentMethodUid)) {
                         $mapper = MapperRegistry::get(PaymentMethodMapper::class);
                         $paymentMethod = $mapper->find($paymentMethodUid);
                     }
                 }
+                $registration->setPaymentMethod($paymentMethod);
             }
         }
-        $registration->setPaymentMethod($paymentMethod);
 
         $accountNumber = isset($formData['account_number'])
             ? strip_tags($this->unifyWhitespace($formData['account_number'])) : '';

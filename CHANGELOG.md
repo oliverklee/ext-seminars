@@ -46,7 +46,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the typo3/cms-lang dependency (#980)
 - Provide a page to the fake frontend where needed (#969)
 - Add more type declarations
-  (#967, #968, #970, #971, #972, #973, #977, #983, #984, #985, #988, #989, #991, #993, #994, #998, #1037, #1046)
+  (#967, #968, #970, #971, #972, #973, #977, #983, #984, #985, #988, #989, #991, #993, #994, #998, #1037, #1046, #1048)
 - Stop treating a model PID as current BE page ID (#963)
 - Complete `extras/typo3-cms` in the `composer.json` (#918)
 - Stop using a deprecated testing framework parameter (#880, #881)

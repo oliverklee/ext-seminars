@@ -203,10 +203,9 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertSame(
-            $this->organizer->getEmailAddress(),
-            \key($this->email->getReplyTo())
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame($this->organizer->getEmailAddress(), \key($replyTo));
     }
 
     /**

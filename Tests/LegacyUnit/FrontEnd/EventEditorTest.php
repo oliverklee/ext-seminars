@@ -2020,10 +2020,9 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertSame(
-            ['mail@foo.com' => 'Mr. Bar'],
-            $this->email->getReplyTo()
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $replyTo);
     }
 
     /**
@@ -2230,10 +2229,9 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertSame(
-            ['mail@foo.com' => 'Mr. Bar'],
-            $this->email->getReplyTo()
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $replyTo);
     }
 
     /**
