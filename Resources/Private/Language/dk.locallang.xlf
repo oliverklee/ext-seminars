@@ -2054,18 +2054,6 @@ This event now has been confirmed.</source>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>I øjeblikket tilbyder vi ingen kategoriserede arrangementer.</target>
 			</trans-unit>
-			<trans-unit id="label_delete" xml:space="preserve">
-				<source>Mark to delete</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_really_delete" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_really_delete_informal" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_owner" xml:space="preserve">
 				<source>Event manager</source>
 				<target></target>

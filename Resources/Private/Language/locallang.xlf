@@ -1569,15 +1569,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_no_categories" xml:space="preserve">
 				<source>Currently, we aren't offering any categorized events.</source>
 			</trans-unit>
-			<trans-unit id="label_delete" xml:space="preserve">
-				<source>Mark to delete</source>
-			</trans-unit>
-			<trans-unit id="label_really_delete" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-			</trans-unit>
-			<trans-unit id="label_really_delete_informal" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-			</trans-unit>
 			<trans-unit id="label_owner" xml:space="preserve">
 				<source>Event manager</source>
 			</trans-unit>

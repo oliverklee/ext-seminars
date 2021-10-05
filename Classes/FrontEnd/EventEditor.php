@@ -42,7 +42,6 @@ use OliverKlee\Seminars\Model\Skill;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TargetGroup;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -58,11 +57,6 @@ class EventEditor extends AbstractEditor
      * @var string stores a validation error message if there was one
      */
     private $validationError = '';
-
-    /**
-     * @var string[] currently attached files
-     */
-    private $attachedFiles = [];
 
     /**
      * @var string the prefix used for every subpart in the FE editor
@@ -114,26 +108,6 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Stores the currently attached files.
-     *
-     * Attached files are stored in a member variable and added to the form data
-     * afterwards, as the FORMidable renderlet is not usable for this.
-     */
-    private function storeAttachedFiles(): void
-    {
-        if ($this->isTestMode()) {
-            $this->attachedFiles = [];
-        } else {
-            $dataHandler = $this->getFormCreator()->getDataHandler();
-            $this->attachedFiles = GeneralUtility::trimExplode(
-                ',',
-                (string)$dataHandler->__aStoredData['attached_files'],
-                true
-            );
-        }
-    }
-
-    /**
      * Declares the additional data handler for m:n relations.
      */
     private function declareDataHandler(): void
@@ -154,8 +128,6 @@ class EventEditor extends AbstractEditor
     {
         $this->setFormConfiguration((array)$this->conf['form.']['eventEditor.']);
         $this->declareDataHandler();
-
-        $this->storeAttachedFiles();
 
         /** @var Template $template */
         $template = GeneralUtility::makeInstance(Template::class);
@@ -181,60 +153,17 @@ class EventEditor extends AbstractEditor
     /**
      * Returns the complete HTML for the FE editor.
      *
-     * As FORMidable does not provide any formatting for the list of
-     * attachments and saves the list with the first letter snipped, we provide
-     * our own formatted list to ensure correctly displayed attachments, even if
-     * there was a validation error.
-     *
      * @param Template $template holds the raw HTML output, must be already processed by FORMidable
      *
-     * @return string HTML for the FE editor with the formatted attachment
-     *                list if there are attached files, will not be empty
+     * @return string HTML for the FE editor
      */
     private function getHtmlWithAttachedFilesList(Template $template): string
     {
-        foreach (
-            [
-                'label_delete',
-                'label_really_delete',
-                'label_save',
-                'label_save_and_back',
-            ] as $label
-        ) {
+        foreach (['label_save', 'label_save_and_back'] as $label) {
             $template->setMarker($label, $this->translate($label));
         }
 
-        /** @var \tx_ameosformidable $form */
-        $form = $this->getFormCreator()->getDataHandler()->oForm;
-        /** @var \formidable_mainrenderlet $renderlet */
-        $renderlet = $form->aORenderlets['attached_files'];
-        $originalAttachmentList = $renderlet->mForcedValue;
-
-        if (empty($this->attachedFiles)) {
-            $template->hideSubparts('attached_files');
-        } else {
-            $attachmentList = '';
-            $fileNumber = 1;
-            foreach ($this->attachedFiles as $fileName) {
-                $template->setMarker('file_name', $fileName);
-                $template->setMarker(
-                    'single_attached_file_id',
-                    'attached_file_' . $fileNumber
-                );
-                $fileNumber++;
-                $attachmentList .= $template->getSubpart('SINGLE_ATTACHED_FILE');
-            }
-            $template->setSubpart('single_attached_file', $attachmentList);
-        }
-
-        $result = $template->getSubpart();
-
-        // Removes FORMidable's original attachment list from the result.
-        if ($originalAttachmentList != '') {
-            $result = str_replace($originalAttachmentList . '<br />', '', $result);
-        }
-
-        return $result;
+        return $template->getSubpart();
     }
 
     /**
@@ -637,37 +566,17 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Gets the URL of the page that should be displayed when an event has been
-     * successfully created.
+     * Gets the URL of the page that should be displayed when an event has been successfully created.
      *
-     * An URL of the FE editor's page is returned if "submit_and_stay" was
-     * clicked.
+     * An URL of the FE editor's page is returned if "submit_and_stay" was clicked.
      *
-     * @return string complete URL of the FE page with a message or, if
-     *                "submit_and_stay" was clicked, of the current page
+     * @return string complete URL of the FE page with a message or, if "submit_and_stay" was clicked, of the current page
      */
     public function getEventSuccessfullySavedUrl(): string
     {
-        $additionalParameters = '';
+        $pageId = $this->getConfValueInteger('eventSuccessfullySavedPID', 's_fe_editing');
 
-        if ($this->getFormValue('proceed_file_upload')) {
-            $additionalParameters = GeneralUtility::implodeArrayForUrl(
-                $this->prefixId,
-                ['seminar' => $this->getObjectUid()]
-            );
-            $pageId = (int)$this->getFrontEndController()->id;
-        } else {
-            $pageId = $this->getConfValueInteger('eventSuccessfullySavedPID', 's_fe_editing');
-        }
-
-        return GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL(
-                [
-                    'parameter' => $pageId,
-                    'additionalParams' => $additionalParameters,
-                ]
-            )
-        );
+        return GeneralUtility::locationHeaderUrl($this->cObj->typoLink_URL(['parameter' => $pageId]));
     }
 
     /**
@@ -760,42 +669,14 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Processes the deletion of attached files and sets the form value for
-     * "attached_files" to the locally stored value for this field.
-     *
-     * This is done because when FORMidable processes the upload renderlet,
-     * the first character of the string might get lost. In addition, with
-     * FORMidable, it is possible to store the name of an invalid file in the
-     * list of attachments.
-     *
-     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
-     */
-    private function processAttachments(array &$formData): void
-    {
-        /** @var string $deleteAttachedFiles */
-        $deleteAttachedFiles = $formData['delete_attached_files'];
-        $filesToDelete = GeneralUtility::trimExplode(',', $deleteAttachedFiles, true);
-
-        foreach ($filesToDelete as $fileName) {
-            // saves other files in the upload folder from being deleted
-            if (in_array($fileName, $this->attachedFiles, true)) {
-                $this->purgeUploadedFile($fileName);
-            }
-        }
-
-        $formData['attached_files'] = implode(',', $this->attachedFiles);
-    }
-
-    /**
      * Removes all form data elements that are no fields in the seminars table.
      *
      * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
      */
     private function purgeNonSeminarsFields(array &$formData): void
     {
-        /** @var string[][] $fieldsToUnset */
+        /** @var array<string, array<int, string>> $fieldsToUnset */
         $fieldsToUnset = [
-            '' => ['proceed_file_upload', 'delete_attached_files'],
             'newPlace_' => [
                 'title',
                 'address',
@@ -850,18 +731,8 @@ class EventEditor extends AbstractEditor
             ],
             'newCheckbox_' => ['title'],
             'editCheckbox_' => ['title', 'uid'],
-            'newTargetGroup_' => [
-                'title',
-                'uid',
-                'minimum_age',
-                'maximum_age',
-            ],
-            'editTargetGroup_' => [
-                'title',
-                'uid',
-                'minimum_age',
-                'maximum_age',
-            ],
+            'newTargetGroup_' => ['title', 'uid', 'minimum_age', 'maximum_age'],
+            'editTargetGroup_' => ['title', 'uid', 'minimum_age', 'maximum_age'],
         ];
 
         foreach ($fieldsToUnset as $prefix => $keys) {
@@ -943,13 +814,12 @@ class EventEditor extends AbstractEditor
      *
      * @return array modified form data, will not be empty
      *
-     * @see unifyDecimalSeparators(), processAttachments(), purgeNonSeminarsFields(), addAdministrativeData()
+     * @see unifyDecimalSeparators(), purgeNonSeminarsFields(), addAdministrativeData()
      */
     public function modifyDataToInsert(array $formData): array
     {
         $modifiedFormData = $formData;
 
-        $this->processAttachments($modifiedFormData);
         $this->purgeNonSeminarsFields($modifiedFormData);
         $this->unifyDecimalSeparators($modifiedFormData);
         $this->addAdministrativeData($modifiedFormData);
@@ -959,109 +829,6 @@ class EventEditor extends AbstractEditor
         $this->savedFormData = $modifiedFormData;
 
         return $modifiedFormData;
-    }
-
-    /**
-     * Checks whether the provided file is of an allowed type and size. If it
-     * is, it is appended to the list of already attached files. If not, the
-     * file deleted becomes from the upload directory and the validation error
-     * is stored in $this->validationError.
-     *
-     * This check is done here because the FORMidable validators do not allow
-     * multiple error messages.
-     *
-     * @param string[] $valueToCheck form data to check, must not be empty
-     *
-     * @return bool TRUE if the provided file is valid, FALSE otherwise
-     */
-    public function checkFile(array $valueToCheck): bool
-    {
-        $this->validationError = '';
-
-        // If these values match, no files have been uploaded and we need no
-        // further check.
-        if ($valueToCheck['value'] == implode(',', $this->attachedFiles)) {
-            return true;
-        }
-
-        $values = GeneralUtility::trimExplode(',', $valueToCheck['value'], true);
-        $fileToCheck = array_pop($values);
-        $this->checkFileSize($fileToCheck);
-        $this->checkFileType($fileToCheck);
-
-        // If there is a validation error, the upload has to be done again.
-        if (
-            ($this->validationError == '')
-            && ($this->isTestMode() || $this->getFormCreator()->getValidationTool()->isAllValid())
-        ) {
-            $this->attachedFiles[] = $fileToCheck;
-        } else {
-            $this->purgeUploadedFile($fileToCheck);
-        }
-
-        return $this->validationError == '';
-    }
-
-    /**
-     * Checks whether an uploaded file is of a valid type.
-     *
-     * @param string $fileName file name, must match an uploaded file, must not be empty
-     */
-    private function checkFileType(string $fileName): void
-    {
-        $allowedExtensions = $this->getConfValueString(
-            'allowedExtensionsForUpload',
-            's_fe_editing'
-        );
-
-        if (!preg_match('/^.+\\.(' . str_replace(',', '|', $allowedExtensions) . ')$/i', $fileName)) {
-            $this->validationError = $this->translate('message_invalid_type') .
-                ' ' . str_replace(',', ', ', $allowedExtensions) . '.';
-        }
-    }
-
-    /**
-     * Checks whether an uploaded file is not too large.
-     *
-     * @param string $fileName file name, must match an uploaded file, must not be empty
-     */
-    private function checkFileSize(string $fileName): void
-    {
-        $maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
-
-        $fileSize = filesize($fileName);
-
-        if ($fileSize > ($maximumFileSize * 1024)) {
-            $this->validationError = $this->translate('message_file_too_large') . ' ' . $maximumFileSize . 'kB.';
-        }
-    }
-
-    /**
-     * Deletes a file in the seminars upload directory and removes it from the
-     * list of currently attached files.
-     *
-     * @param string $fileName file name, must match an uploaded file, must not be empty
-     */
-    private function purgeUploadedFile(string $fileName): void
-    {
-        $fullPath = Environment::getPublicPath() . '/uploads/tx_seminars/' . $fileName;
-        @unlink($fullPath);
-        $keyToPurge = array_search($fileName, $this->attachedFiles, true);
-        if ($keyToPurge !== false) {
-            /** @var string|int $keyToPurge */
-            unset($this->attachedFiles[$keyToPurge]);
-        }
-    }
-
-    /**
-     * Returns an error message if the provided file was invalid.
-     *
-     * @return string localized validation error message, will be empty if
-     *                $this->validationError was empty
-     */
-    public function getFileUploadErrorMessage(): string
-    {
-        return $this->validationError;
     }
 
     /**

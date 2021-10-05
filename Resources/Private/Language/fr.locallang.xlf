@@ -2064,18 +2064,6 @@ This event now has been confirmed.</source>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Pour l'instant, nous ne proposons aucun événement catégorisé.</target>
 			</trans-unit>
-			<trans-unit id="label_delete" xml:space="preserve">
-				<source>Mark to delete</source>
-				<target>Marquer pour effacement</target>
-			</trans-unit>
-			<trans-unit id="label_really_delete" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target>Voulez-vous réellement marquer cet attachement comme étant à effacer ?</target>
-			</trans-unit>
-			<trans-unit id="label_really_delete_informal" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target>Veux-tu réellement marquer cet attachement comme étant à effacer ?</target>
-			</trans-unit>
 			<trans-unit id="label_owner" xml:space="preserve">
 				<source>Event manager</source>
 				<target>Responsable de l'événement</target>

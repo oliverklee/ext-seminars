@@ -154,31 +154,6 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertStringContainsString('?id=' . $targetPageUid, $result);
     }
 
-    /**
-     * @test
-     */
-    public function getEventSuccessfullySavedUrlForProceedUploadReturnsCurrentPageUidAsTargetUid(): void
-    {
-        $this->subject->setFakedFormValue('proceed_file_upload', 1);
-
-        $result = $this->subject->getEventSuccessfullySavedUrl();
-
-        self::assertStringContainsString('?id=' . self::CURRENT_PAGE_UID, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getEventSuccessfullySavedUrlForProceedUploadReturnsSeminarToEditAsLinkParameter(): void
-    {
-        $this->subject->setFakedFormValue('proceed_file_upload', 1);
-        $this->subject->setObjectUid(self::EVENT_UID);
-
-        $result = $this->subject->getEventSuccessfullySavedUrl();
-
-        self::assertStringContainsString('tx_seminars_pi1%5Bseminar%5D=' . self::EVENT_UID, $result);
-    }
-
     // Tests concerning populateListOrganizers().
 
     /**

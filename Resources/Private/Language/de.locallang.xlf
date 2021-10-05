@@ -2106,18 +2106,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</target>
 			</trans-unit>
-			<trans-unit id="label_delete" xml:space="preserve">
-				<source>Mark to delete</source>
-				<target>Zum Löschen markieren</target>
-			</trans-unit>
-			<trans-unit id="label_really_delete" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target>Möchten Sie diese Datei wirklich zum Löschen markieren?</target>
-			</trans-unit>
-			<trans-unit id="label_really_delete_informal" xml:space="preserve">
-				<source>Do you really want to mark this attachment for deletion?</source>
-				<target>Möchtest du diese Datei wirklich zum Löschen markieren?</target>
-			</trans-unit>
 			<trans-unit id="label_owner" xml:space="preserve">
 				<source>Event manager</source>
 				<target>Verwalter dieser Veranstaltung</target>
