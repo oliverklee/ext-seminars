@@ -853,17 +853,14 @@ final class LegacyRegistrationTest extends TestCase
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
-        $foods = ['foo' => 'foo', 'bar' => 'bar'];
+        $foods = [1, 2, 3];
         $this->subject->setRegistrationData(
             $this->subject->getSeminarObject(),
             $userUid,
             ['foods' => $foods]
         );
 
-        self::assertSame(
-            $foods,
-            $this->subject->getFoodsUids()
-        );
+        self::assertSame($foods, $this->subject->getFoodsUids());
     }
 
     /**
@@ -905,17 +902,14 @@ final class LegacyRegistrationTest extends TestCase
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
-        $lodgings = ['foo' => 'foo', 'bar' => 'bar'];
+        $lodgings = [1, 2, 3];
         $this->subject->setRegistrationData(
             $this->subject->getSeminarObject(),
             $userUid,
             ['lodgings' => $lodgings]
         );
 
-        self::assertSame(
-            $lodgings,
-            $this->subject->getLodgingsUids()
-        );
+        self::assertSame($lodgings, $this->subject->getLodgingsUids());
     }
 
     /**
@@ -957,17 +951,14 @@ final class LegacyRegistrationTest extends TestCase
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
-        $checkboxes = ['foo' => 'foo', 'bar' => 'bar'];
+        $checkboxes = [1, 2, 3];
         $this->subject->setRegistrationData(
             $this->subject->getSeminarObject(),
             $userUid,
             ['checkboxes' => $checkboxes]
         );
 
-        self::assertSame(
-            $checkboxes,
-            $this->subject->getCheckboxesUids()
-        );
+        self::assertSame($checkboxes, $this->subject->getCheckboxesUids());
     }
 
     /**

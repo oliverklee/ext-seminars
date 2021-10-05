@@ -379,7 +379,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForHookSetInConfigurationCallsThisHook(): void
     {
-        $salutationHookMock = $this->createPartialMock(\stdClass::class, ['modifySalutation']);
+        $salutationHookMock = $this->createMock(EmailSalutationHookInterface::class);
         $hookClassName = \get_class($salutationHookMock);
         $frontendUser = $this->createFrontEndUser();
         $salutationHookMock->expects(self::atLeastOnce())->method('modifySalutation')->with(

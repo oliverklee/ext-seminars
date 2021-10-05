@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -82,7 +83,7 @@ class RegistrationForm extends AbstractEditor
     private $seminar = null;
 
     /**
-     * @var LegacyRegistration
+     * @var LegacyRegistration|null
      */
     protected $registration = null;
 
@@ -366,6 +367,7 @@ class RegistrationForm extends AbstractEditor
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
         $userGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
+        /** @var Collection<FrontEndUserGroup> $userGroups */
         $userGroups = new Collection();
         $userGroupUids = GeneralUtility::intExplode(
             ',',
@@ -1005,7 +1007,7 @@ class RegistrationForm extends AbstractEditor
     /**
      * Ensures that the parameter is an array. If it is no array yet, it will be changed to an empty array.
      *
-     * @param mixed &$data variable that should be ensured to be an array
+     * @param mixed $data variable that should be ensured to be an array
      */
     protected function ensureArray(&$data): void
     {
@@ -1391,9 +1393,17 @@ class RegistrationForm extends AbstractEditor
         return !empty($formData['value']) || !$this->hasFoods();
     }
 
+    /**
+     * @throws \BadMethodCallException if this method is called without a logged-in FE user
+     */
     protected function getLoggedInUser(): FrontEndUser
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        if (!$user instanceof FrontEndUser) {
+            throw new \BadMethodCallException('No user logged in.', 1633436053);
+        }
+
+        return $user;
     }
 
     /**

@@ -119,7 +119,7 @@ final class RegistrationManagerTest extends TestCase
     private $frontEndUserMapper = null;
 
     /**
-     * @var array<int, class-string>
+     * @var array<int, class-string<MockObject>>
      */
     private $mockedClassNames = [];
 
@@ -2378,10 +2378,9 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertSame(
-            ['mail@example.com' => 'test organizer'],
-            $this->email->getReplyTo()
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame(['mail@example.com' => 'test organizer'], $replyTo);
     }
 
     /**
@@ -4771,10 +4770,9 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyOrganizers($registration);
 
-        self::assertSame(
-            ['mail@example.com' => 'test organizer'],
-            $this->email->getReplyTo()
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame(['mail@example.com' => 'test organizer'], $replyTo);
     }
 
     /**

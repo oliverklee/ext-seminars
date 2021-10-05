@@ -59,7 +59,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     public $registrationFieldKeys = [];
 
     /**
-     * @var array<int, class-string>
+     * @var array<int, class-string<MockObject>>
      */
     private $mockedClassNames = [];
 
@@ -179,6 +179,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      */
     public function addMockedInstanceAddsClassnameToList(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
 
@@ -195,6 +196,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      */
     public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
 
@@ -208,6 +210,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      */
     public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);
@@ -224,6 +227,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      */
     public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer(): void
     {
+        /** @var MockObject $mockedInstance */
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);

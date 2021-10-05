@@ -76,7 +76,9 @@ final class EmailTraitTest extends UnitTestCase
         $mock = $this->createEmailMock();
         $mock->setReplyTo('max@example.com', 'Max');
 
-        self::assertSame(['max@example.com' => 'Max'], $mock->getReplyTo());
+        /** @var array<string, string> $replyTo */
+        $replyTo = $mock->getReplyTo();
+        self::assertSame(['max@example.com' => 'Max'], $replyTo);
     }
 
     /**

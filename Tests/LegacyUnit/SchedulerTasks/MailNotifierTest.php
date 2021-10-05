@@ -1139,10 +1139,9 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertSame(
-            ['MrTest@example.com' => 'Mr. Test'],
-            $this->email->getReplyTo()
-        );
+        /** @var array<string, string> $replyTo */
+        $replyTo = $this->email->getReplyTo();
+        self::assertSame(['MrTest@example.com' => 'Mr. Test'], $replyTo);
     }
 
     /**
