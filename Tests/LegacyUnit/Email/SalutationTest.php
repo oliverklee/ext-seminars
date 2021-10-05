@@ -11,7 +11,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \OliverKlee\Seminar\Email\Salutation
+ * @covers \OliverKlee\Seminars\Email\Salutation
  */
 final class SalutationTest extends TestCase
 {

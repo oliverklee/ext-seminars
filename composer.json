@@ -67,9 +67,9 @@
 		"typo3-ter/seminars": "self.version"
 	},
 	"autoload": {
-		"classmap": [
-			"Classes"
-		]
+		"psr-4": {
+			"OliverKlee\\Seminars\\": "Classes/"
+		}
 	},
 	"autoload-dev": {
 		"psr-4": {

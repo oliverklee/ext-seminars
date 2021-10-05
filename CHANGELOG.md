@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Switch the autoloading to PSR-4 (#1052)
 - Enable the sniff for namespaced classes (#1044)
 - !!! Namespace all classes
   (#1004, #1005, #1007, #1010, #1011, #1012, #1014, #1016, #1017, #1019, #1020, #1021, #1025, #1026, #1028, #1029, #1031, #1032, #1033, #1034, #1035, #1036, #1038, #1039, #1040, #1042, #1043)
