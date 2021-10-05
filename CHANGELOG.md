@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add more type declarations (#887)
 - Use the new configuration classes
   (#725, #910, #913, #914, #915, #916, #917, #919, #922, #927, #928, #930, #966)
-- Require oelib >= 3.6.2 (#877)
+- Require oelib >= 3.6.3 (#877, #1047)
 - Use the Core email functions (#674, #874)
 - Package and use Emogrifier for inlining CSS into HTML emails (#863)
 - Update `simshaun/recurr` to version 5.0.0 (#862)

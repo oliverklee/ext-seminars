@@ -30,7 +30,7 @@
 		"ext-pdo": "*",
 		"digedag/rn-base": "^1.13.13",
 		"dmk/mkforms": "^9.5.2 || ^10.0.1",
-		"oliverklee/oelib": "^3.6.2",
+		"oliverklee/oelib": "^3.6.3",
 		"pelago/emogrifier": "^4.0.0",
 		"psr/http-message": "^1.0",
 		"simshaun/recurr": "^5.0.0",
