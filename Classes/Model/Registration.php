@@ -217,6 +217,7 @@ class Registration extends AbstractModel implements Titled
      */
     public function setAdditionalPersons(Collection $persons): void
     {
+        /** @var Collection<AbstractModel> $persons */
         $this->set('additional_persons', $persons);
     }
 

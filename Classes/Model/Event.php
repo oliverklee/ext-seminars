@@ -9,6 +9,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -997,6 +998,7 @@ class Event extends AbstractTimeSpan implements Titled
             );
         }
 
+        /** @var Collection<AbstractModel> $paymentMethods */
         $this->set('payment_methods', $paymentMethods);
     }
 
@@ -1506,6 +1508,7 @@ class Event extends AbstractTimeSpan implements Titled
      */
     public function setRegistrations(Collection $registrations): void
     {
+        /** @var Collection<AbstractModel> $registrations */
         $this->set('registrations', $registrations);
     }
 
