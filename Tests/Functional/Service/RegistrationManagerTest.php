@@ -21,9 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 final class RegistrationManagerTest extends FunctionalTestCase
 {
     use LanguageHelper;
-
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**

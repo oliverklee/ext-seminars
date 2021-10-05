@@ -207,8 +207,7 @@ final class EventTopicMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
-        $paymentMethod = MapperRegistry::
-        get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -252,8 +251,7 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => Event::TYPE_TOPIC]
         );
-        $targetGroup = MapperRegistry::
-        get(TargetGroupMapper::class)->getNewGhost();
+        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
@@ -277,8 +275,7 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => Event::TYPE_TOPIC]
         );
-        $targetGroup = MapperRegistry::
-        get(TargetGroupMapper::class)->getNewGhost();
+        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,

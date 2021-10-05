@@ -108,8 +108,7 @@ final class RegistrationMapperTest extends TestCase
      */
     public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser(): void
     {
-        $frontEndUser = MapperRegistry::
-        get(FrontEndUserMapper::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());
@@ -132,8 +131,7 @@ final class RegistrationMapperTest extends TestCase
      */
     public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance(): void
     {
-        $paymentMethod = MapperRegistry::
-        get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertInstanceOf(PaymentMethod::class, $testingModel->getPaymentMethod());

@@ -18,9 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 final class CancelEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
-
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**
