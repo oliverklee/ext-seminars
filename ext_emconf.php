@@ -31,8 +31,8 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'typo3-coding@oliverklee.de',
     'author_company' => 'oliverklee.de',
     'autoload' => [
-        'classmap' => [
-            'Classes',
+        'psr-4' => [
+            'OliverKlee\\Seminars\\' => 'Classes/',
         ],
     ],
     'autoload-dev' => [

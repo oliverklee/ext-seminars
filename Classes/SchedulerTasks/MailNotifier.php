@@ -18,7 +18,6 @@ use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
-use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Localization\LanguageService;

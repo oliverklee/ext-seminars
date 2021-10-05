@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
-use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
