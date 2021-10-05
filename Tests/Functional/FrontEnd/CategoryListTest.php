@@ -17,7 +17,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class CategoryListTest extends FunctionalTestCase
 {
     use FalHelper;
-
     use LanguageHelper;
 
     /**

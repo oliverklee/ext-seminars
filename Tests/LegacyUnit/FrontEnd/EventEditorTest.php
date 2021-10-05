@@ -29,9 +29,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class EventEditorTest extends TestCase
 {
     use LanguageHelper;
-
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**

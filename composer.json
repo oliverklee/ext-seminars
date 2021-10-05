@@ -42,7 +42,7 @@
 		"typo3/cms-frontend": "^9.5"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^3.1.0",
+		"friendsofphp/php-cs-fixer": "^3.2.1",
 		"helhum/typo3-console": "^5.8.6",
 		"helmich/typo3-typoscript-lint": "^1.5.0 || ^2.3.0",
 		"mikey179/vfsstream": "^1.6.8",

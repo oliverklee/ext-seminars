@@ -28,7 +28,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 final class EmailServiceTest extends TestCase
 {
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**

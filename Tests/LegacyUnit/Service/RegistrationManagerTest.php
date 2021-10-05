@@ -48,9 +48,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class RegistrationManagerTest extends TestCase
 {
     use LanguageHelper;
-
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**

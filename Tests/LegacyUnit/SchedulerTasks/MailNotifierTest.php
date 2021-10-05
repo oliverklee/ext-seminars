@@ -37,7 +37,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 final class MailNotifierTest extends TestCase
 {
     use EmailTrait;
-
     use MakeInstanceTrait;
 
     /**
