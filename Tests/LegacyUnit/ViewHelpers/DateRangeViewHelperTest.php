@@ -6,11 +6,11 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper
@@ -20,81 +20,32 @@ final class DateRangeViewHelperTest extends TestCase
     use LanguageHelper;
 
     /**
-     * @var DateRangeViewHelper
-     */
-    private $subject;
-
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
-
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
-
-    /**
      * @var int some random date (2001-01-01 00:00:00 UTC)
      */
     private const BEGIN_DATE = 978307200;
 
     /**
-     * @var string
+     * @var DateRangeViewHelper
      */
-    private const DATE_FORMAT_YMD = '%d.%m.%Y';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_Y = '%Y';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_M = '%m.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_MD = '%d.%m.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_D = '%d.';
+    private $subject;
 
     protected function setUp(): void
     {
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
 
-        $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
-
-        $this->configuration = new DummyConfiguration();
-        $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
-        $this->configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
-        $this->configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);
-        $this->configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
-        $this->configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
-
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+        $configuration = new DummyConfiguration(['dateFormatYMD' => '%d.%m.%Y']);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->subject = new DateRangeViewHelper();
-    }
-
-    protected function tearDown(): void
-    {
-        $this->testingFramework->cleanUp();
     }
 
     /**
      * @test
      */
-    public function renderWithTimeSpanWithNoDatesReturnMessageWillBeAnnounced(): void
+    public function renderWithNoDatesReturnsWillBeAnnounced(): void
     {
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setData([]);
 
@@ -107,14 +58,14 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginDateOnlyRendersOnlyBeginDate(): void
+    public function renderWithBeginDateOnlyRendersOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
+            strftime('%d.%m.%Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -122,15 +73,15 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithEqualBeginAndEndDateReturnsOnlyBeginDate(): void
+    public function renderWithEqualBeginAndEndDateReturnsOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
+            strftime('%d.%m.%Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -138,15 +89,15 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnSameDayReturnsOnlyBeginDate(): void
+    public function renderWithBeginAndEndDateOnSameDayReturnsOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
 
         self::assertEquals(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
+            strftime('%d.%m.%Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -154,18 +105,16 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedByDash(): void
+    public function renderWithBeginAndEndDateOnDifferentDaysReturnsBothFullDatesSeparatedByDash(): void
     {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', false);
-
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
         self::assertEquals(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
+            strftime('%d.%m.%Y', self::BEGIN_DATE) . '&#8211;' . strftime('%d.%m.%Y', $endDate),
             $this->subject->render($timeSpan)
         );
     }
@@ -173,76 +122,18 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysButSameMonthWithAbbreviateDateRangeTrueReturnsOnlyDayOfBeginDateAndFullEndDateSeparatedByDash(): void
+    public function renderWithBeginAndEndDateOnDifferentDaysReturnsBothFullDatesSeparatedBySpecifiedDash(): void
     {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', true);
-
-        /** @var AbstractTimeSpan $timeSpan */
-        $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
-        $endDate = self::BEGIN_DATE + (2 * 86400);
-        $timeSpan->setEndDateAsUnixTimeStamp($endDate);
-
-        self::assertEquals(
-            strftime(self::DATE_FORMAT_D, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->subject->render($timeSpan)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentMonthWithAbbreviateDateRangeTrueReturnsDayAndMonthOfBeginDateAndFullEndDateSeparatedByDash(): void
-    {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', true);
-
-        /** @var AbstractTimeSpan $timeSpan */
-        $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
-        $endDate = self::BEGIN_DATE + (32 * 86400);
-        $timeSpan->setEndDateAsUnixTimeStamp($endDate);
-
-        self::assertEquals(
-            strftime(self::DATE_FORMAT_MD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->subject->render($timeSpan)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentYearsWithAbbreviateDateRangeTrueReturnsFullBeginDateAndFullEndDateSeparatedByDash(): void
-    {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', true);
-
-        /** @var AbstractTimeSpan $timeSpan */
-        $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
-        $endDate = self::BEGIN_DATE + (366 * 86400);
-        $timeSpan->setEndDateAsUnixTimeStamp($endDate);
-
-        self::assertEquals(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->subject->render($timeSpan)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedBySpecifiedDash(): void
-    {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', false);
         $dash = '#DASH#';
 
-        /** @var AbstractTimeSpan $timeSpan */
+        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
         self::assertEquals(
-            strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . $dash . strftime(self::DATE_FORMAT_YMD, $endDate),
+            strftime('%d.%m.%Y', self::BEGIN_DATE) . $dash . strftime('%d.%m.%Y', $endDate),
             $this->subject->render($timeSpan, $dash)
         );
     }

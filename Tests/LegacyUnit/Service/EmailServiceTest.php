@@ -36,26 +36,6 @@ final class EmailServiceTest extends TestCase
     private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
     /**
-     * @var string
-     */
-    private const DATE_FORMAT_Y = '%Y';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_M = '%m.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_MD = '%d.%m.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_D = '%d.';
-
-    /**
      * @var EmailService
      */
     private $subject = null;
@@ -95,13 +75,7 @@ final class EmailServiceTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new DummyConfiguration();
-        $configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
-        $configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
-        $configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);
-        $configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
-        $configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
-
+        $configuration = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT_YMD]);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->email = $this->createEmailMock();

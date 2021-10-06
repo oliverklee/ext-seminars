@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the feature for abbreviated date ranges (#1057)
 - Drop time zones and use floating dates for iCal (#1054)
 - Remove the file upload from the FE editor (#1053)
 - Drop the unused `TimeRangeViewHelper` (#1006)

@@ -35,11 +35,6 @@ final class SalutationTest extends TestCase
     /**
      * @var string
      */
-    private const DATE_FORMAT_DAY = '%d';
-
-    /**
-     * @var string
-     */
     private const TIME_FORMAT = '%H:%M';
 
     /**
@@ -48,7 +43,6 @@ final class SalutationTest extends TestCase
     private const CONFIGURATION = [
         'salutation' => 'formal',
         'dateFormatYMD' => self::DATE_FORMAT,
-        'dateFormatD' => self::DATE_FORMAT_DAY,
         'timeFormat' => self::TIME_FORMAT,
     ];
 
@@ -461,7 +455,6 @@ final class SalutationTest extends TestCase
      */
     public function createIntroductionForEventWithBeginAndEndDateOnDifferentDaysReturnsEventsDateFromTo(): void
     {
-        $this->configuration->setAsBoolean('abbreviateDateRanges', true);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -472,7 +465,7 @@ final class SalutationTest extends TestCase
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
-            \strftime(self::DATE_FORMAT_DAY, $GLOBALS['SIM_EXEC_TIME']) . '-' .
+            \strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME']) . '-' .
             strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY),
             $this->subject->createIntroduction('%s', $event)
         );
