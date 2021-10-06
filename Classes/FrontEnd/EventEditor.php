@@ -147,7 +147,7 @@ class EventEditor extends AbstractEditor
             $template->hideSubparts('submit_and_stay');
         }
 
-        return $this->getHtmlWithAttachedFilesList($template);
+        return $this->renderHtmlWithLabels($template);
     }
 
     /**
@@ -157,7 +157,7 @@ class EventEditor extends AbstractEditor
      *
      * @return string HTML for the FE editor
      */
-    private function getHtmlWithAttachedFilesList(Template $template): string
+    private function renderHtmlWithLabels(Template $template): string
     {
         foreach (['label_save', 'label_save_and_back'] as $label) {
             $template->setMarker($label, $this->translate($label));
@@ -930,7 +930,6 @@ class EventEditor extends AbstractEditor
                 'checkboxes' => false,
                 'uses_terms_2' => false,
             ],
-            'attached_file_box' => false,
             'notes' => false,
         ];
     }
