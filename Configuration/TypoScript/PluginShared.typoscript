@@ -69,23 +69,8 @@ plugin.tx_seminars {
     # the time format (in strftime format)
     timeFormat = %H:%M
 
-    # the strftime format code to extract the year from a date string
-    dateFormatY = %Y
-
-    # the strftime format code to extract the month from a date string
-    dateFormatM = %m.
-
-    # the strftime format code to extract the day of month from a date string
-    dateFormatD = %d.
-
     # the strftime format code for the full date
     dateFormatYMD = %d.%m.%Y
-
-    # the strftime format code for the month and day of month
-    dateFormatMD = %d.%m.
-
-    # whether date ranges should be shortened when possible
-    abbreviateDateRanges = 1
 
     # ISO 4217 alpha 3 code of the currency to be used, must be valid
     currency = EUR

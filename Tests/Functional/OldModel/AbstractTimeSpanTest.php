@@ -30,36 +30,11 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
     /**
-     * @var string
-     */
-    private const DATE_FORMAT_MD = '%d.%m.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_D = '%d.';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_M = '%m';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_Y = '%Y';
-
-    /**
      * @var array<string, string|bool>
      */
     private const CONFIGURATION = [
         'timeFormat' => self::TIME_FORMAT,
         'dateFormatYMD' => self::DATE_FORMAT_YMD,
-        'dateFormatMD' => self::DATE_FORMAT_MD,
-        'dateFormatD' => self::DATE_FORMAT_D,
-        'dateFormatM' => self::DATE_FORMAT_M,
-        'dateFormatY' => self::DATE_FORMAT_Y,
-        'abbreviateDateRanges' => true,
     ];
 
     /**
@@ -315,7 +290,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 3, 2010));
 
         self::assertSame(
-            '01.&#8211;03.01.2010',
+            '01.01.2010&#8211;03.01.2010',
             $this->subject->getDate()
         );
     }
@@ -403,7 +378,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::once())->method('modifyDateSpan')
-            ->with('01.&#8211;03.01.2010', $this->subject, '&#8211;')
+            ->with('01.01.2010&#8211;03.01.2010', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
         $hook->expects(self::never())->method('modifyTimeSpan');
 

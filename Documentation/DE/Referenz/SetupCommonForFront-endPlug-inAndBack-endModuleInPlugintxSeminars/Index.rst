@@ -430,54 +430,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Eigenschaft
-         dateFormatY
-
-   Datentyp
-         string
-
-   Beschreibung
-         the  *strftime* format code to extract the year from a date string
-         *(usually this shouldn't be changed)*
-
-   Standardwert
-         %Y
-
-
-.. container:: table-row
-
-   Eigenschaft
-         dateFormatM
-
-   Datentyp
-         string
-
-   Beschreibung
-         the  *strftime* format code to extract the month from a date string
-         *(usually this shouldn't be changed)*
-
-   Standardwert
-         %m.
-
-
-.. container:: table-row
-
-   Eigenschaft
-         dateFormatD
-
-   Datentyp
-         string
-
-   Beschreibung
-         the  *strftime* format code to extract the day of month from a date
-         string *(usually this shouldn't be changed)*
-
-   Standardwert
-         %d.
-
-
-.. container:: table-row
-
-   Eigenschaft
          dateFormatYMD
 
    Datentyp
@@ -489,39 +441,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Standardwert
          %d.%m.%Y
-
-
-.. container:: table-row
-
-   Eigenschaft
-         dateFormatMD
-
-   Datentyp
-         string
-
-   Beschreibung
-         the  *strftime* format code for the month and day of month *(change
-         this to your local date format)*
-
-   Standardwert
-         %d.%m.
-
-
-.. container:: table-row
-
-   Eigenschaft
-         abbreviateDateRanges
-
-   Datentyp
-         boolean
-
-   Beschreibung
-         whether date ranges should be shortened when possible, for example
-
-         **11.10.2005-13.10.2005** becomes  **11.-13.10.2005**
-
-   Standardwert
-         1
 
 
 .. container:: table-row

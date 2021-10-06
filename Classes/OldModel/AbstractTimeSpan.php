@@ -85,29 +85,10 @@ abstract class AbstractTimeSpan extends AbstractModel
             if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
                 $result = $beginDateDay;
             } else {
-                $configuration = $this->getSharedConfiguration();
-                if ($configuration->getAsBoolean('abbreviateDateRanges')) {
-                    // Are the years different? Then includes the complete begin date.
-                    if (
-                        \strftime($configuration->getAsString('dateFormatY'), $beginDate)
-                        !== \strftime($configuration->getAsString('dateFormatY'), $endDate)
-                    ) {
-                        $result = $beginDateDay;
-                    } elseif (
-                        \strftime($configuration->getAsString('dateFormatM'), $beginDate)
-                        !== \strftime($configuration->getAsString('dateFormatM'), $endDate)
-                    ) {
-                        $result = \strftime($configuration->getAsString('dateFormatMD'), $beginDate);
-                    } else {
-                        $result = \strftime($configuration->getAsString('dateFormatD'), $beginDate);
-                    }
-                } else {
-                    $result = $beginDateDay;
-                }
-                $result .= $dash . $endDateDay;
+                $resultBeforeHook = $beginDateDay . $dash . $endDateDay;
                 $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
                     'modifyDateSpan',
-                    $result,
+                    $resultBeforeHook,
                     $this,
                     $dash
                 );

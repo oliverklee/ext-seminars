@@ -91,28 +91,10 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $explanation = 'This determines the way dates and times are displayed.
             If this is not set correctly, dates and times might be mangled or not get displayed at all.';
-        $configVariables = [
-            'timeFormat',
-            'dateFormatY',
-            'dateFormatM',
-            'dateFormatD',
-            'dateFormatYMD',
-            'dateFormatMD',
-        ];
+        $configVariables = ['timeFormat', 'dateFormatYMD'];
         foreach ($configVariables as $configVariable) {
             $this->checkForNonEmptyString($configVariable, $explanation);
         }
-
-        $this->checkAbbreviateDateRanges();
-    }
-
-    private function checkAbbreviateDateRanges(): void
-    {
-        $this->checkIfBoolean(
-            'abbreviateDateRanges',
-            'This value specifies whether date ranges will be abbreviated.
-            If this value is incorrect, the values might be abbreviated even when this is not intended (or vice versa).'
-        );
     }
 
     private function checkAllowRegistrationForEventsWithoutDate(): void
