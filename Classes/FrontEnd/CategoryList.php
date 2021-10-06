@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\FrontEnd;
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyCategory;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -109,8 +110,7 @@ class CategoryList extends AbstractView
      * either only the titles as comma-separated list, only the icons with the
      * title as title attribute or both.
      *
-     * @param array[] $categoriesToDisplay the categories in an associative array, with the UID as key and "title",
-     *        and "icon" as second level keys
+     * @param array<int, array{title: string, icon: FileReference|null}> $categoriesToDisplay
      *
      * @return string the HTML output, will be empty if $categoriesToDisplay is empty
      */
@@ -120,33 +120,30 @@ class CategoryList extends AbstractView
             return '';
         }
 
-        $categories
-            = $this->getConfValueString('categoriesInListView', 's_listView');
+        $categoryUidsFromConfiguration = $this->getConfValueString('categoriesInListView', 's_listView');
         $allCategoryLinks = [];
-        $categorySeparator = ($categories != 'icon') ? ', ' : ' ';
+        $categorySeparator = ($categoryUidsFromConfiguration !== 'icon') ? ', ' : ' ';
 
-        foreach ($categoriesToDisplay as $uid => $value) {
+        foreach ($categoriesToDisplay as $uid => $categoryData) {
             $linkValue = '';
-            switch ($categories) {
+            switch ($categoryUidsFromConfiguration) {
                 case 'both':
-                    if ($value['icon'] != '') {
-                        $linkValue = $this->createCategoryIcon($value) .
-                            '&nbsp;';
+                    if ($categoryData['icon'] instanceof FileReference) {
+                        $linkValue = $this->createCategoryIconImage($categoryData) . '&nbsp;';
                     }
-                    $linkValue .= \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
+                    $linkValue .= \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
                     break;
                 case 'icon':
-                    $linkValue = $this->createCategoryIcon($value);
-                    if ($linkValue == '') {
-                        $linkValue = \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
+                    $linkValue = $this->createCategoryIconImage($categoryData);
+                    if ($linkValue === '') {
+                        $linkValue = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
                         $categorySeparator = ', ';
                     }
                     break;
                 default:
-                    $linkValue = \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
+                    $linkValue = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
             }
-            $allCategoryLinks[]
-                = $this->createLinkToListViewLimitedByCategory($uid, $linkValue);
+            $allCategoryLinks[] = $this->createLinkToListViewLimitedByCategory($uid, $linkValue);
         }
 
         return implode($categorySeparator, $allCategoryLinks);
@@ -155,27 +152,20 @@ class CategoryList extends AbstractView
     /**
      * Creates the category icon with the icon title as alt text.
      *
-     * @param string[] $iconData the filename and title of the icon in an associative array with "icon" as key for the
-     *        filename and "title" as key for the icon title, the values for "title" and "icon" may be empty
+     * @param array{title: string, icon: FileReference|null} $iconData
      *
      * @return string the icon tag with the given icon, will be empty if no icon was given
      */
-    private function createCategoryIcon(array $iconData): string
+    private function createCategoryIconImage(array $iconData): string
     {
-        if ($iconData['icon'] == '') {
+        $icon = $iconData['icon'];
+        if (!$icon instanceof FileReference) {
             return '';
         }
 
-        $imageConfiguration = [
-            'file' => AbstractView::UPLOAD_PATH . $iconData['icon'],
-            'titleText' => $iconData['title'],
-        ];
+        $imageConfiguration = ['file' => $icon->getPublicUrl(), 'titleText' => $iconData['title']];
         $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
 
-        return str_replace(
-            '<img ',
-            '<img class="category_image" ',
-            $imageWithoutClass
-        );
+        return \str_replace('<img ', '<img class="category_image" ', $imageWithoutClass);
     }
 }

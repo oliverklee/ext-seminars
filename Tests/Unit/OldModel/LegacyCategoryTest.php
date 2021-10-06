@@ -11,12 +11,12 @@ use OliverKlee\Seminars\OldModel\LegacyCategory;
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyCategory
  */
-final class CategoryTest extends UnitTestCase
+final class LegacyCategoryTest extends UnitTestCase
 {
     /**
      * @var LegacyCategory
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {
@@ -34,7 +34,7 @@ final class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass(): void
+    public function fromDataCreatesCategoryInstance(): void
     {
         $result = LegacyCategory::fromData([]);
 
@@ -52,14 +52,44 @@ final class CategoryTest extends UnitTestCase
         self::assertSame($title, $subject->getTitle());
     }
 
+    public function hasIconForNoDataReturnsFalse(): void
+    {
+        $subject = LegacyCategory::fromData([]);
+
+        self::assertFalse($subject->hasIcon());
+    }
+
+    /**
+     * @return array<string, array<int, string|int>>
+     */
+    public function noIconDataProvider(): array
+    {
+        return [
+            'empty string' => [''],
+            'file name before migration' => ['icon.png'],
+            'zero as string' => ['0'],
+            'zero as integer' => [0],
+        ];
+    }
+
     /**
      * @test
+     *
+     * @param string|int $icon
+     *
+     * @dataProvider noIconDataProvider
      */
-    public function getIconReturnsIcon(): void
+    public function hasIconForNoIconReturnsFalse($icon): void
     {
-        $icon = 'foo.gif';
         $subject = LegacyCategory::fromData(['icon' => $icon]);
 
-        self::assertSame($icon, $subject->getIcon());
+        self::assertFalse($subject->hasIcon());
+    }
+
+    public function hasIconPositiveNumberOfIconsReturnsTrue(): void
+    {
+        $subject = LegacyCategory::fromData(['icon' => 1]);
+
+        self::assertTrue($subject->hasIcon());
     }
 }

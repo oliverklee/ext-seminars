@@ -30,16 +30,22 @@ return [
         'icon' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.icon',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'file',
-                'allowed' => 'gif,png,jpeg,jpg',
-                'max_size' => 2048,
-                'uploadfolder' => 'uploads/tx_seminars',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'icon',
+                [
+                    'maxitems' => 1,
+                    'appearance' => [
+                        'collapseAll' => true,
+                        'expandSingle' => true,
+                        'useSortable' => false,
+                        'enabledControls' => [
+                            'sort' => false,
+                            'hide' => false,
+                        ],
+                        'fileUploadAllowed' => true,
+                    ],
+                ]
+            ),
         ],
         'single_view_page' => [
             'exclude' => 1,

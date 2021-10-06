@@ -3335,7 +3335,7 @@ final class LegacyEventTest extends TestCase
             $this->subject->getNumberOfCategories()
         );
         self::assertSame(
-            [$categoryUid => ['title' => 'Test', 'icon' => '']],
+            [$categoryUid => ['title' => 'Test', 'icon' => null]],
             $this->subject->getCategories()
         );
     }
@@ -3375,26 +3375,6 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesReturnsIconOfCategory(): void
-    {
-        $categoryUid = $this->addCategoryRelation(
-            [
-                'title' => 'Test 1',
-                'icon' => 'foo.gif',
-            ]
-        );
-
-        $categories = $this->subject->getCategories();
-
-        self::assertSame(
-            'foo.gif',
-            $categories[$categoryUid]['icon']
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getCategoriesReturnsCategoriesOrderedBySorting(): void
     {
         $categoryUid1 = $this->addCategoryRelation(['title' => 'Test 1']);
@@ -3406,8 +3386,8 @@ final class LegacyEventTest extends TestCase
 
         self::assertSame(
             [
-                $categoryUid1 => ['title' => 'Test 1', 'icon' => ''],
-                $categoryUid2 => ['title' => 'Test 2', 'icon' => ''],
+                $categoryUid1 => ['title' => 'Test 1', 'icon' => null],
+                $categoryUid2 => ['title' => 'Test 2', 'icon' => null],
             ],
             $this->subject->getCategories()
         );

@@ -48,6 +48,7 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\ConfigurationService;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -875,10 +876,7 @@ class DefaultController extends TemplateHelper
         $categoryMarker = '';
         foreach ($this->seminar->getCategories() as $category) {
             $this->setMarker('category_title', \htmlspecialchars($category['title'], ENT_QUOTES | ENT_HTML5));
-            $this->setMarker(
-                'category_icon',
-                $this->createCategoryIcon($category)
-            );
+            $this->setMarker('category_icon', $this->createCategoryIconImage($category));
             $categoryMarker .= $this->getSubpart('SINGLE_CATEGORY');
         }
         $this->setSubpart('SINGLE_CATEGORY', $categoryMarker);
@@ -1927,11 +1925,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker('image', $image);
 
             /** @var CategoryList $categoryList */
-            $categoryList = GeneralUtility::makeInstance(
-                CategoryList::class,
-                $this->conf,
-                $this->cObj
-            );
+            $categoryList = GeneralUtility::makeInstance(CategoryList::class, $this->conf, $this->cObj);
             $listOfCategories = $categoryList->createCategoryList($this->seminar->getCategories());
 
             if (
@@ -2874,21 +2868,19 @@ class DefaultController extends TemplateHelper
     /**
      * Creates the category icon IMG tag with the icon title as title attribute.
      *
-     * @param string[] $iconData the filename and title of the icon in an associative array with "icon" as key
-     *        for the filename and "title" as key for the icon title, the values for "title" and "icon" may be empty
+     * @param array{title: string, icon: FileReference|null} $iconData
      *
      * @return string the icon IMG tag with the given icon, will be empty if the category has no icon
      */
-    private function createCategoryIcon(array $iconData): string
+    private function createCategoryIconImage(array $iconData): string
     {
-        if ($iconData['icon'] == '') {
+        $icon = $iconData['icon'];
+        if (!$icon instanceof FileReference) {
             return '';
         }
 
-        $imageConfiguration = [
-            'file' => AbstractView::UPLOAD_PATH . $iconData['icon'],
-            'titleText' => $iconData['title'],
-        ];
+        $imageConfiguration = ['file' => $icon->getPublicUrl(), 'titleText' => $iconData['title']];
+
         return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
