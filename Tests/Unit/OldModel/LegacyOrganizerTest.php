@@ -6,21 +6,21 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
-use OliverKlee\Seminars\OldModel\LegacyTimeSlot;
+use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 
 /**
- * @covers \OliverKlee\Seminars\OldModel\LegacyTimeSlot
+ * @covers \OliverKlee\Seminars\OldModel\LegacyOrganizer
  */
-final class TimeSlotTest extends UnitTestCase
+final class LegacyOrganizerTest extends UnitTestCase
 {
     /**
-     * @var LegacyTimeSlot
+     * @var LegacyOrganizer
      */
     private $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new LegacyTimeSlot();
+        $this->subject = new LegacyOrganizer();
     }
 
     /**
@@ -36,8 +36,8 @@ final class TimeSlotTest extends UnitTestCase
      */
     public function fromDataCreatesInstanceOfSubclass(): void
     {
-        $result = LegacyTimeSlot::fromData([]);
+        $result = LegacyOrganizer::fromData([]);
 
-        self::assertInstanceOf(LegacyTimeSlot::class, $result);
+        self::assertInstanceOf(LegacyOrganizer::class, $result);
     }
 }

@@ -12,9 +12,9 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacySpeaker;
 
 /**
- * @covers \OliverKlee\Seminars\Model\Speaker
+ * @covers \OliverKlee\Seminars\OldModel\LegacySpeaker
  */
-final class SpeakerTest extends UnitTestCase
+final class LegacySpeakerTest extends UnitTestCase
 {
     /**
      * @var \OliverKlee\Seminars\OldModel\LegacySpeaker
