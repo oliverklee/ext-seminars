@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use TYPO3\CMS\Core\Resource\FileReference;
+
 /**
  * This class represents an event category.
  */
@@ -19,15 +21,19 @@ class LegacyCategory extends AbstractModel
      */
     protected $needsTemplateHelperInitialization = false;
 
-    /**
-     * Returns the icon of this category.
-     *
-     * @return string the file name of the icon (relative to the extension
-     *                upload path) of the category, will be empty if the
-     *                category has no icon
-     */
-    public function getIcon(): string
+    public function hasIcon(): bool
     {
-        return $this->getRecordPropertyString('icon');
+        return $this->hasRecordPropertyInteger('icon');
+    }
+
+    public function getIcon(): ?FileReference
+    {
+        if (!$this->hasIcon()) {
+            return null;
+        }
+
+        $images = $this->getFileRepository()->findByRelation('tx_seminars_categories', 'icon', $this->getUid());
+
+        return \array_shift($images);
     }
 }

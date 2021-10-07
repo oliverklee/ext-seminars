@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_categories>
+        <uid>1</uid>
+        <title>Remote events</title>
+        <icon>0</icon>
+    </tx_seminars_categories>
+    <tx_seminars_categories>
+        <uid>2</uid>
+        <title>Local events</title>
+        <icon>1</icon>
+    </tx_seminars_categories>
+    <tx_seminars_categories>
+        <uid>3</uid>
+        <title>Hybrid events</title>
+        <icon>1</icon>
+    </tx_seminars_categories>
+    <tx_seminars_categories>
+        <uid>4</uid>
+        <title>Remote events</title>
+        <icon>icon.png</icon>
+    </tx_seminars_categories>
+
+    <sys_file>
+        <uid>1</uid>
+        <storage>1</storage>
+        <type>0</type>
+        <!-- SHA1 hash of the path without the name, i.e., of "/realty_attachments/102" -->
+        <folder_hash>c1a406ab82b5588738d1587da2761746ec584a6c</folder_hash>
+        <!-- path relative to fileadmin, but with leading slash -->
+        <identifier>/images/icon.png</identifier>
+        <!-- SHA1 hash of the "identifier" field -->
+        <identifier_hash>43a8e2628978c99fde86fe9a946fb767e4313778</identifier_hash>
+        <name>icon.png</name>
+        <extension>png</extension>
+        <mime_type>image/png</mime_type>
+    </sys_file>
+
+    <sys_file_reference>
+        <uid>1</uid>
+        <uid_local>1</uid_local>
+        <uid_foreign>3</uid_foreign>
+        <tablenames>tx_seminars_categories</tablenames>
+        <fieldname>icon</fieldname>
+        <l10n_diffsource/>
+    </sys_file_reference>
+</dataset>

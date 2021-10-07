@@ -9,8 +9,6 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Core\Resource\FileRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -330,13 +328,5 @@ class LegacySpeaker extends AbstractModel
         $images = $this->getFileRepository()->findByRelation('tx_seminars_speakers', 'image', $this->getUid());
 
         return \array_shift($images);
-    }
-
-    private function getFileRepository(): FileRepository
-    {
-        /** @var FileRepository $fileRepository */
-        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-
-        return $fileRepository;
     }
 }

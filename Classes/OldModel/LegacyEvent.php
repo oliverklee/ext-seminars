@@ -28,6 +28,7 @@ use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -3707,11 +3708,7 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets this event's category titles and icons as an associative
      * array (which may be empty), using the category UIDs as keys.
      *
-     * @return array[] two-dimensional associative array with the UID as first level key
-     *               and "title" and "icon" as second level keys. "Title" will
-     *               contain the category title and "icon" will contain the
-     *               category icon. Will be an empty array in if the event has
-     *               no categories.
+     * @return array<int, array{title: string, icon: FileReference|null}>
      */
     public function getCategories(): array
     {

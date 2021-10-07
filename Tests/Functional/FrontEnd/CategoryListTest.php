@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
-use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -16,7 +15,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 final class CategoryListTest extends FunctionalTestCase
 {
-    use FalHelper;
     use LanguageHelper;
 
     /**
@@ -122,21 +120,5 @@ final class CategoryListTest extends FunctionalTestCase
         $result = $this->subject->render();
 
         self::assertStringContainsString('category with ampersand &amp;', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function createCategoryListRendersIconWithEncodedCategoryTitleAsImageTitle(): void
-    {
-        $this->provideAdminBackEndUserForFal();
-        $title = 'a & b';
-        $fileName = $this->createBlankGif();
-        $categoryData = [1 => ['title' => $title, 'icon' => $fileName]];
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-
-        $result = $this->subject->createCategoryList($categoryData);
-
-        self::assertRegExp('/<img[^>]+title="' . \htmlspecialchars($title, ENT_QUOTES | ENT_HTML5) . '"/', $result);
     }
 }
