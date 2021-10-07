@@ -780,9 +780,14 @@ class DefaultController extends TemplateHelper
 
     private function createImageForSingleView(): string
     {
+        $image = $this->seminar->getImage();
+        if (!$image instanceof FileReference) {
+            return '';
+        }
+
         $imageConfiguration = [
             'altText' => '',
-            'file' => AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+            'file' => $image->getPublicUrl(),
             'file.' => [
                 'width' => $this->getConfValueInteger('seminarImageSingleViewWidth'),
                 'height' => $this->getConfValueInteger('seminarImageSingleViewHeight'),
@@ -1908,11 +1913,12 @@ class DefaultController extends TemplateHelper
                 $attendanceData = ['seats' => '', 'total_price' => ''];
             }
 
-            if ($this->seminar->hasImage()) {
+            $image = $this->seminar->getImage();
+            if ($image instanceof FileReference) {
                 $imageConfiguration = [
                     'altText' => $this->seminar->getTitle(),
                     'titleText' => $this->seminar->getTitle(),
-                    'file' => AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+                    'file' => $image->getPublicUrl(),
                     'file.' => [
                         'width' => $this->getConfValueInteger('seminarImageListViewWidth') . 'c',
                         'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',

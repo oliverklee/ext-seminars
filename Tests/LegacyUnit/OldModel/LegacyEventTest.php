@@ -5944,56 +5944,6 @@ final class LegacyEventTest extends TestCase
         );
     }
 
-    // Tests for the getImage function
-
-    /**
-     * @test
-     */
-    public function getImageForNonEmptyImageReturnsImageFileName(): void
-    {
-        $this->subject->setImage('foo.gif');
-
-        self::assertSame(
-            'foo.gif',
-            $this->subject->getImage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getImageForEmptyImageReturnsEmptyString(): void
-    {
-        self::assertSame(
-            '',
-            $this->subject->getImage()
-        );
-    }
-
-    // Tests for the hasImage function
-
-    /**
-     * @test
-     */
-    public function hasImageForNonEmptyImageReturnsTrue(): void
-    {
-        $this->subject->setImage('foo.gif');
-
-        self::assertTrue(
-            $this->subject->hasImage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasImageForEmptyImageReturnsFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->hasImage()
-        );
-    }
-
     // Tests for getLanguageKeySuffixForType
 
     /**

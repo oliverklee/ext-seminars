@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Migrate the category icons to FAL (#1059)
+- Migrate the seminar images to FAL (#1065)
+- Migrate the category icons to FAL (#1063)
 - Switch the autoloading to PSR-4 (#1052)
 - Enable the sniff for namespaced classes (#1044)
 - !!! Namespace all classes

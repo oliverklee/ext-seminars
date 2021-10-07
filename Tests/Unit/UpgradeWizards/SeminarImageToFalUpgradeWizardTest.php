@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\UpgradeWizards;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Seminars\UpgradeWizards\CategoryIconToFalUpgradeWizard;
+use OliverKlee\Seminars\UpgradeWizards\SeminarImageToFalUpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * @covers \OliverKlee\Seminars\UpgradeWizards\CategoryIconToFalUpgradeWizard
+ * @covers \OliverKlee\Seminars\UpgradeWizards\SeminarImageToFalUpgradeWizard
  */
-final class CategoryIconToFalUpgradeWizardTest extends UnitTestCase
+final class SeminarImageToFalUpgradeWizardTest extends UnitTestCase
 {
     /**
-     * @var CategoryIconToFalUpgradeWizard
+     * @var SeminarImageToFalUpgradeWizard
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new CategoryIconToFalUpgradeWizard();
+        $this->subject = new SeminarImageToFalUpgradeWizard();
     }
 
     /**
@@ -37,7 +37,7 @@ final class CategoryIconToFalUpgradeWizardTest extends UnitTestCase
      */
     public function identifierIsForCategoryIconMigration(): void
     {
-        self::assertSame('seminars_migrateCategoryIconsToFal', $this->subject->getIdentifier());
+        self::assertSame('seminars_migrateSeminarImagesToFal', $this->subject->getIdentifier());
     }
 
     /**
@@ -45,7 +45,7 @@ final class CategoryIconToFalUpgradeWizardTest extends UnitTestCase
      */
     public function titleIsForCategoryIconMigration(): void
     {
-        self::assertSame('Migrate seminars category icons to FAL', $this->subject->getTitle());
+        self::assertSame('Migrate seminar images to FAL', $this->subject->getTitle());
     }
 
     /**
@@ -53,7 +53,7 @@ final class CategoryIconToFalUpgradeWizardTest extends UnitTestCase
      */
     public function descriptionIsForCategoryIconMigration(): void
     {
-        $expected = 'The seminars extension used to have a legacy file upload for the category icons. '
+        $expected = 'The seminars extension used to have a legacy file upload for the seminar images. '
             . 'This wizard now migrates those to FAL.';
         self::assertSame($expected, $this->subject->getDescription());
     }

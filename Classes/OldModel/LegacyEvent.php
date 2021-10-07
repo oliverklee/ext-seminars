@@ -3803,25 +3803,21 @@ class LegacyEvent extends AbstractTimeSpan
         $this->setRecordPropertyString('attached_files', $attachedFiles);
     }
 
-    /**
-     * Gets the file name of our image.
-     *
-     * @return string the file name of our image (relative to the extension's
-     *                upload path) or '' if this event has no image
-     */
-    public function getImage(): string
-    {
-        return $this->getTopicString('image');
-    }
-
-    /**
-     * Checks whether we have an image.
-     *
-     * @return bool
-     */
     public function hasImage(): bool
     {
-        return $this->hasTopicString('image');
+        return $this->hasTopicInteger('image');
+    }
+
+    public function getImage(): ?FileReference
+    {
+        if (!$this->hasImage()) {
+            return null;
+        }
+
+        $uid = $this->isEventDate() ? $this->getRecordPropertyInteger('topic') : $this->getUid();
+        $images = $this->getFileRepository()->findByRelation('tx_seminars_seminars', 'image', $uid);
+
+        return \array_shift($images);
     }
 
     /**

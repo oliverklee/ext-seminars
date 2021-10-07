@@ -1214,59 +1214,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function singleViewForEventWithImageDisplaysEventImage(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
-        $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
-        $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
-
-        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['image' => 'test_foo.gif']
-        );
-
-        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
-        $result = $this->subject->main('', []);
-
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
-
-        self::assertStringContainsString('<p class="tx-seminars-pi1-image">', $result);
-        self::assertStringContainsString('<img', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForHideFieldsContainingImageHidesEventImage(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
-        $this->subject->setConfigurationValue('hideFields', 'image');
-        $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
-        $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
-
-        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['image' => 'test_foo.gif']
-        );
-
-        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
-        $result = $this->subject->main('', []);
-
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
-
-        self::assertStringNotContainsString('<p class="tx-seminars-pi1-image">', $result);
-        self::assertStringNotContainsString('<img', $result);
-    }
-
-    /**
-     * @test
-     */
     public function singleViewCallsHookSeminarSingleViewModifySingleView(): void
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -3088,27 +3035,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function listViewDisplaysSeminarImage(): void
-    {
-        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
-
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['image' => 'test_foo.gif']
-        );
-        $listViewWithImage = $this->subject->main('', []);
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
-
-        self::assertStringContainsString(
-            '<img src="',
-            $listViewWithImage
-        );
-    }
-
-    /**
-     * @test
-     */
     public function listViewForSeminarWithoutImageDoesNotDisplayImage(): void
     {
         self::assertStringNotContainsString(
@@ -3124,54 +3050,6 @@ final class DefaultControllerTest extends TestCase
     {
         self::assertStringNotContainsString(
             '###IMAGE###',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listViewUsesTopicImage(): void
-    {
-        $fileName = 'test_foo.gif';
-        $topicTitle = 'Test topic';
-
-        $topicUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
-                'title' => $topicTitle,
-                'image' => $fileName,
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
-                'topic' => $topicUid,
-                'title' => 'Test date',
-            ]
-        );
-
-        /** @var ContentObjectRenderer&MockObject $content */
-        $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        $content->method('cObjGetSingle')
-            ->with(
-                'IMAGE',
-                [
-                    'file' => 'uploads/tx_seminars/' . $fileName,
-                    'file.' => ['width' => '0c', 'height' => '0c'],
-                    'altText' => $topicTitle,
-                    'titleText' => $topicTitle,
-                ]
-            )
-            ->willReturn('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>');
-        $this->subject->cObj = $content;
-
-        self::assertRegExp(
-            '/<img src="[^"]*"[^>]*title="' . $topicTitle . '"/',
             $this->subject->main('', [])
         );
     }
