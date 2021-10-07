@@ -13,7 +13,6 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
@@ -23,7 +22,7 @@ final class LegacyEventTest extends UnitTestCase
     /**
      * @var TestingLegacyEvent
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {
@@ -280,11 +279,31 @@ final class LegacyEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function hasAttachedFilesForNoAttachedFilesReturnsFalse(): void
+    {
+        $subject = LegacyEvent::fromData(['attached_files' => 0]);
+
+        self::assertFalse($subject->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesForNotMigratedFilesReturnsFalse(): void
+    {
+        $subject = LegacyEvent::fromData(['attached_files' => 'handout.pdf']);
+
+        self::assertFalse($subject->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
     public function hasAttachedFilesWithOneAttachedFileReturnsTrue(): void
     {
-        $this->subject->setAttachedFiles('test.file');
+        $subject = LegacyEvent::fromData(['attached_files' => 1]);
 
-        self::assertTrue($this->subject->hasAttachedFiles());
+        self::assertTrue($subject->hasAttachedFiles());
     }
 
     /**
@@ -292,9 +311,9 @@ final class LegacyEventTest extends UnitTestCase
      */
     public function hasAttachedFilesWithTwoAttachedFilesReturnsTrue(): void
     {
-        $this->subject->setAttachedFiles('test.file,test_02.file');
+        $subject = LegacyEvent::fromData(['attached_files' => 2]);
 
-        self::assertTrue($this->subject->hasAttachedFiles());
+        self::assertTrue($subject->hasAttachedFiles());
     }
 
     /**
@@ -302,13 +321,20 @@ final class LegacyEventTest extends UnitTestCase
      */
     public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue(): void
     {
-        $topic = LegacyEvent::fromData(
-            [
-                'object_type' => Event::TYPE_TOPIC,
-                'attached_files' => 'test.file',
-            ]
-        );
+        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC, 'attached_files' => 1]);
         $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE]);
+        $date->setTopic($topic);
+
+        self::assertTrue($date->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesForDateWithOneFileAndTopicWithoutFilesReturnsTrue(): void
+    {
+        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC]);
+        $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE, 'attached_files' => 1]);
         $date->setTopic($topic);
 
         self::assertTrue($date->hasAttachedFiles());
@@ -324,15 +350,5 @@ final class LegacyEventTest extends UnitTestCase
         $date->setTopic($topic);
 
         self::assertFalse($date->hasAttachedFiles());
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForNoAttachedFilesReturnsAnEmptyArray(): void
-    {
-        $plugin = new AbstractPlugin();
-
-        self::assertSame([], $this->subject->getAttachedFiles($plugin));
     }
 }

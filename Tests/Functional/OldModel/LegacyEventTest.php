@@ -7,15 +7,11 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Templating\TemplateHelper;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
@@ -38,21 +34,6 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
-    /**
-     * @var array<int, string>
-     */
-    protected $additionalFoldersToCreate = ['uploads/tx_seminars'];
-
-    /**
-     * @var array<int, string>
-     */
-    private $filesToDelete = [];
-
-    /**
-     * @var TemplateHelper|null
-     */
-    private $plugin = null;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -63,18 +44,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        foreach ($this->filesToDelete as $file) {
-            \unlink($this->getInstancePath() . '/' . $file);
-        }
         ConfigurationRegistry::purgeInstance();
-    }
-
-    private function buildPlugin(): void
-    {
-        $plugin = new TemplateHelper();
-        $plugin->init(['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html']);
-        $plugin->cObj = new ContentObjectRenderer();
-        $this->plugin = $plugin;
     }
 
     /**
@@ -509,196 +479,83 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForOneFileReturnsOneElement(): void
+    public function getAttachedFilesForNoAttachedFilesReturnsEmptyArray(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
+        $this->provideAdminBackEndUserForFal();
 
-        $fileName = 'test.txt';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(1);
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertCount(1, $result);
+        self::assertSame([], $subject->getAttachedFiles());
     }
 
     /**
      * @test
      */
-    public function getAttachedFilesForTwoFilesReturnsTwoElements(): void
+    public function getAttachedFilesForNotMigratedFilesReturnsEmptyArray(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
+        $this->provideAdminBackEndUserForFal();
 
-        $fileName = 'test.txt,test2.txt';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(2);
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertCount(2, $result);
+        self::assertSame([], $subject->getAttachedFiles());
     }
 
     /**
      * @test
      */
-    public function getAttachedFilesReturnsFileName(): void
+    public function getAttachedFilesWithPositiveFileCountWithoutFileReferenceReturnsEmptyArray(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
 
-        $fileName = 'test.txt';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(3);
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+        self::assertSame([], $subject->getAttachedFiles());
     }
 
     /**
      * @test
      */
-    public function getAttachedFilesReturnsSize(): void
+    public function getAttachedFilesWithOneDirectlyAttachedFileFileReferenceInArray(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
+        $this->provideAdminBackEndUserForFal();
 
-        $fileName = 'test.txt';
-        $this->filesToDelete[] = $fileName;
-        \file_put_contents($this->getInstancePath() . '/uploads/tx_seminars/' . $fileName, 'Hello!');
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(4);
+        $files = $subject->getAttachedFiles();
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertSame(GeneralUtility::formatSize(6), $result[0]['size']);
+        self::assertCount(1, $files);
+        self::assertInstanceOf(FileReference::class, $files[0]);
     }
 
     /**
      * @test
      */
-    public function getAttachedFilesReturnsTypeBySuffix(): void
+    public function getAttachedFilesForDateReturnsFilesFromTopic(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
+        $this->provideAdminBackEndUserForFal();
 
-        $fileName = 'test.txt';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(5);
+        $files = $subject->getAttachedFiles();
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertSame('txt', $result[0]['type']);
+        self::assertCount(1, $files);
+        self::assertInstanceOf(FileReference::class, $files[0]);
     }
 
     /**
      * @test
      */
-    public function getAttachedFilesForDotAndSuffixOnlyReturnsTypeBySuffix(): void
+    public function getAttachedFilesForDateReturnsFilesFromTopicAndDateCombined(): void
     {
-        $this->buildPlugin();
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAttachments.xml');
+        $this->provideAdminBackEndUserForFal();
 
-        $fileName = '.txt';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
+        $subject = new LegacyEvent(6);
+        $files = $subject->getAttachedFiles();
 
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertSame('txt', $result[0]['type']);
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForDotOnlyReturnsTypeNone(): void
-    {
-        $this->buildPlugin();
-
-        $fileName = '.';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
-
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertSame('none', $result[0]['type']);
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForFileWithoutSuffixReturnsTypeNone(): void
-    {
-        $this->buildPlugin();
-
-        $fileName = 'test';
-        $subject = LegacyEvent::fromData(['attached_files' => $fileName]);
-
-        $result = $subject->getAttachedFiles($this->plugin);
-
-        self::assertSame('none', $result[0]['type']);
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForDateWithFilesReturnsFilesFromDate(): void
-    {
-        $this->buildPlugin();
-
-        $fileName = 'test.txt';
-        $topic = LegacyEvent::fromData(['object_type' => Event::TYPE_TOPIC]);
-        $date = LegacyEvent::fromData(
-            [
-                'object_type' => Event::TYPE_DATE,
-                'attached_files' => $fileName,
-            ]
-        );
-        $date->setTopic($topic);
-
-        $result = $date->getAttachedFiles($this->plugin);
-
-        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForDateWithoutFilesAndTopicWithFilesReturnsFilesFromTopic(): void
-    {
-        $this->buildPlugin();
-
-        $fileName = 'test.txt';
-        $topic = LegacyEvent::fromData(
-            [
-                'object_type' => Event::TYPE_TOPIC,
-                'attached_files' => $fileName,
-            ]
-        );
-        $date = LegacyEvent::fromData(['object_type' => Event::TYPE_DATE]);
-        $date->setTopic($topic);
-
-        $result = $date->getAttachedFiles($this->plugin);
-
-        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
-    }
-
-    /**
-     * @test
-     */
-    public function getAttachedFilesForDateAndTopicWithFilesReturnsFilesFromDTopicAndDate(): void
-    {
-        $this->buildPlugin();
-
-        $topicFileName = 'test-topic.txt';
-        $topic = LegacyEvent::fromData(
-            [
-                'object_type' => Event::TYPE_TOPIC,
-                'attached_files' => $topicFileName,
-            ]
-        );
-        $dateFileName = 'test-date.txt';
-        $date = LegacyEvent::fromData(
-            [
-                'object_type' => Event::TYPE_DATE,
-                'attached_files' => $dateFileName,
-            ]
-        );
-        $date->setTopic($topic);
-
-        $result = $date->getAttachedFiles($this->plugin);
-
-        self::assertStringContainsString($topicFileName, $result[0]['name']);
-        self::assertStringContainsString($dateFileName, $result[1]['name']);
+        self::assertCount(2, $files);
     }
 
     /**

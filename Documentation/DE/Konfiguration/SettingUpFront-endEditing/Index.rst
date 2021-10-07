@@ -75,14 +75,3 @@ managers.
 #. Select the page with the event editor plug-in (that is the page which
    you have just created). Alternatively, you can set this using the TS
    setup variable plugin.tx\_seminars\_pi1.evenEditorPID.
-
-#. If you need, configure which files may be uploaded by providing a
-   comma-separated list of file-extensions to
-   plugin.tx\_seminars\_pi1.allowedExtensionsForUpload or the
-   corresponding Flexforms field. By default, many text-, image-, office-
-   and archive- filetypes are allowed (see Reference section).
-
-#. If needed, the maximum upload file size can be configured in the
-   install tool.Be aware that, if the maximum upload file size in PHP is
-   set to a lower value than the one in TYPO3, the FE editor cannot show
-   an error message if one tries to upload a too large file.

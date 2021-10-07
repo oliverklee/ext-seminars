@@ -7,31 +7,31 @@ namespace OliverKlee\Seminars\UpgradeWizards;
 use TYPO3\CMS\Install\Updates\RepeatableInterface;
 
 /**
- * This upgrade wizard migrates the seminar images from old-style image uploads to FAL.
+ * This upgrade wizard migrates the seminar attachments from old-style image uploads to FAL.
  */
-class SeminarImageToFalUpgradeWizard extends AbstractFalUpgradeWizard implements RepeatableInterface
+class SeminarAttachmentsToFalUpgradeWizard extends AbstractFalUpgradeWizard implements RepeatableInterface
 {
     /**
      * @var non-empty-string
      */
-    protected $identifier = 'seminars_migrateSeminarImagesToFal';
+    protected $identifier = 'seminars_migrateSeminarAttachmentsToFal';
 
     /**
      * @var non-empty-string
      */
-    protected $title = 'Migrate seminar images to FAL';
+    protected $title = 'Migrate seminar attachments to FAL';
 
     /**
      * target folder after migration, relative to fileadmin
      *
      * @var non-empty-string
      */
-    protected $targetPath = '_migrated/seminars_images/';
+    protected $targetPath = '_migrated/seminars_attachments/';
 
     /**
      * @var non-empty-string
      */
-    protected $description = 'The seminars extension used to have a legacy file upload for the seminar images. '
+    protected $description = 'The seminars extension used to have a legacy file upload for the seminar attachments. '
     . 'This wizard now migrates those to FAL.';
 
     /**
@@ -42,5 +42,5 @@ class SeminarImageToFalUpgradeWizard extends AbstractFalUpgradeWizard implements
     /**
      * @var non-empty-string
      */
-    protected $fieldToMigrate = 'image';
+    protected $fieldToMigrate = 'attached_files';
 }

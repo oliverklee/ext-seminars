@@ -861,20 +861,22 @@ $tca = [
         'attached_files' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attached_files',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'file',
-                'allowed' => 'jpg,jpeg,png,bmp,gif,tiff,tif,' . 'txt,pdf,ps,' .
-                    'svg,' . 'doc,docx,sxw,odt,' . 'xls,xlsx,sxc,ods,' .
-                    'ppt,pptx,sxi,odp,' . 'html,htm,css,js,xml,xsd,' .
-                    'zip,rar,gz,tgz,tar,bz2,tbz,tbz2',
-                'max_size' => 4096,
-                'uploadfolder' => 'uploads/tx_seminars/',
-                'size' => 5,
-                'maxitems' => 200,
-                'minitems' => 0,
-                'autoSizeMax' => 40,
-            ],
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'attached_files',
+                [
+                    'maxitems' => 5,
+                    'appearance' => [
+                        'collapseAll' => true,
+                        'expandSingle' => true,
+                        'useSortable' => true,
+                        'enabledControls' => [
+                            'sort' => true,
+                            'hide' => false,
+                        ],
+                        'fileUploadAllowed' => true,
+                    ],
+                ]
+            ),
         ],
         'hidden' => [
             'exclude' => 1,

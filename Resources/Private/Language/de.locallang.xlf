@@ -1294,10 +1294,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Page to redirect to after saving an event in the front end</source>
 				<target>Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowedExtensionsForUpload" xml:space="preserve">
-				<source>List of allowed file extensions for the upload</source>
-				<target>Liste erlaubter Dateiendungen für Front-end-Bearbeitung</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
 				<source>Fields to display in the front-end editor:</source>
 				<target>Felder im Front-end-Editor anzeigen:</target>

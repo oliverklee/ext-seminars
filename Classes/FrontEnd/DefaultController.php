@@ -1186,21 +1186,23 @@ class DefaultController extends TemplateHelper
 
         $attachedFilesOutput = '';
 
-        /** @var string[] $attachedFile */
-        foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
-            $this->setMarker('attached_file_name', $attachedFile['name']);
-            $this->setMarker('attached_file_size', $attachedFile['size']);
-            $this->setMarker('attached_file_type', $attachedFile['type']);
-
-            $attachedFilesOutput .= $this->getSubpart(
-                'ATTACHED_FILES_LIST_ITEM'
+        foreach ($this->seminar->getAttachedFiles() as $file) {
+            $encodedUrl = \htmlspecialchars($file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
+            $encodedTitle = \htmlspecialchars($file->getTitle() ?? '', ENT_QUOTES | ENT_HTML5);
+            $encodedFileName = \htmlspecialchars(
+                $file->getNameWithoutExtension() . '.' . $file->getExtension(),
+                ENT_QUOTES | ENT_HTML5
             );
+            $link = '<a href="' . $encodedUrl . '" title="' . $encodedTitle . '">' . $encodedFileName . '</a>';
+            $this->setMarker('attached_file_name', $link);
+            $this->setMarker('attached_file_size', GeneralUtility::formatSize($file->getSize()));
+            $encodedExtension = \htmlspecialchars($file->getExtension(), ENT_QUOTES | ENT_HTML5);
+            $this->setMarker('attached_file_type', $encodedExtension);
+
+            $attachedFilesOutput .= $this->getSubpart('ATTACHED_FILES_LIST_ITEM');
         }
 
-        $this->setSubpart(
-            'ATTACHED_FILES_LIST_ITEM',
-            $attachedFilesOutput
-        );
+        $this->setSubpart('ATTACHED_FILES_LIST_ITEM', $attachedFilesOutput);
     }
 
     /**
@@ -3112,18 +3114,23 @@ class DefaultController extends TemplateHelper
             return '';
         }
 
-        $attachedFiles = '';
-        foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
-            $this->setMarker('attached_files_single_title', $attachedFile['name']);
+        $attachedFilesHtml = '';
+        foreach ($this->seminar->getAttachedFiles() as $file) {
+            $encodedUrl = \htmlspecialchars($file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
+            $encodedTitle = \htmlspecialchars($file->getTitle() ?? '', ENT_QUOTES | ENT_HTML5);
+            $encodedFileName = \htmlspecialchars(
+                $file->getNameWithoutExtension() . '.' . $file->getExtension(),
+                ENT_QUOTES | ENT_HTML5
+            );
+            $link = '<a href="' . $encodedUrl . '" title="' . $encodedTitle . '">' . $encodedFileName . '</a>';
+            $this->setMarker('attached_files_single_title', $link);
 
-            $attachedFiles .= $this->getSubpart('ATTACHED_FILES_SINGLE_ITEM');
+            $attachedFilesHtml .= $this->getSubpart('ATTACHED_FILES_SINGLE_ITEM');
         }
 
-        $this->setMarker('attached_files_items', $attachedFiles);
+        $this->setMarker('attached_files_items', $attachedFilesHtml);
 
-        return ($attachedFiles != '')
-            ? $this->getSubpart('ATTACHED_FILES_LIST_VIEW_ITEM')
-            : '';
+        return $attachedFilesHtml !== '' ? $this->getSubpart('ATTACHED_FILES_LIST_VIEW_ITEM') : '';
     }
 
     /**

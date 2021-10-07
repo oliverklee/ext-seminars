@@ -27,10 +27,8 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a seminar (or similar event).
@@ -3738,69 +3736,32 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function hasAttachedFiles(): bool
     {
-        return $this->hasRecordPropertyString('attached_files') || $this->hasTopicString('attached_files');
+        return $this->hasRecordPropertyInteger('attached_files') || $this->hasTopicInteger('attached_files');
     }
 
     /**
-     * Gets our attached files as an array of arrays with the elements "name"
-     * and "size" of the attached file.
+     * Returns the attached files of this event.
      *
-     * The displayed file name is relative to the tx_seminars upload directory
-     * and is linked to the actual file's URL.
+     * If this event is an event date, this function will return the date's files as well as the topic's files
+     * (in that order).
      *
-     * The file size will have, depending on the file size, one of the following
-     * units appended: K for Kilobytes, M for Megabytes and G for Gigabytes.
-     *
-     * The returned array will be sorted like the files are sorted in the back-
-     * end form.
-     *
-     * If this event is an event date, this function will return both the
-     * topic's file and the date's files (in that order).
-     *
-     * Note: This functions' return values already are htmlspecialchared.
-     *
-     * @param AbstractPlugin $plugin an object for a live page
-     *
-     * @return array<array<string, string>> an array of arrays with the elements "name" and
-     *               "size" of the attached file, will be empty if
-     *               there are no attached files
+     * @return array<int, FileReference>
      */
-    public function getAttachedFiles(AbstractPlugin $plugin): array
+    public function getAttachedFiles(): array
     {
         if (!$this->hasAttachedFiles()) {
             return [];
         }
 
-        $topic = $this->getTopic();
-        $allFiles = $topic instanceof self ? $topic->getAttachedFiles($plugin) : [];
-
-        $uploadFolderPath = Environment::getPublicPath() . '/uploads/tx_seminars/';
-        $uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'uploads/tx_seminars/';
-        $fileNamesFromSelf = GeneralUtility::trimExplode(',', $this->getRecordPropertyString('attached_files'), true);
-        foreach ($fileNamesFromSelf as $fileName) {
-            $matches = [];
-            \preg_match('/\\.(\\w+)$/', \basename($fileName), $matches);
-
-            $allFiles[] = [
-                'name' => $plugin->cObj->typoLink(
-                    \htmlspecialchars(\basename($fileName), ENT_QUOTES | ENT_HTML5),
-                    ['parameter' => $uploadFolderUrl . $fileName]
-                ),
-                'type' => \htmlspecialchars($matches[1] ?? 'none', ENT_QUOTES | ENT_HTML5),
-                'size' => GeneralUtility::formatSize(\filesize($uploadFolderPath . $fileName)),
-            ];
+        $attachments = $this->getFileRepository()
+            ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getUid());
+        if ($this->isEventDate()) {
+            $attachmentsFromTopic = $this->getFileRepository()
+                ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getRecordPropertyInteger('topic'));
+            $attachments = \array_merge($attachments, $attachmentsFromTopic);
         }
 
-        return $allFiles;
-    }
-
-    /**
-     * @param string $attachedFiles a comma-separated list of the names of attached files which have to exist in
-     *        "uploads/tx_seminars/"
-     */
-    public function setAttachedFiles(string $attachedFiles): void
-    {
-        $this->setRecordPropertyString('attached_files', $attachedFiles);
+        return $attachments;
     }
 
     public function hasImage(): bool
