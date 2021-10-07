@@ -10,9 +10,9 @@ use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
 /**
- * @covers \OliverKlee\Seminars\Model\Speaker
+ * @covers \OliverKlee\Seminars\OldModel\LegacySpeaker
  */
-final class SpeakerTest extends FunctionalTestCase
+final class LegacySpeakerTest extends FunctionalTestCase
 {
     use FalHelper;
 

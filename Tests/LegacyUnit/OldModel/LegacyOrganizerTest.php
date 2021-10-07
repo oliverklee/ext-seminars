@@ -11,7 +11,7 @@ use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyOrganizer
  */
-final class OrganizerTest extends TestCase
+final class LegacyOrganizerTest extends TestCase
 {
     /**
      * @var LegacyOrganizer

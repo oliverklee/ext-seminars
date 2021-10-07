@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyTimeSlot
  */
-final class TimeSlotTest extends TestCase
+final class LegacyTimeSlotTest extends TestCase
 {
     use LanguageHelper;
 
