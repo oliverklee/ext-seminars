@@ -939,16 +939,22 @@ $tca = [
         'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.image',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'file',
-                'allowed' => 'gif,png,jpeg,jpg',
-                'max_size' => 4096,
-                'uploadfolder' => 'uploads/tx_seminars',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'maxitems' => 1,
+                    'appearance' => [
+                        'collapseAll' => true,
+                        'expandSingle' => true,
+                        'useSortable' => false,
+                        'enabledControls' => [
+                            'sort' => false,
+                            'hide' => false,
+                        ],
+                        'fileUploadAllowed' => true,
+                    ],
+                ]
+            ),
         ],
         'publication_hash' => [
             'exclude' => 1,

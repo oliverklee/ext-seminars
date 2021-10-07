@@ -10,8 +10,10 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -20,6 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 final class LegacyEventTest extends FunctionalTestCase
 {
+    use FalHelper;
     use LanguageHelper;
 
     /**
@@ -846,5 +849,67 @@ final class LegacyEventTest extends FunctionalTestCase
         $subject = TestingLegacyEvent::fromUid(3);
 
         self::assertSame(1, \substr_count($subject->getPlaceShort(), 'The Castle'));
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithoutImageReturnsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithImages.xml');
+
+        $subject = new LegacyEvent(1);
+
+        self::assertNull($subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithNotYetMigratedImageReturnsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithImages.xml');
+
+        $subject = new LegacyEvent(4);
+
+        self::assertNull($subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithImages.xml');
+
+        $subject = new LegacyEvent(2);
+
+        self::assertNull($subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithFileReferenceReturnsFileReference(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithImages.xml');
+        $this->provideAdminBackEndUserForFal();
+
+        $subject = new LegacyEvent(3);
+
+        self::assertInstanceOf(FileReference::class, $subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageForDateForSingleEventWithFileReferenceReturnsFileReference(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithImages.xml');
+        $this->provideAdminBackEndUserForFal();
+
+        $subject = new LegacyEvent(5);
+
+        self::assertInstanceOf(FileReference::class, $subject->getImage());
     }
 }

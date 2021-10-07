@@ -86,7 +86,7 @@ final class LegacyCategoryTest extends UnitTestCase
         self::assertFalse($subject->hasIcon());
     }
 
-    public function hasIconPositiveNumberOfIconsReturnsTrue(): void
+    public function hasIconWithPositiveNumberOfIconsReturnsTrue(): void
     {
         $subject = LegacyCategory::fromData(['icon' => 1]);
 

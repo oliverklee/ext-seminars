@@ -228,6 +228,47 @@ final class LegacyEventTest extends UnitTestCase
         );
     }
 
+    public function hasImageForNoDataReturnsFalse(): void
+    {
+        $subject = LegacyEvent::fromData([]);
+
+        self::assertFalse($subject->hasImage());
+    }
+
+    /**
+     * @return array<string, array<int, string|int>>
+     */
+    public function noImageDataProvider(): array
+    {
+        return [
+            'empty string' => [''],
+            'file name before migration' => ['image.jpg'],
+            'zero as string' => ['0'],
+            'zero as integer' => [0],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param string|int $icon
+     *
+     * @dataProvider noImageDataProvider
+     */
+    public function hasImageForNoImageReturnsFalse($icon): void
+    {
+        $subject = LegacyEvent::fromData(['image' => $icon]);
+
+        self::assertFalse($subject->hasImage());
+    }
+
+    public function hasImageWithPositiveNumberOfImagesReturnsTrue(): void
+    {
+        $subject = LegacyEvent::fromData(['image' => 1]);
+
+        self::assertTrue($subject->hasImage());
+    }
+
     /**
      * @test
      */

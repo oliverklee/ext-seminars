@@ -1294,36 +1294,6 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return string our image file name relative to the seminars upload directory,
-     *         will be empty if this event has no image
-     */
-    public function getImage(): string
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->getImage()
-            : $this->getAsString('image');
-    }
-
-    /**
-     * @param string $image our image file name, must be relative to the seminars upload directory, may be empty
-     */
-    public function setImage(string $image): void
-    {
-        if ($this->isEventDate()) {
-            $this->getTopic()->setImage($image);
-        } else {
-            $this->setAsString('image', $image);
-        }
-    }
-
-    public function hasImage(): bool
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->hasImage()
-            : $this->hasString('image');
-    }
-
-    /**
      * @return Collection<Event>
      */
     public function getRequirements(): Collection
