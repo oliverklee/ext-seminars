@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow installations with oelib 4.x (#1070)
 - Migrate the seminar attachments to FAL (#1067)
 - Migrate the seminar images to FAL (#1065)
 - Migrate the category icons to FAL (#1063)
