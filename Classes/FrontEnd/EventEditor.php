@@ -169,8 +169,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available categories.
      *
-     * @return array[] items with additional items from the categories table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListCategories(): array
     {
@@ -183,9 +182,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available event types.
      *
-     * @return array[] $items with additional items from the event_types
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListEventTypes(): array
     {
@@ -198,8 +195,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available lodgings.
      *
-     * @return array[] items with additional items from the lodgings table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListLodgings(): array
     {
@@ -212,8 +208,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available foods.
      *
-     * @return array[] items with additional items from the foods table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListFoods(): array
     {
@@ -226,8 +221,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available payment methods.
      *
-     * @return array[] items with additional items from payment methods table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListPaymentMethods(): array
     {
@@ -240,8 +234,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available organizers.
      *
-     * @return array[] items with additional items from the organizers table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListOrganizers(): array
     {
@@ -271,19 +264,18 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available places.
      *
-     * @param array[] $items any pre-filled data (may be empty)
+     * @param array<string, string> $parameters
      *
-     * @return array[] items with additional items from the places table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
-    public function populateListPlaces(array $items, ?array $unused = null, ?\tx_mkforms_forms_Base $form = null): array
+    public function populateListPlaces(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
     {
-        $result = $items;
+        $result = [];
 
         $placeMapper = MapperRegistry::get(PlaceMapper::class);
         $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if ($form !== null) {
+        if ($form instanceof \tx_mkforms_forms_Base) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editPlaceButton'];
             /** @var array $editButtonConfiguration */
@@ -296,7 +288,7 @@ class EventEditor extends AbstractEditor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Places'])
-            && $form !== null;
+            && !empty($editButtonConfiguration);
 
         /** @var Place $place */
         foreach ($places as $place) {
@@ -339,8 +331,9 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available speakers.
      *
-     * @return array[] items with additional items from the speakers table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @param array<string, string> $parameters
+     *
+     * @return array<int, array{caption: string, value: int}>
      */
     public function populateListSpeakers(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
     {
@@ -349,7 +342,7 @@ class EventEditor extends AbstractEditor
         $speakerMapper = MapperRegistry::get(SpeakerMapper::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if ($form !== null) {
+        if ($form instanceof \tx_mkforms_forms_Base) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editSpeakerButton'];
             /** @var array $editButtonConfiguration */
@@ -362,9 +355,9 @@ class EventEditor extends AbstractEditor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Speakers'])
-            && $form !== null;
+            && !empty($editButtonConfiguration);
 
-        $type = $parameters['type'];
+        $type = (string)($parameters['type'] ?? '');
         if (empty($parameters['lister'])) {
             $isLister = false;
             $activeSpeakers = '';
@@ -424,23 +417,18 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available checkboxes.
      *
-     * @param array[] $items any pre-filled data (may be empty)
-     * @param \tx_mkforms_forms_Base|null $form
+     * @param array<string, string> $parameters
      *
-     * @return array[] items with additional items from the checkboxes table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
-    public function populateListCheckboxes(
-        array $items,
-        ?array $unused = null,
-        \tx_mkforms_forms_Base $form = null
-    ): array {
-        $result = $items;
+    public function populateListCheckboxes(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
+    {
+        $result = [];
 
         $checkboxMapper = MapperRegistry::get(CheckboxMapper::class);
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if ($form !== null) {
+        if ($form instanceof \tx_mkforms_forms_Base) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editCheckboxButton'];
             /** @var array $editButtonConfiguration */
@@ -453,7 +441,7 @@ class EventEditor extends AbstractEditor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Checkboxes'])
-            && $form !== null;
+            && !empty($editButtonConfiguration);
 
         /** @var Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -496,22 +484,18 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of available target groups.
      *
-     * @param array[] $items array any pre-filled data (may be empty)
+     * @param array<string, string> $parameters
      *
-     * @return array[] items with additional items from the target groups table as an array with the keys "caption"
-     *         (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
-    public function populateListTargetGroups(
-        array $items,
-        ?array $unused = null,
-        ?\tx_mkforms_forms_Base $form = null
-    ): array {
-        $result = $items;
+    public function populateListTargetGroups(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
+    {
+        $result = [];
 
         $targetGroupMapper = MapperRegistry::get(TargetGroupMapper::class);
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if ($form !== null) {
+        if ($form instanceof \tx_mkforms_forms_Base) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editTargetGroupButton'];
             /** @var array $editButtonConfiguration */
@@ -524,7 +508,7 @@ class EventEditor extends AbstractEditor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'TargetGroups'])
-            && $form !== null;
+            && !empty($editButtonConfiguration);
 
         /** @var TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -643,11 +627,9 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Changes all potential decimal separators (commas and dots) in price
-     * fields to dots.
+     * Changes all potential decimal separators (commas and dots) in price fields to dots.
      *
-     * @param array<string, string|int|array<int, string|int>> $formData all entered form data with the field names
-     *        as keys, will be modified
+     * @param array<string, string|int|array<int, string|int>> $formData all entered form data, will be modified
      */
     private function unifyDecimalSeparators(array &$formData): void
     {
@@ -662,8 +644,7 @@ class EventEditor extends AbstractEditor
 
         foreach ($priceFields as $key) {
             if (isset($formData[$key])) {
-                $formData[$key]
-                    = str_replace(',', '.', $formData[$key]);
+                $formData[$key] = str_replace(',', '.', $formData[$key]);
             }
         }
     }
@@ -955,11 +936,11 @@ class EventEditor extends AbstractEditor
      * Returns whether front-end editing of the given related record type is
      * allowed.
      *
-     * @param string[] $parameters the contents of the "params" child of the userobj node as key/value pairs
+     * @param array<string, string> $parameters
      */
     public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters): bool
     {
-        $relatedRecordType = $parameters['relatedRecordType'];
+        $relatedRecordType = (string)($parameters['relatedRecordType'] ?? '');
 
         $frontEndUser = self::getLoggedInUser();
         $isFrontEndEditingAllowed = $this->getConfValueBoolean(
@@ -997,9 +978,7 @@ class EventEditor extends AbstractEditor
         foreach ($this->getFieldsToShow() as $formField) {
             $template->setMarker(
                 $formField . '_required',
-                in_array($formField, $this->requiredFormFields, true)
-                    ? ' class="required"'
-                    : ''
+                in_array($formField, $this->requiredFormFields, true) ? ' class="required"' : ''
             );
         }
     }
@@ -2309,7 +2288,7 @@ class EventEditor extends AbstractEditor
     /**
      * Provides data items for the list of skills.
      *
-     * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
+     * @return array<int, array{caption: string, value: int}>
      */
     public static function populateListSkills(): array
     {
@@ -2322,11 +2301,9 @@ class EventEditor extends AbstractEditor
     /**
      * Returns an array of caption value pairs for formidable checkboxes.
      *
-     * @param Collection $models models to show in the checkboxes, may be empty
+     * @param Collection<AbstractModel> $models models to show in the checkboxes, may be empty
      *
-     * @return array[] items as an array with the keys "caption" (for the title)
-     *         and "value" (for the UID), will be empty if an empty model list
-     *         was provided
+     * @return array<int, array{caption: string, value: int}>
      */
     public static function makeListToFormidableList(Collection $models): array
     {
@@ -2336,7 +2313,7 @@ class EventEditor extends AbstractEditor
 
         $result = [];
 
-        /** @var AbstractModel|Titled $model */
+        /** @var AbstractModel&Titled $model */
         foreach ($models as $model) {
             $result[] = [
                 'caption' => $model->getTitle(),

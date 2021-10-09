@@ -50,6 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 7.0 and 7.1 (#847)
 
 ### Fixed
+- Fix crash in the FE editor (#1076)
 - Block mkforms 10 to avoid a crash (#1080)
 - Copy `FrontEndUserMapper::findByUserName` from oelib (#1001, #1002)
 - Drop the typo3/cms-lang dependency (#980)
