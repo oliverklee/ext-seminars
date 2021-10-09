@@ -526,7 +526,6 @@
 								<internal_type>file</internal_type>
 								<allowed>tmpl,html,htm</allowed>
 								<max_size>100</max_size>
-								<uploadfolder>uploads/tx_seminars</uploadfolder>
 								<maxitems>1</maxitems>
 								<size>1</size>
 							</config>

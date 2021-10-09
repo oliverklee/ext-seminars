@@ -24,8 +24,6 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'state' => 'stable',
-    'uploadfolder' => true,
-    'createDirs' => 'uploads/tx_seminars/',
     'clearCacheOnLoad' => true,
     'author' => 'Oliver Klee',
     'author_email' => 'typo3-coding@oliverklee.de',

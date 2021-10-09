@@ -18,29 +18,14 @@ final class CategoryListTest extends FunctionalTestCase
     use LanguageHelper;
 
     /**
-     * @var string
-     */
-    private const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
-
-    /**
      * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var string[]
-     */
-    protected $additionalFoldersToCreate = ['uploads/tx_seminars'];
-
-    /**
-     * @var string[]
-     */
-    private $filesToDelete = [];
-
-    /**
      * @var CategoryList
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {
@@ -55,23 +40,6 @@ final class CategoryListTest extends FunctionalTestCase
             ],
             new ContentObjectRenderer()
         );
-    }
-
-    protected function tearDown(): void
-    {
-        foreach ($this->filesToDelete as $file) {
-            \unlink($this->getInstancePath() . '/' . $file);
-        }
-    }
-
-    private function createBlankGif(): string
-    {
-        $fileName = 'blank.gif';
-        $this->filesToDelete[] = $fileName;
-        $fullPath = $this->getInstancePath() . '/uploads/tx_seminars/' . $fileName;
-        \file_put_contents($fullPath, \base64_decode(self::BLANK_GIF));
-
-        return $fileName;
     }
 
     /**

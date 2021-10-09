@@ -13,13 +13,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractView extends TemplateHelper
 {
     /**
-     * the relative path to the uploaded files
-     *
-     * @var string
-     */
-    public const UPLOAD_PATH = 'uploads/tx_seminars/';
-
-    /**
      * @var string same as plugin name
      */
     public $prefixId = 'tx_seminars_pi1';

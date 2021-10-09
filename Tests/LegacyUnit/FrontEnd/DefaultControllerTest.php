@@ -1243,56 +1243,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function attachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $dummyFile = $this->testingFramework->createDummyFile();
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
-
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['attached_files' => $dummyFileName]
-        );
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-        self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function attachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndNoLoggedInFeUser(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
-        $dummyFile = $this->testingFramework->createDummyFile();
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
-
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['attached_files' => $dummyFileName]
-        );
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-        self::assertFalse(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
-        );
-    }
-
-    /**
-     * @test
-     */
     public function attachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees(): void
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
