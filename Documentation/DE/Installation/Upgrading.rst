@@ -1,15 +1,14 @@
 =============================================================================
-The extension zusammen mit TYPO3 und PHP über mehrere Versionen aktualisieren
+Die Extension zusammen mit TYPO3 und PHP über mehrere Versionen aktualisieren
 =============================================================================
+
+Empfohlene Upgrade-Reihenfolge mit allen beteiligten Extensions
+===============================================================
 
 Dies ist die empfohlene Aktualisierungsreihenfolge, um den zahlreichen
 Abhängigkeiten zu PHP- und TYPO3-Versionen sowie der Extensions untereinander
 gerecht zu werden. Die Komponente, die im jeweiligen Schritt zu aktualisieren
 ist, ist fett markiert.
-
-To accommodate the multiple dependencies to PHP and TYPO3 versions as well
-as between the extensions, this is the recommended upgrade path (with the
-component to upgrade in each step marked bold):
 
 #. PHP 7.0, TYPO3 8.7, seminars 3.4, oelib 3.6.1, mkforms 9.5.4,
    rn\_base 1.11.4, static\_info\_tables 6.8.0
@@ -34,3 +33,23 @@ component to upgrade in each step marked bold):
 
 Wenn Sie diese Reihenfolge einhalten, sollten Sie alle beteiligten Extensions
 zu jeder Zeit installiert lassen können.
+
+Zu beachtende Dinge beim Upgrade von seminars 3.x zu 4.x
+========================================================
+
+Die TypoScript-Dateien wurde von :file:`*.txt` zu :file:`*.typoscript`
+umbenannt. Falls Sie diese Dateien direkt referenzieren, passen Sie bitte
+Ihre Referenzen entsprechend an.
+
+Alle PHP-Klassen benutzen jetzt Namespaces. Falls Sie XCLASSes benutzen,
+passen Sie diese bitte entsprechend an.
+
+Die Hook-Interfaces wurden auf die genamespaceten Klassen umgestellt, und die
+deprecateten Hooks wurden entfernt. Bitte passen Sie Ihre Hooks entsprechend an.
+
+Alle Bilder und Anhänge wurden auf FAL umgestellt. Bitte benutzen Sie die
+Upgrade-Wizards, um Ihre Daten automatisch zu migrieren.
+
+Das Feature zum Upload von Bildern und Anhängen im FE-Editor wurde entfernt.
+Falls Sie ein eigenes HTML-Template für den FE-Editor benutzen, entfernen
+Sie bitte die entsprechenden Subparts aus Ihrem HTML-Template.
