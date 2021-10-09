@@ -965,16 +965,6 @@
 							</config>
 						</TCEforms>
 					</eventSuccessfullySavedPID>
-					<allowedExtensionsForUpload>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.allowedExtensionsForUpload</label>
-							<config>
-								<type>input</type>
-								<size>100</size>
-								<eval>trim</eval>
-							</config>
-						</TCEforms>
-					</allowedExtensionsForUpload>
 					<displayFrontEndEditorFields>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1134,10 +1124,6 @@
 									<numIndex index="37" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.uses_terms_2</numIndex>
 										<numIndex index="1">uses_terms_2</numIndex>
-									</numIndex>
-									<numIndex index="38" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attached_files</numIndex>
-										<numIndex index="1">attached_file_box</numIndex>
 									</numIndex>
 									<numIndex index="39" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.notes</numIndex>
@@ -1309,10 +1295,6 @@
 									<numIndex index="37" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.uses_terms_2</numIndex>
 										<numIndex index="1">uses_terms_2</numIndex>
-									</numIndex>
-									<numIndex index="38" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attached_files</numIndex>
-										<numIndex index="1">attached_file_box</numIndex>
 									</numIndex>
 									<numIndex index="39" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.notes</numIndex>

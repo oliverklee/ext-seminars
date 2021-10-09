@@ -108,6 +108,8 @@ $boot = static function () {
         = \OliverKlee\Seminars\UpgradeWizards\CategoryIconToFalUpgradeWizard::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarImagesToFal']
         = \OliverKlee\Seminars\UpgradeWizards\SeminarImageToFalUpgradeWizard::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarAttachmentsToFal']
+        = \OliverKlee\Seminars\UpgradeWizards\SeminarAttachmentsToFalUpgradeWizard::class;
 };
 
 $boot();

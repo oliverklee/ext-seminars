@@ -960,9 +960,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
 				<source>Page to redirect to after saving an event in the front end</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowedExtensionsForUpload" xml:space="preserve">
-				<source>List of allowed file extensions for the upload</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
 				<source>Fields to display in the front-end editor:</source>
 			</trans-unit>

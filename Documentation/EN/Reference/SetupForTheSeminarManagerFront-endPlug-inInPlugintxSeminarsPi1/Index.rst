@@ -1214,24 +1214,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         allowedExtensionsForUpload
-
-   Data type
-         string
-
-   Description
-         Comma-separated list of file extensions which are allowed to be
-         uploaded in the FE editor
-
-   Default
-         jpg,jpeg,png,bmp,gif,tiff,tif,txt,pdf,ps,svg,doc,docx,sxw,odt,xls,xlsx
-         ,sxc,ods,ppt,pptx,sxi,odp,html,htm,css,js,xml,xsd,zip,rar,gz,tgz,tar,b
-         z2,tbz,tbz2
-
-
-.. container:: table-row
-
-   Property
          displayFrontEndEditorFields
 
    Data type

@@ -1269,31 +1269,6 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * The returned array will be sorted like the files are sorted in the back-end form.
-     *
-     * @return array<int, string> our attached file names relative to the seminars upload directory,
-     *         will be empty if this event has no attached files
-     */
-    public function getAttachedFiles(): array
-    {
-        return $this->getAsTrimmedArray('attached_files');
-    }
-
-    /**
-     * @param array<array-key, string> $attachedFiles our attached file names,
-     *        file names must be relative to the seminars upload directory, may be empty
-     */
-    public function setAttachedFiles(array $attachedFiles): void
-    {
-        $this->setAsArray('attached_files', $attachedFiles);
-    }
-
-    public function hasAttachedFiles(): bool
-    {
-        return $this->hasString('attached_files');
-    }
-
-    /**
      * @return Collection<Event>
      */
     public function getRequirements(): Collection

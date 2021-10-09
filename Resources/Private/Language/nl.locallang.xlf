@@ -1232,10 +1232,6 @@ This event now has been confirmed.</source>
 				<source>Page to redirect to after saving an event in the front end</source>
 				<target>Pagina waarnaar wordt gesprongen na het opslaan van een seminar</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowedExtensionsForUpload" xml:space="preserve">
-				<source>List of allowed file extensions for the upload</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
 				<source>Fields to display in the front-end editor:</source>
 				<target></target>

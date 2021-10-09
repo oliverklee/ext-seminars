@@ -17,7 +17,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkEventEditorFeGroupID();
         $this->checkCreateEventsPID();
         $this->checkEventSuccessfullySavedPID();
-        $this->checkAllowedExtensionsForUpload();
         $this->checkDisplayFrontEndEditorFields();
         $this->checkRequiredFrontEndEditorFields();
         $this->checkRequiredFrontEndEditorPlaceFields();
@@ -53,15 +52,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies the page to which the user will be redirected
             after saving an event record in the front end.
             If this value is not set correctly, the redirect will not work.'
-        );
-    }
-
-    private function checkAllowedExtensionsForUpload(): void
-    {
-        $this->checkForNonEmptyString(
-            'allowedExtensionsForUpload',
-            'This value specifies the list of allowed extensions of files to upload in the FE editor.
-            If this value is empty, files cannot be uploaded.'
         );
     }
 
@@ -110,7 +100,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'tutors',
                 'checkboxes',
                 'uses_terms_2',
-                'attached_file_box',
                 'notes',
             ]
         );
@@ -161,7 +150,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'tutors',
                 'checkboxes',
                 'uses_terms_2',
-                'attached_file_box',
                 'notes',
             ]
         );
