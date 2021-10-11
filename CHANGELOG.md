@@ -8,6 +8,16 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.0.0
+
+### Changed
 - Migrate the seminar attachments to FAL (#1067)
 - Migrate the seminar images to FAL (#1065)
 - Migrate the category icons to FAL (#1063)
@@ -33,8 +43,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require rn_base >= 1.13.13 (#774, #911)
 - Move PHPStan from PHIVE to Composer (#849)
 - Rename sub-namespace `Interface` to `Interfaces` (#623, #852)
-
-### Deprecated
 
 ### Removed
 - Drop the feature for abbreviated date ranges (#1057)
