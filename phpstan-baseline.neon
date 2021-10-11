@@ -1,2 +1,7 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$models of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:makeListToFormidableList\\(\\) expects iterable\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
