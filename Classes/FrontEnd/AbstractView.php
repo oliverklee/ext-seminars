@@ -43,6 +43,8 @@ abstract class AbstractView extends TemplateHelper
      */
     public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
     {
+        parent::__construct(null, $GLOBALS['TSFE'] ?? null);
+
         $this->cObj = $contentObjectRenderer;
         $this->init($configuration);
         $this->pi_initPIflexForm();

@@ -39,19 +39,15 @@ class RegistrationsList extends AbstractView
         int $seminarUid,
         ContentObjectRenderer $contentObjectRenderer
     ) {
-        if (
-            ($whatToDisplay != 'list_registrations')
-            && ($whatToDisplay != 'list_vip_registrations')
-        ) {
+        parent::__construct($configuration, $contentObjectRenderer);
+
+        if (!\in_array($whatToDisplay, ['list_registrations', 'list_vip_registrations'], true)) {
             throw new \InvalidArgumentException(
                 'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.',
                 1333293210
             );
         }
-
         $this->whatToDisplay = $whatToDisplay;
-
-        parent::__construct($configuration, $contentObjectRenderer);
 
         $this->createSeminar($seminarUid);
     }
