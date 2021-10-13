@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Properly initialize the languages in all views (#1083)
+- Properly initialize the languages in all views (#1083, #1084)
 
 ## 4.0.0
 

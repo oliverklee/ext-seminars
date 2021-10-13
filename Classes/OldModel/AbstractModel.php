@@ -64,6 +64,8 @@ abstract class AbstractModel extends TemplateHelper
      */
     public function __construct(int $uid = 0, bool $allowHidden = false)
     {
+        parent::__construct(null, $GLOBALS['TSFE'] ?? null);
+
         if ($uid > 0) {
             $data = self::fetchDataByUid($uid, $allowHidden);
             if (\is_array($data)) {

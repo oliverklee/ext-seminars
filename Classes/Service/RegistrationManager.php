@@ -105,6 +105,8 @@ class RegistrationManager extends TemplateHelper
      */
     public function __construct()
     {
+        parent::__construct(null, $GLOBALS['TSFE'] ?? null);
+
         $this->init();
     }
 
