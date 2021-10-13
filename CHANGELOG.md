@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow installations with oelib 4 again (#1080)
 
 ### Deprecated
 
