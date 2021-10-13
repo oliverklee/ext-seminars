@@ -8,11 +8,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Allow installations with oelib 4 again (#1080)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 4.0.1
+
+### Changed
+- Allow installations with oelib 4 again (#1080)
 
 ### Fixed
 - Properly initialize the languages in all views (#1083, #1084)
