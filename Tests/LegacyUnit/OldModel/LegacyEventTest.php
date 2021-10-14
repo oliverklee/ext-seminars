@@ -4904,6 +4904,8 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      *
+     * @param array<int, array<int, int>> $timeSlotDates
+     *
      * @dataProvider timeSlotsCollidingWithTimeSlotsDataProvider
      */
     public function timeSlotsCollideWithCollidingTimeSlots(array $timeSlotDates): void
@@ -4965,6 +4967,8 @@ final class LegacyEventTest extends TestCase
 
     /**
      * @test
+     *
+     * @param array<int, array<int, int>> $timeSlotDates
      *
      * @dataProvider timeSlotsNotCollidingWithTimeSlotsDataProvider
      */

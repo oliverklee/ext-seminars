@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -64,7 +63,7 @@ class LegacyRegistration extends AbstractModel
      * This variable stores the data of the user as an array and makes it
      * available without further database queries.
      *
-     * @var string[]|null
+     * @var array<string, string|int|bool>|null
      */
     private $userData = null;
 
@@ -121,7 +120,7 @@ class LegacyRegistration extends AbstractModel
         self::$cachedSeminars = [];
     }
 
-    protected function getObjectManager(): ObjectManagerInterface
+    protected function getObjectManager(): ObjectManager
     {
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -350,6 +349,7 @@ class LegacyRegistration extends AbstractModel
         }
 
         $table = 'fe_users';
+        /** @var array<string, string|int|bool>|false $data */
         $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
         if (!\is_array($data)) {
             throw new NotFoundException(
@@ -363,6 +363,8 @@ class LegacyRegistration extends AbstractModel
 
     /**
      * Sets the data of the FE user of this registration.
+     *
+     * @param array<string, string|int|bool> $data
      */
     public function setUserData(array $data): void
     {

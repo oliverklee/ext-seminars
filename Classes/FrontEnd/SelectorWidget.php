@@ -485,10 +485,9 @@ class SelectorWidget extends AbstractView
     /**
      * Gets the data for the language search field options.
      *
-     * @return string[] the data for the language search field options, the key
-     *               will be the ISO code of the language and the value will be
-     *               the localized title of the language, will be empty if no
-     *               data could be found
+     * @return array<string, string> the data for the language search field options,
+     *         the key will be the ISO code of the language and the value will be the localized title of the language,
+     *         will be empty if no data could be found
      */
     protected function getLanguageData(): array
     {
@@ -500,6 +499,7 @@ class SelectorWidget extends AbstractView
                 // Reads the language from the event record.
                 $languageIsoCode = $event->getLanguage();
                 if (!empty($languageIsoCode) && !isset($result[$languageIsoCode])) {
+                    /** @var string $languageName */
                     $languageName = $this->staticInfo->getStaticInfoName('LANGUAGES', $languageIsoCode, '', '', 0);
                     $result[$languageIsoCode] = $languageName;
                 }
@@ -512,9 +512,9 @@ class SelectorWidget extends AbstractView
     /**
      * Gets the data for the place search field options.
      *
-     * @return string[] the data for the country search field options; the key
-     *               will be the UID of the place and the value will be the
-     *               title of the place, will be empty if no data could be found
+     * @return array<int, string> the data for the country search field options;
+     *         the key will be the UID of the place and the value will be the title of the place,
+     *         will be empty if no data could be found
      */
     protected function getPlaceData(): array
     {

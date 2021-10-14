@@ -51,34 +51,9 @@ parameters:
 			path: Classes/BackEnd/Controller.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllCountries\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/TceForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/TceForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TimeSlotWizard\\:\\:render\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/TimeSlotWizard.php
-
-		-
 			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:cleanIntegers\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BagBuilder/EventBagBuilder.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:cleanIntegers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Email\\\\Salutation\\:\\:getHooks\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -92,11 +67,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:main\\(\\) has parameter \\$conf with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:\\$showUid has no typehint specified\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -206,42 +176,12 @@ parameters:
 			path: Classes/OldModel/AbstractModel.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAssociationAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNonQueueRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaidRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaymentMethodsAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getQueueRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:getObjectManager\\(\\) return type with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface does not specify its types\\: T$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:getObjectManager\\(\\) return type with generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager does not specify its types\\: T$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
@@ -252,11 +192,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setUserData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
@@ -687,16 +622,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTutorRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:timeSlotsCollideWithCollidingTimeSlots\\(\\) has parameter \\$timeSlotDates with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:timeSlotsDoNotCollideWithCollisionFreeTimeSlots\\(\\) has parameter \\$timeSlotDates with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 

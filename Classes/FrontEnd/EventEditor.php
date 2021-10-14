@@ -1259,7 +1259,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function createNewPlace(\tx_mkforms_forms_Base $form): array
     {
@@ -1328,7 +1328,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function updatePlace(\tx_mkforms_forms_Base $form): array
     {
@@ -1479,7 +1479,7 @@ class EventEditor extends AbstractEditor
      *
      * @param int $placeUid the UID of the place to edit, must be > 0
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, int $placeUid): array
     {
@@ -1566,7 +1566,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
@@ -1610,7 +1610,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
@@ -1655,6 +1655,9 @@ class EventEditor extends AbstractEditor
         return $results;
     }
 
+    /**
+     * @return array<int, mixed[]>
+     */
     protected function repaintSpeakers(\tx_mkforms_forms_Base $form): array
     {
         $speakerTypes = [
@@ -1738,7 +1741,7 @@ class EventEditor extends AbstractEditor
     /**
      * Shows a modalbox containing a form for editing an existing speaker record.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function openEditSpeakerModalBox(array $params, \tx_mkforms_forms_Base $form): array
     {
@@ -1749,10 +1752,9 @@ class EventEditor extends AbstractEditor
     /**
      * Shows a modalbox containing a form for editing an existing speaker record.
      *
-     * @param \tx_mkforms_forms_Base $form
      * @param int $speakerUid the UID of the speaker to edit, must be > 0
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function showEditSpeakerModalBox(\tx_mkforms_forms_Base $form, int $speakerUid): array
     {
@@ -1826,7 +1828,7 @@ class EventEditor extends AbstractEditor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function createNewCheckbox(\tx_mkforms_forms_Base $form): array
     {
@@ -1888,7 +1890,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function updateCheckbox(\tx_mkforms_forms_Base $form): array
     {
@@ -1979,7 +1981,7 @@ class EventEditor extends AbstractEditor
      *
      * @param int $checkboxUid the UID of the checkbox to edit, must be > 0
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function showEditCheckboxModalBox(\tx_mkforms_forms_Base $form, int $checkboxUid): array
     {
@@ -2029,7 +2031,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function createNewTargetGroup(\tx_mkforms_forms_Base $form): array
     {
@@ -2095,7 +2097,7 @@ class EventEditor extends AbstractEditor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function updateTargetGroup(\tx_mkforms_forms_Base $form): array
     {
@@ -2205,12 +2207,11 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Shows a modalbox containing a form for editing an existing target group
-     * record.
+     * Shows a modalbox containing a form for editing an existing target group record.
      *
      * @param int $targetGroupUid the UID of the target group to edit, must be > 0
      *
-     * @return array[] calls to be executed on the client
+     * @return array<string|int, mixed> calls to be executed on the client
      */
     public static function showEditTargetGroupModalBox(\tx_mkforms_forms_Base $form, int $targetGroupUid): array
     {

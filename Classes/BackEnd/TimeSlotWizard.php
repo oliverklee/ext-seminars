@@ -32,6 +32,9 @@ class TimeSlotWizard extends AbstractFormElement
      */
     private const DEFAULT_FREQUENCY = 'weekly';
 
+    /**
+     * @return array<string, string>
+     */
     public function render(): array
     {
         $result = $this->initializeResultArray();
