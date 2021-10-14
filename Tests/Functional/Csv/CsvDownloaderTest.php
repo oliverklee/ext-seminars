@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Csv\CsvDownloader;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 
 final class CsvDownloaderTest extends FunctionalTestCase
 {

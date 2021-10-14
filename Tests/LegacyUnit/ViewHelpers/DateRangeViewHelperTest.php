@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 

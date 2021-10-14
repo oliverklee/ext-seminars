@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 

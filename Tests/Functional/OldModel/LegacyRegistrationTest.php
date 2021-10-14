@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration

@@ -14,7 +14,7 @@ use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;

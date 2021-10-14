@@ -9,8 +9,8 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
 /**
