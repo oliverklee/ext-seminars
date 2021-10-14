@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -36,7 +37,7 @@ abstract class AbstractListView
     protected $pageUid = 0;
 
     /**
-     * @var LanguageService
+     * @var LanguageService|null
      */
     protected $translator = null;
 
@@ -70,26 +71,38 @@ abstract class AbstractListView
      */
     protected function getInitializedTranslator(): LanguageService
     {
-        if ($this->translator !== null) {
+        if ($this->translator instanceof LanguageService) {
             return $this->translator;
         }
 
-        if ($this->getLanguageService() !== null) {
-            $this->translator = $this->getLanguageService();
+        if ($this->getLanguageService() instanceof LanguageService) {
+            $languageService = $this->getLanguageService();
         } else {
-            $this->translator = GeneralUtility::makeInstance(LanguageService::class);
-            if ($this->getBackEndUser() !== null) {
-                $this->translator->init($this->getBackEndUser()->uc['lang']);
+            $backEndUser = $this->getBackEndUser();
+            if (Typo3Version::isAtLeast(10)) {
+                if ($backEndUser instanceof BackendUserAuthentication) {
+                    // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
+                    $languageService = LanguageService::createFromUserPreferences($backEndUser);
+                } else {
+                    // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
+                    $languageService = LanguageService::create('default');
+                }
             } else {
-                $this->translator->init('default');
+                $languageService = GeneralUtility::makeInstance(LanguageService::class);
+                if ($backEndUser instanceof BackendUserAuthentication) {
+                    $languageService->init($backEndUser->uc['lang']);
+                } else {
+                    $languageService->init('default');
+                }
             }
         }
 
-        $this->translator->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
-        $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $this->translator = $languageService;
+        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $this->includeAdditionalLanguageFiles();
 
-        return $this->translator;
+        return $languageService;
     }
 
     /**

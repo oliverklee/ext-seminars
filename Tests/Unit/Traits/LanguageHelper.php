@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
+use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 
 /**
@@ -12,15 +13,20 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 trait LanguageHelper
 {
     /**
-     * @var LanguageService
+     * @var LanguageService|null
      */
     private $languageService = null;
 
     private function getLanguageService(): LanguageService
     {
-        if ($this->languageService === null) {
-            $languageService = new LanguageService();
-            $languageService->init('default');
+        if (!$this->languageService instanceof LanguageService) {
+            if (Typo3Version::isAtLeast(10)) {
+                // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
+                $languageService = LanguageService::create('default');
+            } else {
+                $languageService = new LanguageService();
+                $languageService->init('default');
+            }
             $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
             $this->languageService = $languageService;
         }
