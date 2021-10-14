@@ -3446,7 +3446,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $queryWhereParts = [];
-        foreach ($timeSpans as list($timeSpanBegin, $timeSpanEnd)) {
+        foreach ($timeSpans as [$timeSpanBegin, $timeSpanEnd]) {
             $queryWhereParts[] = $this->getQueryForCollidingEventsForTimeSpan($timeSpanBegin, $timeSpanEnd);
         }
 

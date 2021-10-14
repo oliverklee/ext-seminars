@@ -4911,7 +4911,7 @@ final class LegacyEventTest extends TestCase
         $checkEventBegin = PHP_INT_MAX;
         $checkEventEnd = 0;
         $checkEventUid = $this->subject->getUid();
-        foreach ($timeSlotDates as list($beginDate, $endDate)) {
+        foreach ($timeSlotDates as [$beginDate, $endDate]) {
             $this->testingFramework->createRecord(
                 'tx_seminars_timeslots',
                 ['seminar' => $checkEventUid, 'begin_date' => $beginDate, 'end_date' => $endDate]
@@ -4973,7 +4973,7 @@ final class LegacyEventTest extends TestCase
         $checkEventBegin = PHP_INT_MAX;
         $checkEventEnd = 0;
         $checkEventUid = $this->subject->getUid();
-        foreach ($timeSlotDates as list($beginDate, $endDate)) {
+        foreach ($timeSlotDates as [$beginDate, $endDate]) {
             $this->testingFramework->createRecord(
                 'tx_seminars_timeslots',
                 ['seminar' => $checkEventUid, 'begin_date' => $beginDate, 'end_date' => $endDate]
