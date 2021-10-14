@@ -118,9 +118,9 @@ trait BackEndTestsTrait
         $languageService = $this->getLanguageService();
         $languageService->lang = 'default';
 
+        $languageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
     }
 
     /**

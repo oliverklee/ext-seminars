@@ -98,7 +98,7 @@ abstract class AbstractListView
         }
 
         $this->translator = $languageService;
-        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        $languageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $this->includeAdditionalLanguageFiles();
 

@@ -39,8 +39,8 @@ final class EmailRegistrationListViewTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
+        $this->getLanguageService()->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
