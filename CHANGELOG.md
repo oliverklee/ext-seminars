@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require mkforms 10 and allow rn_base 1.14 (#1088)
 
 ### Deprecated
 
