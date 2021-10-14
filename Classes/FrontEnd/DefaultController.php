@@ -2078,7 +2078,7 @@ class DefaultController extends TemplateHelper
         // Overwrites the default sort order with values given by the browser.
         // This happens if the user changes the sort order manually.
         if (!empty($this->piVars['sort'])) {
-            list($this->internal['orderBy'], $this->internal['descFlag']) = \explode(':', $this->piVars['sort']);
+            [$this->internal['orderBy'], $this->internal['descFlag']] = \explode(':', $this->piVars['sort']);
         }
 
         if (isset($this->internal['orderBy'], $this->orderByList[$this->internal['orderBy']])) {
