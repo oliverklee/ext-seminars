@@ -1,2 +1,752 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractEventMailForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setPostData\\(\\) has parameter \\$postData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractEventMailForm.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:\\$postData type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractEventMailForm.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
+			count: 1
+			path: Classes/BackEnd/AbstractEventMailForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractList\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractList.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$storagePageData has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractList.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/Controller.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getTabMenu\\(\\) has parameter \\$mainParams with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/Controller.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getTabMenu\\(\\) has parameter \\$menuItems with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/Controller.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getTabMenuRaw\\(\\) has parameter \\$menuItems with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/Controller.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllCountries\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TimeSlotWizard\\:\\:render\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/TimeSlotWizard.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:cleanIntegers\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:cleanIntegers\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Email\\\\Salutation\\:\\:getHooks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Email/Salutation.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractView\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/AbstractView.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:main\\(\\) has parameter \\$conf with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:\\$showUid has no typehint specified\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationsList\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:removeDummyOptionFromFormData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:removeDummyOptionFromFormData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyBeginDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyDatesFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyEndDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyPlacesFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$allTimeSlots with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$event with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:isValidTimeSlotConfiguration\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:sanitizeEventDates\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$originalData has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\HookProvider\\:\\:executeHookReturningMergedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/HookProvider.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
+			count: 1
+			path: Classes/Hooks/HookProvider.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\DataSanitization\\:\\:sanitizeEventData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/Interfaces/DataSanitization.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\DataSanitization\\:\\:sanitizeEventData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/Interfaces/DataSanitization.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fetchDataByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:setData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:\\$recordData type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAssociationAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNonQueueRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaidRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaymentMethodsAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getQueueRegistrations\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:getObjectManager\\(\\) return type with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface does not specify its types\\: T$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:processAdditionalRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setUserData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:injectObjectManager\\(\\) has parameter \\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface but does not specify its types\\: T$#"
+			count: 1
+			path: Classes/SchedulerTasks/RegistrationDigest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:\\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface does not specify its types\\: T$#"
+			count: 1
+			path: Classes/SchedulerTasks/RegistrationDigest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canCreateRegistration\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:createRegistration\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/AbstractModelTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:getFlashMessageQueue\\(\\) return type has no value type specified in iterable type TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\FlashMessageQueue\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ControllerTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ControllerTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ControllerTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\EventsListTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\EventsListTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\EventsListTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\EventsListTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\OrganizersListTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\OrganizersListTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\OrganizersListTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\OrganizersListTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/EventListViewTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Email/SalutationTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setEventData\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Fixtures/OldModel/TestingLegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addOrganizerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addTargetGroupRelation\\(\\) has parameter \\$targetGroupData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createLoginAndAddFrontEndUserToEventEditorFrontEndGroup\\(\\) has parameter \\$frontEndUserGroupData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addEventTypeRelation\\(\\) has parameter \\$eventTypeData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addLeaderRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizingPartnerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPartnerRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPlaceRelation\\(\\) has parameter \\$placeData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addSpeakerRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTargetGroupRelation\\(\\) has parameter \\$targetGroupData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTutorRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:timeSlotsCollideWithCollidingTimeSlots\\(\\) has parameter \\$timeSlotDates with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:timeSlotsDoNotCollideWithCollisionFreeTimeSlots\\(\\) has parameter \\$timeSlotDates with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$typo3confVarsBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:CONFIGURATION type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
