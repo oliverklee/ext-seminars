@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Config;
+
 if (PHP_SAPI !== 'cli') {
     die('This script supports command line usage only. Please check your command.');
 }
 
-return (new \PhpCsFixer\Config())
+return (new Config())
     ->setRiskyAllowed(true)
     ->setRules(
         [

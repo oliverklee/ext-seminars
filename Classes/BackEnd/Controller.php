@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -385,7 +386,7 @@ class Controller extends AbstractModule
         $uriBuilder = $this->getUriBuilder();
         try {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+        } catch (RouteNotFoundException $e) {
             // no route registered, use the fallback logic to check for a module
             $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }

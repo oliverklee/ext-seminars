@@ -19,6 +19,7 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -674,7 +675,7 @@ abstract class AbstractEventMailForm
         $uriBuilder = $this->getUriBuilder();
         try {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+        } catch (RouteNotFoundException $e) {
             // no route registered, use the fallback logic to check for a module
             $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }
