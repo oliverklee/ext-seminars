@@ -55,7 +55,7 @@ class LegacyEvent extends AbstractTimeSpan
     private $registrationsHaveBeenRetrieved = false;
 
     /**
-     * @var array[]
+     * @var array<int, array<string, string|int>>
      */
     private $registrations = [];
 
@@ -1244,7 +1244,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets the titles of allowed payment methods for this event.
      *
-     * @return string[] our payment method titles, will be an empty array if there are no payment methods
+     * @return array<int, string> our payment method titles, will be an empty array if there are no payment methods
      */
     public function getPaymentMethods(): array
     {
@@ -2659,6 +2659,9 @@ class LegacyEvent extends AbstractTimeSpan
         $this->statisticsHaveBeenCalculated = true;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private function getNonQueueRegistrations(): array
     {
         $this->retrieveRegistrations();
@@ -2671,6 +2674,9 @@ class LegacyEvent extends AbstractTimeSpan
         );
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private function getQueueRegistrations(): array
     {
         $this->retrieveRegistrations();
@@ -2683,6 +2689,9 @@ class LegacyEvent extends AbstractTimeSpan
         );
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private function getPaidRegistrations(): array
     {
         $this->retrieveRegistrations();
@@ -2696,7 +2705,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @param array[] $registrations
+     * @param array<int, array<string, string|int>> $registrations
      */
     private function sumSeatsOfRegistrations(array $registrations): int
     {
@@ -2992,6 +3001,9 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->mmRecordsToSelection($this->getTopicMmRecords($foreignTable, $mmTable));
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     private function mmRecordsToSelection(array $records): array
     {
         $options = [];
@@ -4175,6 +4187,9 @@ class LegacyEvent extends AbstractTimeSpan
         return !$this->hasRecordPropertyString('publication_hash');
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private function getPaymentMethodsAsArray(): array
     {
         return $this->getAssociationAsArray(
@@ -4186,6 +4201,8 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * @param string[] $foreignFields
+     *
+     * @return array<int, array<string, string|int>>
      */
     private function getAssociationAsArray(string $foreignTableName, string $mmTableName, array $foreignFields): array
     {

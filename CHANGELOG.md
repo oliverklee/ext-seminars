@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Improve the type annotations (#1096)
 - Use the `LanguageService` factory methods in TYPO3 10LTS (#1091)
 
 ## 4.0.2

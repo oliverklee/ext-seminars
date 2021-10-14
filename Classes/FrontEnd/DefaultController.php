@@ -91,7 +91,7 @@ class DefaultController extends TemplateHelper
     /**
      * configuration in plugin.tx_seminars (not plugin.tx_seminars_pi1)
      *
-     * @var ConfigurationService
+     * @var ConfigurationService|null
      */
     private $configurationService = null;
 
@@ -236,7 +236,7 @@ class DefaultController extends TemplateHelper
     protected $feuser = null;
 
     /**
-     * int
+     * @var int
      */
     protected $showUid = 0;
 

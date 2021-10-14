@@ -143,6 +143,13 @@ class EventBagBuilder extends AbstractBagBuilder
             ')';
     }
 
+    /**
+     * Casts all values of the given array to integers.
+     *
+     * @param array<int, string|int> $array
+     *
+     * @return array<int, int>
+     */
     private function cleanIntegers(array $array): array
     {
         return \array_map('\\intval', $array);

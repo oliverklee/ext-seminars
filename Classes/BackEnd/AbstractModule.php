@@ -69,7 +69,7 @@ abstract class AbstractModule extends BaseScriptClass
     /**
      * Returns the data of the current BE page.
      *
-     * @return string[] the data of the current BE page, may be empty
+     * @return array<string, string|int> the data of the current BE page, may be empty
      */
     public function getPageData(): array
     {

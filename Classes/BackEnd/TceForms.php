@@ -33,7 +33,7 @@ class TceForms
     /**
      * Creates the values for a country selector in the TCA, using the alpha 2 codes as array keys.
      *
-     * @param array[] $parameters
+     * @param array<string, array> $parameters
      */
     public function createCountrySelector(array &$parameters): void
     {
@@ -47,6 +47,9 @@ class TceForms
         $parameters['items'] = $items;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private static function findAllLanguages(): array
     {
         $table = 'static_languages';
@@ -55,6 +58,9 @@ class TceForms
             ->select(['*'], $table, [], [], ['lg_name_local' => 'ASC'])->fetchAll();
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     private static function findAllCountries(): array
     {
         $table = 'static_countries';

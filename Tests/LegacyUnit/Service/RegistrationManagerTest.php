@@ -315,8 +315,6 @@ final class RegistrationManagerTest extends TestCase
 
     /**
      * Extracts the HTML body from the first sent e-mail.
-     *
-     * @return string
      */
     private function getEmailHtmlPart(): string
     {

@@ -61,10 +61,8 @@ class Registration extends AbstractModel implements Titled
      * Returns the event of this registration.
      *
      * This is an alias for `getEvent` necessary for the relation to the event.
-     *
-     * @see getEvent
      */
-    public function getSeminar(): ?Event
+    public function getSeminar(): Event
     {
         return $this->getEvent();
     }
@@ -78,8 +76,6 @@ class Registration extends AbstractModel implements Titled
      * Sets the event of this registration.
      *
      * This is an alias for setEvent necessary for the relation to the event.
-     *
-     * @see setEvent
      */
     public function setSeminar(Event $event): void
     {

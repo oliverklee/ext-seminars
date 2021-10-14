@@ -16,7 +16,7 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 class FrontEndRegistrationAccessCheck implements CsvAccessCheck
 {
     /**
-     * @var LegacyEvent
+     * @var LegacyEvent|null
      */
     protected $event = null;
 
