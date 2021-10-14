@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow installations with mkforms 10 (#1086)
 
 ### Deprecated
 
