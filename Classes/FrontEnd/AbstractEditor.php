@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\FrontEnd;
 
 use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration form.
@@ -12,7 +13,7 @@ use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
 abstract class AbstractEditor extends AbstractView
 {
     /**
-     * @var \tx_mkforms_forms_Base
+     * @var \tx_mkforms_forms_Base|null
      */
     private $formCreator = null;
 
@@ -65,9 +66,9 @@ abstract class AbstractEditor extends AbstractView
         $this->formConfiguration = $formConfiguration;
     }
 
-    public function getFormCreator(): ?\tx_mkforms_forms_Base
+    public function getFormCreator(): \tx_mkforms_forms_Base
     {
-        if ($this->formCreator === null) {
+        if (!$this->formCreator instanceof \tx_mkforms_forms_Base) {
             $this->formCreator = $this->makeFormCreator();
         }
 
@@ -113,10 +114,10 @@ abstract class AbstractEditor extends AbstractView
      *
      * @throws \BadMethodCallException
      */
-    protected function makeFormCreator(): ?\tx_mkforms_forms_Base
+    protected function makeFormCreator(): \tx_mkforms_forms_Base
     {
         if ($this->isTestMode()) {
-            return null;
+            throw new \BadMethodCallException('This method cannot be used in test mode.', 1634217115);
         }
 
         if (empty($this->formConfiguration)) {
@@ -126,7 +127,6 @@ abstract class AbstractEditor extends AbstractView
             );
         }
 
-        \tx_rnbase::load(\tx_mkforms_forms_Factory::class);
         $form = \tx_mkforms_forms_Factory::createForm(null);
 
         /**
@@ -134,14 +134,14 @@ abstract class AbstractEditor extends AbstractView
          *
          * @var ConfigurationProcessor $pluginConfiguration
          */
-        $pluginConfiguration = \tx_rnbase::makeInstance(ConfigurationProcessor::class);
+        $pluginConfiguration = GeneralUtility::makeInstance(ConfigurationProcessor::class);
         $pluginConfiguration->init($this->conf, $this->cObj, 'mkforms', 'mkforms');
 
         // Initialize the form from TypoScript data and provide configuration for the plugin.
         $form->initFromTs(
             $this,
             $this->formConfiguration,
-            ($this->getObjectUid() > 0) ? $this->getObjectUid() : false,
+            $this->getObjectUid() > 0 ? $this->getObjectUid() : false,
             $pluginConfiguration,
             'form.'
         );
