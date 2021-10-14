@@ -90,7 +90,6 @@ class EventEditor extends AbstractEditor
     public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
     {
         parent::__construct($configuration, $contentObjectRenderer);
-        \tx_rnbase::load(\Tx_Rnbase_Database_Connection::class);
         $this->setRequiredFormFields();
     }
 
@@ -2438,7 +2437,6 @@ class EventEditor extends AbstractEditor
      */
     private function removePathFromWidgetData(array $formData, \tx_mkforms_forms_Base $form): array
     {
-        \tx_rnbase::load(\tx_mkforms_util_FormBase::class);
         return \tx_mkforms_util_FormBase::removePathFromWidgetData($formData, $form);
     }
 }
