@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Raise PHPStan to level 6 (#1093)
 - Require mkforms 10 and allow rn_base 1.14 (#1088)
 
 ### Deprecated
@@ -15,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Use the `LanguageService` factory methods in TYPO3 10LTS (#1091)
 
 ## 4.0.2
 
