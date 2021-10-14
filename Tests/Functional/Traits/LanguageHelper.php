@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Traits;
+namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
 use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;

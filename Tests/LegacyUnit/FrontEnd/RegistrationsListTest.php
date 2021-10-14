@@ -10,7 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;

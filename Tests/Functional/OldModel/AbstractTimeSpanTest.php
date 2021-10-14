@@ -8,8 +8,8 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

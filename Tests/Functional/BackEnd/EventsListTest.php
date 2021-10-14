@@ -8,8 +8,8 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 final class EventsListTest extends FunctionalTestCase
