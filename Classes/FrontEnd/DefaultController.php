@@ -373,9 +373,6 @@ class DefaultController extends TemplateHelper
             case 'seminar_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
-            case 'favorites_list':
-                // The fallthrough is intended
-                // because createListView() will differentiate later.
             default:
                 $result = $this->createListView($this->whatToDisplay);
         }
@@ -1614,9 +1611,6 @@ class DefaultController extends TemplateHelper
                 } else {
                     $isOkay = false;
                 }
-                break;
-            case 'favorites_list':
-                $result = 'Hello World. When I grow up I will be the list of favorites';
                 break;
             default:
         }
