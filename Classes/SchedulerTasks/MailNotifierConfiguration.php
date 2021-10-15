@@ -7,17 +7,15 @@ namespace OliverKlee\Seminars\SchedulerTasks;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * This is the configuration for the e-mail notifier task.
  */
-class MailNotifierConfiguration implements AdditionalFieldProviderInterface
+class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
 {
     /**
      * @var string
@@ -75,25 +73,6 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
         $this->addMessage($message, AbstractMessage::ERROR);
 
         return false;
-    }
-
-    /**
-     * Adds a flash message.
-     *
-     * Once TYPO3 >= 9.5 is required, this class can extend `AbstractAdditionalFieldProvider`, and this method
-     * can be removed.
-     *
-     * @param string $message the flash message content
-     * @param int $severity the flash message severity
-     */
-    private function addMessage(string $message, int $severity = AbstractMessage::OK): void
-    {
-        /** @var FlashMessage $flashMessage */
-        $flashMessage = GeneralUtility::makeInstance(FlashMessage::class, $message, '', $severity);
-        /** @var FlashMessageService $service */
-        $service = GeneralUtility::makeInstance(FlashMessageService::class);
-        $queue = $service->getMessageQueueByIdentifier();
-        $queue->enqueue($flashMessage);
     }
 
     protected function getLanguageService(): LanguageService
