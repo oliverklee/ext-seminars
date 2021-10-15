@@ -106,7 +106,6 @@ class SingleViewLinkBuilder
         $frontEnd->fe_user = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
 
         $frontEnd->determineId();
-        $frontEnd->initTemplate();
         $frontEnd->config = [];
 
         $frontEnd->newCObj();
