@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove the favorites list dummy placeholder (#1100)
 
 ### Fixed
 - Stop using the language labels of the lang extension (#1097)
