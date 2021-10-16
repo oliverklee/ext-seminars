@@ -3901,7 +3901,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3928,7 +3928,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3955,7 +3955,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3988,7 +3988,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4021,7 +4021,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4054,7 +4054,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4087,7 +4087,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4120,7 +4120,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4257,7 +4257,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4280,7 +4280,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4303,7 +4303,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4330,7 +4330,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4357,7 +4357,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4384,7 +4384,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4411,7 +4411,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
-        $this->subject->setConfigurationValue('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4438,7 +4438,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
-        $this->subject->setConfigurationValue('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -5105,10 +5105,7 @@ final class RegistrationManagerTest extends TestCase
         unset($this->subject);
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -5136,10 +5133,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
 
@@ -5160,10 +5154,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -5187,10 +5178,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
         $registration = $this->createRegistration();
@@ -5221,10 +5209,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -5248,10 +5233,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
         $registration = $this->createRegistration();
@@ -5276,10 +5258,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
 
@@ -5300,10 +5279,7 @@ final class RegistrationManagerTest extends TestCase
 
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
 
@@ -5326,10 +5302,7 @@ final class RegistrationManagerTest extends TestCase
         unset($this->subject);
         TestingRegistrationManager::purgeInstance();
         $this->subject = TestingRegistrationManager::getInstance();
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
 
@@ -5392,10 +5365,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $subject = new TestingRegistrationManager();
-        $subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
 

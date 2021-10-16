@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Rector to the toolchain (#1094)
 
 ### Changed
+- Drop the `TemplateHelper` dependency from `RegistationManager` (#1129)
 - Use HTTPS for external links by default (#1127)
 - Stop using typolink for external links (#1123)
 - Drop the `TemplateHelper` dependency from the legacy models (#1117)
