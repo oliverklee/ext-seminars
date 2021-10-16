@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the favorites list dummy placeholder (#1100)
 
 ### Fixed
+- Construct the FE controller differently in V10 (#1125)
 - Add localized label for event description in the CSV export (#1115)
 - Stop using the deprecated `BaseScriptClass` (#1111)
 - Stop using the language labels of the lang extension (#1097)

@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
-use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use TYPO3\CMS\Core\Cache\Backend\NullBackend;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -53,11 +60,28 @@ final class DefaultControllerTest extends FunctionalTestCase
         }
 
         $contentObject = new ContentObjectRenderer();
-        $frontEndController = new TypoScriptFrontendController(null, self::CURRENT_PAGE_UID, 0);
-        $frontEndController->fe_user = $this->prophesize(FrontendUserAuthentication::class)->reveal();
-        if ($frontEndController instanceof LoggerAwareInterface) {
-            $frontEndController->setLogger($this->prophesize(LoggerInterface::class)->reveal());
+        $this->registerNullPageCache();
+
+        // Needed in TYPO3 V10; can be removed in V11.
+        $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
+        if (Typo3Version::isAtLeast(10)) {
+            $this->disableCoreCaches();
+            $frontEndController = GeneralUtility::makeInstance(
+                TypoScriptFrontendController::class,
+                $GLOBALS['TYPO3_CONF_VARS'],
+                new Site('test', self::CURRENT_PAGE_UID, []),
+                new SiteLanguage(0, 'en_US.utf8', new Uri(), [])
+            );
+        } else {
+            $frontEndController = GeneralUtility::makeInstance(
+                TypoScriptFrontendController::class,
+                $GLOBALS['TYPO3_CONF_VARS'],
+                self::CURRENT_PAGE_UID,
+                0
+            );
         }
+        $frontEndController->fe_user = $this->prophesize(FrontendUserAuthentication::class)->reveal();
+        $frontEndController->setLogger($this->prophesize(LoggerInterface::class)->reveal());
         $frontEndController->determineId();
         $frontEndController->cObj = $contentObject;
 
@@ -65,6 +89,43 @@ final class DefaultControllerTest extends FunctionalTestCase
         $GLOBALS['TSFE'] = $frontEndController;
 
         return $frontEndController;
+    }
+
+    private function registerNullPageCache(): void
+    {
+        $cacheKey = $this->getCacheKeyPrefix() . 'pages';
+        $cacheManager = $this->getCacheManager();
+        if ($cacheManager->hasCache($cacheKey)) {
+            return;
+        }
+
+        $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
+        $frontEnd = GeneralUtility::makeInstance(VariableFrontend::class, $cacheKey, $backEnd);
+        $cacheManager->registerCache($frontEnd);
+    }
+
+    private function getCacheKeyPrefix(): string
+    {
+        return Typo3Version::isAtLeast(10) ? '' : '_cache';
+    }
+
+    /**
+     * Sets the following Core caches to the null backen: l10n, rootline, runtime
+     */
+    private function disableCoreCaches(): void
+    {
+        $this->getCacheManager()->setCacheConfigurations(
+            [
+                'l10n' => ['backend' => NullBackend::class],
+                'rootline' => ['backend' => NullBackend::class],
+                'runtime' => ['backend' => NullBackend::class],
+            ]
+        );
+    }
+
+    private function getCacheManager(): CacheManager
+    {
+        return GeneralUtility::makeInstance(CacheManager::class);
     }
 
     // Tests concerning the plugin definition
