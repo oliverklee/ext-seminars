@@ -253,7 +253,7 @@ class LegacyRegistration extends AbstractModel
         $this->recordData['notes'] = $registrationData['notes'];
 
         $this->recordData['pid'] = $this->seminar->hasAttendancesPid()
-            ? $this->seminar->getAttendancesPid() : $this->getConfValueInteger('attendancesPID');
+            ? $this->seminar->getAttendancesPid() : $this->getSharedConfiguration()->getAsInteger('attendancesPID');
 
         $this->processAdditionalRegistrationData($registrationData);
 
