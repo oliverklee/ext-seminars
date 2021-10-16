@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -574,5 +575,19 @@ abstract class AbstractModel extends TemplateHelper
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
 
         return $fileRepository;
+    }
+
+    /**
+     * Retrieves the localized string for the given key within the seminars extension.
+     *
+     * Note: This method does not take the salutation mode (formal/informal) nor its suffixes into account.
+     *
+     * @return string the localized label, or the given key if there is no label with that key
+     */
+    public function translate(string $key): string
+    {
+        $label = LocalizationUtility::translate($key, 'seminars');
+
+        return \is_string($label) ? $label : $key;
     }
 }
