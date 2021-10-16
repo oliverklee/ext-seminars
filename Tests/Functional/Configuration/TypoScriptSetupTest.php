@@ -64,10 +64,8 @@ final class TypoScriptSetupTest extends FunctionalTestCase
             $methodName = $this->extractMethodNameFromUserFunction($match);
 
             self::assertTrue(\class_exists($className), 'Class "' . $className . '"" does not exist.');
-
-            $instance = new $className();
             self::assertTrue(
-                \method_exists($instance, $methodName),
+                \method_exists($className, $methodName),
                 'Method "' . $className . ':' . $methodName . ' "does not exist.'
             );
         }

@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
@@ -37,6 +41,16 @@ final class RegistrationFormTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
+        if (Typo3Version::isAtLeast(10)) {
+            $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
+            // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
+            $frontEndProphecy->getLanguage()->wilLReturn($siteLanguage);
+        }
+        /** @var TypoScriptFrontendController $frontEnd */
+        $frontEnd = $frontEndProphecy->reveal();
+        $GLOBALS['TSFE'] = $frontEnd;
 
         $this->contentObject = $this->prophesize(ContentObjectRenderer::class)->reveal();
         $this->subject = new RegistrationForm([], $this->contentObject);

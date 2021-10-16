@@ -7,9 +7,12 @@ namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use Prophecy\Prophecy\ObjectProphecy;
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -70,6 +73,12 @@ final class RegistrationFormTest extends UnitTestCase
     protected function setUp(): void
     {
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
+        if (Typo3Version::isAtLeast(10)) {
+            $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
+            // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
+            $frontEndProphecy->getLanguage()->wilLReturn($siteLanguage);
+        }
+
         /** @var TypoScriptFrontendController $frontEnd */
         $frontEnd = $frontEndProphecy->reveal();
         $GLOBALS['TSFE'] = $frontEnd;
