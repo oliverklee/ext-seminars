@@ -155,10 +155,10 @@ final class SpeakerTest extends TestCase
      */
     public function getHomepageWithNonEmptyHomepageReturnsHomepage(): void
     {
-        $this->subject->setData(['homepage' => 'http://example.com']);
+        $this->subject->setData(['homepage' => 'https://example.com']);
 
         self::assertEquals(
-            'http://example.com',
+            'https://example.com',
             $this->subject->getHomepage()
         );
     }
@@ -168,10 +168,10 @@ final class SpeakerTest extends TestCase
      */
     public function setHomepageSetsHomepage(): void
     {
-        $this->subject->setHomepage('http://example.com');
+        $this->subject->setHomepage('https://example.com');
 
         self::assertEquals(
-            'http://example.com',
+            'https://example.com',
             $this->subject->getHomepage()
         );
     }
@@ -193,7 +193,7 @@ final class SpeakerTest extends TestCase
      */
     public function hasHomepageWithNonEmptyHomepageReturnsTrue(): void
     {
-        $this->subject->setHomepage('http://example.com');
+        $this->subject->setHomepage('https://example.com');
 
         self::assertTrue(
             $this->subject->hasHomepage()

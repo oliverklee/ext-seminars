@@ -1146,7 +1146,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertRegExp(
-            '#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
+            '#<a href="https://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
     }
@@ -1184,7 +1184,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertRegExp(
-            '#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
+            '#<a href="https://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
     }
@@ -2261,14 +2261,14 @@ final class DefaultControllerTest extends TestCase
     public function singleViewForEventWithOrganizerWithHomepageLinksHtmlSpecialcharedOrganizerNameToTheirHomepage(): void
     {
         $this->addOrganizerRelation(
-            ['title' => 'foo & bar', 'homepage' => 'http://www.orgabar.com']
+            ['title' => 'foo & bar', 'homepage' => 'https://www.orgabar.com']
         );
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertRegExp(
-            '#<a href="http://www.orgabar.com".*>foo &amp; bar</a>#',
+            '#<a href="https://www.orgabar.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
     }

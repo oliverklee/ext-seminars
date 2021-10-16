@@ -575,6 +575,6 @@ abstract class AbstractModel
 
         $hasProtocol = \strpos($url, '://') !== false;
 
-        return $hasProtocol ? $url : ('http://' . $url);
+        return $hasProtocol ? $url : ('https://' . $url);
     }
 }
