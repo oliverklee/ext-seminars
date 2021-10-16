@@ -36,6 +36,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -1517,7 +1518,7 @@ class RegistrationManager extends TemplateHelper
         $prices = $event->getAvailablePrices();
         if (
             !$this->getSharedConfiguration()
-            ->getAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')
+                ->getAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')
         ) {
             return $prices;
         }
@@ -1539,5 +1540,23 @@ class RegistrationManager extends TemplateHelper
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
         return $connectionPool->getConnectionForTable($table);
+    }
+
+    /**
+     * Retrieves the localized string for the given key within the seminars extension.
+     *
+     * This method takes the salutation mode (formal/informal) with its suffixes into account.
+     *
+     * @return string the localized label, or the given key if there is no label with that key
+     */
+    public function translate(string $key): string
+    {
+        $salutationSuffix = '_' . $this->getSharedConfiguration()->getAsString('salutation');
+        $labelWithSalutation = LocalizationUtility::translate($key . $salutationSuffix, 'seminars');
+        $labelWithoutSalutation = LocalizationUtility::translate($key, 'seminars');
+
+        $label = \is_string($labelWithSalutation) ? $labelWithSalutation : $labelWithoutSalutation;
+
+        return \is_string($label) ? $label : $key;
     }
 }
