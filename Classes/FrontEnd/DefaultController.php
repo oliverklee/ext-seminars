@@ -45,7 +45,6 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use OliverKlee\Seminars\Service\ConfigurationService;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -84,16 +83,9 @@ class DefaultController extends TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * @var EventMapper an event mapper used to retrieve event models
+     * @var EventMapper|null
      */
     protected $eventMapper = null;
-
-    /**
-     * configuration in plugin.tx_seminars (not plugin.tx_seminars_pi1)
-     *
-     * @var ConfigurationService|null
-     */
-    private $configurationService = null;
 
     /**
      * @var LegacyEvent|null the seminar which we want to list/show or
@@ -391,16 +383,6 @@ class DefaultController extends TemplateHelper
     // General functions.
     ///////////////////////
 
-    /**
-     * Checks that we are properly initialized and that we have a config getter.
-     *
-     * @return bool TRUE if we are properly initialized, FALSE otherwise
-     */
-    public function isInitialized(): bool
-    {
-        return $this->isInitialized && is_object($this->configurationService);
-    }
-
     protected function getListViewHookProvider(): HookProvider
     {
         if (!$this->listViewHookProvider instanceof HookProvider) {
@@ -489,18 +471,9 @@ class DefaultController extends TemplateHelper
         return $exists;
     }
 
-    /**
-     * Creates the config getter and the registration manager.
-     */
     public function createHelperObjects(): void
     {
-        if ($this->configurationService === null) {
-            $this->configurationService = GeneralUtility::makeInstance(
-                ConfigurationService::class
-            );
-        }
-
-        if ($this->eventMapper === null) {
+        if (!$this->eventMapper instanceof EventMapper) {
             $this->eventMapper = GeneralUtility::makeInstance(EventMapper::class);
         }
     }
@@ -521,14 +494,6 @@ class DefaultController extends TemplateHelper
     public function getRegistrationManager(): RegistrationManager
     {
         return RegistrationManager::getInstance();
-    }
-
-    /**
-     * This function is intended for testing purposes only.
-     */
-    public function getConfigurationService(): ?ConfigurationService
-    {
-        return $this->configurationService;
     }
 
     /**

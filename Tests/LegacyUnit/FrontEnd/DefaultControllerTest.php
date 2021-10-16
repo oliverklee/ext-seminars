@@ -6494,10 +6494,7 @@ final class DefaultControllerTest extends TestCase
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForStartedEvents',
-            1
-        );
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForStartedEvents', true);
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
