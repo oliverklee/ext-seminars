@@ -2667,13 +2667,10 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeehiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer(): void
+    public function notifyAttendeeWithHiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->subject->setConfigurationValue(
-            'hideFieldsInThankYouMail',
-            'planned_disclaimer'
-        );
+        $this->configuration->setAsString('hideFieldsInThankYouMail', 'planned_disclaimer');
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             Event::STATUS_PLANNED
@@ -2698,7 +2695,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -2761,7 +2758,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -2892,7 +2889,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3102,7 +3099,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3138,7 +3135,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3293,7 +3290,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $this->subject->setConfigurationValue(
+        $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -4762,10 +4759,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $registration = $this->createRegistration();
         $this->configuration->setAsBoolean('sendNotification', true);
-        $this->subject->setConfigurationValue(
-            'hideFieldsInNotificationMail',
-            ''
-        );
+        $this->configuration->setAsString('hideFieldsInNotificationMail', '');
 
         $this->subject->notifyOrganizers($registration);
 
@@ -4781,10 +4775,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
-        $this->subject->setConfigurationValue(
-            'showSeminarFieldsInNotificationMail',
-            'vacancies'
-        );
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -4806,10 +4797,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
-        $this->subject->setConfigurationValue(
-            'showSeminarFieldsInNotificationMail',
-            'vacancies'
-        );
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -4832,10 +4820,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
-        $this->subject->setConfigurationValue(
-            'showAttendanceFieldsInNotificationMail',
-            'company'
-        );
+        $this->configuration->setAsString('showAttendanceFieldsInNotificationMail', 'company');
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -4861,10 +4846,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
-        $this->subject->setConfigurationValue(
-            'showAttendanceFieldsInNotificationMail',
-            'company'
-        );
+        $this->configuration->setAsString('showAttendanceFieldsInNotificationMail', 'company');
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -5456,10 +5438,7 @@ final class RegistrationManagerTest extends TestCase
                 'needs_registration' => 1,
             ]
         );
-        $this->subject->setConfigurationValue(
-            'showSeminarFieldsInNotificationMail',
-            'vacancies'
-        );
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -5484,10 +5463,7 @@ final class RegistrationManagerTest extends TestCase
                 'needs_registration' => 1,
             ]
         );
-        $this->subject->setConfigurationValue(
-            'showSeminarFieldsInNotificationMail',
-            'vacancies'
-        );
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -7829,7 +7805,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndNoRegistrationsReturnsAllAvailablePrices(): void
     {
-        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+        $this->configuration->setAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         $user = $this->frontEndUserMapper->find($userUid);
@@ -7857,7 +7833,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationReturnsAllAvailablePrices(): void
     {
-        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+        $this->configuration->setAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         $user = $this->frontEndUserMapper->find($userUid);
@@ -7887,7 +7863,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function getPricesAvailableForUserForAutomaticPricesAndNoRegistrationsRemovesSpecialPrices(): void
     {
-        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->configuration->setAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         $user = $this->frontEndUserMapper->find($userUid);
@@ -7915,7 +7891,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationRemovesRegularPrices(): void
     {
-        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->configuration->setAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         $user = $this->frontEndUserMapper->find($userUid);
@@ -7945,7 +7921,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationAndNoSpecialPriceKeepsRegularPrice(): void
     {
-        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->configuration->setAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         $user = $this->frontEndUserMapper->find($userUid);

@@ -79,7 +79,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);
-        $this->subject->setConfigurationValue('showSeminarFieldsInNotificationMail', 'vacancies');
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
 
         $this->subject->notifyOrganizers($registration);
 
