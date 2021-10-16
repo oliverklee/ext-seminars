@@ -204,7 +204,7 @@ final class RegistrationManagerTest extends TestCase
             SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
         );
-        $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('http://singleview.example.com/');
+        $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('https://singleview.example.com/');
         $this->subject->injectLinkBuilder($linkBuilder);
 
         $frontEndUserMapper = MapperRegistry::get(FrontEndUserMapper::class);
@@ -2572,7 +2572,7 @@ final class RegistrationManagerTest extends TestCase
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
-        $seminarLink = 'http://singleview.example.com/';
+        $seminarLink = 'https://singleview.example.com/';
 
         self::assertStringContainsString(
             '<a href="' . $seminarLink,

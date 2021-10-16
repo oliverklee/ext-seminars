@@ -46,7 +46,7 @@ final class LegacyOrganizerTest extends TestCase
             'tx_seminars_organizers',
             [
                 'title' => 'Test organizer',
-                'homepage' => 'http://www.test.com/',
+                'homepage' => 'https://www.test.com/',
                 'email' => 'maximal-foo@test.com',
                 'email_footer' => "line 1\nline 2",
                 'attendances_pid' => 99,
@@ -120,7 +120,7 @@ final class LegacyOrganizerTest extends TestCase
             $this->subject->getHomepage()
         );
         self::assertEquals(
-            'http://www.test.com/',
+            'https://www.test.com/',
             $this->maximalFixture->getHomepage()
         );
     }

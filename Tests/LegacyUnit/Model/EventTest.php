@@ -853,10 +853,10 @@ final class EventTest extends TestCase
      */
     public function getDetailsPageWithDetailsPageReturnsDetailsPage(): void
     {
-        $this->subject->setData(['details_page' => 'http://example.com']);
+        $this->subject->setData(['details_page' => 'https://example.com']);
 
         self::assertEquals(
-            'http://example.com',
+            'https://example.com',
             $this->subject->getDetailsPage()
         );
     }
@@ -866,10 +866,10 @@ final class EventTest extends TestCase
      */
     public function setDetailsPageSetsDetailsPage(): void
     {
-        $this->subject->setDetailsPage('http://example.com');
+        $this->subject->setDetailsPage('https://example.com');
 
         self::assertEquals(
-            'http://example.com',
+            'https://example.com',
             $this->subject->getDetailsPage()
         );
     }
@@ -891,7 +891,7 @@ final class EventTest extends TestCase
      */
     public function hasDetailsPageWithDetailsPageReturnsTrue(): void
     {
-        $this->subject->setDetailsPage('http://example.com');
+        $this->subject->setDetailsPage('https://example.com');
 
         self::assertTrue(
             $this->subject->hasDetailsPage()

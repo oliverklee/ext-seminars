@@ -3531,7 +3531,7 @@ final class LegacyEventTest extends TestCase
         );
 
         self::assertStringContainsString(
-            '<a href="http://www.bar.com',
+            '<a href="https://www.bar.com',
             $this->subject->getOrganizers($this->pi1)
         );
     }
@@ -4602,13 +4602,13 @@ final class LegacyEventTest extends TestCase
     {
         $speakerWithLink = [
             'title' => 'test speaker',
-            'homepage' => 'http://www.foo.com',
+            'homepage' => 'https://www.foo.com',
         ];
         $this->addSpeakerRelation($speakerWithLink);
         $this->createPi1();
 
         self::assertRegExp(
-            '/href="http:\\/\\/www.foo.com".*>test speaker/',
+            '/href="https:\\/\\/www.foo.com".*>test speaker/',
             $this->subject->getSpeakersShort()
         );
     }
@@ -5425,7 +5425,7 @@ final class LegacyEventTest extends TestCase
         $this->addPlaceRelation(['homepage' => 'www.test.com']);
 
         self::assertStringContainsString(
-            ' href="http://www.test.com',
+            ' href="https://www.test.com',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
     }

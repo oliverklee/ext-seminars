@@ -571,7 +571,7 @@ class DefaultController extends TemplateHelper
 
         // XXX We need to do this workaround of manually encoding brackets in
         // the URL due to a bug in the TYPO3 core:
-        // http://bugs.typo3.org/view.php?id=3808
+        // https://bugs.typo3.org/view.php?id=3808
         $redirectUrl = preg_replace(
             ['/\\[/', '/\\]/'],
             ['%5B', '%5D'],
