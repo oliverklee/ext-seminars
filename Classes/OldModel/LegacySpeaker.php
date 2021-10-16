@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a speaker.
@@ -75,18 +74,9 @@ class LegacySpeaker extends AbstractModel
         return $this->hasRecordPropertyString('homepage');
     }
 
-    /**
-     * Gets our description.
-     *
-     * @param AbstractPlugin $plugin
-     *
-     * @return string our description (or '' if there is an error)
-     */
-    public function getDescription(AbstractPlugin $plugin): string
+    public function getDescription(): string
     {
-        return $plugin->pi_RTEcssText(
-            $this->getRecordPropertyString('description')
-        );
+        return $this->renderAsRichText($this->getRecordPropertyString('description'));
     }
 
     /**
