@@ -40,11 +40,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
- * This utility class checks and creates registrations for seminars.
+ * This service checks and creates registrations for seminars.
  *
- * This file does not include the locallang file in the BE because objectfromdb already does that.
+ * Use `getInstance()` for creating/retrieving an instance.
  */
-class RegistrationManager extends TemplateHelper
+class RegistrationManager
 {
     use SharedPluginConfiguration;
 
@@ -62,18 +62,6 @@ class RegistrationManager extends TemplateHelper
      * @var int use user-specific format for e-mails to attendees
      */
     public const SEND_USER_MAIL = 2;
-
-    /**
-     * faking $this->scriptRelPath so the locallang.xlf file is found
-     *
-     * @var string
-     */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'seminars';
 
     /**
      * @var static|null
@@ -99,17 +87,6 @@ class RegistrationManager extends TemplateHelper
      * @var SingleViewLinkBuilder
      */
     private $linkBuilder = null;
-
-    /**
-     * It still is public due to the TemplateHelper base class. Nevertheless,
-     * `getInstance` should be used so the Singleton property is retained.
-     */
-    public function __construct()
-    {
-        parent::__construct(null, $GLOBALS['TSFE'] ?? null);
-
-        $this->init();
-    }
 
     /**
      * @return static the current Singleton instance
@@ -238,15 +215,9 @@ class RegistrationManager extends TemplateHelper
      *
      * @return string HTML with the link
      */
-    public function getLinkToRegistrationOrLoginPage(
-        DefaultController $plugin,
-        LegacyEvent $event
-    ): string {
-        return $this->getLinkToStandardRegistrationOrLoginPage(
-            $plugin,
-            $event,
-            $this->getRegistrationLabel($plugin, $event)
-        );
+    public function getLinkToRegistrationOrLoginPage(DefaultController $plugin, LegacyEvent $event): string
+    {
+        return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $event, $this->getRegistrationLabel($event));
     }
 
     /**
@@ -256,21 +227,21 @@ class RegistrationManager extends TemplateHelper
      *
      * @return string label for the registration link, will not be empty
      */
-    private function getRegistrationLabel(TemplateHelper $plugin, LegacyEvent $event): string
+    private function getRegistrationLabel(LegacyEvent $event): string
     {
         if ($event->hasVacancies()) {
             if ($event->hasDate()) {
-                $label = $plugin->translate('label_onlineRegistration');
+                $label = $this->translate('label_onlineRegistration');
             } else {
-                $label = $plugin->translate('label_onlinePrebooking');
+                $label = $this->translate('label_onlinePrebooking');
             }
         } elseif ($event->hasRegistrationQueue()) {
             $label = \sprintf(
-                $plugin->translate('label_onlineRegistrationOnQueue'),
+                $this->translate('label_onlineRegistrationOnQueue'),
                 $event->getAttendancesOnRegistrationQueue()
             );
         } else {
-            $label = $plugin->translate('label_onlineRegistration');
+            $label = $this->translate('label_onlineRegistration');
         }
 
         return $label;
@@ -315,12 +286,10 @@ class RegistrationManager extends TemplateHelper
      *
      * @return string HTML code with the link
      */
-    public function getLinkToUnregistrationPage(
-        TemplateHelper $plugin,
-        LegacyRegistration $registration
-    ): string {
+    public function getLinkToUnregistrationPage(TemplateHelper $plugin, LegacyRegistration $registration): string
+    {
         return $plugin->cObj->getTypoLink(
-            $plugin->translate('label_onlineUnregistration'),
+            $this->translate('label_onlineUnregistration'),
             (string)$plugin->getConfValueInteger('registerPID'),
             ['tx_seminars_pi1[registration]' => $registration->getUid(), 'tx_seminars_pi1[action]' => 'unregister']
         );
@@ -1549,7 +1518,7 @@ class RegistrationManager extends TemplateHelper
      *
      * @return string the localized label, or the given key if there is no label with that key
      */
-    public function translate(string $key): string
+    private function translate(string $key): string
     {
         $salutationSuffix = '_' . $this->getSharedConfiguration()->getAsString('salutation');
         $labelWithSalutation = LocalizationUtility::translate($key . $salutationSuffix, 'seminars');
