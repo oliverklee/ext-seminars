@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the favorites list dummy placeholder (#1100)
 
 ### Fixed
+- Stop using the deprecated `BaseScriptClass` (#1111)
 - Stop using the language labels of the lang extension (#1097)
 - Improve the type annotations (#1096)
 - Use the `LanguageService` factory methods in TYPO3 10LTS (#1091)
