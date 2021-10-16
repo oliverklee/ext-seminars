@@ -189,7 +189,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         self::assertSame(DefaultController::class, $className);
 
         self::assertTrue(
-            \method_exists(new DefaultController(), $methodName),
+            \method_exists(DefaultController::class, $methodName),
             'Method ' . $methodName . ' does not exist in class ' . $className
         );
     }
@@ -200,8 +200,9 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/' . $fixtureFileName . '.xml');
 
+        $frontEndController = $this->getFrontEndController();
         $subject = new TestingDefaultController();
-        $subject->cObj = $this->getFrontEndController()->cObj;
+        $subject->cObj = $frontEndController->cObj;
         $subject->init(
             [
                 'isStaticTemplateLoaded' => 1,
