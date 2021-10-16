@@ -979,7 +979,7 @@ class DefaultController extends TemplateHelper
 
         $speakerContent = $this->getConfValueBoolean('showSpeakerDetails', 's_template_special')
             ? $this->seminar->getSpeakersWithDetails($this, $speakerType)
-            : $this->seminar->getSpeakersShort($this, $speakerType);
+            : $this->seminar->getSpeakersShort($speakerType);
         $this->setMarker($speakerType, $speakerContent);
     }
 
@@ -1910,7 +1910,7 @@ class DefaultController extends TemplateHelper
             );
             $this->setMarker('credit_points', $this->seminar->getCreditPoints());
             $this->setMarker('teaser', $this->createSingleViewLink($event, $event->getTeaser()));
-            $this->setMarker('speakers', $this->seminar->getSpeakersShort($this));
+            $this->setMarker('speakers', $this->seminar->getSpeakersShort());
             $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
 
             $currentDate = $this->seminar->getDate();
@@ -2885,17 +2885,14 @@ class DefaultController extends TemplateHelper
         $result = '';
         /** @var LegacyOrganizer $organizer */
         foreach ($this->seminar->getOrganizerBag() as $organizer) {
+            $encodedName = \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5);
             if ($organizer->hasHomepage()) {
-                $organizerTitle = $this->cObj->getTypoLink(
-                    \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
-                    $organizer->getHomepage(),
-                    [],
-                    $this->getConfValueString('externalLinkTarget')
-                );
+                $encodedUrl = \htmlspecialchars($organizer->getHomepage(), ENT_QUOTES | ENT_HTML5);
+                $organizerHtml = '<a href="' . $encodedUrl . '">' . $encodedName . '</a>';
             } else {
-                $organizerTitle = \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5);
+                $organizerHtml = $encodedName;
             }
-            $this->setMarker('organizer_item_title', $organizerTitle);
+            $this->setMarker('organizer_item_title', $organizerHtml);
 
             if ($organizer->hasDescription()) {
                 $this->setMarker(

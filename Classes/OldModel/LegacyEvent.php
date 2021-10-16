@@ -281,16 +281,17 @@ class LegacyEvent extends AbstractTimeSpan
 
         $result = '';
         foreach ($this->getPlacesAsArray() as $place) {
-            $name = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
-            if ((string)$place['homepage'] !== '') {
-                $name = $plugin->cObj->getTypoLink(
-                    $name,
-                    (string)$place['homepage'],
-                    [],
-                    $plugin->getConfValueString('externalLinkTarget')
+            $encodedPlaceTitle = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
+            if (!empty($place['homepage'])) {
+                $encodedUrl = \htmlspecialchars(
+                    $this->addMissingProtocolToUrl((string)$place['homepage']),
+                    ENT_QUOTES | ENT_HTML5
                 );
+                $placeTitleHtml = '<a href="' . $encodedUrl . '">' . $encodedPlaceTitle . '</a>';
+            } else {
+                $placeTitleHtml = $encodedPlaceTitle;
             }
-            $plugin->setMarker('place_item_title', $name);
+            $plugin->setMarker('place_item_title', $placeTitleHtml);
 
             $descriptionParts = [];
             if ((string)$place['address'] !== '') {
@@ -645,7 +646,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-            $name = $speaker->getLinkedTitle($plugin);
+            $name = $speaker->getLinkedTitle();
             if ($speaker->hasOrganization()) {
                 $name .= ', ' . \htmlspecialchars($speaker->getOrganization(), ENT_QUOTES | ENT_HTML5);
             }
@@ -734,7 +735,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return string our speakers list, will be empty if an error occurred during processing
      */
-    public function getSpeakersShort(?TemplateHelper $plugin = null, string $speakerRelation = 'speakers'): string
+    public function getSpeakersShort(string $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -744,7 +745,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-            $result[] = $plugin instanceof TemplateHelper ? $speaker->getLinkedTitle($plugin) : $speaker->getTitle();
+            $result[] = $speaker->getLinkedTitle();
         }
 
         return implode(', ', $result);
@@ -1856,15 +1857,25 @@ class LegacyEvent extends AbstractTimeSpan
 
         /** @var LegacyOrganizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
-            $result[] = $plugin->cObj->getTypoLink(
-                \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
-                $organizer->getHomepage(),
-                [],
-                $plugin->getConfValueString('externalLinkTarget')
-            );
+            $result[] = $this->buildHtmlForOrganizerWithPossibleHomepageLink($organizer);
         }
 
         return implode(', ', $result);
+    }
+
+    protected function buildHtmlForOrganizerWithPossibleHomepageLink(LegacyOrganizer $organizer): string
+    {
+        $encodedName = \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5);
+        if (!$organizer->hasHomepage()) {
+            return $encodedName;
+        }
+
+        $encodedUrl = \htmlspecialchars(
+            $this->addMissingProtocolToUrl($organizer->getHomepage()),
+            ENT_QUOTES | ENT_HTML5
+        );
+
+        return '<a href="' . $encodedUrl . '">' . $encodedName . '</a>';
     }
 
     /**
@@ -2005,12 +2016,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         /** @var LegacyOrganizer $organizer */
         foreach ($organizerBag as $organizer) {
-            $result[] = $plugin->cObj->getTypoLink(
-                $organizer->getName(),
-                $organizer->getHomepage(),
-                [],
-                $plugin->getConfValueString('externalLinkTarget')
-            );
+            $result[] = $this->buildHtmlForOrganizerWithPossibleHomepageLink($organizer);
         }
 
         return implode(', ', $result);
