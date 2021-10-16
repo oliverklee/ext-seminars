@@ -50,8 +50,10 @@ use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 /**
  * Plugin "Seminar Manager".
@@ -790,10 +792,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $this->setMarker(
-            'description',
-            $this->pi_RTEcssText($this->seminar->getDescription())
-        );
+        $this->setMarker('description', $this->renderAsRichText($this->seminar->getDescription()));
     }
 
     /**
@@ -1127,7 +1126,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker(
             'additional_information',
-            $this->pi_RTEcssText($this->seminar->getAdditionalInformation())
+            $this->renderAsRichText($this->seminar->getAdditionalInformation())
         );
     }
 
@@ -2897,11 +2896,9 @@ class DefaultController extends TemplateHelper
             if ($organizer->hasDescription()) {
                 $this->setMarker(
                     'organizer_description_content',
-                    $this->pi_RTEcssText($organizer->getDescription())
+                    $this->renderAsRichText($organizer->getDescription())
                 );
-                $description = $this->getSubpart(
-                    'ORGANIZER_DESCRIPTION_ITEM'
-                );
+                $description = $this->getSubpart('ORGANIZER_DESCRIPTION_ITEM');
             } else {
                 $description = '';
             }
@@ -3307,5 +3304,16 @@ class DefaultController extends TemplateHelper
         $flexFormsConfiguration = new FlexformsConfiguration($this->cObj);
 
         return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
+    }
+
+    private function renderAsRichText(string $rawData): string
+    {
+        $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
+        $childrenClosure = function () use ($rawData): string {
+            return \trim($rawData);
+        };
+        $renderingContext = new RenderingContext();
+
+        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, $renderingContext);
     }
 }

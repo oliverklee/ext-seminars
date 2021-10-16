@@ -313,8 +313,8 @@ class LegacyEvent extends AbstractTimeSpan
             }
 
             $description = \implode(', ', $descriptionParts);
-            if ((string)$place['directions'] !== '') {
-                $description .= $plugin->pi_RTEcssText(\trim((string)$place['directions']));
+            if (!empty($place['directions'])) {
+                $description .= $this->renderAsRichText((string)$place['directions']);
             }
             $plugin->setMarker('place_item_description', $description);
 
@@ -653,7 +653,7 @@ class LegacyEvent extends AbstractTimeSpan
             $plugin->setMarker('speaker_item_title', $name);
             $plugin->setMarker(
                 'speaker_item_description',
-                $speaker->hasDescription() ? $speaker->getDescription($plugin) : ''
+                $speaker->hasDescription() ? $speaker->getDescription() : ''
             );
             $plugin->setMarker(
                 'speaker_image',

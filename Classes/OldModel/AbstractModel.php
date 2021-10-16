@@ -16,6 +16,8 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -576,5 +578,16 @@ abstract class AbstractModel
         $hasProtocol = \strpos($url, '://') !== false;
 
         return $hasProtocol ? $url : ('https://' . $url);
+    }
+
+    protected function renderAsRichText(string $rawData): string
+    {
+        $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
+        $childrenClosure = function () use ($rawData): string {
+            return \trim($rawData);
+        };
+        $renderingContext = new RenderingContext();
+
+        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, $renderingContext);
     }
 }
