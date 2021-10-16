@@ -21,9 +21,9 @@ trait LanguageHelper
     {
         if (!$this->languageService instanceof LanguageService) {
             if (Typo3Version::isAtLeast(10)) {
-                // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
                 $languageService = LanguageService::create('default');
             } else {
+                // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we currently are on 10LTS.
                 $languageService = new LanguageService();
                 $languageService->init('default');
             }

@@ -291,11 +291,6 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -306,11 +301,6 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
@@ -321,11 +311,6 @@ parameters:
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
@@ -334,16 +319,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/EventsListTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
@@ -386,16 +361,6 @@ parameters:
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/CategoryListTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
@@ -436,26 +401,6 @@ parameters:
 			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:getFlashMessageQueue\\(\\) return type has no value type specified in iterable type TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\FlashMessageQueue\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
@@ -464,11 +409,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
@@ -681,11 +621,6 @@ parameters:
 			path: Tests/LegacyUnit/Csv/EventListViewTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Email/SalutationTest.php
@@ -694,11 +629,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setEventData\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Fixtures/OldModel/TestingLegacyEvent.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
@@ -721,11 +651,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createLoginAndAddFrontEndUserToEventEditorFrontEndGroup\\(\\) has parameter \\$frontEndUserGroupData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
@@ -739,31 +664,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventPublicationTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
@@ -821,19 +721,9 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyTimeSlotTest.php
 
 		-
 			message: "#^Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:getChildren\\(\\)\\.$#"
@@ -901,11 +791,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$string of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 13
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
@@ -944,16 +829,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$typo3confVarsBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/ViewHelpers/CountdownViewHelperTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/ViewHelpers/DateRangeViewHelperTest.php
 
 		-
 			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:CONFIGURATION type has no value type specified in iterable type array\\.$#"
