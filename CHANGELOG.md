@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Rector to the toolchain (#1094)
 
 ### Changed
+- Switch to the new configuration classes in more places (#1112)
 - Stop calling `initTemplate()` in the link builder (#1098)
 - Use PHP 7.2 features (#1095)
 - Raise PHPStan to level 6 (#1093)
