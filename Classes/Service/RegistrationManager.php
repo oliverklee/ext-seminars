@@ -875,33 +875,35 @@ class RegistrationManager extends TemplateHelper
         );
 
         $template = $this->getInitializedEmailTemplate();
-        $template->hideSubparts($this->getConfValueString('hideFieldsInNotificationMail'), 'field_wrapper');
+        $template->hideSubparts($configuration->getAsString('hideFieldsInNotificationMail'), 'field_wrapper');
 
         $template->setMarker('hello', $this->translate('email_' . $helloSubjectPrefix . 'Hello'));
         $template->setMarker('summary', $registration->getTitle());
 
-        if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
+        if ($configuration->hasString('showSeminarFieldsInNotificationMail')) {
             $template->setMarker(
                 'seminardata',
-                $event->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail'))
+                $event->dumpSeminarValues($configuration->getAsString('showSeminarFieldsInNotificationMail'))
             );
         } else {
             $template->hideSubparts('seminardata', 'field_wrapper');
         }
 
-        if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
+        if ($configuration->hasString('showFeUserFieldsInNotificationMail')) {
             $template->setMarker(
                 'feuserdata',
-                $registration->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail'))
+                $registration->dumpUserValues($configuration->getAsString('showFeUserFieldsInNotificationMail'))
             );
         } else {
             $template->hideSubparts('feuserdata', 'field_wrapper');
         }
 
-        if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
+        if ($configuration->hasString('showAttendanceFieldsInNotificationMail')) {
             $template->setMarker(
                 'attendancedata',
-                $registration->dumpAttendanceValues($this->getConfValueString('showAttendanceFieldsInNotificationMail'))
+                $registration->dumpAttendanceValues(
+                    $configuration->getAsString('showAttendanceFieldsInNotificationMail')
+                )
             );
         } else {
             $template->hideSubparts('attendancedata', 'field_wrapper');
@@ -1019,16 +1021,14 @@ class RegistrationManager extends TemplateHelper
      *
      * @return string the message, will not be empty
      */
-    private function getMessageForNotification(
-        LegacyRegistration $registration,
-        string $reasonForNotification
-    ): string {
+    private function getMessageForNotification(LegacyRegistration $registration, string $reasonForNotification): string
+    {
         $localLanguageKey = 'email_additionalNotification' . $reasonForNotification;
         $template = $this->getInitializedEmailTemplate();
 
         $template->setMarker('message', $this->translate($localLanguageKey));
-        $showSeminarFields = $this->getConfValueString('showSeminarFieldsInNotificationMail');
-        if ($showSeminarFields != '') {
+        $showSeminarFields = $this->getSharedConfiguration()->getAsString('showSeminarFieldsInNotificationMail');
+        if ($showSeminarFields !== '') {
             $template->setMarker(
                 'seminardata',
                 $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields)
@@ -1097,7 +1097,10 @@ class RegistrationManager extends TemplateHelper
 
         $template = $this->getInitializedEmailTemplate();
         $template->setMarker('html_mail_charset', 'utf-8');
-        $template->hideSubparts($this->getConfValueString('hideFieldsInThankYouMail'), $wrapperPrefix);
+        $template->hideSubparts(
+            $this->getSharedConfiguration()->getAsString('hideFieldsInThankYouMail'),
+            $wrapperPrefix
+        );
 
         $this->setEmailIntroduction($helloSubjectPrefix, $registration);
         $event = $registration->getSeminarObject();
@@ -1245,11 +1248,14 @@ class RegistrationManager extends TemplateHelper
     private function addCssToHtmlEmail(string $emailBody): string
     {
         // The CSS inlining uses a Composer-provided library and hence is a Composer-only feature.
-        if (!$this->hasConfValueString('cssFileForAttendeeMail') || !\class_exists(CssInliner::class)) {
+        if (
+            !$this->getSharedConfiguration()->hasString('cssFileForAttendeeMail')
+            || !\class_exists(CssInliner::class)
+        ) {
             return $emailBody;
         }
 
-        $cssFile = $this->getConfValueString('cssFileForAttendeeMail');
+        $cssFile = $this->getSharedConfiguration()->getAsString('cssFileForAttendeeMail');
         $absolutePath = GeneralUtility::getFileAbsFileName($cssFile);
         if (\is_readable($absolutePath)) {
             $css = \file_get_contents($absolutePath);
@@ -1509,7 +1515,10 @@ class RegistrationManager extends TemplateHelper
         FrontEndUser $user
     ): array {
         $prices = $event->getAvailablePrices();
-        if (!$this->getConfValueBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')) {
+        if (
+            !$this->getSharedConfiguration()
+            ->getAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')
+        ) {
             return $prices;
         }
 
