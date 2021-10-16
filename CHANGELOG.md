@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.0.3
+
+### Added
 - Add Rector to the toolchain (#1094)
 
 ### Changed
@@ -20,8 +32,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use PHP 7.2 features (#1095)
 - Raise PHPStan to level 6 (#1093)
 - Require mkforms 10 and allow rn_base 1.14 (#1088)
-
-### Deprecated
 
 ### Removed
 - Remove the favorites list dummy placeholder (#1100)
