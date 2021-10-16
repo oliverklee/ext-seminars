@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -209,28 +208,23 @@ class LegacySpeaker extends AbstractModel
     /**
      * Creates a link to this speaker's homepage, with the title as link text.
      *
-     * @param TemplateHelper $plugin object with current configuration values
-     *
-     * @return string this speaker's title wrapped in an link tag, or if the
+     * @return string this speaker's title wrapped in a link tag, or if the
      *                speaker has no homepage just the speaker name, will not
      *                be empty
      */
-    public function getLinkedTitle(TemplateHelper $plugin): string
+    public function getLinkedTitle(): string
     {
-        $safeTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
-
-        if ($this->hasHomepage()) {
-            $result = $plugin->cObj->getTypoLink(
-                $safeTitle,
-                $this->getHomepage(),
-                [],
-                $plugin->getConfValueString('externalLinkTarget')
-            );
-        } else {
-            $result = $safeTitle;
+        $encodedTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
+        if (!$this->hasHomepage()) {
+            return $encodedTitle;
         }
 
-        return $result;
+        $encodedUrl = \htmlspecialchars(
+            $this->addMissingProtocolToUrl($this->getHomepage()),
+            ENT_QUOTES | ENT_HTML5
+        );
+
+        return '<a href="' . $encodedUrl . '">' . $encodedTitle . '</a>';
     }
 
     /**

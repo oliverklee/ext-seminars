@@ -4508,19 +4508,19 @@ final class LegacyEventTest extends TestCase
 
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort($this->pi1)
+            $this->subject->getSpeakersShort()
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort($this->pi1, 'partners')
+            $this->subject->getSpeakersShort('partners')
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort($this->pi1, 'tutors')
+            $this->subject->getSpeakersShort('tutors')
         );
         self::assertSame(
             '',
-            $this->subject->getSpeakersShort($this->pi1, 'leaders')
+            $this->subject->getSpeakersShort('leaders')
         );
     }
 
@@ -4535,25 +4535,25 @@ final class LegacyEventTest extends TestCase
         $this->addSpeakerRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort($this->pi1)
+            $this->subject->getSpeakersShort()
         );
 
         $this->addPartnerRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'partners')
+            $this->subject->getSpeakersShort('partners')
         );
 
         $this->addTutorRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'tutors')
+            $this->subject->getSpeakersShort('tutors')
         );
 
         $this->addLeaderRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'leaders')
+            $this->subject->getSpeakersShort('leaders')
         );
     }
 
@@ -4570,28 +4570,28 @@ final class LegacyEventTest extends TestCase
         $this->createPi1();
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort($this->pi1)
+            $this->subject->getSpeakersShort()
         );
 
         $this->addPartnerRelation($firstSpeaker);
         $this->addPartnerRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'partners')
+            $this->subject->getSpeakersShort('partners')
         );
 
         $this->addTutorRelation($firstSpeaker);
         $this->addTutorRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'tutors')
+            $this->subject->getSpeakersShort('tutors')
         );
 
         $this->addLeaderRelation($firstSpeaker);
         $this->addLeaderRelation($secondSpeaker);
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->subject->getSpeakersShort($this->pi1, 'leaders')
+            $this->subject->getSpeakersShort('leaders')
         );
     }
 
@@ -4609,7 +4609,7 @@ final class LegacyEventTest extends TestCase
 
         self::assertRegExp(
             '/href="http:\\/\\/www.foo.com".*>test speaker/',
-            $this->subject->getSpeakersShort($this->pi1)
+            $this->subject->getSpeakersShort()
         );
     }
 
@@ -4625,8 +4625,7 @@ final class LegacyEventTest extends TestCase
         $this->addSpeakerRelation($speaker);
         $this->createPi1();
 
-        $shortSpeakerOutput
-            = $this->subject->getSpeakersShort($this->pi1);
+        $shortSpeakerOutput = $this->subject->getSpeakersShort();
 
         self::assertStringContainsString(
             'test speaker',

@@ -566,4 +566,15 @@ abstract class AbstractModel
 
         return \is_string($label) ? $label : $key;
     }
+
+    protected function addMissingProtocolToUrl(string $url): string
+    {
+        if ($url === '') {
+            return '';
+        }
+
+        $hasProtocol = \strpos($url, '://') !== false;
+
+        return $hasProtocol ? $url : ('http://' . $url);
+    }
 }
