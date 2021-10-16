@@ -4760,7 +4760,7 @@ final class LegacyEventTest extends TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        $this->subject->setConfigurationValue('skipRegistrationCollisionCheck', true);
+        $this->configuration->setAsBoolean('skipRegistrationCollisionCheck', true);
 
         self::assertFalse($this->subject->isUserBlocked($userUid));
     }
@@ -5819,7 +5819,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForCanceledEventWithVacanciesReturnsEmptyString(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(5);
         $this->subject->setNumberOfAttendances(0);
@@ -5833,7 +5833,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringWithoutRegistrationNeededReturnsEmptyString(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setNeedsRegistration(false);
 
@@ -5845,7 +5845,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForNonZeroVacanciesAndPastDeadlineReturnsEmptyString(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setAttendancesMax(5);
         $this->subject->setNumberOfAttendances(0);
         $this->subject->setBeginDate($this->now + 10000);
@@ -5859,7 +5859,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForNonZeroVacanciesBelowThresholdReturnsNumberOfVacancies(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(5);
         $this->subject->setNumberOfAttendances(0);
@@ -5875,7 +5875,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForNoVancanciesReturnsFullyBooked(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(5);
         $this->subject->setNumberOfAttendances(5);
@@ -5891,7 +5891,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForVacanciesGreaterThanThresholdReturnsEnough(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 10);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(42);
         $this->subject->setNumberOfAttendances(0);
@@ -5907,7 +5907,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getVacanciesStringForVacanciesEqualToThresholdReturnsEnough(): void
     {
-        $this->subject->setConfigurationValue('showVacanciesThreshold', 42);
+        $this->configuration->setAsInteger('showVacanciesThreshold', 42);
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(42);
         $this->subject->setNumberOfAttendances(0);
@@ -8235,15 +8235,15 @@ final class LegacyEventTest extends TestCase
         bool $isVip,
         bool $allowCsvExportForVips
     ): void {
+        $this->configuration->setAsBoolean('allowCsvExportForVips', $allowCsvExportForVips);
+
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration', 'isUserVip']);
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserVip')
             ->willReturn($isVip);
-        $subject->init(
-            ['allowCsvExportForVips' => $allowCsvExportForVips]
-        );
+        $subject->init([]);
 
         if ($loggedIn) {
             $pageUid = $this->testingFramework->createFrontEndPage();

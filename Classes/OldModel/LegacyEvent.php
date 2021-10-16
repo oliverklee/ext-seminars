@@ -946,7 +946,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets our regular price as a string containing amount and currency. If
      * no regular price has been set, either "free" or "to be announced" will
-     * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
+     * be returned, depending on the TypoScript variable showToBeAnnouncedForEmptyPrice.
      */
     public function getPriceRegular(): string
     {
@@ -954,7 +954,7 @@ class LegacyEvent extends AbstractTimeSpan
             $result = $this->formatPrice($this->getPriceRegularAmount());
         } else {
             $result =
-                $this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice')
+                $this->getSharedConfiguration()->getAsBoolean('showToBeAnnouncedForEmptyPrice')
                     ? $this->translate('message_willBeAnnounced')
                     : $this->translate('message_forFree');
         }
@@ -1534,7 +1534,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $vacancies = $this->getVacancies();
-        $vacanciesThreshold = $this->getConfValueInteger('showVacanciesThreshold');
+        $vacanciesThreshold = $this->getSharedConfiguration()->getAsInteger('showVacanciesThreshold');
 
         if ($vacancies === 0) {
             $result = $this->translate('message_fullyBooked');
@@ -1703,7 +1703,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $this->getDateFormat(),
                 $this->getRecordPropertyInteger('deadline_registration')
             );
-            if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
+            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfRegistrationDeadline')) {
                 $result .= \strftime(
                     ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger('deadline_registration')
@@ -1744,7 +1744,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         if ($this->hasEarlyBirdDeadline()) {
             $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
-            if ($this->getConfValueBoolean('showTimeOfEarlyBirdDeadline')) {
+            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfEarlyBirdDeadline')) {
                 $result .= \strftime(
                     ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger('deadline_early_bird')
@@ -2350,7 +2350,7 @@ class LegacyEvent extends AbstractTimeSpan
                 break;
             case 'csv_export':
                 $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getConfValueBoolean('allowCsvExportForVips');
+                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
                 break;
             default:
                 $result = false;
@@ -2401,7 +2401,7 @@ class LegacyEvent extends AbstractTimeSpan
         switch ($whichPlugin) {
             case 'csv_export':
                 $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getConfValueBoolean('allowCsvExportForVips');
+                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
                 break;
             case 'my_vip_events':
                 $result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
@@ -2459,7 +2459,7 @@ class LegacyEvent extends AbstractTimeSpan
         switch ($whichPlugin) {
             case 'csv_export':
                 $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
-                    && $this->getConfValueBoolean('allowCsvExportForVips');
+                    && $this->getSharedConfiguration()->getAsBoolean('allowCsvExportForVips');
                 break;
             case 'my_vip_events':
                 $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
@@ -3472,7 +3472,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     private function skipCollisionCheck(): bool
     {
-        return $this->getConfValueBoolean('skipRegistrationCollisionCheck') ||
+        return $this->getSharedConfiguration()->getAsBoolean('skipRegistrationCollisionCheck') ||
             $this->getRecordPropertyBoolean('skip_collision_check');
     }
 
