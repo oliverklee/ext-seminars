@@ -13,6 +13,9 @@
 			<trans-unit id="label_title" xml:space="preserve">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="label_description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="label_uid" xml:space="preserve">
 				<source>Number</source>
 			</trans-unit>
