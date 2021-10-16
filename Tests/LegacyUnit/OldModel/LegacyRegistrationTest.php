@@ -60,6 +60,7 @@ final class LegacyRegistrationTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
 
         $this->configuration = new DummyConfiguration();
+        $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $organizerUid = $this->testingFramework->createRecord(
@@ -102,10 +103,6 @@ final class LegacyRegistrationTest extends TestCase
         );
 
         $this->subject = new LegacyRegistration($registrationUid);
-        $this->subject->setConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
 
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }

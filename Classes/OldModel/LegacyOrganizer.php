@@ -17,11 +17,6 @@ class LegacyOrganizer extends AbstractModel implements MailRole
     protected static $tableName = 'tx_seminars_organizers';
 
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction
-     */
-    protected $needsTemplateHelperInitialization = false;
-
-    /**
      * Gets the organizer's real name.
      *
      * @return string the organizer's real name, will not be empty for valid records

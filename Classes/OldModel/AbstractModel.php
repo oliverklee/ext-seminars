@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -23,31 +22,14 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * It will hold the corresponding data and can commit that data to the DB.
  */
-abstract class AbstractModel extends TemplateHelper
+abstract class AbstractModel
 {
     use SharedPluginConfiguration;
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'seminars';
-
-    /**
-     * faking $this->scriptRelPath so the locallang.xlf file is found
-     *
-     * @var string
-     */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the name of the SQL table this class corresponds to
      */
     protected static $tableName = '';
-
-    /**
-     * @var bool whether to call `TemplateHelper::init()` during construction
-     */
-    protected $needsTemplateHelperInitialization = true;
 
     /**
      * @var array the values from/for the DB
@@ -65,17 +47,11 @@ abstract class AbstractModel extends TemplateHelper
      */
     public function __construct(int $uid = 0, bool $allowHidden = false)
     {
-        parent::__construct(null, $GLOBALS['TSFE'] ?? null);
-
         if ($uid > 0) {
             $data = self::fetchDataByUid($uid, $allowHidden);
             if (\is_array($data)) {
                 $this->setData($data);
             }
-        }
-
-        if ($this->needsTemplateHelperInitialization) {
-            $this->init();
         }
     }
 
@@ -584,7 +560,7 @@ abstract class AbstractModel extends TemplateHelper
      *
      * @return string the localized label, or the given key if there is no label with that key
      */
-    public function translate(string $key): string
+    protected function translate(string $key): string
     {
         $label = LocalizationUtility::translate($key, 'seminars');
 

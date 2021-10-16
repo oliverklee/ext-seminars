@@ -17,11 +17,6 @@ final class TestingModel extends AbstractModel
     protected static $tableName = 'tx_seminars_test';
 
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
-     */
-    protected $needsTemplateHelperInitialization = false;
-
-    /**
      * Sets the test field of this record to a boolean value.
      *
      * @param bool $test the boolean value to set

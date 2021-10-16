@@ -7338,10 +7338,7 @@ final class LegacyEventTest extends TestCase
     {
         $this->subject->setDescription('');
 
-        self::assertSame(
-            $this->getLanguageService()->getLL('label_description') . ":\n",
-            $this->subject->dumpSeminarValues('description')
-        );
+        self::assertStringContainsString(":\n", $this->subject->dumpSeminarValues('description'));
     }
 
     /**
@@ -8243,7 +8240,6 @@ final class LegacyEventTest extends TestCase
             ->willReturn(true);
         $subject->method('isUserVip')
             ->willReturn($isVip);
-        $subject->init([]);
 
         if ($loggedIn) {
             $pageUid = $this->testingFramework->createFrontEndPage();
@@ -8669,7 +8665,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(false);
-        $subject->init();
 
         self::assertSame(
             $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
@@ -8685,7 +8680,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->init();
 
         self::assertSame(
             $this->getLanguageService()->getLL('message_notLoggedIn'),
@@ -8701,7 +8695,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->init();
 
         self::assertSame(
             $this->getLanguageService()->getLL('message_notLoggedIn'),
@@ -8717,7 +8710,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->init();
 
         self::assertSame(
             '',
@@ -8750,7 +8742,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->init();
 
         self::assertSame(
             $this->getLanguageService()->getLL('message_notLoggedIn'),
@@ -8766,7 +8757,6 @@ final class LegacyEventTest extends TestCase
         /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
-        $subject->init();
 
         self::assertSame(
             '',

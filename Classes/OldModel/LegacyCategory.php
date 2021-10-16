@@ -16,11 +16,6 @@ class LegacyCategory extends AbstractModel
      */
     protected static $tableName = 'tx_seminars_categories';
 
-    /**
-     * @var bool whether to call `TemplateHelper::init()` during construction
-     */
-    protected $needsTemplateHelperInitialization = false;
-
     public function hasIcon(): bool
     {
         return $this->hasRecordPropertyInteger('icon');

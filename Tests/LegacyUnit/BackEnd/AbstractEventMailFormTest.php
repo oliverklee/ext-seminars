@@ -69,7 +69,6 @@ final class AbstractEventMailFormTest extends TestCase
         );
 
         $this->subject = new TestingEventMailForm($this->eventUid);
-        $this->subject->setDateFormat();
     }
 
     protected function tearDown(): void

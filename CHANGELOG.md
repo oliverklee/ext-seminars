@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Rector to the toolchain (#1094)
 
 ### Changed
+- Drop the `TemplateHelper` dependency from the legacy models (#1117)
 - Use the Extbase localization features in the legacy models (#1116)
 - Switch to the new configuration classes in more places (#1112, #1114)
 - Stop calling `initTemplate()` in the link builder (#1098)
