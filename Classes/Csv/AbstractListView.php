@@ -81,10 +81,8 @@ abstract class AbstractListView
             $backEndUser = $this->getBackEndUser();
             if (Typo3Version::isAtLeast(10)) {
                 if ($backEndUser instanceof BackendUserAuthentication) {
-                    // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
                     $languageService = LanguageService::createFromUserPreferences($backEndUser);
                 } else {
-                    // @phpstan-ignore-next-line This line is for TYPO3 10LTS only, and we currently are on 9LTS.
                     $languageService = LanguageService::create('default');
                 }
             } else {

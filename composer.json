@@ -35,15 +35,15 @@
 		"psr/http-message": "^1.0",
 		"simshaun/recurr": "^5.0.0",
 		"sjbr/static-info-tables": "^6.9.5",
-		"typo3/cms-backend": "^9.5",
-		"typo3/cms-core": "^9.5.7",
-		"typo3/cms-extbase": "^9.5",
-		"typo3/cms-fluid": "^9.5",
-		"typo3/cms-frontend": "^9.5"
+		"typo3/cms-backend": "^9.5 || ^10.4",
+		"typo3/cms-core": "^9.5.7 || ^10.4",
+		"typo3/cms-extbase": "^9.5 || ^10.4",
+		"typo3/cms-fluid": "^9.5 || ^10.4",
+		"typo3/cms-frontend": "^9.5 || ^10.4"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.2.1",
-		"helhum/typo3-console": "^5.8.6",
+		"helhum/typo3-console": "^5.8.6 || ^6.6.0",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.10",
 		"nimut/testing-framework": "dev-task/faster-truncate",
@@ -57,7 +57,7 @@
 		"saschaegerer/phpstan-typo3": "^0.13.3",
 		"sjbr/sr-feuser-register": "^7.0.5",
 		"squizlabs/php_codesniffer": "^3.6.1",
-		"typo3/cms-scheduler": "^9.5"
+		"typo3/cms-scheduler": "^9.5 || ^10.4"
 	},
 	"suggest": {
 		"in2code/femanager": "^6.0",
