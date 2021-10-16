@@ -12,11 +12,6 @@ use OliverKlee\Seminars\OldModel\AbstractTimeSpan;
 final class TestingTimeSpan extends AbstractTimeSpan
 {
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
-     */
-    protected $needsTemplateHelperInitialization = false;
-
-    /**
      * Sets this time span's begin date and time.
      *
      * @param int $beginDate begin date and time as a UNIX timestamp, may be zero

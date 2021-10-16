@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -104,11 +103,6 @@ class LegacyRegistration extends AbstractModel
      * @var FrontendUserGroupRepository|null
      */
     private $frontEndUserGroupRepository = null;
-
-    public function setContentObject(?ContentObjectRenderer $contentObjectRenderer = null): void
-    {
-        $this->cObj = $contentObjectRenderer;
-    }
 
     /**
      * Purges our cached seminars array.

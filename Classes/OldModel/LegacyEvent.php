@@ -734,7 +734,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return string our speakers list, will be empty if an error occurred during processing
      */
-    public function getSpeakersShort(TemplateHelper $plugin, string $speakerRelation = 'speakers'): string
+    public function getSpeakersShort(?TemplateHelper $plugin = null, string $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -744,7 +744,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-            $result[] = $speaker->getLinkedTitle($plugin);
+            $result[] = $plugin instanceof TemplateHelper ? $speaker->getLinkedTitle($plugin) : $speaker->getTitle();
         }
 
         return implode(', ', $result);
@@ -2103,7 +2103,7 @@ class LegacyEvent extends AbstractTimeSpan
                     $value = $this->getEarlyBirdPriceSpecial();
                     break;
                 case 'speakers':
-                    $value = $this->getSpeakersShort($this);
+                    $value = $this->getSpeakersShort();
                     break;
                 case 'time':
                     $value = $this->getTime('-');

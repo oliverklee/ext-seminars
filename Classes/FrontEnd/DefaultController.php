@@ -462,13 +462,8 @@ class DefaultController extends TemplateHelper
     public function createRegistration(int $uid): bool
     {
         $this->registration = LegacyRegistration::fromUid($uid);
-        $exists = $this->registration instanceof LegacyRegistration;
 
-        if ($exists) {
-            $this->registration->setContentObject($this->cObj);
-        }
-
-        return $exists;
+        return $this->registration instanceof LegacyRegistration;
     }
 
     public function createHelperObjects(): void

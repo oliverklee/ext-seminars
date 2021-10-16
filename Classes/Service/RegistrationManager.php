@@ -455,7 +455,6 @@ class RegistrationManager extends TemplateHelper
     public function createRegistration(LegacyEvent $event, array $formData, AbstractPlugin $plugin): Registration
     {
         $this->registration = GeneralUtility::makeInstance(LegacyRegistration::class);
-        $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
         $this->registration->commitToDatabase();
         $event->increaseNumberOfAssociatedRegistrationRecords();
@@ -617,7 +616,6 @@ class RegistrationManager extends TemplateHelper
             return;
         }
 
-        $this->registration->setContentObject($plugin->cObj);
         if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
             return;
         }

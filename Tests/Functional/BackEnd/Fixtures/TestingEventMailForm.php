@@ -44,14 +44,6 @@ final class TestingEventMailForm extends AbstractEventMailForm
     }
 
     /**
-     * Sets the date format for the event.
-     */
-    public function setDateFormat(): void
-    {
-        $this->getOldEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
-    }
-
-    /**
      * Sets an error message.
      *
      * @param string $fieldName the field name to set the error message for, must be "messageBody" or "subject"
