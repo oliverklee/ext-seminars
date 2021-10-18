@@ -11,6 +11,7 @@ use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
@@ -90,6 +91,7 @@ final class EventEditorTest extends FunctionalTestCase
         }
 
         $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
         $this->registerNullPageCache();
 
         // Needed in TYPO3 V10; can be removed in V11.

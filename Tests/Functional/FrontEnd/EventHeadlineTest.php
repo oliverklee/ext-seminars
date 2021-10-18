@@ -11,6 +11,7 @@ use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\EventHeadline;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -59,7 +60,9 @@ final class EventHeadlineTest extends FunctionalTestCase
         $frontEnd = $frontEndProphecy->reveal();
         $GLOBALS['TSFE'] = $frontEnd;
 
-        $this->subject = new EventHeadline(self::CONFIGURATION, new ContentObjectRenderer());
+        $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
+        $this->subject = new EventHeadline(self::CONFIGURATION, $contentObject);
 
         $mapper = new EventMapper();
         $this->subject->injectEventMapper($mapper);
@@ -80,7 +83,9 @@ final class EventHeadlineTest extends FunctionalTestCase
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionCode(1333614794);
 
-        $subject = new EventHeadline([], new ContentObjectRenderer());
+        $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
+        $subject = new EventHeadline([], $contentObject);
 
         $subject->render();
     }

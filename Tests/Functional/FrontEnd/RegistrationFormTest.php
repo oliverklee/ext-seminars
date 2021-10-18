@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -52,7 +53,9 @@ final class RegistrationFormTest extends FunctionalTestCase
         $frontEnd = $frontEndProphecy->reveal();
         $GLOBALS['TSFE'] = $frontEnd;
 
-        $this->contentObject = $this->prophesize(ContentObjectRenderer::class)->reveal();
+        $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
+        $this->contentObject = $contentObject;
         $this->subject = new RegistrationForm([], $this->contentObject);
         $this->subject->setTestMode();
     }

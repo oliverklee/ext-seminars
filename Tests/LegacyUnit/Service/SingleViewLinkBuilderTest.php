@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service\TestingSingleViewLinkBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -341,6 +342,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->willReturn($eventUid);
 
         $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['typoLink_URL']);
+        $contentObject->setLogger(new NullLogger());
         $contentObject->expects(self::once())->method('typoLink_URL')
             ->with(
                 [
@@ -371,6 +373,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
 
         $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['typoLink_URL']);
+        $contentObject->setLogger(new NullLogger());
         $contentObject->expects(self::once())->method('typoLink_URL')
             ->willReturn($relativeUrl);
 
