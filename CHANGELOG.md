@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Provide the `ContentObjectRenderer` with a logger in the tests (#1145)
 - Set up a site language for the fake frontend in tests (#1139)
 
 ## 4.0.3

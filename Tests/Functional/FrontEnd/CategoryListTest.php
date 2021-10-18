@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
@@ -61,12 +62,14 @@ final class CategoryListTest extends FunctionalTestCase
         }
         $GLOBALS['TSFE'] = $frontEnd;
 
+        $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
         $this->subject = new CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            new ContentObjectRenderer()
+            $contentObject
         );
     }
 

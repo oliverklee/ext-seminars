@@ -30,6 +30,7 @@ use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -175,12 +176,11 @@ final class DefaultControllerTest extends TestCase
             ->willReturn('index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337');
         $this->subject->injectLinkBuilder($linkBuilder);
 
-        /** @var ContentObjectRenderer&MockObject $content */
-        $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        $content->method('cObjGetSingle')->willReturn(
-            '<img src="foo.jpg" alt="bar"/>'
-        );
-        $this->subject->cObj = $content;
+        /** @var ContentObjectRenderer&MockObject $contentObject */
+        $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        $contentObject->setLogger(new NullLogger());
+        $contentObject->method('cObjGetSingle')->willReturn('<img src="foo.jpg" alt="bar"/>');
+        $this->subject->cObj = $contentObject;
 
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
@@ -345,6 +345,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var ContentObjectRenderer&MockObject $mock */
         $mock = $this->createPartialMock(ContentObjectRenderer::class, ['getTypoLink']);
+        $mock->setLogger(new NullLogger());
         $mock->method('getTypoLink')->willReturnCallback([$this, 'getTypoLink']);
 
         return $mock;

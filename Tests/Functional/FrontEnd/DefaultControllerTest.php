@@ -10,6 +10,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
@@ -60,6 +61,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         }
 
         $contentObject = new ContentObjectRenderer();
+        $contentObject->setLogger(new NullLogger());
         $this->registerNullPageCache();
 
         // Needed in TYPO3 V10; can be removed in V11.
