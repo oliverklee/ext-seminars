@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for TYPO3 10LTS (#1136)
 
 ### Changed
+- Require oelib >= 4.0 (#1143)
 
 ### Deprecated
 
