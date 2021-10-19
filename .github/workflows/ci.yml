@@ -54,7 +54,7 @@ jobs:
           path: ~/.composer/cache
           restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
-        run: "composer install --no-progress"
+        run: "composer install --no-ansi --no-progress"
       - name: "Run command"
         run: "composer ci:${{ matrix.command }}"
     strategy:
@@ -95,11 +95,7 @@ jobs:
         env:
           TYPO3: "${{ matrix.typo3-version }}"
         run: |
-          composer require --no-progress typo3/minimal:"$TYPO3"
-          composer show
-      - name: "Install dependencies with composer"
-        run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies
+          composer require --no-ansi --no-progress typo3/minimal:"$TYPO3"
           composer show
       - name: "Run unit tests"
         run: "composer ci:tests:unit"
@@ -141,11 +137,7 @@ jobs:
         env:
           TYPO3: "${{ matrix.typo3-version }}"
         run: |
-          composer require --no-progress typo3/minimal:"$TYPO3"
-          composer show
-      - name: "Install dependencies with composer"
-        run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies
+          composer require --no-ansi --no-progress typo3/minimal:"$TYPO3"
           composer show
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
@@ -208,7 +200,7 @@ jobs:
         env:
           TYPO3: "${{ matrix.typo3-version }}"
         run: |
-          composer require --no-progress typo3/minimal:"$TYPO3"
+          composer require --no-ansi --no-progress typo3/minimal:"$TYPO3"
           composer show
       - name: "Set up TYPO3"
         run: >
