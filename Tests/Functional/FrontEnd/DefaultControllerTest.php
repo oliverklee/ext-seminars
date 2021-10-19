@@ -6,14 +6,12 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use TYPO3\CMS\Core\Cache\Backend\NullBackend;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -47,6 +45,12 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     private $frontEndController = null;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        (new CacheNullifyer())->disableCoreCaches();
+    }
+
     protected function tearDown(): void
     {
         RegistrationManager::purgeInstance();
@@ -62,12 +66,10 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $contentObject = new ContentObjectRenderer();
         $contentObject->setLogger(new NullLogger());
-        $this->registerNullPageCache();
 
         // Needed in TYPO3 V10; can be removed in V11.
         $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
         if (Typo3Version::isAtLeast(10)) {
-            $this->disableCoreCaches();
             $frontEndController = GeneralUtility::makeInstance(
                 TypoScriptFrontendController::class,
                 $GLOBALS['TYPO3_CONF_VARS'],
@@ -91,43 +93,6 @@ final class DefaultControllerTest extends FunctionalTestCase
         $GLOBALS['TSFE'] = $frontEndController;
 
         return $frontEndController;
-    }
-
-    private function registerNullPageCache(): void
-    {
-        $cacheKey = $this->getCacheKeyPrefix() . 'pages';
-        $cacheManager = $this->getCacheManager();
-        if ($cacheManager->hasCache($cacheKey)) {
-            return;
-        }
-
-        $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
-        $frontEnd = GeneralUtility::makeInstance(VariableFrontend::class, $cacheKey, $backEnd);
-        $cacheManager->registerCache($frontEnd);
-    }
-
-    private function getCacheKeyPrefix(): string
-    {
-        return Typo3Version::isAtLeast(10) ? '' : '_cache';
-    }
-
-    /**
-     * Sets the following Core caches to the null backen: l10n, rootline, runtime
-     */
-    private function disableCoreCaches(): void
-    {
-        $this->getCacheManager()->setCacheConfigurations(
-            [
-                'l10n' => ['backend' => NullBackend::class],
-                'rootline' => ['backend' => NullBackend::class],
-                'runtime' => ['backend' => NullBackend::class],
-            ]
-        );
-    }
-
-    private function getCacheManager(): CacheManager
-    {
-        return GeneralUtility::makeInstance(CacheManager::class);
     }
 
     // Tests concerning the plugin definition
