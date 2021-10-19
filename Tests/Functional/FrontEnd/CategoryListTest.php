@@ -6,12 +6,10 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use Psr\Log\NullLogger;
-use TYPO3\CMS\Core\Cache\Backend\NullBackend;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -40,12 +38,11 @@ final class CategoryListTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->registerNullPageCache();
+        (new CacheNullifyer())->disableCoreCaches();
 
         // Needed in TYPO3 V10; can be removed in V11.
         $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
         if (Typo3Version::isAtLeast(10)) {
-            $this->disableCoreCaches();
             $frontEnd = GeneralUtility::makeInstance(
                 TypoScriptFrontendController::class,
                 $GLOBALS['TYPO3_CONF_VARS'],
@@ -71,43 +68,6 @@ final class CategoryListTest extends FunctionalTestCase
             ],
             $contentObject
         );
-    }
-
-    private function registerNullPageCache(): void
-    {
-        $cacheKey = $this->getCacheKeyPrefix() . 'pages';
-        $cacheManager = $this->getCacheManager();
-        if ($cacheManager->hasCache($cacheKey)) {
-            return;
-        }
-
-        $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
-        $frontEnd = GeneralUtility::makeInstance(VariableFrontend::class, $cacheKey, $backEnd);
-        $cacheManager->registerCache($frontEnd);
-    }
-
-    private function getCacheKeyPrefix(): string
-    {
-        return Typo3Version::isAtLeast(10) ? '' : '_cache';
-    }
-
-    /**
-     * Sets the following Core caches to the null backen: l10n, rootline, runtime
-     */
-    private function disableCoreCaches(): void
-    {
-        $this->getCacheManager()->setCacheConfigurations(
-            [
-                'l10n' => ['backend' => NullBackend::class],
-                'rootline' => ['backend' => NullBackend::class],
-                'runtime' => ['backend' => NullBackend::class],
-            ]
-        );
-    }
-
-    private function getCacheManager(): CacheManager
-    {
-        return GeneralUtility::makeInstance(CacheManager::class);
     }
 
     /**
