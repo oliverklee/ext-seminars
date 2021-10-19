@@ -31,10 +31,3 @@ English Manual
    DevelopmentWorkflow/Index
    HelpingOut/Index
    KnownProblems/Index
-
-Compatibility with TYPO3 10LTS/10.4
------------------------------------
-
-If you would like to use this extension with TYPO3 10LTS/10.4, please consider
-supporting the `crowdfunding campaign <https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign>`_
-to help make this happen.
