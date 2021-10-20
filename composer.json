@@ -39,7 +39,7 @@
 		"symfony/mailer": "^5.2 || ^6.0",
 		"symfony/mime": "^5.2 || ^6.0",
 		"typo3/cms-backend": "^9.5 || ^10.4",
-		"typo3/cms-core": "^9.5.7 || ^10.4",
+		"typo3/cms-core": "^9.5.7",
 		"typo3/cms-extbase": "^9.5 || ^10.4",
 		"typo3/cms-fluid": "^9.5 || ^10.4",
 		"typo3/cms-frontend": "^9.5 || ^10.4"

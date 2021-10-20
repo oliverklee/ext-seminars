@@ -329,10 +329,7 @@ final class RegistrationManagerTest extends TestCase
      * Example: a $contentType of "text/calendar" will also find attachments that have 'text/calendar; charset="utf-8"'
      * as the content type.
      *
-     * @param MailMessage $email
-     * @param string $contentType
-     *
-     * @return \Swift_Mime_MimeEntity[]
+     * @return array<int, \Swift_Mime_MimeEntity>
      */
     private function filterEmailAttachmentsByType(MailMessage $email, string $contentType): array
     {
@@ -340,7 +337,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Swift_Mime_MimeEntity $attachment */
         foreach ($email->getChildren() as $attachment) {
-            if (strpos($attachment->getContentType(), $contentType) !== false) {
+            if (\strpos($attachment->getContentType(), $contentType) !== false) {
                 $matches[] = $attachment;
             }
         }

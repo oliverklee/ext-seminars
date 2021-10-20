@@ -16,11 +16,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:\\$postData type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
@@ -226,27 +221,7 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Email\\:\\:attach\\(\\) expects resource\\|string, Swift_Attachment given\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:addPart\\(\\)\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:injectObjectManager\\(\\) has parameter \\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
@@ -254,16 +229,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:\\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface does not specify its types\\: T$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 1
-			path: Classes/Service/EmailService.php
-
-		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:addPart\\(\\)\\.$#"
-			count: 2
-			path: Classes/Service/RegistrationManager.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canCreateRegistration\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
@@ -281,11 +246,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 3
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -296,17 +256,7 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
@@ -314,16 +264,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
@@ -409,11 +349,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
@@ -656,16 +591,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 8
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
@@ -726,11 +651,6 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:getChildren\\(\\)\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -741,19 +661,9 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\<string, string\\>&nonEmpty and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
 			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
@@ -761,54 +671,9 @@ parameters:
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
-
-		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:getChildren\\(\\)\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('mail@example\\.com' \\=\\> 'test organizer'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('system\\-foo@example\\.com' \\=\\> 'Mr\\. Default'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 13
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 41
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
@@ -839,19 +704,3 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/HookProviderTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 'What is love\\?' and Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/Unit/Traits/EmailTraitTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('max@example\\.com' \\=\\> 'Max'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 2
-			path: Tests/Unit/Traits/EmailTraitTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 1
-			path: Tests/Unit/Traits/EmailTraitTest.php
-

@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
@@ -21,7 +22,6 @@ use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -155,31 +155,32 @@ class MailNotifier extends AbstractTask
      */
     private function sendRemindersToOrganizers(LegacyEvent $event, string $messageKey): void
     {
-        $attachment = null;
-
         $replyTo = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);
+        /** @var string|null $attachmentBody */
+        $attachmentBody = null;
         if ($this->shouldCsvFileBeAdded($event)) {
-            $attachment = $this->getCsv($event->getUid());
+            $attachmentBody = $this->getCsv($event->getUid());
         }
 
         /** @var LegacyOrganizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
-            /** @var MailMessage $mail */
-            $mail = GeneralUtility::makeInstance(MailMessage::class);
-            $mail->setFrom($sender->getEmailAddress(), $sender->getName());
-            $mail->setTo($organizer->getEmailAddress(), $organizer->getName());
+            $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
+            $emailBuilder->from($sender)
+                ->to($organizer)
+                ->subject($subject)
+                ->text($this->customizeMessage($messageKey, $event, $organizer->getName()));
+
             if ($replyTo instanceof LegacyOrganizer) {
-                $mail->setReplyTo($replyTo->getEmailAddress(), $replyTo->getName());
+                $emailBuilder->replyTo($replyTo);
             }
-            $mail->setSubject($subject);
-            $mail->setBody($this->customizeMessage($messageKey, $event, $organizer->getName()));
-            if ($attachment !== null) {
-                $mail->attach($attachment);
+            if (\is_string($attachmentBody)) {
+                $fileName = $this->getConfiguration()->getAsString('filenameForRegistrationsCsv');
+                $emailBuilder->attach($attachmentBody, 'text/csv', $fileName);
             }
 
-            $mail->send();
+            $emailBuilder->build()->send();
         }
     }
 
@@ -276,21 +277,13 @@ class MailNotifier extends AbstractTask
      * Returns the CSV output for the list of registrations for the event with the provided UID.
      *
      * @param int $eventUid UID of the event to create the output for, must be > 0
-     *
-     * @return \Swift_Attachment CSV list of registrations for the given event
      */
-    private function getCsv(int $eventUid): \Swift_Attachment
+    private function getCsv(int $eventUid): string
     {
-        /** @var EmailRegistrationListView $csvCreator */
         $csvCreator = GeneralUtility::makeInstance(EmailRegistrationListView::class);
         $csvCreator->setEventUid($eventUid);
-        $csvString = $csvCreator->render();
 
-        $fileName = $this->getConfiguration()->getAsString('filenameForRegistrationsCsv');
-        /** @var \Swift_Attachment $attachment */
-        $attachment = \Swift_Attachment::newInstance($csvString, $fileName, 'text/csv');
-
-        return $attachment;
+        return $csvCreator->render();
     }
 
     /**

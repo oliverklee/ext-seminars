@@ -6,18 +6,27 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
+use TYPO3\CMS\Core\Cache\Backend\NullBackend;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\Core\Cache\FluidTemplateCache;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ * @covers \OliverKlee\Seminars\SchedulerTasks\RegistrationDigest
+ */
 final class RegistrationDigestTest extends TestCase
 {
     /**
@@ -66,6 +75,8 @@ final class RegistrationDigestTest extends TestCase
             self::markTestSkipped('This tests needs the scheduler extension.');
         }
 
+        $this->disableCoreCaches();
+
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
 
         $this->subject = new RegistrationDigest();
@@ -84,6 +95,87 @@ final class RegistrationDigestTest extends TestCase
 
         $this->emailProphecy = $this->prophesize(MailMessage::class);
         $this->viewProphecy = $this->prophesize(StandaloneView::class);
+    }
+
+    protected function tearDown(): void
+    {
+        GeneralUtility::purgeInstances();
+    }
+
+    /**
+     * Sets all Core caches to the `NullBackend`, except for: assets, di.
+     */
+    private function disableCoreCaches(): void
+    {
+        if (Typo3Version::isNotHigherThan(9)) {
+            $this->disableCoreCachesForVersion9();
+        } else {
+            $this->disableCoreCachesForVersion10();
+        }
+    }
+
+    private function disableCoreCachesForVersion9(): void
+    {
+        $this->getCacheManager()->setCacheConfigurations(
+            [
+                'cache_core' => ['backend' => NullBackend::class],
+                'cache_hash' => ['backend' => NullBackend::class],
+                'cache_pagesection' => ['backend' => NullBackend::class],
+                'cache_rootline' => ['backend' => NullBackend::class],
+                'cache_runtime' => ['backend' => NullBackend::class],
+                'l10n' => ['backend' => NullBackend::class],
+            ]
+        );
+        $this->registerNullCache('pages', VariableFrontend::class);
+    }
+
+    private function disableCoreCachesForVersion10(): void
+    {
+        $this->getCacheManager()->setCacheConfigurations(
+            [
+                'assets' => ['backend' => NullBackend::class],
+                'core' => ['backend' => NullBackend::class],
+                'extbase' => ['backend' => NullBackend::class],
+                'hash' => ['backend' => NullBackend::class],
+                'l10n' => ['backend' => NullBackend::class],
+                'pagesection' => ['backend' => NullBackend::class],
+                'rootline' => ['backend' => NullBackend::class],
+                'runtime' => ['backend' => NullBackend::class],
+            ]
+        );
+        $this->registerNullCache('pages', VariableFrontend::class);
+        $this->registerNullFluidCache();
+    }
+
+    private function getCacheManager(): CacheManager
+    {
+        return GeneralUtility::makeInstance(CacheManager::class);
+    }
+
+    private function registerNullFluidCache(): void
+    {
+        $this->registerNullCache('fluid_template', FluidTemplateCache::class);
+    }
+
+    /**
+     * Registers a `NullCache` for the given key using a frontend of the given class.
+     *
+     * Use this method for caches that do not work without a frontend, e.g., the pages cache or the Fluid template
+     * cache.
+     *
+     * @param non-empty-string $cacheKey
+     * @param class-string<FrontendInterface> $frontEndClass
+     */
+    private function registerNullCache(string $cacheKey, string $frontEndClass): void
+    {
+        $cacheManager = $this->getCacheManager();
+        if ($cacheManager->hasCache($cacheKey)) {
+            return;
+        }
+
+        $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
+        $frontEnd = GeneralUtility::makeInstance($frontEndClass, $cacheKey, $backEnd);
+        $cacheManager->registerCache($frontEnd);
     }
 
     /**
@@ -105,12 +197,11 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @return void
      */
-    private function setObjectManagerReturnValues(): void
+    private function setGeneralUtilityAndObjectManagerReturnValues(): void
     {
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(StandaloneView::class)->willReturn($this->viewProphecy->reveal());
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->objectManagerProphecy->get(MailMessage::class)->willReturn($this->emailProphecy->reveal());
+        GeneralUtility::addInstance(MailMessage::class, $this->emailProphecy->reveal());
     }
 
     /**
@@ -127,8 +218,7 @@ final class RegistrationDigestTest extends TestCase
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
 
         $emailProphecy = $this->prophesize(MailMessage::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->objectManagerProphecy->get(MailMessage::class)->willReturn($emailProphecy->reveal());
+        GeneralUtility::addInstance(MailMessage::class, $emailProphecy->reveal());
 
         $this->subject->execute();
 
@@ -141,7 +231,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeForEnabledDigestAndNoApplicableEventsNotSendsEmail(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -158,7 +248,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeForEnabledDigestAndOneApplicableEventSendsEmail(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
@@ -180,7 +270,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailUsesSenderFromConfiguration(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $fromEmail = 'jane@example.com';
@@ -199,7 +289,7 @@ final class RegistrationDigestTest extends TestCase
         $this->subject->execute();
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->emailProphecy->setFrom($fromEmail, $fromName)->shouldHaveBeenCalled();
+        $this->emailProphecy->setFrom([$fromEmail => $fromName])->shouldHaveBeenCalled();
     }
 
     /**
@@ -207,7 +297,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailUsesToFromConfiguration(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $toEmail = 'joe@example.com';
@@ -226,7 +316,7 @@ final class RegistrationDigestTest extends TestCase
         $this->subject->execute();
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->emailProphecy->setTo($toEmail, $toName)->shouldHaveBeenCalled();
+        $this->emailProphecy->addTo($toEmail, $toName)->shouldHaveBeenCalled();
     }
 
     /**
@@ -234,7 +324,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailHasLocalizedSubject(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $toEmail = 'joe@example.com';
@@ -265,7 +355,7 @@ final class RegistrationDigestTest extends TestCase
         $plaintextTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.txt';
         $htmlTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.html';
 
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
         $this->configuration->setAsString('plaintextTemplate', $plaintextTemplatePath);
         $this->configuration->setAsString('htmlTemplate', $htmlTemplatePath);
@@ -308,7 +398,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeSetsDateOfLastDigestInEventsToNow(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
@@ -329,7 +419,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeSavesEvents(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
