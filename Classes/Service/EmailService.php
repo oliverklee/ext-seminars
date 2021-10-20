@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -56,17 +56,13 @@ class EmailService implements SingletonInterface
                 continue;
             }
 
-            $sender = $event->getEmailSender();
-            $replyTo = $event->getFirstOrganizer();
-
-            /** @var MailMessage $eMail */
-            $eMail = GeneralUtility::makeInstance(MailMessage::class);
-            $eMail->setTo($user->getEmailAddress(), $user->getName());
-            $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
-            $eMail->setReplyTo($replyTo->getEmailAddress(), $replyTo->getName());
-            $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
-            $eMail->setBody($this->buildMessageBody($body, $event, $user));
-            $eMail->send();
+            GeneralUtility::makeInstance(EmailBuilder::class)
+                ->to($user)
+                ->from($event->getEmailSender())
+                ->replyTo($event->getFirstOrganizer())
+                ->subject($this->replaceMarkers($subject, $event, $user))
+                ->text($this->buildMessageBody($body, $event, $user))
+                ->build()->send();
         }
     }
 

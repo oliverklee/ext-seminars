@@ -19,6 +19,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ * @covers \OliverKlee\Seminars\SchedulerTasks\RegistrationDigest
+ */
 final class RegistrationDigestTest extends TestCase
 {
     /**
@@ -89,6 +92,11 @@ final class RegistrationDigestTest extends TestCase
         $this->viewProphecy = $this->prophesize(StandaloneView::class);
     }
 
+    protected function tearDown(): void
+    {
+        GeneralUtility::purgeInstances();
+    }
+
     /**
      * @test
      */
@@ -108,12 +116,11 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @return void
      */
-    private function setObjectManagerReturnValues(): void
+    private function setGeneralUtilityAndObjectManagerReturnValues(): void
     {
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(StandaloneView::class)->willReturn($this->viewProphecy->reveal());
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->objectManagerProphecy->get(MailMessage::class)->willReturn($this->emailProphecy->reveal());
+        GeneralUtility::addInstance(MailMessage::class, $this->emailProphecy->reveal());
     }
 
     /**
@@ -130,8 +137,7 @@ final class RegistrationDigestTest extends TestCase
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
 
         $emailProphecy = $this->prophesize(MailMessage::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->objectManagerProphecy->get(MailMessage::class)->willReturn($emailProphecy->reveal());
+        GeneralUtility::addInstance(MailMessage::class, $emailProphecy->reveal());
 
         $this->subject->execute();
 
@@ -144,7 +150,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeForEnabledDigestAndNoApplicableEventsNotSendsEmail(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
@@ -161,7 +167,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeForEnabledDigestAndOneApplicableEventSendsEmail(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
@@ -183,7 +189,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailUsesSenderFromConfiguration(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $fromEmail = 'jane@example.com';
@@ -202,7 +208,7 @@ final class RegistrationDigestTest extends TestCase
         $this->subject->execute();
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->emailProphecy->setFrom($fromEmail, $fromName)->shouldHaveBeenCalled();
+        $this->emailProphecy->setFrom([$fromEmail => $fromName])->shouldHaveBeenCalled();
     }
 
     /**
@@ -210,7 +216,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailUsesToFromConfiguration(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $toEmail = 'joe@example.com';
@@ -229,7 +235,7 @@ final class RegistrationDigestTest extends TestCase
         $this->subject->execute();
 
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $this->emailProphecy->setTo($toEmail, $toName)->shouldHaveBeenCalled();
+        $this->emailProphecy->addTo($toEmail, $toName)->shouldHaveBeenCalled();
     }
 
     /**
@@ -237,7 +243,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function emailHasLocalizedSubject(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $toEmail = 'joe@example.com';
@@ -268,7 +274,7 @@ final class RegistrationDigestTest extends TestCase
         $plaintextTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.txt';
         $htmlTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.html';
 
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
         $this->configuration->setAsString('plaintextTemplate', $plaintextTemplatePath);
         $this->configuration->setAsString('htmlTemplate', $htmlTemplatePath);
@@ -311,7 +317,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeSetsDateOfLastDigestInEventsToNow(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
@@ -332,7 +338,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function executeSavesEvents(): void
     {
-        $this->setObjectManagerReturnValues();
+        $this->setGeneralUtilityAndObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new Collection();
