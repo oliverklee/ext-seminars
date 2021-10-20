@@ -800,18 +800,3 @@ parameters:
 			count: 1
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 'What is love\\?' and Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/Unit/Traits/EmailTraitTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('max@example\\.com' \\=\\> 'Max'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 2
-			path: Tests/Unit/Traits/EmailTraitTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of method Symfony\\\\Component\\\\Mime\\\\Message\\:\\:setBody\\(\\) expects Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart\\|null, string given\\.$#"
-			count: 1
-			path: Tests/Unit/Traits/EmailTraitTest.php
-
