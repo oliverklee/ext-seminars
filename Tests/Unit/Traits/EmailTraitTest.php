@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\System\Typo3Version;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
@@ -14,6 +15,20 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 final class EmailTraitTest extends UnitTestCase
 {
     use EmailTrait;
+
+    private function runInV9Only(): void
+    {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is intended for V9 only.');
+        }
+    }
+
+    private function runInV10AndHigherOnly(): void
+    {
+        if (Typo3Version::isNotHigherThan(9)) {
+            self::markTestSkipped('This test is intended for V10 and higher only.');
+        }
+    }
 
     /**
      * @test
@@ -54,7 +69,7 @@ final class EmailTraitTest extends UnitTestCase
         $mock = $this->createEmailMock();
         $mock->setTo('max@example.com', 'Max');
 
-        self::assertSame(['max@example.com' => 'Max'], $mock->getTo());
+        self::assertSame(['max@example.com' => 'Max'], $this->getToOfEmail($mock));
     }
 
     /**
@@ -65,7 +80,7 @@ final class EmailTraitTest extends UnitTestCase
         $mock = $this->createEmailMock();
         $mock->setFrom('max@example.com', 'Max');
 
-        self::assertSame(['max@example.com' => 'Max'], $mock->getFrom());
+        self::assertSame(['max@example.com' => 'Max'], $this->getFromOfEmail($mock));
     }
 
     /**
@@ -76,9 +91,7 @@ final class EmailTraitTest extends UnitTestCase
         $mock = $this->createEmailMock();
         $mock->setReplyTo('max@example.com', 'Max');
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $mock->getReplyTo();
-        self::assertSame(['max@example.com' => 'Max'], $replyTo);
+        self::assertSame(['max@example.com' => 'Max'], $this->getReplyToOfEmail($mock));
     }
 
     /**
@@ -96,12 +109,29 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersBody(): void
+    public function mockRemembersTextBodyInV9(): void
     {
-        $body = 'What is love?';
-        $mock = $this->createEmailMock();
-        $mock->setBody($body);
+        $this->runInV9Only();
 
-        self::assertSame($body, $mock->getBody());
+        $textBody = 'What is love?';
+        $mock = $this->createEmailMock();
+        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
+        $mock->setBody($textBody);
+
+        self::assertSame($textBody, $this->getTextBodyOfEmail($mock));
+    }
+
+    /**
+     * @test
+     */
+    public function mockRemembersTextBodyInV10(): void
+    {
+        $this->runInV10AndHigherOnly();
+
+        $textBody = 'What is love?';
+        $mock = $this->createEmailMock();
+        $mock->text($textBody);
+
+        self::assertSame($textBody, $this->getTextBodyOfEmail($mock));
     }
 }
