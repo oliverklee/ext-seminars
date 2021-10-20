@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -413,17 +414,16 @@ abstract class AbstractEventMailForm
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
-                /** @var MailMessage $eMail */
-                $eMail = GeneralUtility::makeInstance(MailMessage::class);
-                $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
-                $eMail->setReplyTo($organizer->getEmailAddress(), $organizer->getName());
-                $eMail->setSubject($this->getPostData('subject'));
-                $eMail->setTo($user->getEmailAddress(), $user->getName());
-                $eMail->setBody($this->createMessageBody($user, $organizer));
+                $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
+                $email = $emailBuilder->from($sender)
+                    ->replyTo($organizer)
+                    ->subject($this->getPostData('subject'))
+                    ->to($user)
+                    ->text($this->createMessageBody($user, $organizer))
+                    ->build();
 
-                $this->modifyEmailWithHook($registration, $eMail);
-
-                $eMail->send();
+                $this->modifyEmailWithHook($registration, $email);
+                $email->send();
             }
 
             /** @var FlashMessage $message */

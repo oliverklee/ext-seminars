@@ -19,6 +19,7 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -42,7 +43,6 @@ use OliverKlee\Seminars\Model\Skill;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TargetGroup;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -1107,22 +1107,18 @@ class EventEditor extends AbstractEditor
             return;
         }
 
-        $mapper = MapperRegistry::get(EventMapper::class);
-        /** @var Event $event */
-        $event = $mapper->findByPublicationHash($this->publicationHash);
-
-        if ($event !== null && $event->isHidden()) {
+        $event = MapperRegistry::get(EventMapper::class)->findByPublicationHash($this->publicationHash);
+        if ($event instanceof Event && $event->isHidden()) {
             $sender = $this->getEmailSender();
             $loggedInUser = self::getLoggedInUser();
 
-            /** @var MailMessage $eMail */
-            $eMail = GeneralUtility::makeInstance(MailMessage::class);
-            $eMail->setTo($reviewer->getEmailAddress(), $reviewer->getName());
-            $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
-            $eMail->setReplyTo($loggedInUser->getEmailAddress(), $loggedInUser->getName());
-            $eMail->setSubject($this->translate('publish_event_subject'));
-            $eMail->setBody($this->createEmailContent($event));
-            $eMail->send();
+            GeneralUtility::makeInstance(EmailBuilder::class)
+                ->to($reviewer)
+                ->from($sender)
+                ->replyTo($loggedInUser)
+                ->subject($this->translate('publish_event_subject'))
+                ->text($this->createEmailContent($event))
+                ->build()->send();
         }
     }
 
@@ -1215,14 +1211,13 @@ class EventEditor extends AbstractEditor
         $sender = $this->getEmailSender();
         $loggedInUser = self::getLoggedInUser();
 
-        /** @var MailMessage $eMail */
-        $eMail = GeneralUtility::makeInstance(MailMessage::class);
-        $eMail->setTo($reviewer->getEmailAddress(), $reviewer->getName());
-        $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
-        $eMail->setReplyTo($loggedInUser->getEmailAddress(), $loggedInUser->getName());
-        $eMail->setSubject($this->translate('save_event_subject'));
-        $eMail->setBody($this->createAdditionalEmailContent());
-        $eMail->send();
+        GeneralUtility::makeInstance(EmailBuilder::class)
+            ->to($reviewer)
+            ->from($sender)
+            ->replyTo($loggedInUser)
+            ->subject($this->translate('save_event_subject'))
+            ->text($this->createAdditionalEmailContent())
+            ->build()->send();
     }
 
     /**

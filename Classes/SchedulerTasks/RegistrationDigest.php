@@ -6,8 +6,10 @@ namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -128,23 +130,25 @@ class RegistrationDigest
     private function buildEmail(Collection $events): MailMessage
     {
         $configuration = $this->configuration;
-        $email = $this->objectManager->get(MailMessage::class);
-        $email->setFrom($configuration->getAsString('fromEmail'), $configuration->getAsString('fromName'));
-        $email->setTo($configuration->getAsString('toEmail'), $configuration->getAsString('toName'));
-        $subject = LocalizationUtility::translate('registrationDigestEmail_Subject', 'seminars');
-        $email->setSubject($subject);
+        $from = new GeneralEmailRole($configuration->getAsString('fromEmail'), $configuration->getAsString('fromName'));
+        $to = new GeneralEmailRole($configuration->getAsString('toEmail'), $configuration->getAsString('toName'));
+        $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
+        $emailBuilder
+            ->from($from)
+            ->to($to)
+            ->subject(LocalizationUtility::translate('registrationDigestEmail_Subject', 'seminars'));
 
         /** @var non-empty-string $plaintextTemplatePath */
         $plaintextTemplatePath = $this->getConfiguration()->getAsString('plaintextTemplate');
         $plaintextBody = $this->createContent($plaintextTemplatePath, $events);
-        $email->setBody($plaintextBody);
+        $emailBuilder->text($plaintextBody);
 
         /** @var non-empty-string $htmlTemplatePath */
         $htmlTemplatePath = $this->getConfiguration()->getAsString('htmlTemplate');
         $htmlBody = $this->createContent($htmlTemplatePath, $events);
-        $email->addPart($htmlBody, 'text/html');
+        $emailBuilder->html($htmlBody);
 
-        return $email;
+        return $emailBuilder->build();
     }
 
     /**
