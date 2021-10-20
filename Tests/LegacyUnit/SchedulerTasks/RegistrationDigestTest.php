@@ -6,22 +6,17 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
-use TYPO3\CMS\Core\Cache\Backend\NullBackend;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
-use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\Core\Cache\FluidTemplateCache;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -75,7 +70,7 @@ final class RegistrationDigestTest extends TestCase
             self::markTestSkipped('This tests needs the scheduler extension.');
         }
 
-        $this->disableCoreCaches();
+        (new CacheNullifyer())->disableCoreCaches();
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
 
@@ -100,82 +95,6 @@ final class RegistrationDigestTest extends TestCase
     protected function tearDown(): void
     {
         GeneralUtility::purgeInstances();
-    }
-
-    /**
-     * Sets all Core caches to the `NullBackend`, except for: assets, di.
-     */
-    private function disableCoreCaches(): void
-    {
-        if (Typo3Version::isNotHigherThan(9)) {
-            $this->disableCoreCachesForVersion9();
-        } else {
-            $this->disableCoreCachesForVersion10();
-        }
-    }
-
-    private function disableCoreCachesForVersion9(): void
-    {
-        $this->getCacheManager()->setCacheConfigurations(
-            [
-                'cache_core' => ['backend' => NullBackend::class],
-                'cache_hash' => ['backend' => NullBackend::class],
-                'cache_pagesection' => ['backend' => NullBackend::class],
-                'cache_rootline' => ['backend' => NullBackend::class],
-                'cache_runtime' => ['backend' => NullBackend::class],
-                'l10n' => ['backend' => NullBackend::class],
-            ]
-        );
-        $this->registerNullCache('pages', VariableFrontend::class);
-    }
-
-    private function disableCoreCachesForVersion10(): void
-    {
-        $this->getCacheManager()->setCacheConfigurations(
-            [
-                'assets' => ['backend' => NullBackend::class],
-                'core' => ['backend' => NullBackend::class],
-                'extbase' => ['backend' => NullBackend::class],
-                'hash' => ['backend' => NullBackend::class],
-                'l10n' => ['backend' => NullBackend::class],
-                'pagesection' => ['backend' => NullBackend::class],
-                'rootline' => ['backend' => NullBackend::class],
-                'runtime' => ['backend' => NullBackend::class],
-            ]
-        );
-        $this->registerNullCache('pages', VariableFrontend::class);
-        $this->registerNullFluidCache();
-    }
-
-    private function getCacheManager(): CacheManager
-    {
-        return GeneralUtility::makeInstance(CacheManager::class);
-    }
-
-    private function registerNullFluidCache(): void
-    {
-        $this->registerNullCache('fluid_template', FluidTemplateCache::class);
-    }
-
-    /**
-     * Registers a `NullCache` for the given key using a frontend of the given class.
-     *
-     * Use this method for caches that do not work without a frontend, e.g., the pages cache or the Fluid template
-     * cache.
-     *
-     * @param non-empty-string $cacheKey
-     * @param class-string<FrontendInterface> $frontEndClass
-     */
-    private function registerNullCache(string $cacheKey, string $frontEndClass): void
-    {
-        $cacheManager = $this->getCacheManager();
-        if ($cacheManager->hasCache($cacheKey)) {
-            return;
-        }
-
-        $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
-        $frontEnd = GeneralUtility::makeInstance($frontEndClass, $cacheKey, $backEnd);
-        $cacheManager->registerCache($frontEnd);
     }
 
     /**
