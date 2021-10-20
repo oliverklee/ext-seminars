@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
@@ -68,6 +69,8 @@ final class EmailServiceTest extends TestCase
 
     protected function setUp(): void
     {
+        (new CacheNullifyer())->disableCoreCaches();
+
         Bootstrap::initializeBackendAuthentication();
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
         if (Typo3Version::isAtLeast(10)) {

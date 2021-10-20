@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -65,6 +66,8 @@ final class RegistrationDigestTest extends TestCase
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');
         }
+
+        (new CacheNullifyer())->disableCoreCaches();
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
 
