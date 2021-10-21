@@ -5059,10 +5059,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_COMPLETE);
         $this->subject->setHidden(true);
 
-        self::assertStringContainsString(
-            'overlay-hidden.svg',
-            $this->subject->getRecordIcon()
-        );
+        self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5073,10 +5070,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_TOPIC);
         $this->subject->setHidden(true);
 
-        self::assertStringContainsString(
-            'overlay-hidden.svg',
-            $this->subject->getRecordIcon()
-        );
+        self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5087,10 +5081,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_DATE);
         $this->subject->setHidden(true);
 
-        self::assertStringContainsString(
-            'overlay-hidden.svg',
-            $this->subject->getRecordIcon()
-        );
+        self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5143,7 +5134,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_COMPLETE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5154,7 +5145,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_TOPIC);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5165,7 +5156,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setRecordType(Event::TYPE_DATE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
     }
 
     // Tests for hasSeparateDetailsPage
