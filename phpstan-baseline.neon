@@ -671,16 +671,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('mail@example\\.com' \\=\\> 'test organizer'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('system\\-foo@example\\.com' \\=\\> 'Mr\\. Default'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$email of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:filterSwiftEmailAttachmentsByType\\(\\) expects Swift_Message, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
 			count: 17
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
