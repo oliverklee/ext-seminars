@@ -1668,10 +1668,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertArrayHasKey(
-            'foo@bar.com',
-            $this->email->getTo()
-        );
+        self::assertArrayHasKey('foo@bar.com', $this->getToOfEmail($this->email));
     }
 
     /**
@@ -1735,10 +1732,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringContainsString(
-            'foo Event',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('foo Event', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1771,12 +1765,12 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertContains(
-            strftime(
+        self::assertStringContainsString(
+            \strftime(
                 $this->subject->getConfValueString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME']
             ),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -1809,10 +1803,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString(
-            '###PUBLISH_EVENT_DATE###',
-            $this->email->getBody()
-        );
+        self::assertStringNotContainsString('###PUBLISH_EVENT_DATE###', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1845,10 +1836,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString(
-            'foo event,',
-            $this->email->getBody()
-        );
+        self::assertStringNotContainsString('foo event,', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1879,10 +1867,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString(
-            '###',
-            $this->email->getBody()
-        );
+        self::assertStringNotContainsString('###', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1914,10 +1899,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringContainsString(
-            'Foo Description',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('Foo Description', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1950,7 +1932,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -1985,10 +1967,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertContains(
-            $defaultFromName,
-            $this->email->getFrom()
-        );
+        self::assertContains($defaultFromName, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2020,9 +1999,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $this->email->getReplyTo();
-        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $replyTo);
+        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $this->getReplyToOfEmail($this->email));
     }
 
     /**
@@ -2054,10 +2031,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertContains(
-            'Mr. Bar',
-            $this->email->getFrom()
-        );
+        self::assertContains('Mr. Bar', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2089,10 +2063,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertArrayHasKey(
-            'mail@foo.com',
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey('mail@foo.com', $this->getFromOfEmail($this->email));
     }
 
     // Tests concerning the notification e-mails
@@ -2156,10 +2127,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertArrayHasKey(
-            'foo@bar.com',
-            $this->email->getTo()
-        );
+        self::assertArrayHasKey('foo@bar.com', $this->getToOfEmail($this->email));
     }
 
     /**
@@ -2181,10 +2149,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
-            $defaultMailFromName,
-            $this->email->getFrom()
-        );
+        self::assertContains($defaultMailFromName, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2206,10 +2171,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertArrayHasKey(
-            $defaultMailFromAddress,
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($defaultMailFromAddress, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2229,9 +2191,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $this->email->getReplyTo();
-        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $replyTo);
+        self::assertSame(['mail@foo.com' => 'Mr. Bar'], $this->getReplyToOfEmail($this->email));
     }
 
     /**
@@ -2251,10 +2211,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
-            'Mr. Bar',
-            $this->email->getFrom()
-        );
+        self::assertContains('Mr. Bar', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2274,10 +2231,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertArrayHasKey(
-            'mail@foo.com',
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey('mail@foo.com', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2316,7 +2270,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_save_event_text'),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -2336,7 +2290,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_save_event_overview'),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -2356,7 +2310,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringNotContainsString(
             '###',
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -2377,10 +2331,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString(
-            $title,
-            $this->email->getBody()
-        );
+        self::assertStringContainsString($title, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -2400,10 +2351,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString(
-            $description,
-            $this->email->getBody()
-        );
+        self::assertStringContainsString($description, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -2424,10 +2372,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString(
-            '02.04.1975',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('02.04.1975', $this->getTextBodyOfEmail($this->email));
     }
 
     ///////////////////////////////////////////
