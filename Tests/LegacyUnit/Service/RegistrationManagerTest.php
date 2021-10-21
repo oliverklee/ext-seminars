@@ -314,38 +314,6 @@ final class RegistrationManagerTest extends TestCase
     }
 
     /**
-     * Extracts the HTML body from the first sent e-mail.
-     */
-    private function getEmailHtmlPart(): string
-    {
-        $htmlMimeParts = $this->filterEmailAttachmentsByType($this->email, 'text/html');
-
-        return $htmlMimeParts[0]->getBody();
-    }
-
-    /**
-     * Returns the attachments of $email that have a content type that contains $contentType.
-     *
-     * Example: a $contentType of "text/calendar" will also find attachments that have 'text/calendar; charset="utf-8"'
-     * as the content type.
-     *
-     * @return array<int, \Swift_Mime_MimeEntity>
-     */
-    private function filterEmailAttachmentsByType(MailMessage $email, string $contentType): array
-    {
-        $matches = [];
-
-        /** @var \Swift_Mime_MimeEntity $attachment */
-        foreach ($email->getChildren() as $attachment) {
-            if (\strpos($attachment->getContentType(), $contentType) !== false) {
-                $matches[] = $attachment;
-            }
-        }
-
-        return $matches;
-    }
-
-    /**
      * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
      * and registers it for purging in `tearDown()`.
      *
@@ -2393,10 +2361,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            '<html',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('<html', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2411,10 +2376,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertSame(
-            [],
-            $this->filterEmailAttachmentsByType($this->email, 'text/html')
-        );
+        self::assertSame('', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2446,10 +2408,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringNotContainsString(
-            '###',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringNotContainsString('###', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2472,10 +2431,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            '<html',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('<html', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2498,10 +2454,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertSame(
-            [],
-            $this->filterEmailAttachmentsByType($this->email, 'text/html')
-        );
+        self::assertSame('', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2523,10 +2476,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            'Harry Callagan',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('Harry Callagan', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2547,10 +2497,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
         $seminarLink = 'https://singleview.example.com/';
 
-        self::assertStringContainsString(
-            '<a href="' . $seminarLink,
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('<a href="' . $seminarLink, $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2676,10 +2623,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            'style=',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('style=', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -2736,7 +2680,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertRegExp(
             '/\\<ol>.*<li>foo1<\\/li>.*<li>foo2<\\/li>.*<\\/ol>/s',
-            $this->getEmailHtmlPart()
+            $this->getHtmlBodyOfEmail($this->email)
         );
     }
 
@@ -2869,10 +2813,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            'place_title<br>place_address',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('place_title<br>place_address', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -3061,10 +3002,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            'address1 address2',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('address1 address2', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -3237,10 +3175,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString(
-            'address<br>footown',
-            $this->getEmailHtmlPart()
-        );
+        self::assertStringContainsString('address<br>footown', $this->getHtmlBodyOfEmail($this->email));
     }
 
     /**
@@ -3331,7 +3266,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3351,7 +3286,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3371,7 +3306,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         $attachment = $attachments[0];
         self::assertContains('BEGIN:VCALENDAR', $attachment->getBody());
@@ -3390,7 +3325,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3409,7 +3344,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3448,7 +3383,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3468,7 +3403,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3488,7 +3423,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3515,7 +3450,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3535,7 +3470,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3556,7 +3491,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3576,7 +3511,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3607,7 +3542,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3638,7 +3573,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3658,7 +3593,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3678,7 +3613,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
@@ -3698,7 +3633,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $attachments = $this->filterSwiftEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];

@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Seminars\Email\EmailBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
@@ -133,5 +134,57 @@ final class EmailTraitTest extends UnitTestCase
         $mock->text($textBody);
 
         self::assertSame($textBody, $this->getTextBodyOfEmail($mock));
+    }
+
+    /**
+     * @test
+     */
+    public function getHtmlBodyOfEmailForEmailWithoutAnyTextOrHtmlBodyReturnsEmptyString(): void
+    {
+        $email = (new EmailBuilder())->build();
+
+        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+    }
+
+    /**
+     * @test
+     */
+    public function getHtmlBodyOfEmailForEmailWithTextOnlyBodyReturnsEmptyString(): void
+    {
+        $email = (new EmailBuilder())->text('There is only text.')->build();
+
+        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+    }
+
+    /**
+     * @test
+     */
+    public function getHtmlBodyOfEmailForEmailWithTextBodyAndEmptyHtmlBodyReturnsEmptyString(): void
+    {
+        $email = (new EmailBuilder())->text('There is only text.')->html('')->build();
+
+        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+    }
+
+    /**
+     * @test
+     */
+    public function getHtmlBodyOfEmailForEmailWithNonEmptyTextAndHtmlBodyReturnsHtmlBody(): void
+    {
+        $htmlBody = '<p>There also is HTML.</p>';
+        $email = (new EmailBuilder())->text('There is some text.')->html($htmlBody)->build();
+
+        self::assertSame($htmlBody, $this->getHtmlBodyOfEmail($email));
+    }
+
+    /**
+     * @test
+     */
+    public function getHtmlBodyOfEmailForEmailWithHtmlBodyOnlyReturnsHtmlBody(): void
+    {
+        $htmlBody = '<p>There also is HTML.</p>';
+        $email = (new EmailBuilder())->html($htmlBody)->build();
+
+        self::assertSame($htmlBody, $this->getHtmlBodyOfEmail($email));
     }
 }
