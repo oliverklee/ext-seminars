@@ -121,4 +121,64 @@ trait EmailTrait
 
         return $text;
     }
+
+    /**
+     * Returns HTML content of an email.
+     */
+    private function getHtmlBodyOfEmail(MailMessage $message): string
+    {
+        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
+        if ($message instanceof \Swift_Message) {
+            $htmlPart = $this->filterSwiftEmailAttachmentsByType($message, 'text/html')[0] ?? null;
+            $htmlBody = $htmlPart instanceof \Swift_Mime_MimeEntity ? (string)$htmlPart->getBody() : '';
+        } else {
+            $htmlBody = (string)$message->getHtmlBody();
+        }
+
+        return $htmlBody;
+    }
+
+    /**
+     * Returns the attachments of $email that have a content type with the given content type.
+     *
+     * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
+     * as the content type.
+     *
+     * @return array<int, \Swift_Mime_MimeEntity>
+     */
+    private function filterEmailAttachmentsByType(\Swift_Message $email, string $contentType): array
+    {
+        /** @var array<int, \Swift_Mime_MimeEntity> $matches */
+        $matches = [];
+
+        foreach ($email->getChildren() as $attachment) {
+            if (\strpos($attachment->getContentType(), $contentType) !== false) {
+                $matches[] = $attachment;
+            }
+        }
+
+        return $matches;
+    }
+
+    /**
+     * Returns the attachments of $email that have a content type with the given content type.
+     *
+     * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
+     * as the content type.
+     *
+     * @return array<int, \Swift_Mime_MimeEntity>
+     */
+    private function filterSwiftEmailAttachmentsByType(\Swift_Message $email, string $contentType): array
+    {
+        /** @var array<int, \Swift_Mime_MimeEntity> $matches */
+        $matches = [];
+
+        foreach ($email->getChildren() as $attachment) {
+            if (\strpos($attachment->getContentType(), $contentType) !== false) {
+                $matches[] = $attachment;
+            }
+        }
+
+        return $matches;
+    }
 }
