@@ -256,17 +256,7 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
@@ -274,16 +264,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
@@ -369,11 +349,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
