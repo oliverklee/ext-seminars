@@ -2300,10 +2300,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertSame(
-            [$defaultMailFromAddress => $defaultMailFromName],
-            $this->email->getFrom()
-        );
+        self::assertSame([$defaultMailFromAddress => $defaultMailFromName], $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -2341,10 +2338,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertSame(
-            ['mail@example.com' => 'test organizer'],
-            $this->email->getFrom()
-        );
+        self::assertSame(['mail@example.com' => 'test organizer'], $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -4522,10 +4516,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyOrganizers($registration);
 
-        self::assertSame(
-            [$defaultMailFromAddress => $defaultMailFromName],
-            $this->email->getFrom()
-        );
+        self::assertSame([$defaultMailFromAddress => $defaultMailFromName], $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -4561,10 +4552,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyOrganizers($registration);
 
-        self::assertSame(
-            [$defaultMailFromAddress => $defaultMailFromName],
-            $this->email->getFrom()
-        );
+        self::assertSame([$defaultMailFromAddress => $defaultMailFromName], $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -4833,10 +4821,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertArrayHasKey(
-            $defaultMailFromAddress,
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($defaultMailFromAddress, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -4902,10 +4887,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertArrayHasKey(
-            'mail@example.com',
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey('mail@example.com', $this->getFromOfEmail($this->email));
     }
 
     /**
