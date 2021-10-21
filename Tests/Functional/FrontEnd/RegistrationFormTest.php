@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use Psr\Log\NullLogger;
-use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
@@ -38,30 +34,31 @@ final class RegistrationFormTest extends FunctionalTestCase
     private $subject = null;
 
     /**
+     * @var TestingFramework
+     */
+    private $testingFramework;
+
+    /**
      * @var ContentObjectRenderer
      */
-    private $contentObject = null;
+    private $contentObject;
 
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd();
+        $this->contentObject = new ContentObjectRenderer();
         $this->initializeBackEndLanguage();
 
-        $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
-        if (Typo3Version::isAtLeast(10)) {
-            $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
-            // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-            $frontEndProphecy->getLanguage()->wilLReturn($siteLanguage);
-        }
-        /** @var TypoScriptFrontendController $frontEnd */
-        $frontEnd = $frontEndProphecy->reveal();
-        $GLOBALS['TSFE'] = $frontEnd;
-
-        $contentObject = new ContentObjectRenderer();
-        $contentObject->setLogger(new NullLogger());
-        $this->contentObject = $contentObject;
         $this->subject = new RegistrationForm([], $this->contentObject);
         $this->subject->setTestMode();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->testingFramework->cleanUp();
     }
 
     /**
