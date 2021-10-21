@@ -541,7 +541,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertContains(
             substr($message, 0, strpos($message, '%') - 1),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -810,7 +810,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertContains(
             substr($message, 0, strpos($message, '%') - 1),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -1048,10 +1048,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertArrayHasKey(
-            'MrTest@example.com',
-            $this->email->getTo()
-        );
+        self::assertArrayHasKey('MrTest@example.com', $this->getToOfEmail($this->email));
     }
 
     /**
@@ -1076,10 +1073,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertArrayHasKey(
-            $defaultMailFromAddress,
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($defaultMailFromAddress, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -1111,10 +1105,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertArrayHasKey(
-            $defaultMailFromAddress,
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($defaultMailFromAddress, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -1144,9 +1135,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $this->email->getReplyTo();
-        self::assertSame(['MrTest@example.com' => 'Mr. Test'], $replyTo);
+        self::assertSame(['MrTest@example.com' => 'Mr. Test'], $this->getReplyToOfEmail($this->email));
     }
 
     /**
@@ -1169,10 +1158,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertArrayHasKey(
-            'MrTest@example.com',
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey('MrTest@example.com', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -1202,10 +1188,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertArrayHasKey(
-            'MrTest@example.com',
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey('MrTest@example.com', $this->getFromOfEmail($this->email));
     }
 
     // attached CSV
@@ -1522,10 +1505,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            'Mr. Test',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('Mr. Test', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1546,10 +1526,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            'test event',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('test event', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1569,10 +1546,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            (string)$uid,
-            $this->email->getBody()
-        );
+        self::assertStringContainsString((string)$uid, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1592,10 +1566,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            '2',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('2', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1622,7 +1593,7 @@ final class MailNotifierTest extends TestCase
                 $this->configuration->getAsString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY
             ),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -1643,10 +1614,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            '0',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('0', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -1674,10 +1642,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString(
-            '1',
-            $this->email->getBody()
-        );
+        self::assertStringContainsString('1', $this->getTextBodyOfEmail($this->email));
     }
 
     /**

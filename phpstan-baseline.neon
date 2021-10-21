@@ -591,16 +591,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 8
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
@@ -676,32 +666,12 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\<string, string\\>&nonEmpty and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
 			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
@@ -723,26 +693,6 @@ parameters:
 		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('system\\-foo@example\\.com' \\=\\> 'Mr\\. Default'\\) and array\\<Symfony\\\\Component\\\\Mime\\\\Address\\> will always evaluate to false\\.$#"
 			count: 3
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 13
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 41
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, Symfony\\\\Component\\\\Mime\\\\Part\\\\AbstractPart given\\.$#"
-			count: 2
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-

@@ -166,10 +166,7 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertArrayHasKey(
-            $defaultMailFromAddress,
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($defaultMailFromAddress, $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -185,9 +182,7 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $this->email->getReplyTo();
-        self::assertSame($this->organizer->getEmailAddress(), \key($replyTo));
+        self::assertArrayHasKey($this->organizer->getEmailAddress(), $this->getReplyToOfEmail($this->email));
     }
 
     /**
@@ -203,10 +198,7 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertArrayHasKey(
-            $this->organizer->getEmailAddress(),
-            $this->email->getFrom()
-        );
+        self::assertArrayHasKey($this->organizer->getEmailAddress(), $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -277,10 +269,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', $body);
 
-        self::assertStringContainsString(
-            $body,
-            $this->email->getBody()
-        );
+        self::assertStringContainsString($body, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -295,7 +284,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertSame(
             [$this->user->getEmailAddress() => $this->user->getName()],
-            $this->email->getTo()
+            $this->getToOfEmail($this->email)
         );
     }
 
@@ -362,10 +351,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation (This was the salutation)');
 
-        self::assertStringContainsString(
-            $this->user->getName(),
-            $this->email->getBody()
-        );
+        self::assertStringContainsString($this->user->getName(), $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -380,7 +366,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Hello ' . $this->user->getName() . '!',
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -396,7 +382,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Event: ' . $this->event->getTitle(),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -414,7 +400,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Date: ' . $formattedDate,
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -432,7 +418,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringNotContainsString(
             '-- ',
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 
@@ -448,7 +434,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             "\n-- \n" . $this->organizer->getEmailFooter(),
-            $this->email->getBody()
+            $this->getTextBodyOfEmail($this->email)
         );
     }
 }
