@@ -49,14 +49,14 @@
 		"helhum/typo3-console": "^5.8.6 || ^6.6.0",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.10",
-		"nimut/testing-framework": "dev-task/faster-truncate",
+		"nimut/testing-framework": "^5.3.0",
 		"oliverklee/phpunit": "^7.5.25",
 		"phpspec/prophecy": "^1.14.0",
 		"phpstan/extension-installer": "^1.1.0",
 		"phpstan/phpstan": "^0.12.99",
 		"phpstan/phpstan-phpunit": "^0.12.22",
 		"phpunit/phpunit": "^7.5.20",
-		"rector/rector": "^0.11.58",
+		"rector/rector": "^0.11.60",
 		"saschaegerer/phpstan-typo3": "^0.13.3",
 		"sjbr/sr-feuser-register": "^7.0.5",
 		"squizlabs/php_codesniffer": "^3.6.1",
@@ -81,12 +81,6 @@
 		}
 	},
 	"prefer-stable": true,
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/oliverklee/testing-framework/"
-		}
-	],
 	"config": {
 		"preferred-install": {
 			"*": "dist"
