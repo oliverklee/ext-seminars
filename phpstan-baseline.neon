@@ -671,11 +671,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\$email of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:filterSwiftEmailAttachmentsByType\\(\\) expects Swift_Message, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 17
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
