@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -19,6 +20,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 final class RegistrationFormTest extends FunctionalTestCase
 {
+    use LanguageHelper;
+
     /**
      * @var array<int, string>
      */
@@ -42,6 +45,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->initializeBackEndLanguage();
 
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
         if (Typo3Version::isAtLeast(10)) {

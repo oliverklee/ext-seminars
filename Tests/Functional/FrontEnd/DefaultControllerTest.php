@@ -9,6 +9,7 @@ use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -25,6 +26,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 final class DefaultControllerTest extends FunctionalTestCase
 {
+    use LanguageHelper;
+
     /**
      * @var int
      */
@@ -49,6 +52,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         parent::setUp();
         (new CacheNullifyer())->disableCoreCaches();
+        $this->initializeBackEndLanguage();
     }
 
     protected function tearDown(): void
