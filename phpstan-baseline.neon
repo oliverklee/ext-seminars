@@ -656,11 +656,6 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -669,11 +664,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Class TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService constructor invoked with 0 parameters, 2 required\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"

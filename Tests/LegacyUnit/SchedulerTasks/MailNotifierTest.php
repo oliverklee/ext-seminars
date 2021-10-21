@@ -108,6 +108,7 @@ final class MailNotifierTest extends TestCase
         if (Typo3Version::isAtLeast(10)) {
             $this->languageService = LanguageService::create('default');
         } else {
+            // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we currently are on 10LTS.
             $this->languageService = new LanguageService();
             $this->languageService->init('default');
         }
