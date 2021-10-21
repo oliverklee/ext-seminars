@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use the new mailer in TYPO3 10LTS (#1153, #1157, #1158, #1161, #1163)
 - Properly disable the Core cache in V10 in the tests (#1148)
 - Provide the `ContentObjectRenderer` with a logger in the tests (#1145)
-- Fix the test setup (language, frontend) (#1139, #1162)
+- Fix the test setup (#1139, #1162, #1164)
 
 ## 4.0.3
 
