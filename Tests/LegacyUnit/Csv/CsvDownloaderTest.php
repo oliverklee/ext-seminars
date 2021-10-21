@@ -44,6 +44,7 @@ final class CsvDownloaderTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd();
 
         $this->pid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
