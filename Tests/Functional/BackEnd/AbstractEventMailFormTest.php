@@ -130,7 +130,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertStringContainsString('Joe Johnson', $this->email->getBody());
+        self::assertStringContainsString('Joe Johnson', $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -156,7 +156,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        self::assertArrayHasKey('system-foo@example.com', $this->email->getFrom());
+        self::assertArrayHasKey('system-foo@example.com', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -183,7 +183,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        self::assertArrayHasKey('oliver@example.com', $this->email->getFrom());
+        self::assertArrayHasKey('oliver@example.com', $this->getFromOfEmail($this->email));
     }
 
     /**
@@ -208,9 +208,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        /** @var array<string, string> $replyTo */
-        $replyTo = $this->email->getReplyTo();
-        self::assertArrayHasKey('oliver@example.com', $replyTo);
+        self::assertArrayHasKey('oliver@example.com', $this->getReplyToOfEmail($this->email));
     }
 
     /**
@@ -236,7 +234,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertStringContainsString("\n-- \nThe one and only", $this->email->getBody());
+        self::assertStringContainsString("\n-- \nThe one and only", $this->getTextBodyOfEmail($this->email));
     }
 
     /**
