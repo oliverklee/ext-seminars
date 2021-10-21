@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Traits;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -129,7 +130,7 @@ trait EmailTrait
     {
         // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
         if ($message instanceof \Swift_Message) {
-            $htmlPart = $this->filterSwiftEmailAttachmentsByType($message, 'text/html')[0] ?? null;
+            $htmlPart = $this->filterSwiftMimePartsByType($message, 'text/html')[0] ?? null;
             $htmlBody = $htmlPart instanceof \Swift_Mime_MimeEntity ? (string)$htmlPart->getBody() : '';
         } else {
             $htmlBody = (string)$message->getHtmlBody();
@@ -144,16 +145,29 @@ trait EmailTrait
      * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
      * as the content type.
      *
-     * @return array<int, \Swift_Mime_MimeEntity>
+     * @return array<int, DataPart>
      */
-    private function filterEmailAttachmentsByType(\Swift_Message $email, string $contentType): array
+    private function filterEmailAttachmentsByType(MailMessage $email, string $contentType): array
     {
-        /** @var array<int, \Swift_Mime_MimeEntity> $matches */
+        /** @var array<int, DataPart> $matches */
         $matches = [];
 
-        foreach ($email->getChildren() as $attachment) {
-            if (\strpos($attachment->getContentType(), $contentType) !== false) {
-                $matches[] = $attachment;
+        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
+        if ($email instanceof \Swift_Message) {
+            $mimeParts = $this->filterSwiftMimePartsByType($email, $contentType);
+            foreach ($mimeParts as $mimePart) {
+                if (!$mimePart instanceof \Swift_Attachment) {
+                    continue;
+                }
+
+                // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
+                $matches[] = new DataPart($mimePart->getBody(), $mimePart->getFileName(), $mimePart->getContentType());
+            }
+        } else {
+            foreach ($email->getAttachments() as $attachment) {
+                if (\strpos($this->getContentTypeForDataPart($attachment), $contentType) !== false) {
+                    $matches[] = $attachment;
+                }
             }
         }
 
@@ -168,7 +182,7 @@ trait EmailTrait
      *
      * @return array<int, \Swift_Mime_MimeEntity>
      */
-    private function filterSwiftEmailAttachmentsByType(\Swift_Message $email, string $contentType): array
+    private function filterSwiftMimePartsByType(\Swift_Message $email, string $contentType): array
     {
         /** @var array<int, \Swift_Mime_MimeEntity> $matches */
         $matches = [];
@@ -180,5 +194,10 @@ trait EmailTrait
         }
 
         return $matches;
+    }
+
+    private function getContentTypeForDataPart(DataPart $dataPart): string
+    {
+        return $dataPart->getMediaType() . '/' . $dataPart->getMediaSubtype();
     }
 }

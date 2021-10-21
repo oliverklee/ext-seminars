@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -186,5 +187,71 @@ final class EmailTraitTest extends UnitTestCase
         $email = (new EmailBuilder())->html($htmlBody)->build();
 
         self::assertSame($htmlBody, $this->getHtmlBodyOfEmail($email));
+    }
+
+    /**
+     * @test
+     */
+    public function filterEmailAttachmentsByTypeForNoAttachmentReturnsEmptyArray(): void
+    {
+        $email = (new EmailBuilder())->build();
+
+        self::assertSame([], $this->filterEmailAttachmentsByType($email, 'text/calendar'));
+    }
+
+    /**
+     * @test
+     */
+    public function filterEmailAttachmentsByTypeIgnoresNonMatchingAttachment(): void
+    {
+        $emailBuilder = new EmailBuilder();
+        $emailBuilder->attach('CSV data', 'text/csv', 'registrations.csv');
+        $email = $emailBuilder->build();
+
+        self::assertSame([], $this->filterEmailAttachmentsByType($email, 'text/calendar'));
+    }
+
+    /**
+     * @test
+     */
+    public function filterEmailAttachmentsByTypeReturnsMatchingAttachmentWithExactMatch(): void
+    {
+        $body = 'Event data';
+        $contentType = 'text/calendar';
+        $fileName = 'event.ical';
+
+        $emailBuilder = new EmailBuilder();
+        $emailBuilder->attach($body, $contentType, $fileName);
+        $email = $emailBuilder->build();
+
+        $matches = $this->filterEmailAttachmentsByType($email, $contentType);
+        self::assertContainsOnlyInstancesOf(DataPart::class, $matches);
+        self::assertCount(1, $matches);
+        $firstMatch = $matches[0];
+        self::assertSame($body, $firstMatch->getBody());
+        self::assertSame($contentType, $this->getContentTypeForDataPart($firstMatch));
+        self::assertStringContainsString($fileName, $firstMatch->getPreparedHeaders()->toString());
+    }
+
+    /**
+     * @test
+     */
+    public function filterEmailAttachmentsByTypeReturnsMatchingAttachmentUsingSubstringMatching(): void
+    {
+        $body = 'Event data';
+        $contentType = 'text/calendar; charset="utf-8"; component="vevent"; method="publish"';
+        $fileName = 'event.ical';
+
+        $emailBuilder = new EmailBuilder();
+        $emailBuilder->attach($body, $contentType, $fileName);
+        $email = $emailBuilder->build();
+
+        $matches = $this->filterEmailAttachmentsByType($email, 'text/calendar');
+        self::assertContainsOnlyInstancesOf(DataPart::class, $matches);
+        self::assertCount(1, $matches);
+        $firstMatch = $matches[0];
+        self::assertSame($body, $firstMatch->getBody());
+        self::assertSame($contentType, $this->getContentTypeForDataPart($firstMatch));
+        self::assertStringContainsString($fileName, $firstMatch->getPreparedHeaders()->toString());
     }
 }
