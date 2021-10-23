@@ -32,6 +32,8 @@ final class ControllerTest extends TestCase
 
     protected function tearDown(): void
     {
+        // Manually purge the TYPO3 FIFO queue
+        GeneralUtility::makeInstance(CsvDownloader::class);
         $this->restoreOriginalEnvironment();
     }
 

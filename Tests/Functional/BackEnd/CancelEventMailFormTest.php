@@ -39,7 +39,9 @@ final class CancelEventMailFormTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        GeneralUtility::purgeInstances();
+        // Manually purge the TYPO3 FIFO queue
+        GeneralUtility::makeInstance(MailMessage::class);
+        GeneralUtility::makeInstance(MailMessage::class);
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule']);
     }
 
