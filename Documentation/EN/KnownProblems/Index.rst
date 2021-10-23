@@ -56,6 +56,12 @@ Known problems
 - The inlining of CSS in HTML emails is available in Composer-mode only
   as this feature makes use of a third-party library.
 
+- If you are using the sites feature in TYPO3 with languages other than English,
+  and you are using rn_base in a version < 1.14.1, you will also need to set the
+  `config.language` TypoScript setup variable to have the labels in the
+  registration form and front-end editor translated to the selected language.
+  (This problem has been solved in rn_base 1.14.1.)
+
 - The front-end editor does not work with MySQL/MariaDB in strict mode. You will
   need to remove `STRICT_TRANS_TABLES` from `sql_mode`:
 
