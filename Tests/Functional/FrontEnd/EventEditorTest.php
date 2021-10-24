@@ -7,18 +7,9 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\System\Typo3Version;
-use OliverKlee\Oelib\Testing\CacheNullifyer;
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -36,16 +27,6 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @var int
      */
-    private const CURRENT_PAGE_UID = 1;
-
-    /**
-     * @var int
-     */
-    private const EVENT_UID = 1;
-
-    /**
-     * @var int
-     */
     private const NOW = 1577285056;
 
     /**
@@ -59,65 +40,27 @@ final class EventEditorTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var TypoScriptFrontendController|null
+     * @var TestingFramework
      */
-    private $frontEndController = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {
         parent::setUp();
-        (new CacheNullifyer())->disableCoreCaches();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/EventEditorTest.xml');
-
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
+        $this->importDataSet(__DIR__ . '/Fixtures/EventEditorTest.xml');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = $this->buildSubject(self::CONFIGURATION);
     }
 
     protected function tearDown(): void
     {
+        $this->testingFramework->cleanUpWithoutDatabase();
         FrontEndLoginManager::purgeInstance();
         MapperRegistry::purgeInstance();
 
         parent::tearDown();
-    }
-
-    private function getFrontEndController(): TypoScriptFrontendController
-    {
-        if ($this->frontEndController instanceof TypoScriptFrontendController) {
-            return $this->frontEndController;
-        }
-
-        $contentObject = new ContentObjectRenderer();
-        $contentObject->setLogger(new NullLogger());
-
-        // Needed in TYPO3 V10; can be removed in V11.
-        $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
-        if (Typo3Version::isAtLeast(10)) {
-            $frontEndController = GeneralUtility::makeInstance(
-                TypoScriptFrontendController::class,
-                $GLOBALS['TYPO3_CONF_VARS'],
-                new Site('test', self::CURRENT_PAGE_UID, []),
-                new SiteLanguage(0, 'en_US.utf8', new Uri(), [])
-            );
-        } else {
-            $frontEndController = GeneralUtility::makeInstance(
-                TypoScriptFrontendController::class,
-                $GLOBALS['TYPO3_CONF_VARS'],
-                self::CURRENT_PAGE_UID,
-                0
-            );
-        }
-        $frontEndController->fe_user = $this->prophesize(FrontendUserAuthentication::class)->reveal();
-        $frontEndController->setLogger($this->prophesize(LoggerInterface::class)->reveal());
-        $frontEndController->determineId();
-        $frontEndController->cObj = $contentObject;
-
-        $this->frontEndController = $frontEndController;
-        $GLOBALS['TSFE'] = $frontEndController;
-
-        return $frontEndController;
     }
 
     /**
@@ -125,15 +68,8 @@ final class EventEditorTest extends FunctionalTestCase
      */
     private function logInUser(int $uid): void
     {
-        $user = $this->getUserMapper()->find($uid);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($uid);
         FrontEndLoginManager::getInstance()->logInUser($user);
-    }
-
-    private function getUserMapper(): FrontEndUserMapper
-    {
-        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
-
-        return $mapper;
     }
 
     private function buildSubjectWithRequiredField(string $requiredField): EventEditor
@@ -146,7 +82,12 @@ final class EventEditorTest extends FunctionalTestCase
 
     private function buildSubject(array $configuration): EventEditor
     {
-        $subject = new EventEditor($configuration, $this->getFrontEndController()->cObj);
+        $this->testingFramework->createFakeFrontEnd(1);
+
+        /** @var TypoScriptFrontendController $frontEndController */
+        $frontEndController = $GLOBALS['TSFE'];
+
+        $subject = new EventEditor($configuration, $frontEndController->cObj);
         $subject->setTestMode();
 
         return $subject;
@@ -174,7 +115,7 @@ final class EventEditorTest extends FunctionalTestCase
 
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
-        self::assertStringContainsString('?id=' . $targetPageUid, $result);
+        self::assertStringContainsString('/' . $targetPageUid, $result);
     }
 
     // Tests concerning populateListOrganizers().
@@ -508,7 +449,7 @@ final class EventEditorTest extends FunctionalTestCase
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');
 
-        $data = ['elementName' => 'categories', 'value' => [42]];
+        $data = ['elementName' => 'categories', 'value' => ['42']];
         $result = $subject->validateCheckboxes($data);
 
         self::assertTrue($result);
@@ -522,7 +463,7 @@ final class EventEditorTest extends FunctionalTestCase
         $this->logInUser(4);
         $subject = $this->buildSubjectWithRequiredField('categories');
 
-        $data = ['elementName' => 'categories', 'value' => '[42]'];
+        $data = ['elementName' => 'categories', 'value' => ['42']];
         $result = $subject->validateCheckboxes($data);
 
         self::assertTrue($result);
@@ -531,7 +472,21 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse(): void
+    public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyArrayReturnsFalse(): void
+    {
+        $this->logInUser(1);
+        $subject = $this->buildSubjectWithRequiredField('categories');
+
+        $data = ['elementName' => 'categories', 'value' => []];
+        $result = $subject->validateCheckboxes($data);
+
+        self::assertFalse($result);
+    }
+
+    /**
+     * @test
+     */
+    public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyStringReturnsFalse(): void
     {
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');
