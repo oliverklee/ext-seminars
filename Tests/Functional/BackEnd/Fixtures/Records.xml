@@ -2,16 +2,19 @@
 <dataset>
     <pages>
         <uid>1</uid>
+        <slug>/1</slug>
         <doktype>254</doktype>
         <title>Folder without events</title>
     </pages>
     <pages>
         <uid>2</uid>
+        <slug>/2</slug>
         <doktype>254</doktype>
         <title>Folder with event without registrations</title>
     </pages>
     <pages>
         <uid>3</uid>
+        <slug>/3</slug>
         <doktype>254</doktype>
         <title>Folder with event with registrations</title>
     </pages>
