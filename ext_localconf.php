@@ -63,10 +63,6 @@ $boot = static function () {
         'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
     ];
 
-    // RealURL auto-configuration
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']
-    ['seminars'] = \OliverKlee\Seminars\RealUrl\Configuration::class . '->addConfiguration';
-
     $icons = [
         'tx-seminars-canceled' => 'Canceled.png',
         'tx-seminars-category' => 'Category.gif',
