@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Do not advertise the crowdfunding campaign (#1150)
 - Allow installations with Emogrifier 5.x and 6.x (#1147)
-- Require oelib >= 4.1.1 (#1143, #1146, #1154)
+- Require oelib >= 4.1.2 (#1143, #1146, #1154, #1183)
 
 ### Deprecated
 
