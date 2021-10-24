@@ -58,13 +58,6 @@ Bekannte Probleme
 - Sortieren in den Front-end-Listen funktioniert mit MySQL < 4.1 nicht
   richtig.
 
-- Manche Benutzer haben von Problemen mit RealURL berichtet (vor allem
-  mit dem Internet Explorer) bezüglich nicht funktionierenden
-  Weiterleitungen zur Danke-Seite oder doppelten Anmeldungen
-  (Fehlerbericht). Wenn diese Probleme bei Ihnen auftreten, schalten Sie
-  bitte realURL für die Anmeldeseite und die Danke-Seite aus (und
-  ermutigen Sie Ihren Kunden, auf Mozilla Firefox umzusteigen).
-
 - Wenn die maximale Upload-Dateigröße in PHP auf einen niedrigeren Wert
   gesetzt ist, als in TYPO3 konfiguriert ist, wird bei der Bearbeitung
   von Veranstaltungen in FE keine Fehlermeldung angezeigt.

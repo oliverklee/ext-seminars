@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the RealURL auto-configuration (#1189)
 
 ### Fixed
 - Change the icon tests to recognize icon sprites (#1172)
