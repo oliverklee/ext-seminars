@@ -31,10 +31,12 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
+/**
+ * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifier
+ */
 final class MailNotifierTest extends TestCase
 {
     use EmailTrait;
@@ -43,37 +45,37 @@ final class MailNotifierTest extends TestCase
     /**
      * @var MailNotifier&MockObject&AccessibleObject
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var DummyConfiguration
      */
-    protected $configuration = null;
+    private $configuration = null;
 
     /**
      * @var EventStatusService&MockObject
      */
-    protected $eventStatusService = null;
+    private $eventStatusService = null;
 
     /**
      * @var EmailService&MockObject
      */
-    protected $emailService = null;
+    private $emailService = null;
 
     /**
      * @var EventMapper&MockObject
      */
-    protected $eventMapper = null;
+    private $eventMapper = null;
 
     /**
      * @var Salutation&MockObject
      */
-    protected $emailSalutation = null;
+    private $emailSalutation = null;
 
     /**
      * @var LanguageService|null
@@ -100,9 +102,6 @@ final class MailNotifierTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
-            self::markTestSkipped('This tests needs the scheduler extension.');
-        }
         Bootstrap::initializeBackendAuthentication();
 
         if (Typo3Version::isAtLeast(10)) {
@@ -163,7 +162,7 @@ final class MailNotifierTest extends TestCase
 
     protected function tearDown(): void
     {
-        if ($this->testingFramework !== null) {
+        if ($this->testingFramework instanceof TestingFramework) {
             $this->testingFramework->cleanUp();
         }
 
@@ -214,22 +213,6 @@ final class MailNotifierTest extends TestCase
 
         $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['speakers' => 1]);
         $this->testingFramework->createRelation('tx_seminars_seminars_speakers_mm', $eventUid, $speakerUid);
-    }
-
-    /**
-     * Returns the first e-mail attachment (if there is any).
-     *
-     * @return \Swift_Mime_Attachment
-     */
-    protected function getFirstEmailAttachment(): \Swift_Mime_Attachment
-    {
-        $children = $this->email->getChildren();
-        $attachment = $children[0];
-        if (!$attachment instanceof \Swift_Mime_Attachment) {
-            throw new \UnexpectedValueException('Attachment is no Swift_Mime_Attachment.', 1630771213);
-        }
-
-        return $attachment;
     }
 
     // Tests for the utility functions
@@ -1215,7 +1198,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertSame(
             [],
-            $this->email->getChildren()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')
         );
     }
 
@@ -1247,9 +1230,9 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertSame(
+        self::assertStringContainsString(
             'registrations.csv',
-            $this->getFirstEmailAttachment()->getFilename()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getPreparedHeaders()->toString()
         );
     }
 
@@ -1281,7 +1264,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertSame(
             [],
-            $this->email->getChildren()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')
         );
     }
 
@@ -1313,7 +1296,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertStringContainsString(
             "test registration\r\n",
-            $this->getFirstEmailAttachment()->getBody()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getBody()
         );
     }
 
@@ -1348,7 +1331,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertStringContainsString(
             'foo@bar.com',
-            $this->getFirstEmailAttachment()->getBody()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getBody()
         );
     }
 
@@ -1390,7 +1373,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertStringContainsString(
             'on queue',
-            $this->getFirstEmailAttachment()->getBody()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getBody()
         );
     }
 
@@ -1434,7 +1417,7 @@ final class MailNotifierTest extends TestCase
 
         self::assertStringNotContainsString(
             'on queue',
-            $this->getFirstEmailAttachment()->getBody()
+            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getBody()
         );
     }
 
