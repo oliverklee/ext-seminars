@@ -49,7 +49,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentTypeHeader = $subject->getHeader('Content-Type')[0];
-        self::assertStringContainsString('Content-Type: text/csv; header=present;', $contentTypeHeader);
+        self::assertStringContainsString('text/csv; header=present;', $contentTypeHeader);
     }
 
     /**
@@ -60,7 +60,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentTypeHeader = $subject->getHeader('content-type')[0];
-        self::assertContains('Content-Type: text/csv; header=present; ', $contentTypeHeader);
+        self::assertContains('text/csv; header=present; ', $contentTypeHeader);
     }
 
     /**
@@ -96,7 +96,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
-        self::assertContains('Content-Disposition: attachment', $contentDispositionHeader);
+        self::assertContains('attachment', $contentDispositionHeader);
     }
 
     /**
@@ -107,7 +107,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentDispositionHeader = $subject->getHeader('content-disposition')[0];
-        self::assertContains('Content-Disposition: attachment', $contentDispositionHeader);
+        self::assertContains('attachment', $contentDispositionHeader);
     }
 
     /**

@@ -22,10 +22,10 @@ class CsvResponse extends Response
 
         $charset = ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('charsetForCsv');
 
-        $this->headers['Content-Type'][] = 'Content-Type: text/csv; header=present; charset=' . $charset;
+        $this->headers['Content-Type'][] = 'text/csv; header=present; charset=' . $charset;
         $this->lowercasedHeaderNames['content-type'] = 'Content-Type';
 
-        $contentDisposition = 'Content-Disposition: attachment';
+        $contentDisposition = 'attachment';
         if (\is_string($filename)) {
             $contentDisposition .= '; filename=' . $filename;
         }
