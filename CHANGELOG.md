@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for TYPO3 10LTS (#1136)
 
 ### Changed
+- Disable the time slot wizard in V10 (#1200)
 - Do not advertise the crowdfunding campaign (#1150)
 - Allow installations with Emogrifier 5.x and 6.x (#1147)
 - Require oelib >= 4.1.2 (#1143, #1146, #1154, #1183)
