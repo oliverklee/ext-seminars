@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a `CsvResponse` class (#1198)
 - Add support for TYPO3 10LTS (#1136)
 
 ### Changed
