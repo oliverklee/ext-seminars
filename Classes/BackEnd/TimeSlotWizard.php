@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\System\Typo3Version;
 use Recurr\Rule;
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\Exception as FormException;
@@ -14,6 +15,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Form engine wizard that renders a wizard for creating a series of time slots.
+ *
+ * This wizard is limited to TYPO3 9LTS and does not create any output in 10LTS.
  */
 class TimeSlotWizard extends AbstractFormElement
 {
@@ -39,7 +42,7 @@ class TimeSlotWizard extends AbstractFormElement
     {
         $result = $this->initializeResultArray();
         // The time-slot wizard uses a Composer-provided library and hence is a Composer-only feature.
-        if (!\class_exists(Rule::class)) {
+        if (!\class_exists(Rule::class) || Typo3Version::isAtLeast(10)) {
             $result['html'] = '';
             return $result;
         }
