@@ -9,13 +9,14 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Csv\CsvResponse;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -26,23 +27,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Controller extends AbstractModule
 {
     /**
-     * Main module action
-     *
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     *
-     * @return ResponseInterface
+     * Renders the module.
      */
-    public function mainAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function mainAction(): ResponseInterface
     {
         $this->init();
         if (GeneralUtility::_GET('csv') === '1') {
             /** @var CsvDownloader $csvExporter */
             $csvExporter = GeneralUtility::makeInstance(CsvDownloader::class);
-            $content = $csvExporter->main();
-            $response->getBody()->write($content);
+            $csvContent = $csvExporter->main();
+            $response = new CsvResponse($csvContent);
         } else {
-            $response->getBody()->write($this->main());
+            $htmlContent = $this->main();
+            $response = new HtmlResponse($htmlContent);
         }
 
         return $response;

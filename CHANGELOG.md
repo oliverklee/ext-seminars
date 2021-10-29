@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the RealURL auto-configuration (#1189)
 
 ### Fixed
+- Fix crash in the BE module in V10 (#1199)
 - Change the icon tests to recognize icon sprites (#1172)
 - Improve the type annotations and fix PHPStan warnings (#1165)
 - Use the new mailer in TYPO3 10LTS (#1153, #1157, #1158, #1161, #1163, #1169, #1170)
