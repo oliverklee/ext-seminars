@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
@@ -26,11 +21,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractList.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractList\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractList.php
@@ -39,11 +29,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$storagePageData has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractList.php
-
-		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
-			count: 1
-			path: Classes/BackEnd/Controller.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"

@@ -677,6 +677,7 @@ abstract class AbstractEventMailForm
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
         } catch (RouteNotFoundException $e) {
             // no route registered, use the fallback logic to check for a module
+            // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we check with 10LTS.
             $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }
 
