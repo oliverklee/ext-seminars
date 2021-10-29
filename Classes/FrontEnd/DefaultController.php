@@ -2571,10 +2571,8 @@ class DefaultController extends TemplateHelper
                     '',
                     [
                         'type' => CsvDownloader::CSV_TYPE_NUMBER,
-                        'tx_seminars_pi2' => [
-                            'table' => 'tx_seminars_attendances',
-                            'eventUid' => $this->seminar->getUid(),
-                        ],
+                        'table' => 'tx_seminars_attendances',
+                        'eventUid' => $this->seminar->getUid(),
                     ]
                 ),
             ]

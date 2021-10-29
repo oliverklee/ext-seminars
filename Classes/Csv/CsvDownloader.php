@@ -7,15 +7,15 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * Plugin "CSV export".
+ * This controller creates CSV data for registrations or events.
  */
-class CsvDownloader extends TemplateHelper
+class CsvDownloader
 {
     /**
      * @var int
@@ -31,23 +31,6 @@ class CsvDownloader extends TemplateHelper
      * @var int HTTP status code for "access denied"
      */
     private const ACCESS_DENIED = 403;
-
-    /**
-     * @var string prefix for request parameters
-     */
-    public $prefixId = 'tx_seminars_pi2';
-
-    /**
-     * faking $this->scriptRelPath so the locallang.xlf file is found
-     *
-     * @var string
-     */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'seminars';
 
     /**
      * @var Configuration
@@ -66,12 +49,6 @@ class CsvDownloader extends TemplateHelper
 
     public function __construct()
     {
-        parent::__construct();
-
-        if ($this->getLanguageService() !== null) {
-            $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        }
-
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
@@ -83,14 +60,12 @@ class CsvDownloader extends TemplateHelper
     public function main(): string
     {
         try {
-            $this->init([]);
-
-            switch ($this->piVars['table']) {
+            switch ((string)GeneralUtility::_GET('table')) {
                 case 'tx_seminars_seminars':
-                    $result = $this->createAndOutputListOfEvents((int)$this->piVars['pid']);
+                    $result = $this->createAndOutputListOfEvents((int)GeneralUtility::_GET('pid'));
                     break;
                 case 'tx_seminars_attendances':
-                    $result = $this->createAndOutputListOfRegistrations((int)$this->piVars['eventUid']);
+                    $result = $this->createAndOutputListOfRegistrations((int)GeneralUtility::_GET('eventUid'));
                     break;
                 default:
                     $result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
@@ -124,7 +99,7 @@ class CsvDownloader extends TemplateHelper
         /** @var DownloadRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
 
-        $pageUid = (int)$this->piVars['pid'];
+        $pageUid = (int)GeneralUtility::_GET('pid');
         if ($eventUid > 0) {
             if (!$this->hasAccessToEventAndItsRegistrations($eventUid)) {
                 return $this->addErrorHeaderAndReturnMessage($this->errorType);
@@ -403,5 +378,12 @@ class CsvDownloader extends TemplateHelper
         }
 
         return $result;
+    }
+
+    private function translate(string $key): string
+    {
+        $label = LocalizationUtility::translate($key, 'seminars');
+
+        return \is_string($label) ? $label : $key;
     }
 }

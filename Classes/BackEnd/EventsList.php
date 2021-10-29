@@ -287,8 +287,8 @@ class EventsList extends AbstractList
         $urlParameters = [
             'id' => (int)$pageData['uid'],
             'csv' => '1',
-            'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
-            'tx_seminars_pi2[eventUid]' => $event->getUid(),
+            'table' => 'tx_seminars_attendances',
+            'eventUid' => $event->getUid(),
         ];
         $csvUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 

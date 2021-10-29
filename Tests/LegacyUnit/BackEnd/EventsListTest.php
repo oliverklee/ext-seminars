@@ -661,8 +661,8 @@ final class EventsListTest extends TestCase
         self::assertStringNotContainsString(
             '<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
             $this->dummySysFolderPid .
-            '&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-            '&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
+            '&amp;table=tx_seminars_attendances' .
+            '&amp;eventUid=' . $eventUid . '">',
             $this->subject->show()
         );
     }

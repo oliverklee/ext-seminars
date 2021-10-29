@@ -9,12 +9,8 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\CsvDownloader
@@ -55,18 +51,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->setUpExtensionConfiguration();
         $this->initializeBackEndLanguage();
 
-        $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
-        if (Typo3Version::isAtLeast(10)) {
-            $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
-            // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-            $frontEndProphecy->getLanguage()->wilLReturn($siteLanguage);
-        }
-        /** @var TypoScriptFrontendController $frontEnd */
-        $frontEnd = $frontEndProphecy->reveal();
-        $GLOBALS['TSFE'] = $frontEnd;
-
         $this->subject = new CsvDownloader();
-        $this->subject->init([]);
     }
 
     /**
