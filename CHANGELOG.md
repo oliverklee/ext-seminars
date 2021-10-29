@@ -6,7 +6,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a `CsvResponse` class (#1198)
 - Add support for TYPO3 10LTS (#1136)
 
 ### Changed
@@ -21,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the RealURL auto-configuration (#1189)
 
 ### Fixed
+- Get the BE CSV export to work in TYPO3 V10 (#1198, #1206)
 - Avoid calls to the removed `buildUriFromModule` (#1204)
 - Fix crash in the BE module in V10 (#1199)
 - Change the icon tests to recognize icon sprites (#1172)

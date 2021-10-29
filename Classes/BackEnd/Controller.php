@@ -32,11 +32,23 @@ class Controller extends AbstractModule
     public function mainAction(): ResponseInterface
     {
         $this->init();
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
         if ((bool)GeneralUtility::_GET('csv')) {
+            switch (GeneralUtility::_GET('table')) {
+                case 'tx_seminars_seminars':
+                    $filename = $configuration->getAsString('filenameForEventsCsv');
+                    break;
+                case 'tx_seminars_attendances':
+                    $filename = $configuration->getAsString('filenameForRegistrationsCsv');
+                    break;
+                default:
+                    $filename = null;
+            }
+
             /** @var CsvDownloader $csvExporter */
             $csvExporter = GeneralUtility::makeInstance(CsvDownloader::class);
             $csvContent = $csvExporter->main();
-            $response = new CsvResponse($csvContent);
+            $response = new CsvResponse($csvContent, $filename);
         } else {
             $htmlContent = $this->main();
             $response = new HtmlResponse($htmlContent);
