@@ -9,9 +9,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class ControllerTest extends TestCase
@@ -58,23 +55,10 @@ final class ControllerTest extends TestCase
         $exporterMock = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $exporterMock);
 
-        /** @var ServerRequestInterface $requestMock */
-        $requestMock = $this->prophesize(ServerRequestInterface::class)->reveal();
-
-        $bodyProphecy = $this->prophesize(StreamInterface::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $bodyProphecy->write($csvBody)->shouldBeCalled();
-        /** @var StreamInterface $bodyMock */
-        $bodyMock = $bodyProphecy->reveal();
-
-        $responseProphecy = $this->prophesize(ResponseInterface::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
-        $responseProphecy->getBody()->shouldBeCalled()->willReturn($bodyMock);
-        /** @var ResponseInterface $responseMock */
-        $responseMock = $responseProphecy->reveal();
-
         $GLOBALS['_GET']['csv'] = '1';
 
-        self::assertSame($responseMock, $this->subject->mainAction($requestMock, $responseMock));
+        $response = $this->subject->mainAction();
+
+        self::assertSame($csvBody, (string)$response->getBody());
     }
 }
