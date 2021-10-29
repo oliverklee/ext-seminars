@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the RealURL auto-configuration (#1189)
 
 ### Fixed
+- Avoid calls to the removed `buildUriFromModule` (#1204)
 - Fix crash in the BE module in V10 (#1199)
 - Change the icon tests to recognize icon sprites (#1172)
 - Improve the type annotations and fix PHPStan warnings (#1165)
