@@ -257,7 +257,7 @@ class RegistrationsList extends AbstractList
     protected function getAdditionalCsvParameters(): string
     {
         if ($this->eventUid > 0) {
-            $result = '&amp;tx_seminars_pi2[eventUid]=' . $this->eventUid;
+            $result = '&amp;eventUid=' . $this->eventUid;
         } else {
             $result = parent::getAdditionalCsvParameters();
         }

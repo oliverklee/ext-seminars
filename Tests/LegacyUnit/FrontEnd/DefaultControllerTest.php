@@ -5046,7 +5046,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertStringContainsString(
-            'tx_seminars_pi2%5BeventUid%5D',
+            'eventUid',
             $this->subject->main('', [])
         );
     }
@@ -5064,7 +5064,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertStringContainsString(
-            'tx_seminars_pi2%5Btable%5D=tx_seminars_attendances',
+            'table=tx_seminars_attendances',
             $this->subject->main('', [])
         );
     }

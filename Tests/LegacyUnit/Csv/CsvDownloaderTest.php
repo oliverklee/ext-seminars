@@ -16,6 +16,11 @@ final class CsvDownloaderTest extends TestCase
     use BackEndTestsTrait;
 
     /**
+     * @var bool
+     */
+    protected $backupGlobals = true;
+
+    /**
      * @var CsvDownloader
      */
     private $subject = null;
@@ -58,7 +63,6 @@ final class CsvDownloaderTest extends TestCase
         $this->configuration->setAsString('charsetForCsv', 'utf-8');
 
         $this->subject = new CsvDownloader();
-        $this->subject->init([]);
     }
 
     protected function tearDown(): void
@@ -166,8 +170,8 @@ final class CsvDownloaderTest extends TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-        $this->subject->piVars['table'] = 'tx_seminars_seminars';
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
+        $GLOBALS['_GET']['pid'] = $this->pid;
 
         self::assertStringContainsString(
             (string)$this->eventUid,
@@ -617,8 +621,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['table'] = 'tx_seminars_attendances';
-        $this->subject->piVars['eventUid'] = $this->eventUid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
+        $GLOBALS['_GET']['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             (string)$registrationUid,
@@ -678,8 +682,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['table'] = 'tx_seminars_seminars';
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
+        $GLOBALS['_GET']['pid'] = $this->pid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',
@@ -702,8 +706,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['table'] = 'tx_seminars_seminars';
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
+        $GLOBALS['_GET']['pid'] = $this->pid;
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
@@ -731,8 +735,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['table'] = 'tx_seminars_attendances';
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
+        $GLOBALS['_GET']['pid'] = $this->pid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',
@@ -758,8 +762,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['table'] = 'tx_seminars_attendances';
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
+        $GLOBALS['_GET']['pid'] = $this->pid;
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
@@ -1161,7 +1165,7 @@ final class CsvDownloaderTest extends TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage(): void
     {
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $this->testingFramework->createRecord(
@@ -1185,7 +1189,7 @@ final class CsvDownloaderTest extends TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage(): void
     {
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $this->testingFramework->createRecord(
@@ -1209,7 +1213,7 @@ final class CsvDownloaderTest extends TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage(): void
     {
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['pid'] = $this->pid;
         $subpagePid = $this->testingFramework->createSystemFolder($this->pid);
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1270,7 +1274,7 @@ final class CsvDownloaderTest extends TestCase
      */
     public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv(): void
     {
-        $this->subject->piVars['pid'] = $this->pid;
+        $GLOBALS['_GET']['pid'] = $this->pid;
         $this->subject->createAndOutputListOfRegistrations();
 
         self::assertContains(

@@ -32,7 +32,7 @@ class Controller extends AbstractModule
     public function mainAction(): ResponseInterface
     {
         $this->init();
-        if (GeneralUtility::_GET('csv') === '1') {
+        if ((bool)GeneralUtility::_GET('csv')) {
             /** @var CsvDownloader $csvExporter */
             $csvExporter = GeneralUtility::makeInstance(CsvDownloader::class);
             $csvContent = $csvExporter->main();

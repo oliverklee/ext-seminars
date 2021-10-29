@@ -596,7 +596,7 @@ final class RegistrationsListTest extends TestCase
         $_GET['eventUid'] = $eventUid;
 
         self::assertStringContainsString(
-            'tx_seminars_pi2[eventUid]=' . $eventUid,
+            'eventUid=' . $eventUid,
             $this->subject->show()
         );
     }
@@ -622,7 +622,7 @@ final class RegistrationsListTest extends TestCase
         $_GET['eventUid'] = $eventUid;
 
         self::assertStringNotContainsString(
-            'tx_seminars_pi2[pid]=',
+            'pid=',
             $this->subject->show()
         );
     }
@@ -646,7 +646,7 @@ final class RegistrationsListTest extends TestCase
         );
 
         self::assertStringNotContainsString(
-            'tx_seminars_pi2[eventUid]=',
+            'eventUid=',
             $this->subject->show()
         );
     }
