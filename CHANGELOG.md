@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the RealURL auto-configuration (#1189)
 
 ### Fixed
+- Create mkforms-related directories on the fly (#1211)
 - Get the BE CSV export to work in TYPO3 V10 (#1198, #1206, #1207)
 - Avoid calls to the removed `buildUriFromModule` (#1204)
 - Fix crash in the BE module in V10 (#1199)
