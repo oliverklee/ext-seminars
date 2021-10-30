@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Create mkforms-related directories on the fly (#1211)
 
 ## 3.4.1
 
