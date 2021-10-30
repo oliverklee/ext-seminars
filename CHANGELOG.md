@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.1.0
+
+### Added
 - Add support for TYPO3 10LTS (#1136)
 
 ### Changed
@@ -13,8 +25,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Do not advertise the crowdfunding campaign (#1150)
 - Allow installations with Emogrifier 5.x and 6.x (#1147)
 - Require oelib >= 4.1.2 (#1143, #1146, #1154, #1183)
-
-### Deprecated
 
 ### Removed
 - Drop the RealURL auto-configuration (#1189)
