@@ -205,9 +205,6 @@ abstract class AbstractBag implements \Iterator
         $this->key = 0;
     }
 
-    /**
-     * @return void
-     */
     private function executeQueryIfNotDoneYet(): void
     {
         if ($this->queryHasBeenExecuted) {

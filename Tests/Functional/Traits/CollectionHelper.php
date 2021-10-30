@@ -11,17 +11,11 @@ use OliverKlee\Oelib\DataStructures\Collection;
  */
 trait CollectionHelper
 {
-    /**
-     * @return void
-     */
     private static function assertContainsModelWithUid(Collection $models, int $uid): void
     {
         self::assertTrue($models->hasUid($uid));
     }
 
-    /**
-     * @return void
-     */
     private static function assertNotContainsModelWithUid(Collection $models, int $uid): void
     {
         self::assertFalse($models->hasUid($uid));

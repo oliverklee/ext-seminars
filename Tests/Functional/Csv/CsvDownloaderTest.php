@@ -54,9 +54,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->subject = new CsvDownloader();
     }
 
-    /**
-     * @return void
-     */
     private function setUpExtensionConfiguration(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
