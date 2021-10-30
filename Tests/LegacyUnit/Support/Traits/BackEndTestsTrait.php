@@ -78,9 +78,6 @@ trait BackEndTestsTrait
         $this->headerProxy = $headerProxyFactory->getHeaderCollector();
     }
 
-    /**
-     * @return void
-     */
     private function cleanRequestVariables(): void
     {
         $this->getBackup = $GLOBALS['_GET'];
@@ -89,9 +86,6 @@ trait BackEndTestsTrait
         $GLOBALS['_POST'] = [];
     }
 
-    /**
-     * @return void
-     */
     private function replaceBackEndUserWithMock(): void
     {
         /** @var BackendUserAuthentication $currentBackEndUser */
@@ -108,9 +102,6 @@ trait BackEndTestsTrait
         $GLOBALS['BE_USER'] = $mockBackEndUser;
     }
 
-    /**
-     * @return void
-     */
     private function unifyBackEndLanguage(): void
     {
         $this->languageBackup = $GLOBALS['LANG']->lang;
@@ -123,9 +114,6 @@ trait BackEndTestsTrait
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
     }
 
-    /**
-     * @return void
-     */
     private function unifyExtensionSettings(): void
     {
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
@@ -133,9 +121,6 @@ trait BackEndTestsTrait
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
     }
 
-    /**
-     * @return void
-     */
     private function setUpExtensionConfiguration(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
@@ -144,9 +129,6 @@ trait BackEndTestsTrait
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
     }
 
-    /**
-     * @return void
-     */
     private function restoreOriginalEnvironment(): void
     {
         $this->flushAllFlashMessages();
@@ -179,9 +161,6 @@ trait BackEndTestsTrait
         $defaultFlashMessageQueue->getAllMessagesAndFlush();
     }
 
-    /**
-     * @return LanguageService
-     */
     private function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
