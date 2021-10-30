@@ -616,11 +616,6 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:getChildren\\(\\)\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php

@@ -25,7 +25,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Fix crash in the BE module in V10 (#1199)
 - Change the icon tests to recognize icon sprites (#1172)
 - Improve the type annotations and fix PHPStan warnings (#1165)
-- Use the new mailer in TYPO3 10LTS (#1153, #1157, #1158, #1161, #1163, #1169, #1170)
+- Use the new mailer in TYPO3 10LTS
+  (#1153, #1157, #1158, #1161, #1163, #1169, #1170, #1208)
 - Properly disable the Core cache in V10 in the tests (#1148)
 - Provide the `ContentObjectRenderer` with a logger in the tests (#1145)
 - Fix the test setup (#1139, #1162, #1164, #1168)
