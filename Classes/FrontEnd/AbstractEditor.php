@@ -103,7 +103,22 @@ abstract class AbstractEditor extends AbstractView
      */
     public function render(): string
     {
+        $this->createTemporaryDirectories();
+
         return $this->getFormCreator()->render();
+    }
+
+    /**
+     * Creates the assets and cache directories for mkforms if they are missing
+     * (which can happen due to a bug in mkforms).
+     */
+    private function createTemporaryDirectories(): void
+    {
+        foreach (['typo3temp/assets/mkforms/', 'typo3temp/mkforms/cache/'] as $directory) {
+            if (!\is_dir($directory)) {
+                GeneralUtility::mkdir_deep($directory);
+            }
+        }
     }
 
     /**
