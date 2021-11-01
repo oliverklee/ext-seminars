@@ -40,7 +40,8 @@ final class SelectorWidgetTest extends TestCase
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->subject = new SelectorWidget(
             [
