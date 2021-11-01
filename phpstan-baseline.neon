@@ -51,7 +51,42 @@ parameters:
 			path: Classes/BackEnd/Controller.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowFeUserFieldsInRegistrationsList\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/FlexForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowFeUserFieldsInRegistrationsList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/FlexForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowRegistrationFieldsInRegistrationList\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/FlexForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowRegistrationFieldsInRegistrationList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/FlexForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createLanguageSelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
 			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:\\$queryResult type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
@@ -66,6 +101,11 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:main\\(\\) has parameter \\$conf with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -76,6 +116,11 @@ parameters:
 			path: Classes/FrontEnd/RegistrationsList.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createDateArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:removeDummyOptionFromFormData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -84,6 +129,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:removeDummyOptionFromFormData\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^Constant OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:DATE_PARSE_FORMAT is unused\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyBeginDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -131,6 +181,11 @@ parameters:
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
+			message: "#^PHPDoc tag @var for variable \\$map has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$originalData has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
@@ -156,12 +211,127 @@ parameters:
 			path: Classes/Hooks/Interfaces/DataSanitization.php
 
 		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUserGroupMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserGroupMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUserGroupMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUserMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUserMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\CategoryMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Category\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Category\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/CategoryMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/CheckboxMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/CheckboxMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/EventMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/EventMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventTypeMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\EventType\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\EventType\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/EventTypeMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FoodMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Food\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Food\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/FoodMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserGroupMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserGroupMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserMapper.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$modelClassName\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\PlaceMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/PlaceMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\RegistrationMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Registration\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/RegistrationMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\SpeakerMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/SpeakerMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TargetGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TargetGroup\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/TargetGroupMapper.php
+
+		-
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TimeSlotMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TimeSlot\\>\\:\\:\\$relations\\.$#"
+			count: 1
+			path: Classes/Mapper/TimeSlotMapper.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: Classes/Model/Event.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fetchDataByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecords\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordsByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
@@ -174,6 +344,46 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:\\$recordData type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCheckboxes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getFoods\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getLodgings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTimeSlotsAsArrayWithMarkers\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTopicMmRecords\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTopicMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
@@ -229,6 +439,16 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Offset 0 does not exist on TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface\\<TYPO3\\\\CMS\\\\Core\\\\Resource\\\\Storage\\>\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/AbstractFalUpgradeWizard.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\UpgradeWizards\\\\AbstractFalUpgradeWizard\\:\\:\\$storage \\(TYPO3\\\\CMS\\\\Core\\\\Resource\\\\ResourceStorage\\) does not accept TYPO3\\\\CMS\\\\Core\\\\Resource\\\\Storage\\|null\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/AbstractFalUpgradeWizard.php
 
 		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
@@ -287,6 +507,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^PHPDoc tag @var for constant OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:CONFIGURATION with type array\\<string\\> is incompatible with value array\\{form\\.\\: array\\{eventEditor\\.\\: array\\{\\}\\}\\}\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
@@ -531,6 +756,11 @@ parameters:
 			path: Tests/LegacyUnit/Fixtures/OldModel/TestingLegacyEvent.php
 
 		-
+			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CategoryListTest\\:\\:BLANK_GIF is unused\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
@@ -546,6 +776,11 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:hideListRegistrationsColumnIfNecessaryDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
@@ -554,6 +789,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createLoginAndAddFrontEndUserToEventEditorFrontEndGroup\\(\\) has parameter \\$frontEndUserGroupData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:formFieldsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
@@ -611,12 +851,22 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:\\$beginDate is never read, only written\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$emailSalutation is never read, only written\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
@@ -656,7 +906,27 @@ parameters:
 			path: Tests/Unit/FrontEnd/RegistrationFormTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookImplementorReturnsArray\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/Hooks/Fixtures/TestingHookImplementorReturnsArray.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookImplementorReturnsArray2\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/Hooks/Fixtures/TestingHookImplementorReturnsArray2.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookInterfaceReturnsArray\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/Hooks/Fixtures/TestingHookInterfaceReturnsArray.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:nameUserDataDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/LegacyRegistrationTest.php
 
