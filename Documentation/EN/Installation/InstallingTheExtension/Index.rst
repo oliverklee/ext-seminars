@@ -70,7 +70,7 @@ The default values are good for starters.
 
 - You can choose the “Format of e-mails for attendees” to send text
   e-mail, HTML e-mail or HTML e-mail if the user enabled it. So that
-  HTML e-mail will be send to the attendee of an event.
+  HTML e-mail will be sent to the attendee of an event.
 
 In your TS setup, please set config.language and config.locale\_all so
 the extension will use the correct language in the front end.

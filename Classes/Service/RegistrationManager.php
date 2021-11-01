@@ -794,7 +794,7 @@ class RegistrationManager
      * Sends an e-mail to all organizers with a message about a registration or unregistration.
      *
      * @param LegacyRegistration $registration
-     *        the registration for which the notification should be send
+     *        the registration for which the notification should be sent
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject string, Allowed values are:
      *        - notification
@@ -1027,7 +1027,7 @@ class RegistrationManager
      * Builds the e-mail body for an e-mail to the attendee.
      *
      * @param LegacyRegistration $registration
-     *        the registration for which the notification should be send
+     *        the registration for which the notification should be sent
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
      *        string; allowed values are:
