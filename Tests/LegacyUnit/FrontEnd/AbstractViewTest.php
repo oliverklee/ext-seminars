@@ -27,7 +27,8 @@ final class AbstractViewTest extends TestCase
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->subject = new TestingView(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $this->getFrontEndController()->cObj

@@ -435,7 +435,8 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getContentObjectForAvailableFrontEndReturnsFrontEndContentObject(): void
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $subject = new TestingSingleViewLinkBuilder();
 

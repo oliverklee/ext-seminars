@@ -45,7 +45,8 @@ final class CountdownTest extends TestCase
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         /** @var EventMapper&MockObject $mapper */
         $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['findNextUpcoming'])->getMock();

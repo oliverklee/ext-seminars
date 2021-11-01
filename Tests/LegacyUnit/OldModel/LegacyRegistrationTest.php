@@ -57,7 +57,8 @@ final class LegacyRegistrationTest extends TestCase
         LegacyRegistration::purgeCachedSeminars();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->configuration = new DummyConfiguration();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');

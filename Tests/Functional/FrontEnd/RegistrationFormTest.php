@@ -48,7 +48,8 @@ final class RegistrationFormTest extends FunctionalTestCase
         parent::setUp();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->contentObject = new ContentObjectRenderer();
         $this->initializeBackEndLanguage();
 
