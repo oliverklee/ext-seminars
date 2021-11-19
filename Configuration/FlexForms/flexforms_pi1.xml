@@ -518,19 +518,6 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<templateFile>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.templateFile</label>
-							<config>
-								<type>group</type>
-								<internal_type>file</internal_type>
-								<allowed>tmpl,html,htm</allowed>
-								<max_size>100</max_size>
-								<maxitems>1</maxitems>
-								<size>1</size>
-							</config>
-						</TCEforms>
-					</templateFile>
 					<showSingleEvent>
 						<TCEforms>
 							<exclude>1</exclude>

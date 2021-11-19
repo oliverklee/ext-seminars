@@ -1072,10 +1072,6 @@ This event now has been confirmed.</source>
 				<source>Show attached files list only to attendees:</source>
 				<target>Montrer la liste des fichiers attachés uniquement aux participants :</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve">
-				<source>File name of the HTML template:</source>
-				<target>Nom du modèle HTML :</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
 				<source>Which event should be shown in a detailed view?</source>
 				<target>Quel événement devrait être montré en détail ?</target>
