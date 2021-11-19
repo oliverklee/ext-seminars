@@ -8,11 +8,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Switch the TER release to Tailor (#1222)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 4.1.1
+
+### Changed
+- Switch the TER release to Tailor (#1222)
 
 ### Fixed
 - Remove the HTML template file settings from the Flexforms (#1221)
