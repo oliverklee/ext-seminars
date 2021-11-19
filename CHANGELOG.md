@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Advertise the 11LTS crowdfunding campaign (#1338)
 
 ### Changed
+- Switch the TER release to Tailor (#1222)
 
 ### Deprecated
 
