@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Remove the HTML template file settings from the Flexforms (#1221)
 - Fix the link generation in the tests in TYPO3 V10 (#1217)
 
 ## 4.1.0

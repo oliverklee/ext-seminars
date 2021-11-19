@@ -792,10 +792,6 @@ This event now has been confirmed.</source>
 				<source>Show attached files list only to attendees:</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve">
-				<source>File name of the HTML template:</source>
-				<target>Файл HTML-шаблона:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
 				<source>Which event should be shown in a detailed view?</source>
 				<target>Какое событие показывать в детализированном виде?</target>
