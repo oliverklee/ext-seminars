@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\PostRector\Rector\NameImportingPostRector;
 use Rector\Set\ValueObject\SetList;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\FileProcessor\Composer\Rector\ExtensionComposerRector;
 use Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\FileIncludeToImportStatementTypoScriptRector;
-use Ssch\TYPO3Rector\Rector\v9\v0\InjectAnnotationRector;
 use Ssch\TYPO3Rector\Rector\General\ConvertTypo3ConfVarsRector;
 use Ssch\TYPO3Rector\Rector\General\ExtEmConfRector;
+use Ssch\TYPO3Rector\Rector\v9\v0\InjectAnnotationRector;
 use Ssch\TYPO3Rector\Set\Typo3SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -136,4 +137,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // Do you want to modernize your TypoScript include statements for files and move from <INCLUDE /> to @import use the FileIncludeToImportStatementVisitor
     // $services->set(FileIncludeToImportStatementTypoScriptRector::class);
+
+    // upgrade PHPUnit
+    // $containerConfigurator->import(PHPUnitSetList::PHPUNIT_80);
+    // $containerConfigurator->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
+    // $containerConfigurator->import(PHPUnitSetList::PHPUNIT_EXCEPTION);
+    // $containerConfigurator->import(PHPUnitSetList::PHPUNIT_MOCK);
+    // $containerConfigurator->import(PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD);
 };

@@ -108,7 +108,7 @@ final class ControllerTest extends FunctionalTestCase
 
         $filename = $this->configuration->getAsString('filenameForEventsCsv');
         $contentDispositionHeader = $response->getHeader('Content-Disposition')[0];
-        self::assertContains('; filename=' . $filename, $contentDispositionHeader);
+        self::assertStringContainsString('; filename=' . $filename, $contentDispositionHeader);
     }
 
     /**
@@ -130,6 +130,6 @@ final class ControllerTest extends FunctionalTestCase
 
         $filename = $this->configuration->getAsString('filenameForRegistrationsCsv');
         $contentDispositionHeader = $response->getHeader('Content-Disposition')[0];
-        self::assertContains('; filename=' . $filename, $contentDispositionHeader);
+        self::assertStringContainsString('; filename=' . $filename, $contentDispositionHeader);
     }
 }

@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Upgrade to PHPUnit 8 (#1223)
 - Stop using `getAccessibleMock` (#1259)
 
 ### Deprecated

@@ -127,7 +127,7 @@ final class EventHeadlineTest extends FunctionalTestCase
         $result = $this->subject->render();
 
         $expectedDate = \strftime(self::DATE_FORMAT, 978303600);
-        self::assertContains($expectedDate, $result);
+        self::assertStringContainsString($expectedDate, $result);
     }
 
     /**

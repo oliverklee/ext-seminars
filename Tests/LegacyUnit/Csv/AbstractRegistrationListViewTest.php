@@ -348,7 +348,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -379,11 +379,11 @@ final class AbstractRegistrationListViewTest extends TestCase
         );
 
         $registrationsList = $this->subject->render();
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$firstRegistrationUid,
             $registrationsList
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondRegistrationUid,
             $registrationsList
         );
@@ -406,7 +406,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_user',
             $this->subject->render()
         );
@@ -429,7 +429,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -451,7 +451,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -481,7 +481,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\r\n" . $firstRegistrationUid . "\r\n" .
             $secondRegistrationUid . "\r\n",
             $this->subject->render()
@@ -535,7 +535,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo "" bar',
             $this->subject->render()
         );
@@ -558,7 +558,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"foo bar"',
             $this->subject->render()
         );
@@ -581,7 +581,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo ; bar"',
             $this->subject->render()
         );
@@ -604,7 +604,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\"foo\nbar\"",
             $this->subject->render()
         );
@@ -627,7 +627,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo "" bar"',
             $this->subject->render()
         );
@@ -651,7 +651,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo;test',
             $this->subject->render()
         );
@@ -667,11 +667,11 @@ final class AbstractRegistrationListViewTest extends TestCase
         $registrationsList = $this->subject->render();
         $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $localizedAddress,
             $registrationsList
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"' . $localizedAddress . '"',
             $registrationsList
         );
@@ -684,7 +684,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->registrationFieldKeys = ['address', 'title'];
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
             $this->subject->render()
@@ -698,7 +698,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->frontEndUserFieldKeys = ['name'];
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'name;',
             $this->subject->render()
         );
@@ -711,7 +711,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->registrationFieldKeys = ['address'];
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             ';address',
             $this->subject->render()
         );
@@ -725,7 +725,7 @@ final class AbstractRegistrationListViewTest extends TestCase
         $this->registrationFieldKeys = ['address'];
         $this->frontEndUserFieldKeys = ['name'];
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon(
                 'LGL.name'
             ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
@@ -779,7 +779,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $this->subject->render()
         );
@@ -805,7 +805,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo',
             $this->subject->render()
         );
@@ -832,7 +832,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $this->subject->render()
         );

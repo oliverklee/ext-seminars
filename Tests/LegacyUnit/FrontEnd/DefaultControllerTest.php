@@ -573,7 +573,7 @@ final class DefaultControllerTest extends TestCase
     {
         $contentMock = $this->createContentMock();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="index.php?id=42',
             $contentMock->getTypoLink('link label', '42')
         );
@@ -586,7 +586,7 @@ final class DefaultControllerTest extends TestCase
     {
         $contentMock = $this->createContentMock();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>link label</a>',
             $contentMock->getTypoLink('link label', '42')
         );
@@ -602,7 +602,7 @@ final class DefaultControllerTest extends TestCase
         $linkTitle = 'foo & bar';
         $result = $contentMock->getTypoLink($linkTitle, '');
 
-        self::assertContains($linkTitle . '</a>', $result);
+        self::assertStringContainsString($linkTitle . '</a>', $result);
     }
 
     /**
@@ -612,7 +612,7 @@ final class DefaultControllerTest extends TestCase
     {
         $contentMock = $this->createContentMock();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5Bseminar%5D=42',
             $contentMock->getTypoLink(
                 'link label',
@@ -629,7 +629,7 @@ final class DefaultControllerTest extends TestCase
     {
         $contentMock = $this->createContentMock();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5Bseminar%5D=42&amp;foo=bar',
             $contentMock->getTypoLink(
                 'link label',
@@ -6760,7 +6760,7 @@ final class DefaultControllerTest extends TestCase
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
             $this->getLanguageService()->getLL('label_edit') . '</a>',
             $subject->createAllEditorLinks()
@@ -6788,7 +6788,7 @@ final class DefaultControllerTest extends TestCase
 
         $currentPageId = (int)$this->getFrontEndController()->id;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
             $this->getLanguageService()->getLL('label_hide') . '</a>',
@@ -6817,7 +6817,7 @@ final class DefaultControllerTest extends TestCase
 
         $currentPageId = (int)$this->getFrontEndController()->id;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
             $this->getLanguageService()->getLL('label_unhide') . '</a>',
@@ -6844,10 +6844,7 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
-        self::assertNotContains(
-            'tx_seminars_pi1[action%5D=hide',
-            $subject->createAllEditorLinks()
-        );
+        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=hide', $subject->createAllEditorLinks());
     }
 
     /**
@@ -6869,10 +6866,7 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        self::assertNotContains(
-            'tx_seminars_pi1[action%5D=unhide',
-            $subject->createAllEditorLinks()
-        );
+        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=unhide', $subject->createAllEditorLinks());
     }
 
     /**
@@ -6894,10 +6888,7 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        self::assertNotContains(
-            'tx_seminars_pi1[action%5D=copy',
-            $subject->createAllEditorLinks()
-        );
+        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=copy', $subject->createAllEditorLinks());
     }
 
     /**
@@ -6919,10 +6910,7 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
-        self::assertNotContains(
-            'tx_seminars_pi1[action%5D=copy',
-            $subject->createAllEditorLinks()
-        );
+        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=copy', $subject->createAllEditorLinks());
     }
 
     /**
@@ -6946,7 +6934,7 @@ final class DefaultControllerTest extends TestCase
 
         $currentPageId = (int)$this->getFrontEndController()->id;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
             $this->getLanguageService()->getLL('label_copy') . '</a>',

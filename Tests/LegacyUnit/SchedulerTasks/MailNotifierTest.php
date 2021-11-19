@@ -348,10 +348,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
-            $subject,
-            $this->email->getSubject()
-        );
+        self::assertStringContainsString($subject, $this->email->getSubject());
     }
 
     /**
@@ -378,8 +375,8 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
-            substr($message, 0, strpos($message, '%') - 1),
+        self::assertStringContainsString(
+            \substr($message, 0, \strpos($message, '%') - 1),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -616,10 +613,7 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendCancellationDeadlineReminders();
 
-        self::assertContains(
-            $subject,
-            $this->email->getSubject()
-        );
+        self::assertStringContainsString($subject, $this->email->getSubject());
     }
 
     /**
@@ -647,8 +641,8 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendCancellationDeadlineReminders();
 
-        self::assertContains(
-            substr($message, 0, strpos($message, '%') - 1),
+        self::assertStringContainsString(
+            \substr($message, 0, \strpos($message, '%') - 1),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -1427,8 +1421,8 @@ final class MailNotifierTest extends TestCase
 
         $this->subject->sendCancellationDeadlineReminders();
 
-        self::assertContains(
-            strftime(
+        self::assertStringContainsString(
+            \strftime(
                 $this->configuration->getAsString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY
             ),
