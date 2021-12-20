@@ -391,11 +391,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:getObjectManager\\(\\) return type with generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager does not specify its types\\: T$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:processAdditionalRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
@@ -404,26 +399,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:injectObjectManager\\(\\) has parameter \\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\RegistrationDigest\\:\\:\\$objectManager with generic interface TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManagerInterface does not specify its types\\: T$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canCreateRegistration\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
@@ -554,11 +529,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:getFlashMessageQueue\\(\\) return type has no value type specified in iterable type TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\FlashMessageQueue\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
-			count: 1
-			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
@@ -869,11 +839,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$emailSalutation is never read, only written\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$objectManager contains generic class TYPO3\\\\CMS\\\\Extbase\\\\Object\\\\ObjectManager but does not specify its types\\: T$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
