@@ -45,20 +45,20 @@
 		"typo3/cms-frontend": "^9.5 || ^10.4"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^3.2.1",
+		"friendsofphp/php-cs-fixer": "^3.4.0",
 		"helhum/typo3-console": "^5.8.6 || ^6.6.0",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.10",
 		"nimut/testing-framework": "^5.3.0",
 		"oliverklee/phpunit": "^7.5.25",
-		"phpspec/prophecy": "^1.14.0",
+		"phpspec/prophecy": "^1.15.0",
 		"phpstan/extension-installer": "^1.1.0",
-		"phpstan/phpstan": "^1.2.0",
+		"phpstan/phpstan": "^1.4.6",
 		"phpstan/phpstan-phpunit": "^1.0.0",
 		"phpunit/phpunit": "^7.5.20",
-		"saschaegerer/phpstan-typo3": "^1.0.0",
+		"saschaegerer/phpstan-typo3": "^1.1.2",
 		"sjbr/sr-feuser-register": "^7.0.5",
-		"squizlabs/php_codesniffer": "^3.6.1",
+		"squizlabs/php_codesniffer": "^3.6.2",
 		"typo3/cms-scheduler": "^9.5 || ^10.4"
 	},
 	"suggest": {
