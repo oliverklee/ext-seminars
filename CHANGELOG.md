@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Also test with the highest and lowest dependencies in CI (#1237)
 - Add a script for creating an installation for legacy tests (#1243)
 
 ### Changed
