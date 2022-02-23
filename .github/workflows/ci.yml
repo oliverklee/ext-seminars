@@ -209,7 +209,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           php-version: "${{ matrix.php-version }}"
-          tools: composer:v2
+          tools: composer:v1
           extensions: dom, json, libxml, mysqli, zip
           coverage: none
       - name: "Show Composer version"
