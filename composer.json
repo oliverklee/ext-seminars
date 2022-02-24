@@ -123,6 +123,7 @@
 			"@ci:static",
 			"@ci:dynamic"
 		],
+		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
 		"link-extension": [
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
