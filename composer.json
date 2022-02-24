@@ -121,6 +121,18 @@
 		"post-autoload-dump": [
 			"@link-extension"
 		],
+		"prepare-release": [
+			"rm -rf .Build",
+			"rm -rf .github",
+			"rm -rf .phive",
+			"rm -rf Tests",
+			"rm .editorconfig",
+			"rm .gitattributes",
+			"rm .gitignore",
+			"rm phpcs.xml.dist",
+			"rm phpstan-baseline.neon",
+			"rm phpstan.neon"
+		],
 		"typo3:docs:render": [
 			"docker-compose run --rm t3docmake"
 		],
@@ -132,7 +144,8 @@
 		"ci": "Runs all dynamic and static code checks.",
 		"ci:php:stan": "Checks the types with PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
-		"phpstan:baseline": "Updates the PHPStan baseline file to match the code."
+		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
+		"prepare-release": "Removes development-only files in preparation of a TER release."
 	},
 	"extra": {
 		"branch-alias": {
