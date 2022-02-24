@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Keep development-only files out of the TER releases (#1241)
 
 ## 4.1.1
 

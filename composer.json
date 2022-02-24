@@ -127,9 +127,21 @@
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
 		],
-		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"post-autoload-dump": [
 			"@link-extension"
+		],
+		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
+		"prepare-release": [
+			"rm -rf .Build",
+			"rm -rf .github",
+			"rm -rf Tests",
+			"rm .editorconfig",
+			"rm .gitattributes",
+			"rm .gitignore",
+			"rm phpcs.xml.dist",
+			"rm phpstan-baseline.neon",
+			"rm phpstan.neon",
+			"rm rector.php"
 		],
 		"typo3:docs:render": [
 			"docker-compose run --rm t3docmake"
@@ -144,7 +156,8 @@
 		"ci:php:stan": "Checks the types with PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
 		"php:rector": "Updates the code with Rector.",
-		"phpstan:baseline": "Updates the PHPStan baseline file to match the code."
+		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
+		"prepare-release": "Removes development-only files in preparation of a TER release."
 	},
 	"extra": {
 		"branch-alias": {
