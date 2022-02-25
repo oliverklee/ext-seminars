@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -20,9 +20,9 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithUidCreatesSingleView(): void
     {
-        /** @var TestingDefaultController&MockObject $controller */
+        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
-            TestingDefaultController::class,
+            DefaultController::class,
             [
                 'createListView',
                 'createSingleView',
@@ -47,9 +47,9 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView(): void
     {
-        /** @var TestingDefaultController&MockObject $controller */
+        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
-            TestingDefaultController::class,
+            DefaultController::class,
             [
                 'createListView',
                 'createSingleView',
@@ -74,9 +74,9 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithoutUidCreatesSingleView(): void
     {
-        /** @var TestingDefaultController&MockObject $controller */
+        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
-            TestingDefaultController::class,
+            DefaultController::class,
             [
                 'createListView',
                 'createSingleView',
@@ -103,9 +103,9 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function eventListFlavorWithoutUidCreatesListView(): void
     {
-        /** @var TestingDefaultController&MockObject $controller */
+        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
-            TestingDefaultController::class,
+            DefaultController::class,
             [
                 'createListView',
                 'createSingleView',
@@ -130,9 +130,9 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function eventListFlavorWithUidCreatesListView(): void
     {
-        /** @var TestingDefaultController&MockObject $controller */
+        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
-            TestingDefaultController::class,
+            DefaultController::class,
             [
                 'createListView',
                 'createSingleView',
