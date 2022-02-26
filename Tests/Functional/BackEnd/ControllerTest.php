@@ -11,7 +11,7 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use Prophecy\Prophecy\ProphecySubjectInterface;
+use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -76,10 +76,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagReturnsCsvDownload(): void
     {
         $csvBody = 'foo;bar';
+        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var CsvDownloader&ProphecySubjectInterface $xsvExporter */
         $xsvExporter = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
 
@@ -96,10 +95,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagForEventTableUsesEventCsvFilename(): void
     {
         $csvBody = 'foo;bar';
+        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var CsvDownloader&ProphecySubjectInterface $xsvExporter */
         $xsvExporter = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
 
@@ -119,10 +117,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagForRegistrationsTableUsesEventCsvFilename(): void
     {
         $csvBody = 'foo;bar';
+        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var CsvDownloader&ProphecySubjectInterface $xsvExporter */
         $xsvExporter = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
 

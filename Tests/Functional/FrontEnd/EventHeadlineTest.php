@@ -11,6 +11,7 @@ use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\EventHeadline;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -50,13 +51,12 @@ final class EventHeadlineTest extends FunctionalTestCase
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin.tx_seminars', $con);
 
+        /** @var ObjectProphecy<TypoScriptFrontendController> $frontEndProphecy */
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
         if (Typo3Version::isAtLeast(10)) {
             $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
-            // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
             $frontEndProphecy->getLanguage()->wilLReturn($siteLanguage);
         }
-        /** @var TypoScriptFrontendController $frontEnd */
         $frontEnd = $frontEndProphecy->reveal();
         $GLOBALS['TSFE'] = $frontEnd;
 

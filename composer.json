@@ -49,6 +49,7 @@
 		"friendsofphp/php-cs-fixer": "^3.4.0",
 		"helhum/typo3-console": "^5.8.6 || ^6.6.0",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
+		"jangregor/phpstan-prophecy": "^1.0.0",
 		"mikey179/vfsstream": "^1.6.10",
 		"nimut/testing-framework": "^5.3.0",
 		"oliverklee/phpunit": "^7.5.25",
