@@ -6,16 +6,24 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.1.2
+
+### Added
 - Also test with the highest and lowest dependencies in CI (#1237)
 - Add a script for creating an installation for legacy tests (#1243)
 
 ### Changed
 - Move more legacy tests to the new testing framework (#1247, #1249, #1251, #1252, #1254)
 - Require oelib >= 4.1.3 (#1242)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Fix crash with RTE rendering with `typo3fluid/fluid:2.6` (#1253)
