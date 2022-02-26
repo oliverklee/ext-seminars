@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
+use Nimut\TestingFramework\Exception\Exception as NimutException;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
+use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
@@ -22,7 +27,7 @@ final class LegacyEventTest extends FunctionalTestCase
     use LanguageHelper;
 
     /**
-     * @var array<string, string>
+     * @var array<string, non-empty-string>
      */
     private const CONFIGURATION = [
         'dateFormatYMD' => '%d.%m.%Y',
@@ -30,9 +35,18 @@ final class LegacyEventTest extends FunctionalTestCase
     ];
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    /**
+     * @var TestingFramework
+     */
+    private $testingFramework;
 
     protected function setUp(): void
     {
@@ -40,11 +54,37 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+
+        $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
     protected function tearDown(): void
     {
+        $this->testingFramework->cleanUpWithoutDatabase();
         ConfigurationRegistry::purgeInstance();
+    }
+
+    /**
+     * Imports static records - but only if they aren't already available as static data.
+     *
+     * @throws NimutException
+     */
+    private function importStaticData(): void
+    {
+        if ($this->getDatabaseConnection()->selectCount('*', 'static_countries') === 0) {
+            $this->importDataSet(__DIR__ . '/Fixtures/Events/Countries.xml');
+        }
+    }
+
+    private function buildFrontEndAndPlugin(): DefaultController
+    {
+        $this->testingFramework->createFakeFrontEnd();
+        $this->initializeBackEndLanguage();
+
+        $plugin = new DefaultController();
+        $plugin->main('', ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html']);
+
+        return $plugin;
     }
 
     /**
@@ -558,6 +598,261 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertCount(2, $files);
     }
 
+    // Tests concerning getPlaceWithDetails and getPlaceWithDetailsRaw
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(1);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        self::assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsTitleOfPlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('The Castle (without country)', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsTitlesOfAllRelatedPlaces(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(8);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('The Castle (without country)', $result);
+        self::assertStringContainsString('The garden (without country)', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsListsDuplicateAssociationsOnlyOnce(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(3);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsAddressOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('on top of the mountain', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsForNonEmptyZipAndCityContainsZipAndCity(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('12345', $result);
+        self::assertStringContainsString('Hamm', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsCountryOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $this->importStaticData();
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(4);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('Schweiz', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsHomepageLinkOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('href="https://www.example.com"', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsContainsDirectionsOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $plugin = $this->buildFrontEndAndPlugin();
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetails($plugin);
+
+        self::assertStringContainsString('3 turns left, then always right', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(1);
+        $this->initializeBackEndLanguage();
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        self::assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawContainsTitleOfPlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('The Castle (without country)', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawSeparatesPlacesByNewline(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(8);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString("3 turns left, then always right\nThe garden (without country)", $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawListsDuplicateAssociationsOnlyOnce(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(3);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawContainsAddressOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('on top of the mountain', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawForNonEmptyZipAndCityContainsZipAndCity(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('12345', $result);
+        self::assertStringContainsString('Hamm', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawContainsCountryOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $this->importStaticData();
+        $subject = TestingLegacyEvent::fromUid(4);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('Schweiz', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawContainsHomepageLinkOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('www.example.com', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceWithDetailsRawContainsDirectionsOfOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceWithDetailsRaw();
+
+        self::assertStringContainsString('3 turns left, then always right', $result);
+    }
+
+    // Tests concerning getPlacesWithCountry
+
     /**
      * @test
      */
@@ -636,6 +931,95 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame([], $result);
     }
 
+    // Tests for getPlaceShort
+
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(1);
+        $this->initializeBackEndLanguage();
+
+        $result = $subject->getPlaceShort();
+
+        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        self::assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsPlaceNameForOnePlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaceShort();
+
+        self::assertStringContainsString('The Castle (without country)', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsPlaceNamesWithCommaForTwoPlaces(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(8);
+
+        $result = $subject->getPlaceShort();
+
+        self::assertStringContainsString('The Castle (without country), The garden (without country)', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortListsDuplicateAssociationsOnlyOnce(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(3);
+
+        $result = $subject->getPlaceShort();
+
+        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
+    }
+
+    // Tests concerning getPlaces
+
+    /**
+     * @test
+     */
+    public function getPlacesForEventWithNoPlacesReturnsEmptyList(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(1);
+
+        $result = $subject->getPlaces();
+
+        self::assertInstanceOf(Collection::class, $result);
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesForSeminarWithOnePlacesReturnsListWithPlace(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(2);
+
+        $result = $subject->getPlaces();
+
+        self::assertInstanceOf(Collection::class, $result);
+        self::assertInstanceOf(Place::class, $result->first());
+        self::assertSame('1', $result->getUids());
+    }
+
+    // Tests for hasCountry
+
     /**
      * @test
      */
@@ -684,29 +1068,117 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertTrue($subject->hasCountry());
     }
 
+    // Tests for getCountry
+
     /**
      * @test
      */
-    public function getPlaceShortReturnsPlaceName(): void
+    public function getCountryForNoPlacesReturnsEmptyString(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(1);
 
+        $result = $subject->getCountry();
+
+        self::assertSame('', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCountryForPlaceWithoutCountryReturnsEmptyString(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
         $subject = TestingLegacyEvent::fromUid(2);
 
-        self::assertStringContainsString('The Castle', $subject->getPlaceShort());
+        $result = $subject->getCountry();
+
+        self::assertSame('', $result);
     }
 
     /**
      * @test
      */
-    public function getPlaceShortIgnoresDuplicatePlaces(): void
+    public function getCountryForPlaceWithDeletedCountryReturnsEmptyString(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(6);
 
-        $subject = TestingLegacyEvent::fromUid(3);
+        $result = $subject->getCountry();
 
-        self::assertSame(1, \substr_count($subject->getPlaceShort(), 'The Castle'));
+        self::assertSame('', $result);
     }
+
+    /**
+     * @test
+     */
+    public function getCountryForPlaceWithCountryReturnsCountryName(): void
+    {
+        $this->importStaticData();
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(4);
+
+        $result = $subject->getCountry();
+
+        self::assertSame('Schweiz', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCountryForMultiplePlacesWithDifferentCountriesReturnsCommaSeparatedCountryNames(): void
+    {
+        $this->importStaticData();
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+        $subject = TestingLegacyEvent::fromUid(7);
+
+        $result = $subject->getCountry();
+
+        self::assertSame('Deutschland, Schweiz', $result);
+    }
+
+    // Test for getCountryNameFromIsoCode
+
+    /**
+     * @test
+     */
+    public function getCountryForIsoCodeWithValidCountryCodeReturnsCountryName(): void
+    {
+        $this->importStaticData();
+        $subject = new TestingLegacyEvent();
+
+        $result = $subject->getCountryNameFromIsoCode('ch');
+
+        self::assertSame('Schweiz', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCountryForIsoCodeWithInvalidCountryCodeReturnsEmptyString(): void
+    {
+        $this->importStaticData();
+        $subject = new TestingLegacyEvent();
+
+        $result = $subject->getCountryNameFromIsoCode('xy');
+
+        self::assertSame('', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCountryForIsoCodeWithEmptyCountryCodeReturnsEmptyString(): void
+    {
+        $this->importStaticData();
+        $subject = new TestingLegacyEvent();
+
+        $result = $subject->getCountryNameFromIsoCode('');
+
+        self::assertSame('', $result);
+    }
+
+    // Tests for getImage
 
     /**
      * @test

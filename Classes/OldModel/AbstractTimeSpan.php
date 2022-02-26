@@ -248,11 +248,6 @@ abstract class AbstractTimeSpan extends AbstractModel
         return $this->hasRecordPropertyInteger('place');
     }
 
-    public function getNumberOfPlaces(): int
-    {
-        return $this->getRecordPropertyInteger('place');
-    }
-
     /**
      * Gets our place(s) as plain text (just the places name).
      *
