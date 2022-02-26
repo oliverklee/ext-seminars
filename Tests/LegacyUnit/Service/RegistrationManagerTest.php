@@ -54,12 +54,12 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var TestingRegistrationManager
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int
@@ -69,7 +69,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var TestingLegacyEvent
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * @var int the UID of a fake front-end user
@@ -89,17 +89,17 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var DefaultController a front-end plugin
      */
-    private $pi1 = null;
+    private $pi1;
 
     /**
      * @var TestingLegacyEvent
      */
-    private $fullyBookedSeminar = null;
+    private $fullyBookedSeminar;
 
     /**
      * @var TestingLegacyEvent
      */
-    private $cachedSeminar = null;
+    private $cachedSeminar;
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
@@ -111,12 +111,12 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var HeaderCollector
      */
-    private $headerCollector = null;
+    private $headerCollector;
 
     /**
      * @var FrontEndUserMapper
      */
-    private $frontEndUserMapper = null;
+    private $frontEndUserMapper;
 
     /**
      * @var array<int, class-string<MockObject>>
@@ -741,209 +741,6 @@ final class RegistrationManagerTest extends TestCase
             \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
-    }
-
-    // Tests concerning getRegistrationLink
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        self::assertStringContainsString(
-            '?id=' . $this->registrationPageUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        self::assertStringContainsString(
-            '%5Bseminar%5D=' . $this->seminarUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink(): void
-    {
-        $this->createFrontEndPages();
-
-        self::assertStringContainsString(
-            '?id=' . $this->loginPageUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsEmptyString(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        $this->createBookedOutSeminar();
-
-        self::assertSame(
-            '',
-            $this->subject->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsEmptyString(): void
-    {
-        $this->createFrontEndPages();
-
-        $this->createBookedOutSeminar();
-
-        self::assertSame(
-            '',
-            $this->subject->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        $this->cachedSeminar = new TestingLegacyEvent(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars',
-                [
-                    'title' => 'test event',
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
-                    'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                    'attendees_max' => 10,
-                ]
-            )
-        );
-
-        self::assertSame(
-            '',
-            $this->subject->getRegistrationLink($this->pi1, $this->cachedSeminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        $this->cachedSeminar = new TestingLegacyEvent(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars',
-                [
-                    'title' => 'test event',
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                    'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                    'attendees_max' => 10,
-                    'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
-                ]
-            )
-        );
-
-        self::assertSame(
-            '',
-            $this->subject->getRegistrationLink($this->pi1, $this->cachedSeminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsLinkWithSeminarUid(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-        $this->seminar->setUnlimitedVacancies();
-
-        self::assertStringContainsString(
-            '%5Bseminar%5D=' . $this->seminarUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsLoginLink(): void
-    {
-        $this->createFrontEndPages();
-        $this->seminar->setUnlimitedVacancies();
-
-        self::assertStringContainsString(
-            '?id=' . $this->loginPageUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarWithQueueEnabledReturnsLinkWithSeminarUid(): void
-    {
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-        $this->seminar->setNeedsRegistration(true);
-        $this->seminar->setAttendancesMax(1);
-        $this->seminar->setNumberOfAttendances(1);
-        $this->seminar->setRegistrationQueue(true);
-
-        self::assertStringContainsString(
-            '%5Bseminar%5D=' . $this->seminarUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarWithQueueEnabledReturnsLoginLink(): void
-    {
-        $this->createFrontEndPages();
-        $this->seminar->setNeedsRegistration(true);
-        $this->seminar->setAttendancesMax(1);
-        $this->seminar->setNumberOfAttendances(1);
-        $this->seminar->setRegistrationQueue(true);
-
-        self::assertStringContainsString(
-            '?id=' . $this->loginPageUid,
-            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkForPriceOnRequestReturnsEmptyString(): void
-    {
-        $this->seminar->setPriceOnRequest(true);
-        $this->createFrontEndPages();
-        $this->createAndLogInFrontEndUser();
-
-        self::assertSame('', $this->subject->getRegistrationLink($this->pi1, $this->seminar));
     }
 
     // Tests concerning canRegisterIfLoggedIn

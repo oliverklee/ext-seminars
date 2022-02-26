@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a script for creating an installation for legacy tests (#1243)
 
 ### Changed
+- Move more legacy tests to the new testing framework (#1249)
 - Require oelib >= 4.1.3 (#1242)
 
 ### Deprecated
