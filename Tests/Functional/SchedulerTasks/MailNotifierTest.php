@@ -48,7 +48,7 @@ final class MailNotifierTest extends FunctionalTestCase
     private $languageService;
 
     /**
-     * @var ObjectProphecy
+     * @var ObjectProphecy<RegistrationDigest>
      */
     private $registrationDigestProphecy;
 
@@ -70,12 +70,12 @@ final class MailNotifierTest extends FunctionalTestCase
         $user->setData([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($user);
 
+        /** @var ObjectProphecy<ObjectManager> $objectManagerProphecy */
         $objectManagerProphecy = $this->prophesize(ObjectManager::class);
         GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerProphecy->reveal());
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $this->registrationDigest = $this->registrationDigestProphecy->reveal();
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $objectManagerProphecy->get(RegistrationDigest::class)->willReturn($this->registrationDigest);
 
         $this->subject = new MailNotifier();
@@ -206,7 +206,6 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $subject->execute();
 
-        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->registrationDigestProphecy->execute()->shouldHaveBeenCalled();
     }
 }
