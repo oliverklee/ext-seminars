@@ -6,9 +6,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\CountdownViewHelper

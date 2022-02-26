@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Skill;
 use OliverKlee\Seminars\Model\Speaker;
+use PHPUnit\Framework\TestCase;
 
 final class SpeakerTest extends TestCase
 {

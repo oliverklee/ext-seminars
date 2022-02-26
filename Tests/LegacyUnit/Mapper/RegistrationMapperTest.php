@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FoodMapper;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Model\Food;
 use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\RegistrationMapper

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Category;
+use PHPUnit\Framework\TestCase;
 
 final class CategoryTest extends TestCase
 {

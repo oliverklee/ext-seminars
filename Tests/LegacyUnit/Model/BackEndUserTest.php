@@ -6,9 +6,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
+use PHPUnit\Framework\TestCase;
 
 final class BackEndUserTest extends TestCase
 {

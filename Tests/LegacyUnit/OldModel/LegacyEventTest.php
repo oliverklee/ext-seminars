@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

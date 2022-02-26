@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Model\Skill;
+use PHPUnit\Framework\TestCase;
 
 final class SkillMapperTest extends TestCase
 {

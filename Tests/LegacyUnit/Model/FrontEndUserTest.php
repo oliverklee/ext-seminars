@@ -8,7 +8,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
@@ -16,6 +15,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 final class FrontEndUserTest extends TestCase
 {

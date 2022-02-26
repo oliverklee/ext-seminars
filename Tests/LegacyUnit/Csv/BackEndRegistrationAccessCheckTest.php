@@ -6,10 +6,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 

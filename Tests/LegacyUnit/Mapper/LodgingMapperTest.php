@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Model\Lodging;
+use PHPUnit\Framework\TestCase;
 
 final class LodgingMapperTest extends TestCase
 {

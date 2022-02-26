@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\AbstractModel

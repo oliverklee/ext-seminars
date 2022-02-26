@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder

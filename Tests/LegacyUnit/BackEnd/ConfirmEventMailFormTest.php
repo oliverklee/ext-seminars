@@ -7,10 +7,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ConfirmEventMailFormTest extends TestCase
 {

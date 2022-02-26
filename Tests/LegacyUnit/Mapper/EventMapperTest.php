@@ -10,7 +10,6 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\LodgingMapper;
@@ -24,6 +23,7 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TimeSlot;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\EventMapper

@@ -7,8 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Country;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Place;
+use PHPUnit\Framework\TestCase;
 
 final class PlaceTest extends TestCase
 {

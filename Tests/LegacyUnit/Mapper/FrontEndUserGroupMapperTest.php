@@ -8,11 +8,11 @@ use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Organizer;
+use PHPUnit\Framework\TestCase;
 
 final class FrontEndUserGroupMapperTest extends TestCase
 {

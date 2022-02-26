@@ -6,10 +6,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds all tests specific to event dates.

@@ -6,11 +6,11 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper

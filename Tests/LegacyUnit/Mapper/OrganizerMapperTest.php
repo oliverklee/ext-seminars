@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\Organizer;
+use PHPUnit\Framework\TestCase;
 
 final class OrganizerMapperTest extends TestCase
 {

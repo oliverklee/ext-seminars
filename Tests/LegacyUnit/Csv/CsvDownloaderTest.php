@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
 
 final class CsvDownloaderTest extends TestCase

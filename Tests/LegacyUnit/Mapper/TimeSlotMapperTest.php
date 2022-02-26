@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
@@ -16,6 +15,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TimeSlot;
+use PHPUnit\Framework\TestCase;
 
 final class TimeSlotMapperTest extends TestCase
 {

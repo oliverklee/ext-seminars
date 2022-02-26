@@ -7,10 +7,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
+use PHPUnit\Framework\TestCase;
 
 final class FrontEndUserGroupTest extends TestCase
 {

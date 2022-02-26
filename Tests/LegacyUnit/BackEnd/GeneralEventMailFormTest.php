@@ -6,9 +6,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use PHPUnit\Framework\TestCase;
 
 final class GeneralEventMailFormTest extends TestCase
 {

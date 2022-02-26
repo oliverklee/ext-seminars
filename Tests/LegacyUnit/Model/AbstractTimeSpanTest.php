@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 final class AbstractTimeSpanTest extends TestCase
 {

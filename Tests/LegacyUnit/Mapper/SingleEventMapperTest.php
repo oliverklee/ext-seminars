@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\TargetGroup;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds tests which are specific to single events.
