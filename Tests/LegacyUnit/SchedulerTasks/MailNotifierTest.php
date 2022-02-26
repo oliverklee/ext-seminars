@@ -9,11 +9,11 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\System\Typo3Version;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
@@ -25,12 +25,14 @@ use OliverKlee\Seminars\Service\EventStatusService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifier
@@ -41,7 +43,7 @@ final class MailNotifierTest extends TestCase
     use MakeInstanceTrait;
 
     /**
-     * @var MailNotifier&MockObject&AccessibleObject
+     * @var MailNotifier
      */
     private $subject;
 
@@ -84,6 +86,8 @@ final class MailNotifierTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
+        (new CacheNullifyer())->setAllCoreCaches();
+
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
         Bootstrap::initializeBackendAuthentication();
 
@@ -109,36 +113,36 @@ final class MailNotifierTest extends TestCase
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        /** @var MailNotifier&MockObject&AccessibleObject $subject */
-        $subject = $this->getAccessibleMock(MailNotifier::class, ['dummy']);
-        $this->subject = $subject;
-
-        $configurationPageUid = $this->testingFramework->createFrontEndPage();
-        $subject->setConfigurationPageUid($configurationPageUid);
-
         /** @var EventStatusService&MockObject $eventStatusService */
         $eventStatusService = $this->createMock(EventStatusService::class);
         $this->eventStatusService = $eventStatusService;
-        $subject->_set('eventStatusService', $eventStatusService);
+        GeneralUtility::setSingletonInstance(EventStatusService::class, $this->eventStatusService);
 
         /** @var EmailService&MockObject $emailService */
         $emailService = $this->createMock(EmailService::class);
         $this->emailService = $emailService;
-        $subject->_set('emailService', $emailService);
+        GeneralUtility::setSingletonInstance(EmailService::class, $this->emailService);
 
         /** @var EventMapper&MockObject $eventMapper */
         $eventMapper = $this->createMock(EventMapper::class);
         $this->eventMapper = $eventMapper;
-        $subject->_set('eventMapper', $eventMapper);
+        MapperRegistry::set(EventMapper::class, $eventMapper);
 
-        /** @var Salutation&MockObject $emailSalutation */
-        $emailSalutation = $this->createMock(Salutation::class);
-        $subject->_set('emailSalutation', $emailSalutation);
+        /** @var ObjectProphecy<ObjectManager> $objectManagerProphecy */
+        $objectManagerProphecy = $this->prophesize(ObjectManager::class);
+        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerProphecy->reveal());
 
-        $registrationDigest = $this->prophesize(RegistrationDigest::class)->reveal();
-        $subject->_set('registrationDigest', $registrationDigest);
+        /** @var ObjectProphecy<RegistrationDigest> $registrationDigestProphecy */
+        $registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
+        $registrationDigest = $registrationDigestProphecy->reveal();
+        $objectManagerProphecy->get(RegistrationDigest::class)->willReturn($registrationDigest);
 
         $this->email = $this->createEmailMock();
+
+        $this->subject = new MailNotifier();
+
+        $configurationPageUid = $this->testingFramework->createFrontEndPage();
+        $this->subject->setConfigurationPageUid($configurationPageUid);
     }
 
     protected function tearDown(): void
@@ -149,6 +153,10 @@ final class MailNotifierTest extends TestCase
 
         $GLOBALS['LANG'] = $this->languageBackup;
         $this->languageBackup = null;
+
+        MapperRegistry::purgeInstance();
+        ConfigurationRegistry::purgeInstance();
+        GeneralUtility::resetSingletonInstances([]);
     }
 
     // Utility functions
@@ -1735,9 +1743,7 @@ final class MailNotifierTest extends TestCase
         $event = new Event();
         $event->setStatus(Event::STATUS_PLANNED);
         $events->add($event);
-        $this->eventMapper->expects(self::once())->method(
-            'findForAutomaticStatusChange'
-        )->willReturn($events);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->willReturn($events);
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
