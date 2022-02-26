@@ -57,10 +57,19 @@ class MailNotifier extends AbstractTask
     protected $registrationDigest = null;
 
     /**
+     * @var bool
+     */
+    private $dependenciesAreSetUp = false;
+
+    /**
      * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).
      */
     protected function constituteDependencies(): void
     {
+        if ($this->dependenciesAreSetUp) {
+            return;
+        }
+
         // This is necessary so that the configuration is fetched from the provided page UID early.
         $this->getConfiguration();
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
@@ -72,6 +81,8 @@ class MailNotifier extends AbstractTask
 
         $this->useUserConfiguredLanguage();
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+
+        $this->dependenciesAreSetUp = true;
     }
 
     /**
@@ -349,6 +360,8 @@ class MailNotifier extends AbstractTask
      */
     public function automaticallyChangeEventStatuses(): void
     {
+        $this->constituteDependencies();
+
         $languageService = $this->getLanguageService();
 
         /** @var Event $event */
