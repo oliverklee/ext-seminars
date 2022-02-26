@@ -42,16 +42,6 @@ final class TestingTimeSpan extends AbstractTimeSpan
     }
 
     /**
-     * Sets the number of places for this time span.
-     *
-     * @param int $places the number of places that are associated with this time span
-     */
-    public function setNumberOfPlaces(int $places): void
-    {
-        $this->setRecordPropertyInteger('place', $places);
-    }
-
-    /**
      * Returns always an empty string.
      *
      * This function is just a dummy because the implementations of this

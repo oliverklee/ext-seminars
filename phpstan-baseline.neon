@@ -786,11 +786,6 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPlaceRelation\\(\\) has parameter \\$placeData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addSpeakerRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
@@ -802,11 +797,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTutorRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:\\$beginDate is never read, only written\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 

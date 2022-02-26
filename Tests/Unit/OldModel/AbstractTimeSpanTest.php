@@ -323,27 +323,6 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertFalse($this->subject->hasStarted());
     }
 
-    // Tests concerning the places.
-
-    /**
-     * @test
-     */
-    public function numberOfPlacesInitiallyIsZero(): void
-    {
-        self::assertSame(0, $this->subject->getNumberOfPlaces());
-    }
-
-    /**
-     * @test
-     */
-    public function setNumberOfPlacesSetsNumberOfPlace(): void
-    {
-        $value = 42;
-        $this->subject->setNumberOfPlaces($value);
-
-        self::assertSame($value, $this->subject->getNumberOfPlaces());
-    }
-
     // Tests for getting the room.
 
     /**

@@ -75,9 +75,30 @@
         <sorting>1</sorting>
     </tx_seminars_seminars_place_mm>
 
+    <tx_seminars_seminars>
+        <uid>8</uid>
+        <title>event with 2 places without countries</title>
+        <place>2</place>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars_place_mm>
+        <uid_local>8</uid_local>
+        <uid_foreign>1</uid_foreign>
+        <sorting>1</sorting>
+    </tx_seminars_seminars_place_mm>
+    <tx_seminars_seminars_place_mm>
+        <uid_local>8</uid_local>
+        <uid_foreign>6</uid_foreign>
+        <sorting>2</sorting>
+    </tx_seminars_seminars_place_mm>
+
     <tx_seminars_sites>
         <uid>1</uid>
-        <title>The Castle (without country></title>
+        <title>The Castle (without country)</title>
+        <address>on top of the mountain</address>
+        <zip>12345</zip>
+        <city>Hamm</city>
+        <directions>3 turns left, then always right</directions>
+        <homepage>www.example.com</homepage>
     </tx_seminars_sites>
     <tx_seminars_sites>
         <uid>2</uid>
@@ -99,5 +120,9 @@
         <uid>5</uid>
         <title>with another valid country</title>
         <country>de</country>
+    </tx_seminars_sites>
+    <tx_seminars_sites>
+        <uid>6</uid>
+        <title>The garden (without country)</title>
     </tx_seminars_sites>
 </dataset>
