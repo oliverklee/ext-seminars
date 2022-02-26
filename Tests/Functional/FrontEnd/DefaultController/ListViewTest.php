@@ -98,8 +98,6 @@ final class ListViewTest extends FunctionalTestCase
         return $frontEndController;
     }
 
-    // Tests concerning the list view
-
     private function buildSubjectForListView(string $fixtureFileName): TestingDefaultController
     {
         $this->importDataSet(__DIR__ . '/Fixtures/' . $fixtureFileName . '.xml');
@@ -127,6 +125,8 @@ final class ListViewTest extends FunctionalTestCase
 
         return $subject;
     }
+
+    // Tests concerning the list view
 
     /**
      * @test

@@ -44,7 +44,7 @@ final class DefaultControllerTest extends TestCase
     use LanguageHelper;
 
     /**
-     * @var array<string, string>
+     * @var array<string, non-empty-string>
      */
     private const CONFIGURATION = [
         'dateFormatYMD' => '%d.%m.%Y',
@@ -55,12 +55,12 @@ final class DefaultControllerTest extends TestCase
     /**
      * @var TestingDefaultController
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int the UID of a seminar to which the fixture relates
@@ -97,10 +97,12 @@ final class DefaultControllerTest extends TestCase
     /**
      * @var HeaderCollector
      */
-    private $headerCollector = null;
+    private $headerCollector;
 
-    /** @var ConnectionPool */
-    private $connectionPool = null;
+    /**
+     * @var ConnectionPool
+     */
+    private $connectionPool;
 
     /**
      * @var DummyConfiguration
@@ -700,62 +702,6 @@ final class DefaultControllerTest extends TestCase
     }
 
     // Tests concerning the single view
-
-    /**
-     * @test
-     */
-    public function singleViewContainsHtmlspecialcharedEventTitle(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'Test &amp; event',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewContainsHtmlspecialcharedEventSubtitle(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'Something for you &amp; me',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewContainsHtmlspecialcharedEventRoom(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'Rooms 2 &amp; 3',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewContainsHtmlspecialcharedAccreditationNumber(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            '1 &amp; 1',
-            $this->subject->main('', [])
-        );
-    }
 
     /**
      * @test
@@ -2138,58 +2084,6 @@ final class DefaultControllerTest extends TestCase
     ///////////////////////////////////////////////////////
     // Tests concerning the organizers in the single view
     ///////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function singleViewForEventWithOrganzierShowsHtmlspecialcharedOrganizerTitle(): void
-    {
-        $this->addOrganizerRelation(['title' => 'foo & organizer']);
-
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'foo &amp; organizer',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForEventWithOrganizerWithDescriptionShowsOrganizerDescription(): void
-    {
-        $this->addOrganizerRelation(
-            ['title' => 'foo', 'description' => 'organizer description']
-        );
-
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'organizer description',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForEventWithOrganizerWithHomepageLinksHtmlSpecialcharedOrganizerNameToTheirHomepage(): void
-    {
-        $this->addOrganizerRelation(
-            ['title' => 'foo & bar', 'homepage' => 'https://www.orgabar.com']
-        );
-
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertRegExp(
-            '#<a href="https://www.orgabar.com".*>foo &amp; bar</a>#',
-            $this->subject->main('', [])
-        );
-    }
 
     /**
      * @test
