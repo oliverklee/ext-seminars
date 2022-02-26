@@ -38,7 +38,7 @@ final class ListViewTest extends FunctionalTestCase
     private const FOLDER_UID = 1;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

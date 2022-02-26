@@ -2,12 +2,12 @@
 <dataset>
     <pages>
         <uid>1</uid>
-        <slug>/1</slug>
+        <slug>/home</slug>
     </pages>
     <pages>
         <pid>1</pid>
         <uid>2</uid>
-        <slug>/2</slug>
+        <slug>/afterSave</slug>
     </pages>
 
     <fe_users>

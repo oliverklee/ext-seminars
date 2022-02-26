@@ -19,7 +19,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     use LanguageHelper;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = [
         'typo3conf/ext/oelib',
@@ -31,7 +31,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @var RegistrationForm
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework

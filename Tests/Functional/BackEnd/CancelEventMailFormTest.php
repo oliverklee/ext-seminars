@@ -15,6 +15,9 @@ use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\BackEnd\CancelEventMailForm
+ */
 final class CancelEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
@@ -22,7 +25,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     use MakeInstanceTrait;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

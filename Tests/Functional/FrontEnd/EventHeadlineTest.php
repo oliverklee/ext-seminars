@@ -28,19 +28,19 @@ final class EventHeadlineTest extends FunctionalTestCase
     private const DATE_FORMAT = '%d.%m.%Y';
 
     /**
-     * @var string[]
+     * @var array{templateFile: non-empty-string}
      */
     private const CONFIGURATION = ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'];
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var EventHeadline
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

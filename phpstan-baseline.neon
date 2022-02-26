@@ -476,11 +476,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^PHPDoc tag @var for constant OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:CONFIGURATION with type array\\<string\\> is incompatible with value array\\{form\\.\\: array\\{eventEditor\\.\\: array\\{\\}\\}\\}\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventDateMapperTest.php

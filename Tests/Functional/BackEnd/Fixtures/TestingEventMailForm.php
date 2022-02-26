@@ -14,7 +14,7 @@ final class TestingEventMailForm extends AbstractEventMailForm
     /**
      * the prefix for all locallang keys for prefilling the form, must not be empty
      *
-     * @var string
+     * @var non-empty-string
      */
     protected $formFieldPrefix = 'testForm_prefillField_';
 

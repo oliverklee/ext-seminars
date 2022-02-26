@@ -18,7 +18,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class EventEditorTest extends FunctionalTestCase
 {
     /**
-     * @var string[]
+     * @var array{'form.': array{'eventEditor.': array<string, string>}}
      */
     private const CONFIGURATION = [
         'form.' => ['eventEditor.' => []],
@@ -30,14 +30,14 @@ final class EventEditorTest extends FunctionalTestCase
     private const NOW = 1577285056;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var EventEditor
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
@@ -63,9 +63,6 @@ final class EventEditorTest extends FunctionalTestCase
         parent::tearDown();
     }
 
-    /**
-     * @param int $uid
-     */
     private function logInUser(int $uid): void
     {
         $user = MapperRegistry::get(FrontEndUserMapper::class)->find($uid);
@@ -110,12 +107,11 @@ final class EventEditorTest extends FunctionalTestCase
      */
     public function getEventSuccessfullySavedUrlReturnsConfiguredTargetPid(): void
     {
-        $targetPageUid = 2;
-        $this->subject->setConfigurationValue('eventSuccessfullySavedPID', $targetPageUid);
+        $this->subject->setConfigurationValue('eventSuccessfullySavedPID', 2);
 
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
-        self::assertStringContainsString('/' . $targetPageUid, $result);
+        self::assertStringContainsString('/afterSave', $result);
     }
 
     // Tests concerning populateListOrganizers().
