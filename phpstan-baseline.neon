@@ -811,11 +811,6 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$emailSalutation is never read, only written\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
