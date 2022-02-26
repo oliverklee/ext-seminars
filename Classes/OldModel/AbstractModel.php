@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Rendering\NullRenderingContext;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -17,7 +18,6 @@ use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -586,8 +586,6 @@ abstract class AbstractModel
         $childrenClosure = function () use ($rawData): string {
             return \trim($rawData);
         };
-        $renderingContext = new RenderingContext();
-
-        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, $renderingContext);
+        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
     }
 }
