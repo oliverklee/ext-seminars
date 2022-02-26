@@ -8,12 +8,12 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 
 /**
- * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
+ * @coversNothing
  */
 final class PluginDefinitionTest extends FunctionalTestCase
 {
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

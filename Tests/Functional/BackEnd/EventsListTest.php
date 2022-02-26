@@ -12,24 +12,27 @@ use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
+/**
+ * @covers \OliverKlee\Seminars\BackEnd\EventsList
+ */
 final class EventsListTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var EventsList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var DummyModule
      */
-    private $backEndModule = null;
+    private $backEndModule;
 
     protected function setUp(): void
     {

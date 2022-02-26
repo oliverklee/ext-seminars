@@ -15,34 +15,37 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
+/**
+ * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration
+ */
 final class MailNotifierConfigurationTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
     /**
-     * @var string
+     * @var non-empty-string
      */
     private const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
 
     /**
-     * @var string[]
+     * @var array<int, non-empty-string>
      */
     protected $coreExtensionsToLoad = ['scheduler'];
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var MailNotifierConfiguration
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var SchedulerModuleController&MockObject
      */
-    private $moduleController = null;
+    private $moduleController;
 
     protected function setUp(): void
     {

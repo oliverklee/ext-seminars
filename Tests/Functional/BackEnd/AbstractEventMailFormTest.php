@@ -17,6 +17,9 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\BackEnd\AbstractEventMailForm
+ */
 final class AbstractEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
@@ -24,17 +27,17 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     use MakeInstanceTrait;
 
     /**
-     * @var array<int, string>
+     * @var array<int, non-empty-string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var HeaderCollector
      */
-    private $headerProxy = null;
+    private $headerProxy;
 
     /**
-     * @var string[][]
+     * @var array<string, array<string, non-empty-string>>
      */
     protected $configurationToUseInTestInstance = [
         'MAIL' => [
