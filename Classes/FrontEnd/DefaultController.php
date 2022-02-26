@@ -45,6 +45,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Rendering\NullRenderingContext;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -53,7 +54,6 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 /**
  * Plugin "Seminar Manager".
@@ -3310,8 +3310,6 @@ class DefaultController extends TemplateHelper
         $childrenClosure = function () use ($rawData): string {
             return \trim($rawData);
         };
-        $renderingContext = new RenderingContext();
-
-        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, $renderingContext);
+        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
     }
 }

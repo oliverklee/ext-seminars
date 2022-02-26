@@ -42,7 +42,8 @@
 		"typo3/cms-core": "^9.5.7 || ^10.4.6",
 		"typo3/cms-extbase": "^9.5 || ^10.4",
 		"typo3/cms-fluid": "^9.5 || ^10.4",
-		"typo3/cms-frontend": "^9.5 || ^10.4"
+		"typo3/cms-frontend": "^9.5 || ^10.4",
+		"typo3fluid/fluid": "^2.6.10"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.4.0",

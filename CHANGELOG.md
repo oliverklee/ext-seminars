@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix crash with RTE rendering with `typo3fluid/fluid:2.6` (#1253)
 - Require `typo3/class-alias-loader` >= 1.1.0 for development (#1245)
 - Keep development-only files out of the TER releases (#1241)
 
