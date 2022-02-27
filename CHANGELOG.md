@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Move more legacy tests to the new testing framework (#1267)
 - Use the new configuration classes for the single view link builder (#1265, #1266)
 - Upgrade to PHPUnit 8 (#1223)
 - Stop using `getAccessibleMock` (#1259)
