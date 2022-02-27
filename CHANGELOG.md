@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Dev-require and suggest the install tool (#1261)
 
 ## 4.1.2
 
