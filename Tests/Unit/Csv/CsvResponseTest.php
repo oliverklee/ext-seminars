@@ -60,7 +60,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentTypeHeader = $subject->getHeader('content-type')[0];
-        self::assertContains('text/csv; header=present; ', $contentTypeHeader);
+        self::assertStringContainsString('text/csv; header=present; ', $contentTypeHeader);
     }
 
     /**
@@ -96,7 +96,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
-        self::assertContains('attachment', $contentDispositionHeader);
+        self::assertStringContainsString('attachment', $contentDispositionHeader);
     }
 
     /**
@@ -107,7 +107,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentDispositionHeader = $subject->getHeader('content-disposition')[0];
-        self::assertContains('attachment', $contentDispositionHeader);
+        self::assertStringContainsString('attachment', $contentDispositionHeader);
     }
 
     /**
@@ -119,7 +119,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('php://temp', $filename);
 
         $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
-        self::assertContains('; filename=' . $filename, $contentDispositionHeader);
+        self::assertStringContainsString('; filename=' . $filename, $contentDispositionHeader);
     }
 
     /**
@@ -130,7 +130,7 @@ final class CsvResponseTest extends UnitTestCase
         $subject = new CsvResponse('');
 
         $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
-        self::assertNotContains('filename=', $contentDispositionHeader);
+        self::assertStringNotContainsString('filename=', $contentDispositionHeader);
     }
 
     /**

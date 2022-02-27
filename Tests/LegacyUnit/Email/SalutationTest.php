@@ -444,7 +444,7 @@ final class SalutationTest extends TestCase
 
         $event = new TestingLegacyEvent($eventUid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME']),
             $this->subject->createIntroduction('%s', $event)
         );
@@ -485,7 +485,7 @@ final class SalutationTest extends TestCase
 
         $event = new TestingLegacyEvent($eventUid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             \strftime(self::TIME_FORMAT, $GLOBALS['SIM_EXEC_TIME']),
             $this->subject->createIntroduction('%s', $event)
         );
@@ -533,7 +533,7 @@ final class SalutationTest extends TestCase
         $event = new TestingLegacyEvent($eventUid);
         $formattedDate = \strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $formattedDate,
             $this->subject->createIntroduction('%s', $event)
         );

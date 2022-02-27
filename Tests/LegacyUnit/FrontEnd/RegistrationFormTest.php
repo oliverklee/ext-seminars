@@ -334,10 +334,7 @@ final class RegistrationFormTest extends TestCase
 
         $paymentMethods = $this->subject->populateListPaymentMethods();
 
-        self::assertContains(
-            'foo',
-            $paymentMethods[0]['caption']
-        );
+        self::assertStringContainsString('foo', $paymentMethods[0]['caption']);
     }
 
     /**

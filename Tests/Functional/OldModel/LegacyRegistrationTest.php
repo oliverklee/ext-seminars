@@ -327,7 +327,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $result = $this->subject->dumpUserValues($fieldName);
 
         $expected = \strftime(self::DATE_FORMAT, $value);
-        self::assertContains($expected, $result);
+        self::assertStringContainsString($expected, $result);
     }
 
     /**

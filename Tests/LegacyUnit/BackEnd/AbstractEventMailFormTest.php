@@ -172,7 +172,7 @@ final class AbstractEventMailFormTest extends TestCase
      */
     public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
             $this->subject->render()
         );
@@ -352,7 +352,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $beginDate = strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $beginDate,
             $this->subject->getInitialValue('subject')
         );

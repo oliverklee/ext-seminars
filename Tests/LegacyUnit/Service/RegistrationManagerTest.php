@@ -2907,7 +2907,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains($country->getLocalShortName(), $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString($country->getLocalShortName(), $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -3099,8 +3099,8 @@ final class RegistrationManagerTest extends TestCase
         $attachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
         self::assertNotEmpty($attachments);
         $attachment = $attachments[0];
-        self::assertContains('BEGIN:VCALENDAR', $attachment->getBody());
-        self::assertContains('END:VCALENDAR', $attachment->getBody());
+        self::assertStringContainsString('BEGIN:VCALENDAR', $attachment->getBody());
+        self::assertStringContainsString('END:VCALENDAR', $attachment->getBody());
     }
 
     /**
