@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow Composer plugins from `helhum/typo3-console-plugin` (#1264)
 - Fix PHPUnit warnings (#1262)
 - Dev-require and suggest the install tool (#1261)
 
