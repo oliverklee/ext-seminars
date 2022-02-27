@@ -19,6 +19,12 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
+    $parameters->set(Option::PARALLEL, true);
+
+    $parameters->set(Option::BOOTSTRAP_FILES, [
+        __DIR__ . '/.Build/vendor/autoload.php',
+    ]);
+
     // paths to refactor; solid alternative to CLI arguments
     $parameters->set(Option::PATHS,
         [
