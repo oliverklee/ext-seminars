@@ -179,7 +179,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->injectLinkBuilder($linkBuilder);
 
         /** @var ContentObjectRenderer&MockObject $contentObject */
-        $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['cObjGetSingle']);
         $contentObject->setLogger(new NullLogger());
         $contentObject->method('cObjGetSingle')->willReturn('<img src="foo.jpg" alt="bar"/>');
         $this->subject->cObj = $contentObject;

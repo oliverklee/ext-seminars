@@ -360,7 +360,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->willReturn($contentObject);
         $subject
             ->method('getSingleViewPageForEvent')
-            ->willReturn($singleViewPageUid);
+            ->willReturn((string)$singleViewPageUid);
 
         $subject->createRelativeUrlForEvent($event);
     }
