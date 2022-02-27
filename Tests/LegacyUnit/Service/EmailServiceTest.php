@@ -304,7 +304,7 @@ final class EmailServiceTest extends TestCase
         $this->email
             ->expects(self::exactly(2))
             ->method('send')
-            ->willReturn(2);
+            ->willReturn(true);
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 

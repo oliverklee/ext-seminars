@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix PHPUnit warnings (#1262)
 - Dev-require and suggest the install tool (#1261)
 
 ## 4.1.2

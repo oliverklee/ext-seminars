@@ -29,9 +29,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'pi_initPIflexForm',
                 'getTemplateCode',
                 'setLabels',
-                'setCSS',
                 'createHelperObjects',
-                'setErrorMessage',
             ]
         );
         $controller->expects(self::once())->method('createSingleView');
@@ -56,9 +54,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'pi_initPIflexForm',
                 'getTemplateCode',
                 'setLabels',
-                'setCSS',
                 'createHelperObjects',
-                'setErrorMessage',
             ]
         );
         $controller->expects(self::once())->method('createSingleView');
@@ -83,9 +79,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'pi_initPIflexForm',
                 'getTemplateCode',
                 'setLabels',
-                'setCSS',
                 'createHelperObjects',
-                'setErrorMessage',
             ]
         );
         $controller->expects(self::once())->method('createSingleView');
@@ -112,9 +106,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'pi_initPIflexForm',
                 'getTemplateCode',
                 'setLabels',
-                'setCSS',
                 'createHelperObjects',
-                'setErrorMessage',
             ]
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');
@@ -139,9 +131,7 @@ final class DefaultControllerTest extends UnitTestCase
                 'pi_initPIflexForm',
                 'getTemplateCode',
                 'setLabels',
-                'setCSS',
                 'createHelperObjects',
-                'setErrorMessage',
             ]
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');

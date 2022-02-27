@@ -1074,7 +1074,7 @@ final class EventTest extends TestCase
             ['getCombinedSingleViewPage']
         );
         $subject->expects(self::atLeastOnce())
-            ->method('getCombinedSingleViewPage')->willReturn(42);
+            ->method('getCombinedSingleViewPage')->willReturn('42');
 
         self::assertTrue(
             $subject->hasCombinedSingleViewPage()
