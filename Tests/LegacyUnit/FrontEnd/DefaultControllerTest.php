@@ -114,6 +114,11 @@ final class DefaultControllerTest extends TestCase
      */
     private $extensionConfiguration;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $pluginConfiguration;
+
     protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -132,6 +137,8 @@ final class DefaultControllerTest extends TestCase
         ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
         $this->sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->sharedConfiguration);
+        $this->pluginConfiguration = new DummyConfiguration(self::CONFIGURATION);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->pluginConfiguration);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -753,10 +760,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function otherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue(
             'hideFields',
             'eventsnextday'
@@ -908,10 +912,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewForSpeakerWithoutHomepageContainsHtmlspecialcharedSpeakerName(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -945,10 +946,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewForContainsHtmlspecialcharedSpeakerOrganization(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -982,10 +980,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewWithSpeakerDetailsLinksHtmlspecialcharedSpeakersName(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -1020,10 +1015,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewWithoutSpeakerDetailsLinksHtmlspecialcharedSpeakersName(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('showSpeakerDetails', false);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -1058,8 +1050,8 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewForEventWithoutImageNotDisplaysImage(): void
     {
+        $this->extensionConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
         $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
 
@@ -1573,10 +1565,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function singleViewForSeminarWithOneRequirementLinksRequirementToItsSingleView(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -5958,10 +5947,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->pluginConfiguration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
 
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

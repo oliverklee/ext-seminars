@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -50,11 +48,6 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     private $typo3confVarsBackup;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
-
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -62,9 +55,6 @@ final class SingleViewLinkBuilderTest extends TestCase
         $this->postBackup = $_POST;
         $this->getBackup = $_GET;
         $this->typo3confVarsBackup = $GLOBALS['TYPO3_CONF_VARS'];
-
-        $this->configuration = new DummyConfiguration();
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
     }
 
     protected function tearDown(): void
@@ -274,13 +264,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration(): void
     {
-        /** @var TemplateHelper&MockObject $plugin */
-        $plugin = $this->createPartialMock(TemplateHelper::class, ['hasConfValueInteger', 'getConfValueInteger']);
-        $plugin->method('hasConfValueInteger')->willReturn(true);
-        $plugin->method('getConfValueInteger')->with('detailPID')->willReturn(42);
+        $configuration = new DummyConfiguration(['detailPID' => 42]);
 
-        $subject = new TestingSingleViewLinkBuilder();
-        $subject->setPlugin($plugin);
+        $subject = new TestingSingleViewLinkBuilder($configuration);
 
         self::assertSame(
             42,
@@ -293,9 +279,9 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForNoPluginSetReturnsPageUidFromTypoScriptSetup(): void
     {
-        $this->configuration->setAsInteger('detailPID', 91);
+        $configuration = new DummyConfiguration(['detailPID' => 91]);
 
-        $subject = new TestingSingleViewLinkBuilder();
+        $subject = new TestingSingleViewLinkBuilder($configuration);
 
         self::assertSame(
             91,
@@ -402,7 +388,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $event = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
 
-        $subject = new TestingSingleViewLinkBuilder();
+        $subject = new TestingSingleViewLinkBuilder(new DummyConfiguration());
 
         self::assertSame(
             'http://www.example.com',
@@ -420,7 +406,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $event = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['details_page' => $pageUid]);
 
-        $subject = new TestingSingleViewLinkBuilder();
+        $subject = new TestingSingleViewLinkBuilder(new DummyConfiguration());
 
         self::assertStringContainsString(
             '?id=' . $pageUid . '&tx_seminars_pi1%5BshowUid%5D=' . $event->getUid(),
@@ -438,7 +424,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
-        $subject = new TestingSingleViewLinkBuilder();
+        $subject = new TestingSingleViewLinkBuilder(new DummyConfiguration());
 
         self::assertSame(
             $this->getFrontEndController()->cObj,
@@ -451,7 +437,7 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getContentObjectForNoFrontEndReturnsContentObjectRenderer(): void
     {
-        $subject = new TestingSingleViewLinkBuilder();
+        $subject = new TestingSingleViewLinkBuilder(new DummyConfiguration());
 
         self::assertInstanceOf(ContentObjectRenderer::class, $subject->getContentObject());
     }

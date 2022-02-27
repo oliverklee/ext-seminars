@@ -6,6 +6,9 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\FallbackConfiguration;
+use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
@@ -1046,12 +1049,12 @@ class RegistrationManager
         string $helloSubjectPrefix,
         bool $useHtml = false
     ): string {
-        if ($this->linkBuilder === null) {
+        if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
+            $configuration = $this->buildConfigurationWithFlexforms($plugin);
             /** @var SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
             $this->injectLinkBuilder($linkBuilder);
         }
-        $this->linkBuilder->setPlugin($plugin);
 
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
 
@@ -1203,6 +1206,13 @@ class RegistrationManager
         }
 
         return $emailBody;
+    }
+
+    private function buildConfigurationWithFlexforms(TemplateHelper $plugin): FallbackConfiguration
+    {
+        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
+        $flexFormsConfiguration = new FlexformsConfiguration($plugin->cObj);
+        return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
     }
 
     private function addCssToHtmlEmail(string $emailBody): string

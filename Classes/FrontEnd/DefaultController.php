@@ -218,9 +218,7 @@ class DefaultController extends TemplateHelper
     protected $registrationFormHookProvider = null;
 
     /**
-     * a link builder instance
-     *
-     * @var SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder|null
      */
     private $linkBuilder = null;
 
@@ -238,6 +236,11 @@ class DefaultController extends TemplateHelper
      * @var string
      */
     protected $whatToDisplay = '';
+
+    /**
+     * @var Configuration|null
+     */
+    private $configuration = null;
 
     /**
      * Displays the seminar manager HTML.
@@ -289,7 +292,7 @@ class DefaultController extends TemplateHelper
                 $result = $registrationsList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new RegistrationListConfigurationCheck(
-                        $this->buildConfigurationWithFlexForms(),
+                        $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
                     $configurationCheck->check();
@@ -307,7 +310,7 @@ class DefaultController extends TemplateHelper
                 $result = $countdown->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new CountdownConfigurationCheck(
-                        $this->buildConfigurationWithFlexForms(),
+                        $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
                     $configurationCheck->check();
@@ -324,7 +327,7 @@ class DefaultController extends TemplateHelper
                 $result = $categoryList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new CategoryListConfigurationCheck(
-                        $this->buildConfigurationWithFlexForms(),
+                        $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
                     $configurationCheck->check();
@@ -342,7 +345,7 @@ class DefaultController extends TemplateHelper
                 $result = $eventHeadline->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new EventHeadlineConfigurationCheck(
-                        $this->buildConfigurationWithFlexForms(),
+                        $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
                     $configurationCheck->check();
@@ -626,7 +629,7 @@ class DefaultController extends TemplateHelper
 
         if ($this->isConfigurationCheckEnabled()) {
             $configurationCheck = new SingleViewConfigurationCheck(
-                $this->buildConfigurationWithFlexForms(),
+                $this->getConfigurationWithFlexForms(),
                 'plugin.tx_seminars_pi1'
             );
             $configurationCheck->check();
@@ -1420,7 +1423,7 @@ class DefaultController extends TemplateHelper
         }
 
         $configurationCheck = new ListViewConfigurationCheck(
-            $this->buildConfigurationWithFlexForms(),
+            $this->getConfigurationWithFlexForms(),
             'plugin.tx_seminars_pi1'
         );
         $configurationCheck->check();
@@ -1544,7 +1547,7 @@ class DefaultController extends TemplateHelper
 
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new MyVipEventsConfigurationCheck(
-                        $this->buildConfigurationWithFlexForms(),
+                        $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
                     $configurationCheck->check();
@@ -1561,7 +1564,7 @@ class DefaultController extends TemplateHelper
                     $result .= $this->getSubpart('MESSAGE_MY_ENTERED_EVENTS');
                     if ($this->isConfigurationCheckEnabled()) {
                         $configurationCheck = new MyEnteredEventsConfigurationCheck(
-                            $this->buildConfigurationWithFlexForms(),
+                            $this->getConfigurationWithFlexForms(),
                             'plugin.tx_seminars_pi1'
                         );
                         $configurationCheck->check();
@@ -2651,7 +2654,7 @@ class DefaultController extends TemplateHelper
 
         if ($this->isConfigurationCheckEnabled()) {
             $configurationCheck = new RegistrationFormConfigurationCheck(
-                $this->buildConfigurationWithFlexForms(),
+                $this->getConfigurationWithFlexForms(),
                 'plugin.tx_seminars_pi1'
             );
             $configurationCheck->check();
@@ -2798,7 +2801,7 @@ class DefaultController extends TemplateHelper
             $result = $eventEditor->render();
             if ($this->isConfigurationCheckEnabled()) {
                 $configurationCheck = new EventEditorConfigurationCheck(
-                    $this->buildConfigurationWithFlexForms(),
+                    $this->getConfigurationWithFlexForms(),
                     'plugin.tx_seminars_pi1'
                 );
                 $configurationCheck->check();
@@ -3277,12 +3280,12 @@ class DefaultController extends TemplateHelper
 
     protected function getLinkBuilder(): SingleViewLinkBuilder
     {
-        if ($this->linkBuilder === null) {
+        if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
+            $configuration = $this->getConfigurationWithFlexForms();
             /** @var SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
             $this->injectLinkBuilder($linkBuilder);
         }
-        $this->linkBuilder->setPlugin($this);
 
         return $this->linkBuilder;
     }
@@ -3292,16 +3295,22 @@ class DefaultController extends TemplateHelper
         $this->linkBuilder = $linkBuilder;
     }
 
-    private function buildConfigurationWithFlexForms(): Configuration
+    protected function getConfigurationWithFlexForms(): Configuration
     {
+        if ($this->configuration instanceof Configuration) {
+            return $this->configuration;
+        }
+
         $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
         if (!$this->cObj instanceof ContentObjectRenderer) {
+            $this->configuration = $typoScriptConfiguration;
             return $typoScriptConfiguration;
         }
 
         $flexFormsConfiguration = new FlexformsConfiguration($this->cObj);
+        $this->configuration = new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
 
-        return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
+        return $this->configuration;
     }
 
     private function renderAsRichText(string $rawData): string

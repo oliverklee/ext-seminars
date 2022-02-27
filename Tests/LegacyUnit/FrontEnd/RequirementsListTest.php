@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
 use OliverKlee\Seminars\Model\Event;
@@ -30,7 +32,12 @@ final class RequirementsListTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
+
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
 
     protected function setUp(): void
     {
@@ -48,6 +55,9 @@ final class RequirementsListTest extends TestCase
             ]
         );
 
+        $this->configuration = new DummyConfiguration();
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+
         $this->subject = new RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $this->getFrontEndController()->cObj
@@ -58,6 +68,7 @@ final class RequirementsListTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
+        ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();
     }
 
@@ -119,10 +130,7 @@ final class RequirementsListTest extends TestCase
      */
     public function renderLinksOneRequirementToTheSingleView(): void
     {
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->configuration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
