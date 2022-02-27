@@ -29,7 +29,7 @@ class RequirementsList extends AbstractView
     private $limitRequirementsToMissing = false;
 
     /**
-     * @var SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder|null
      */
     private $linkBuilder = null;
 
@@ -75,12 +75,12 @@ class RequirementsList extends AbstractView
             );
         }
 
-        if ($this->linkBuilder == null) {
+        if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
+            $configuration = $this->getConfigurationWithFlexForms();
             /** @var SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class);
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
             $this->injectLinkBuilder($linkBuilder);
         }
-        $this->linkBuilder->setPlugin($this);
 
         $output = '';
 

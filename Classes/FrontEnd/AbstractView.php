@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\FallbackConfiguration;
+use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -35,6 +39,11 @@ abstract class AbstractView extends TemplateHelper
     protected $whatToDisplay = '';
 
     /**
+     * @var Configuration|null
+     */
+    private $configuration = null;
+
+    /**
      * The constructor. Initializes the TypoScript configuration, initializes
      * the flex forms, gets the template HTML code, sets the localized labels
      * and set the CSS classes from TypoScript.
@@ -59,4 +68,22 @@ abstract class AbstractView extends TemplateHelper
      * @return string the view's content
      */
     abstract public function render(): string;
+
+    protected function getConfigurationWithFlexForms(): Configuration
+    {
+        if ($this->configuration instanceof Configuration) {
+            return $this->configuration;
+        }
+
+        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            $this->configuration = $typoScriptConfiguration;
+            return $this->configuration;
+        }
+
+        $flexFormsConfiguration = new FlexformsConfiguration($this->cObj);
+        $this->configuration = new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
+
+        return $this->configuration;
+    }
 }
