@@ -62,7 +62,7 @@ class SingleViewLinkBuilder
      */
     protected function getContentObject(): ContentObjectRenderer
     {
-        if ($this->getFrontEndController() === null) {
+        if (!$this->getFrontEndController() instanceof TypoScriptFrontendController) {
             $this->createFakeFrontEnd();
         }
 

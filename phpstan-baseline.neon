@@ -821,21 +821,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$typo3confVarsBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
-
-		-
 			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:CONFIGURATION type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/FrontEnd/RegistrationFormTest.php

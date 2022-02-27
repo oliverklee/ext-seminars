@@ -505,13 +505,16 @@ class Event extends AbstractTimeSpan implements Titled
             return 0;
         }
 
-        return $this->getEventType()->getSingleViewPageUid();
+        $eventType = $this->getEventType();
+
+        return $eventType instanceof EventType ? $eventType->getSingleViewPageUid() : 0;
     }
 
     protected function hasSingleViewPageUidFromEventType(): bool
     {
-        return ($this->getEventType() !== null)
-            && $this->getEventType()->hasSingleViewPageUid();
+        $eventType = $this->getEventType();
+
+        return $eventType instanceof EventType && $eventType->hasSingleViewPageUid();
     }
 
     /**
