@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Service;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -62,51 +61,17 @@ class SingleViewLinkBuilder
      */
     protected function getContentObject(): ContentObjectRenderer
     {
-        if (!$this->getFrontEndController() instanceof TypoScriptFrontendController) {
-            $this->createFakeFrontEnd();
-        }
-
         return $this->getFrontEndController()->cObj;
     }
 
-    private function getFrontEndController(): ?TypoScriptFrontendController
+    private function getFrontEndController(): TypoScriptFrontendController
     {
-        return $GLOBALS['TSFE'] ?? null;
-    }
+        $controller = $GLOBALS['TSFE'] ?? null;
+        if (!$controller instanceof TypoScriptFrontendController) {
+            throw new \BadMethodCallException('The SingleViewLinkBuilder may only be used in FE context.', 1645981344);
+        }
 
-    /**
-     * Creates an artificial front end (which is necessary for creating typolinks).
-     */
-    protected function createFakeFrontEnd(): void
-    {
-        $this->suppressFrontEndCookies();
-
-        /** @var TypoScriptFrontendController $frontEnd */
-        $frontEnd = GeneralUtility::makeInstance(
-            TypoScriptFrontendController::class,
-            $GLOBALS['TYPO3_CONF_VARS'],
-            0,
-            0
-        );
-
-        $frontEnd->fe_user = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-
-        $frontEnd->determineId();
-        $frontEnd->config = [];
-
-        $frontEnd->newCObj();
-
-        $GLOBALS['TSFE'] = $frontEnd;
-    }
-
-    /**
-     * Makes sure that no FE login cookies will be sent.
-     */
-    private function suppressFrontEndCookies(): void
-    {
-        $_POST['FE_SESSION_KEY'] = '';
-        $_GET['FE_SESSION_KEY'] = '';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['dontSetCookie'] = 1;
+        return $controller;
     }
 
     /**
