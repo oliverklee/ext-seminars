@@ -112,7 +112,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->method('getSingleViewPageFromConfiguration')
             ->willReturn(0);
 
-        self::assertEquals(
+        self::assertSame(
             '42',
             $subject->getSingleViewPageForEvent($event)
         );
@@ -147,7 +147,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->method('getSingleViewPageFromConfiguration')
             ->willReturn(91);
 
-        self::assertEquals(
+        self::assertSame(
             '91',
             $subject->getSingleViewPageForEvent($event)
         );
@@ -182,7 +182,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->method('getSingleViewPageFromConfiguration')
             ->willReturn(91);
 
-        self::assertEquals(
+        self::assertSame(
             '42',
             $subject->getSingleViewPageForEvent($event)
         );
@@ -217,7 +217,7 @@ final class SingleViewLinkBuilderTest extends TestCase
             ->method('getSingleViewPageFromConfiguration')
             ->willReturn(0);
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $subject->getSingleViewPageForEvent($event)
         );
@@ -282,7 +282,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $subject = new TestingSingleViewLinkBuilder();
         $subject->setPlugin($plugin);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $subject->getSingleViewPageFromConfiguration()
         );
@@ -297,7 +297,7 @@ final class SingleViewLinkBuilderTest extends TestCase
 
         $subject = new TestingSingleViewLinkBuilder();
 
-        self::assertEquals(
+        self::assertSame(
             91,
             $subject->getSingleViewPageFromConfiguration()
         );
@@ -322,7 +322,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $subject->method('createRelativeUrlForEvent')
             ->willReturn($relativeUrl);
 
-        self::assertEquals(
+        self::assertSame(
             GeneralUtility::locationHeaderUrl($relativeUrl),
             $subject->createAbsoluteUrlForEvent($event)
         );
@@ -388,7 +388,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         /** @var Event&MockObject $event */
         $event = $this->createMock(Event::class);
 
-        self::assertEquals(
+        self::assertSame(
             $relativeUrl,
             $subject->createRelativeUrlForEvent($event)
         );
@@ -404,7 +404,7 @@ final class SingleViewLinkBuilderTest extends TestCase
 
         $subject = new TestingSingleViewLinkBuilder();
 
-        self::assertEquals(
+        self::assertSame(
             'http://www.example.com',
             $subject->createAbsoluteUrlForEvent($event)
         );
