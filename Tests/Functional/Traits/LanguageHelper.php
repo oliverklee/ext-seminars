@@ -41,4 +41,14 @@ trait LanguageHelper
     {
         $GLOBALS['LANG'] = $this->getLanguageService();
     }
+
+    /**
+     * Convenience function for `$this->getLanguageService()->getLL()`
+     *
+     * @param non-empty-string $key
+     */
+    private function translate(string $key): string
+    {
+        return $this->getLanguageService()->getLL($key);
+    }
 }

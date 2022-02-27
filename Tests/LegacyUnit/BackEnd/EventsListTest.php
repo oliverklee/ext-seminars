@@ -705,7 +705,7 @@ final class EventsListTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_show_event_registrations'),
+            $this->translate('label_show_event_registrations'),
             $this->subject->show()
         );
     }
@@ -772,7 +772,7 @@ final class EventsListTest extends TestCase
         );
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_show_event_registrations'),
+            $this->translate('label_show_event_registrations'),
             $this->subject->show()
         );
     }
@@ -810,7 +810,7 @@ final class EventsListTest extends TestCase
      */
     public function localizationReturnsLocalizedStringForExistingKey(): void
     {
-        self::assertSame('Events', $this->getLanguageService()->getLL('title'));
+        self::assertSame('Events', $this->translate('title'));
     }
 
     ///////////////////////////////////////////
@@ -849,7 +849,7 @@ final class EventsListTest extends TestCase
 
         self::assertStringContainsString(
             \sprintf(
-                $this->getLanguageService()->getLL('label_create_record_in_current_folder'),
+                $this->translate('label_create_record_in_current_folder'),
                 '',
                 $this->dummySysFolderPid
             ),
@@ -882,7 +882,7 @@ final class EventsListTest extends TestCase
 
         self::assertStringContainsString(
             \sprintf(
-                $this->getLanguageService()->getLL('label_create_record_in_foreign_folder'),
+                $this->translate('label_create_record_in_foreign_folder'),
                 '',
                 $newEventFolder
             ),

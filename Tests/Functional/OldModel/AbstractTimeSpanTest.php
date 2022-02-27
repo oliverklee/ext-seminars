@@ -71,7 +71,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     public function getTimeForNoTimeReturnsWillBeAnnouncesMessage(): void
     {
         self::assertSame(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->subject->getTime()
         );
     }
@@ -84,7 +84,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50' . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            '09:50' . ' ' . $this->translate('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -98,7 +98,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50&#8211;18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            '09:50&#8211;18:30' . ' ' . $this->translate('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -112,7 +112,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50-18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            '09:50-18:30' . ' ' . $this->translate('label_hours'),
             $this->subject->getTime('-')
         );
     }
@@ -126,7 +126,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 2, 2010));
 
         self::assertSame(
-            '09:50&#8211;18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            '09:50&#8211;18:30' . ' ' . $this->translate('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -223,7 +223,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertSame(
-            $modifiedValue . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            $modifiedValue . ' ' . $this->translate('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -236,7 +236,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     public function getDateForNoDateReturnsWillBeAnnouncedMessage(): void
     {
         self::assertSame(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->subject->getDate()
         );
     }
@@ -262,7 +262,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->subject->getDate()
         );
     }

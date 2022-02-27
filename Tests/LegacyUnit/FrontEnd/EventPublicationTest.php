@@ -52,7 +52,7 @@ final class EventPublicationTest extends TestCase
     public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage(): void
     {
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_publishingFailed'),
+            $this->translate('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -65,7 +65,7 @@ final class EventPublicationTest extends TestCase
         $this->subject->piVars['hash'] = '';
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_publishingFailed'),
+            $this->translate('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -78,7 +78,7 @@ final class EventPublicationTest extends TestCase
         $this->subject->piVars['hash'] = 'foo';
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_publishingFailed'),
+            $this->translate('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -97,7 +97,7 @@ final class EventPublicationTest extends TestCase
         $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_publishingFailed'),
+            $this->translate('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -116,7 +116,7 @@ final class EventPublicationTest extends TestCase
         $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_publishingSuccessful'),
+            $this->translate('message_publishingSuccessful'),
             $this->subject->render()
         );
     }

@@ -80,7 +80,7 @@ final class ConfirmEventMailFormTest extends TestCase
     {
         self::assertStringContainsString(
             '<button class="submitButton confirmEvent"><p>' .
-            $this->getLanguageService()->getLL('confirmMailForm_sendButton') .
+            $this->translate('confirmMailForm_sendButton') .
             '</p></button>',
             $this->subject->render()
         );

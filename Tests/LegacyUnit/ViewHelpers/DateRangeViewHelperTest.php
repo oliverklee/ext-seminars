@@ -50,7 +50,7 @@ final class DateRangeViewHelperTest extends TestCase
         $timeSpan->setData([]);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->subject->render($timeSpan)
         );
     }

@@ -686,7 +686,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setBeginDate(0);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlinePrebooking'),
+            $this->translate('label_onlinePrebooking'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -703,7 +703,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setAttendancesMax(5);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -721,7 +721,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertStringContainsString(
-            \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
+            \sprintf($this->translate('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -738,7 +738,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertStringContainsString(
-            \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
+            \sprintf($this->translate('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -976,7 +976,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_alreadyRegistered'),
+            $this->translate('message_alreadyRegistered'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1028,7 +1028,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_userIsBlocked'),
+            $this->translate('message_userIsBlocked'),
             $this->subject->canRegisterIfLoggedInMessage($this->cachedSeminar)
         );
     }
@@ -1041,7 +1041,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createBookedOutSeminar();
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noVacancies'),
+            $this->translate('message_noVacancies'),
             $this->subject->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
         );
     }
@@ -1054,7 +1054,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setStatus(Event::STATUS_CANCELED);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarCancelled'),
+            $this->translate('message_seminarCancelled'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1068,7 +1068,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setNeedsRegistration(false);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
+            $this->translate('message_noRegistrationNecessary'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1966,7 +1966,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_confirmationSubject'),
+            $this->translate('email_confirmationSubject'),
             $this->email->getSubject()
         );
     }
@@ -2323,7 +2323,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_planned_disclaimer'),
+            $this->translate('label_planned_disclaimer'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -2345,7 +2345,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_planned_disclaimer'),
+            $this->translate('label_planned_disclaimer'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -2367,7 +2367,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_planned_disclaimer'),
+            $this->translate('label_planned_disclaimer'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -2390,7 +2390,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_planned_disclaimer'),
+            $this->translate('label_planned_disclaimer'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -2540,7 +2540,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -3439,7 +3439,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_informal'),
+            $this->translate('email_hello_informal'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -3467,7 +3467,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_2'),
+            $this->translate('email_hello_formal_2'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -3495,7 +3495,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_0'),
+            $this->translate('email_hello_formal_0'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -3523,7 +3523,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_1'),
+            $this->translate('email_hello_formal_1'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -3548,7 +3548,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('email_confirmationHello'),
+                $this->translate('email_confirmationHello'),
                 $this->seminar->getTitle()
             ),
             $this->getTextBodyOfEmail($this->email)
@@ -3575,7 +3575,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('email_confirmationHello_informal'),
+                $this->translate('email_confirmationHello_informal'),
                 $this->seminar->getTitle()
             ),
             $this->getTextBodyOfEmail($this->email)
@@ -3606,7 +3606,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnUnregistrationHello'
                 ),
                 $this->seminar->getTitle()
@@ -3639,7 +3639,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnUnregistrationHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -3672,7 +3672,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnRegistrationForQueueHello'
                 ),
                 $this->seminar->getTitle()
@@ -3705,7 +3705,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnRegistrationForQueueHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -3738,7 +3738,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnQueueUpdateHello'
                 ),
                 $this->seminar->getTitle()
@@ -3771,7 +3771,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL(
+                $this->translate(
                     'email_confirmationOnQueueUpdateHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4381,7 +4381,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertRegExp(
-            '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1\\n*$/',
+            '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -4403,8 +4403,8 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_vacancies') . ': ' .
-            $this->getLanguageService()->getLL('label_unlimited'),
+            $this->translate('label_vacancies') . ': ' .
+            $this->translate('label_unlimited'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -4430,7 +4430,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_company'),
+            $this->translate('label_company'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -4693,7 +4693,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -4769,7 +4769,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotNull($firstEmail);
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -4907,7 +4907,7 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('email_additionalNotificationIsFullSubject'),
+                $this->translate('email_additionalNotificationIsFullSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -4929,7 +4929,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_additionalNotificationIsFull'),
+            $this->translate('email_additionalNotificationIsFull'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -4995,7 +4995,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertRegExp(
-            '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1\\n*$/',
+            '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -5020,8 +5020,8 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_vacancies') . ': '
-            . $this->getLanguageService()->getLL('label_unlimited'),
+            $this->translate('label_vacancies') . ': '
+            . $this->translate('label_unlimited'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -7249,7 +7249,7 @@ final class RegistrationManagerTest extends TestCase
     public function existsSeminarMessageForZeroUidReturnsErrorMessage(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_missingSeminarNumber'),
+            $this->translate('message_missingSeminarNumber'),
             $this->subject->existsSeminarMessage(0)
         );
     }
@@ -7273,7 +7273,7 @@ final class RegistrationManagerTest extends TestCase
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
         );
     }
@@ -7303,7 +7303,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }
@@ -7320,7 +7320,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }

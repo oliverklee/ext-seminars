@@ -118,7 +118,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
 
         $subject = new GeneralEventMailForm(1);
 
-        $messageBody = '%salutation' . $this->getLanguageService()->getLL('cancelMailForm_prefillField_messageBody');
+        $messageBody = '%salutation' . $this->translate('cancelMailForm_prefillField_messageBody');
         $subject->setPostData(
             [
                 'action' => 'sendEmail',

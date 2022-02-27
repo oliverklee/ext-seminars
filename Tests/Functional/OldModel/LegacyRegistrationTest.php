@@ -222,7 +222,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('email');
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_email'), $result);
+        self::assertStringContainsString($this->translate('label_email'), $result);
     }
 
     /**
@@ -241,8 +241,8 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('name , email');
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_name'), $result);
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_email'), $result);
+        self::assertStringContainsString($this->translate('label_name'), $result);
+        self::assertStringContainsString($this->translate('label_email'), $result);
     }
 
     /**
@@ -508,7 +508,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('gender');
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.' . $value), $result);
+        self::assertStringContainsString($this->translate('label_gender.I.' . $value), $result);
     }
 
     /**
@@ -548,7 +548,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.0'), $result);
+        self::assertStringContainsString($this->translate('label_gender.I.0'), $result);
     }
 
     /**
@@ -560,7 +560,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.1'), $result);
+        self::assertStringContainsString($this->translate('label_gender.I.1'), $result);
     }
 
     /**

@@ -300,7 +300,7 @@ final class LegacyRegistrationTest extends TestCase
         $this->subject->setRegisteredThemselves(false);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_no'),
+            $this->translate('label_no'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }
@@ -313,7 +313,7 @@ final class LegacyRegistrationTest extends TestCase
         $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_yes'),
+            $this->translate('label_yes'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }
@@ -424,7 +424,7 @@ final class LegacyRegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelForInterestsIfRequested(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_interests'),
+            $this->translate('label_interests'),
             $this->subject->dumpAttendanceValues('interests')
         );
     }
@@ -435,7 +435,7 @@ final class LegacyRegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_interests'),
+            $this->translate('label_interests'),
             $this->subject->dumpAttendanceValues('interests, expectations')
         );
     }
@@ -446,7 +446,7 @@ final class LegacyRegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_interests'),
+            $this->translate('label_interests'),
             $this->subject->dumpAttendanceValues('interests ,expectations')
         );
     }
@@ -988,7 +988,7 @@ final class LegacyRegistrationTest extends TestCase
         );
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_yes'),
+            $this->translate('label_yes'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }

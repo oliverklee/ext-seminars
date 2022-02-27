@@ -134,7 +134,7 @@ final class SelectorWidgetTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_searching_hints'),
+            $this->translate('label_searching_hints'),
             $this->subject->render()
         );
     }
@@ -151,7 +151,7 @@ final class SelectorWidgetTest extends TestCase
 
         self::assertStringContainsString(
             '<input type="submit" value="' .
-            $this->getLanguageService()->getLL('label_selector_submit') . '" />',
+            $this->translate('label_selector_submit') . '" />',
             $this->subject->render()
         );
     }
@@ -168,7 +168,7 @@ final class SelectorWidgetTest extends TestCase
 
         self::assertStringContainsString(
             '<input type="submit" value="' .
-            $this->getLanguageService()->getLL('label_selector_reset') . '"',
+            $this->translate('label_selector_reset') . '"',
             $this->subject->render()
         );
     }
@@ -189,7 +189,7 @@ final class SelectorWidgetTest extends TestCase
 
         self::assertStringContainsString(
             '<option value="0">' .
-            $this->getLanguageService()->getLL('label_selector_pleaseChoose') .
+            $this->translate('label_selector_pleaseChoose') .
             '</option>',
             $this->subject->render()
         );
@@ -208,11 +208,11 @@ final class SelectorWidgetTest extends TestCase
         $output = $this->subject->render();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_event_type'),
+            $this->translate('label_event_type'),
             $output
         );
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_language'),
+            $this->translate('label_language'),
             $output
         );
     }

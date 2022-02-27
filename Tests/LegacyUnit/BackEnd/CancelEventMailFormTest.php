@@ -80,7 +80,7 @@ final class CancelEventMailFormTest extends TestCase
     {
         self::assertStringContainsString(
             '<button class="submitButton cancelEvent"><p>' .
-            $this->getLanguageService()->getLL('cancelMailForm_sendButton') .
+            $this->translate('cancelMailForm_sendButton') .
             '</p></button>',
             $this->subject->render()
         );

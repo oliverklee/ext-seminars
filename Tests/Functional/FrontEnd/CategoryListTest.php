@@ -91,7 +91,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('label_no_categories'), $result);
+        self::assertStringContainsString($this->translate('label_no_categories'), $result);
     }
 
     /**

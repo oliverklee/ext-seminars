@@ -8,11 +8,13 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\EventListView;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Localization\LanguageService;
 
 final class EventListViewTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var EventListView
      */
@@ -58,23 +60,17 @@ final class EventListViewTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
-
     /**
      * Retrieves the localization for the given locallang key and then strips the trailing colon from the localization.
      *
-     * @param string $locallangKey
-     *        the locallang key with the localization to remove the trailing colon from, must not be empty and the localization
-     *        must have a trailing colon
+     * @param non-empty-string $locallangKey the locallang key with the localization to remove the trailing colon from,
+     *        must not be empty and the localization must have a trailing colon
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
-    protected function localizeAndRemoveColon(string $locallangKey): string
+    private function localizeAndRemoveColon(string $locallangKey): string
     {
-        return \rtrim($this->getLanguageService()->getLL($locallangKey), ':');
+        return \rtrim($this->translate($locallangKey), ':');
     }
 
     /**

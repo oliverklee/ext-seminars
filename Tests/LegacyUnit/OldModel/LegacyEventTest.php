@@ -1288,7 +1288,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
+            $this->translate('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1304,7 +1304,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
+            $this->translate('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1318,7 +1318,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
+            $this->translate('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1334,7 +1334,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
+            $this->translate('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1345,7 +1345,7 @@ final class LegacyEventTest extends TestCase
     public function canSomebodyRegisterMessageForEventWithoutDateReturnsNoDateMessage(): void
     {
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noDate'),
+            $this->translate('message_noDate'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1388,7 +1388,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setStatus(Event::STATUS_CANCELED);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_seminarCancelled'),
+            $this->translate('message_seminarCancelled'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1401,7 +1401,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNeedsRegistration(false);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
+            $this->translate('message_noRegistrationNecessary'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1417,7 +1417,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(10);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noVacancies'),
+            $this->translate('message_noVacancies'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1452,7 +1452,7 @@ final class LegacyEventTest extends TestCase
 
         self::assertSame(
             sprintf(
-                $this->getLanguageService()->getLL('message_registrationOpensOn'),
+                $this->translate('message_registrationOpensOn'),
                 $this->subject->getRegistrationBegin()
             ),
             $this->subject->canSomebodyRegisterMessage()
@@ -5238,7 +5238,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(5);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_fullyBooked'),
+            $this->translate('message_fullyBooked'),
             $this->subject->getVacanciesString()
         );
     }
@@ -5254,7 +5254,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_enough'),
+            $this->translate('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -5270,7 +5270,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_enough'),
+            $this->translate('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -5285,7 +5285,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_enough'),
+            $this->translate('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -5300,7 +5300,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNumberOfAttendances(1);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_enough'),
+            $this->translate('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -6658,7 +6658,7 @@ final class LegacyEventTest extends TestCase
     public function dumpSeminarValuesForTitleGivenReturnsLabelForTitle(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_title'),
+            $this->translate('label_title'),
             $this->subject->dumpSeminarValues('title')
         );
     }
@@ -6708,7 +6708,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_vacancies') . ": 0\n",
+            $this->translate('label_vacancies') . ": 0\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -6723,7 +6723,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_vacancies') . ": 1\n",
+            $this->translate('label_vacancies') . ": 1\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -6736,8 +6736,8 @@ final class LegacyEventTest extends TestCase
         $this->subject->setUnlimitedVacancies();
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_vacancies') . ': ' .
-            $this->getLanguageService()->getLL('label_unlimited') . "\n",
+            $this->translate('label_vacancies') . ': ' .
+            $this->translate('label_unlimited') . "\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -8024,7 +8024,7 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(false);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
+            $this->translate('message_noRegistrationNecessary'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -8039,7 +8039,7 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_notLoggedIn'),
+            $this->translate('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -8054,7 +8054,7 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_notLoggedIn'),
+            $this->translate('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_registrations', 'login')
         );
     }
@@ -8101,7 +8101,7 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_notLoggedIn'),
+            $this->translate('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel)
         );
     }
@@ -8208,7 +8208,7 @@ final class LegacyEventTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(
-            $this->getLanguageService()->getLL('message_accessDenied'),
+            $this->translate('message_accessDenied'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -8617,7 +8617,7 @@ final class LegacyEventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceRegular();
 
-        self::assertSame($this->getLanguageService()->getLL('message_forFree'), $result);
+        self::assertSame($this->translate('message_forFree'), $result);
     }
 
     /**
@@ -8642,7 +8642,7 @@ final class LegacyEventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceRegular();
 
-        self::assertSame($this->getLanguageService()->getLL('message_onRequest'), $result);
+        self::assertSame($this->translate('message_onRequest'), $result);
     }
 
     /**
@@ -8669,7 +8669,7 @@ final class LegacyEventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceSpecial();
 
-        self::assertSame($this->getLanguageService()->getLL('message_onRequest'), $result);
+        self::assertSame($this->translate('message_onRequest'), $result);
     }
 
     /**

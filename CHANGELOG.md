@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a convenience function for localized labels in tests (#1268)
 
 ### Changed
 - Move more legacy tests to the new testing framework (#1267)

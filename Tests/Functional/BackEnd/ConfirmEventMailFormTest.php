@@ -144,7 +144,7 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
 
         $subject = new ConfirmEventMailForm(1);
 
-        $messageBody = '%salutation' . $this->getLanguageService()->getLL('cancelMailForm_prefillField_messageBody');
+        $messageBody = '%salutation' . $this->translate('cancelMailForm_prefillField_messageBody');
         $subject->setPostData(
             [
                 'action' => 'confirmEvent',
