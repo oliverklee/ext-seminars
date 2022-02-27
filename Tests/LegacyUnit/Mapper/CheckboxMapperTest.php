@@ -6,11 +6,11 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use PHPUnit\Framework\TestCase;
 
 final class CheckboxMapperTest extends TestCase
 {

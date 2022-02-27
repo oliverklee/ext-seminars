@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\FlexForms;
+use PHPUnit\Framework\TestCase;
 
 final class FlexFormsTest extends TestCase
 {

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds all tests specific to event topics.

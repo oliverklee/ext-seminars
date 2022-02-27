@@ -7,10 +7,10 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
 use OliverKlee\Seminars\ViewHelpers\CommaSeparatedTitlesViewHelper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\CommaSeparatedTitlesViewHelper
