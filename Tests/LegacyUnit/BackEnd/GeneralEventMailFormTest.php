@@ -76,7 +76,7 @@ final class GeneralEventMailFormTest extends TestCase
     {
         self::assertStringContainsString(
             '<button class="submitButton sendEmail"><p>' .
-            $this->getLanguageService()->getLL('generalMailForm_sendButton') .
+            $this->translate('generalMailForm_sendButton') .
             '</p></button>',
             $this->subject->render()
         );

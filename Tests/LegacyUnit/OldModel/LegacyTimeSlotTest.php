@@ -141,7 +141,7 @@ final class LegacyTimeSlotTest extends TestCase
     public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces(): void
     {
         self::assertSame(
-            $this->getLanguageService()->getLL('message_willBeAnnounced'),
+            $this->translate('message_willBeAnnounced'),
             $this->subject->getPlaceShort()
         );
     }

@@ -447,7 +447,7 @@ final class RegistrationFormTest extends TestCase
         $this->subject->setPage(['next_page' => 5]);
 
         self::assertEquals(
-            \sprintf($this->getLanguageService()->getLL('label_step_counter'), 2, 2),
+            \sprintf($this->translate('label_step_counter'), 2, 2),
             $this->subject->getStepCounter()
         );
     }
@@ -1142,7 +1142,7 @@ final class RegistrationFormTest extends TestCase
         $this->subject->setFakedFormValue('seats', 2);
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_lessAttendeesThanSeats'),
+            $this->translate('message_lessAttendeesThanSeats'),
             $this->subject->getMessageForSeatsNotMatchingRegisteredPersons()
         );
     }
@@ -1160,7 +1160,7 @@ final class RegistrationFormTest extends TestCase
         $this->subject->setFakedFormValue('seats', 1);
 
         self::assertEquals(
-            $this->getLanguageService()->getLL('message_moreAttendeesThanSeats'),
+            $this->translate('message_moreAttendeesThanSeats'),
             $this->subject->getMessageForSeatsNotMatchingRegisteredPersons()
         );
     }

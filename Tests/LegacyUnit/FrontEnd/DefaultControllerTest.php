@@ -1914,7 +1914,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $uid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_expiry'),
+            $this->translate('label_expiry'),
             $this->subject->main('', [])
         );
     }
@@ -1932,7 +1932,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_paymentmethods'),
+            $this->translate('label_paymentmethods'),
             $this->subject->main('', [])
         );
     }
@@ -1961,7 +1961,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_paymentmethods'),
+            $this->translate('label_paymentmethods'),
             $this->subject->main('', [])
         );
     }
@@ -2156,7 +2156,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = 0;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_missingSeminarNumber'),
+            $this->translate('message_missingSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -2176,7 +2176,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -2197,7 +2197,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -2381,7 +2381,7 @@ final class DefaultControllerTest extends TestCase
     public function listViewNotContainsExpiryLabel(): void
     {
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_expiry'),
+            $this->translate('label_expiry'),
             $this->subject->main('', [])
         );
     }
@@ -4443,7 +4443,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -4474,7 +4474,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
+                $this->translate('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -4507,7 +4507,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringNotContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
+                $this->translate('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -4530,7 +4530,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_onlinePrebooking'),
+            $this->translate('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
     }
@@ -4554,7 +4554,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -4580,7 +4580,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('message_registrationOpensOn'),
+                $this->translate('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
             $this->subject->main('', [])
@@ -4606,7 +4606,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -4629,7 +4629,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -4934,7 +4934,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('visibility_status_published'),
+            $this->translate('visibility_status_published'),
             $this->subject->main('', [])
         );
     }
@@ -4962,7 +4962,7 @@ final class DefaultControllerTest extends TestCase
     public function getFieldHeaderContainsLabelOfKey(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_date'),
+            $this->translate('label_date'),
             $this->subject->getFieldHeader('date')
         );
     }
@@ -5368,7 +5368,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_owner'),
+            $this->translate('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -5413,7 +5413,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_owner'),
+            $this->translate('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -5439,7 +5439,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_owner'),
+            $this->translate('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -5614,7 +5614,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -5648,7 +5648,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
+                $this->translate('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -5684,7 +5684,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringNotContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
+                $this->translate('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -5710,7 +5710,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_onlinePrebooking'),
+            $this->translate('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
     }
@@ -5736,7 +5736,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -5764,7 +5764,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringContainsString(
             sprintf(
-                $this->getLanguageService()->getLL('message_registrationOpensOn'),
+                $this->translate('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
             $this->subject->main('', [])
@@ -5792,7 +5792,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -5818,7 +5818,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_onlineRegistration'),
+            $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -5894,7 +5894,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['seminar'] = $date;
 
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_your_user_data'),
+            $this->translate('label_your_user_data'),
             $this->subject->main('', [])
         );
     }
@@ -6506,7 +6506,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('visibility_status_pending'),
+            $this->translate('visibility_status_pending'),
             $this->subject->main('', [])
         );
     }
@@ -6538,7 +6538,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('visibility_status_published'),
+            $this->translate('visibility_status_published'),
             $this->subject->main('', [])
         );
     }
@@ -6748,7 +6748,7 @@ final class DefaultControllerTest extends TestCase
 
         self::assertStringContainsString(
             '<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
-            $this->getLanguageService()->getLL('label_edit') . '</a>',
+            $this->translate('label_edit') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -6777,7 +6777,7 @@ final class DefaultControllerTest extends TestCase
         self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->getLanguageService()->getLL('label_hide') . '</a>',
+            $this->translate('label_hide') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -6806,7 +6806,7 @@ final class DefaultControllerTest extends TestCase
         self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->getLanguageService()->getLL('label_unhide') . '</a>',
+            $this->translate('label_unhide') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -6923,7 +6923,7 @@ final class DefaultControllerTest extends TestCase
         self::assertStringContainsString(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->getLanguageService()->getLL('label_copy') . '</a>',
+            $this->translate('label_copy') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -8250,7 +8250,7 @@ final class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('message_forFree'), $result);
+        self::assertStringContainsString($this->translate('message_forFree'), $result);
     }
 
     /**
@@ -8265,6 +8265,6 @@ final class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertStringContainsString($this->getLanguageService()->getLL('message_onRequest'), $result);
+        self::assertStringContainsString($this->translate('message_onRequest'), $result);
     }
 }

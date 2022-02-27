@@ -66,9 +66,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             $offset,
-            $this->getLanguageService()->getLL('countdown_seconds_plural')
+            $this->translate('countdown_seconds_plural')
         );
         self::assertSame($expected, $result);
     }
@@ -83,9 +83,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             1,
-            $this->getLanguageService()->getLL('countdown_minutes_singular')
+            $this->translate('countdown_minutes_singular')
         );
         self::assertSame($expected, $result);
     }
@@ -100,9 +100,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             2,
-            $this->getLanguageService()->getLL('countdown_minutes_plural')
+            $this->translate('countdown_minutes_plural')
         );
         self::assertSame($expected, $result);
     }
@@ -117,9 +117,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             1,
-            $this->getLanguageService()->getLL('countdown_hours_singular')
+            $this->translate('countdown_hours_singular')
         );
         self::assertSame($expected, $result);
     }
@@ -134,9 +134,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             $offset / Time::SECONDS_PER_HOUR,
-            $this->getLanguageService()->getLL('countdown_hours_plural')
+            $this->translate('countdown_hours_plural')
         );
         self::assertSame($expected, $result);
     }
@@ -149,9 +149,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + Time::SECONDS_PER_DAY);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             1,
-            $this->getLanguageService()->getLL('countdown_days_singular')
+            $this->translate('countdown_days_singular')
         );
         self::assertSame($expected, $result);
     }
@@ -166,9 +166,9 @@ final class CountdownViewHelperTest extends FunctionalTestCase
         $result = $this->subject->render(self::NOW + $offset);
 
         $expected = \sprintf(
-            $this->getLanguageService()->getLL('message_countdown'),
+            $this->translate('message_countdown'),
             2,
-            $this->getLanguageService()->getLL('countdown_days_plural')
+            $this->translate('countdown_days_plural')
         );
         self::assertSame($expected, $result);
     }

@@ -167,7 +167,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_0'),
+            $this->translate('email_hello_formal_0'),
             $this->subject->getSalutation($user)
         );
     }
@@ -182,7 +182,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_salutation_title_0') .
+            $this->translate('email_salutation_title_0') .
             ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -198,7 +198,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_1'),
+            $this->translate('email_hello_formal_1'),
             $this->subject->getSalutation($user)
         );
     }
@@ -213,7 +213,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_salutation_title_1') .
+            $this->translate('email_salutation_title_1') .
             ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -227,7 +227,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_formal_99'),
+            $this->translate('email_hello_formal_99'),
             $this->subject->getSalutation($user)
         );
     }
@@ -240,7 +240,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_salutation_title_99') . ' ' . $user->getLastOrFullName(),
+            $this->translate('email_salutation_title_99') . ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
     }
@@ -254,7 +254,7 @@ final class SalutationTest extends TestCase
         $this->configuration->setAsString('salutation', 'informal');
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('email_hello_informal'),
+            $this->translate('email_hello_informal'),
             $this->subject->getSalutation($user)
         );
     }
@@ -507,11 +507,11 @@ final class SalutationTest extends TestCase
 
         $event = new TestingLegacyEvent($eventUid);
         $timeInsert = \strftime(self::TIME_FORMAT, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
-            $this->getLanguageService()->getLL('email_timeTo') . ' ' .
+            $this->translate('email_timeTo') . ' ' .
             \strftime(self::TIME_FORMAT, $endDate);
 
         self::assertStringContainsString(
-            \sprintf($this->getLanguageService()->getLL('email_timeFrom'), $timeInsert),
+            \sprintf($this->translate('email_timeFrom'), $timeInsert),
             $this->subject->createIntroduction('%s', $event)
         );
     }

@@ -611,7 +611,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetails($plugin);
 
-        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        $expected = $this->translate('message_willBeAnnounced');
         self::assertStringContainsString($expected, $result);
     }
 
@@ -741,7 +741,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetailsRaw();
 
-        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        $expected = $this->translate('message_willBeAnnounced');
         self::assertStringContainsString($expected, $result);
     }
 
@@ -944,7 +944,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceShort();
 
-        $expected = $this->getLanguageService()->getLL('message_willBeAnnounced');
+        $expected = $this->translate('message_willBeAnnounced');
         self::assertStringContainsString($expected, $result);
     }
 

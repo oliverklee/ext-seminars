@@ -74,20 +74,6 @@ final class EmailRegistrationListViewTest extends TestCase
     }
 
     /**
-     * Retrieves the localization for the given locallang key and then strips the trailing colon from the localization.
-     *
-     * @param string $locallangKey
-     *        the locallang key with the localization to remove the trailing colon from, must not be empty and the localization
-     *        must have a trailing colon
-     *
-     * @return string locallang string with the removed trailing colon, will not be empty
-     */
-    protected function localizeAndRemoveColon(string $locallangKey): string
-    {
-        return \rtrim($this->getLanguageService()->getLL($locallangKey), ':');
-    }
-
-    /**
      * @test
      */
     public function renderCanContainOneRegistrationUid(): void

@@ -129,7 +129,7 @@ final class AbstractEventMailFormTest extends TestCase
     public function renderContainsPrefilledBodyField(): void
     {
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('testForm_prefillField_messageBody'),
+            $this->translate('testForm_prefillField_messageBody'),
             $this->subject->render()
         );
     }
@@ -141,7 +141,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         self::assertStringContainsString(
             \sprintf(
-                $this->getLanguageService()->getLL('testForm_prefillField_introduction'),
+                $this->translate('testForm_prefillField_introduction'),
                 \htmlspecialchars('"Dummy Event"', ENT_QUOTES | ENT_HTML5)
             ),
             $this->subject->render()
@@ -205,7 +205,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         self::assertStringContainsString(
             '<input type="button" value="' .
-            $this->getLanguageService()->getLL('eventMailForm_backButton') .
+            $this->translate('eventMailForm_backButton') .
             '" class="backButton"' .
             ' onclick="window.location=window.location" />',
             $this->subject->render()
@@ -226,7 +226,7 @@ final class AbstractEventMailFormTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
+            $this->translate('eventMailForm_error_subjectMustNotBeEmpty'),
             $this->subject->render()
         );
     }
@@ -245,7 +245,7 @@ final class AbstractEventMailFormTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
+            $this->translate('eventMailForm_error_messageBodyMustNotBeEmpty'),
             $this->subject->render()
         );
     }

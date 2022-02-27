@@ -448,7 +448,7 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_notLoggedIn'),
+            $this->translate('message_notLoggedIn'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -466,7 +466,7 @@ final class EventEditorTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
+            $this->translate('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -498,7 +498,7 @@ final class EventEditorTest extends TestCase
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
+            $this->translate('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -536,7 +536,7 @@ final class EventEditorTest extends TestCase
         $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
+            $this->translate('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -568,7 +568,7 @@ final class EventEditorTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
+            $this->translate('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -609,7 +609,7 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
+            $this->translate('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -650,7 +650,7 @@ final class EventEditorTest extends TestCase
         $this->subject->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -673,7 +673,7 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
+            $this->translate('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -1698,7 +1698,7 @@ final class EventEditorTest extends TestCase
         $this->subject->sendEmailToReviewer();
 
         self::assertSame(
-            $this->getLanguageService()->getLL('publish_event_subject'),
+            $this->translate('publish_event_subject'),
             $this->email->getSubject()
         );
     }
@@ -2249,7 +2249,7 @@ final class EventEditorTest extends TestCase
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertSame(
-            $this->getLanguageService()->getLL('save_event_subject'),
+            $this->translate('save_event_subject'),
             $this->email->getSubject()
         );
     }
@@ -2269,7 +2269,7 @@ final class EventEditorTest extends TestCase
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_save_event_text'),
+            $this->translate('label_save_event_text'),
             $this->getTextBodyOfEmail($this->email)
         );
     }
@@ -2289,7 +2289,7 @@ final class EventEditorTest extends TestCase
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_save_event_overview'),
+            $this->translate('label_save_event_overview'),
             $this->getTextBodyOfEmail($this->email)
         );
     }

@@ -11,6 +11,9 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
 
+/**
+ * @covers \OliverKlee\Seminars\Csv\CsvDownloader
+ */
 final class CsvDownloaderTest extends TestCase
 {
     use BackEndTestsTrait;
@@ -83,13 +86,13 @@ final class CsvDownloaderTest extends TestCase
     /**
      * Retrieves the localization for the given locallang key and then strips the trailing colon from it.
      *
-     * @param string $key the locallang key with the localization to remove the trailing colon from
+     * @param non-empty-string $key the locallang key with the localization to remove the trailing colon from
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
     private function localizeAndRemoveColon(string $key): string
     {
-        return \rtrim($this->getLanguageService()->getLL($key), ':');
+        return \rtrim($this->translate($key), ':');
     }
 
     // Tests for the CSV export of events.

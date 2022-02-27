@@ -651,7 +651,7 @@ final class RegistrationsListTest extends TestCase
     public function renderForNoWaitingListRegistrationsNotContainsWaitingListLabel(): void
     {
         self::assertStringNotContainsString(
-            $this->getLanguageService()->getLL('label_waiting_list'),
+            $this->translate('label_waiting_list'),
             $this->subject->render()
         );
     }
@@ -678,7 +678,7 @@ final class RegistrationsListTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $this->getLanguageService()->getLL('label_waiting_list'),
+            $this->translate('label_waiting_list'),
             $this->subject->render()
         );
     }

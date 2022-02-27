@@ -65,13 +65,13 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * Retrieves the localization for the given locallang key and then strips the trailing colon from it.
      *
-     * @param string $key the locallang key with the localization to remove the trailing colon from
+     * @param non-empty-string $key the locallang key with the localization to remove the trailing colon from
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
     private function localizeAndRemoveColon(string $key): string
     {
-        return \rtrim($this->getLanguageService()->getLL($key), ':');
+        return \rtrim($this->translate($key), ':');
     }
 
     /**
@@ -91,7 +91,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     {
         $result = $this->subject->createAndOutputListOfRegistrations(1);
 
-        self::assertSame($this->getLanguageService()->getLL('message_404'), $result);
+        self::assertSame($this->translate('message_404'), $result);
     }
 
     /**
