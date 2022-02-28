@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\CsvDownloader
@@ -21,7 +22,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @var bool
      */
-    protected $backupGlobals = true;
+    protected $backupGlobals = false;
 
     /**
      * @var CsvDownloader
@@ -51,7 +52,11 @@ final class CsvDownloaderTest extends TestCase
     {
         $this->unifyTestingEnvironment();
 
+        unset($GLOBALS['TYPO3_REQUEST']);
         $this->testingFramework = new TestingFramework('tx_seminars');
+//        $environment = GeneralUtility::getIndpEnv('_ARRAY');
+//        self::assertSame([], $environment);
+//        self::assertSame([], $environment);
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 

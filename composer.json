@@ -112,7 +112,7 @@
 		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
-		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
+		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit/Csv/CsvDownloaderTest.php",
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
 		"ci:tests": [
 			"@ci:tests:unit",
