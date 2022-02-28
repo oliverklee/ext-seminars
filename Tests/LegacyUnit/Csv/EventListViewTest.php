@@ -82,7 +82,7 @@ final class EventListViewTest extends TestCase
      *
      * @return int the UID of the created event record
      */
-    protected function createEventInFolderAndSetPageUid(array $eventData = []): int
+    private function createEventInFolderAndSetPageUid(array $eventData = []): int
     {
         $this->pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($this->pageUid);

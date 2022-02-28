@@ -111,7 +111,7 @@ final class SalutationTest extends TestCase
      * Checks whether the FrontEndUser.gender fields exists and
      * marks the test as skipped if that extension is not installed.
      */
-    protected function skipWithoutGenderField(): void
+    private function skipWithoutGenderField(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped(
