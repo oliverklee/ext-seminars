@@ -19,11 +19,6 @@ final class CsvDownloaderTest extends TestCase
     use BackEndTestsTrait;
 
     /**
-     * @var bool
-     */
-    protected $backupGlobals = true;
-
-    /**
      * @var CsvDownloader
      */
     private $subject = null;
