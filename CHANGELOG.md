@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a convenience function for localized labels in tests (#1268)
 
 ### Changed
+- Clean up the test (#1267)
 - Move more legacy tests to the new testing framework (#1267)
 - Use the new configuration classes for the single view link builder (#1265, #1266)
 - Upgrade to PHPUnit 8 (#1223)
