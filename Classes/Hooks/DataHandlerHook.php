@@ -278,7 +278,8 @@ class DataHandlerHook
             $eventPid = (int)$record['pid'];
         }
 
-        $timeSlotUids = GeneralUtility::trimExplode(',', $event['timeslots']);
+        /** @var array<int, non-empty-string> $timeSlotUids */
+        $timeSlotUids = GeneralUtility::trimExplode(',', $event['timeslots'], true);
 
         $all = (int)$configuration['all'];
         $frequency = $configuration['frequency'];

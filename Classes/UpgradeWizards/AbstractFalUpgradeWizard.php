@@ -177,6 +177,7 @@ abstract class AbstractFalUpgradeWizard implements UpgradeWizardInterface, Chatt
      */
     protected function migrateField(array $row): void
     {
+        /** @var array<int, non-empty-string> $fieldItems */
         $fieldItems = GeneralUtility::trimExplode(',', $row[$this->fieldToMigrate], true);
         if (empty($fieldItems) || is_numeric($row[$this->fieldToMigrate])) {
             return;

@@ -522,6 +522,7 @@ class LegacyRegistration extends AbstractModel
      */
     public function getUserDataAsHtml(string $keys, AbstractPlugin $plugin): string
     {
+        /** @var array<int, non-empty-string> $singleKeys */
         $singleKeys = GeneralUtility::trimExplode(',', $keys, true);
         $singleValues = [];
 
@@ -816,6 +817,7 @@ class LegacyRegistration extends AbstractModel
      */
     public function dumpUserValues(string $keysList): string
     {
+        /** @var array<int, non-empty-string> $keys */
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         $labels = [];
         $result = '';
@@ -869,6 +871,7 @@ class LegacyRegistration extends AbstractModel
      */
     public function dumpAttendanceValues(string $keysList): string
     {
+        /** @var array<int, non-empty-string> $keys */
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         /** @var array<non-empty-string, string> $labels */
         $labels = [];
@@ -1285,6 +1288,7 @@ class LegacyRegistration extends AbstractModel
             return '';
         }
 
+        /** @var array<int, non-empty-string> $names */
         $names = GeneralUtility::trimExplode("\n", $this->getAttendeesNames(), true);
         if ($this->hasRegisteredThemselves()) {
             \array_unshift($names, $this->getFrontEndUser()->getName());

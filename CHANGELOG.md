@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Improve the type annotations (#1277)
 - Remove a stray `backupGlobals` from a legacy test (#1274)
 - Allow Composer plugins from `helhum/typo3-console-plugin` (#1264)
 - Fix PHPUnit warnings (#1262)
