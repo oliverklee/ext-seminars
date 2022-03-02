@@ -102,8 +102,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of places.
      *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
-     *
      * @param int $places the number of places that are associated with this event, must be >= 0
      */
     public function setNumberOfPlaces(int $places): void
@@ -115,8 +113,6 @@ final class TestingLegacyEvent extends LegacyEvent
      * Sets the number of target groups for this record.
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of target groups.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $targetGroups the number of target groups that are associated with this event, must be >= 0
      */
@@ -132,8 +128,6 @@ final class TestingLegacyEvent extends LegacyEvent
      * payment methods field was changed to an unsigned integer and we may use
      * the function createRelationAndUpdateCounter() of the testing framework.
      *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=2948
-     *
      * @param int $paymentMethods the number of payment methods that are associated with this event, must be >= 0
      */
     public function setNumberOfPaymentMethods(int $paymentMethods): void
@@ -146,8 +140,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of organizing partners.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $numberOfOrganizingPartners
      *        the number of organizing partners that are associated with this event, must be >= 0
@@ -165,8 +157,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of categories.
      *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
-     *
      * @param int $number the number of categories that are associated with this event, must be >= 0
      */
     public function setNumberOfCategories(int $number): void
@@ -179,8 +169,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of organizers.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of organizers that are associated with this event, must be >= 0
      */
@@ -195,8 +183,6 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of speakers.
      *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
-     *
      * @param int $number the number of speakers that are associated with this event, must be >= 0
      */
     public function setNumberOfSpeakers(int $number): void
@@ -209,8 +195,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of partners.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of partners that are associated with this event, must be >= 0
      */
@@ -225,8 +209,6 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of tutors.
      *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
-     *
      * @param int $number the number of tutors that are associated with this event, must be >= 0
      */
     public function setNumberOfTutors(int $number): void
@@ -239,8 +221,6 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of leaders.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of leaders that are associated with this event, must be >= 0
      */

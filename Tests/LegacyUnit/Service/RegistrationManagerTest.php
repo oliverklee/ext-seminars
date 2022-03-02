@@ -644,8 +644,6 @@ final class RegistrationManagerTest extends TestCase
 
     /**
      * @test
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=4504
      */
     public function getLinkToRegistrationOrLoginPageWithLoggedInAndSeparateDetailsPageCreatesLinkToRegistrationPage(): void
     {

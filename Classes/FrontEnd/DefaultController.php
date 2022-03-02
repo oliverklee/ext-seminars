@@ -727,7 +727,6 @@ class DefaultController extends TemplateHelper
         // $this->seminar.
         // TODO: This needs to be removed as soon as the list view is moved
         // to its own class.
-        // @see https://bugs.oliverklee.com/show_bug.cgi?id=290
         $seminar = $this->seminar;
         if ($this->seminar->hasEndDate()) {
             $result .= $this->createEventsOnNextDayList();
@@ -2109,8 +2108,6 @@ class DefaultController extends TemplateHelper
             );
         }
 
-        // TODO: This needs to be changed when bug 3410 gets fixed.
-        // @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
         if (\is_array($this->piVars['place'])) {
             $builder->limitToPlaces(
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['place'])
