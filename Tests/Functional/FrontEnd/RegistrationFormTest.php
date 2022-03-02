@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Session\FakeSession;
+use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -17,6 +19,14 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 final class RegistrationFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
+
+    /**
+     * @var array<string, positive-int>
+     */
+    private const CONFIGURATION = [
+        'thankYouAfterRegistrationPID' => 3,
+        'pageToShowAfterUnregistrationPID' => 4,
+    ];
 
     /**
      * @var array<int, non-empty-string>
@@ -43,15 +53,24 @@ final class RegistrationFormTest extends FunctionalTestCase
      */
     private $contentObject;
 
+    /**
+     * @var FakeSession
+     */
+    private $session;
+
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/Pages.xml');
+
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
+        $this->testingFramework->createFakeFrontEnd(1);
         $this->contentObject = new ContentObjectRenderer();
         $this->initializeBackEndLanguage();
+
+        $this->session = new FakeSession();
+        Session::setInstance(Session::TYPE_USER, $this->session);
 
         $this->subject = new RegistrationForm([], $this->contentObject);
         $this->subject->setTestMode();
@@ -59,6 +78,7 @@ final class RegistrationFormTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
+        Session::purgeInstances();
         $this->testingFramework->cleanUpWithoutDatabase();
     }
 
@@ -252,5 +272,216 @@ final class RegistrationFormTest extends FunctionalTestCase
             1,
             $this->getDatabaseConnection()->selectCount('*', 'fe_users', 'username = "' . $email . '"')
         );
+    }
+
+    // Tests concerning getThankYouAfterRegistrationUrl
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp(): void
+    {
+        $subject = new RegistrationForm(self::CONFIGURATION, $this->contentObject);
+
+        $result = $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertRegExp('/^http:\\/\\/./', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithoutSendParametersNotContainsShowSeminarUid(): void
+    {
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = false;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $result = $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertStringNotContainsString('showUid', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithSendParametersContainsShowSeminarUid(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
+
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 1;
+        $event = LegacyEvent::fromUid($eventUid);
+        self::assertInstanceOf(LegacyEvent::class, $event);
+        $subject->setSeminar($event);
+
+        $result = $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertStringContainsString('showUid', $result);
+        self::assertStringContainsString('=' . $eventUid, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithSendParametersEncodesBracketsInUrl(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
+
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 1;
+        $event = LegacyEvent::fromUid($eventUid);
+        self::assertInstanceOf(LegacyEvent::class, $event);
+        $subject->setSeminar($event);
+
+        $result = $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertStringContainsString('%5BshowUid%5D', $result);
+        self::assertStringNotContainsString('[showUid]', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutEnabledNotLogsUserOff(): void
+    {
+        $this->testingFramework->createAndLoginFrontEndUser();
+
+        $configuration = self::CONFIGURATION;
+        $configuration['logOutOneTimeAccountsAfterRegistration'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertTrue($this->testingFramework->isLoggedIn());
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutDisabledNotLogsUserOff(): void
+    {
+        $this->testingFramework->createAndLoginFrontEndUser();
+        $this->session->setAsBoolean('onetimeaccount', true);
+
+        $configuration = self::CONFIGURATION;
+        $configuration['logOutOneTimeAccountsAfterRegistration'] = false;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertTrue($this->testingFramework->isLoggedIn());
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutDisabledNotLogsUserOff(): void
+    {
+        $this->testingFramework->createAndLoginFrontEndUser();
+
+        $configuration = self::CONFIGURATION;
+        $configuration['logOutOneTimeAccountsAfterRegistration'] = false;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertTrue($this->testingFramework->isLoggedIn());
+    }
+
+    /**
+     * @test
+     */
+    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutEnabledLogsUserOff(): void
+    {
+        $this->testingFramework->createAndLoginFrontEndUser();
+
+        $this->session->setAsBoolean('onetimeaccount', true);
+
+        $configuration = self::CONFIGURATION;
+        $configuration['logOutOneTimeAccountsAfterRegistration'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $subject->getThankYouAfterRegistrationUrl();
+
+        self::assertFalse($this->testingFramework->isLoggedIn());
+    }
+
+    // Tests concerning getPageToShowAfterUnregistrationUrl
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp(): void
+    {
+        $subject = new RegistrationForm(self::CONFIGURATION, $this->contentObject);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertRegExp('/^http:\\/\\/./', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithoutSendParametersNotContainsShowSeminarUid(): void
+    {
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = false;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertStringNotContainsString('showUid', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersContainsShowSeminarUid(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
+
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 1;
+        $event = LegacyEvent::fromUid($eventUid);
+        self::assertInstanceOf(LegacyEvent::class, $event);
+        $subject->setSeminar($event);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertStringContainsString('showUid', $result);
+        self::assertStringContainsString('=' . $eventUid, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersEncodesBracketsInUrl(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
+
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
+        $subject = new RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 1;
+        $event = LegacyEvent::fromUid($eventUid);
+        self::assertInstanceOf(LegacyEvent::class, $event);
+        $subject->setSeminar($event);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertStringContainsString('%5BshowUid%5D', $result);
+        self::assertStringNotContainsString('[showUid]', $result);
     }
 }

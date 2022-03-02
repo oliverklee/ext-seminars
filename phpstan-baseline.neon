@@ -586,11 +586,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:CONFIGURATION type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Unit/FrontEnd/RegistrationFormTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookImplementorReturnsArray\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/Fixtures/TestingHookImplementorReturnsArray.php
