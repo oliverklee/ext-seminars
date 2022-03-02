@@ -20,12 +20,12 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @var TestingEventMailForm
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * UID of a dummy event record

@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid spilling over the request in the legacy tests (#1278, #1279)
 - Improve the type annotations (#1277)
 - Remove a stray `backupGlobals` from a legacy test (#1274)
 - Allow Composer plugins from `helhum/typo3-console-plugin` (#1264)

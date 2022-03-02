@@ -30,17 +30,17 @@ final class RegistrationsListTest extends TestCase
     /**
      * @var RegistrationsList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int PID of a dummy system folder
      */
-    private $dummySysFolderPid = 0;
+    private $dummySysFolderPid;
 
     /**
      * @var array<int, class-string<MockObject>>
@@ -52,6 +52,7 @@ final class RegistrationsListTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
         $backEndModule = new DummyModule();
         $backEndModule->id = $this->dummySysFolderPid;

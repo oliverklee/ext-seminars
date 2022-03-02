@@ -18,12 +18,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 trait BackEndTestsTrait
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $getBackup = [];
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $postBackup = [];
 
@@ -38,24 +38,24 @@ trait BackEndTestsTrait
     private $languageBackup = '';
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $extConfBackup = [];
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $t3VarBackup = [];
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * @var HeaderCollector
      */
-    private $headerProxy = null;
+    private $headerProxy;
 
     /**
      * Replaces the current BE user with a mocked user, sets "default" as the current BE language, clears the
@@ -80,6 +80,8 @@ trait BackEndTestsTrait
 
     private function cleanRequestVariables(): void
     {
+        GeneralUtility::flushInternalRuntimeCaches();
+        unset($GLOBALS['TYPO3_REQUEST']);
         $this->getBackup = $GLOBALS['_GET'];
         $GLOBALS['_GET'] = [];
         $this->postBackup = $GLOBALS['_POST'];
@@ -148,6 +150,8 @@ trait BackEndTestsTrait
             $GLOBALS['_GET'] = $this->getBackup;
             $GLOBALS['_POST'] = $this->postBackup;
         }
+        unset($GLOBALS['TYPO3_REQUEST']);
+        GeneralUtility::flushInternalRuntimeCaches();
     }
 
     /**

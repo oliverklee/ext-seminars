@@ -5,18 +5,27 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
+use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 
 final class AbstractModuleTest extends TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var DummyModule
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {
+        $this->unifyTestingEnvironment();
         $this->subject = new DummyModule();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->restoreOriginalEnvironment();
     }
 
     /**
