@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a convenience function for localized labels in tests (#1268)
 
 ### Changed
+- Require oelib >= 4.1.4 (#1281)
 - Clean up the test (#1267)
 - Move more legacy tests to the new testing framework (#1267)
 - Use the new configuration classes for the single view link builder (#1265, #1266)
