@@ -511,11 +511,6 @@ parameters:
 			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:getFlashMessageQueue\\(\\) return type has no value type specified in iterable type TYPO3\\\\CMS\\\\Core\\\\Messaging\\\\FlashMessageQueue\\.$#"
-			count: 1
-			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
