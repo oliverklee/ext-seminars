@@ -15,12 +15,12 @@ use OliverKlee\Seminars\Model\Category;
 class CategoryMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'tx_seminars_categories';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<Category> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = Category::class;
 }

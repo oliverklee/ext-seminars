@@ -15,12 +15,12 @@ use OliverKlee\Seminars\Model\BackEndUser;
 class BackEndUserMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'be_users';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<BackEndUser> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = BackEndUser::class;
 

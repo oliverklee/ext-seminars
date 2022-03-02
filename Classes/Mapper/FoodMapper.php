@@ -15,12 +15,12 @@ use OliverKlee\Seminars\Model\Food;
 class FoodMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'tx_seminars_foods';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<Food> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = Food::class;
 }

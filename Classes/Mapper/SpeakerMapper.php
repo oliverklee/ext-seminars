@@ -15,7 +15,7 @@ use OliverKlee\Seminars\Model\Speaker;
 class SpeakerMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'tx_seminars_speakers';
 
