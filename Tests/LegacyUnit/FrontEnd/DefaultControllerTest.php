@@ -1302,8 +1302,6 @@ final class DefaultControllerTest extends TestCase
 
     /**
      * @test
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=4483
      */
     public function singleViewDisplaysTimeSlotTimesWithDash(): void
     {
@@ -4219,8 +4217,6 @@ final class DefaultControllerTest extends TestCase
      */
     public function listViewLimitedToPlacesFromSelectorWidgetIgnoresFlexFormsValues(): void
     {
-        // TODO: This needs to be changed when bug 2304 gets fixed.
-        // @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
