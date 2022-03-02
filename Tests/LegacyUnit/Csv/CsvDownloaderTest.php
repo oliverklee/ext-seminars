@@ -21,12 +21,12 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @var CsvDownloader
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * PID of the system folder in which we store our test data
@@ -45,10 +45,9 @@ final class CsvDownloaderTest extends TestCase
     protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
+        $this->configuration->setAsString('charsetForCsv', 'utf-8');
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->pid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
@@ -59,15 +58,13 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->configuration->setAsString('charsetForCsv', 'utf-8');
-
         $this->subject = new CsvDownloader();
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
         RegistrationManager::purgeInstance();
+        $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
     }
 
