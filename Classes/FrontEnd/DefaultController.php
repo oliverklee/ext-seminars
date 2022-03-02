@@ -2377,9 +2377,9 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Hides the columns specified in the first parameter $columnsToHide.
+     * Hides the columns specified in the parameter.
      *
-     * @param string[] $columnsToHide the columns to hide, may be empty
+     * @param array<int, non-empty-string> $columnsToHide the columns to hide, may be empty
      */
     protected function hideColumns(array $columnsToHide): void
     {
@@ -2388,28 +2388,21 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Un-hides the columns specified in the first parameter $columnsToHide.
+     * Un-hides the columns specified in the parameter.
      *
-     * @param string[] $columnsToUnhide the columns to un-hide, may be empty
+     * @param array<int, non-empty-string> $columnsToUnhide the columns to un-hide, may be empty
      */
     protected function unhideColumns(array $columnsToUnhide): void
     {
+        /** @var array<int, non-empty-string> $permanentlyHiddenColumns */
         $permanentlyHiddenColumns = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('hideColumns', 's_template_special'),
             true
         );
 
-        $this->unhideSubpartsArray(
-            $columnsToUnhide,
-            $permanentlyHiddenColumns,
-            'LISTHEADER_WRAPPER'
-        );
-        $this->unhideSubpartsArray(
-            $columnsToUnhide,
-            $permanentlyHiddenColumns,
-            'LISTITEM_WRAPPER'
-        );
+        $this->unhideSubpartsArray($columnsToUnhide, $permanentlyHiddenColumns, 'LISTHEADER_WRAPPER');
+        $this->unhideSubpartsArray($columnsToUnhide, $permanentlyHiddenColumns, 'LISTITEM_WRAPPER');
     }
 
     /**
@@ -2550,13 +2543,13 @@ class DefaultController extends TemplateHelper
      */
     private function hideColumnsForAllViewsFromTypoScriptSetup(): void
     {
-        $this->hideColumns(
-            GeneralUtility::trimExplode(
-                ',',
-                $this->getConfValueString('hideColumns', 's_template_special'),
-                true
-            )
+        /** @var array<int, non-empty-string> $columns */
+        $columns = GeneralUtility::trimExplode(
+            ',',
+            $this->getConfValueString('hideColumns', 's_template_special'),
+            true
         );
+        $this->hideColumns($columns);
     }
 
     /**
@@ -2747,6 +2740,7 @@ class DefaultController extends TemplateHelper
     {
         $fieldsToShow = [];
         if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
+            /** @var array<int, non-empty-string> $fieldsToShow */
             $fieldsToShow = GeneralUtility::trimExplode(
                 ',',
                 $this->getConfValueString('eventFieldsOnRegistrationPage', 's_template_special'),

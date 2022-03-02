@@ -136,6 +136,7 @@ class RegistrationForm extends AbstractEditor
     {
         parent::__construct($configuration, $contentObjectRenderer);
 
+        /** @var array<int, non-empty-string> $fieldKeys */
         $fieldKeys = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('showRegistrationFields', 's_template_special'),
@@ -832,10 +833,13 @@ class RegistrationForm extends AbstractEditor
         /** @var mixed[] $userData */
         $userData = $this->getFrontEndController()->fe_user->user;
 
+        /** @var array<int, non-empty-string> $fieldKeys */
         $fieldKeys = GeneralUtility::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
+        /** @var array<int, non-empty-string> $fieldsWithLabels */
         $fieldsWithLabels = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel')
+            $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel'),
+            true
         );
 
         foreach ($fieldKeys as $key) {

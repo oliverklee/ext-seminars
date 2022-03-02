@@ -921,6 +921,7 @@ class EventEditor extends AbstractEditor
      */
     private function getFieldsToShow(): array
     {
+        /** @var array<int, non-empty-string> $fieldsToShow */
         $fieldsToShow = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('displayFrontEndEditorFields', 's_fe_editing'),

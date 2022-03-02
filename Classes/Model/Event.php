@@ -615,9 +615,10 @@ class Event extends AbstractTimeSpan implements Titled
         if (!$this->hasLanguage()) {
             return null;
         }
+        /** @var non-empty-string $languageCode */
+        $languageCode = $this->getAsString('language');
 
-        $mapper = MapperRegistry::get(LanguageMapper::class);
-        return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
+        return MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code($languageCode);
     }
 
     public function setLanguage(Language $language): void
