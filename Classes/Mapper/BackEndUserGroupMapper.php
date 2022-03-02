@@ -15,12 +15,12 @@ use OliverKlee\Seminars\Model\BackEndUserGroup;
 class BackEndUserGroupMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'be_groups';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<BackEndUserGroup> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = BackEndUserGroup::class;
 

@@ -101,11 +101,6 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:main\\(\\) has parameter \\$conf with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -216,32 +211,12 @@ parameters:
 			path: Classes/Mapper/BackEndUserGroupMapper.php
 
 		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserGroupMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUserGroupMapper.php
-
-		-
 			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/BackEndUserMapper.php
 
 		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUserMapper.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\CategoryMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Category\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Category\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/CategoryMapper.php
-
-		-
 			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$relations\\.$#"
-			count: 1
-			path: Classes/Mapper/CheckboxMapper.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$modelClassName\\.$#"
 			count: 1
 			path: Classes/Mapper/CheckboxMapper.php
 
@@ -251,37 +226,12 @@ parameters:
 			path: Classes/Mapper/EventMapper.php
 
 		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/EventMapper.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventTypeMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\EventType\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\EventType\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/EventTypeMapper.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FoodMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\Food\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Food\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/FoodMapper.php
-
-		-
 			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/FrontEndUserGroupMapper.php
 
 		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$modelClassName\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUserGroupMapper.php
-
-		-
 			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$relations\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUserMapper.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$modelClassName is not covariant with PHPDoc type class\\-string\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$modelClassName\\.$#"
 			count: 1
 			path: Classes/Mapper/FrontEndUserMapper.php
 

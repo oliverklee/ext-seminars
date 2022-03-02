@@ -15,12 +15,12 @@ use OliverKlee\Seminars\Model\EventType;
 class EventTypeMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'tx_seminars_event_types';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<EventType> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = EventType::class;
 }

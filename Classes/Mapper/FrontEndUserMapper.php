@@ -16,12 +16,12 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 class FrontEndUserMapper extends AbstractDataMapper
 {
     /**
-     * @var string the name of the database table for this mapper
+     * @var non-empty-string the name of the database table for this mapper
      */
     protected $tableName = 'fe_users';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<FrontEndUser> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = FrontEndUser::class;
 
