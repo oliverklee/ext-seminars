@@ -23,12 +23,12 @@ final class OrganizersListTest extends TestCase
     /**
      * @var OrganizersList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int PID of a dummy system folder

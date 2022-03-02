@@ -19,12 +19,12 @@ final class CancelEventMailFormTest extends TestCase
     /**
      * @var CancelEventMailForm
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

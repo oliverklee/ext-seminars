@@ -25,17 +25,17 @@ final class EventsListTest extends TestCase
     /**
      * @var EventsList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int PID of a dummy system folder
      */
-    private $dummySysFolderPid = 0;
+    private $dummySysFolderPid;
 
     protected function setUp(): void
     {
