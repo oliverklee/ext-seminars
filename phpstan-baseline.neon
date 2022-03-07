@@ -516,6 +516,11 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNotSame\\(\\) with int and int will always evaluate to false\\.$#"
+			count: 10
+			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
