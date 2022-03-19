@@ -188,7 +188,7 @@ class RegistrationsList extends AbstractView
      */
     private function createTableHeader(): string
     {
-        /** @var string[] $labelKeys */
+        /** @var array<int, non-empty-string> $labelKeys */
         $labelKeys = [];
         foreach ($this->getFrontEndUserFields() as $field) {
             $labelKeys[] = 'label_' . $field;
@@ -202,13 +202,8 @@ class RegistrationsList extends AbstractView
 
         $tableHeader = '';
         foreach ($labelKeys as $labelKey) {
-            $this->setMarker(
-                'registrations_list_header',
-                $this->translate($labelKey)
-            );
-            $tableHeader .= $this->getSubpart(
-                'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_CELL'
-            );
+            $this->setMarker('registrations_list_header', $this->translate($labelKey));
+            $tableHeader .= $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_CELL');
         }
 
         return $tableHeader;
