@@ -9,6 +9,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This builder class creates customized event bags.
@@ -95,11 +96,13 @@ class EventBagBuilder extends AbstractBagBuilder
             return;
         }
 
+        $categoryUids = GeneralUtility::intExplode(',', $concatenatedCategoryUids, true);
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars_categories_mm');
+        $categoryUidsParameter = $queryBuilder->createNamedParameter($categoryUids, Connection::PARAM_INT_ARRAY);
         $result = $queryBuilder
             ->select('uid_local')
             ->from('tx_seminars_seminars_categories_mm')
-            ->where($queryBuilder->expr()->in('uid_foreign', $concatenatedCategoryUids))
+            ->where($queryBuilder->expr()->in('uid_foreign', $categoryUidsParameter))
             ->execute()
             ->fetchAll();
         $directMatchUids = \array_column($result, 'uid_local');
