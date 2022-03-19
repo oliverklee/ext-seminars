@@ -31,16 +31,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToEventTypes\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
-			count: 11
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToPlaces\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
