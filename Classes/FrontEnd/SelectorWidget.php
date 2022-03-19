@@ -101,7 +101,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToEventTypes(
-            GeneralUtility::trimExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
+            GeneralUtility::intExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
         );
         $builder->limitToOrganizers($this->getConfValueString('limitListViewToOrganizers', 's_listView'));
         $builder->limitToCategories($this->getConfValueString('limitListViewToCategories', 's_listView'));
