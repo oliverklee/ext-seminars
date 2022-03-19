@@ -126,7 +126,8 @@ class EventBagBuilder extends AbstractBagBuilder
      * Limits the bag to events at any of the places with the UIDs provided as
      * the parameter $placeUids.
      *
-     * @param array<int, string|int> $uids place UIDs, set to an empty array for no limitation, need not be SQL-safe
+     * @param array<array-key, string|int> $uids place UIDs, set to an empty array for no limitation,
+     *        need not be SQL-safe
      */
     public function limitToPlaces(array $uids = []): void
     {
@@ -301,7 +302,8 @@ class EventBagBuilder extends AbstractBagBuilder
      * Limits the bag to events from any of the event types with the UIDs
      * provided as the parameter $eventTypeUids.
      *
-     * @param array<int, string|int> $uids event type UIDs, set to empty array for no limitation, need not be SQL-safe
+     * @param array<array-key, string|int> $uids event type UIDs, set to empty array for no limitation,
+     *        need not be SQL-safe
      */
     public function limitToEventTypes(array $uids = []): void
     {
@@ -329,7 +331,7 @@ class EventBagBuilder extends AbstractBagBuilder
      * Limits the bag to events in the cities given in the first parameter
      * $cities.
      *
-     * @param string[] $cities city names, set to an empty array for no limitation, may not be SQL-safe
+     * @param array<array-key, string> $cities city names, set to an empty array for no limitation, need not be SQL-safe
      */
     public function limitToCities(array $cities = []): void
     {
@@ -347,7 +349,7 @@ class EventBagBuilder extends AbstractBagBuilder
             ' LEFT JOIN tx_seminars_sites ON ' .
             'tx_seminars_seminars_place_mm.uid_foreign = ' .
             'tx_seminars_sites.uid' .
-            ' WHERE tx_seminars_sites.city IN(' . $this->quoteAndImplodeForSites($cities) . ')' .
+            ' WHERE tx_seminars_sites.city IN(' . $this->quoteAndImplodeForDatabaseQuery($cities) . ')' .
             ')';
     }
 
@@ -375,7 +377,7 @@ class EventBagBuilder extends AbstractBagBuilder
             ' LEFT JOIN tx_seminars_sites ON ' .
             'tx_seminars_seminars_place_mm.uid_foreign = ' .
             'tx_seminars_sites.uid' .
-            ' WHERE tx_seminars_sites.country IN(' . $this->quoteAndImplodeForSites($countries) . ')' .
+            ' WHERE tx_seminars_sites.country IN(' . $this->quoteAndImplodeForDatabaseQuery($countries) . ')' .
             ')';
     }
 
@@ -395,15 +397,15 @@ class EventBagBuilder extends AbstractBagBuilder
         }
 
         $this->whereClauseParts['languages'] = 'tx_seminars_seminars' .
-            '.language IN (' . $this->quoteAndImplodeForSites($languages) . ')';
+            '.language IN (' . $this->quoteAndImplodeForDatabaseQuery($languages) . ')';
     }
 
     /**
-     * @param string[] $array
+     * @param array<array-key, string> $array
      *
      * @return string
      */
-    private function quoteAndImplodeForSites(array $array): string
+    private function quoteAndImplodeForDatabaseQuery(array $array): string
     {
         $connection = $this->getConnectionForTable('tx_seminars_sites');
         $quoted = [];

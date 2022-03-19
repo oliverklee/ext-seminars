@@ -42,9 +42,8 @@ class CategoryBagBuilder extends AbstractBagBuilder
      * So the bag will be limited to categories 9 and 12 (plus any additional
      * limits).
      *
-     * @param string $eventUids
-     *        comma-separated list of UID of the events to which the category selection should be limited, may be empty,
-     *        all UIDs must be > 0
+     * @param string $eventUids comma-separated list of UIDs of the events to which the category selection
+     *        should be limited, may be empty, all UIDs must be > 0
      */
     public function limitToEvents(string $eventUids): void
     {
