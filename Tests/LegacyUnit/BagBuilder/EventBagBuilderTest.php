@@ -278,6 +278,76 @@ final class EventBagBuilderTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function limitToPlacesWithStringPlaceUidFindsMatchingEvent(): void
+    {
+        $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars', ['place' => 1]);
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_place_mm',
+            $eventUid,
+            $siteUid
+        );
+        $this->subject->limitToPlaces([(string)$siteUid]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame($eventUid, $bag->current()->getUid());
+    }
+
+    /**
+     * @return array<string, array{0: int}>
+     */
+    public function nonPositiveIntegerDataProvider(): array
+    {
+        return [
+            'zero' => [0],
+            'negative int' => [-1],
+        ];
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public function sqlCharacterDataProvider(): array
+    {
+        return [
+            ';' => [';'],
+            ',' => [','],
+            '(' => ['('],
+            ')' => [')'],
+            'double quote' => ['"'],
+            'single quote' => ["'"],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int|non-empty-string $invalidUid
+     *
+     * @dataProvider nonPositiveIntegerDataProvider
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToPlacesSilentlyIgnoreInvalidUids($invalidUid): void
+    {
+        $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars', ['place' => 1]);
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_place_mm',
+            $eventUid,
+            $siteUid
+        );
+
+        $this->subject->limitToPlaces([$siteUid, $invalidUid]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame($eventUid, $bag->current()->getUid());
+    }
+
     //////////////////////////////////////
     // Tests concerning canceled events.
     //////////////////////////////////////
@@ -2151,6 +2221,28 @@ final class EventBagBuilderTest extends TestCase
         self::assertSame((string)$topicUid, $bag->getUids());
     }
 
+    /**
+     * @test
+     *
+     * @param int|non-empty-string $invalidUid
+     *
+     * @dataProvider nonPositiveIntegerDataProvider
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToEventTypesSilentlyIgnoreInvalidUids($invalidUid): void
+    {
+        $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Event::TYPE_COMPLETE, 'event_type' => $typeUid]
+        );
+
+        $this->subject->limitToEventTypes([$typeUid, $invalidUid]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+    }
+
     //////////////////////////////
     // Tests for limitToCities()
     //////////////////////////////
@@ -2437,6 +2529,26 @@ final class EventBagBuilderTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     *
+     * @param non-empty-string $invalidName
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToCitiesSilentlyIgnoreInvalidCityNames(string $invalidName): void
+    {
+        $siteUid = $this->testingFramework->createRecord('tx_seminars_sites', ['city' => 'test city 1']);
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars', ['place' => 1]);
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $siteUid);
+
+        $this->subject->limitToCities(['test city 1', $invalidName]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame($eventUid, $bag->current()->getUid());
+    }
+
     /////////////////////////////////
     // Tests for limitToCountries()
     /////////////////////////////////
@@ -2651,6 +2763,26 @@ final class EventBagBuilderTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     *
+     * @param non-empty-string $invalidName
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToCountriesSilentlyIgnoreInvalidCityNames(string $invalidName): void
+    {
+        $siteUid = $this->testingFramework->createRecord('tx_seminars_sites', ['country' => 'DE']);
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars', ['place' => 1]);
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $siteUid);
+
+        $this->subject->limitToCountries(['DE', $invalidName]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame($eventUid, $bag->current()->getUid());
+    }
+
     /////////////////////////////////
     // Tests for limitToLanguages()
     /////////////////////////////////
@@ -2749,6 +2881,24 @@ final class EventBagBuilderTest extends TestCase
         self::assertTrue(
             $bag->isEmpty()
         );
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $invalidName
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToLanguagesSilentlyIgnoreInvalidCityNames(string $invalidName): void
+    {
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars', ['language' => 'DE']);
+
+        $this->subject->limitToLanguages(['DE', $invalidName]);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame($eventUid, $bag->current()->getUid());
     }
 
     ////////////////////////////////////
