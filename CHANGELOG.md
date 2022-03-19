@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 - Make the Composer dependencies explicit (#1283)
 - Avoid spilling over the request in the legacy tests (#1278, #1279)
-- Improve the type annotations (#1277, #1280)
+- Improve the type annotations (#1277, #1280, #1294)
 - Remove a stray `backupGlobals` from a legacy test (#1274)
 - Allow Composer plugins from `helhum/typo3-console-plugin` (#1264)
 - Fix PHPUnit warnings (#1262)
