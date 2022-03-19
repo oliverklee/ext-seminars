@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -221,6 +222,8 @@ class SelectorWidget extends AbstractView
         /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_sites');
+        $eventUids = GeneralUtility::intExplode(',', $this->seminarBag->getUids());
+        $eventUidsParameter = $queryBuilder->createNamedParameter($eventUids, Connection::PARAM_INT_ARRAY);
         $dataOfPlaces = $queryBuilder
             ->select('tx_seminars_sites.*')
             ->from('tx_seminars_sites')
@@ -228,17 +231,9 @@ class SelectorWidget extends AbstractView
                 'tx_seminars_sites',
                 'tx_seminars_seminars_place_mm',
                 'mm',
-                $queryBuilder->expr()->eq(
-                    'mm.uid_foreign',
-                    $queryBuilder->quoteIdentifier('tx_seminars_sites.uid')
-                )
+                $queryBuilder->expr()->eq('mm.uid_foreign', $queryBuilder->quoteIdentifier('tx_seminars_sites.uid'))
             )
-            ->where(
-                $queryBuilder->expr()->in(
-                    'mm.uid_local',
-                    $this->seminarBag->getUids()
-                )
-            )
+            ->where($queryBuilder->expr()->in('mm.uid_local', $eventUidsParameter))
             ->orderBy('mm.sorting')
             ->execute()
             ->fetchAll();

@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Harden some queries (#1297)
 - Use `intExplode` where applicable (#1296)
 - Make the Composer dependencies explicit (#1283)
 - Avoid spilling over the request in the legacy tests (#1278, #1279)

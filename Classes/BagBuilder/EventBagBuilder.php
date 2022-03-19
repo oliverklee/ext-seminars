@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * This builder class creates customized event bags.
@@ -103,15 +104,13 @@ class EventBagBuilder extends AbstractBagBuilder
             )
             ->execute()
             ->fetchAll();
-        $directMatchUids = array_column($result, 'uid_local');
-
+        $directMatchUids = \array_column($result, 'uid_local');
         if (empty($directMatchUids)) {
             $this->whereClauseParts['categories'] = '(1 = 0)';
             return;
         }
 
-        $uidMatcher = ' IN(' . \implode(',', $directMatchUids) . ')';
-
+        $uidMatcher = ' IN(' . \implode(',', $this->cleanIntegers($directMatchUids)) . ')';
         $this->whereClauseParts['categories'] =
             '(' .
             '(object_type <> ' . Event::TYPE_DATE . ' AND ' .
@@ -886,19 +885,17 @@ class EventBagBuilder extends AbstractBagBuilder
             ->execute()
             ->fetchAll();
 
-        $foreignUids = array_column($result, 'uid');
-
+        $foreignUids = \array_column($result, 'uid');
         if (empty($foreignUids)) {
             return [];
         }
 
         $queryBuilder = $this->getQueryBuilderForTable($mmTable);
+        $foreignUidsParameter = $queryBuilder->createNamedParameter($foreignUids, Connection::PARAM_INT_ARRAY);
         $result = $queryBuilder
             ->select('uid_local')
             ->from($mmTable)
-            ->where(
-                $queryBuilder->expr()->in('uid_foreign', $foreignUids)
-            )
+            ->where($queryBuilder->expr()->in('uid_foreign', $foreignUidsParameter))
             ->execute()
             ->fetchAll();
         $localUids = array_column($result, 'uid_local');
@@ -1135,7 +1132,7 @@ class EventBagBuilder extends AbstractBagBuilder
 
         $table = 'tx_seminars_target_groups';
         $queryBuilder = $this->getQueryBuilderForTable($table);
-        $result = $queryBuilder
+        $resultWithTargetGroups = $queryBuilder
             ->select('uid')
             ->from($table)
             ->where(
@@ -1156,12 +1153,11 @@ class EventBagBuilder extends AbstractBagBuilder
             )
             ->execute()
             ->fetchAll();
-
-        $matchingTargetGroups = implode(',', array_column($result, 'uid'));
+        $matchingTargetGroups = \array_column($resultWithTargetGroups, 'uid');
 
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
-        $result = $queryBuilder
+        $resultWithoutTargetGroups = $queryBuilder
             ->select('uid')
             ->from($table)
             ->where(
@@ -1182,23 +1178,22 @@ class EventBagBuilder extends AbstractBagBuilder
             )
             ->execute()
             ->fetchAll();
+        $eventsWithoutTargetGroup = \array_column($resultWithoutTargetGroups, 'uid');
 
-        $eventsWithoutTargetGroup = array_column($result, 'uid');
-
-        if ($matchingTargetGroups !== '') {
+        if ($matchingTargetGroups !== []) {
             $table = 'tx_seminars_seminars_target_groups_mm';
             $queryBuilder = $this->getQueryBuilderForTable($table);
+            $targetGroupsParameter = $queryBuilder
+                ->createNamedParameter($matchingTargetGroups, Connection::PARAM_INT_ARRAY);
             $result = $queryBuilder
                 ->select('uid_local')
                 ->from($table)
-                ->where(
-                    $queryBuilder->expr()->in('uid_foreign', $matchingTargetGroups)
-                )
+                ->where($queryBuilder->expr()->in('uid_foreign', $targetGroupsParameter))
                 ->groupBy('uid_local')
                 ->execute()
                 ->fetchAll();
 
-            $eventsWithMatchingTargetGroup = array_column($result, 'uid_local');
+            $eventsWithMatchingTargetGroup = \array_column($result, 'uid_local');
             $matchingEventsUids = \array_merge($eventsWithMatchingTargetGroup, $eventsWithoutTargetGroup);
         } else {
             $matchingEventsUids = $eventsWithoutTargetGroup;
