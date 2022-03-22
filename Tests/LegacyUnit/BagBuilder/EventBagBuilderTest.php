@@ -3008,13 +3008,10 @@ final class EventBagBuilderTest extends TestCase
      */
     public function limitToOwnerWithNegativeFeUserUidThrowsException(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $feUserUid must be >= 0.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $feUserUid must be >= 0.');
 
+        // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->limitToOwner(-1);
     }
 
@@ -3196,13 +3193,10 @@ final class EventBagBuilderTest extends TestCase
      */
     public function limitToEventManagerWithNegativeFeUserUidThrowsException(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $feUserUid must be >= 0.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $feUserUid must be >= 0.');
 
+        // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->limitToEventManager(-1);
     }
 
