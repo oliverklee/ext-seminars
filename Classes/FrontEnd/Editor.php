@@ -127,7 +127,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      * Creates the assets and cache directories for mkforms if they are missing
      * (which can happen due to a bug in mkforms).
      */
-    private function createTemporaryDirectories(): void
+    private function createTemporaryDirectories()
     {
         foreach (['typo3temp/assets/mkforms/', 'typo3temp/mkforms/cache/'] as $directory) {
             if (!\is_dir($directory)) {

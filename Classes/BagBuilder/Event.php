@@ -27,7 +27,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     protected $tableName = 'tx_seminars_seminars';
 
     /**
-     * @var string[] list of the valid keys for time-frames
+     * @var array<int, string> list of the valid keys for time-frames
      */
     private static $validTimeFrames = [
         'past',
@@ -42,7 +42,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     ];
 
     /**
-     * @var string[][] a list of field names of m:n associations in which we can search, grouped by record type
+     * @var array<string, array<int, string>> a list of field names of m:n associations in which we can search,
+     *      grouped by record type
      */
     private static $searchFieldList = [
         'speakers' => ['title'],
@@ -87,29 +88,26 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events from any of the categories with the UIDs
      * provided as the parameter $categoryUids.
      *
-     * @param string $categoryUids
-     *        comma-separated list of UIDs of the categories which the bag
+     * @param string $concatenatedCategoryUids comma-separated list of UIDs of the categories which the bag
      *        should be limited to, set to an empty string for no limitation
      *
      * @return void
      */
-    public function limitToCategories(string $categoryUids)
+    public function limitToCategories(string $concatenatedCategoryUids)
     {
-        if ($categoryUids === '') {
+        if ($concatenatedCategoryUids === '') {
             unset($this->whereClauseParts['categories']);
             return;
         }
 
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars_categories_mm');
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from('tx_seminars_seminars_categories_mm')
-           ->where(
-               $queryBuilder->expr()->in('uid_foreign', $categoryUids)
-           )
-           ->execute()
-           ->fetchAll();
-        $directMatchUids = array_column($result, 'uid_local');
+            ->select('uid_local')
+            ->from('tx_seminars_seminars_categories_mm')
+            ->where($queryBuilder->expr()->in('uid_foreign', $concatenatedCategoryUids))
+            ->execute()
+            ->fetchAll();
+        $directMatchUids = \array_column($result, 'uid_local');
         if (empty($directMatchUids)) {
             $this->whereClauseParts['categories'] = '(1 = 0)';
             return;
@@ -293,6 +291,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
                     ')';
                 break;
             case 'all':
+                // The fall-through is intentional.
             default:
                 // To show all events, we don't need any additional parameters.
                 $where = '';
@@ -366,9 +365,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events in the countries given in the first parameter
      * $countries.
      *
-     * @param string[] $countries
-     *        ISO 3166-2 (alpha2) country codes, invalid country codes are allowed, set to an empty array for no limitation,
-     *        need not be SQL-safe
+     * @param array<array-key, string> $countries ISO 3166-2 (alpha2) country codes,
+     *        invalid country codes are allowed, set to an empty array for no limitation, need not be SQL-safe
      *
      * @return void
      */
@@ -396,9 +394,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events in the languages given in the first parameter
      * $languages.
      *
-     * @param string[] $languages
-     *        ISO 639-1 (alpha2) language codes, invalid language codes are allowed, set to an empty array for no limitation,
-     *        need not be SQL-safe
+     * @param array<array-key, string> $languages ISO 639-1 (alpha2) language codes,
+     *        invalid language codes are allowed, set to an empty array for no limitation, need not be SQL-safe
      *
      * @return void
      */
@@ -415,8 +412,6 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * @param array<array-key, string> $array
-     *
-     * @return string
      */
     private function quoteAndImplodeForDatabaseQuery(array $array): string
     {
@@ -455,7 +450,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events where the FE user given in the parameter
      * $feUserUid is the owner.
      *
-     * @param int $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation, must be >= 0
+     * @param int $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation
      *
      * @return void
      */
@@ -500,8 +495,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events with the FE user UID given in the parameter
      * $feUserUid as event manager.
      *
-     * @param int $feUserUid
-     *        the FE user UID of the event manager to limit for, set to 0 to remove the limitation, must be >= 0
+     * @param int $feUserUid the FE user UID of the event manager to limit for,
+     *        set to 0 to remove the limitation
      *
      * @return void
      */
@@ -617,7 +612,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
             // Only search for words with a certain length.
             // Skips the current iteration of the loop for empty search words.
-            // We use strlen instead of mb_strlen because having a search word
+            // We use `strlen` instead of `mb_strlen` because having a search word
             // consisting of just an umlaut is okay, and this avoids problems
             // on installations without mb_string enabled.
             if (\strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
@@ -635,10 +630,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
                 $this->getSearchWherePartForCategories($safeKeyword),
                 $this->getSearchWherePartForTargetGroups($safeKeyword)
             );
-
-            if (!empty($wherePartsForCurrentSearchWord)) {
-                $allWhereParts[] = '(' . \implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
-            }
+            $allWhereParts[] = '(' . \implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
         }
 
         if (empty($allWhereParts)) {
@@ -705,9 +697,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in categories
      * based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
      *
-     * @return string[] the WHERE clause parts for the search in categories
+     * @return non-empty-array<int, string> the WHERE clause parts for the search in categories
      */
     private function getSearchWherePartForCategories(string $quotedSearchWord): array
     {
@@ -723,9 +715,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in target groups
      * based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
      *
-     * @return string[] the WHERE clause parts for the search in categories
+     * @return non-empty-array<int, string> the WHERE clause parts for the search in categories
      */
     private function getSearchWherePartForTargetGroups(string $quotedSearchWord): array
     {
@@ -741,9 +733,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in event
      * types based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
      *
-     * @return string[] the WHERE clause parts for the search in event types
+     * @return non-empty-array<int, string> the WHERE clause parts for the search in event types
      */
     private function getSearchWherePartForEventTypes(string $quotedSearchWord): array
     {
@@ -763,9 +755,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in places
      * based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty
+     * @param string $quotedSearchWord the current search word
      *
-     * @return string[] the WHERE clause parts for the search in places
+     * @return array<int, string> the WHERE clause parts for the search in places
      */
     private function getSearchWherePartForPlaces(string $quotedSearchWord): array
     {
@@ -781,24 +773,23 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in event
      * topics based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty
+     * @param string $quotedSearchWord the current search word
      *
-     * @return string[] the WHERE clause parts for the search in event topics
+     * @return array<int, string> the WHERE clause parts for the search in event topics
      */
     private function getSearchWherePartForEventTopics(string $quotedSearchWord): array
     {
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars');
         $result = $queryBuilder
-           ->select('uid')
-           ->from('tx_seminars_seminars')
-           ->where(
-               'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from('tx_seminars_seminars')
+            ->where(
+                'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'
+            )
+            ->execute()
+            ->fetchAll();
 
-        $matchingUids = array_column($result, 'uid');
-
+        $matchingUids = \array_column($result, 'uid');
         if (empty($matchingUids)) {
             return [];
         }
@@ -813,12 +804,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Generates and returns the WHERE clause parts for the search independent
-     * from the event record type based on the search word given in the first
+     * of the event record type based on the search word given in the first
      * parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
      *
-     * @return string[] the WHERE clause parts for the search independent from the event record type
+     * @return non-empty-array<int, string> the WHERE clause parts for the search
+     *         independent of the event record type
      */
     private function getSearchWherePartIndependentFromEventRecordType(string $quotedSearchWord): array
     {
@@ -831,10 +823,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause parts for the search in speakers
      * based on the search word given in the first parameter $quotedSearchWord.
      *
-     * @param string $quotedSearchWord the current search word, must not be empty,
-     *               must be SQL-safe
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
      *
-     * @return string[] the WHERE clause parts for the search in speakers
+     * @return array<int, string> the WHERE clause parts for the search in speakers
      */
     private function getSearchWherePartForSpeakers(string $quotedSearchWord): array
     {
@@ -852,16 +843,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * Searches for $searchWord in $field in $foreignTable using the m:n table $mmTable.
      *
-     * @param string $quotedSearchWord
-     *        the current search word, must not be empty, must be SQL-safe
-     * @param string $searchFieldKey
-     *        the key of the search field list, must not be empty, must be an valid key of $this->searchFieldList
-     * @param string $foreignTable
-     *        the foreign table to search in, must not be empty
-     * @param string $mmTable
-     *        the m:n relation table, must not be empty
+     * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
+     * @param string $searchFieldKey the key of the search field list,
+     *        must be a valid key of `$this->searchFieldList`
+     * @param string $foreignTable the foreign table to search in
+     * @param string $mmTable the m:n relation table
      *
-     * @return string[] the WHERE clause parts for the search in categories
+     * @return non-empty-array<int, string> the WHERE clause parts for the search in categories
      */
     private function getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
         string $quotedSearchWord,
@@ -895,17 +883,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Searches for $searchWord in $field in $foreignTable using the m:n table
      * $mmTable.
      *
-     * @param string $quotedSearchWord
-     *        the current search word, must not be empty, must be SQL-safe
-     * @param string $searchFieldKey
-     *        the key of the search field list, must not be empty, must be a
-     *        valid key of $this->searchFieldList
-     * @param string $foreignTable
-     *        the name of the foreign table to search in, must not be empty
-     * @param string $mmTable
-     *        the m:n relation table, must not be empty
+     * @param string $quotedSearchWord the current search word, must be SQL-safe
+     * @param string $searchFieldKey the key of the search field list,
+     *        must be a valid key of `$this->searchFieldList`
+     * @param string $foreignTable the name of the foreign table to search in
+     * @param string $mmTable the m:n relation table
      *
-     * @return string[] the WHERE clause parts for the search in categories, will not be empty
+     * @return array<int, string> the WHERE clause parts for the search in categories
      */
     private function getSearchWherePartForMmRelation(
         string $quotedSearchWord,
@@ -915,7 +899,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     ): array {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
-        $matchQueryPart = sprintf(
+        $matchQueryPart = \sprintf(
             'MATCH (%s) AGAINST (%s IN BOOLEAN MODE)',
             \implode(',', self::$searchFieldList[$searchFieldKey]),
             $quotedSearchWord
@@ -923,11 +907,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
         $queryBuilder = $this->getQueryBuilderForTable($foreignTable);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($foreignTable)
-           ->where($matchQueryPart)
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($foreignTable)
+            ->where($matchQueryPart)
+            ->execute()
+            ->fetchAll();
 
         $foreignUids = \array_column($result, 'uid');
         if (empty($foreignUids)) {
@@ -937,11 +921,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $queryBuilder = $this->getQueryBuilderForTable($mmTable);
         $foreignUidsParameter = $queryBuilder->createNamedParameter($foreignUids, Connection::PARAM_INT_ARRAY);
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from($mmTable)
-           ->where($queryBuilder->expr()->in('uid_foreign', $foreignUidsParameter))
-           ->execute()
-           ->fetchAll();
+            ->select('uid_local')
+            ->from($mmTable)
+            ->where($queryBuilder->expr()->in('uid_foreign', $foreignUidsParameter))
+            ->execute()
+            ->fetchAll();
         $localUids = array_column($result, 'uid_local');
 
         if (empty($localUids)) {
@@ -967,14 +951,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Checks the parameters for the m:n search functions and throws exceptions
      * if at least one of the parameters is empty.
      *
-     * @param string $searchWord
-     *        the current search word, must not be empty, must already be SQL-safe
-     * @param string $searchFieldKey
-     *        the key of the search field list, must not be empty, must be an valid key of self::$searchFieldList
-     * @param string $foreignTable
-     *        the foreign table to search in, must not be empty
-     * @param string $mmTable
-     *        the m:n relation table, must not be empty
+     * @param string $searchWord the current search word, must already be SQL-safe
+     * @param string $searchFieldKey the key of the search field list,
+     *        must be a valid key of `self::$searchFieldList`
+     * @param string $foreignTable the foreign table to search in
+     * @param string $mmTable the m:n relation table
      *
      * @return void
      */
@@ -1008,7 +989,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the search results to topics which are required for the
      * given topic.
      *
-     * @param int $eventUid the UID of the topic event for which the requirements should be found, must be > 0
+     * @param int $eventUid the UID of the topic event for which the requirements should be found
      *
      * @return void
      */
@@ -1025,7 +1006,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * Limits the search result to topics which depend on the given topic.
      *
-     * @param int $eventUid the UID of the topic event which the searched events depend on, must be > 0
+     * @param int $eventUid the UID of the topic event which the searched events depend on
      *
      * @return void
      */
@@ -1048,7 +1029,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Registrations for dates that have a non-zero expiry date in the past will
      * be counted as not existing.
      *
-     * @param int $uid the UID of the front-end user whose registered events should be removed from the bag, must be > 0
+     * @param int $uid the UID of the front-end user whose registered events should be removed from the bag
      *
      * @return void
      */
@@ -1096,7 +1077,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have a begin_date lower than the given
      * time-stamp, but greater than zero.
      *
-     * A $latestBeginDate of 0 will remove the filter.
+     * A `$latestBeginDate` of 0 will remove the filter.
      *
      * @param int $latestBeginDate the latest begin date as UNIX time-stamp, 0 will remove the limit
      *
@@ -1139,33 +1120,28 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * Limits the bag to events with the given organizers.
      *
-     * @param string $organizerUids
-     *               comma-separated list of organizer UIDs to limit the bag to,
-     *               may be empty
+     * @param string $concatenatedOrganizerUids comma-separated list of organizer UIDs to limit the bag to, may be empty
      *
      * @return void
      */
-    public function limitToOrganizers(string $organizerUids)
+    public function limitToOrganizers(string $concatenatedOrganizerUids)
     {
-        if ($organizerUids === '') {
+        if ($concatenatedOrganizerUids === '') {
             return;
         }
+
         $table = 'tx_seminars_seminars_organizers_mm';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid_local')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->in('uid_foreign', $organizerUids)
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid_local')
+            ->from($table)
+            ->where($queryBuilder->expr()->in('uid_foreign', $concatenatedOrganizerUids))
+            ->execute()
+            ->fetchAll();
 
-        $eventUids = implode(',', array_column($result, 'uid_local'));
-
+        $eventUids = \implode(',', \array_column($result, 'uid_local'));
         if ($eventUids === '') {
             $this->whereClauseParts['eventsWithOrganizers'] = '(0 = 1)';
-
             return;
         }
 
@@ -1182,7 +1158,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have target groups with age limits within
      * the provided age.
      *
-     * @param int $age the age to limit the bag to, must be >= 0
+     * @param int $age the age to limit the bag to
      *
      * @return void
      */
@@ -1195,51 +1171,51 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_target_groups';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $resultWithTargetGroups = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->lte(
-                   'minimum_age',
-                   $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
-               ),
-               $queryBuilder->expr()->orX(
-                   $queryBuilder->expr()->eq(
-                       'maximum_age',
-                       $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
-                   ),
-                   $queryBuilder->expr()->gte(
-                       'maximum_age',
-                       $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
-                   )
-               )
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->lte(
+                    'minimum_age',
+                    $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq(
+                        'maximum_age',
+                        $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->gte(
+                        'maximum_age',
+                        $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                    )
+                )
+            )
+            ->execute()
+            ->fetchAll();
         $matchingTargetGroups = \array_column($resultWithTargetGroups, 'uid');
 
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $resultWithoutTargetGroups = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where(
-               $queryBuilder->expr()->orX(
-                   $queryBuilder->expr()->eq(
-                       'object_type',
-                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
-                   ),
-                   $queryBuilder->expr()->eq(
-                       'object_type',
-                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
-                   )
-               ),
-               $queryBuilder->expr()->eq(
-                   'target_groups',
-                   $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
-               )
-           )
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq(
+                        'object_type',
+                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'object_type',
+                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                    )
+                ),
+                $queryBuilder->expr()->eq(
+                    'target_groups',
+                    $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                )
+            )
+            ->execute()
+            ->fetchAll();
 
         $eventsWithoutTargetGroup = \array_column($resultWithoutTargetGroups, 'uid');
 
@@ -1280,7 +1256,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have a price lower or equal to the given
      * maximum price.
      *
-     * @param int $maximumPrice the maximum price an event is allowed to cost, must be >= 0
+     * @param int $maximumPrice the maximum price an event is allowed to cost
      *
      * @return void
      */
@@ -1317,12 +1293,12 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where($whereClause)
-           ->execute()
-           ->fetchAll();
-        $foundUids = implode(',', array_column($result, 'uid'));
+            ->select('uid')
+            ->from($table)
+            ->where($whereClause)
+            ->execute()
+            ->fetchAll();
+        $foundUids = \implode(',', \array_column($result, 'uid'));
 
         if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
@@ -1340,7 +1316,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have a price higher or equal to the given
      * minimum price.
      *
-     * @param int $minimumPrice the minimum price an event is allowed to cost, must be >= 0
+     * @param int $minimumPrice the minimum price an event is allowed to cost
      *
      * @return void
      */
@@ -1371,13 +1347,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);
         $result = $queryBuilder
-           ->select('uid')
-           ->from($table)
-           ->where($whereClause)
-           ->execute()
-           ->fetchAll();
+            ->select('uid')
+            ->from($table)
+            ->where($whereClause)
+            ->execute()
+            ->fetchAll();
 
-        $foundUids = implode(',', array_column($result, 'uid'));
+        $foundUids = \implode(',', \array_column($result, 'uid'));
 
         if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
