@@ -138,6 +138,11 @@ final class RegistrationManagerTest extends TestCase
      */
     private $extensionConfiguration;
 
+    /**
+     * @var int
+     */
+    private $rootPageUid;
+
     protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -145,9 +150,9 @@ final class RegistrationManagerTest extends TestCase
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
+        $this->rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
 
         $this->email = $this->createEmailMock();
         $this->secondEmail = $this->createEmailMock();
@@ -232,15 +237,14 @@ final class RegistrationManagerTest extends TestCase
 
     /**
      * Creates a dummy login page and registration page and stores their UIDs
-     * in $this->loginPageUid and $this->registrationPageUid.
+     * in `$this->loginPageUid` and `$this->registrationPageUid`.
      *
      * In addition, it provides the fixture's configuration with the UIDs.
      */
     private function createFrontEndPages(): void
     {
         $this->loginPageUid = $this->testingFramework->createFrontEndPage();
-        $this->registrationPageUid
-            = $this->testingFramework->createFrontEndPage();
+        $this->registrationPageUid = $this->testingFramework->createFrontEndPage();
 
         $this->pi1 = new DefaultController();
 

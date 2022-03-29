@@ -35,14 +35,19 @@ final class CategoryListTest extends TestCase
      */
     private $systemFolderPid = 0;
 
+    /**
+     * @var int
+     */
+    private $rootPageUid;
+
     protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
+        $this->rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->subject = new CategoryList(
@@ -388,10 +393,9 @@ final class CategoryListTest extends TestCase
      */
     public function renderCreatesCategoryListContainingLinksToListPageLimitedToCategory(): void
     {
-        $this->subject->setConfigurationValue(
-            'listPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $listPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $listPageUid, ['slug' => '/eventList']);
+        $this->subject->setConfigurationValue('listPID', $listPageUid);
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',

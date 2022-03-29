@@ -119,6 +119,11 @@ final class DefaultControllerTest extends TestCase
      */
     private $pluginConfiguration;
 
+    /**
+     * @var int
+     */
+    private $rootPageUid;
+
     protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -127,9 +132,9 @@ final class DefaultControllerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
+        $this->rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
         HeaderProxyFactory::getInstance()->enableTestMode();
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;

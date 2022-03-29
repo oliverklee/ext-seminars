@@ -37,14 +37,19 @@ final class RequirementsListTest extends TestCase
     /**
      * @var DummyConfiguration
      */
-    private $configuration;
+    private $pluginConfiguration;
+
+    /**
+     * @var int
+     */
+    private $rootPageUid;
 
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
+        $this->rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
 
         $systemFolderPid = $this->testingFramework->createSystemFolder();
 
@@ -56,8 +61,8 @@ final class RequirementsListTest extends TestCase
             ]
         );
 
-        $this->configuration = new DummyConfiguration();
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+        $this->pluginConfiguration = new DummyConfiguration();
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->pluginConfiguration);
 
         $this->subject = new RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
@@ -131,7 +136,9 @@ final class RequirementsListTest extends TestCase
      */
     public function renderLinksOneRequirementToTheSingleView(): void
     {
-        $this->configuration->setAsInteger('detailPID', $this->testingFramework->createFrontEndPage());
+        $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
+        $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
