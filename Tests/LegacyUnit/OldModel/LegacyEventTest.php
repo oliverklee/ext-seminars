@@ -117,8 +117,9 @@ final class LegacyEventTest extends TestCase
      */
     private function createPi1(int $detailPageUid = 0): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->pi1 = new DefaultController();
         $this->pi1->init(
@@ -5075,8 +5076,9 @@ final class LegacyEventTest extends TestCase
      */
     public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse(): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
         $this->subject->setOwnerUid($userUid + 1);
@@ -5091,8 +5093,9 @@ final class LegacyEventTest extends TestCase
      */
     public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue(): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5108,8 +5111,9 @@ final class LegacyEventTest extends TestCase
      */
     public function getOwnerForExistingOwnerReturnsFrontEndUserInstance(): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5121,8 +5125,9 @@ final class LegacyEventTest extends TestCase
      */
     public function getOwnerForExistingOwnerReturnsUserWithOwnersUid(): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5149,8 +5154,9 @@ final class LegacyEventTest extends TestCase
      */
     public function hasOwnerForExistingOwnerReturnsTrue(): void
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -7485,8 +7491,9 @@ final class LegacyEventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $pageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->createFakeFrontEnd($pageUid);
+            $rootPageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+            $this->testingFramework->createFakeFrontEnd($rootPageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -7527,8 +7534,9 @@ final class LegacyEventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $pageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->createFakeFrontEnd($pageUid);
+            $rootPageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+            $this->testingFramework->createFakeFrontEnd($rootPageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -7599,8 +7607,9 @@ final class LegacyEventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $pageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->createFakeFrontEnd($pageUid);
+            $rootPageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+            $this->testingFramework->createFakeFrontEnd($rootPageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -7794,8 +7803,9 @@ final class LegacyEventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $pageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->createFakeFrontEnd($pageUid);
+            $rootPageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+            $this->testingFramework->createFakeFrontEnd($rootPageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -7995,8 +8005,9 @@ final class LegacyEventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $pageUid = $this->testingFramework->createFrontEndPage();
-            $this->testingFramework->createFakeFrontEnd($pageUid);
+            $rootPageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+            $this->testingFramework->createFakeFrontEnd($rootPageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8160,8 +8171,9 @@ final class LegacyEventTest extends TestCase
             ->with($whichPlugin, 0, 0, 0, $accessLevel)
             ->willReturn(true);
 
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         $subject->canViewRegistrationsListMessage($whichPlugin, $accessLevel);
@@ -8180,8 +8192,9 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(true);
 
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(
@@ -8203,8 +8216,9 @@ final class LegacyEventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(false);
 
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(

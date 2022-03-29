@@ -29,6 +29,7 @@ final class AbstractEditorTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->subject = new TestingEditor([], $this->getFrontEndController()->cObj);

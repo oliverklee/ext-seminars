@@ -59,8 +59,9 @@ final class RegistrationFormTest extends TestCase
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $frontEndPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->session = new FakeSession();
         Session::setInstance(Session::TYPE_USER, $this->session);
@@ -82,9 +83,9 @@ final class RegistrationFormTest extends TestCase
 
         $this->subject = new RegistrationForm(
             [
-                'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
+                'pageToShowAfterUnregistrationPID' => $rootPageUid,
                 'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
-                'thankYouAfterRegistrationPID' => $frontEndPageUid,
+                'thankYouAfterRegistrationPID' => $rootPageUid,
                 'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'logOutOneTimeAccountsAfterRegistration' => 1,

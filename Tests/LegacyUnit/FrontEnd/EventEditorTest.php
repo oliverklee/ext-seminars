@@ -68,8 +68,9 @@ final class EventEditorTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $sharedConfiguration);

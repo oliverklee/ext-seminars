@@ -40,8 +40,9 @@ final class CategoryListTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->subject = new CategoryList(

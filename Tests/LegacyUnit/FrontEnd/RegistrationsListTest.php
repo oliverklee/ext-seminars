@@ -54,8 +54,9 @@ final class RegistrationsListTest extends TestCase
         HeaderProxyFactory::getInstance()->enableTestMode();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
