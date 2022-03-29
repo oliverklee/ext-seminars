@@ -145,8 +145,9 @@ final class RegistrationManagerTest extends TestCase
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createFakeFrontEnd($pageUid);
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->email = $this->createEmailMock();
         $this->secondEmail = $this->createEmailMock();

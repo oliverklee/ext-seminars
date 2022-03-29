@@ -78,7 +78,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
     private function buildFrontEndAndPlugin(): DefaultController
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleRootPage.xml');
+        $this->testingFramework->createFakeFrontEnd(1);
         $this->initializeBackEndLanguage();
 
         $plugin = new DefaultController();
