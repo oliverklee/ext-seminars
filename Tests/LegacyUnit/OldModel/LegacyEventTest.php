@@ -115,7 +115,7 @@ final class LegacyEventTest extends TestCase
     /**
      * Creates a fake front end and a pi1 instance in `$this->pi1`.
      */
-    private function createPi1(int $detailPageUid = 0): void
+    private function createPi1(): void
     {
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
@@ -126,7 +126,6 @@ final class LegacyEventTest extends TestCase
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'detailPID' => $detailPageUid,
             ]
         );
         $this->pi1->getTemplateCode();
@@ -4970,7 +4969,10 @@ final class LegacyEventTest extends TestCase
      */
     public function hasSeparateDetailsPageReturnsTrueForInternalSeparateDetailsPage(): void
     {
-        $detailsPageUid = $this->testingFramework->createFrontEndPage();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $detailsPageUid = $this->testingFramework->createFrontEndPage($rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailsPageUid, ['slug' => '/eventDetail']);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -5022,7 +5024,10 @@ final class LegacyEventTest extends TestCase
      */
     public function getDetailsPageForInternalSeparateDetailsPageSetReturnsThisPage(): void
     {
-        $detailsPageUid = $this->testingFramework->createFrontEndPage();
+        $rootPageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
+        $detailsPageUid = $this->testingFramework->createFrontEndPage($rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailsPageUid, ['slug' => '/eventDetail']);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
