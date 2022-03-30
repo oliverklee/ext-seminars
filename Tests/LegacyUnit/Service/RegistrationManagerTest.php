@@ -243,8 +243,8 @@ final class RegistrationManagerTest extends TestCase
      */
     private function createFrontEndPages(): void
     {
-        $this->loginPageUid = $this->testingFramework->createFrontEndPage();
-        $this->registrationPageUid = $this->testingFramework->createFrontEndPage();
+        $this->loginPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->registrationPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
 
         $this->pi1 = new DefaultController();
 
@@ -588,10 +588,9 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
 
-        self::assertStringContainsString(
-            '?id=' . $this->loginPageUid,
-            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
-        );
+        $result = $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar);
+
+        self::assertStringContainsString('?id=' . $this->loginPageUid, $result);
     }
 
     /**
@@ -634,17 +633,10 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertStringContainsString(
-            '?id=' . $this->registrationPageUid,
-            $this->subject->getLinkToRegistrationOrLoginPage(
-                $this->pi1,
-                $this->seminar
-            )
-        );
-        self::assertStringContainsString(
-            '%5Bseminar%5D=' . $this->seminarUid,
-            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
-        );
+        $result = $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar);
+
+        self::assertStringContainsString('?id=' . $this->registrationPageUid, $result);
+        self::assertStringContainsString('%5Bseminar%5D=' . $this->seminarUid, $result);
     }
 
     /**
@@ -654,15 +646,14 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->createFrontEndPages();
 
-        $detailsPageUid = $this->testingFramework->createFrontEndPage();
+        $detailsPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
         $this->seminar->setDetailsPage($detailsPageUid);
 
         $this->createAndLogInFrontEndUser();
 
-        self::assertStringContainsString(
-            '?id=' . $this->registrationPageUid,
-            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
-        );
+        $result = $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar);
+
+        self::assertStringContainsString('?id=' . $this->registrationPageUid, $result);
     }
 
     /**
