@@ -244,7 +244,9 @@ final class RegistrationManagerTest extends TestCase
     private function createFrontEndPages(): void
     {
         $this->loginPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $this->loginPageUid, ['slug' => '/login']);
         $this->registrationPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $this->registrationPageUid, ['slug' => '/eventRegistration']);
 
         $this->pi1 = new DefaultController();
 
@@ -647,6 +649,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
 
         $detailsPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailsPageUid, ['slug' => '/eventDetail']);
         $this->seminar->setDetailsPage($detailsPageUid);
 
         $this->createAndLogInFrontEndUser();

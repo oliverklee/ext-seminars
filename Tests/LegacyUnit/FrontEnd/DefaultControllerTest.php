@@ -760,6 +760,7 @@ final class DefaultControllerTest extends TestCase
     public function otherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue(
             'hideFields',
@@ -916,6 +917,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewForSpeakerWithoutHomepageContainsHtmlspecialcharedSpeakerName(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -951,6 +953,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewForContainsHtmlspecialcharedSpeakerOrganization(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -986,6 +989,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewWithSpeakerDetailsLinksHtmlspecialcharedSpeakersName(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue('showSpeakerDetails', true);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1022,6 +1026,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewWithoutSpeakerDetailsLinksHtmlspecialcharedSpeakersName(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue('showSpeakerDetails', false);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1058,6 +1063,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewForEventWithoutImageNotDisplaysImage(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
@@ -1572,6 +1578,7 @@ final class DefaultControllerTest extends TestCase
     public function singleViewForSeminarWithOneRequirementLinksRequirementToItsSingleView(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -3669,6 +3676,7 @@ final class DefaultControllerTest extends TestCase
 
         // @phpstan-ignore-next-line Yes, this code is unreachable, and we know it.
         $listPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $listPageUid, ['slug' => '/eventList']);
         $this->pluginConfiguration->setAsInteger('listPID', $listPageUid);
 
         $eventUid = $this->testingFramework->createRecord(
@@ -3701,6 +3709,7 @@ final class DefaultControllerTest extends TestCase
     public function categoryIsNotLinkedFromSpecializedListView(): void
     {
         $listPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $listPageUid, ['slug' => '/eventList']);
         $this->pluginConfiguration->setAsInteger('listPID', $listPageUid);
         $this->subject->setConfigurationValue('what_to_display', 'events_next_day');
 
@@ -4736,6 +4745,8 @@ final class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $editorPageSlug = '/eventEditor';
+        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
         $this->subject->setConfigurationValue('eventEditorPID', $editorPageUid);
 
         $result = $this->subject->main('', []);
@@ -5035,9 +5046,11 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->logoutFrontEndUser();
 
         $loginPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $loginPageUid, ['slug' => '/login']);
         $this->pluginConfiguration->setAsInteger('loginPID', $loginPageUid);
 
         $otherPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $otherPageUid, ['slug' => '/other']);
 
         $result = $this->subject->getLoginLink('foo', $otherPageUid, $eventUid);
 
@@ -5951,6 +5964,7 @@ final class DefaultControllerTest extends TestCase
     public function listOfRequirementsForEventWithOneNotFulfilledRequirementLinksHtmlspecialcharedTitleOfRequirement(): void
     {
         $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
         $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
