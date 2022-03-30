@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
@@ -4616,6 +4617,10 @@ final class DefaultControllerTest extends TestCase
      */
     public function managedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink(): void
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
+        }
+
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
@@ -4627,7 +4632,13 @@ final class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertStringContainsString('?id=' . $editorPageUid, $result);
+        // @phpstan-ignore-next-line PHPStan does not know that we are running the tests on two versions.
+        if (Typo3Version::isAtLeast(10)) {
+            $expectedUrl = $editorPageSlug;
+        } else {
+            $expectedUrl = 'index.php?id=' . $editorPageUid;
+        }
+        self::assertStringContainsString($expectedUrl, $result);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6636,6 +6647,10 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid(): void
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
+        }
+
         $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
         $editorPageSlug = '/eventEditor';
         $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
@@ -6664,6 +6679,10 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid(): void
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
+        }
+
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
         $subject->cObj = $this->getFrontEndController()->cObj;
@@ -6691,6 +6710,10 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid(): void
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
+        }
+
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
         $subject->cObj = $this->getFrontEndController()->cObj;
@@ -6806,6 +6829,10 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid(): void
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
+        }
+
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
         $subject->cObj = $this->getFrontEndController()->cObj;
