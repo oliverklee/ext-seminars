@@ -336,46 +336,6 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    /**
-     * Creates a mock content object that can create links in the following
-     * form:
-     *
-     * <a href="index.php?id=42&amp;...parameters">link title</a>
-     *
-     * The page ID isn't checked for existence. So any page ID can be used.
-     *
-     * @return ContentObjectRenderer&MockObject a mock content object
-     */
-    private function createContentMock(): ContentObjectRenderer
-    {
-        /** @var ContentObjectRenderer&MockObject $mock */
-        $mock = $this->createPartialMock(ContentObjectRenderer::class, ['getTypoLink']);
-        $mock->setLogger(new NullLogger());
-        $mock->method('getTypoLink')->willReturnCallback([$this, 'getTypoLink']);
-
-        return $mock;
-    }
-
-    /**
-     * Callback function for creating mock typolinks.
-     *
-     * @param string $label the link text
-     * @param string $pageId the page UID to link to as a string, must be >= 0
-     * @param string[] $urlParameters
-     *        URL parameters to set as key/value pairs, not URL-encoded yet
-     *
-     * @return string faked link tag, will not be empty
-     */
-    public function getTypoLink(string $label, string $pageId, array $urlParameters = []): string
-    {
-        $encodedParameters = '';
-        foreach ($urlParameters as $key => $value) {
-            $encodedParameters .= '&amp;' . $key . '=' . $value;
-        }
-
-        return '<a href="index.php?id=' . $pageId . $encodedParameters . '">' . $label . '</a>';
-    }
-
     /////////////////////////////////////
     // Tests for the utility functions.
     /////////////////////////////////////
@@ -558,90 +518,6 @@ final class DefaultControllerTest extends TestCase
         self::assertEquals(
             2,
             $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createContentMockCreatesContentObjectRenderer(): void
-    {
-        self::assertInstanceOf(ContentObjectRenderer::class, $this->createContentMock());
-    }
-
-    /**
-     * @test
-     */
-    public function createTypoLinkInContentMockCreatesLinkToPageId(): void
-    {
-        $contentMock = $this->createContentMock();
-
-        self::assertStringContainsString(
-            '<a href="index.php?id=42',
-            $contentMock->getTypoLink('link label', '42')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createTypoLinkInContentMockUsesLinkTitle(): void
-    {
-        $contentMock = $this->createContentMock();
-
-        self::assertStringContainsString(
-            '>link label</a>',
-            $contentMock->getTypoLink('link label', '42')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createTypoLinkInContentMockNotHtmlspecialcharedLinkTitle(): void
-    {
-        $contentMock = $this->createContentMock();
-
-        $linkTitle = 'foo & bar';
-        $result = $contentMock->getTypoLink($linkTitle, '');
-
-        self::assertStringContainsString($linkTitle . '</a>', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function createTypoLinkInContentMockAddsParameters(): void
-    {
-        $contentMock = $this->createContentMock();
-
-        self::assertStringContainsString(
-            'tx_seminars_pi1%5Bseminar%5D=42',
-            $contentMock->getTypoLink(
-                'link label',
-                '1',
-                ['tx_seminars_pi1%5Bseminar%5D' => 42]
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createTypoLinkInContentMockCanAddTwoParameters(): void
-    {
-        $contentMock = $this->createContentMock();
-
-        self::assertStringContainsString(
-            'tx_seminars_pi1%5Bseminar%5D=42&amp;foo=bar',
-            $contentMock->getTypoLink(
-                'link label',
-                '1',
-                [
-                    'tx_seminars_pi1%5Bseminar%5D' => 42,
-                    'foo' => 'bar',
-                ]
-            )
         );
     }
 
@@ -6636,7 +6512,7 @@ final class DefaultControllerTest extends TestCase
     public function mayCurrentUserEditCurrentEventForLoggedInUserAsOwnerIsTrue(): void
     {
         $subject = new TestingDefaultController();
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         /** @var LegacyEvent&MockObject $event */
         $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
@@ -6658,7 +6534,7 @@ final class DefaultControllerTest extends TestCase
     {
         $subject = new TestingDefaultController();
 
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = ['mayManagersEditTheirEvents' => true];
         /** @var LegacyEvent&MockObject $event */
         $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
@@ -6680,7 +6556,7 @@ final class DefaultControllerTest extends TestCase
     {
         $subject = new TestingDefaultController();
 
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = ['mayManagersEditTheirEvents' => false];
         /** @var LegacyEvent&MockObject $event */
         $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
@@ -6702,7 +6578,7 @@ final class DefaultControllerTest extends TestCase
     {
         $subject = new TestingDefaultController();
 
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [
             'eventEditorPID' => 42,
             'mayManagersEditTheirEvents' => true,
@@ -6731,7 +6607,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = ['eventEditorPID' => 42];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(false);
@@ -6754,7 +6630,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [
             'eventEditorPID' => 42,
         ];
@@ -6766,10 +6642,12 @@ final class DefaultControllerTest extends TestCase
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
+        $result = $subject->createAllEditorLinks();
+
+        $expectedUrl = 'index.php?id=42&amp;tx_seminars_pi1%5Bseminar%5D=91';
         self::assertStringContainsString(
-            '<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
-            $this->translate('label_edit') . '</a>',
-            $subject->createAllEditorLinks()
+            '<a href="' . $expectedUrl . '">' . $this->translate('label_edit') . '</a>',
+            $result
         );
     }
 
@@ -6780,7 +6658,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6809,7 +6687,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6838,7 +6716,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6860,7 +6738,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6882,7 +6760,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6904,7 +6782,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
@@ -6926,7 +6804,7 @@ final class DefaultControllerTest extends TestCase
     {
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->createContentMock();
+        $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
