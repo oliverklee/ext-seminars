@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Improve the fake frontend in the tests (#1299, #1300, #1301, #1302, #1303, #1304, #1305)
+- Improve the fake frontend in the tests (#1299, #1300, #1301, #1302, #1303, #1304, #1305, #1307)
 - Harden some queries (#1297)
 - Use `intExplode` where applicable (#1296)
 - Make the Composer dependencies explicit (#1283)
