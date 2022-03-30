@@ -2323,7 +2323,7 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Creates a an action link (to the current page or $pageUid) for the current event.
+     * Creates an action link (to the current page or $pageUid) for the current event.
      *
      * This function does not check the edit permissions for this event.
      *
