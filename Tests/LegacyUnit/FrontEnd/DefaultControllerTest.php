@@ -6670,10 +6670,8 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
-        $currentPageId = (int)$this->getFrontEndController()->id;
-
         self::assertStringContainsString(
-            '<a href="index.php?id=' . $currentPageId .
+            '<a href="index.php?id=' . $this->rootPageUid .
             '" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
             $this->translate('label_hide') . '</a>',
             $subject->createAllEditorLinks()
@@ -6699,10 +6697,8 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        $currentPageId = (int)$this->getFrontEndController()->id;
-
         self::assertStringContainsString(
-            '<a href="index.php?id=' . $currentPageId .
+            '<a href="index.php?id=' . $this->rootPageUid .
             '" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
             $this->translate('label_unhide') . '</a>',
             $subject->createAllEditorLinks()
@@ -6816,10 +6812,8 @@ final class DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        $currentPageId = (int)$this->getFrontEndController()->id;
-
         self::assertStringContainsString(
-            '<a href="index.php?id=' . $currentPageId .
+            '<a href="index.php?id=' . $this->rootPageUid .
             '" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
             $this->translate('label_copy') . '</a>',
             $subject->createAllEditorLinks()
