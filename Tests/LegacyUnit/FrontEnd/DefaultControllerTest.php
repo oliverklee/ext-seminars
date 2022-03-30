@@ -6576,11 +6576,15 @@ final class DefaultControllerTest extends TestCase
      */
     public function mayCurrentUserEditCurrentEventForLoggedInUserNeitherVipNorOwnerIsFalse(): void
     {
+        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $editorPageSlug = '/eventEditor';
+        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
+
         $subject = new TestingDefaultController();
 
         $subject->cObj = $this->getFrontEndController()->cObj;
         $subject->conf = [
-            'eventEditorPID' => 42,
+            'eventEditorPID' => $editorPageUid,
             'mayManagersEditTheirEvents' => true,
         ];
         /** @var LegacyEvent&MockObject $event */
@@ -6605,10 +6609,14 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString(): void
     {
+        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $editorPageSlug = '/eventEditor';
+        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
+
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
         $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = ['eventEditorPID' => 42];
+        $subject->conf = ['eventEditorPID' => $editorPageUid];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(false);
 
@@ -6628,12 +6636,14 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid(): void
     {
+        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
+        $editorPageSlug = '/eventEditor';
+        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
+
         /** @var TestingDefaultController&MockObject $subject */
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
         $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [
-            'eventEditorPID' => 42,
-        ];
+        $subject->conf = ['eventEditorPID' => $editorPageUid];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
@@ -6644,11 +6654,9 @@ final class DefaultControllerTest extends TestCase
 
         $result = $subject->createAllEditorLinks();
 
-        $expectedUrl = 'index.php?id=42&amp;tx_seminars_pi1%5Bseminar%5D=91';
-        self::assertStringContainsString(
-            '<a href="' . $expectedUrl . '">' . $this->translate('label_edit') . '</a>',
-            $result
-        );
+        $expectedUrl = 'index.php?id=' . $editorPageUid . '&amp;tx_seminars_pi1%5Bseminar%5D=91';
+        $expectedTag = '<a href="' . $expectedUrl . '">' . $this->translate('label_edit') . '</a>';
+        self::assertStringContainsString($expectedTag, $result);
     }
 
     /**
