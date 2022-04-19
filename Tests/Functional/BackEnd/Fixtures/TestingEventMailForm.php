@@ -31,9 +31,8 @@ final class TestingEventMailForm extends AbstractEventMailForm
     /**
      * Returns the initial value for a certain field.
      *
-     * @param string $fieldName
-     *        the name of the field for which to get the initial value, must be
-     *        either 'subject' or 'messageBody'
+     * @param non-empty-string $fieldName the name of the field for which to get the initial value,
+     *        must be either 'subject' or 'messageBody'
      *
      * @return string the initial value of the field, will be empty if no
      *                initial value is defined
@@ -46,7 +45,8 @@ final class TestingEventMailForm extends AbstractEventMailForm
     /**
      * Sets an error message.
      *
-     * @param string $fieldName the field name to set the error message for, must be "messageBody" or "subject"
+     * @param non-empty-string $fieldName the field name to set the error message for,
+     *        must be "messageBody" or "subject"
      * @param string $message the error message to set, may be empty
      */
     public function setErrorMessage(string $fieldName, string $message): void
@@ -58,9 +58,7 @@ final class TestingEventMailForm extends AbstractEventMailForm
      * Returns all error messages set via setErrorMessage for the given field
      * name.
      *
-     * @param string $fieldName
-     *        the field name for which the error message should be returned,
-     *        must not be empty
+     * @param non-empty-string $fieldName the field name for which the error message should be returned
      *
      * @return string the error message for the field, will be empty if there's
      *                no error message for this field
