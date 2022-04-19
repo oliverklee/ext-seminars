@@ -92,17 +92,13 @@ abstract class AbstractEventMailForm
     /**
      * The constructor of this class. Instantiates an event object.
      *
-     * @param int $eventUid UID of an event, must be > 0
+     * @param positive-int $eventUid UID of an event, must be > 0
      *
      * @throws \InvalidArgumentException
      * @throws NotFoundException if event could not be instantiated
      */
     public function __construct(int $eventUid)
     {
-        if ($eventUid <= 0) {
-            throw new \InvalidArgumentException('$eventUid must be > 0.');
-        }
-
         $this->oldEvent = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid);
 
         if (!$this->oldEvent->comesFromDatabase()) {
@@ -304,9 +300,7 @@ abstract class AbstractEventMailForm
     /**
      * Returns all error messages set via setErrorMessage for the given field name.
      *
-     * @param string $fieldName
-     *        the field name for which the error message should be returned,
-     *        must not be empty
+     * @param non-empty-string $fieldName the field name for which the error message should be returned
      *
      * @return string HTML with error message for the field, will be empty if there's no error message for this field
      *
@@ -314,9 +308,6 @@ abstract class AbstractEventMailForm
      */
     protected function getErrorMessage(string $fieldName): string
     {
-        if ($fieldName === '') {
-            throw new \InvalidArgumentException('$fieldName must not be empty.', 1333292174);
-        }
         if (!$this->hasErrorMessage($fieldName)) {
             return '';
         }
@@ -331,7 +322,7 @@ abstract class AbstractEventMailForm
      * For the subject field, we fill in the event's title and date after the
      * default subject for confirming an event.
      *
-     * @param string $fieldName the field name, must not be empty
+     * @param non-empty-string $fieldName the field name
      *
      * @return string either the data from POST array or a default value for this field
      */
@@ -360,7 +351,7 @@ abstract class AbstractEventMailForm
      * Returns an entry from the stored POST data or an empty string if that
      * key is not set.
      *
-     * @param string $key the key of the field to return, must not be empty
+     * @param non-empty-string $key the key of the field to return
      *
      * @return string the value of the field, may be empty
      */
@@ -376,7 +367,7 @@ abstract class AbstractEventMailForm
     /**
      * Checks whether the stored POST data contains data for a certain field.
      *
-     * @param string $key the key of the field to check for, must not be empty
+     * @param non-empty-string $key the key of the field to check for
      *
      * @return bool TRUE if the stored POST data contains an entry, FALSE otherwise
      *
@@ -384,10 +375,6 @@ abstract class AbstractEventMailForm
      */
     protected function hasPostData(string $key): bool
     {
-        if ($key === '') {
-            throw new \InvalidArgumentException('$key must not be empty.', 1333292184);
-        }
-
         return isset($this->postData[$key]);
     }
 
