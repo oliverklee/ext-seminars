@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Switch to the TYPO3 Code of Conduct (#1311)
-- Require oelib >= 4.1.4 (#1281)
+- Require oelib >= 4.1.5 (#1281, #1314)
 - Clean up the test (#1267)
 - Move more legacy tests to the new testing framework (#1267, #1282, #1290, #1308)
 - Use the new configuration classes for the single view link builder (#1265, #1266)
