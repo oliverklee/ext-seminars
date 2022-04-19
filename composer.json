@@ -54,11 +54,13 @@
 		"mikey179/vfsstream": "^1.6.10",
 		"nimut/testing-framework": "^6.0.1",
 		"oliverklee/phpunit": "^8.5.0",
+		"php-coveralls/php-coveralls": "^2.5.2",
 		"phpspec/prophecy": "^1.15.0",
 		"phpstan/extension-installer": "^1.1.0",
 		"phpstan/phpstan": "^1.5.6",
 		"phpstan/phpstan-phpunit": "^1.1.0",
-		"phpunit/phpunit": "^8.5.26",
+		"phpunit/phpcov": "^5.0.0 || ^6.0.1",
+		"phpunit/phpunit": "^7.5.20 || ^8.5.26",
 		"saschaegerer/phpstan-typo3": "^1.1.2",
 		"sjbr/sr-feuser-register": "^7.0.5",
 		"squizlabs/php_codesniffer": "^3.6.2",
@@ -106,6 +108,26 @@
 	"scripts": {
 		"php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
 		"php:rector": ".Build/vendor/bin/rector",
+		"ci:coverage": [
+			"@ci:coverage:unit",
+			"@ci:coverage:functional"
+		],
+		"ci:coverage:functional": [
+			"@coverage:create-directories",
+			".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=.Build/coverage/functional.cov Tests/Functional"
+		],
+		"ci:coverage:legacy": [
+			"@coverage:create-directories",
+			".Build/vendor/bin/typo3 phpunit:run --options=\"--whitelist Classes --coverage-php=.Build/coverage/legacy.cov\" Tests/LegacyUnit"
+		],
+		"ci:coverage:merge": [
+			"@coverage:create-directories",
+			".Build/vendor/bin/phpcov merge --clover=./build/logs/clover.xml ./.Build/coverage/"
+		],
+		"ci:coverage:unit": [
+			"@coverage:create-directories",
+			".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
+		],
 		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
@@ -133,6 +155,7 @@
 			"@ci:static",
 			"@ci:dynamic"
 		],
+		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
 		"link-extension": [
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
@@ -163,9 +186,15 @@
 	},
 	"scripts-descriptions": {
 		"ci": "Runs all dynamic and static code checks.",
+		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
+		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
+		"ci:coverage:legacy": "Generates the code coverage report for legacy tests.",
+		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
+		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
 		"ci:php:rector": "Checks for code for changes by Rector.",
 		"ci:php:stan": "Checks the types with PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
+		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"php:rector": "Updates the code with Rector.",
 		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
 		"prepare-release": "Removes development-only files in preparation of a TER release."
