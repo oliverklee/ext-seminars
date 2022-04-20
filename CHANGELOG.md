@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.1.3
+
+### Added
 - Add more tests for `NullRenderingContext` (#1316)
 - Add a code coverage badge (#1313)
 - Add a convenience function for localized labels in tests (#1268)
@@ -18,10 +30,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use the new configuration classes for the single view link builder (#1265, #1266)
 - Upgrade to PHPUnit 8 (#1223)
 - Stop using `getAccessibleMock` (#1259)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Improve the fake frontend in the tests (#1299, #1300, #1301, #1302, #1303, #1304, #1305, #1307, #1309)
