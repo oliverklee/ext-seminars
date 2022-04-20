@@ -22,111 +22,135 @@ use TYPO3Fluid\Fluid\View\TemplatePaths;
  */
 class NullRenderingContext implements RenderingContextInterface
 {
-    public function getErrorHandler()
+    /**
+     * @return never
+     */
+    public function getErrorHandler(): ErrorHandlerInterface
     {
         throw new \BadMethodCallException('Not implemented.', 1645902075);
     }
 
-    public function setErrorHandler(ErrorHandlerInterface $errorHandler)
+    public function setErrorHandler(ErrorHandlerInterface $errorHandler): void
     {
     }
 
     /**
-     * @return void
+     * @return never
      */
-    public function setVariableProvider(VariableProviderInterface $variableProvider)
+    public function getVariableProvider(): VariableProviderInterface
+    {
+        throw new \BadMethodCallException('Not implemented.', 164590206);
+    }
+
+    public function setVariableProvider(VariableProviderInterface $variableProvider): void
     {
     }
 
     /**
-     * @return void
+     * @return never
      */
-    public function setViewHelperVariableContainer(ViewHelperVariableContainer $viewHelperVariableContainer)
-    {
-    }
-
-    public function getVariableProvider()
-    {
-        throw new \BadMethodCallException('Not implemented.', 1645902096);
-    }
-
-    public function getViewHelperVariableContainer()
+    public function getViewHelperVariableContainer(): ViewHelperVariableContainer
     {
         throw new \BadMethodCallException('Not implemented.', 1645902107);
     }
 
-    public function getViewHelperResolver()
+    public function setViewHelperVariableContainer(ViewHelperVariableContainer $viewHelperVariableContainer): void
+    {
+    }
+
+    /**
+     * @return never
+     */
+    public function getViewHelperResolver(): ViewHelperResolver
     {
         throw new \BadMethodCallException('Not implemented.', 1645902122);
     }
 
-    public function setViewHelperResolver(ViewHelperResolver $viewHelperResolver)
+    public function setViewHelperResolver(ViewHelperResolver $viewHelperResolver): void
     {
     }
 
-    public function getViewHelperInvoker()
+    /**
+     * @return never
+     */
+    public function getViewHelperInvoker(): ViewHelperInvoker
     {
         throw new \BadMethodCallException('Not implemented.', 1645902138);
     }
 
-    public function setViewHelperInvoker(ViewHelperInvoker $viewHelperInvoker)
+    public function setViewHelperInvoker(ViewHelperInvoker $viewHelperInvoker): void
     {
     }
 
-    public function setTemplateParser(TemplateParser $templateParser)
-    {
-    }
-
-    public function getTemplateParser()
+    /**
+     * @return never
+     */
+    public function getTemplateParser(): TemplateParser
     {
         throw new \BadMethodCallException('Not implemented.', 1645902147);
     }
 
-    public function setTemplateCompiler(TemplateCompiler $templateCompiler)
+    public function setTemplateParser(TemplateParser $templateParser): void
     {
     }
 
-    public function getTemplateCompiler()
+    /**
+     * @return never
+     */
+    public function getTemplateCompiler(): TemplateCompiler
     {
         throw new \BadMethodCallException('Not implemented.', 1645902156);
     }
 
-    public function getTemplatePaths()
+    public function setTemplateCompiler(TemplateCompiler $templateCompiler): void
+    {
+    }
+
+    /**
+     * @return never
+     */
+    public function getTemplatePaths(): TemplatePaths
     {
         throw new \BadMethodCallException('Not implemented.', 1645902162);
     }
 
-    public function setTemplatePaths(TemplatePaths $templatePaths)
+    public function setTemplatePaths(TemplatePaths $templatePaths): void
     {
     }
 
-    public function setCache(FluidCacheInterface $cache)
-    {
-    }
-
-    public function getCache()
+    /**
+     * @return never
+     */
+    public function getCache(): FluidCacheInterface
     {
         throw new \BadMethodCallException('Not implemented.', 1645902170);
     }
 
-    public function isCacheEnabled()
-    {
-        throw new \BadMethodCallException('Not implemented.', 1645902176);
-    }
-
-    public function setTemplateProcessors(array $templateProcessors)
+    public function setCache(FluidCacheInterface $cache): void
     {
     }
 
-    public function getTemplateProcessors()
+    public function isCacheEnabled(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return never
+     */
+    public function getTemplateProcessors(): array
     {
         throw new \BadMethodCallException('Not implemented.', 1645902182);
     }
 
+    public function setTemplateProcessors(array $templateProcessors): void
+    {
+    }
+
     /**
-     * @return array<int, class-string>
+     * @return never
      */
-    public function getExpressionNodeTypes()
+    public function getExpressionNodeTypes(): array
     {
         throw new \BadMethodCallException('Not implemented.', 1645902192);
     }
@@ -134,30 +158,45 @@ class NullRenderingContext implements RenderingContextInterface
     /**
      * @param array<int, class-string> $expressionNodeTypes
      */
-    public function setExpressionNodeTypes(array $expressionNodeTypes)
+    public function setExpressionNodeTypes(array $expressionNodeTypes): void
     {
     }
 
-    public function buildParserConfiguration()
+    /**
+     * @return never
+     */
+    public function buildParserConfiguration(): void
     {
         throw new \BadMethodCallException('Not implemented.', 1645902199);
     }
 
-    public function getControllerName()
+    /**
+     * @return never
+     */
+    public function getControllerName(): string
     {
         throw new \BadMethodCallException('Not implemented.', 1645902211);
     }
 
-    public function setControllerName($controllerName)
+    /**
+     * @param string $controllerName
+     */
+    public function setControllerName($controllerName): void
     {
     }
 
-    public function getControllerAction()
+    /**
+     * @return never
+     */
+    public function getControllerAction(): string
     {
         throw new \BadMethodCallException('Not implemented.', 1645902216);
     }
 
-    public function setControllerAction($action)
+    /**
+     * @param string $action
+     */
+    public function setControllerAction($action): void
     {
     }
 }

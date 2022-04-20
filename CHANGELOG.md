@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add more tests for `NullRenderingContext` (#1316)
 - Add a code coverage badge (#1313)
 - Add a convenience function for localized labels in tests (#1268)
 
