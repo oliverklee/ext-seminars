@@ -125,6 +125,66 @@ final class EventBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function limitToCategoriesWithUidOfExistingAndInexistentCategoryFindsEventWithExistingCategory(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1,999');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @return array<string, array{0: int}>
+     */
+    public function nonPositiveIntegerDataProvider(): array
+    {
+        return [
+            'zero' => [0],
+            'negative int' => [-1],
+        ];
+    }
+
+    /**
+     * @return array<string, array{0: non-empty-string}>
+     */
+    public function sqlStringCharacterDataProvider(): array
+    {
+        return [
+            ';' => [';'],
+            ',' => [','],
+            '(' => ['('],
+            ')' => [')'],
+            'double quote' => ['"'],
+            'single quote' => ["'"],
+            'some random string' => ['There is no spoon.'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int|non-empty-string $invalidUid
+     *
+     * @dataProvider nonPositiveIntegerDataProvider
+     * @dataProvider sqlStringCharacterDataProvider
+     */
+    public function limitToCategoriesSilentlyIgnoresInvalidUids($invalidUid): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1,' . $invalidUid);
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
     public function limitToCategoriesWithUidOfExistingCategoryIgnoresEventOnlyWithOtherCategory(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
