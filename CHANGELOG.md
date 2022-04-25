@@ -14,6 +14,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+
+## 4.1.4
+
+### Fixed
 - Fix SQL injection in `EventBagBuilder::limitToOrganizers` (#1322)
 - Fix SQL injection in `EventBagBuilder::limitToCategories` (#1321)
 
