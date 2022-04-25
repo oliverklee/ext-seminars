@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This builder class creates customized event bags.
@@ -100,11 +101,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
+        $categoryUids = GeneralUtility::intExplode(',', $concatenatedCategoryUids, true);
         $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars_categories_mm');
+        $categoryUidsParameter = $queryBuilder->createNamedParameter($categoryUids, Connection::PARAM_INT_ARRAY);
         $result = $queryBuilder
             ->select('uid_local')
             ->from('tx_seminars_seminars_categories_mm')
-            ->where($queryBuilder->expr()->in('uid_foreign', $concatenatedCategoryUids))
+            ->where($queryBuilder->expr()->in('uid_foreign', $categoryUidsParameter))
             ->execute()
             ->fetchAll();
         $directMatchUids = \array_column($result, 'uid_local');
