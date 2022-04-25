@@ -1079,11 +1079,13 @@ class EventBagBuilder extends AbstractBagBuilder
         }
 
         $table = 'tx_seminars_seminars_organizers_mm';
+        $organizerUids = GeneralUtility::intExplode(',', $concatenatedOrganizerUids, true);
         $queryBuilder = $this->getQueryBuilderForTable($table);
+        $organizersParameter = $queryBuilder->createNamedParameter($organizerUids, Connection::PARAM_INT_ARRAY);
         $result = $queryBuilder
             ->select('uid_local')
             ->from($table)
-            ->where($queryBuilder->expr()->in('uid_foreign', $concatenatedOrganizerUids))
+            ->where($queryBuilder->expr()->in('uid_foreign', $organizersParameter))
             ->execute()
             ->fetchAll();
 
