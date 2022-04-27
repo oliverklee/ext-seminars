@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Bump the mkforms and rn_base dependencies (#1329)
 - Remove the version constraints from the extension suggestions (#1337)
 - Require oelib >= 4.1.6 (#1325)
 
