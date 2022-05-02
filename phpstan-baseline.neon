@@ -31,6 +31,11 @@ parameters:
 			path: Classes/BackEnd/AbstractList.php
 
 		-
+			message: "#^Instanceof between TYPO3\\\\CMS\\\\Core\\\\Page\\\\PageRenderer and TYPO3\\\\CMS\\\\Core\\\\Page\\\\PageRenderer will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractModule.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/Controller.php
@@ -86,9 +91,54 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:\\$queryResult type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 4
+			path: Classes/BagBuilder/AbstractBagBuilder.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 11
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:\\$tableName is not the same as PHPDoc type string of overridden property OliverKlee\\\\Seminars\\\\BagBuilder\\\\AbstractBagBuilder\\<OliverKlee\\\\Seminars\\\\Bag\\\\EventBag\\>\\:\\:\\$tableName\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
+			count: 1
+			path: Classes/Csv/DownloadRegistrationListView.php
+
+		-
+			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\)$#"
+			count: 1
+			path: Classes/Csv/DownloadRegistrationListView.php
+
+		-
+			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
+			count: 1
+			path: Classes/Csv/EmailRegistrationListView.php
+
+		-
+			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\)$#"
+			count: 1
+			path: Classes/Csv/EmailRegistrationListView.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Email\\\\Salutation\\:\\:getHooks\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -101,14 +151,79 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/FrontEnd/CategoryList.php
+
+		-
+			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 5
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder and OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:main\\(\\) has parameter \\$conf with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
+			message: "#^Only booleans are allowed in &&, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given on the left side\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, int\\<\\-1, 1\\> given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int given\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventPublication.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationsList\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
+			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createDateArray\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -127,6 +242,11 @@ parameters:
 
 		-
 			message: "#^Constant OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:DATE_PARSE_FORMAT is unused\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 
@@ -196,6 +316,11 @@ parameters:
 			path: Classes/Hooks/HookProvider.php
 
 		-
+			message: "#^Variable method call on OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\Hook\\.$#"
+			count: 3
+			path: Classes/Hooks/HookProvider.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\DataSanitization\\:\\:sanitizeEventData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/Interfaces/DataSanitization.php
@@ -206,57 +331,57 @@ parameters:
 			path: Classes/Hooks/Interfaces/DataSanitization.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserGroupMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUserGroup\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/BackEndUserGroupMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\BackEndUserMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\BackEndUser\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/BackEndUserMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\CheckboxMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/CheckboxMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/EventMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserGroupMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUserGroup\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/FrontEndUserGroupMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/FrontEndUserMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\PlaceMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\PlaceMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/PlaceMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\RegistrationMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Registration\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\RegistrationMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Registration\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/RegistrationMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\SpeakerMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\SpeakerMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/SpeakerMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TargetGroupMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TargetGroup\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TargetGroupMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TargetGroup\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/TargetGroupMapper.php
 
 		-
-			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TimeSlotMapper\\:\\:\\$relations is not covariant with PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TimeSlot\\>\\:\\:\\$relations\\.$#"
+			message: "#^PHPDoc type array\\<non\\-empty\\-string, class\\-string\\> of property OliverKlee\\\\Seminars\\\\Mapper\\\\TimeSlotMapper\\:\\:\\$relations is not the same as PHPDoc type array\\<non\\-empty\\-string, class\\-string\\<OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\>\\> of overridden property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\TimeSlot\\>\\:\\:\\$relations\\.$#"
 			count: 1
 			path: Classes/Mapper/TimeSlotMapper.php
 
@@ -264,6 +389,16 @@ parameters:
 			message: "#^Left side of && is always true\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 2
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 2
+			path: Classes/OldModel/AbstractModel.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fetchDataByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -294,6 +429,31 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:\\$recordData type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 2
+			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractTimeSpan.php
+
+		-
+			message: "#^Casting to int something that's already int\\<1, 12\\>\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractTimeSpan.php
+
+		-
+			message: "#^Casting to int something that's already int\\<1, 31\\>\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractTimeSpan.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 5
+			path: Classes/OldModel/LegacyEvent.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"
@@ -351,6 +511,51 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
+			message: "#^Only booleans are allowed in a negated boolean, int given\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, int given\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyRegistration.php
+
+		-
+			message: "#^Parameter \\#1 \\$expressionNodeTypes \\(array\\<int, class\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRenderingContext\\:\\:setExpressionNodeTypes\\(\\) should be contravariant with parameter \\$expressionNodeTypes \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:setExpressionNodeTypes\\(\\)$#"
+			count: 1
+			path: Classes/Rendering/NullRenderingContext.php
+
+		-
+			message: "#^Parameter \\#1 \\$submittedData \\(array\\<string, string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:saveAdditionalFields\\(\\) should be contravariant with parameter \\$submittedData \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:saveAdditionalFields\\(\\)$#"
+			count: 2
+			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
+
+		-
+			message: "#^Parameter \\#1 \\$submittedData \\(array\\<string, string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:validateAdditionalFields\\(\\) should be contravariant with parameter \\$submittedData \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:validateAdditionalFields\\(\\)$#"
+			count: 2
+			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
+
+		-
+			message: "#^Parameter \\#1 \\$taskInfo \\(array\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:getAdditionalFields\\(\\) should be contravariant with parameter \\$taskInfo \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:getAdditionalFields\\(\\)$#"
+			count: 2
+			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/RegistrationDigest.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder and OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canCreateRegistration\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
@@ -366,6 +571,31 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 2
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: Classes/Service/SingleViewLinkBuilder.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/AbstractFalUpgradeWizard.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 2
+			path: Classes/UpgradeWizards/AbstractFalUpgradeWizard.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 2
+			path: Classes/ViewHelpers/DateRangeViewHelper.php
+
+		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -376,7 +606,22 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc type array\\<string, array\\<string, string\\>\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$configurationToUseInTestInstance is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$configurationToUseInTestInstance\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
@@ -384,6 +629,41 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ControllerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/ControllerTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\EventsListTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/EventsListTest.php
+
+		-
+			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm\\:\\:\\$formFieldPrefix is not the same as PHPDoc type string of overridden property OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:\\$formFieldPrefix\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$fieldName \\(non\\-empty\\-string\\) of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm\\:\\:getInitialValue\\(\\) should be contravariant with parameter \\$fieldName \\(string\\) of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getInitialValue\\(\\)$#"
+			count: 1
+			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$fieldName \\(non\\-empty\\-string\\) of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm\\:\\:setErrorMessage\\(\\) should be contravariant with parameter \\$fieldName \\(string\\) of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setErrorMessage\\(\\)$#"
+			count: 1
+			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
@@ -397,6 +677,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/Bag/SpeakerBagTest.php
 
@@ -416,14 +701,109 @@ parameters:
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
 
 		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\CsvExportConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Configuration/CsvExportConfigurationCheckTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationFormConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Configuration/RegistrationFormConfigurationCheckTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationListConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Configuration/RegistrationListConfigurationCheckTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\SharedConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Configuration/SharedConfigurationCheckTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\TypoScriptSetupTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Configuration/TypoScriptSetupTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\CategoryListTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\ListViewTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/DefaultController/ListViewTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\PluginDefinitionTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\SingleViewTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Call to method Prophecy\\\\Prophecy\\\\MethodProphecy\\:\\:willReturn\\(\\) with incorrect case\\: wilLReturn$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Hooks\\\\DataHandlerHookTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Hooks/DataHandlerHookTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/BackEndUserGroupMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/BackEndUserMapperTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
@@ -432,6 +812,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventDateMapperTest.php
 
@@ -446,6 +831,11 @@ parameters:
 			path: Tests/Functional/Mapper/EventMapperTest.php
 
 		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
@@ -456,9 +846,129 @@ parameters:
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/FrontEndUserGroupMapperTest.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 4
+			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\RegistrationMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/RegistrationMapperTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Model\\\\SpeakerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Model/SpeakerTest.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/AbstractModelTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractModelTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/AbstractModelTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractTimeSpanTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyCategoryTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/LegacyCategoryTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacySpeakerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/LegacySpeakerTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$coreExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$coreExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
+
+		-
+			message: "#^Instanceof between TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService and TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$coreExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$coreExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\CategoryIconToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/UpgradeWizards/CategoryIconToFalUpgradeWizardTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarAttachmentsToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/UpgradeWizards/SeminarAttachmentsToFalUpgradeWizardTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarImageToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/UpgradeWizards/SeminarImageToFalUpgradeWizardTest.php
+
+		-
+			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\CountdownViewHelperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			count: 1
+			path: Tests/Functional/ViewHelpers/CountdownViewHelperTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
@@ -569,6 +1079,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
