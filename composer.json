@@ -73,10 +73,10 @@
 		"helhum/typo3-console-plugin": "< 2.0.7"
 	},
 	"suggest": {
-		"in2code/femanager": "^6.0",
-		"oliverklee/onetimeaccount": "^4.2",
-		"sjbr/sr-feuser-register": "^6.0 || ^7.0",
-		"typo3/cms-install": "^9.5 || ^10.4"
+		"in2code/femanager": "for additing additional fields to FE users",
+		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
+		"sjbr/sr-feuser-register": "for additing additional fields to FE users",
+		"typo3/cms-install": "for running the upgrade wizards"
 	},
 	"replace": {
 		"typo3-ter/seminars": "self.version"
