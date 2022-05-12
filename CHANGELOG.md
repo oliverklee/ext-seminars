@@ -6,16 +6,24 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.1.5
+
+### Added
 - Advertise the 11LTS crowdfunding campaign (#1338)
 
 ### Changed
 - Bump the mkforms and rn_base dependencies (#1329)
 - Remove the version constraints from the extension suggestions (#1337)
 - Require oelib >= 4.1.6 (#1325)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Avoid crash with empty file titles (#1342)
