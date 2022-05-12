@@ -19,10 +19,5 @@ parameters:
     - Classes
     - Tests
 
-  excludePaths:
-    - Classes/FrontEnd/AbstractEditor.php
-    - Classes/FrontEnd/EventEditor.php
-    - Classes/FrontEnd/RegistrationForm.php
-
   # Allow instanceof checks, particularly in tests
   checkAlwaysTrueCheckTypeFunctionCall: false

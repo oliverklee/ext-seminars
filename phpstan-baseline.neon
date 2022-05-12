@@ -146,6 +146,16 @@ parameters:
 			path: Classes/Email/Salutation.php
 
 		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/FrontEnd/AbstractEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractEditor\\:\\:getFormValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/AbstractEditor.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractView\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
@@ -206,9 +216,239 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
+			message: "#^Casting to int something that's already int\\<1, max\\>\\.$#"
+			count: 4
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 2
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 15
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createBasicAuxiliaryData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createNewSpeaker\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createTemplateStructure\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:modifyDataToInsert\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:openEditSpeakerModalBox\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:populateListCountries\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:updateSpeaker\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Only booleans are allowed in &&, OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null given on the right side\\.$#"
+			count: 4
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$editButtonConfiguration has no value type specified in iterable type array\\.$#"
+			count: 7
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$results has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Parameter \\#1 \\$configuration \\(array\\|tx_mkforms_forms_IForm\\|null\\) of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) should be contravariant with parameter \\$configuration \\(mixed\\) of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:init\\(\\)$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Parameter \\#1 \\$subparts of method OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:hideSubpartsArray\\(\\) expects array\\<int\\|string, non\\-empty\\-string\\>, array\\<string\\> given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:\\$validationError is never read, only written\\.$#"
+			count: 1
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 2
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventPublication.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 10
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:canRegisterSeats\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getCaptionsForSelectedOptions\\(\\) has parameter \\$availableOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getFeUserData\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:hasBankData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:hasBankDataFormField\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:hasRegistrationFormField\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isFoodSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isLodgingSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isMethodOfPaymentSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isTerms2CheckedAndEnabled\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isTermsChecked\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isValidPriceSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:populateCheckboxes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:populateFoods\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:populateListCountries\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:populateListPaymentMethods\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:populateLodgings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:processRegistration\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:retrieveDataFromSession\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:saveDataToSession\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setPage\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Offset 3 on array\\{string, string, string, string\\} in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$additionalPersons contains generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$personData has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationsList\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
