@@ -68,12 +68,6 @@ Bekannte Probleme
 - Dass Inlinen von CSS in HTML-Emails ist nur im Composer-Modus verfügbar,
   da dieses Feature eine externe Bibliothek benutzt.
 
-- Wenn Sie die Sprachen Ihrer Website mit dem Sites-Feature von TYPO3 setzen,
-  eine andere Sprache als Englisch benutzen und die rn_base-Extension in einer
-  Version <> 1.14.1 benutzen, ist es notwendig, dass Sie zusätzlich die Sprache
-  über die TypoScript-Setup-Variable `config.language` setzen.
-  (Dieses Problem ist in rn_base 1.14.1 gelöst.)
-
 - Der Front-end-Editor funktioniert mit MySQL/MariaDB nicht im Strict-Mode.
   Deswegen ist es notwendig, `STRICT_TRANS_TABLES` aus `sql_mode` zu entfernen:
 
