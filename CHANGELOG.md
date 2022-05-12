@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid crash with empty file titles (#1342)
 
 ## 4.1.4
 
