@@ -15,6 +15,13 @@ Most of the documentation is in ReST format
 [in the Documentation/ folder](Documentation/) and is rendered
 [as part of the TYPO3 documentation](https://docs.typo3.org/typo3cms/extensions/seminars/).
 
+## Compatibility with TYPO3 11LTS/11.5
+
+This extension is not compatible TYPO3 11LTS/11.5 yet.
+Please consider supporting the
+[crowdfunding campaign](https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign)
+to make this happen.
+
 ## Give it a try!
 
 If you would like to test the extension yourself, there is a

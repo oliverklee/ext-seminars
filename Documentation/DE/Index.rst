@@ -33,3 +33,11 @@ Deutsches Handbuch
    DevelopmentWorkflow/Index
    DieEntwicklungDerExtensionUntersttzen/Index
    BekannteProbleme/Index
+
+Kompatibilität mit TYPO3 11LTS/11.5
+-----------------------------------
+
+Wenn Sie die Extension mit TYPO3 11LTS/11.5 benutzen möchten, wäre es schön,
+wenn Sie die `Crowdfunding-Kampagne <https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign>`_
+unterstützen könnten, um die Arbeiten für die 10.4-Kompatibilität zu
+finanzieren.
