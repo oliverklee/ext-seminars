@@ -644,7 +644,7 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="message.crowdfundingCampaign">
 				<source>
-					This extension is not compatible with TYPO3 10LTS/10.4 yet.
+					This extension is not compatible with TYPO3 11LTS/11.5 yet.
 					With this crowdfunding campaign, you can help support the necessary programming work:
 				</source>
 			</trans-unit>

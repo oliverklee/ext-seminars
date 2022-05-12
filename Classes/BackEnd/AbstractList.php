@@ -241,6 +241,10 @@ abstract class AbstractList
             $renderedFlashMessages = $flashMessageService->getMessageQueueByIdentifier()->renderFlashMessages();
 
             $result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
+
+            if ($this->getBackEndUser()->isAdmin()) {
+                $result .= $this->createCrowdfundingMessage();
+            }
         }
 
         return $result;
@@ -379,6 +383,33 @@ abstract class AbstractList
         $pageData = $this->page->getPageData();
 
         return '&amp;pid=' . $pageData['uid'];
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    private function createCrowdfundingMessage(): string
+    {
+        return '<div class="typo3-messages">
+            <div class="alert alert-warning">
+                <div class="media">
+                    <div class="media-left">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-info fa-stack-1x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="alert-message">
+                            ' . $this->getLanguageService()->getLL('message.crowdfundingCampaign') . '
+                            <br/>
+                            <a href="https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign" target="_blank">
+                                https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>';
     }
 
     /**
