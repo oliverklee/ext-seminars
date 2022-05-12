@@ -34,10 +34,10 @@ Deutsches Handbuch
    DieEntwicklungDerExtensionUntersttzen/Index
    BekannteProbleme/Index
 
-Kompatibilität mit TYPO3 10LTS/10.4
+Kompatibilität mit TYPO3 11LTS/11.5
 -----------------------------------
 
-Wenn Sie die Extension mit TYPO3 10LTS/10.4 benutzen möchten, wäre es schön,
-wenn Sie die `Crowdfunding-Kampagne <https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign>`_
-unterstützen könnten, um die Arbeiten für die 10.4-Kompatibilität zu
+Wenn Sie die Extension mit TYPO3 11LTS/11.5 benutzen möchten, wäre es schön,
+wenn Sie die `Crowdfunding-Kampagne <https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign>`_
+unterstützen könnten, um die Arbeiten für die 11.5-Kompatibilität zu
 finanzieren.
