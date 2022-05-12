@@ -1145,8 +1145,9 @@ class DefaultController extends TemplateHelper
         $attachedFilesOutput = '';
 
         foreach ($this->seminar->getAttachedFiles() as $file) {
-            $encodedUrl = \htmlspecialchars($file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
-            $encodedTitle = \htmlspecialchars($file->getTitle(), ENT_QUOTES | ENT_HTML5);
+            $encodedUrl = \htmlspecialchars((string)$file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
+            // @phpstan-ignore-next-line The string cast works around a bug in the Core that was fixed in V11.
+            $encodedTitle = \htmlspecialchars((string)$file->getTitle(), ENT_QUOTES | ENT_HTML5);
             $encodedFileName = \htmlspecialchars(
                 $file->getNameWithoutExtension() . '.' . $file->getExtension(),
                 ENT_QUOTES | ENT_HTML5
@@ -3056,8 +3057,9 @@ class DefaultController extends TemplateHelper
 
         $attachedFilesHtml = '';
         foreach ($this->seminar->getAttachedFiles() as $file) {
-            $encodedUrl = \htmlspecialchars($file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
-            $encodedTitle = \htmlspecialchars($file->getTitle(), ENT_QUOTES | ENT_HTML5);
+            $encodedUrl = \htmlspecialchars((string)$file->getPublicUrl(), ENT_QUOTES | ENT_HTML5);
+            // @phpstan-ignore-next-line The string cast works around a bug in the Core that was fixed in V11.
+            $encodedTitle = \htmlspecialchars((string)$file->getTitle(), ENT_QUOTES | ENT_HTML5);
             $encodedFileName = \htmlspecialchars(
                 $file->getNameWithoutExtension() . '.' . $file->getExtension(),
                 ENT_QUOTES | ENT_HTML5
