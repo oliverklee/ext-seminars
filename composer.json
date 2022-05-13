@@ -46,7 +46,7 @@
 		"helhum/typo3-console": "^5.8.6",
 		"helmich/typo3-typoscript-lint": "^1.5.0 || ^2.3.0",
 		"mikey179/vfsstream": "^1.6.8",
-		"nimut/testing-framework": "dev-task/faster-truncate",
+		"nimut/testing-framework": "^5.3.0",
 		"oliverklee/phpunit": "^6.5.16",
 		"phpspec/prophecy": "^1.10.3",
 		"phpunit/phpunit": "^6.5.14",
@@ -72,12 +72,6 @@
 		}
 	},
 	"prefer-stable": true,
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/oliverklee/testing-framework/"
-		}
-	],
 	"config": {
 		"preferred-install": {
 			"*": "dist"
