@@ -388,33 +388,6 @@ abstract class AbstractList
     }
 
     /**
-     * @return string
-     */
-    private function createCrowdfundingMessage(): string
-    {
-        return '<div class="typo3-messages">
-            <div class="alert alert-notice">
-                <div class="media">
-                    <div class="media-left">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-info fa-stack-1x"></i>
-                        </span>
-                    </div>
-                    <div class="media-body">
-                        <p class="alert-message">
-                            ' . $this->getLanguageService()->getLL('message.crowdfundingCampaign') . '
-                            <br/>
-                            <a href="https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign" target="_blank">
-                                https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>';
-    }
-
-    /**
      * @return non-empty-string
      */
     private function createCrowdfundingMessage(): string

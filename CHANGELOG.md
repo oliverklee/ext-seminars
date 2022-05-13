@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Advertise the 11LTS crowdfunding campaign (#1338)
+- Advertise the 11LTS crowdfunding campaign (#1338, #1346)
 
 ### Changed
 - Switch the TER release to Tailor (#1222)
