@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Keep development-only files out of the TER releases (#1241, #1348)
 - Create mkforms-related directories on the fly (#1211)
 
 ## 3.4.1
