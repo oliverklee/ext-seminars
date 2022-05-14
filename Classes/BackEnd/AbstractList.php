@@ -387,9 +387,6 @@ abstract class AbstractList
         return '&amp;tx_seminars_pi2[pid]=' . $pageData['uid'];
     }
 
-    /**
-     * @return non-empty-string
-     */
     private function createCrowdfundingMessage(): string
     {
         return '<div class="typo3-messages">
