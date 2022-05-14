@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Require `typo3/class-alias-loader` >= 1.1.0 for development (#1245, #1351)
 - Keep development-only files out of the TER releases (#1241, #1348)
 - Create mkforms-related directories on the fly (#1211)
 
