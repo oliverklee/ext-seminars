@@ -3148,12 +3148,8 @@ class EventBagBuilderTest extends TestCase
 
     public function testLimitToOwnerWithNegativeFeUserUidThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $feUserUid must be >= 0.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $feUserUid must be >= 0.');
 
         $this->subject->limitToOwner(-1);
     }
@@ -3306,12 +3302,8 @@ class EventBagBuilderTest extends TestCase
 
     public function testLimitToEventManagerWithNegativeFeUserUidThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $feUserUid must be >= 0.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $feUserUid must be >= 0.');
 
         $this->subject->limitToEventManager(-1);
     }

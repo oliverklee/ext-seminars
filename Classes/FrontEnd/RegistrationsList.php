@@ -210,7 +210,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      */
     private function createTableHeader(): string
     {
-        /** @var array<int, non-empty-string> $labelKeys */
+        /** @var array<int, string> $labelKeys */
         $labelKeys = [];
         foreach ($this->getFrontEndUserFields() as $field) {
             $labelKeys[] = 'label_' . $field;
