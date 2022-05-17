@@ -126,62 +126,141 @@ class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToZeroEventUidFails()
+    /**
+     * @test
+     */
+    public function limitToEventsWithZeroUidThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventUids must be a comma-separated list of positive integers.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
         $this->subject->limitToEvents('0');
     }
 
-    public function testLimitToNegativeEventUidFails()
+    /**
+     * @test
+     */
+    public function limitToEventsWithNegativeUidThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventUids must be a comma-separated list of positive integers.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
         $this->subject->limitToEvents('-2');
     }
 
-    public function testLimitToInvalidEventUidAtTheStartFails()
+    /**
+     * @test
+     */
+    public function limitToEventsWithZeroUidAtTheStartThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventUids must be a comma-separated list of positive integers.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
         $this->subject->limitToEvents('0,1');
     }
 
-    public function testLimitToInvalidEventUidAtTheEndFails()
+    /**
+     * @test
+     */
+    public function limitToEventsWithZeroUidAtTheEndThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventUids must be a comma-separated list of positive integers.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
         $this->subject->limitToEvents('1,0');
     }
 
-    public function testLimitToInvalidEventUidInTheMiddleFails()
+    /**
+     * @test
+     */
+    public function limitToEventsWithZeroUidInTheMiddleThrowsException()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventUids must be a comma-separated list of positive integers.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
         $this->subject->limitToEvents('1,0,2');
     }
 
-    public function testLimitToEventsCanResultInOneCategory()
+    /**
+     * @return array<string, array{0: string}>
+     */
+    public function sqlCharacterDataProvider(): array
+    {
+        return [
+            ';' => [';'],
+            ',' => [','],
+            '(' => ['('],
+            ')' => [')'],
+            'double quote' => ['"'],
+            'single quote' => ["'"],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToEventsWithSqlRelevantCharacterOnlyThrowsException(string $sqlCharacter)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
+        $this->subject->limitToEvents($sqlCharacter);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToEventsWithSqlRelevantCharacterFirstThrowsException(string $sqlCharacter)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
+        $this->subject->limitToEvents($sqlCharacter . ',1');
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToEventsWithSqlRelevantCharacterLastThrowsException(string $sqlCharacter)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
+        $this->subject->limitToEvents('1,' . $sqlCharacter);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToEventsWithSqlRelevantCharacterInTheMiddleThrowsException(string $sqlCharacter)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$eventUids must be a comma-separated list of positive integers.');
+        $this->expectExceptionCode(1333292640);
+
+        $this->subject->limitToEvents('1,' . $sqlCharacter . ',2');
+    }
+
+    /**
+     * @test
+     */
+    public function limitToEventsCanResultInOneCategory()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
