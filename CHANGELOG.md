@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Advertise the 11LTS crowdfunding campaign (#1338, #1346)
 
 ### Changed
+- Improve the type annotations (#1294, #1357)
 - Move more legacy tests to the new testing framework (#1290, #1356)
 - Require oelib >= 3.6.4 (#1353)
 - Switch the TER release to Tailor (#1222)

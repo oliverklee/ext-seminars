@@ -210,7 +210,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      */
     private function createTableHeader(): string
     {
-        /** @var string[] $labelKeys */
+        /** @var array<int, non-empty-string> $labelKeys */
         $labelKeys = [];
         foreach ($this->getFrontEndUserFields() as $field) {
             $labelKeys[] = 'label_' . $field;
@@ -224,13 +224,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
 
         $tableHeader = '';
         foreach ($labelKeys as $labelKey) {
-            $this->setMarker(
-                'registrations_list_header',
-                $this->translate($labelKey)
-            );
-            $tableHeader .= $this->getSubpart(
-                'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_CELL'
-            );
+            $this->setMarker('registrations_list_header', $this->translate($labelKey));
+            $tableHeader .= $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_CELL');
         }
 
         return $tableHeader;
