@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Harden some queries (#1297, #1360)
 - Use `intExplode` where applicable (#1296, #1359)
 - Require `typo3/class-alias-loader` >= 1.1.0 for development (#1245, #1351)
 - Keep development-only files out of the TER releases (#1241, #1348)
