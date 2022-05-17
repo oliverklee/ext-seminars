@@ -24,7 +24,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     /**
      * @var \Tx_Seminars_BagBuilder_Event
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp()
     {
@@ -66,6 +66,163 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(2, $bag);
+    }
+
+    // Tests for limitToCategories
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithEmptyStringsFindsEventWithoutCategories()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithoutCategories.xml');
+
+        $this->subject->limitToCategories('');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithEmptyStringsFindsEventWithCategory()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithEmptyStringResetsPreviousCategoryFilter()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithoutCategories.xml');
+
+        $this->subject->limitToCategories('2');
+        $this->subject->limitToCategories('');
+
+        $bag = $this->subject->build();
+
+        self::assertFalse($bag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithUidOfExistingCategoryFindsEventWithTheGivenCategory()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithUidOfExistingCategoryIgnoresEventOnlyWithOtherCategory()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('2');
+
+        $bag = $this->subject->build();
+
+        self::assertTrue($bag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithInexistentCategoryUidIgnoresWithCategory()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('15');
+
+        $bag = $this->subject->build();
+
+        self::assertTrue($bag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithUidOfExistingCategoryIgnoresEventWithoutCategories()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithoutCategories.xml');
+
+        $this->subject->limitToCategories('2');
+
+        $bag = $this->subject->build();
+
+        self::assertTrue($bag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithUidOfTwoExistingCategoriesFindsEventWithOneGivenCategory()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1,2');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesWithUidOfTwoExistingCategoriesFindsEventWithBothCategories()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/EventWithTwoCategories.xml');
+
+        $this->subject->limitToCategories('1,2');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesFindsMatchingTopic()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/TopicWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1');
+
+        $bag = $this->subject->build();
+
+        self::assertBagContainsUid(1, $bag);
+    }
+
+    /**
+     * @test
+     */
+    public function limitToCategoriesFindsDateOfMatchingTopic()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventBagBuilder/TopicWithOneCategory.xml');
+
+        $this->subject->limitToCategories('1');
+
         $bag = $this->subject->build();
 
         self::assertBagContainsUid(2, $bag);
