@@ -2378,7 +2378,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             // TODO: This needs to be changed as soon as we are using the new
             // TypoScript configuration class from tx_oelib which offers a getAsIntegerArray() method.
             $builder->limitToPlaces(
-                GeneralUtility::trimExplode(
+                GeneralUtility::intExplode(
                     ',',
                     $this->getConfValueString('limitListViewToPlaces', 's_listView'),
                     true
@@ -2423,7 +2423,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             // TypoScript configuration class from tx_oelib which offers a
             // getAsIntegerArray() method.
             $builder->limitToEventTypes(
-                GeneralUtility::trimExplode(
+                GeneralUtility::intExplode(
                     ',',
                     $this->getConfValueString('limitListViewToEventTypes', 's_listView'),
                     true
