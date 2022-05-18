@@ -6139,6 +6139,22 @@ class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
+    public function limitToOrganizersForOneExistingAndOneInexistentOrganizerFindsEventWithExistingOrganizer()
+    {
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $organizerUid1 = $this->testingFramework->createRecord('tx_seminars_organizers');
+        $this->testingFramework
+            ->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers');
+
+        $this->subject->limitToOrganizers($organizerUid1 . ',' . ($organizerUid1 + 1));
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
+    }
+
+    /**
+     * @test
+     */
     public function limitToOrganizersForProvidedOrganizerAndTwoEventsWithThisOrganizerFindsTheseEvents()
     {
         $eventUid1 = $this->testingFramework->createRecord(
@@ -6239,6 +6255,27 @@ class EventBagBuilderTest extends TestCase
             1,
             $bag->count()
         );
+    }
+
+    /**
+     * @test
+     *
+     * @param int|string $invalidUid
+     *
+     * @dataProvider nonPositiveIntegerDataProvider
+     * @dataProvider sqlCharacterDataProvider
+     */
+    public function limitToOrganizersSilentlyIgnoreInvalidUids($invalidUid)
+    {
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $organizerUid1 = $this->testingFramework->createRecord('tx_seminars_organizers');
+        $this->testingFramework
+            ->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers');
+
+        $this->subject->limitToOrganizers($organizerUid1 . ',' . $invalidUid);
+        $bag = $this->subject->build();
+
+        self::assertSame(1, $bag->count());
     }
 
     ////////////////////////////////
