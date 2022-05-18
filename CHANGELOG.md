@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.4.2
+
+### Added
 - Advertise the 11LTS crowdfunding campaign (#1338, #1346)
 
 ### Changed
@@ -13,10 +25,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Move more legacy tests to the new testing framework (#1290, #1356)
 - Require oelib >= 3.6.4 (#1353)
 - Switch the TER release to Tailor (#1222)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Fix SQL injection in `EventBagBuilder::limitToOrganizers` (#1322, #1364)
