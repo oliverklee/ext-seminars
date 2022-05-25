@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
