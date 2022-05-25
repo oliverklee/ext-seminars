@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add missing import in the FE form base class (#1367)
 
 ## 3.4.2
 
