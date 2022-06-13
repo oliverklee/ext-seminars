@@ -10,7 +10,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\Service\SingleViewLinkBuilder
@@ -59,14 +58,6 @@ final class SingleViewLinkBuilderTest extends FunctionalTestCase
     {
         MapperRegistry::purgeInstance();
         $this->testingFramework->cleanUpWithoutDatabase();
-    }
-
-    private function getFrontEndController(): TypoScriptFrontendController
-    {
-        $controller = $GLOBALS['TSFE'];
-        \assert($controller instanceof TypoScriptFrontendController);
-
-        return $controller;
     }
 
     /**
