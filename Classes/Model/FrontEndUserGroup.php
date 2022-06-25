@@ -34,11 +34,15 @@ class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
      *
      * If no publish settings have been set, PUBLISH_IMMEDIATELY is returned.
      *
-     * @return int the class constants PUBLISH_IMMEDIATELY, PUBLISH_HIDE_NEW or PUBLISH_HIDE_EDITED
+     * @return self::PUBLISH_*
      */
     public function getPublishSetting(): int
     {
-        return $this->getAsInteger('tx_seminars_publish_events');
+        $setting = $this->getAsInteger('tx_seminars_publish_events');
+        $validSettings = [self::PUBLISH_IMMEDIATELY, self::PUBLISH_HIDE_NEW, self::PUBLISH_HIDE_EDITED];
+        \assert(\in_array($setting, $validSettings, true));
+
+        return $setting;
     }
 
     /**

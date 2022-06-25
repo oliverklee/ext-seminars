@@ -15,6 +15,15 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Registration extends AbstractModel implements Titled
 {
     /**
+     * @var array<int, OelibFrontEndUser::GENDER_*>
+     */
+    private const VALID_GENDERS = [
+        OelibFrontEndUser::GENDER_MALE,
+        OelibFrontEndUser::GENDER_FEMALE,
+        OelibFrontEndUser::GENDER_UNKNOWN,
+    ];
+
+    /**
      * @return string the title of this registration, will not be empty
      */
     public function getTitle(): string
@@ -369,36 +378,26 @@ class Registration extends AbstractModel implements Titled
     /**
      * Returns the gender of the billing address of this registration.
      *
-     * @return int the gender of this registration, will be one of the
-     *                 following:
-     *                 - FrontEndUser::GENDER_MALE
-     *                 - FrontEndUser::GENDER_FEMALE
-     *                 - FrontEndUser::GENDER_UNKNOWN
+     * @return FrontEndUser::GENDER_*
      */
     public function getGender(): int
     {
-        return $this->getAsInteger('gender');
+        $gender = $this->getAsInteger('gender');
+        \assert(\in_array($gender, self::VALID_GENDERS, true));
+
+        return $gender;
     }
 
     /**
      * Sets the gender of the billing address of this registration.
      *
-     * @param int $gender the gender of this registration, must be one of the following:
-     *        - FrontEndUser::GENDER_MALE
-     *        - FrontEndUser::GENDER_FEMALE
-     *        - FrontEndUser::GENDER_UNKNOWN
+     * @param FrontEndUser::GENDER_* $gender
      *
      * @throws \InvalidArgumentException
      */
     public function setGender(int $gender): void
     {
-        $allowedGenders = [
-            OelibFrontEndUser::GENDER_MALE,
-            OelibFrontEndUser::GENDER_FEMALE,
-            OelibFrontEndUser::GENDER_UNKNOWN,
-        ];
-
-        if (!in_array($gender, $allowedGenders, true)) {
+        if (!\in_array($gender, self::VALID_GENDERS, true)) {
             throw new \InvalidArgumentException(
                 'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
                 'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN',

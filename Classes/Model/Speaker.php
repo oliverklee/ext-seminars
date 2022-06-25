@@ -239,15 +239,18 @@ class Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * @return int our gender, will be either GENDER_MALE, GENDER_FEMALE or GENDER_UNKNOWN if the speaker has no gender
+     * @return self::GENDER_* our gender
      */
     public function getGender(): int
     {
-        return $this->getAsInteger('gender');
+        $gender = $this->getAsInteger('gender');
+        \assert(\in_array($gender, [self::GENDER_UNKNOWN, self::GENDER_MALE, self::GENDER_FEMALE], true));
+
+        return $gender;
     }
 
     /**
-     * @param int $gender our gender to set, must be one of GENDER_MALE, GENDER_FEMALE or GENDER_UNKNOWN
+     * @param self::GENDER_* $gender
      */
     public function setGender(int $gender): void
     {

@@ -697,8 +697,7 @@ Implement the methods required by the interface:
          * @param Registration $registration
          *        the registration the row is made from
          * @param Template $template the template that will be used to create the registration list
-         * @param int $registrationsToShow
-         *        the type of registration shown in the list
+         * @param iRegistrationsList::REGISTRATIONS_ON_QUEUE|RegistrationsList::REGULAR_REGISTRATIONS $registrationsToShow
          */
         public function modifyListRow(
             Registration $registration,

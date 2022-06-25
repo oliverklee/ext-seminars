@@ -63,7 +63,7 @@ class DefaultController extends TemplateHelper
     use SharedPluginConfiguration;
 
     /**
-     * @var string[]
+     * @var array<int, non-empty-string>
      */
     private const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
@@ -965,12 +965,11 @@ class DefaultController extends TemplateHelper
      * Sets the speaker markers for the type given in $speakerType without
      * checking whether the current event has any speakers of the given type.
      *
-     * @param string $speakerType the speaker type to set the markers for, must not be empty, must be
-     *        one of the following: "speakers", "partners", "tutors" or "leaders"
+     * @param 'speakers'|'partners'|'tutors'|'leaders' $speakerType
      */
     private function setSpeakersMarkerWithoutCheck(string $speakerType): void
     {
-        if (!in_array($speakerType, self::VALID_SPEAKER_TYPES, true)) {
+        if (!\in_array($speakerType, self::VALID_SPEAKER_TYPES, true)) {
             throw new \InvalidArgumentException('The given speaker type is not valid.', 1333293083);
         }
 
@@ -3127,12 +3126,8 @@ class DefaultController extends TemplateHelper
     private function limitToTimeFrameSetting(EventBagBuilder $builder): void
     {
         try {
-            $builder->setTimeFrame(
-                $this->getConfValueString(
-                    'timeframeInList',
-                    's_template_special'
-                )
-            );
+            // @phpstan-ignore-next-line We're allowing invalid values to be passed and rely on the exception for this.
+            $builder->setTimeFrame($this->getConfValueString('timeframeInList', 's_template_special'));
         } catch (\Exception $exception) {
             // Ignores the exception because the user will be warned of the
             // problem by the configuration check.

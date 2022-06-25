@@ -1717,7 +1717,12 @@ class EventEditor extends AbstractEditor
         $speaker->setSkills($skills);
 
         $speaker->setName(trim(strip_tags($formData[$prefix . 'title'])));
-        $speaker->setGender((int)$formData[$prefix . 'gender']);
+        $gender = (int)$formData[$prefix . 'gender'];
+        $validGenders = [FrontEndUser::GENDER_MALE, FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN];
+        if (!\in_array($gender, $validGenders, true)) {
+            $gender = FrontEndUser::GENDER_UNKNOWN;
+        }
+        $speaker->setGender($gender);
         $speaker->setOrganization($formData[$prefix . 'organization']);
         $speaker->setHomepage(trim(strip_tags($formData[$prefix . 'homepage'])));
         $speaker->setDescription(trim($formData[$prefix . 'description']));

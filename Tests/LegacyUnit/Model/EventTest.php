@@ -1596,6 +1596,7 @@ final class EventTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->setStatus(-1);
     }
 
