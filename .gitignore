@@ -1,10 +1,10 @@
 # Please keep the lines in this file sorted.
-*.idea
-*~
+/*.idea
 /.Build/*
 /.php-cs-fixer.cache
 /.php_cs.cache
 /Documentation-GENERATED-temp
 /composer.lock
 /nbproject
-/var/
+/tools
+/var

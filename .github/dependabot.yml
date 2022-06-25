@@ -15,7 +15,6 @@ updates:
       - dependency-type: "development"
     ignore:
       - dependency-name: "helhum/typo3-console"
-      - dependency-name: "phpunit/phpcov"
       - dependency-name: "phpunit/phpunit"
       - dependency-name: "typo3/cms-*"
     versioning-strategy: "increase"

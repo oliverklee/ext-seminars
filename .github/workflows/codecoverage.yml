@@ -32,7 +32,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           coverage: xdebug
           extensions: xdebug, mysqli
-          tools: composer:v1
+          tools: composer:v1, phive
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
@@ -57,6 +57,8 @@ jobs:
         run: |
           composer update --no-ansi --no-interaction --no-progress --with-dependencies
           composer show
+      - name: "Install development tools"
+        run: phive --no-progress install --trust-gpg-keys D8406D0D82947747293778314AA394086372C20A
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
       - name: "Set up TYPO3"
