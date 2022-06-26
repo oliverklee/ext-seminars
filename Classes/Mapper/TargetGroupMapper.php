@@ -14,20 +14,10 @@ use OliverKlee\Seminars\Model\TargetGroup;
  */
 class TargetGroupMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'tx_seminars_target_groups';
 
-    /**
-     * @var class-string<TargetGroup> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = TargetGroup::class;
 
-    /**
-     * @var array<non-empty-string, class-string>
-     *      the (possible) relations of the created models in the format DB column name => mapper name
-     */
     protected $relations = [
         'owner' => FrontEndUserMapper::class,
     ];

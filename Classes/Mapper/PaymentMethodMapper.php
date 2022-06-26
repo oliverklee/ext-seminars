@@ -14,13 +14,7 @@ use OliverKlee\Seminars\Model\PaymentMethod;
  */
 class PaymentMethodMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'tx_seminars_payment_methods';
 
-    /**
-     * @var class-string<PaymentMethod> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = PaymentMethod::class;
 }

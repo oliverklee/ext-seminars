@@ -14,13 +14,7 @@ use OliverKlee\Seminars\Model\Skill;
  */
 class SkillMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'tx_seminars_skills';
 
-    /**
-     * @var class-string<Skill> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = Skill::class;
 }
