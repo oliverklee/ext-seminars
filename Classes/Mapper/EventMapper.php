@@ -18,20 +18,10 @@ use OliverKlee\Seminars\Model\Event;
  */
 class EventMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'tx_seminars_seminars';
 
-    /**
-     * @var class-string<Event> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = Event::class;
 
-    /**
-     * @var array<non-empty-string, class-string>
-     *      the (possible) relations of the created models in the format DB column name => mapper name
-     */
     protected $relations = [
         'topic' => EventMapper::class,
         'categories' => CategoryMapper::class,

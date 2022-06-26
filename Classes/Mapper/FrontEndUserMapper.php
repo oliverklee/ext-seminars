@@ -15,36 +15,23 @@ use OliverKlee\Seminars\Model\FrontEndUser;
  */
 class FrontEndUserMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'fe_users';
 
-    /**
-     * @var class-string<FrontEndUser> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = FrontEndUser::class;
 
-    /**
-     * @var array<non-empty-string, class-string>
-     *      the (possible) relations of the created models in the format DB column name => mapper name
-     */
     protected $relations = [
         'usergroup' => FrontEndUserGroupMapper::class,
         'tx_seminars_registration' => RegistrationMapper::class,
     ];
 
-    /**
-     * @var array<int, string> the column names of additional string keys
-     */
     protected $additionalKeys = ['username'];
 
     /**
-     * Finds a front-end user by user name. Hidden user records will be retrieved as well.
+     * Finds a front-end user by username. Hidden user records will be retrieved as well.
      *
-     * @param non-empty-string $userName user name, case-insensitive
+     * @param non-empty-string $userName username, case-insensitive
      *
-     * @throws NotFoundException if there is no front-end user with the provided user name in the database
+     * @throws NotFoundException if there is no front-end user with the provided username in the database
      */
     public function findByUserName(string $userName): FrontEndUser
     {

@@ -15,20 +15,10 @@ use OliverKlee\Seminars\Model\FrontEndUserGroup;
  */
 class FrontEndUserGroupMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'fe_groups';
 
-    /**
-     * @var class-string<FrontEndUserGroup> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = FrontEndUserGroup::class;
 
-    /**
-     * @var array<non-empty-string, class-string>
-     *      the (possible) relations of the created models in the format DB column name => mapper name
-     */
     protected $relations = [
         'tx_seminars_reviewer' => OelibBackEndUserMapper::class,
         'tx_seminars_default_categories' => CategoryMapper::class,

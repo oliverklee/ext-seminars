@@ -14,13 +14,7 @@ use OliverKlee\Seminars\Model\Lodging;
  */
 class LodgingMapper extends AbstractDataMapper
 {
-    /**
-     * @var non-empty-string the name of the database table for this mapper
-     */
     protected $tableName = 'tx_seminars_lodgings';
 
-    /**
-     * @var class-string<Lodging> the model class name for this mapper, must not be empty
-     */
     protected $modelClassName = Lodging::class;
 }
