@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
 use OliverKlee\Seminars\Bag\AbstractBag;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This trait provides methods useful when testing bags and bag builders.
@@ -26,7 +25,6 @@ trait BagHelper
     {
         $found = false;
 
-        /** @var AbstractModel $element */
         foreach ($bag as $element) {
             if ($element->getUid() === $uid) {
                 $found = true;

@@ -2297,7 +2297,7 @@ class EventEditor extends AbstractEditor
     /**
      * Returns an array of caption value pairs for formidable checkboxes.
      *
-     * @param Collection<AbstractModel> $models models to show in the checkboxes, may be empty
+     * @param Collection<AbstractModel&Titled> $models models to show in the checkboxes, may be empty
      *
      * @return array<int, array{caption: string, value: int}>
      */
@@ -2309,8 +2309,14 @@ class EventEditor extends AbstractEditor
 
         $result = [];
 
-        /** @var AbstractModel&Titled $model */
         foreach ($models as $model) {
+            if (!$model instanceof Titled) {
+                throw new \InvalidArgumentException(
+                    'All elements in $models must implement the interface Titled.',
+                    1656254936
+                );
+            }
+
             $result[] = [
                 'caption' => $model->getTitle(),
                 'value' => $model->getUid(),
