@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix a flaky test (#1403)
 - Drop redundant type annotations (#1401)
 
 ## 4.1.5
