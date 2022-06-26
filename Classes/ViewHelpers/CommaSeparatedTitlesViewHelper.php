@@ -18,7 +18,7 @@ class CommaSeparatedTitlesViewHelper
      *
      * The titles will be htmlspecialchared before being returned.
      *
-     * @param Collection<AbstractModel> $items
+     * @param Collection<AbstractModel&Titled> $items
      *
      * @return string the titles of the elements in $list as a comma-separated list
      *         or an empty string if the list is empty

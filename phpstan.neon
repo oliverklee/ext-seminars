@@ -22,3 +22,5 @@ parameters:
 
   # Allow instanceof checks, particularly in tests
   checkAlwaysTrueCheckTypeFunctionCall: false
+
+  checkGenericClassInNonGenericObjectType: false

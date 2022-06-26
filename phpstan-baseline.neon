@@ -86,11 +86,6 @@ parameters:
 			path: Classes/BackEnd/TceForms.php
 
 		-
-			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
-			count: 1
-			path: Classes/Bag/AbstractBag.php
-
-		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
@@ -477,11 +472,6 @@ parameters:
 
 		-
 			message: "#^Offset 3 on array\\{string, string, string, string\\} in isset\\(\\) always exists and is not nullable\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$additionalPersons contains generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1051,49 +1041,14 @@ parameters:
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Bag/SpeakerBagTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Bag/SpeakerBagTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Bag/SpeakerBagTest.php
-
-		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/Bag/SpeakerBagTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
-
-		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
@@ -1191,44 +1146,14 @@ parameters:
 			path: Tests/Functional/Mapper/BackEndUserMapperTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventDateMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventDateMapperTest.php
-
-		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventDateMapperTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventMapperTest.php
-
-		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventTopicMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
 			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"

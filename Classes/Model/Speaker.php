@@ -130,7 +130,6 @@ class Speaker extends AbstractModel implements MailRole
      */
     public function setSkills(Collection $skills): void
     {
-        /** @var Collection<AbstractModel> $skills */
         $this->set('skills', $skills);
     }
 
