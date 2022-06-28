@@ -6669,8 +6669,8 @@ final class DefaultControllerTest extends TestCase
 
         $result = $subject->createAllEditorLinks();
 
-        $expectedUrl = 'index.php?id=' . $editorPageUid . '&amp;tx_seminars_pi1%5Bseminar%5D=91';
-        self::assertStringContainsString($expectedUrl, $result);
+        $expectedQueryParameters = 'tx_seminars_pi1%5Bseminar%5D=91';
+        self::assertStringContainsString($expectedQueryParameters, $result);
         $expectedLabel = $this->translate('label_edit');
         self::assertStringContainsString($expectedLabel, $result);
     }
