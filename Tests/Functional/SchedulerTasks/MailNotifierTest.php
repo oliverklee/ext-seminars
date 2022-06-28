@@ -27,14 +27,8 @@ final class MailNotifierTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $coreExtensionsToLoad = ['scheduler'];
 
     /**

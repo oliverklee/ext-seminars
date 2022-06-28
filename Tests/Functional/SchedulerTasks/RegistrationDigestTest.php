@@ -13,9 +13,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 final class RegistrationDigestTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     protected function tearDown(): void

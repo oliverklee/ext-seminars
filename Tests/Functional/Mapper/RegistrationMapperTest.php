@@ -13,9 +13,6 @@ use OliverKlee\Seminars\Mapper\RegistrationMapper;
  */
 final class RegistrationMapperTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

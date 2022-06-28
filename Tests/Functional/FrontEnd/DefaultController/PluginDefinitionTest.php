@@ -12,9 +12,6 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
  */
 final class PluginDefinitionTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     private function getContentRenderingConfiguration(): string

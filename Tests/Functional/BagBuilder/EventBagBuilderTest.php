@@ -14,9 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 final class EventBagBuilderTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

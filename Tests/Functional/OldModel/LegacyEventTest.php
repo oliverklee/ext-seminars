@@ -34,9 +34,6 @@ final class LegacyEventTest extends FunctionalTestCase
         'timeFormat' => '%H:%M',
     ];
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/oelib',

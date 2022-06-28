@@ -26,9 +26,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     use EmailTrait;
     use MakeInstanceTrait;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

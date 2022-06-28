@@ -29,9 +29,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
      */
     private const TIME_FORMAT = '%H:%M';
 
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
