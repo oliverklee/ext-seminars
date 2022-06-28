@@ -12,9 +12,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  */
 final class TypoScriptSetupTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
 
     /**

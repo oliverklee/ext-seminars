@@ -981,22 +981,22 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc type array\\<string, array\\<string, string\\>\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$configurationToUseInTestInstance is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$configurationToUseInTestInstance\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$statement has no value type specified in iterable type Doctrine\\\\DBAL\\\\Driver\\\\Statement\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/CancelEventMailFormTest.php
 
@@ -1006,17 +1006,17 @@ parameters:
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ControllerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ControllerTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/ControllerTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\EventsListTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\EventsListTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/EventsListTest.php
 
@@ -1036,72 +1036,72 @@ parameters:
 			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Bag/SpeakerBagTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\CsvExportConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\CsvExportConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/CsvExportConfigurationCheckTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationFormConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationFormConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/RegistrationFormConfigurationCheckTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationListConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationListConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/RegistrationListConfigurationCheckTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\SharedConfigurationCheckTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\SharedConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/SharedConfigurationCheckTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\TypoScriptSetupTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\TypoScriptSetupTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/TypoScriptSetupTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\CategoryListTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\CategoryListTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/CategoryListTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\ListViewTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\ListViewTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/DefaultController/ListViewTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\PluginDefinitionTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\PluginDefinitionTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\SingleViewTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\SingleViewTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
 
@@ -1111,7 +1111,7 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
@@ -1121,47 +1121,47 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Hooks\\\\DataHandlerHookTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Hooks\\\\DataHandlerHookTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/BackEndUserGroupMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\BackEndUserMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/BackEndUserMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventDateMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/FrontEndUserGroupMapperTest.php
 
@@ -1171,17 +1171,17 @@ parameters:
 			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\RegistrationMapperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\RegistrationMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/RegistrationMapperTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Model\\\\SpeakerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Model\\\\SpeakerTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Model/SpeakerTest.php
 
@@ -1191,42 +1191,42 @@ parameters:
 			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractModelTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractModelTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractTimeSpanTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractTimeSpanTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyCategoryTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyCategoryTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyCategoryTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacySpeakerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacySpeakerTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacySpeakerTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$coreExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$coreExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$coreExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierConfigurationTest.php
 
@@ -1236,47 +1236,47 @@ parameters:
 			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$coreExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$coreExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$coreExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Service/SingleViewLinkBuilderTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\CategoryIconToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\CategoryIconToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/UpgradeWizards/CategoryIconToFalUpgradeWizardTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarAttachmentsToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarAttachmentsToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/UpgradeWizards/SeminarAttachmentsToFalUpgradeWizardTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarImageToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeminarImageToFalUpgradeWizardTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/UpgradeWizards/SeminarImageToFalUpgradeWizardTest.php
 
 		-
-			message: "#^PHPDoc type array\\<int, string\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\CountdownViewHelperTest\\:\\:\\$testExtensionsToLoad is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$testExtensionsToLoad\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\CountdownViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/ViewHelpers/CountdownViewHelperTest.php
 

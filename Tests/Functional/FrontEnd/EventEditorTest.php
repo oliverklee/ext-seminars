@@ -29,9 +29,6 @@ final class EventEditorTest extends FunctionalTestCase
      */
     private const NOW = 1577285056;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

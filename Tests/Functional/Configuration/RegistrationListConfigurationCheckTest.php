@@ -13,13 +13,7 @@ use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
  */
 final class RegistrationListConfigurationCheckTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
      * @var RegistrationListConfigurationCheck

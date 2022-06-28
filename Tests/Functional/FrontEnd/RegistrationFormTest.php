@@ -28,9 +28,6 @@ final class RegistrationFormTest extends FunctionalTestCase
         'pageToShowAfterUnregistrationPID' => 4,
     ];
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = [
         'typo3conf/ext/oelib',
         'typo3conf/ext/rn_base',

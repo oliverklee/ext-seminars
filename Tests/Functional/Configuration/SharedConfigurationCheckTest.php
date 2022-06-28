@@ -13,9 +13,6 @@ use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
  */
 final class SharedConfigurationCheckTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/oelib',

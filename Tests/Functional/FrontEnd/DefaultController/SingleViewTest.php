@@ -32,9 +32,6 @@ final class SingleViewTest extends FunctionalTestCase
      */
     private const CURRENT_PAGE_UID = 1;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

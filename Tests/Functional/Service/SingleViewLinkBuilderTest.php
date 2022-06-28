@@ -21,9 +21,6 @@ final class SingleViewLinkBuilderTest extends FunctionalTestCase
      */
     private const DEFAULT_SINGLE_VIEW_PAGE_UID = 3;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

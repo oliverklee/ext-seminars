@@ -21,9 +21,6 @@ final class ControllerTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

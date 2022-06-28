@@ -16,9 +16,6 @@ use OliverKlee\Seminars\Model\Registration;
  */
 final class FrontEndUserMapperTest extends FunctionalTestCase
 {
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

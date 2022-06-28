@@ -18,9 +18,6 @@ final class EventDateMapperTest extends FunctionalTestCase
 {
     use CollectionHelper;
 
-    /**
-     * @var array<int, string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**

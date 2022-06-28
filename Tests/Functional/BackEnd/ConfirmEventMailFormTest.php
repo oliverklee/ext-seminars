@@ -24,9 +24,6 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
     use EmailTrait;
     use MakeInstanceTrait;
 
-    /**
-     * @var array<int, non-empty-string>
-     */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     protected function setUp(): void
