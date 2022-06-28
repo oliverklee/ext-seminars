@@ -28,6 +28,7 @@ class CommaSeparatedTitlesViewHelper
         $titles = [];
 
         foreach ($items as $element) {
+            // @phpstan-ignore-next-line We are checking for contract violations here.
             if (!$element instanceof Titled) {
                 throw new \InvalidArgumentException(
                     'All elements in $list must implement the interface OliverKlee\\Seminars\\Model\\Interfaces\\Titled.',

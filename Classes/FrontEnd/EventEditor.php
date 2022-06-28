@@ -2310,6 +2310,7 @@ class EventEditor extends AbstractEditor
         $result = [];
 
         foreach ($models as $model) {
+            // @phpstan-ignore-next-line We are checking for contract violations here.
             if (!$model instanceof Titled) {
                 throw new \InvalidArgumentException(
                     'All elements in $models must implement the interface Titled.',
