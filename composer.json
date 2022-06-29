@@ -57,7 +57,7 @@
 		"php-coveralls/php-coveralls": "^2.5.2",
 		"phpspec/prophecy": "^1.15.0",
 		"phpstan/extension-installer": "^1.1.0",
-		"phpstan/phpstan": "^1.6.8",
+		"phpstan/phpstan": "^1.8.0",
 		"phpstan/phpstan-phpunit": "^1.1.1",
 		"phpstan/phpstan-strict-rules": "^1.2.3",
 		"phpunit/phpunit": "^7.5.20 || ^8.5.26",
