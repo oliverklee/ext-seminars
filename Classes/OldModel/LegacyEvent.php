@@ -184,6 +184,11 @@ class LegacyEvent extends AbstractTimeSpan
         $this->setRecordPropertyString('description', $description);
     }
 
+    public function getContentId(): int
+    {
+        return $this->getRecordPropertyInteger('content');
+    }
+
     public function hasDescription(): bool
     {
         return $this->hasTopicString('description');

@@ -790,6 +790,18 @@ class DefaultController extends TemplateHelper
      */
     private function setDescriptionMarker(): void
     {
+        $contentId = $this->seminar->getContentId();
+        if ($contentId > 0) {
+            $configuration = [
+                'tables' => 'tt_content',
+                'source' => $contentId,
+                'dontCheckPid' => 1,
+            ];
+            $content = $this->cObj->cObjGetSingle('RECORDS', $configuration);
+            $this->setMarker('description', $content);
+            return;
+        }
+
         if (!$this->seminar->hasDescription()) {
             $this->hideSubparts('description', 'field_wrapper');
             return;
