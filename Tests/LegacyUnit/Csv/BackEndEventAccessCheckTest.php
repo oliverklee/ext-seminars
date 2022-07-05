@@ -32,7 +32,6 @@ final class BackEndEventAccessCheckTest extends TestCase
     protected function setUp(): void
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
-        /** @var BackendUserAuthentication&MockObject $backEndUser */
         $backEndUser = $this->createMock(BackendUserAuthentication::class);
         $this->backEndUser = $backEndUser;
         $GLOBALS['BE_USER'] = $backEndUser;

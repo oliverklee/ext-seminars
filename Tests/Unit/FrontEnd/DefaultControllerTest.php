@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
@@ -20,7 +19,6 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithUidCreatesSingleView(): void
     {
-        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
             DefaultController::class,
             [
@@ -45,7 +43,6 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView(): void
     {
-        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
             DefaultController::class,
             [
@@ -70,7 +67,6 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function singleViewFlavorWithoutUidCreatesSingleView(): void
     {
-        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
             DefaultController::class,
             [
@@ -97,7 +93,6 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function eventListFlavorWithoutUidCreatesListView(): void
     {
-        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
             DefaultController::class,
             [
@@ -122,7 +117,6 @@ final class DefaultControllerTest extends UnitTestCase
      */
     public function eventListFlavorWithUidCreatesListView(): void
     {
-        /** @var DefaultController&MockObject $controller */
         $controller = $this->createPartialMock(
             DefaultController::class,
             [

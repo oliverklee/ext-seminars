@@ -9,7 +9,6 @@ use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -469,7 +468,6 @@ final class SelectorWidgetTest extends TestCase
      */
     public function itemsInSearchBoxAreSortedAlphabetically(): void
     {
-        /** @var SelectorWidget&MockObject $subject */
         $subject = $this->getMockBuilder(SelectorWidget::class)
             ->setMethods(
                 [

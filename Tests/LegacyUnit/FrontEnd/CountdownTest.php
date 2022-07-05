@@ -49,7 +49,6 @@ final class CountdownTest extends TestCase
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
-        /** @var EventMapper&MockObject $mapper */
         $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['findNextUpcoming'])->getMock();
         $this->mapper = $mapper;
 
@@ -137,7 +136,6 @@ final class CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->willReturn($event);
 
-        /** @var CountdownViewHelper&MockObject $viewHelper */
         $viewHelper = $this->createPartialMock(CountdownViewHelper::class, ['render']);
         $viewHelper->expects(self::once())
             ->method('render')

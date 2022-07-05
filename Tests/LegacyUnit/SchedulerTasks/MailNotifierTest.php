@@ -113,20 +113,14 @@ final class MailNotifierTest extends TestCase
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        /** @var EventStatusService&MockObject $eventStatusService */
-        $eventStatusService = $this->createMock(EventStatusService::class);
-        $this->eventStatusService = $eventStatusService;
+        $this->eventStatusService = $this->createMock(EventStatusService::class);
         GeneralUtility::setSingletonInstance(EventStatusService::class, $this->eventStatusService);
 
-        /** @var EmailService&MockObject $emailService */
-        $emailService = $this->createMock(EmailService::class);
-        $this->emailService = $emailService;
+        $this->emailService = $this->createMock(EmailService::class);
         GeneralUtility::setSingletonInstance(EmailService::class, $this->emailService);
 
-        /** @var EventMapper&MockObject $eventMapper */
-        $eventMapper = $this->createMock(EventMapper::class);
-        $this->eventMapper = $eventMapper;
-        MapperRegistry::set(EventMapper::class, $eventMapper);
+        $this->eventMapper = $this->createMock(EventMapper::class);
+        MapperRegistry::set(EventMapper::class, $this->eventMapper);
 
         /** @var ObjectProphecy<ObjectManager> $objectManagerProphecy */
         $objectManagerProphecy = $this->prophesize(ObjectManager::class);

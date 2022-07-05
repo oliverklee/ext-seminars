@@ -17,9 +17,7 @@ final class AbstractTimeSpanTest extends TestCase
 
     protected function setUp(): void
     {
-        /** @var AbstractTimeSpan&MockObject $subject */
-        $subject = $this->getMockForAbstractClass(AbstractTimeSpan::class);
-        $this->subject = $subject;
+        $this->subject = $this->getMockForAbstractClass(AbstractTimeSpan::class);
     }
 
     // Tests regarding the begin date.

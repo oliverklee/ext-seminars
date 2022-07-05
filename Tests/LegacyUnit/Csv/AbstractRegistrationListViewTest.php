@@ -100,7 +100,6 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        /** @var AbstractRegistrationListView&MockObject $subject */
         $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
         $subject->method('shouldAlsoContainRegistrationsOnQueue')->willReturn(true);
 
@@ -311,7 +310,6 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var AbstractRegistrationListView&MockObject $subject */
         $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
 
         self::assertSame(
@@ -327,7 +325,6 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var AbstractRegistrationListView&MockObject $subject */
         $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);

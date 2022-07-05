@@ -205,7 +205,6 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
 
-        /** @var SingleViewLinkBuilder&MockObject $linkBuilder */
         $linkBuilder = $this->createPartialMock(
             SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
@@ -3898,7 +3897,6 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice(): void
     {
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -3929,7 +3927,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
 
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -3957,7 +3954,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -3990,7 +3986,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -4028,7 +4023,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -5102,7 +5096,6 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -5138,7 +5131,6 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -5171,7 +5163,6 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -5213,7 +5204,6 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -5402,7 +5392,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5428,7 +5417,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5454,7 +5442,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5480,7 +5467,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5506,7 +5492,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5532,7 +5517,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -5738,7 +5722,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -5768,7 +5751,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -5796,7 +5778,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -5819,7 +5800,6 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -5851,7 +5831,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -5878,7 +5857,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -5908,7 +5886,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -5938,7 +5915,6 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var Event&MockObject $event */
         $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);

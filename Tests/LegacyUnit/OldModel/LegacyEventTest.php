@@ -18,7 +18,6 @@ use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -6560,7 +6559,6 @@ final class LegacyEventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -6593,7 +6591,6 @@ final class LegacyEventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place1, $place2]);
         $subject->method('hasPlace')->willReturn(true);
@@ -6616,7 +6613,6 @@ final class LegacyEventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -6639,7 +6635,6 @@ final class LegacyEventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -7483,7 +7478,6 @@ final class LegacyEventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -7526,7 +7520,6 @@ final class LegacyEventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -7604,7 +7597,6 @@ final class LegacyEventTest extends TestCase
     ): void {
         $this->configuration->setAsBoolean('allowCsvExportForVips', $allowCsvExportForVips);
 
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration', 'isUserVip']);
         $subject->method('needsRegistration')
             ->willReturn(true);
@@ -7795,7 +7787,6 @@ final class LegacyEventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -7997,7 +7988,6 @@ final class LegacyEventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -8035,7 +8025,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(false);
 
@@ -8050,7 +8039,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
 
@@ -8065,7 +8053,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
 
@@ -8080,7 +8067,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
 
@@ -8112,7 +8098,6 @@ final class LegacyEventTest extends TestCase
     public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
         string $accessLevel
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
 
@@ -8127,7 +8112,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
 
@@ -8166,7 +8150,6 @@ final class LegacyEventTest extends TestCase
         string $whichPlugin,
         string $accessLevel
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -8189,7 +8172,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -8213,7 +8195,6 @@ final class LegacyEventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage(): void
     {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -8367,7 +8348,6 @@ final class LegacyEventTest extends TestCase
         bool $hasPriceRegularBoard,
         bool $hasPriceSpecialBoard
     ): void {
-        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
             LegacyEvent::class,
             [

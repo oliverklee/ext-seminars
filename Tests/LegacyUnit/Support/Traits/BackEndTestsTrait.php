@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -93,7 +92,6 @@ trait BackEndTestsTrait
         /** @var BackendUserAuthentication $currentBackEndUser */
         $currentBackEndUser = $GLOBALS['BE_USER'];
         $this->backEndUserBackup = $currentBackEndUser;
-        /** @var BackendUserAuthentication&MockObject $mockBackEndUser */
         $mockBackEndUser = $this->createPartialMock(
             BackendUserAuthentication::class,
             ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC']

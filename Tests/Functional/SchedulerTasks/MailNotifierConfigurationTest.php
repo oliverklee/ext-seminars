@@ -48,7 +48,6 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
-        /** @var SchedulerModuleController&MockObject $moduleController */
         $moduleController = $this->createMock(SchedulerModuleController::class);
         $this->moduleController = $moduleController;
         // We can remove this line once we have moved to PHPUnit 7.5.
@@ -200,7 +199,6 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
         $pageUid = 1;
         $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
-        /** @var MailNotifier&MockObject $task */
         $task = $this->createMock(MailNotifier::class);
         $task->expects(self::once())->method('setConfigurationPageUid')->with($pageUid);
 
