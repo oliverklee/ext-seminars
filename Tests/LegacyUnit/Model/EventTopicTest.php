@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -1443,7 +1442,6 @@ final class EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1463,7 +1461,6 @@ final class EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1483,7 +1480,6 @@ final class EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1507,7 +1503,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1527,7 +1522,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1547,7 +1541,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1572,7 +1565,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1597,7 +1589,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1624,7 +1615,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1651,7 +1641,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1674,7 +1663,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1702,7 +1690,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']
@@ -1727,7 +1714,6 @@ final class EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice(): void
     {
-        /** @var Event&MockObject $subject */
         $subject = $this->createPartialMock(
             Event::class,
             ['earlyBirdApplies']

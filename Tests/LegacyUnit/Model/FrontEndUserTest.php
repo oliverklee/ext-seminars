@@ -14,7 +14,6 @@ use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class FrontEndUserTest extends TestCase
@@ -859,7 +858,6 @@ final class FrontEndUserTest extends TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse(): void
     {
-        /** @var FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
             FrontEndUser::class,
             ['getDefaultOrganizers']
@@ -881,7 +879,6 @@ final class FrontEndUserTest extends TestCase
         $organizers = new Collection();
         $organizers->add($organizer);
 
-        /** @var FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
             FrontEndUser::class,
             ['getDefaultOrganizers']

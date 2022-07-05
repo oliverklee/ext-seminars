@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -45,7 +44,6 @@ final class DateRangeViewHelperTest extends TestCase
      */
     public function renderWithNoDatesReturnsWillBeAnnounced(): void
     {
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setData([]);
 
@@ -60,7 +58,6 @@ final class DateRangeViewHelperTest extends TestCase
      */
     public function renderWithBeginDateOnlyRendersOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
@@ -75,7 +72,6 @@ final class DateRangeViewHelperTest extends TestCase
      */
     public function renderWithEqualBeginAndEndDateReturnsOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
@@ -91,7 +87,6 @@ final class DateRangeViewHelperTest extends TestCase
      */
     public function renderWithBeginAndEndDateOnSameDayReturnsOnlyBeginDate(): void
     {
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
@@ -107,7 +102,6 @@ final class DateRangeViewHelperTest extends TestCase
      */
     public function renderWithBeginAndEndDateOnDifferentDaysReturnsBothFullDatesSeparatedByDash(): void
     {
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
@@ -126,7 +120,6 @@ final class DateRangeViewHelperTest extends TestCase
     {
         $dash = '#DASH#';
 
-        /** @var AbstractTimeSpan&MockObject $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);

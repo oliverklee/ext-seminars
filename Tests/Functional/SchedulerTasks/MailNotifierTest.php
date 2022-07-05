@@ -13,7 +13,6 @@ use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -152,7 +151,6 @@ final class MailNotifierTest extends FunctionalTestCase
     public function executeWithPageConfigurationCallsAllSeparateSteps(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
-        /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -171,7 +169,6 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function executeWithoutPageConfigurationNotCallsAnySeparateStep(): void
     {
-        /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -191,7 +188,6 @@ final class MailNotifierTest extends FunctionalTestCase
     public function executeWithPageConfigurationExecutesRegistrationDigest(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
-        /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
