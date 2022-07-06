@@ -146,8 +146,6 @@ abstract class AbstractEditor extends AbstractView
 
         /**
          * Configuration instance for plugin data. Necessary for LABEL translation.
-         *
-         * @var ConfigurationProcessor $pluginConfiguration
          */
         $pluginConfiguration = GeneralUtility::makeInstance(ConfigurationProcessor::class);
         $pluginConfiguration->init($this->conf, $this->cObj, 'mkforms', 'mkforms');

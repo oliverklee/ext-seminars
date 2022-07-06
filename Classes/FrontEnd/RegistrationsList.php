@@ -174,7 +174,6 @@ class RegistrationsList extends AbstractView
      */
     private function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var RegistrationBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $builder->limitToEvent($this->seminar->getUid());
         $builder->limitToExistingUsers();

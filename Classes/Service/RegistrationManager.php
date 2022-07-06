@@ -97,7 +97,6 @@ class RegistrationManager
     public static function getInstance(): RegistrationManager
     {
         if (!self::$instance instanceof static) {
-            /** @var static $instance */
             $instance = GeneralUtility::makeInstance(static::class);
             self::$instance = $instance;
         }
@@ -617,7 +616,6 @@ class RegistrationManager
 
         $vacancies = $seminar->getVacancies();
 
-        /** @var RegistrationBagBuilder $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($seminar->getUid());
         $registrationBagBuilder->limitToOnQueue();
@@ -674,7 +672,6 @@ class RegistrationManager
      */
     public function getMissingRequiredTopics(LegacyEvent $event): EventBag
     {
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($event->getTopicOrSelfUid());
         $builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
@@ -1051,9 +1048,7 @@ class RegistrationManager
     ): string {
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->buildConfigurationWithFlexforms($plugin);
-            /** @var SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
-            $this->injectLinkBuilder($linkBuilder);
+            $this->injectLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
         }
 
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
@@ -1362,7 +1357,6 @@ class RegistrationManager
         LegacyRegistration $registration
     ): void {
         $template = $this->getInitializedEmailTemplate();
-        /** @var Salutation $salutation */
         $salutation = GeneralUtility::makeInstance(Salutation::class);
         $user = $registration->getFrontEndUser();
         if ($user instanceof FrontEndUser) {
@@ -1445,8 +1439,8 @@ class RegistrationManager
     protected function getRegistrationEmailHookProvider(): HookProvider
     {
         if (!$this->registrationEmailHookProvider instanceof HookProvider) {
-            $this->registrationEmailHookProvider =
-                GeneralUtility::makeInstance(HookProvider::class, RegistrationEmail::class);
+            $this->registrationEmailHookProvider
+                = GeneralUtility::makeInstance(HookProvider::class, RegistrationEmail::class);
         }
 
         return $this->registrationEmailHookProvider;
@@ -1505,10 +1499,7 @@ class RegistrationManager
 
     private function getConnectionForTable(string $table): Connection
     {
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-
-        return $connectionPool->getConnectionForTable($table);
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
     }
 
     /**

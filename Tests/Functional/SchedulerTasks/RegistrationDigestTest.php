@@ -28,9 +28,7 @@ final class RegistrationDigestTest extends FunctionalTestCase
      */
     public function objectManagerInitializesObject(): void
     {
-        /** @var ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $subject = $objectManager->get(RegistrationDigest::class);
+        $subject = GeneralUtility::makeInstance(ObjectManager::class)->get(RegistrationDigest::class);
 
         self::assertTrue($subject->isInitialized());
     }

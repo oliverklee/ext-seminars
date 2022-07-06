@@ -66,10 +66,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
 
     private function getFlashMessageQueue(): FlashMessageQueue
     {
-        /** @var FlashMessageService $service */
-        $service = GeneralUtility::makeInstance(FlashMessageService::class);
-
-        return $service->getMessageQueueByIdentifier();
+        return GeneralUtility::makeInstance(FlashMessageService::class)->getMessageQueueByIdentifier();
     }
 
     /**

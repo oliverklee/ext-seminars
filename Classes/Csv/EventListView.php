@@ -85,7 +85,6 @@ class EventListView extends AbstractListView
      */
     protected function createCsvBodyLines(): array
     {
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setBackEndMode();
         $builder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);

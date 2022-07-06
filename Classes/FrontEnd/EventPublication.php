@@ -51,7 +51,6 @@ class EventPublication extends TemplateHelper
             return $this->translate('message_publishingFailed');
         }
 
-        /** @var EventMapper $eventMapper */
         $eventMapper = GeneralUtility::makeInstance(EventMapper::class);
         /** @var Event|null $event */
         $event = $eventMapper->findByPublicationHash($this->piVars['hash']);

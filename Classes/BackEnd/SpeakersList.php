@@ -49,12 +49,9 @@ class SpeakersList extends AbstractList
         $this->template->setMarker('label_full_name', $languageService->getLL('speakerlist.title'));
         $this->template->setMarker('label_skills', $languageService->getLL('speakerlist.skills'));
 
-        /** @var SpeakerBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(SpeakerBagBuilder::class);
         $builder->showHiddenRecords();
-
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
-
         $speakerBag = $builder->build();
 
         $tableRows = '';

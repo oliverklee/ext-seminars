@@ -138,10 +138,8 @@ final class RegistrationsListTest extends TestCase
     public function createLogInAndRegisterFrontEndUserCreatesRegistrationRecord(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-
-        $connection = $connectionPool->getConnectionForTable('tx_seminars_attendances');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_attendances');
 
         self::assertSame(
             1,

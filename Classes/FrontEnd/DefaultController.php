@@ -281,7 +281,6 @@ class DefaultController extends TemplateHelper
                 // The fallthrough is intended
                 // because createRegistrationsListPage() will differentiate later.
             case 'list_registrations':
-                /** @var RegistrationsList $registrationsList */
                 $registrationsList = GeneralUtility::makeInstance(
                     RegistrationsList::class,
                     $this->conf,
@@ -300,7 +299,6 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'countdown':
-                /** @var Countdown $countdown */
                 $countdown = GeneralUtility::makeInstance(
                     Countdown::class,
                     $this->conf,
@@ -318,7 +316,6 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'category_list':
-                /** @var CategoryList $categoryList */
                 $categoryList = GeneralUtility::makeInstance(
                     CategoryList::class,
                     $this->conf,
@@ -335,7 +332,6 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'event_headline':
-                /** @var EventHeadline $eventHeadline */
                 $eventHeadline = GeneralUtility::makeInstance(
                     EventHeadline::class,
                     $this->conf,
@@ -1195,7 +1191,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $requirementsLists = $this->createRequirementsList();
+        $requirementsLists = GeneralUtility::makeInstance(RequirementsList::class, $this->conf, $this->cObj);
         $requirementsLists->setEvent($this->seminar);
 
         $this->setSubpart(
@@ -1888,9 +1884,8 @@ class DefaultController extends TemplateHelper
             }
             $this->setMarker('image', $image);
 
-            /** @var CategoryList $categoryList */
-            $categoryList = GeneralUtility::makeInstance(CategoryList::class, $this->conf, $this->cObj);
-            $listOfCategories = $categoryList->createCategoryList($this->seminar->getCategories());
+            $listOfCategories = GeneralUtility::makeInstance(CategoryList::class, $this->conf, $this->cObj)
+                ->createCategoryList($this->seminar->getCategories());
 
             if (
                 $listOfCategories === $this->previousCategory
@@ -1977,7 +1972,6 @@ class DefaultController extends TemplateHelper
      */
     private function createSeminarBagBuilder(): EventBagBuilder
     {
-        /** @var EventBagBuilder $seminarBagBuilder */
         $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
 
         $seminarBagBuilder->setSourcePages(
@@ -1997,7 +1991,6 @@ class DefaultController extends TemplateHelper
      */
     private function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var RegistrationBagBuilder $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
         /** @var FrontEndUser $loggedInUser */
@@ -2006,16 +1999,6 @@ class DefaultController extends TemplateHelper
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 
         return $registrationBagBuilder;
-    }
-
-    /**
-     * @return RequirementsList the object to build the requirements list with
-     */
-    private function createRequirementsList(): RequirementsList
-    {
-        /** @var RequirementsList $list */
-        $list = GeneralUtility::makeInstance(RequirementsList::class, $this->conf, $this->cObj);
-        return $list;
     }
 
     /**
@@ -2086,7 +2069,6 @@ class DefaultController extends TemplateHelper
             return '';
         }
 
-        /** @var SelectorWidget $selectorWidget */
         $selectorWidget = GeneralUtility::makeInstance(
             SelectorWidget::class,
             $this->conf,
@@ -2633,7 +2615,7 @@ class DefaultController extends TemplateHelper
                 $registrationForm = $this->createRegistrationForm();
             } else {
                 $errorMessage = $this->translate('message_requirementsNotFulfilled');
-                $requirementsList = $this->createRequirementsList();
+                $requirementsList = GeneralUtility::makeInstance(RequirementsList::class, $this->conf, $this->cObj);
                 $requirementsList->setEvent($this->seminar);
                 $requirementsList->limitToMissingRegistrations();
                 $registrationForm = $requirementsList->render();
@@ -2700,7 +2682,6 @@ class DefaultController extends TemplateHelper
      */
     protected function createRegistrationForm(): string
     {
-        /** @var RegistrationForm $registrationEditor */
         $registrationEditor = GeneralUtility::makeInstance(
             RegistrationForm::class,
             $this->conf,
@@ -2812,7 +2793,6 @@ class DefaultController extends TemplateHelper
      */
     protected function createEventEditorInstance(): EventEditor
     {
-        /** @var EventEditor $eventEditor */
         $eventEditor = GeneralUtility::makeInstance(EventEditor::class, $this->conf, $this->cObj);
         $eventEditor->setObjectUid((int)$this->piVars['seminar']);
 
@@ -3275,7 +3255,6 @@ class DefaultController extends TemplateHelper
     {
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->getConfigurationWithFlexForms();
-            /** @var SingleViewLinkBuilder $linkBuilder */
             $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
             $this->injectLinkBuilder($linkBuilder);
         }

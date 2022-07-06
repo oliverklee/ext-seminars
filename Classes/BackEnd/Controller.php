@@ -45,9 +45,7 @@ class Controller extends AbstractModule
                     $filename = null;
             }
 
-            /** @var CsvDownloader $csvExporter */
-            $csvExporter = GeneralUtility::makeInstance(CsvDownloader::class);
-            $csvContent = $csvExporter->main();
+            $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
             $response = new CsvResponse($csvContent, $filename);
         } else {
             $htmlContent = $this->main();
@@ -67,9 +65,6 @@ class Controller extends AbstractModule
         $languageService = $this->getLanguageService();
         $backEndUser = $this->getBackendUser();
 
-        /** @var DocumentTemplate $document */
-        $document = GeneralUtility::makeInstance(DocumentTemplate::class);
-
         $pageRenderer = $this->getPageRenderer();
         $pageRenderer->addCssFile(
             '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
@@ -79,11 +74,11 @@ class Controller extends AbstractModule
             false
         );
 
+        $document = GeneralUtility::makeInstance(DocumentTemplate::class);
         $content = $document->startPage($languageService->getLL('title')) .
             '<h1>' . $languageService->getLL('title') . '</h1></div>';
 
         if ($this->id <= 0) {
-            /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $languageService->getLL('message_noPageTypeSelected'),
@@ -101,7 +96,6 @@ class Controller extends AbstractModule
         }
 
         if (!$this->hasStaticTemplate()) {
-            /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $languageService->getLL('message_noStaticTemplateFound'),
@@ -155,19 +149,13 @@ class Controller extends AbstractModule
 
         switch ($this->subModule) {
             case 2:
-                /** @var RegistrationsList $registrationsList */
-                $registrationsList = GeneralUtility::makeInstance(RegistrationsList::class, $this);
-                $content .= $registrationsList->show();
+                $content .= GeneralUtility::makeInstance(RegistrationsList::class, $this)->show();
                 break;
             case 3:
-                /** @var SpeakersList $speakersList */
-                $speakersList = GeneralUtility::makeInstance(SpeakersList::class, $this);
-                $content .= $speakersList->show();
+                $content .= GeneralUtility::makeInstance(SpeakersList::class, $this)->show();
                 break;
             case 4:
-                /** @var OrganizersList $organizersList */
-                $organizersList = GeneralUtility::makeInstance(OrganizersList::class, $this);
-                $content .= $organizersList->show();
+                $content .= GeneralUtility::makeInstance(OrganizersList::class, $this)->show();
                 break;
             case 1:
                 if ($this->isGeneralEmailFormRequested()) {
@@ -177,9 +165,7 @@ class Controller extends AbstractModule
                 } elseif ($this->isCancelEventFormRequested()) {
                     $content .= $this->getCancelEventMailForm();
                 } else {
-                    /** @var EventsList $eventsList */
-                    $eventsList = GeneralUtility::makeInstance(EventsList::class, $this);
-                    $content .= $eventsList->show();
+                    $content .= GeneralUtility::makeInstance(EventsList::class, $this)->show();
                 }
                 break;
             default:
@@ -203,9 +189,8 @@ class Controller extends AbstractModule
      */
     protected function addFlashMessage(FlashMessage $flashMessage): void
     {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
+            ->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 
@@ -216,9 +201,8 @@ class Controller extends AbstractModule
      */
     protected function getRenderedFlashMessages(): string
     {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        return $flashMessageService->getMessageQueueByIdentifier()->renderFlashMessages();
+        return GeneralUtility::makeInstance(FlashMessageService::class)
+            ->getMessageQueueByIdentifier()->renderFlashMessages();
     }
 
     /**
@@ -282,7 +266,6 @@ class Controller extends AbstractModule
      */
     private function getGeneralMailForm(): string
     {
-        /** @var GeneralEventMailForm $form */
         $form = GeneralUtility::makeInstance(GeneralEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
@@ -296,7 +279,6 @@ class Controller extends AbstractModule
      */
     private function getConfirmEventMailForm(): string
     {
-        /** @var ConfirmEventMailForm $form */
         $form = GeneralUtility::makeInstance(ConfirmEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
@@ -310,7 +292,6 @@ class Controller extends AbstractModule
      */
     private function getCancelEventMailForm(): string
     {
-        /** @var CancelEventMailForm $form */
         $form = GeneralUtility::makeInstance(CancelEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
@@ -392,7 +373,7 @@ class Controller extends AbstractModule
      */
     protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
     {
-        $uriBuilder = $this->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         try {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
         } catch (RouteNotFoundException $e) {
@@ -402,10 +383,5 @@ class Controller extends AbstractModule
         }
 
         return (string)$uri;
-    }
-
-    protected function getUriBuilder(): UriBuilder
-    {
-        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 }

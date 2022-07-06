@@ -227,7 +227,6 @@ abstract class AbstractList
                 '</a>' .
                 '</div>';
 
-            /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $storageLabel,
@@ -236,9 +235,8 @@ abstract class AbstractList
             );
             $this->addFlashMessage($message);
 
-            /** @var FlashMessageService $flashMessageService */
-            $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-            $renderedFlashMessages = $flashMessageService->getMessageQueueByIdentifier()->renderFlashMessages();
+            $renderedFlashMessages = GeneralUtility::makeInstance(FlashMessageService::class)
+                ->getMessageQueueByIdentifier()->renderFlashMessages();
 
             $result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
 
@@ -255,9 +253,8 @@ abstract class AbstractList
      */
     protected function addFlashMessage(FlashMessage $flashMessage): void
     {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
+            ->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 

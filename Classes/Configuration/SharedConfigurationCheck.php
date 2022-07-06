@@ -43,9 +43,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
      */
     private function checkCurrency(): void
     {
-        /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $connection = $pool->getConnectionForTable('static_currencies');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_currencies');
         $result = $connection->select(['cu_iso_3'], 'static_currencies')->fetchAll();
         $allowedValues = \array_column($result, 'cu_iso_3');
 

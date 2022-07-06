@@ -133,8 +133,8 @@ abstract class AbstractBagBuilder
         // Todo: Remove this after we pass an array from outside
         $uids = GeneralUtility::intExplode(',', $sourcePagePids);
 
-        $recursivePidList =
-            GeneralUtility::makeInstance(OelibPageRepository::class)->findWithinParentPages($uids, $recursionDepth);
+        $recursivePidList = GeneralUtility::makeInstance(OelibPageRepository::class)
+            ->findWithinParentPages($uids, $recursionDepth);
 
         $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . \implode(',', $recursivePidList) . ')';
     }

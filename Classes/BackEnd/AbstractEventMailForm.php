@@ -387,7 +387,6 @@ abstract class AbstractEventMailForm
         $organizer = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
 
-        /** @var RegistrationBagBuilder $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($event->getUid());
         $registrations = $registrationBagBuilder->build();
@@ -413,7 +412,6 @@ abstract class AbstractEventMailForm
                 $email->send();
             }
 
-            /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $this->getLanguageService()->getLL('message_emailToAttendeesSent'),
@@ -432,9 +430,8 @@ abstract class AbstractEventMailForm
      */
     protected function addFlashMessage(FlashMessage $flashMessage): void
     {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
+            ->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 
@@ -544,9 +541,7 @@ abstract class AbstractEventMailForm
      */
     protected function localizeSalutationPlaceholder(string $prefix): string
     {
-        /** @var Salutation $salutation */
-        $salutation = GeneralUtility::makeInstance(Salutation::class);
-        $eventDetails = $salutation->createIntroduction(
+        $eventDetails = GeneralUtility::makeInstance(Salutation::class)->createIntroduction(
             '"%s"',
             $this->getOldEvent()
         );
@@ -568,11 +563,9 @@ abstract class AbstractEventMailForm
      */
     private function createMessageBody(FrontEndUser $user, Organizer $organizer): string
     {
-        /** @var Salutation $salutation */
-        $salutation = GeneralUtility::makeInstance(Salutation::class);
         $messageText = str_replace(
             '%salutation',
-            $salutation->getSalutation($user),
+            GeneralUtility::makeInstance(Salutation::class)->getSalutation($user),
             $this->getPostData('messageBody')
         );
         $messageFooter = $organizer->hasEmailFooter()

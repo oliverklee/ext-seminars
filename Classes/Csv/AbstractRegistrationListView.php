@@ -100,9 +100,8 @@ abstract class AbstractRegistrationListView extends AbstractListView
             . implode(self::LINE_SEPARATOR, $allLines)
             . self::LINE_SEPARATOR;
 
-        /** @var HookProvider $csvHookProvider */
-        $csvHookProvider = GeneralUtility::makeInstance(HookProvider::class, RegistrationListCsv::class);
-        return $csvHookProvider->executeHookReturningModifiedValue('modifyCsv', $allLines, $this);
+        return GeneralUtility::makeInstance(HookProvider::class, RegistrationListCsv::class)
+            ->executeHookReturningModifiedValue('modifyCsv', $allLines, $this);
     }
 
     /**
@@ -180,9 +179,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
      */
     protected function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var RegistrationBagBuilder $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
-
         if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
             $registrationBagBuilder->limitToRegular();
         }

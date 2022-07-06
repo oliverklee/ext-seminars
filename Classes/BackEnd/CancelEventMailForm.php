@@ -42,11 +42,8 @@ class CancelEventMailForm extends AbstractEventMailForm
      */
     protected function setEventStatus(): void
     {
-        /** @var EventStatusService $eventStatusService */
-        $eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
-        $eventStatusService->cancelAndSave($this->getEvent());
+        GeneralUtility::makeInstance(EventStatusService::class)->cancelAndSave($this->getEvent());
 
-        /** @var FlashMessage $message */
         $message = GeneralUtility::makeInstance(
             FlashMessage::class,
             $this->getLanguageService()->getLL('message_eventCanceled'),

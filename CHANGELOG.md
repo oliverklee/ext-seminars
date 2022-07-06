@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Fix a flaky test (#1403, #1408)
-- Improve the type annotations (#1401, #1417)
+- Improve the type annotations (#1401, #1417, #1424)
 
 ## 4.1.5
 

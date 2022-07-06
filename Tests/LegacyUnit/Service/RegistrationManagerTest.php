@@ -7295,10 +7295,7 @@ final class RegistrationManagerTest extends TestCase
 
     private function getConnectionPool(): ConnectionPool
     {
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-
-        return $connectionPool;
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     private function getConnectionForTable(string $table): Connection

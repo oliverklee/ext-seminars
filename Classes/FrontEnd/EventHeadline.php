@@ -68,9 +68,6 @@ class EventHeadline extends AbstractView
             return $result;
         }
 
-        /** @var DateRangeViewHelper $dateRangeViewHelper */
-        $dateRangeViewHelper = GeneralUtility::makeInstance(DateRangeViewHelper::class);
-
-        return $result . ', ' . $dateRangeViewHelper->render($event);
+        return $result . ', ' . GeneralUtility::makeInstance(DateRangeViewHelper::class)->render($event);
     }
 }

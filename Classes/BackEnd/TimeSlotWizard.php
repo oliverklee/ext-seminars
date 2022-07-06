@@ -74,13 +74,10 @@ class TimeSlotWizard extends AbstractFormElement
 
     private function buildSingleToggleButton(string $labelKey, string $icon, string $additionalClass = ''): string
     {
-        /** @var IconFactory $iconFactory */
-        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-
         $allClasses = 'btn btn-default ' .
             't3js-formengine-timeslotwizard-toggle t3js-formengine-timeslotwizard-toggleable ' . $additionalClass;
         return '<button class="' . $allClasses . '" type="button">' .
-            $iconFactory->getIcon($icon, Icon::SIZE_SMALL) . ' ' .
+            GeneralUtility::makeInstance(IconFactory::class)->getIcon($icon, Icon::SIZE_SMALL) . ' ' .
             $this->createEncodedLabel($labelKey) .
             '</button>';
     }
@@ -195,10 +192,8 @@ class TimeSlotWizard extends AbstractFormElement
 
     private function buildSubmitButton(): string
     {
-        /** @var IconFactory $iconFactory */
         $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
 
-        /** @var InputButton $button */
         $button = GeneralUtility::makeInstance(InputButton::class);
         $button->setTitle($this->getLanguageService()->sL(self::LABEL_KEY_PREFIX . 'create'))
             ->setName('_savedok')

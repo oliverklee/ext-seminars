@@ -49,7 +49,6 @@ class EventsList extends AbstractList
 
         $this->createTableHeading();
 
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setBackEndMode();
 

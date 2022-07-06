@@ -101,7 +101,6 @@ class SelectorWidget extends AbstractView
         );
 
         $this->instantiateStaticInfo();
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToEventTypes(
             GeneralUtility::intExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
@@ -219,9 +218,8 @@ class SelectorWidget extends AbstractView
             return;
         }
 
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_sites');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_seminars_sites');
         $eventUids = GeneralUtility::intExplode(',', $this->seminarBag->getUids());
         $eventUidsParameter = $queryBuilder->createNamedParameter($eventUids, Connection::PARAM_INT_ARRAY);
         $dataOfPlaces = $queryBuilder

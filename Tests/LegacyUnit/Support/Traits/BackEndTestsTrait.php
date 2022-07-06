@@ -157,9 +157,8 @@ trait BackEndTestsTrait
      */
     private function flushAllFlashMessages(): void
     {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
+            ->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->getAllMessagesAndFlush();
     }
 

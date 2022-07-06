@@ -96,7 +96,6 @@ class CsvDownloader
      */
     public function createAndOutputListOfRegistrations(int $eventUid = 0): string
     {
-        /** @var DownloadRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
 
         $pageUid = (int)GeneralUtility::_GET('pid');
@@ -134,7 +133,6 @@ class CsvDownloader
             return '';
         }
 
-        /** @var DownloadRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
         $listView->setEventUid($eventUid);
 
@@ -177,7 +175,6 @@ class CsvDownloader
      */
     public function createListOfEvents(int $pageUid): string
     {
-        /** @var EventListView $eventListView */
         $eventListView = GeneralUtility::makeInstance(EventListView::class);
         $eventListView->setPageUid($pageUid);
 
@@ -199,19 +196,13 @@ class CsvDownloader
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var BackEndRegistrationAccessCheck $accessCheck */
-                $accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
-                $result = $accessCheck->hasAccess();
+                $result = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class)->hasAccess();
                 break;
             case 'FE':
-                /** @var FrontEndRegistrationAccessCheck $accessCheck */
-                $accessCheck = GeneralUtility::makeInstance(FrontEndRegistrationAccessCheck::class);
-
-                /** @var LegacyEvent $event */
                 $event = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid, false, true);
-                $accessCheck->setEvent($event);
+                GeneralUtility::makeInstance(FrontEndRegistrationAccessCheck::class)->setEvent($event);
 
-                $result = $accessCheck->hasAccess();
+                $result = GeneralUtility::makeInstance(FrontEndRegistrationAccessCheck::class)->hasAccess();
                 break;
             default:
                 $result = false;
@@ -229,7 +220,6 @@ class CsvDownloader
      */
     protected function canAccessListOfEvents(int $pageUid): bool
     {
-        /** @var BackEndEventAccessCheck $accessCheck */
         $accessCheck = GeneralUtility::makeInstance(BackEndEventAccessCheck::class);
         $accessCheck->setPageUid($pageUid);
 
@@ -309,7 +299,6 @@ class CsvDownloader
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var BackEndRegistrationAccessCheck $accessCheck */
                 $accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
                 $accessCheck->setPageUid($pageUid);
                 $result = $accessCheck->hasAccess();
