@@ -893,14 +893,13 @@ final class RegistrationTest extends TestCase
      */
     public function setGenderWithUnsupportedGenderThrowsException(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
             'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN'
         );
 
+        // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->setGender(-1);
     }
 

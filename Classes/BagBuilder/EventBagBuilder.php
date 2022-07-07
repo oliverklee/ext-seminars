@@ -31,7 +31,7 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * @var array<int, non-empty-string> list of the valid keys for time-frames
      */
-    private static $validTimeFrames = [
+    public const VALID_TIMES_FRAMES = [
         'past',
         'pastAndCurrent',
         'current',
@@ -175,14 +175,12 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * Sets the time-frame for the events that will be found by this bag.
      *
-     * @param string $timeFrameKey
-     *        key for the selected time-frame, must not be empty, must be one of the following:
-     *        past, pastAndCurrent, current, currentAndUpcoming, upcoming, deadlineNotOver, all
+     * @param value-of<self::VALID_TIMES_FRAMES> $timeFrameKey
      */
     public function setTimeFrame(string $timeFrameKey): void
     {
-        if (!\in_array($timeFrameKey, self::$validTimeFrames, true)) {
-            throw new \InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
+        if (!\in_array($timeFrameKey, self::VALID_TIMES_FRAMES, true)) {
+            throw new \InvalidArgumentException('The time-frame key "' . $timeFrameKey . '" is not valid.', 1333292705);
         }
 
         $now = $GLOBALS['SIM_EXEC_TIME'];

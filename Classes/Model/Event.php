@@ -22,6 +22,11 @@ class Event extends AbstractTimeSpan implements Titled
     use EventEmailSenderTrait;
 
     /**
+     * @var array<int, self::TYPE_*>
+     */
+    private const VALID_TYPES = [self::TYPE_COMPLETE, self::TYPE_TOPIC, self::TYPE_DATE];
+
+    /**
      * @var int represents the type for a single event
      */
     public const TYPE_COMPLETE = 0;
@@ -35,6 +40,11 @@ class Event extends AbstractTimeSpan implements Titled
      * @var int represents the type for an event date
      */
     public const TYPE_DATE = 2;
+
+    /**
+     * @var array<int, self::STATUS_*>
+     */
+    private const VALID_STATUSES = [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED];
 
     /**
      * @var int the status "planned" for an event
@@ -77,17 +87,14 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * Returns the record type of this event, which will be one of the following:
-     * - Event::TYPE_COMPLETE
-     * - Event::TYPE_TOPIC
-     * - Event::TYPE_DATE
-     *
-     * @return int the record type of this event, will be one of the values
-     *                 mentioned above, will be >= 0
+     * @return self::TYPE_*
      */
     public function getRecordType(): int
     {
-        return $this->getAsInteger('object_type');
+        $type = $this->getAsInteger('object_type');
+        \assert(\in_array($type, self::VALID_TYPES, true));
+
+        return $type;
     }
 
     /**
@@ -1133,21 +1140,24 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @return int our status, will be one of STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED
+     * @return self::STATUS_*
      */
     public function getStatus(): int
     {
-        return $this->getAsInteger('cancelled');
+        $status = $this->getAsInteger('cancelled');
+        \assert(\in_array($status, self::VALID_STATUSES, true));
+
+        return $status;
     }
 
     /**
-     * @param int $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
+     * @param self::STATUS_* $status
      *
      * @throws \InvalidArgumentException
      */
     public function setStatus(int $status): void
     {
-        if (!in_array($status, [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED], true)) {
+        if (!\in_array($status, self::VALID_STATUSES, true)) {
             throw new \InvalidArgumentException(
                 '$status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED.',
                 1333296722

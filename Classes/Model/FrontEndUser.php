@@ -22,10 +22,7 @@ class FrontEndUser extends OelibFrontEndUser
      * If the user has more than one group, the strictest setting of the groups
      * will be returned.
      *
-     * @return int one of the class constants
-     *                 FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-     *                 FrontEndUserGroup::PUBLISH_HIDE_NEW or
-     *                 FrontEndUserGroup::PUBLISH_HIDE_EDITED
+     * @return FrontEndUserGroup::PUBLISH_*
      */
     public function getPublishSetting(): int
     {

@@ -475,12 +475,10 @@ final class EventBagBuilderTest extends TestCase
      */
     public function setTimeFrameFailsWithEmptyKey(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The time-frame key  is not valid.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The time-frame key "" is not valid.');
+
+        // @phpstan-ignore-next-line We're explicitly testing for a contract violation here.
         $this->subject->setTimeFrame('');
     }
 
@@ -489,12 +487,10 @@ final class EventBagBuilderTest extends TestCase
      */
     public function setTimeFrameFailsWithInvalidKey(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The time-frame key foo is not valid.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The time-frame key "foo" is not valid.');
+
+        // @phpstan-ignore-next-line We're explicitly testing for a contract violation here.
         $this->subject->setTimeFrame('foo');
     }
 

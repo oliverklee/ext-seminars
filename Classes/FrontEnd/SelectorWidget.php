@@ -162,9 +162,7 @@ class SelectorWidget extends AbstractView
     /**
      * Creates the HTML code for a single option box of the selector widget.
      *
-     * @param string $name
-     *        the name of the option box to generate, must be one of the following:
-     *        'event_type', 'language', 'country', 'city', 'places'
+     * @param 'event_type'|'language'|'country'|'city'|'places' $name
      * @param string[] $options
      *        the options for the option box with the option value as key and the option label as value, may be empty
      *
@@ -329,8 +327,7 @@ class SelectorWidget extends AbstractView
     /**
      * Fills or hides the subpart for the given search field.
      *
-     * @param string $searchField the key of the search field, must be one of the following:
-     *        "event_type", "language", "country", "city", "places", "organizer"
+     * @param 'event_type'|'language'|'place'|'city'|'country'|'organizer'|'categories' $searchField
      */
     private function fillOrHideSearchSubpart(string $searchField): void
     {

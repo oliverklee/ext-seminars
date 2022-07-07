@@ -220,20 +220,20 @@ class LegacySpeaker extends AbstractModel
     /**
      * Returns the gender of this speaker.
      *
-     * @return int the gender of the speaker, will be either
-     *                 GENDER_MALE,
-     *                 GENDER_FEMALE or
-     *                 GENDER_UNKNOWN if the speaker has no gender
+     * @return self::GENDER_* $gender
      */
     public function getGender(): int
     {
-        return $this->getRecordPropertyInteger('gender');
+        $gender = $this->getRecordPropertyInteger('gender');
+        \assert(\in_array($gender, [self::GENDER_UNKNOWN, self::GENDER_MALE, self::GENDER_FEMALE], true));
+
+        return $gender;
     }
 
     /**
      * Sets the gender of this speaker.
      *
-     * @param int $gender the gender of the speaker, must be one of GENDER_FEMALE, GENDER_MALE, GENDER_UNKNOWN
+     * @param self::GENDER_* $gender
      */
     public function setGender(int $gender): void
     {
