@@ -3056,10 +3056,8 @@ class LegacyEvent extends AbstractTimeSpan
             return null;
         }
 
-        $mapper = MapperRegistry::get(OelibFrontEndUserMapper::class);
-        $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
-
-        return $owner;
+        return MapperRegistry::get(OelibFrontEndUserMapper::class)
+            ->find($this->getRecordPropertyInteger('owner_feuser'));
     }
 
     /**

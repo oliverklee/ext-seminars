@@ -483,7 +483,6 @@ class LegacyRegistration extends AbstractModel
                 /** @var int[] $uids */
                 $uids = GeneralUtility::intExplode(',', $rawData, true);
                 foreach ($uids as $uid) {
-                    /** @var FrontendUserGroup|null $group */
                     $group = $repository->findByUid($uid);
                     if ($group instanceof FrontendUserGroup) {
                         $titles[] = $group->getTitle();

@@ -266,8 +266,7 @@ final class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryInstance(): void
     {
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
+        $country = MapperRegistry::get(CountryMapper::class)->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
         self::assertInstanceOf(
@@ -281,8 +280,7 @@ final class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryAsModel(): void
     {
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
+        $country = MapperRegistry::get(CountryMapper::class)->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
         self::assertSame(
@@ -296,8 +294,7 @@ final class PlaceTest extends TestCase
      */
     public function setCountrySetsCountry(): void
     {
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
+        $country = MapperRegistry::get(CountryMapper::class)->find(54);
         $this->subject->setCountry($country);
 
         self::assertSame(
@@ -347,8 +344,7 @@ final class PlaceTest extends TestCase
      */
     public function hasCountryWithCountryReturnsTrue(): void
     {
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
+        $country = MapperRegistry::get(CountryMapper::class)->find(54);
         $this->subject->setCountry($country);
 
         self::assertTrue(

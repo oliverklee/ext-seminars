@@ -512,8 +512,7 @@ class RegistrationManager
                     $paymentMethodUid = isset($formData['method_of_payment'])
                         ? max(0, (int)$formData['method_of_payment']) : 0;
                     if ($paymentMethodUid > 0 && $availablePaymentMethods->hasUid($paymentMethodUid)) {
-                        $mapper = MapperRegistry::get(PaymentMethodMapper::class);
-                        $paymentMethod = $mapper->find($paymentMethodUid);
+                        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->find($paymentMethodUid);
                     }
                 }
                 $registration->setPaymentMethod($paymentMethod);
@@ -871,8 +870,7 @@ class RegistrationManager
 
         $emailBuilder->text($template->getSubpart('MAIL_NOTIFICATION'));
 
-        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
-        $registrationNew = $registrationMapper->find($registration->getUid());
+        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
 
         $email = $emailBuilder->build();
         $this->getRegistrationEmailHookProvider()
@@ -1167,8 +1165,7 @@ class RegistrationManager
             $template->hideSubparts('interests', $wrapperPrefix);
         }
 
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $newEvent = $mapper->find($event->getUid());
+        $newEvent = MapperRegistry::get(EventMapper::class)->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $template->setMarker(
             'url',
@@ -1184,8 +1181,7 @@ class RegistrationManager
         $footers = $event->getOrganizersFooter();
         $template->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
 
-        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
-        $registrationNew = $registrationMapper->find($registration->getUid());
+        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()->executeHook(
             $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',

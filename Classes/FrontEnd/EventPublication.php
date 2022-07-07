@@ -52,10 +52,9 @@ class EventPublication extends TemplateHelper
         }
 
         $eventMapper = GeneralUtility::makeInstance(EventMapper::class);
-        /** @var Event|null $event */
         $event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
-        if ($event !== null && $event->isHidden()) {
+        if ($event instanceof Event && $event->isHidden()) {
             $event->markAsVisible();
             $event->purgePublicationHash();
             $eventMapper->save($event);

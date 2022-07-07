@@ -187,15 +187,10 @@ class RegistrationForm extends AbstractEditor
 
     /**
      * Returns the event for this registration form.
-     *
-     * @return Event
      */
     public function getEvent(): Event
     {
-        $eventMapper = MapperRegistry::get(EventMapper::class);
-        $event = $eventMapper->find($this->getSeminar()->getUid());
-
-        return $event;
+        return MapperRegistry::get(EventMapper::class)->find($this->getSeminar()->getUid());
     }
 
     /**

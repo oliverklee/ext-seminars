@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Only show the configuration check with a logged-in BE admin (#1427)
 - Do not rely on transitive Composer dependencies (#1426)
 - Fix a flaky test (#1403, #1408)
-- Improve the type annotations (#1393, #1401, #1417, #1424)
+- Improve the type annotations (#1393, #1401, #1417, #1424, #1429)
 
 ## 4.1.5
 

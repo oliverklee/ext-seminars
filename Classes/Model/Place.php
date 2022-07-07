@@ -106,8 +106,7 @@ class Place extends AbstractModel implements Titled
         }
 
         try {
-            $mapper = MapperRegistry::get(CountryMapper::class);
-            $country = $mapper->findByIsoAlpha2Code($countryCode);
+            $country = MapperRegistry::get(CountryMapper::class)->findByIsoAlpha2Code($countryCode);
         } catch (NotFoundException $exception) {
             $country = null;
         }
