@@ -114,19 +114,10 @@ class LegacyRegistration extends AbstractModel
         self::$cachedSeminars = [];
     }
 
-    protected function getObjectManager(): ObjectManager
-    {
-        /** @var ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-
-        return $objectManager;
-    }
-
     protected function getFrontEndUserGroupRepository(): FrontendUserGroupRepository
     {
         if (!$this->frontEndUserGroupRepository instanceof FrontendUserGroupRepository) {
-            /** @var FrontendUserGroupRepository $repository */
-            $repository = $this->getObjectManager()->get(FrontendUserGroupRepository::class);
+            $repository = GeneralUtility::makeInstance(ObjectManager::class)->get(FrontendUserGroupRepository::class);
             $this->frontEndUserGroupRepository = $repository;
         }
 
@@ -176,9 +167,8 @@ class LegacyRegistration extends AbstractModel
         // selected, there actually is anything to pay and only one payment
         // method is provided.
         if (!$methodOfPayment && $this->recordData['total_price'] > 0.00 && $event->getNumberOfPaymentMethods() === 1) {
-            /** @var ConnectionPool $connectionPool */
-            $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-            $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_payment_methods');
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getQueryBuilderForTable('tx_seminars_payment_methods');
             $rows = $queryBuilder
                 ->select('uid')
                 ->from('tx_seminars_payment_methods')
@@ -1102,9 +1092,8 @@ class LegacyRegistration extends AbstractModel
             $this->createMmRecords('tx_seminars_attendances_checkboxes_mm', $this->checkboxes);
         }
 
-        /** @var ReferenceIndex $referenceIndex */
-        $referenceIndex = GeneralUtility::makeInstance(ReferenceIndex::class);
-        $referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
+        GeneralUtility::makeInstance(ReferenceIndex::class)
+            ->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 
         return true;
     }

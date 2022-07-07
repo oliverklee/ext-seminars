@@ -979,7 +979,6 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function formatPrice(string $value): string
     {
-        /** @var PriceViewHelper $priceViewHelper */
         $priceViewHelper = GeneralUtility::makeInstance(PriceViewHelper::class);
         $priceViewHelper
             ->setCurrencyFromIsoAlpha3Code(ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency'));
@@ -1820,7 +1819,6 @@ class LegacyEvent extends AbstractTimeSpan
             throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
         }
 
-        /** @var OrganizerBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
         $builder->limitToEvent($this->getUid());
         /** @var OrganizerBag $bag */
@@ -2007,7 +2005,6 @@ class LegacyEvent extends AbstractTimeSpan
         }
         $result = [];
 
-        /** @var OrganizerBag $organizerBag */
         $organizerBag = GeneralUtility::makeInstance(
             OrganizerBag::class,
             'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
@@ -3443,10 +3440,7 @@ class LegacyEvent extends AbstractTimeSpan
             'tx_seminars_attendances.seminar' .
             ' AND tx_seminars_attendances.user = ' . $uid;
 
-        /** @var EventBag $blockingEvents */
-        $blockingEvents = GeneralUtility::makeInstance(EventBag::class, $queryWhere, $additionalTables);
-
-        return !$blockingEvents->isEmpty();
+        return !GeneralUtility::makeInstance(EventBag::class, $queryWhere, $additionalTables)->isEmpty();
     }
 
     private function getQueryForCollidingEvents(): string
@@ -3687,16 +3681,13 @@ class LegacyEvent extends AbstractTimeSpan
 
     public function getTimeSlots(): TimeSlotBag
     {
-        /** @var TimeSlotBag $timeSlotBag */
-        $timeSlotBag = GeneralUtility::makeInstance(
+        return GeneralUtility::makeInstance(
             TimeSlotBag::class,
             'tx_seminars_timeslots.seminar = ' . $this->getUid(),
             '',
             '',
             'tx_seminars_timeslots.begin_date ASC'
         );
-
-        return $timeSlotBag;
     }
 
     /**
@@ -3733,7 +3724,6 @@ class LegacyEvent extends AbstractTimeSpan
             return [];
         }
 
-        /** @var CategoryBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(CategoryBagBuilder::class);
         $builder->limitToEvents((string)$this->getTopicOrSelfUid());
         $builder->sortByRelationOrder();
@@ -3833,7 +3823,6 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getRequirements(): EventBag
     {
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($this->getTopicOrSelfUid());
         /** @var EventBag $bag */
@@ -3851,7 +3840,6 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getDependencies(): EventBag
     {
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToDependingEventTopics($this->getTopicOrSelfUid());
         /** @var EventBag $bag */
@@ -4040,11 +4028,7 @@ class LegacyEvent extends AbstractTimeSpan
             return $emptyPlaces;
         }
 
-        $places = $this->getPlacesAsArray();
-
-        /** @var PlaceMapper $mapper */
-        $mapper = GeneralUtility::makeInstance(PlaceMapper::class);
-        return $mapper->getListOfModels($places);
+        return GeneralUtility::makeInstance(PlaceMapper::class)->getListOfModels($this->getPlacesAsArray());
     }
 
     /**

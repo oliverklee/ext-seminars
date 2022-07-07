@@ -26,7 +26,6 @@ class CategoryList extends AbstractView
      */
     public function render(): string
     {
-        /** @var EventBagBuilder $seminarBagBuilder */
         $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $seminarBagBuilder->setSourcePages(
             $this->getConfValueString('pages'),
@@ -48,7 +47,6 @@ class CategoryList extends AbstractView
 
         $eventUids = $seminarBagBuilder->build()->getUids();
 
-        /** @var CategoryBagBuilder $categoryBagBuilder */
         $categoryBagBuilder = GeneralUtility::makeInstance(CategoryBagBuilder::class);
         $categoryBagBuilder->limitToEvents($eventUids);
         $categoryBag = $categoryBagBuilder->build();

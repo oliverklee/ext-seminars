@@ -134,7 +134,6 @@ class RegistrationsList extends AbstractList
      */
     private function setRegistrationTableMarkers(int $registrationsToShow): bool
     {
-        /** @var RegistrationBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $pageData = $this->page->getPageData();
 

@@ -75,9 +75,7 @@ class MailNotifier extends AbstractTask
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $this->emailService = GeneralUtility::makeInstance(EmailService::class);
         $this->eventMapper = MapperRegistry::get(EventMapper::class);
-        /** @var ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->registrationDigest = $objectManager->get(RegistrationDigest::class);
+        $this->registrationDigest = GeneralUtility::makeInstance(ObjectManager::class)->get(RegistrationDigest::class);
 
         $this->useUserConfiguredLanguage();
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -276,7 +274,6 @@ class MailNotifier extends AbstractTask
      */
     private function getSeminarBagBuilder(int $status): EventBagBuilder
     {
-        /** @var EventBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setTimeFrame('upcomingWithBeginDate');
         $builder->limitToStatus($status);

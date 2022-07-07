@@ -71,9 +71,6 @@ class TceForms
 
     private static function getConnectionForTable(string $table): Connection
     {
-        /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
-
-        return $pool->getConnectionForTable($table);
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
     }
 }

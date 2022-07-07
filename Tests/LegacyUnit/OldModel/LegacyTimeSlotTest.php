@@ -170,9 +170,8 @@ final class LegacyTimeSlotTest extends TestCase
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->subject->setPlace($placeUid);
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $connection = $connectionPool->getConnectionForTable('tx_seminars_attendances');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_attendances');
         $connection->delete('tx_seminars_sites', ['uid' => $placeUid]);
 
         self::assertSame('', $this->subject->getPlaceShort());

@@ -128,7 +128,6 @@ class EventEditor extends AbstractEditor
         $this->setFormConfiguration((array)$this->conf['form.']['eventEditor.']);
         $this->declareDataHandler();
 
-        /** @var Template $template */
         $template = GeneralUtility::makeInstance(Template::class);
         $template->processTemplate(parent::render());
 
@@ -821,10 +820,9 @@ class EventEditor extends AbstractEditor
      */
     private function getHiddenSubparts(): array
     {
-        /** @var Tree $visibilityTree */
         $visibilityTree = GeneralUtility::makeInstance(Tree::class, $this->createTemplateStructure());
-
         $visibilityTree->makeNodesVisible($this->getFieldsToShow());
+
         return $visibilityTree->getKeysOfHiddenSubparts();
     }
 
@@ -1282,7 +1280,6 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var Place $place */
         $place = GeneralUtility::makeInstance(Place::class);
         $place->setData(self::createBasicAuxiliaryData());
         self::setPlaceData($place, 'newPlace_', $formData);
@@ -1579,7 +1576,6 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var Speaker $speaker */
         $speaker = GeneralUtility::makeInstance(Speaker::class);
 
         self::createBasicAuxiliaryData();
@@ -1843,7 +1839,6 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var Checkbox $checkbox */
         $checkbox = GeneralUtility::makeInstance(Checkbox::class);
         $checkbox->setData(self::createBasicAuxiliaryData());
         self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
@@ -2050,7 +2045,6 @@ class EventEditor extends AbstractEditor
             ];
         }
 
-        /** @var TargetGroup $targetGroup */
         $targetGroup = GeneralUtility::makeInstance(TargetGroup::class);
         $targetGroup->setData(self::createBasicAuxiliaryData());
         self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);

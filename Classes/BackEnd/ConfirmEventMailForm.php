@@ -52,11 +52,8 @@ class ConfirmEventMailForm extends AbstractEventMailForm
      */
     protected function setEventStatus(): void
     {
-        /** @var EventStatusService $eventStatusService */
-        $eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
-        $eventStatusService->confirmAndSave($this->getEvent());
+        GeneralUtility::makeInstance(EventStatusService::class)->confirmAndSave($this->getEvent());
 
-        /** @var FlashMessage $message */
         $message = GeneralUtility::makeInstance(
             FlashMessage::class,
             $this->getLanguageService()->getLL('message_eventConfirmed'),

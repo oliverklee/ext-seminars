@@ -61,7 +61,6 @@ class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
         $pageUid = (int)$submittedData['seminars_configurationPageUid'];
         $submittedData['seminars_configurationPageUid'] = $pageUid;
 
-        /** @var \TYPO3\CMS\Core\Database\Connection $connection */
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $pageWithUidExist = $connection->count('*', 'pages', ['uid' => $pageUid]) > 0;
         $hasPageUid = $pageUid > 0 && $pageWithUidExist;

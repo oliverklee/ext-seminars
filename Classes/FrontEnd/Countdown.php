@@ -46,9 +46,7 @@ class Countdown extends AbstractView
             throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
         }
         if ($this->viewHelper === null) {
-            /** @var CountdownViewHelper $viewHelper */
-            $viewHelper = GeneralUtility::makeInstance(CountdownViewHelper::class);
-            $this->injectCountDownViewHelper($viewHelper);
+            $this->injectCountDownViewHelper(GeneralUtility::makeInstance(CountdownViewHelper::class));
         }
 
         try {

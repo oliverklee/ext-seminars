@@ -64,7 +64,6 @@ abstract class AbstractModel
      */
     public static function fromData(array $data): AbstractModel
     {
-        /** @var static $model */
         $model = GeneralUtility::makeInstance(static::class);
         $model->setData($data);
 
@@ -428,9 +427,8 @@ abstract class AbstractModel
      */
     public function getRecordIcon(): string
     {
-        /** @var IconFactory $iconFactory */
-        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-        return $iconFactory->getIconForRecord(static::$tableName, $this->recordData, Icon::SIZE_SMALL)->render();
+        return GeneralUtility::makeInstance(IconFactory::class)
+            ->getIconForRecord(static::$tableName, $this->recordData, Icon::SIZE_SMALL)->render();
     }
 
     /**
@@ -549,10 +547,7 @@ abstract class AbstractModel
 
     protected function getFileRepository(): FileRepository
     {
-        /** @var FileRepository $fileRepository */
-        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-
-        return $fileRepository;
+        return GeneralUtility::makeInstance(FileRepository::class);
     }
 
     /**

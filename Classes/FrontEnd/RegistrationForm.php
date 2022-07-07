@@ -380,13 +380,10 @@ class RegistrationForm extends AbstractEditor
             $userGroups->add($userGroup);
         }
 
-        /** @var Random $random */
         $random = GeneralUtility::makeInstance(Random::class);
-        /** @var Collection $additionalPersons */
         $additionalPersons = $registration->getAdditionalPersons();
         /** @var array $personData */
         foreach ($allPersonsData as $personData) {
-            /** @var FrontEndUser $user */
             $user = GeneralUtility::makeInstance(FrontEndUser::class);
             $user->setPageUid($pageUid);
             $user->setPassword($random->generateRandomHexString(8));
@@ -745,9 +742,8 @@ class RegistrationForm extends AbstractEditor
             return [];
         }
 
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_payment_methods');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_seminars_payment_methods');
         $rows = $queryBuilder
             ->select('uid', 'title')
             ->from('tx_seminars_payment_methods')

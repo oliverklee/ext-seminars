@@ -22,16 +22,13 @@ class LegacyTimeSlot extends AbstractTimeSpan
      */
     private function getSpeakerBag(): SpeakerBag
     {
-        /** @var SpeakerBag $bag */
-        $bag = GeneralUtility::makeInstance(
+        return GeneralUtility::makeInstance(
             SpeakerBag::class,
             'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() . ' AND uid = uid_foreign',
             'tx_seminars_timeslots_speakers_mm',
             '',
             'sorting'
         );
-
-        return $bag;
     }
 
     /**

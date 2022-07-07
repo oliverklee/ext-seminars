@@ -50,11 +50,8 @@ class OrganizersList extends AbstractList
             $this->getLanguageService()->getLL('organizerlist.title')
         );
 
-        /** @var OrganizerBagBuilder $builder */
         $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
-
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
-
         $organizerBag = $builder->build();
 
         $tableRows = '';

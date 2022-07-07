@@ -324,16 +324,9 @@ class Speaker extends AbstractModel implements MailRole
             return null;
         }
 
-        $images = $this->getFileRepository()->findByRelation('tx_seminars_speakers', 'image', $this->getUid());
+        $images = GeneralUtility::makeInstance(FileRepository::class)
+            ->findByRelation('tx_seminars_speakers', 'image', $this->getUid());
 
         return \array_shift($images);
-    }
-
-    private function getFileRepository(): FileRepository
-    {
-        /** @var FileRepository $fileRepository */
-        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-
-        return $fileRepository;
     }
 }
