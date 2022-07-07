@@ -361,7 +361,6 @@ class MailNotifier extends AbstractTask
 
         $languageService = $this->getLanguageService();
 
-        /** @var Event $event */
         foreach ($this->eventMapper->findForAutomaticStatusChange() as $event) {
             $statusWasChanged = $this->eventStatusService->updateStatusAndSave($event);
             if (!$statusWasChanged) {

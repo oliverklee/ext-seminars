@@ -277,10 +277,8 @@ class LegacySpeaker extends AbstractModel
             return null;
         }
 
-        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
-        $owner = $mapper->find($this->getRecordPropertyInteger('owner'));
-
-        return $owner;
+        return MapperRegistry::get(FrontEndUserMapper::class)
+            ->find($this->getRecordPropertyInteger('owner'));
     }
 
     public function setOwner(FrontEndUser $frontEndUser): void

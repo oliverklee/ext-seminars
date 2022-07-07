@@ -56,7 +56,6 @@ class EventMapper extends AbstractDataMapper
         }
 
         try {
-            /** @var Event $result */
             $result = $this->findSingleByWhereClause(['publication_hash' => $publicationHash]);
         } catch (NotFoundException $exception) {
             $result = null;

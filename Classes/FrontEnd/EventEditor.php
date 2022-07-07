@@ -15,7 +15,6 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
-use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
@@ -2268,9 +2267,7 @@ class EventEditor extends AbstractEditor
     {
         $result = [];
 
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        /** @var Country $country */
-        foreach ($mapper->findAll('cn_short_local') as $country) {
+        foreach (MapperRegistry::get(CountryMapper::class)->findAll('cn_short_local') as $country) {
             $result[] = [
                 'caption' => $country->getLocalShortName(),
                 'value' => $country->getUid(),
@@ -2287,8 +2284,7 @@ class EventEditor extends AbstractEditor
      */
     public static function populateListSkills(): array
     {
-        $mapper = MapperRegistry::get(SkillMapper::class);
-        $skills = $mapper->findAll('title ASC');
+        $skills = MapperRegistry::get(SkillMapper::class)->findAll('title ASC');
 
         return self::makeListToFormidableList($skills);
     }

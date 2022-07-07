@@ -1214,7 +1214,6 @@ class DefaultController extends TemplateHelper
 
         $eventMapper = MapperRegistry::get(EventMapper::class);
 
-        /** @var LegacyEvent $dependency */
         foreach ($this->seminar->getDependencies() as $dependency) {
             $event = $eventMapper->find($dependency->getUid());
             $this->setMarker(

@@ -1148,10 +1148,8 @@ final class EventTest extends TestCase
     {
         $this->subject->setData(['language' => 'DE']);
 
-        /** @var LanguageMapper $mapper */
-        $mapper = MapperRegistry::get(LanguageMapper::class);
         self::assertSame(
-            $mapper->findByIsoAlpha2Code('DE'),
+            MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE'),
             $this->subject->getLanguage()
         );
     }
@@ -1161,9 +1159,7 @@ final class EventTest extends TestCase
      */
     public function setLanguageSetsLanguage(): void
     {
-        /** @var LanguageMapper $mapper */
-        $mapper = MapperRegistry::get(LanguageMapper::class);
-        $language = $mapper->findByIsoAlpha2Code('DE');
+        $language = MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE');
         $this->subject->setLanguage($language);
 
         self::assertSame(
@@ -1189,9 +1185,7 @@ final class EventTest extends TestCase
      */
     public function hasLanguageWithLanguageReturnsTrue(): void
     {
-        /** @var LanguageMapper $mapper */
-        $mapper = MapperRegistry::get(LanguageMapper::class);
-        $language = $mapper->findByIsoAlpha2Code('DE');
+        $language = MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE');
         $this->subject->setLanguage($language);
 
         self::assertTrue(

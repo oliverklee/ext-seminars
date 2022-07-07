@@ -50,9 +50,7 @@ class Countdown extends AbstractView
         }
 
         try {
-            /** @var Event $event */
             $event = $this->mapper->findNextUpcoming();
-
             $message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());
         } catch (NotFoundException $exception) {
             $message = $this->translate('message_countdown_noEventFound');

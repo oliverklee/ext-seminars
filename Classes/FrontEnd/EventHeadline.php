@@ -41,15 +41,13 @@ class EventHeadline extends AbstractView
         }
 
         $event = $this->mapper->find($eventId);
-
         if (!$this->mapper->existsModel($eventId)) {
             return '';
         }
 
         $this->setMarker('title_and_date', $this->getTitleAndDate($event));
-        $result = $this->getSubpart('VIEW_HEADLINE');
 
-        return $result;
+        return $this->getSubpart('VIEW_HEADLINE');
     }
 
     /**
