@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Do not rely on transitive Composer dependencies (#1426)
 - Fix a flaky test (#1403, #1408)
 - Improve the type annotations (#1401, #1417, #1424)
 
