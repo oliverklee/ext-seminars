@@ -1821,10 +1821,8 @@ class LegacyEvent extends AbstractTimeSpan
 
         $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
         $builder->limitToEvent($this->getUid());
-        /** @var OrganizerBag $bag */
-        $bag = $builder->build();
 
-        return $bag;
+        return $builder->build();
     }
 
     public function getFirstOrganizer(): ?LegacyOrganizer
@@ -3727,7 +3725,6 @@ class LegacyEvent extends AbstractTimeSpan
         $builder->sortByRelationOrder();
 
         $result = [];
-        /** @var LegacyCategory $category */
         foreach ($builder->build() as $category) {
             $result[$category->getUid()] = ['title' => $category->getTitle(), 'icon' => $category->getIcon()];
         }
@@ -3823,10 +3820,8 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($this->getTopicOrSelfUid());
-        /** @var EventBag $bag */
-        $bag = $builder->build();
 
-        return $bag;
+        return $builder->build();
     }
 
     /**
@@ -3840,10 +3835,8 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToDependingEventTopics($this->getTopicOrSelfUid());
-        /** @var EventBag $bag */
-        $bag = $builder->build();
 
-        return $bag;
+        return $builder->build();
     }
 
     /**

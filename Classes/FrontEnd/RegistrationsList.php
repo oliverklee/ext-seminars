@@ -131,7 +131,6 @@ class RegistrationsList extends AbstractView
         $builder = $this->createRegistrationBagBuilder();
         $builder->limitToRegular();
 
-        /** @var RegistrationBag $regularRegistrations */
         $regularRegistrations = $builder->build();
         if ($regularRegistrations->isEmpty()) {
             $this->setMarker(
@@ -152,7 +151,6 @@ class RegistrationsList extends AbstractView
             $builder = $this->createRegistrationBagBuilder();
             $builder->limitToOnQueue();
 
-            /** @var RegistrationBag $waitingListRegistrations */
             $waitingListRegistrations = $builder->build();
             if (!$waitingListRegistrations->isEmpty()) {
                 $this->createTableBody($waitingListRegistrations);

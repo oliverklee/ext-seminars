@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
-use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
@@ -209,10 +208,8 @@ abstract class AbstractRegistrationListView extends AbstractListView
     protected function getRegistrationsCsvList(RegistrationBagBuilder $builder): array
     {
         $csvLines = [];
-        /** @var RegistrationBag $bag */
         $bag = $builder->build();
 
-        /** @var LegacyRegistration $registration */
         foreach ($bag as $registration) {
             $userData = $this->createCsvColumnsForFrontEndUser($registration);
             $registrationData = $this->createCsvColumnsForRegistration($registration);
