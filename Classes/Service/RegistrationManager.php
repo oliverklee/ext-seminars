@@ -621,7 +621,6 @@ class RegistrationManager
         $registrationBagBuilder->limitToSeatsAtMost($vacancies);
 
         $configuration = $this->getSharedConfiguration();
-        /** @var LegacyRegistration $registration */
         foreach ($registrationBagBuilder->build() as $registration) {
             if ($vacancies <= 0) {
                 break;
@@ -674,10 +673,8 @@ class RegistrationManager
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($event->getTopicOrSelfUid());
         $builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
-        /** @var EventBag $bag */
-        $bag = $builder->build();
 
-        return $bag;
+        return $builder->build();
     }
 
     /**

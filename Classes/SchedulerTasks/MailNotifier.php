@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\Email\EmailBuilder;
@@ -212,7 +211,6 @@ class MailNotifier extends AbstractTask
         $builder = $this->getSeminarBagBuilder(Event::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
-        /** @var LegacyEvent $event */
         foreach ($builder->build() as $event) {
             $result[] = $event;
         }
@@ -235,13 +233,10 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        /** @var EventBagBuilder $builder */
         $builder = $this->getSeminarBagBuilder(Event::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
-        /** @var EventBag $bag */
         $bag = $builder->build();
 
-        /** @var LegacyEvent $event */
         foreach ($bag as $event) {
             if ($event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
                 $result[] = $event;

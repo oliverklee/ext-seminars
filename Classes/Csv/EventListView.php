@@ -90,7 +90,6 @@ class EventListView extends AbstractListView
         $builder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);
 
         $csvLines = [];
-        /** @var LegacyEvent $event */
         foreach ($builder->build() as $event) {
             $csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($event));
         }
