@@ -53,7 +53,7 @@
 		"helhum/typo3-console": "^5.8.6 || ^6.7.2",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"jangregor/phpstan-prophecy": "^1.0.0",
-		"mikey179/vfsstream": "^1.6.10",
+		"mikey179/vfsstream": "^1.6.11",
 		"nimut/testing-framework": "^6.0.1",
 		"oliverklee/phpunit": "^8.5.0",
 		"php-coveralls/php-coveralls": "^2.5.2",
