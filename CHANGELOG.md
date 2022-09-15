@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Rename the `TSConfig` folder to `TsConfig` (#1473)
 - Loosen the mkforms/rn_base version requirements (#1469)
 - Require oelib >= 4.1.8 (#1409, #1415)
 
