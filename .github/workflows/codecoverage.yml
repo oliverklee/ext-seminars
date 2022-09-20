@@ -35,6 +35,8 @@ jobs:
           tools: composer:v1, phive
       - name: "Show Composer version"
         run: composer --version
+      - name: "Show the Composer configuration"
+        run: composer config --global --list
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v3
         with:
