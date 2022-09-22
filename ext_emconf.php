@@ -12,7 +12,7 @@ $EM_CONF[$_EXTKEY] = [
             'oelib' => '4.1.8-4.99.99',
             'mkforms' => '10.1.0-10.1.99',
             'rn_base' => '1.15.0-1.15.99',
-            'static_info_tables' => '6.9.5-6.99.99',
+            'static_info_tables' => '6.9.5-11.5.99',
         ],
         'conflicts' => [
             'sourceopt' => '',
@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
         'suggests' => [
             'femanager' => '5.1.0-',
             'onetimeaccount' => '',
-            'sr_feuser_register' => '5.1.0-',
+            'sr_feuser_register' => '7.0.5-11.5.99',
         ],
     ],
     'state' => 'stable',
