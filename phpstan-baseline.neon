@@ -86,22 +86,17 @@ parameters:
 			path: Classes/BackEnd/FlexForms.php
 
 		-
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			count: 2
+			path: Classes/BackEnd/TceForms.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/TceForms.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createLanguageSelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/TceForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllCountries\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\.$#"
-			count: 1
-			path: Classes/BackEnd/TceForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllLanguages\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\.$#"
 			count: 1
 			path: Classes/BackEnd/TceForms.php
 
@@ -116,7 +111,7 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
-			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
@@ -126,17 +121,7 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:countWithoutLimit\\(\\) should return int but returns mixed\\.$#"
-			count: 1
-			path: Classes/Bag/AbstractBag.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:\\$queryResult type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Bag/AbstractBag.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\<M of OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\>\\:\\:\\$countWithoutLimit \\(int\\) does not accept mixed\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
@@ -181,7 +166,7 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 10
 			path: Classes/BagBuilder/EventBagBuilder.php
 
@@ -211,6 +196,11 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			count: 1
+			path: Classes/Configuration/SharedConfigurationCheck.php
+
+		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/EmailController.php
@@ -219,6 +209,11 @@ parameters:
 			message: "#^Cannot access offset 'subject' on mixed\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/EmailController.php
+
+		-
+			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\EventController\\:\\:\\$response\\.$#"
+			count: 1
+			path: Classes/Controller/BackEnd/EventController.php
 
 		-
 			message: "#^Cannot access offset 'pid' on mixed\\.$#"
@@ -241,14 +236,9 @@ parameters:
 			path: Classes/Controller/BackEnd/EventController.php
 
 		-
-			message: "#^Property TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:\\$response \\(TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\) in isset\\(\\) is not nullable\\.$#"
+			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:\\$response\\.$#"
 			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
+			path: Classes/Controller/BackEnd/RegistrationController.php
 
 		-
 			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
@@ -279,21 +269,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findWaitingListRegistrationsByEvent\\(\\) expects int\\<1, max\\>, int\\|null given\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Property TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:\\$response \\(TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Parameter \\#1 \\$actionName of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:redirect\\(\\) expects string, null given\\.$#"
-			count: 1
-			path: Classes/Controller/EventRegistrationController.php
 
 		-
 			message: "#^Parameter \\#2 \\$storageFolderUid of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationProcessor\\:\\:createAdditionalPersons\\(\\) expects int\\<0, max\\>, int given\\.$#"
@@ -376,12 +351,22 @@ parameters:
 			path: Classes/Domain/Model/Event/EventDate.php
 
 		-
-			message: "#^Cannot call method fetchAllAssociative\\(\\) on class\\-string\\|object\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
 
 		-
-			message: "#^Cannot call method fetchOne\\(\\) on class\\-string\\|object\\.$#"
+			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
+
+		-
+			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/Event/EventRepository.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
@@ -391,17 +376,17 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\EventTypeRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
-			path: Classes/Domain/Repository/EventTypeRepository.php
+			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\OrganizerRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
-			path: Classes/Domain/Repository/OrganizerRepository.php
+			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
-			message: "#^Cannot call method fetchOne\\(\\) on class\\-string\\|object\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
@@ -416,14 +401,9 @@ parameters:
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\SpeakerRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
-			path: Classes/Domain/Repository/SpeakerRepository.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\VenueRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/VenueRepository.php
+			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
@@ -1171,7 +1151,7 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
@@ -1216,28 +1196,33 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'country'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'country'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Cannot access offset 'place' on mixed\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
-			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			count: 1
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 2
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 3
+			count: 2
+			path: Classes/Hooks/DataHandlerHook.php
+
+		-
+			message: "#^Casting to array\\<int\\|string, array\\> something that's already array\\<int\\|string, array\\>\\.$#"
+			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
@@ -1331,13 +1316,13 @@ parameters:
 			path: Classes/Hooks/Interfaces/DataSanitization.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 2
 			path: Classes/Mapper/EventMapper.php
 
 		-
 			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array given\\.$#"
-			count: 3
+			count: 1
 			path: Classes/Mapper/EventMapper.php
 
 		-
@@ -1381,12 +1366,12 @@ parameters:
 			path: Classes/Model/Place.php
 
 		-
-			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
@@ -1411,11 +1396,6 @@ parameters:
 			path: Classes/OldModel/AbstractModel.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fetchDataByUid\\(\\) should return array\\|false but returns mixed\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
@@ -1427,11 +1407,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordsByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordsByUid\\(\\) should return array\\<array\\> but returns array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
@@ -1491,7 +1466,17 @@ parameters:
 			path: Classes/OldModel/AbstractTimeSpan.php
 
 		-
-			message: "#^Cannot access offset 'uid' on mixed\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
+			count: 4
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchColumn\\(\\)\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1501,7 +1486,7 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 2
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1556,11 +1541,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAssociationAsArray\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCheckboxes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1602,11 +1582,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaymentMethods\\(\\) should return array\\<int, string\\> but returns array\\<int, int\\|string\\>\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, mixed\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1681,9 +1656,9 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:\\$registrations \\(array\\<int, array\\<string, int\\|string\\>\\>\\) does not accept array\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
 			count: 1
-			path: Classes/OldModel/LegacyEvent.php
+			path: Classes/OldModel/LegacyRegistration.php
 
 		-
 			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
@@ -1716,12 +1691,12 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Cannot access offset 'uid_foreign' on mixed\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyTimeSlot.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyTimeSlot.php
 
@@ -1901,6 +1876,11 @@ parameters:
 			path: Classes/Service/EventStatisticsCalculator.php
 
 		-
+			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Service/OneTimeAccountConnector.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationGuard.php
@@ -2041,7 +2021,17 @@ parameters:
 			path: Classes/Service/SingleViewLinkBuilder.php
 
 		-
-			message: "#^Cannot call method fetchOne\\(\\) on class\\-string\\|object\\.$#"
+			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
 
@@ -3606,7 +3596,7 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
+			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
@@ -3736,6 +3726,11 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/EmailControllerTest.php
 
 		-
+			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
+			count: 2
+			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
+
+		-
 			message: "#^Cannot access offset 'id' on mixed\\.$#"
 			count: 6
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
@@ -3749,6 +3744,16 @@ parameters:
 			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\EventControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
+
+		-
+			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
+			count: 2
+			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
 			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
@@ -3768,6 +3773,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 2
+			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\RegistrationControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
+			count: 1
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-

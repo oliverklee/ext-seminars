@@ -1,6 +1,7 @@
 # Seminars TYPO3 extension
 
 [![TYPO3 V10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
+[![TYPO3 V11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
 [![License](https://img.shields.io/github/license/oliverklee/ext-seminars)](https://packagist.org/packages/oliverklee/seminars)
 [![Total Downloads](https://poser.pugx.org/oliverklee/seminars/downloads.svg)](https://packagist.org/packages/oliverklee/seminars)
 [![GitHub CI Status](https://github.com/oliverklee/ext-seminars/workflows/CI/badge.svg?branch=main)](https://github.com/oliverklee/ext-seminars/actions)
