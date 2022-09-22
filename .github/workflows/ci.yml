@@ -33,10 +33,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "7.4"
-          - "8.0"
-          - "8.1"
-          - "8.2"
           - "8.3"
   code-quality:
     name: "Code quality checks"
@@ -59,12 +55,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
         run: "composer update --no-ansi --no-progress"
       - name: "Run command"
@@ -73,20 +63,12 @@ jobs:
       fail-fast: false
       matrix:
         command:
-          - "composer:normalize"
-          - "composer:unused"
-          - "php:cs-fixer"
-          - "php:rector"
-          - "php:sniff"
           - "php:stan"
-          - "ts:lint"
-          - "xliff:lint"
         php-version:
           - "8.3"
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
     needs: php-lint
     steps:
       - name: "Checkout"
@@ -106,12 +88,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
@@ -192,12 +168,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
@@ -287,12 +257,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
