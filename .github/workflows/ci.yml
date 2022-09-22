@@ -201,6 +201,8 @@ jobs:
           composer show
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
+      - name: "Create the tests directory"
+        run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run functional tests"
         run: |
           export typo3DatabaseName="typo3";
