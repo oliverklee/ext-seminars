@@ -47,7 +47,7 @@ final class ListViewTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        (new CacheNullifyer())->disableCoreCaches();
+        (new CacheNullifyer())->setAllCoreCaches();
         $this->initializeBackEndLanguage();
     }
 
