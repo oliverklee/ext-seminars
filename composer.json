@@ -95,9 +95,6 @@
 	},
 	"prefer-stable": true,
 	"config": {
-		"platform": {
-			"php": "7.2.9"
-		},
 		"preferred-install": {
 			"*": "dist"
 		},
