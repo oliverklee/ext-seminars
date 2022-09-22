@@ -69,7 +69,7 @@ final class EmailServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        (new CacheNullifyer())->disableCoreCaches();
+        (new CacheNullifyer())->setAllCoreCaches();
 
         Bootstrap::initializeBackendAuthentication();
         $this->languageBackup = $GLOBALS['LANG'] ?? null;

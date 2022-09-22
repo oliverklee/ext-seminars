@@ -35,7 +35,7 @@ final class CategoryListTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        (new CacheNullifyer())->disableCoreCaches();
+        (new CacheNullifyer())->setAllCoreCaches();
 
         // Needed in TYPO3 V10; can be removed in V11.
         $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
