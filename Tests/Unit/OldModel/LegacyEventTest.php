@@ -26,6 +26,7 @@ final class LegacyEventTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        $GLOBALS['TYPO3_CONF_VARS']['LOG'] = [];
         $this->subject = TestingLegacyEvent::fromData(
             [
                 'title' => 'A nice event',

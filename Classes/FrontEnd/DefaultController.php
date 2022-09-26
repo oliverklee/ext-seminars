@@ -53,6 +53,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Plugin "Seminar Manager".
@@ -262,7 +263,7 @@ class DefaultController extends TemplateHelper
         if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
             $this->showUid = $this->getConfValueInteger('showSingleEvent', 's_template_special');
         } else {
-            $this->showUid = (int)$this->piVars['showUid'];
+            $this->showUid = (int)($this->piVars['showUid'] ?? 0);
         }
 
         $this->whatToDisplay = $this->getConfValueString('what_to_display');
@@ -284,7 +285,7 @@ class DefaultController extends TemplateHelper
                     RegistrationsList::class,
                     $this->conf,
                     $this->whatToDisplay,
-                    (int)$this->piVars['seminar'],
+                    (int)($this->piVars['seminar'] ?? 0),
                     $this->cObj
                 );
                 $result = $registrationsList->render();
@@ -376,7 +377,12 @@ class DefaultController extends TemplateHelper
             $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
         }
 
-        return $this->pi_wrapInBaseClass($result);
+        /** @phpstan-ignore-next-line In unit tests, this property might not always be set. */
+        if ($this->frontendController instanceof TypoScriptFrontendController) {
+            $result = $this->pi_wrapInBaseClass($result);
+        }
+
+        return $result;
     }
 
     ///////////////////////
@@ -1695,7 +1701,7 @@ class DefaultController extends TemplateHelper
             }
         }
 
-        $pointer = (int)$this->piVars['pointer'];
+        $pointer = (int)($this->piVars['pointer'] ?? 0);
         $resultsAtATime = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
@@ -2077,7 +2083,7 @@ class DefaultController extends TemplateHelper
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
-        if (\is_array($this->piVars['language'])) {
+        if (\is_array($this->piVars['language'] ?? null)) {
             $builder->limitToLanguages(
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['language'])
             );
@@ -2098,12 +2104,12 @@ class DefaultController extends TemplateHelper
             );
         }
 
-        if (\is_array($this->piVars['city'])) {
+        if (\is_array($this->piVars['city'] ?? null)) {
             $builder->limitToCities(
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
             );
         }
-        if (\is_array($this->piVars['country'])) {
+        if (\is_array($this->piVars['country'] ?? null)) {
             $builder->limitToCountries(
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
             );
@@ -2138,8 +2144,8 @@ class DefaultController extends TemplateHelper
             );
         }
 
-        $categoryUid = isset($this->piVars['category']) ? (int)$this->piVars['category'] : 0;
-        $categoryUids = isset($this->piVars['categories']) ? (array)$this->piVars['categories'] : [];
+        $categoryUid = (int)($this->piVars['category'] ?? 0);
+        $categoryUids = (array)($this->piVars['categories'] ?? []);
         array_walk($categoryUids, '\\intval');
         if ($categoryUid > 0) {
             $categories = (string)$categoryUid;
@@ -2150,15 +2156,15 @@ class DefaultController extends TemplateHelper
         }
         $builder->limitToCategories($categories);
 
-        if ($this->piVars['age'] > 0) {
-            $builder->limitToAge($this->piVars['age']);
+        if ((int)($this->piVars['age'] ?? 0) > 0) {
+            $builder->limitToAge((int)$this->piVars['age']);
         }
 
-        if ($this->piVars['price_from'] > 0) {
-            $builder->limitToMinimumPrice($this->piVars['price_from']);
+        if ((int)($this->piVars['price_from'] ?? 0) > 0) {
+            $builder->limitToMinimumPrice((int)$this->piVars['price_from']);
         }
-        if ($this->piVars['price_to'] > 0) {
-            $builder->limitToMaximumPrice($this->piVars['price_to']);
+        if ((int)($this->piVars['price_to'] ?? 0) > 0) {
+            $builder->limitToMaximumPrice((int)$this->piVars['price_to']);
         }
 
         $this->filterByDate($builder);
@@ -2575,7 +2581,7 @@ class DefaultController extends TemplateHelper
 
         $this->toggleEventFieldsOnRegistrationPage();
 
-        $eventUid = (int)$this->piVars['seminar'];
+        $eventUid = (int)($this->piVars['seminar'] ?? 0);
         if ($this->createSeminar($eventUid)) {
             if ($this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
                 if ($this->isLoggedIn()) {
@@ -2590,7 +2596,7 @@ class DefaultController extends TemplateHelper
             } else {
                 $errorMessage = $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar);
             }
-        } elseif ($this->createRegistration((int)$this->piVars['registration'])) {
+        } elseif ($this->createRegistration((int)($this->piVars['registration'] ?? 0))) {
             if ($this->createSeminar($this->registration->getSeminar())) {
                 if ($this->seminar->isUnregistrationPossible()) {
                     $isOkay = true;
@@ -2599,7 +2605,7 @@ class DefaultController extends TemplateHelper
                 }
             }
         } else {
-            switch ($this->piVars['action']) {
+            switch ($this->piVars['action'] ?? '') {
                 case 'unregister':
                     $errorMessage = $this->translate('message_notRegisteredForThisEvent');
                     break;
@@ -2612,7 +2618,7 @@ class DefaultController extends TemplateHelper
 
         if ($isOkay) {
             if (
-                $this->piVars['action'] === 'unregister'
+                ($this->piVars['action'] ?? '') === 'unregister'
                 || $this->getRegistrationManager()->userFulfillsRequirements($this->seminar)
             ) {
                 $registrationForm = $this->createRegistrationForm();
@@ -2691,9 +2697,9 @@ class DefaultController extends TemplateHelper
             $this->cObj
         );
         $registrationEditor->setSeminar($this->seminar);
-        $action = $this->piVars['action'] ?? 'register';
-        $registrationEditor->setAction((string)$action);
-        if ($this->piVars['action'] == 'unregister') {
+        $action = (string)($this->piVars['action'] ?? 'register');
+        $registrationEditor->setAction($action);
+        if ($action === 'unregister') {
             $registrationEditor->setRegistration($this->registration);
         }
 
@@ -2797,7 +2803,7 @@ class DefaultController extends TemplateHelper
     protected function createEventEditorInstance(): EventEditor
     {
         $eventEditor = GeneralUtility::makeInstance(EventEditor::class, $this->conf, $this->cObj);
-        $eventEditor->setObjectUid((int)$this->piVars['seminar']);
+        $eventEditor->setObjectUid((int)($this->piVars['seminar'] ?? 0));
 
         return $eventEditor;
     }
@@ -2943,14 +2949,14 @@ class DefaultController extends TemplateHelper
     private function getTimestampFromDatePiVars(string $fromOrTo): int
     {
         if (
-            $this->piVars[$fromOrTo . '_day'] == 0
-            && $this->piVars[$fromOrTo . '_month'] == 0
-            && $this->piVars[$fromOrTo . '_year'] == 0
+            (int)($this->piVars[$fromOrTo . '_day'] ?? 0) === 0
+            && (int)($this->piVars[$fromOrTo . '_month'] ?? 0) === 0
+            && (int)($this->piVars[$fromOrTo . '_year'] ?? 0) === 0
         ) {
             return 0;
         }
 
-        return ($fromOrTo == 'from') ? $this->getFromDate() : $this->getToDate();
+        return ($fromOrTo === 'from') ? $this->getFromDate() : $this->getToDate();
     }
 
     /**
@@ -2964,10 +2970,10 @@ class DefaultController extends TemplateHelper
      */
     private function getFromDate(): int
     {
-        $day = (int)$this->piVars['from_day'] > 0 ? (int)$this->piVars['from_day'] : 1;
-        $month = (int)$this->piVars['from_month'] > 0 ? (int)$this->piVars['from_month'] : 1;
-        $year = (int)$this->piVars['from_year'] > 0
-            ? (int)$this->piVars['from_year'] : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+        $day = (int)($this->piVars['from_day'] ?? 0) > 0 ? (int)($this->piVars['from_day'] ?? 0) : 1;
+        $month = (int)($this->piVars['from_month'] ?? 0) > 0 ? (int)($this->piVars['from_month'] ?? 0) : 1;
+        $year = (int)($this->piVars['from_year'] ?? 0) > 0
+            ? (int)($this->piVars['from_year'] ?? 0) : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
         return mktime(0, 0, 0, $month, $day, $year);
     }
@@ -2985,11 +2991,11 @@ class DefaultController extends TemplateHelper
     {
         $longMonths = [1, 3, 5, 7, 8, 10, 12];
 
-        $month = (int)$this->piVars['to_month'] > 0 ? (int)$this->piVars['to_month'] : 12;
-        $year = (int)$this->piVars['to_year'] > 0
-            ? (int)$this->piVars['to_year'] : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+        $month = (int)($this->piVars['to_month'] ?? 0) > 0 ? (int)($this->piVars['to_month'] ?? 0) : 12;
+        $year = (int)($this->piVars['to_year'] ?? 0) > 0
+            ? (int)($this->piVars['to_year'] ?? 0) : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
-        $day = (int)$this->piVars['to_day'];
+        $day = (int)($this->piVars['to_day'] ?? 0);
 
         if ($month === 2) {
             // the last day of february can be 29 or 28, depending on the year
@@ -3143,8 +3149,8 @@ class DefaultController extends TemplateHelper
      */
     protected function processEventEditorActions(): void
     {
-        $this->ensureIntegerPiVars(['seminar']);
-        if ($this->piVars['seminar'] <= 0) {
+        $eventUid = (int)($this->piVars['seminar'] ?? 0);
+        if ($eventUid <= 0) {
             return;
         }
 
@@ -3156,12 +3162,12 @@ class DefaultController extends TemplateHelper
         }
 
         $mapper = MapperRegistry::get(EventMapper::class);
-        $event = $mapper->find($this->piVars['seminar']);
+        $event = $mapper->find($eventUid);
         if (!$event->isPublished()) {
             return;
         }
 
-        switch ($this->piVars['action']) {
+        switch ((string)($this->piVars['action'] ?? '')) {
             case 'hide':
                 $this->hideEvent($event);
                 break;

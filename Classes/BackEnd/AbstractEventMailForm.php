@@ -621,7 +621,7 @@ abstract class AbstractEventMailForm
     protected function getHooks(): array
     {
         if (!$this->hooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];
+            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'] ?? null;
             if (\is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::makeInstance($hookClass);

@@ -6860,21 +6860,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function processEventEditorActionsIntvalsSeminarPivar(): void
-    {
-        $subject = $this->createPartialMock(
-            TestingDefaultController::class,
-            ['ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent']
-        );
-        $subject->expects(self::atLeastOnce())->method('ensureIntegerPiVars')
-            ->with(['seminar']);
-
-        $subject->processEventEditorActions();
-    }
-
-    /**
-     * @test
-     */
     public function processEventEditorActionsWithZeroSeminarPivarNotCreatesEventEditor(): void
     {
         $subject = $this->createPartialMock(
