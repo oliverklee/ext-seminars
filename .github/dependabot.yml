@@ -20,5 +20,6 @@ updates:
         versions: [ ">= 3.4.0" ]
       - dependency-name: "helhum/typo3-console"
       - dependency-name: "phpunit/phpunit"
+        versions: [ ">= 9" ]
       - dependency-name: "typo3/cms-*"
     versioning-strategy: "increase"
