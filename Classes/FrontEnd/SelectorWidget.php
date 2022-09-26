@@ -151,7 +151,7 @@ class SelectorWidget extends AbstractView
         $cleanedFormData = [];
 
         foreach ($formData as $value) {
-            if ($value !== 0) {
+            if ($value !== 0 && $value !== '0') {
                 $cleanedFormData[] = $value;
             }
         }

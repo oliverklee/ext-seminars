@@ -1510,8 +1510,6 @@ class DefaultController extends TemplateHelper
             ]
         );
 
-        $this->ensureIntegerArrayValues(['event_type', 'place', 'organizer']);
-
         switch ($whatToDisplay) {
             case 'my_events':
                 if ($this->isLoggedIn()) {
@@ -2089,10 +2087,9 @@ class DefaultController extends TemplateHelper
             );
         }
 
-        if (\is_array($this->piVars['place'])) {
-            $builder->limitToPlaces(
-                SelectorWidget::removeDummyOptionFromFormData($this->piVars['place'])
-            );
+        $placeUids = $this->getIntegerArrayFromRequest('place');
+        if (\is_array($placeUids)) {
+            $builder->limitToPlaces(SelectorWidget::removeDummyOptionFromFormData($placeUids));
         } else {
             // TODO: This needs to be changed as soon as we are using the new
             // TypoScript configuration class from tx_oelib which offers a getAsIntegerArray() method.
@@ -2115,13 +2112,9 @@ class DefaultController extends TemplateHelper
                 SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
             );
         }
-        if (\is_array($this->piVars['organizer'])) {
-            $builder->limitToOrganizers(
-                \implode(
-                    ',',
-                    SelectorWidget::removeDummyOptionFromFormData($this->piVars['organizer'])
-                )
-            );
+        $organizerUids = $this->getIntegerArrayFromRequest('organizer');
+        if (\is_array($organizerUids)) {
+            $builder->limitToOrganizers(\implode(',', SelectorWidget::removeDummyOptionFromFormData($organizerUids)));
         } else {
             $builder->limitToOrganizers($this->getConfValueString('limitListViewToOrganizers', 's_listView'));
         }
@@ -2133,10 +2126,9 @@ class DefaultController extends TemplateHelper
             $builder->ignoreCanceledEvents();
         }
 
-        if (isset($this->piVars['event_type']) && \is_array($this->piVars['event_type'])) {
-            $builder->limitToEventTypes(
-                SelectorWidget::removeDummyOptionFromFormData($this->piVars['event_type'])
-            );
+        $eventTypeUids = $this->getIntegerArrayFromRequest('event_type');
+        if (\is_array($eventTypeUids)) {
+            $builder->limitToEventTypes(SelectorWidget::removeDummyOptionFromFormData($eventTypeUids));
         } else {
             // TODO: This needs to be changed as soon as we are using the new
             // TypoScript configuration class from tx_oelib which offers a
@@ -2174,6 +2166,23 @@ class DefaultController extends TemplateHelper
         }
 
         $this->filterByDate($builder);
+    }
+
+    /**
+     * @param non-empty-string $key
+     *
+     * @return int[]|null
+     */
+    private function getIntegerArrayFromRequest(string $key): ?array
+    {
+        $values = $this->piVars[$key] ?? null;
+        if (!\is_array($values)) {
+            return null;
+        }
+
+        \array_walk($values, '\\intval');
+
+        return $values;
     }
 
     /**
