@@ -354,9 +354,9 @@ class DefaultController extends TemplateHelper
                 // We still use the processEventEditorActions call in the next case.
             case 'my_entered_events':
                 $this->processEventEditorActions();
-            // The fallthrough is intended
-            // because createListView() will differentiate later.
-            // no break
+                // The fallthrough is intended
+                // because createListView() will differentiate later.
+                // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
