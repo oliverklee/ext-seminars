@@ -64,7 +64,7 @@ class Salutation
     {
         $result = [];
 
-        $hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'];
+        $hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'] ?? null;
         if (is_array($hooks)) {
             /** @var array<array-key, class-string> $hooks */
             foreach ($hooks as $classReference) {

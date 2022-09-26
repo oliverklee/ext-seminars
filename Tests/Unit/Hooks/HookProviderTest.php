@@ -22,13 +22,13 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsMod
 final class HookProviderTest extends UnitTestCase
 {
     /**
-     * @var array
+     * @var array|null
      */
     private $extConfBackup = [];
 
     protected function setUp(): void
     {
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'];
+        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] ?? null;
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']);
         TestingHookImplementor::$wasCalled = 0;
         TestingHookImplementor2::$wasCalled = 0;
