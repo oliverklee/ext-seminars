@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow installations with oelib 5 (#1509)
 - Allow a broader version range for dependencies (#1494)
 - Run the tests with all warnings enabled (#1485, #1501)
 - Rename the `TSConfig` folder to `TsConfig` (#1473)
