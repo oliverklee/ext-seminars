@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Allow a broader version range for dependencies (#1494)
-- Run the tests with all warnings enabled (#1485)
+- Run the tests with all warnings enabled (#1485, #1501)
 - Rename the `TSConfig` folder to `TsConfig` (#1473)
 - Loosen the mkforms/rn_base version requirements (#1469)
 - Require oelib >= 4.1.8 (#1409, #1415)
