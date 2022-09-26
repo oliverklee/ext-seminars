@@ -977,9 +977,8 @@ class RegistrationForm extends AbstractEditor
                     $this->isFormFieldEnabled('registered_themselves')
                     && $this->getFormValue('registered_themselves') == '1'
                 ) {
-                    /** @var FrontEndUser $user */
-                    $user = FrontEndLoginManager::getInstance()
-                        ->getLoggedInUser(FrontEndUserMapper::class);
+                    $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+                    $user = MapperRegistry::get(FrontEndUserMapper::class)->find($userUid);
                     $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
@@ -1393,7 +1392,8 @@ class RegistrationForm extends AbstractEditor
      */
     protected function getLoggedInUser(): FrontEndUser
     {
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
         if (!$user instanceof FrontEndUser) {
             throw new \BadMethodCallException('No user logged in.', 1633436053);
         }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
@@ -362,10 +363,8 @@ abstract class AbstractList
      */
     protected function getLoggedInUser(): BackEndUser
     {
-        /** @var BackEndUser $user */
-        $user = BackEndLoginManager::getInstance()->getLoggedInUser(BackEndUserMapper::class);
-
-        return $user;
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        return MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
     }
 
     /**

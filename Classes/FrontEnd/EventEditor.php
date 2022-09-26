@@ -252,10 +252,8 @@ class EventEditor extends AbstractEditor
 
     protected static function getLoggedInUser(): ?FrontEndUser
     {
-        /** @var FrontEndUser|null $user */
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
-
-        return $user;
+        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        return $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
     }
 
     /**

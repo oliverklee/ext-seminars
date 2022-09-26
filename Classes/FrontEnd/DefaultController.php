@@ -40,7 +40,6 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
@@ -1657,8 +1656,8 @@ class DefaultController extends TemplateHelper
             $this->limitToTimeFrameSetting($builder);
         }
 
-        /** @var FrontEndUser|null $user */
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
 
         switch ($whatToDisplay) {
             case 'topic_list':
@@ -1989,9 +1988,9 @@ class DefaultController extends TemplateHelper
     {
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
-        /** @var FrontEndUser $loggedInUser */
-        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
-        $registrationBagBuilder->limitToAttendee($loggedInUser);
+        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
+        $registrationBagBuilder->limitToAttendee($user);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 
         return $registrationBagBuilder;
