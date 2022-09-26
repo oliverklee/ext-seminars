@@ -1314,10 +1314,7 @@ class DefaultController extends TemplateHelper
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        $loginManager = FrontEndLoginManager::getInstance();
-        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
-            FrontEndUserMapper::class
-        )->getUid() : 0;
+        return FrontEndLoginManager::getInstance()->getLoggedInUserUid();
     }
 
     /**
