@@ -11,7 +11,6 @@ use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
 use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
-use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -862,9 +861,8 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
-        /** @var BackEndUser $loggedInUser */
-        $loggedInUser = BackEndLoginManager::getInstance()
-            ->getLoggedInUser(BackEndUserMapper::class);
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        $loggedInUser = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertStringContainsString((string)$newEventFolder, $this->subject->show());
@@ -875,9 +873,8 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel(): void
     {
-        /** @var BackEndUser $loggedInUser */
-        $loggedInUser = BackEndLoginManager::getInstance()
-            ->getLoggedInUser(BackEndUserMapper::class);
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        $loggedInUser = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertStringContainsString(

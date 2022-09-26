@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Stop using removed oelib functionality (#1493, #1502, #1503)
+- Stop using removed oelib functionality (#1493, #1502, #1503, #1507)
 - Bump the minimal 10.4 Extbase requirement (#1445)
 - Only show the configuration check with a logged-in BE admin (#1427)
 - Do not rely on transitive Composer dependencies (#1426)

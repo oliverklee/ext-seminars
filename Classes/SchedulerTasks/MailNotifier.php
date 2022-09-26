@@ -14,7 +14,6 @@ use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
@@ -389,8 +388,12 @@ class MailNotifier extends AbstractTask
      */
     private function useUserConfiguredLanguage(): void
     {
-        /** @var BackEndUser $user */
-        $user = BackEndLoginManager::getInstance()->getLoggedInUser(BackEndUserMapper::class);
+        $uid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        if ($uid <= 0) {
+            return;
+        }
+
+        $user = MapperRegistry::get(BackEndUserMapper::class)->find($uid);
         $this->getLanguageService()->init($user->getLanguage());
     }
 
