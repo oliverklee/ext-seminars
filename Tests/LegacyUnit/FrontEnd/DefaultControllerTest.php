@@ -5207,45 +5207,6 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function listViewEnsuresPlacePiVarArray(): void
-    {
-        $this->subject->piVars['place'] = ['foo'];
-        $this->subject->main('', []);
-
-        self::assertEmpty(
-            $this->subject->piVars['place']
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listViewEnsuresOrganizerPiVarArray(): void
-    {
-        $this->subject->piVars['organizer'] = ['foo'];
-        $this->subject->main('', []);
-
-        self::assertEmpty(
-            $this->subject->piVars['organizer']
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listViewEnsuresEventTypePiVarArray(): void
-    {
-        $this->subject->piVars['event_type'] = ['foo'];
-        $this->subject->main('', []);
-
-        self::assertEmpty(
-            $this->subject->piVars['event_type']
-        );
-    }
-
     ///////////////////////////////////////////////////////
     // Tests concerning the owner data in the single view
     ///////////////////////////////////////////////////////
