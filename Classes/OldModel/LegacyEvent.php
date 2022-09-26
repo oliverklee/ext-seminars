@@ -2187,7 +2187,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether a certain user is entered as a default VIP for all events
      * but also checks whether this user is entered as a VIP for this event,
-     * ie. he/she is allowed to view the list of registrations for this event.
+     * i.e., he/she is allowed to view the list of registrations for this event.
      *
      * @param int $userUid UID of the FE user to check, must be > 0
      * @param int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
@@ -2196,7 +2196,9 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
-        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
+        $loggedInUserUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $loggedInUser = $loggedInUserUid > 0
+            ? MapperRegistry::get(FrontEndUserMapper::class)->find($loggedInUserUid) : null;
         $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
             && $loggedInUser instanceof FrontEndUser
             && $loggedInUser->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
@@ -2323,9 +2325,7 @@ class LegacyEvent extends AbstractTimeSpan
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
-        $loginManager = FrontEndLoginManager::getInstance();
-        $currentUserUid = $loginManager->isLoggedIn()
-            ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid() : 0;
+        $currentUserUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
 
         switch ($whichPlugin) {
             case 'seminar_list':
@@ -2396,7 +2396,7 @@ class LegacyEvent extends AbstractTimeSpan
             return false;
         }
 
-        $currentUserUid = $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid();
+        $currentUserUid = $loginManager->getLoggedInUserUid();
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
@@ -2456,7 +2456,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid() : 0;
+        $currentUserUid = $loginManager->getLoggedInUserUid();
 
         switch ($whichPlugin) {
             case 'csv_export':
@@ -3082,8 +3082,7 @@ class LegacyEvent extends AbstractTimeSpan
             return false;
         }
 
-        return $this->getRecordPropertyInteger('owner_feuser')
-            === $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid();
+        return $this->getRecordPropertyInteger('owner_feuser') === $loginManager->getLoggedInUserUid();
     }
 
     /**

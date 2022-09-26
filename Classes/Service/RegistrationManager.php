@@ -25,7 +25,6 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
@@ -1449,10 +1448,7 @@ class RegistrationManager
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        $loginManager = FrontEndLoginManager::getInstance();
-        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
-            FrontEndUserMapper::class
-        )->getUid() : 0;
+        return FrontEndLoginManager::getInstance()->getLoggedInUserUid();
     }
 
     protected function getRegistrationMapper(): RegistrationMapper
