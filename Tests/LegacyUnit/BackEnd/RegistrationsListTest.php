@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class RegistrationsListTest extends TestCase
@@ -49,6 +50,10 @@ final class RegistrationsListTest extends TestCase
 
     protected function setUp(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
+
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -72,7 +77,9 @@ final class RegistrationsListTest extends TestCase
     {
         $this->purgeMockedInstances();
 
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework instanceof TestingFramework) {
+            $this->testingFramework->cleanUp();
+        }
         LegacyRegistration::purgeCachedSeminars();
         $this->restoreOriginalEnvironment();
     }

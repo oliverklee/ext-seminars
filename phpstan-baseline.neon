@@ -1051,6 +1051,11 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
 
 		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
@@ -1069,6 +1074,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
@@ -1226,6 +1236,51 @@ parameters:
 			path: Tests/Functional/ViewHelpers/CountdownViewHelperTest.php
 
 		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/FlexFormsTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/EventListViewTest.php
@@ -1271,9 +1326,19 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createLoginAndAddFrontEndUserToEventEditorFrontEndGroup\\(\\) has parameter \\$frontEndUserGroupData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:formFieldsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
