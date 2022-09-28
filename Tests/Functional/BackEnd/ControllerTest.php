@@ -12,6 +12,7 @@ use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use Prophecy\Prophecy\ObjectProphecy;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -36,6 +37,10 @@ final class ControllerTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
 
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();

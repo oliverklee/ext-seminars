@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Information\Typo3Version;
 
 final class SpeakersListTest extends TestCase
 {
@@ -37,6 +38,10 @@ final class SpeakersListTest extends TestCase
 
     protected function setUp(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
+
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -59,7 +64,9 @@ final class SpeakersListTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework instanceof TestingFramework) {
+            $this->testingFramework->cleanUp();
+        }
         $this->restoreOriginalEnvironment();
     }
 

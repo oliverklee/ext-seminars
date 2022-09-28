@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -45,6 +46,10 @@ final class EventEditorTest extends FunctionalTestCase
     {
         parent::setUp();
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
+
         $this->importDataSet(__DIR__ . '/Fixtures/EventEditorTest.xml');
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -53,7 +58,9 @@ final class EventEditorTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        if ($this->testingFramework instanceof TestingFramework) {
+            $this->testingFramework->cleanUpWithoutDatabase();
+        }
         FrontEndLoginManager::purgeInstance();
         MapperRegistry::purgeInstance();
 

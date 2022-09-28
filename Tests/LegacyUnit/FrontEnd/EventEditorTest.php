@@ -19,6 +19,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -66,6 +67,10 @@ final class EventEditorTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
+
         $this->testingFramework = new TestingFramework('tx_seminars');
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
         $rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -95,7 +100,9 @@ final class EventEditorTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework instanceof TestingFramework) {
+            $this->testingFramework->cleanUp();
+        }
 
         RegistrationManager::purgeInstance();
         ConfigurationProxy::purgeInstances();

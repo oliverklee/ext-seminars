@@ -11,6 +11,7 @@ use OliverKlee\Seminars\BackEnd\EventsList;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Information\Typo3Version;
 
 /**
  * @covers \OliverKlee\Seminars\BackEnd\EventsList
@@ -34,6 +35,10 @@ final class EventsListTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
 
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();

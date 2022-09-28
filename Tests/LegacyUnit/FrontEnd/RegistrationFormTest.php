@@ -15,6 +15,7 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\TestCase;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -57,6 +58,10 @@ final class RegistrationFormTest extends TestCase
 
     protected function setUp(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
+        }
+
         $this->testingFramework = new TestingFramework('tx_seminars');
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
@@ -109,7 +114,9 @@ final class RegistrationFormTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework instanceof TestingFramework) {
+            $this->testingFramework->cleanUp();
+        }
 
         RegistrationManager::purgeInstance();
     }
