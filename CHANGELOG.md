@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Disable the legacy BE module in TYPO3 11LTS (#1521)
 
 ### Deprecated
 
