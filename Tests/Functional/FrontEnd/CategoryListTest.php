@@ -5,17 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\System\Typo3Version;
-use OliverKlee\Oelib\Testing\CacheNullifyer;
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use Psr\Log\NullLogger;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -32,40 +25,38 @@ final class CategoryListTest extends FunctionalTestCase
      */
     private $subject;
 
+    /**
+     * @var TestingFramework
+     */
+    private $testingFramework;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        (new CacheNullifyer())->setAllCoreCaches();
+        $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
-        // Needed in TYPO3 V10; can be removed in V11.
-        $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
-        if (Typo3Version::isAtLeast(10)) {
-            $frontEnd = GeneralUtility::makeInstance(
-                TypoScriptFrontendController::class,
-                new Context(),
-                new Site('test', 0, []),
-                new SiteLanguage(0, 'en_US.utf8', new Uri(), [])
-            );
-        } else {
-            $frontEnd = GeneralUtility::makeInstance(
-                TypoScriptFrontendController::class,
-                $GLOBALS['TYPO3_CONF_VARS'],
-                0,
-                0
-            );
-        }
-        $GLOBALS['TSFE'] = $frontEnd;
-
-        $contentObject = new ContentObjectRenderer();
-        $contentObject->setLogger(new NullLogger());
         $this->subject = new CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            $contentObject
+            $this->getFrontEndController()->cObj
         );
+    }
+
+    protected function tearDown(): void
+    {
+        RegistrationManager::purgeInstance();
+        $this->testingFramework->cleanUpWithoutDatabase();
+
+        parent::tearDown();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     /**
