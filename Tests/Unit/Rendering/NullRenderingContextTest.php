@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Rendering;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Rendering\NullRenderingContext;
+use OliverKlee\Seminars\Rendering\NullRequest;
 use TYPO3Fluid\Fluid\Core\Cache\FluidCacheInterface;
 use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
 use TYPO3Fluid\Fluid\Core\ErrorHandler\ErrorHandlerInterface;
@@ -331,5 +332,13 @@ final class NullRenderingContextTest extends UnitTestCase
     public function setControllerActionCanBeCalled(): void
     {
         $this->subject->setControllerAction('');
+    }
+
+    /**
+     * @test
+     */
+    public function getRequestReturnsNullRequest(): void
+    {
+        self::assertInstanceOf(NullRequest::class, $this->subject->getRequest());
     }
 }
