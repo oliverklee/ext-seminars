@@ -1,7 +1,12 @@
 <?php
 defined('TYPO3_MODE') or die('Access denied.');
 
-$boot = static function () {
+$boot = static function (): void {
+    // The legacy BE module will be removed before our 11LTS-compatible release.
+    if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 11) {
+        return;
+    }
+
     $moduleConfiguration = [
         'routeTarget' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
         'access' => 'user,group',
