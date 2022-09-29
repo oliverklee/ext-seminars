@@ -836,6 +836,56 @@ parameters:
 			path: Classes/Rendering/NullRenderingContext.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getAttributes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getCookieParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getParsedBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getQueryParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getServerParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getUploadedFiles\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:withCookieParams\\(\\) has parameter \\$cookies with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:withParsedBody\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:withQueryParams\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:withUploadedFiles\\(\\) has parameter \\$uploadedFiles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Rendering/NullRequest.php
+
+		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php

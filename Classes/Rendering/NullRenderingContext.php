@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Rendering;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3Fluid\Fluid\Core\Cache\FluidCacheInterface;
 use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
 use TYPO3Fluid\Fluid\Core\ErrorHandler\ErrorHandlerInterface;
@@ -20,7 +21,7 @@ use TYPO3Fluid\Fluid\View\TemplatePaths;
  *
  * Its methods are not intended to get called.
  */
-class NullRenderingContext implements RenderingContextInterface
+final class NullRenderingContext implements RenderingContextInterface
 {
     /**
      * @return never
@@ -198,5 +199,10 @@ class NullRenderingContext implements RenderingContextInterface
      */
     public function setControllerAction($action): void
     {
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return new NullRequest();
     }
 }
