@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use Psr\Log\NullLogger;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -42,7 +43,7 @@ final class CategoryListTest extends FunctionalTestCase
         if (Typo3Version::isAtLeast(10)) {
             $frontEnd = GeneralUtility::makeInstance(
                 TypoScriptFrontendController::class,
-                $GLOBALS['TYPO3_CONF_VARS'],
+                new Context(),
                 new Site('test', 0, []),
                 new SiteLanguage(0, 'en_US.utf8', new Uri(), [])
             );
