@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- 11LTS compatibility fixes (#1526)
+- 11LTS compatibility fixes (#1526, #1527)
 - Fix type warnings for `str_replace` in the `MailNotifier` (#1524)
 
 ## 4.1.6
