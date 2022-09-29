@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix type warnings for `str_replace` in the `MailNotifier` (#1524)
 
 ## 4.1.6
 
