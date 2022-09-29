@@ -8,7 +8,7 @@ on:
 jobs:
   code-coverage:
     name: "Calculate code coverage"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     services:
       mysql:
         image: mysql:5.7
