@@ -315,7 +315,7 @@ class MailNotifier extends AbstractTask
                 '%uid' => $event->getUid(),
             ] as $search => $replace
         ) {
-            $result = str_replace($search, $replace, $result);
+            $result = str_replace($search, (string)$replace, $result);
         }
 
         return $result;
