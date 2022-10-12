@@ -64,7 +64,7 @@
 		"phpstan/phpstan-strict-rules": "^1.4.4",
 		"phpunit/phpunit": "^8.5.30",
 		"saschaegerer/phpstan-typo3": "^1.1.2",
-		"sjbr/sr-feuser-register": "^7.0.5 || ^11.5.1",
+		"sjbr/sr-feuser-register": "^11.5.2",
 		"squizlabs/php_codesniffer": "^3.7.1",
 		"typo3/class-alias-loader": "^1.1.4",
 		"typo3/cms-install": "^9.5.7 || ^10.4.6",
