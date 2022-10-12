@@ -19,7 +19,12 @@ updates:
       - dependency-name: "friendsofphp/php-cs-fixer"
         versions: [ ">= 3.4.0" ]
       - dependency-name: "helhum/typo3-console"
+      - dependency-name: "oliverklee/oelib"
+      - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
         versions: [ ">= 9" ]
+      - dependency-name: "sjbr/sr-feuser-register"
+      - dependency-name: "sjbr/static-info-tables"
+      - dependency-name: "symfony/*"
       - dependency-name: "typo3/cms-*"
     versioning-strategy: "increase"
