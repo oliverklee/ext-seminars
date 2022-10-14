@@ -45,14 +45,7 @@ Installation*
 
 #. If you want users to be able register manually, then build up a front-
    end user system for your site. Remember which group corresponds to
-   “confirmed front-end users”.If you wish to utilize the additional
-   fields for the table front-end users, you'll need to set up
-   **sr\_feuser\_register** for this. In that extension's documentation,
-   you'll find a tutorial about how to add fields to the registration
-   form.In static/tx\_srfeuserregister\_pi1\_tmpl.tmpl, there is a
-   modified template where all new seminar fields for registration are
-   included. The fields to the INVITE and PREVIEW sections have not been
-   added in the template yet.
+   “confirmed front-end users”.
 
 #. Add a page (which we called “ ***Events (list view)*** ” in the
    illustrations) that will contain the list view.

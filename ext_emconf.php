@@ -20,9 +20,7 @@ $EM_CONF[$_EXTKEY] = [
             'sourceopt' => '',
         ],
         'suggests' => [
-            'femanager' => '5.1.0-',
             'onetimeaccount' => '',
-            'sr_feuser_register' => '7.0.5-11.5.99',
         ],
     ],
     'state' => 'stable',

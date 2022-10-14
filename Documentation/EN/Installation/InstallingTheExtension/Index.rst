@@ -34,10 +34,6 @@ extensions to be installed beforehand:
   can register for events, you should also install a login extension
   like *felogin* .
 
-- sr\_feuser\_register (optional): If you want FE users to create their
-  accounts themselves, a self-registration extension like
-  *sr\_feuser\_register* is recommended.
-
 - onetimeaccount (optional): If you want users to be able to register
   for events without having to use a FE login, please use the
   *onetimeaccount* extension.
