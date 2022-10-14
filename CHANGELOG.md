@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a services configuration file (#1548)
 
 ### Changed
 - Require oelib >= 4.3.0 (#1525)

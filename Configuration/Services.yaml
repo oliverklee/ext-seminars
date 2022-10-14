@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  OliverKlee\Seminars\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Model/*,../Classes/OldModel/*'
