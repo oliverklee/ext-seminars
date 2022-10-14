@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a services configuration file (#1548)
 
 ### Changed
+- Add `feuserextrafields` as a dependency (#1565)
 - Switch to the TYPO3 coding standards package (#1553)
 - Rename some Composer scripts (#1552)
 - Require oelib >= 4.3.0 (#1525)
