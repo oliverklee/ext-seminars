@@ -14,12 +14,12 @@ final class SkillMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var SkillMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

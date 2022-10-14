@@ -17,7 +17,7 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
     /**
      * @var BackEndUserGroupMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

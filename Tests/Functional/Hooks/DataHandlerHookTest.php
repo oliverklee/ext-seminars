@@ -22,12 +22,12 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @var DataHandlerHook
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var DataHandler
      */
-    private $dataHandler = null;
+    private $dataHandler;
 
     protected function setUp(): void
     {

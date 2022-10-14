@@ -51,7 +51,7 @@ class LegacyRegistration extends AbstractModel
     /**
      * @var LegacyEvent|null the event to which this registration relates
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * @var bool
@@ -64,7 +64,7 @@ class LegacyRegistration extends AbstractModel
      *
      * @var array<string, string|int|bool>|null
      */
-    private $userData = null;
+    private $userData;
 
     /**
      * UIDs of lodging options associated with this record
@@ -97,12 +97,12 @@ class LegacyRegistration extends AbstractModel
     /**
      * @var FrontEndUser|null
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * @var FrontendUserGroupRepository|null
      */
-    private $frontEndUserGroupRepository = null;
+    private $frontEndUserGroupRepository;
 
     /**
      * Purges our cached seminars array.

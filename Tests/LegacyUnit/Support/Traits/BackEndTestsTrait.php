@@ -29,7 +29,7 @@ trait BackEndTestsTrait
     /**
      * @var BackendUserAuthentication
      */
-    private $backEndUserBackup = null;
+    private $backEndUserBackup;
 
     /**
      * @var string

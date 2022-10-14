@@ -74,7 +74,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @var LanguageService|null
      */
-    private $languageBackup = null;
+    private $languageBackup;
 
     /**
      * @var LanguageService

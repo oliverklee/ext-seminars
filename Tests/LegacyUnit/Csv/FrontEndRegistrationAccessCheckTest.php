@@ -18,12 +18,12 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @var FrontEndRegistrationAccessCheck
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var DummyConfiguration
      */
-    private $seminarsPluginConfiguration = null;
+    private $seminarsPluginConfiguration;
 
     /**
      * @var int

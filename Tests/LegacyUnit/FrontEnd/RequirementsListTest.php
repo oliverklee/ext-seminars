@@ -22,7 +22,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @var RequirementsList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var int the UID of a seminar to which the plugin relates

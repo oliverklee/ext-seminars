@@ -19,7 +19,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
     /**
      * @var LegacyEvent|null
      */
-    protected $event = null;
+    protected $event;
 
     /**
      * Sets the event for the access check.

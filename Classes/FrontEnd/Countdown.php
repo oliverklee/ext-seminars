@@ -18,12 +18,12 @@ class Countdown extends AbstractView
     /**
      * @var EventMapper
      */
-    protected $mapper = null;
+    protected $mapper;
 
     /**
      * @var CountdownViewHelper
      */
-    protected $viewHelper = null;
+    protected $viewHelper;
 
     public function injectEventMapper(EventMapper $mapper): void
     {

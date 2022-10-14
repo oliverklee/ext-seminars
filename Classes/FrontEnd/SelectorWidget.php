@@ -29,7 +29,7 @@ class SelectorWidget extends AbstractView
      *
      * @var PiBaseApi
      */
-    protected $staticInfo = null;
+    protected $staticInfo;
 
     /**
      * @var string[] the keys of the search fields which should be displayed in the search form
@@ -44,17 +44,17 @@ class SelectorWidget extends AbstractView
     /**
      * @var EventBag all seminars to show in the list view
      */
-    private $seminarBag = null;
+    private $seminarBag;
 
     /**
      * @var Collection<Place>|null all places which are assigned to at least one event
      */
-    private $places = null;
+    private $places;
 
     /**
      * @var HookProvider|null
      */
-    protected $selectorWidgetHookProvider = null;
+    protected $selectorWidgetHookProvider;
 
     /**
      * Returns the selector widget if it is not hidden.

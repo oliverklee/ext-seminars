@@ -20,7 +20,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @var TestingBagBuilder
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

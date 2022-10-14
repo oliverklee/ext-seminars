@@ -14,12 +14,12 @@ final class LodgingMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var LodgingMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

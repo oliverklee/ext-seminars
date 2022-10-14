@@ -18,17 +18,17 @@ final class EventListViewTest extends TestCase
     /**
      * @var EventListView
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * PID of the system folder in which we store our test data

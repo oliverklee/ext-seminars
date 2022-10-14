@@ -23,7 +23,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @var EventMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

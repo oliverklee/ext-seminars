@@ -14,7 +14,7 @@ final class MailNotifierConfigurationTest extends UnitTestCase
     /**
      * @var MailNotifierConfiguration
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

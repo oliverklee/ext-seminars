@@ -16,12 +16,12 @@ final class AbstractBagTest extends TestCase
     /**
      * @var TestingBag
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int the UID of the first test record in the DB

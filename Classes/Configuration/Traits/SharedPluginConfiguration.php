@@ -15,7 +15,7 @@ trait SharedPluginConfiguration
     /**
      * @var Configuration|null
      */
-    private $sharedPluginConfiguration = null;
+    private $sharedPluginConfiguration;
 
     protected function getSharedConfiguration(): Configuration
     {

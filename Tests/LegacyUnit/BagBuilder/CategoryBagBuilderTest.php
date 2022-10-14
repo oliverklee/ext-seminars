@@ -17,12 +17,12 @@ final class CategoryBagBuilderTest extends TestCase
     /**
      * @var CategoryBagBuilder
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

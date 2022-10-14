@@ -52,7 +52,7 @@ class DataHandlerHook
     /**
      * @var DataHandler
      */
-    private $dataHandler = null;
+    private $dataHandler;
 
     /**
      * Creates the time slots requested by the time slot wizard (if any are requested).

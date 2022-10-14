@@ -24,17 +24,17 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @var CsvDownloader
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var HeaderCollector
      */
-    private $headerProxy = null;
+    private $headerProxy;
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     protected function setUp(): void
     {

@@ -17,17 +17,17 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @var BackEndEventAccessCheck
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var BackendUserAuthentication&MockObject
      */
-    private $backEndUser = null;
+    private $backEndUser;
 
     /**
      * @var BackendUserAuthentication
      */
-    private $backEndUserBackup = null;
+    private $backEndUserBackup;
 
     protected function setUp(): void
     {

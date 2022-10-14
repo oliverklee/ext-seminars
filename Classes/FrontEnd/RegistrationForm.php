@@ -75,17 +75,17 @@ class RegistrationForm extends AbstractEditor
     /**
      * @var PiBaseApi
      */
-    private $staticInfo = null;
+    private $staticInfo;
 
     /**
      * @var LegacyEvent seminar object
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * @var LegacyRegistration|null
      */
-    protected $registration = null;
+    protected $registration;
 
     /**
      * @var string[]

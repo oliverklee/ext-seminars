@@ -16,7 +16,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @var RegistrationDigest
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

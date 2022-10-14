@@ -29,32 +29,32 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @var RegistrationDigest
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * @var ObjectProphecy<EventMapper>
      */
-    private $eventMapperProphecy = null;
+    private $eventMapperProphecy;
 
     /**
      * @var EventMapper
      */
-    private $eventMapper = null;
+    private $eventMapper;
 
     /**
      * @var ObjectProphecy<ObjectManager>
      */
-    private $objectManagerProphecy = null;
+    private $objectManagerProphecy;
 
     /**
      * @var ObjectProphecy<StandaloneView>
      */
-    private $viewProphecy = null;
+    private $viewProphecy;
 
     /**
      * @var int

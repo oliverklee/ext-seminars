@@ -31,17 +31,17 @@ class RegistrationDigest
     /**
      * @var ObjectManagerInterface
      */
-    private $objectManager = null;
+    private $objectManager;
 
     /**
      * @var Configuration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * @var EventMapper
      */
-    private $eventMapper = null;
+    private $eventMapper;
 
     public function injectObjectManager(ObjectManagerInterface $objectManager): void
     {

@@ -18,12 +18,12 @@ final class RegistrationMapperTest extends FunctionalTestCase
     /**
      * @var RegistrationMapper
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var FrontEndUserMapper
      */
-    private $userMapper = null;
+    private $userMapper;
 
     protected function setUp(): void
     {

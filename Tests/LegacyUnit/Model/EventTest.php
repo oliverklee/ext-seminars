@@ -27,12 +27,12 @@ final class EventTest extends TestCase
     /**
      * @var Event
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * @var int

@@ -25,12 +25,12 @@ final class RegistrationsListTest extends TestCase
     /**
      * @var RegistrationsList
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int the UID of a seminar to which the fixture relates

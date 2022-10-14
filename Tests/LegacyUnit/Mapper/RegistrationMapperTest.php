@@ -29,12 +29,12 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var RegistrationMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

@@ -17,12 +17,12 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var TargetGroupMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

@@ -35,7 +35,7 @@ class CsvDownloader
     /**
      * @var Configuration
      */
-    protected $configuration = null;
+    protected $configuration;
 
     /**
      * @var string the TYPO3 mode set for testing purposes

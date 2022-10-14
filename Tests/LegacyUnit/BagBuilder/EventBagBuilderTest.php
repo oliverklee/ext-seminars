@@ -22,12 +22,12 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @var EventBagBuilder
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int a UNIX timestamp in the past.

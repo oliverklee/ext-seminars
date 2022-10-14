@@ -16,17 +16,17 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @var EmailRegistrationListView
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * UID of a test event record

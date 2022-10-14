@@ -14,12 +14,12 @@ final class CategoryMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var CategoryMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

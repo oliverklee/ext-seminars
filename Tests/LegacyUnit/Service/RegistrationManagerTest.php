@@ -126,7 +126,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var (MailMessage&MockObject)|null
      */
-    private $secondEmail = null;
+    private $secondEmail;
 
     /**
      * @var DummyConfiguration

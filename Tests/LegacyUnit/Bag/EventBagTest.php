@@ -17,12 +17,12 @@ final class EventBagTest extends TestCase
     /**
      * @var EventBag
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

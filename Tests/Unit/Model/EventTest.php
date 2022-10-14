@@ -20,12 +20,12 @@ final class EventTest extends UnitTestCase
     /**
      * @var Event
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var Organizer
      */
-    private $organizer = null;
+    private $organizer;
 
     protected function setUp(): void
     {

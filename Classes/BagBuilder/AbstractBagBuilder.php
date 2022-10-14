@@ -68,7 +68,7 @@ abstract class AbstractBagBuilder
     /**
      * @var PageRepository
      */
-    protected $pageRepository = null;
+    protected $pageRepository;
 
     /**
      * The constructor. Checks that $this->tableName is not empty.

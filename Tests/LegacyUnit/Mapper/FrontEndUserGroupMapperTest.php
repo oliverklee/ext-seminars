@@ -19,12 +19,12 @@ final class FrontEndUserGroupMapperTest extends TestCase
     /**
      * @var FrontEndUserGroupMapper the object to test
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework the testing framework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

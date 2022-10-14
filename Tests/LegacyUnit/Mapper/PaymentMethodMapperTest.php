@@ -14,12 +14,12 @@ final class PaymentMethodMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var PaymentMethodMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

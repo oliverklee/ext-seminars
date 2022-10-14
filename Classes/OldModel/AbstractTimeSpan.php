@@ -16,7 +16,7 @@ abstract class AbstractTimeSpan extends AbstractModel
     /**
      * @var HookProvider|null
      */
-    protected $dateTimeSpanHookProvider = null;
+    protected $dateTimeSpanHookProvider;
 
     /**
      * Gets the begin date.

@@ -34,7 +34,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     /**
      * @var LegacyRegistration
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var array<string, string>

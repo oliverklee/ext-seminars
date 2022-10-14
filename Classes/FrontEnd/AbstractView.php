@@ -41,7 +41,7 @@ abstract class AbstractView extends TemplateHelper
     /**
      * @var Configuration|null
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * The constructor. Initializes the TypoScript configuration, initializes

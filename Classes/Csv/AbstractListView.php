@@ -39,7 +39,7 @@ abstract class AbstractListView
     /**
      * @var LanguageService|null
      */
-    protected $translator = null;
+    protected $translator;
 
     /**
      * @var string
@@ -49,7 +49,7 @@ abstract class AbstractListView
     /**
      * @var Configuration
      */
-    protected $configuration = null;
+    protected $configuration;
 
     public function __construct()
     {

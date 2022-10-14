@@ -16,12 +16,12 @@ final class OrganizerBagTest extends TestCase
     /**
      * @var OrganizerBag
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

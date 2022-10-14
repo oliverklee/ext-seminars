@@ -68,7 +68,8 @@
 		"squizlabs/php_codesniffer": "^3.7.1",
 		"typo3/class-alias-loader": "^1.1.4",
 		"typo3/cms-install": "^9.5.7 || ^10.4.6",
-		"typo3/cms-scheduler": "^9.5.7 || ^10.4.6"
+		"typo3/cms-scheduler": "^9.5.7 || ^10.4.6",
+		"typo3/coding-standards": "^0.5.5"
 	},
 	"conflict": {
 		"helhum/typo3-console-plugin": "< 2.0.7"
@@ -137,7 +138,7 @@
 			"@ci:php:sniff",
 			"@ci:php:stan"
 		],
-		"ci:php:cs-fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots Classes Tests",
+		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --using-cache no --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
@@ -157,7 +158,7 @@
 		"ci:static": [
 			"@ci:php:lint",
 			"@ci:php:sniff",
-			"@ci:php:fixer",
+			"@ci:php:cs-fixer",
 			"@ci:ts:lint"
 		],
 		"ci": [
@@ -174,7 +175,7 @@
 			"@fix:php:cs",
 			"@fix:php:sniff"
 		],
-		"fix:php:cs": "php-cs-fixer fix ---config=Configuration/php-cs-fixer.php Classes Tests",
+		"fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php",
 		"fix:php:sniff": "phpcbf Classes Configuration Tests",
 		"link-extension": [
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
@@ -193,6 +194,7 @@
 			"rm .editorconfig",
 			"rm .gitattributes",
 			"rm .gitignore",
+			"rm .php-cs-fixer.php",
 			"rm Configuration/FunctionalTests.xml",
 			"rm Configuration/UnitTests.xml",
 			"rm phpcs.xml.dist",

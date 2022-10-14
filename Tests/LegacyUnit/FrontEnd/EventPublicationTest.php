@@ -22,12 +22,12 @@ final class EventPublicationTest extends TestCase
     /**
      * @var EventPublication
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

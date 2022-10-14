@@ -19,12 +19,12 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var SpeakerMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {
