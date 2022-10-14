@@ -169,6 +169,7 @@ class Controller extends AbstractModule
                 }
                 break;
             default:
+                // nothing to do
         }
 
         if (AbstractConfigurationCheck::shouldCheck('seminars')) {
