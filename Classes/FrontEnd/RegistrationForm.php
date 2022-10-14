@@ -627,8 +627,8 @@ class RegistrationForm extends AbstractEditor
                 $result = $result && $this->isTerms2Enabled();
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
 
         return $result;
     }
@@ -994,8 +994,8 @@ class RegistrationForm extends AbstractEditor
                 }
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
 
         return (string)$currentFormData;
     }
