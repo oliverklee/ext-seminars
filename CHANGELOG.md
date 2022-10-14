@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a Speaker model and repository (#1564)
 - Add `composer normalize` to the CI toolchain (#1559)
 - Add a services configuration file (#1548)
 
