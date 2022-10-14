@@ -169,8 +169,8 @@ class Controller extends AbstractModule
                 }
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
 
         if (AbstractConfigurationCheck::shouldCheck('seminars')) {
             $configuration = ConfigurationRegistry::get('plugin.tx_seminars');

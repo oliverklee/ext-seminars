@@ -354,9 +354,9 @@ class DefaultController extends TemplateHelper
                 // We still use the processEventEditorActions call in the next case.
             case 'my_entered_events':
                 $this->processEventEditorActions();
-            // The fallthrough is intended
-            // because createListView() will differentiate later.
-            // no break
+                // The fallthrough is intended
+                // because createListView() will differentiate later.
+                // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -1569,8 +1569,8 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
 
         if ($isOkay) {
             $result .= $this->getSelectorWidgetIfNecessary($whatToDisplay);
@@ -1693,8 +1693,8 @@ class DefaultController extends TemplateHelper
                 $builder->limitToOtherDatesForTopic($this->seminar);
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
 
         if (($whatToDisplay === 'other_dates') || ($whatToDisplay === 'seminar_list')) {
             $hideBookedOutEvents = $this->getConfValueBoolean('showOnlyEventsWithVacancies', 's_listView');
@@ -3180,8 +3180,8 @@ class DefaultController extends TemplateHelper
                 $this->copyEvent($event);
                 break;
             default:
-                // nothing to do
-        }
+            // nothing to do
+            }
     }
 
     /**
