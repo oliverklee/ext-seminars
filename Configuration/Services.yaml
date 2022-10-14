@@ -6,4 +6,4 @@ services:
 
   OliverKlee\Seminars\:
     resource: '../Classes/*'
-    exclude: '../Classes/Model/*,../Classes/OldModel/*'
+    exclude: '../Classes/Domain/Model/*,../Classes/Model/*,../Classes/OldModel/*'
