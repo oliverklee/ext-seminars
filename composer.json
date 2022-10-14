@@ -111,8 +111,6 @@
 		}
 	},
 	"scripts": {
-		"php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
-		"php:rector": ".Build/vendor/bin/rector",
 		"ci:coverage": [
 			"@ci:coverage:unit",
 			"@ci:coverage:functional"
@@ -133,10 +131,16 @@
 			"@coverage:create-directories",
 			".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
+		"ci:php": [
+			"@ci:php:cs-fixer",
+			"@ci:php:lint",
+			"@ci:php:sniff",
+			"@ci:php:stan"
+		],
+		"ci:php:cs-fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots Classes Tests",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
-		"ci:php:fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots Classes Tests",
 		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
@@ -162,6 +166,16 @@
 		],
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
+		"fix": [
+			"@fix:composer",
+			"@fix:php"
+		],
+		"fix:php": [
+			"@fix:php:cs",
+			"@fix:php:sniff"
+		],
+		"fix:php:cs": "php-cs-fixer fix ---config=Configuration/php-cs-fixer.php Classes Tests",
+		"fix:php:sniff": "phpcbf Classes Configuration Tests",
 		"link-extension": [
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
@@ -169,6 +183,7 @@
 		"post-autoload-dump": [
 			"@link-extension"
 		],
+		"php:rector": ".Build/vendor/bin/rector",
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
@@ -199,10 +214,18 @@
 		"ci:coverage:legacy": "Generates the code coverage report for legacy tests.",
 		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
 		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
+		"ci:php": "Runs all static checks for the PHP files.",
+		"ci:php:cs-fixer": "Checks the code style with the PHP Coding Standards Fixer (PHP-CS-Fixer).",
+		"ci:php:lint": "Lints the PHP files for syntax errors.",
 		"ci:php:rector": "Checks for code for changes by Rector.",
-		"ci:php:stan": "Checks the types with PHPStan.",
+		"ci:php:sniff": "Checks the code style with PHP_CodeSniffer (PHPCS).",
+		"ci:php:stan": "Checks the PHP types using PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
+		"fix": "Runs all automatic code style fixes.",
+		"fix:php": "Runs all fixers for the PHP code.",
+		"fix:php:cs": "Fixes the code style with PHP-CS-Fixer.",
+		"fix:php:sniff": "Fixes the code style with PHP_CodeSniffer.",
 		"php:rector": "Updates the code with Rector.",
 		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
 		"prepare-release": "Removes development-only files in preparation of a TER release."

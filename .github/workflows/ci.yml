@@ -67,8 +67,8 @@ jobs:
       fail-fast: false
       matrix:
         command:
+          - "php:cs-fixer"
           - "php:sniff"
-          - "php:fixer"
           - "php:stan"
           - "ts:lint"
         php-version:
