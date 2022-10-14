@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Do not package the docker-compose configuration file (#1559)
 - Get rid of unnecessary properties in the BE modules (#1554)
 - 11LTS compatibility fixes (#1526, #1527, #1528)
 - Fix type warnings for `str_replace` in the `MailNotifier` (#1524)

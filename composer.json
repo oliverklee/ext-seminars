@@ -194,6 +194,7 @@
 			"rm .php-cs-fixer.php",
 			"rm Configuration/FunctionalTests.xml",
 			"rm Configuration/UnitTests.xml",
+			"rm docker-compose.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
 			"rm phpstan.neon",
