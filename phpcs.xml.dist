@@ -11,5 +11,9 @@
     <rule ref="PSR12">
         <!-- We'll enable this rule once the line lengths are fixed. -->
         <exclude name="Generic.Files.LineLength"/>
+        <!-- This rule contradict the TYPO3 CS-Fixer ruleset. -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent"/>
+        <!-- This rule contradict the TYPO3 CS-Fixer ruleset. -->
+        <exclude name="Squiz.WhiteSpace.ScopeClosingBrace"/>
     </rule>
 </ruleset>
