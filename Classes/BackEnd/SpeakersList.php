@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\SpeakerBag;
 use OliverKlee\Seminars\BagBuilder\SpeakerBagBuilder;
-use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -18,11 +17,6 @@ class SpeakersList extends AbstractList
      * @var string the name of the table we're working on
      */
     protected $tableName = 'tx_seminars_speakers';
-
-    /**
-     * @var LegacySpeaker the speaker which we want to list
-     */
-    private $speaker = null;
 
     /**
      * @var string the path to the template file of this list
@@ -57,41 +51,22 @@ class SpeakersList extends AbstractList
         $tableRows = '';
 
         /** @var SpeakerBag $speakerBag */
-        foreach ($speakerBag as $this->speaker) {
-            $this->template->setMarker(
-                'icon',
-                $this->speaker->getRecordIcon()
-            );
-            $this->template->setMarker(
-                'full_name',
-                \htmlspecialchars($this->speaker->getTitle(), ENT_QUOTES | ENT_HTML5)
-            );
+        foreach ($speakerBag as $speaker) {
+            $this->template->setMarker('icon', $speaker->getRecordIcon());
+            $this->template->setMarker('full_name', \htmlspecialchars($speaker->getTitle(), ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'edit_button',
-                $this->getEditIcon(
-                    $this->speaker->getUid(),
-                    $this->speaker->getPageUid()
-                )
+                $this->getEditIcon($speaker->getUid(), $speaker->getPageUid())
             );
             $this->template->setMarker(
                 'delete_button',
-                $this->getDeleteIcon(
-                    $this->speaker->getUid(),
-                    $this->speaker->getPageUid()
-                )
+                $this->getDeleteIcon($speaker->getUid(), $speaker->getPageUid())
             );
             $this->template->setMarker(
                 'hide_unhide_button',
-                $this->getHideUnhideIcon(
-                    $this->speaker->getUid(),
-                    $this->speaker->getPageUid(),
-                    $this->speaker->isHidden()
-                )
+                $this->getHideUnhideIcon($speaker->getUid(), $speaker->getPageUid(), $speaker->isHidden())
             );
-            $this->template->setMarker(
-                'skills',
-                \htmlspecialchars($this->speaker->getSkillsShort(), ENT_QUOTES | ENT_HTML5)
-            );
+            $this->template->setMarker('skills', \htmlspecialchars($speaker->getSkillsShort(), ENT_QUOTES | ENT_HTML5));
 
             $tableRows .= $this->template->getSubpart('SPEAKER_ROW');
         }

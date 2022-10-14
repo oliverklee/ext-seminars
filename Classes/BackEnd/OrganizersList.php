@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
-use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -18,11 +17,6 @@ class OrganizersList extends AbstractList
      * @var string the name of the table we're working on
      */
     protected $tableName = 'tx_seminars_organizers';
-
-    /**
-     * @var LegacyOrganizer the organizer which we want to list
-     */
-    private $organizer = null;
 
     /**
      * @var string the path to the template file of this list
@@ -57,28 +51,16 @@ class OrganizersList extends AbstractList
         $tableRows = '';
 
         /** @var OrganizerBag $organizerBag */
-        foreach ($organizerBag as $this->organizer) {
-            $this->template->setMarker(
-                'icon',
-                $this->organizer->getRecordIcon()
-            );
-            $this->template->setMarker(
-                'full_name',
-                \htmlspecialchars($this->organizer->getTitle(), ENT_QUOTES | ENT_HTML5)
-            );
+        foreach ($organizerBag as $organizer) {
+            $this->template->setMarker('icon', $organizer->getRecordIcon());
+            $this->template->setMarker('full_name', \htmlspecialchars($organizer->getTitle(), ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'edit_button',
-                $this->getEditIcon(
-                    $this->organizer->getUid(),
-                    $this->organizer->getPageUid()
-                )
+                $this->getEditIcon($organizer->getUid(), $organizer->getPageUid())
             );
             $this->template->setMarker(
                 'delete_button',
-                $this->getDeleteIcon(
-                    $this->organizer->getUid(),
-                    $this->organizer->getPageUid()
-                )
+                $this->getDeleteIcon($organizer->getUid(), $organizer->getPageUid())
             );
 
             $tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
