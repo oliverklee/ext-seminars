@@ -1,7 +1,7 @@
 {
 	"name": "oliverklee/seminars",
-	"description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
 	"type": "typo3-cms-extension",
+	"description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
 	"keywords": [
 		"seminars",
 		"workshops",
@@ -20,10 +20,6 @@
 			"role": "developer"
 		}
 	],
-	"support": {
-		"issues": "https://github.com/oliverklee/ext-seminars/issues",
-		"source": "https://github.com/oliverklee/ext-seminars"
-	},
 	"require": {
 		"php": "^7.2.0 || ~8.0.0",
 		"ext-json": "*",
@@ -48,7 +44,14 @@
 		"typo3/cms-frontend": "^9.5.7 || ^10.4.6",
 		"typo3fluid/fluid": "^2.6.10"
 	},
+	"replace": {
+		"typo3-ter/seminars": "self.version"
+	},
+	"conflict": {
+		"helhum/typo3-console-plugin": "< 2.0.7"
+	},
 	"require-dev": {
+		"ergebnis/composer-normalize": "~2.15.0",
 		"friendsofphp/php-cs-fixer": "^3.4.0",
 		"helhum/typo3-console": "^5.8.6 || ^6.7.2 || ^7.1.2",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
@@ -71,17 +74,39 @@
 		"typo3/cms-scheduler": "^9.5.7 || ^10.4.6",
 		"typo3/coding-standards": "^0.5.5"
 	},
-	"conflict": {
-		"helhum/typo3-console-plugin": "< 2.0.7"
-	},
 	"suggest": {
 		"in2code/femanager": "for additing additional fields to FE users",
 		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
 		"sjbr/sr-feuser-register": "for additing additional fields to FE users",
 		"typo3/cms-install": "for running the upgrade wizards"
 	},
-	"replace": {
-		"typo3-ter/seminars": "self.version"
+	"config": {
+		"allow-plugins": {
+			"ergebnis/composer-normalize": true,
+			"helhum/typo3-console-plugin": true,
+			"phpstan/extension-installer": true,
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		},
+		"preferred-install": {
+			"*": "dist"
+		},
+		"process-timeout": 1000,
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-main": "4.1.x-dev"
+		},
+		"helhum/typo3-console": {
+			"install-extension-dummy": "0"
+		},
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"extension-key": "seminars",
+			"web-dir": ".Build/public"
+		}
 	},
 	"autoload": {
 		"psr-4": {
@@ -94,21 +119,15 @@
 		}
 	},
 	"prefer-stable": true,
-	"config": {
-		"preferred-install": {
-			"*": "dist"
-		},
-		"sort-packages": true,
-		"process-timeout": 1000,
-		"vendor-dir": ".Build/vendor",
-		"allow-plugins": {
-			"typo3/class-alias-loader": true,
-			"typo3/cms-composer-installers": true,
-			"phpstan/extension-installer": true,
-			"helhum/typo3-console-plugin": true
-		}
-	},
 	"scripts": {
+		"post-autoload-dump": [
+			"@link-extension"
+		],
+		"ci": [
+			"@ci:static",
+			"@ci:dynamic"
+		],
+		"ci:composer:normalize": "@composer normalize --dry-run",
 		"ci:coverage": [
 			"@ci:coverage:unit",
 			"@ci:coverage:functional"
@@ -129,6 +148,9 @@
 			"@coverage:create-directories",
 			".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
+		"ci:dynamic": [
+			"@ci:tests"
+		],
 		"ci:php": [
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
@@ -137,37 +159,32 @@
 		],
 		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --using-cache no --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
-		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
-		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
-		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
-		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
-		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests": [
-			"@ci:tests:unit",
-			"@ci:tests:unit-legacy",
-			"@ci:tests:functional"
-		],
-		"ci:dynamic": [
-			"@ci:tests"
-		],
 		"ci:static": [
+			"@ci:composer:normalize",
 			"@ci:php:lint",
 			"@ci:php:sniff",
 			"@ci:php:cs-fixer",
 			"@ci:ts:lint"
 		],
-		"ci": [
-			"@ci:static",
-			"@ci:dynamic"
+		"ci:tests": [
+			"@ci:tests:unit",
+			"@ci:tests:unit-legacy",
+			"@ci:tests:functional"
 		],
+		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
+		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
+		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
+		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
 		"fix": [
 			"@fix:composer",
 			"@fix:php"
 		],
+		"fix:composer": "@composer normalize",
 		"fix:php": [
 			"@fix:php:cs",
 			"@fix:php:sniff"
@@ -177,9 +194,6 @@
 		"link-extension": [
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
-		],
-		"post-autoload-dump": [
-			"@link-extension"
 		],
 		"php:rector": ".Build/vendor/bin/rector",
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
@@ -208,6 +222,7 @@
 	},
 	"scripts-descriptions": {
 		"ci": "Runs all dynamic and static code checks.",
+		"ci:composer:normalize": "Checks the composer.json.",
 		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
 		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
 		"ci:coverage:legacy": "Generates the code coverage report for legacy tests.",
@@ -222,6 +237,7 @@
 		"ci:static": "Runs all static code analysis checks for the code.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
+		"fix:composer": "Runs all fixers for the PHP code.",
 		"fix:php": "Runs all fixers for the PHP code.",
 		"fix:php:cs": "Fixes the code style with PHP-CS-Fixer.",
 		"fix:php:sniff": "Fixes the code style with PHP_CodeSniffer.",
@@ -229,17 +245,8 @@
 		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
 		"prepare-release": "Removes development-only files in preparation of a TER release."
 	},
-	"extra": {
-		"branch-alias": {
-			"dev-main": "4.1.x-dev"
-		},
-		"typo3/cms": {
-			"extension-key": "seminars",
-			"app-dir": ".Build",
-			"web-dir": ".Build/public"
-		},
-		"helhum/typo3-console": {
-			"install-extension-dummy": "0"
-		}
+	"support": {
+		"issues": "https://github.com/oliverklee/ext-seminars/issues",
+		"source": "https://github.com/oliverklee/ext-seminars"
 	}
 }

@@ -67,6 +67,7 @@ jobs:
       fail-fast: false
       matrix:
         command:
+          - "composer:normalize"
           - "php:cs-fixer"
           - "php:sniff"
           - "php:stan"
