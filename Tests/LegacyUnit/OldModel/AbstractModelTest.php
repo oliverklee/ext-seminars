@@ -16,12 +16,12 @@ final class AbstractModelTest extends TestCase
     /**
      * @var TestingModel
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int UID of the minimal fixture's data in the DB

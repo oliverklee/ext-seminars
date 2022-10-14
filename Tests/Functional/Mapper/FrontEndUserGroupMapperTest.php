@@ -17,7 +17,7 @@ final class FrontEndUserGroupMapperTest extends FunctionalTestCase
     /**
      * @var FrontEndUserGroupMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

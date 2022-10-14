@@ -22,7 +22,7 @@ class EventListView extends AbstractListView
     /**
      * @var Configuration
      */
-    protected $configuration = null;
+    protected $configuration;
 
     /**
      * Sets the page UID of the records to retrieve.

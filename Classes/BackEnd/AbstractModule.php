@@ -63,7 +63,7 @@ abstract class AbstractModule
     /**
      * @var ModuleTemplate
      */
-    protected $moduleTemplate = null;
+    protected $moduleTemplate;
 
     /**
      * available sub modules

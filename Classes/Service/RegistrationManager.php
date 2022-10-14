@@ -68,12 +68,12 @@ class RegistrationManager
     /**
      * @var static|null
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * @var LegacyRegistration|null
      */
-    private $registration = null;
+    private $registration;
 
     /**
      * @var Template|null
@@ -83,12 +83,12 @@ class RegistrationManager
     /**
      * @var HookProvider|null
      */
-    protected $registrationEmailHookProvider = null;
+    protected $registrationEmailHookProvider;
 
     /**
      * @var SingleViewLinkBuilder
      */
-    private $linkBuilder = null;
+    private $linkBuilder;
 
     /**
      * @return static the current Singleton instance

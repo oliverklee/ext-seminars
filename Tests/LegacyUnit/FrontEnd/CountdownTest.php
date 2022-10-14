@@ -25,17 +25,17 @@ final class CountdownTest extends TestCase
     /**
      * @var Countdown
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var EventMapper&MockObject
      */
-    private $mapper = null;
+    private $mapper;
 
     protected function setUp(): void
     {

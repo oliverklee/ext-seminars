@@ -22,17 +22,17 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @var EventStatusService
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var EventMapper&MockObject
      */
-    private $eventMapper = null;
+    private $eventMapper;
 
     /**
      * @var int

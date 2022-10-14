@@ -37,22 +37,22 @@ class MailNotifier extends AbstractTask
     /**
      * @var EventStatusService
      */
-    protected $eventStatusService = null;
+    protected $eventStatusService;
 
     /**
      * @var EmailService
      */
-    protected $emailService = null;
+    protected $emailService;
 
     /**
      * @var EventMapper
      */
-    protected $eventMapper = null;
+    protected $eventMapper;
 
     /**
      * @var RegistrationDigest
      */
-    protected $registrationDigest = null;
+    protected $registrationDigest;
 
     /**
      * @var bool

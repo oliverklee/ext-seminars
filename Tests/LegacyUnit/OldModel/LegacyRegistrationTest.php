@@ -25,12 +25,12 @@ final class LegacyRegistrationTest extends TestCase
     /**
      * @var LegacyRegistration
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int the UID of a seminar to which the fixture relates
@@ -43,7 +43,7 @@ final class LegacyRegistrationTest extends TestCase
     private $feUserUid = 0;
 
     /** @var ConnectionPool */
-    private $connectionPool = null;
+    private $connectionPool;
 
     /**
      * @var DummyConfiguration

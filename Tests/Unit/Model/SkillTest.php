@@ -12,7 +12,7 @@ final class SkillTest extends UnitTestCase
     /**
      * @var Skill
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

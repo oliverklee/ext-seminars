@@ -16,7 +16,7 @@ final class LegacyTimeSlotTest extends UnitTestCase
     /**
      * @var LegacyTimeSlot
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

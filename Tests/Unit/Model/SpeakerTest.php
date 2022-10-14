@@ -12,7 +12,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @var Speaker
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

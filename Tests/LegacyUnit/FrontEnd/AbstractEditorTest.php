@@ -18,12 +18,12 @@ final class AbstractEditorTest extends TestCase
     /**
      * @var TestingEditor
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

@@ -16,7 +16,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @var TestingTimeSpan
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

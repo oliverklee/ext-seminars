@@ -18,22 +18,22 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @var BackEndRegistrationAccessCheck
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var BackendUserAuthentication&MockObject
      */
-    private $backEndUser = null;
+    private $backEndUser;
 
     /**
      * @var BackendUserAuthentication
      */
-    private $backEndUserBackup = null;
+    private $backEndUserBackup;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

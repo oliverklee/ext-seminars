@@ -87,19 +87,19 @@ class DefaultController extends TemplateHelper
     /**
      * @var EventMapper|null
      */
-    protected $eventMapper = null;
+    protected $eventMapper;
 
     /**
      * @var LegacyEvent|null the seminar which we want to list/show or
      *                          for which the user wants to register
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * @var LegacyRegistration|null the registration which we want to
      *                               list/show in the "my events" view
      */
-    private $registration = null;
+    private $registration;
 
     /** @var string the previous event's category (used for the list view) */
     private $previousCategory = '';
@@ -205,27 +205,27 @@ class DefaultController extends TemplateHelper
     /**
      * @var HookProvider|null
      */
-    protected $listViewHookProvider = null;
+    protected $listViewHookProvider;
 
     /**
      * @var HookProvider|null
      */
-    protected $singleViewHookProvider = null;
+    protected $singleViewHookProvider;
 
     /**
      * @var HookProvider|null
      */
-    protected $registrationFormHookProvider = null;
+    protected $registrationFormHookProvider;
 
     /**
      * @var SingleViewLinkBuilder|null
      */
-    private $linkBuilder = null;
+    private $linkBuilder;
 
     /**
      * @var FrontendUserAuthentication
      */
-    protected $feuser = null;
+    protected $feuser;
 
     /**
      * @var int
@@ -240,7 +240,7 @@ class DefaultController extends TemplateHelper
     /**
      * @var Configuration|null
      */
-    private $configuration = null;
+    private $configuration;
 
     /**
      * Displays the seminar manager HTML.

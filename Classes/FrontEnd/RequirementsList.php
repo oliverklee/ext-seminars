@@ -21,7 +21,7 @@ class RequirementsList extends AbstractView
     /**
      * @var LegacyEvent|null the event to build the requirements list for
      */
-    private $event = null;
+    private $event;
 
     /**
      * @var bool whether to limit the requirements to the events the user still needs to register
@@ -31,7 +31,7 @@ class RequirementsList extends AbstractView
     /**
      * @var SingleViewLinkBuilder|null
      */
-    private $linkBuilder = null;
+    private $linkBuilder;
 
     /**
      * Sets the event to which this view relates.

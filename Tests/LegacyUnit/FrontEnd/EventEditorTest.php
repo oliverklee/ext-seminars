@@ -43,17 +43,17 @@ final class EventEditorTest extends TestCase
     /**
      * @var EventEditor
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var DummyConfiguration
      */
-    private $pluginConfiguration = null;
+    private $pluginConfiguration;
 
     /**
      * @var int
@@ -61,7 +61,7 @@ final class EventEditorTest extends TestCase
     private $recordsPageUid = 0;
 
     /** @var ConnectionPool */
-    private $connectionPool = null;
+    private $connectionPool;
 
     protected function setUp(): void
     {

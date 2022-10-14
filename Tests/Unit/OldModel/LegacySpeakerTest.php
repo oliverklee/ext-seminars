@@ -19,7 +19,7 @@ final class LegacySpeakerTest extends UnitTestCase
     /**
      * @var \OliverKlee\Seminars\OldModel\LegacySpeaker
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

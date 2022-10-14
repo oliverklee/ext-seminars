@@ -17,7 +17,7 @@ final class LegacyRegistrationTest extends UnitTestCase
     /**
      * @var LegacyRegistration
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

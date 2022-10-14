@@ -24,17 +24,17 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @var SelectorWidget
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var PiBaseApi
      */
-    protected $staticInfo = null;
+    protected $staticInfo;
 
     protected function setUp(): void
     {

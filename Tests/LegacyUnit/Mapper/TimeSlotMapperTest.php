@@ -22,12 +22,12 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var TimeSlotMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

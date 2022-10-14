@@ -23,12 +23,12 @@ final class LegacyTimeSlotTest extends TestCase
     /**
      * @var TestingLegacyTimeSlot
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var DummyConfiguration

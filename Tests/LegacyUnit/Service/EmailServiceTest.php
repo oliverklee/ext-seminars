@@ -40,7 +40,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @var EmailService
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
@@ -50,17 +50,17 @@ final class EmailServiceTest extends TestCase
     /**
      * @var Event
      */
-    private $event = null;
+    private $event;
 
     /**
      * @var FrontEndUser
      */
-    private $user = null;
+    private $user;
 
     /**
      * @var Organizer
      */
-    private $organizer = null;
+    private $organizer;
 
     /**
      * @var LanguageService

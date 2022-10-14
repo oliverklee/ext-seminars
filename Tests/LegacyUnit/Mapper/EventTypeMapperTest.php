@@ -14,12 +14,12 @@ final class EventTypeMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var EventTypeMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

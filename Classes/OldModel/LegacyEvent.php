@@ -92,7 +92,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @var LegacyEvent|null
      */
-    private $topic = null;
+    private $topic;
 
     public function getTopic(): ?LegacyEvent
     {

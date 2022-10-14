@@ -17,12 +17,12 @@ final class AbstractViewTest extends TestCase
     /**
      * @var TestingView
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     protected function setUp(): void
     {

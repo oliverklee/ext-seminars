@@ -15,7 +15,7 @@ trait LanguageHelper
     /**
      * @var LanguageService|null
      */
-    private $languageService = null;
+    private $languageService;
 
     private function getLanguageService(): LanguageService
     {

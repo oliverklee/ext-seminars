@@ -15,7 +15,7 @@ abstract class AbstractEditor extends AbstractView
     /**
      * @var \tx_mkforms_forms_Base|null
      */
-    private $formCreator = null;
+    private $formCreator;
 
     /**
      * UID of the currently edited object, zero if the object is going to be a new database record

@@ -29,17 +29,17 @@ final class RegistrationFormTest extends TestCase
     /**
      * @var RegistrationForm
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var FakeSession
      */
-    private $session = null;
+    private $session;
 
     /**
      * @var int the UID of the event the fixture relates to
@@ -49,7 +49,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @var LegacyEvent
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * @var DummyConfiguration

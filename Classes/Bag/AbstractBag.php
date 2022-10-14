@@ -99,7 +99,7 @@ abstract class AbstractBag implements \Iterator
     /**
      * @var PageRepository
      */
-    protected $pageRepository = null;
+    protected $pageRepository;
 
     /**
      * Creates a bag that contains test records and allows iterating over them.

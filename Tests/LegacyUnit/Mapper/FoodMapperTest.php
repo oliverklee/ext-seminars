@@ -14,12 +14,12 @@ final class FoodMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var FoodMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

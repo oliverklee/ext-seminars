@@ -49,12 +49,12 @@ final class SalutationTest extends TestCase
     /**
      * @var TestingFramework the testing framework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var Salutation
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var array backed-up extension configuration of the TYPO3 configuration

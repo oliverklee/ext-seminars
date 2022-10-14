@@ -18,7 +18,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @var SpeakerMapper
      */
-    private $speakerMapper = null;
+    private $speakerMapper;
 
     protected function setUp(): void
     {

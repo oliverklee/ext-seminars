@@ -18,12 +18,12 @@ final class AbstractBagBuilderTest extends TestCase
     /**
      * @var TestingBagBuilder
      */
-    private $subject = null;
+    private $subject;
 
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var int PID of a dummy system folder

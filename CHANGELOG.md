@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a services configuration file (#1548)
 
 ### Changed
+- Switch to the TYPO3 coding standards package (#1553)
 - Rename some Composer scripts (#1552)
 - Require oelib >= 4.3.0 (#1525)
 - Disable the legacy BE module in TYPO3 11LTS (#1521)

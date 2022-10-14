@@ -42,7 +42,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @var TestingTimeSpan
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

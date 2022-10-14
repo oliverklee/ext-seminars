@@ -42,12 +42,12 @@ abstract class AbstractEventMailForm
     /**
      * @var LegacyEvent the event which this e-mail form refers to
      */
-    private $oldEvent = null;
+    private $oldEvent;
 
     /**
      * @var Event the event which this e-mail form refers to
      */
-    private $event = null;
+    private $event;
 
     /**
      * @var bool whether the form is complete

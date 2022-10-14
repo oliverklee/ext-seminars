@@ -52,7 +52,7 @@ class RegistrationsList extends AbstractList
     /**
      * @var HookProvider|null
      */
-    protected $listViewHookProvider = null;
+    protected $listViewHookProvider;
 
     /**
      * Generates and prints out a registrations list.

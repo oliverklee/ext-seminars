@@ -17,12 +17,12 @@ final class CheckboxMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var CheckboxMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

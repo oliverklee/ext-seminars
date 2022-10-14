@@ -26,7 +26,7 @@ class EventsList extends AbstractList
     /**
      * @var LegacyEvent the seminar which we want to list
      */
-    protected $seminar = null;
+    protected $seminar;
 
     /**
      * @var string the path to the template file of this list
@@ -36,7 +36,7 @@ class EventsList extends AbstractList
     /**
      * @var BackEndRegistrationAccessCheck
      */
-    protected $accessCheck = null;
+    protected $accessCheck;
 
     /**
      * Generates and prints out an event list.

@@ -29,12 +29,12 @@ class EmailService implements SingletonInterface
     /**
      * @var Salutation
      */
-    protected $salutationBuilder = null;
+    protected $salutationBuilder;
 
     /**
      * @var DateRangeViewHelper
      */
-    protected $dateRangeViewHelper = null;
+    protected $dateRangeViewHelper;
 
     public function __construct()
     {

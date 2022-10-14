@@ -49,12 +49,12 @@ abstract class AbstractList
     /**
      * @var AbstractModule
      */
-    protected $page = null;
+    protected $page;
 
     /**
      * @var Template
      */
-    protected $template = null;
+    protected $template;
 
     /**
      * @var string the path to the template file of this list

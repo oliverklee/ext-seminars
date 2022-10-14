@@ -16,7 +16,7 @@ final class LegacyOrganizerTest extends UnitTestCase
     /**
      * @var LegacyOrganizer
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

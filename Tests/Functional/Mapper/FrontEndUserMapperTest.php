@@ -21,7 +21,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     /**
      * @var FrontEndUserMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

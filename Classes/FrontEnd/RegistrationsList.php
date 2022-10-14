@@ -21,7 +21,7 @@ class RegistrationsList extends AbstractView
      * @var LegacyEvent the seminar of which we want to list the
      *                          registrations
      */
-    private $seminar = null;
+    private $seminar;
 
     /**
      * The constructor.

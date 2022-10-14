@@ -17,12 +17,12 @@ final class PlaceMapperTest extends TestCase
     /**
      * @var TestingFramework
      */
-    private $testingFramework = null;
+    private $testingFramework;
 
     /**
      * @var PlaceMapper
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp(): void
     {

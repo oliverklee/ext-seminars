@@ -17,7 +17,7 @@ class EventHeadline extends AbstractView
     /**
      * @var EventMapper
      */
-    protected $mapper = null;
+    protected $mapper;
 
     public function injectEventMapper(EventMapper $mapper): void
     {
