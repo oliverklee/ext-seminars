@@ -15,7 +15,7 @@ updates:
       - dependency-type: "development"
     ignore:
       - dependency-name: "ergebnis/composer-normalize"
-        versions: [ ">= 2.19.0" ]
+        versions: [ ">= 2.16.0" ]
       - dependency-name: "friendsofphp/php-cs-fixer"
         versions: [ ">= 3.4.0" ]
       - dependency-name: "helhum/typo3-console"
