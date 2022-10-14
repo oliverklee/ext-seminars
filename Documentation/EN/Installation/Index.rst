@@ -30,7 +30,6 @@ Installation
    CreatingSystemFolders/Index
    SettingAccessRights/Index
    AddingPagesToTheFrontEnd/Index
-   UsingTheSrFeuserRegisterAutologinFeature/Index
    EnablingUnregistration/Index
    SettingUpAListOfCategories/Index
    SettingUpTheFront-endRegistrationLists/Index

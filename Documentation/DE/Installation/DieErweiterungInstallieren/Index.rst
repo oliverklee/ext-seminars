@@ -36,10 +36,6 @@ TYPO3- Erweiterungen auf Ihrem Server:
   Erweiterung benutzen (oder Sie verwenden die Loginfunktionen des
   Systems).
 
-- sr\_feuser\_register (optional): Wenn Sie möchten, dass sich Frontend-
-  Benutzer ihre Accounts selbst erstellen können, benötigen Sie eine
-  Erweiterung wie *sr\_feuser\_register* .
-
 - onetimeaccount (optional): Wenn Sie möchten, dass sich die
   TeilnehmerInnen zu Veranstaltungen anmelden können, ohne dass diese
   sich vorher einen Frontend-Benutzer-Account einrichten müssen, können

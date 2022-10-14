@@ -17,17 +17,10 @@ Get a front-end user login (any possibly registration) running
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Choose a login box extension and a front-end user registration
-extension, install and configure them. On my site, I use  *felogin*
-and  *sr\_feuser\_register* , but you may want to use others. You can
+extension, install and configure them. On my site, I use  *felogin*,
+but you may want to use others. You can
 leave out the front-end user registration extension if you don't want
 front-end users to be able to create their own accounts.
-
-If you use the extension  *sr\_feuser\_register* , make sure that the
-salutation modes of that extension and the  *seminars* extension are
-the same so that your users get a consistent experience.
-
-**Make sure that you make the following fields required, or this
-extension won't work properly: name, email, username**
 
 If a user is on the detail view page of an event and wants to
 register, he's shown a link to the login page. The URL provided there

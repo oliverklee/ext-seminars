@@ -18,26 +18,17 @@ Konfiguration eines Frontend-Benutzer-Logins (egal welche Login-Erweiterung)
 
 Wählen sie eine Loginbox- und eine Frontendregistrierungsextension und
 installieren und konfigurieren Sie diese. Auf meiner Internetseite
-nutze ich die  *felogin* und  *sr\_feuser\_register* , aber Sie können
+nutze ich die  *felogin*, aber Sie können
 auch andere nutzen. Sie können die Frontendregistrierung auch
 weglassen, wenn Sie nicht möchten, dass Frontendnutzer eigene Accounts
 erstellen können.
-
-Wenn Sie die Extension  *sr\_feuser\_register* nutzen, stellen Sie
-bitte sicher, dass die Anredungsform der sr\_feuser\_register
-Extension mit der seminars Extension übereinstimmt, sodass Ihre Nutzer
-ein einheitliches Gesamtbild erhalten.
-
-**Stellen Sie sicher, dass Sie die folgenden Felder als “required”
-konfiguriert sind, da sonst die Extension nicht richtig funktionieren
-wird: name, email, username**
 
 Wenn ein Nutzer sich auf der Detailseite befindet und sich für eine
 Veranstaltung registrieren möchte, so wird ihm ein Link zur Loginseite
 angezeigt. Die angegebene URL beinhaltet eine Information, um den
 Nutzer nach dem Login zur Veranstaltungsregistrierung
 zurückzuschicken. Wichtig: Dieses Feature funktioniert nur mit
-*felogin* !
+*felogin*!
 
 Es besteht die Möglichkeit auf der Login-Seite den Titel und das Datum
 der veranstaltung anzeigen zu lassen, für die der User sich

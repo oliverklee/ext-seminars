@@ -30,7 +30,6 @@ Installation
    ErstellenDerSystemordner/Index
    ZugriffsrechteSetzen/Index
    SeitenZumFrontendHinzufgen/Index
-   DasAutologin-featureVonSrFeuserRegisterBenutzen/Index
    AbmeldungenErlauben/Index
    EineKategorienlisteAnlegen/Index
    SettingUpTheFront-endRegistrationLists/Index

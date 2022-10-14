@@ -28,8 +28,7 @@ Your page structure can then look like this:
 
 Usually, you’ll want to use this extension with the online
 registration feature. For this, the minimal page structure will look
-like this (note that you still need to set a  *sr\_feuser\_register*
-if you want user self-registration):
+like this:
 
 |img-11|  *Illustration 11: Page structure for a minimal setup* with
 *online registration*
@@ -44,11 +43,7 @@ you only need some of these pages):
 
 #. If you want users to be able register manually, then build up a front-
    end user system for your site. Remember which group corresponds to
-   “confirmed front-end users.”If you wish to utilize the additional
-   fields for the table front-end users, you'll need to set up
-   **sr\_feuser\_register** for this. In that extension's documentation,
-   you'll find a tutorial about how to add fields to the registration
-   form.
+   “confirmed front-end users.”
 
 #. Add a page (which we called “ ***Events (list view)*** ” in the
    illustrations) that will contain the list view.
