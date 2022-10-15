@@ -2,7 +2,7 @@
 
 [![TYPO3 V10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 V9](https://img.shields.io/badge/TYPO3-9-orange.svg)](https://get.typo3.org/version/9)
-[![License](https://poser.pugx.org/oliverklee/seminars/license.svg)](https://packagist.org/packages/oliverklee/seminars)
+[![License](https://img.shields.io/github/license/oliverklee/ext-seminars)](https://packagist.org/packages/oliverklee/seminars)
 [![Total Downloads](https://poser.pugx.org/oliverklee/seminars/downloads.svg)](https://packagist.org/packages/oliverklee/seminars)
 [![GitHub CI Status](https://github.com/oliverklee/ext-seminars/workflows/CI/badge.svg?branch=main)](https://github.com/oliverklee/ext-seminars/actions)
 [![Coverage Status](https://coveralls.io/repos/github/oliverklee/ext-seminars/badge.svg?branch=main)](https://coveralls.io/github/oliverklee/ext-seminars?branch=main)
