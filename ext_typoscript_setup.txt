@@ -1,18 +1,18 @@
 # This file can be removed once we drop support for TYPO3 V9.
 config.tx_extbase.persistence.classes {
-    OliverKlee\Seminars\Domain\Model\Event {
+    OliverKlee\Seminars\Domain\Model\Event\Event {
         mapping {
             tableName = tx_seminars_seminars
         }
 
         subclasses {
-            0 = OliverKlee\Seminars\Domain\Model\SingleEvent
-            1 = OliverKlee\Seminars\Domain\Model\EventTopic
-            2 = OliverKlee\Seminars\Domain\Model\EventDate
+            0 = OliverKlee\Seminars\Domain\Model\Event\SingleEvent
+            1 = OliverKlee\Seminars\Domain\Model\Event\EventTopic
+            2 = OliverKlee\Seminars\Domain\Model\Event\EventDate
         }
     }
 
-    OliverKlee\Seminars\Domain\Model\SingleEvent {
+    OliverKlee\Seminars\Domain\Model\Event\SingleEvent {
         mapping {
             tableName = tx_seminars_seminars
             recordType = 0
@@ -22,7 +22,7 @@ config.tx_extbase.persistence.classes {
         }
     }
 
-    OliverKlee\Seminars\Domain\Model\EventTopic {
+    OliverKlee\Seminars\Domain\Model\Event\EventTopic {
         mapping {
             tableName = tx_seminars_seminars
             recordType = 1
@@ -32,7 +32,7 @@ config.tx_extbase.persistence.classes {
         }
     }
 
-    OliverKlee\Seminars\Domain\Model\EventDate {
+    OliverKlee\Seminars\Domain\Model\Event\EventDate {
         mapping {
             tableName = tx_seminars_seminars
             recordType = 2

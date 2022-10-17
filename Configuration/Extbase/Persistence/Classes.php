@@ -3,35 +3,35 @@
 declare(strict_types=1);
 
 return [
-    \OliverKlee\Seminars\Domain\Model\Event::class => [
+    \OliverKlee\Seminars\Domain\Model\Event\Event::class => [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => 'object_type',
         'subclasses' => [
-            \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_SINGLE_EVENT
-            => \OliverKlee\Seminars\Domain\Model\SingleEvent::class,
-            \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_EVENT_TOPIC
-            => \OliverKlee\Seminars\Domain\Model\EventTopic::class,
-            \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_EVENT_DATE
-            => \OliverKlee\Seminars\Domain\Model\EventDate::class,
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT
+            => \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class,
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC
+            => \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class,
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE
+            => \OliverKlee\Seminars\Domain\Model\Event\EventDate::class,
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\SingleEvent::class => [
+    \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_SINGLE_EVENT,
+        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\EventTopic::class => [
+    \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_EVENT_TOPIC,
+        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\EventDate::class => [
+    \OliverKlee\Seminars\Domain\Model\Event\EventDate::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\EventInterface::TYPE_EVENT_DATE,
+        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
         ],

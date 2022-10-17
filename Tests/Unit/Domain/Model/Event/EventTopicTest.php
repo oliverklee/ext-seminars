@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Event;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Seminars\Domain\Model\Event;
-use OliverKlee\Seminars\Domain\Model\EventInterface;
-use OliverKlee\Seminars\Domain\Model\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Model\EventTopic
- * @covers \OliverKlee\Seminars\Domain\Model\Event
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
  */
 final class EventTopicTest extends UnitTestCase
 {
