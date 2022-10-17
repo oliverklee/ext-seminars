@@ -7,6 +7,42 @@ config.tx_extbase.persistence.classes {
                 title.mapOnProperty = internalTitle
             }
         }
+
+        subclasses {
+            0 = OliverKlee\Seminars\Domain\Model\SingleEvent
+            1 = OliverKlee\Seminars\Domain\Model\EventTopic
+            2 = OliverKlee\Seminars\Domain\Model\EventDate
+        }
+    }
+
+    OliverKlee\Seminars\Domain\Model\SingleEvent {
+        mapping {
+            tableName = tx_seminars_seminars
+            recordType = 0
+            columns {
+                title.mapOnProperty = internalTitle
+            }
+        }
+    }
+
+    OliverKlee\Seminars\Domain\Model\EventTopic {
+        mapping {
+            tableName = tx_seminars_seminars
+            recordType = 1
+            columns {
+                title.mapOnProperty = internalTitle
+            }
+        }
+    }
+
+    OliverKlee\Seminars\Domain\Model\EventDate {
+        mapping {
+            tableName = tx_seminars_seminars
+            recordType = 2
+            columns {
+                title.mapOnProperty = internalTitle
+            }
+        }
     }
 
     OliverKlee\Seminars\Domain\Model\EventType {

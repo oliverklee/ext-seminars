@@ -2,7 +2,7 @@
 <dataset>
     <tx_seminars_seminars>
         <uid>1</uid>
-        <object_type>0</object_type>
-        <title>Jousting</title>
+        <object_type>1</object_type>
+        <title>Jousting topic</title>
     </tx_seminars_seminars>
 </dataset>

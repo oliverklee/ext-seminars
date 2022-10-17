@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Domain\Model\Event;
+use OliverKlee\Seminars\Domain\Model\EventDate;
+use OliverKlee\Seminars\Domain\Model\EventTopic;
+use OliverKlee\Seminars\Domain\Model\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,13 +41,39 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsAllModelFields(): void
+    public function mapsSingleEventWithAllFields(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
-        self::assertInstanceOf(Event::class, $result);
+        self::assertInstanceOf(SingleEvent::class, $result);
         self::assertSame('Jousting', $result->getInternalTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventTopicWithAllFields(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(EventTopic::class, $result);
+        self::assertSame('Jousting topic', $result->getInternalTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventDateWithAllFields(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(EventDate::class, $result);
+        self::assertSame('Jousting date', $result->getInternalTitle());
     }
 }
