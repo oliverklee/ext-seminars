@@ -15,4 +15,10 @@ config.tx_extbase.persistence.classes {
             }
         }
     }
+
+    OliverKlee\Seminars\Domain\Model\Venue {
+        mapping {
+            tableName = tx_seminars_sites
+        }
+    }
 }
