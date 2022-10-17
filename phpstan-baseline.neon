@@ -526,16 +526,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Constant OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:DATE_PARSE_FORMAT is unused\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyBeginDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
@@ -552,26 +542,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyPlacesFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$allTimeSlots with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:createTimeSlots\\(\\) has parameter \\$event with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:isValidTimeSlotConfiguration\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 

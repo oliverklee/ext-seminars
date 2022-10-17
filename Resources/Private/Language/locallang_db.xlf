@@ -163,45 +163,6 @@
 			<trans-unit id="tx_seminars_seminars.end_date" xml:space="preserve">
 				<source>End time and date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard" xml:space="preserve">
-				<source>Create a series of time slots</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.show" xml:space="preserve">
-				<source>Show wizard</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.hide" xml:space="preserve">
-				<source>Hide wizard</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.first_start" xml:space="preserve">
-				<source>Begin of the first time slot</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.first_end" xml:space="preserve">
-				<source>End of the first time slot</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence" xml:space="preserve">
-				<source>Recurrence pattern</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.all" xml:space="preserve">
-				<source>Recur every</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.daily" xml:space="preserve">
-				<source>days</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.weekly" xml:space="preserve">
-				<source>weeks</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.monthly" xml:space="preserve">
-				<source>months</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.yearly" xml:space="preserve">
-				<source>years</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.until" xml:space="preserve">
-				<source>Recur until</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.create" xml:space="preserve">
-				<source>Create time slots and save</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.timeslots" xml:space="preserve">
 				<source>Time slots</source>
 			</trans-unit>

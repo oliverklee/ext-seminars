@@ -62,9 +62,6 @@ Bekannte Probleme
   gesetzt ist, als in TYPO3 konfiguriert ist, wird bei der Bearbeitung
   von Veranstaltungen in FE keine Fehlermeldung angezeigt.
 
-- Der Wizard für Zeitslots in den TCEforms ist nur im Composer-Modus verfügbar,
-  da dieses Feature eine externe Bibliothek benutzt.
-
 - Dass Inlinen von CSS in HTML-Emails ist nur im Composer-Modus verfügbar,
   da dieses Feature eine externe Bibliothek benutzt.
 
