@@ -7,9 +7,11 @@ namespace OliverKlee\Seminars\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * This class represents a event. It is a dummy placeholder until we have resolved the STI.
+ * Abstract base class for different event types (single events, event topics, event dates).
+ *
+ * Mostly, this class exists in order to get single-table inheritance working. In the code,
+ * please use `EventInterface` as much as possible instead.
  */
-class Event extends AbstractEntity implements EventInterface
+abstract class Event extends AbstractEntity implements EventInterface
 {
-    use EventTrait;
 }
