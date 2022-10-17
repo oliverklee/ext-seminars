@@ -16,6 +16,16 @@ config.tx_extbase.persistence.classes {
         }
     }
 
+    OliverKlee\Seminars\Domain\Model\Organizer {
+        mapping {
+            tableName = tx_seminars_organizers
+            columns {
+                title.mapOnProperty = name
+                email.mapOnProperty = emailAddress
+            }
+        }
+    }
+
     OliverKlee\Seminars\Domain\Model\Venue {
         mapping {
             tableName = tx_seminars_sites
