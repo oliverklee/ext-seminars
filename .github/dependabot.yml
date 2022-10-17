@@ -25,7 +25,6 @@ updates:
       - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
         versions: [ ">= 9" ]
-      - dependency-name: "sjbr/sr-feuser-register"
       - dependency-name: "sjbr/static-info-tables"
       - dependency-name: "symfony/*"
       - dependency-name: "typo3/cms-*"
