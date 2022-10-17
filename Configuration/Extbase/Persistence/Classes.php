@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 return [
+    OliverKlee\Seminars\Domain\Model\Event::class => [
+        'tableName' => 'tx_seminars_seminars',
+        'properties' => [
+            'internalTitle' => ['fieldName' => 'title'],
+        ],
+    ],
     OliverKlee\Seminars\Domain\Model\EventType::class => [
         'tableName' => 'tx_seminars_event_types',
     ],
