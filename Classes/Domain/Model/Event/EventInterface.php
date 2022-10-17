@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
 /**
- * This interface represents a event.
+ * This interface represents an event.
  */
 interface EventInterface
 {
