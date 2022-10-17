@@ -162,9 +162,10 @@
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
 		"ci:static": [
 			"@ci:composer:normalize",
+			"@ci:php:cs-fixer",
 			"@ci:php:lint",
 			"@ci:php:sniff",
-			"@ci:php:cs-fixer",
+			"@ci:php:stan",
 			"@ci:ts:lint"
 		],
 		"ci:tests": [
