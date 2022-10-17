@@ -15,6 +15,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event
+ * @covers \OliverKlee\Seminars\Domain\Model\SingleEvent
+ * @covers \OliverKlee\Seminars\Domain\Model\EventTopic
+ * @covers \OliverKlee\Seminars\Domain\Model\EventDate
  * @covers \OliverKlee\Seminars\Domain\Repository\EventRepository
  */
 final class EventRepositoryTest extends FunctionalTestCase
