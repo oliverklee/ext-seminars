@@ -6,6 +6,13 @@ return [
     OliverKlee\Seminars\Domain\Model\EventType::class => [
         'tableName' => 'tx_seminars_event_types',
     ],
+    OliverKlee\Seminars\Domain\Model\Organizer::class => [
+        'tableName' => 'tx_seminars_organizers',
+        'properties' => [
+            'name' => ['fieldName' => 'title'],
+            'emailAddress' => ['fieldName' => 'email'],
+        ],
+    ],
     OliverKlee\Seminars\Domain\Model\Speaker::class => [
         'tableName' => 'tx_seminars_speakers',
         'properties' => [
