@@ -13,4 +13,7 @@ return [
             'emailAddress' => ['fieldName' => 'email'],
         ],
     ],
+    OliverKlee\Seminars\Domain\Model\Venue::class => [
+        'tableName' => 'tx_seminars_sites',
+    ],
 ];

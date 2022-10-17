@@ -6,8 +6,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add an EventType model and repository (#1575)
-- Add a Speaker model and repository (#1564)
+- Add a `Venue` model and repository (#1586)
+- Add an `EventType` model and repository (#1575)
+- Add a `Speaker` model and repository (#1564)
 - Add `composer normalize` to the CI toolchain (#1559)
 - Add a services configuration file (#1548)
 
