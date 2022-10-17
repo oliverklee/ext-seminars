@@ -220,58 +220,6 @@
 				<source>Time slots</source>
 				<target>Zeitblöcke</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard" xml:space="preserve">
-				<source>Create a series of time slots</source>
-				<target>Eine Serie von Zeitblöcken anlegen</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.show" xml:space="preserve">
-				<source>Show wizard</source>
-				<target>Assistent einblenden</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.hide" xml:space="preserve">
-				<source>Hide wizard</source>
-				<target>Assistent ausblenden</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.first_start" xml:space="preserve">
-				<source>Begin of the first time slot</source>
-				<target>Anfang des ersten Zeitblocks</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.first_end" xml:space="preserve">
-				<source>End of the first time slot</source>
-				<target>Ende des ersten Zeitblocks</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence" xml:space="preserve">
-				<source>Recurrence pattern</source>
-				<target>Wiederholung</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.all" xml:space="preserve">
-				<source>Recur every</source>
-				<target>Wiederholung alle</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.daily" xml:space="preserve">
-				<source>days</source>
-				<target>Tage</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.weekly" xml:space="preserve">
-				<source>weeks</source>
-				<target>Wochen</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.monthly" xml:space="preserve">
-				<source>months</source>
-				<target>Monate</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.reccurrence.yearly" xml:space="preserve">
-				<source>years</source>
-				<target>Jahre</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.until" xml:space="preserve">
-				<source>Recur until</source>
-				<target>Wiederholung bis</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time_slot_wizard.create" xml:space="preserve">
-				<source>Create time slots and save</source>
-				<target>Zeitblöcke anlegen und speichern</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.begin_date_registration" xml:space="preserve">
 				<source>Begin date for registration</source>
 				<target>Anmeldebegin</target>

@@ -92,13 +92,6 @@ $boot = static function () {
 '
     );
 
-    // register the time slot wizard
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1558632705] = [
-        'nodeName' => 'time_slot_wizard',
-        'priority' => 70,
-        'class' => \OliverKlee\Seminars\BackEnd\TimeSlotWizard::class,
-    ];
-
     // FAL upgrade wizards
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateCategoryIconsToFal']
         = \OliverKlee\Seminars\UpgradeWizards\CategoryIconToFalUpgradeWizard::class;

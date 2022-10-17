@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the BE time-slot wizard (#1598)
 
 ### Fixed
 - Do not package the docker-compose configuration file (#1559)
