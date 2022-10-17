@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Domain\Repository;
+namespace OliverKlee\Seminars\Domain\Repository\Event;
 
-use OliverKlee\Seminars\Domain\Model\Event;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**

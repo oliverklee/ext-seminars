@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Domain\Model;
+namespace OliverKlee\Seminars\Domain\Model\Event;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 

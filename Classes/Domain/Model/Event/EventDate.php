@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Domain\Model;
+namespace OliverKlee\Seminars\Domain\Model\Event;
 
 /**
  * This class represents a date for an event that has an association to a topic.

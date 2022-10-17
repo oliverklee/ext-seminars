@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
+namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Domain\Model\EventDate;
-use OliverKlee\Seminars\Domain\Model\EventTopic;
-use OliverKlee\Seminars\Domain\Model\SingleEvent;
-use OliverKlee\Seminars\Domain\Repository\EventRepository;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Model\Event
- * @covers \OliverKlee\Seminars\Domain\Model\SingleEvent
- * @covers \OliverKlee\Seminars\Domain\Model\EventTopic
- * @covers \OliverKlee\Seminars\Domain\Model\EventDate
- * @covers \OliverKlee\Seminars\Domain\Repository\EventRepository
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventDate
+ * @covers \OliverKlee\Seminars\Domain\Repository\Event\EventRepository
  */
 final class EventRepositoryTest extends FunctionalTestCase
 {
