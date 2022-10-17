@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add an `Event` model and repository (#1599)
+- Add an `Event` model and repository (#1599, #1590)
 - Add an `Organizer` model and repository (#1590)
 - Add a `Venue` model and repository (#1586)
 - Add an `EventType` model and repository (#1575)

@@ -6,10 +6,12 @@ namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\Event;
+use OliverKlee\Seminars\Domain\Model\EventInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event
+ * @covers \OliverKlee\Seminars\Domain\Model\EventTrait
  */
 final class EventTest extends UnitTestCase
 {
@@ -31,6 +33,14 @@ final class EventTest extends UnitTestCase
     public function isAbstractEntity(): void
     {
         self::assertInstanceOf(AbstractEntity::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsEventInterface(): void
+    {
+        self::assertInstanceOf(EventInterface::class, $this->subject);
     }
 
     /**
