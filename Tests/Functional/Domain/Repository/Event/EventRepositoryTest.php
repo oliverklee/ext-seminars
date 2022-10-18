@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
@@ -31,11 +30,6 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     private $subject;
 
-    /**
-     * @var PersistenceManager
-     */
-    private $persistenceManager;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -46,8 +40,6 @@ final class EventRepositoryTest extends FunctionalTestCase
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             $this->subject = $objectManager->get(EventRepository::class);
         }
-
-        $this->persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
     }
 
     /**
@@ -92,11 +84,32 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function persistAllPersistsAddedModels(): void
+    {
+        $event = new SingleEvent();
+
+        $this->subject->add($event);
+        $this->subject->persistAll();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+    }
+    /**
+     * @test
+     */
     public function persistsSingleEventWithSingleEventRecordType(): void
     {
         $event = new SingleEvent();
         $this->subject->add($event);
-        $this->persistenceManager->persistAll();
+        $this->subject->persistAll();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
@@ -118,7 +131,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     {
         $event = new EventTopic();
         $this->subject->add($event);
-        $this->persistenceManager->persistAll();
+        $this->subject->persistAll();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
@@ -140,7 +153,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     {
         $event = new EventDate();
         $this->subject->add($event);
-        $this->persistenceManager->persistAll();
+        $this->subject->persistAll();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
