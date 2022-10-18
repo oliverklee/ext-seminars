@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a services configuration file (#1548)
 
 ### Changed
+- Switch the coverage on CI from Xdebug to PCOV (#1614)
 - Add `feuserextrafields` as a dependency (#1565)
 - Switch to the TYPO3 coding standards package (#1553)
 - Rename some Composer scripts (#1552)
