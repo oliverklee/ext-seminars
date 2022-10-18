@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Bag\TimeSlotBag;
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -2748,7 +2749,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isEventDate(): bool
     {
-        return $this->getRecordPropertyInteger('object_type') === Event::TYPE_DATE;
+        return $this->getRecordPropertyInteger('object_type') === EventInterface::TYPE_EVENT_DATE;
     }
 
     /**
@@ -2756,7 +2757,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isEventTopic(): bool
     {
-        return $this->getRecordPropertyInteger('object_type') === Event::TYPE_TOPIC;
+        return $this->getRecordPropertyInteger('object_type') === EventInterface::TYPE_EVENT_TOPIC;
     }
 
     /**
@@ -3548,7 +3549,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $result = '';
 
-        if ($this->getRecordPropertyInteger('object_type') !== Event::TYPE_TOPIC) {
+        if ($this->getRecordPropertyInteger('object_type') !== EventInterface::TYPE_EVENT_TOPIC) {
             $result = parent::getDate($dash);
         }
 

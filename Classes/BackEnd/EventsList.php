@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -350,7 +351,7 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
 
         if (
-            ($event->getRecordType() !== Event::TYPE_TOPIC)
+            ($event->getRecordType() !== EventInterface::TYPE_EVENT_TOPIC)
             && !$event->isHidden() && !$event->isCanceled()
             && !$event->hasStarted()
             && $this->getBackEndUser()->check('tables_modify', $this->tableName)
@@ -383,7 +384,7 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
 
         if (
-            ($event->getRecordType() !== Event::TYPE_TOPIC)
+            ($event->getRecordType() !== EventInterface::TYPE_EVENT_TOPIC)
             && !$event->isHidden() && !$event->isConfirmed()
             && !$event->hasStarted()
             && $this->getBackEndUser()->check('tables_modify', $this->tableName)
