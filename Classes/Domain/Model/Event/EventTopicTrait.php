@@ -19,6 +19,16 @@ trait EventTopicTrait
      */
     protected $description = '';
 
+    /**
+     * @var float
+     */
+    protected $standardPrice = 0.0;
+
+    /**
+     * @var float
+     */
+    protected $earlyBirdPrice = 0.0;
+
     public function getDisplayTitle(): string
     {
         return $this->getInternalTitle();
@@ -32,5 +42,33 @@ trait EventTopicTrait
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getStandardPrice(): float
+    {
+        return $this->standardPrice;
+    }
+
+    public function setStandardPrice(float $price): void
+    {
+        if ($price < 0) {
+            throw new \InvalidArgumentException('The price must be >= 0.0.', 1666112500);
+        }
+
+        $this->standardPrice = $price;
+    }
+
+    public function getEarlyBirdPrice(): float
+    {
+        return $this->earlyBirdPrice;
+    }
+
+    public function setEarlyBirdPrice(float $price): void
+    {
+        if ($price < 0) {
+            throw new \InvalidArgumentException('The price must be >= 0.0.', 1666112478);
+        }
+
+        $this->earlyBirdPrice = $price;
     }
 }

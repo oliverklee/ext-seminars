@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 /**
  * This class represents a topic for an event. It can be referenced by multiple event dates.
  */
-class EventTopic extends Event
+class EventTopic extends Event implements EventTopicInterface
 {
     use EventTrait;
     use EventTopicTrait;
