@@ -294,4 +294,46 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getMaximumNumberOfRegistrations());
     }
+
+    /**
+     * @test
+     */
+    public function getStandardPriceWithoutTopicReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getStandardPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getStandardPriceWithTopicReturnsStandardPriceFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 500.0;
+        $topic->setStandardPrice($value);
+        $this->subject->setTopic($topic);
+
+        self::assertEqualsWithDelta($value, $this->subject->getStandardPrice(), 0.0001);
+    }
+
+    /**
+     * @test
+     */
+    public function getEarlyBirdPriceWithoutTopicReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getEarlyBirdPriceWithTopicReturnsEarlyBirdPriceFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 500.0;
+        $topic->setEarlyBirdPrice($value);
+        $this->subject->setTopic($topic);
+
+        self::assertEqualsWithDelta($value, $this->subject->getEarlyBirdPrice(), 0.0001);
+    }
 }
