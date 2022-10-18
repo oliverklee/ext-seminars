@@ -102,6 +102,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertIsArray($databaseRow);
     }
+
     /**
      * @test
      */
@@ -166,5 +167,21 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertIsArray($databaseRow);
         self::assertSame(EventInterface::TYPE_EVENT_DATE, $databaseRow['object_type']);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventTopicAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $topic = $result->getTopic();
+        self::assertInstanceOf(EventTopic::class, $topic);
+        self::assertSame(2, $topic->getUid());
+        self::assertSame('Jousting topic', $topic->getInternalTitle());
     }
 }

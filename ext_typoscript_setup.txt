@@ -38,6 +38,7 @@ config.tx_extbase.persistence.classes {
             recordType = 2
             columns {
                 title.mapOnProperty = internalTitle
+                topic.mapOnProperty = topic
             }
         }
     }
