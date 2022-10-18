@@ -5,5 +5,9 @@
         <object_type>0</object_type>
         <title>Jousting</title>
         <description>There is no glory in prevention.</description>
+        <begin_date>1648893600</begin_date>
+        <end_date>1649008800</end_date>
+        <deadline_early_bird>1646215200</deadline_early_bird>
+        <deadline_registration>1648807200</deadline_registration>
     </tx_seminars_seminars>
 </dataset>

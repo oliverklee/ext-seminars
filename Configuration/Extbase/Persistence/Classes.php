@@ -20,6 +20,10 @@ return [
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
+            'start' => ['fieldName' => 'begin_date'],
+            'end' => ['fieldName' => 'end_date'],
+            'earlyBirdDeadline' => ['fieldName' => 'deadline_early_bird'],
+            'registrationDeadline' => ['fieldName' => 'deadline_registration'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
@@ -35,6 +39,10 @@ return [
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
             'topic' => ['fieldName' => 'topic'],
+            'start' => ['fieldName' => 'begin_date'],
+            'end' => ['fieldName' => 'end_date'],
+            'earlyBirdDeadline' => ['fieldName' => 'deadline_early_bird'],
+            'registrationDeadline' => ['fieldName' => 'deadline_registration'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\EventType::class => [

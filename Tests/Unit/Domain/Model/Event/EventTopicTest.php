@@ -11,8 +11,10 @@ use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
  * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopicTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTrait
  */
 final class EventTopicTest extends UnitTestCase
 {
