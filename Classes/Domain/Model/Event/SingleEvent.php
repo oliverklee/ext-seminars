@@ -7,8 +7,9 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 /**
  * This class represents a single event, e.g., an event has the topic and date all in one record.
  */
-class SingleEvent extends Event
+class SingleEvent extends Event implements EventDateInterface
 {
     use EventTrait;
     use EventTopicTrait;
+    use EventDateTrait;
 }

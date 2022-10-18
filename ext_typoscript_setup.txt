@@ -18,6 +18,10 @@ config.tx_extbase.persistence.classes {
             recordType = 0
             columns {
                 title.mapOnProperty = internalTitle
+                begin_date.mapOnProperty = start
+                end_date.mapOnProperty = end
+                deadline_early_bird.mapOnProperty = earlyBirdDeadline
+                deadline_registration.mapOnProperty = registrationDeadline
             }
         }
     }
@@ -39,6 +43,10 @@ config.tx_extbase.persistence.classes {
             columns {
                 title.mapOnProperty = internalTitle
                 topic.mapOnProperty = topic
+                begin_date.mapOnProperty = start
+                end_date.mapOnProperty = end
+                deadline_early_bird.mapOnProperty = earlyBirdDeadline
+                deadline_registration.mapOnProperty = registrationDeadline
             }
         }
     }

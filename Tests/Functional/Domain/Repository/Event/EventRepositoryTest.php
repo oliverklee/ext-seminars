@@ -16,9 +16,12 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
- * @covers \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
- * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventDate
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventDateTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopicTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
  * @covers \OliverKlee\Seminars\Domain\Repository\Event\EventRepository
  */
 final class EventRepositoryTest extends FunctionalTestCase
@@ -55,6 +58,26 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('Jousting', $result->getInternalTitle());
         self::assertSame('Jousting', $result->getDisplayTitle());
         self::assertSame('There is no glory in prevention.', $result->getDescription());
+        self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
+        self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
+        self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsNotSetDateTimesForSingleEventAsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithoutData.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(SingleEvent::class, $result);
+        self::assertNull($result->getStart());
+        self::assertNull($result->getEnd());
+        self::assertNull($result->getEarlyBirdDeadline());
+        self::assertNull($result->getRegistrationDeadline());
     }
 
     /**
@@ -85,6 +108,26 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('Jousting date', $result->getInternalTitle());
         self::assertSame('Jousting topic', $result->getDisplayTitle());
         self::assertSame('There is no glory in prevention.', $result->getDescription());
+        self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
+        self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
+        self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsNotSetDateTimesForEventDateAsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithoutData.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(SingleEvent::class, $result);
+        self::assertNull($result->getStart());
+        self::assertNull($result->getEnd());
+        self::assertNull($result->getEarlyBirdDeadline());
+        self::assertNull($result->getRegistrationDeadline());
     }
 
     /**

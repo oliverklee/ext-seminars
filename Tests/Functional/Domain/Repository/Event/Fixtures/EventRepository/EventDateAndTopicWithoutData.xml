@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_seminars>
+        <uid>1</uid>
+        <object_type>2</object_type>
+        <topic>2</topic>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>2</uid>
+        <object_type>1</object_type>
+    </tx_seminars_seminars>
+</dataset>
