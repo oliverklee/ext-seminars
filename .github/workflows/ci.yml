@@ -153,6 +153,12 @@ jobs:
           - typo3-version: "^11.5"
             php-version: "8.0"
             composer-dependencies: highest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
+            composer-dependencies: lowest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
+            composer-dependencies: highest
   functional-tests:
     name: "Functional tests"
     runs-on: ubuntu-22.04
@@ -248,6 +254,12 @@ jobs:
             composer-dependencies: lowest
           - typo3-version: "^11.5"
             php-version: "8.0"
+            composer-dependencies: highest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
+            composer-dependencies: lowest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
             composer-dependencies: highest
   legacy-tests:
     name: "Legacy tests"
@@ -347,4 +359,10 @@ jobs:
             composer-dependencies: lowest
           - typo3-version: "^11.5"
             php-version: "8.0"
+            composer-dependencies: highest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
+            composer-dependencies: lowest
+          - typo3-version: "^11.5"
+            php-version: "8.1"
             composer-dependencies: highest

@@ -25,7 +25,7 @@
 		"source": "https://github.com/oliverklee/ext-seminars"
 	},
 	"require": {
-		"php": "^7.2.0 || ~8.0.0",
+		"php": "^7.2.0 || ~8.0.0 || ~8.1.0",
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"doctrine/dbal": "^2.10",
