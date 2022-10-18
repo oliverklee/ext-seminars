@@ -25,4 +25,18 @@ class EventDate extends Event
     {
         $this->topic = $topic;
     }
+
+    public function getDisplayTitle(): string
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic ? $topic->getDisplayTitle() : '';
+    }
+
+    public function getDescription(): string
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic ? $topic->getDescription() : '';
+    }
 }

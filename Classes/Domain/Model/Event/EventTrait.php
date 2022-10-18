@@ -7,9 +7,9 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
- * Trait to avoid code duplication for some methods of `Event` classes.
+ * This trait provides methods that are useful for all event classes (`SingleEvent`, `EventDate` and `EventTopic`).
  *
- * @mixin EventInterface
+ * @mixin Event
  */
 trait EventTrait
 {

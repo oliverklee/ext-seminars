@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
 /**
- * This interface represents an event.
+ * This interface is required for all kinds of events: `SingleEvent`, `EventTopic`, and `EventDate`.
  */
 interface EventInterface
 {
@@ -25,4 +25,8 @@ interface EventInterface
     public const TYPE_EVENT_DATE = 2;
 
     public function getInternalTitle(): string;
+
+    public function getDisplayTitle(): string;
+
+    public function getDescription(): string;
 }
