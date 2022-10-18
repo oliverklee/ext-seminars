@@ -9,6 +9,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 
 /**
@@ -134,7 +135,7 @@ class EventMapper extends AbstractDataMapper
                 ),
                 $queryBuilder->expr()->neq(
                     'object_type',
-                    $queryBuilder->createNamedParameter(Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, \PDO::PARAM_INT)
                 ),
                 $queryBuilder->expr()->gt(
                     'begin_date',
@@ -196,7 +197,7 @@ class EventMapper extends AbstractDataMapper
      */
     public function findForRegistrationDigestEmail(): Collection
     {
-        $whereClause = 'registrations <> 0 AND object_type <> ' . Event::TYPE_TOPIC .
+        $whereClause = 'registrations <> 0 AND object_type <> ' . EventInterface::TYPE_EVENT_TOPIC .
             ' AND hidden = 0 AND deleted = 0 ' .
             ' AND EXISTS (' .
             'SELECT * FROM tx_seminars_attendances ' .

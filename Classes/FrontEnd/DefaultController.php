@@ -32,6 +32,7 @@ use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SingleViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
@@ -1368,7 +1369,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideUnneededSubpartsForTopicRecords(): void
     {
-        if ($this->seminar->getRecordType() != Event::TYPE_TOPIC) {
+        if ($this->seminar->getRecordType() != EventInterface::TYPE_EVENT_TOPIC) {
             return;
         }
 
@@ -1448,7 +1449,7 @@ class DefaultController extends TemplateHelper
             if (
                 \in_array(
                     $this->seminar->getRecordType(),
-                    [Event::TYPE_COMPLETE, Event::TYPE_TOPIC],
+                    [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_TOPIC],
                     true
                 )
             ) {
