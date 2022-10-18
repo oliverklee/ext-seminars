@@ -32,6 +32,28 @@ trait EventDateTrait
      */
     protected $registrationDeadline;
 
+    /**
+     * @var bool
+     */
+    protected $requiresRegistration = false;
+
+    /**
+     * @var bool
+     */
+    protected $hasWaitingList = false;
+
+    /**
+     * @var int
+     * @phpstan-var 0|positive-int
+     */
+    protected $minimumNumberOfRegistrations = 0;
+
+    /**
+     * @var int
+     * @phpstan-var 0|positive-int
+     */
+    protected $maximumNumberOfRegistrations = 0;
+
     public function getStart(): ?\DateTime
     {
         return $this->start;
@@ -70,5 +92,57 @@ trait EventDateTrait
     public function setRegistrationDeadline(\DateTime $registrationDeadline): void
     {
         $this->registrationDeadline = $registrationDeadline;
+    }
+
+    public function requiresRegistration(): bool
+    {
+        return $this->requiresRegistration;
+    }
+
+    public function setRequiresRegistration(bool $requiresRegistration): void
+    {
+        $this->requiresRegistration = $requiresRegistration;
+    }
+
+    public function hasWaitingList(): bool
+    {
+        return $this->hasWaitingList;
+    }
+
+    public function setHasWaitingList(bool $hasWaitingList): void
+    {
+        $this->hasWaitingList = $hasWaitingList;
+    }
+
+    /**
+     * @return 0|positive-int
+     */
+    public function getMinimumNumberOfRegistrations(): int
+    {
+        return $this->minimumNumberOfRegistrations;
+    }
+
+    /**
+     * @param 0|positive-int $minimumNumberOfRegistrations
+     */
+    public function setMinimumNumberOfRegistrations(int $minimumNumberOfRegistrations): void
+    {
+        $this->minimumNumberOfRegistrations = $minimumNumberOfRegistrations;
+    }
+
+    /**
+     * @return 0|positive-int
+     */
+    public function getMaximumNumberOfRegistrations(): int
+    {
+        return $this->maximumNumberOfRegistrations;
+    }
+
+    /**
+     * @param 0|positive-int $maximumNumberOfRegistrations
+     */
+    public function setMaximumNumberOfRegistrations(int $maximumNumberOfRegistrations): void
+    {
+        $this->maximumNumberOfRegistrations = $maximumNumberOfRegistrations;
     }
 }

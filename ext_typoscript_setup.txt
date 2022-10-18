@@ -22,6 +22,10 @@ config.tx_extbase.persistence.classes {
                 end_date.mapOnProperty = end
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
+                needs_registration.mapOnProperty = requiresRegistration
+                queue_size.mapOnProperty = hasWaitingList
+                attendees_min.mapOnProperty = minimumNumberOfRegistrations
+                attendees_max.mapOnProperty = maximumNumberOfRegistrations
             }
         }
     }
@@ -47,6 +51,10 @@ config.tx_extbase.persistence.classes {
                 end_date.mapOnProperty = end
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
+                needs_registration.mapOnProperty = requiresRegistration
+                queue_size.mapOnProperty = hasWaitingList
+                attendees_min.mapOnProperty = minimumNumberOfRegistrations
+                attendees_max.mapOnProperty = maximumNumberOfRegistrations
             }
         }
     }

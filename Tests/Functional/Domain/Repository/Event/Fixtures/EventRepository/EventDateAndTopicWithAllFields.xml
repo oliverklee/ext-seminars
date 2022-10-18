@@ -9,6 +9,10 @@
         <end_date>1649008800</end_date>
         <deadline_early_bird>1646215200</deadline_early_bird>
         <deadline_registration>1648807200</deadline_registration>
+        <needs_registration>1</needs_registration>
+        <queue_size>1</queue_size>
+        <attendees_min>5</attendees_min>
+        <attendees_max>20</attendees_max>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>2</uid>
