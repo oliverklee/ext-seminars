@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -69,5 +70,24 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setInternalTitle($value);
 
         self::assertSame($value, $this->subject->getInternalTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getTopicInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getTopic());
+    }
+
+    /**
+     * @test
+     */
+    public function setTopicSetsTopic(): void
+    {
+        $model = new EventTopic();
+        $this->subject->setTopic($model);
+
+        self::assertSame($model, $this->subject->getTopic());
     }
 }

@@ -34,6 +34,7 @@ return [
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
+            'topic' => ['fieldName' => 'topic'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\EventType::class => [
