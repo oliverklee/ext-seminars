@@ -9,7 +9,4 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
  */
 interface EventTopicInterface
 {
-    public function getStandardPrice(): float;
-
-    public function getEarlyBirdPrice(): float;
 }

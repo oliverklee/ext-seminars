@@ -29,4 +29,8 @@ interface EventInterface
     public function getDisplayTitle(): string;
 
     public function getDescription(): string;
+
+    public function getStandardPrice(): float;
+
+    public function getEarlyBirdPrice(): float;
 }
