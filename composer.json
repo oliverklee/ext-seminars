@@ -131,7 +131,7 @@
 		],
 		"ci:coverage:functional": [
 			"@coverage:create-directories",
-			".Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=.Build/coverage/functional.cov Tests/Functional"
+			"find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
 		"ci:coverage:legacy": [
 			"@coverage:create-directories",
