@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -429,7 +430,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
             ]
         );
 
@@ -566,7 +567,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
             ]
         );
 
@@ -797,7 +798,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
             ]
         );
 

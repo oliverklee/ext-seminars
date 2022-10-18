@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -242,9 +243,7 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the record type for this event record.
      *
-     * @param int $recordType
-     *        the record type for this event record, must be either Event::TYPE_COMPLETE,
-     *        Event::TYPE_TOPIC or Event::TYPE_DATE
+     * @param EventInterface::TYPE_* $recordType
      */
     public function setRecordType(int $recordType): void
     {

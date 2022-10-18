@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use PHPUnit\Framework\TestCase;
 
@@ -32,7 +33,7 @@ final class SingleEventTest extends TestCase
     public function getSubtitleForSingleEventWithoutSubtitleReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -48,7 +49,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'subtitle' => 'sub title',
             ]
         );
@@ -65,7 +66,7 @@ final class SingleEventTest extends TestCase
     public function setSubtitleForSingleEventSetsSubtitle(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSubtitle('sub title');
 
@@ -81,7 +82,7 @@ final class SingleEventTest extends TestCase
     public function hasSubtitleForSingleEventWithoutSubtitleReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -95,7 +96,7 @@ final class SingleEventTest extends TestCase
     public function hasSubtitleForSingleEventWithSubtitleReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSubtitle('sub title');
 
@@ -114,7 +115,7 @@ final class SingleEventTest extends TestCase
     public function getTeaserForSingleEventWithoutTeaserReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -131,7 +132,7 @@ final class SingleEventTest extends TestCase
         $this->subject->setData(
             [
                 'teaser' => 'wow, this is teasing',
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
             ]
         );
 
@@ -147,7 +148,7 @@ final class SingleEventTest extends TestCase
     public function setTeaserForSingleEventSetsTeaser(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setTeaser('wow, this is teasing');
 
@@ -163,7 +164,7 @@ final class SingleEventTest extends TestCase
     public function hasTeaserForSingleEventWithoutTeaserReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -178,7 +179,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'teaser' => 'wow, this is teasing',
             ]
         );
@@ -198,7 +199,7 @@ final class SingleEventTest extends TestCase
     public function getDescriptionForSingleEventWithoutDescriptionReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -214,7 +215,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'description' => 'this is a great event.',
             ]
         );
@@ -231,7 +232,7 @@ final class SingleEventTest extends TestCase
     public function setDescriptionForSingleEventSetsDescription(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setDescription('this is a great event.');
 
@@ -247,7 +248,7 @@ final class SingleEventTest extends TestCase
     public function hasDescriptionForSingleEventWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -262,7 +263,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'description' => 'this is a great event.',
             ]
         );
@@ -282,7 +283,7 @@ final class SingleEventTest extends TestCase
     public function getCreditPointsForSingleEventWithoutCreditPointsReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -298,7 +299,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'credit_points' => 42,
             ]
         );
@@ -331,7 +332,7 @@ final class SingleEventTest extends TestCase
     public function setCreditPointsForSingleEventWithZeroCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setCreditPoints(0);
 
@@ -347,7 +348,7 @@ final class SingleEventTest extends TestCase
     public function setCreditPointsForSingleEventWithPositiveCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setCreditPoints(42);
 
@@ -363,7 +364,7 @@ final class SingleEventTest extends TestCase
     public function hasCreditPointsForSingleEventWithoutCreditPointsReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -378,7 +379,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'credit_points' => 42,
             ]
         );
@@ -399,7 +400,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular' => 0.00,
             ]
         );
@@ -417,7 +418,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular' => 42.42,
             ]
         );
@@ -449,7 +450,7 @@ final class SingleEventTest extends TestCase
     public function setRegularPriceForSingleEventWithZeroRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularPrice(0.00);
 
@@ -465,7 +466,7 @@ final class SingleEventTest extends TestCase
     public function setRegularPriceForSingleEventWithPositiveRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularPrice(42.42);
 
@@ -481,7 +482,7 @@ final class SingleEventTest extends TestCase
     public function hasRegularPriceForSingleEventWithoutRegularPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -496,7 +497,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular' => 42.42,
             ]
         );
@@ -516,7 +517,7 @@ final class SingleEventTest extends TestCase
     public function getRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -532,7 +533,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -564,7 +565,7 @@ final class SingleEventTest extends TestCase
     public function setRegularEarlyBirdPriceForSingleEventWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularEarlyBirdPrice(0.00);
 
@@ -580,7 +581,7 @@ final class SingleEventTest extends TestCase
     public function setRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularEarlyBirdPrice(42.42);
 
@@ -596,7 +597,7 @@ final class SingleEventTest extends TestCase
     public function hasRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -611,7 +612,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -631,7 +632,7 @@ final class SingleEventTest extends TestCase
     public function getRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -647,7 +648,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -679,7 +680,7 @@ final class SingleEventTest extends TestCase
     public function setRegularBoardPriceForSingleEventWithZeroRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularBoardPrice(0.00);
 
@@ -695,7 +696,7 @@ final class SingleEventTest extends TestCase
     public function setRegularBoardPriceForSingleEventWithPositiveRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setRegularBoardPrice(42.42);
 
@@ -711,7 +712,7 @@ final class SingleEventTest extends TestCase
     public function hasRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -726,7 +727,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -746,7 +747,7 @@ final class SingleEventTest extends TestCase
     public function getSpecialPriceForSingleEventWithoutSpecialPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -762,7 +763,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_special' => 42.42,
             ]
         );
@@ -794,7 +795,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialPriceForSingleEventWithZeroSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialPrice(0.00);
 
@@ -810,7 +811,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialPriceForSingleEventWithPositiveSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialPrice(42.42);
 
@@ -826,7 +827,7 @@ final class SingleEventTest extends TestCase
     public function hasSpecialPriceForSingleEventWithoutSpecialPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -840,7 +841,7 @@ final class SingleEventTest extends TestCase
     public function hasSpecialPriceForSingleEventWithSpecialPriceReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialPrice(42.42);
 
@@ -859,7 +860,7 @@ final class SingleEventTest extends TestCase
     public function getSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -875,7 +876,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_special_early' => 42.42,
             ]
         );
@@ -907,7 +908,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialEarlyBirdPriceForSingleEventWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialEarlyBirdPrice(0.00);
 
@@ -923,7 +924,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialEarlyBirdPrice(42.42);
 
@@ -939,7 +940,7 @@ final class SingleEventTest extends TestCase
     public function hasSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -954,7 +955,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_special_early' => 42.42,
             ]
         );
@@ -974,7 +975,7 @@ final class SingleEventTest extends TestCase
     public function getSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -990,7 +991,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'price_special_board' => 42.42,
             ]
         );
@@ -1022,7 +1023,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialBoardPriceForSingleEventWithZeroSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialBoardPrice(0.00);
 
@@ -1038,7 +1039,7 @@ final class SingleEventTest extends TestCase
     public function setSpecialBoardPriceForSingleEventWithPositiveSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialBoardPrice(42.42);
 
@@ -1054,7 +1055,7 @@ final class SingleEventTest extends TestCase
     public function hasSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -1068,7 +1069,7 @@ final class SingleEventTest extends TestCase
     public function hasSpecialBoardPriceForSingleEventWithSpecialBoardPriceReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setSpecialBoardPrice(42.42);
 
@@ -1087,7 +1088,7 @@ final class SingleEventTest extends TestCase
     public function getAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -1103,7 +1104,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1120,7 +1121,7 @@ final class SingleEventTest extends TestCase
     public function setAdditionalInformationForSingleEventSetsAdditionalInformation(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setAdditionalInformation('this is good to know');
 
@@ -1136,7 +1137,7 @@ final class SingleEventTest extends TestCase
     public function hasAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -1151,7 +1152,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1171,7 +1172,7 @@ final class SingleEventTest extends TestCase
     public function allowsMultipleRegistrationForSingleEventWithUnsetAllowsMultipleRegistrationReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -1186,7 +1187,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'allows_multiple_registrations' => true,
             ]
         );
@@ -1206,7 +1207,7 @@ final class SingleEventTest extends TestCase
     public function usesTerms2ForSingleEventWithUnsetUseTerms2ReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -1221,7 +1222,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'use_terms_2' => true,
             ]
         );
@@ -1241,7 +1242,7 @@ final class SingleEventTest extends TestCase
     public function getNotesForSingleEventWithoutNotesReturnsEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
@@ -1257,7 +1258,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'notes' => 'Don\'t forget this.',
             ]
         );
@@ -1274,7 +1275,7 @@ final class SingleEventTest extends TestCase
     public function setNotesForSingleEventSetsNotes(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
         $this->subject->setNotes('Don\'t forget this.');
 
@@ -1290,7 +1291,7 @@ final class SingleEventTest extends TestCase
     public function hasNotesForSingleEventWithoutNotesReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -1305,7 +1306,7 @@ final class SingleEventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'notes' => 'Don\'t forget this.',
             ]
         );

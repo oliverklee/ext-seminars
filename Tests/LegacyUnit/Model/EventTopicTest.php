@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use PHPUnit\Framework\TestCase;
@@ -68,7 +69,7 @@ final class EventTopicTest extends TestCase
     public function getSubtitleForEventTopicWithoutSubtitleReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -84,7 +85,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'subtitle' => 'sub title',
             ]
         );
@@ -101,7 +102,7 @@ final class EventTopicTest extends TestCase
     public function setSubtitleForEventTopicSetsSubtitle(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSubtitle('sub title');
 
@@ -117,7 +118,7 @@ final class EventTopicTest extends TestCase
     public function hasSubtitleForEventTopicWithoutSubtitleReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -131,7 +132,7 @@ final class EventTopicTest extends TestCase
     public function hasSubtitleForEventTopicWithSubtitleReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSubtitle('sub title');
 
@@ -150,7 +151,7 @@ final class EventTopicTest extends TestCase
     public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -167,7 +168,7 @@ final class EventTopicTest extends TestCase
         $this->subject->setData(
             [
                 'teaser' => 'wow, this is teasing',
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
             ]
         );
 
@@ -183,7 +184,7 @@ final class EventTopicTest extends TestCase
     public function setTeaserForEventTopicSetsTeaser(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setTeaser('wow, this is teasing');
 
@@ -199,7 +200,7 @@ final class EventTopicTest extends TestCase
     public function hasTeaserForEventTopicWithoutTeaserReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -214,7 +215,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'teaser' => 'wow, this is teasing',
             ]
         );
@@ -234,7 +235,7 @@ final class EventTopicTest extends TestCase
     public function getDescriptionForEventTopicWithoutDescriptionReturnsAnEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -250,7 +251,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'description' => 'this is a great event.',
             ]
         );
@@ -267,7 +268,7 @@ final class EventTopicTest extends TestCase
     public function setDescriptionForEventTopicSetsDescription(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setDescription('this is a great event.');
 
@@ -283,7 +284,7 @@ final class EventTopicTest extends TestCase
     public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -297,7 +298,7 @@ final class EventTopicTest extends TestCase
     public function hasDescriptionForEventTopicWithDescriptionReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setDescription('this is a great event.');
 
@@ -316,7 +317,7 @@ final class EventTopicTest extends TestCase
     public function getCreditPointsForEventTopicWithoutCreditPointsReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -332,7 +333,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 42,
             ]
         );
@@ -349,7 +350,7 @@ final class EventTopicTest extends TestCase
     public function setCreditPointsForEventTopicWithZeroCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setCreditPoints(0);
 
@@ -365,7 +366,7 @@ final class EventTopicTest extends TestCase
     public function setCreditPointsForEventTopicWithPositiveCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setCreditPoints(42);
 
@@ -381,7 +382,7 @@ final class EventTopicTest extends TestCase
     public function hasCreditPointsForEventTopicWithoutCreditPointsReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -396,7 +397,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 42,
             ]
         );
@@ -417,7 +418,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular' => 0.00,
             ]
         );
@@ -435,7 +436,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular' => 42.42,
             ]
         );
@@ -452,7 +453,7 @@ final class EventTopicTest extends TestCase
     public function setRegularPriceForEventTopicWithZeroRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularPrice(0.00);
 
@@ -468,7 +469,7 @@ final class EventTopicTest extends TestCase
     public function setRegularPriceForEventTopicWithPositiveRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularPrice(42.42);
 
@@ -484,7 +485,7 @@ final class EventTopicTest extends TestCase
     public function hasRegularPriceForEventTopicWithoutRegularPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -499,7 +500,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular' => 42.42,
             ]
         );
@@ -519,7 +520,7 @@ final class EventTopicTest extends TestCase
     public function getRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -535,7 +536,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -567,7 +568,7 @@ final class EventTopicTest extends TestCase
     public function setRegularEarlyBirdPriceForEventTopicWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularEarlyBirdPrice(0.00);
 
@@ -583,7 +584,7 @@ final class EventTopicTest extends TestCase
     public function setRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularEarlyBirdPrice(42.42);
 
@@ -599,7 +600,7 @@ final class EventTopicTest extends TestCase
     public function hasRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -614,7 +615,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -634,7 +635,7 @@ final class EventTopicTest extends TestCase
     public function getRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -650,7 +651,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -667,7 +668,7 @@ final class EventTopicTest extends TestCase
     public function setRegularBoardPriceForEventTopicWithZeroRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularBoardPrice(0.00);
 
@@ -683,7 +684,7 @@ final class EventTopicTest extends TestCase
     public function setRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setRegularBoardPrice(42.42);
 
@@ -699,7 +700,7 @@ final class EventTopicTest extends TestCase
     public function hasRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -714,7 +715,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -734,7 +735,7 @@ final class EventTopicTest extends TestCase
     public function getSpecialPriceForEventTopicWithoutSpecialPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -750,7 +751,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_special' => 42.42,
             ]
         );
@@ -767,7 +768,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialPriceForEventTopicWithZeroSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialPrice(0.00);
 
@@ -783,7 +784,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialPriceForEventTopicWithPositiveSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialPrice(42.42);
 
@@ -799,7 +800,7 @@ final class EventTopicTest extends TestCase
     public function hasSpecialPriceForEventTopicWithoutSpecialPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -813,7 +814,7 @@ final class EventTopicTest extends TestCase
     public function hasSpecialPriceForEventTopicWithSpecialPriceReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialPrice(42.42);
 
@@ -832,7 +833,7 @@ final class EventTopicTest extends TestCase
     public function getSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -848,7 +849,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_special_early' => 42.42,
             ]
         );
@@ -865,7 +866,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialEarlyBirdPriceForEventTopicWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialEarlyBirdPrice(0.00);
 
@@ -881,7 +882,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialEarlyBirdPrice(42.42);
 
@@ -897,7 +898,7 @@ final class EventTopicTest extends TestCase
     public function hasSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -912,7 +913,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_special_early' => 42.42,
             ]
         );
@@ -932,7 +933,7 @@ final class EventTopicTest extends TestCase
     public function getSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -948,7 +949,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'price_special_board' => 42.42,
             ]
         );
@@ -965,7 +966,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialBoardPriceForEventTopicWithZeroSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialBoardPrice(0.00);
 
@@ -981,7 +982,7 @@ final class EventTopicTest extends TestCase
     public function setSpecialBoardPriceForEventTopicWithPositiveSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialBoardPrice(42.42);
 
@@ -997,7 +998,7 @@ final class EventTopicTest extends TestCase
     public function hasSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -1011,7 +1012,7 @@ final class EventTopicTest extends TestCase
     public function hasSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setSpecialBoardPrice(42.42);
 
@@ -1030,7 +1031,7 @@ final class EventTopicTest extends TestCase
     public function getAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -1046,7 +1047,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1063,7 +1064,7 @@ final class EventTopicTest extends TestCase
     public function setAdditionalInformationForEventTopicSetsAdditionalInformation(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setAdditionalInformation('this is good to know');
 
@@ -1079,7 +1080,7 @@ final class EventTopicTest extends TestCase
     public function hasAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -1094,7 +1095,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1114,7 +1115,7 @@ final class EventTopicTest extends TestCase
     public function allowsMultipleRegistrationForEventTopicWithUnsetAllowsMultipleRegistrationReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -1129,7 +1130,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'allows_multiple_registrations' => true,
             ]
         );
@@ -1149,7 +1150,7 @@ final class EventTopicTest extends TestCase
     public function usesTerms2ForEventTopicWithUnsetUseTerms2ReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -1164,7 +1165,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'use_terms_2' => true,
             ]
         );
@@ -1184,7 +1185,7 @@ final class EventTopicTest extends TestCase
     public function getNotesForEventTopicWithoutNotesReturnsEmptyString(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
@@ -1200,7 +1201,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'notes' => 'Don\'t forget this.',
             ]
         );
@@ -1217,7 +1218,7 @@ final class EventTopicTest extends TestCase
     public function setNotesForEventTopicSetsNotes(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->subject->setNotes('Don\'t forget this.');
 
@@ -1233,7 +1234,7 @@ final class EventTopicTest extends TestCase
     public function hasNotesForEventTopicWithoutNotesReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -1248,7 +1249,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'notes' => 'Don\'t forget this.',
             ]
         );

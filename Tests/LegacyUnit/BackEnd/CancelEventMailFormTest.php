@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
-use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -53,7 +53,7 @@ final class CancelEventMailFormTest extends TestCase
             [
                 'pid' => $dummySysFolderUid,
                 'title' => 'Dummy event',
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
                 'organizers' => 0,
             ]
