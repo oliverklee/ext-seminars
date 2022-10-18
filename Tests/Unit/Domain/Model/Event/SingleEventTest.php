@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
@@ -54,6 +55,14 @@ final class SingleEventTest extends UnitTestCase
     public function implementsEventDateInterface(): void
     {
         self::assertInstanceOf(EventDateInterface::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsEventTopicInterface(): void
+    {
+        self::assertInstanceOf(EventTopicInterface::class, $this->subject);
     }
 
     /**
@@ -261,5 +270,78 @@ final class SingleEventTest extends UnitTestCase
         $this->subject->setMaximumNumberOfRegistrations($value);
 
         self::assertSame($value, $this->subject->getMaximumNumberOfRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function getStandardPriceInitiallyReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getStandardPrice());
+    }
+
+    /**
+     * @return array<string, array<int, float>>
+     */
+    public function validPriceDataProvider(): array
+    {
+        return [
+            'zero' => [0.0],
+            'positive' => [1234.56],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider validPriceDataProvider
+     */
+    public function setStandardPriceSetsStandardPrice(float $price): void
+    {
+        $this->subject->setStandardPrice($price);
+
+        self::assertSame($price, $this->subject->getStandardPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function setStandardPriceWithNegativeNumberThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1666112500);
+        $this->expectExceptionMessage('The price must be >= 0.0.');
+
+        $this->subject->setStandardPrice(-1.0);
+    }
+
+    /**
+     * @test
+     */
+    public function getEarlyBirdPriceInitiallyReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     * @dataProvider validPriceDataProvider
+     */
+    public function setEarlyBirdPriceSetsEarlyBirdPrice(float $price): void
+    {
+        $this->subject->setEarlyBirdPrice($price);
+
+        self::assertSame($price, $this->subject->getEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function setEarlyBildPriceWithNegativeNumberThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1666112478);
+        $this->expectExceptionMessage('The price must be >= 0.0.');
+
+        $this->subject->setEarlyBirdPrice(-1.0);
     }
 }

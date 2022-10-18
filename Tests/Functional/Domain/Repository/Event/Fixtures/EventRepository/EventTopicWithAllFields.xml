@@ -5,5 +5,7 @@
         <object_type>1</object_type>
         <title>Jousting topic</title>
         <description>There is no glory in prevention.</description>
+        <price_regular>150.0</price_regular>
+        <price_regular_early>125.0</price_regular_early>
     </tx_seminars_seminars>
 </dataset>

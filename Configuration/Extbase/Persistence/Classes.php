@@ -28,6 +28,8 @@ return [
             'hasWaitingList' => ['fieldName' => 'queue_size'],
             'minimumNumberOfRegistrations' => ['fieldName' => 'attendees_min'],
             'maximumNumberOfRegistrations' => ['fieldName' => 'attendees_max'],
+            'standardPrice' => ['fieldName' => 'price_regular'],
+            'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
@@ -35,6 +37,8 @@ return [
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
+            'standardPrice' => ['fieldName' => 'price_regular'],
+            'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventDate::class => [

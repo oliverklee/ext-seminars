@@ -13,5 +13,7 @@
         <queue_size>1</queue_size>
         <attendees_min>5</attendees_min>
         <attendees_max>20</attendees_max>
+        <price_regular>150.0</price_regular>
+        <price_regular_early>125.0</price_regular_early>
     </tx_seminars_seminars>
 </dataset>

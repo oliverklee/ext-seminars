@@ -26,6 +26,8 @@ config.tx_extbase.persistence.classes {
                 queue_size.mapOnProperty = hasWaitingList
                 attendees_min.mapOnProperty = minimumNumberOfRegistrations
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
+                price_regular.mapOnProperty = standardPrice
+                price_regular_early.mapOnProperty = earlyBirdPrice
             }
         }
     }
@@ -36,6 +38,8 @@ config.tx_extbase.persistence.classes {
             recordType = 1
             columns {
                 title.mapOnProperty = internalTitle
+                price_regular.mapOnProperty = standardPrice
+                price_regular_early.mapOnProperty = earlyBirdPrice
             }
         }
     }
