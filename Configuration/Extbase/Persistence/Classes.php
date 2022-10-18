@@ -24,6 +24,10 @@ return [
             'end' => ['fieldName' => 'end_date'],
             'earlyBirdDeadline' => ['fieldName' => 'deadline_early_bird'],
             'registrationDeadline' => ['fieldName' => 'deadline_registration'],
+            'requiresRegistration' => ['fieldName' => 'needs_registration'],
+            'hasWaitingList' => ['fieldName' => 'queue_size'],
+            'minimumNumberOfRegistrations' => ['fieldName' => 'attendees_min'],
+            'maximumNumberOfRegistrations' => ['fieldName' => 'attendees_max'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
@@ -43,6 +47,10 @@ return [
             'end' => ['fieldName' => 'end_date'],
             'earlyBirdDeadline' => ['fieldName' => 'deadline_early_bird'],
             'registrationDeadline' => ['fieldName' => 'deadline_registration'],
+            'requiresRegistration' => ['fieldName' => 'needs_registration'],
+            'hasWaitingList' => ['fieldName' => 'queue_size'],
+            'minimumNumberOfRegistrations' => ['fieldName' => 'attendees_min'],
+            'maximumNumberOfRegistrations' => ['fieldName' => 'attendees_max'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\EventType::class => [

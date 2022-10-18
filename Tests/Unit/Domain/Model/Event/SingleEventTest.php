@@ -188,4 +188,78 @@ final class SingleEventTest extends UnitTestCase
 
         self::assertSame($model, $this->subject->getRegistrationDeadline());
     }
+
+    /**
+     * @test
+     */
+    public function requiresRegistrationInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->requiresRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function setRequiresRegistrationSetsRequiresRegistration(): void
+    {
+        $this->subject->setRequiresRegistration(true);
+
+        self::assertTrue($this->subject->requiresRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWaitingListInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function setHasWaitingListSetsHasWaitingList(): void
+    {
+        $this->subject->setHasWaitingList(true);
+
+        self::assertTrue($this->subject->hasWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function getMinimumNumberOfRegistrationsInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getMinimumNumberOfRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function setMinimumNumberOfRegistrationsSetsMinimumNumberOfRegistrations(): void
+    {
+        $value = 123456;
+        $this->subject->setMinimumNumberOfRegistrations($value);
+
+        self::assertSame($value, $this->subject->getMinimumNumberOfRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function getMaximumNumberOfRegistrationsInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getMaximumNumberOfRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function setMaximumNumberOfRegistrationsSetsMaximumNumberOfRegistrations(): void
+    {
+        $value = 123456;
+        $this->subject->setMaximumNumberOfRegistrations($value);
+
+        self::assertSame($value, $this->subject->getMaximumNumberOfRegistrations());
+    }
 }

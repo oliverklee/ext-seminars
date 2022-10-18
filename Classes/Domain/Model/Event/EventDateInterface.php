@@ -16,4 +16,18 @@ interface EventDateInterface
     public function getEarlyBirdDeadline(): ?\DateTime;
 
     public function getRegistrationDeadline(): ?\DateTime;
+
+    public function requiresRegistration(): bool;
+
+    public function hasWaitingList(): bool;
+
+    /**
+     * @return 0|positive-int
+     */
+    public function getMinimumNumberOfRegistrations(): int;
+
+    /**
+     * @return 0|positive-int
+     */
+    public function getMaximumNumberOfRegistrations(): int;
 }

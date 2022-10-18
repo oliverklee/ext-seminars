@@ -62,6 +62,10 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+        self::assertTrue($result->requiresRegistration());
+        self::assertTrue($result->hasWaitingList());
+        self::assertSame(5, $result->getMinimumNumberOfRegistrations());
+        self::assertSame(20, $result->getMaximumNumberOfRegistrations());
     }
 
     /**
@@ -112,6 +116,10 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+        self::assertTrue($result->requiresRegistration());
+        self::assertTrue($result->hasWaitingList());
+        self::assertSame(5, $result->getMinimumNumberOfRegistrations());
+        self::assertSame(20, $result->getMaximumNumberOfRegistrations());
     }
 
     /**
