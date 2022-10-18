@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Event;
@@ -64,7 +65,7 @@ final class EventTest extends TestCase
     public function isSingleEventForSingleRecordReturnsTrue(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertTrue(
@@ -78,7 +79,7 @@ final class EventTest extends TestCase
     public function isSingleEventForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -92,7 +93,7 @@ final class EventTest extends TestCase
     public function isSingleEventForDateRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE]
         );
 
         self::assertFalse(
@@ -110,7 +111,7 @@ final class EventTest extends TestCase
     public function isEventDateForSingleRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertFalse(
@@ -124,7 +125,7 @@ final class EventTest extends TestCase
     public function isEventDateForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertFalse(
@@ -139,7 +140,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => new Event(),
             ]
         );
@@ -156,7 +157,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setData(
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => null,
             ]
         );
@@ -176,11 +177,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_COMPLETE]
+            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
         );
 
         self::assertEquals(
-            Event::TYPE_COMPLETE,
+            EventInterface::TYPE_SINGLE_EVENT,
             $this->subject->getRecordType()
         );
     }
@@ -191,11 +192,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_DATE]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE]
         );
 
         self::assertEquals(
-            Event::TYPE_DATE,
+            EventInterface::TYPE_EVENT_DATE,
             $this->subject->getRecordType()
         );
     }
@@ -206,11 +207,11 @@ final class EventTest extends TestCase
     public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic(): void
     {
         $this->subject->setData(
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertEquals(
-            Event::TYPE_TOPIC,
+            EventInterface::TYPE_EVENT_TOPIC,
             $this->subject->getRecordType()
         );
     }

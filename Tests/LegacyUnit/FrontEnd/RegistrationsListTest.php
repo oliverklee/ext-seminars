@@ -6,8 +6,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\TestCase;
@@ -61,7 +61,7 @@ final class RegistrationsListTest extends TestCase
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'title' => 'Test event & more',
                 'attendees_max' => 10,
                 'needs_registration' => 1,

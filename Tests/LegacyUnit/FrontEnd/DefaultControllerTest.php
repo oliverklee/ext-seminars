@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
@@ -593,7 +594,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
             ]
         );
@@ -601,7 +602,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
@@ -612,7 +613,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
@@ -645,7 +646,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
             ]
         );
@@ -653,7 +654,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
@@ -664,7 +665,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'topic' => $topicUid,
                 'title' => 'Test single 2',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
@@ -695,7 +696,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
             ]
         );
@@ -703,7 +704,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
@@ -714,7 +715,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
@@ -748,7 +749,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'Test topic',
             ]
         );
@@ -756,7 +757,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
@@ -767,7 +768,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
@@ -1426,11 +1427,11 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1458,12 +1459,12 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -1508,13 +1509,13 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -1539,14 +1540,14 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
             ]
         );
@@ -1573,14 +1574,14 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
             ]
         );
@@ -1607,14 +1608,14 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
             ]
         );
         $dependingEventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_foo',
             ]
         );
@@ -1626,7 +1627,7 @@ final class DefaultControllerTest extends TestCase
         $dependingEventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'depending_bar',
             ]
         );
@@ -1770,7 +1771,7 @@ final class DefaultControllerTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => mktime(0, 0, 0, 1, 1, 2008),
             ]
@@ -1793,7 +1794,7 @@ final class DefaultControllerTest extends TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => 0,
             ]
@@ -5705,7 +5706,7 @@ final class DefaultControllerTest extends TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'title' => 'foo & bar',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -5732,16 +5733,16 @@ final class DefaultControllerTest extends TestCase
 
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
@@ -5773,16 +5774,16 @@ final class DefaultControllerTest extends TestCase
 
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
@@ -5817,12 +5818,12 @@ final class DefaultControllerTest extends TestCase
 
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
@@ -5834,7 +5835,7 @@ final class DefaultControllerTest extends TestCase
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required & foo',
             ]
         );
@@ -5862,12 +5863,12 @@ final class DefaultControllerTest extends TestCase
 
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
@@ -5879,7 +5880,7 @@ final class DefaultControllerTest extends TestCase
         $requiredTopic1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -5892,7 +5893,7 @@ final class DefaultControllerTest extends TestCase
         $requiredTopic2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_bar',
             ]
         );
@@ -5925,7 +5926,7 @@ final class DefaultControllerTest extends TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'title' => 'Registration form test',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -7706,14 +7707,14 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -7769,14 +7770,14 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUId,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -7786,7 +7787,7 @@ final class DefaultControllerTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUId,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 11000, // > 1 day after first date
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 12000,

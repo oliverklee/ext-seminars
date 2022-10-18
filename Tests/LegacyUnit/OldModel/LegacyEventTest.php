@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -990,7 +991,7 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'a test topic',
             ]
         );
@@ -1010,14 +1011,14 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'a test topic',
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
                 'title' => 'a test date',
             ]
@@ -1622,7 +1623,7 @@ final class LegacyEventTest extends TestCase
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
                 'language' => 'it',
             ]
@@ -1655,7 +1656,7 @@ final class LegacyEventTest extends TestCase
         $singleRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_COMPLETE,
+                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'topic' => $topicRecordUid,
                 'language' => 'it',
             ]
@@ -2935,7 +2936,7 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
                     ['title' => 'foo type']
@@ -2945,7 +2946,7 @@ final class LegacyEventTest extends TestCase
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
@@ -2965,7 +2966,7 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
                     ['title' => 'foo type']
@@ -2989,14 +2990,14 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => 99999,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
                 'event_type' => 199999,
             ]
@@ -4809,7 +4810,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForSingleEvent(): void
     {
-        $this->subject->setRecordType(Event::TYPE_COMPLETE);
+        $this->subject->setRecordType(EventInterface::TYPE_SINGLE_EVENT);
 
         self::assertStringContainsString(
             'EventComplete.',
@@ -4822,7 +4823,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForTopic(): void
     {
-        $this->subject->setRecordType(Event::TYPE_TOPIC);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_TOPIC);
 
         self::assertStringContainsString(
             'EventTopic.',
@@ -4835,7 +4836,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForDateRecord(): void
     {
-        $this->subject->setRecordType(Event::TYPE_DATE);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_DATE);
 
         self::assertStringContainsString(
             'EventDate.',
@@ -4848,7 +4849,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForHiddenSingleEvent(): void
     {
-        $this->subject->setRecordType(Event::TYPE_COMPLETE);
+        $this->subject->setRecordType(EventInterface::TYPE_SINGLE_EVENT);
         $this->subject->setHidden(true);
 
         self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
@@ -4859,7 +4860,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForHiddenTopic(): void
     {
-        $this->subject->setRecordType(Event::TYPE_TOPIC);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_TOPIC);
         $this->subject->setHidden(true);
 
         self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
@@ -4870,7 +4871,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForHiddenDate(): void
     {
-        $this->subject->setRecordType(Event::TYPE_DATE);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_DATE);
         $this->subject->setHidden(true);
 
         self::assertStringContainsString('overlay-hidden', $this->subject->getRecordIcon());
@@ -4881,7 +4882,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForVisibleTimedSingleEvent(): void
     {
-        $this->subject->setRecordType(Event::TYPE_COMPLETE);
+        $this->subject->setRecordType(EventInterface::TYPE_SINGLE_EVENT);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString(
@@ -4895,7 +4896,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForVisibleTimedTopic(): void
     {
-        $this->subject->setRecordType(Event::TYPE_TOPIC);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_TOPIC);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString(
@@ -4909,7 +4910,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForVisibleTimedDate(): void
     {
-        $this->subject->setRecordType(Event::TYPE_DATE);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_DATE);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString(
@@ -4923,7 +4924,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForExpiredSingleEvent(): void
     {
-        $this->subject->setRecordType(Event::TYPE_COMPLETE);
+        $this->subject->setRecordType(EventInterface::TYPE_SINGLE_EVENT);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
@@ -4934,7 +4935,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForExpiredTimedTopic(): void
     {
-        $this->subject->setRecordType(Event::TYPE_TOPIC);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_TOPIC);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
@@ -4945,7 +4946,7 @@ final class LegacyEventTest extends TestCase
      */
     public function usesCorrectIconForExpiredTimedDate(): void
     {
-        $this->subject->setRecordType(Event::TYPE_DATE);
+        $this->subject->setRecordType(EventInterface::TYPE_EVENT_DATE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertStringContainsString('overlay-endtime', $this->subject->getRecordIcon());
@@ -5500,7 +5501,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_TOPIC,
+                    'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                     'requirements' => 0,
                 ]
             )
@@ -5519,7 +5520,7 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 0,
             ]
         );
@@ -5527,7 +5528,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -5545,11 +5546,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5571,11 +5572,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5587,7 +5588,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -5605,11 +5606,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5619,7 +5620,7 @@ final class LegacyEventTest extends TestCase
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5645,7 +5646,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_TOPIC,
+                    'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                     'dependencies' => 0,
                 ]
             )
@@ -5664,7 +5665,7 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 0,
             ]
         );
@@ -5672,7 +5673,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -5691,14 +5692,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -5722,14 +5723,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -5742,7 +5743,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -5761,14 +5762,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
             ]
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -5780,7 +5781,7 @@ final class LegacyEventTest extends TestCase
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -5824,11 +5825,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5856,11 +5857,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5872,7 +5873,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -5897,11 +5898,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5911,7 +5912,7 @@ final class LegacyEventTest extends TestCase
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -5956,14 +5957,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -5993,14 +5994,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -6013,7 +6014,7 @@ final class LegacyEventTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Event::TYPE_DATE,
+                    'object_type' => EventInterface::TYPE_EVENT_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -6039,14 +6040,14 @@ final class LegacyEventTest extends TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'dependencies' => 2,
             ]
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -6058,7 +6059,7 @@ final class LegacyEventTest extends TestCase
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7147,14 +7148,14 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 42,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
@@ -7213,14 +7214,14 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 0,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
@@ -7240,14 +7241,14 @@ final class LegacyEventTest extends TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'credit_points' => 1,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
@@ -8578,11 +8579,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC, 'price_on_request' => false]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => false]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_DATE, 'topic' => $topicUid]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid]
         );
         $date = new LegacyEvent($dateUid);
 
@@ -8596,11 +8597,11 @@ final class LegacyEventTest extends TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_TOPIC, 'price_on_request' => true]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC, 'price_on_request' => true]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Event::TYPE_DATE, 'topic' => $topicUid]
+            ['object_type' => EventInterface::TYPE_EVENT_DATE, 'topic' => $topicUid]
         );
         $date = new LegacyEvent($dateUid);
 

@@ -7,8 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\TestCase;
@@ -108,12 +108,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required & foo',
             ]
         );
@@ -142,12 +142,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -173,12 +173,12 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -191,7 +191,7 @@ final class RequirementsListTest extends TestCase
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_bar',
             ]
         );
@@ -235,19 +235,19 @@ final class RequirementsListTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Event::TYPE_TOPIC]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_foo',
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $requiredEvent1,
             ]
         );
@@ -260,14 +260,14 @@ final class RequirementsListTest extends TestCase
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_TOPIC,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'title' => 'required_bar',
             ]
         );
         $requiredDate2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Event::TYPE_DATE,
+                'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $requiredEvent2,
             ]
         );
