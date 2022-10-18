@@ -90,4 +90,46 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($model, $this->subject->getTopic());
     }
+
+    /**
+     * @test
+     */
+    public function getDisplayTitleWithoutTopicReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getDisplayTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getDisplayTitleWithTopicReturnsDisplayTitleFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 'TYPO3 extension development';
+        $topic->setInternalTitle($value);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($value, $this->subject->getDisplayTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getDescriptionWithoutTopicReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function getDescriptionWithTopicReturnsDescriptionFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 'TYPO3 extension development';
+        $topic->setDescription($value);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($value, $this->subject->getDescription());
+    }
 }

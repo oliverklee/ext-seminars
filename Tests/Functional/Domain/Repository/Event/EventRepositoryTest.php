@@ -53,6 +53,8 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(SingleEvent::class, $result);
         self::assertSame('Jousting', $result->getInternalTitle());
+        self::assertSame('Jousting', $result->getDisplayTitle());
+        self::assertSame('There is no glory in prevention.', $result->getDescription());
     }
 
     /**
@@ -66,6 +68,8 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(EventTopic::class, $result);
         self::assertSame('Jousting topic', $result->getInternalTitle());
+        self::assertSame('Jousting topic', $result->getDisplayTitle());
+        self::assertSame('There is no glory in prevention.', $result->getDescription());
     }
 
     /**
@@ -79,6 +83,8 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(EventDate::class, $result);
         self::assertSame('Jousting date', $result->getInternalTitle());
+        self::assertSame('Jousting topic', $result->getDisplayTitle());
+        self::assertSame('There is no glory in prevention.', $result->getDescription());
     }
 
     /**

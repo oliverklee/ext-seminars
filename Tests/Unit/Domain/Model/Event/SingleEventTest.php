@@ -70,4 +70,34 @@ final class SingleEventTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getInternalTitle());
     }
+
+    /**
+     * @test
+     */
+    public function getDisplayTitleReturnsInternalTitle(): void
+    {
+        $value = 'TYPO3 extension development';
+        $this->subject->setInternalTitle($value);
+
+        self::assertSame($value, $this->subject->getDisplayTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getDescriptionInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function setDescriptionSetsDescription(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setDescription($value);
+
+        self::assertSame($value, $this->subject->getDescription());
+    }
 }

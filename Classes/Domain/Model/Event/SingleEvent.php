@@ -10,4 +10,5 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 class SingleEvent extends Event
 {
     use EventTrait;
+    use EventTopicTrait;
 }
