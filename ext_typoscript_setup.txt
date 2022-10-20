@@ -28,6 +28,7 @@ config.tx_extbase.persistence.classes {
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
                 price_regular.mapOnProperty = standardPrice
                 price_regular_early.mapOnProperty = earlyBirdPrice
+                place.mapOnProperty = venues
             }
         }
     }
@@ -59,6 +60,7 @@ config.tx_extbase.persistence.classes {
                 queue_size.mapOnProperty = hasWaitingList
                 attendees_min.mapOnProperty = minimumNumberOfRegistrations
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
+                place.mapOnProperty = venues
             }
         }
     }
