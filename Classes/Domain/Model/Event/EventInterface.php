@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\EventType;
+
 /**
  * This interface is required for all kinds of events: `SingleEvent`, `EventTopic`, and `EventDate`.
  */
@@ -33,4 +35,6 @@ interface EventInterface
     public function getStandardPrice(): float;
 
     public function getEarlyBirdPrice(): float;
+
+    public function getEventType(): ?EventType;
 }

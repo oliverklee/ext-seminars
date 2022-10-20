@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\EventType;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -343,5 +344,24 @@ final class SingleEventTest extends UnitTestCase
         $this->expectExceptionMessage('The price must be >= 0.0.');
 
         $this->subject->setEarlyBirdPrice(-1.0);
+    }
+
+    /**
+     * @test
+     */
+    public function getEventTypeInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function setEventTypeSetsEventType(): void
+    {
+        $model = new EventType();
+        $this->subject->setEventType($model);
+
+        self::assertSame($model, $this->subject->getEventType());
     }
 }

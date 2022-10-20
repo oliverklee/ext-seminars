@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\EventType;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -335,5 +336,26 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setTopic($topic);
 
         self::assertEqualsWithDelta($value, $this->subject->getEarlyBirdPrice(), 0.0001);
+    }
+
+    /**
+     * @test
+     */
+    public function getEventTypeWithoutTopicReturnsNull(): void
+    {
+        self::assertNull($this->subject->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function getEventTypeWithTopicReturnsEventTypeFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $eventType = new EventType();
+        $topic->setEventType($eventType);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($eventType, $this->subject->getEventType());
     }
 }
