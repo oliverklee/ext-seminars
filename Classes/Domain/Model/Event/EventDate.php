@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\EventType;
+
 /**
  * This class represents a date for an event that has an association to a topic.
  */
@@ -53,5 +55,12 @@ class EventDate extends Event implements EventDateInterface
         $topic = $this->getTopic();
 
         return $topic instanceof EventTopic ? $topic->getEarlyBirdPrice() : 0.0;
+    }
+
+    public function getEventType(): ?EventType
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic ? $topic->getEventType() : null;
     }
 }

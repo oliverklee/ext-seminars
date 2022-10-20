@@ -9,6 +9,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -244,5 +245,89 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(EventTopic::class, $topic);
         self::assertSame(2, $topic->getUid());
         self::assertSame('Jousting topic', $topic->getInternalTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEmptyEventTypeAssociationForSingleEventAsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        self::assertNull($result->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEmptyEventTypeAssociationForEventTopicAsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventTopic::class, $result);
+
+        self::assertNull($result->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEmptyEventTypeAssociationForEventDateAsNull(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        self::assertNull($result->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventTypeAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithEventType.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $eventType = $result->getEventType();
+        self::assertInstanceOf(EventType::class, $eventType);
+        self::assertSame(1, $eventType->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventTypeAssociationForEventTopic(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithEventType.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventTopic::class, $result);
+
+        $eventType = $result->getEventType();
+        self::assertInstanceOf(EventType::class, $eventType);
+        self::assertSame(1, $eventType->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventTypeAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithEventType.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $eventType = $result->getEventType();
+        self::assertInstanceOf(EventType::class, $eventType);
+        self::assertSame(1, $eventType->getUid());
     }
 }
