@@ -11,7 +11,11 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\Speaker;
+use OliverKlee\Seminars\Domain\Model\Venue;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
@@ -357,5 +361,122 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setTopic($topic);
 
         self::assertSame($eventType, $this->subject->getEventType());
+    }
+
+    /**
+     * @test
+     */
+    public function getVenuesInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getVenues();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setVenuesSetsVenues(): void
+    {
+        /** @var ObjectStorage<Venue> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setVenues($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getVenues());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpeakersInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getSpeakers();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setSpeakersSetsSpeakers(): void
+    {
+        /** @var ObjectStorage<Speaker> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setSpeakers($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getSpeakers());
+    }
+
+    /**
+     * @test
+     */
+    public function getOrganizersInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getOrganizers();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setOrganizersSetsOrganizers(): void
+    {
+        /** @var ObjectStorage<Organizer> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setOrganizers($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getOrganizers());
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstOrganizerWithNoOrganizersReturnsNull(): void
+    {
+        self::assertNull($this->subject->getFirstOrganizer());
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstOrganizerWithTwoOrganizersReturnsFirstOrganizer(): void
+    {
+        /** @var ObjectStorage<Organizer> $organizers */
+        $organizers = new ObjectStorage();
+        $organizer1 = new Organizer();
+        $organizers->attach($organizer1);
+        $organizer2 = new Organizer();
+        $organizers->attach($organizer2);
+        $this->subject->setOrganizers($organizers);
+
+        self::assertSame($organizer1, $this->subject->getFirstOrganizer());
+    }
+
+    /**
+     * @test
+     */
+    public function getOrganizerWithNoOrganizersReturnsNull(): void
+    {
+        self::assertNull($this->subject->getOrganizer());
+    }
+
+    /**
+     * @test
+     */
+    public function getOrganizerWithTwoOrganizersReturnsFirstOrganizer(): void
+    {
+        /** @var ObjectStorage<Organizer> $organizers */
+        $organizers = new ObjectStorage();
+        $organizer1 = new Organizer();
+        $organizers->attach($organizer1);
+        $organizer2 = new Organizer();
+        $organizers->attach($organizer2);
+        $this->subject->setOrganizers($organizers);
+
+        self::assertSame($organizer1, $this->subject->getOrganizer());
     }
 }

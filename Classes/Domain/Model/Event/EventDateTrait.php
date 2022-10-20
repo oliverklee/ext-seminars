@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\Speaker;
+use OliverKlee\Seminars\Domain\Model\Venue;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * This trait provides methods that are useful for `EventTopic`s, and usually also `SingleEvent`s.
  *
@@ -53,6 +58,31 @@ trait EventDateTrait
      * @phpstan-var 0|positive-int
      */
     protected $maximumNumberOfRegistrations = 0;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Venue>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $venues;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Speaker>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $speakers;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Organizer>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $organizers;
+
+    public function __construct()
+    {
+        $this->venues = new ObjectStorage();
+        $this->speakers = new ObjectStorage();
+        $this->organizers = new ObjectStorage();
+    }
 
     public function getStart(): ?\DateTime
     {
@@ -144,5 +174,71 @@ trait EventDateTrait
     public function setMaximumNumberOfRegistrations(int $maximumNumberOfRegistrations): void
     {
         $this->maximumNumberOfRegistrations = $maximumNumberOfRegistrations;
+    }
+
+    /**
+     * @return ObjectStorage<Venue>
+     */
+    public function getVenues(): ObjectStorage
+    {
+        return $this->venues;
+    }
+
+    /**
+     * @param ObjectStorage<Venue> $venues
+     */
+    public function setVenues(ObjectStorage $venues): void
+    {
+        $this->venues = $venues;
+    }
+
+    /**
+     * @return ObjectStorage<Speaker>
+     */
+    public function getSpeakers(): ObjectStorage
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * @param ObjectStorage<Speaker> $speakers
+     */
+    public function setSpeakers(ObjectStorage $speakers): void
+    {
+        $this->speakers = $speakers;
+    }
+
+    /**
+     * @return ObjectStorage<Organizer>
+     */
+    public function getOrganizers(): ObjectStorage
+    {
+        return $this->organizers;
+    }
+
+    /**
+     * @param ObjectStorage<Organizer> $organizers
+     */
+    public function setOrganizers(ObjectStorage $organizers): void
+    {
+        $this->organizers = $organizers;
+    }
+
+    /**
+     * @deprecated will be removed in seminars 6.0.
+     */
+    public function getFirstOrganizer(): ?Organizer
+    {
+        $organizers = $this->getOrganizers();
+
+        return \count($organizers) > 0 ? $organizers->current() : null;
+    }
+
+    /**
+     * Alias for `getFirstOrganizer()`.
+     */
+    public function getOrganizer(): ?Organizer
+    {
+        return $this->getFirstOrganizer();
     }
 }

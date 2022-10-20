@@ -10,6 +10,9 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\Speaker;
+use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -329,5 +332,95 @@ final class EventRepositoryTest extends FunctionalTestCase
         $eventType = $result->getEventType();
         self::assertInstanceOf(EventType::class, $eventType);
         self::assertSame(1, $eventType->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsVenuesAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithVenue.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getVenues();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Venue::class, $associatedModels->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsVenuesAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithVenue.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getVenues();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Venue::class, $associatedModels->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsSpeakersAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithSpeaker.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getSpeakers();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Speaker::class, $associatedModels->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsSpeakersAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithSpeaker.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getSpeakers();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Speaker::class, $associatedModels->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsOrganizersAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithOrganizer.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getOrganizers();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Organizer::class, $associatedModels->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsOrganizersAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithOrganizer.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getOrganizers();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(Organizer::class, $associatedModels->current());
     }
 }
