@@ -12,7 +12,7 @@ $EM_CONF[$_EXTKEY] = [
             'extbase' => '9.5.7-10.4.99',
             'feuserextrafields' => '3.2.0-5.99.99',
             'oelib' => '4.3.1-5.99.99',
-            'mkforms' => '10.1.0-10.1.99',
+            'mkforms' => '10.1.0-11.99.99',
             'rn_base' => '1.15.0-1.15.99',
             'static_info_tables' => '6.9.5-11.5.99',
         ],
