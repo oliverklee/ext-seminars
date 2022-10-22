@@ -9,7 +9,6 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
  */
 class EventTopic extends Event implements EventTopicInterface
 {
-    use EventTrait;
     use EventTopicTrait;
 
     public function __construct()

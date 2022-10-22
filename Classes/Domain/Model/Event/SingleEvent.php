@@ -9,7 +9,6 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
  */
 class SingleEvent extends Event implements EventDateInterface, EventTopicInterface
 {
-    use EventTrait;
     use EventTopicTrait;
     use EventDateTrait;
 

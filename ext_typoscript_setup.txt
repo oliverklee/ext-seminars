@@ -26,6 +26,8 @@ config.tx_extbase.persistence.classes {
             tableName = tx_seminars_seminars
             recordType = 0
             columns {
+                crdate.mapOnProperty = creationDate
+                tstamp.mapOnProperty = changeDate
                 title.mapOnProperty = internalTitle
                 begin_date.mapOnProperty = start
                 end_date.mapOnProperty = end
@@ -58,6 +60,8 @@ config.tx_extbase.persistence.classes {
             tableName = tx_seminars_seminars
             recordType = 1
             columns {
+                crdate.mapOnProperty = creationDate
+                tstamp.mapOnProperty = changeDate
                 title.mapOnProperty = internalTitle
                 price_regular.mapOnProperty = standardPrice
                 price_regular_early.mapOnProperty = earlyBirdPrice
@@ -75,6 +79,8 @@ config.tx_extbase.persistence.classes {
             tableName = tx_seminars_seminars
             recordType = 2
             columns {
+                crdate.mapOnProperty = creationDate
+                tstamp.mapOnProperty = changeDate
                 title.mapOnProperty = internalTitle
                 topic.mapOnProperty = topic
                 begin_date.mapOnProperty = start

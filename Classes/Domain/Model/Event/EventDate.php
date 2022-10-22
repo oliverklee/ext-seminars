@@ -14,7 +14,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class EventDate extends Event implements EventDateInterface
 {
-    use EventTrait;
     use EventDateTrait;
 
     /**

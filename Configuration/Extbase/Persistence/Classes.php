@@ -25,6 +25,8 @@ return [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
         'properties' => [
+            'creationDate' => ['fieldName' => 'crdate'],
+            'changeDate' => ['fieldName' => 'tstamp'],
             'internalTitle' => ['fieldName' => 'title'],
             'start' => ['fieldName' => 'begin_date'],
             'end' => ['fieldName' => 'end_date'],
@@ -54,6 +56,8 @@ return [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC,
         'properties' => [
+            'creationDate' => ['fieldName' => 'crdate'],
+            'changeDate' => ['fieldName' => 'tstamp'],
             'internalTitle' => ['fieldName' => 'title'],
             'standardPrice' => ['fieldName' => 'price_regular'],
             'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
@@ -68,6 +72,8 @@ return [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE,
         'properties' => [
+            'creationDate' => ['fieldName' => 'crdate'],
+            'changeDate' => ['fieldName' => 'tstamp'],
             'internalTitle' => ['fieldName' => 'title'],
             'topic' => ['fieldName' => 'topic'],
             'start' => ['fieldName' => 'begin_date'],

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Event;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\Domain\Model\Interfaces\ChangeDate;
+use OliverKlee\Oelib\Domain\Model\Interfaces\CreationDate;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
@@ -62,6 +64,22 @@ final class EventTopicTest extends UnitTestCase
     /**
      * @test
      */
+    public function implementsCreationDate(): void
+    {
+        self::assertInstanceOf(CreationDate::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsChangeDate(): void
+    {
+        self::assertInstanceOf(ChangeDate::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
     public function isEvent(): void
     {
         self::assertInstanceOf(Event::class, $this->subject);
@@ -73,6 +91,44 @@ final class EventTopicTest extends UnitTestCase
     public function isRegistrationPossibleForThisClassReturnsFalse(): void
     {
         self::assertFalse($this->subject->isRegistrationPossibleForThisClass());
+    }
+
+    /**
+     * @test
+     */
+    public function getCreationDateInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getCreationDate());
+    }
+
+    /**
+     * @test
+     */
+    public function setCreationDateSetsCreationDate(): void
+    {
+        $date = new \DateTimeImmutable();
+        $this->subject->setCreationDate($date);
+
+        self::assertSame($date, $this->subject->getCreationDate());
+    }
+
+    /**
+     * @test
+     */
+    public function getChangeDateInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getChangeDate());
+    }
+
+    /**
+     * @test
+     */
+    public function setChangeDateSetsChangeDate(): void
+    {
+        $date = new \DateTimeImmutable();
+        $this->subject->setChangeDate($date);
+
+        self::assertSame($date, $this->subject->getChangeDate());
     }
 
     /**

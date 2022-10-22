@@ -2,6 +2,8 @@
 <dataset>
     <tx_seminars_seminars>
         <uid>1</uid>
+        <crdate>1666461600</crdate>
+        <tstamp>1666465200</tstamp>
         <object_type>2</object_type>
         <title>Jousting date</title>
         <topic>2</topic>
