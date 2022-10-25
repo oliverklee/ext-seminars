@@ -204,4 +204,23 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame($model, $this->subject->getEventType());
     }
+
+    /**
+     * @test
+     */
+    public function getOwnerUidInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getOwnerUid());
+    }
+
+    /**
+     * @test
+     */
+    public function setOwnerUidSetsOwnerUid(): void
+    {
+        $value = 123456;
+        $this->subject->setOwnerUid($value);
+
+        self::assertSame($value, $this->subject->getOwnerUid());
+    }
 }

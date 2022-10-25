@@ -37,4 +37,6 @@ interface EventInterface
     public function getEarlyBirdPrice(): float;
 
     public function getEventType(): ?EventType;
+
+    public function getOwnerUid(): int;
 }

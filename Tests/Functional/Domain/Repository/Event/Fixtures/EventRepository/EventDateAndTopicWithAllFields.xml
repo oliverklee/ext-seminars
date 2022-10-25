@@ -13,6 +13,7 @@
         <queue_size>1</queue_size>
         <attendees_min>5</attendees_min>
         <attendees_max>20</attendees_max>
+        <owner_feuser>15</owner_feuser>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>2</uid>

@@ -34,6 +34,7 @@ return [
             'standardPrice' => ['fieldName' => 'price_regular'],
             'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
             'venues' => ['fieldName' => 'place'],
+            'ownerUid' => ['fieldName' => 'owner_feuser'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
@@ -43,6 +44,7 @@ return [
             'internalTitle' => ['fieldName' => 'title'],
             'standardPrice' => ['fieldName' => 'price_regular'],
             'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
+            'ownerUid' => ['fieldName' => 'owner_feuser'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventDate::class => [
@@ -60,6 +62,7 @@ return [
             'minimumNumberOfRegistrations' => ['fieldName' => 'attendees_min'],
             'maximumNumberOfRegistrations' => ['fieldName' => 'attendees_max'],
             'venues' => ['fieldName' => 'place'],
+            'ownerUid' => ['fieldName' => 'owner_feuser'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\EventType::class => [
