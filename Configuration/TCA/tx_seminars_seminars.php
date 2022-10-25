@@ -23,9 +23,9 @@ $tca = [
         'typeicon_column' => 'object_type',
         'typeicon_classes' => [
             'default' => 'tx-seminars-event-complete',
-            '0' => 'tx-seminars-event-complete',
-            '1' => 'tx-seminars-event-topic',
-            '2' => 'tx-seminars-event-date',
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT => 'tx-seminars-event-complete',
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC => 'tx-seminars-event-topic',
+            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE => 'tx-seminars-event-date',
         ],
         'hideAtCopy' => true,
         'searchFields' => 'title,accreditation_number',
