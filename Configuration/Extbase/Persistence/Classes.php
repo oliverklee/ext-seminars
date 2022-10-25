@@ -15,7 +15,7 @@ return [
             => \OliverKlee\Seminars\Domain\Model\Event\EventDate::class,
         ],
         'properties' => [
-            'owner' => ['fieldName' => 'owner_feuser'],
+            'ownerUid' => ['fieldName' => 'owner_feuser'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class => [
