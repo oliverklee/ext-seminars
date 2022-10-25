@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Rewrite the FE editor (#1656, #1657, 1658)
+- Rewrite the FE editor for TYPO3 >= 10LTS (#1656, #1657, #1658, #1663)
 - Add an `Event` model and repository
   (#1599, #1600, #1602, #1603, #1604, #1616, #1617, #1618, #1622, #1625, #1626, #1627, #1630, #1631, #1639, #1643)
 - Add an `Organizer` model and repository (#1590)

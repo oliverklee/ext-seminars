@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') or die('Access denied.');
 
-$boot = static function () {
+(static function (): void {
     $tables = [
         'seminars',
         'speakers',
@@ -99,7 +99,23 @@ $boot = static function () {
         = \OliverKlee\Seminars\UpgradeWizards\SeminarImageToFalUpgradeWizard::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarAttachmentsToFal']
         = \OliverKlee\Seminars\UpgradeWizards\SeminarAttachmentsToFalUpgradeWizard::class;
-};
 
-$boot();
-unset($boot);
+    $typo3Version = new \TYPO3\CMS\Core\Information\Typo3Version();
+    if ($typo3Version->getMajorVersion() >= 10) {
+        // This makes the plugin available for front-end rendering.
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            // extension name, matching the PHP namespaces (but without the vendor)
+            'Seminars',
+            // arbitrary, but unique plugin name (not visible in the BE)
+            'FrontEndEditor',
+            // all actions
+            [
+                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index',
+            ],
+            // non-cacheable actions
+            [
+                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index',
+            ]
+        );
+    }
+})();

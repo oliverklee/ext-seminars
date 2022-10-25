@@ -1471,6 +1471,16 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Call to an undefined method Nimut\\\\TestingFramework\\\\MockObject\\\\AccessibleMockObjectInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:injectEventRepository\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/FrontEndEditorControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\FrontEndEditorControllerTest\\:\\:\\$subject \\(Nimut\\\\TestingFramework\\\\MockObject\\\\AccessibleMockObjectInterface&OliverKlee\\\\Seminars\\\\Controller\\\\FrontEndEditorController&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) does not accept Nimut\\\\TestingFramework\\\\MockObject\\\\AccessibleMockObjectInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/FrontEndEditorControllerTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookImplementorReturnsArray\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/Fixtures/TestingHookImplementorReturnsArray.php
