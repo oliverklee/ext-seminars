@@ -14,6 +14,9 @@ return [
             \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE
             => \OliverKlee\Seminars\Domain\Model\Event\EventDate::class,
         ],
+        'properties' => [
+            'owner' => ['fieldName' => 'owner_feuser'],
+        ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class => [
         'tableName' => 'tx_seminars_seminars',
