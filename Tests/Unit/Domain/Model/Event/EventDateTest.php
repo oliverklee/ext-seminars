@@ -479,4 +479,23 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($organizer1, $this->subject->getOrganizer());
     }
+
+    /**
+     * @test
+     */
+    public function getOwnerUidInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getOwnerUid());
+    }
+
+    /**
+     * @test
+     */
+    public function setOwnerUidSetsOwnerUid(): void
+    {
+        $value = 123456;
+        $this->subject->setOwnerUid($value);
+
+        self::assertSame($value, $this->subject->getOwnerUid());
+    }
 }

@@ -72,6 +72,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(20, $result->getMaximumNumberOfRegistrations());
         self::assertEqualsWithDelta(150.0, $result->getStandardPrice(), 0.0001);
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
+        self::assertSame(15, $result->getOwnerUid());
     }
 
     /**
@@ -105,6 +106,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('There is no glory in prevention.', $result->getDescription());
         self::assertEqualsWithDelta(150.0, $result->getStandardPrice(), 0.0001);
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
+        self::assertSame(15, $result->getOwnerUid());
     }
 
     /**
@@ -128,6 +130,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
         self::assertSame(20, $result->getMaximumNumberOfRegistrations());
+        self::assertSame(15, $result->getOwnerUid());
     }
 
     /**

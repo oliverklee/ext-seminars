@@ -32,6 +32,7 @@ config.tx_extbase.persistence.classes {
                 price_regular.mapOnProperty = standardPrice
                 price_regular_early.mapOnProperty = earlyBirdPrice
                 place.mapOnProperty = venues
+                owner_feuser.mapOnProperty = ownerUid
             }
         }
     }
@@ -44,6 +45,7 @@ config.tx_extbase.persistence.classes {
                 title.mapOnProperty = internalTitle
                 price_regular.mapOnProperty = standardPrice
                 price_regular_early.mapOnProperty = earlyBirdPrice
+                owner_feuser.mapOnProperty = ownerUid
             }
         }
     }
@@ -64,6 +66,7 @@ config.tx_extbase.persistence.classes {
                 attendees_min.mapOnProperty = minimumNumberOfRegistrations
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
                 place.mapOnProperty = venues
+                owner_feuser.mapOnProperty = ownerUid
             }
         }
     }
