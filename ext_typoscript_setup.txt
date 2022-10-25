@@ -3,6 +3,9 @@ config.tx_extbase.persistence.classes {
     OliverKlee\Seminars\Domain\Model\Event\Event {
         mapping {
             tableName = tx_seminars_seminars
+            columns {
+                owner_feuser.mapOnProperty = owner
+            }
         }
 
         subclasses {
