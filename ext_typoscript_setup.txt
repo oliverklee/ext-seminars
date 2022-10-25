@@ -4,7 +4,7 @@ config.tx_extbase.persistence.classes {
         mapping {
             tableName = tx_seminars_seminars
             columns {
-                owner_feuser.mapOnProperty = owner
+                owner_feuser.mapOnProperty = ownerUid
             }
         }
 

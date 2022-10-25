@@ -37,7 +37,7 @@ class EventRepository extends Repository implements DirectPersist
         $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
 
         $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
-        $ownerMatcher = $query->equals('owner', $ownerUid);
+        $ownerMatcher = $query->equals('ownerUid', $ownerUid);
         $query->matching($query->logicalAnd($objectTypeMatcher, $ownerMatcher));
 
         return $query->execute()->toArray();
