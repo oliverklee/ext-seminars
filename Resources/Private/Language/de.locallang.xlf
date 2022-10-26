@@ -2554,6 +2554,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Date of birth</source>
 				<target>Geburtsdatum</target>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor">
+				<source>Front-end editor for events</source>
+				<target>Front-end-Editor für Veranstaltungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.index.headline">
+				<source>Events I have created</source>
+				<target>Veranstaltungen, die ich erstellt habe</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
