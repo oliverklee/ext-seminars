@@ -12,12 +12,28 @@
                     <f:for each="{events}" as="event">
                         <tr>
                             <th scope="col">
+                                <f:translate key="plugin.frontEndEditor.property.uid"/>
+                            </th>
+                            <th scope="col">
                                 <f:translate key="plugin.frontEndEditor.property.internalTitle"/>
+                            </th>
+                            <th scope="col">
+                                <f:translate key="plugin.frontEndEditor.property.date"/>
                             </th>
                         </tr>
                         <tr>
                             <td>
+                                {event.uid}
+                            </td>
+                            <td>
                                 {event.internalTitle}
+                            </td>
+                            <td>
+                                <f:if condition="{event.start}">
+                                    {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}')}<f:if condition="{event.end}">&ndash;{event.end -> f:format.date(format:
+                                        '{f:translate(key: \'dateFormat\')}')}
+                                    </f:if>
+                                </f:if>
                             </td>
                         </tr>
                     </f:for>
