@@ -9,10 +9,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Rewrite the FE editor for TYPO3 >= 10LTS (#1656, #1657, #1658, #1663, #1666)
 - Add an `Event` model and repository
   (#1599, #1600, #1602, #1603, #1604, #1616, #1617, #1618, #1622, #1625, #1626, #1627, #1630, #1631, #1639, #1643)
-- Add an `Organizer` model and repository (#1590)
-- Add a `Venue` model and repository (#1586)
-- Add an `EventType` model and repository (#1575)
-- Add a `Speaker` model and repository (#1564)
+- Add an `Organizer` model and repository (#1590, #1667)
+- Add a `Venue` model and repository (#1586, #1667)
+- Add an `EventType` model and repository (#1575, #1667)
+- Add a `Speaker` model and repository (#1564, #1667)
 - Add `composer normalize` to the CI toolchain (#1559)
 - Add a services configuration file (#1548)
 

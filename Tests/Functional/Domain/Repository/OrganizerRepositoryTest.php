@@ -49,4 +49,16 @@ final class OrganizerRepositoryTest extends FunctionalTestCase
         self::assertSame('Dan Chase', $result->getName());
         self::assertSame('dan@example.com', $result->getEmailAddress());
     }
+
+    /**
+     * @test
+     */
+    public function findsRecordOnPages(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/OrganizerRepository/OrganizerOnPage.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(1, $result);
+    }
 }
