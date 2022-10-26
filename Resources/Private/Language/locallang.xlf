@@ -1911,8 +1911,14 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor.index.headline">
 				<source>Events I have created</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.uid">
+				<source>UID</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
 				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.date">
+				<source>Date</source>
 			</trans-unit>
 		</body>
 	</file>

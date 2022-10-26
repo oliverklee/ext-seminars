@@ -2562,9 +2562,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Events I have created</source>
 				<target>Veranstaltungen, die ich erstellt habe</target>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.uid">
+				<source>UID</source>
+				<target>UID</target>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.internalTitle">
 				<source>Title</source>
 				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.date">
+				<source>Date</source>
+				<target>Datum</target>
 			</trans-unit>
 		</body>
 	</file>
