@@ -20,6 +20,7 @@ trait EventTrait
      *
      * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Extbase\Validate("NotEmpty")
      */
     protected $internalTitle = '';
 
@@ -35,6 +36,9 @@ trait EventTrait
         return $this->internalTitle;
     }
 
+    /**
+     * @param non-empty-string $name
+     */
     public function setInternalTitle(string $name): void
     {
         $this->internalTitle = $name;
