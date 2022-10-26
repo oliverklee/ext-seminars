@@ -48,4 +48,16 @@ final class VenueRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Venue::class, $result);
         self::assertSame('JH Köln-Deutz', $result->getTitle());
     }
+
+    /**
+     * @test
+     */
+    public function findsRecordOnPages(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/VenueRepository/VenueOnPage.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(1, $result);
+    }
 }

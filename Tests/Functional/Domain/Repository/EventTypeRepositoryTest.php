@@ -48,4 +48,16 @@ final class EventTypeRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(EventType::class, $result);
         self::assertSame('Hands-on session', $result->getTitle());
     }
+
+    /**
+     * @test
+     */
+    public function findsRecordOnPages(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTypeRepository/EventTypeOnPage.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(1, $result);
+    }
 }
