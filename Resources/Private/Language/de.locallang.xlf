@@ -2562,6 +2562,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Events I have created</source>
 				<target>Veranstaltungen, die ich erstellt habe</target>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.edit.headline">
+				<source>Edit event</source>
+				<target>Veranstaltung bearbeiten</target>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.uid">
 				<source>UID</source>
 				<target>UID</target>
@@ -2573,6 +2577,78 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.frontEndEditor.property.date">
 				<source>Date</source>
 				<target>Datum</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.standardPrice">
+				<source>Standard price</source>
+				<target>Standardpreis</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
+				<source>Early-bird price</source>
+				<target>Frühbucherpreis</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.eventType">
+				<source>Event type</source>
+				<target>Veranstaltungsart</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.start">
+				<source>Start</source>
+				<target>Anfang</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.end">
+				<source>End</source>
+				<target>Ende</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
+				<source>Early-bird deadline</source>
+				<target>Frühbucherfrist</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
+				<source>Registration deadline</source>
+				<target>Anmeldefrist</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.registrationRequired">
+				<source>Registration is required</source>
+				<target>Anmeldung ist notwendig</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.waitingList">
+				<source>Has a waiting list</source>
+				<target>Hat eine Warteliste</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+				<source>Required registrations</source>
+				<target>Minimale Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+				<source>Maximum registrations</source>
+				<target>Maximale Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.venues">
+				<source>Venues</source>
+				<target>Veranstaltungsorte</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.speakers">
+				<source>Speakers</source>
+				<target>Referent:innen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.organizers">
+				<source>Organizer</source>
+				<target>Veranstalter:in</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.edit">
+				<source>Edit</source>
+				<target>Bearbeiten</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.cancel">
+				<source>Cancel</source>
+				<target>Abbrechen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.save">
+				<source>Save</source>
+				<target>Speichern</target>
 			</trans-unit>
 		</body>
 	</file>

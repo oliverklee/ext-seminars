@@ -1,0 +1,153 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    {f:variable(name: 'labelPrefix', value: 'plugin.frontEndEditor')}
+    {f:variable(name: 'propertylabelPrefix', value: '{labelPrefix}.property')}
+    {f:variable(name: 'idPrefix', value: 'event-editor')}
+    <fieldset>
+        <div class="row mb-3">
+            <label for="{idPrefix}-internalTitle" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.internalTitle"/>
+            </label>
+            <div class="col-sm-10">
+                <f:form.textfield property="internalTitle" id="{idPrefix}-internalTitle" maxlength="255"
+                                  class="form-control" errorClass="is-invalid" required="required"/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="{idPrefix}-description" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.description"/>
+            </label>
+            <div class="col-sm-10">
+                <f:form.textarea property="description" id="{idPrefix}-description"
+                                 class="form-control" rows="5" errorClass="is-invalid"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <label for="{idPrefix}-start" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.start"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield name="event[start][date]" id="{idPrefix}-start" maxlength="16"
+                                  class="form-control" type="datetime-local"
+                                  value="{event.start -> f:format.date(format: 'Y-m-d H:i')}"/>
+                <f:form.hidden name="event[start][dateFormat]" value="Y-m-d\TH:i"/>
+            </div>
+
+            <label for="{idPrefix}-end" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.end"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield name="event[end][date]" id="{idPrefix}-end" maxlength="16"
+                                  class="form-control" type="datetime-local"
+                                  value="{event.end -> f:format.date(format: 'Y-m-d H:i')}"/>
+                <f:form.hidden name="event[end][dateFormat]" value="Y-m-d\TH:i"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="{idPrefix}-earlyBirdDeadline" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.earlyBirdDeadline"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield name="event[earlyBirdDeadline][date]" id="{idPrefix}-earlyBirdDeadline" maxlength="16"
+                                  class="form-control" type="datetime-local"
+                                  value="{event.earlyBirdDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
+                <f:form.hidden name="event[earlyBirdDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+            </div>
+
+            <label for="{idPrefix}-registrationDeadline" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.registrationDeadline"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield name="event[registrationDeadline][date]" id="{idPrefix}-registrationDeadline"
+                                  maxlength="16"
+                                  class="form-control" type="datetime-local"
+                                  value="{event.registrationDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
+                <f:form.hidden name="event[registrationDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <div class="col-sm-4 offset-sm-2">
+                <div class="form-check">
+                    <f:form.checkbox property="registrationRequired" id="{idPrefix}-registrationRequired"
+                                     class="form-check-input" errorClass="is-invalid"
+                                     value="1" checked="{event.registrationRequired}"/>
+                    <label for="{idPrefix}-registrationRequired" class="form-check-label">
+                        <f:translate key="{propertylabelPrefix}.registrationRequired"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-4 offset-sm-2">
+                <div class="form-check">
+                    <f:form.checkbox property="waitingList" id="{idPrefix}-waitingList"
+                                     class="form-check-input" errorClass="is-invalid"
+                                     value="1" checked="{event.waitingList}"/>
+                    <label for="{idPrefix}-waitingList" class="form-check-label">
+                        <f:translate key="{propertylabelPrefix}.waitingList"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <label for="{idPrefix}-minimumNumberOfRegistrations" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.minimumNumberOfRegistrations"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}minimumNumberOfRegistrations" maxlength="9"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4"
+                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
+                />
+            </div>
+
+            <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.maximumNumberOfRegistrations"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}maximumNumberOfRegistrations" maxlength="9"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4"
+                                  additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
+                />
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <label for="{idPrefix}-standardPrice" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.standardPrice"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="9"
+                                  class="form-control" errorClass="is-invalid"
+                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
+                />
+            </div>
+
+            <label for="{idPrefix}-earlyBirdPrice" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.earlyBirdPrice"/>
+            </label>
+            <div class="col-sm-4">
+                <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="9"
+                                  class="form-control" errorClass="is-invalid"
+                                  additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
+                />
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="d-flex justify-content-end mt-3 mb-3">
+        <f:link.action action="index" class="btn btn-outline-secondary me-3" additionalAttributes="{role: 'button'}">
+            <f:translate key="plugin.frontEndEditor.action.cancel"/>
+        </f:link.action>
+        <f:form.submit value="{f:translate(key: 'plugin.frontEndEditor.action.save')}" class="btn btn-primary"/>
+    </div>
+</html>

@@ -1911,6 +1911,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor.index.headline">
 				<source>Events I have created</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.edit.headline">
+				<source>Edit event</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.uid">
 				<source>UID</source>
 			</trans-unit>
@@ -1919,6 +1922,60 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.date">
 				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.standardPrice">
+				<source>Standard price</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.eventType">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.start">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.end">
+				<source>End</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
+				<source>Early-bird deadline</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
+				<source>Registration deadline</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.registrationRequired">
+				<source>Registration is required</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.waitingList">
+				<source>Has a waiting list</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+				<source>Required registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+				<source>Maximum registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.venues">
+				<source>Venues</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.speakers">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.property.organizers">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.edit">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.save">
+				<source>Save</source>
 			</trans-unit>
 		</body>
 	</file>

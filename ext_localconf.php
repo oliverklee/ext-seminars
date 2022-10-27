@@ -110,11 +110,11 @@ defined('TYPO3_MODE') or die('Access denied.');
             'FrontEndEditor',
             // all actions
             [
-                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index',
+                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update',
             ],
             // non-cacheable actions
             [
-                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index',
+                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update',
             ]
         );
     }
