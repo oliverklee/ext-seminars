@@ -246,19 +246,19 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
-    public function requiresRegistrationInitiallyReturnsFalse(): void
+    public function isRegistrationRequiredInitiallyReturnsFalse(): void
     {
-        self::assertFalse($this->subject->requiresRegistration());
+        self::assertFalse($this->subject->isRegistrationRequired());
     }
 
     /**
      * @test
      */
-    public function setRequiresRegistrationSetsRequiresRegistration(): void
+    public function setRegistrationRequiredSetsRegistrationRequired(): void
     {
-        $this->subject->setRequiresRegistration(true);
+        $this->subject->setRegistrationRequired(true);
 
-        self::assertTrue($this->subject->requiresRegistration());
+        self::assertTrue($this->subject->isRegistrationRequired());
     }
 
     /**
@@ -272,9 +272,9 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHasWaitingListSetsHasWaitingList(): void
+    public function setWaitingListSetsHasWaitingList(): void
     {
-        $this->subject->setHasWaitingList(true);
+        $this->subject->setWaitingList(true);
 
         self::assertTrue($this->subject->hasWaitingList());
     }
