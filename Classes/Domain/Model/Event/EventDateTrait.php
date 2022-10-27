@@ -89,7 +89,7 @@ trait EventDateTrait
         return $this->start;
     }
 
-    public function setStart(\DateTime $start): void
+    public function setStart(?\DateTime $start): void
     {
         $this->start = $start;
     }
@@ -99,7 +99,7 @@ trait EventDateTrait
         return $this->end;
     }
 
-    public function setEnd(\DateTime $end): void
+    public function setEnd(?\DateTime $end): void
     {
         $this->end = $end;
     }
@@ -109,7 +109,7 @@ trait EventDateTrait
         return $this->earlyBirdDeadline;
     }
 
-    public function setEarlyBirdDeadline(\DateTime $earlyBirdDeadline): void
+    public function setEarlyBirdDeadline(?\DateTime $earlyBirdDeadline): void
     {
         $this->earlyBirdDeadline = $earlyBirdDeadline;
     }
@@ -119,7 +119,7 @@ trait EventDateTrait
         return $this->registrationDeadline;
     }
 
-    public function setRegistrationDeadline(\DateTime $registrationDeadline): void
+    public function setRegistrationDeadline(?\DateTime $registrationDeadline): void
     {
         $this->registrationDeadline = $registrationDeadline;
     }

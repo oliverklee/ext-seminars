@@ -172,6 +172,16 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function setStartCanSetStartToNull(): void
+    {
+        $this->subject->setStart(null);
+
+        self::assertNull($this->subject->getStart());
+    }
+
+    /**
+     * @test
+     */
     public function getEndInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getEnd());
@@ -186,6 +196,16 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setEnd($model);
 
         self::assertSame($model, $this->subject->getEnd());
+    }
+
+    /**
+     * @test
+     */
+    public function setEndCanSetEndToNull(): void
+    {
+        $this->subject->setEnd(null);
+
+        self::assertNull($this->subject->getEnd());
     }
 
     /**
@@ -210,6 +230,16 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function setEarlyBirdDeadlineCanSetEarlyBirdDeadlineToNull(): void
+    {
+        $this->subject->setEarlyBirdDeadline(null);
+
+        self::assertNull($this->subject->getEarlyBirdDeadline());
+    }
+
+    /**
+     * @test
+     */
     public function getRegistrationDeadlineInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getRegistrationDeadline());
@@ -224,6 +254,16 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setRegistrationDeadline($model);
 
         self::assertSame($model, $this->subject->getRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function setRegistrationDeadlineCanSetRegistrationDeadlineToNull(): void
+    {
+        $this->subject->setRegistrationDeadline(null);
+
+        self::assertNull($this->subject->getRegistrationDeadline());
     }
 
     /**
