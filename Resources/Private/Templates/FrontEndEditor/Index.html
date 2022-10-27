@@ -7,18 +7,18 @@
             <f:translate key="plugin.frontEndEditor.index.headline"/>
         </h2>
         <table class="table table-hover">
+            <tr>
+                <th scope="col">
+                    <f:translate key="plugin.frontEndEditor.property.uid"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.frontEndEditor.property.internalTitle"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.frontEndEditor.property.date"/>
+                </th>
+            </tr>
             <f:for each="{events}" as="event">
-                <tr>
-                    <th scope="col">
-                        <f:translate key="plugin.frontEndEditor.property.uid"/>
-                    </th>
-                    <th scope="col">
-                        <f:translate key="plugin.frontEndEditor.property.internalTitle"/>
-                    </th>
-                    <th scope="col">
-                        <f:translate key="plugin.frontEndEditor.property.date"/>
-                    </th>
-                </tr>
                 <tr>
                     <td>
                         {event.uid}
