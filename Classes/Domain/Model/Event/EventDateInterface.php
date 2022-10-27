@@ -22,7 +22,7 @@ interface EventDateInterface
 
     public function getRegistrationDeadline(): ?\DateTime;
 
-    public function requiresRegistration(): bool;
+    public function isRegistrationRequired(): bool;
 
     public function hasWaitingList(): bool;
 

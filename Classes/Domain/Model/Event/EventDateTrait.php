@@ -40,12 +40,12 @@ trait EventDateTrait
     /**
      * @var bool
      */
-    protected $requiresRegistration = false;
+    protected $registrationRequired = false;
 
     /**
      * @var bool
      */
-    protected $hasWaitingList = false;
+    protected $waitingList = false;
 
     /**
      * @var int
@@ -124,24 +124,24 @@ trait EventDateTrait
         $this->registrationDeadline = $registrationDeadline;
     }
 
-    public function requiresRegistration(): bool
+    public function isRegistrationRequired(): bool
     {
-        return $this->requiresRegistration;
+        return $this->registrationRequired;
     }
 
-    public function setRequiresRegistration(bool $requiresRegistration): void
+    public function setRegistrationRequired(bool $registrationRequired): void
     {
-        $this->requiresRegistration = $requiresRegistration;
+        $this->registrationRequired = $registrationRequired;
     }
 
     public function hasWaitingList(): bool
     {
-        return $this->hasWaitingList;
+        return $this->waitingList;
     }
 
-    public function setHasWaitingList(bool $hasWaitingList): void
+    public function setWaitingList(bool $waitingList): void
     {
-        $this->hasWaitingList = $hasWaitingList;
+        $this->waitingList = $waitingList;
     }
 
     /**

@@ -25,8 +25,8 @@ config.tx_extbase.persistence.classes {
                 end_date.mapOnProperty = end
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
-                needs_registration.mapOnProperty = requiresRegistration
-                queue_size.mapOnProperty = hasWaitingList
+                needs_registration.mapOnProperty = registrationRequired
+                queue_size.mapOnProperty = waitingList
                 attendees_min.mapOnProperty = minimumNumberOfRegistrations
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
                 price_regular.mapOnProperty = standardPrice
@@ -61,8 +61,8 @@ config.tx_extbase.persistence.classes {
                 end_date.mapOnProperty = end
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
-                needs_registration.mapOnProperty = requiresRegistration
-                queue_size.mapOnProperty = hasWaitingList
+                needs_registration.mapOnProperty = registrationRequired
+                queue_size.mapOnProperty = waitingList
                 attendees_min.mapOnProperty = minimumNumberOfRegistrations
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
                 place.mapOnProperty = venues
