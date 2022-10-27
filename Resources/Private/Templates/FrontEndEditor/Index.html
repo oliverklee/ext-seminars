@@ -30,9 +30,14 @@
                             </td>
                             <td>
                                 <f:if condition="{event.start}">
-                                    {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}')}<f:if condition="{event.end}">&ndash;{event.end -> f:format.date(format:
-                                        '{f:translate(key: \'dateFormat\')}')}
+                                    {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
+                                    f:variable(name: 'start')}
+                                    <f:if condition="{event.end}">
+                                        {event.end -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
+                                        f:variable(name: 'end')}
+                                        {f:variable(name: 'end', value: '–{end}')}
                                     </f:if>
+                                    {start}{end}
                                 </f:if>
                             </td>
                         </tr>
