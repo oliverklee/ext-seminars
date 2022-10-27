@@ -85,4 +85,38 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
         $this->subject->indexAction();
     }
+
+    /**
+     * @test
+     */
+    public function editActionAssignsProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+
+        $this->subject->editAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function updateActionPersistsProvidedEvent(): void
+    {
+        $event = new SingleEvent();
+        $this->eventRepositoryProphecy->update($event)->shouldBeCalled();
+        $this->eventRepositoryProphecy->persistAll()->shouldBeCalled();
+
+        $this->subject->updateAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function updateActionRedirectsToIndexAction(): void
+    {
+        $event = new SingleEvent();
+        $this->subject->expects(self::once())->method('redirect')->with('index');
+
+        $this->subject->updateAction($event);
+    }
 }

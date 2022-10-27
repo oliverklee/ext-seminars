@@ -594,3 +594,10 @@ table.tx-seminars-pi1-timeslots td {
 #tx-seminars-pi1-unregistration-form .tx-seminars-pi1-submit {
     margin: .5em 0;
 }
+
+.tx-seminars-frontendeditor input.form-control[type="datetime-local"] {
+    width: 13em;
+}
+.tx-seminars-frontendeditor input.form-control[autocomplete="number"] {
+    width: 13em;
+}

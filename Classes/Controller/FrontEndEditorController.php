@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,5 +32,21 @@ class FrontEndEditorController extends ActionController
 
         $events = $this->eventRepository->findSingleEventsByOwnerUid($userUid);
         $this->view->assign('events', $events);
+    }
+
+    /**
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
+     */
+    public function editAction(SingleEvent $event): void
+    {
+        $this->view->assign('event', $event);
+    }
+
+    public function updateAction(SingleEvent $event): void
+    {
+        $this->eventRepository->update($event);
+        $this->eventRepository->persistAll();
+
+        $this->redirect('index');
     }
 }

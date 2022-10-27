@@ -17,6 +17,8 @@
                 <th scope="col">
                     <f:translate key="plugin.frontEndEditor.property.date"/>
                 </th>
+                <th scope="col">
+                </th>
             </tr>
             <f:for each="{events}" as="event">
                 <tr>
@@ -39,6 +41,11 @@
                             </f:if>
                             {startDate}{endDateWithDash}
                         </f:if>
+                    </td>
+                    <td>
+                        <f:link.action action="edit" arguments="{event: event}">
+                            <f:translate key="plugin.frontEndEditor.action.edit"/>
+                        </f:link.action>
                     </td>
                 </tr>
             </f:for>
