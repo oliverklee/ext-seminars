@@ -28,14 +28,16 @@
                     </td>
                     <td>
                         <f:if condition="{event.start}">
-                            {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
-                            f:variable(name: 'start')}
+                            {event.start ->
+                            f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
+                            f:variable(name: 'startDate')}
                             <f:if condition="{event.end}">
-                                {event.end -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
-                                f:variable(name: 'end')}
-                                {f:variable(name: 'end', value: '–{end}')}
+                                {event.end ->
+                                f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
+                                f:variable(name: 'endDate')}
+                                {f:variable(name: 'endDateWithDash', value: '–{endDate}')}
                             </f:if>
-                            {start}{end}
+                            {startDate}{endDateWithDash}
                         </f:if>
                     </td>
                 </tr>
