@@ -2635,8 +2635,8 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<target>Referent:innen</target>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.organizers">
-				<source>Organizer</source>
-				<target>Veranstalter:in</target>
+				<source>Organizers</source>
+				<target>Veranstalter:innen</target>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.action.edit">
 				<source>Edit</source>

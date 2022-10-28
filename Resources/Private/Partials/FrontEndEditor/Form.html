@@ -22,6 +22,18 @@
                                  class="form-control" rows="5" errorClass="is-invalid"/>
             </div>
         </div>
+
+        <div class="row mb-3">
+            <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.eventType"/>
+            </label>
+            <div class="col-sm-10">
+                <f:form.select property="eventType" id="{idPrefix}-eventType"
+                               options="{eventTypes}" optionLabelField="title" optionValueField="uid"
+                               class="form-select" errorClass="is-invalid"/>
+            </div>
+        </div>
+
     </fieldset>
 
     <fieldset>
@@ -102,8 +114,8 @@
                 <f:translate key="{propertylabelPrefix}.minimumNumberOfRegistrations"/>
             </label>
             <div class="col-sm-4">
-                <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}minimumNumberOfRegistrations" maxlength="9"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4"
+                <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}-minimumNumberOfRegistrations"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
             </div>
@@ -112,8 +124,8 @@
                 <f:translate key="{propertylabelPrefix}.maximumNumberOfRegistrations"/>
             </label>
             <div class="col-sm-4">
-                <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}maximumNumberOfRegistrations" maxlength="9"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4"
+                <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}-maximumNumberOfRegistrations"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
             </div>
@@ -141,6 +153,63 @@
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
                 />
             </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.venues"/>
+            </label>
+            <div class="col-sm-10">
+                <f:for each="{venues}" as="venue">
+                    <div class="form-check">
+                        <f:form.checkbox property="venues" id="{idPrefix}-venues-{venue.uid}"
+                                         class="form-check-input" errorClass="is-invalid"
+                                         value="{venue.uid}"/>
+                        <label for="{idPrefix}-venues-{venue.uid}" class="form-check-label">
+                            {venue.title}
+                        </label>
+                    </div>
+                </f:for>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.speakers"/>
+            </label>
+            <div class="col-sm-4">
+                <f:for each="{speakers}" as="speaker">
+                    <div class="form-check">
+                        <f:form.checkbox property="speakers" id="{idPrefix}-speakers-{speaker.uid}"
+                                         class="form-check-input" errorClass="is-invalid"
+                                         value="{speaker.uid}"/>
+                        <label for="{idPrefix}-speakers-{speaker.uid}" class="form-check-label">
+                            {speaker.name}
+                        </label>
+                    </div>
+                </f:for>
+            </div>
+
+            <label class="col-sm-2 col-form-label">
+                <f:translate key="{propertylabelPrefix}.organizers"/>
+            </label>
+            <div class="col-sm-4">
+                <f:for each="{organizers}" as="organizer">
+                    <div class="form-check">
+                        <f:form.checkbox property="organizers" id="{idPrefix}-organizers-{organizer.uid}"
+                                         class="form-check-input" errorClass="is-invalid"
+                                         value="{organizer.uid}"/>
+                        <label for="{idPrefix}-organizers-{organizer.uid}" class="form-check-label">
+                            {organizer.name}
+                        </label>
+                    </div>
+                </f:for>
+            </div>
+
         </div>
     </fieldset>
 

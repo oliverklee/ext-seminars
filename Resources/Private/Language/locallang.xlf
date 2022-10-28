@@ -1966,7 +1966,7 @@ This event now has been confirmed.</source>
 				<source>Speakers</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.organizers">
-				<source>Organizer</source>
+				<source>Organizers</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.action.edit">
 				<source>Edit</source>
