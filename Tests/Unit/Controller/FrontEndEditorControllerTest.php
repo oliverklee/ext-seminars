@@ -45,10 +45,9 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->subject = $this->getAccessibleMock(
-            FrontEndEditorController::class,
-            ['redirect', 'forward', 'redirectToUri']
-        );
+        /** @var FrontEndEditorController&AccessibleMockObjectInterface&MockObject $subject */
+        $subject = $this->getAccessibleMock(FrontEndEditorController::class, ['redirect', 'forward', 'redirectToUri']);
+        $this->subject = $subject;
 
         $this->viewProphecy = $this->prophesize(TemplateView::class);
         $view = $this->viewProphecy->reveal();
