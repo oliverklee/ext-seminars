@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\NullEventType;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -59,5 +60,43 @@ final class EventTypeRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findAll();
 
         self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllPlusNullEventTypeForNoDataReturnsNullEventType(): void
+    {
+        $result = $this->subject->findAllPlusNullEventType();
+
+        self::assertCount(1, $result);
+        self::assertInstanceOf(NullEventType::class, $result[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllPlusNullEventTypeReturnsNullEventTypeAndRecords(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTypeRepository/EventTypeWithAllFields.xml');
+
+        $result = $this->subject->findAllPlusNullEventType();
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(NullEventType::class, $result[0]);
+        self::assertInstanceOf(EventType::class, $result[1]);
+    }
+
+    /**
+     * @test
+     */
+    public function findAllPlusNullEventTypeAlsoFindsRecordsOnPages(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTypeRepository/EventTypeOnPage.xml');
+
+        $result = $this->subject->findAllPlusNullEventType();
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(EventType::class, $result[1]);
     }
 }
