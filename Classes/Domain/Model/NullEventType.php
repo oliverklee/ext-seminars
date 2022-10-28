@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Domain\Model;
 /**
  * Dummy event type to be used as empty option in selects.
  */
-class NullEventType extends EventType
+class NullEventType implements EventTypeInterface
 {
     /**
      * @return 0
