@@ -25,13 +25,31 @@ class FrontEndEditorController extends ActionController
         $this->eventRepository = $repository;
     }
 
+    private function getLoggedInUserUid(): int
+    {
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+    }
+
     public function indexAction(): void
     {
-        $context = GeneralUtility::makeInstance(Context::class);
-        $userUid = $context->getPropertyFromAspect('frontend.user', 'id');
-
-        $events = $this->eventRepository->findSingleEventsByOwnerUid($userUid);
+        $events = $this->eventRepository->findSingleEventsByOwnerUid($this->getLoggedInUserUid());
         $this->view->assign('events', $events);
+    }
+
+    /**
+     * Checks if the logged-in FE user is the owner of the provided event, and throws an exception otherwise.
+     *
+     * This should only happen if someone manipulates the request.
+     *
+     * Note: This cannot go into an `intialize*Action()` method because the event is not available there.
+     *
+     * @throws \RuntimeException
+     */
+    private function checkEventOwner(SingleEvent $event): void
+    {
+        if ($event->getOwnerUid() !== $this->getLoggedInUserUid()) {
+            throw new \RuntimeException('You do not have permission to edit this event.', 1666954310);
+        }
     }
 
     /**
@@ -39,11 +57,15 @@ class FrontEndEditorController extends ActionController
      */
     public function editAction(SingleEvent $event): void
     {
+        $this->checkEventOwner($event);
+
         $this->view->assign('event', $event);
     }
 
     public function updateAction(SingleEvent $event): void
     {
+        $this->checkEventOwner($event);
+
         $this->eventRepository->update($event);
         $this->eventRepository->persistAll();
 
