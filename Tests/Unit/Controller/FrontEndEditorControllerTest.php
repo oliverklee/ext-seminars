@@ -36,6 +36,11 @@ final class FrontEndEditorControllerTest extends UnitTestCase
      */
     private $eventRepositoryProphecy;
 
+    /**
+     * @var Context&MockObject
+     */
+    private $context;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -51,6 +56,9 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
         $this->eventRepositoryProphecy = $this->prophesize(EventRepository::class);
         $this->subject->injectEventRepository($this->eventRepositoryProphecy->reveal());
+
+        $this->context = $this->createMock(Context::class);
+        GeneralUtility::setSingletonInstance(Context::class, $this->context);
     }
 
     protected function tearDown(): void
@@ -74,9 +82,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function indexActionsAssignsEventsOwnedByLoggedInUserToView(): void
     {
         $ownerUid = 42;
-        $context = $this->createMock(Context::class);
-        $context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
-        GeneralUtility::setSingletonInstance(Context::class, $context);
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
 
         $events = [new SingleEvent()];
         $this->eventRepositoryProphecy->findSingleEventsByOwnerUid($ownerUid)->willReturn($events);
@@ -100,6 +106,37 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function editActionWithEventFromOtherUserThrowsException(): void
+    {
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $event = new SingleEvent();
+        $event->setOwnerUid(2);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
+
+        $this->subject->editAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function editActionWithEventWithoutOwnerThrowsException(): void
+    {
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $event = new SingleEvent();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
+
+        $this->subject->editAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function updateActionPersistsProvidedEvent(): void
     {
         $event = new SingleEvent();
@@ -116,6 +153,37 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $this->subject->expects(self::once())->method('redirect')->with('index');
+
+        $this->subject->updateAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function updateActionWithEventFromOtherUserThrowsException(): void
+    {
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $event = new SingleEvent();
+        $event->setOwnerUid(2);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
+
+        $this->subject->updateAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function updateActionWithEventWithoutOwnerThrowsException(): void
+    {
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(1);
+        $event = new SingleEvent();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You do not have permission to edit this event.');
+        $this->expectExceptionCode(1666954310);
 
         $this->subject->updateAction($event);
     }
