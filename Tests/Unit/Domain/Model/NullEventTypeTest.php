@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
 use OliverKlee\Seminars\Domain\Model\NullEventType;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\NullEventType
@@ -29,17 +28,9 @@ final class NullEventTypeTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractEntity(): void
+    public function implementsEventTypeInterface(): void
     {
-        self::assertInstanceOf(AbstractEntity::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
-    public function isEventType(): void
-    {
-        self::assertInstanceOf(EventType::class, $this->subject);
+        self::assertInstanceOf(EventTypeInterface::class, $this->subject);
     }
 
     /**

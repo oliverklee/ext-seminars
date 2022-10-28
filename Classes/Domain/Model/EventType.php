@@ -10,7 +10,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * This class represents an event type, e.g. "workshop" or "lecture".
  */
-class EventType extends AbstractEntity
+class EventType extends AbstractEntity implements EventTypeInterface
 {
     /**
      * @var string
