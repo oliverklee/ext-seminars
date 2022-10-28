@@ -8,8 +8,19 @@ use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\NullEventType;
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\Speaker;
+use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
+use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
+use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
+use OliverKlee\Seminars\Domain\Repository\VenueRepository;
+use OliverKlee\Seminars\Tests\Unit\Controller\Fixtures\TestingQueryResult;
 use PHPUnit\Framework\MockObject\MockObject;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,6 +48,26 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     private $eventRepositoryProphecy;
 
     /**
+     * @var ObjectProphecy<EventTypeRepository>
+     */
+    private $eventTypeRepositoryProphecy;
+
+    /**
+     * @var ObjectProphecy<OrganizerRepository>
+     */
+    private $organizerRepositoryProphecy;
+
+    /**
+     * @var ObjectProphecy<SpeakerRepository>
+     */
+    private $speakerRepositoryProphecy;
+
+    /**
+     * @var ObjectProphecy<VenueRepository>
+     */
+    private $venueRepositoryProphecy;
+
+    /**
      * @var Context&MockObject
      */
     private $context;
@@ -55,6 +86,14 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
         $this->eventRepositoryProphecy = $this->prophesize(EventRepository::class);
         $this->subject->injectEventRepository($this->eventRepositoryProphecy->reveal());
+        $this->eventTypeRepositoryProphecy = $this->prophesize(EventTypeRepository::class);
+        $this->subject->injectEventTypeRepository($this->eventTypeRepositoryProphecy->reveal());
+        $this->organizerRepositoryProphecy = $this->prophesize(OrganizerRepository::class);
+        $this->subject->injectOrganizerRepository($this->organizerRepositoryProphecy->reveal());
+        $this->speakerRepositoryProphecy = $this->prophesize(SpeakerRepository::class);
+        $this->subject->injectSpeakerRepository($this->speakerRepositoryProphecy->reveal());
+        $this->venueRepositoryProphecy = $this->prophesize(VenueRepository::class);
+        $this->subject->injectVenueRepository($this->venueRepositoryProphecy->reveal());
 
         $this->context = $this->createMock(Context::class);
         GeneralUtility::setSingletonInstance(Context::class, $this->context);
@@ -98,6 +137,43 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+
+        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn([]);
+        $this->viewProphecy->assign('eventTypes', Argument::any())->shouldBeCalled();
+        $this->viewProphecy->assign('organizers', Argument::any())->shouldBeCalled();
+        $this->viewProphecy->assign('speakers', Argument::any())->shouldBeCalled();
+        $this->viewProphecy->assign('venues', Argument::any())->shouldBeCalled();
+
+        $this->subject->editAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function editActionAssignsAuxiliaryRecordsToView(): void
+    {
+        $event = new SingleEvent();
+        $this->viewProphecy->assign('event', Argument::any())->shouldBeCalled();
+
+        /** @var array<int, EventType> $eventTypes */
+        $eventTypes = [new NullEventType()];
+        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn($eventTypes);
+        $this->viewProphecy->assign('eventTypes', $eventTypes)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Organizer> $organizers */
+        $organizers = new TestingQueryResult();
+        $this->organizerRepositoryProphecy->findAll()->willReturn($organizers);
+        $this->viewProphecy->assign('organizers', $organizers)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Speaker> $speakers */
+        $speakers = new TestingQueryResult();
+        $this->speakerRepositoryProphecy->findAll()->willReturn($speakers);
+        $this->viewProphecy->assign('speakers', $speakers)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Venue> $venues */
+        $venues = new TestingQueryResult();
+        $this->venueRepositoryProphecy->findAll()->willReturn($venues);
+        $this->viewProphecy->assign('venues', $venues)->shouldBeCalled();
 
         $this->subject->editAction($event);
     }
