@@ -65,6 +65,21 @@ final class EventTypeRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function sortRecordsByTitleInAscendingOrder(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTypeRepository/TwoEventTypesInReverseOrder.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(2, $result);
+        $first = $result->getFirst();
+        self::assertInstanceOf(EventType::class, $first);
+        self::assertSame('Earlier', $first->getTitle());
+    }
+
+    /**
+     * @test
+     */
     public function findAllPlusNullEventTypeForNoDataReturnsNullEventType(): void
     {
         $result = $this->subject->findAllPlusNullEventType();

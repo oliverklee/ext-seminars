@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Domain\Repository;
 
 use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Speaker;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -14,4 +15,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class SpeakerRepository extends Repository
 {
     use StoragePageAgnostic;
+
+    protected $defaultOrderings = ['name' => QueryInterface::ORDER_ASCENDING];
 }
