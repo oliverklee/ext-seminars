@@ -2558,6 +2558,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Front-end editor for events</source>
 				<target>Front-end-Editor für Veranstaltungen</target>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+				<source>Folder for the created events</source>
+				<target>Ordner für die angelegten Veranstaltungen</target>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.index.headline">
 				<source>Events I have created</source>
 				<target>Veranstaltungen, die ich erstellt habe</target>
