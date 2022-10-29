@@ -61,4 +61,19 @@ final class OrganizerRepositoryTest extends FunctionalTestCase
 
         self::assertCount(1, $result);
     }
+
+    /**
+     * @test
+     */
+    public function sortRecordsByTitleInAscendingOrder(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/OrganizerRepository/TwoOrganizersInReverseOrder.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(2, $result);
+        $first = $result->getFirst();
+        self::assertInstanceOf(Organizer::class, $first);
+        self::assertSame('Earlier', $first->getName());
+    }
 }

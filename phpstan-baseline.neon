@@ -141,6 +141,26 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\EventTypeRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/EventTypeRepository.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\OrganizerRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/OrganizerRepository.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\SpeakerRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/SpeakerRepository.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\VenueRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/VenueRepository.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Email\\\\Salutation\\:\\:getHooks\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Email/Salutation.php

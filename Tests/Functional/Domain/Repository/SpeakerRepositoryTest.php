@@ -57,10 +57,23 @@ final class SpeakerRepositoryTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SpeakerRepository/SpeakerOnPage.xml');
 
-        $result = $this->subject->findByUid(1);
-
         $result = $this->subject->findAll();
 
         self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sortRecordsByTitleInAscendingOrder(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SpeakerRepository/TwoSpeakersInReverseOrder.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(2, $result);
+        $first = $result->getFirst();
+        self::assertInstanceOf(Speaker::class, $first);
+        self::assertSame('Earlier', $first->getName());
     }
 }

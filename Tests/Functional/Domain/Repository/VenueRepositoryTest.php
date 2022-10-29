@@ -60,4 +60,19 @@ final class VenueRepositoryTest extends FunctionalTestCase
 
         self::assertCount(1, $result);
     }
+
+    /**
+     * @test
+     */
+    public function sortRecordsByTitleInAscendingOrder(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/VenueRepository/TwoVenuesInReverseOrder.xml');
+
+        $result = $this->subject->findAll();
+
+        self::assertCount(2, $result);
+        $first = $result->getFirst();
+        self::assertInstanceOf(Venue::class, $first);
+        self::assertSame('Earlier', $first->getTitle());
+    }
 }
