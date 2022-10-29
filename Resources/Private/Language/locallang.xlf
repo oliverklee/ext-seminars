@@ -1917,6 +1917,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor.edit.headline">
 				<source>Edit event</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.new.headline">
+				<source>Create new event</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.uid">
 				<source>UID</source>
 			</trans-unit>
@@ -1970,6 +1973,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.organizers">
 				<source>Organizers</source>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.new">
+				<source>Create a new event</source>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.action.edit">
 				<source>Edit</source>

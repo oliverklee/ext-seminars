@@ -101,6 +101,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
+        // purge FIFO buffer
+        GeneralUtility::makeInstance(SingleEvent::class);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -138,13 +140,18 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $this->viewProphecy->assign('event', $event)->shouldBeCalled();
 
+        $this->stubAuxiliaryRecordAssignments();
+
+        $this->subject->editAction($event);
+    }
+
+    private function stubAuxiliaryRecordAssignments(): void
+    {
         $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn([]);
         $this->viewProphecy->assign('eventTypes', Argument::any())->shouldBeCalled();
         $this->viewProphecy->assign('organizers', Argument::any())->shouldBeCalled();
         $this->viewProphecy->assign('speakers', Argument::any())->shouldBeCalled();
         $this->viewProphecy->assign('venues', Argument::any())->shouldBeCalled();
-
-        $this->subject->editAction($event);
     }
 
     /**
@@ -261,5 +268,139 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->expectExceptionCode(1666954310);
 
         $this->subject->updateAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithEventAssignsProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+        $this->stubAuxiliaryRecordAssignments();
+
+        $this->subject->newAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithNullEventAssignsNewEventToView(): void
+    {
+        $event = new SingleEvent();
+        GeneralUtility::addInstance(SingleEvent::class, $event);
+        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+        $this->stubAuxiliaryRecordAssignments();
+
+        $this->subject->newAction(null);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithoutEventAssignsNewEventToView(): void
+    {
+        $event = new SingleEvent();
+        GeneralUtility::addInstance(SingleEvent::class, $event);
+        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+        $this->stubAuxiliaryRecordAssignments();
+
+        $this->subject->newAction();
+    }
+
+    /**
+     * @test
+     */
+    public function newActionAssignsAuxiliaryRecordsToView(): void
+    {
+        $event = new SingleEvent();
+        $this->viewProphecy->assign('event', Argument::any())->shouldBeCalled();
+
+        /** @var array<int, EventType> $eventTypes */
+        $eventTypes = [new NullEventType()];
+        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn($eventTypes);
+        $this->viewProphecy->assign('eventTypes', $eventTypes)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Organizer> $organizers */
+        $organizers = new TestingQueryResult();
+        $this->organizerRepositoryProphecy->findAll()->willReturn($organizers);
+        $this->viewProphecy->assign('organizers', $organizers)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Speaker> $speakers */
+        $speakers = new TestingQueryResult();
+        $this->speakerRepositoryProphecy->findAll()->willReturn($speakers);
+        $this->viewProphecy->assign('speakers', $speakers)->shouldBeCalled();
+
+        /** @var TestingQueryResult<Venue> $venues */
+        $venues = new TestingQueryResult();
+        $this->venueRepositoryProphecy->findAll()->willReturn($venues);
+        $this->viewProphecy->assign('venues', $venues)->shouldBeCalled();
+
+        $this->subject->newAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionSetsCurrentUserAsOwner(): void
+    {
+        $ownerUid = 42;
+        $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
+        $event = new SingleEvent();
+
+        $this->subject->createAction($event);
+
+        self::assertSame($ownerUid, $event->getOwnerUid());
+    }
+
+    /**
+     * @test
+     */
+    public function createActionWithPageUidInConfigurationSetsProvidedPageUid(): void
+    {
+        $pageUid = 42;
+        $event = new SingleEvent();
+        $this->subject->_set('settings', ['folderForCreatedEvents' => (string)$pageUid]);
+
+        $this->subject->createAction($event);
+
+        self::assertSame($pageUid, $event->getPid());
+    }
+
+    /**
+     * @test
+     */
+    public function createActionWithoutPageUidInConfigurationSetsZeroPageUid(): void
+    {
+        $event = new SingleEvent();
+
+        $this->subject->createAction($event);
+
+        self::assertSame(0, $event->getPid());
+    }
+
+    /**
+     * @test
+     */
+    public function createActionPersistsEvent(): void
+    {
+        $event = new SingleEvent();
+
+        $this->eventRepositoryProphecy->add($event)->shouldBeCalled();
+        $this->eventRepositoryProphecy->persistAll()->shouldBeCalled();
+
+        $this->subject->createAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionRedirectsToIndexAction(): void
+    {
+        $event = new SingleEvent();
+
+        $this->subject->expects(self::once())->method('redirect')->with('index');
+
+        $this->subject->createAction($event);
     }
 }
