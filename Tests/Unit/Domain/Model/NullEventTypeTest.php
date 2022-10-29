@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
 use OliverKlee\Seminars\Domain\Model\NullEventType;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\NullEventType
@@ -23,6 +24,14 @@ final class NullEventTypeTest extends UnitTestCase
         parent::setUp();
 
         $this->subject = new NullEventType();
+    }
+
+    /**
+     * @test
+     */
+    public function isDomainObject(): void
+    {
+        self::assertInstanceOf(AbstractDomainObject::class, $this->subject);
     }
 
     /**
