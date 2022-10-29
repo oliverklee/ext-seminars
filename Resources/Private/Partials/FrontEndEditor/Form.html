@@ -10,6 +10,7 @@
             <div class="col-sm-10">
                 <f:form.textfield property="internalTitle" id="{idPrefix}-internalTitle" maxlength="255"
                                   class="form-control" errorClass="is-invalid" required="required"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'internalTitle'}"/>
             </div>
         </div>
 
@@ -20,6 +21,7 @@
             <div class="col-sm-10">
                 <f:form.textarea property="description" id="{idPrefix}-description"
                                  class="form-control" rows="5" errorClass="is-invalid"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'description'}"/>
             </div>
         </div>
 
@@ -31,6 +33,7 @@
                 <f:form.select property="eventType" id="{idPrefix}-eventType"
                                options="{eventTypes}" optionLabelField="title"
                                class="form-select" errorClass="is-invalid"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
             </div>
         </div>
 
@@ -46,6 +49,7 @@
                                   class="form-control" type="datetime-local"
                                   value="{event.start -> f:format.date(format: 'Y-m-d H:i')}"/>
                 <f:form.hidden name="event[start][dateFormat]" value="Y-m-d\TH:i"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'start'}"/>
             </div>
 
             <label for="{idPrefix}-end" class="col-sm-2 col-form-label">
@@ -56,6 +60,7 @@
                                   class="form-control" type="datetime-local"
                                   value="{event.end -> f:format.date(format: 'Y-m-d H:i')}"/>
                 <f:form.hidden name="event[end][dateFormat]" value="Y-m-d\TH:i"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'end'}"/>
             </div>
         </div>
         <div class="row mb-3">
@@ -67,6 +72,7 @@
                                   class="form-control" type="datetime-local"
                                   value="{event.earlyBirdDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
                 <f:form.hidden name="event[earlyBirdDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'earlyBirdDeadline'}"/>
             </div>
 
             <label for="{idPrefix}-registrationDeadline" class="col-sm-2 col-form-label">
@@ -78,6 +84,7 @@
                                   class="form-control" type="datetime-local"
                                   value="{event.registrationDeadline -> f:format.date(format: 'Y-m-d H:i')}"/>
                 <f:form.hidden name="event[registrationDeadline][dateFormat]" value="Y-m-d\TH:i"/>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationDeadline'}"/>
             </div>
         </div>
     </fieldset>
@@ -92,6 +99,7 @@
                     <label for="{idPrefix}-registrationRequired" class="form-check-label">
                         <f:translate key="{propertylabelPrefix}.registrationRequired"/>
                     </label>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationRequired'}"/>
                 </div>
             </div>
 
@@ -103,6 +111,7 @@
                     <label for="{idPrefix}-waitingList" class="form-check-label">
                         <f:translate key="{propertylabelPrefix}.waitingList"/>
                     </label>
+                    <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'waitingList'}"/>
                 </div>
             </div>
         </div>
@@ -118,6 +127,7 @@
                                   class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'minimumNumberOfRegistrations'}"/>
             </div>
 
             <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
@@ -128,6 +138,7 @@
                                   class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'maximumNumberOfRegistrations'}"/>
             </div>
         </div>
     </fieldset>
@@ -142,6 +153,7 @@
                                   class="form-control" errorClass="is-invalid"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
                 />
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'standardPrice'}"/>
             </div>
 
             <label for="{idPrefix}-earlyBirdPrice" class="col-sm-2 col-form-label">
@@ -152,6 +164,7 @@
                                   class="form-control" errorClass="is-invalid"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
                 />
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'earlyBirdPrice'}"/>
             </div>
         </div>
     </fieldset>
@@ -172,6 +185,7 @@
                         </label>
                     </div>
                 </f:for>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'venues'}"/>
             </div>
         </div>
     </fieldset>
@@ -192,6 +206,7 @@
                         </label>
                     </div>
                 </f:for>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'speakers'}"/>
             </div>
 
             <label class="col-sm-2 col-form-label">
@@ -208,8 +223,8 @@
                         </label>
                     </div>
                 </f:for>
+                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'organizers'}"/>
             </div>
-
         </div>
     </fieldset>
 
