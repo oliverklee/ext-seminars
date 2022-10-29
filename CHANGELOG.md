@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.2.0
+
+### Added
 - Rewrite the FE editor for TYPO3 >= 10LTS
   (#1656, #1657, #1658, #1663, #1666, #1669, #1675, #1680, #1683, #1688, #1695)
 - Add an `Event` model and repository
