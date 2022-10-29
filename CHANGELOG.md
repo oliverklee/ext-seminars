@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Disable the legacy BE module in TYPO3 11LTS (#1521)
 
 ### Deprecated
+- Deprecate the legacy front-end editor (#1699)
 
 ### Removed
 - Drop the BE time-slot wizard (#1598)
