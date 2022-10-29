@@ -2570,6 +2570,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Edit event</source>
 				<target>Veranstaltung bearbeiten</target>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.new.headline">
+				<source>Create new event</source>
+				<target>Neue Veranstaltung anlegen</target>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.property.uid">
 				<source>UID</source>
 				<target>UID</target>
@@ -2641,6 +2645,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.frontEndEditor.property.organizers">
 				<source>Organizers</source>
 				<target>Veranstalter:innen</target>
+			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.action.new">
+				<source>Create a new event</source>
+				<target>Neue Veranstaltung anlegen</target>
 			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.action.edit">
 				<source>Edit</source>
