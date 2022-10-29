@@ -40,5 +40,13 @@ defined('TYPO3_MODE') or die('Access denied.');
         // @phpstan-ignore-next-line We know that this array key exists and is an array.
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_frontendeditor']
             = 'recursive,select_key,pages';
+
+        // These two commands add the flexform configuration for the plugin.
+        // @phpstan-ignore-next-line We know that this array key exists and is an array.
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_frontendeditor'] = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            'seminars_frontendeditor',
+            'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
+        );
     }
 })();

@@ -1908,6 +1908,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor">
 				<source>Front-end editor for events</source>
 			</trans-unit>
+			<trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+				<source>Folder for the created events</source>
+			</trans-unit>
 			<trans-unit id="plugin.frontEndEditor.index.headline">
 				<source>Events I have created</source>
 			</trans-unit>
