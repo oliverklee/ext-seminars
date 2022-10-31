@@ -412,6 +412,16 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function setEventTypeCanSetEventTypeToNull(): void
+    {
+        $this->subject->setEventType(null);
+
+        self::assertNull($this->subject->getEventType());
+    }
+
+    /**
+     * @test
+     */
     public function getVenuesInitiallyReturnsEmptyStorage(): void
     {
         $associatedModels = $this->subject->getVenues();
