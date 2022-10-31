@@ -208,6 +208,16 @@ final class EventTopicTest extends UnitTestCase
     /**
      * @test
      */
+    public function setEventTypeCanSetEventTypeToNull(): void
+    {
+        $this->subject->setEventType(null);
+
+        self::assertNull($this->subject->getEventType());
+    }
+
+    /**
+     * @test
+     */
     public function getOwnerUidInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getOwnerUid());

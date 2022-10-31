@@ -93,7 +93,7 @@ trait EventTopicTrait
         return $eventType;
     }
 
-    public function setEventType(EventType $eventType): void
+    public function setEventType(?EventType $eventType): void
     {
         $this->eventType = $eventType;
     }
