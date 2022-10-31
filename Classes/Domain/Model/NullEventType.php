@@ -11,12 +11,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
  */
 class NullEventType extends AbstractDomainObject implements EventTypeInterface
 {
-    /**
-     * @return 0
-     */
-    public function getUid(): int
+    public function getUid(): ?int
     {
-        return 0;
+        return null;
     }
 
     /**

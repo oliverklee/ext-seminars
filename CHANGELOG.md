@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Allow saving events without event type in the FE editor (#1712)
+- Allow saving events without event type in the FE editor (#1712, #1714)
 
 ## 4.2.0
 

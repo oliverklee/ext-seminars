@@ -45,9 +45,9 @@ final class NullEventTypeTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUidReturnsZero(): void
+    public function getUidReturnsNull(): void
     {
-        self::assertSame(0, $this->subject->getUid());
+        self::assertNull($this->subject->getUid());
     }
 
     /**
