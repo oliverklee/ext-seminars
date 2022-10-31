@@ -30,8 +30,12 @@
                 <f:translate key="{propertylabelPrefix}.eventType"/>
             </label>
             <div class="col-sm-10">
+                <f:comment>
+                    We need to set the `optionValueField` to allow saving events without an event type
+                    (i.e., with the `NullEventType` that sits on top of the event types in the FE dropdown).
+                </f:comment>
                 <f:form.select property="eventType" id="{idPrefix}-eventType"
-                               options="{eventTypes}" optionLabelField="title"
+                               options="{eventTypes}" optionLabelField="title" optionValueField="uid"
                                class="form-select" errorClass="is-invalid"/>
                 <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'eventType'}"/>
             </div>
@@ -127,7 +131,8 @@
                                   class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'minimumNumberOfRegistrations'}"/>
+                <f:render partial="FrontEndEditor/ValidationResult"
+                          arguments="{property: 'minimumNumberOfRegistrations'}"/>
             </div>
 
             <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
@@ -138,7 +143,8 @@
                                   class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
                                   additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
-                <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'maximumNumberOfRegistrations'}"/>
+                <f:render partial="FrontEndEditor/ValidationResult"
+                          arguments="{property: 'maximumNumberOfRegistrations'}"/>
             </div>
         </div>
     </fieldset>
