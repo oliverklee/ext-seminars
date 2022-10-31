@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Improve the documentation for the FE editor (#1713)
 
 ### Deprecated
 
