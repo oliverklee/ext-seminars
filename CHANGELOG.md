@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add links to the feature survey in a few places (#1720)
 
 ### Changed
 - Improve the documentation for the FE editor (#1713)
