@@ -15,6 +15,15 @@ Most of the documentation is in ReST format
 [in the Documentation/ folder](Documentation/) and is rendered
 [as part of the TYPO3 documentation](https://docs.typo3.org/typo3cms/extensions/seminars/).
 
+## :clipboard: Feature survey
+
+There is a [feature survey](https://forms.gle/uMZsDpuJnnqYbQvX6) underway to
+determine which features of this extension are actually in use. Features for
+which the survey determines that nobody uses them will be removed quite soon.
+
+Please take a few minutes to fill out the survey to ensure your favorite
+features will not be removed. Thank you! :pray:
+
 ## Compatibility with TYPO3 11LTS/11.5
 
 This extension is not compatible TYPO3 11LTS/11.5 yet.
