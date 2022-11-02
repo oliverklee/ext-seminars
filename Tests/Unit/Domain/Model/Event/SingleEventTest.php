@@ -515,6 +515,24 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getFirstOrganizerWithTwoOrganizersNotRewoundReturnsFirstOrganizer(): void
+    {
+        /** @var ObjectStorage<Organizer> $organizers */
+        $organizers = new ObjectStorage();
+        $organizer1 = new Organizer();
+        $organizers->attach($organizer1);
+        $organizer2 = new Organizer();
+        $organizers->attach($organizer2);
+        $organizers->rewind();
+        $organizers->next();
+        $this->subject->setOrganizers($organizers);
+
+        self::assertSame($organizer1, $this->subject->getFirstOrganizer());
+    }
+
+    /**
+     * @test
+     */
     public function getOwnerUidInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getOwnerUid());
