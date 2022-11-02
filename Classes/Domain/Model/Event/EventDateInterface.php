@@ -51,13 +51,5 @@ interface EventDateInterface
      */
     public function getOrganizers(): ObjectStorage;
 
-    /**
-     * @deprecated will be removed in seminars 6.0.
-     */
     public function getFirstOrganizer(): ?Organizer;
-
-    /**
-     * Alias for `getFirstOrganizer()`.
-     */
-    public function getOrganizer(): ?Organizer;
 }
