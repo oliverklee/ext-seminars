@@ -1,5 +1,11 @@
 # This file can be removed once we drop support for TYPO3 V9.
 config.tx_extbase.persistence.classes {
+    OliverKlee\Seminars\Domain\Model\AccommodationOption {
+        mapping {
+            tableName = tx_seminars_lodgings
+        }
+    }
+
     OliverKlee\Seminars\Domain\Model\Event\Event {
         mapping {
             tableName = tx_seminars_seminars

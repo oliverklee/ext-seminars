@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 return [
+    \OliverKlee\Seminars\Domain\Model\AccommodationOption::class => [
+        'tableName' => 'tx_seminars_lodgings',
+    ],
     \OliverKlee\Seminars\Domain\Model\Event\Event::class => [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => 'object_type',
