@@ -227,6 +227,7 @@ trait EventDateTrait
     public function getFirstOrganizer(): ?Organizer
     {
         $organizers = $this->getOrganizers();
+        $organizers->rewind();
 
         return \count($organizers) > 0 ? $organizers->current() : null;
     }
