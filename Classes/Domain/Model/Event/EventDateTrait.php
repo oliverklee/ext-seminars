@@ -224,21 +224,10 @@ trait EventDateTrait
         $this->organizers = $organizers;
     }
 
-    /**
-     * @deprecated will be removed in seminars 6.0.
-     */
     public function getFirstOrganizer(): ?Organizer
     {
         $organizers = $this->getOrganizers();
 
         return \count($organizers) > 0 ? $organizers->current() : null;
-    }
-
-    /**
-     * Alias for `getFirstOrganizer()`.
-     */
-    public function getOrganizer(): ?Organizer
-    {
-        return $this->getFirstOrganizer();
     }
 }
