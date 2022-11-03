@@ -23,7 +23,7 @@ final class EventTypeRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->prophesize(ObjectManagerInterface::class)->reveal();
+        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
         $this->subject = new EventTypeRepository($objectManagerStub);
     }
 

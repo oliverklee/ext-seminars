@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -47,9 +48,9 @@ final class RegistrationDigestTest extends TestCase
     private $eventMapper;
 
     /**
-     * @var ObjectProphecy<ObjectManager>
+     * @var ObjectManager&MockObject
      */
-    private $objectManagerProphecy;
+    private $objectManagerMock;
 
     /**
      * @var ObjectProphecy<StandaloneView>
@@ -78,16 +79,16 @@ final class RegistrationDigestTest extends TestCase
         $this->configuration = new DummyConfiguration($configuration);
         $this->subject->setConfiguration($this->configuration);
 
-        $this->objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        $objectManager = $this->objectManagerProphecy->reveal();
-        $this->subject->injectObjectManager($objectManager);
+        $this->objectManagerMock = $this->createMock(ObjectManager::class);
+        $this->subject->injectObjectManager($this->objectManagerMock);
 
         $this->eventMapperProphecy = $this->prophesize(EventMapper::class);
         $this->eventMapper = $this->eventMapperProphecy->reveal();
         $this->subject->setEventMapper($this->eventMapper);
 
         $this->viewProphecy = $this->prophesize(StandaloneView::class);
-        $this->objectManagerProphecy->get(StandaloneView::class)->willReturn($this->viewProphecy->reveal());
+        $this->objectManagerMock->method('get')->with(StandaloneView::class)
+            ->willReturn($this->viewProphecy->reveal());
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);

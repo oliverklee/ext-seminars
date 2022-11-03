@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `AccommodationOption` model (#1731)
 
 ### Changed
+- Use less Prophecy (#1734)
 
 ### Deprecated
 
