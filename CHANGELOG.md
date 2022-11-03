@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a `PaymentMethod` model (#1740)
 - Add a `FoodOption` model (#1738)
 - Add an `AccommodationOption` model (#1731, #1736)
 
