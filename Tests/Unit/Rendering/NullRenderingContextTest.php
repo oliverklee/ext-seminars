@@ -59,7 +59,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setErrorHandlerCanBeCalled(): void
     {
-        $this->subject->setErrorHandler($this->prophesize(ErrorHandlerInterface::class)->reveal());
+        $this->subject->setErrorHandler($this->createMock(ErrorHandlerInterface::class));
     }
 
     /**
@@ -80,7 +80,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setVariableProviderCanBeCalled(): void
     {
-        $this->subject->setVariableProvider($this->prophesize(VariableProviderInterface::class)->reveal());
+        $this->subject->setVariableProvider($this->createMock(VariableProviderInterface::class));
     }
 
     /**
@@ -101,7 +101,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setViewHelperVariableContainerCanBeCalled(): void
     {
-        $this->subject->setViewHelperVariableContainer($this->prophesize(ViewHelperVariableContainer::class)->reveal());
+        $this->subject->setViewHelperVariableContainer($this->createMock(ViewHelperVariableContainer::class));
     }
 
     /**
@@ -122,7 +122,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setViewHelperResolverCanBeCalled(): void
     {
-        $this->subject->setViewHelperResolver($this->prophesize(ViewHelperResolver::class)->reveal());
+        $this->subject->setViewHelperResolver($this->createMock(ViewHelperResolver::class));
     }
 
     /**
@@ -143,7 +143,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setViewHelperInvokerCanBeCalled(): void
     {
-        $this->subject->setViewHelperInvoker($this->prophesize(ViewHelperInvoker::class)->reveal());
+        $this->subject->setViewHelperInvoker($this->createMock(ViewHelperInvoker::class));
     }
 
     /**
@@ -164,7 +164,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setTemplateParserCanBeCalled(): void
     {
-        $this->subject->setTemplateParser($this->prophesize(TemplateParser::class)->reveal());
+        $this->subject->setTemplateParser($this->createMock(TemplateParser::class));
     }
 
     /**
@@ -185,7 +185,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setTemplateCompilerCanBeCalled(): void
     {
-        $this->subject->setTemplateCompiler($this->prophesize(TemplateCompiler::class)->reveal());
+        $this->subject->setTemplateCompiler($this->createMock(TemplateCompiler::class));
     }
 
     /**
@@ -206,7 +206,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setTemplatePathsCanBeCalled(): void
     {
-        $this->subject->setTemplatePaths($this->prophesize(TemplatePaths::class)->reveal());
+        $this->subject->setTemplatePaths($this->createMock(TemplatePaths::class));
     }
 
     /**
@@ -227,7 +227,7 @@ final class NullRenderingContextTest extends UnitTestCase
      */
     public function setCacheCanBeCalled(): void
     {
-        $this->subject->setCache($this->prophesize(FluidCacheInterface::class)->reveal());
+        $this->subject->setCache($this->createMock(FluidCacheInterface::class));
     }
 
     /**
