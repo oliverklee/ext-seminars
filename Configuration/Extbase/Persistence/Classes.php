@@ -81,6 +81,9 @@ return [
             'emailAddress' => ['fieldName' => 'email'],
         ],
     ],
+    \OliverKlee\Seminars\Domain\Model\PaymentMethod::class => [
+        'tableName' => 'tx_seminars_payment_methods',
+    ],
     \OliverKlee\Seminars\Domain\Model\Speaker::class => [
         'tableName' => 'tx_seminars_speakers',
         'properties' => [

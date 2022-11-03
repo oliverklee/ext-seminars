@@ -99,6 +99,12 @@ config.tx_extbase.persistence.classes {
         }
     }
 
+    OliverKlee\Seminars\Domain\Model\PaymentMethod {
+        mapping {
+            tableName = tx_seminars_payment_methods
+        }
+    }
+
     OliverKlee\Seminars\Domain\Model\Speaker {
         mapping {
             tableName = tx_seminars_speakers
