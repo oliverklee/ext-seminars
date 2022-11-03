@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
-- Drop Prophecy (#1734, #1737, #1739)
+- Drop Prophecy (#1734, #1737, #1739, #1741, #1746)
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed

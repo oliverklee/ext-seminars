@@ -11,7 +11,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -78,11 +77,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagReturnsCsvDownload(): void
     {
         $csvBody = 'foo;bar';
-        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
-        $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        $xsvExporter = $exporterProphecy->reveal();
-        GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
+        $csvDownloaderMock = $this->createMock(CsvDownloader::class);
+        $csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvBody);
+        GeneralUtility::addInstance(CsvDownloader::class, $csvDownloaderMock);
 
         $GLOBALS['_GET']['csv'] = '1';
 
@@ -97,11 +94,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagForEventTableUsesEventCsvFilename(): void
     {
         $csvBody = 'foo;bar';
-        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
-        $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        $xsvExporter = $exporterProphecy->reveal();
-        GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
+        $csvDownloaderMock = $this->createMock(CsvDownloader::class);
+        $csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvBody);
+        GeneralUtility::addInstance(CsvDownloader::class, $csvDownloaderMock);
 
         $GLOBALS['_GET']['csv'] = '1';
         $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
@@ -119,11 +114,9 @@ final class ControllerTest extends FunctionalTestCase
     public function mainActionWithCsvFlagForRegistrationsTableUsesEventCsvFilename(): void
     {
         $csvBody = 'foo;bar';
-        /** @var ObjectProphecy<CsvDownloader> $exporterProphecy */
-        $exporterProphecy = $this->prophesize(CsvDownloader::class);
-        $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        $xsvExporter = $exporterProphecy->reveal();
-        GeneralUtility::addInstance(CsvDownloader::class, $xsvExporter);
+        $csvDownloaderMock = $this->createMock(CsvDownloader::class);
+        $csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvBody);
+        GeneralUtility::addInstance(CsvDownloader::class, $csvDownloaderMock);
 
         $GLOBALS['_GET']['csv'] = '1';
         $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
