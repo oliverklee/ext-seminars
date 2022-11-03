@@ -34,18 +34,7 @@
                         {event.internalTitle}
                     </td>
                     <td>
-                        <f:if condition="{event.start}">
-                            {event.start ->
-                            f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
-                            f:variable(name: 'startDate')}
-                            <f:if condition="{event.end}">
-                                {event.end ->
-                                f:format.date(format: '{f:translate(key: \'dateFormat\')}') ->
-                                f:variable(name: 'endDate')}
-                                {f:variable(name: 'endDateWithDash', value: '–{endDate}')}
-                            </f:if>
-                            {startDate}{endDateWithDash}
-                        </f:if>
+                        <f:render partial="EventDate" arguments="{event: event}"/>
                     </td>
                     <td>
                         <f:link.action action="edit" arguments="{event: event}">
