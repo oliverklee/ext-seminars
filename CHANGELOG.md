@@ -9,11 +9,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `AccommodationOption` model (#1731, #1736)
 
 ### Changed
-- Use less Prophecy (#1734)
 
 ### Deprecated
 
 ### Removed
+- Drop Prophecy (#1734, #1737)
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed

@@ -420,7 +420,7 @@ final class NullRequestTest extends UnitTestCase
      */
     public function withBodyReturnsInstanceOfSameClass(): void
     {
-        $body = $this->prophesize(StreamInterface::class)->reveal();
+        $body = $this->createMock(StreamInterface::class);
 
         self::assertInstanceOf(NullRequest::class, $this->subject->withBody($body));
     }
@@ -430,7 +430,7 @@ final class NullRequestTest extends UnitTestCase
      */
     public function withBodyReturnsNewInstance(): void
     {
-        $body = $this->prophesize(StreamInterface::class)->reveal();
+        $body = $this->createMock(StreamInterface::class);
 
         self::assertNotSame($this->subject, $this->subject->withBody($body));
     }
