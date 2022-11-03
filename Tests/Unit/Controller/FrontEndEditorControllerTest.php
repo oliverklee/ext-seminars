@@ -20,8 +20,6 @@ use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
 use OliverKlee\Seminars\Tests\Unit\Controller\Fixtures\TestingQueryResult;
 use PHPUnit\Framework\MockObject\MockObject;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -33,39 +31,39 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class FrontEndEditorControllerTest extends UnitTestCase
 {
     /**
-     * @var FrontEndEditorController&AccessibleMockObjectInterface&MockObject
+     * @var FrontEndEditorController&MockObject&AccessibleMockObjectInterface
      */
     private $subject;
 
     /**
-     * @var ObjectProphecy<TemplateView>
+     * @var TemplateView&MockObject
      */
-    private $viewProphecy;
+    private $viewMock;
 
     /**
-     * @var ObjectProphecy<EventRepository>
+     * @var EventRepository&MockObject
      */
-    private $eventRepositoryProphecy;
+    private $eventRepositoryMock;
 
     /**
-     * @var ObjectProphecy<EventTypeRepository>
+     * @var EventTypeRepository&MockObject
      */
-    private $eventTypeRepositoryProphecy;
+    private $eventTypeRepositoryMock;
 
     /**
-     * @var ObjectProphecy<OrganizerRepository>
+     * @var OrganizerRepository&MockObject
      */
-    private $organizerRepositoryProphecy;
+    private $organizerRepositoryMock;
 
     /**
-     * @var ObjectProphecy<SpeakerRepository>
+     * @var SpeakerRepository&MockObject
      */
-    private $speakerRepositoryProphecy;
+    private $speakerRepositoryMock;
 
     /**
-     * @var ObjectProphecy<VenueRepository>
+     * @var VenueRepository&MockObject
      */
-    private $venueRepositoryProphecy;
+    private $venueRepositoryMock;
 
     /**
      * @var Context&MockObject
@@ -80,20 +78,19 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(FrontEndEditorController::class, ['redirect', 'forward', 'redirectToUri']);
         $this->subject = $subject;
 
-        $this->viewProphecy = $this->prophesize(TemplateView::class);
-        $view = $this->viewProphecy->reveal();
-        $this->subject->_set('view', $view);
+        $this->viewMock = $this->createMock(TemplateView::class);
+        $this->subject->_set('view', $this->viewMock);
 
-        $this->eventRepositoryProphecy = $this->prophesize(EventRepository::class);
-        $this->subject->injectEventRepository($this->eventRepositoryProphecy->reveal());
-        $this->eventTypeRepositoryProphecy = $this->prophesize(EventTypeRepository::class);
-        $this->subject->injectEventTypeRepository($this->eventTypeRepositoryProphecy->reveal());
-        $this->organizerRepositoryProphecy = $this->prophesize(OrganizerRepository::class);
-        $this->subject->injectOrganizerRepository($this->organizerRepositoryProphecy->reveal());
-        $this->speakerRepositoryProphecy = $this->prophesize(SpeakerRepository::class);
-        $this->subject->injectSpeakerRepository($this->speakerRepositoryProphecy->reveal());
-        $this->venueRepositoryProphecy = $this->prophesize(VenueRepository::class);
-        $this->subject->injectVenueRepository($this->venueRepositoryProphecy->reveal());
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->subject->injectEventRepository($this->eventRepositoryMock);
+        $this->eventTypeRepositoryMock = $this->createMock(EventTypeRepository::class);
+        $this->subject->injectEventTypeRepository($this->eventTypeRepositoryMock);
+        $this->organizerRepositoryMock = $this->createMock(OrganizerRepository::class);
+        $this->subject->injectOrganizerRepository($this->organizerRepositoryMock);
+        $this->speakerRepositoryMock = $this->createMock(SpeakerRepository::class);
+        $this->subject->injectSpeakerRepository($this->speakerRepositoryMock);
+        $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
+        $this->subject->injectVenueRepository($this->venueRepositoryMock);
 
         $this->context = $this->createMock(Context::class);
         GeneralUtility::setSingletonInstance(Context::class, $this->context);
@@ -125,9 +122,9 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($ownerUid);
 
         $events = [new SingleEvent()];
-        $this->eventRepositoryProphecy->findSingleEventsByOwnerUid($ownerUid)->willReturn($events);
+        $this->eventRepositoryMock->method('findSingleEventsByOwnerUid')->with($ownerUid)->willReturn($events);
 
-        $this->viewProphecy->assign('events', $events)->shouldBeCalled();
+        $this->viewMock->expects(self::once())->method('assign')->with('events', $events);
 
         $this->subject->indexAction();
     }
@@ -138,20 +135,17 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function editActionAssignsProvidedEventToView(): void
     {
         $event = new SingleEvent();
-        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
 
-        $this->stubAuxiliaryRecordAssignments();
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['eventTypes', self::anything()],
+            ['organizers', self::anything()],
+            ['speakers', self::anything()],
+            ['venues', self::anything()]
+        );
 
         $this->subject->editAction($event);
-    }
-
-    private function stubAuxiliaryRecordAssignments(): void
-    {
-        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn([]);
-        $this->viewProphecy->assign('eventTypes', Argument::any())->shouldBeCalled();
-        $this->viewProphecy->assign('organizers', Argument::any())->shouldBeCalled();
-        $this->viewProphecy->assign('speakers', Argument::any())->shouldBeCalled();
-        $this->viewProphecy->assign('venues', Argument::any())->shouldBeCalled();
     }
 
     /**
@@ -160,27 +154,30 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function editActionAssignsAuxiliaryRecordsToView(): void
     {
         $event = new SingleEvent();
-        $this->viewProphecy->assign('event', Argument::any())->shouldBeCalled();
 
         /** @var array<int, EventType> $eventTypes */
         $eventTypes = [new NullEventType()];
-        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn($eventTypes);
-        $this->viewProphecy->assign('eventTypes', $eventTypes)->shouldBeCalled();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 
         /** @var TestingQueryResult<Organizer> $organizers */
         $organizers = new TestingQueryResult();
-        $this->organizerRepositoryProphecy->findAll()->willReturn($organizers);
-        $this->viewProphecy->assign('organizers', $organizers)->shouldBeCalled();
+        $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
 
         /** @var TestingQueryResult<Speaker> $speakers */
         $speakers = new TestingQueryResult();
-        $this->speakerRepositoryProphecy->findAll()->willReturn($speakers);
-        $this->viewProphecy->assign('speakers', $speakers)->shouldBeCalled();
+        $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
 
         /** @var TestingQueryResult<Venue> $venues */
         $venues = new TestingQueryResult();
-        $this->venueRepositoryProphecy->findAll()->willReturn($venues);
-        $this->viewProphecy->assign('venues', $venues)->shouldBeCalled();
+        $this->venueRepositoryMock->method('findAll')->willReturn($venues);
+
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['eventTypes', $eventTypes],
+            ['organizers', $organizers],
+            ['speakers', $speakers],
+            ['venues', $venues]
+        );
 
         $this->subject->editAction($event);
     }
@@ -222,8 +219,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function updateActionPersistsProvidedEvent(): void
     {
         $event = new SingleEvent();
-        $this->eventRepositoryProphecy->update($event)->shouldBeCalled();
-        $this->eventRepositoryProphecy->persistAll()->shouldBeCalled();
+        $this->eventRepositoryMock->expects(self::once())->method('update')->with($event);
+        $this->eventRepositoryMock->expects(self::once())->method('persistAll');
 
         $this->subject->updateAction($event);
     }
@@ -276,8 +273,15 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function newActionWithEventAssignsProvidedEventToView(): void
     {
         $event = new SingleEvent();
-        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
-        $this->stubAuxiliaryRecordAssignments();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
+
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['eventTypes', self::anything()],
+            ['organizers', self::anything()],
+            ['speakers', self::anything()],
+            ['venues', self::anything()]
+        );
 
         $this->subject->newAction($event);
     }
@@ -289,8 +293,15 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         GeneralUtility::addInstance(SingleEvent::class, $event);
-        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
-        $this->stubAuxiliaryRecordAssignments();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
+
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['eventTypes', self::anything()],
+            ['organizers', self::anything()],
+            ['speakers', self::anything()],
+            ['venues', self::anything()]
+        );
 
         $this->subject->newAction(null);
     }
@@ -302,8 +313,15 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
         GeneralUtility::addInstance(SingleEvent::class, $event);
-        $this->viewProphecy->assign('event', $event)->shouldBeCalled();
-        $this->stubAuxiliaryRecordAssignments();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn([]);
+
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['eventTypes', self::anything()],
+            ['organizers', self::anything()],
+            ['speakers', self::anything()],
+            ['venues', self::anything()]
+        );
 
         $this->subject->newAction();
     }
@@ -314,27 +332,30 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function newActionAssignsAuxiliaryRecordsToView(): void
     {
         $event = new SingleEvent();
-        $this->viewProphecy->assign('event', Argument::any())->shouldBeCalled();
 
         /** @var array<int, EventType> $eventTypes */
         $eventTypes = [new NullEventType()];
-        $this->eventTypeRepositoryProphecy->findAllPlusNullEventType()->willReturn($eventTypes);
-        $this->viewProphecy->assign('eventTypes', $eventTypes)->shouldBeCalled();
+        $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 
         /** @var TestingQueryResult<Organizer> $organizers */
         $organizers = new TestingQueryResult();
-        $this->organizerRepositoryProphecy->findAll()->willReturn($organizers);
-        $this->viewProphecy->assign('organizers', $organizers)->shouldBeCalled();
+        $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
 
         /** @var TestingQueryResult<Speaker> $speakers */
         $speakers = new TestingQueryResult();
-        $this->speakerRepositoryProphecy->findAll()->willReturn($speakers);
-        $this->viewProphecy->assign('speakers', $speakers)->shouldBeCalled();
+        $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
 
         /** @var TestingQueryResult<Venue> $venues */
         $venues = new TestingQueryResult();
-        $this->venueRepositoryProphecy->findAll()->willReturn($venues);
-        $this->viewProphecy->assign('venues', $venues)->shouldBeCalled();
+        $this->venueRepositoryMock->method('findAll')->willReturn($venues);
+
+        $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['eventTypes', $eventTypes],
+            ['organizers', $organizers],
+            ['speakers', $speakers],
+            ['venues', $venues]
+        );
 
         $this->subject->newAction($event);
     }
@@ -386,8 +407,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        $this->eventRepositoryProphecy->add($event)->shouldBeCalled();
-        $this->eventRepositoryProphecy->persistAll()->shouldBeCalled();
+        $this->eventRepositoryMock->expects(self::once())->method('add')->with($event);
+        $this->eventRepositoryMock->expects(self::once())->method('persistAll');
 
         $this->subject->createAction($event);
     }
