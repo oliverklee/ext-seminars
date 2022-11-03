@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `AccommodationOption` model (#1731, #1736)
 
 ### Changed
+- Converted icons from gif/png to SVG (#1522)
 
 ### Deprecated
 
