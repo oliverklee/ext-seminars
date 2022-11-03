@@ -121,14 +121,13 @@ final class MailNotifierTest extends TestCase
         $this->eventMapper = $this->createMock(EventMapper::class);
         MapperRegistry::set(EventMapper::class, $this->eventMapper);
 
-        /** @var ObjectProphecy<ObjectManager> $objectManagerProphecy */
-        $objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerProphecy->reveal());
+        $objectManagerMock = $this->createMock(ObjectManager::class);
+        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
 
         /** @var ObjectProphecy<RegistrationDigest> $registrationDigestProphecy */
         $registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $registrationDigest = $registrationDigestProphecy->reveal();
-        $objectManagerProphecy->get(RegistrationDigest::class)->willReturn($registrationDigest);
+        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($registrationDigest);
 
         $this->email = $this->createEmailMock();
 

@@ -23,7 +23,7 @@ final class VenueRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->prophesize(ObjectManagerInterface::class)->reveal();
+        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
         $this->subject = new VenueRepository($objectManagerStub);
     }
 

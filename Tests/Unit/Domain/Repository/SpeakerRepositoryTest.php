@@ -23,7 +23,7 @@ final class SpeakerRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->prophesize(ObjectManagerInterface::class)->reveal();
+        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
         $this->subject = new SpeakerRepository($objectManagerStub);
     }
 

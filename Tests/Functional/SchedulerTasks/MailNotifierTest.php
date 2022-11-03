@@ -63,13 +63,12 @@ final class MailNotifierTest extends FunctionalTestCase
         $user->setData([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($user);
 
-        /** @var ObjectProphecy<ObjectManager> $objectManagerProphecy */
-        $objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerProphecy->reveal());
+        $objectManagerMock = $this->createMock(ObjectManager::class);
+        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $this->registrationDigest = $this->registrationDigestProphecy->reveal();
-        $objectManagerProphecy->get(RegistrationDigest::class)->willReturn($this->registrationDigest);
+        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($this->registrationDigest);
 
         $this->subject = new MailNotifier();
     }
