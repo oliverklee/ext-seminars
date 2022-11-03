@@ -1091,6 +1091,11 @@ parameters:
 			path: Tests/Functional/Domain/Repository/EventTypeRepositoryTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\FoodOptionRepositoryTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/FoodOptionRepositoryTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\OrganizerRepositoryTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Domain/Repository/OrganizerRepositoryTest.php

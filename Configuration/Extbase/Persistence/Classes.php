@@ -71,6 +71,9 @@ return [
     \OliverKlee\Seminars\Domain\Model\EventType::class => [
         'tableName' => 'tx_seminars_event_types',
     ],
+    \OliverKlee\Seminars\Domain\Model\FoodOption::class => [
+        'tableName' => 'tx_seminars_foods',
+    ],
     \OliverKlee\Seminars\Domain\Model\Organizer::class => [
         'tableName' => 'tx_seminars_organizers',
         'properties' => [
