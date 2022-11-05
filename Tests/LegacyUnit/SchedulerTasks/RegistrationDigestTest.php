@@ -55,7 +55,12 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @var ObjectProphecy<StandaloneView>
      */
-    private $viewProphecy;
+    private $plaintextViewProphecy;
+
+    /**
+     * @var ObjectProphecy<StandaloneView>
+     */
+    private $htmlViewProphecy;
 
     /**
      * @var int
@@ -86,9 +91,10 @@ final class RegistrationDigestTest extends TestCase
         $this->eventMapper = $this->eventMapperProphecy->reveal();
         $this->subject->setEventMapper($this->eventMapper);
 
-        $this->viewProphecy = $this->prophesize(StandaloneView::class);
+        $this->plaintextViewProphecy = $this->prophesize(StandaloneView::class);
+        $this->htmlViewProphecy = $this->prophesize(StandaloneView::class);
         $this->objectManagerMock->method('get')->with(StandaloneView::class)
-            ->willReturn($this->viewProphecy->reveal());
+            ->willReturnOnConsecutiveCalls($this->plaintextViewProphecy->reveal(), $this->htmlViewProphecy->reveal());
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);
@@ -259,17 +265,22 @@ final class RegistrationDigestTest extends TestCase
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
-        $expectedBody = 'Text body';
-        $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($plaintextTemplatePath))
+        $this->plaintextViewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($plaintextTemplatePath))
             ->shouldBeCalled();
-        $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($htmlTemplatePath))
+        $this->plaintextViewProphecy->assign('events', $events)->shouldBeCalled();
+        $expectedPlaintextBody = 'Text body';
+        $this->plaintextViewProphecy->render()->willReturn($expectedPlaintextBody);
+
+        $this->htmlViewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($htmlTemplatePath))
             ->shouldBeCalled();
-        $this->viewProphecy->assign('events', $events)->shouldBeCalled();
-        $this->viewProphecy->render()->willReturn($expectedBody);
+        $this->htmlViewProphecy->assign('events', $events)->shouldBeCalled();
+        $expectedHtmlBody = 'Text body';
+        $this->htmlViewProphecy->render()->willReturn($expectedHtmlBody);
 
         $this->subject->execute();
 
-        self::assertSame($expectedBody, $this->getTextBodyOfEmail($this->email));
+        self::assertSame($expectedPlaintextBody, $this->getTextBodyOfEmail($this->email));
+        self::assertSame($expectedHtmlBody, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
