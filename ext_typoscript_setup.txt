@@ -108,6 +108,9 @@ config.tx_extbase.persistence.classes {
     OliverKlee\Seminars\Domain\Model\Registration {
         mapping {
             tableName = tx_seminars_attendances
+            columns {
+                seminar.mapOnProperty = event
+            }
         }
     }
 
