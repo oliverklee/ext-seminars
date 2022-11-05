@@ -1156,11 +1156,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Call to method Prophecy\\\\Prophecy\\\\MethodProphecy\\:\\:willReturn\\(\\) with incorrect case\\: wilLReturn$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventHeadlineTest.php

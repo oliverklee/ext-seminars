@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * This trait provides methods useful when testing FAL output.
+ *
+ * @mixin TestCase
  */
 trait FalHelper
 {
@@ -20,10 +22,9 @@ trait FalHelper
      */
     private function provideAdminBackEndUserForFal(): void
     {
-        /** @var ObjectProphecy<BackendUserAuthentication> $backEndUserProphecy */
-        $backEndUserProphecy = $this->prophesize(BackendUserAuthentication::class);
+        $backEndUserMock = $this->createMock(BackendUserAuthentication::class);
 
-        $backEndUserProphecy->isAdmin()->willReturn(true);
-        $GLOBALS['BE_USER'] = $backEndUserProphecy->reveal();
+        $backEndUserMock->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $backEndUserMock;
     }
 }
