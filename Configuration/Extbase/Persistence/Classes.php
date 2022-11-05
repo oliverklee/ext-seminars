@@ -84,6 +84,9 @@ return [
     \OliverKlee\Seminars\Domain\Model\PaymentMethod::class => [
         'tableName' => 'tx_seminars_payment_methods',
     ],
+    \OliverKlee\Seminars\Domain\Model\Registration::class => [
+        'tableName' => 'tx_seminars_attendances',
+    ],
     \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [
         'tableName' => 'tx_seminars_checkboxes',
     ],
