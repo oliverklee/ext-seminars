@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration;
 use OliverKlee\Seminars\Domain\Repository\RegistrationRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -51,6 +55,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(Registration::class, $result);
         self::assertSame('some new registration', $result->getTitle());
+        self::assertNull($result->getEvent());
+        self::assertNull($result->getUser());
     }
 
     /**
@@ -85,5 +91,60 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         }
 
         self::assertIsArray($databaseRow);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventAssociationWithSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithSingleEvent.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(Registration::class, $result);
+        self::assertInstanceOf(SingleEvent::class, $result->getEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsEventAssociationWithEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithEventDate.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(Registration::class, $result);
+        self::assertInstanceOf(EventDate::class, $result->getEvent());
+    }
+
+    /**
+     * @test
+     *
+     * Note: This case usually should not happen. It is only possible if there are already registrations for a single
+     * event of event topic, and the event then gets changed to an event topic.
+     */
+    public function mapsEventAssociationWithEventTopic(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithEventTopic.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(Registration::class, $result);
+        self::assertInstanceOf(EventTopic::class, $result->getEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsUserAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithUser.xml');
+
+        $result = $this->subject->findByUid(1);
+
+        self::assertInstanceOf(Registration::class, $result);
+        self::assertInstanceOf(FrontendUser::class, $result->getUser());
     }
 }

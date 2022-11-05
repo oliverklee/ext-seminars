@@ -86,6 +86,9 @@ return [
     ],
     \OliverKlee\Seminars\Domain\Model\Registration::class => [
         'tableName' => 'tx_seminars_attendances',
+        'properties' => [
+            'event' => ['fieldName' => 'seminar'],
+        ],
     ],
     \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [
         'tableName' => 'tx_seminars_checkboxes',
