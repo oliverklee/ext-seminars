@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Registration;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
@@ -17,6 +18,8 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\BillingAddressTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\PaymentTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
  * @covers \OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository
  */
@@ -48,16 +51,70 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsAllModelFields(): void
+    public function mapsAllModelFieldsFromTheBaseModel(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertSame('some new registration', $result->getTitle());
+        self::assertNull($result->getEvent());
+        self::assertTrue($result->isOnWaitingList());
+        self::assertSame('escapism', $result->getInterests());
+        self::assertSame('fast escapes', $result->getExpectations());
+        self::assertSame('Looking forward to the event!', $result->getComments());
+        self::assertSame('the internet', $result->getKnownFrom());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAllModelFieldsFromTheAttendeesTrait(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
         self::assertInstanceOf(Registration::class, $result);
-        self::assertSame('some new registration', $result->getTitle());
-        self::assertNull($result->getEvent());
         self::assertNull($result->getUser());
+        self::assertSame(3, $result->getSeats());
+        self::assertTrue($result->hasRegisteredThemselves());
+        self::assertSame('Max und Moritz', $result->getAttendeesNames());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAllModelFieldsFromTheBillingAddressTrait(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertSame('ACME Inc.', $result->getBillingCompany());
+        self::assertSame('Dan Chase', $result->getBillingFullName());
+        self::assertSame('Abenteuerland 5', $result->getBillingStreetAddress());
+        self::assertSame('01234', $result->getBillingZipCode());
+        self::assertSame('Solar City', $result->getBillingCity());
+        self::assertSame('Solar Country', $result->getBillingCountry());
+        self::assertSame('+49 0000 1928765', $result->getBillingPhoneNumber());
+        self::assertSame('billing@example.com', $result->getBillingEmailAddress());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAllModelFieldsFromThePaymentTrait(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertSame(EventInterface::PRICE_EARLY_BIRD, $result->getPriceCode());
+        self::assertSame(199.99, $result->getTotalPrice());
     }
 
     /**
