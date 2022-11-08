@@ -90,6 +90,9 @@ return [
             'event' => ['fieldName' => 'seminar'],
             'onWaitingList' => ['fieldName' => 'registration_queue'],
             'comments' => ['fieldName' => 'notes'],
+            'accommodationOptions' => ['fieldName' => 'lodgings'],
+            'foodOptions' => ['fieldName' => 'foods'],
+            'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
             'billingCompany' => ['fieldName' => 'company'],
             'billingFullName' => ['fieldName' => 'name'],
             'billingStreetAddress' => ['fieldName' => 'address'],
@@ -99,6 +102,7 @@ return [
             'billingPhoneNumber' => ['fieldName' => 'telephone'],
             'billingEmailAddress' => ['fieldName' => 'email'],
             'priceCode' => ['fieldName' => 'price'],
+            'paymentMethod' => ['fieldName' => 'method_of_payment'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [

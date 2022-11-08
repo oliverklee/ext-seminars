@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Domain\Model\Registration;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Provides attendees-related fields to `Registration`.
@@ -37,6 +38,12 @@ trait AttendeesTrait
      * @Extbase\Validate("StringLength", options={"maximum": 16383})
      */
     protected $attendeesNames = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $additionalPersons;
 
     public function getUser(): ?FrontendUser
     {
@@ -83,5 +90,21 @@ trait AttendeesTrait
     public function setAttendeesNames(string $attendeesNames): void
     {
         $this->attendeesNames = $attendeesNames;
+    }
+
+    /**
+     * @return ObjectStorage<FrontendUser>
+     */
+    public function getAdditionalPersons(): ObjectStorage
+    {
+        return $this->additionalPersons;
+    }
+
+    /**
+     * @param ObjectStorage<FrontendUser> $additionalPersons
+     */
+    public function setAdditionalPersons(ObjectStorage $additionalPersons): void
+    {
+        $this->additionalPersons = $additionalPersons;
     }
 }
