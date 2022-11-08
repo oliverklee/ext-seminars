@@ -86,10 +86,10 @@ final class CategoryTest extends TestCase
      */
     public function getIconWithNonEmptyIconReturnsIcon(): void
     {
-        $this->subject->setData(['icon' => 'icon.gif']);
+        $this->subject->setData(['icon' => 'icon.svg']);
 
         self::assertEquals(
-            'icon.gif',
+            'icon.svg',
             $this->subject->getIcon()
         );
     }
@@ -99,10 +99,10 @@ final class CategoryTest extends TestCase
      */
     public function setIconSetsIcon(): void
     {
-        $this->subject->setIcon('icon.gif');
+        $this->subject->setIcon('icon.svg');
 
         self::assertEquals(
-            'icon.gif',
+            'icon.svg',
             $this->subject->getIcon()
         );
     }
@@ -124,7 +124,7 @@ final class CategoryTest extends TestCase
      */
     public function hasIconWithIconReturnsTrue(): void
     {
-        $this->subject->setIcon('icon.gif');
+        $this->subject->setIcon('icon.svg');
 
         self::assertTrue(
             $this->subject->hasIcon()
