@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
  */
 final class RegistrationTest extends UnitTestCase

@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
  * @covers \OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository
  */
