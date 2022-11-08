@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Domain\Repository;
+namespace OliverKlee\Seminars\Tests\Unit\Domain\Repository\Registration;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
-use OliverKlee\Seminars\Domain\Repository\RegistrationRepository;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Repository\RegistrationRepository
+ * @covers \OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository
  */
 final class RegistrationRepositoryTest extends UnitTestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Registration;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
@@ -10,11 +10,11 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
-use OliverKlee\Seminars\Domain\Model\Registration;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Model\Registration
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
  */
 final class RegistrationTest extends UnitTestCase
 {

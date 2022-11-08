@@ -84,7 +84,7 @@ return [
     \OliverKlee\Seminars\Domain\Model\PaymentMethod::class => [
         'tableName' => 'tx_seminars_payment_methods',
     ],
-    \OliverKlee\Seminars\Domain\Model\Registration::class => [
+    \OliverKlee\Seminars\Domain\Model\Registration\Registration::class => [
         'tableName' => 'tx_seminars_attendances',
         'properties' => [
             'event' => ['fieldName' => 'seminar'],

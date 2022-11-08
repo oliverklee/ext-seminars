@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
+namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Registration;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
-use OliverKlee\Seminars\Domain\Model\Registration;
-use OliverKlee\Seminars\Domain\Repository\RegistrationRepository;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * @covers \OliverKlee\Seminars\Domain\Model\Registration
- * @covers \OliverKlee\Seminars\Domain\Repository\RegistrationRepository
+ * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
+ * @covers \OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository
  */
 final class RegistrationRepositoryTest extends FunctionalTestCase
 {
@@ -49,7 +49,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -64,7 +64,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findsRecordOnPages(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationOnPage.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
 
         $result = $this->subject->findAll();
 
@@ -98,7 +98,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventAssociationWithSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithSingleEvent.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithSingleEvent.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -111,7 +111,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventAssociationWithEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithEventDate.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventDate.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -127,7 +127,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventAssociationWithEventTopic(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithEventTopic.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventTopic.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -140,7 +140,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsUserAssociation(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationRepository/RegistrationWithUser.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithUser.xml');
 
         $result = $this->subject->findByUid(1);
 
