@@ -105,6 +105,15 @@ config.tx_extbase.persistence.classes {
         }
     }
 
+    OliverKlee\Seminars\Domain\Model\Registration\Registration {
+        mapping {
+            tableName = tx_seminars_attendances
+            columns {
+                seminar.mapOnProperty = event
+            }
+        }
+    }
+
     OliverKlee\Seminars\Domain\Model\RegistrationCheckbox {
         mapping {
             tableName = tx_seminars_checkboxes

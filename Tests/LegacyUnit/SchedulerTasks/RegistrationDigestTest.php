@@ -13,7 +13,6 @@ use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -38,14 +37,9 @@ final class RegistrationDigestTest extends TestCase
     private $configuration;
 
     /**
-     * @var ObjectProphecy<EventMapper>
+     * @var EventMapper&MockObject
      */
-    private $eventMapperProphecy;
-
-    /**
-     * @var EventMapper
-     */
-    private $eventMapper;
+    private $eventMapperMock;
 
     /**
      * @var ObjectManager&MockObject
@@ -53,9 +47,14 @@ final class RegistrationDigestTest extends TestCase
     private $objectManagerMock;
 
     /**
-     * @var ObjectProphecy<StandaloneView>
+     * @var StandaloneView&MockObject
      */
-    private $viewProphecy;
+    private $plaintextViewMock;
+
+    /**
+     * @var StandaloneView&MockObject
+     */
+    private $htmlViewMock;
 
     /**
      * @var int
@@ -82,13 +81,13 @@ final class RegistrationDigestTest extends TestCase
         $this->objectManagerMock = $this->createMock(ObjectManager::class);
         $this->subject->injectObjectManager($this->objectManagerMock);
 
-        $this->eventMapperProphecy = $this->prophesize(EventMapper::class);
-        $this->eventMapper = $this->eventMapperProphecy->reveal();
-        $this->subject->setEventMapper($this->eventMapper);
+        $this->eventMapperMock = $this->createMock(EventMapper::class);
+        $this->subject->setEventMapper($this->eventMapperMock);
 
-        $this->viewProphecy = $this->prophesize(StandaloneView::class);
+        $this->plaintextViewMock = $this->createMock(StandaloneView::class);
+        $this->htmlViewMock = $this->createMock(StandaloneView::class);
         $this->objectManagerMock->method('get')->with(StandaloneView::class)
-            ->willReturn($this->viewProphecy->reveal());
+            ->willReturnOnConsecutiveCalls($this->plaintextViewMock, $this->htmlViewMock);
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);
@@ -114,7 +113,7 @@ final class RegistrationDigestTest extends TestCase
      */
     public function setEventMapperSetsEventMapper(): void
     {
-        self::assertSame($this->eventMapper, $this->subject->getEventMapper());
+        self::assertSame($this->eventMapperMock, $this->subject->getEventMapper());
     }
 
     /**
@@ -127,7 +126,7 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
 
         $this->email->expects(self::never())->method('send');
 
@@ -141,7 +140,7 @@ final class RegistrationDigestTest extends TestCase
     {
         $this->configuration->setAsBoolean('enable', true);
 
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn(new Collection());
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn(new Collection());
 
         $this->email->expects(self::never())->method('send');
 
@@ -158,8 +157,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->email->expects(self::once())->method('send');
 
@@ -181,8 +180,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->subject->execute();
 
@@ -204,8 +203,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->subject->execute();
 
@@ -227,8 +226,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->subject->execute();
 
@@ -256,20 +255,25 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
-        $expectedBody = 'Text body';
-        $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($plaintextTemplatePath))
-            ->shouldBeCalled();
-        $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($htmlTemplatePath))
-            ->shouldBeCalled();
-        $this->viewProphecy->assign('events', $events)->shouldBeCalled();
-        $this->viewProphecy->render()->willReturn($expectedBody);
+        $this->plaintextViewMock->expects(self::once())->method('setTemplatePathAndFilename')
+            ->with(GeneralUtility::getFileAbsFileName($plaintextTemplatePath));
+        $this->plaintextViewMock->expects(self::once())->method('assign')->with('events', $events);
+        $expectedPlaintextBody = 'Text body';
+        $this->plaintextViewMock->method('render')->willReturn($expectedPlaintextBody);
+
+        $this->htmlViewMock->expects(self::once())->method('setTemplatePathAndFilename')
+            ->with(GeneralUtility::getFileAbsFileName($htmlTemplatePath));
+        $this->htmlViewMock->expects(self::once())->method('assign')->with('events', $events);
+        $expectedHtmlBody = 'Text body';
+        $this->htmlViewMock->method('render')->willReturn($expectedHtmlBody);
 
         $this->subject->execute();
 
-        self::assertSame($expectedBody, $this->getTextBodyOfEmail($this->email));
+        self::assertSame($expectedPlaintextBody, $this->getTextBodyOfEmail($this->email));
+        self::assertSame($expectedHtmlBody, $this->getTextBodyOfEmail($this->email));
     }
 
     /**
@@ -282,8 +286,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->subject->execute();
 
@@ -300,8 +304,8 @@ final class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new Event();
         $events->add($event);
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
-        $this->eventMapperProphecy->save($event)->shouldBeCalled();
+        $this->eventMapperMock->method('findForRegistrationDigestEmail')->willReturn($events);
+        $this->eventMapperMock->expects(self::once())->method('save')->with($event);
 
         $this->subject->execute();
     }

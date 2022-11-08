@@ -13,7 +13,7 @@ use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -41,14 +41,9 @@ final class MailNotifierTest extends FunctionalTestCase
     private $languageService;
 
     /**
-     * @var ObjectProphecy<RegistrationDigest>
+     * @var RegistrationDigest&MockObject
      */
-    private $registrationDigestProphecy;
-
-    /**
-     * @var RegistrationDigest
-     */
-    private $registrationDigest;
+    private $registrationDigestMock;
 
     protected function setUp(): void
     {
@@ -66,9 +61,8 @@ final class MailNotifierTest extends FunctionalTestCase
         $objectManagerMock = $this->createMock(ObjectManager::class);
         GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
 
-        $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
-        $this->registrationDigest = $this->registrationDigestProphecy->reveal();
-        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($this->registrationDigest);
+        $this->registrationDigestMock = $this->createMock(RegistrationDigest::class);
+        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($this->registrationDigestMock);
 
         $this->subject = new MailNotifier();
     }
@@ -192,9 +186,8 @@ final class MailNotifierTest extends FunctionalTestCase
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
         );
         $subject->setConfigurationPageUid(1);
+        $this->registrationDigestMock->expects(self::once())->method('execute');
 
         $subject->execute();
-
-        $this->registrationDigestProphecy->execute()->shouldHaveBeenCalled();
     }
 }

@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a `Registration` model (#1750, #1752, #1755)
 - Add a `RegistrationCheckbox` model (#1742)
 - Add a `PaymentMethod` model (#1740)
 - Add a `FoodOption` model (#1738)
@@ -13,14 +14,16 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Converted icons from gif/png to SVG (#1743)
 
 ### Changed
+- Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
 
 ### Removed
-- Drop Prophecy (#1734, #1737, #1739)
+- Stop using Prophecy (#1734, #1737, #1739, #1741, #1746, #1747)
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed
+- Fix a typo in a `Registration` model setter (#1754)
 - Fix `Event.getFirstOrganizer()` for not-rewound storages (#1729)
 
 ## 4.2.1

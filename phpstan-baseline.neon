@@ -1106,6 +1106,11 @@ parameters:
 			path: Tests/Functional/Domain/Repository/PaymentMethodRepositoryTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepositoryTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\RegistrationCheckboxRepositoryTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Domain/Repository/RegistrationCheckboxRepositoryTest.php
@@ -1154,11 +1159,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Call to method Prophecy\\\\Prophecy\\\\MethodProphecy\\:\\:willReturn\\(\\) with incorrect case\\: wilLReturn$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"

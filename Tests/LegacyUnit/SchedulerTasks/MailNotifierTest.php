@@ -24,7 +24,6 @@ use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -124,10 +123,8 @@ final class MailNotifierTest extends TestCase
         $objectManagerMock = $this->createMock(ObjectManager::class);
         GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
 
-        /** @var ObjectProphecy<RegistrationDigest> $registrationDigestProphecy */
-        $registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
-        $registrationDigest = $registrationDigestProphecy->reveal();
-        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($registrationDigest);
+        $registrationDigestMock = $this->createMock(RegistrationDigest::class);
+        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($registrationDigestMock);
 
         $this->email = $this->createEmailMock();
 
