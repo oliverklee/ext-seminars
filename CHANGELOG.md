@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a `Registration` model (#1750, #1752, #1755)
+- Add a `Registration` model (#1750, #1752, #1755, #1756)
 - Add a `RegistrationCheckbox` model (#1742)
 - Add a `PaymentMethod` model (#1740)
 - Add a `FoodOption` model (#1738)
