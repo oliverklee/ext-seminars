@@ -110,6 +110,17 @@ config.tx_extbase.persistence.classes {
             tableName = tx_seminars_attendances
             columns {
                 seminar.mapOnProperty = event
+                registration_queue.mapOnProperty = onWaitingList
+                notes.mapOnProperty = comments
+                company.mapOnProperty = billingCompany
+                name.mapOnProperty = billingFullName
+                address.mapOnProperty = billingStreetAddress
+                zip.mapOnProperty = billingZipCode
+                city.mapOnProperty = billingCity
+                country.mapOnProperty = billingCountry
+                telephone.mapOnProperty = billingPhoneNumber
+                email.mapOnProperty = billingEmailAddress
+                price.mapOnProperty = priceCode
             }
         }
     }

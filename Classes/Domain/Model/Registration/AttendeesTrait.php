@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 /**
@@ -21,6 +22,22 @@ trait AttendeesTrait
      */
     protected $user;
 
+    /**
+     * @var int
+     */
+    protected $seats = 0;
+
+    /**
+     * @var bool
+     */
+    protected $registeredThemselves = false;
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
+    protected $attendeesNames = '';
+
     public function getUser(): ?FrontendUser
     {
         $user = $this->user;
@@ -36,5 +53,35 @@ trait AttendeesTrait
     public function setUser(FrontendUser $user): void
     {
         $this->user = $user;
+    }
+
+    public function getSeats(): int
+    {
+        return $this->seats;
+    }
+
+    public function setSeats(int $seats): void
+    {
+        $this->seats = $seats;
+    }
+
+    public function hasRegisteredThemselves(): bool
+    {
+        return $this->registeredThemselves;
+    }
+
+    public function setRegisteredThemselves(bool $registeredThemselves): void
+    {
+        $this->registeredThemselves = $registeredThemselves;
+    }
+
+    public function getAttendeesNames(): string
+    {
+        return $this->attendeesNames;
+    }
+
+    public function setAttendeesNames(string $attendeesNames): void
+    {
+        $this->attendeesNames = $attendeesNames;
     }
 }

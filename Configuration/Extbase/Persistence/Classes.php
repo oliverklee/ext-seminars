@@ -88,6 +88,17 @@ return [
         'tableName' => 'tx_seminars_attendances',
         'properties' => [
             'event' => ['fieldName' => 'seminar'],
+            'onWaitingList' => ['fieldName' => 'registration_queue'],
+            'comments' => ['fieldName' => 'notes'],
+            'billingCompany' => ['fieldName' => 'company'],
+            'billingFullName' => ['fieldName' => 'name'],
+            'billingStreetAddress' => ['fieldName' => 'address'],
+            'billingZipCode' => ['fieldName' => 'zip'],
+            'billingCity' => ['fieldName' => 'city'],
+            'billingCountry' => ['fieldName' => 'country'],
+            'billingPhoneNumber' => ['fieldName' => 'telephone'],
+            'billingEmailAddress' => ['fieldName' => 'email'],
+            'priceCode' => ['fieldName' => 'price'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [

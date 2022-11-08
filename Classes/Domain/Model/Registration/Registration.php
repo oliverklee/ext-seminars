@@ -18,6 +18,8 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 class Registration extends AbstractEntity
 {
     use AttendeesTrait;
+    use BillingAddressTrait;
+    use PaymentTrait;
 
     /**
      * @var string
@@ -31,6 +33,35 @@ class Registration extends AbstractEntity
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $event;
+
+    /**
+     * @var bool
+     */
+    protected $onWaitingList = false;
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
+    protected $interests = '';
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
+    protected $expectations = '';
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
+    protected $comments = '';
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
+    protected $knownFrom = '';
 
     public function getTitle(): string
     {
@@ -78,5 +109,55 @@ class Registration extends AbstractEntity
     public function hasNecessaryAssociations(): bool
     {
         return $this->hasValidEventType() && $this->getUser() instanceof FrontendUser;
+    }
+
+    public function isOnWaitingList(): bool
+    {
+        return $this->onWaitingList;
+    }
+
+    public function setOnWaitingList(bool $onWaitingList): void
+    {
+        $this->onWaitingList = $onWaitingList;
+    }
+
+    public function getInterests(): string
+    {
+        return $this->interests;
+    }
+
+    public function setInterests(string $interests): void
+    {
+        $this->interests = $interests;
+    }
+
+    public function getExpectations(): string
+    {
+        return $this->expectations;
+    }
+
+    public function setExpectations(string $expectations): void
+    {
+        $this->expectations = $expectations;
+    }
+
+    public function getComments(): string
+    {
+        return $this->comments;
+    }
+
+    public function setComments(string $comments): void
+    {
+        $this->comments = $comments;
+    }
+
+    public function getKnownFrom(): string
+    {
+        return $this->knownFrom;
+    }
+
+    public function setKnownFrom(string $knownFrom): void
+    {
+        $this->knownFrom = $knownFrom;
     }
 }
