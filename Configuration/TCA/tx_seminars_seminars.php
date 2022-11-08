@@ -19,7 +19,7 @@ $tca = [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'iconfile' => 'EXT:seminars/Resources/Public/Icons/EventComplete.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/EventComplete.svg',
         'typeicon_column' => 'object_type',
         'typeicon_classes' => [
             'default' => 'tx-seminars-event-complete',

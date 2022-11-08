@@ -11,7 +11,7 @@ $tca = [
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'hideTable' => true,
-        'iconfile' => 'EXT:seminars/Resources/Public/Icons/TimeSlot.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/TimeSlot.svg',
         'searchFields' => '',
     ],
     'interface' => [

@@ -11,7 +11,7 @@ return [
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:seminars/Resources/Public/Icons/PaymentMethod.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/PaymentMethod.svg',
         'searchFields' => 'title',
     ],
     'interface' => [

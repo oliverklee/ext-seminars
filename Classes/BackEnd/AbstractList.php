@@ -116,7 +116,7 @@ abstract class AbstractList
 
         $langEdit = \htmlspecialchars($this->getLanguageService()->getLL('edit'), ENT_QUOTES | ENT_HTML5);
         $icon = '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
+            'Resources/Public/Icons/Edit.svg" alt="' . $langEdit . '" class="icon" />';
 
         $urlParameters = [
             'edit' => [$this->tableName => [$recordUid => 'edit']],
@@ -165,7 +165,7 @@ abstract class AbstractList
                 \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-                'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
+                'Resources/Public/Icons/Garbage.svg" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
                 '" alt="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) . '" class="deleteicon" />' .
                 '</a>';
         }
@@ -220,7 +220,7 @@ abstract class AbstractList
             $result = '<div id="typo3-newRecordLink">' .
                 '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
                 '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-                'Resources/Public/Icons/New.gif"' .
+                'Resources/Public/Icons/New.svg"' .
                 // We use an empty alt attribute as we already have a textual
                 // representation directly next to the icon.
                 ' title="' . $langNew . '" alt="" />' .
@@ -278,7 +278,7 @@ abstract class AbstractList
             '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
             $this->getAdditionalCsvParameters() . '">' .
             '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="" class="icon" />' .
+            'Resources/Public/Icons/Csv.svg" title="' . $csvLabel . '" alt="" class="icon" />' .
             // We use an empty alt attribute as we already have a textual
             // representation directly next to the icon.
             $csvLabel .
@@ -303,11 +303,11 @@ abstract class AbstractList
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             if ($hidden) {
                 $hidden = '0';
-                $icon = 'Unhide.gif';
+                $icon = 'Unhide.svg';
                 $langHide = $this->getLanguageService()->getLL('unHide');
             } else {
                 $hidden = '1';
-                $icon = 'Hide.gif';
+                $icon = 'Hide.svg';
                 $langHide = $this->getLanguageService()->getLL('hide');
             }
 

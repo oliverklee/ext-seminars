@@ -11,7 +11,7 @@ $tca = [
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Place.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Place.svg',
         'searchFields' => 'title',
     ],
     'interface' => [

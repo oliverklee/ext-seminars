@@ -84,7 +84,7 @@ final class SpeakersListTest extends TestCase
         );
 
         self::assertStringContainsString(
-            'Icons/Hide.gif',
+            'Icons/Hide.svg',
             $this->subject->show()
         );
     }
@@ -103,7 +103,7 @@ final class SpeakersListTest extends TestCase
         );
 
         self::assertStringContainsString(
-            'Icons/Unhide.gif',
+            'Icons/Unhide.svg',
             $this->subject->show()
         );
     }

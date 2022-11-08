@@ -803,7 +803,7 @@ final class EventsListTest extends TestCase
         );
 
         self::assertStringContainsString(
-            'EventComplete.gif',
+            'EventComplete.svg',
             $this->subject->show()
         );
     }

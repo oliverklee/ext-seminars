@@ -281,7 +281,7 @@ class EventsList extends AbstractList
         $csvLabel = $this->getLanguageService()->getLL('csvExport');
 
         $imageTag = '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
+            'Resources/Public/Icons/Csv.svg" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
 
         $urlParameters = [
             'id' => (int)$pageData['uid'],

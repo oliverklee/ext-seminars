@@ -11,7 +11,7 @@ return [
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Food.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Food.svg',
         'searchFields' => 'title',
     ],
     'interface' => [
