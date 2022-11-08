@@ -6,15 +6,20 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Registration;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
@@ -115,6 +120,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         self::assertSame(EventInterface::PRICE_EARLY_BIRD, $result->getPriceCode());
         self::assertSame(199.99, $result->getTotalPrice());
+        self::assertNull($result->getPaymentMethod());
     }
 
     /**
@@ -159,8 +165,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithSingleEvent.xml');
 
         $result = $this->subject->findByUid(1);
-
         self::assertInstanceOf(Registration::class, $result);
+
         self::assertInstanceOf(SingleEvent::class, $result->getEvent());
     }
 
@@ -172,8 +178,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventDate.xml');
 
         $result = $this->subject->findByUid(1);
-
         self::assertInstanceOf(Registration::class, $result);
+
         self::assertInstanceOf(EventDate::class, $result->getEvent());
     }
 
@@ -188,8 +194,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventTopic.xml');
 
         $result = $this->subject->findByUid(1);
-
         self::assertInstanceOf(Registration::class, $result);
+
         self::assertInstanceOf(EventTopic::class, $result->getEvent());
     }
 
@@ -201,8 +207,85 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithUser.xml');
 
         $result = $this->subject->findByUid(1);
-
         self::assertInstanceOf(Registration::class, $result);
+
         self::assertInstanceOf(FrontendUser::class, $result->getUser());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAdditionalPersonsAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAdditionalPerson.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        $association = $result->getAdditionalPersons();
+        self::assertInstanceOf(ObjectStorage::class, $association);
+        self::assertCount(1, $association);
+        self::assertInstanceOf(FrontendUser::class, $association->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAccommodationOptionsAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAccommodationOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        $association = $result->getAccommodationOptions();
+        self::assertInstanceOf(ObjectStorage::class, $association);
+        self::assertCount(1, $association);
+        self::assertInstanceOf(AccommodationOption::class, $association->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsFoodOptionsAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithFoodOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        $association = $result->getFoodOptions();
+        self::assertInstanceOf(ObjectStorage::class, $association);
+        self::assertCount(1, $association);
+        self::assertInstanceOf(FoodOption::class, $association->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsRegistrationCheckboxesAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithRegistrationCheckbox.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        $association = $result->getRegistrationCheckboxes();
+        self::assertInstanceOf(ObjectStorage::class, $association);
+        self::assertCount(1, $association);
+        self::assertInstanceOf(RegistrationCheckbox::class, $association->current());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsPaymentMethodAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithPaymentMethod.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertInstanceOf(PaymentMethod::class, $result->getPaymentMethod());
     }
 }

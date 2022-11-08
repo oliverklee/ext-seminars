@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * This class represents a registration (or a waiting list entry) for an event.
@@ -62,6 +66,32 @@ class Registration extends AbstractEntity
      * @Extbase\Validate("StringLength", options={"maximum": 16383})
      */
     protected $knownFrom = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\AccommodationOption>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $accommodationOptions;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\FoodOption>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $foodOptions;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\RegistrationCheckbox>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $registrationCheckboxes;
+
+    public function __construct()
+    {
+        $this->additionalPersons = new ObjectStorage();
+        $this->accommodationOptions = new ObjectStorage();
+        $this->foodOptions = new ObjectStorage();
+        $this->registrationCheckboxes = new ObjectStorage();
+    }
 
     public function getTitle(): string
     {
@@ -159,5 +189,53 @@ class Registration extends AbstractEntity
     public function setKnownFrom(string $knownFrom): void
     {
         $this->knownFrom = $knownFrom;
+    }
+
+    /**
+     * @return ObjectStorage<AccommodationOption>
+     */
+    public function getAccommodationOptions(): ObjectStorage
+    {
+        return $this->accommodationOptions;
+    }
+
+    /**
+     * @param ObjectStorage<AccommodationOption> $accommodationOptions
+     */
+    public function setAccommodationOptions(ObjectStorage $accommodationOptions): void
+    {
+        $this->accommodationOptions = $accommodationOptions;
+    }
+
+    /**
+     * @return ObjectStorage<FoodOption>
+     */
+    public function getFoodOptions(): ObjectStorage
+    {
+        return $this->foodOptions;
+    }
+
+    /**
+     * @param ObjectStorage<FoodOption> $foodOptions
+     */
+    public function setFoodOptions(ObjectStorage $foodOptions): void
+    {
+        $this->foodOptions = $foodOptions;
+    }
+
+    /**
+     * @return ObjectStorage<RegistrationCheckbox>
+     */
+    public function getRegistrationCheckboxes(): ObjectStorage
+    {
+        return $this->registrationCheckboxes;
+    }
+
+    /**
+     * @param ObjectStorage<RegistrationCheckbox> $registrationCheckboxes
+     */
+    public function setRegistrationCheckboxes(ObjectStorage $registrationCheckboxes): void
+    {
+        $this->registrationCheckboxes = $registrationCheckboxes;
     }
 }

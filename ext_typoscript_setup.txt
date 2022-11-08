@@ -112,6 +112,9 @@ config.tx_extbase.persistence.classes {
                 seminar.mapOnProperty = event
                 registration_queue.mapOnProperty = onWaitingList
                 notes.mapOnProperty = comments
+                lodgings.mapOnProperty = accommodationOptions
+                foods.mapOnProperty = foodOptions
+                checkboxes.mapOnProperty = registrationCheckboxes
                 company.mapOnProperty = billingCompany
                 name.mapOnProperty = billingFullName
                 address.mapOnProperty = billingStreetAddress
@@ -121,6 +124,7 @@ config.tx_extbase.persistence.classes {
                 telephone.mapOnProperty = billingPhoneNumber
                 email.mapOnProperty = billingEmailAddress
                 price.mapOnProperty = priceCode
+                method_of_payment.mapOnProperty = paymentMethod
             }
         }
     }
