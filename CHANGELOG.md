@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed
+- Fix a typo in a `Registration` model setter (#1754)
 - Fix `Event.getFirstOrganizer()` for not-rewound storages (#1729)
 
 ## 4.2.1

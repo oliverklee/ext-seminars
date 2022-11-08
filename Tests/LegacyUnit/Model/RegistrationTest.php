@@ -1178,7 +1178,7 @@ final class RegistrationTest extends TestCase
      */
     public function setEmailAddressSetsEmailAddress(): void
     {
-        $this->subject->setEnailAddress('john@doe.com');
+        $this->subject->setEmailAddress('john@doe.com');
 
         self::assertEquals(
             'john@doe.com',

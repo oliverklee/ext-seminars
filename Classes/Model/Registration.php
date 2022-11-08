@@ -523,7 +523,7 @@ class Registration extends AbstractModel implements Titled
      *
      * @param string $email the e-mail address of this registration, may be empty
      */
-    public function setEnailAddress(string $email): void
+    public function setEmailAddress(string $email): void
     {
         $this->setAsString('email', $email);
     }
