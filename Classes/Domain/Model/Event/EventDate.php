@@ -57,10 +57,38 @@ class EventDate extends Event implements EventDateInterface
         return $topic instanceof EventTopic ? $topic->getEarlyBirdPrice() : 0.0;
     }
 
+    public function getSpecialPrice(): float
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic ? $topic->getSpecialPrice() : 0.0;
+    }
+
+    public function getSpecialEarlyBirdPrice(): float
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic ? $topic->getSpecialEarlyBirdPrice() : 0.0;
+    }
+
     public function getEventType(): ?EventType
     {
         $topic = $this->getTopic();
 
         return $topic instanceof EventTopic ? $topic->getEventType() : null;
+    }
+
+    public function hasAdditionalTermsAndConditions(): bool
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic && $topic->hasAdditionalTermsAndConditions();
+    }
+
+    public function isMultipleRegistrationPossible(): bool
+    {
+        $topic = $this->getTopic();
+
+        return $topic instanceof EventTopic && $topic->isMultipleRegistrationPossible();
     }
 }

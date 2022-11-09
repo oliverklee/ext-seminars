@@ -30,6 +30,11 @@ trait EventDateTrait
     /**
      * @var \DateTime|null
      */
+    protected $registrationStart;
+
+    /**
+     * @var \DateTime|null
+     */
     protected $earlyBirdDeadline;
 
     /**
@@ -77,6 +82,17 @@ trait EventDateTrait
      */
     protected $organizers;
 
+    /**
+     * @var int
+     */
+    protected $numberOfOfflineRegistrations = 0;
+
+    /**
+     * @var int
+     * @phpstan-var EventInterface::STATUS_*
+     */
+    protected $status = EventInterface::STATUS_PLANNED;
+
     public function __construct()
     {
         $this->venues = new ObjectStorage();
@@ -102,6 +118,16 @@ trait EventDateTrait
     public function setEnd(?\DateTime $end): void
     {
         $this->end = $end;
+    }
+
+    public function getRegistrationStart(): ?\DateTime
+    {
+        return $this->registrationStart;
+    }
+
+    public function setRegistrationStart(\DateTime $registrationStart): void
+    {
+        $this->registrationStart = $registrationStart;
     }
 
     public function getEarlyBirdDeadline(): ?\DateTime
@@ -230,5 +256,36 @@ trait EventDateTrait
         $organizers->rewind();
 
         return \count($organizers) > 0 ? $organizers->current() : null;
+    }
+
+    public function getNumberOfOfflineRegistrations(): int
+    {
+        return $this->numberOfOfflineRegistrations;
+    }
+
+    public function setNumberOfOfflineRegistrations(int $numberOfOfflineRegistrations): void
+    {
+        $this->numberOfOfflineRegistrations = $numberOfOfflineRegistrations;
+    }
+
+    /**
+     * @return EventInterface::STATUS_*
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param EventInterface::STATUS_* $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function isCanceled(): bool
+    {
+        return $this->status === EventInterface::STATUS_CANCELED;
     }
 }

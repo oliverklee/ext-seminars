@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add registration-specific fields to the `Event` model (#1764)
 - Add a `Registration` model (#1750, #1752, #1755, #1756, #1757, #1758)
 - Add a `RegistrationCheckbox` model (#1742)
 - Add a `PaymentMethod` model (#1740)

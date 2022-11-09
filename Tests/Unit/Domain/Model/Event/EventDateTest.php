@@ -532,4 +532,202 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getOwnerUid());
     }
+
+    /**
+     * @test
+     */
+    public function getRegistrationStartInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getRegistrationStart());
+    }
+
+    /**
+     * @test
+     */
+    public function setRegistrationStartSetsRegistrationStart(): void
+    {
+        $model = new \DateTime();
+        $this->subject->setRegistrationStart($model);
+
+        self::assertSame($model, $this->subject->getRegistrationStart());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAdditionalTermsAndConditionsWithoutTopicReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasAdditionalTermsAndConditions());
+    }
+
+    /**
+     * @return array<string, array{0: bool}>
+     */
+    public function boolDataProvider(): array
+    {
+        return [
+            'true' => [true],
+            'false' => [false],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider boolDataProvider
+     */
+    public function hasAdditionalTermsAndConditionsWithTopicReturnsValueFromTopic(bool $value): void
+    {
+        $topic = new EventTopic();
+        $topic->setAdditionalTermsAndConditions($value);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($value, $this->subject->hasAdditionalTermsAndConditions());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultipleRegistrationPossibleWithoutTopicReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isMultipleRegistrationPossible());
+    }
+
+    /**
+     * @test
+     * @dataProvider boolDataProvider
+     */
+    public function isMultipleRegistrationPossibleWithTopicReturnsValueFromTopic(bool $value): void
+    {
+        $topic = new EventTopic();
+        $topic->setMultipleRegistrationPossible($value);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($value, $this->subject->isMultipleRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getNumberOfOfflineRegistrationsInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getNumberOfOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function setNumberOfOfflineRegistrationsSetsNumberOfOfflineRegistrations(): void
+    {
+        $value = 123456;
+        $this->subject->setNumberOfOfflineRegistrations($value);
+
+        self::assertSame($value, $this->subject->getNumberOfOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function getStatusByDefaultReturnsPlanned(): void
+    {
+        self::assertSame(EventInterface::STATUS_PLANNED, $this->subject->getStatus());
+    }
+
+    /**
+     * @return array<string, array{0: EventInterface::STATUS_*}>
+     */
+    public function statusDataProvider(): array
+    {
+        return [
+            'planned' => [EventInterface::STATUS_PLANNED],
+            'confirmed' => [EventInterface::STATUS_CONFIRMED],
+            'canceled' => [EventInterface::STATUS_CANCELED],
+        ];
+    }
+
+    /**
+     * @test
+     * @param EventInterface::STATUS_* $status
+     * @dataProvider statusDataProvider
+     */
+    public function setStatusSetsStatus(int $status): void
+    {
+        $this->subject->setStatus($status);
+
+        self::assertSame($status, $this->subject->getStatus());
+    }
+
+    /**
+     * @return array<string, array{0: EventInterface::STATUS_*}>
+     */
+    public function nonCanceledStatusDataProvider(): array
+    {
+        return [
+            'planned' => [EventInterface::STATUS_PLANNED],
+            'confirmed' => [EventInterface::STATUS_CONFIRMED],
+        ];
+    }
+
+    /**
+     * @test
+     * @param EventInterface::STATUS_* $status
+     * @dataProvider nonCanceledStatusDataProvider
+     */
+    public function isCanceledForNonCanceledStatusReturnsFalse(int $status): void
+    {
+        $this->subject->setStatus($status);
+
+        self::assertFalse($this->subject->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function isCanceledForCanceledStatusReturnsTrue(): void
+    {
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
+
+        self::assertTrue($this->subject->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialPriceWithoutTopicReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getSpecialPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialPriceWithTopicReturnsSpecialPriceFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 500.0;
+        $topic->setSpecialPrice($value);
+        $this->subject->setTopic($topic);
+
+        self::assertEqualsWithDelta($value, $this->subject->getSpecialPrice(), 0.0001);
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialEarlyBirdPriceWithoutTopicReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getSpecialEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialEarlyBirdPriceWithTopicReturnsSpecialEarlyBirdPriceFromTopic(): void
+    {
+        $topic = new EventTopic();
+        $value = 500.0;
+        $topic->setSpecialEarlyBirdPrice($value);
+        $this->subject->setTopic($topic);
+
+        self::assertEqualsWithDelta($value, $this->subject->getSpecialEarlyBirdPrice(), 0.0001);
+    }
 }
