@@ -12,4 +12,10 @@ class SingleEvent extends Event implements EventDateInterface, EventTopicInterfa
     use EventTrait;
     use EventTopicTrait;
     use EventDateTrait;
+
+    public function __construct()
+    {
+        $this->initializeEventTopic();
+        $this->initializeEventDate();
+    }
 }

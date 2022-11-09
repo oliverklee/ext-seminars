@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * This class represents a date for an event that has an association to a topic.
@@ -18,6 +20,11 @@ class EventDate extends Event implements EventDateInterface
      * @var \OliverKlee\Seminars\Domain\Model\Event\EventTopic|null
      */
     protected $topic;
+
+    public function __construct()
+    {
+        $this->initializeEventDate();
+    }
 
     public function getTopic(): ?EventTopic
     {
@@ -90,5 +97,21 @@ class EventDate extends Event implements EventDateInterface
         $topic = $this->getTopic();
 
         return $topic instanceof EventTopic && $topic->isMultipleRegistrationPossible();
+    }
+
+    /**
+     * @return ObjectStorage<PaymentMethod>
+     */
+    public function getPaymentMethods(): ObjectStorage
+    {
+        $topic = $this->getTopic();
+        if ($topic instanceof EventTopic) {
+            return $topic->getPaymentMethods();
+        }
+
+        /** @var ObjectStorage<PaymentMethod> $paymentMethods */
+        $paymentMethods = new ObjectStorage();
+
+        return $paymentMethods;
     }
 }

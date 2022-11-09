@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -63,4 +66,19 @@ interface EventDateInterface
     public function getStatus(): int;
 
     public function isCanceled(): bool;
+
+    /**
+     * @return ObjectStorage<AccommodationOption>
+     */
+    public function getAccommodationOptions(): ObjectStorage;
+
+    /**
+     * @return ObjectStorage<FoodOption>
+     */
+    public function getFoodOptions(): ObjectStorage;
+
+    /**
+     * @return ObjectStorage<RegistrationCheckbox>
+     */
+    public function getRegistrationCheckboxes(): ObjectStorage;
 }

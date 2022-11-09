@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Event;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -724,5 +728,97 @@ final class SingleEventTest extends UnitTestCase
         $this->subject->setSpecialEarlyBirdPrice($price);
 
         self::assertSame($price, $this->subject->getSpecialEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getAccommodationOptionsInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getAccommodationOptions();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setAccommodationOptionsSetsAccommodationOptions(): void
+    {
+        /** @var ObjectStorage<AccommodationOption> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setAccommodationOptions($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getAccommodationOptions());
+    }
+
+    /**
+     * @test
+     */
+    public function getFoodOptionsInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getFoodOptions();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setFoodOptionsSetsFoodOptions(): void
+    {
+        /** @var ObjectStorage<FoodOption> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setFoodOptions($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getFoodOptions());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationCheckboxesInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getRegistrationCheckboxes();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setRegistrationCheckboxesSetsCheckboxes(): void
+    {
+        /** @var ObjectStorage<RegistrationCheckbox> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setRegistrationCheckboxes($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getRegistrationCheckboxes());
+    }
+
+    /**
+     * @test
+     */
+    public function getPaymentMethodsInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getPaymentMethods();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setPaymentMethodsSetsCheckboxes(): void
+    {
+        /** @var ObjectStorage<PaymentMethod> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setPaymentMethods($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getPaymentMethods());
     }
 }

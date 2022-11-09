@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * This trait provides methods that are useful for `EventTopic`s, and usually also `SingleEvent`s.
@@ -57,6 +59,17 @@ trait EventTopicTrait
      * @var bool
      */
     protected $multipleRegistrationPossible = false;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\PaymentMethod>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $paymentMethods;
+
+    private function initializeEventTopic(): void
+    {
+        $this->paymentMethods = new ObjectStorage();
+    }
 
     public function getDisplayTitle(): string
     {
@@ -156,5 +169,21 @@ trait EventTopicTrait
     public function setMultipleRegistrationPossible(bool $multipleRegistrationPossible): void
     {
         $this->multipleRegistrationPossible = $multipleRegistrationPossible;
+    }
+
+    /**
+     * @return ObjectStorage<PaymentMethod>
+     */
+    public function getPaymentMethods(): ObjectStorage
+    {
+        return $this->paymentMethods;
+    }
+
+    /**
+     * @param ObjectStorage<PaymentMethod> $paymentMethods
+     */
+    public function setPaymentMethods(ObjectStorage $paymentMethods): void
+    {
+        $this->paymentMethods = $paymentMethods;
     }
 }

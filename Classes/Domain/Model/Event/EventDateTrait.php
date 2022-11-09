@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -93,11 +96,32 @@ trait EventDateTrait
      */
     protected $status = EventInterface::STATUS_PLANNED;
 
-    public function __construct()
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\AccommodationOption>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $accommodationOptions;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\FoodOption>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $foodOptions;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\RegistrationCheckbox>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $registrationCheckboxes;
+
+    private function initializeEventDate(): void
     {
         $this->venues = new ObjectStorage();
         $this->speakers = new ObjectStorage();
         $this->organizers = new ObjectStorage();
+        $this->accommodationOptions = new ObjectStorage();
+        $this->foodOptions = new ObjectStorage();
+        $this->registrationCheckboxes = new ObjectStorage();
     }
 
     public function getStart(): ?\DateTime
@@ -287,5 +311,53 @@ trait EventDateTrait
     public function isCanceled(): bool
     {
         return $this->status === EventInterface::STATUS_CANCELED;
+    }
+
+    /**
+     * @return ObjectStorage<AccommodationOption>
+     */
+    public function getAccommodationOptions(): ObjectStorage
+    {
+        return $this->accommodationOptions;
+    }
+
+    /**
+     * @param ObjectStorage<AccommodationOption> $accommodationOptions
+     */
+    public function setAccommodationOptions(ObjectStorage $accommodationOptions): void
+    {
+        $this->accommodationOptions = $accommodationOptions;
+    }
+
+    /**
+     * @return ObjectStorage<FoodOption>
+     */
+    public function getFoodOptions(): ObjectStorage
+    {
+        return $this->foodOptions;
+    }
+
+    /**
+     * @param ObjectStorage<FoodOption> $foodOptions
+     */
+    public function setFoodOptions(ObjectStorage $foodOptions): void
+    {
+        $this->foodOptions = $foodOptions;
+    }
+
+    /**
+     * @return ObjectStorage<RegistrationCheckbox>
+     */
+    public function getRegistrationCheckboxes(): ObjectStorage
+    {
+        return $this->registrationCheckboxes;
+    }
+
+    /**
+     * @param ObjectStorage<RegistrationCheckbox> $registrationCheckboxes
+     */
+    public function setRegistrationCheckboxes(ObjectStorage $registrationCheckboxes): void
+    {
+        $this->registrationCheckboxes = $registrationCheckboxes;
     }
 }
