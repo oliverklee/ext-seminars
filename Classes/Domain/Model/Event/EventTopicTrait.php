@@ -32,11 +32,31 @@ trait EventTopicTrait
     protected $earlyBirdPrice = 0.0;
 
     /**
+     * @var float
+     */
+    protected $specialPrice = 0.0;
+
+    /**
+     * @var float
+     */
+    protected $specialEarlyBirdPrice = 0.0;
+
+    /**
      * @var \OliverKlee\Seminars\Domain\Model\EventType|null
      * @phpstan-var EventType|LazyLoadingProxy|null
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $eventType;
+
+    /**
+     * @var bool
+     */
+    protected $additionalTermsAndConditions = false;
+
+    /**
+     * @var bool
+     */
+    protected $multipleRegistrationPossible = false;
 
     public function getDisplayTitle(): string
     {
@@ -81,6 +101,26 @@ trait EventTopicTrait
         $this->earlyBirdPrice = $price;
     }
 
+    public function getSpecialPrice(): float
+    {
+        return $this->specialPrice;
+    }
+
+    public function setSpecialPrice(float $specialPrice): void
+    {
+        $this->specialPrice = $specialPrice;
+    }
+
+    public function getSpecialEarlyBirdPrice(): float
+    {
+        return $this->specialEarlyBirdPrice;
+    }
+
+    public function setSpecialEarlyBirdPrice(float $specialEarlyBirdPrice): void
+    {
+        $this->specialEarlyBirdPrice = $specialEarlyBirdPrice;
+    }
+
     public function getEventType(): ?EventType
     {
         $eventType = $this->eventType;
@@ -96,5 +136,25 @@ trait EventTopicTrait
     public function setEventType(?EventType $eventType): void
     {
         $this->eventType = $eventType;
+    }
+
+    public function hasAdditionalTermsAndConditions(): bool
+    {
+        return $this->additionalTermsAndConditions;
+    }
+
+    public function setAdditionalTermsAndConditions(bool $additionalTermsAndConditions): void
+    {
+        $this->additionalTermsAndConditions = $additionalTermsAndConditions;
+    }
+
+    public function isMultipleRegistrationPossible(): bool
+    {
+        return $this->multipleRegistrationPossible;
+    }
+
+    public function setMultipleRegistrationPossible(bool $multipleRegistrationPossible): void
+    {
+        $this->multipleRegistrationPossible = $multipleRegistrationPossible;
     }
 }

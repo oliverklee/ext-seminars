@@ -27,6 +27,21 @@ interface EventInterface
     public const TYPE_EVENT_DATE = 2;
 
     /**
+     * @var int
+     */
+    public const STATUS_PLANNED = 0;
+
+    /**
+     * @var int
+     */
+    public const STATUS_CANCELED = 1;
+
+    /**
+     * @var int
+     */
+    public const STATUS_CONFIRMED = 2;
+
+    /**
      * @var non-empty-string
      */
     public const PRICE_STANDARD = 'price_regular';
@@ -56,7 +71,15 @@ interface EventInterface
 
     public function getEarlyBirdPrice(): float;
 
+    public function getSpecialPrice(): float;
+
+    public function getSpecialEarlyBirdPrice(): float;
+
     public function getEventType(): ?EventType;
 
     public function getOwnerUid(): int;
+
+    public function hasAdditionalTermsAndConditions(): bool;
+
+    public function isMultipleRegistrationPossible(): bool;
 }

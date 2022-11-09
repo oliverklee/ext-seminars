@@ -7,6 +7,7 @@
         <description>There is no glory in prevention.</description>
         <begin_date>1648893600</begin_date>
         <end_date>1649008800</end_date>
+        <begin_date_registration>1640995200</begin_date_registration>
         <deadline_early_bird>1646215200</deadline_early_bird>
         <deadline_registration>1648807200</deadline_registration>
         <needs_registration>1</needs_registration>
@@ -16,5 +17,11 @@
         <price_regular>150.0</price_regular>
         <price_regular_early>125.0</price_regular_early>
         <owner_feuser>15</owner_feuser>
+        <uses_terms_2>1</uses_terms_2>
+        <allows_multiple_registrations>1</allows_multiple_registrations>
+        <offline_attendees>5</offline_attendees>
+        <cancelled>2</cancelled>
+        <price_special>100.0</price_special>
+        <price_special_early>75.0</price_special_early>
     </tx_seminars_seminars>
 </dataset>

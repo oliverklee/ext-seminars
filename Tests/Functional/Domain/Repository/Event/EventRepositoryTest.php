@@ -64,6 +64,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('There is no glory in prevention.', $result->getDescription());
         self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
         self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTime('2022-01-01 00:00'), $result->getRegistrationStart());
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
         self::assertTrue($result->isRegistrationRequired());
@@ -74,6 +75,12 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
         self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
+        self::assertTrue($result->hasAdditionalTermsAndConditions());
+        self::assertTrue($result->isMultipleRegistrationPossible());
+        self::assertSame(5, $result->getNumberOfOfflineRegistrations());
+        self::assertSame(EventInterface::STATUS_CONFIRMED, $result->getStatus());
+        self::assertEqualsWithDelta(100.0, $result->getSpecialPrice(), 0.0001);
+        self::assertEqualsWithDelta(75.0, $result->getSpecialEarlyBirdPrice(), 0.0001);
     }
 
     /**
@@ -109,6 +116,10 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
         self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
+        self::assertTrue($result->hasAdditionalTermsAndConditions());
+        self::assertTrue($result->isMultipleRegistrationPossible());
+        self::assertEqualsWithDelta(100.0, $result->getSpecialPrice(), 0.0001);
+        self::assertEqualsWithDelta(75.0, $result->getSpecialEarlyBirdPrice(), 0.0001);
     }
 
     /**
@@ -126,6 +137,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('There is no glory in prevention.', $result->getDescription());
         self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
         self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTime('2022-01-01 00:00'), $result->getRegistrationStart());
         self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
         self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
         self::assertTrue($result->isRegistrationRequired());
@@ -133,6 +145,8 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
         self::assertSame(20, $result->getMaximumNumberOfRegistrations());
         self::assertSame(15, $result->getOwnerUid());
+        self::assertSame(5, $result->getNumberOfOfflineRegistrations());
+        self::assertSame(EventInterface::STATUS_CONFIRMED, $result->getStatus());
     }
 
     /**

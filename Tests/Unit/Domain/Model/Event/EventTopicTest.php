@@ -233,4 +233,78 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getOwnerUid());
     }
+
+    /**
+     * @test
+     */
+    public function hasAdditionalTermsAndConditionsInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasAdditionalTermsAndConditions());
+    }
+
+    /**
+     * @test
+     */
+    public function setAdditionalTermsAndConditionsSetsAdditionalTermsAndConditions(): void
+    {
+        $this->subject->setAdditionalTermsAndConditions(true);
+
+        self::assertTrue($this->subject->hasAdditionalTermsAndConditions());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultipleRegistrationPossibleInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isMultipleRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function setMultipleRegistrationPossibleSetsMultipleRegistrationPossible(): void
+    {
+        $this->subject->setMultipleRegistrationPossible(true);
+
+        self::assertTrue($this->subject->isMultipleRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialPriceInitiallyReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getSpecialPrice());
+    }
+
+    /**
+     * @test
+     * @dataProvider validPriceDataProvider
+     */
+    public function setSpecialPriceSetsSpecialPrice(float $price): void
+    {
+        $this->subject->setSpecialPrice($price);
+
+        self::assertSame($price, $this->subject->getSpecialPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getSpecialEarlyBirdPriceInitiallyReturnsZero(): void
+    {
+        self::assertSame(0.0, $this->subject->getSpecialEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     * @dataProvider validPriceDataProvider
+     */
+    public function setSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(float $price): void
+    {
+        $this->subject->setSpecialEarlyBirdPrice($price);
+
+        self::assertSame($price, $this->subject->getSpecialEarlyBirdPrice());
+    }
 }

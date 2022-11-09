@@ -18,6 +18,8 @@ interface EventDateInterface
 
     public function getEnd(): ?\DateTime;
 
+    public function getRegistrationStart(): ?\DateTime;
+
     public function getEarlyBirdDeadline(): ?\DateTime;
 
     public function getRegistrationDeadline(): ?\DateTime;
@@ -52,4 +54,13 @@ interface EventDateInterface
     public function getOrganizers(): ObjectStorage;
 
     public function getFirstOrganizer(): ?Organizer;
+
+    public function getNumberOfOfflineRegistrations(): int;
+
+    /**
+     * @return EventInterface::STATUS_*
+     */
+    public function getStatus(): int;
+
+    public function isCanceled(): bool;
 }

@@ -29,6 +29,7 @@ config.tx_extbase.persistence.classes {
                 title.mapOnProperty = internalTitle
                 begin_date.mapOnProperty = start
                 end_date.mapOnProperty = end
+                begin_date_registration.mapOnProperty = registrationStart
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
                 needs_registration.mapOnProperty = registrationRequired
@@ -39,6 +40,12 @@ config.tx_extbase.persistence.classes {
                 price_regular_early.mapOnProperty = earlyBirdPrice
                 place.mapOnProperty = venues
                 owner_feuser.mapOnProperty = ownerUid
+                uses_terms_2.mapOnProperty = additionalTermsAndConditions
+                allows_multiple_registrations.mapOnProperty = multipleRegistrationPossible
+                offline_attendees.mapOnProperty = numberOfOfflineRegistrations
+                cancelled.mapOnProperty = status
+                price_special.mapOnProperty = specialPrice
+                price_special_early.mapOnProperty = specialEarlyBirdPrice
             }
         }
     }
@@ -52,6 +59,10 @@ config.tx_extbase.persistence.classes {
                 price_regular.mapOnProperty = standardPrice
                 price_regular_early.mapOnProperty = earlyBirdPrice
                 owner_feuser.mapOnProperty = ownerUid
+                uses_terms_2.mapOnProperty = additionalTermsAndConditions
+                allows_multiple_registrations.mapOnProperty = multipleRegistrationPossible
+                price_special.mapOnProperty = specialPrice
+                price_special_early.mapOnProperty = specialEarlyBirdPrice
             }
         }
     }
@@ -65,6 +76,7 @@ config.tx_extbase.persistence.classes {
                 topic.mapOnProperty = topic
                 begin_date.mapOnProperty = start
                 end_date.mapOnProperty = end
+                begin_date_registration.mapOnProperty = registrationStart
                 deadline_early_bird.mapOnProperty = earlyBirdDeadline
                 deadline_registration.mapOnProperty = registrationDeadline
                 needs_registration.mapOnProperty = registrationRequired
@@ -73,6 +85,8 @@ config.tx_extbase.persistence.classes {
                 attendees_max.mapOnProperty = maximumNumberOfRegistrations
                 place.mapOnProperty = venues
                 owner_feuser.mapOnProperty = ownerUid
+                offline_attendees.mapOnProperty = numberOfOfflineRegistrations
+                cancelled.mapOnProperty = status
             }
         }
     }
