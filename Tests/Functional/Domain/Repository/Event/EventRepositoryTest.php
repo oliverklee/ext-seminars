@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
@@ -441,6 +445,126 @@ final class EventRepositoryTest extends FunctionalTestCase
         $associatedModels = $result->getOrganizers();
         self::assertCount(1, $associatedModels);
         self::assertInstanceOf(Organizer::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAccommodationOptionsAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAccommodationOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getAccommodationOptions();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(AccommodationOption::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsAccommodationOptionsAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithAccommodationOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getAccommodationOptions();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(AccommodationOption::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsFoodOptionsAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithFoodOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getFoodOptions();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(FoodOption::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsFoodOptionsAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithFoodOption.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getFoodOptions();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(FoodOption::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsRegistrationCheckboxesAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithRegistrationCheckbox.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getRegistrationCheckboxes();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(RegistrationCheckbox::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsRegistrationCheckboxesAssociationForEventDate(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithRegistrationCheckbox.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventDate::class, $result);
+
+        $associatedModels = $result->getRegistrationCheckboxes();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(RegistrationCheckbox::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsPaymentMethodsAssociationForSingleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithPaymentMethod.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        $associatedModels = $result->getPaymentMethods();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(PaymentMethod::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function mapsPaymentMethodsAssociationForEventTopic(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithPaymentMethod.xml');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(EventTopic::class, $result);
+
+        $associatedModels = $result->getPaymentMethods();
+        self::assertCount(1, $associatedModels);
+        self::assertInstanceOf(PaymentMethod::class, $associatedModels->toArray()[0]);
     }
 
     /**

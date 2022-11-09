@@ -45,6 +45,9 @@ return [
             'status' => ['fieldName' => 'cancelled'],
             'specialPrice' => ['fieldName' => 'price_special'],
             'specialEarlyBirdPrice' => ['fieldName' => 'price_special_early'],
+            'accommodationOptions' => ['fieldName' => 'lodgings'],
+            'foodOptions' => ['fieldName' => 'foods'],
+            'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
@@ -80,6 +83,9 @@ return [
             'ownerUid' => ['fieldName' => 'owner_feuser'],
             'numberOfOfflineRegistrations' => ['fieldName' => 'offline_attendees'],
             'status' => ['fieldName' => 'cancelled'],
+            'accommodationOptions' => ['fieldName' => 'lodgings'],
+            'foodOptions' => ['fieldName' => 'foods'],
+            'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\EventType::class => [

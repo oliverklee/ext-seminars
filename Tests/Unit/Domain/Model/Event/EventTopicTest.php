@@ -10,7 +10,9 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Event\Event
@@ -306,5 +308,28 @@ final class EventTopicTest extends UnitTestCase
         $this->subject->setSpecialEarlyBirdPrice($price);
 
         self::assertSame($price, $this->subject->getSpecialEarlyBirdPrice());
+    }
+
+    /**
+     * @test
+     */
+    public function getPaymentMethodsInitiallyReturnsEmptyStorage(): void
+    {
+        $associatedModels = $this->subject->getPaymentMethods();
+
+        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
+        self::assertCount(0, $associatedModels);
+    }
+
+    /**
+     * @test
+     */
+    public function setPaymentMethodsSetsCheckboxes(): void
+    {
+        /** @var ObjectStorage<PaymentMethod> $associatedModels */
+        $associatedModels = new ObjectStorage();
+        $this->subject->setPaymentMethods($associatedModels);
+
+        self::assertSame($associatedModels, $this->subject->getPaymentMethods());
     }
 }

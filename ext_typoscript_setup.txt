@@ -46,6 +46,9 @@ config.tx_extbase.persistence.classes {
                 cancelled.mapOnProperty = status
                 price_special.mapOnProperty = specialPrice
                 price_special_early.mapOnProperty = specialEarlyBirdPrice
+                lodgings.mapOnProperty = accommodationOptions
+                foods.mapOnProperty = foodOptions
+                checkboxes.mapOnProperty = registrationCheckboxes
             }
         }
     }
@@ -87,6 +90,9 @@ config.tx_extbase.persistence.classes {
                 owner_feuser.mapOnProperty = ownerUid
                 offline_attendees.mapOnProperty = numberOfOfflineRegistrations
                 cancelled.mapOnProperty = status
+                lodgings.mapOnProperty = accommodationOptions
+                foods.mapOnProperty = foodOptions
+                checkboxes.mapOnProperty = registrationCheckboxes
             }
         }
     }
