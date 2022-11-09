@@ -225,7 +225,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $association = $result->getAdditionalPersons();
         self::assertInstanceOf(ObjectStorage::class, $association);
         self::assertCount(1, $association);
-        self::assertInstanceOf(FrontendUser::class, $association->current());
+        self::assertInstanceOf(FrontendUser::class, $association->toArray()[0]);
     }
 
     /**
@@ -241,7 +241,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $association = $result->getAccommodationOptions();
         self::assertInstanceOf(ObjectStorage::class, $association);
         self::assertCount(1, $association);
-        self::assertInstanceOf(AccommodationOption::class, $association->current());
+        self::assertInstanceOf(AccommodationOption::class, $association->toArray()[0]);
     }
 
     /**
@@ -257,7 +257,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $association = $result->getFoodOptions();
         self::assertInstanceOf(ObjectStorage::class, $association);
         self::assertCount(1, $association);
-        self::assertInstanceOf(FoodOption::class, $association->current());
+        self::assertInstanceOf(FoodOption::class, $association->toArray()[0]);
     }
 
     /**
@@ -273,7 +273,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $association = $result->getRegistrationCheckboxes();
         self::assertInstanceOf(ObjectStorage::class, $association);
         self::assertCount(1, $association);
-        self::assertInstanceOf(RegistrationCheckbox::class, $association->current());
+        self::assertInstanceOf(RegistrationCheckbox::class, $association->toArray()[0]);
     }
 
     /**

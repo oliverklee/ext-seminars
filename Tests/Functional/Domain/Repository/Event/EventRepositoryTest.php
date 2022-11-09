@@ -365,7 +365,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getVenues();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Venue::class, $associatedModels->current());
+        self::assertInstanceOf(Venue::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -380,7 +380,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getVenues();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Venue::class, $associatedModels->current());
+        self::assertInstanceOf(Venue::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -395,7 +395,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getSpeakers();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Speaker::class, $associatedModels->current());
+        self::assertInstanceOf(Speaker::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -410,7 +410,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getSpeakers();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Speaker::class, $associatedModels->current());
+        self::assertInstanceOf(Speaker::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -425,7 +425,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getOrganizers();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Organizer::class, $associatedModels->current());
+        self::assertInstanceOf(Organizer::class, $associatedModels->toArray()[0]);
     }
 
     /**
@@ -440,7 +440,7 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $associatedModels = $result->getOrganizers();
         self::assertCount(1, $associatedModels);
-        self::assertInstanceOf(Organizer::class, $associatedModels->current());
+        self::assertInstanceOf(Organizer::class, $associatedModels->toArray()[0]);
     }
 
     /**
