@@ -58,7 +58,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsSingleEventWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -92,7 +92,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsNotSetDateTimesForSingleEventAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithoutData.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutData.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -108,7 +108,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTopicWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -131,7 +131,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventDateWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -158,7 +158,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsNotSetDateTimesForEventDateAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithoutData.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutData.xml');
 
         $result = $this->subject->findByUid(1);
 
@@ -262,7 +262,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTopicAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -278,7 +278,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForSingleEventAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -291,7 +291,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForEventTopicAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventTopic::class, $result);
@@ -304,7 +304,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForEventDateAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithAllFields.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithAllFields.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -317,7 +317,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTypeAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithEventType.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithEventType.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -332,7 +332,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTypeAssociationForEventTopic(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithEventType.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithEventType.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventTopic::class, $result);
@@ -347,7 +347,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEventTypeAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateAndTopicWithEventType.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateAndTopicWithEventType.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -362,7 +362,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsVenuesAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithVenue.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithVenue.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -377,7 +377,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsVenuesAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithVenue.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithVenue.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -392,7 +392,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsSpeakersAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithSpeaker.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSpeaker.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -407,7 +407,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsSpeakersAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithSpeaker.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithSpeaker.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -422,7 +422,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsOrganizersAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithOrganizer.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOrganizer.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -437,7 +437,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsOrganizersAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithOrganizer.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithOrganizer.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -452,7 +452,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsAccommodationOptionsAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithAccommodationOption.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAccommodationOption.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -467,7 +467,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsAccommodationOptionsAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithAccommodationOption.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithAccommodationOption.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -482,7 +482,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsFoodOptionsAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithFoodOption.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithFoodOption.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -497,7 +497,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsFoodOptionsAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithFoodOption.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithFoodOption.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -512,7 +512,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsRegistrationCheckboxesAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithRegistrationCheckbox.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithRegistrationCheckbox.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -527,7 +527,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsRegistrationCheckboxesAssociationForEventDate(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithRegistrationCheckbox.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithRegistrationCheckbox.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventDate::class, $result);
@@ -542,7 +542,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsPaymentMethodsAssociationForSingleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithPaymentMethod.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithPaymentMethod.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -557,7 +557,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsPaymentMethodsAssociationForEventTopic(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithPaymentMethod.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithPaymentMethod.xml');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(EventTopic::class, $result);
@@ -572,7 +572,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
@@ -587,7 +587,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithoutOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(0);
 
@@ -599,7 +599,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithOwnerOnPage.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwnerOnPage.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
@@ -614,7 +614,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresSingleEventWithOtherOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/SingleEventWithOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -626,7 +626,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresEventDatesWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventDateWithOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -638,7 +638,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidIgnoresEventTopicsWithTheProvidedOwnerUid(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/EventTopicWithOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(5);
 
@@ -650,7 +650,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findSingleEventsByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventRepository/TwoSingleEventsWithOwner.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithOwner.xml');
 
         $result = $this->subject->findSingleEventsByOwnerUid(42);
 
