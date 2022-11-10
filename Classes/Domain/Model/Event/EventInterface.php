@@ -82,7 +82,7 @@ interface EventInterface
      *
      * If this event is free of charge, the result will be only the standard price with a total amount of zero.
      *
-     * @return array<Price::PRICE_TYPE_*, Price>
+     * @return array<Price::PRICE_*, Price>
      */
     public function getAllPrices(): array;
 
