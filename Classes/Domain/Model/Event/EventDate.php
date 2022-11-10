@@ -106,14 +106,11 @@ class EventDate extends Event implements EventDateInterface
     public function getPaymentMethods(): ObjectStorage
     {
         $topic = $this->getTopic();
-        if ($topic instanceof EventTopic) {
-            return $topic->getPaymentMethods();
+        if (!$topic instanceof EventTopic) {
+            return new ObjectStorage();
         }
 
-        /** @var ObjectStorage<PaymentMethod> $paymentMethods */
-        $paymentMethods = new ObjectStorage();
-
-        return $paymentMethods;
+        return $topic->getPaymentMethods();
     }
 
     /**
@@ -122,11 +119,11 @@ class EventDate extends Event implements EventDateInterface
     public function isFreeOfCharge(): bool
     {
         $topic = $this->getTopic();
-        if ($topic instanceof EventTopic) {
-            return $topic->isFreeOfCharge();
+        if (!$topic instanceof EventTopic) {
+            return true;
         }
 
-        return true;
+        return $topic->isFreeOfCharge();
     }
 
     /**
@@ -140,11 +137,11 @@ class EventDate extends Event implements EventDateInterface
     public function getAllPrices(): array
     {
         $topic = $this->getTopic();
-        if ($topic instanceof EventTopic) {
-            return $topic->getAllPrices();
+        if (!$topic instanceof EventTopic) {
+            return [];
         }
 
-        return [];
+        return $topic->getAllPrices();
     }
 
     /**
@@ -155,10 +152,10 @@ class EventDate extends Event implements EventDateInterface
     public function getPriceByPriceCode(string $priceCode): Price
     {
         $topic = $this->getTopic();
-        if ($topic instanceof EventTopic) {
-            return $topic->getPriceByPriceCode($priceCode);
+        if (!$topic instanceof EventTopic) {
+            throw new \UnexpectedValueException('This event date does not have a topic.', 1668096905);
         }
 
-        throw new \UnexpectedValueException('This event date does not have a topic.', 1668096905);
+        return $topic->getPriceByPriceCode($priceCode);
     }
 }
