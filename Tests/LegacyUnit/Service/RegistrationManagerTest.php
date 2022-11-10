@@ -685,7 +685,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse(): void
     {
-        $this->seminar->setStatus(Event::STATUS_CANCELED);
+        $this->seminar->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
             $this->subject->canRegisterIfLoggedIn($this->seminar)
@@ -874,7 +874,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage(): void
     {
-        $this->seminar->setStatus(Event::STATUS_CANCELED);
+        $this->seminar->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertSame(
             $this->translate('message_seminarCancelled'),
@@ -2137,7 +2137,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            Event::STATUS_CONFIRMED
+            EventInterface::STATUS_CONFIRMED
         );
 
         $pi1 = new DefaultController();
@@ -2159,7 +2159,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            Event::STATUS_CANCELED
+            EventInterface::STATUS_CANCELED
         );
 
         $pi1 = new DefaultController();
@@ -2181,7 +2181,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            Event::STATUS_PLANNED
+            EventInterface::STATUS_PLANNED
         );
 
         $pi1 = new DefaultController();
@@ -2204,7 +2204,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsString('hideFieldsInThankYouMail', 'planned_disclaimer');
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
-            Event::STATUS_PLANNED
+            EventInterface::STATUS_PLANNED
         );
 
         $pi1 = new DefaultController();

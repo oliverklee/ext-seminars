@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\LodgingMapper;
@@ -1039,7 +1040,7 @@ final class EventMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1055,7 +1056,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1070,7 +1071,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();
@@ -1085,7 +1086,7 @@ final class EventMapperTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
+            ['cancelled' => EventInterface::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
         );
 
         $result = $this->subject->findForAutomaticStatusChange();

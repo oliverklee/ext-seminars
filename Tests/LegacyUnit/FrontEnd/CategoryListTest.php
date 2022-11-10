@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
-use OliverKlee\Seminars\Model\Event;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -301,7 +301,7 @@ final class CategoryListTest extends TestCase
                 'title' => 'my_title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'categories' => 1,
-                'cancelled' => Event::STATUS_CONFIRMED,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
         $this->testingFramework->createRelation(

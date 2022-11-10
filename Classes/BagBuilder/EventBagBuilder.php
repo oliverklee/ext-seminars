@@ -162,7 +162,7 @@ class EventBagBuilder extends AbstractBagBuilder
      */
     public function ignoreCanceledEvents(): void
     {
-        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . Event::STATUS_CANCELED;
+        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . EventInterface::STATUS_CANCELED;
     }
 
     /**
@@ -631,12 +631,11 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * Limits the bag to events in status $status.
      *
-     * @param int $status Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+     * @param EventInterface::STATUS_* $status
      */
     public function limitToStatus(int $status): void
     {
-        $this->whereClauseParts['event_status']
-            = 'tx_seminars_seminars.cancelled = ' . $status;
+        $this->whereClauseParts['event_status'] = 'tx_seminars_seminars.cancelled = ' . $status;
     }
 
     /**
