@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a `PriceFinder` class (#1799)
 - Add `Event.isFreeOfCharge()` (#1791)
 - Add a (non-persisted) `Price` model (#1771, #1793)
 - Add registration-specific fields to the `Event` model (#1764, #1767)
