@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
@@ -18,7 +18,7 @@ trait PaymentTrait
 {
     /**
      * @var string|null
-     * @phpstan-var EventInterface::PRICE_*|null
+     * @phpstan-var Price::PRICE_*|null
      * @Extbase\Validate("StringLength", options={"maximum": 32})
      */
     protected $priceCode;
@@ -36,7 +36,7 @@ trait PaymentTrait
     protected $paymentMethod;
 
     /**
-     * @return EventInterface::PRICE_*
+     * @return Price::PRICE_*
      */
     public function getPriceCode(): ?string
     {
@@ -44,7 +44,7 @@ trait PaymentTrait
     }
 
     /**
-     * @param EventInterface::PRICE_* $priceCode
+     * @param Price::PRICE_* $priceCode
      */
     public function setPriceCode(string $priceCode): void
     {
