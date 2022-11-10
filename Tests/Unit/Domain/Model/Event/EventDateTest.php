@@ -828,4 +828,25 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($paymentMethods, $this->subject->getPaymentMethods());
     }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForNoTopicReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     * @dataProvider boolDataProvider
+     */
+    public function isFreeOfChargeWithTopicReturnsValueFromTopic(bool $freeOfCharge): void
+    {
+        $topic = $this->createMock(EventTopic::class);
+        $topic->method('isFreeOfCharge')->willReturn($freeOfCharge);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($freeOfCharge, $this->subject->isFreeOfCharge());
+    }
 }

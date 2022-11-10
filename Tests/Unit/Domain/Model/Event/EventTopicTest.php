@@ -332,4 +332,64 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame($associatedModels, $this->subject->getPaymentMethods());
     }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForNoPricesSetReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForAllPricesSetToZeroReturnsTrue(): void
+    {
+        $this->subject->setStandardPrice(0.0);
+        $this->subject->setEarlyBirdPrice(0.0);
+        $this->subject->setSpecialPrice(0.0);
+        $this->subject->setSpecialEarlyBirdPrice(0.0);
+
+        self::assertTrue($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForNonZeroStandardPriceAndAllOtherPricesZeroReturnsFalse(): void
+    {
+        $this->subject->setStandardPrice(42.0);
+        $this->subject->setEarlyBirdPrice(0.0);
+        $this->subject->setSpecialPrice(0.0);
+        $this->subject->setSpecialEarlyBirdPrice(0.0);
+
+        self::assertFalse($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForAllPricesSetToNonZeroReturnsFalse(): void
+    {
+        $this->subject->setStandardPrice(1.0);
+        $this->subject->setEarlyBirdPrice(2.0);
+        $this->subject->setSpecialPrice(3.0);
+        $this->subject->setSpecialEarlyBirdPrice(4.0);
+
+        self::assertFalse($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeOfChargeForZeroStandardPriceAndAllOtherPricesNonZeroReturnsTrue(): void
+    {
+        $this->subject->setStandardPrice(0.0);
+        $this->subject->setEarlyBirdPrice(2.0);
+        $this->subject->setSpecialPrice(3.0);
+        $this->subject->setSpecialEarlyBirdPrice(4.0);
+
+        self::assertTrue($this->subject->isFreeOfCharge());
+    }
 }

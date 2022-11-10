@@ -114,4 +114,17 @@ class EventDate extends Event implements EventDateInterface
 
         return $paymentMethods;
     }
+
+    /**
+     * Returns true if the standard price is 0.0. (In this case, all other prices are irrelevant.)
+     */
+    public function isFreeOfCharge(): bool
+    {
+        $topic = $this->getTopic();
+        if ($topic instanceof EventTopic) {
+            return $topic->isFreeOfCharge();
+        }
+
+        return true;
+    }
 }
