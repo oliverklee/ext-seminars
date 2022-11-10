@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -391,5 +392,140 @@ final class EventTopicTest extends UnitTestCase
         $this->subject->setSpecialEarlyBirdPrice(4.0);
 
         self::assertTrue($this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForNoPricesSetReturnsZeroStandardPrice(): void
+    {
+        $result = $this->subject->getAllPrices();
+
+        self::assertCount(1, $result);
+        $expected = [Price::PRICE_STANDARD => new Price(0.0, 'price.standard', Price::PRICE_STANDARD)];
+        self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForAllPricesZeroReturnsZeroStandardPrice(): void
+    {
+        $this->subject->setStandardPrice(0.0);
+        $this->subject->setEarlyBirdPrice(0.0);
+        $this->subject->setSpecialPrice(0.0);
+        $this->subject->setSpecialEarlyBirdPrice(0.0);
+
+        $result = $this->subject->getAllPrices();
+
+        self::assertCount(1, $result);
+        $expected = [Price::PRICE_STANDARD => new Price(0.0, 'price.standard', Price::PRICE_STANDARD)];
+        self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForZeroStandardPriceAndAllOtherPricesNonZeroReturnsZeroStandardPrice(): void
+    {
+        $this->subject->setStandardPrice(0.0);
+        $this->subject->setEarlyBirdPrice(2.0);
+        $this->subject->setSpecialPrice(3.0);
+        $this->subject->setSpecialEarlyBirdPrice(4.0);
+
+        $result = $this->subject->getAllPrices();
+
+        self::assertCount(1, $result);
+        $expected = [Price::PRICE_STANDARD => new Price(0.0, 'price.standard', Price::PRICE_STANDARD)];
+        self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForForNonZeroStandardPriceAndAllOtherPricesZeroStandardPrice(): void
+    {
+        $standardPriceAmount = 200.0;
+        $this->subject->setStandardPrice($standardPriceAmount);
+        $this->subject->setEarlyBirdPrice(0.0);
+        $this->subject->setSpecialPrice(0.0);
+        $this->subject->setSpecialEarlyBirdPrice(0.0);
+
+        $result = $this->subject->getAllPrices();
+
+        self::assertCount(1, $result);
+        $expected = [Price::PRICE_STANDARD => new Price($standardPriceAmount, 'price.standard', Price::PRICE_STANDARD)];
+        self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForAllPricesNonZeroReturnsAllPrices(): void
+    {
+        $standardPriceAmount = 1.0;
+        $earlyBirdPriceAmount = 2.0;
+        $specialPriceAmount = 3.0;
+        $specialEarlyBirdPriceAmount = 4.0;
+        $this->subject->setStandardPrice($standardPriceAmount);
+        $this->subject->setEarlyBirdPrice($earlyBirdPriceAmount);
+        $this->subject->setSpecialPrice($specialPriceAmount);
+        $this->subject->setSpecialEarlyBirdPrice($specialEarlyBirdPriceAmount);
+
+        $result = $this->subject->getAllPrices();
+
+        self::assertCount(4, $result);
+        $expected = [
+            Price::PRICE_STANDARD => new Price($standardPriceAmount, 'price.standard', Price::PRICE_STANDARD),
+            Price::PRICE_EARLY_BIRD => new Price($earlyBirdPriceAmount, 'price.earlyBird', Price::PRICE_EARLY_BIRD),
+            Price::PRICE_SPECIAL => new Price($specialPriceAmount, 'price.special', Price::PRICE_SPECIAL),
+            Price::PRICE_SPECIAL_EARLY_BIRD => new Price(
+                $specialEarlyBirdPriceAmount,
+                'price.specialEarlyBird',
+                Price::PRICE_SPECIAL_EARLY_BIRD
+            ),
+        ];
+
+        self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceByPriceCodeWithStandardPriceCodeForNoPricesReturnsFreeStandardPrice(): void
+    {
+        $expectedPrice = new Price(0.0, 'price.standard', Price::PRICE_STANDARD);
+        self::assertEquals($expectedPrice, $this->subject->getPriceByPriceCode(Price::PRICE_STANDARD));
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceByPriceCodeForExistingNonStandardPriceWithThatCodeReturnsMatchingPrice(): void
+    {
+        $standardPriceAmount = 1.0;
+        $earlyBirdPriceAmount = 2.0;
+        $this->subject->setStandardPrice($standardPriceAmount);
+        $this->subject->setEarlyBirdPrice($earlyBirdPriceAmount);
+
+        $expectedPrice = new Price($earlyBirdPriceAmount, 'price.earlyBird', Price::PRICE_EARLY_BIRD);
+        self::assertEquals($expectedPrice, $this->subject->getPriceByPriceCode(Price::PRICE_EARLY_BIRD));
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceByPriceCodeForInexistentPriceThrowsException(): void
+    {
+        $standardPriceAmount = 1.0;
+        $this->subject->setStandardPrice($standardPriceAmount);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1668096769);
+        $this->expectExceptionMessage(
+            'This event does not have a price with the code "' . Price::PRICE_EARLY_BIRD . '".'
+        );
+
+        $this->subject->getPriceByPriceCode(Price::PRICE_EARLY_BIRD);
     }
 }

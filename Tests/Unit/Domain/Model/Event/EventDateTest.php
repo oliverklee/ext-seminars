@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
@@ -848,5 +849,51 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setTopic($topic);
 
         self::assertSame($freeOfCharge, $this->subject->isFreeOfCharge());
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesForNoTopicReturnsEmptyArray(): void
+    {
+        self::assertSame([], $this->subject->getAllPrices());
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPricesWithTopicReturnsPricesFromTopic(): void
+    {
+        $prices = [Price::PRICE_STANDARD => new Price(0.0, 'price.standard', Price::PRICE_STANDARD)];
+        $topic = $this->createMock(EventTopic::class);
+        $topic->method('getAllPrices')->willReturn($prices);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($prices, $this->subject->getAllPrices());
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesByPriceCodeForNoTopicThrowsException(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1668096905);
+        $this->expectExceptionMessage('This event date does not have a topic.');
+
+        $this->subject->getPriceByPriceCode(Price::PRICE_EARLY_BIRD);
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesByPriceCodeWithTopicReturnsPriceFromTopic(): void
+    {
+        $price = new Price(0.0, 'price.standard', Price::PRICE_STANDARD);
+        $topic = $this->createMock(EventTopic::class);
+        $topic->method('getPriceByPriceCode')->with(Price::PRICE_STANDARD)->willReturn($price);
+        $this->subject->setTopic($topic);
+
+        self::assertSame($price, $this->subject->getPriceByPriceCode(Price::PRICE_STANDARD));
     }
 }
