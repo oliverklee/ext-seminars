@@ -186,4 +186,12 @@ trait EventTopicTrait
     {
         $this->paymentMethods = $paymentMethods;
     }
+
+    /**
+     * Returns true if the standard price is 0.0. (In this case, all other prices are irrelevant.)
+     */
+    public function isFreeOfCharge(): bool
+    {
+        return $this->getStandardPrice() === 0.0;
+    }
 }

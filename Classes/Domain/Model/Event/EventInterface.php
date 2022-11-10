@@ -69,4 +69,9 @@ interface EventInterface
      * @return ObjectStorage<PaymentMethod>
      */
     public function getPaymentMethods(): ObjectStorage;
+
+    /**
+     * Returns true if the standard price is 0.0. (In this case, all other prices are irrelevant.)
+     */
+    public function isFreeOfCharge(): bool;
 }
