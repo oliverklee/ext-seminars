@@ -1986,6 +1986,18 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor.action.save">
 				<source>Save</source>
 			</trans-unit>
+			<trans-unit id="price.standard">
+				<source>Regular price</source>
+			</trans-unit>
+			<trans-unit id="price.earlyBird">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="price.special">
+				<source>Special price</source>
+			</trans-unit>
+			<trans-unit id="price.specialEarlyBird">
+				<source>Early-bird special price</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

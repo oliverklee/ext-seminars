@@ -2480,6 +2480,22 @@ This event now has been confirmed.</source>
 				<source>The entered data as an overview:</source>
 				<target></target>
 			</trans-unit>
+			<trans-unit id="price.standard">
+				<source>Regular price</source>
+				<target>Standaardprijs</target>
+			</trans-unit>
+			<trans-unit id="price.earlyBird">
+				<source>Early-bird price</source>
+				<target>Vroegboeking prijs</target>
+			</trans-unit>
+			<trans-unit id="price.special">
+				<source>Special price</source>
+				<target>Speciale prijs</target>
+			</trans-unit>
+			<trans-unit id="price.specialEarlyBird">
+				<source>Early-bird special price</source>
+				<target>Vroegboek speciale prijs</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

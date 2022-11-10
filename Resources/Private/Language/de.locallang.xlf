@@ -2662,6 +2662,22 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Save</source>
 				<target>Speichern</target>
 			</trans-unit>
+			<trans-unit id="price.standard">
+				<source>Regular price</source>
+				<target>Standardpreis</target>
+			</trans-unit>
+			<trans-unit id="price.earlyBird">
+				<source>Early-bird price</source>
+				<target>Frühbucherpreis</target>
+			</trans-unit>
+			<trans-unit id="price.special">
+				<source>Special price</source>
+				<target>Spezialpreis</target>
+			</trans-unit>
+			<trans-unit id="price.specialEarlyBird">
+				<source>Early-bird special price</source>
+				<target>Frühbucher-Spezialpreis</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

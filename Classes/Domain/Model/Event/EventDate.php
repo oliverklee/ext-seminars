@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -126,5 +127,38 @@ class EventDate extends Event implements EventDateInterface
         }
 
         return true;
+    }
+
+    /**
+     * Returns all prices, event if they might not be applicable right now (e.g. also always the early bird prices if
+     * they are non-zero).
+     *
+     * If this event is free of charge, the result will be only the standard price with a total amount of zero.
+     *
+     * @return array<Price::PRICE_TYPE_*, Price>
+     */
+    public function getAllPrices(): array
+    {
+        $topic = $this->getTopic();
+        if ($topic instanceof EventTopic) {
+            return $topic->getAllPrices();
+        }
+
+        return [];
+    }
+
+    /**
+     * @param Price::PRICE_* $priceCode
+     *
+     * @throws \UnexpectedValueException if this date has no topic, or if there is no price with that code
+     */
+    public function getPriceByPriceCode(string $priceCode): Price
+    {
+        $topic = $this->getTopic();
+        if ($topic instanceof EventTopic) {
+            return $topic->getPriceByPriceCode($priceCode);
+        }
+
+        throw new \UnexpectedValueException('This event date does not have a topic.', 1668096905);
     }
 }

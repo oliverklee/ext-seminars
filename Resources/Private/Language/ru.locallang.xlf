@@ -2220,6 +2220,22 @@ This event now has been confirmed.</source>
 				<source>The entered data as an overview:</source>
 				<target></target>
 			</trans-unit>
+			<trans-unit id="price.standard">
+				<source>Regular price</source>
+				<target>Обычная цена</target>
+			</trans-unit>
+			<trans-unit id="price.earlyBird">
+				<source>Early-bird price</source>
+				<target>Цена при заказе заранее</target>
+			</trans-unit>
+			<trans-unit id="price.special">
+				<source>Special price</source>
+				<target>Специальная цена</target>
+			</trans-unit>
+			<trans-unit id="price.specialEarlyBird">
+				<source>Early-bird special price</source>
+				<target>Специальная цена при раннем заказе</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
