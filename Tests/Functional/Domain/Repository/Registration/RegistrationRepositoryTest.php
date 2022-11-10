@@ -8,11 +8,11 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -118,7 +118,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
 
-        self::assertSame(EventInterface::PRICE_EARLY_BIRD, $result->getPriceCode());
+        self::assertSame(Price::PRICE_EARLY_BIRD, $result->getPriceCode());
         self::assertSame(199.99, $result->getTotalPrice());
         self::assertNull($result->getPaymentMethod());
     }

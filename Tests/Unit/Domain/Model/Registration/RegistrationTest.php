@@ -9,11 +9,11 @@ use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -237,21 +237,21 @@ final class RegistrationTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array{0: EventInterface::PRICE_*}>
+     * @return array<string, array{0: Price::PRICE_*}>
      */
     public function validPriceCodeDataProvider(): array
     {
         return [
-            'standard' => [EventInterface::PRICE_STANDARD],
-            'early bird' => [EventInterface::PRICE_EARLY_BIRD],
-            'special' => [EventInterface::PRICE_SPECIAL],
-            'special early bird' => [EventInterface::PRICE_SPECIAL_EARLY_BIRD],
+            'standard' => [Price::PRICE_STANDARD],
+            'early bird' => [Price::PRICE_EARLY_BIRD],
+            'special' => [Price::PRICE_SPECIAL],
+            'special early bird' => [Price::PRICE_SPECIAL_EARLY_BIRD],
         ];
     }
 
     /**
      * @test
-     * @param EventInterface::PRICE_* $priceCode
+     * @param Price::PRICE_* $priceCode
      * @dataProvider validPriceCodeDataProvider
      */
     public function setPriceCodeSetsPriceCode(string $priceCode): void

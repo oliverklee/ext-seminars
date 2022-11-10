@@ -43,26 +43,6 @@ interface EventInterface
      */
     public const STATUS_CONFIRMED = 2;
 
-    /**
-     * @var non-empty-string
-     */
-    public const PRICE_STANDARD = 'price_regular';
-
-    /**
-     * @var non-empty-string
-     */
-    public const PRICE_EARLY_BIRD = 'price_regular_early';
-
-    /**
-     * @var non-empty-string
-     */
-    public const PRICE_SPECIAL = 'price_special';
-
-    /**
-     * @var non-empty-string
-     */
-    public const PRICE_SPECIAL_EARLY_BIRD = 'price_special_early';
-
     public function getInternalTitle(): string;
 
     public function getDisplayTitle(): string;
