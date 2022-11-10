@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
@@ -81,4 +82,14 @@ interface EventDateInterface
      * @return ObjectStorage<RegistrationCheckbox>
      */
     public function getRegistrationCheckboxes(): ObjectStorage;
+
+    /**
+     * Returns all prices, event if they might not be applicable right now (e.g. also always the early bird prices if
+     * they are non-zero).
+     *
+     * If this event is free of charge, the result will be only the standard price with a total amount of zero.
+     *
+     * @return array<Price::PRICE_*, Price>
+     */
+    public function getAllPrices(): array;
 }
