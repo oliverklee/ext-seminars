@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -207,7 +208,7 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        $builder = $this->getSeminarBagBuilder(Event::STATUS_CONFIRMED);
+        $builder = $this->getSeminarBagBuilder(EventInterface::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
         foreach ($builder->build() as $event) {
@@ -232,7 +233,7 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        $builder = $this->getSeminarBagBuilder(Event::STATUS_PLANNED);
+        $builder = $this->getSeminarBagBuilder(EventInterface::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
         $bag = $builder->build();
 
@@ -259,10 +260,9 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Returns a seminar bag builder already limited to upcoming events with a
-     * begin date and status $status.
+     * Returns a seminar bag builder already limited to upcoming events with a begin date and the given status.
      *
-     * @param int $status status to limit the builder to, must be either ::STATUS_PLANNED or ::CONFIRMED
+     * @param EventInterface::STATUS_* $status status to limit the builder to
      *
      * @return EventBagBuilder builder for the seminar bag
      */

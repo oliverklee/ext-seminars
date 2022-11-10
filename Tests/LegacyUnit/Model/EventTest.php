@@ -1534,7 +1534,7 @@ final class EventTest extends TestCase
         $this->subject->setData([]);
 
         self::assertEquals(
-            Event::STATUS_PLANNED,
+            EventInterface::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1545,11 +1545,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusPlannedReturnsStatusPlanned(): void
     {
         $this->subject->setData(
-            ['cancelled' => Event::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED]
         );
 
         self::assertEquals(
-            Event::STATUS_PLANNED,
+            EventInterface::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1560,11 +1560,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusCanceledReturnStatusCanceled(): void
     {
         $this->subject->setData(
-            ['cancelled' => Event::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED]
         );
 
         self::assertEquals(
-            Event::STATUS_CANCELED,
+            EventInterface::STATUS_CANCELED,
             $this->subject->getStatus()
         );
     }
@@ -1575,11 +1575,11 @@ final class EventTest extends TestCase
     public function getStatusWithStatusConfirmedReturnsStatusConfirmed(): void
     {
         $this->subject->setData(
-            ['cancelled' => Event::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED]
         );
 
         self::assertEquals(
-            Event::STATUS_CONFIRMED,
+            EventInterface::STATUS_CONFIRMED,
             $this->subject->getStatus()
         );
     }
@@ -1600,10 +1600,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusPlannedSetsStatus(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertEquals(
-            Event::STATUS_PLANNED,
+            EventInterface::STATUS_PLANNED,
             $this->subject->getStatus()
         );
     }
@@ -1613,10 +1613,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusCanceledSetsStatus(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertEquals(
-            Event::STATUS_CANCELED,
+            EventInterface::STATUS_CANCELED,
             $this->subject->getStatus()
         );
     }
@@ -1626,10 +1626,10 @@ final class EventTest extends TestCase
      */
     public function setStatusWithStatusConfirmedSetsStatus(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertEquals(
-            Event::STATUS_CONFIRMED,
+            EventInterface::STATUS_CONFIRMED,
             $this->subject->getStatus()
         );
     }
@@ -1639,7 +1639,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForPlannedStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertTrue($this->subject->isPlanned());
     }
@@ -1649,7 +1649,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForCanceledStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse($this->subject->isPlanned());
     }
@@ -1659,7 +1659,7 @@ final class EventTest extends TestCase
      */
     public function isPlannedForConfirmedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse($this->subject->isPlanned());
     }
@@ -1669,7 +1669,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForPlannedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse($this->subject->isCanceled());
     }
@@ -1679,7 +1679,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForCanceledStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertTrue($this->subject->isCanceled());
     }
@@ -1689,7 +1689,7 @@ final class EventTest extends TestCase
      */
     public function isCanceledForConfirmedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse($this->subject->isCanceled());
     }
@@ -1699,7 +1699,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForPlannedStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse($this->subject->isConfirmed());
     }
@@ -1709,7 +1709,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForCanceledStatusReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse($this->subject->isConfirmed());
     }
@@ -1719,7 +1719,7 @@ final class EventTest extends TestCase
      */
     public function isConfirmedForConfirmedStatusReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertTrue($this->subject->isConfirmed());
     }
@@ -1729,7 +1729,7 @@ final class EventTest extends TestCase
      */
     public function cancelCanMakePlannedEventCanceled(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->subject->cancel();
 
@@ -1741,7 +1741,7 @@ final class EventTest extends TestCase
      */
     public function cancelCanMakeConfirmedEventCanceled(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         $this->subject->cancel();
 
@@ -1755,7 +1755,7 @@ final class EventTest extends TestCase
      */
     public function cancelForCanceledEventNotThrowsException(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         $this->subject->cancel();
     }
@@ -1765,7 +1765,7 @@ final class EventTest extends TestCase
      */
     public function confirmCanMakePlannedEventConfirmed(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->subject->confirm();
 
@@ -1777,7 +1777,7 @@ final class EventTest extends TestCase
      */
     public function confirmCanMakeCanceledEventConfirmed(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         $this->subject->confirm();
 
@@ -1791,7 +1791,7 @@ final class EventTest extends TestCase
      */
     public function confirmForConfirmedEventNotThrowsException(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         $this->subject->confirm();
     }

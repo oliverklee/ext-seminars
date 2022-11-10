@@ -131,7 +131,7 @@ class EventMapper extends AbstractDataMapper
             ->where(
                 $queryBuilder->expr()->neq(
                     'cancelled',
-                    $queryBuilder->createNamedParameter(Event::STATUS_CANCELED, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(EventInterface::STATUS_CANCELED, \PDO::PARAM_INT)
                 ),
                 $queryBuilder->expr()->neq(
                     'object_type',
@@ -171,7 +171,7 @@ class EventMapper extends AbstractDataMapper
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'cancelled',
-                        $queryBuilder->createNamedParameter(Event::STATUS_PLANNED, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::STATUS_PLANNED, \PDO::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'automatic_confirmation_cancelation',

@@ -12,7 +12,6 @@ use OliverKlee\Seminars\BackEnd\EventsList;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Mapper\BackEndUserMapper;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
@@ -263,7 +262,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_CANCELED,
+                'cancelled' => EventInterface::STATUS_CANCELED,
             ]
         );
 
@@ -282,7 +281,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_CONFIRMED,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
 
@@ -301,7 +300,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_PLANNED,
+                'cancelled' => EventInterface::STATUS_PLANNED,
             ]
         );
 
@@ -351,7 +350,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_CONFIRMED,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -390,7 +389,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_PLANNED,
+                'cancelled' => EventInterface::STATUS_PLANNED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -410,7 +409,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_CANCELED,
+                'cancelled' => EventInterface::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -488,7 +487,7 @@ final class EventsListTest extends TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Event::STATUS_CANCELED,
+                'cancelled' => EventInterface::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -547,7 +546,7 @@ final class EventsListTest extends TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'cancelled' => Event::STATUS_CONFIRMED,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
 

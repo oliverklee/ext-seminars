@@ -395,7 +395,7 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED]
         );
 
         $this->subject->ignoreCanceledEvents();
@@ -5448,10 +5448,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5467,10 +5467,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5486,10 +5486,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CANCELED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CANCELED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5505,10 +5505,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5524,10 +5524,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5543,10 +5543,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_CONFIRMED);
+        $this->subject->limitToStatus(EventInterface::STATUS_CONFIRMED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5562,10 +5562,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_PLANNED]
+            ['cancelled' => EventInterface::STATUS_PLANNED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5581,10 +5581,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CONFIRMED]
+            ['cancelled' => EventInterface::STATUS_CONFIRMED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5600,10 +5600,10 @@ final class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Event::STATUS_CANCELED]
+            ['cancelled' => EventInterface::STATUS_CANCELED]
         );
 
-        $this->subject->limitToStatus(Event::STATUS_PLANNED);
+        $this->subject->limitToStatus(EventInterface::STATUS_PLANNED);
         $bag = $this->subject->build();
 
         self::assertSame(

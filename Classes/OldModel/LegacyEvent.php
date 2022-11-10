@@ -2589,7 +2589,7 @@ class LegacyEvent extends AbstractTimeSpan
 
     public function isCanceled(): bool
     {
-        return $this->getStatus() === Event::STATUS_CANCELED;
+        return $this->getStatus() === EventInterface::STATUS_CANCELED;
     }
 
     /**
@@ -3846,7 +3846,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isConfirmed(): bool
     {
-        return $this->getStatus() == Event::STATUS_CONFIRMED;
+        return $this->getStatus() == EventInterface::STATUS_CONFIRMED;
     }
 
     /**
@@ -3856,7 +3856,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isPlanned(): bool
     {
-        return $this->getStatus() == Event::STATUS_PLANNED;
+        return $this->getStatus() == EventInterface::STATUS_PLANNED;
     }
 
     /**

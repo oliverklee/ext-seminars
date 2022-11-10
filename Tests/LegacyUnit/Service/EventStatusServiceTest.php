@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -81,7 +82,7 @@ final class EventStatusServiceTest extends TestCase
     {
         $event = new Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
-        $event->setStatus(Event::STATUS_CONFIRMED);
+        $event->setStatus(EventInterface::STATUS_CONFIRMED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -102,7 +103,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -123,7 +124,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -144,7 +145,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);
 
@@ -165,7 +166,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -186,7 +187,7 @@ final class EventStatusServiceTest extends TestCase
                 'offline_attendees' => 1,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -200,7 +201,7 @@ final class EventStatusServiceTest extends TestCase
     {
         $event = new Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
-        $event->setStatus(Event::STATUS_CANCELED);
+        $event->setStatus(EventInterface::STATUS_CANCELED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -222,7 +223,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => 0,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -244,7 +245,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->future,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -266,7 +267,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $result = $this->subject->updateStatusAndSave($event);
 
@@ -288,7 +289,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->subject->updateStatusAndSave($event);
 
@@ -310,7 +311,7 @@ final class EventStatusServiceTest extends TestCase
                 'deadline_registration' => $this->past,
             ]
         );
-        $event->setStatus(Event::STATUS_PLANNED);
+        $event->setStatus(EventInterface::STATUS_PLANNED);
 
         $this->eventMapper->expects(self::once())->method('save')->with($event);
 

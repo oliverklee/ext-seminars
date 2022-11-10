@@ -821,15 +821,15 @@ $tca = [
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_planned',
-                        '0',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_PLANNED,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_canceled',
-                        '1',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_CANCELED,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_confirmed',
-                        '2',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_CONFIRMED,
                     ],
                 ],
 

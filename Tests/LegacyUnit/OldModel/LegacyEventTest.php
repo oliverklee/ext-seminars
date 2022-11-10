@@ -1151,7 +1151,7 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
             $this->subject->canSomebodyRegister()
@@ -1385,7 +1385,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForCancelledEventReturnsSeminarCancelledMessage(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertSame(
             $this->translate('message_seminarCancelled'),
@@ -5191,7 +5191,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setBeginDate($this->now + 10000);
         $this->subject->setAttendancesMax(5);
         $this->subject->setNumberOfAttendances(0);
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertSame('', $this->subject->getVacanciesString());
     }
@@ -6084,7 +6084,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isConfirmedForStatusPlannedReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse(
             $this->subject->isConfirmed()
@@ -6096,7 +6096,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isConfirmedForStatusConfirmedReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertTrue(
             $this->subject->isConfirmed()
@@ -6108,7 +6108,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isConfirmedForStatusCanceledReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
             $this->subject->isConfirmed()
@@ -6122,7 +6122,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isCanceledForPlannedEventReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertFalse(
             $this->subject->isCanceled()
@@ -6134,7 +6134,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isCanceledForCanceledEventReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertTrue(
             $this->subject->isCanceled()
@@ -6146,7 +6146,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isCanceledForConfirmedEventReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse(
             $this->subject->isCanceled()
@@ -6160,7 +6160,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isPlannedForStatusPlannedReturnsTrue(): void
     {
-        $this->subject->setStatus(Event::STATUS_PLANNED);
+        $this->subject->setStatus(EventInterface::STATUS_PLANNED);
 
         self::assertTrue(
             $this->subject->isPlanned()
@@ -6172,7 +6172,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isPlannedForStatusConfirmedReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CONFIRMED);
+        $this->subject->setStatus(EventInterface::STATUS_CONFIRMED);
 
         self::assertFalse(
             $this->subject->isPlanned()
@@ -6184,7 +6184,7 @@ final class LegacyEventTest extends TestCase
      */
     public function isPlannedForStatusCanceledReturnsFalse(): void
     {
-        $this->subject->setStatus(Event::STATUS_CANCELED);
+        $this->subject->setStatus(EventInterface::STATUS_CANCELED);
 
         self::assertFalse(
             $this->subject->isPlanned()
