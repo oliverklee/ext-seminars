@@ -21,27 +21,27 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 trait EventDateTrait
 {
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      */
     protected $start;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      */
     protected $end;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      */
     protected $registrationStart;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      */
     protected $earlyBirdDeadline;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeImmutable|null
      */
     protected $registrationDeadline;
 
@@ -124,52 +124,52 @@ trait EventDateTrait
         $this->registrationCheckboxes = new ObjectStorage();
     }
 
-    public function getStart(): ?\DateTime
+    public function getStart(): ?\DateTimeImmutable
     {
         return $this->start;
     }
 
-    public function setStart(?\DateTime $start): void
+    public function setStart(?\DateTimeImmutable $start): void
     {
         $this->start = $start;
     }
 
-    public function getEnd(): ?\DateTime
+    public function getEnd(): ?\DateTimeImmutable
     {
         return $this->end;
     }
 
-    public function setEnd(?\DateTime $end): void
+    public function setEnd(?\DateTimeImmutable $end): void
     {
         $this->end = $end;
     }
 
-    public function getRegistrationStart(): ?\DateTime
+    public function getRegistrationStart(): ?\DateTimeImmutable
     {
         return $this->registrationStart;
     }
 
-    public function setRegistrationStart(\DateTime $registrationStart): void
+    public function setRegistrationStart(\DateTimeImmutable $registrationStart): void
     {
         $this->registrationStart = $registrationStart;
     }
 
-    public function getEarlyBirdDeadline(): ?\DateTime
+    public function getEarlyBirdDeadline(): ?\DateTimeImmutable
     {
         return $this->earlyBirdDeadline;
     }
 
-    public function setEarlyBirdDeadline(?\DateTime $earlyBirdDeadline): void
+    public function setEarlyBirdDeadline(?\DateTimeImmutable $earlyBirdDeadline): void
     {
         $this->earlyBirdDeadline = $earlyBirdDeadline;
     }
 
-    public function getRegistrationDeadline(): ?\DateTime
+    public function getRegistrationDeadline(): ?\DateTimeImmutable
     {
         return $this->registrationDeadline;
     }
 
-    public function setRegistrationDeadline(?\DateTime $registrationDeadline): void
+    public function setRegistrationDeadline(?\DateTimeImmutable $registrationDeadline): void
     {
         $this->registrationDeadline = $registrationDeadline;
     }

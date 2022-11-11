@@ -29,7 +29,7 @@ final class PriceFinderTest extends UnitTestCase
     private $subject;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeImmutable
      */
     private $now;
 
@@ -38,9 +38,8 @@ final class PriceFinderTest extends UnitTestCase
         parent::setUp();
 
         $this->context = $this->createMock(Context::class);
-        $immutableNow = new \DateTimeImmutable('2022-04-01 10:00:00');
-        $this->now = new \DateTime('2022-04-01 10:00:00');
-        $this->context->method('getPropertyFromAspect')->with('date', 'full')->willReturn($immutableNow);
+        $this->now = new \DateTimeImmutable('2022-04-01 10:00:00');
+        $this->context->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now);
         GeneralUtility::setSingletonInstance(Context::class, $this->context);
 
         $this->subject = new PriceFinder();

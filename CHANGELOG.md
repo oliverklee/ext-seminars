@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `AccommodationOption` model (#1731, #1736)
 
 ### Changed
+- Switch the new models from `DateTime` to `DateTimeImmutable` (#1801)
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated

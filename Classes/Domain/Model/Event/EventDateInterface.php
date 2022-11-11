@@ -18,15 +18,15 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 interface EventDateInterface
 {
-    public function getStart(): ?\DateTime;
+    public function getStart(): ?\DateTimeImmutable;
 
-    public function getEnd(): ?\DateTime;
+    public function getEnd(): ?\DateTimeImmutable;
 
-    public function getRegistrationStart(): ?\DateTime;
+    public function getRegistrationStart(): ?\DateTimeImmutable;
 
-    public function getEarlyBirdDeadline(): ?\DateTime;
+    public function getEarlyBirdDeadline(): ?\DateTimeImmutable;
 
-    public function getRegistrationDeadline(): ?\DateTime;
+    public function getRegistrationDeadline(): ?\DateTimeImmutable;
 
     public function isRegistrationRequired(): bool;
 
