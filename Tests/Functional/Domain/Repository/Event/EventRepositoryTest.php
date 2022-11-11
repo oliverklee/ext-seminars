@@ -66,11 +66,11 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('Jousting', $result->getInternalTitle());
         self::assertSame('Jousting', $result->getDisplayTitle());
         self::assertSame('There is no glory in prevention.', $result->getDescription());
-        self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
-        self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
-        self::assertEquals(new \DateTime('2022-01-01 00:00'), $result->getRegistrationStart());
-        self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
-        self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+        self::assertEquals(new \DateTimeImmutable('2022-04-02 10:00'), $result->getStart());
+        self::assertEquals(new \DateTimeImmutable('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTimeImmutable('2022-01-01 00:00'), $result->getRegistrationStart());
+        self::assertEquals(new \DateTimeImmutable('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
+        self::assertEquals(new \DateTimeImmutable('2022-04-01 10:00'), $result->getRegistrationDeadline());
         self::assertTrue($result->isRegistrationRequired());
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
@@ -90,7 +90,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsNotSetDateTimesForSingleEventAsNull(): void
+    public function mapsNotSetDateTimeImmutablesForSingleEventAsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutData.xml');
 
@@ -139,11 +139,11 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('Jousting date', $result->getInternalTitle());
         self::assertSame('Jousting topic', $result->getDisplayTitle());
         self::assertSame('There is no glory in prevention.', $result->getDescription());
-        self::assertEquals(new \DateTime('2022-04-02 10:00'), $result->getStart());
-        self::assertEquals(new \DateTime('2022-04-03 18:00'), $result->getEnd());
-        self::assertEquals(new \DateTime('2022-01-01 00:00'), $result->getRegistrationStart());
-        self::assertEquals(new \DateTime('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
-        self::assertEquals(new \DateTime('2022-04-01 10:00'), $result->getRegistrationDeadline());
+        self::assertEquals(new \DateTimeImmutable('2022-04-02 10:00'), $result->getStart());
+        self::assertEquals(new \DateTimeImmutable('2022-04-03 18:00'), $result->getEnd());
+        self::assertEquals(new \DateTimeImmutable('2022-01-01 00:00'), $result->getRegistrationStart());
+        self::assertEquals(new \DateTimeImmutable('2022-03-02 10:00'), $result->getEarlyBirdDeadline());
+        self::assertEquals(new \DateTimeImmutable('2022-04-01 10:00'), $result->getRegistrationDeadline());
         self::assertTrue($result->isRegistrationRequired());
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
@@ -156,7 +156,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsNotSetDateTimesForEventDateAsNull(): void
+    public function mapsNotSetDateTimeImmutablesForEventDateAsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutData.xml');
 

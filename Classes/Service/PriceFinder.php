@@ -57,7 +57,7 @@ class PriceFinder implements SingletonInterface
     private function earlyBirdPricesApply(EventDateInterface $event): bool
     {
         $deadline = $event->getEarlyBirdDeadline();
-        if (!$deadline instanceof \DateTime) {
+        if (!$deadline instanceof \DateTimeImmutable) {
             return false;
         }
 
