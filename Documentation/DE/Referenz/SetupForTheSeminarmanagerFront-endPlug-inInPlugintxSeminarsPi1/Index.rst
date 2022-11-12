@@ -489,7 +489,8 @@ override the corresponding value from TS Setup.**
          boolean
 
    Beschreibung
-         whether to show the owner data in the single view
+         whether to show the owner data in the single view,
+         @deprecated, will be removed in seminars 5.0
 
    Standardwert
          0
@@ -504,7 +505,8 @@ override the corresponding value from TS Setup.**
          integer
 
    Beschreibung
-         the maximum width of the owner picture in the single view
+         the maximum width of the owner picture in the single view,
+         @deprecated, will be removed in seminars 5.0
 
    Standardwert
          250
