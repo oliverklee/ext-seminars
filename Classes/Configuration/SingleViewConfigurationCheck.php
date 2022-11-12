@@ -158,6 +158,9 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function checkShowOwnerDataInSingleView(): void
     {
         $this->checkIfBoolean(
@@ -168,6 +171,9 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function checkOwnerPictureMaxWidth(): void
     {
         $this->checkIfPositiveInteger(

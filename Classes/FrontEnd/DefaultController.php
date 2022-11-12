@@ -1249,6 +1249,8 @@ class DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the owner data or hides the subpart if
      * the event has no owner or the owner data should not be displayed.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     private function setOwnerDataMarker(): void
     {

@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate showing the owner data in the single view (#1811)
 
 ### Removed
 - Stop using Prophecy (#1734, #1737, #1739, #1741, #1746, #1747)
