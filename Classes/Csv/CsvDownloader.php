@@ -7,16 +7,18 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This controller creates CSV data for registrations or events.
  */
 class CsvDownloader
 {
+    use TranslateTrait;
+
     /**
      * @var int
      */
@@ -366,12 +368,5 @@ class CsvDownloader
         }
 
         return $result;
-    }
-
-    private function translate(string $key): string
-    {
-        $label = LocalizationUtility::translate($key, 'seminars');
-
-        return \is_string($label) ? $label : $key;
     }
 }
