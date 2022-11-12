@@ -4,6 +4,9 @@
 		  product-name="seminars">
 		<header/>
 		<body>
+			<trans-unit id="test-label">
+				<source>This is a test label.</source>
+			</trans-unit>
 			<trans-unit id="pi1_title" xml:space="preserve">
 				<source>Seminar Manager</source>
 			</trans-unit>

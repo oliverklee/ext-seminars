@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\Rendering\NullRenderingContext;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -16,7 +17,6 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 
 /**
@@ -27,6 +27,7 @@ use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 abstract class AbstractModel
 {
     use SharedPluginConfiguration;
+    use TranslateTrait;
 
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -548,20 +549,6 @@ abstract class AbstractModel
     protected function getFileRepository(): FileRepository
     {
         return GeneralUtility::makeInstance(FileRepository::class);
-    }
-
-    /**
-     * Retrieves the localized string for the given key within the seminars extension.
-     *
-     * Note: This method does not take the salutation mode (formal/informal) nor its suffixes into account.
-     *
-     * @return string the localized label, or the given key if there is no label with that key
-     */
-    protected function translate(string $key): string
-    {
-        $label = LocalizationUtility::translate($key, 'seminars');
-
-        return \is_string($label) ? $label : $key;
     }
 
     protected function addMissingProtocolToUrl(string $url): string
