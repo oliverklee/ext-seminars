@@ -366,6 +366,7 @@ CREATE TABLE tx_seminars_attendances (
     bank_code tinytext,
     bank_name tinytext,
     account_owner tinytext,
+    separate_billing_address tinyint(1) unsigned DEFAULT '0' NOT NULL,
     company tinytext,
     name varchar(80) DEFAULT '' NOT NULL,
     gender tinyint(1) unsigned DEFAULT '0' NOT NULL,

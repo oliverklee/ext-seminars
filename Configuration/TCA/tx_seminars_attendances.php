@@ -18,7 +18,7 @@ $tca = [
         'searchFields' => 'title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,registered_themselves,total_price,currency,including_tax,attendees_names,additional_persons,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
+        'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,registered_themselves,total_price,currency,including_tax,attendees_names,additional_persons,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,separate_billing_address,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
     ],
     'columns' => [
         'title' => [
@@ -372,9 +372,18 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
+        'separate_billing_address' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.separate_billing_address',
+            'onChange' => 'reload',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
         'company' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.company',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'text',
                 'cols' => 20,
@@ -384,6 +393,7 @@ $tca = [
         'gender' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -404,6 +414,7 @@ $tca = [
         'name' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.name',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
@@ -414,6 +425,7 @@ $tca = [
         'address' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.address',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'text',
                 'cols' => 20,
@@ -423,6 +435,7 @@ $tca = [
         'zip' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.zip',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 8,
@@ -433,6 +446,7 @@ $tca = [
         'city' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.city',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -443,6 +457,7 @@ $tca = [
         'country' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.country',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 16,
@@ -453,6 +468,7 @@ $tca = [
         'telephone' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.telephone',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -463,6 +479,7 @@ $tca = [
         'email' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.email',
+            'displayCond' => 'FIELD:separate_billing_address:REQ:true',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -478,7 +495,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, separate_billing_address, company, gender, name, address, zip, city, country, telephone, email',
         ],
     ],
 ];

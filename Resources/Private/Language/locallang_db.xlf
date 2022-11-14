@@ -403,6 +403,9 @@
 			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve">
 				<source>Account owner</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.separate_billing_address">
+				<source>Separate billing address</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve">
 				<source>Company</source>
 			</trans-unit>

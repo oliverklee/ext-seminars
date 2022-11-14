@@ -536,6 +536,10 @@
 				<source>Account owner</source>
 				<target>Kontoinhaber</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.separate_billing_address">
+				<source>Separate billing address</source>
+				<target>Abweichende Rechnungsadresse</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve">
 				<source>Company</source>
 				<target>Firma</target>

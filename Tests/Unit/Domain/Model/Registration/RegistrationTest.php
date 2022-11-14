@@ -674,4 +674,22 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertSame($model, $this->subject->getPaymentMethod());
     }
+
+    /**
+     * @test
+     */
+    public function hasSeparateBillingAddressInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasSeparateBillingAddress());
+    }
+
+    /**
+     * @test
+     */
+    public function setSeparateBillingAddressSetsSeparateBillingAddress(): void
+    {
+        $this->subject->setSeparateBillingAddress(true);
+
+        self::assertTrue($this->subject->hasSeparateBillingAddress());
+    }
 }
