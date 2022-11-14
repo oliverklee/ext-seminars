@@ -364,8 +364,10 @@ class RegistrationManager
      *
      * For this, only events that forbid multiple registrations are checked.
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @param LegacyEvent $event a seminar for which we'll check whether the user already is blocked
-     *        by an other event
+     *        by another event
      *
      * @return bool TRUE if user is blocked by another registration, FALSE otherwise
      */

@@ -3414,6 +3414,8 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * For this, only events that forbid multiple registrations are checked.
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @param int $uid UID of the FE user to check, must be > 0
      *
      * @return bool true if user is blocked by another registration, false otherwise
@@ -3439,6 +3441,9 @@ class LegacyEvent extends AbstractTimeSpan
         return !GeneralUtility::makeInstance(EventBag::class, $queryWhere, $additionalTables)->isEmpty();
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function getQueryForCollidingEvents(): string
     {
         if ($this->hasTimeslots()) {
@@ -3465,6 +3470,8 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether the collision check should be skipped for this event.
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return bool whether the collision check should be skipped for this event
      */
     private function skipCollisionCheck(): bool
@@ -3480,6 +3487,8 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * For open-ended events, only the begin date is checked.
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
     private function getQueryForCollidingEventsForTimeSpan(int $beginDate, int $endDate): string
@@ -3492,6 +3501,9 @@ class LegacyEvent extends AbstractTimeSpan
             ')';
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function getQueryPartForCollidingEventWithoutTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots = 0 AND (' .
@@ -3512,6 +3524,9 @@ class LegacyEvent extends AbstractTimeSpan
             '))';
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function getQueryPartForCollidingEventWithTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots != 0 AND EXISTS (' .

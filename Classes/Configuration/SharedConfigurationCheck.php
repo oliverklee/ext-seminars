@@ -320,6 +320,9 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     private function checkSkipRegistrationCollisionCheck(): void
     {
         $this->checkIfBoolean(

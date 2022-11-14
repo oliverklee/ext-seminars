@@ -1133,6 +1133,8 @@ class Event extends AbstractTimeSpan implements Titled
 
     /**
      * Returns whether the collision check should be skipped for this event.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     public function shouldSkipCollisionCheck(): bool
     {
