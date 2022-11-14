@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\ViewHelpers;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3Fluid\Fluid\Core\Variables\StandardVariableProvider;
 use TYPO3Fluid\Fluid\Core\Variables\VariableProviderInterface;
@@ -29,12 +27,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
         $this->setUpLanguageService();
-
         $this->variableProvider = new StandardVariableProvider();
-
-        $renderingContext = new RenderingContext();
-        $renderingContext->setVariableProvider($this->variableProvider);
-        GeneralUtility::addInstance(RenderingContext::class, $renderingContext);
     }
 
     public function setUpLanguageService(): void
@@ -62,6 +55,11 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
 
         $view = new StandaloneView();
+
+        $renderingContext = $view->getRenderingContext();
+        $renderingContext->setVariableProvider($this->variableProvider);
+        $view->setRenderingContext($renderingContext);
+
         $view->setTemplateSource($this->embedInHtmlWithNamespace($html));
 
         return $view->render();
