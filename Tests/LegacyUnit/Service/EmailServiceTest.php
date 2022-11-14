@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Model\Event;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -73,7 +73,7 @@ final class EmailServiceTest extends TestCase
 
         Bootstrap::initializeBackendAuthentication();
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             $languageService = LanguageService::create('default');
         } else {
             // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we currently are on 10LTS.

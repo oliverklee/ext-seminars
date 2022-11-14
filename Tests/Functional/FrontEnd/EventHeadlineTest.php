@@ -7,12 +7,12 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\FrontEnd\EventHeadline;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -48,7 +48,7 @@ final class EventHeadlineTest extends FunctionalTestCase
         $configurationRegistry->set('plugin.tx_seminars', $con);
 
         $frontEndControllerMock = $this->createMock(TypoScriptFrontendController::class);
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             $siteLanguage = new SiteLanguage(0, 'en_US.UTF-8', new Uri('/'), []);
             $frontEndControllerMock->method('getLanguage')->willReturn($siteLanguage);
         }

@@ -10,7 +10,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -28,6 +27,7 @@ use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -90,7 +90,7 @@ final class MailNotifierTest extends TestCase
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
         Bootstrap::initializeBackendAuthentication();
 
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             $this->languageService = LanguageService::create('default');
         } else {
             // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we currently are on 10LTS.
