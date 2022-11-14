@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add `Registration.hasSeparateBillingAddress` (#1821)
 - Add salutation-aware localization functionality (#1813, #1818)
 - Add a `PriceFinder` class (#1799)
 - Add `Event.isFreeOfCharge()` (#1791)
