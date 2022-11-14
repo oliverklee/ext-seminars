@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Mime\Part\DataPart;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -20,14 +20,14 @@ final class EmailTraitTest extends UnitTestCase
 
     private function runInV9Only(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is intended for V9 only.');
         }
     }
 
     private function runInV10AndHigherOnly(): void
     {
-        if (Typo3Version::isNotHigherThan(9)) {
+        if ((new Typo3Version())->getMajorVersion() <= 9) {
             self::markTestSkipped('This test is intended for V10 and higher only.');
         }
     }

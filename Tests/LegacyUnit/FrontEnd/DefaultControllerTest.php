@@ -12,7 +12,6 @@ use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
@@ -32,6 +31,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -4616,7 +4616,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function managedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
         }
 
@@ -4632,7 +4632,7 @@ final class DefaultControllerTest extends TestCase
         $result = $this->subject->main('', []);
 
         // @phpstan-ignore-next-line PHPStan does not know that we are running the tests on two versions.
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             $expectedUrl = $editorPageSlug;
         } else {
             $expectedUrl = 'index.php?id=' . $editorPageUid;
@@ -6601,7 +6601,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
         }
 
@@ -6632,7 +6632,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
         }
 
@@ -6661,7 +6661,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
         }
 
@@ -6770,7 +6770,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid(): void
     {
-        if (Typo3Version::isAtLeast(10)) {
+        if ((new Typo3Version())->getMajorVersion() >= 10) {
             self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
         }
 
