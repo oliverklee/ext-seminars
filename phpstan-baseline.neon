@@ -961,6 +961,16 @@ parameters:
 			path: Classes/ViewHelpers/DateRangeViewHelper.php
 
 		-
+			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractViewHelper\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
+
+		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -1329,6 +1339,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\CountdownViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/ViewHelpers/CountdownViewHelperTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/ViewHelpers/SalutationAwareTranslateViewHelperTest.php
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"

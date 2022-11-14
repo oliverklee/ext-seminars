@@ -7,6 +7,24 @@
 			<trans-unit id="test-label">
 				<source>This is a test label.</source>
 			</trans-unit>
+			<trans-unit id="test-label-with-arguments">
+				<source>Hello %s!</source>
+			</trans-unit>
+			<trans-unit id="test-label-with-salutation_formal">
+				<source>This is a test label with a formal salutation.</source>
+			</trans-unit>
+			<trans-unit id="test-label-with-salutation_informal">
+				<source>This is a test label with an informal salutation.</source>
+			</trans-unit>
+			<trans-unit id="test-label-with-salutation-and-fallback">
+				<source>This is a test label with a fallback.</source>
+			</trans-unit>
+			<trans-unit id="test-label-with-salutation-and-fallback_informal">
+				<source>This is a test label with a fallback and an informal salutation.</source>
+			</trans-unit>
+			<trans-unit id="test-label-with-salutation-and-fallback_formal">
+				<source>This is a test label with a fallback and a formal salutation.</source>
+			</trans-unit>
 			<trans-unit id="pi1_title" xml:space="preserve">
 				<source>Seminar Manager</source>
 			</trans-unit>
