@@ -786,6 +786,7 @@ $tca = [
                 ],
             ],
         ],
+        // @deprecated will be removed in seminars 5.0
         'skip_collision_check' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.skip_collision_check',

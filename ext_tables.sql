@@ -257,6 +257,7 @@ CREATE TABLE tx_seminars_seminars (
     queue_size int(1) unsigned DEFAULT '0' NOT NULL,
     offline_attendees int(11) unsigned DEFAULT '0' NOT NULL,
     target_groups int(11) unsigned DEFAULT '0' NOT NULL,
+    # @deprecated will be removed in seminars 5.0
     skip_collision_check tinyint(1) unsigned DEFAULT '0' NOT NULL,
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
