@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a `RegistrationGuard` class (#1838)
 - Add a rewritten registration form for TYPO3 >= 10LTS
   (#1825, #1830)
 - Add `Registration.hasSeparateBillingAddress` (#1821)
