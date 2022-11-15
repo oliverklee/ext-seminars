@@ -2007,6 +2007,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.frontEndEditor.action.save">
 				<source>Save</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration">
+				<source>Registration form for events</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
+				<source>Page to display if this plugin is called with no event</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>

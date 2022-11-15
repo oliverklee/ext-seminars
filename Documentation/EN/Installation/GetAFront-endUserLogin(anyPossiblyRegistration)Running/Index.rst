@@ -1,9 +1,4 @@
 .. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. ==================================================
 .. DEFINE SOME TEXTROLES
 .. --------------------------------------------------
 .. role::   underline
@@ -12,26 +7,50 @@
    :class:  typoscript
 .. role::   php(code)
 
+.. _login-page:
 
-Get a front-end user login (any possibly registration) running
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======================
+Setting up a login page
+=======================
 
-Choose a login box extension and a front-end user registration
-extension, install and configure them. On my site, I use  *felogin*,
-but you may want to use others. You can
-leave out the front-end user registration extension if you don't want
-front-end users to be able to create their own accounts.
+Some of this extension's features require a FE user to be logged in, for example
+the event registration, the event management in the FE or access to the attendee
+lists. If you are not using any of these feature, you can skip this chapter.
 
-If a user is on the detail view page of an event and wants to
-register, he's shown a link to the login page. The URL provided there
-contains the information to redirect the user directly to the
-registration page after login. Important: This feature works only with
-*felogin* !
+Selecting which login plugins to use
+====================================
 
-It is possible to show the events title and date on the login page, by
-setting up the event headline view on the login page.To do so, insert
-a page content element on the login page containing the seminars plug-
-inand set the view to „event headline.“If a user clicks on the
-register link of an event, the title and date of the event will be
-shown on the login page.
+There are two possible scenarios for the login page:
 
+1.  You have (recurring) visitors that log in to your site in order to register
+    for events, to unregister again, or to manage events.
+    In this case, you will need regular login form using the **felogin**
+    extension that comes with the TYPO3 Core.
+
+2.  You want people to register for your events, but you do not want bother them
+    with having to create an account. In this case, you will need the
+    **onetimeaccount** extension.
+
+If you want to cover both scenarios, you can also use both plugins (on the same
+page.)
+
+Allowing users to create an account with a double-opt-in process before they can
+log in is *not*, supported, though. (In that case, the redirect parameter to
+the registration page in the link to the login page will get lost.)
+
+Selecting which onetimeaccount plugin to use
+============================================
+
+The onetimeaccount extension comes with two plugins:
+
+One-time FE account creator with autologin
+------------------------------------------
+
+Use this version if you are using the legacy seminars registration form that
+was available until seminars 4.x and will get removed in seminars 5.0.
+
+One-time FE account creator without autologin
+---------------------------------------------
+
+Use this version if you are using the rewritten seminars registration form that
+was introduced in seminars 4.3.0.
