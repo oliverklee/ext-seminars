@@ -68,9 +68,11 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'price_regular',
                 // We use "price_board_regular" instead of "price_regular_board"
                 // to keep the subpart names prefix-free.
+                // @deprecated will be removed in seminars 5.0
                 'price_board_regular',
                 'price_special',
                 // Ditto for "price_board_special".
+                // @deprecated will be removed in seminars 5.0
                 'price_board_special',
                 'paymentmethods',
                 'additional_information',

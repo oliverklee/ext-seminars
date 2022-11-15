@@ -1172,6 +1172,8 @@ class LegacyEvent extends AbstractTimeSpan
      * amount and currency. Returns an empty string if there is no regular price
      * (including full board) set.
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return string the regular event price (including full board)
      */
     public function getPriceRegularBoard(): string
@@ -1186,6 +1188,8 @@ class LegacyEvent extends AbstractTimeSpan
      * If there is no regular price (including full board), this function
      * returns "0.00".
      *
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return string the regular event price (including full board)
      */
     private function getPriceRegularBoardAmount(): string
@@ -1194,8 +1198,9 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether this event has a non-zero regular price (including full
-     * board) set.
+     * Checks whether this event has a non-zero regular price (including full board) set.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     public function hasPriceRegularBoard(): bool
     {
@@ -1206,6 +1211,8 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets our special price (including full board) as a string containing
      * amount and currency. Returns an empty string if there is no special price
      * (including full board) set.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     public function getPriceSpecialBoard(): string
     {
@@ -1218,6 +1225,8 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * If there is no special price (including full board), this function
      * returns "0.00".
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     private function getPriceSpecialBoardAmount(): string
     {
@@ -1225,8 +1234,9 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether this event has a non-zero special price (including full
-     * board) set.
+     * Checks whether this event has a non-zero special price (including full board) set.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     public function hasPriceSpecialBoard(): bool
     {
@@ -3222,6 +3232,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->getEarlyBirdPriceRegular();
                 break;
             case 'price_regular_board':
+                // @deprecated will be removed in seminars 5.0
                 $result = $this->getPriceRegularBoard();
                 break;
             case 'price_special':
@@ -3231,6 +3242,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->getEarlyBirdPriceSpecial();
                 break;
             case 'price_special_board':
+                // @deprecated will be removed in seminars 5.0
                 $result = $this->getPriceSpecialBoard();
                 break;
             case 'additional_information':
@@ -3327,6 +3339,7 @@ class LegacyEvent extends AbstractTimeSpan
                     . ': ' . $this->getPriceRegular(),
             ];
         }
+        // @deprecated will be removed in seminars 5.0
         if ($this->hasPriceRegularBoard()) {
             $result['regular_board'] = [
                 'value' => 'regular_board',
@@ -3353,6 +3366,7 @@ class LegacyEvent extends AbstractTimeSpan
                 ];
             }
         }
+        // @deprecated will be removed in seminars 5.0
         if ($this->hasPriceSpecialBoard()) {
             $result['special_board'] = [
                 'value' => 'special_board',
@@ -3403,6 +3417,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         // There is no early-bird version of the prices that include full board.
+        // @deprecated will be removed in seminars 5.0
         $result = $result || $this->hasPriceRegularBoard() || $this->hasPriceSpecialBoard();
 
         return $result;

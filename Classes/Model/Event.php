@@ -710,6 +710,8 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return float our regular board price, will be 0.00 if this event has no
      *               regular board price, will be >= 0.00
      */
@@ -721,6 +723,8 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
+     * @deprecated will be removed in seminars 5.0
+     *
      * @param float $price our regular board price, must be >= 0.00
      */
     public function setRegularBoardPrice(float $price): void
@@ -736,6 +740,9 @@ class Event extends AbstractTimeSpan implements Titled
         }
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     public function hasRegularBoardPrice(): bool
     {
         return $this->isEventDate()
@@ -811,6 +818,8 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
+     * @deprecated will be removed in seminars 5.0
+     *
      * @return float our special board price, will be 0.00 if this event has no
      *               special board price, will be >= 0.00
      */
@@ -822,6 +831,8 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
+     * @deprecated will be removed in seminars 5.0
+     *
      * @param float $price our special board price, must be >= 0.00
      */
     public function setSpecialBoardPrice(float $price): void
@@ -837,6 +848,9 @@ class Event extends AbstractTimeSpan implements Titled
         }
     }
 
+    /**
+     * @deprecated will be removed in seminars 5.0
+     */
     public function hasSpecialBoardPrice(): bool
     {
         return $this->isEventDate()
@@ -929,9 +943,11 @@ class Event extends AbstractTimeSpan implements Titled
             }
         }
 
+        // @deprecated will be removed in seminars 5.0
         if ($this->hasRegularBoardPrice()) {
             $result['regular_board'] = $this->getRegularBoardPrice();
         }
+        // @deprecated will be removed in seminars 5.0
         if ($this->hasSpecialBoardPrice()) {
             $result['special_board'] = $this->getSpecialBoardPrice();
         }
