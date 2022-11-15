@@ -92,4 +92,6 @@ interface EventDateInterface
      * @return array<Price::PRICE_*, Price>
      */
     public function getAllPrices(): array;
+
+    public function allowsUnlimitedRegistrations(): bool;
 }
