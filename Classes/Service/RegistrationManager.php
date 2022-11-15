@@ -269,7 +269,13 @@ class RegistrationManager
             $result = $plugin->cObj->getTypoLink(
                 $label,
                 (string)$plugin->getConfValueInteger('registerPID'),
-                ['tx_seminars_pi1[seminar]' => $event->getUid(), 'tx_seminars_pi1[action]' => 'register']
+                [
+                    'tx_seminars_eventregistration[event]' => $event->getUid(),
+                    // @deprecated These parameters can be removed in seminars 5.0
+                    // when the legacy registration form is removed.
+                    'tx_seminars_pi1[seminar]' => $event->getUid(),
+                    'tx_seminars_pi1[action]' => 'register',
+                ]
             );
         } else {
             // provides the login link
@@ -364,12 +370,11 @@ class RegistrationManager
      *
      * For this, only events that forbid multiple registrations are checked.
      *
-     * @deprecated will be removed in seminars 5.0
-     *
-     * @param LegacyEvent $event a seminar for which we'll check whether the user already is blocked
-     *        by another event
+     * @param LegacyEvent $event a seminar for which we'll check whether the user already is blocked by another event
      *
      * @return bool TRUE if user is blocked by another registration, FALSE otherwise
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     private function isUserBlocked(LegacyEvent $event): bool
     {

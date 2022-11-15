@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Add a rewritten registration form for TYPO3 >= 10LTS
-  (#1825)
+  (#1825, #1830)
 - Add `Registration.hasSeparateBillingAddress` (#1821)
 - Add salutation-aware localization functionality (#1813, #1818, #1822)
 - Add a `PriceFinder` class (#1799)
