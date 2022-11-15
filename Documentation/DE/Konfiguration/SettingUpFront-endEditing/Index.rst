@@ -22,7 +22,7 @@ events and no fun or test records.
 Setting up the front-end editing with the new plugin
 ====================================================
 
-..  info::
+..  note::
 
     This is the new front-end editor that was introduced in seminars 4.2.0
     in order to replace the old mkforms-based front-end editor. This is what
