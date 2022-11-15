@@ -240,9 +240,11 @@ CREATE TABLE tx_seminars_seminars (
     language char(2) DEFAULT '' NOT NULL,
     price_regular decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_regular_early decimal(10,2) DEFAULT '0.00' NOT NULL,
+    # @deprecated will be removed in seminars 5.0
     price_regular_board decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_special decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_special_early decimal(10,2) DEFAULT '0.00' NOT NULL,
+    # @deprecated will be removed in seminars 5.0
     price_special_board decimal(10,2) DEFAULT '0.00' NOT NULL,
     additional_information text,
     payment_methods int(11) unsigned DEFAULT '0' NOT NULL,

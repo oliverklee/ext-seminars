@@ -1088,6 +1088,8 @@ class DefaultController extends TemplateHelper
     /**
      * Sets the prices with board (regular and special) or hides the corresponding subparts if those prices
      * are not available.
+     *
+     * @deprecated will be removed in seminars 5.0
      */
     private function setSingleViewBoardPriceMarkers(): void
     {

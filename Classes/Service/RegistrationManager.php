@@ -1486,8 +1486,10 @@ class RegistrationManager
         $useSpecialPrice = $event->hasPriceSpecial() && $this->getRegistrationMapper()->countByFrontEndUser($user) > 0;
 
         if ($useSpecialPrice) {
+            // @deprecated remove board prices in seminars 5.0
             unset($prices['regular'], $prices['regular_early'], $prices['regular_board']);
         } else {
+            // @deprecated remove board prices in seminars 5.0
             unset($prices['special'], $prices['special_early'], $prices['special_board']);
         }
 

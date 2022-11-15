@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the board-related prices (#1831)
 - Deprecate all bank-data-related fields (#1828)
 - Deprecate the collision check for registrations (#1820)
 - Deprecate showing the owner data in the single view (#1811)
