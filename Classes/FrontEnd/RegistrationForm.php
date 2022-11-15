@@ -639,8 +639,10 @@ class RegistrationForm extends AbstractEditor
      * "showRegistrationFields" variable.
      *
      * This function also checks if the current event has a price set at all,
-     * and returns only TRUE if the event has a price (ie. is not completely for
+     * and returns only TRUE if the event has a price (i.e., is not completely for
      * free) and the current form field should be displayed.
+     *
+     * @deprecated will be removed in seminars 5.0
      *
      * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
@@ -1174,6 +1176,8 @@ class RegistrationForm extends AbstractEditor
      * "bank transfer" is selected. If a different payment method is selected
      * (or none is defined as "bank transfer"), the check is always positive and
      * returns TRUE.
+     *
+     * @deprecated will be removed in seminars 5.0
      *
      * @param array $formData associative array with the element "value" in which the value of the current field is provided
      *

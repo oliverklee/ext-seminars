@@ -1299,7 +1299,8 @@ override the corresponding value from TS Setup.**
 
    Description
          UID of the payment method that corresponds to "bank transfer", used
-         for input validation in the registration form
+         for input validation in the registration form,
+         @deprecated will be removed in seminars 5.0
 
    Default
          None

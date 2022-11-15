@@ -520,6 +520,7 @@ class RegistrationManager
             }
         }
 
+        // @deprecated will be removed in seminars 5.0
         $accountNumber = isset($formData['account_number'])
             ? strip_tags($this->unifyWhitespace($formData['account_number'])) : '';
         $registration->setAccountNumber($accountNumber);

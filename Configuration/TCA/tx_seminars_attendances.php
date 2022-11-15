@@ -336,6 +336,7 @@ $tca = [
                 'maxitems' => 1,
             ],
         ],
+        // @deprecated will be removed in seminars 5.0
         'account_number' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.account_number',
@@ -345,6 +346,7 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
+        // @deprecated will be removed in seminars 5.0
         'account_owner' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.account_owner',
@@ -354,6 +356,7 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
+        // @deprecated will be removed in seminars 5.0
         'bank_code' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.bank_code',
@@ -363,6 +366,7 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
+        // @deprecated will be removed in seminars 5.0
         'bank_name' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.bank_name',
