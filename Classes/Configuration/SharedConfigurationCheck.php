@@ -49,7 +49,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
 
         $this->checkIfSingleInSetNotEmpty(
             'currency',
-            'The specified currency setting is either empty or not a valid  ISO 4217 alpha 3 code.',
+            'The specified currency setting is either empty or not a valid ISO 4217 alpha 3 code.',
             $allowedValues
         );
     }
