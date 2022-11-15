@@ -25,6 +25,10 @@ defined('TYPO3_MODE') or die('Access denied.');
 
     $typo3Version = new \TYPO3\CMS\Core\Information\Typo3Version();
     if ($typo3Version->getMajorVersion() >= 10) {
+        //
+        // FE editor
+        //
+
         // This makes the plugin selectable in the BE.
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'Seminars',
@@ -47,6 +51,35 @@ defined('TYPO3_MODE') or die('Access denied.');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
             'seminars_frontendeditor',
             'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
+        );
+
+        //
+        // Registration form
+        //
+
+        // This makes the plugin selectable in the BE.
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'Seminars',
+            // arbitrary, but unique plugin name (not visible in the BE)
+            'EventRegistration',
+            // plugin title, as visible in the drop-down in the BE
+            'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration',
+            // the icon visible in the drop-down in the BE
+            'EXT:seminars/Resources/Public/Icons/Extension.svg'
+        );
+
+        // This removes the default controls from the plugin.
+        // @phpstan-ignore-next-line We know that this array key exists and is an array.
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventregistration']
+            = 'recursive,select_key,pages';
+
+        // These two commands add the flexform configuration for the plugin.
+        // @phpstan-ignore-next-line We know that this array key exists and is an array.
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventregistration']
+            = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            'seminars_eventregistration',
+            'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml'
         );
     }
 })();

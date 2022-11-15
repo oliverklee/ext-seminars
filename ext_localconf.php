@@ -117,5 +117,21 @@ defined('TYPO3_MODE') or die('Access denied.');
                 \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
             ]
         );
+
+        // This makes the plugin available for front-end rendering.
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            // extension name, matching the PHP namespaces (but without the vendor)
+            'Seminars',
+            // arbitrary, but unique plugin name (not visible in the BE)
+            'EventRegistration',
+            // all actions
+            [
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites',
+            ],
+            // non-cacheable actions
+            [
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites',
+            ]
+        );
     }
 })();

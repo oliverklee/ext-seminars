@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+    <sheets>
+        <general>
+            <ROOT>
+                <TCEforms>
+                    <!--
+                        The sheet title will not be visible in the BE. Still, the XML element needs to be present to
+                        avoid a crash in the BE.
+                    -->
+                    <sheetTitle/>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.pageForMissingEvent>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.pageForMissingEvent
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.pageForMissingEvent>
+                </el>
+            </ROOT>
+        </general>
+    </sheets>
+</T3DataStructure>

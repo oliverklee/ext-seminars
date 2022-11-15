@@ -14,9 +14,9 @@
    :class:  typoscript
 .. role::   php(code)
 
-
-Adding pages to the front end
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+======================
+Adding front-end pages
+======================
 
 If your site does not use the online registration feature, you have to
 explicitly disable that feature.
@@ -73,11 +73,17 @@ you only need some of these pages):
    page as “hide in menu,” but the page must be accessible for all
    visitors, independent of their login status (logged in or not).
 
-#. Add a “Seminar Manager” plug-in content element. Set the type to
+#. **New registration form that got introduced in seminars 5.0:**
+   Add a plug-in content element and set the type to "Registration form for
+   events".
+
+#. **Legacy registration form that will be removed in seminar 5.0:**
+   Add a “Seminar Manager” plug-in content element. Set the type to
    “Event Registration.” Set the content element's start pages to the
    page or pages that contain (or will contain) the seminar records.
 
-#. Add another page that will be shown after a user has registered for an
+#. **Legacy registration form that will be removed in seminar 5.0:**
+   Add another page that will be shown after a user has registered for an
    event. Put some thank-you message on the page. If you would like the
    single view for the event for which the user has just registered to
    display on this page, you can also add a Seminar Manager plug-in with
