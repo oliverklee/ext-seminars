@@ -360,4 +360,9 @@ trait EventDateTrait
     {
         $this->registrationCheckboxes = $registrationCheckboxes;
     }
+
+    public function allowsUnlimitedRegistrations(): bool
+    {
+        return $this->isRegistrationRequired() && $this->getMaximumNumberOfRegistrations() === 0;
+    }
 }

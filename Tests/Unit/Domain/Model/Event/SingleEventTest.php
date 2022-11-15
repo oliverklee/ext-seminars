@@ -1017,4 +1017,37 @@ final class SingleEventTest extends UnitTestCase
 
         $this->subject->getPriceByPriceCode(Price::PRICE_EARLY_BIRD);
     }
+
+    /**
+     * @test
+     */
+    public function allowsUnlimitedRegistrationsForZeroMaxRegistrationsAndRegistrationRequiredReturnsTrue(): void
+    {
+        $this->subject->setMaximumNumberOfRegistrations(0);
+        $this->subject->setRegistrationRequired(true);
+
+        self::assertTrue($this->subject->allowsUnlimitedRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function allowsUnlimitedRegistrationsForNonZeroMaxRegistrationsAndRegistrationRequiredReturnsFalse(): void
+    {
+        $this->subject->setMaximumNumberOfRegistrations(10);
+        $this->subject->setRegistrationRequired(true);
+
+        self::assertFalse($this->subject->allowsUnlimitedRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function allowsUnlimitedRegistrationsForZeroMaxRegistrationsAndRegistrationNotRequiredReturnsFalse(): void
+    {
+        $this->subject->setMaximumNumberOfRegistrations(0);
+        $this->subject->setRegistrationRequired(false);
+
+        self::assertFalse($this->subject->allowsUnlimitedRegistrations());
+    }
 }
