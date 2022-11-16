@@ -121,11 +121,6 @@ parameters:
 			path: Classes/Controller/EventRegistrationController.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Controller\\\\EventRegistrationController\\:\\:\\$eventRepository is never read, only written\\.$#"
-			count: 1
-			path: Classes/Controller/EventRegistrationController.php
-
-		-
 			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
 			count: 1
 			path: Classes/Csv/DownloadRegistrationListView.php

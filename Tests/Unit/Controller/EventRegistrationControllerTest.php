@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
-use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -27,11 +26,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
      */
     private $viewMock;
 
-    /**
-     * @var EventRepository&MockObject
-     */
-    private $eventRepositoryMock;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -45,9 +39,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
-
-        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->subject->injectEventRepository($this->eventRepositoryMock);
     }
 
     /**
