@@ -161,6 +161,11 @@ parameters:
 			path: Classes/Domain/Repository/OrganizerRepository.php
 
 		-
+			message: "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\:\\:logicalAnd\\(\\) invoked with 2 parameters, 1 required\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\SpeakerRepository\\:\\:\\$defaultOrderings type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/SpeakerRepository.php
