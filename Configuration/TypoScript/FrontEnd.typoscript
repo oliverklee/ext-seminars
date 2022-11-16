@@ -159,6 +159,7 @@ plugin.tx_seminars_pi1 {
     linkToSingleView = always
 
     # whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
+    # @deprecated will be removed in seminars 5.0
     sendAdditionalNotificationEmailInFrontEndEditor = 0
 
     # the width of the speaker image in the single view

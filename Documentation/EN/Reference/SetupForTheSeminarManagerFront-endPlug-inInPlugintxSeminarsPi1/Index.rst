@@ -837,7 +837,8 @@ override the corresponding value from TS Setup.**
          boolean
 
    Description
-        sendAdditionalNotificationEmailInFrontEndEditor
+        sendAdditionalNotificationEmailInFrontEndEditor,
+        @deprecated will be removed in seminars 5.0
 
    Default
          0
