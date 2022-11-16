@@ -584,6 +584,16 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function setRegistrationStartCanSetRegistrationStartToNull(): void
+    {
+        $this->subject->setRegistrationStart(null);
+
+        self::assertNull($this->subject->getRegistrationStart());
+    }
+
+    /**
+     * @test
+     */
     public function hasAdditionalTermsAndConditionsInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasAdditionalTermsAndConditions());
