@@ -26,7 +26,7 @@ trait AttendeesTrait
     /**
      * @var int
      */
-    protected $seats = 0;
+    protected $seats = 1;
 
     /**
      * @var bool
