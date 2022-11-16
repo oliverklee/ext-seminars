@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration form.
+ *
+ * @deprecated will be removed in seminars 5.0
  */
 abstract class AbstractEditor extends AbstractView
 {

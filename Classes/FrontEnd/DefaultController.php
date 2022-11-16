@@ -2587,6 +2587,8 @@ class DefaultController extends TemplateHelper
      * Creates the HTML for the registration page.
      *
      * @return string HTML for the registration page
+     *
+     * @deprecated will be removed in seminars 5.0.
      */
     protected function createRegistrationPage(): string
     {
@@ -2740,6 +2742,8 @@ class DefaultController extends TemplateHelper
     /**
      * Enables/disables the display of data from event records on the registration page depending on the config variable
      * "eventFieldsOnRegistrationPage".
+     *
+     * @deprecated will be removed in seminars 5.0.
      */
     protected function toggleEventFieldsOnRegistrationPage(): void
     {
@@ -2790,6 +2794,8 @@ class DefaultController extends TemplateHelper
      *
      * @return string HTML for the event editor, or an error message if the
      *                FE user doesn't have access to the editor
+     *
+     * @deprecated will be removed in seminars 5.0.
      */
     protected function createEventEditorHtml(): string
     {
@@ -2816,6 +2822,8 @@ class DefaultController extends TemplateHelper
 
     /**
      * Creates an event editor instance and returns it.
+     *
+     * @deprecated will be removed in seminars 5.0.
      */
     protected function createEventEditorInstance(): EventEditor
     {
