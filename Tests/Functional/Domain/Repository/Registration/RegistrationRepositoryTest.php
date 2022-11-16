@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -41,15 +42,22 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     private $subject;
 
+    /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             $this->subject = GeneralUtility::makeInstance(RegistrationRepository::class);
+            $this->eventRepository = GeneralUtility::makeInstance(EventRepository::class);
         } else {
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             $this->subject = $objectManager->get(RegistrationRepository::class);
+            $this->eventRepository = $objectManager->get(EventRepository::class);
         }
     }
 
@@ -288,5 +296,81 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Registration::class, $result);
 
         self::assertInstanceOf(PaymentMethod::class, $result->getPaymentMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationForEventAndUserForZeroUserUidReturnsFalse(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 0));
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationForEventAndOtherUserUidReturnsFalse(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 2));
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationForOtherEventAndThisUserUidReturnsFalse(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUserAndAdditionalEvent.xml');
+        $event = $this->eventRepository->findByUid(2);
+
+        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationForHiddenMatchingRegistrationReturnsFalse(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationForDeletedMatchingRegistrationReturnsFalse(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
+    }
+
+    /**
+     * @test
+     */
+    public function existsRegistrationMatchingRegistrationReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertTrue($this->subject->existsRegistrationForEventAndUser($event, 1));
+    }
+    /**
+     * @test
+     */
+    public function existsRegistrationTwoMatchingRegistrationsReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoRegistrationsWithSameEventAndUser.xml');
+        $event = $this->eventRepository->findByUid(1);
+
+        self::assertTrue($this->subject->existsRegistrationForEventAndUser($event, 1));
     }
 }
