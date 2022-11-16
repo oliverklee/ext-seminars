@@ -86,6 +86,14 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function isRegistrationPossibleForThisClassReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isRegistrationPossibleForThisClass());
+    }
+
+    /**
+     * @test
+     */
     public function getInternalTitleInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getInternalTitle());

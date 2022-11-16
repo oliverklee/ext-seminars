@@ -13,7 +13,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a `PriceFinder` class (#1799)
 - Add `Event.isFreeOfCharge()` (#1791)
 - Add a (non-persisted) `Price` model (#1771, #1793)
-- Add registration-specific fields to the `Event` model (#1764, #1767, #1829)
+- Add registration-specific fields to the `Event` model
+  (#1764, #1767, #1829, #1835)
 - Add a `Registration` model (#1750, #1752, #1755, #1756, #1757, #1758, #1834)
 - Add a `RegistrationCheckbox` model (#1742)
 - Add a `PaymentMethod` model (#1740)
