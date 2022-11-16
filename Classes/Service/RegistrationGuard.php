@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -14,6 +16,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class RegistrationGuard implements SingletonInterface
 {
+    /**
+     * @var RegistrationRepository
+     */
+    private $registrationRepository;
+
+    public function injectRegistrationRepository(RegistrationRepository $repository): void
+    {
+        $this->registrationRepository = $repository;
+    }
+
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool
     {
         $registrationDeadline = $this->getRegistrationDeadlineForEvent($event);
@@ -49,5 +61,11 @@ class RegistrationGuard implements SingletonInterface
     private function now(): \DateTimeImmutable
     {
         return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'full');
+    }
+
+    public function isFreeFromRegistrationConflicts(EventInterface $event, int $userUid): bool
+    {
+        return $event->isMultipleRegistrationPossible()
+            || !$this->registrationRepository->existsRegistrationForEventAndUser($event, $userUid);
     }
 }
