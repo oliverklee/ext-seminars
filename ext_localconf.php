@@ -126,11 +126,11 @@ defined('TYPO3_MODE') or die('Access denied.');
             'EventRegistration',
             // all actions
             [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites',
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites, denyRegistration',
             ],
             // non-cacheable actions
             [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites',
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites, denyRegistration',
             ]
         );
     }

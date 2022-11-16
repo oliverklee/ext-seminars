@@ -2670,6 +2670,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Page to display if this plugin is called with no event</source>
 				<target>Seite, die angezeigt werden soll, wenn dieses Plugin ohne Veranstaltung aufgerufen wird</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.sorry">
+				<source>Sorry!</source>
+				<target>Entschuldigung!</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>
