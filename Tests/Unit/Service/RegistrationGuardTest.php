@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
@@ -29,6 +30,11 @@ final class RegistrationGuardTest extends UnitTestCase
     private $context;
 
     /**
+     * @var RegistrationRepository&MockObject
+     */
+    private $registrationRepositoryMock;
+
+    /**
      * @var RegistrationGuard
      */
     private $subject;
@@ -42,6 +48,9 @@ final class RegistrationGuardTest extends UnitTestCase
         GeneralUtility::setSingletonInstance(Context::class, $this->context);
 
         $this->subject = new RegistrationGuard();
+
+        $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
+        $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
     }
 
     protected function tearDown(): void
@@ -239,5 +248,61 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setRegistrationDeadline($registrationDeadline);
 
         self::assertFalse($this->subject->isRegistrationPossibleByDate($event));
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeFromRegistrationConflictsForNoConflictAndNoMultipleRegistrationsPossibleReturnsTrue(): void
+    {
+        $userUid = 47;
+        $event = new SingleEvent();
+        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+            ->with($event, $userUid)->willReturn(false);
+        $event->setMultipleRegistrationPossible(true);
+
+        self::assertTrue($this->subject->isFreeFromRegistrationConflicts($event, $userUid));
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeFromRegistrationConflictsForNoConflictAndMultipleRegistrationsPossibleReturnsTrue(): void
+    {
+        $userUid = 47;
+        $event = new SingleEvent();
+        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+            ->with($event, $userUid)->willReturn(false);
+        $event->setMultipleRegistrationPossible(true);
+
+        self::assertTrue($this->subject->isFreeFromRegistrationConflicts($event, $userUid));
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeFromRegistrationConflictsForConflictAndMultipleRegistrationsPossibleReturnsTrue(): void
+    {
+        $userUid = 47;
+        $event = new SingleEvent();
+        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+            ->with($event, $userUid)->willReturn(true);
+        $event->setMultipleRegistrationPossible(true);
+
+        self::assertTrue($this->subject->isFreeFromRegistrationConflicts($event, $userUid));
+    }
+
+    /**
+     * @test
+     */
+    public function isFreeFromRegistrationConflictsForConflictAndMultipleRegistrationsNotPossibleReturnsFalse(): void
+    {
+        $userUid = 47;
+        $event = new SingleEvent();
+        $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
+            ->with($event, $userUid)->willReturn(true);
+        $event->setMultipleRegistrationPossible(false);
+
+        self::assertFalse($this->subject->isFreeFromRegistrationConflicts($event, $userUid));
     }
 }
