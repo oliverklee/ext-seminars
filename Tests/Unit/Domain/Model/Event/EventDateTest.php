@@ -568,6 +568,16 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function setRegistrationStartCanSetRegistrationStartToNull(): void
+    {
+        $this->subject->setRegistrationStart(null);
+
+        self::assertNull($this->subject->getRegistrationStart());
+    }
+
+    /**
+     * @test
+     */
     public function hasAdditionalTermsAndConditionsWithoutTopicReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasAdditionalTermsAndConditions());

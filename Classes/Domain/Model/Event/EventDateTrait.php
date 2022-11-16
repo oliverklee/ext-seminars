@@ -149,7 +149,7 @@ trait EventDateTrait
         return $this->registrationStart;
     }
 
-    public function setRegistrationStart(\DateTimeImmutable $registrationStart): void
+    public function setRegistrationStart(?\DateTimeImmutable $registrationStart): void
     {
         $this->registrationStart = $registrationStart;
     }
