@@ -14,6 +14,9 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class EventRegistrationController extends ActionController
 {
     /**
+     * Checks that the user can register for the provided event, and redirects or forwards to the corresponding next
+     * action.
+     *
      * @Extbase\IgnoreValidation("event")
      */
     public function checkPrerequisitesAction(?Event $event = null): void
@@ -22,11 +25,26 @@ class EventRegistrationController extends ActionController
             $this->redirectToPageForNoEvent();
             return;
         }
+
+        $this->forwardToDenyAction('plugin.eventRegistration.heading.sorry');
     }
 
     private function redirectToPageForNoEvent(): void
     {
         $pageUid = (int)($this->settings['pageForMissingEvent'] ?? 0);
         $this->redirect(null, null, null, [], $pageUid);
+    }
+
+    /**
+     * This is a convenience method.
+     */
+    private function forwardToDenyAction(string $warningMessageKey): void
+    {
+        $this->forward('denyRegistration', null, null, ['warningMessageKey' => $warningMessageKey]);
+    }
+
+    public function denyRegistrationAction(string $warningMessageKey): void
+    {
+        $this->view->assign('warningMessageKey', $warningMessageKey);
     }
 }

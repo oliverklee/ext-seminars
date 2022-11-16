@@ -74,4 +74,15 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->subject->checkPrerequisitesAction(null);
     }
+
+    /**
+     * @test
+     */
+    public function denyRegistrationActionPassesProvidedWarningMessageKeyToView(): void
+    {
+        $warningMessageKey = 'not-possible';
+        $this->viewMock->expects(self::once())->method('assign')->with('warningMessageKey', $warningMessageKey);
+
+        $this->subject->denyRegistrationAction($warningMessageKey);
+    }
 }
