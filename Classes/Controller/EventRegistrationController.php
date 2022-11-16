@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
-use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -14,16 +13,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventRegistrationController extends ActionController
 {
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
-
-    public function injectEventRepository(EventRepository $repository): void
-    {
-        $this->eventRepository = $repository;
-    }
-
     /**
      * @Extbase\IgnoreValidation("event")
      */
