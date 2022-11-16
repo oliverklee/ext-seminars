@@ -264,9 +264,9 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSeatsInitiallyReturnsZero(): void
+    public function getSeatsInitiallyReturnsOne(): void
     {
-        self::assertSame(0, $this->subject->getSeats());
+        self::assertSame(1, $this->subject->getSeats());
     }
 
     /**
