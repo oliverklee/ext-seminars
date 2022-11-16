@@ -18,11 +18,9 @@ class Salutation
     /**
      * Creates the salutation for the given user.
      *
-     * The salutation is localized and gender-specific and contains the name of
-     * the user.
+     * The salutation is localized and gender-specific and contains the name of the user.
      *
-     * @param FrontEndUser $user
-     *        the user to create the salutation for
+     * @param FrontEndUser $user the user to create the salutation for
      *
      * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
      */
@@ -37,6 +35,7 @@ class Salutation
                 $salutationParts['name'] = $user->getFirstOrFullName();
                 break;
             default:
+                // @deprecated The salutations will be made gender-neutral in seminars 5.0.
                 $gender = $user->getGender();
                 $salutationParts['dear'] = LocalizationUtility::translate('email_hello_formal_' . $gender, 'seminars');
                 $salutationParts['title'] = LocalizationUtility::translate(
