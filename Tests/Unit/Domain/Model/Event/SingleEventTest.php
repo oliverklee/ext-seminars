@@ -153,10 +153,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setStartSetsStart(): void
     {
-        $model = new \DateTimeImmutable();
-        $this->subject->setStart($model);
+        $date = new \DateTimeImmutable();
+        $this->subject->setStart($date);
 
-        self::assertSame($model, $this->subject->getStart());
+        self::assertSame($date, $this->subject->getStart());
     }
 
     /**
@@ -182,10 +182,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setEndSetsEnd(): void
     {
-        $model = new \DateTimeImmutable();
-        $this->subject->setEnd($model);
+        $date = new \DateTimeImmutable();
+        $this->subject->setEnd($date);
 
-        self::assertSame($model, $this->subject->getEnd());
+        self::assertSame($date, $this->subject->getEnd());
     }
 
     /**
@@ -211,10 +211,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
     {
-        $model = new \DateTimeImmutable();
-        $this->subject->setEarlyBirdDeadline($model);
+        $date = new \DateTimeImmutable();
+        $this->subject->setEarlyBirdDeadline($date);
 
-        self::assertSame($model, $this->subject->getEarlyBirdDeadline());
+        self::assertSame($date, $this->subject->getEarlyBirdDeadline());
     }
 
     /**
@@ -240,10 +240,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setRegistrationDeadlineSetsRegistrationDeadline(): void
     {
-        $model = new \DateTimeImmutable();
-        $this->subject->setRegistrationDeadline($model);
+        $date = new \DateTimeImmutable();
+        $this->subject->setRegistrationDeadline($date);
 
-        self::assertSame($model, $this->subject->getRegistrationDeadline());
+        self::assertSame($date, $this->subject->getRegistrationDeadline());
     }
 
     /**
@@ -575,10 +575,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setRegistrationStartSetsRegistrationStart(): void
     {
-        $model = new \DateTimeImmutable();
-        $this->subject->setRegistrationStart($model);
+        $date = new \DateTimeImmutable();
+        $this->subject->setRegistrationStart($date);
 
-        self::assertSame($model, $this->subject->getRegistrationStart());
+        self::assertSame($date, $this->subject->getRegistrationStart());
     }
 
     /**
