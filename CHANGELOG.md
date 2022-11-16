@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the legacy registration form (#1844)
 - Deprecate the automatic gender-specific salutations (#1839)
 - Deprecate the board-related prices (#1831)
 - Deprecate all bank-data-related fields (#1828)

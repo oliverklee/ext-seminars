@@ -47,6 +47,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is a controller which allows creating and editing events on the FE.
+ *
+ * @deprecated will be removed in seminars 5.0
  */
 class EventEditor extends AbstractEditor
 {

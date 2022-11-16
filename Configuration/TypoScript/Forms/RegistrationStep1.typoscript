@@ -1,3 +1,4 @@
+# @deprecated will be removed in seminars 5.0
 plugin.tx_seminars_pi1.form.registration.step1 {
     meta {
         name = Seminar Manager registration form

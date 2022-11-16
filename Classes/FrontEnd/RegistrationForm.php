@@ -31,6 +31,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is a controller which allows to create registrations on the FE.
+ *
+ * @deprecated will be removed in seminars 5.0
  */
 class RegistrationForm extends AbstractEditor
 {
