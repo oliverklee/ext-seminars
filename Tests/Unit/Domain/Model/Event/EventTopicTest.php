@@ -70,14 +70,6 @@ final class EventTopicTest extends UnitTestCase
     /**
      * @test
      */
-    public function isRegistrationPossibleForThisClassReturnsFalse(): void
-    {
-        self::assertFalse($this->subject->isRegistrationPossibleForThisClass());
-    }
-
-    /**
-     * @test
-     */
     public function getInternalTitleInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getInternalTitle());

@@ -14,10 +14,4 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 abstract class Event extends AbstractEntity implements EventInterface
 {
-    /**
-     * Checks whether this `Event` subclass actually allows registration.
-     *
-     * @return ($this is EventDateInterface ? true : false)
-     */
-    abstract public function isRegistrationPossibleForThisClass(): bool;
 }

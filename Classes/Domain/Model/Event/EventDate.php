@@ -27,16 +27,6 @@ class EventDate extends Event implements EventDateInterface
         $this->initializeEventDate();
     }
 
-    /**
-     * Checks whether this `Event` subclass actually allows registration.
-     *
-     * @return ($this is EventDateInterface ? true : false)
-     */
-    public function isRegistrationPossibleForThisClass(): bool
-    {
-        return true;
-    }
-
     public function getTopic(): ?EventTopic
     {
         return $this->topic;
