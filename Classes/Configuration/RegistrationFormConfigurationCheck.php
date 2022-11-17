@@ -130,13 +130,13 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
                 'step_counter',
                 'price',
                 'method_of_payment',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1571 will be removed in seminars 5.0
                 'account_number',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1571 will be removed in seminars 5.0
                 'bank_code',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1571 will be removed in seminars 5.0
                 'bank_name',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1571 will be removed in seminars 5.0
                 'account_owner',
                 'billing_address',
                 'company',
@@ -261,7 +261,7 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      */
     private function checkBankTransferUid(): void
     {

@@ -498,7 +498,7 @@ $tca = [
                 'default' => '0.00',
             ],
         ],
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         'price_regular_board' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board',
@@ -552,7 +552,7 @@ $tca = [
                 'default' => '0.00',
             ],
         ],
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         'price_special_board' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board',
@@ -788,7 +788,7 @@ $tca = [
                 ],
             ],
         ],
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1763 will be removed in seminars 5.0
         'skip_collision_check' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.skip_collision_check',

@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class publishes events which are hidden through editing or creation in the FE editor.
  *
- * @deprecated will be removed in seminars 5.0
+ * @deprecated #1543 will be removed in seminars 5.0
  */
 class EventPublication extends TemplateHelper
 {

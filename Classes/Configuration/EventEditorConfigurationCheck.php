@@ -85,11 +85,11 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'target_groups',
                 'price_regular',
                 'price_regular_early',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 'price_regular_board',
                 'price_special',
                 'price_special_early',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 'price_special_board',
                 'payment_methods',
                 'place',
@@ -137,11 +137,11 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'target_groups',
                 'price_regular',
                 'price_regular_early',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 'price_regular_board',
                 'price_special',
                 'price_special_early',
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 'price_special_board',
                 'payment_methods',
                 'place',

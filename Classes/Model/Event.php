@@ -710,7 +710,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @return float our regular board price, will be 0.00 if this event has no
      *               regular board price, will be >= 0.00
@@ -723,7 +723,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @param float $price our regular board price, must be >= 0.00
      */
@@ -741,7 +741,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     public function hasRegularBoardPrice(): bool
     {
@@ -818,7 +818,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @return float our special board price, will be 0.00 if this event has no
      *               special board price, will be >= 0.00
@@ -831,7 +831,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @param float $price our special board price, must be >= 0.00
      */
@@ -849,7 +849,7 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     public function hasSpecialBoardPrice(): bool
     {
@@ -943,11 +943,11 @@ class Event extends AbstractTimeSpan implements Titled
             }
         }
 
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         if ($this->hasRegularBoardPrice()) {
             $result['regular_board'] = $this->getRegularBoardPrice();
         }
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         if ($this->hasSpecialBoardPrice()) {
             $result['special_board'] = $this->getSpecialBoardPrice();
         }
@@ -1150,7 +1150,7 @@ class Event extends AbstractTimeSpan implements Titled
     /**
      * Returns whether the collision check should be skipped for this event.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      */
     public function shouldSkipCollisionCheck(): bool
     {

@@ -271,7 +271,7 @@ class RegistrationManager
                 (string)$plugin->getConfValueInteger('registerPID'),
                 [
                     'tx_seminars_eventregistration[event]' => $event->getUid(),
-                    // @deprecated These parameters can be removed in seminars 5.0
+                    // @deprecated #1545 These parameters can be removed in seminars 5.0
                     // when the legacy registration form is removed.
                     'tx_seminars_pi1[seminar]' => $event->getUid(),
                     'tx_seminars_pi1[action]' => 'register',
@@ -374,7 +374,7 @@ class RegistrationManager
      *
      * @return bool TRUE if user is blocked by another registration, FALSE otherwise
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      */
     private function isUserBlocked(LegacyEvent $event): bool
     {
@@ -525,7 +525,7 @@ class RegistrationManager
             }
         }
 
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1571 will be removed in seminars 5.0
         $accountNumber = isset($formData['account_number'])
             ? strip_tags($this->unifyWhitespace($formData['account_number'])) : '';
         $registration->setAccountNumber($accountNumber);
@@ -1486,10 +1486,10 @@ class RegistrationManager
         $useSpecialPrice = $event->hasPriceSpecial() && $this->getRegistrationMapper()->countByFrontEndUser($user) > 0;
 
         if ($useSpecialPrice) {
-            // @deprecated remove board prices in seminars 5.0
+            // @deprecated #1571 remove board prices in seminars 5.0
             unset($prices['regular'], $prices['regular_early'], $prices['regular_board']);
         } else {
-            // @deprecated remove board prices in seminars 5.0
+            // @deprecated #1571 remove board prices in seminars 5.0
             unset($prices['special'], $prices['special_early'], $prices['special_board']);
         }
 

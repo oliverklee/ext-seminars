@@ -1089,7 +1089,7 @@ class DefaultController extends TemplateHelper
      * Sets the prices with board (regular and special) or hides the corresponding subparts if those prices
      * are not available.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     private function setSingleViewBoardPriceMarkers(): void
     {
@@ -1262,7 +1262,7 @@ class DefaultController extends TemplateHelper
      * Fills in the matching marker for the owner data or hides the subpart if
      * the event has no owner or the owner data should not be displayed.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1811 will be removed in seminars 5.0
      */
     private function setOwnerDataMarker(): void
     {
@@ -2588,7 +2588,7 @@ class DefaultController extends TemplateHelper
      *
      * @return string HTML for the registration page
      *
-     * @deprecated will be removed in seminars 5.0.
+     * @deprecated #1545 will be removed in seminars 5.0.
      */
     protected function createRegistrationPage(): string
     {
@@ -2743,7 +2743,7 @@ class DefaultController extends TemplateHelper
      * Enables/disables the display of data from event records on the registration page depending on the config variable
      * "eventFieldsOnRegistrationPage".
      *
-     * @deprecated will be removed in seminars 5.0.
+     * @deprecated #1545 will be removed in seminars 5.0.
      */
     protected function toggleEventFieldsOnRegistrationPage(): void
     {
@@ -2795,7 +2795,7 @@ class DefaultController extends TemplateHelper
      * @return string HTML for the event editor, or an error message if the
      *                FE user doesn't have access to the editor
      *
-     * @deprecated will be removed in seminars 5.0.
+     * @deprecated #1544 will be removed in seminars 5.0.
      */
     protected function createEventEditorHtml(): string
     {
@@ -2823,7 +2823,7 @@ class DefaultController extends TemplateHelper
     /**
      * Creates an event editor instance and returns it.
      *
-     * @deprecated will be removed in seminars 5.0.
+     * @deprecated #1544 will be removed in seminars 5.0.
      */
     protected function createEventEditorInstance(): EventEditor
     {

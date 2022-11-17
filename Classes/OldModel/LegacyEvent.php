@@ -1172,7 +1172,7 @@ class LegacyEvent extends AbstractTimeSpan
      * amount and currency. Returns an empty string if there is no regular price
      * (including full board) set.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @return string the regular event price (including full board)
      */
@@ -1188,7 +1188,7 @@ class LegacyEvent extends AbstractTimeSpan
      * If there is no regular price (including full board), this function
      * returns "0.00".
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      *
      * @return string the regular event price (including full board)
      */
@@ -1200,7 +1200,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether this event has a non-zero regular price (including full board) set.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     public function hasPriceRegularBoard(): bool
     {
@@ -1212,7 +1212,7 @@ class LegacyEvent extends AbstractTimeSpan
      * amount and currency. Returns an empty string if there is no special price
      * (including full board) set.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     public function getPriceSpecialBoard(): string
     {
@@ -1226,7 +1226,7 @@ class LegacyEvent extends AbstractTimeSpan
      * If there is no special price (including full board), this function
      * returns "0.00".
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     private function getPriceSpecialBoardAmount(): string
     {
@@ -1236,7 +1236,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether this event has a non-zero special price (including full board) set.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1773 will be removed in seminars 5.0
      */
     public function hasPriceSpecialBoard(): bool
     {
@@ -3232,7 +3232,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->getEarlyBirdPriceRegular();
                 break;
             case 'price_regular_board':
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 $result = $this->getPriceRegularBoard();
                 break;
             case 'price_special':
@@ -3242,7 +3242,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = $this->getEarlyBirdPriceSpecial();
                 break;
             case 'price_special_board':
-                // @deprecated will be removed in seminars 5.0
+                // @deprecated #1773 will be removed in seminars 5.0
                 $result = $this->getPriceSpecialBoard();
                 break;
             case 'additional_information':
@@ -3339,7 +3339,7 @@ class LegacyEvent extends AbstractTimeSpan
                     . ': ' . $this->getPriceRegular(),
             ];
         }
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         if ($this->hasPriceRegularBoard()) {
             $result['regular_board'] = [
                 'value' => 'regular_board',
@@ -3366,7 +3366,7 @@ class LegacyEvent extends AbstractTimeSpan
                 ];
             }
         }
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         if ($this->hasPriceSpecialBoard()) {
             $result['special_board'] = [
                 'value' => 'special_board',
@@ -3417,7 +3417,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         // There is no early-bird version of the prices that include full board.
-        // @deprecated will be removed in seminars 5.0
+        // @deprecated #1773 will be removed in seminars 5.0
         $result = $result || $this->hasPriceRegularBoard() || $this->hasPriceSpecialBoard();
 
         return $result;
@@ -3429,7 +3429,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * For this, only events that forbid multiple registrations are checked.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      *
      * @param int $uid UID of the FE user to check, must be > 0
      *
@@ -3457,7 +3457,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      */
     private function getQueryForCollidingEvents(): string
     {
@@ -3485,7 +3485,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether the collision check should be skipped for this event.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      *
      * @return bool whether the collision check should be skipped for this event
      */
@@ -3502,7 +3502,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * For open-ended events, only the begin date is checked.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
@@ -3517,7 +3517,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      */
     private function getQueryPartForCollidingEventWithoutTimeSlots(int $beginDate, int $endDate): string
     {
@@ -3540,7 +3540,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1763 will be removed in seminars 5.0
      */
     private function getQueryPartForCollidingEventWithTimeSlots(int $beginDate, int $endDate): string
     {

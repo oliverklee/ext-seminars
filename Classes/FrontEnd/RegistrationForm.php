@@ -32,7 +32,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows to create registrations on the FE.
  *
- * @deprecated will be removed in seminars 5.0
+ * @deprecated #1545 will be removed in seminars 5.0
  */
 class RegistrationForm extends AbstractEditor
 {
@@ -644,7 +644,7 @@ class RegistrationForm extends AbstractEditor
      * and returns only TRUE if the event has a price (i.e., is not completely for
      * free) and the current form field should be displayed.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
@@ -1179,7 +1179,7 @@ class RegistrationForm extends AbstractEditor
      * (or none is defined as "bank transfer"), the check is always positive and
      * returns TRUE.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param array $formData associative array with the element "value" in which the value of the current field is provided
      *
