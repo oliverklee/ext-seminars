@@ -23,12 +23,14 @@ class EventRegistrationController extends ActionController
     {
         if (!$event instanceof Event) {
             $this->redirectToPageForNoEvent();
-            return;
         }
 
         $this->forwardToDenyAction('plugin.eventRegistration.heading.sorry');
     }
 
+    /**
+     * @return never
+     */
     private function redirectToPageForNoEvent(): void
     {
         $pageUid = (int)($this->settings['pageForMissingEvent'] ?? 0);
@@ -36,7 +38,9 @@ class EventRegistrationController extends ActionController
     }
 
     /**
-     * This is a convenience method.
+     * This is a convenience method to simplify multiple calls.
+     *
+     * @return never
      */
     private function forwardToDenyAction(string $warningMessageKey): void
     {
