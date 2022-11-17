@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -24,6 +25,12 @@ class RegistrationGuard implements SingletonInterface
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
+    }
+
+    public function isRegistrationPossibleAtAnyTimeAtAll(Event $event): bool
+    {
+        return $event instanceof EventDateInterface
+            && $event->isRegistrationPossibleForThisClass() && $event->isRegistrationRequired();
     }
 
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool

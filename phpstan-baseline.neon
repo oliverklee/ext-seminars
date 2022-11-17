@@ -916,6 +916,11 @@ parameters:
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
+			message: "#^Right side of && is always true\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationGuard.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
