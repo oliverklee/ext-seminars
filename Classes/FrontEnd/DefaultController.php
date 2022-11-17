@@ -2273,6 +2273,7 @@ class DefaultController extends TemplateHelper
 
         if ($this->seminar->isPublished()) {
             $links[] = $this->createCopyLink();
+            // @deprecated #1568 will be removed in seminars 5.0
             $links[] = $this->seminar->isHidden() ? $this->createUnhideLink() : $this->createHideLink();
         }
 
@@ -2301,6 +2302,8 @@ class DefaultController extends TemplateHelper
      * This function does not check the edit permissions for this event.
      *
      * @return string HTML for the link, will not be empty
+     *
+     * @deprecated #1568 will be removed in seminars 5.0
      */
     protected function createHideLink(): string
     {
@@ -2313,6 +2316,8 @@ class DefaultController extends TemplateHelper
      * This function does not check the edit permissions for this event.
      *
      * @return string HTML for the link, will not be empty
+     *
+     * @deprecated #1568 will be removed in seminars 5.0
      */
     protected function createUnhideLink(): string
     {
@@ -3194,9 +3199,11 @@ class DefaultController extends TemplateHelper
 
         switch ((string)($this->piVars['action'] ?? '')) {
             case 'hide':
+                // @deprecated #1568 will be removed in seminars 5.0
                 $this->hideEvent($event);
                 break;
             case 'unhide':
+                // @deprecated #1568 will be removed in seminars 5.0
                 $this->unhideEvent($event);
                 break;
             case 'copy':

@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate hiding events in the FE editor (#1864)
 - Deprecate the FE editor approval workflow (#1849)
 - Deprecate the legacy registration form (#1844)
 - Deprecate the automatic gender-specific salutations (#1839)
