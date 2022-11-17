@@ -107,7 +107,7 @@ plugin.tx_seminars_pi1 {
     # whether to allow the CSV export in the "my VIP events" view
     allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
-    # whether managers may edit their events
+    # whether managers may edit their events, @deprecated #1633 will be removed in seminars 5.0
     mayManagersEditTheirEvents = 0
 
     # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)

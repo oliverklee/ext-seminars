@@ -553,7 +553,8 @@ override the corresponding value from TS Setup.**
          boolean
 
    Description
-         whether managers may edit their events
+         whether managers may edit their events,
+         @deprecated #1633 will be removed in seminars 5.0
 
    Default
          0

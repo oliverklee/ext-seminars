@@ -16,6 +16,7 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkMayManagersEditTheirEvents();
         $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
 
+        // @deprecated #1633 will be removed in seminars 5.0
         if ($this->configuration->getAsBoolean('mayManagersEditTheirEvents')) {
             $this->checkEventEditorPID();
         }
@@ -30,6 +31,9 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated #1633 will be removed in seminars 5.0
+     */
     private function checkMayManagersEditTheirEvents(): void
     {
         $this->checkIfBoolean(
