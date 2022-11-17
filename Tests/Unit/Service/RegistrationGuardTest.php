@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
@@ -27,9 +28,19 @@ final class RegistrationGuardTest extends UnitTestCase
     private const NOW = '2022-04-01 10:00:00';
 
     /**
+     * @var Context&MockObject
+     */
+    private $contextMock;
+
+    /**
      * @var RegistrationRepository&MockObject
      */
     private $registrationRepositoryMock;
+
+    /**
+     * @var OneTimeAccountConnector&MockObject
+     */
+    private $oneTimeAccountConnectorMock;
 
     /**
      * @var RegistrationGuard
@@ -40,14 +51,16 @@ final class RegistrationGuardTest extends UnitTestCase
     {
         parent::setUp();
 
-        $context = $this->createMock(Context::class);
-        $context->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
-        GeneralUtility::setSingletonInstance(Context::class, $context);
+        $this->contextMock = $this->createMock(Context::class);
+        GeneralUtility::setSingletonInstance(Context::class, $this->contextMock);
 
         $this->subject = new RegistrationGuard();
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
+
+        $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
+        $this->subject->injectOneTimeAccountConnector($this->oneTimeAccountConnectorMock);
     }
 
     protected function tearDown(): void
@@ -75,6 +88,7 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function isRegistrationPossibleAtAnyTimeAtAllForEventTopicReturnsFalse(): void
     {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
         $event = new EventTopic();
 
         self::assertFalse($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
@@ -100,6 +114,7 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function isRegistrationPossibleAtAnyTimeAtAllEventThatRequiresNoRegistrationReturnsFalse(Event $event): void
     {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
         $event->setRegistrationRequired(false);
 
         self::assertFalse($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
@@ -114,6 +129,7 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function isRegistrationPossibleAtAnyTimeAtAllForEventThatRequiresRegistrationReturnsTrue(Event $event): void
     {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
         $event->setRegistrationRequired(true);
 
         self::assertTrue($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
@@ -238,6 +254,8 @@ final class RegistrationGuardTest extends UnitTestCase
         ?\DateTimeImmutable $registrationStart,
         ?\DateTimeImmutable $registrationDeadline
     ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
         $event = new EventDate();
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
@@ -256,6 +274,8 @@ final class RegistrationGuardTest extends UnitTestCase
         ?\DateTimeImmutable $registrationStart,
         ?\DateTimeImmutable $registrationDeadline
     ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
         $event = new EventDate();
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
@@ -274,6 +294,8 @@ final class RegistrationGuardTest extends UnitTestCase
         ?\DateTimeImmutable $registrationStart,
         ?\DateTimeImmutable $registrationDeadline
     ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
         $event = new SingleEvent();
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
@@ -292,6 +314,8 @@ final class RegistrationGuardTest extends UnitTestCase
         ?\DateTimeImmutable $registrationStart,
         ?\DateTimeImmutable $registrationDeadline
     ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
         $event = new SingleEvent();
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
@@ -354,5 +378,97 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setMultipleRegistrationPossible(false);
 
         self::assertFalse($this->subject->isFreeFromRegistrationConflicts($event, $userUid));
+    }
+
+    /**
+     * @test
+     */
+    public function existsFrontEndUserUidInSessionForNoLoginAndNoOneTimeAccountDataReturnsFalse(): void
+    {
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'isLoggedIn')->willReturn(false);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(null);
+
+        self::assertFalse($this->subject->existsFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function existsFrontEndUserUidInSessionForLoginAndNoOneTimeAccountDataReturnsTrue(): void
+    {
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'isLoggedIn')->willReturn(true);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(5);
+
+        self::assertTrue($this->subject->existsFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function existsFrontEndUserUidInSessionForNoLoginAndOneTimeAccountDataReturnsTrue(): void
+    {
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'isLoggedIn')->willReturn(false);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(5);
+
+        self::assertTrue($this->subject->existsFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function existsFrontEndUserUidInSessionForLoginAndOneTimeAccountDataReturnsTrue(): void
+    {
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'isLoggedIn')->willReturn(true);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(5);
+
+        self::assertTrue($this->subject->existsFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function getFrontEndUserUidFromSessionForNoLoginAndNoOneTimeAccountDataReturnsNull(): void
+    {
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(null);
+
+        self::assertNull($this->subject->getFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function getFrontEndUserUidFromSessionForLoginAndNoOneTimeAccountDataReturnsUidFromLogin(): void
+    {
+        $userUidFromLogin = 12;
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($userUidFromLogin);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(null);
+
+        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function getFrontEndUserUidFromSessionForNoLoginAndOneTimeAccountDataReturnsUidFromOneTimeAccount(): void
+    {
+        $userUidFromOneTimeAccount = 12;
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn($userUidFromOneTimeAccount);
+
+        self::assertSame($userUidFromOneTimeAccount, $this->subject->getFrontEndUserUidInSession());
+    }
+
+    /**
+     * @test
+     */
+    public function getFrontEndUserUidFromSessionForLoginAndOneTimeAccountDataReturnsUidFromLogin(): void
+    {
+        $userUidFromLogin = 12;
+        $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($userUidFromLogin);
+        $userUidFromOneTimeAccount = 9;
+        $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn($userUidFromOneTimeAccount);
+
+        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidInSession());
     }
 }
