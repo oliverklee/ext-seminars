@@ -22,9 +22,24 @@ class RegistrationGuard implements SingletonInterface
      */
     private $registrationRepository;
 
+    /**
+     * @var OneTimeAccountConnector
+     */
+    private $oneTimeAccountConnector;
+
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
+    }
+
+    public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
+    {
+        $this->oneTimeAccountConnector = $connector;
+    }
+
+    private function getContext(): Context
+    {
+        return GeneralUtility::makeInstance(Context::class);
     }
 
     public function isRegistrationPossibleAtAnyTimeAtAll(Event $event): bool
@@ -66,12 +81,33 @@ class RegistrationGuard implements SingletonInterface
 
     private function now(): \DateTimeImmutable
     {
-        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'full');
+        return $this->getContext()->getPropertyFromAspect('date', 'full');
     }
 
     public function isFreeFromRegistrationConflicts(EventInterface $event, int $userUid): bool
     {
         return $event->isMultipleRegistrationPossible()
             || !$this->registrationRepository->existsRegistrationForEventAndUser($event, $userUid);
+    }
+
+    public function existsFrontEndUserUidInSession(): bool
+    {
+        return (bool)$this->getContext()->getPropertyFromAspect('frontend.user', 'isLoggedIn')
+            || \is_int($this->oneTimeAccountConnector->getOneTimeAccountUserUid());
+    }
+
+    /**
+     * @return positive-int|null
+     */
+    public function getFrontEndUserUidInSession(): ?int
+    {
+        $userUidFromLogin = (int)$this->getContext()->getPropertyFromAspect('frontend.user', 'id');
+        if ($userUidFromLogin <= 0) {
+            $userUidFromLogin = null;
+        }
+
+        $userUidFromOneTimeAccount = $this->oneTimeAccountConnector->getOneTimeAccountUserUid();
+
+        return \is_int($userUidFromLogin) ? $userUidFromLogin : $userUidFromOneTimeAccount;
     }
 }
