@@ -678,6 +678,16 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function setPaymentMethodCanSetPaymentMethodToNull(): void
+    {
+        $this->subject->setPaymentMethod(null);
+
+        self::assertNull($this->subject->getPaymentMethod());
+    }
+
+    /**
+     * @test
+     */
     public function hasSeparateBillingAddressInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasSeparateBillingAddress());
