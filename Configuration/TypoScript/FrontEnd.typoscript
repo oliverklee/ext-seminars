@@ -94,10 +94,10 @@ plugin.tx_seminars_pi1 {
     # whether to omit the date in the list view if it is the same as the previous item's
     omitDateIfSameAsPrevious = 0
 
-    # whether to show the owner data in the single view @deprecated will be removed in seminars 5.0
+    # whether to show the owner data in the single view, @deprecated #1811 will be removed in seminars 5.0
     showOwnerDataInSingleView = 0
 
-    # the maximum width of the owner picture in the single view, @deprecated will be removed in seminars 5.0
+    # the maximum width of the owner picture in the single view, @deprecated #1811 will be removed in seminars 5.0
     ownerPictureMaxWidth = 250
 
     # who is allowed to view the list of registrations on the front end:
@@ -159,7 +159,7 @@ plugin.tx_seminars_pi1 {
     linkToSingleView = always
 
     # whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1543 will be removed in seminars 5.0
     sendAdditionalNotificationEmailInFrontEndEditor = 0
 
     # the width of the speaker image in the single view
@@ -249,7 +249,7 @@ plugin.tx_seminars_pi1 {
     # comma-separated list of the place fields which are required to be filled in the FE editor
     requiredFrontEndEditorPlaceFields = city
 
-    # UID of the payment method that corresponds to "bank transfer", @deprecated will be removed in seminars 5.0
+    # UID of the payment method that corresponds to "bank transfer", @deprecated #1571 will be removed in seminars 5.0
     bankTransferUID =
 
     # The target for external links in seminars.

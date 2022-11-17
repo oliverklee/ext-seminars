@@ -1,4 +1,4 @@
-# @deprecated will be removed in seminars 5.0
+# @deprecated #1841 will be removed in seminars 5.0
 plugin.tx_seminars_pi1.form.unregistration {
     meta {
         name = Seminar Manager unregistration form

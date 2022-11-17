@@ -240,11 +240,11 @@ CREATE TABLE tx_seminars_seminars (
     language char(2) DEFAULT '' NOT NULL,
     price_regular decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_regular_early decimal(10,2) DEFAULT '0.00' NOT NULL,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1773 will be removed in seminars 5.0
     price_regular_board decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_special decimal(10,2) DEFAULT '0.00' NOT NULL,
     price_special_early decimal(10,2) DEFAULT '0.00' NOT NULL,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1773 will be removed in seminars 5.0
     price_special_board decimal(10,2) DEFAULT '0.00' NOT NULL,
     additional_information text,
     payment_methods int(11) unsigned DEFAULT '0' NOT NULL,
@@ -259,7 +259,7 @@ CREATE TABLE tx_seminars_seminars (
     queue_size int(1) unsigned DEFAULT '0' NOT NULL,
     offline_attendees int(11) unsigned DEFAULT '0' NOT NULL,
     target_groups int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1763 will be removed in seminars 5.0
     skip_collision_check tinyint(1) unsigned DEFAULT '0' NOT NULL,
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -364,13 +364,13 @@ CREATE TABLE tx_seminars_attendances (
     additional_persons int(11) unsigned DEFAULT '0' NOT NULL,
     datepaid int(11) unsigned DEFAULT '0' NOT NULL,
     method_of_payment int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1571 will be removed in seminars 5.0
     account_number tinytext,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1571 will be removed in seminars 5.0
     bank_code tinytext,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1571 will be removed in seminars 5.0
     bank_name tinytext,
-    # @deprecated will be removed in seminars 5.0
+    # @deprecated #1571 will be removed in seminars 5.0
     account_owner tinytext,
     separate_billing_address tinyint(1) unsigned DEFAULT '0' NOT NULL,
     company tinytext,

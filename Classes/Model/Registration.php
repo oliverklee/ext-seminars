@@ -263,7 +263,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Returns the account number of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @return string the account number of the bank account of this registration, might be empty
      */
@@ -275,7 +275,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Sets the account number of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param string $accountNumber the account number of the bank account of this registration to , may be empty
      */
@@ -287,7 +287,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Returns the bank code of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @return string the bank code of the bank account of this registration, might be empty
      */
@@ -299,7 +299,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Sets the bank code of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param string $bankCode the bank code of the bank account of this registration, may be empty
      */
@@ -311,7 +311,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Returns the bank name of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @return string the bank name of the bank account of this registration, might be empty
      */
@@ -323,7 +323,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Sets the bank name of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param string $bankName the bank name of the bank account of this registration to set, may be empty
      */
@@ -335,7 +335,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Returns the name of the owner of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @return string the name of the owner of the bank account of this registration, might be empty
      */
@@ -347,7 +347,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Sets the name of the owner of the bank account of this registration.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1571 will be removed in seminars 5.0
      *
      * @param string $accountOwner the name of the owner of the bank account of this registration, may be empty
      */

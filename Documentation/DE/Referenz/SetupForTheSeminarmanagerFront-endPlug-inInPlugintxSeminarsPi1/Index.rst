@@ -490,7 +490,7 @@ override the corresponding value from TS Setup.**
 
    Beschreibung
          whether to show the owner data in the single view,
-         @deprecated, will be removed in seminars 5.0
+         @deprecated #1811, will be removed in seminars 5.0
 
    Standardwert
          0
@@ -506,7 +506,7 @@ override the corresponding value from TS Setup.**
 
    Beschreibung
          the maximum width of the owner picture in the single view,
-         @deprecated, will be removed in seminars 5.0
+         @deprecated #1811, will be removed in seminars 5.0
 
    Standardwert
          250
@@ -838,7 +838,7 @@ override the corresponding value from TS Setup.**
 
    Description
         sendAdditionalNotificationEmailInFrontEndEditor,
-        @deprecated will be removed in seminars 5.0
+        @deprecated #1543, will be removed in seminars 5.0
 
    Default
          0

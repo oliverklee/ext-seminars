@@ -48,7 +48,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows creating and editing events on the FE.
  *
- * @deprecated will be removed in seminars 5.0
+ * @deprecated #1544 will be removed in seminars 5.0
  */
 class EventEditor extends AbstractEditor
 {
@@ -1132,7 +1132,7 @@ class EventEditor extends AbstractEditor
     /**
      * Builds the content for the publishing e-mail to the reviewer.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1543 will be removed in seminars 5.0
      *
      * @param Event $event the event to send the publication e-mail for
      *
@@ -1172,7 +1172,7 @@ class EventEditor extends AbstractEditor
     /**
      * Builds the URL for the reviewer e-mail.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1543 will be removed in seminars 5.0
      *
      * @return string the URL for the plain text e-mail, will not be empty
      */
@@ -1200,7 +1200,7 @@ class EventEditor extends AbstractEditor
      * Sends an additional notification email to the review if this is enabled in the configuration and if the event has
      * been newly created.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function sendAdditionalNotificationEmailToReviewer(): void
     {
@@ -1227,7 +1227,7 @@ class EventEditor extends AbstractEditor
     /**
      * Builds the content for the additional notification e-mail to the reviewer.
      *
-     * @deprecated will be removed in seminars 5.0
+     * @deprecated #1543 will be removed in seminars 5.0
      *
      * @return string the e-mail body for the notification e-mail, will not be empty
      */
