@@ -29,8 +29,7 @@ class RegistrationGuard implements SingletonInterface
 
     public function isRegistrationPossibleAtAnyTimeAtAll(Event $event): bool
     {
-        return $event instanceof EventDateInterface
-            && $event->isRegistrationPossibleForThisClass() && $event->isRegistrationRequired();
+        return $event instanceof EventDateInterface && $event->isRegistrationRequired();
     }
 
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool

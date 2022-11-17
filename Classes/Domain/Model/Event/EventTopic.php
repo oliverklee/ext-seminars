@@ -16,14 +16,4 @@ class EventTopic extends Event implements EventTopicInterface
     {
         $this->initializeEventTopic();
     }
-
-    /**
-     * Checks whether this `Event` subclass actually allows registration.
-     *
-     * @return ($this is EventDateInterface ? true : false)
-     */
-    public function isRegistrationPossibleForThisClass(): bool
-    {
-        return false;
-    }
 }

@@ -18,14 +18,4 @@ class SingleEvent extends Event implements EventDateInterface, EventTopicInterfa
         $this->initializeEventTopic();
         $this->initializeEventDate();
     }
-
-    /**
-     * Checks whether this `Event` subclass actually allows registration.
-     *
-     * @return ($this is EventDateInterface ? true : false)
-     */
-    public function isRegistrationPossibleForThisClass(): bool
-    {
-        return true;
-    }
 }

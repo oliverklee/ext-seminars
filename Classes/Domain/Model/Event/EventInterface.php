@@ -44,13 +44,6 @@ interface EventInterface
      */
     public const STATUS_CONFIRMED = 2;
 
-    /**
-     * Checks whether this `Event` subclass actually allows registration.
-     *
-     * @return ($this is EventDateInterface ? true : false)
-     */
-    public function isRegistrationPossibleForThisClass(): bool;
-
     public function getInternalTitle(): string;
 
     public function getDisplayTitle(): string;
