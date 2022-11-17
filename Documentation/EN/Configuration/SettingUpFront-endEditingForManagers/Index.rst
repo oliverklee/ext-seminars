@@ -16,6 +16,8 @@
 Setting up front-end editing for Managers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+@deprecated #1633 will be removed in seminars 5.0
+
 You can add so called Managers (formerly VIPs) to each event who can
 access – if set up by you - a special list view of their events.
 

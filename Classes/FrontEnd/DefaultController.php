@@ -2377,8 +2377,10 @@ class DefaultController extends TemplateHelper
             return true;
         }
 
+        // @deprecated #1633 will be removed in seminars 5.0
         $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
+        // @deprecated #1633 will be removed in seminars 5.0
         $isUserManager = $this->seminar->isUserVip(
             $this->getLoggedInFrontEndUserUid(),
             $this->getConfValueInteger('defaultEventVipsFeGroupID')

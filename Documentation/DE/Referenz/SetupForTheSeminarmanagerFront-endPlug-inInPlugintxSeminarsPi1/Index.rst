@@ -553,7 +553,8 @@ override the corresponding value from TS Setup.**
          boolean
 
    Beschreibung
-         Legt fest ob Verwalter ihre Veranstaltungen bearbeiten dürfen
+         Legt fest ob Verwalter ihre Veranstaltungen bearbeiten dürfen,
+         @deprecated #1633 will be removed in seminars 5.0
 
    Standardwert
          0

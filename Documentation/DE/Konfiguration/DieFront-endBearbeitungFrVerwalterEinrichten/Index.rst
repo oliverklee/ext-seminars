@@ -16,6 +16,8 @@
 Die Front-End Bearbeitung für Verwalter einrichten
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+@deprecated #1633 will be removed in seminars 5.0
+
 Sie können so genannte Verwalter (ehemals VIPs) zu jeder ihrer
 Veranstaltungen hinzufügen, welche dann – sofern von Ihnen
 eingerichtet – eine spezielle Listenansicht mit deren Veranstaltungen
