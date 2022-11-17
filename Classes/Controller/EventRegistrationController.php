@@ -44,7 +44,7 @@ class EventRegistrationController extends ActionController
             $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
         }
 
-        $this->forwardToDenyAction('noRegistrationPossibleAtAll');
+        $this->redirect('new', null, null, ['event' => $event]);
     }
 
     /**
@@ -72,5 +72,45 @@ class EventRegistrationController extends ActionController
     public function denyRegistrationAction(string $warningMessageKey): void
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
+    }
+
+    /**
+     * Displays the event registration form.
+     *
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function newAction(Event $event): void
+    {
+        $this->view->assign('event', $event);
+    }
+
+    /**
+     * Displays the confirmation page of the event registration form.
+     *
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function confirmAction(Event $event): void
+    {
+        $this->view->assign('event', $event);
+    }
+
+    /**
+     * Creates the registration and redirects to the thank-you action.
+     *
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function createAction(Event $event): void
+    {
+        $this->redirect('thankYou', null, null, ['event' => $event]);
+    }
+
+    /**
+     * Displays the thank-you page.
+     *
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function thankYouAction(Event $event): void
+    {
+        $this->view->assign('event', $event);
     }
 }

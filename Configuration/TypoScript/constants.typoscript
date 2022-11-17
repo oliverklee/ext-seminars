@@ -1,4 +1,11 @@
-plugin.tx_seminars_pi1 {
-    # cat=plugin.tx_seminars_pi1//; type=string; label=Path to CSS file: location of the CSS file (leave empty to include no CSS file)
-    cssFile = EXT:seminars/Resources/Public/CSS/FrontEnd/FrontEnd.css
+plugin {
+    tx_seminars_pi1 {
+        # cat=plugin.tx_seminars_pi1//; type=string; label=Path to CSS file: location of the CSS file (leave empty to include no CSS file)
+        cssFile = EXT:seminars/Resources/Public/CSS/FrontEnd/FrontEnd.css
+    }
+
+    tx_seminars.settings {
+        # cat=plugin.tx_seminars.settings//; type=options [formal,informal]; label=Salutation mode in the frontend
+        salutation = formal
+    }
 }

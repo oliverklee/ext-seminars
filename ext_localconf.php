@@ -104,10 +104,8 @@ defined('TYPO3_MODE') or die('Access denied.');
     if ($typo3Version->getMajorVersion() >= 10) {
         // This makes the plugin available for front-end rendering.
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            // extension name, matching the PHP namespaces (but without the vendor)
-            'Seminars',
-            // arbitrary, but unique plugin name (not visible in the BE)
-            'FrontEndEditor',
+            'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+            'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
             // all actions
             [
                 \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
@@ -120,17 +118,17 @@ defined('TYPO3_MODE') or die('Access denied.');
 
         // This makes the plugin available for front-end rendering.
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            // extension name, matching the PHP namespaces (but without the vendor)
-            'Seminars',
-            // arbitrary, but unique plugin name (not visible in the BE)
-            'EventRegistration',
+            'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+            'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
             // all actions
             [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites, denyRegistration',
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class
+                => 'checkPrerequisites, denyRegistration, new, confirm, create, thankYou',
             ],
             // non-cacheable actions
             [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class => 'checkPrerequisites, denyRegistration',
+                \OliverKlee\Seminars\Controller\EventRegistrationController::class
+                => 'checkPrerequisites, denyRegistration, new, confirm, create, thankYou',
             ]
         );
     }

@@ -2016,6 +2016,15 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
+				<source>Event registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.thankYou_formal">
+				<source>Thank you!</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.thankYou_informal">
+				<source>Thank you!</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 			</trans-unit>
