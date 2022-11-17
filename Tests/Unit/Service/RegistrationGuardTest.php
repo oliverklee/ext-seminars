@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\RegistrationGuard;
@@ -66,6 +68,55 @@ final class RegistrationGuardTest extends UnitTestCase
     public function isSingleton(): void
     {
         self::assertInstanceOf(SingletonInterface::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function isRegistrationPossibleAtAnyTimeAtAllForEventTopicReturnsFalse(): void
+    {
+        $event = new EventTopic();
+
+        self::assertFalse($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
+    }
+
+    /**
+     * @return array<string, array{0: SingleEvent|EventDate}>
+     */
+    public function nonTopicEventDataProvider(): array
+    {
+        return [
+            'single event' => [new SingleEvent()],
+            'event date' => [new EventDate()],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param SingleEvent|EventDate $event
+     *
+     * @dataProvider nonTopicEventDataProvider
+     */
+    public function isRegistrationPossibleAtAnyTimeAtAllEventThatRequiresNoRegistrationReturnsFalse(Event $event): void
+    {
+        $event->setRegistrationRequired(false);
+
+        self::assertFalse($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
+    }
+
+    /**
+     * @test
+     *
+     * @param SingleEvent|EventDate $event
+     *
+     * @dataProvider nonTopicEventDataProvider
+     */
+    public function isRegistrationPossibleAtAnyTimeAtAllForEventThatRequiresRegistrationReturnsTrue(Event $event): void
+    {
+        $event->setRegistrationRequired(true);
+
+        self::assertTrue($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
     }
 
     /**

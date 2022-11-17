@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Service\RegistrationGuard;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -13,6 +15,16 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventRegistrationController extends ActionController
 {
+    /**
+     * @var RegistrationGuard
+     */
+    private $registrationGuard;
+
+    public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
+    {
+        $this->registrationGuard = $registrationGuard;
+    }
+
     /**
      * Checks that the user can register for the provided event, and redirects or forwards to the corresponding next
      * action.
@@ -24,8 +36,12 @@ class EventRegistrationController extends ActionController
         if (!$event instanceof Event) {
             $this->redirectToPageForNoEvent();
         }
+        if (!$this->registrationGuard->isRegistrationPossibleAtAnyTimeAtAll($event)) {
+            $this->forwardToDenyAction('noRegistrationPossibleAtAll');
+        }
+        \assert($event instanceof EventDateInterface);
 
-        $this->forwardToDenyAction('plugin.eventRegistration.heading.sorry');
+        $this->forwardToDenyAction('noRegistrationPossibleAtAll');
     }
 
     /**
@@ -39,6 +55,9 @@ class EventRegistrationController extends ActionController
 
     /**
      * This is a convenience method to simplify multiple calls.
+     *
+     * @param non-empty-string $warningMessageKey the key of the message to display,
+     *        will automatically get prefixed with `plugin.eventRegistration.error.`
      *
      * @return never
      */
