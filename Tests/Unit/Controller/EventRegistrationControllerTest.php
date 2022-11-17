@@ -129,11 +129,79 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function checkPrerequisitesActionForNoProblemsRedirectsToNewActionAndPassesEvent(): void
+    {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('isRegistrationPossibleByDate')->with($event)->willReturn(true);
+
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('new', null, null, ['event' => $event])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function denyRegistrationActionPassesProvidedWarningMessageKeyToView(): void
     {
         $warningMessageKey = 'noRegistrationPossibleAtAll';
         $this->viewMock->expects(self::once())->method('assign')->with('warningMessageKey', $warningMessageKey);
 
         $this->subject->denyRegistrationAction($warningMessageKey);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionPassesProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+
+        $this->viewMock->expects(self::once())->method('assign')->with('event', $event);
+
+        $this->subject->newAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionPassesProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+
+        $this->viewMock->expects(self::once())->method('assign')->with('event', $event);
+
+        $this->subject->confirmAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionRedirectsToThankYouActionAndPassesEvent(): void
+    {
+        $event = new SingleEvent();
+
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('thankYou', null, null, ['event' => $event])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->createAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function thankYouActionPassesProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+
+        $this->viewMock->expects(self::once())->method('assign')->with('event', $event);
+
+        $this->subject->thankYouAction($event);
     }
 }

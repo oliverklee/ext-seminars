@@ -2504,6 +2504,18 @@ This event now has been confirmed.</source>
 				<source>Sorry!</source>
 				<target>Pardon!</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
+				<source>Event registration</source>
+				<target>Inscription à l'événement</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.thankYou_formal">
+				<source>Thank you!</source>
+				<target>Merci beaucoup!</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.thankYou_informal">
+				<source>Thank you!</source>
+				<target>Merci beaucoup!</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 				<target>Il n'est possible de s'inscire pour cet événement.</target>
