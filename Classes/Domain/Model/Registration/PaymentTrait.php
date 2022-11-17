@@ -73,7 +73,7 @@ trait PaymentTrait
         return $paymentMethod;
     }
 
-    public function setPaymentMethod(PaymentMethod $paymentMethod): void
+    public function setPaymentMethod(?PaymentMethod $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
