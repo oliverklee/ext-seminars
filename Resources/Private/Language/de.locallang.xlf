@@ -2675,8 +2675,12 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<target>Entschuldigung!</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
-				<source>For this event, no registration is possible.</source>
+				<source>For this event, registration is not possible.</source>
 				<target>Für diese Veranstaltung ist keine Anmeldung möglich.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+				<source>For this event, registration is not possible at the moment.</source>
+				<target>Für diese Veranstaltung ist im Moment keine Anmeldung möglich.</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

@@ -110,6 +110,25 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function checkPrerequisitesActionForNoRegistrationPossibleAtTheMomentForwardsToDenyRegistrationAction(): void
+    {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')
+            ->with($event)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleByDate')
+            ->with($event)->willReturn(false);
+
+        $this->subject->expects(self::once())->method('forward')
+            ->with('denyRegistration', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtTheMoment'])
+            ->willThrowException(new StopActionException('forward', 1476045801));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function denyRegistrationActionPassesProvidedWarningMessageKeyToView(): void
     {
         $warningMessageKey = 'noRegistrationPossibleAtAll';

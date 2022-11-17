@@ -2505,8 +2505,12 @@ This event now has been confirmed.</source>
 				<target>Pardon!</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
-				<source>For this event, no registration is necessary.</source>
+				<source>For this event, registration is not possible.</source>
 				<target>Il n'est possible de s'inscire pour cet événement.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+				<source>For this event, registration is not possible at the moment.</source>
+				<target>Il n'est possible de s'inscire pour cet événement pour le moment.</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

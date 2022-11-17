@@ -2485,8 +2485,12 @@ This event now has been confirmed.</source>
 				<target>Sorry!</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
-				<source>For this event, no registration is necessary.</source>
+				<source>For this event, registration is not possible.</source>
 				<target>Voor dit evenement is geen registratie mogelijk.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+				<source>For this event, registration is not possible at the moment.</source>
+				<target>Voor dit evenement is op dit moment geen registratie mogelijk.</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

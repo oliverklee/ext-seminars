@@ -40,6 +40,9 @@ class EventRegistrationController extends ActionController
             $this->forwardToDenyAction('noRegistrationPossibleAtAll');
         }
         \assert($event instanceof EventDateInterface);
+        if (!$this->registrationGuard->isRegistrationPossibleByDate($event)) {
+            $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
+        }
 
         $this->forwardToDenyAction('noRegistrationPossibleAtAll');
     }

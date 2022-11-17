@@ -2017,7 +2017,10 @@ This event now has been confirmed.</source>
 				<source>Sorry!</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
-				<source>For this event, no registration is possible.</source>
+				<source>For this event, registration is not possible.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+				<source>For this event, registration is not possible at the moment.</source>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
