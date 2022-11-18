@@ -43,6 +43,9 @@ class EventRegistrationController extends ActionController
         if (!$this->registrationGuard->isRegistrationPossibleByDate($event)) {
             $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
         }
+        if (!$this->registrationGuard->existsFrontEndUserUidInSession()) {
+            $this->redirectToLoginPage($event);
+        }
 
         $this->redirect('new', null, null, ['event' => $event]);
     }
@@ -72,6 +75,24 @@ class EventRegistrationController extends ActionController
     public function denyRegistrationAction(string $warningMessageKey): void
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
+    }
+
+    /**
+     * @return never
+     */
+    private function redirectToLoginPage(Event $event): void
+    {
+        // In order to shorten the URL by removing redundant arguments, we are not using `$uriBuilder->uriFor()` here.
+        $redirectUrl = $this->uriBuilder->reset()->setCreateAbsoluteUri(true)
+            ->setArguments(['tx_seminars_eventregistration[event]' => $event->getUid()])
+            ->buildFrontendUri();
+
+        $loginPageUid = (int)($this->settings['loginPage'] ?? 0);
+        $loginPageUrlWithRedirect = $this->uriBuilder->reset()->setCreateAbsoluteUri(true)
+            ->setTargetPageUid($loginPageUid)->setArguments(['redirect_url' => $redirectUrl])
+            ->buildFrontendUri();
+
+        $this->redirectToUri($loginPageUrlWithRedirect);
     }
 
     /**

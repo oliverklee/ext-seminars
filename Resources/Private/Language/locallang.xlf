@@ -2013,6 +2013,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
 				<source>Page to display if this plugin is called with no event</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.loginPage">
+				<source>Login page (or with onetimeaccount)</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 			</trans-unit>

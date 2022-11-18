@@ -27,6 +27,21 @@
                             </config>
                         </TCEforms>
                     </settings.pageForMissingEvent>
+                    <settings.loginPage>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.loginPage
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.loginPage>
                 </el>
             </ROOT>
         </general>
