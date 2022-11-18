@@ -3,15 +3,8 @@
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
-        <h2>
-            <f:translate key="plugin.eventRegistration.heading.eventRegistration"/>
-        </h2>
-        <h3>
-            {event.displayTitle}
-        </h3>
-        <h4>
-            <f:render partial="EventDate" arguments="{event: event}"/>
-        </h4>
+        <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
+
         <p class="alert alert-info" role="alert">
             NewAction
         </p>

@@ -2504,6 +2504,10 @@ This event now has been confirmed.</source>
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Page de login (ou avec onetimeaccount):</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
+				<source>%1$s, %2$s (event #%3$u)</source>
+				<target>%1$s, %2$s (événement #%3$u)</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 				<target>Pardon!</target>
@@ -2511,14 +2515,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
 				<source>Event registration</source>
 				<target>Inscription à l'événement</target>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_formal">
-				<source>Thank you!</source>
-				<target>Merci beaucoup!</target>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_informal">
-				<source>Thank you!</source>
-				<target>Merci beaucoup!</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>

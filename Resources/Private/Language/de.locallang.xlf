@@ -2674,6 +2674,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Loginseite (oder mit Onetimeaccount)</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
+				<source>%1$s, %2$s (event #%3$u)</source>
+				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 				<target>Entschuldigung!</target>
@@ -2681,14 +2685,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
 				<source>Event registration</source>
 				<target>Veranstaltungsanmeldung</target>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_formal">
-				<source>Thank you!</source>
-				<target>Vielen Dank!</target>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_informal">
-				<source>Thank you!</source>
-				<target>Vielen Dank!</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
