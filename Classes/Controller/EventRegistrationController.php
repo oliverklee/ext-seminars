@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\RegistrationGuard;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -103,10 +105,15 @@ class EventRegistrationController extends ActionController
      * Displays the event registration form.
      *
      * @Extbase\IgnoreValidation("event")
+     * @Extbase\IgnoreValidation("registration")
      */
-    public function newAction(Event $event): void
+    public function newAction(Event $event, ?Registration $registration = null): void
     {
         $this->view->assign('event', $event);
+
+        $newRegistration = $registration instanceof Registration
+            ? $registration : GeneralUtility::makeInstance(Registration::class);
+        $this->view->assign('registration', $newRegistration);
     }
 
     /**
@@ -114,9 +121,10 @@ class EventRegistrationController extends ActionController
      *
      * @Extbase\IgnoreValidation("event")
      */
-    public function confirmAction(Event $event): void
+    public function confirmAction(Event $event, Registration $registration): void
     {
         $this->view->assign('event', $event);
+        $this->view->assign('registration', $registration);
     }
 
     /**
@@ -124,7 +132,7 @@ class EventRegistrationController extends ActionController
      *
      * @Extbase\IgnoreValidation("event")
      */
-    public function createAction(Event $event): void
+    public function createAction(Event $event, Registration $registration): void
     {
         $this->redirect('thankYou', null, null, ['event' => $event]);
     }
