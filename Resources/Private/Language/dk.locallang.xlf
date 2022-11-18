@@ -2490,6 +2490,14 @@ This event now has been confirmed.</source>
 				<source>The entered data as an overview:</source>
 				<target></target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+				<source>You are already registered for this event.</source>
+				<target>De er allerede tilmeldt dette arrangement.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+				<source>You are already registered for this event.</source>
+				<target>Du er allerede tilmeldt dette arrangement.</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Pris</target>

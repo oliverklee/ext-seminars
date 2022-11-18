@@ -2698,6 +2698,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>For this event, registration is not possible at the moment.</source>
 				<target>Für diese Veranstaltung ist im Moment keine Anmeldung möglich.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+				<source>You are already registered for this event.</source>
+				<target>Sie sind für diese Veranstaltung bereits angemeldet.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+				<source>You are already registered for this event.</source>
+				<target>Du bist für diese Veranstaltung bereits angemeldet.</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>

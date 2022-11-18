@@ -2508,6 +2508,14 @@ This event now has been confirmed.</source>
 				<source>For this event, registration is not possible at the moment.</source>
 				<target>Voor dit evenement is op dit moment geen registratie mogelijk.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+				<source>You are already registered for this event.</source>
+				<target>U heeft zich al geregistreerd voor dit evenement.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+				<source>You are already registered for this event.</source>
+				<target>Je bent al voor dit evenement bijeenkomst aangemeld.</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standaardprijs</target>

@@ -138,12 +138,39 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForNoProblemsRedirectsToNewActionAndPassesEvent(): void
+    public function checkPrerequisitesActionUserAlreadyRegisteredForwardsToDenyRegistrationAction(): void
     {
+        $userUid = 17;
+        $this->registrationGuardMock->method('getFrontEndUserUidInSession')->willReturn($userUid);
+
         $event = new SingleEvent();
         $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
         $this->registrationGuardMock->method('isRegistrationPossibleByDate')->with($event)->willReturn(true);
         $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())
+            ->method('isFreeFromRegistrationConflicts')->with($event, $userUid)->willReturn(false);
+
+        $this->subject->expects(self::once())->method('forward')
+            ->with('denyRegistration', null, null, ['warningMessageKey' => 'alreadyRegistered'])
+            ->willThrowException(new StopActionException('forward', 1476045801));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function checkPrerequisitesActionForNoProblemsRedirectsToNewActionAndPassesEvent(): void
+    {
+        $userUid = 17;
+        $this->registrationGuardMock->method('getFrontEndUserUidInSession')->willReturn($userUid);
+
+        $event = new SingleEvent();
+        $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('isRegistrationPossibleByDate')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(true);
+        $this->registrationGuardMock->method('isFreeFromRegistrationConflicts')->with($event, $userUid)->willReturn(true);
 
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])

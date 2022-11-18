@@ -2528,6 +2528,14 @@ This event now has been confirmed.</source>
 				<source>For this event, registration is not possible at the moment.</source>
 				<target>Il n'est possible de s'inscire pour cet événement pour le moment.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+				<source>You are already registered for this event.</source>
+				<target>Vous êtes déjà enregistré à cet événement.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+				<source>You are already registered for this event.</source>
+				<target>Tu es déjà enregistré à cet événement.</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Prix normal</target>
