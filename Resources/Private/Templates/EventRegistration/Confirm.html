@@ -8,5 +8,22 @@
         <p class="alert alert-info" role="alert">
             ConfirmAction
         </p>
+
+        <f:form action="create" name="registration" object="{registration}" class="tx-seminars-event-registration">
+            <f:form.hidden name="event" value="{event}"/>
+
+            <div class="d-flex justify-content-end mt-3 mb-3">
+                <f:if condition="{event.freeOfCharge}">
+                    <f:then>
+                        <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.registerForFree')}"
+                                       class="btn btn-primary"/>
+                    </f:then>
+                    <f:else>
+                        <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.registerWithCosts')}"
+                                       class="btn btn-primary"/>
+                    </f:else>
+                </f:if>
+            </div>
+        </f:form>
     </f:section>
 </html>

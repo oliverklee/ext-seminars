@@ -8,5 +8,14 @@
         <p class="alert alert-info" role="alert">
             NewAction
         </p>
+
+        <f:form action="confirm" name="registration" object="{registration}" class="tx-seminars-event-registration">
+            <f:form.hidden name="event" value="{event}"/>
+
+            <div class="d-flex justify-content-end mt-3 mb-3">
+                <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.continue')}"
+                               class="btn btn-primary"/>
+            </div>
+        </f:form>
     </f:section>
 </html>
