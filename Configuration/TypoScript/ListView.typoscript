@@ -1,13 +1,13 @@
 plugin.tx_seminars_pi1.listView {
-    # the default sort order in list view (a sort field name)
-    orderBy = date
+  # the default sort order in list view (a sort field name)
+  orderBy = date
 
-    # whether to order ascending (0) or descending (1)
-    descFlag = 0
+  # whether to order ascending (0) or descending (1)
+  descFlag = 0
 
-    # how many results to display per page
-    results_at_a_time = 20
+  # how many results to display per page
+  results_at_a_time = 20
 
-    # the number of neighboring pages to list in the page browser
-    maxPages = 5
+  # the number of neighboring pages to list in the page browser
+  maxPages = 5
 }

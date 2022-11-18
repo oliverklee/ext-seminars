@@ -1,802 +1,808 @@
 # @deprecated #1545 will be removed in seminars 5.0
 plugin.tx_seminars_pi1.form.registration.step1 {
-    meta {
-        name = Seminar Manager registration form
-        description = This form allows FE users to register for events.
-        form.formid = tx_seminars_pi1_registration_editor
-        debug = false
-        displaylabels = false
-        minify.enabled = 1
-    }
+  meta {
+    name = Seminar Manager registration form
+    description = This form allows FE users to register for events.
+    form.formid = tx_seminars_pi1_registration_editor
+    debug = false
+    displaylabels = false
+    minify.enabled = 1
+  }
 
-    control {
-        datahandler = datahandler:RAW
-        datahandler.parentcallback = setPage
+  control {
+    datahandler = datahandler:RAW
+    datahandler.parentcallback = setPage
 
-        renderer = renderer:TEMPLATE
-        renderer.template {
-            path.userobj.php (
+    renderer = renderer:TEMPLATE
+    renderer.template {
+      path.userobj.php (
                 return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
-            )
-            subpart = ###REGISTRATION_EDITOR_STEP_1###
-            errortag = errors
-        }
+      )
+      subpart = ###REGISTRATION_EDITOR_STEP_1###
+      errortag = errors
+    }
+  }
+
+  elements {
+    step_counter = renderlet:LABEL
+    step_counter {
+      name = step_counter
+      data.value.userobj {
+        extension = this
+        method = getStepCounter
+      }
     }
 
-    elements {
-        step_counter = renderlet:LABEL
-        step_counter {
-            name = step_counter
-            data.value.userobj {
-                extension = this
-                method = getStepCounter
-            }
+    price = renderlet:LISTBOX
+    price {
+      name = price
+      data.userobj {
+        extension = this
+        method = populatePrices
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
+          userobj {
+            extension = this
+            method = isValidPriceSelected
+          }
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = price
+        }
+      }
+    }
+
+    method_of_payment = renderlet:RADIOBUTTON
+    method_of_payment {
+      name = method_of_payment
+      data {
+        userobj {
+          extension = this
+          method = populateListPaymentMethods
         }
 
-        price = renderlet:LISTBOX
-        price {
-            name = price
-            data.userobj {
-                extension = this
-                method = populatePrices
-            }
+        defaultvalue.userobj {
+          extension = this
+          method = getPreselectedPaymentMethod
+        }
+      }
 
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
-                    userobj {
-                        extension = this
-                        method = isValidPriceSelected
-                    }
-                }
-            }
+      wrapitem = |<br/>
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
+          userobj {
+            extension = this
+            method = isMethodOfPaymentSelected
+          }
+        }
+      }
 
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = price
-                }
-            }
+      process.userobj {
+        extension = this
+        method = showMethodsOfPayment
+      }
+    }
+
+    account_number = renderlet:TEXT
+    account_number {
+      name = account_number
+      sanitize = false
+      data {
+        defaultvalue.userobj {
+          extension = this
+          method = retrieveDataFromSession
+          params.10 {
+            name = key
+            value = account_number
+          }
+        }
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+          userobj {
+            extension = this
+            method = hasBankData
+          }
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasBankDataFormField
+        params.10 {
+          name = elementname
+          value = account_number
+        }
+      }
+    }
+
+    bank_code = renderlet:TEXT
+    bank_code {
+      name = bank_code
+      sanitize = false
+      data {
+        defaultvalue.userobj {
+          extension = this
+          method = retrieveDataFromSession
+          params.10 {
+            name = key
+            value = bank_code
+          }
+        }
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+          userobj {
+            extension = this
+            method = hasBankData
+          }
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasBankDataFormField
+        params.10 {
+          name = elementname
+          value = bank_code
+        }
+      }
+    }
+
+    bank_name = renderlet:TEXT
+    bank_name {
+      name = bank_name
+      sanitize = false
+      data {
+        defaultvalue.userobj {
+          extension = this
+          method = retrieveDataFromSession
+          params.10 {
+            name = key
+            value = bank_name
+          }
+        }
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+          userobj {
+            extension = this
+            method = hasBankData
+          }
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasBankDataFormField
+        params.10 {
+          name = elementname
+          value = bank_name
+        }
+      }
+    }
+
+    account_owner = renderlet:TEXT
+    account_owner {
+      name = account_owner
+      sanitize = false
+      data {
+        defaultvalue.userobj {
+          extension = this
+          method = retrieveDataFromSession
+          params.10 {
+            name = key
+            value = account_owner
+          }
+        }
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+          userobj {
+            extension = this
+            method = hasBankData
+          }
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasBankDataFormField
+        params.10 {
+          name = elementname
+          value = account_owner
+        }
+      }
+    }
+
+    company = renderlet:TEXT
+    company {
+      name = company
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = company
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = company
+        }
+      }
+    }
+
+    gender = renderlet:LISTBOX
+    gender {
+      name = gender
+      data {
+        items {
+          10 {
+            caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.0
+            value = 0
+          }
+
+          20 {
+            caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.1
+            value = 1
+          }
         }
 
-        method_of_payment = renderlet:RADIOBUTTON
-        method_of_payment {
-            name = method_of_payment
-            data {
-                userobj {
-                    extension = this
-                    method = populateListPaymentMethods
-                }
+        defaultvalue.userobj {
+          extension = this
+          method = getFeUserData
+          params.10 {
+            name = key
+            value = gender
+          }
+        }
+      }
 
-                defaultvalue.userobj {
-                    extension = this
-                    method = getPreselectedPaymentMethod
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = gender
+        }
+      }
+    }
 
-            wrapitem = |<br/>
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
-                    userobj {
-                        extension = this
-                        method = isMethodOfPaymentSelected
-                    }
-                }
-            }
+    name = renderlet:TEXT
+    name {
+      name = name
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = name
+        }
+      }
 
-            process.userobj {
-                extension = this
-                method = showMethodsOfPayment
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = name
+        }
+      }
+    }
+
+    address = renderlet:TEXTAREA
+    address {
+      name = address
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = address
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = address
+        }
+      }
+    }
+
+    zip = renderlet:TEXT
+    zip {
+      name = zip
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = zip
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = zip
+        }
+      }
+    }
+
+    city = renderlet:TEXT
+    city {
+      name = city
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = city
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = city
+        }
+      }
+    }
+
+    country = renderlet:LISTBOX
+    country {
+      name = country
+      data {
+        userobj {
+          extension = this
+          method = populateListCountries
         }
 
-        account_number = renderlet:TEXT
-        account_number {
-            name = account_number
-            sanitize = false
-            data {
-                defaultvalue.userobj {
-                    extension = this
-                    method = retrieveDataFromSession
-                    params.10 {
-                        name = key
-                        value = account_number
-                    }
-                }
-            }
+        defaultvalue.userobj {
+          extension = this
+          method = getFeUserData
+          params.10 {
+            name = key
+            value = country
+          }
+        }
+      }
 
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                    userobj {
-                        extension = this
-                        method = hasBankData
-                    }
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = country
+        }
+      }
+    }
 
-            process.userobj {
-                extension = this
-                method = hasBankDataFormField
-                params.10 {
-                    name = elementname
-                    value = account_number
-                }
-            }
+    telephone = renderlet:TEXT
+    telephone {
+      name = telephone
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = telephone
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = telephone
+        }
+      }
+    }
+
+    email = renderlet:TEXT
+    email {
+      name = email
+      sanitize = false
+      data.defaultvalue.userobj {
+        extension = this
+        method = getFeUserData
+        params.10 {
+          name = key
+          value = email
+        }
+      }
+
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = email
+        }
+      }
+    }
+
+    seats = renderlet:LISTBOX
+    seats {
+      name = seats
+      data {
+        userobj {
+          extension = this
+          method = populateSeats
         }
 
-        bank_code = renderlet:TEXT
-        bank_code {
-            name = bank_code
-            sanitize = false
-            data {
-                defaultvalue.userobj {
-                    extension = this
-                    method = retrieveDataFromSession
-                    params.10 {
-                        name = key
-                        value = bank_code
-                    }
-                }
-            }
+        defaultvalue = 1
+      }
 
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                    userobj {
-                        extension = this
-                        method = hasBankData
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasBankDataFormField
-                params.10 {
-                    name = elementname
-                    value = bank_code
-                }
-            }
+      validators {
+        10 = validator:PREG
+        10.pattern {
+          value = /^[\d]*$/
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noSeatsNumber
         }
 
-        bank_name = renderlet:TEXT
-        bank_name {
-            name = bank_name
-            sanitize = false
-            data {
-                defaultvalue.userobj {
-                    extension = this
-                    method = retrieveDataFromSession
-                    params.10 {
-                        name = key
-                        value = bank_name
-                    }
-                }
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                    userobj {
-                        extension = this
-                        method = hasBankData
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasBankDataFormField
-                params.10 {
-                    name = elementname
-                    value = bank_name
-                }
-            }
+        20 = validator:STANDARD
+        20.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
+          userobj {
+            extension = this
+            method = canRegisterSeats
+          }
         }
 
-        account_owner = renderlet:TEXT
-        account_owner {
-            name = account_owner
-            sanitize = false
-            data {
-                defaultvalue.userobj {
-                    extension = this
-                    method = retrieveDataFromSession
-                    params.10 {
-                        name = key
-                        value = account_owner
-                    }
-                }
-            }
+        30 = validator:STANDARD
+        30.custom {
+          message.userobj {
+            extension = this
+            method = getMessageForSeatsNotMatchingRegisteredPersons
+          }
 
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                    userobj {
-                        extension = this
-                        method = hasBankData
-                    }
-                }
-            }
+          userobj {
+            extension = this
+            method = validateNumberOfRegisteredPersons
+          }
+        }
+      }
 
-            process.userobj {
-                extension = this
-                method = hasBankDataFormField
-                params.10 {
-                    name = elementname
-                    value = account_owner
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = seats
+        }
+      }
+    }
+
+    registered_themselves = renderlet:CHECKSINGLE
+    registered_themselves {
+      name = registered_themselves
+      data.defaultvalue = 1
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = registered_themselves
+        }
+      }
+    }
+
+    attendees_names = renderlet:HIDDEN
+    attendees_names {
+      name = attendees_names
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = attendees_names
+        }
+      }
+    }
+
+    structured_attendees_names = renderlet:HIDDEN
+    structured_attendees_names {
+      name = structured_attendees_names
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
+          userobj {
+            extension = this
+            method = validateAdditionalPersonsEMailAddresses
+          }
+        }
+      }
+    }
+
+    kids = renderlet:LISTBOX
+    kids {
+      name = kids
+      data.items {
+        blank {
+          caption =
+          value = 0
         }
 
-        company = renderlet:TEXT
-        company {
-            name = company
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = company
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = company
-                }
-            }
+        1 {
+          caption = 1
+          value = 1
         }
 
-        gender = renderlet:LISTBOX
-        gender {
-            name = gender
-            data {
-                items {
-                    10 {
-                        caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.0
-                        value = 0
-                    }
-
-                    20 {
-                        caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.1
-                        value = 1
-                    }
-                }
-
-                defaultvalue.userobj {
-                    extension = this
-                    method = getFeUserData
-                    params.10 {
-                        name = key
-                        value = gender
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = gender
-                }
-            }
+        2 {
+          caption = 2
+          value = 2
         }
 
-        name = renderlet:TEXT
-        name {
-            name = name
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = name
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = name
-                }
-            }
+        3 {
+          caption = 3
+          value = 3
         }
 
-        address = renderlet:TEXTAREA
-        address {
-            name = address
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = address
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = address
-                }
-            }
+        4 {
+          caption = 4
+          value = 4
         }
 
-        zip = renderlet:TEXT
-        zip {
-            name = zip
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = zip
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = zip
-                }
-            }
+        5 {
+          caption = 5
+          value = 5
         }
+      }
 
-        city = renderlet:TEXT
-        city {
-            name = city
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = city
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = city
-                }
-            }
+      validators {
+        10 = validator:PREG
+        10.pattern {
+          value = /^[\d]*$/
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noKidsNumber
         }
+      }
 
-        country = renderlet:LISTBOX
-        country {
-            name = country
-            data {
-                userobj {
-                    extension = this
-                    method = populateListCountries
-                }
-
-                defaultvalue.userobj {
-                    extension = this
-                    method = getFeUserData
-                    params.10 {
-                        name = key
-                        value = country
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = country
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = kids
         }
+      }
+    }
 
-        telephone = renderlet:TEXT
-        telephone {
-            name = telephone
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = telephone
-                }
-            }
+    lodgings = renderlet:CHECKBOX
+    lodgings {
+      name = lodgings
+      data.userobj {
+        extension = this
+        method = populateLodgings
+      }
 
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = telephone
-                }
-            }
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
+          userobj {
+            extension = this
+            method = isLodgingSelected
+          }
         }
+      }
 
-        email = renderlet:TEXT
-        email {
-            name = email
-            sanitize = false
-            data.defaultvalue.userobj {
-                extension = this
-                method = getFeUserData
-                params.10 {
-                    name = key
-                    value = email
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasLodgings
+      }
+    }
 
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = email
-                }
-            }
+    accommodation = renderlet:TEXTAREA
+    accommodation {
+      name = accommodation
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = accommodation
         }
+      }
+    }
 
-        seats = renderlet:LISTBOX
-        seats {
-            name = seats
-            data {
-                userobj {
-                    extension = this
-                    method = populateSeats
-                }
+    foods = renderlet:CHECKBOX
+    foods {
+      name = foods
+      data.userobj {
+        extension = this
+        method = populateFoods
+      }
 
-                defaultvalue = 1
-            }
-
-            validators {
-                10 = validator:PREG
-                10.pattern {
-                    value = /^[\d]*$/
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noSeatsNumber
-                }
-
-                20 = validator:STANDARD
-                20.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
-                    userobj {
-                        extension = this
-                        method = canRegisterSeats
-                    }
-                }
-
-                30 = validator:STANDARD
-                30.custom {
-                    message.userobj {
-                        extension = this
-                        method = getMessageForSeatsNotMatchingRegisteredPersons
-                    }
-                    userobj {
-                        extension = this
-                        method = validateNumberOfRegisteredPersons
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = seats
-                }
-            }
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
+          userobj {
+            extension = this
+            method = isFoodSelected
+          }
         }
+      }
 
-        registered_themselves = renderlet:CHECKSINGLE
-        registered_themselves {
-            name = registered_themselves
-            data.defaultvalue = 1
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = registered_themselves
-                }
-            }
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = foods
         }
+      }
+    }
 
-        attendees_names = renderlet:HIDDEN
-        attendees_names {
-            name = attendees_names
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = attendees_names
-                }
-            }
+    food = renderlet:TEXTAREA
+    food {
+      name = food
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = food
         }
+      }
+    }
 
-        structured_attendees_names = renderlet:HIDDEN
-        structured_attendees_names {
-            name = structured_attendees_names
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
-                    userobj {
-                        extension = this
-                        method = validateAdditionalPersonsEMailAddresses
-                    }
-                }
-            }
+    checkboxes = renderlet:CHECKBOX
+    checkboxes {
+      name = checkboxes
+      data.userobj {
+        extension = this
+        method = populateCheckboxes
+      }
+
+      process.userobj {
+        extension = this
+        method = hasCheckboxes
+      }
+    }
+
+    interests = renderlet:TEXTAREA
+    interests {
+      name = interests
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = interests
         }
+      }
+    }
 
-        kids = renderlet:LISTBOX
-        kids {
-            name = kids
-            data.items {
-                blank {
-                    caption =
-                    value = 0
-                }
-                1 {
-                    caption = 1
-                    value = 1
-                }
-                2 {
-                    caption = 2
-                    value = 2
-                }
-                3 {
-                    caption = 3
-                    value = 3
-                }
-                4 {
-                    caption = 4
-                    value = 4
-                }
-                5 {
-                    caption = 5
-                    value = 5
-                }
-            }
-
-            validators {
-                10 = validator:PREG
-                10.pattern {
-                    value = /^[\d]*$/
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noKidsNumber
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = kids
-                }
-            }
+    expectations = renderlet:TEXTAREA
+    expectations {
+      name = expectations
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = expectations
         }
+      }
+    }
 
-        lodgings = renderlet:CHECKBOX
-        lodgings {
-            name = lodgings
-            data.userobj {
-                extension = this
-                method = populateLodgings
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
-                    userobj {
-                        extension = this
-                        method = isLodgingSelected
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasLodgings
-            }
+    background_knowledge = renderlet:TEXTAREA
+    background_knowledge {
+      name = background_knowledge
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = background_knowledge
         }
+      }
+    }
 
-        accommodation = renderlet:TEXTAREA
-        accommodation {
-            name = accommodation
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = accommodation
-                }
-            }
+    known_from = renderlet:TEXTAREA
+    known_from {
+      name = known_from
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = known_from
         }
+      }
+    }
 
-        foods = renderlet:CHECKBOX
-        foods {
-            name = foods
-            data.userobj {
-                extension = this
-                method = populateFoods
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
-                    userobj {
-                        extension = this
-                        method = isFoodSelected
-                    }
-                }
-            }
-
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = foods
-                }
-            }
+    notes = renderlet:TEXTAREA
+    notes {
+      name = notes
+      sanitize = false
+      process.userobj {
+        extension = this
+        method = hasRegistrationFormField
+        params.10 {
+          name = elementname
+          value = notes
         }
+      }
+    }
 
-        food = renderlet:TEXTAREA
-        food {
-            name = food
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = food
-                }
-            }
-        }
+    button_continue = renderlet:SUBMIT
+    button_continue {
+      name = button_continue
+      label = ###LABEL_PROCEED_REGISTRATION###
+    }
 
-        checkboxes = renderlet:CHECKBOX
-        checkboxes {
-            name = checkboxes
-            data.userobj {
-                extension = this
-                method = populateCheckboxes
-            }
-
-            process.userobj {
-                extension = this
-                method = hasCheckboxes
-            }
-        }
-
-        interests = renderlet:TEXTAREA
-        interests {
-            name = interests
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = interests
-                }
-            }
-        }
-
-        expectations = renderlet:TEXTAREA
-        expectations {
-            name = expectations
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = expectations
-                }
-            }
-        }
-
-        background_knowledge = renderlet:TEXTAREA
-        background_knowledge {
-            name = background_knowledge
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = background_knowledge
-                }
-            }
-        }
-
-        known_from = renderlet:TEXTAREA
-        known_from {
-            name = known_from
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = known_from
-                }
-            }
-        }
-
-        notes = renderlet:TEXTAREA
-        notes {
-            name = notes
-            sanitize = false
-            process.userobj {
-                extension = this
-                method = hasRegistrationFormField
-                params.10 {
-                    name = elementname
-                    value = notes
-                }
-            }
-        }
-
-        button_continue = renderlet:SUBMIT
-        button_continue {
-            name = button_continue
-            label = ###LABEL_PROCEED_REGISTRATION###
-        }
-
-        button_submit = renderlet:SUBMIT
-        button_submit {
-            name = button_submit
-            label = ###LABEL_SUBMIT_REGISTRATION###
-            onclick {
-                runat = server
-                submit = full
-                userobj.php (
+    button_submit = renderlet:SUBMIT
+    button_submit {
+      name = button_submit
+      label = ###LABEL_SUBMIT_REGISTRATION###
+      onclick {
+        runat = server
+        submit = full
+        userobj.php (
                     if ($this->_oParent->getFormCreator()->oDataHandler->_allIsValid()) {
                         $this->_oParent->currentPageNumber = 2;
                     }
-                )
-            }
-        }
-
-        next_page = renderlet:PASSTHRU
-        next_page {
-            name = next_page
-            data.value = 1
-        }
+        )
+      }
     }
+
+    next_page = renderlet:PASSTHRU
+    next_page {
+      name = next_page
+      data.value = 1
+    }
+  }
 }

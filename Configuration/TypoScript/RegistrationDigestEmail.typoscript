@@ -1,23 +1,23 @@
 # Configuration for the (usually daily) registration digest email.
 plugin.tx_seminars.registrationDigestEmail {
-    # whether to send out the emails when the seminars Scheduler task is executed
-    enable = 0
+  # whether to send out the emails when the seminars Scheduler task is executed
+  enable = 0
 
-    # email address of the sender
-    fromEmail =
+  # email address of the sender
+  fromEmail =
 
-    # name of the sender
-    fromName =
+  # name of the sender
+  fromName =
 
-    # email address of the recipient
-    toEmail =
+  # email address of the recipient
+  toEmail =
 
-    # name of the recipient
-    toName =
+  # name of the recipient
+  toName =
 
-    # path to the fluid template for the plaintext email
-    plaintextTemplate = EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.txt
+  # path to the fluid template for the plaintext email
+  plaintextTemplate = EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.txt
 
-    # path to the fluid template for the HTML email
-    htmlTemplate = EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.html
+  # path to the fluid template for the HTML email
+  htmlTemplate = EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.html
 }

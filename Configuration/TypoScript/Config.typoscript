@@ -1,16 +1,16 @@
 config {
-    uniqueLinkVars = 1
+  uniqueLinkVars = 1
 
-    tx_mkforms {
-        loadJsFramework = 1
-        mayLoadScriptaculous = 1
-        jsframework {
-            jscore = jquery
-            jscore {
-                tx_mkforms_base = EXT:mkforms/Resources/Public/JavaScript/prototype/addons/base/Base.js
-                basewrapper = EXT:mkforms/Resources/Public/JavaScript/wrapper.js
-                wrapper = EXT:mkforms/Resources/Public/JavaScript/jquery/wrapper.js
-            }
-        }
+  tx_mkforms {
+    loadJsFramework = 1
+    mayLoadScriptaculous = 1
+    jsframework {
+      jscore = jquery
+      jscore {
+        tx_mkforms_base = EXT:mkforms/Resources/Public/JavaScript/prototype/addons/base/Base.js
+        basewrapper = EXT:mkforms/Resources/Public/JavaScript/wrapper.js
+        wrapper = EXT:mkforms/Resources/Public/JavaScript/jquery/wrapper.js
+      }
     }
+  }
 }

@@ -1,25 +1,25 @@
 tx_seminars_pi2 = PAGE
 tx_seminars_pi2 {
-    # The page type number for the CSV export. Do not change this!
-    typeNum = 736
+  # The page type number for the CSV export. Do not change this!
+  typeNum = 736
 
-    config {
-        disableCharsetHeader = 1
-        enableContentLengthHeader = 0
-        no_cache = 1
-        disableAllHeaderCode = 1
-        admPanel = 0
+  config {
+    disableCharsetHeader = 1
+    enableContentLengthHeader = 0
+    no_cache = 1
+    disableAllHeaderCode = 1
+    admPanel = 0
 
-        xhtml_cleaning >
-    }
+    xhtml_cleaning >
+  }
 
-    includeLibs.tx_seminars_pi2 = EXT:seminars/Classes/Csv/CsvDownloader.php
+  includeLibs.tx_seminars_pi2 = EXT:seminars/Classes/Csv/CsvDownloader.php
 
-    10 = USER
-    10 {
-        userFunc = \OliverKlee\Seminars\Csv\CsvDownloader->main
+  10 = USER
+  10 {
+    userFunc = \OliverKlee\Seminars\Csv\CsvDownloader->main
 
-        # pro forma salutation mode for the FE; has no effect whatsoever
-        salutation = formal
-    }
+    # pro forma salutation mode for the FE; has no effect whatsoever
+    salutation = formal
+  }
 }

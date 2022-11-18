@@ -1,155 +1,155 @@
 # Non-frontend specific configuration, e.g., for emails, the CSV export or the BE.
 plugin.tx_seminars {
-    # Do not copy this variable into your TS setup! This is needed for checking whether this static template has been included correctly.
-    isStaticTemplateLoaded = 1
+  # Do not copy this variable into your TS setup! This is needed for checking whether this static template has been included correctly.
+  isStaticTemplateLoaded = 1
 
-    # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
-    enableRegistration = 1
+  # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
+  enableRegistration = 1
 
-    # whether the registration collision check should be skipped for all events, @deprecated #1763 will be removed in seminars 5.0
-    skipRegistrationCollisionCheck = 0
+  # whether the registration collision check should be skipped for all events, @deprecated #1763 will be removed in seminars 5.0
+  skipRegistrationCollisionCheck = 0
 
-    # location of the template file
-    templateFile = EXT:seminars/Resources/Private/Templates/Mail/e-mail.html
+  # location of the template file
+  templateFile = EXT:seminars/Resources/Private/Templates/Mail/e-mail.html
 
-    # whether to use formal or informal language
-    salutation = formal
+  # whether to use formal or informal language
+  salutation = formal
 
-    # comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
-    hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
+  # comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
+  hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
 
-    # the CSS file for the HTML e-mail to the attendees
-    cssFileForAttendeeMail = EXT:seminars/Resources/Private/CSS/thankYouMail.css
+  # the CSS file for the HTML e-mail to the attendees
+  cssFileForAttendeeMail = EXT:seminars/Resources/Private/CSS/thankYouMail.css
 
-    # whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
-    generalPriceInMail = 0
+  # whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
+  generalPriceInMail = 0
 
-    # Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
-    hideFieldsInNotificationMail =
+  # Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
+  hideFieldsInNotificationMail =
 
-    # comma-separated list of field names from seminars that should be mentioned in the notification e-mail to the organizers (in the "seminardata" section)
-    showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_regular_early,price_special,price_special_early,attendees,vacancies,enough_attendees,is_full
+  # comma-separated list of field names from seminars that should be mentioned in the notification e-mail to the organizers (in the "seminardata" section)
+  showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_regular_early,price_special,price_special_early,attendees,vacancies,enough_attendees,is_full
 
-    # comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
-    showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone
+  # comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
+  showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone
 
-    # comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
-    showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
+  # comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
+  showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
-    # Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
-    sendAdditionalNotificationEmails = 1
+  # Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
+  sendAdditionalNotificationEmails = 1
 
-    # Whether to send a notification to the organizers if a user has registered.
-    sendNotification = 1
+  # Whether to send a notification to the organizers if a user has registered.
+  sendNotification = 1
 
-    # Whether to send a notification to the organizers if a user has unregistered.
-    sendNotificationOnUnregistration = 1
+  # Whether to send a notification to the organizers if a user has unregistered.
+  sendNotificationOnUnregistration = 1
 
-    # Whether to send a notification to the organizers if someone registered for the queue.
-    sendNotificationOnRegistrationForQueue = 1
+  # Whether to send a notification to the organizers if someone registered for the queue.
+  sendNotificationOnRegistrationForQueue = 1
 
-    # Whether to send a notification to the organizers if the queue has been updated.
-    sendNotificationOnQueueUpdate = 1
+  # Whether to send a notification to the organizers if the queue has been updated.
+  sendNotificationOnQueueUpdate = 1
 
-    # Whether to send a confirmation to the user after the user has registered.
-    sendConfirmation = 1
+  # Whether to send a confirmation to the user after the user has registered.
+  sendConfirmation = 1
 
-    # Whether to send a confirmation to the user if the user has unregistered.
-    sendConfirmationOnUnregistration = 1
+  # Whether to send a confirmation to the user if the user has unregistered.
+  sendConfirmationOnUnregistration = 1
 
-    # Whether to send a confirmation to the user if the user has registered for the queue.
-    sendConfirmationOnRegistrationForQueue = 1
+  # Whether to send a confirmation to the user if the user has registered for the queue.
+  sendConfirmationOnRegistrationForQueue = 1
 
-    # Whether to send a confirmation to the user if the queue has been updated.
-    sendConfirmationOnQueueUpdate = 1
+  # Whether to send a confirmation to the user if the queue has been updated.
+  sendConfirmationOnQueueUpdate = 1
 
-    # Whether to add the CSV file of the registrations when sending the reminder e-mails to the organizers.
-    addRegistrationCsvToOrganizerReminderMail = 0
+  # Whether to add the CSV file of the registrations when sending the reminder e-mails to the organizers.
+  addRegistrationCsvToOrganizerReminderMail = 0
 
-    # the time format (in strftime format)
-    timeFormat = %H:%M
+  # the time format (in strftime format)
+  timeFormat = %H:%M
 
-    # the strftime format code for the full date
-    dateFormatYMD = %d.%m.%Y
+  # the strftime format code for the full date
+  dateFormatYMD = %d.%m.%Y
 
-    # ISO 4217 alpha 3 code of the currency to be used, must be valid
-    currency = EUR
+  # ISO 4217 alpha 3 code of the currency to be used, must be valid
+  currency = EUR
 
-    # whether to also show the time of the registration deadline
-    showTimeOfRegistrationDeadline = 0
+  # whether to also show the time of the registration deadline
+  showTimeOfRegistrationDeadline = 0
 
-    # whether to also show the time of the early bird deadline
-    showTimeOfEarlyBirdDeadline = 0
+  # whether to also show the time of the early bird deadline
+  showTimeOfEarlyBirdDeadline = 0
 
-    # whether to also show the time of the unregistration deadline
-    showTimeOfUnregistrationDeadline = 0
+  # whether to also show the time of the unregistration deadline
+  showTimeOfUnregistrationDeadline = 0
 
-    # Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
-    unregistrationDeadlineDaysBeforeBeginDate =
+  # Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
+  unregistrationDeadlineDaysBeforeBeginDate =
 
-    # whether registration should be possible even if an event has already started
-    allowRegistrationForStartedEvents = 0
+  # whether registration should be possible even if an event has already started
+  allowRegistrationForStartedEvents = 0
 
-    # whether registration for events without a date should be possible
-    allowRegistrationForEventsWithoutDate = 0
+  # whether registration for events without a date should be possible
+  allowRegistrationForEventsWithoutDate = 0
 
-    # Whether unregistration is possible even when there are no registrations
-    # on the waiting list yet.
-    allowUnregistrationWithEmptyWaitingList = 0
+  # Whether unregistration is possible even when there are no registrations
+  # on the waiting list yet.
+  allowUnregistrationWithEmptyWaitingList = 0
 
-    # If there are at least this many vancancies, "enough" is displayed instead of the exact number.
-    showVacanciesThreshold = 10
+  # If there are at least this many vancancies, "enough" is displayed instead of the exact number.
+  showVacanciesThreshold = 10
 
-    # whether events that have no standard price set should have "to be announced" as price instead of "free"
-    showToBeAnnouncedForEmptyPrice = 0
+  # whether events that have no standard price set should have "to be announced" as price instead of "free"
+  showToBeAnnouncedForEmptyPrice = 0
 
-    # The charset for the CSV export, e.g., utf-8, iso-8859-1 or iso-8859-15.
-    # The default is iso-9959-15 because Excel has problems with importing utf-8.
-    charsetForCsv = iso-8859-15
+  # The charset for the CSV export, e.g., utf-8, iso-8859-1 or iso-8859-15.
+  # The default is iso-9959-15 because Excel has problems with importing utf-8.
+  charsetForCsv = iso-8859-15
 
-    # the filename proposed for CSV export of event lists
-    filenameForEventsCsv = events.csv
+  # the filename proposed for CSV export of event lists
+  filenameForEventsCsv = events.csv
 
-    # the filename proposed for CSV export of registration lists
-    filenameForRegistrationsCsv = registrations.csv
+  # the filename proposed for CSV export of registration lists
+  filenameForRegistrationsCsv = registrations.csv
 
-    # comma-separated list of field names from tx_seminars_seminars that will be used for CSV export
-    fieldsFromEventsForCsv = uid,title,subtitle,description,event_type,date,time,place,room,speakers,price_regular,attendees,attendees_max,vacancies,is_full
+  # comma-separated list of field names from tx_seminars_seminars that will be used for CSV export
+  fieldsFromEventsForCsv = uid,title,subtitle,description,event_type,date,time,place,room,speakers,price_regular,attendees,attendees_max,vacancies,is_full
 
-    # comma-separated list of field names from fe_users that will be used for CSV export
-    fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
+  # comma-separated list of field names from fe_users that will be used for CSV export
+  fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
 
-    # comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
-    fieldsFromAttendanceForCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
+  # comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
+  fieldsFromAttendanceForCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
-    # whether to show attendances on the registration queue in the CSV export or not
-    showAttendancesOnRegistrationQueueInCSV = 0
+  # whether to show attendances on the registration queue in the CSV export or not
+  showAttendancesOnRegistrationQueueInCSV = 0
 
-    # comma-separated list of field names from fe_users that will be used for CLI CSV export
-    fieldsFromFeUserForEmailCsv = name,company,address,zip,city,country,telephone,email
+  # comma-separated list of field names from fe_users that will be used for CLI CSV export
+  fieldsFromFeUserForEmailCsv = name,company,address,zip,city,country,telephone,email
 
-    # comma-separated list of field names from tx_seminars_attendances that will be used for CLI CSV export
-    fieldsFromAttendanceForEmailCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
+  # comma-separated list of field names from tx_seminars_attendances that will be used for CLI CSV export
+  fieldsFromAttendanceForEmailCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
-    # whether to show attendances on the registration queue in the CLI CSV export or not
-    showAttendancesOnRegistrationQueueInEmailCsv = 0
+  # whether to show attendances on the registration queue in the CLI CSV export or not
+  showAttendancesOnRegistrationQueueInEmailCsv = 0
 
-    # whether to add the Excel-specific "sep=;" line to the CSV
-    addExcelSpecificSeparatorLineToCsv = 0
+  # whether to add the Excel-specific "sep=;" line to the CSV
+  addExcelSpecificSeparatorLineToCsv = 0
 
-    # whether to send a cancelation deadline reminder to the organizers
-    sendCancelationDeadlineReminder = 0
+  # whether to send a cancelation deadline reminder to the organizers
+  sendCancelationDeadlineReminder = 0
 
-    # how many days before an events' begin date the organizers should be reminded about this event via e-mail, zero disables the reminder
-    sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
+  # how many days before an events' begin date the organizers should be reminded about this event via e-mail, zero disables the reminder
+  sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
 
-    # Set this to 1 to hide the special price for the first registration of a user and to automatically offer the special
-    # price for the 2nd, 3rd etc. registrations of the same user.
-    automaticSpecialPriceForSubsequentRegistrationsBySameUser = 0
+  # Set this to 1 to hide the special price for the first registration of a user and to automatically offer the special
+  # price for the 2nd, 3rd etc. registrations of the same user.
+  automaticSpecialPriceForSubsequentRegistrationsBySameUser = 0
 
-    # The following variables don't have any default values provided.
-    # You need to set them yourself for this extension to work correctly.
+  # The following variables don't have any default values provided.
+  # You need to set them yourself for this extension to work correctly.
 
-    # PID of the folder where event registrations (attendances) will be stored
-    attendancesPID =
+  # PID of the folder where event registrations (attendances) will be stored
+  attendancesPID =
 }

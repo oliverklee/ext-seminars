@@ -1,280 +1,280 @@
 plugin.tx_seminars_pi1 {
-    # Do not copy this variable into your TS setup! This is needed for checking whether this static template has been included correctly.
-    isStaticTemplateLoaded = 1
+  # Do not copy this variable into your TS setup! This is needed for checking whether this static template has been included correctly.
+  isStaticTemplateLoaded = 1
 
-    # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
-    enableRegistration = 1
+  # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
+  enableRegistration = 1
 
-    # number of clicks to registration (valid options are 2 or 3)
-    numberOfClicksForRegistration = 3
+  # number of clicks to registration (valid options are 2 or 3)
+  numberOfClicksForRegistration = 3
 
-    # location of the HTML template file
-    templateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html
+  # location of the HTML template file
+  templateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html
 
-    # activate Javascript framework from global config
-    loadJsFramework =< config.loadJsFramework
+  # activate Javascript framework from global config
+  loadJsFramework =< config.loadJsFramework
 
-    # location of the front-end event editor template file
-    eventEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/EventEditor.html
+  # location of the front-end event editor template file
+  eventEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/EventEditor.html
 
-    # location of the template file for the registration form
-    registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
+  # location of the template file for the registration form
+  registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
 
-    # the strftime format code for the full date
-    dateFormatYMD < plugin.tx_seminars.dateFormatYMD
+  # the strftime format code for the full date
+  dateFormatYMD < plugin.tx_seminars.dateFormatYMD
 
-    # whether to use formal or informal language
-    salutation = formal
+  # whether to use formal or informal language
+  salutation = formal
 
-    # the PID of a fixed event that should be shown in a detailed view
-    showSingleEvent =
+  # the PID of a fixed event that should be shown in a detailed view
+  showSingleEvent =
 
-    # the time-frame from which events should be displayed in the list view
-    timeframeInList = currentAndUpcoming
+  # the time-frame from which events should be displayed in the list view
+  timeframeInList = currentAndUpcoming
 
-    # comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
-    hideColumns = image,category,subtitle,event_type,accreditation_number,credit_points,teaser,time,expiry,place,city,country,price_special,speakers,language,target_groups,attached_files,status
+  # comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
+  hideColumns = image,category,subtitle,event_type,accreditation_number,credit_points,teaser,time,expiry,place,city,country,price_special,speakers,language,target_groups,attached_files,status
 
-    # comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
-    hideFields = credit_points,eventsnextday
+  # comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
+  hideFields = credit_points,eventsnextday
 
-    # whether the option boxes in the selector widget contain an empty entry like "not selected"
-    showEmptyEntryInOptionLists = 0
+  # whether the option boxes in the selector widget contain an empty entry like "not selected"
+  showEmptyEntryInOptionLists = 0
 
-    # comma-separated list of search options which should be shown in the search widget.
-    displaySearchFormFields =
+  # comma-separated list of search options which should be shown in the search widget.
+  displaySearchFormFields =
 
-    # how many years are displayed in the date filter
-    numberOfYearsInDateFilter = 2
+  # how many years are displayed in the date filter
+  numberOfYearsInDateFilter = 2
 
-    # whether the page browser should be hidden in list view
-    hidePageBrowser = 0
+  # whether the page browser should be hidden in list view
+  hidePageBrowser = 0
 
-    # whether canceled events should be hidden or not
-    hideCanceledEvents = 0
+  # whether canceled events should be hidden or not
+  hideCanceledEvents = 0
 
-    # comma-separated list of event types UIDs to filter the list view for,
-    # leave empty to have no such filter
-    limitListViewToEventTypes =
+  # comma-separated list of event types UIDs to filter the list view for,
+  # leave empty to have no such filter
+  limitListViewToEventTypes =
 
-    # comma-separated list of category UIDs to filter the list view for, leave
-    # empty to have no such filter
-    limitListViewToCategories =
+  # comma-separated list of category UIDs to filter the list view for, leave
+  # empty to have no such filter
+  limitListViewToCategories =
 
-    # comma-separated list of place UIDs to filter the list view for, leave
-    # empty to have no such filter
-    limitListViewToPlaces =
+  # comma-separated list of place UIDs to filter the list view for, leave
+  # empty to have no such filter
+  limitListViewToPlaces =
 
-    # comma-separated list of organizer UIDs to filter the list view for, leave
-    # empty to have no such filter
-    limitListViewToOrganizers =
+  # comma-separated list of organizer UIDs to filter the list view for, leave
+  # empty to have no such filter
+  limitListViewToOrganizers =
 
-    # whether to show only events with vacancies on in the list view
-    showOnlyEventsWithVacancies = 0
+  # whether to show only events with vacancies on in the list view
+  showOnlyEventsWithVacancies = 0
 
-    # the maximum height of the image of a seminar in the list view
-    seminarImageListViewHeight = 43
+  # the maximum height of the image of a seminar in the list view
+  seminarImageListViewHeight = 43
 
-    # the maximum width of the image of a seminar in the list view
-    seminarImageListViewWidth = 70
+  # the maximum width of the image of a seminar in the list view
+  seminarImageListViewWidth = 70
 
-    # whether the list view should always be sorted by category (before applying
-    # the normal sorting)
-    sortListViewByCategory = 0
+  # whether the list view should always be sorted by category (before applying
+  # the normal sorting)
+  sortListViewByCategory = 0
 
-    # how to display the categories in the event list view: icon, text, both
-    categoriesInListView = both
+  # how to display the categories in the event list view: icon, text, both
+  categoriesInListView = both
 
-    # whether to use the label "Price" as column header for the standard price (instead of "Standard price")
-    generalPriceInList = 0
+  # whether to use the label "Price" as column header for the standard price (instead of "Standard price")
+  generalPriceInList = 0
 
-    # whether to use the label "Price" as heading for the standard price (instead of "Standard price") in the detailed view and on the registration page
-    generalPriceInSingle = 0
+  # whether to use the label "Price" as heading for the standard price (instead of "Standard price") in the detailed view and on the registration page
+  generalPriceInSingle = 0
 
-    # whether to omit the date in the list view if it is the same as the previous item's
-    omitDateIfSameAsPrevious = 0
+  # whether to omit the date in the list view if it is the same as the previous item's
+  omitDateIfSameAsPrevious = 0
 
-    # whether to show the owner data in the single view, @deprecated #1811 will be removed in seminars 5.0
-    showOwnerDataInSingleView = 0
+  # whether to show the owner data in the single view, @deprecated #1811 will be removed in seminars 5.0
+  showOwnerDataInSingleView = 0
 
-    # the maximum width of the owner picture in the single view, @deprecated #1811 will be removed in seminars 5.0
-    ownerPictureMaxWidth = 250
+  # the maximum width of the owner picture in the single view, @deprecated #1811 will be removed in seminars 5.0
+  ownerPictureMaxWidth = 250
 
-    # who is allowed to view the list of registrations on the front end:
-    # "attendees_and_managers", "login" or "world"
-    accessToFrontEndRegistrationLists = attendees_and_managers
+  # who is allowed to view the list of registrations on the front end:
+  # "attendees_and_managers", "login" or "world"
+  accessToFrontEndRegistrationLists = attendees_and_managers
 
-    # whether to allow the CSV export in the "my VIP events" view
-    allowCsvExportOfRegistrationsInMyVipEventsView = 0
+  # whether to allow the CSV export in the "my VIP events" view
+  allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
-    # whether managers may edit their events, @deprecated #1633 will be removed in seminars 5.0
-    mayManagersEditTheirEvents = 0
+  # whether managers may edit their events, @deprecated #1633 will be removed in seminars 5.0
+  mayManagersEditTheirEvents = 0
 
-    # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
-    eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
+  # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
+  eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
-    # list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
-    showRegistrationFields = step_counter,price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
+  # list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
+  showRegistrationFields = step_counter,price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
 
-    # whether the logged-in user should be registered themselves by default in the registration form (only applicable if the checkbox is hidden)
-    registerThemselvesByDefaultForHiddenCheckbox = 1
+  # whether the logged-in user should be registered themselves by default in the registration form (only applicable if the checkbox is hidden)
+  registerThemselvesByDefaultForHiddenCheckbox = 1
 
-    # fe_users DB fields to show for in the registration form
-    showFeUserFieldsInRegistrationForm = name,company,address,zip,city,country,telephone,email
+  # fe_users DB fields to show for in the registration form
+  showFeUserFieldsInRegistrationForm = name,company,address,zip,city,country,telephone,email
 
-    # fe_users DB fields on the registration form that should be displayed with a label
-    showFeUserFieldsInRegistrationFormWithLabel = telephone,email
+  # fe_users DB fields on the registration form that should be displayed with a label
+  showFeUserFieldsInRegistrationFormWithLabel = telephone,email
 
-    # the displayed number of the first registration page (for "step x of y")
-    numberOfFirstRegistrationPage = 1
+  # the displayed number of the first registration page (for "step x of y")
+  numberOfFirstRegistrationPage = 1
 
-    # the displayed number of the last registration page (for "step x of y")
-    numberOfLastRegistrationPage = 2
+  # the displayed number of the last registration page (for "step x of y")
+  numberOfLastRegistrationPage = 2
 
-    # the maximum number of seats that can be booked in one registration
-    maximumBookableSeats = 10
+  # the maximum number of seats that can be booked in one registration
+  maximumBookableSeats = 10
 
-    # whether detailed information for the speakers is shown in the single view
-    showSpeakerDetails = 1
+  # whether detailed information for the speakers is shown in the single view
+  showSpeakerDetails = 1
 
-    # whether detailed information for the locations is shown in the single view
-    showSiteDetails = 1
+  # whether detailed information for the locations is shown in the single view
+  showSiteDetails = 1
 
-    # whether file downloads are limited to attendees only
-    limitFileDownloadToAttendees = 1
+  # whether file downloads are limited to attendees only
+  limitFileDownloadToAttendees = 1
 
-    # comma-separated list of FEuser fields to show in the list of registrations for an event
-    showFeUserFieldsInRegistrationsList = name
+  # comma-separated list of FEuser fields to show in the list of registrations for an event
+  showFeUserFieldsInRegistrationsList = name
 
-    # comma-separated list of registration fields to show in the list of registrations for an event
-    showRegistrationFieldsInRegistrationList =
+  # comma-separated list of registration fields to show in the list of registrations for an event
+  showRegistrationFieldsInRegistrationList =
 
-    # whether one-time FE users will be automatically logged out after registering for an event
-    logOutOneTimeAccountsAfterRegistration = 1
+  # whether one-time FE users will be automatically logged out after registering for an event
+  logOutOneTimeAccountsAfterRegistration = 1
 
-    # whether to add sorting links to the headers in the list view
-    enableSortingLinksInListView = 1
+  # whether to add sorting links to the headers in the list view
+  enableSortingLinksInListView = 1
 
-    # when to link to the single view: always, never, onlyForNonEmptyDescription
-    linkToSingleView = always
+  # when to link to the single view: always, never, onlyForNonEmptyDescription
+  linkToSingleView = always
 
-    # whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
-    # @deprecated #1543 will be removed in seminars 5.0
-    sendAdditionalNotificationEmailInFrontEndEditor = 0
+  # whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
+  # @deprecated #1543 will be removed in seminars 5.0
+  sendAdditionalNotificationEmailInFrontEndEditor = 0
 
-    # the width of the speaker image in the single view
-    speakerImageWidth = 150
+  # the width of the speaker image in the single view
+  speakerImageWidth = 150
 
-    # the height of the speaker image in the single view
-    speakerImageHeight = 150
+  # the height of the speaker image in the single view
+  speakerImageHeight = 150
 
-    # The following variables don't have any default values provided.
-    # You need to set them yourself for this extension to work correctly.
+  # The following variables don't have any default values provided.
+  # You need to set them yourself for this extension to work correctly.
 
-    # PID of the folder that contains all the event records (e.g., the starting point)
-    pages =
+  # PID of the folder that contains all the event records (e.g., the starting point)
+  pages =
 
-    # number of levels to recurse when accessing the starting point
-    recursive =
+  # number of levels to recurse when accessing the starting point
+  recursive =
 
-    # PID of the FE page that contains the event list
-    listPID =
+  # PID of the FE page that contains the event list
+  listPID =
 
-    # PID of the FE page that contains the single view
-    detailPID =
+  # PID of the FE page that contains the single view
+  detailPID =
 
-    # PID of the FE page that contains the "my events" list
-    myEventsPID =
+  # PID of the FE page that contains the "my events" list
+  myEventsPID =
 
-    # PID of the FE page that contains the seminar registration plug-in
-    registerPID =
+  # PID of the FE page that contains the seminar registration plug-in
+  registerPID =
 
-    # PID of the thank-you page that will be displayed after a FE user has registered for an event
-    thankYouAfterRegistrationPID =
+  # PID of the thank-you page that will be displayed after a FE user has registered for an event
+  thankYouAfterRegistrationPID =
 
-    # whether to send GET parameters to the thank-you-after-registration-page-URL
-    sendParametersToThankYouAfterRegistrationPageUrl = 1
+  # whether to send GET parameters to the thank-you-after-registration-page-URL
+  sendParametersToThankYouAfterRegistrationPageUrl = 1
 
-    # PID of the page that will be displayed after a FE user has unregistered from an event
-    pageToShowAfterUnregistrationPID =
+  # PID of the page that will be displayed after a FE user has unregistered from an event
+  pageToShowAfterUnregistrationPID =
 
-    # Whether to send GET parameters to the thank-you-after-registration-page-URL.
-    sendParametersToPageToShowAfterUnregistrationUrl = 1
+  # Whether to send GET parameters to the thank-you-after-registration-page-URL.
+  sendParametersToPageToShowAfterUnregistrationUrl = 1
 
-    # whether to create FE user records for additional attendees (in addition
-    # to storing them in a text field)
-    createAdditionalAttendeesAsFrontEndUsers = 0
+  # whether to create FE user records for additional attendees (in addition
+  # to storing them in a text field)
+  createAdditionalAttendeesAsFrontEndUsers = 0
 
-    # UID of the sys folder in which FE users created as additional attendees in
-    # the registration form get stored
-    sysFolderForAdditionalAttendeeUsersPID =
+  # UID of the sys folder in which FE users created as additional attendees in
+  # the registration form get stored
+  sysFolderForAdditionalAttendeeUsersPID =
 
-    # comma-separated list of front-end user group UIDs to which the FE users
-    # created in the registration form will be assigned
-    userGroupUidsForAdditionalAttendeesFrontEndUsers =
+  # comma-separated list of front-end user group UIDs to which the FE users
+  # created in the registration form will be assigned
+  userGroupUidsForAdditionalAttendeesFrontEndUsers =
 
-    # PID of the FE page that contains the login form or onetimeaccount
-    loginPID =
+  # PID of the FE page that contains the login form or onetimeaccount
+  loginPID =
 
-    # PID of the page that contains the registrations list for participants
-    registrationsListPID =
+  # PID of the page that contains the registrations list for participants
+  registrationsListPID =
 
-    # PID of the page that contains the registrations list for event managers
-    registrationsVipListPID =
+  # PID of the page that contains the registrations list for event managers
+  registrationsVipListPID =
 
-    # UID of the FE user group that is allowed to enter and edit event records in the FE
-    eventEditorFeGroupID =
+  # UID of the FE user group that is allowed to enter and edit event records in the FE
+  eventEditorFeGroupID =
 
-    # UID of the FE user group for event managers
-    defaultEventVipsFeGroupID =
+  # UID of the FE user group for event managers
+  defaultEventVipsFeGroupID =
 
-    # PID of the page where the plug-in for editing events is located
-    eventEditorPID =
+  # PID of the page where the plug-in for editing events is located
+  eventEditorPID =
 
-    # PID of the folder where FE-created events will be stored
-    createEventsPID =
+  # PID of the folder where FE-created events will be stored
+  createEventsPID =
 
-    # PID of the folder where FE-created auxiliary records will be stored
-    createAuxiliaryRecordsPID =
+  # PID of the folder where FE-created auxiliary records will be stored
+  createAuxiliaryRecordsPID =
 
-    # PID of the page that will be shown when an event has been successfully entered on the FE
-    eventSuccessfullySavedPID =
+  # PID of the page that will be shown when an event has been successfully entered on the FE
+  eventSuccessfullySavedPID =
 
-    # comma-separated list of the fields to show in the FE-editor
-    displayFrontEndEditorFields = subtitle,accreditation_number,credit_points,categories,event_type,cancelled,teaser,description,additional_information,begin_date,end_date,begin_date_registration,deadline_early_bird,deadline_registration,needs_registration,allows_multiple_registrations,queue_size,offline_attendees,attendees_min,attendees_max,target_groups,price_regular,price_regular_early,price_regular_board,price_special,price_special_early,price_special_board,payment_methods,place,room,lodgings,foods,speakers,leaders,partners,tutors,checkboxes,uses_terms_2,notes
+  # comma-separated list of the fields to show in the FE-editor
+  displayFrontEndEditorFields = subtitle,accreditation_number,credit_points,categories,event_type,cancelled,teaser,description,additional_information,begin_date,end_date,begin_date_registration,deadline_early_bird,deadline_registration,needs_registration,allows_multiple_registrations,queue_size,offline_attendees,attendees_min,attendees_max,target_groups,price_regular,price_regular_early,price_regular_board,price_special,price_special_early,price_special_board,payment_methods,place,room,lodgings,foods,speakers,leaders,partners,tutors,checkboxes,uses_terms_2,notes
 
-    # comma-separated list of the event fields which are required to be filled in the FE editor
-    requiredFrontEndEditorFields =
+  # comma-separated list of the event fields which are required to be filled in the FE editor
+  requiredFrontEndEditorFields =
 
-    # comma-separated list of the place fields which are required to be filled in the FE editor
-    requiredFrontEndEditorPlaceFields = city
+  # comma-separated list of the place fields which are required to be filled in the FE editor
+  requiredFrontEndEditorPlaceFields = city
 
-    # UID of the payment method that corresponds to "bank transfer", @deprecated #1571 will be removed in seminars 5.0
-    bankTransferUID =
+  # UID of the payment method that corresponds to "bank transfer", @deprecated #1571 will be removed in seminars 5.0
+  bankTransferUID =
 
-    # The target for external links in seminars.
-    externalLinkTarget =
+  # The target for external links in seminars.
+  externalLinkTarget =
 
-    # the maximum width of the image of a seminar in the single view
-    seminarImageSingleViewWidth = 260
+  # the maximum width of the image of a seminar in the single view
+  seminarImageSingleViewWidth = 260
 
-    # the maximum height of the image of a seminar in the single view
-    seminarImageSingleViewHeight = 160
+  # the maximum height of the image of a seminar in the single view
+  seminarImageSingleViewHeight = 160
 
-    # whether to allow front-end editing of speakers
-    allowFrontEndEditingOfSpeakers = 0
+  # whether to allow front-end editing of speakers
+  allowFrontEndEditingOfSpeakers = 0
 
-    # whether to allow front-end editing of places
-    allowFrontEndEditingOfPlaces = 0
+  # whether to allow front-end editing of places
+  allowFrontEndEditingOfPlaces = 0
 
-    # whether to allow front-end editing of checkboxes
-    allowFrontEndEditingOfCheckboxes = 0
+  # whether to allow front-end editing of checkboxes
+  allowFrontEndEditingOfCheckboxes = 0
 
-    # whether to allow front-end editing of target groups
-    allowFrontEndEditingOfTargetGroups = 0
+  # whether to allow front-end editing of target groups
+  allowFrontEndEditingOfTargetGroups = 0
 
-    # location of language file for substitution of LABEL markers
-    locallangFilename = EXT:seminars/Resources/Private/Language/locallang.xlf
+  # location of language file for substitution of LABEL markers
+  locallangFilename = EXT:seminars/Resources/Private/Language/locallang.xlf
 
-    form =< config.tx_mkforms
+  form =< config.tx_mkforms
 }

@@ -1,2025 +1,2030 @@
 # Front-end specific configuration.
 # @deprecated #1544 will be removed in seminars 5.0
 plugin.tx_seminars_pi1.form.eventEditor {
-    meta {
-        name = Seminar Manager FE Editor
-        description = This editor provides a FE editing feature for events.
-        form.formid = tx_seminars_pi1_seminars
-        debug = false
-        displaylabels = false
-        codeBehind {
-            name = eventeditor
-            path = this
-        }
+  meta {
+    name = Seminar Manager FE Editor
+    description = This editor provides a FE editing feature for events.
+    form.formid = tx_seminars_pi1_seminars
+    debug = false
+    displaylabels = false
+    codeBehind {
+      name = eventeditor
+      path = this
     }
+  }
 
-    control {
-        datahandler = datahandler:DBMM
-        datahandler {
-            tablename = tx_seminars_seminars
-            keyname = uid
-            labelname = title
-            mmrelations {
-                categories {
-                    field = categories
-                    mmtable = tx_seminars_seminars_categories_mm
-                }
-
-                place {
-                    field = place
-                    mmtable = tx_seminars_seminars_place_mm
-                }
-
-                lodgings {
-                    field = lodgings
-                    mmtable = tx_seminars_seminars_lodgings_mm
-                }
-
-                foods {
-                    field = foods
-                    mmtable = tx_seminars_seminars_foods_mm
-                }
-
-                speakers {
-                    field = speakers
-                    mmtable = tx_seminars_seminars_speakers_mm
-                }
-
-                partners {
-                    field = partners
-                    mmtable = tx_seminars_seminars_speakers_mm_partners
-                }
-
-                tutors {
-                    field = tutors
-                    mmtable = tx_seminars_seminars_speakers_mm_tutors
-                }
-
-                leaders {
-                    field = leaders
-                    mmtable = tx_seminars_seminars_speakers_mm_leaders
-                }
-
-                target_groups {
-                    field = target_groups
-                    mmtable = tx_seminars_seminars_target_groups_mm
-                }
-
-                payment_methods {
-                    field = payment_methods
-                    mmtable = tx_seminars_seminars_payment_methods_mm
-                }
-
-                organizers {
-                    field = organizers
-                    mmtable = tx_seminars_seminars_organizers_mm
-                }
-            }
-
-            process.beforeinsertion.userobj {
-                extension = this
-                method = modifyDataToInsert
-            }
-        }
-
-        datasources {
-            listSpeakers = datasource:PHPARRAY
-            listSpeakers {
-                name = listSpeakers
-                bindsto {
-                    exec = eventeditor.populateListSpeakers
-                    params {
-                        10 {
-                            name = type
-                            value = Speaker
-                        }
-                        20 {
-                            name = lister
-                            value = 1
-                        }
-                    }
-                }
-            }
-        }
-
-        renderer = renderer:TEMPLATE
-        renderer.template {
-            path.userobj.php (
-                return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
-            )
-            subpart = ###seminars_FORM###
-            errortag = errors
-        }
-
-        actionlets {
-            10 = actionlet:USEROBJ
-            10.userobj {
-                extension = this
-                method = sendEMailToReviewer
-            }
-
-            20 = actionlet:USEROBJ
-            20.userobj {
-                extension = this
-                method = sendAdditionalNotificationEmailToReviewer
-            }
-
-            30 = actionlet:REDIRECT
-            30.url.userobj {
-                extension = this
-                method = getEventSuccessfullySavedUrl
-            }
-        }
-    }
-
-    elements {
-        title = renderlet:TEXT
-        title {
-            name = title
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.title
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.required.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTitle
-            }
-        }
-
-        subtitle = renderlet:TEXT
-        subtitle {
-            name = subtitle
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.subtitle
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptySubtitle
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = subtitle
-                        }
-                    }
-                }
-            }
-        }
-
-        categories = renderlet:CHECKBOX
+  control {
+    datahandler = datahandler:DBMM
+    datahandler {
+      tablename = tx_seminars_seminars
+      keyname = uid
+      labelname = title
+      mmrelations {
         categories {
-            name = categories
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.categories
-            class = tx-seminars-pi1-event-editor-checkbox
-            data.userobj {
-                extension = this
-                method = populateListCategories
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCategoryChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = categories
-                        }
-                    }
-                }
-            }
+          field = categories
+          mmtable = tx_seminars_seminars_categories_mm
         }
 
-        teaser = renderlet:TEXTAREA
-        teaser {
-            name = teaser
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.teaser
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTeaser
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = teaser
-                        }
-                    }
-                }
-            }
-        }
-
-        description = renderlet:TEXTAREA
-        description {
-            name = description
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.description
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyDescription
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = description
-                        }
-                    }
-                }
-            }
-        }
-
-        event_type = renderlet:LISTBOX
-        event_type {
-            name = event_type
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_type
-            data {
-                items {
-                    item {
-                        caption =
-                        value = 0
-                    }
-                }
-
-                userobj {
-                    extension = this
-                    method = populateListEventTypes
-                }
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noEventTypeChosen
-                    userobj {
-                        extension = this
-                        method = validateInteger
-                        params.10 {
-                            name = elementName
-                            value = event_type
-                        }
-                    }
-                }
-            }
-        }
-
-        accreditation_number = renderlet:TEXT
-        accreditation_number {
-            name = accreditation_number
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.accreditation_number
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_accreditationNumberZero
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = accreditation_number
-                        }
-                    }
-                }
-            }
-        }
-
-        credit_points = renderlet:TEXT
-        credit_points {
-            name = credit_points
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.credit_points
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_creditPointsZero
-                    userobj {
-                        extension = this
-                        method = validateInteger
-                        params.10 {
-                            name = elementName
-                            value = credit_points
-                        }
-                    }
-                }
-            }
-        }
-
-        begin_date = renderlet:DATE
-        begin_date {
-            name = begin_date
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDate
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = begin_date
-                        }
-                    }
-                }
-            }
-        }
-
-        end_date = renderlet:DATE
-        end_date {
-            name = end_date
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.end_date
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEndDate
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = end_date
-                        }
-                    }
-                }
-            }
-        }
-
-        begin_date_registration = renderlet:DATE
-        begin_date_registration {
-            name = begin_date_registration
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date_registration
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDateRegistration
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = begin_date_registration
-                        }
-                    }
-                }
-            }
-        }
-
-        deadline_registration = renderlet:DATE
-        deadline_registration {
-            name = deadline_registration
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_registration
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineRegistration
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = deadline_registration
-                        }
-                    }
-                }
-            }
-        }
-
-        deadline_early_bird = renderlet:DATE
-        deadline_early_bird {
-            name = deadline_early_bird
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_early_bird
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineEarlyBird
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = deadline_early_bird
-                        }
-                    }
-                }
-            }
-        }
-
-        deadline_unregistration = renderlet:DATE
-        deadline_unregistration {
-            name = deadline_unregistration
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_unregistration
-            data.datetime {
-                format = %H:%M %d-%m-%Y
-                displaytime = true
-                converttotimestamp = true
-                allowmanualedition = true
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineUnregistration
-                    userobj {
-                        extension = this
-                        method = validateDate
-                        params.10 {
-                            name = elementName
-                            value = deadline_unregistration
-                        }
-                    }
-                }
-            }
-        }
-
-        place = renderlet:CHECKBOX
         place {
-            name = place
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.place
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListPlaces
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPlaceChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = place
-                        }
-                    }
-                }
-            }
+          field = place
+          mmtable = tx_seminars_seminars_place_mm
         }
 
-        newPlaceButton = renderlet:BUTTON
-        newPlaceButton {
-            name = newPlaceButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newPlaceButton
-            process.userobj {
-                extension = this
-                method = isFrontEndEditingOfRelatedRecordsAllowed
-                params.10 {
-                    name = relatedRecordType
-                    value = Places
-                }
+        lodgings {
+          field = lodgings
+          mmtable = tx_seminars_seminars_lodgings_mm
+        }
+
+        foods {
+          field = foods
+          mmtable = tx_seminars_seminars_foods_mm
+        }
+
+        speakers {
+          field = speakers
+          mmtable = tx_seminars_seminars_speakers_mm
+        }
+
+        partners {
+          field = partners
+          mmtable = tx_seminars_seminars_speakers_mm_partners
+        }
+
+        tutors {
+          field = tutors
+          mmtable = tx_seminars_seminars_speakers_mm_tutors
+        }
+
+        leaders {
+          field = leaders
+          mmtable = tx_seminars_seminars_speakers_mm_leaders
+        }
+
+        target_groups {
+          field = target_groups
+          mmtable = tx_seminars_seminars_target_groups_mm
+        }
+
+        payment_methods {
+          field = payment_methods
+          mmtable = tx_seminars_seminars_payment_methods_mm
+        }
+
+        organizers {
+          field = organizers
+          mmtable = tx_seminars_seminars_organizers_mm
+        }
+      }
+
+      process.beforeinsertion.userobj {
+        extension = this
+        method = modifyDataToInsert
+      }
+    }
+
+    datasources {
+      listSpeakers = datasource:PHPARRAY
+      listSpeakers {
+        name = listSpeakers
+        bindsto {
+          exec = eventeditor.populateListSpeakers
+          params {
+            10 {
+              name = type
+              value = Speaker
             }
 
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
+            20 {
+              name = lister
+              value = 1
+            }
+          }
+        }
+      }
+    }
+
+    renderer = renderer:TEMPLATE
+    renderer.template {
+      path.userobj.php (
+                return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
+      )
+      subpart = ###seminars_FORM###
+      errortag = errors
+    }
+
+    actionlets {
+      10 = actionlet:USEROBJ
+      10.userobj {
+        extension = this
+        method = sendEMailToReviewer
+      }
+
+      20 = actionlet:USEROBJ
+      20.userobj {
+        extension = this
+        method = sendAdditionalNotificationEmailToReviewer
+      }
+
+      30 = actionlet:REDIRECT
+      30.url.userobj {
+        extension = this
+        method = getEventSuccessfullySavedUrl
+      }
+    }
+  }
+
+  elements {
+    title = renderlet:TEXT
+    title {
+      name = title
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.title
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.required.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTitle
+      }
+    }
+
+    subtitle = renderlet:TEXT
+    subtitle {
+      name = subtitle
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.subtitle
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptySubtitle
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = subtitle
+            }
+          }
+        }
+      }
+    }
+
+    categories = renderlet:CHECKBOX
+    categories {
+      name = categories
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.categories
+      class = tx-seminars-pi1-event-editor-checkbox
+      data.userobj {
+        extension = this
+        method = populateListCategories
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCategoryChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = categories
+            }
+          }
+        }
+      }
+    }
+
+    teaser = renderlet:TEXTAREA
+    teaser {
+      name = teaser
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.teaser
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTeaser
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = teaser
+            }
+          }
+        }
+      }
+    }
+
+    description = renderlet:TEXTAREA
+    description {
+      name = description
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.description
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyDescription
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = description
+            }
+          }
+        }
+      }
+    }
+
+    event_type = renderlet:LISTBOX
+    event_type {
+      name = event_type
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_type
+      data {
+        items {
+          item {
+            caption =
+            value = 0
+          }
+        }
+
+        userobj {
+          extension = this
+          method = populateListEventTypes
+        }
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noEventTypeChosen
+          userobj {
+            extension = this
+            method = validateInteger
+            params.10 {
+              name = elementName
+              value = event_type
+            }
+          }
+        }
+      }
+    }
+
+    accreditation_number = renderlet:TEXT
+    accreditation_number {
+      name = accreditation_number
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.accreditation_number
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_accreditationNumberZero
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = accreditation_number
+            }
+          }
+        }
+      }
+    }
+
+    credit_points = renderlet:TEXT
+    credit_points {
+      name = credit_points
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.credit_points
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_creditPointsZero
+          userobj {
+            extension = this
+            method = validateInteger
+            params.10 {
+              name = elementName
+              value = credit_points
+            }
+          }
+        }
+      }
+    }
+
+    begin_date = renderlet:DATE
+    begin_date {
+      name = begin_date
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDate
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = begin_date
+            }
+          }
+        }
+      }
+    }
+
+    end_date = renderlet:DATE
+    end_date {
+      name = end_date
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.end_date
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEndDate
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = end_date
+            }
+          }
+        }
+      }
+    }
+
+    begin_date_registration = renderlet:DATE
+    begin_date_registration {
+      name = begin_date_registration
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date_registration
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDateRegistration
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = begin_date_registration
+            }
+          }
+        }
+      }
+    }
+
+    deadline_registration = renderlet:DATE
+    deadline_registration {
+      name = deadline_registration
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_registration
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineRegistration
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = deadline_registration
+            }
+          }
+        }
+      }
+    }
+
+    deadline_early_bird = renderlet:DATE
+    deadline_early_bird {
+      name = deadline_early_bird
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_early_bird
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineEarlyBird
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = deadline_early_bird
+            }
+          }
+        }
+      }
+    }
+
+    deadline_unregistration = renderlet:DATE
+    deadline_unregistration {
+      name = deadline_unregistration
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.deadline_unregistration
+      data.datetime {
+        format = %H:%M %d-%m-%Y
+        displaytime = true
+        converttotimestamp = true
+        allowmanualedition = true
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineUnregistration
+          userobj {
+            extension = this
+            method = validateDate
+            params.10 {
+              name = elementName
+              value = deadline_unregistration
+            }
+          }
+        }
+      }
+    }
+
+    place = renderlet:CHECKBOX
+    place {
+      name = place
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.place
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListPlaces
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPlaceChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = place
+            }
+          }
+        }
+      }
+    }
+
+    newPlaceButton = renderlet:BUTTON
+    newPlaceButton {
+      name = newPlaceButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newPlaceButton
+      process.userobj {
+        extension = this
+        method = isFrontEndEditingOfRelatedRecordsAllowed
+        params.10 {
+          name = relatedRecordType
+          value = Places
+        }
+      }
+
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
                     $this->getRenderer()->_setDisplayLabels(true);
                     $result = $this->aORenderlets['newPlaceModalBox']->majixShowFreshBox();
                     $this->getRenderer()->_setDisplayLabels(false);
                     return $result;
-                )
-            }
+        )
+      }
+    }
+
+    newPlaceModalBox = renderlet:MODALBOX
+    newPlaceModalBox {
+      name = newPlaceModalBox
+      childs {
+        newPlace_title = renderlet:TEXT
+        newPlace_title {
+          name = newPlace_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        newPlaceModalBox = renderlet:MODALBOX
-        newPlaceModalBox {
-            name = newPlaceModalBox
-            childs {
-                newPlace_title = renderlet:TEXT
-                newPlace_title {
-                    name = newPlace_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_address = renderlet:TEXTAREA
+        newPlace_address {
+          name = newPlace_address
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_address = renderlet:TEXTAREA
-                newPlace_address {
-                    name = newPlace_address
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_zip = renderlet:TEXT
+        newPlace_zip {
+          name = newPlace_zip
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_zip = renderlet:TEXT
-                newPlace_zip {
-                    name = newPlace_zip
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_city = renderlet:TEXT
+        newPlace_city {
+          name = newPlace_city
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_city = renderlet:TEXT
-                newPlace_city {
-                    name = newPlace_city
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_country = renderlet:LISTBOX
+        newPlace_country {
+          name = newPlace_country
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+          data {
+            items.10 {
+              value = 0
+              caption =
+            }
 
-                newPlace_country = renderlet:LISTBOX
-                newPlace_country {
-                    name = newPlace_country
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                    data {
-                        items.10 {
-                            value = 0
-                            caption =
-                        }
-
-                        userobj.php (
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListCountries();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                newPlace_homepage = renderlet:TEXT
-                newPlace_homepage {
-                    name = newPlace_homepage
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_homepage = renderlet:TEXT
+        newPlace_homepage {
+          name = newPlace_homepage
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_directions = renderlet:TEXTAREA
-                newPlace_directions {
-                    name = newPlace_directions
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_directions = renderlet:TEXTAREA
+        newPlace_directions {
+          name = newPlace_directions
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_notes = renderlet:TEXTAREA
-                newPlace_notes {
-                    name = newPlace_notes
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newPlace_notes = renderlet:TEXTAREA
+        newPlace_notes {
+          name = newPlace_notes
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newPlace_cancelButton = renderlet:BUTTON
-                newPlace_cancelButton {
-                    name = newPlace_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        newPlace_cancelButton = renderlet:BUTTON
+        newPlace_cancelButton {
+          name = newPlace_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['newPlaceModalBox']->majixCloseBox();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                newPlace_saveButton = renderlet:BUTTON
-                newPlace_saveButton {
-                    name = newPlace_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        cache = false
-                        params = newPlace_title, newPlace_address, newPlace_zip, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
-                        userobj.php (
+        newPlace_saveButton = renderlet:BUTTON
+        newPlace_saveButton {
+          name = newPlace_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            cache = false
+            params = newPlace_title, newPlace_address, newPlace_zip, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewPlace($this);
-                        )
-                    }
-                }
-            }
+            )
+          }
         }
+      }
+    }
 
-        editPlaceButton = renderlet:BUTTON
-        editPlaceButton {
-            name = editPlaceButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
-            class = tx-seminars-pi1-event-editor-edit-button
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
+    editPlaceButton = renderlet:BUTTON
+    editPlaceButton {
+      name = editPlaceButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
+      class = tx-seminars-pi1-event-editor-edit-button
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
                     return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditPlaceModalBox($this);
-                )
-            }
+        )
+      }
+    }
+
+    editPlaceModalBox = renderlet:MODALBOX
+    editPlaceModalBox {
+      name = editPlaceModalBox
+      childs {
+        editPlace_title = renderlet:TEXT
+        editPlace_title {
+          name = editPlace_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        editPlaceModalBox = renderlet:MODALBOX
-        editPlaceModalBox {
-            name = editPlaceModalBox
-            childs {
-                editPlace_title = renderlet:TEXT
-                editPlace_title {
-                    name = editPlace_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_address = renderlet:TEXTAREA
+        editPlace_address {
+          name = editPlace_address
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_address = renderlet:TEXTAREA
-                editPlace_address {
-                    name = editPlace_address
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_zip = renderlet:TEXT
+        editPlace_zip {
+          name = editPlace_zip
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_zip = renderlet:TEXT
-                editPlace_zip {
-                    name = editPlace_zip
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_city = renderlet:TEXT
+        editPlace_city {
+          name = editPlace_city
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_city = renderlet:TEXT
-                editPlace_city {
-                    name = editPlace_city
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_country = renderlet:LISTBOX
+        editPlace_country {
+          name = editPlace_country
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+          data {
+            items.10 {
+              value = 0
+              caption =
+            }
 
-                editPlace_country = renderlet:LISTBOX
-                editPlace_country {
-                    name = editPlace_country
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                    data {
-                        items.10 {
-                            value = 0
-                            caption =
-                        }
-
-                        userobj.php (
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListCountries();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                editPlace_homepage = renderlet:TEXT
-                editPlace_homepage {
-                    name = editPlace_homepage
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_homepage = renderlet:TEXT
+        editPlace_homepage {
+          name = editPlace_homepage
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_directions = renderlet:TEXTAREA
-                editPlace_directions {
-                    name = editPlace_directions
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_directions = renderlet:TEXTAREA
+        editPlace_directions {
+          name = editPlace_directions
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_notes = renderlet:TEXTAREA
-                editPlace_notes {
-                    name = editPlace_notes
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editPlace_notes = renderlet:TEXTAREA
+        editPlace_notes {
+          name = editPlace_notes
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editPlace_uid = renderlet:HIDDEN
-                editPlace_uid {
-                    name = editPlace_uid
-                }
+        editPlace_uid = renderlet:HIDDEN
+        editPlace_uid {
+          name = editPlace_uid
+        }
 
-                editPlace_cancelButton = renderlet:BUTTON
-                editPlace_cancelButton {
-                    name = editPlace_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        editPlace_cancelButton = renderlet:BUTTON
+        editPlace_cancelButton {
+          name = editPlace_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['editPlaceModalBox']->majixCloseBox();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                editPlace_saveButton = renderlet:BUTTON
-                editPlace_saveButton {
-                    name = editPlace_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        cache = false
-                        params = editPlace_title, editPlace_address, editPlace_zip, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
-                        userobj.php (
+        editPlace_saveButton = renderlet:BUTTON
+        editPlace_saveButton {
+          name = editPlace_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            cache = false
+            params = editPlace_title, editPlace_address, editPlace_zip, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::updatePlace($this);
-                        )
-                    }
-                }
+            )
+          }
+        }
+      }
+    }
+
+    room = renderlet:TEXT
+    room {
+      name = room
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.room
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyRoom
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = room
             }
+          }
+        }
+      }
+    }
+
+    lodgings = renderlet:CHECKBOX
+    lodgings {
+      name = lodgings
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.lodgings
+      class = tx-seminars-pi1-event-editor-checkbox
+      data.userobj {
+        extension = this
+        method = populateListLodgings
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLodgingsChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = lodgings
+            }
+          }
+        }
+      }
+    }
+
+    foods = renderlet:CHECKBOX
+    foods {
+      name = foods
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.foods
+      class = tx-seminars-pi1-event-editor-checkbox
+      data.userobj {
+        extension = this
+        method = populateListFoods
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noFoodsChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = foods
+            }
+          }
+        }
+      }
+    }
+
+    speakers = renderlet:LISTER
+    speakers {
+      name = speakers
+      label = LLL:EXT:seminars/locallang_db.xlf:tx_seminars_seminars.speakers
+      uidColumn = uid
+      usegp = 0
+      datasource.use = listSpeakers
+      # disable the pager, list all speakers
+      pager.rows.perpage = -1
+      columns {
+        uid {
+          name = uid
+          type = renderlet:HIDDEN
         }
 
-        room = renderlet:TEXT
-        room {
-            name = room
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.room
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyRoom
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = room
-                        }
-                    }
-                }
-            }
+        selected {
+          name = selected
+          type = renderlet:CHECKSINGLE
+          activelistable = true
         }
 
-        lodgings = renderlet:CHECKBOX
-        lodgings {
-            name = lodgings
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.lodgings
-            class = tx-seminars-pi1-event-editor-checkbox
-            data.userobj {
-                extension = this
-                method = populateListLodgings
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLodgingsChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = lodgings
-                        }
-                    }
-                }
-            }
+        name {
+          name = name
+          type = renderlet:TEXT
+          sanitize = false
         }
 
-        foods = renderlet:CHECKBOX
-        foods {
-            name = foods
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.foods
-            class = tx-seminars-pi1-event-editor-checkbox
-            data.userobj {
-                extension = this
-                method = populateListFoods
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noFoodsChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = foods
-                        }
-                    }
-                }
-            }
+        edit {
+          name = edit
+          type = renderlet:BUTTON
+          label = LLL:label_edit
+          visible.userobj.php = return !$this->getCurrentRdt() || $this->getCurrentRdt()->getValue();
+          onclick {
+            runat = ajax
+            params = rowData::uid
+            cache = false
+            exec = eventeditor.openEditSpeakerModalBox()
+          }
         }
+      }
+    }
 
-        speakers = renderlet:LISTER
-        speakers {
-            name = speakers
-            label = LLL:EXT:seminars/locallang_db.xlf:tx_seminars_seminars.speakers
-            uidColumn = uid
-            usegp = 0
-            datasource.use = listSpeakers
-            # disable the pager, list all speakers
-            pager.rows.perpage = -1
-            columns {
-                uid {
-                    name = uid
-                    type = renderlet:HIDDEN
-                }
-
-                selected {
-                    name = selected
-                    type = renderlet:CHECKSINGLE
-                    activelistable = true
-                }
-
-                name {
-                    name = name
-                    type = renderlet:TEXT
-                    sanitize = false
-                }
-
-                edit {
-                    name = edit
-                    type = renderlet:BUTTON
-                    label = LLL:label_edit
-                    visible.userobj.php = return !$this->getCurrentRdt() || $this->getCurrentRdt()->getValue();
-                    onclick {
-                        runat = ajax
-                        params = rowData::uid
-                        cache = false
-                        exec = eventeditor.openEditSpeakerModalBox()
-                    }
-                }
-            }
+    newSpeakerButton = renderlet:BUTTON
+    newSpeakerButton {
+      name = newSpeakerButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newSpeakerButton
+      process.userobj {
+        extension = this
+        method = isFrontEndEditingOfRelatedRecordsAllowed
+        params.10 {
+          name = relatedRecordType
+          value = Speakers
         }
+      }
 
-        newSpeakerButton = renderlet:BUTTON
-        newSpeakerButton {
-            name = newSpeakerButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newSpeakerButton
-            process.userobj {
-                extension = this
-                method = isFrontEndEditingOfRelatedRecordsAllowed
-                params.10 {
-                    name = relatedRecordType
-                    value = Speakers
-                }
-            }
-
-            onclick {
-                runat = ajax
-                userobj.php (
+      onclick {
+        runat = ajax
+        userobj.php (
                     $this->getRenderer()->_setDisplayLabels(true);
                     $result = $this->aORenderlets['newSpeakerModalBox']->majixShowFreshBox();
                     $this->getRenderer()->_setDisplayLabels(false);
                     return $result;
-                )
-            }
+        )
+      }
+    }
+
+    newLeaderButton < .newSpeakerButton
+    newLeaderButton.name = newLeaderButton
+
+    newPartnerButton < .newSpeakerButton
+    newPartnerButton.name = newPartnerButton
+
+    newTutorButton < .newSpeakerButton
+    newTutorButton.name = newTutorButton
+
+    newSpeakerModalBox = renderlet:MODALBOX
+    newSpeakerModalBox {
+      name = newSpeakerModalBox
+      childs {
+        newSpeaker_title = renderlet:TEXT
+        newSpeaker_title {
+          name = newSpeaker_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
+          sanitize = false
+          wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        newLeaderButton < .newSpeakerButton
-        newLeaderButton.name = newLeaderButton
+        newSpeaker_gender = renderlet:LISTBOX
+        newSpeaker_gender {
+          name = newSpeaker_gender
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+          data {
+            items {
+              10 {
+                caption =
+                value = 0
+              }
 
-        newPartnerButton < .newSpeakerButton
-        newPartnerButton.name = newPartnerButton
+              20 {
+                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
+                value = 1
+              }
 
-        newTutorButton < .newSpeakerButton
-        newTutorButton.name = newTutorButton
+              30 {
+                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
+                value = 2
+              }
+            }
+          }
+        }
 
-        newSpeakerModalBox = renderlet:MODALBOX
-        newSpeakerModalBox {
-            name = newSpeakerModalBox
-            childs {
-                newSpeaker_title = renderlet:TEXT
-                newSpeaker_title {
-                    name = newSpeaker_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
-                    sanitize = false
-                    wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_organization = renderlet:TEXT
+        newSpeaker_organization {
+          name = newSpeaker_organization
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_gender = renderlet:LISTBOX
-                newSpeaker_gender {
-                    name = newSpeaker_gender
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                    data {
-                        items {
-                            10 {
-                                caption =
-                                value = 0
-                            }
-                            20 {
-                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
-                                value = 1
-                            }
-                            30 {
-                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
-                                value = 2
-                            }
-                        }
-                    }
-                }
+        newSpeaker_homepage = renderlet:TEXT
+        newSpeaker_homepage {
+          name = newSpeaker_homepage
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_organization = renderlet:TEXT
-                newSpeaker_organization {
-                    name = newSpeaker_organization
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_description = renderlet:TEXTAREA
+        newSpeaker_description {
+          name = newSpeaker_description
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_homepage = renderlet:TEXT
-                newSpeaker_homepage {
-                    name = newSpeaker_homepage
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newSpeaker_description = renderlet:TEXTAREA
-                newSpeaker_description {
-                    name = newSpeaker_description
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newSpeaker_skills = renderlet:CHECKBOX
-                newSpeaker_skills {
-                    name = newSpeaker_skills
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.skills
-                    class = tx-seminars-pi1-event-editor-checkbox
-                    wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
-                    data.userobj.php (
+        newSpeaker_skills = renderlet:CHECKBOX
+        newSpeaker_skills {
+          name = newSpeaker_skills
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.skills
+          class = tx-seminars-pi1-event-editor-checkbox
+          wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
+          data.userobj.php (
                         return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListSkills();
-                    )
-                }
+          )
+        }
 
-                newSpeaker_notes = renderlet:TEXTAREA
-                newSpeaker_notes {
-                    name = newSpeaker_notes
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
-                    sanitize = false
-                    wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_notes = renderlet:TEXTAREA
+        newSpeaker_notes {
+          name = newSpeaker_notes
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
+          sanitize = false
+          wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_address = renderlet:TEXTAREA
-                newSpeaker_address {
-                    name = newSpeaker_address
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_address = renderlet:TEXTAREA
+        newSpeaker_address {
+          name = newSpeaker_address
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_phone_work = renderlet:TEXT
-                newSpeaker_phone_work {
-                    name = newSpeaker_phone_work
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_phone_work = renderlet:TEXT
+        newSpeaker_phone_work {
+          name = newSpeaker_phone_work
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_phone_home = renderlet:TEXT
-                newSpeaker_phone_home {
-                    name = newSpeaker_phone_home
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_phone_home = renderlet:TEXT
+        newSpeaker_phone_home {
+          name = newSpeaker_phone_home
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_phone_mobile = renderlet:TEXT
-                newSpeaker_phone_mobile {
-                    name = newSpeaker_phone_mobile
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_phone_mobile = renderlet:TEXT
+        newSpeaker_phone_mobile {
+          name = newSpeaker_phone_mobile
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_email = renderlet:TEXT
-                newSpeaker_email {
-                    name = newSpeaker_email
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        newSpeaker_email = renderlet:TEXT
+        newSpeaker_email {
+          name = newSpeaker_email
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                newSpeaker_cancelation_period = renderlet:TEXT
-                newSpeaker_cancelation_period {
-                    name = newSpeaker_cancelation_period
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
-                }
+        newSpeaker_cancelation_period = renderlet:TEXT
+        newSpeaker_cancelation_period {
+          name = newSpeaker_cancelation_period
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
+        }
 
-                newSpeaker_cancelButton = renderlet:BUTTON
-                newSpeaker_cancelButton {
-                    name = newSpeaker_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        newSpeaker_cancelButton = renderlet:BUTTON
+        newSpeaker_cancelButton {
+          name = newSpeaker_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['newSpeakerModalBox']->majixCloseBox();
-                        )
-                    }
-                }
-
-                newSpeaker_saveButton = renderlet:BUTTON
-                newSpeaker_saveButton {
-                    name = newSpeaker_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        params = newSpeakerModalBox__*
-                        cache = false
-                        exec = eventeditor.createNewSpeaker()
-                    }
-                }
-            }
+            )
+          }
         }
 
-        editSpeakerButton = renderlet:BUTTON
-        editSpeakerButton {
-            name = editSpeakerButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
-            class = tx-seminars-pi1-event-editor-edit-button
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
+        newSpeaker_saveButton = renderlet:BUTTON
+        newSpeaker_saveButton {
+          name = newSpeaker_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            params = newSpeakerModalBox__*
+            cache = false
+            exec = eventeditor.createNewSpeaker()
+          }
+        }
+      }
+    }
+
+    editSpeakerButton = renderlet:BUTTON
+    editSpeakerButton {
+      name = editSpeakerButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
+      class = tx-seminars-pi1-event-editor-edit-button
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
                     return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditSpeakerModalBox($this);
-                )
-            }
+        )
+      }
+    }
+
+    editSpeakerModalBox = renderlet:MODALBOX
+    editSpeakerModalBox {
+      name = editSpeakerModalBox
+      childs {
+        editSpeaker_title = renderlet:TEXT
+        editSpeaker_title {
+          name = editSpeaker_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
+          sanitize = false
+          wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        editSpeakerModalBox = renderlet:MODALBOX
-        editSpeakerModalBox {
-            name = editSpeakerModalBox
-            childs {
-                editSpeaker_title = renderlet:TEXT
-                editSpeaker_title {
-                    name = editSpeaker_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
-                    sanitize = false
-                    wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_gender = renderlet:LISTBOX
+        editSpeaker_gender {
+          name = editSpeaker_gender
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+          data {
+            items {
+              10 {
+                caption =
+                value = 0
+              }
 
-                editSpeaker_gender = renderlet:LISTBOX
-                editSpeaker_gender {
-                    name = editSpeaker_gender
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                    data {
-                        items {
-                            10 {
-                                caption =
-                                value = 0
-                            }
-                            20 {
-                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
-                                value = 1
-                            }
-                            30 {
-                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
-                                value = 2
-                            }
-                        }
-                    }
-                }
+              20 {
+                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
+                value = 1
+              }
 
-                editSpeaker_organization = renderlet:TEXT
-                editSpeaker_organization {
-                    name = editSpeaker_organization
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+              30 {
+                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
+                value = 2
+              }
+            }
+          }
+        }
 
-                editSpeaker_homepage = renderlet:TEXT
-                editSpeaker_homepage {
-                    name = editSpeaker_homepage
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_organization = renderlet:TEXT
+        editSpeaker_organization {
+          name = editSpeaker_organization
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_description = renderlet:TEXTAREA
-                editSpeaker_description {
-                    name = editSpeaker_description
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_homepage = renderlet:TEXT
+        editSpeaker_homepage {
+          name = editSpeaker_homepage
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_skills = renderlet:CHECKBOX
-                editSpeaker_skills {
-                    name = editSpeaker_skills
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.skills
-                    class = tx-seminars-pi1-event-editor-checkbox
-                    wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
-                    data.userobj.php (
+        editSpeaker_description = renderlet:TEXTAREA
+        editSpeaker_description {
+          name = editSpeaker_description
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        editSpeaker_skills = renderlet:CHECKBOX
+        editSpeaker_skills {
+          name = editSpeaker_skills
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.skills
+          class = tx-seminars-pi1-event-editor-checkbox
+          wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
+          data.userobj.php (
                         return \OliverKlee\Seminars\FrontEnd\EventEditor::populateListSkills();
-                    )
-                }
+          )
+        }
 
-                editSpeaker_notes = renderlet:TEXTAREA
-                editSpeaker_notes {
-                    name = editSpeaker_notes
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
-                    sanitize = false
-                    wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_notes = renderlet:TEXTAREA
+        editSpeaker_notes {
+          name = editSpeaker_notes
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
+          sanitize = false
+          wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_address = renderlet:TEXTAREA
-                editSpeaker_address {
-                    name = editSpeaker_address
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_address = renderlet:TEXTAREA
+        editSpeaker_address {
+          name = editSpeaker_address
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_phone_work = renderlet:TEXT
-                editSpeaker_phone_work {
-                    name = editSpeaker_phone_work
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_phone_work = renderlet:TEXT
+        editSpeaker_phone_work {
+          name = editSpeaker_phone_work
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_phone_home = renderlet:TEXT
-                editSpeaker_phone_home {
-                    name = editSpeaker_phone_home
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_phone_home = renderlet:TEXT
+        editSpeaker_phone_home {
+          name = editSpeaker_phone_home
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_phone_mobile = renderlet:TEXT
-                editSpeaker_phone_mobile {
-                    name = editSpeaker_phone_mobile
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_phone_mobile = renderlet:TEXT
+        editSpeaker_phone_mobile {
+          name = editSpeaker_phone_mobile
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_email = renderlet:TEXT
-                editSpeaker_email {
-                    name = editSpeaker_email
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editSpeaker_email = renderlet:TEXT
+        editSpeaker_email {
+          name = editSpeaker_email
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
 
-                editSpeaker_cancelation_period = renderlet:TEXT
-                editSpeaker_cancelation_period {
-                    name = editSpeaker_cancelation_period
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
-                }
+        editSpeaker_cancelation_period = renderlet:TEXT
+        editSpeaker_cancelation_period {
+          name = editSpeaker_cancelation_period
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
+        }
 
-                editSpeaker_uid = renderlet:HIDDEN
-                editSpeaker_uid {
-                    name = editSpeaker_uid
-                }
+        editSpeaker_uid = renderlet:HIDDEN
+        editSpeaker_uid {
+          name = editSpeaker_uid
+        }
 
-                editSpeaker_cancelButton = renderlet:BUTTON
-                editSpeaker_cancelButton {
-                    name = editSpeaker_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        editSpeaker_cancelButton = renderlet:BUTTON
+        editSpeaker_cancelButton {
+          name = editSpeaker_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['editSpeakerModalBox']->majixCloseBox();
-                        )
-                    }
-                }
-
-                editSpeaker_saveButton = renderlet:BUTTON
-                editSpeaker_saveButton {
-                    name = editSpeaker_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        params = editSpeakerModalBox__*
-                        cache = false
-                        exec = eventeditor.updateSpeaker()
-                    }
-                }
-            }
+            )
+          }
         }
 
-        partners = renderlet:CHECKBOX
-        partners {
-            name = partners
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.partners
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListSpeakers
-                params.10 {
-                    name = type
-                    value = Partner
-                }
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPartnersChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = partners
-                        }
-                    }
-                }
-            }
+        editSpeaker_saveButton = renderlet:BUTTON
+        editSpeaker_saveButton {
+          name = editSpeaker_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            params = editSpeakerModalBox__*
+            cache = false
+            exec = eventeditor.updateSpeaker()
+          }
         }
+      }
+    }
 
-        tutors = renderlet:CHECKBOX
-        tutors {
-            name = tutors
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.tutors
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListSpeakers
-                params.10 {
-                    name = type
-                    value = Tutor
-                }
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTutorsChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = tutors
-                        }
-                    }
-                }
-            }
+    partners = renderlet:CHECKBOX
+    partners {
+      name = partners
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.partners
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListSpeakers
+        params.10 {
+          name = type
+          value = Partner
         }
+      }
 
-        leaders = renderlet:CHECKBOX
-        leaders {
-            name = leaders
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.leaders
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListSpeakers
-                params.10 {
-                    name = type
-                    value = Leader
-                }
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPartnersChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = partners
             }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLeadersChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = leaders
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
+    }
 
-        price_regular = renderlet:TEXT
-        price_regular {
-            name = price_regular
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegular
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_regular
-                        }
-                    }
-                }
-            }
+    tutors = renderlet:CHECKBOX
+    tutors {
+      name = tutors
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.tutors
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListSpeakers
+        params.10 {
+          name = type
+          value = Tutor
         }
+      }
 
-        price_regular_early = renderlet:TEXT
-        price_regular_early {
-            name = price_regular_early
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_early
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularEarly
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_regular_early
-                        }
-                    }
-                }
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTutorsChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = tutors
             }
+          }
         }
+      }
+    }
 
-        price_regular_board = renderlet:TEXT
-        price_regular_board {
-            name = price_regular_board
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularBoard
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_regular_board
-                        }
-                    }
-                }
-            }
+    leaders = renderlet:CHECKBOX
+    leaders {
+      name = leaders
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.leaders
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListSpeakers
+        params.10 {
+          name = type
+          value = Leader
         }
+      }
 
-        price_special = renderlet:TEXT
-        price_special {
-            name = price_special
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecial
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_special
-                        }
-                    }
-                }
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLeadersChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = leaders
             }
+          }
         }
+      }
+    }
 
-        price_special_early = renderlet:TEXT
-        price_special_early {
-            name = price_special_early
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_early
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialEarly
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_special_early
-                        }
-                    }
-                }
+    price_regular = renderlet:TEXT
+    price_regular {
+      name = price_regular
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegular
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_regular
             }
+          }
         }
+      }
+    }
 
-        price_special_board = renderlet:TEXT
-        price_special_board {
-            name = price_special_board
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialBoard
-                    userobj {
-                        extension = this
-                        method = validatePrice
-                        params.10 {
-                            name = elementName
-                            value = price_special_board
-                        }
-                    }
-                }
+    price_regular_early = renderlet:TEXT
+    price_regular_early {
+      name = price_regular_early
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_early
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularEarly
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_regular_early
             }
+          }
         }
+      }
+    }
 
-        additional_information = renderlet:TEXTAREA
-        additional_information {
-            name = additional_information
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.additional_information
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyAdditionalInformation
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = additional_information
-                        }
-                    }
-                }
+    price_regular_board = renderlet:TEXT
+    price_regular_board {
+      name = price_regular_board
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularBoard
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_regular_board
             }
+          }
         }
+      }
+    }
 
-        checkboxes = renderlet:CHECKBOX
-        checkboxes {
-            name = checkboxes
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.checkboxes
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListCheckboxes
+    price_special = renderlet:TEXT
+    price_special {
+      name = price_special
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecial
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_special
             }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCheckboxesChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = checkboxes
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
+    }
 
-        newCheckboxButton = renderlet:BUTTON
-        newCheckboxButton {
-            name = newCheckboxButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newCheckboxButton
-            process.userobj {
-                extension = this
-                method = isFrontEndEditingOfRelatedRecordsAllowed
-                params.10 {
-                    name = relatedRecordType
-                    value = Checkboxes
-                }
+    price_special_early = renderlet:TEXT
+    price_special_early {
+      name = price_special_early
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_early
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialEarly
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_special_early
             }
+          }
+        }
+      }
+    }
 
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
+    price_special_board = renderlet:TEXT
+    price_special_board {
+      name = price_special_board
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialBoard
+          userobj {
+            extension = this
+            method = validatePrice
+            params.10 {
+              name = elementName
+              value = price_special_board
+            }
+          }
+        }
+      }
+    }
+
+    additional_information = renderlet:TEXTAREA
+    additional_information {
+      name = additional_information
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.additional_information
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyAdditionalInformation
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = additional_information
+            }
+          }
+        }
+      }
+    }
+
+    checkboxes = renderlet:CHECKBOX
+    checkboxes {
+      name = checkboxes
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.checkboxes
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListCheckboxes
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCheckboxesChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = checkboxes
+            }
+          }
+        }
+      }
+    }
+
+    newCheckboxButton = renderlet:BUTTON
+    newCheckboxButton {
+      name = newCheckboxButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newCheckboxButton
+      process.userobj {
+        extension = this
+        method = isFrontEndEditingOfRelatedRecordsAllowed
+        params.10 {
+          name = relatedRecordType
+          value = Checkboxes
+        }
+      }
+
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
                     $this->getRenderer()->_setDisplayLabels(true);
                     $result = $this->aORenderlets['newCheckboxModalBox']->majixShowFreshBox();
                     $this->getRenderer()->_setDisplayLabels(false);
                     return $result;
-                )
-            }
+        )
+      }
+    }
+
+    newCheckboxModalBox = renderlet:MODALBOX
+    newCheckboxModalBox {
+      name = newCheckboxModalBox
+      childs {
+        newCheckbox_title = renderlet:TEXT
+        newCheckbox_title {
+          name = newCheckbox_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        newCheckboxModalBox = renderlet:MODALBOX
-        newCheckboxModalBox {
-            name = newCheckboxModalBox
-            childs {
-                newCheckbox_title = renderlet:TEXT
-                newCheckbox_title {
-                    name = newCheckbox_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newCheckbox_cancelButton = renderlet:BUTTON
-                newCheckbox_cancelButton {
-                    name = newCheckbox_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        newCheckbox_cancelButton = renderlet:BUTTON
+        newCheckbox_cancelButton {
+          name = newCheckbox_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['newCheckboxModalBox']->majixCloseBox();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                newCheckbox_saveButton = renderlet:BUTTON
-                newCheckbox_saveButton {
-                    name = newCheckbox_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        cache = false
-                        params = newCheckbox_title
-                        userobj.php (
+        newCheckbox_saveButton = renderlet:BUTTON
+        newCheckbox_saveButton {
+          name = newCheckbox_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            cache = false
+            params = newCheckbox_title
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewCheckbox($this);
-                        )
-                    }
-                }
-            }
+            )
+          }
         }
+      }
+    }
 
-        editCheckboxButton = renderlet:BUTTON
-        editCheckboxButton {
-            name = editCheckboxButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
-            class = tx-seminars-pi1-event-editor-edit-button
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
+    editCheckboxButton = renderlet:BUTTON
+    editCheckboxButton {
+      name = editCheckboxButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
+      class = tx-seminars-pi1-event-editor-edit-button
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
                     return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditCheckboxModalBox($this);
-                )
-            }
+        )
+      }
+    }
+
+    editCheckboxModalBox = renderlet:MODALBOX
+    editCheckboxModalBox {
+      name = editCheckboxModalBox
+      childs {
+        editCheckbox_title = renderlet:TEXT
+        editCheckbox_title {
+          name = editCheckbox_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
         }
 
-        editCheckboxModalBox = renderlet:MODALBOX
-        editCheckboxModalBox {
-            name = editCheckboxModalBox
-            childs {
-                editCheckbox_title = renderlet:TEXT
-                editCheckbox_title {
-                    name = editCheckbox_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
+        editCheckbox_uid = renderlet:HIDDEN
+        editCheckbox_uid {
+          name = editCheckbox_uid
+        }
 
-                editCheckbox_uid = renderlet:HIDDEN
-                editCheckbox_uid {
-                    name = editCheckbox_uid
-                }
-
-                editCheckbox_cancelButton = renderlet:BUTTON
-                editCheckbox_cancelButton {
-                    name = editCheckbox_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
+        editCheckbox_cancelButton = renderlet:BUTTON
+        editCheckbox_cancelButton {
+          name = editCheckbox_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
                             return $this->aORenderlets['editCheckboxModalBox']->majixCloseBox();
-                        )
-                    }
-                }
+            )
+          }
+        }
 
-                editCheckbox_saveButton = renderlet:BUTTON
-                editCheckbox_saveButton {
-                    name = editCheckbox_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        cache = false
-                        params = editCheckbox_title, editCheckbox_uid
-                        userobj.php (
+        editCheckbox_saveButton = renderlet:BUTTON
+        editCheckbox_saveButton {
+          name = editCheckbox_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            cache = false
+            params = editCheckbox_title, editCheckbox_uid
+            userobj.php (
                             return \OliverKlee\Seminars\FrontEnd\EventEditor::updateCheckbox($this);
-                        )
-                    }
-                }
+            )
+          }
+        }
+      }
+    }
+
+    payment_methods = renderlet:CHECKBOX
+    payment_methods {
+      name = payment_methods
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.payment_methods
+      class = tx-seminars-pi1-event-editor-checkbox
+      data.userobj {
+        extension = this
+        method = populateListPaymentMethods
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPaymentMethodsChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = payment_methods
             }
+          }
+        }
+      }
+    }
+
+    organizers = renderlet:CHECKBOX
+    organizers {
+      name = organizers
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.organizers
+      class = tx-seminars-pi1-event-editor-checkbox
+      data {
+        userobj {
+          extension = this
+          method = populateListOrganizers
         }
 
-        payment_methods = renderlet:CHECKBOX
-        payment_methods {
-            name = payment_methods
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.payment_methods
-            class = tx-seminars-pi1-event-editor-checkbox
-            data.userobj {
-                extension = this
-                method = populateListPaymentMethods
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPaymentMethodsChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = payment_methods
-                        }
-                    }
-                }
-            }
+        defaultvalue.userobj {
+          extension = this
+          method = getPreselectedOrganizer
         }
+      }
 
-        organizers = renderlet:CHECKBOX
-        organizers {
-            name = organizers
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.organizers
-            class = tx-seminars-pi1-event-editor-checkbox
-            data {
-                userobj {
-                    extension = this
-                    method = populateListOrganizers
-                }
-
-                defaultvalue.userobj {
-                    extension = this
-                    method = getPreselectedOrganizer
-                }
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyOrganizer
-                    userobj {
-                        php (
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyOrganizer
+          userobj {
+            php (
                             $value = array_pop(func_get_args());
                             return (!empty($value));
-                        )
-                    }
-                }
+            )
+          }
+        }
+      }
+    }
+
+    needs_registration = renderlet:CHECKSINGLE
+    needs_registration {
+      name = needs_registration
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.needs_registration
+    }
+
+    allows_multiple_registrations = renderlet:CHECKSINGLE
+    allows_multiple_registrations {
+      name = allows_multiple_registrations
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.allows_multiple_registrations
+    }
+
+    attendees_min = renderlet:TEXT
+    attendees_min {
+      name = attendees_min
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_min
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMinZero
+          userobj {
+            extension = this
+            method = validateInteger
+            params.10 {
+              name = elementName
+              value = attendees_min
             }
+          }
         }
+      }
+    }
 
-        needs_registration = renderlet:CHECKSINGLE
-        needs_registration {
-            name = needs_registration
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.needs_registration
-        }
-
-        allows_multiple_registrations = renderlet:CHECKSINGLE
-        allows_multiple_registrations {
-            name = allows_multiple_registrations
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.allows_multiple_registrations
-        }
-
-        attendees_min = renderlet:TEXT
-        attendees_min {
-            name = attendees_min
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_min
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMinZero
-                    userobj {
-                        extension = this
-                        method = validateInteger
-                        params.10 {
-                            name = elementName
-                            value = attendees_min
-                        }
-                    }
-                }
+    attendees_max = renderlet:TEXT
+    attendees_max {
+      name = attendees_max
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_max
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMaxZero
+          userobj {
+            extension = this
+            method = validateInteger
+            params.10 {
+              name = elementName
+              value = attendees_max
             }
+          }
         }
+      }
+    }
 
-        attendees_max = renderlet:TEXT
-        attendees_max {
-            name = attendees_max
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_max
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMaxZero
-                    userobj {
-                        extension = this
-                        method = validateInteger
-                        params.10 {
-                            name = elementName
-                            value = attendees_max
-                        }
-                    }
-                }
+    queue_size = renderlet:CHECKSINGLE
+    queue_size {
+      name = queue_size
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.queue_size
+    }
+
+    offline_attendees = renderlet:TEXT
+    offline_attendees {
+      name = offline_attendees
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.offline_attendees
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_offlineAttendeesZero
+          userobj {
+            extension = this
+            method = validateInteger
+            params.10 {
+              name = elementName
+              value = offline_attendees
             }
+          }
         }
+      }
+    }
 
-        queue_size = renderlet:CHECKSINGLE
-        queue_size {
-            name = queue_size
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.queue_size
+    target_groups = renderlet:CHECKBOX
+    target_groups {
+      name = target_groups
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.target_groups
+      class = tx-seminars-pi1-event-editor-checkbox
+      wrapitem = <tr><td>|</td></tr>
+      wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+      separator =
+      data.userobj {
+        extension = this
+        method = populateListTargetGroups
+      }
+
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTargetGroupsChosen
+          userobj {
+            extension = this
+            method = validateCheckboxes
+            params.10 {
+              name = elementName
+              value = target_groups
+            }
+          }
         }
+      }
+    }
 
-        offline_attendees = renderlet:TEXT
-        offline_attendees {
-            name = offline_attendees
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.offline_attendees
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_offlineAttendeesZero
-                    userobj {
-                        extension = this
-                        method = validateInteger
-                        params.10 {
-                            name = elementName
-                            value = offline_attendees
-                        }
-                    }
-                }
-            }
+    newTargetGroupButton = renderlet:BUTTON
+    newTargetGroupButton {
+      name = newTargetGroupButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newTargetGroupButton
+      process.userobj {
+        extension = this
+        method = isFrontEndEditingOfRelatedRecordsAllowed
+        params.10 {
+          name = relatedRecordType
+          value = TargetGroups
         }
+      }
 
-        target_groups = renderlet:CHECKBOX
-        target_groups {
-            name = target_groups
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.target_groups
-            class = tx-seminars-pi1-event-editor-checkbox
-            wrapitem = <tr><td>|</td></tr>
-            wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
-            separator =
-            data.userobj {
-                extension = this
-                method = populateListTargetGroups
-            }
-
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTargetGroupsChosen
-                    userobj {
-                        extension = this
-                        method = validateCheckboxes
-                        params.10 {
-                            name = elementName
-                            value = target_groups
-                        }
-                    }
-                }
-            }
-        }
-
-        newTargetGroupButton = renderlet:BUTTON
-        newTargetGroupButton {
-            name = newTargetGroupButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:newTargetGroupButton
-            process.userobj {
-                extension = this
-                method = isFrontEndEditingOfRelatedRecordsAllowed
-                params.10 {
-                    name = relatedRecordType
-                    value = TargetGroups
-                }
-            }
-
-            onclick {
-                runat = ajax
-                userobj.php (
+      onclick {
+        runat = ajax
+        userobj.php (
                     $this->getRenderer()->_setDisplayLabels(true);
                     $result = $this->aORenderlets['newTargetGroupModalBox']->majixShowFreshBox();
                     $this->getRenderer()->_setDisplayLabels(false);
                     return $result;
-                )
-            }
-        }
-
-        newTargetGroupModalBox = renderlet:MODALBOX
-        newTargetGroupModalBox {
-            name = newTargetGroupModalBox
-            childs {
-                newTargetGroup_title = renderlet:TEXT
-                newTargetGroup_title {
-                    name = newTargetGroup_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newTargetGroup_minimum_age = renderlet:TEXT
-                newTargetGroup_minimum_age {
-                    name = newTargetGroup_minimum_age
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newTargetGroup_maximum_age = renderlet:TEXT
-                newTargetGroup_maximum_age {
-                    name = newTargetGroup_maximum_age
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                newTargetGroup_cancelButton = renderlet:BUTTON
-                newTargetGroup_cancelButton {
-                    name = newTargetGroup_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
-                            return $this->aORenderlets['newTargetGroupModalBox']->majixCloseBox();
-                        )
-                    }
-                }
-
-                newTargetGroup_saveButton = renderlet:BUTTON
-                newTargetGroup_saveButton {
-                    name = newTargetGroup_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        params = newTargetGroup_title, newTargetGroup_minimum_age, newTargetGroup_maximum_age
-                        userobj.php (
-                            return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewTargetGroup($this);
-                        )
-                    }
-                }
-            }
-        }
-
-        editTargetGroupButton = renderlet:BUTTON
-        editTargetGroupButton {
-            name = editTargetGroupButton
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
-            class = tx-seminars-pi1-event-editor-edit-button
-            onclick {
-                runat = ajax
-                cache = false
-                userobj.php (
-                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditTargetGroupModalBox($this);
-                )
-            }
-        }
-
-        editTargetGroupModalBox = renderlet:MODALBOX
-        editTargetGroupModalBox {
-            name = editTargetGroupModalBox
-            childs {
-                editTargetGroup_title = renderlet:TEXT
-                editTargetGroup_title {
-                    name = editTargetGroup_title
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                editTargetGroup_uid = renderlet:HIDDEN
-                editTargetGroup_uid {
-                    name = editTargetGroup_uid
-                }
-
-                editTargetGroup_minimum_age = renderlet:TEXT
-                editTargetGroup_minimum_age {
-                    name = editTargetGroup_minimum_age
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                editTargetGroup_maximum_age = renderlet:TEXT
-                editTargetGroup_maximum_age {
-                    name = editTargetGroup_maximum_age
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
-                    sanitize = false
-                    wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
-                }
-
-                editTargetGroup_cancelButton = renderlet:BUTTON
-                editTargetGroup_cancelButton {
-                    name = editTargetGroup_cancelButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
-                    wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
-                    onclick {
-                        runat = client
-                        userobj.php (
-                            return $this->aORenderlets['editTargetGroupModalBox']->majixCloseBox();
-                        )
-                    }
-                }
-
-                editTargetGroup_saveButton = renderlet:BUTTON
-                editTargetGroup_saveButton {
-                    name = editTargetGroup_saveButton
-                    label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
-                    wrap = |</div>
-                    onclick {
-                        runat = ajax
-                        cache = false
-                        params = editTargetGroup_title, editTargetGroup_uid, editTargetGroup_minimum_age, editTargetGroup_maximum_age
-                        userobj.php (
-                            return \OliverKlee\Seminars\FrontEnd\EventEditor::updateTargetGroup($this);
-                        )
-                    }
-                }
-            }
-        }
-
-        cancelled = renderlet:LISTBOX
-        cancelled {
-            name = cancelled
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled
-            data.items {
-                10 {
-                    caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_planned
-                    value = 0
-                }
-
-                20 {
-                    caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_canceled
-                    value = 1
-                }
-
-                30 {
-                    caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_confirmed
-                    value = 2
-                }
-            }
-        }
-
-        uses_terms_2 = renderlet:CHECKSINGLE
-        uses_terms_2 {
-            name = uses_terms_2
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.uses_terms_2
-        }
-
-        notes = renderlet:TEXTAREA
-        notes {
-            name = notes
-            label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.notes
-            sanitize = false
-            validators {
-                10 = validator:STANDARD
-                10.custom {
-                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyNotes
-                    userobj {
-                        extension = this
-                        method = validateString
-                        params.10 {
-                            name = elementName
-                            value = notes
-                        }
-                    }
-                }
-            }
-        }
-
-        submit_and_stay = renderlet:SUBMIT
-        submit_and_stay {
-            name = submit_and_stay
-            label = ###LABEL_SAVE###
-        }
-
-        btnsubmit = renderlet:SUBMIT
-        btnsubmit {
-            name = btnsubmit
-            label = ###LABEL_SAVE_AND_BACK###
-        }
+        )
+      }
     }
+
+    newTargetGroupModalBox = renderlet:MODALBOX
+    newTargetGroupModalBox {
+      name = newTargetGroupModalBox
+      childs {
+        newTargetGroup_title = renderlet:TEXT
+        newTargetGroup_title {
+          name = newTargetGroup_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        newTargetGroup_minimum_age = renderlet:TEXT
+        newTargetGroup_minimum_age {
+          name = newTargetGroup_minimum_age
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        newTargetGroup_maximum_age = renderlet:TEXT
+        newTargetGroup_maximum_age {
+          name = newTargetGroup_maximum_age
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        newTargetGroup_cancelButton = renderlet:BUTTON
+        newTargetGroup_cancelButton {
+          name = newTargetGroup_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
+                            return $this->aORenderlets['newTargetGroupModalBox']->majixCloseBox();
+            )
+          }
+        }
+
+        newTargetGroup_saveButton = renderlet:BUTTON
+        newTargetGroup_saveButton {
+          name = newTargetGroup_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            params = newTargetGroup_title, newTargetGroup_minimum_age, newTargetGroup_maximum_age
+            userobj.php (
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::createNewTargetGroup($this);
+            )
+          }
+        }
+      }
+    }
+
+    editTargetGroupButton = renderlet:BUTTON
+    editTargetGroupButton {
+      name = editTargetGroupButton
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_edit
+      class = tx-seminars-pi1-event-editor-edit-button
+      onclick {
+        runat = ajax
+        cache = false
+        userobj.php (
+                    return \OliverKlee\Seminars\FrontEnd\EventEditor::showEditTargetGroupModalBox($this);
+        )
+      }
+    }
+
+    editTargetGroupModalBox = renderlet:MODALBOX
+    editTargetGroupModalBox {
+      name = editTargetGroupModalBox
+      childs {
+        editTargetGroup_title = renderlet:TEXT
+        editTargetGroup_title {
+          name = editTargetGroup_title
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        editTargetGroup_uid = renderlet:HIDDEN
+        editTargetGroup_uid {
+          name = editTargetGroup_uid
+        }
+
+        editTargetGroup_minimum_age = renderlet:TEXT
+        editTargetGroup_minimum_age {
+          name = editTargetGroup_minimum_age
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        editTargetGroup_maximum_age = renderlet:TEXT
+        editTargetGroup_maximum_age {
+          name = editTargetGroup_maximum_age
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
+          sanitize = false
+          wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+        }
+
+        editTargetGroup_cancelButton = renderlet:BUTTON
+        editTargetGroup_cancelButton {
+          name = editTargetGroup_cancelButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_cancel
+          wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+          onclick {
+            runat = client
+            userobj.php (
+                            return $this->aORenderlets['editTargetGroupModalBox']->majixCloseBox();
+            )
+          }
+        }
+
+        editTargetGroup_saveButton = renderlet:BUTTON
+        editTargetGroup_saveButton {
+          name = editTargetGroup_saveButton
+          label = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:label_save
+          wrap = |</div>
+          onclick {
+            runat = ajax
+            cache = false
+            params = editTargetGroup_title, editTargetGroup_uid, editTargetGroup_minimum_age, editTargetGroup_maximum_age
+            userobj.php (
+                            return \OliverKlee\Seminars\FrontEnd\EventEditor::updateTargetGroup($this);
+            )
+          }
+        }
+      }
+    }
+
+    cancelled = renderlet:LISTBOX
+    cancelled {
+      name = cancelled
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled
+      data.items {
+        10 {
+          caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_planned
+          value = 0
+        }
+
+        20 {
+          caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_canceled
+          value = 1
+        }
+
+        30 {
+          caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_confirmed
+          value = 2
+        }
+      }
+    }
+
+    uses_terms_2 = renderlet:CHECKSINGLE
+    uses_terms_2 {
+      name = uses_terms_2
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.uses_terms_2
+    }
+
+    notes = renderlet:TEXTAREA
+    notes {
+      name = notes
+      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.notes
+      sanitize = false
+      validators {
+        10 = validator:STANDARD
+        10.custom {
+          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyNotes
+          userobj {
+            extension = this
+            method = validateString
+            params.10 {
+              name = elementName
+              value = notes
+            }
+          }
+        }
+      }
+    }
+
+    submit_and_stay = renderlet:SUBMIT
+    submit_and_stay {
+      name = submit_and_stay
+      label = ###LABEL_SAVE###
+    }
+
+    btnsubmit = renderlet:SUBMIT
+    btnsubmit {
+      name = btnsubmit
+      label = ###LABEL_SAVE_AND_BACK###
+    }
+  }
 }

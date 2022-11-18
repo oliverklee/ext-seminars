@@ -1,22 +1,22 @@
 tx_seminars_publication = PAGE
 tx_seminars_publication {
-    # The page type number for the publish links. Do not change this!
-    typeNum = 737
+  # The page type number for the publish links. Do not change this!
+  typeNum = 737
 
-    config {
-        enableContentLengthHeader = 1
-        no_cache = 1
-        doctype = xhtml_strict
-        removeDefaultJS = 1
-        setJS_openPic = 0
-    }
+  config {
+    enableContentLengthHeader = 1
+    no_cache = 1
+    doctype = xhtml_strict
+    removeDefaultJS = 1
+    setJS_openPic = 0
+  }
 
-    includeLibs.tx_seminars_publication = EXT:seminars/Classes/FrontEnd/EventPublication.php
-    stdWrap.wrap = <p>|</p>
+  includeLibs.tx_seminars_publication = EXT:seminars/Classes/FrontEnd/EventPublication.php
+  stdWrap.wrap = <p>|</p>
 
-    10 = USER
-    10 {
-        userFunc = \OliverKlee\Seminars\FrontEnd\EventPublication->render
-        xhtml_cleaning = all
-    }
+  10 = USER
+  10 {
+    userFunc = \OliverKlee\Seminars\FrontEnd\EventPublication->render
+    xhtml_cleaning = all
+  }
 }

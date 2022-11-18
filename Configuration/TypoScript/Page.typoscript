@@ -1,13 +1,13 @@
 page {
-    includeCSS {
-        tx_seminars_pi1 = {$plugin.tx_seminars_pi1.cssFile}
-    }
+  includeCSS {
+    tx_seminars_pi1 = {$plugin.tx_seminars_pi1.cssFile}
+  }
 
-    includeJSFooter {
-        seminarsFrontEnd = EXT:seminars/Resources/Public/JavaScript/FrontEnd/FrontEnd.js
-        seminarsFrontEnd {
-            async = 1
-            defer = 1
-        }
+  includeJSFooter {
+    seminarsFrontEnd = EXT:seminars/Resources/Public/JavaScript/FrontEnd/FrontEnd.js
+    seminarsFrontEnd {
+      async = 1
+      defer = 1
     }
+  }
 }
