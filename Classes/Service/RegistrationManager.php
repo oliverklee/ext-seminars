@@ -732,6 +732,8 @@ class RegistrationManager
             ->text($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
         $emailFormat = ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
+        // @deprecated #1716 The `wantsHtmlEmail` call will be removed in seminars 5.0.
+        // Instead, HTML and plain-text emails will always be sent.
         if (
             $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
         ) {
