@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Service\RegistrationGuard;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Fluid\View\TemplateView;
 
 /**
@@ -34,6 +35,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
      */
     private $viewMock;
 
+    /**
+     * @var UriBuilder&MockObject
+     */
+    private $uriBuilderMock;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -50,6 +56,9 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
+
+        $this->uriBuilderMock = $this->createMock(UriBuilder::class);
+        $this->subject->_set('uriBuilder', $this->uriBuilderMock);
     }
 
     /**
@@ -134,9 +143,45 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
         $this->registrationGuardMock->method('isRegistrationPossibleByDate')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(true);
 
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function checkPrerequisitesActionForNoUserInSessionRedirectsLoginPageWithRedirectUrl(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('isRegistrationPossibleByDate')->with($event)->willReturn(true);
+        $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(false);
+
+        $redirectUrl = 'https://example.com/current-page';
+        $loginPageUrl = 'https://example.com/login-with-event-uid';
+        $loginPageUid = 17;
+        $this->subject->_set('settings', ['loginPage' => (string)$loginPageUid]);
+
+        $this->uriBuilderMock->expects(self::exactly(2))->method('reset')->willReturnSelf();
+        $this->uriBuilderMock->expects(self::exactly(2))->method('setCreateAbsoluteUri')->with(true)->willReturnSelf();
+        $this->uriBuilderMock->expects(self::once())->method('setTargetPageUid')->with($loginPageUid)->willReturnSelf();
+        $this->uriBuilderMock->expects(self::exactly(2))->method('setArguments')->withConsecutive(
+            [['tx_seminars_eventregistration[event]' => $eventUid]],
+            [['redirect_url' => $redirectUrl]]
+        )->willReturnSelf();
+        $this->uriBuilderMock->expects(self::exactly(2))->method('buildFrontendUri')
+            ->willReturnOnConsecutiveCalls($redirectUrl, $loginPageUrl);
+
+        $this->subject->expects(self::once())->method('redirectToUri')
+            ->with($loginPageUrl)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 

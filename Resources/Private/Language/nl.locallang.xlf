@@ -2480,6 +2480,10 @@ This event now has been confirmed.</source>
 				<source>The entered data as an overview:</source>
 				<target></target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.loginPage">
+				<source>Login page (or with onetimeaccount)</source>
+				<target>Inlogpagina (or met onetimeaccount)</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 				<target>Sorry!</target>
