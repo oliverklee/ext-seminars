@@ -2016,17 +2016,14 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.loginPage">
 				<source>Login page (or with onetimeaccount)</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
+				<source>%1$s, %2$s (event #%3$u)</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.sorry">
 				<source>Sorry!</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
 				<source>Event registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_formal">
-				<source>Thank you!</source>
-			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.thankYou_informal">
-				<source>Thank you!</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
