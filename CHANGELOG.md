@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate seeing the registrations within an event in the TCEforms (#1891)
 - Deprecate the FE user email format settings (#1885)
 - Deprecate FE editing for managers (#1866)
 - Deprecate hiding events in the FE editor (#1864)

@@ -261,6 +261,7 @@ CREATE TABLE tx_seminars_seminars (
     target_groups int(11) unsigned DEFAULT '0' NOT NULL,
     # @deprecated #1763 will be removed in seminars 5.0
     skip_collision_check tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    # @deprecated #1324 will be removed in seminars 5.0
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,

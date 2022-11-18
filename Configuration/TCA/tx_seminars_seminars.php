@@ -798,6 +798,7 @@ $tca = [
                 'default' => 0,
             ],
         ],
+        // @deprecated #1324 will be removed in seminars 5.0
         'registrations' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.registrations',

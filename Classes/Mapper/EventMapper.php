@@ -44,6 +44,7 @@ class EventMapper extends AbstractDataMapper
         'checkboxes' => CheckboxMapper::class,
         'requirements' => EventMapper::class,
         'dependencies' => EventMapper::class,
+        // @deprecated #1324 will be removed in seminars 5.0
         'registrations' => RegistrationMapper::class,
     ];
 

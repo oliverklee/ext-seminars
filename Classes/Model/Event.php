@@ -1458,6 +1458,8 @@ class Event extends AbstractTimeSpan implements Titled
      * @return Collection<Registration> the registrations for this event (both regular and
      *                       on the waiting list), will be empty if this event
      *                       has no registrations
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function getRegistrations(): Collection
     {
@@ -1470,12 +1472,17 @@ class Event extends AbstractTimeSpan implements Titled
     /**
      * @param Collection<Registration> $registrations the registrations for this event
      *        (both regular and on the waiting list), may be empty
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function setRegistrations(Collection $registrations): void
     {
         $this->set('registrations', $registrations);
     }
 
+    /**
+     * @deprecated #1324 will be removed in seminars 5.0
+     */
     public function attachRegistration(Registration $registration): void
     {
         $registration->setEvent($this);
@@ -1489,6 +1496,8 @@ class Event extends AbstractTimeSpan implements Titled
      * @return Collection<Registration> the regular registrations for this event, will be
      *                       will be empty if this event no regular
      *                       registrations
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function getRegularRegistrations(): Collection
     {
@@ -1511,6 +1520,8 @@ class Event extends AbstractTimeSpan implements Titled
      *
      * @return Collection<Registration> the queue registrations for this event, will be
      *                       will be empty if this event no queue registrations
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function getQueueRegistrations(): Collection
     {
@@ -1530,6 +1541,8 @@ class Event extends AbstractTimeSpan implements Titled
     /**
      * Checks whether this event has any registrations on its registration
      * queue (i.e., on the waiting list).
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function hasQueueRegistrations(): bool
     {
