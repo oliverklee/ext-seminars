@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
+      data-namespace-typo3-fluid="true">
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
@@ -7,7 +8,7 @@
             <f:translate key="plugin.eventRegistration.heading.sorry"/>
         </h2>
         <p class="alert alert-warning" role="alert">
-            <f:translate key="plugin.eventRegistration.error.{warningMessageKey}"/>
+            <s:salutationAwareTranslate key="plugin.eventRegistration.error.{warningMessageKey}"/>
         </p>
     </f:section>
 </html>

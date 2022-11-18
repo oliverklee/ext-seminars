@@ -46,6 +46,10 @@ class EventRegistrationController extends ActionController
         if (!$this->registrationGuard->existsFrontEndUserUidInSession()) {
             $this->redirectToLoginPage($event);
         }
+        $userUid = $this->registrationGuard->getFrontEndUserUidInSession();
+        if (!$this->registrationGuard->isFreeFromRegistrationConflicts($event, $userUid)) {
+            $this->forwardToDenyAction('alreadyRegistered');
+        }
 
         $this->redirect('new', null, null, ['event' => $event]);
     }
