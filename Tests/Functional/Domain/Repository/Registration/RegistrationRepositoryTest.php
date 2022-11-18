@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -47,6 +48,11 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     private $eventRepository;
 
+    /**
+     * @var PersistenceManager
+     */
+    private $persistenceManager;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -54,10 +60,12 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             $this->subject = GeneralUtility::makeInstance(RegistrationRepository::class);
             $this->eventRepository = GeneralUtility::makeInstance(EventRepository::class);
+            $this->persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         } else {
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             $this->subject = $objectManager->get(RegistrationRepository::class);
             $this->eventRepository = $objectManager->get(EventRepository::class);
+            $this->persistenceManager = $objectManager->get(PersistenceManager::class);
         }
     }
 
@@ -142,6 +150,28 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findAll();
 
         self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function canPersistModel(): void
+    {
+        $registration = new Registration();
+
+        $this->subject->add($registration);
+        $this->persistenceManager->persistAll();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
     }
 
     /**
