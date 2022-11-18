@@ -2702,6 +2702,22 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>You are already registered for this event.</source>
 				<target>Du bist für diese Veranstaltung bereits angemeldet.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.action.back">
+				<source>Back</source>
+				<target>Zurück</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.action.continue">
+				<source>Continue</source>
+				<target>Weiter</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.action.registerForFree">
+				<source>Confirm registration (for free)</source>
+				<target>Kostenlos anmelden</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.action.registerWithCosts">
+				<source>Confirm registration</source>
+				<target>Kostenpflichtig anmelden</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>
