@@ -1,9 +1,10 @@
+---
 sniffs:
   - class: Indentation
     parameters:
-      useSpaces: true
-      indentPerLevel: 4
       indentConditions: true
+      indentPerLevel: 2
+      useSpaces: true
   - class: DeadCode
   - class: OperatorWhitespace
   - class: RepeatingRValue

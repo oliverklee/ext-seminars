@@ -1,46 +1,46 @@
 # @deprecated #1841 will be removed in seminars 5.0
 plugin.tx_seminars_pi1.form.unregistration {
-    meta {
-        name = Seminar Manager unregistration form
-        description = This form allows FE users to unregister for events.
-        form.formid = tx_seminars_pi1_registration_editor
-        debug = false
-        displaylabels = false
-    }
+  meta {
+    name = Seminar Manager unregistration form
+    description = This form allows FE users to unregister for events.
+    form.formid = tx_seminars_pi1_registration_editor
+    debug = false
+    displaylabels = false
+  }
 
-    control {
-        datahandler = datahandler:RAW
-        datahandler.parentcallback = processUnregistration
+  control {
+    datahandler = datahandler:RAW
+    datahandler.parentcallback = processUnregistration
 
-        renderer = renderer:TEMPLATE
-        renderer.template {
-            path.userobj.php (
+    renderer = renderer:TEMPLATE
+    renderer.template {
+      path.userobj.php (
                     return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
-            )
-            subpart = ###REGISTRATION_EDITOR_UNREGISTRATION###
-            errortag = errors
-        }
-
-        actionlets {
-            10 = actionlet:REDIRECT
-            10.url.userobj {
-                extension = this
-                method = getPageToShowAfterUnregistrationUrl
-            }
-        }
+      )
+      subpart = ###REGISTRATION_EDITOR_UNREGISTRATION###
+      errortag = errors
     }
 
-    elements {
-        button_cancel = renderlet:SUBMIT
-        button_cancel {
-            name = button_cancel
-            label = ###LABEL_CANCEL###
-        }
-
-        button_unregister = renderlet:SUBMIT
-        button_unregister {
-            name = button_unregister
-            label = ###LABEL_UNREGISTER###
-        }
+    actionlets {
+      10 = actionlet:REDIRECT
+      10.url.userobj {
+        extension = this
+        method = getPageToShowAfterUnregistrationUrl
+      }
     }
+  }
+
+  elements {
+    button_cancel = renderlet:SUBMIT
+    button_cancel {
+      name = button_cancel
+      label = ###LABEL_CANCEL###
+    }
+
+    button_unregister = renderlet:SUBMIT
+    button_unregister {
+      name = button_unregister
+      label = ###LABEL_UNREGISTER###
+    }
+  }
 }
