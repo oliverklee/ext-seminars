@@ -149,7 +149,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function checkPrerequisitesActionUserAlreadyRegisteredForwardsToDenyRegistrationAction(): void
     {
         $userUid = 17;
-        $this->registrationGuardMock->method('getFrontEndUserUidInSession')->willReturn($userUid);
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
 
         $event = new SingleEvent();
         $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);
@@ -172,7 +172,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function checkPrerequisitesActionForNoProblemsRedirectsToNewActionAndPassesEvent(): void
     {
         $userUid = 17;
-        $this->registrationGuardMock->method('getFrontEndUserUidInSession')->willReturn($userUid);
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
 
         $event = new SingleEvent();
         $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')->with($event)->willReturn(true);

@@ -432,7 +432,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
         $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(null);
 
-        self::assertNull($this->subject->getFrontEndUserUidInSession());
+        self::assertNull($this->subject->getFrontEndUserUidFromSession());
     }
 
     /**
@@ -444,7 +444,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($userUidFromLogin);
         $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn(null);
 
-        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidInSession());
+        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidFromSession());
     }
 
     /**
@@ -456,7 +456,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
         $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn($userUidFromOneTimeAccount);
 
-        self::assertSame($userUidFromOneTimeAccount, $this->subject->getFrontEndUserUidInSession());
+        self::assertSame($userUidFromOneTimeAccount, $this->subject->getFrontEndUserUidFromSession());
     }
 
     /**
@@ -469,6 +469,6 @@ final class RegistrationGuardTest extends UnitTestCase
         $userUidFromOneTimeAccount = 9;
         $this->oneTimeAccountConnectorMock->method('getOneTimeAccountUserUid')->willReturn($userUidFromOneTimeAccount);
 
-        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidInSession());
+        self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidFromSession());
     }
 }

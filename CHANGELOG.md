@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Add a `OneTimeAccountConnector` (#1865)
-- Add a `RegistrationGuard` class (#1838, #1846, #1855)
+- Add a `RegistrationGuard` class (#1838, #1846, #1855, #1901)
 - Add a rewritten registration form for TYPO3 >= 10LTS
   (#1825, #1830, #1848, #1855, #1861, #1871, #1873, #1886, #1889, #1890, #1892,
   #1893, #1896, #1898)
