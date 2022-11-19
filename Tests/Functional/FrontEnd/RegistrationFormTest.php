@@ -30,6 +30,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     ];
 
     protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
         'typo3conf/ext/oelib',
         'typo3conf/ext/rn_base',
         'typo3conf/ext/mkforms',

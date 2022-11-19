@@ -19,7 +19,11 @@ final class CsvDownloaderTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var CsvDownloader

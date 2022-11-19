@@ -37,7 +37,11 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         'dateFormatYMD' => self::DATE_FORMAT_YMD,
     ];
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var TestingTimeSpan

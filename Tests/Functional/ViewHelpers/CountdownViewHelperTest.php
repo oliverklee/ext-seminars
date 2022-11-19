@@ -22,7 +22,11 @@ final class CountdownViewHelperTest extends FunctionalTestCase
      */
     private const NOW = 1645975847;
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var TestingFramework

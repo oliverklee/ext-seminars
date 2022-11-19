@@ -17,7 +17,11 @@ final class DataHandlerHookTest extends FunctionalTestCase
      */
     private const TABLE_SEMINARS = 'tx_seminars_seminars';
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var DataHandlerHook
