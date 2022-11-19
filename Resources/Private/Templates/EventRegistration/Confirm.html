@@ -14,6 +14,7 @@
             <f:form.hidden name="event" value="{event}"/>
             <f:variable name="idPrefix" value="seminars-registration"/>
             <f:variable name="labelPrefix" value="plugin.eventRegistration.property"/>
+            <f:variable name="actionLabelPrefix" value="plugin.eventRegistration.action"/>
 
             <h3>
                 <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
@@ -39,13 +40,17 @@
             </f:if>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
+                <f:variable name="newActionUri" value="{f:uri.action(action: 'new')}"/>
+                <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.back')}" class="btn btn-secondary me-3"
+                               additionalAttributes="{formaction: newActionUri}"/>
+
                 <f:if condition="{event.freeOfCharge}">
                     <f:then>
-                        <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.registerForFree')}"
+                        <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.registerForFree')}"
                                        class="btn btn-primary"/>
                     </f:then>
                     <f:else>
-                        <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.registerWithCosts')}"
+                        <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.registerWithCosts')}"
                                        class="btn btn-primary"/>
                     </f:else>
                 </f:if>

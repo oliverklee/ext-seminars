@@ -14,6 +14,7 @@
             <f:form.hidden name="event" value="{event}"/>
             <f:variable name="idPrefix" value="seminars-registration"/>
             <f:variable name="labelPrefix" value="plugin.eventRegistration.property"/>
+            <f:variable name="actionLabelPrefix" value="plugin.eventRegistration.action"/>
 
             <h3>
                 <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
@@ -31,8 +32,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
-                <f:form.submit value="{f:translate(key: 'plugin.eventRegistration.action.continue')}"
-                               class="btn btn-primary"/>
+                <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.continue')}" class="btn btn-primary"/>
             </div>
         </f:form>
     </f:section>
