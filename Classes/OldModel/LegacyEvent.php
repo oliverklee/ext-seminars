@@ -958,6 +958,7 @@ class LegacyEvent extends AbstractTimeSpan
         } else {
             $result =
                 $this->getSharedConfiguration()->getAsBoolean('showToBeAnnouncedForEmptyPrice')
+                    // @deprecated #1786 will be removed in seminars 5.0
                     ? $this->translate('message_willBeAnnounced')
                     : $this->translate('message_forFree');
         }
