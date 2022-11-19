@@ -99,7 +99,7 @@ class RegistrationGuard implements SingletonInterface
     /**
      * @return positive-int|null
      */
-    public function getFrontEndUserUidInSession(): ?int
+    public function getFrontEndUserUidFromSession(): ?int
     {
         $userUidFromLogin = (int)$this->getContext()->getPropertyFromAspect('frontend.user', 'id');
         if ($userUidFromLogin <= 0) {
