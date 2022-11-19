@@ -32,7 +32,11 @@ final class EventHeadlineTest extends FunctionalTestCase
      */
     private const CONFIGURATION = ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'];
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var EventHeadline

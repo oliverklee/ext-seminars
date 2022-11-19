@@ -12,7 +12,11 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  */
 final class TypoScriptSetupTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * Extracts the class name from something like '...->foo'.

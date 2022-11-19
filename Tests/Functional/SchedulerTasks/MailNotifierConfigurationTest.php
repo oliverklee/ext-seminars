@@ -29,7 +29,11 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
 
     protected $coreExtensionsToLoad = ['scheduler'];
 
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var MailNotifierConfiguration

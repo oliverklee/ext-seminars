@@ -18,7 +18,11 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 final class EventTypeRepositoryTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var EventTypeRepository

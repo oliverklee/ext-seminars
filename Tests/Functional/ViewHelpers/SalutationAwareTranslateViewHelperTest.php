@@ -16,7 +16,11 @@ use TYPO3Fluid\Fluid\Core\Variables\VariableProviderInterface;
  */
 final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var VariableProviderInterface
