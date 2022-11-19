@@ -2034,6 +2034,18 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
 				<source>Your registration data</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationSent_formal">
+				<source>Your registration has been sent.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
+				<source>Your registration has been sent.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
+				<source>Thank you for registering for this event. We are looking forward to seeing you there!</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
+				<source>Thank you for registering for this event. We're looking forward to seeing you there!</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 			</trans-unit>

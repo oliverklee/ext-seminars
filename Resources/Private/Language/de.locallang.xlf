@@ -2698,6 +2698,22 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Your registration data</source>
 				<target>Deine Anmeldedaten</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationSent_formal">
+				<source>Your registration has been sent.</source>
+				<target>Ihre Anmeldung wurde abgeschickt.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
+				<source>Your registration has been sent.</source>
+				<target>Deine Anmeldung wurde abgeschickt.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
+				<source>Thank you for registering for this event. We are looking forward to seeing you there!</source>
+				<target>Vielen Dank für Ihre Anmeldung zu dieser Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
+				<source>Thank you for registering for this event. We're looking forward to seeing you there!</source>
+				<target>Dank dir für deine Anmeldung zu dieser Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 				<target>Für diese Veranstaltung ist keine Anmeldung möglich.</target>

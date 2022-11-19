@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
+      data-namespace-typo3-fluid="true">
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
@@ -7,6 +8,13 @@
 
         <p class="alert alert-info" role="alert">
             ThankYouAction
+        </p>
+
+        <h3>
+            <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationSent"/>
+        </h3>
+        <p class="alert alert-success" role="alert">
+            <s:salutationAwareTranslate key="plugin.eventRegistration.message.thankYouForYourRegistration"/>
         </p>
     </f:section>
 </html>
