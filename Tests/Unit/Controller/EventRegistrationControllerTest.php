@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\RegistrationGuard;
+use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -31,6 +32,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
      * @var RegistrationGuard&MockObject
      */
     private $registrationGuardMock;
+
+    /**
+     * @var RegistrationProcessor&MockObject
+     */
+    private $registrationProcesserMock;
 
     /**
      * @var TemplateView&MockObject
@@ -55,10 +61,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
         $this->subject->injectRegistrationGuard($this->registrationGuardMock);
+        $this->registrationProcesserMock = $this->createMock(RegistrationProcessor::class);
+        $this->subject->injectRegistrationProcessor($this->registrationProcesserMock);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
-
         $this->uriBuilderMock = $this->createMock(UriBuilder::class);
         $this->subject->_set('uriBuilder', $this->uriBuilderMock);
     }
@@ -330,9 +337,39 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function createActionEnrichesRegistrationWithMetadata(): void
+    {
+        $registration = new Registration();
+        $event = new SingleEvent();
+        $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
+        $this->subject->_set('settings', $settings);
+
+        $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
+            ->with($registration, $event, $settings);
+
+        $this->subject->createAction($event, $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionPersistsRegistration(): void
+    {
+        $registration = new Registration();
+        $this->subject->_set('settings', []);
+
+        $this->registrationProcesserMock->expects(self::once())->method('persist')->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
     public function createActionRedirectsToThankYouActionAndPassesEvent(): void
     {
         $event = new SingleEvent();
+        $this->subject->_set('settings', []);
 
         $this->subject->expects(self::once())->method('redirect')
             ->with('thankYou', null, null, ['event' => $event])
