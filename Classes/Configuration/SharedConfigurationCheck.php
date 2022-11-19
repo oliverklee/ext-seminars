@@ -72,6 +72,9 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated #1786 will be removed in seminars 5.0
+     */
     private function checkShowToBeAnnouncedForEmptyPrice(): void
     {
         $this->checkIfBoolean(

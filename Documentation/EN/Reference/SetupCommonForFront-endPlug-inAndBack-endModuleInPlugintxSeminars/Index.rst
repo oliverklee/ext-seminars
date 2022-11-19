@@ -597,7 +597,8 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          whether events that have no standard price set should have “to be
-         announced” as price instead of “free”
+         announced” as price instead of “free”,
+         @deprecated #1786 will be removed in seminars 5.0
 
    Default
          0
