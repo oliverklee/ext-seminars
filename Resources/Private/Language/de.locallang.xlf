@@ -2686,6 +2686,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Event registration</source>
 				<target>Veranstaltungsanmeldung</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
+				<source>Your registration data</source>
+				<target>Ihre Anmeldedaten</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
+				<source>Your registration data</source>
+				<target>Deine Anmeldedaten</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 				<target>Für diese Veranstaltung ist keine Anmeldung möglich.</target>
@@ -2717,6 +2725,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.action.registerWithCosts">
 				<source>Confirm registration</source>
 				<target>Kostenpflichtig anmelden</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.comments">
+				<source>Comments</source>
+				<target>Anmerkungen</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

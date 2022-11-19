@@ -2025,6 +2025,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
 				<source>Event registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
+				<source>Your registration data</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
+				<source>Your registration data</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 			</trans-unit>
@@ -2048,6 +2054,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.action.registerWithCosts">
 				<source>Confirm registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.comments">
+				<source>Comments</source>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

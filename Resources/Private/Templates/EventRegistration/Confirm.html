@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
+      data-namespace-typo3-fluid="true">
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
-        <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
-
         <p class="alert alert-info" role="alert">
             ConfirmAction
         </p>
 
+        <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
+
         <f:form action="create" name="registration" object="{registration}" class="tx-seminars-event-registration">
             <f:form.hidden name="event" value="{event}"/>
+            <f:variable name="idPrefix" value="seminars-registration"/>
+            <f:variable name="labelPrefix" value="plugin.eventRegistration.property"/>
+
+            <h3>
+                <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
+            </h3>
+
+            <f:if condition="{registration.comments}">
+                <f:then>
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-comments" class="col-sm-2 col-form-label">
+                            <f:translate key="{labelPrefix}.comments"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="comments" id="{idPrefix}-comments"
+                                             class="form-control-plaintext" errorClass="is-invalid"
+                                             additionalAttributes="{readonly: 'readonly'}"/>
+                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'comments'}"/>
+                        </div>
+                    </div>
+                </f:then>
+                <f:else>
+                    <f:form.hidden property="comments"/>
+                </f:else>
+            </f:if>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
                 <f:if condition="{event.freeOfCharge}">
