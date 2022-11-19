@@ -2674,6 +2674,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Loginseite (oder mit Onetimeaccount)</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
+				<source>Folder in which to store the registrations</source>
+				<target>Ordner, in dem die Anmeldungen gespeichert werden</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>

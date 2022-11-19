@@ -24,6 +24,7 @@
                                 <size>1</size>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
                             </config>
                         </TCEforms>
                     </settings.pageForMissingEvent>
@@ -39,9 +40,26 @@
                                 <size>1</size>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
                             </config>
                         </TCEforms>
                     </settings.loginPage>
+                    <settings.registrationRecordsStorageFolder>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.registrationRecordsStorageFolder
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
+                            </config>
+                        </TCEforms>
+                    </settings.registrationRecordsStorageFolder>
                 </el>
             </ROOT>
         </general>
