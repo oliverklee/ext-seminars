@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\RegistrationGuard;
+use OliverKlee\Seminars\Service\RegistrationProcessor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -22,9 +23,19 @@ class EventRegistrationController extends ActionController
      */
     private $registrationGuard;
 
+    /**
+     * @var RegistrationProcessor
+     */
+    private $registrationProcessor;
+
     public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
     {
         $this->registrationGuard = $registrationGuard;
+    }
+
+    public function injectRegistrationProcessor(RegistrationProcessor $processor): void
+    {
+        $this->registrationProcessor = $processor;
     }
 
     /**
@@ -134,6 +145,9 @@ class EventRegistrationController extends ActionController
      */
     public function createAction(Event $event, Registration $registration): void
     {
+        $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
+        $this->registrationProcessor->persist($registration);
+
         $this->redirect('thankYou', null, null, ['event' => $event]);
     }
 
