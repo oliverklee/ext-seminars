@@ -32,6 +32,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the `omitDateIfSameAsPrevious` setting (#1906)
 - Deprecate the `showToBeAnnouncedForEmptyPrice` setting (#1897)
 - Deprecate seeing the registrations within an event in the TCEforms (#1891)
 - Deprecate the FE user email format settings (#1885)

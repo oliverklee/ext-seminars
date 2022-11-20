@@ -475,7 +475,7 @@ override the corresponding value from TS Setup.**
    Description
          whether to omit the date in the list view if it is the same as the
          previous item's (useful if you often have several events at the same
-         date)
+         date), @deprecated #1788 will be removed in seminars 5.0
 
    Default
          0
