@@ -43,8 +43,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This service checks and creates registrations for seminars.
- *
- * Use `getInstance()` for creating/retrieving an instance.
  */
 class RegistrationManager
 {
@@ -66,6 +64,8 @@ class RegistrationManager
     public const SEND_USER_MAIL = 2;
 
     /**
+     * @deprecated #1904 will be removed in seminars 5.0
+     *
      * @var static|null
      */
     private static $instance;
@@ -91,11 +91,13 @@ class RegistrationManager
     private $linkBuilder;
 
     /**
-     * @return static the current Singleton instance
+     * @return static the current singleton instance
+     *
+     * @deprecated #1904 will be removed in seminars 5.0
      */
     public static function getInstance(): RegistrationManager
     {
-        if (!self::$instance instanceof static) {
+        if (!self::$instance instanceof RegistrationManager) {
             $instance = GeneralUtility::makeInstance(static::class);
             self::$instance = $instance;
         }
@@ -104,11 +106,18 @@ class RegistrationManager
     }
 
     /**
-     * Purges the current instance so that getInstance will create a new instance.
+     * Purges the current instance so that `getInstance` will create a new instance.
+     *
+     * @deprecated #1904 will be removed in seminars 5.0
      */
     public static function purgeInstance(): void
     {
         self::$instance = null;
+    }
+
+    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
+    {
+        $this->linkBuilder = $linkBuilder;
     }
 
     /**
@@ -1426,17 +1435,20 @@ class RegistrationManager
     }
 
     /**
-     * Returns the (old) registration created via createRegistration.
+     * Returns the registration created via `createRegistration` or `setRegistration`.
      */
     public function getRegistration(): ?LegacyRegistration
     {
         return $this->registration;
     }
 
+    public function setRegistration(LegacyRegistration $registration): void
+    {
+        $this->registration = $registration;
+    }
+
     /**
      * Gets the hook provider for the registration emails.
-     *
-     * @return HookProvider
      */
     protected function getRegistrationEmailHookProvider(): HookProvider
     {
@@ -1446,11 +1458,6 @@ class RegistrationManager
         }
 
         return $this->registrationEmailHookProvider;
-    }
-
-    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
-    {
-        $this->linkBuilder = $linkBuilder;
     }
 
     /**

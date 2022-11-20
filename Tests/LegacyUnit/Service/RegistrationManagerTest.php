@@ -28,7 +28,6 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -515,55 +514,6 @@ final class RegistrationManagerTest extends TestCase
         $this->purgeMockedInstances();
 
         self::assertNotSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
-    }
-
-    // Tests regarding the Singleton property.
-
-    /**
-     * @test
-     */
-    public function getInstanceReturnsRegistrationManagerInstance(): void
-    {
-        self::assertInstanceOf(
-            RegistrationManager::class,
-            TestingRegistrationManager::getInstance()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getInstanceReturnsTestingRegistrationManagerInstance(): void
-    {
-        self::assertInstanceOf(
-            TestingRegistrationManager::class,
-            TestingRegistrationManager::getInstance()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getInstanceTwoTimesReturnsSameInstance(): void
-    {
-        self::assertSame(
-            TestingRegistrationManager::getInstance(),
-            TestingRegistrationManager::getInstance()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getInstanceAfterPurgeInstanceReturnsNewInstance(): void
-    {
-        $firstInstance = TestingRegistrationManager::getInstance();
-        TestingRegistrationManager::purgeInstance();
-
-        self::assertNotSame(
-            $firstInstance,
-            TestingRegistrationManager::getInstance()
-        );
     }
 
     // Tests concerning canRegisterIfLoggedIn
