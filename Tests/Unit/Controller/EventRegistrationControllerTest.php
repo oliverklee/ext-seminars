@@ -366,6 +366,19 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function createActionSendsEmail(): void
+    {
+        $registration = new Registration();
+        $this->subject->_set('settings', []);
+
+        $this->registrationProcesserMock->expects(self::once())->method('sendEmails')->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
     public function createActionRedirectsToThankYouActionAndPassesEvent(): void
     {
         $event = new SingleEvent();

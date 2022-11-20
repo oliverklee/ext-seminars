@@ -7,10 +7,13 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
+use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationGuard;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -37,6 +40,11 @@ final class RegistrationProcessorTest extends UnitTestCase
     private $registrationGuardMock;
 
     /**
+     * @var RegistrationManager&MockObject
+     */
+    private $registrationManagerMock;
+
+    /**
      * @var RegistrationProcessor
      */
     private $subject;
@@ -53,6 +61,8 @@ final class RegistrationProcessorTest extends UnitTestCase
         $this->subject->injectFrontendUserRepository($this->frontendUserRepositoryMock);
         $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
         $this->subject->injectRegistrationGuard($this->registrationGuardMock);
+        $this->registrationManagerMock = $this->createMock(RegistrationManager::class);
+        $this->subject->injectRegistrationManager($this->registrationManagerMock);
     }
 
     protected function tearDown(): void
@@ -168,5 +178,54 @@ final class RegistrationProcessorTest extends UnitTestCase
         $this->registrationRepositoryMock->expects(self::once())->method('persistAll');
 
         $this->subject->persist($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailsForRegistrationWithoutUidThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1668939288);
+        $this->expectExceptionMessage('The registration has not been persisted yet.');
+
+        $this->subject->sendEmails(new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailsForRegistrationWithZeroUidThrowsException(): void
+    {
+        $registration = $this->createMock(Registration::class);
+        $registration->method('getUid')->willReturn(0);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1668939288);
+        $this->expectExceptionMessage('The registration has not been persisted yet.');
+
+        $this->subject->sendEmails($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailsSendsEmailsWithLegacyRegistrationAndLegacyConfiguration(): void
+    {
+        $registrationUid = 15;
+        $registration = $this->createMock(Registration::class);
+        $registration->method('getUid')->willReturn($registrationUid);
+
+        $legacyRegistrationMock = $this->createMock(LegacyRegistration::class);
+        GeneralUtility::addInstance(LegacyRegistration::class, $legacyRegistrationMock);
+        $configurationMock = $this->createMock(LegacyRegistrationConfiguration::class);
+        GeneralUtility::addInstance(LegacyRegistrationConfiguration::class, $configurationMock);
+
+        $this->registrationManagerMock->expects(self::once())->method('setRegistration')
+            ->with($legacyRegistrationMock);
+        $this->registrationManagerMock->expects(self::once())->method('sendEmailsForNewRegistration')
+            ->with($configurationMock);
+
+        $this->subject->sendEmails($registration);
     }
 }

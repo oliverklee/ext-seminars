@@ -147,6 +147,7 @@ class EventRegistrationController extends ActionController
     {
         $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
         $this->registrationProcessor->persist($registration);
+        $this->registrationProcessor->sendEmails($registration);
 
         $this->redirect('thankYou', null, null, ['event' => $event]);
     }
