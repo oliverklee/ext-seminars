@@ -42,21 +42,29 @@ class Event extends AbstractTimeSpan implements Titled
     public const TYPE_DATE = 2;
 
     /**
+     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
+     *
      * @var array<int, self::STATUS_*>
      */
     private const VALID_STATUSES = [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED];
 
     /**
+     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
+     *
      * @var int the status "planned" for an event
      */
     public const STATUS_PLANNED = 0;
 
     /**
+     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
+     *
      * @var int the status "canceled" for an event
      */
     public const STATUS_CANCELED = 1;
 
     /**
+     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
+     *
      * @var int the status "confirmed" for an event
      */
     public const STATUS_CONFIRMED = 2;
@@ -1187,8 +1195,6 @@ class Event extends AbstractTimeSpan implements Titled
 
     /**
      * Checks whether this event still has the "planned" status.
-     *
-     * @return bool
      */
     public function isPlanned(): bool
     {
