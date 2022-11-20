@@ -69,7 +69,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = RegistrationManager::getInstance();
+        $this->subject = new RegistrationManager();
     }
 
     protected function tearDown(): void
@@ -122,6 +122,16 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $controller->conf = ['loginPID' => '2', 'registerPID' => '3'];
 
         return $controller;
+    }
+
+    /**
+     * @test
+     */
+    public function canBeCreatedWithMakeInstance(): void
+    {
+        $instance = GeneralUtility::makeInstance(RegistrationManager::class);
+
+        self::assertInstanceOf(RegistrationManager::class, $instance);
     }
 
     // Tests concerning notifyOrganizers

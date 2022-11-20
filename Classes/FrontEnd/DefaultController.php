@@ -3297,13 +3297,13 @@ class DefaultController extends TemplateHelper
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->getConfigurationWithFlexForms();
             $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
-            $this->injectLinkBuilder($linkBuilder);
+            $this->setLinkBuilder($linkBuilder);
         }
 
         return $this->linkBuilder;
     }
 
-    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
+    public function setLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }

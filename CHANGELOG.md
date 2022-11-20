@@ -53,6 +53,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed
+- Make the `RegistrationManager` injectable (#1915)
 - Update the `.editorconfig` and TypoScript lint settings (1875)
 - Fix renderings warnings in the documentation (#1826)
 - Stop using deprecated oelib functionality (#1819)

@@ -210,7 +210,7 @@ final class RegistrationManagerTest extends TestCase
             ['createAbsoluteUrlForEvent']
         );
         $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('https://singleview.example.com/');
-        $this->subject->injectLinkBuilder($linkBuilder);
+        $this->subject->setLinkBuilder($linkBuilder);
 
         $frontEndUserMapper = MapperRegistry::get(FrontEndUserMapper::class);
         $this->frontEndUserMapper = $frontEndUserMapper;
