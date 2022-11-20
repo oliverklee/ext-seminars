@@ -144,6 +144,9 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated #1788 will be removed in seminars 5.0
+     */
     private function checkOmitDateIfSameAsPrevious(): void
     {
         $this->checkIfBoolean(

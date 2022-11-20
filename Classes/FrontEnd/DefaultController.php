@@ -1927,6 +1927,7 @@ class DefaultController extends TemplateHelper
 
             $currentDate = $this->seminar->getDate();
             if (
+                // @deprecated #1788 will be removed in seminars 5.0
                 $currentDate == $this->previousDate
                 && $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')
             ) {
