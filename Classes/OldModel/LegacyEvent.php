@@ -1594,7 +1594,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Returns the number of associated registration records (i.e., the number in the counter cache).
      *
-     * @return int
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function getNumberOfAssociatedRegistrationRecords(): int
     {
@@ -1605,6 +1605,8 @@ class LegacyEvent extends AbstractTimeSpan
      * Increases the number of associated registration records by one.
      *
      * This method does not save this model.
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
      */
     public function increaseNumberOfAssociatedRegistrationRecords(): void
     {
