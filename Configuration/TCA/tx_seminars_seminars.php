@@ -72,6 +72,7 @@ $tca = [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_seminars_seminars',
+                // @deprecated  #1679 using single events (type 0) as topics will be removed in seminars 5.0
                 // only allow for topic records and complete event records, but not for date records
                 'foreign_table_where' => 'AND (tx_seminars_seminars.object_type = 0 OR tx_seminars_seminars.object_type = 1) ORDER BY title',
                 'default' => 0,
