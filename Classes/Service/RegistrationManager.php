@@ -115,7 +115,7 @@ class RegistrationManager
         self::$instance = null;
     }
 
-    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
+    public function setLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }
@@ -1061,7 +1061,7 @@ class RegistrationManager
     ): string {
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->buildConfigurationWithFlexforms($plugin);
-            $this->injectLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
+            $this->setLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
         }
 
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';

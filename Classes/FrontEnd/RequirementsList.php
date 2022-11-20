@@ -77,7 +77,7 @@ class RequirementsList extends AbstractView
 
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->getConfigurationWithFlexForms();
-            $this->injectLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
+            $this->setLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
         }
 
         $output = '';
@@ -121,7 +121,7 @@ class RequirementsList extends AbstractView
         return $result;
     }
 
-    public function injectLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
+    public function setLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }
