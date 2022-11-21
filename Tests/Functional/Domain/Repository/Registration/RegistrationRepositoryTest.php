@@ -86,6 +86,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame('fast escapes', $result->getExpectations());
         self::assertSame('Looking forward to the event!', $result->getComments());
         self::assertSame('the internet', $result->getKnownFrom());
+        self::assertSame('crash course', $result->getBackgroundKnowledge());
         self::assertTrue($result->hasSeparateBillingAddress());
     }
 
