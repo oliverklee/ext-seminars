@@ -64,8 +64,10 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'list_vip_registrations',
                 'edit_event',
                 'my_entered_events',
+                // @deprecated #1809 will be removed in seminars 5.0
                 'countdown',
                 'category_list',
+                // @deprecated #1924 will be removed in seminars 5.0
                 'event_headline',
             ]
         );
