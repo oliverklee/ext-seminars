@@ -6,12 +6,13 @@ namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a countdown to the next upcoming event.
+ *
+ * @deprecated #1809 will be removed in seminars 5.0
  */
 class Countdown extends AbstractView
 {
