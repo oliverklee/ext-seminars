@@ -24,6 +24,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
     'fe_groups',
     [
+        // @deprecated #1543 will be removed in seminars 5.0
         'tx_seminars_publish_events' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events',
@@ -132,6 +133,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_groups',
     '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tab_event_management,' .
+    // @deprecated #1543 will be removed in seminars 5.0
     'tx_seminars_publish_events,tx_seminars_events_pid,' .
     'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
     'tx_seminars_default_categories, tx_seminars_default_organizer'

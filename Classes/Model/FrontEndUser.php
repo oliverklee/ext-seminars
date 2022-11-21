@@ -23,6 +23,8 @@ class FrontEndUser extends OelibFrontEndUser
      * will be returned.
      *
      * @return FrontEndUserGroup::PUBLISH_*
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function getPublishSetting(): int
     {

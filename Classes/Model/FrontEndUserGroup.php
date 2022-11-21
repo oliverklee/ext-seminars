@@ -15,17 +15,23 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
 {
     /**
-     * @var int the publish setting to immediately publish all events edited
+     * @var int the publication setting to immediately publish all events edited
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public const PUBLISH_IMMEDIATELY = 0;
 
     /**
-     * @var int the publish setting for hiding only new events created
+     * @var int the publication setting for hiding only new events created
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public const PUBLISH_HIDE_NEW = 1;
 
     /**
-     * @var int the publish setting for hiding newly created and edited events
+     * @var int the publication setting for hiding newly created and edited events
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public const PUBLISH_HIDE_EDITED = 2;
 
@@ -35,6 +41,8 @@ class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
      * If no publish settings have been set, PUBLISH_IMMEDIATELY is returned.
      *
      * @return self::PUBLISH_*
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function getPublishSetting(): int
     {

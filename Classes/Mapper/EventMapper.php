@@ -50,6 +50,8 @@ class EventMapper extends AbstractDataMapper
 
     /**
      * Retrieves an event model with the publication hash provided.
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function findByPublicationHash(string $publicationHash): ?Event
     {

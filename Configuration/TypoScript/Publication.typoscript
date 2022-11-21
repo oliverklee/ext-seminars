@@ -1,3 +1,4 @@
+// @deprecated #1543 will be removed in seminars 5.0
 tx_seminars_publication = PAGE
 tx_seminars_publication {
   # The page type number for the publish links. Do not change this!
