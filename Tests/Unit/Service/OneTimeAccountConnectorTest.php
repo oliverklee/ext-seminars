@@ -142,4 +142,84 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
 
         self::assertSame($userUid, $this->subject->getOneTimeAccountUserUid());
     }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForRegularLoginDoesNotLogUserOut(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
+
+        $this->frontEndUserAuthenticationMock->expects(self::never())->method('logoff');
+
+        $this->subject->destroyOneTimeSession();
+    }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForRegularLoginDoesSetAnySessionDate(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
+
+        $this->frontEndUserAuthenticationMock->expects(self::never())->method('setAndSaveSessionData');
+
+        $this->subject->destroyOneTimeSession();
+    }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForOneTimeLoginLogsUserOut(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(true);
+
+        $this->frontEndUserAuthenticationMock->expects(self::once())->method('logoff');
+
+        $this->subject->destroyOneTimeSession();
+    }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForOneTimeSessionWithoutLoginRemovesUserUidFromSession(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
+        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+            ->willReturn(5);
+
+        $this->frontEndUserAuthenticationMock->expects(self::once())->method('setAndSaveSessionData')
+            ->with('onetimeaccountUserUid', null);
+
+        $this->subject->destroyOneTimeSession();
+    }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForRegularLoginAndOneTimeSessionDoesNotLogUserOut(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
+        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+            ->willReturn(5);
+
+        $this->frontEndUserAuthenticationMock->expects(self::never())->method('logoff');
+
+        $this->subject->destroyOneTimeSession();
+    }
+
+    /**
+     * @test
+     */
+    public function destroyOneTimeSessionForRegularLoginAndOneTimeSessionRemovesUserUidFromSession(): void
+    {
+        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(true);
+        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
+            ->willReturn(5);
+
+        $this->frontEndUserAuthenticationMock->expects(self::once())->method('setAndSaveSessionData')
+            ->with('onetimeaccountUserUid', null);
+
+        $this->subject->destroyOneTimeSession();
+    }
 }
