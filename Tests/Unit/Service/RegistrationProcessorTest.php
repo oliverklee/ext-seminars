@@ -10,6 +10,7 @@ use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationGuard;
@@ -28,6 +29,11 @@ final class RegistrationProcessorTest extends UnitTestCase
      * @var RegistrationRepository&MockObject
      */
     private $registrationRepositoryMock;
+
+    /**
+     * @var EventRepository&MockObject
+     */
+    private $eventRepositoryMock;
 
     /**
      * @var FrontEndUserRepository&MockObject
@@ -57,6 +63,8 @@ final class RegistrationProcessorTest extends UnitTestCase
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->subject->injectEventRepository($this->eventRepositoryMock);
         $this->frontendUserRepositoryMock = $this->createMock(FrontendUserRepository::class);
         $this->subject->injectFrontendUserRepository($this->frontendUserRepositoryMock);
         $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
@@ -170,12 +178,39 @@ final class RegistrationProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    public function persistForRegistationWithoutEventThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1669036253);
+        $this->expectExceptionMessage('The registration has no associated event.');
+
+        $this->subject->persist(new Registration());
+    }
+
+    /**
+     * @test
+     */
     public function persistPersistsRegistration(): void
     {
         $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
 
         $this->registrationRepositoryMock->expects(self::once())->method('add')->with($registration);
         $this->registrationRepositoryMock->expects(self::once())->method('persistAll');
+
+        $this->subject->persist($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function persistUpdateEventRegistrationsCounterCache(): void
+    {
+        $event = new SingleEvent();
+        $registration = new Registration();
+        $registration->setEvent($event);
+
+        $this->eventRepositoryMock->expects(self::once())->method('updateRegistrationCounterCache')->with($event);
 
         $this->subject->persist($registration);
     }

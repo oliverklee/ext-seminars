@@ -662,4 +662,96 @@ final class EventRepositoryTest extends FunctionalTestCase
         $firstMatch = $result[0];
         self::assertSame(2, $firstMatch->getUid());
     }
+
+    /**
+     * @test
+     */
+    public function updateRegistrationCounterCacheForNoRegistrationsSetsCounterCacheAtZero(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(0, (int)$databaseRow['registrations']);
+    }
+
+    /**
+     * @test
+     */
+    public function updateRegistrationCounterCacheForRegistrationsSetsCounterCacheToRegistrationsCount(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithTwoRegistrationsWithZeroCounterCache.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(2, (int)$databaseRow['registrations']);
+    }
+
+    /**
+     * @test
+     */
+    public function updateRegistrationCounterCacheIgnoresHiddenRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(0, (int)$databaseRow['registrations']);
+    }
+
+    /**
+     * @test
+     */
+    public function updateRegistrationCounterCacheIgnoresDeletedRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(0, (int)$databaseRow['registrations']);
+    }
 }
