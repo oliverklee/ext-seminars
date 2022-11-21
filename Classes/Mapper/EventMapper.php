@@ -119,6 +119,8 @@ class EventMapper extends AbstractDataMapper
      * @return Event the next upcoming event
      *
      * @throws NotFoundException
+     *
+     * @deprecated #1809 will be removed in seminars 5.0
      */
     public function findNextUpcoming(): Event
     {

@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the event countdown (#1933)
 - Deprecate the `CommaSeparatedTitlesViewHelper` (#1928)
 - Deprecate the `Event::STATUS_*` constants (#1916)
 - Deprecate using single events as topics for event dates (#1913)
