@@ -2750,9 +2750,41 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Confirm registration</source>
 				<target>Kostenpflichtig anmelden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.interests_formal">
+				<source>What are your interests concerning this event?</source>
+				<target>Was interessiert Sie bei dieser Veranstaltung?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.interests_informal">
+				<source>What are your interests concerning this event?</source>
+				<target>Was interessiert dich bei dieser Veranstaltung?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.expectations_formal">
+				<source>What are your expectations?</source>
+				<target>Was sind Ihre Erwartungen?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.expectations_informal">
+				<source>What are your expectations?</source>
+				<target>Was sind deine Erwartungen?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_formal">
+				<source>What are is your background knowledge?</source>
+				<target>Was ist Ihr Hintergrundwissen?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_informal">
+				<source>What are is your background knowledge?</source>
+				<target>Was ist dein Hintergrundwissen?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.knownFrom_formal">
+				<source>How did you hear about this event?</source>
+				<target>Wie haben Sie von dieser Veranstaltung erfahren?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
+				<source>What are is your background knowledge on the topic of this event?</source>
+				<target>Wie hast du von dieser Veranstaltung erfahren?</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.comments">
-				<source>Comments</source>
-				<target>Anmerkungen</target>
+				<source>Other comments</source>
+				<target>Sonstige Anmerkungen</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
