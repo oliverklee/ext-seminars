@@ -702,4 +702,23 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertTrue($this->subject->hasSeparateBillingAddress());
     }
+
+    /**
+     * @test
+     */
+    public function getBackgroundKnowledgeInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getBackgroundKnowledge());
+    }
+
+    /**
+     * @test
+     */
+    public function setBackgroundKnowledgeSetsBackgroundKnowledge(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setBackgroundKnowledge($value);
+
+        self::assertSame($value, $this->subject->getBackgroundKnowledge());
+    }
 }

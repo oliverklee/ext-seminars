@@ -59,6 +59,12 @@ class Registration extends AbstractEntity
      * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 16383})
      */
+    protected $backgroundKnowledge = '';
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     */
     protected $comments = '';
 
     /**
@@ -169,6 +175,16 @@ class Registration extends AbstractEntity
     public function setExpectations(string $expectations): void
     {
         $this->expectations = $expectations;
+    }
+
+    public function getBackgroundKnowledge(): string
+    {
+        return $this->backgroundKnowledge;
+    }
+
+    public function setBackgroundKnowledge(string $backgroundKnowledge): void
+    {
+        $this->backgroundKnowledge = $backgroundKnowledge;
     }
 
     public function getComments(): string
