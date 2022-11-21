@@ -1356,12 +1356,17 @@ class Event extends AbstractTimeSpan implements Titled
     /**
      * @return string the publication hash of this event, will be empty if this
      *                event has no publication hash set
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function getPublicationHash(): string
     {
         return $this->getAsString('publication_hash');
     }
 
+    /**
+     * @deprecated #1543 will be removed in seminars 5.0
+     */
     public function hasPublicationHash(): bool
     {
         return $this->hasString('publication_hash');
@@ -1369,8 +1374,9 @@ class Event extends AbstractTimeSpan implements Titled
 
     /**
      * @param string $hash the publication hash, use a non-empty string to mark an event as
-     *        "not published yet" and an empty string to mark an event as
-     *        published
+     *        "not published yet" and an empty string to mark an event as published
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function setPublicationHash(string $hash): void
     {
@@ -1379,6 +1385,8 @@ class Event extends AbstractTimeSpan implements Titled
 
     /**
      * Purges the publication hash of this event.
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function purgePublicationHash(): void
     {
@@ -1392,6 +1400,8 @@ class Event extends AbstractTimeSpan implements Titled
      * hidden or not.
      *
      * @return bool TRUE if this event has been published, FALSE otherwise
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function isPublished(): bool
     {

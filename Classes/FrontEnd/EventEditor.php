@@ -752,10 +752,12 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Checks the publish settings of the user and hides the event record if necessary.
+     * Checks the publication settings of the user and hides the event record if necessary.
      *
      * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
      *        if the seminar must be hidden corresponding to the publish settings of the user, must not be empty
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     private function checkPublishSettings(array &$formData): void
     {
@@ -1095,6 +1097,8 @@ class EventEditor extends AbstractEditor
 
     /**
      * Sends the publishing e-mail to the reviewer if necessary.
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function sendEmailToReviewer(): void
     {
@@ -1133,11 +1137,11 @@ class EventEditor extends AbstractEditor
     /**
      * Builds the content for the publishing e-mail to the reviewer.
      *
-     * @deprecated #1543 will be removed in seminars 5.0
-     *
      * @param Event $event the event to send the publication e-mail for
      *
      * @return string the e-mail body for the publishing e-mail, will not be empty
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     private function createEmailContent(Event $event): string
     {

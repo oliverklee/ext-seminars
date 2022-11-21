@@ -43,7 +43,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Deprecate the FE user email format settings (#1885)
 - Deprecate FE editing for managers (#1866)
 - Deprecate hiding events in the FE editor (#1864)
-- Deprecate the FE editor approval workflow (#1849)
+- Deprecate the FE editor approval workflow (#1849, #1934)
 - Deprecate the legacy registration form (#1844)
 - Deprecate the automatic gender-specific salutations (#1839)
 - Deprecate the board-related prices (#1831)

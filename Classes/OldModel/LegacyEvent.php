@@ -4169,8 +4169,9 @@ class LegacyEvent extends AbstractTimeSpan
      * The publication hash is not related to whether an event is hidden:
      * Visible events may also have a non-empty publication hash.
      *
-     * @return string this event's publication hash, will be empty for published
-     *                events
+     * @return string this event's publication hash, will be empty for published events
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function getPublicationHash(): string
     {
@@ -4181,8 +4182,9 @@ class LegacyEvent extends AbstractTimeSpan
      * Sets this event's publication hash.
      *
      * @param string $hash the publication hash, use a non-empty string to mark an event as
-     *        "not published yet" and an empty string to mark an event as
-     *        published
+     *        "not published yet" and an empty string to mark an event as published
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function setPublicationHash(string $hash): void
     {
@@ -4196,6 +4198,8 @@ class LegacyEvent extends AbstractTimeSpan
      * hidden or not.
      *
      * @return bool TRUE if this event has been published, FALSE otherwise
+     *
+     * @deprecated #1543 will be removed in seminars 5.0
      */
     public function isPublished(): bool
     {
