@@ -2532,6 +2532,22 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Tu es déjà enregistré à cet événement.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+				<target>Paiement</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Adresse de paiement</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
+				<source>Persons to register</source>
+				<target>Personnes inscrites</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+				<target>Informations supplémentaires</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Prix normal</target>

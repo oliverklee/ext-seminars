@@ -2512,6 +2512,18 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Je bent al voor dit evenement bijeenkomst aangemeld.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+				<target>Betalen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Factuur adres</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+				<target>Extra informatie</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standaardprijs</target>

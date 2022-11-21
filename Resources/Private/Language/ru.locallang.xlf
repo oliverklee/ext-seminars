@@ -2228,6 +2228,14 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Ты уже зарегистрированы на это мероприятие.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Адрес для выставления счета</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+				<target>Следующая информация</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Обычная цена</target>

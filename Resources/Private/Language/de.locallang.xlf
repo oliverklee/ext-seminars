@@ -2710,6 +2710,26 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Your registration has been sent.</source>
 				<target>Deine Anmeldung wurde abgeschickt.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+				<target>Bezahlung</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Rechnungsadresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
+				<source>Persons to register</source>
+				<target>Anzumeldende Personen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.foodAndAccommodation">
+				<source>Food and accommodation</source>
+				<target>Essen und Unterbringung</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+				<target>Weitere Informationen</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
 				<source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
 				<target>Vielen Dank für Ihre Anmeldung zu unserer Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!</target>
