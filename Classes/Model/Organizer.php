@@ -97,6 +97,8 @@ class Organizer extends AbstractModel implements MailRole, Titled
 
     /**
      * @return int our attendances PID, will be >= 0
+     *
+     * @deprecated #1922 will be removed in seminars 5.0
      */
     public function getAttendancesPID(): int
     {
@@ -105,6 +107,8 @@ class Organizer extends AbstractModel implements MailRole, Titled
 
     /**
      * @param int $attendancesPID our attendances PID, must be >= 0
+     *
+     * @deprecated #1922 will be removed in seminars 5.0
      */
     public function setAttendancesPID(int $attendancesPID): void
     {
@@ -115,6 +119,9 @@ class Organizer extends AbstractModel implements MailRole, Titled
         $this->setAsInteger('attendances_pid', $attendancesPID);
     }
 
+    /**
+     * @deprecated #1922 will be removed in seminars 5.0
+     */
     public function hasAttendancesPID(): bool
     {
         return $this->hasInteger('attendances_pid');

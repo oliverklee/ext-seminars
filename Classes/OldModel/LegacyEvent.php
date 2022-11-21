@@ -3038,6 +3038,8 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return int the PID of the system folder where registration records
      *                 for this event should be stored or 0 if no folder is set
+     *
+     * @deprecated #1922 will be removed in seminars 5.0
      */
     public function getAttendancesPid(): int
     {
@@ -3053,6 +3055,8 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return bool TRUE if a the system folder for registration is specified in this event's topmost organizers record,
      *                 FALSE otherwise
+     *
+     * @deprecated #1922 will be removed in seminars 5.0
      */
     public function hasAttendancesPid(): bool
     {
