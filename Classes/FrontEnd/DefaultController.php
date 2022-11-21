@@ -300,6 +300,7 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'countdown':
+                // @deprecated #1809 will be removed in seminars 5.0
                 $countdown = GeneralUtility::makeInstance(
                     Countdown::class,
                     $this->conf,
@@ -333,6 +334,7 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'event_headline':
+                // @deprecated #1924 will be removed in seminars 5.0
                 $eventHeadline = GeneralUtility::makeInstance(
                     EventHeadline::class,
                     $this->conf,

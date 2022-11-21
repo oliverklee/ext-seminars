@@ -11,6 +11,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class displays an event headline consisting of the event title and date.
+ *
+ * @deprecated #1924 will be removed in seminars 5.0
  */
 class EventHeadline extends AbstractView
 {
