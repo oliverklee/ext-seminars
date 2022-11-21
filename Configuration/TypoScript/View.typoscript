@@ -1,0 +1,13 @@
+plugin.tx_seminars.view {
+  templateRootPaths {
+    0 = EXT:seminars/Resources/Private/Templates/
+  }
+
+  partialRootPaths {
+    0 = EXT:seminars/Resources/Private/Partials/
+  }
+
+  layoutRootPaths {
+    0 = EXT:seminars/Resources/Private/Layouts/
+  }
+}
