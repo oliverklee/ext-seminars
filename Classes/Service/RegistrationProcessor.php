@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -33,6 +34,11 @@ class RegistrationProcessor implements SingletonInterface
     private $registrationRepository;
 
     /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+
+    /**
      * @var FrontendUserRepository
      */
     private $frontendUserRepository;
@@ -50,6 +56,11 @@ class RegistrationProcessor implements SingletonInterface
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
+    }
+
+    public function injectEventRepository(EventRepository $repository): void
+    {
+        $this->eventRepository = $repository;
     }
 
     public function injectFrontendUserRepository(FrontendUserRepository $repository): void
@@ -120,12 +131,21 @@ class RegistrationProcessor implements SingletonInterface
     }
 
     /**
-     * Persists a registration. Call `enrichWithMetadata` first.
+     * Persists a registration and updates the `Event.registrations` counter cache.
+     *
+     * Call `enrichWithMetadata` first before calling this method.
      */
     public function persist(Registration $registration): void
     {
+        $event = $registration->getEvent();
+        if (!$event instanceof Event) {
+            throw new \RuntimeException('The registration has no associated event.', 1669036253);
+        }
+
         $this->registrationRepository->add($registration);
         $this->registrationRepository->persistAll();
+
+        $this->eventRepository->updateRegistrationCounterCache($event);
     }
 
     /**
