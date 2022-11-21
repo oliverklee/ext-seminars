@@ -2041,10 +2041,10 @@ This event now has been confirmed.</source>
 				<source>Your registration has been sent.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
-				<source>Thank you for registering for this event. We are looking forward to seeing you there!</source>
+				<source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
-				<source>Thank you for registering for this event. We're looking forward to seeing you there!</source>
+				<source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
