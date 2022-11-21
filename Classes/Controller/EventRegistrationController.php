@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -28,6 +29,11 @@ class EventRegistrationController extends ActionController
      */
     private $registrationProcessor;
 
+    /**
+     * @var OneTimeAccountConnector
+     */
+    private $oneTimeAccountConnector;
+
     public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
     {
         $this->registrationGuard = $registrationGuard;
@@ -36,6 +42,11 @@ class EventRegistrationController extends ActionController
     public function injectRegistrationProcessor(RegistrationProcessor $processor): void
     {
         $this->registrationProcessor = $processor;
+    }
+
+    public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
+    {
+        $this->oneTimeAccountConnector = $connector;
     }
 
     /**
@@ -149,6 +160,8 @@ class EventRegistrationController extends ActionController
         $this->registrationProcessor->createTitle($registration);
         $this->registrationProcessor->persist($registration);
         $this->registrationProcessor->sendEmails($registration);
+
+        $this->oneTimeAccountConnector->destroyOneTimeSession();
 
         $this->redirect('thankYou', null, null, ['event' => $event]);
     }

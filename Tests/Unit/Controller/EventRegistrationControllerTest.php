@@ -9,6 +9,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -39,6 +40,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
     private $registrationProcesserMock;
 
     /**
+     * @var OneTimeAccountConnector&MockObject
+     */
+    private $oneTimeAccountConnectorMock;
+
+    /**
      * @var TemplateView&MockObject
      */
     private $viewMock;
@@ -63,6 +69,8 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->subject->injectRegistrationGuard($this->registrationGuardMock);
         $this->registrationProcesserMock = $this->createMock(RegistrationProcessor::class);
         $this->subject->injectRegistrationProcessor($this->registrationProcesserMock);
+        $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
+        $this->subject->injectOneTimeAccountConnector($this->oneTimeAccountConnectorMock);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -385,6 +393,19 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->subject->_set('settings', []);
 
         $this->registrationProcesserMock->expects(self::once())->method('sendEmails')->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function createDestroysOneTimeAccountSession(): void
+    {
+        $registration = new Registration();
+        $this->subject->_set('settings', []);
+
+        $this->oneTimeAccountConnectorMock->expects(self::once())->method('destroyOneTimeSession');
 
         $this->subject->createAction(new SingleEvent(), $registration);
     }

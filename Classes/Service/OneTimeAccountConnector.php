@@ -57,4 +57,23 @@ class OneTimeAccountConnector implements SingletonInterface
 
         return $uid;
     }
+
+    /**
+     * Destroys any onetimeaccount sessions (with or without login).
+     *
+     * If a onetimeaccount login session is active, the user will be logged out.
+     *
+     * If no user is logged in, but a onetimeaccount user UID is available in the session, it will be deleted.
+     *
+     * If regular FE user is logged in, nothing happens.
+     */
+    public function destroyOneTimeSession(): void
+    {
+        if ($this->existsOneTimeAccountLoginSession()) {
+            $this->frontEndUserAuthentication->logoff();
+        }
+        if (\is_int($this->getOneTimeAccountUserUid())) {
+            $this->frontEndUserAuthentication->setAndSaveSessionData('onetimeaccountUserUid', null);
+        }
+    }
 }
