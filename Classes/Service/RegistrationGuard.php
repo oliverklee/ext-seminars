@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -44,7 +46,12 @@ class RegistrationGuard implements SingletonInterface
 
     public function isRegistrationPossibleAtAnyTimeAtAll(Event $event): bool
     {
-        return $event instanceof EventDateInterface && $event->isRegistrationRequired();
+        $isPossible = $event instanceof EventDateInterface && $event->isRegistrationRequired();
+        if ($isPossible && $event instanceof EventDate) {
+            $isPossible = $event->getTopic() instanceof EventTopic;
+        }
+
+        return $isPossible;
     }
 
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool

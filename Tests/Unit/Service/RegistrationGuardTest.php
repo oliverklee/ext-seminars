@@ -99,9 +99,12 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function nonTopicEventDataProvider(): array
     {
+        $eventDate = new EventDate();
+        $eventDate->setTopic(new EventTopic());
+
         return [
             'single event' => [new SingleEvent()],
-            'event date' => [new EventDate()],
+            'event date with topic' => [$eventDate],
         ];
     }
 
@@ -133,6 +136,17 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setRegistrationRequired(true);
 
         self::assertTrue($this->subject->isRegistrationPossibleAtAnyTimeAtAll($event));
+    }
+
+    /**
+     * @test
+     */
+    public function isRegistrationPossibleAtAnyTimeAtAllForEventDateWithoutTopicReturnsFalse(): void
+    {
+        $eventDate = new EventDate();
+        $eventDate->setRegistrationRequired(true);
+
+        self::assertFalse($this->subject->isRegistrationPossibleAtAnyTimeAtAll($eventDate));
     }
 
     /**
