@@ -162,7 +162,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->subject->add($registration);
         $this->persistenceManager->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
         $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
         if (\method_exists($result, 'fetchAssociative')) {
@@ -184,7 +184,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->subject->add($registration);
         $this->subject->persistAll();
 
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
         $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
         if (\method_exists($result, 'fetchAssociative')) {
