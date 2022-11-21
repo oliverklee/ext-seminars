@@ -668,6 +668,8 @@ class RegistrationManager
      * @param LegacyEvent $event the event to check
      *
      * @return bool TRUE if the user fulfills all requirements, FALSE otherwise
+     *
+     * @deprecated #1843 will be removed in seminars 5.0
      */
     public function userFulfillsRequirements(LegacyEvent $event): bool
     {
@@ -683,6 +685,8 @@ class RegistrationManager
      * @param LegacyEvent $event the event to check
      *
      * @return EventBag the event topics which still need the user's registration, may be empty
+     *
+     * @deprecated #1843 will be removed in seminars 5.0
      */
     public function getMissingRequiredTopics(LegacyEvent $event): EventBag
     {

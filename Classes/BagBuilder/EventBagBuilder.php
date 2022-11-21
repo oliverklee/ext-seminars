@@ -986,6 +986,8 @@ class EventBagBuilder extends AbstractBagBuilder
      * be counted as not existing.
      *
      * @param positive-int $uid the UID of the front-end user whose registered events should be removed from the bag
+     *
+     * @deprecated #1843 will be removed in seminars 5.0
      */
     public function limitToTopicsWithoutRegistrationByUser(int $uid): void
     {
