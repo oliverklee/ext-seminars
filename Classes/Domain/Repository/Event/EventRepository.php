@@ -64,8 +64,8 @@ class EventRepository extends Repository implements DirectPersist
                     $registrationQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
                 )
             );
-        if (\method_exists($registrationCountQuery, 'executeStatement')) {
-            $registrationCountQueryResult = $registrationCountQuery->executeStatement();
+        if (\method_exists($registrationCountQuery, 'executeQuery')) {
+            $registrationCountQueryResult = $registrationCountQuery->executeQuery();
         } else {
             $registrationCountQueryResult = $registrationCountQuery->execute();
         }
