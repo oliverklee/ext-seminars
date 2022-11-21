@@ -33,7 +33,7 @@ final class RegistrationManagerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getInstanceReturnsRegistationManagerInstance(): void
+    public function getInstanceReturnsRegistrationManagerInstance(): void
     {
         self::assertInstanceOf(RegistrationManager::class, RegistrationManager::getInstance());
     }
