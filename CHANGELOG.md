@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 - Add TypoScript settings for the Fluid templates (#1927)
 - Add a `OneTimeAccountConnector` (#1865)
-- Add a `RegistrationGuard` class (#1838, #1846, #1855, #1901)
+- Add a `RegistrationGuard` class (#1838, #1846, #1855, #1901, #1937)
 - Add a rewritten registration form for TYPO3 >= 10LTS
   (#1825, #1830, #1848, #1855, #1861, #1871, #1873, #1886, #1889, #1890, #1892,
   #1893, #1896, #1898, #1899, #1902, #1906, #1914, #1920, #1932)
