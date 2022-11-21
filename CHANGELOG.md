@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the "duplicate event" functionality in the FE editor (#1940)
 - Deprecate the requirements check (#1938)
 - Deprecate the event countdown (#1933)
 - Deprecate the `CommaSeparatedTitlesViewHelper` (#1928)

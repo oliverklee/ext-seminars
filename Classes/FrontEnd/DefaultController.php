@@ -2331,6 +2331,8 @@ class DefaultController extends TemplateHelper
      * This function does not check the edit permissions for this event.
      *
      * @return string HTML for the link, will not be empty
+     *
+     * @deprecated #1862 will be removed in seminars 5.0
      */
     protected function createCopyLink(): string
     {
@@ -3210,6 +3212,7 @@ class DefaultController extends TemplateHelper
                 $this->unhideEvent($event);
                 break;
             case 'copy':
+                // @deprecated #1862 will be removed in seminars 5.0
                 $this->copyEvent($event);
                 break;
             default:
@@ -3243,6 +3246,8 @@ class DefaultController extends TemplateHelper
 
     /**
      * Creates a hidden copy of the given and saves it.
+     *
+     * @deprecated #1862 will be removed in seminars 5.0
      */
     protected function copyEvent(Event $event): void
     {
