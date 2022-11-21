@@ -636,6 +636,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Y-m-d</source>
 				<target>d.m.Y</target>
 			</trans-unit>
+			<trans-unit id="registrationTitleFormat">
+				<source>%1s / %2s, %3s</source>
+				<target>%1s / %2s, %3s</target>
+			</trans-unit>
 			<trans-unit id="message_403" xml:space="preserve">
 				<source>Error 403. Sorry, you don't have access to this data.</source>
 				<target>Fehler 403. Sorry, Sie haben nicht die Berechtigung, auf diese Daten zuzugreifen.</target>
