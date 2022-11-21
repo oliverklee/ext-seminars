@@ -2500,6 +2500,14 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Sei già registrato per questo evento.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+				<target>Pagamento</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Indirizzo fatturazione</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Prezzo regolare</target>

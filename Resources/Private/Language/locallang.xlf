@@ -2043,6 +2043,21 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
 				<source>Your registration has been sent.</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
+				<source>Persons to register</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.foodAndAccommodation">
+				<source>Food and accommodation</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
 				<source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
 			</trans-unit>

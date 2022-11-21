@@ -2498,6 +2498,18 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Du er allerede tilmeldt dette arrangement.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.payment">
+				<source>Payment</source>
+				<target>Betaling</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+				<source>Billing address</source>
+				<target>Faktureringsadresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+				<source>Additional information</source>
+				<target>Yderlig information</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Pris</target>
