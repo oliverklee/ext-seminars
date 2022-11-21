@@ -1326,6 +1326,11 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationProcessorTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationProcessorTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Service/SingleViewLinkBuilderTest.php

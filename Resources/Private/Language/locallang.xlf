@@ -489,6 +489,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="dateFormat" xml:space="preserve">
 				<source>Y-m-d</source>
 			</trans-unit>
+			<trans-unit id="registrationTitleFormat">
+				<source>%1s / %2s, %3s</source>
+			</trans-unit>
 			<trans-unit id="message_403" xml:space="preserve">
 				<source>Error 403. Sorry, you don't have access to this data.</source>
 			</trans-unit>

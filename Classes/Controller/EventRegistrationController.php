@@ -146,6 +146,7 @@ class EventRegistrationController extends ActionController
     public function createAction(Event $event, Registration $registration): void
     {
         $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
+        $this->registrationProcessor->createTitle($registration);
         $this->registrationProcessor->persist($registration);
         $this->registrationProcessor->sendEmails($registration);
 

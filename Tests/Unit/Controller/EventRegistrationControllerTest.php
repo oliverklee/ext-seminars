@@ -353,6 +353,19 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function createActionCreatesRegistrationTitle(): void
+    {
+        $registration = new Registration();
+        $this->subject->_set('settings', []);
+
+        $this->registrationProcesserMock->expects(self::once())->method('createTitle')->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
     public function createActionPersistsRegistration(): void
     {
         $registration = new Registration();
