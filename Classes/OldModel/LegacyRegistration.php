@@ -237,6 +237,7 @@ class LegacyRegistration extends AbstractModel
         $this->recordData['known_from'] = $registrationData['known_from'];
         $this->recordData['notes'] = $registrationData['notes'];
 
+        // @deprecated #1922 organizer-specific registration folders will be removed in seminars 5.0
         $this->recordData['pid'] = $this->seminar->hasAttendancesPid()
             ? $this->seminar->getAttendancesPid() : $this->getSharedConfiguration()->getAsInteger('attendancesPID');
 

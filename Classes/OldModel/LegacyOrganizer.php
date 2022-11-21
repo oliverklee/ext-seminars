@@ -71,8 +71,9 @@ class LegacyOrganizer extends AbstractModel implements MailRole
     /**
      * Gets our attendances PID, will be 0 if there is no attendances PID set.
      *
-     * @return int our attendances PID or 0 if there is no attendances
-     *                 PID set
+     * @return int our attendances PID or 0 if there is no attendances PID set
+     *
+     * @deprecated #1922 will be removed in seminars 5.0
      */
     public function getAttendancesPid(): int
     {

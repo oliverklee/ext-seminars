@@ -66,6 +66,7 @@ $tca = [
                 'rows' => 5,
             ],
         ],
+        // # @deprecated #1922 will be removed in seminars 5.0
         'attendances_pid' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.attendances_pid',

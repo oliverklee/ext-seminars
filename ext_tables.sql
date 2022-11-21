@@ -433,6 +433,7 @@ CREATE TABLE tx_seminars_organizers (
     homepage tinytext,
     email tinytext,
     email_footer text,
+    # @deprecated #1922 will be removed in seminars 5.0
     attendances_pid int(11) unsigned DEFAULT '0' NOT NULL,
     description text,
 
