@@ -2121,6 +2121,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.seats">
 				<source>Seats to book</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registeredThemselves">
+				<source>I am registering myself.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
+				<source>I am not registering myself.</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>

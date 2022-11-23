@@ -2814,6 +2814,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Seats to book</source>
 				<target>Zu buchende Plätze</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registeredThemselves">
+				<source>I am registering myself.</source>
+				<target>Ich melde mich selbst an.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
+				<source>I am not registering myself.</source>
+				<target>Ich melde mich selbst nicht an.</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>
