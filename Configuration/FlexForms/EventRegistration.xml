@@ -60,6 +60,24 @@
                             </config>
                         </TCEforms>
                     </settings.registrationRecordsStorageFolder>
+                    <settings.maximumBookableSeats>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.maximumBookableSeats
+                            </label>
+                            <config>
+                                <type>input</type>
+                                <range>
+                                    <lower>1</lower>
+                                    <upper>999</upper>
+                                </range>
+                                <size>3</size>
+                                <max>3</max>
+                                <eval>int,nospace,trim</eval>
+                                <default>10</default>
+                            </config>
+                        </TCEforms>
+                    </settings.maximumBookableSeats>
                 </el>
             </ROOT>
         </general>

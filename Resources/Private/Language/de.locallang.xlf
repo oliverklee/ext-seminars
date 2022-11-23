@@ -2682,6 +2682,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Folder in which to store the registrations</source>
 				<target>Ordner, in dem die Anmeldungen gespeichert werden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
+				<source>Maximum bookable seats per registration</source>
+				<target>Maximal buchbare Plätze pro Anmeldung</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>
@@ -2805,6 +2809,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.property.comments">
 				<source>Other comments</source>
 				<target>Sonstige Anmerkungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.seats">
+				<source>Seats to book</source>
+				<target>Zu buchende Plätze</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

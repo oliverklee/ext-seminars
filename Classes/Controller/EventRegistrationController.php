@@ -136,6 +136,8 @@ class EventRegistrationController extends ActionController
         $newRegistration = $registration instanceof Registration
             ? $registration : GeneralUtility::makeInstance(Registration::class);
         $this->view->assign('registration', $newRegistration);
+
+        $this->view->assign('maximumBookableSeats', (int)($this->settings['maximumBookableSeats'] ?? 10));
     }
 
     /**

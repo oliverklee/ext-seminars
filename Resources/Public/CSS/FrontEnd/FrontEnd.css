@@ -595,9 +595,22 @@ table.tx-seminars-pi1-timeslots td {
     margin: .5em 0;
 }
 
+/*
+ * FE editor
+ */
+
 .tx-seminars-frontendeditor input.form-control[type="datetime-local"] {
     width: 13em;
 }
+
 .tx-seminars-frontendeditor input.form-control[autocomplete="number"] {
     width: 13em;
+}
+
+/*
+ * Registration form
+ */
+
+form.tx-seminars-event-registration input[type="number"] {
+    width: 3em;
 }

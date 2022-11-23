@@ -2022,6 +2022,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
 				<source>Folder in which to store the registrations</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
+				<source>Maximum bookable seats per registration</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 			</trans-unit>
@@ -2114,6 +2117,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.comments">
 				<source>Other comments</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.seats">
+				<source>Seats to book</source>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
