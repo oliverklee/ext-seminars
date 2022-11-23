@@ -329,7 +329,7 @@ TYPO3.seminars.clearSearchWidgetFields = function() {
  * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
  */
 TYPO3.seminars.convertActionLinks = function() {
-  jQuery('a[data-method]').click(TYPO3.seminars.executeLinkAction);
+  jQuery('.tx-seminars-pi1 a[data-method]').click(TYPO3.seminars.executeLinkAction);
 };
 
 /**
@@ -432,11 +432,7 @@ TYPO3.seminars.initializeRegistrationForm = function() {
   TYPO3.seminars.preventMultipleFormSubmit();
 };
 
-jQuery(document).ready(function() {
-  if (jQuery('.tx-seminars-pi1').length === 0) {
-    return;
-  }
-
+document.addEventListener('readystatechange', function() {
   TYPO3.seminars.initializeSearchWidget();
   TYPO3.seminars.initializeRegistrationForm();
   TYPO3.seminars.convertActionLinks();
