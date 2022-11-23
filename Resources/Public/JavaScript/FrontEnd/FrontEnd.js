@@ -5,6 +5,23 @@
 
 var TYPO3 = TYPO3 || {};
 TYPO3.seminars = {};
+TYPO3.seminars.elements = {};
+
+/**
+ * Classes that will show an element (with `display: block;`).
+ *
+ * The first class comes from Bootstrap, while the other is our own
+ * (so that this feature works both with the Bootstrap CSS or the seminars CSS).
+ */
+TYPO3.seminars.visibilityClasses = ['d-block', 'tx-seminars-display-block'];
+
+/**
+ * Classes that will hide an element (with `display: none;`).
+ *
+ * The first class comes from Bootstrap, while the other is our own
+ * (so that this feature works both with the Bootstrap CSS or the seminars CSS).
+ */
+TYPO3.seminars.invisibilityClasses = ['d-none', 'tx-seminars-display-none'];
 
 /**
  * Marks the current attachment as deleted if the confirm becomes submitted.
@@ -413,10 +430,7 @@ TYPO3.seminars.updateAttendees = function() {
   TYPO3.seminars.compileNames();
 };
 
-/**
- * Initializes the registration form.
- */
-TYPO3.seminars.initializeRegistrationForm = function() {
+TYPO3.seminars.initializeLegacyRegistrationForm = function() {
   var registrationForm = jQuery('#tx-seminars-pi1-registration-form');
   if (registrationForm.length === 0) {
     return;
@@ -432,8 +446,73 @@ TYPO3.seminars.initializeRegistrationForm = function() {
   TYPO3.seminars.preventMultipleFormSubmit();
 };
 
+TYPO3.seminars.findRegistrationFormElements = function() {
+  const selectors = {
+    registrationForm: 'form[data-behavior="tx-seminars-registration-form"]',
+    billingAddressCheckbox: 'input[data-behavior="tx-seminars-billing-address-toggle"]',
+    billingAddressFields: '[data-behavior="tx-seminars-billing-address-fields"]',
+  }
+
+  for (const key in selectors) {
+    TYPO3.seminars.elements[key] = document.querySelector(selectors[key]);
+  }
+};
+
+TYPO3.seminars.existsRegistrationForm = function() {
+  return TYPO3.seminars.elements.registrationForm instanceof Element;
+}
+
+TYPO3.seminars.initializeRegistrationForm = function() {
+  TYPO3.seminars.findRegistrationFormElements();
+  if (!TYPO3.seminars.existsRegistrationForm()) {
+    return;
+  }
+
+  TYPO3.seminars.updateBillingAddressVisibility();
+  TYPO3.seminars.addBillingAddressCheckboxListener();
+};
+
+TYPO3.seminars.addBillingAddressCheckboxListener = function() {
+  TYPO3.seminars.elements.billingAddressCheckbox.addEventListener('change', TYPO3.seminars.updateBillingAddressVisibility);
+}
+
+TYPO3.seminars.updateBillingAddressVisibility = function() {
+  if (!(TYPO3.seminars.elements.billingAddressCheckbox instanceof Element)
+    || !(TYPO3.seminars.elements.billingAddressFields instanceof Element)
+  ) {
+    return;
+  }
+
+  const shouldShowBillingAddress = TYPO3.seminars.elements.billingAddressCheckbox.checked;
+  if (shouldShowBillingAddress) {
+    TYPO3.seminars.showElement(TYPO3.seminars.elements.billingAddressFields);
+  } else {
+    TYPO3.seminars.hideElement(TYPO3.seminars.elements.billingAddressFields);
+  }
+};
+
+TYPO3.seminars.showElement = function(element) {
+  for (const classToAdd of TYPO3.seminars.visibilityClasses) {
+    element.classList.add(classToAdd);
+  }
+  for (const classToRemove of TYPO3.seminars.invisibilityClasses) {
+    element.classList.remove(classToRemove);
+  }
+}
+
+TYPO3.seminars.hideElement = function(element) {
+  for (const classToAdd of TYPO3.seminars.invisibilityClasses) {
+    element.classList.add(classToAdd);
+  }
+  for (const classToRemove of TYPO3.seminars.visibilityClasses) {
+    element.classList.remove(classToRemove);
+  }
+}
+
 document.addEventListener('readystatechange', function() {
   TYPO3.seminars.initializeSearchWidget();
-  TYPO3.seminars.initializeRegistrationForm();
+  TYPO3.seminars.initializeLegacyRegistrationForm();
   TYPO3.seminars.convertActionLinks();
+
+  TYPO3.seminars.initializeRegistrationForm();
 });
