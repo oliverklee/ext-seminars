@@ -599,11 +599,9 @@ table.tx-seminars-pi1-timeslots td {
  * FE editor
  */
 
-.tx-seminars-frontendeditor input.form-control[type="datetime-local"] {
-    width: 13em;
-}
-
-.tx-seminars-frontendeditor input.form-control[autocomplete="number"] {
+form.tx-seminars-frontendeditor input[type="datetime-local"],
+form.tx-seminars-frontendeditor input[type="number"],
+form.tx-seminars-frontendeditor input[autocomplete="number"] {
     width: 13em;
 }
 
