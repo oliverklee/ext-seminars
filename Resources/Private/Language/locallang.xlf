@@ -2013,6 +2013,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration">
 				<source>Registration form for events</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.pagesAndFolders">
+				<source>Pages and folders</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
 				<source>Page to display if this plugin is called with no event</source>
 			</trans-unit>
@@ -2022,11 +2025,17 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
 				<source>Folder in which to store the registrations</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
+				<source>Persons to register</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
 				<source>Maximum bookable seats per registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
 				<source>People register themselves by default</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
+				<source>Form fields</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>

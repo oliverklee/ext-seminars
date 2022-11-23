@@ -2670,6 +2670,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registration form for events</source>
 				<target>Anmeldeformular für Veranstaltungen</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.pagesAndFolders">
+				<source>Pages and folders</source>
+				<target>Seiten und Ordner</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
 				<source>Page to display if this plugin is called with no event</source>
 				<target>Seite, die angezeigt werden soll, wenn dieses Plugin ohne Veranstaltung aufgerufen wird</target>
@@ -2682,6 +2686,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Folder in which to store the registrations</source>
 				<target>Ordner, in dem die Anmeldungen gespeichert werden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
+				<source>Persons to register</source>
+				<target>Anzumeldende Personen</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
 				<source>Maximum bookable seats per registration</source>
 				<target>Maximal buchbare Plätze pro Anmeldung</target>
@@ -2689,6 +2697,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
 				<source>People register themselves by default</source>
 				<target>Leute melden sich standardmäßig selbst an</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
+				<source>Form fields</source>
+				<target>Formularfelder</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
@@ -2740,11 +2752,15 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
 				<source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
-				<target>Vielen Dank für Ihre Anmeldung zu unserer Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!</target>
+				<target>
+					Vielen Dank für Ihre Anmeldung zu unserer Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!
+				</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
 				<source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
-				<target>Dank dir für deine Anmeldung zu dieser Veranstaltung. Wir freuen uns darauf, Sie dort zu sehen!</target>
+				<target>
+					Dank dir für deine Anmeldung zu dieser Veranstaltung. Wir freuen uns darauf, dich dort zu sehen!
+				</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
