@@ -128,7 +128,7 @@
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}-minimumNumberOfRegistrations"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="4"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
                 <f:render partial="FrontEndEditor/ValidationResult"
@@ -140,7 +140,7 @@
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}-maximumNumberOfRegistrations"
-                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="9"
+                                  class="form-control" errorClass="is-invalid" type="number" size="4" maxlength="4"
                                   additionalAttributes="{autocomplete: 'number', max: '0', max: '9999', pattern: '^[0-9]{0,4}$'}"
                 />
                 <f:render partial="FrontEndEditor/ValidationResult"
@@ -155,7 +155,7 @@
                 <f:translate key="{propertylabelPrefix}.standardPrice"/>
             </label>
             <div class="col-sm-4">
-                <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="9"
+                <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="8"
                                   class="form-control" errorClass="is-invalid"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
                 />
@@ -166,7 +166,7 @@
                 <f:translate key="{propertylabelPrefix}.earlyBirdPrice"/>
             </label>
             <div class="col-sm-4">
-                <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="9"
+                <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="8"
                                   class="form-control" errorClass="is-invalid"
                                   additionalAttributes="{autocomplete: 'number', min: '0', max: '99999.99', pattern: '^[0-9]{1,5}(\.[0-9]{1,2})?$'}"
                 />
