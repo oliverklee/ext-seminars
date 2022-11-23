@@ -17,114 +17,84 @@
             </h3>
 
             <div class="row mb-3">
-                <label for="{idPrefix}-seats" class="col-sm-2 col-form-label">
-                    <s:salutationAwareTranslate key="{labelPrefix}.seats"/>
-                </label>
+                <div class="col-sm-2">
+                    <f:translate key="{labelPrefix}.seats"/>
+                </div>
                 <div class="col-sm-10">
-                    <f:form.textfield property="seats" id="{idPrefix}-seats"
-                                      size="3" maxlength="3" type="number"
-                                      class="form-control-plaintext" errorClass="is-invalid"
-                                      additionalAttributes="{readonly: 'readonly', autocomplete: 'number', min: '1', max: maximumBookableSeats}"/>
-                    <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'seats'}"/>
+                    {registration.seats}
                 </div>
             </div>
+            <f:form.hidden property="seats"/>
 
             <f:if condition="{registration.interests}">
                 <f:then>
                     <div class="row mb-3">
-                        <label for="{idPrefix}-interests" class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
-                        </label>
+                        </div>
                         <div class="col-sm-10">
-                            <f:form.textarea property="interests" id="{idPrefix}-interests"
-                                             class="form-control-plaintext" errorClass="is-invalid"
-                                             additionalAttributes="{readonly: 'readonly'}"/>
-                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'interests'}"/>
+                            {registration.interests}
                         </div>
                     </div>
                 </f:then>
-                <f:else>
-                    <f:form.hidden property="interests"/>
-                </f:else>
             </f:if>
+            <f:form.hidden property="interests"/>
 
             <f:if condition="{registration.expectations}">
                 <f:then>
                     <div class="row mb-3">
-                        <label for="{idPrefix}-expectations" class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
-                        </label>
+                        </div>
                         <div class="col-sm-10">
-                            <f:form.textarea property="expectations" id="{idPrefix}-expectations"
-                                             class="form-control-plaintext" errorClass="is-invalid"
-                                             additionalAttributes="{readonly: 'readonly'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'expectations'}"/>
+                            {registration.expectations}
                         </div>
                     </div>
                 </f:then>
-                <f:else>
-                    <f:form.hidden property="expectations"/>
-                </f:else>
             </f:if>
+            <f:form.hidden property="expectations"/>
 
             <f:if condition="{registration.backgroundKnowledge}">
                 <f:then>
                     <div class="row mb-3">
-                        <label for="{idPrefix}-backgroundKnowledge" class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
-                        </label>
+                        </div>
                         <div class="col-sm-10">
-                            <f:form.textarea property="backgroundKnowledge" id="{idPrefix}-backgroundKnowledge"
-                                             class="form-control-plaintext" errorClass="is-invalid"
-                                             additionalAttributes="{readonly: 'readonly'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'backgroundKnowledge'}"/>
+                            {registration.backgroundKnowledge}
                         </div>
                     </div>
                 </f:then>
-                <f:else>
-                    <f:form.hidden property="backgroundKnowledge"/>
-                </f:else>
             </f:if>
+            <f:form.hidden property="backgroundKnowledge"/>
 
             <f:if condition="{registration.knownFrom}">
                 <f:then>
                     <div class="row mb-3">
-                        <label for="{idPrefix}-knownFrom" class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
-                        </label>
+                        </div>
                         <div class="col-sm-10">
-                            <f:form.textarea property="knownFrom" id="{idPrefix}-knownFrom"
-                                             class="form-control-plaintext" errorClass="is-invalid"
-                                             additionalAttributes="{readonly: 'readonly'}"/>
-                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'knownFrom'}"/>
+                            {registration.knownFrom}
                         </div>
                     </div>
                 </f:then>
-                <f:else>
-                    <f:form.hidden property="knownFrom"/>
-                </f:else>
             </f:if>
+            <f:form.hidden property="knownFrom"/>
 
             <f:if condition="{registration.comments}">
                 <f:then>
                     <div class="row mb-3">
-                        <label for="{idPrefix}-comments" class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
-                        </label>
+                        </div>
                         <div class="col-sm-10">
-                            <f:form.textarea property="comments" id="{idPrefix}-comments"
-                                             class="form-control-plaintext" errorClass="is-invalid"
-                                             additionalAttributes="{readonly: 'readonly'}"/>
-                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'comments'}"/>
+                            {registration.comments}
                         </div>
                     </div>
                 </f:then>
-                <f:else>
-                    <f:form.hidden property="comments"/>
-                </f:else>
             </f:if>
+            <f:form.hidden property="comments"/>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
                 <f:variable name="newActionUri" value="{f:uri.action(action: 'new')}"/>
