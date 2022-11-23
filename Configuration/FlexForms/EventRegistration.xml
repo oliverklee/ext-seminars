@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <T3DataStructure>
     <sheets>
-        <general>
+        <pagesAndFolders>
             <ROOT>
                 <TCEforms>
-                    <!--
-                        The sheet title will not be visible in the BE. Still, the XML element needs to be present to
-                        avoid a crash in the BE.
-                    -->
-                    <sheetTitle/>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.tab.pagesAndFolders
+                    </sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
@@ -60,6 +58,18 @@
                             </config>
                         </TCEforms>
                     </settings.registrationRecordsStorageFolder>
+                </el>
+            </ROOT>
+        </pagesAndFolders>
+        <personsToRegister>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.tab.personsToRegister
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
                     <settings.maximumBookableSeats>
                         <TCEforms>
                             <label>
@@ -91,6 +101,18 @@
                     </settings.registerThemselvesDefault>
                 </el>
             </ROOT>
-        </general>
+        </personsToRegister>
+        <formFields>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.tab.formFields
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                </el>
+            </ROOT>
+        </formFields>
     </sheets>
 </T3DataStructure>
