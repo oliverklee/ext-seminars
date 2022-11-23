@@ -2025,6 +2025,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
 				<source>Maximum bookable seats per registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
+				<source>People register themselves by default</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 			</trans-unit>

@@ -319,7 +319,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionPassesWithoutSettingForMaximumBookableSeatsPassesTenToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsPassesTenToView(): void
     {
         $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
             ['event', self::anything()],
@@ -345,6 +345,60 @@ final class EventRegistrationControllerTest extends UnitTestCase
         );
 
         $this->subject->newAction(new SingleEvent(), new Registration());
+    }
+
+    /**
+     * @return array<string, array{0: bool}>
+     */
+    public function booleanDataProvider(): array
+    {
+        return [
+            'true' => [true],
+            'false' => [false],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider booleanDataProvider
+     */
+    public function newActionWithoutRegistrationKeepsRegisteredThemselvesUnchanged(bool $registeredThemselves): void
+    {
+        $this->subject->_set('settings', ['registerThemselvesDefault' => ($registeredThemselves ? '1' : '0')]);
+
+        $registration = new Registration();
+        GeneralUtility::addInstance(Registration::class, $registration);
+
+        $this->subject->newAction(new SingleEvent());
+
+        self::assertSame($registeredThemselves, $registration->hasRegisteredThemselves());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithoutRegistrationAndWithoutRegisteredThemselvesSettingSetsItToTrue(): void
+    {
+        $registration = new Registration();
+        GeneralUtility::addInstance(Registration::class, $registration);
+
+        $this->subject->newAction(new SingleEvent());
+
+        self::assertTrue($registration->hasRegisteredThemselves());
+    }
+
+    /**
+     * @test
+     * @dataProvider booleanDataProvider
+     */
+    public function newActionWithoutRegistrationUsesRegisteredThemselvesFromSettings(bool $registeredThemselves): void
+    {
+        $registration = new Registration();
+        $registration->setRegisteredThemselves($registeredThemselves);
+
+        $this->subject->newAction(new SingleEvent(), $registration);
+
+        self::assertSame($registeredThemselves, $registration->hasRegisteredThemselves());
     }
 
     /**
