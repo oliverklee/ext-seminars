@@ -114,7 +114,7 @@ final class RegistrationProcessorTest extends FunctionalTestCase
         $registration->setUser(new FrontendUser());
 
         $event = new SingleEvent();
-        $eventStart = new \DateTimeImmutable('2020-01-01 10:00:00');
+        $eventStart = new \DateTime('2020-01-01 10:00:00');
         $event->setStart($eventStart);
         $registration->setEvent($event);
 

@@ -53,6 +53,14 @@ final class PriceFinderTest extends UnitTestCase
     }
 
     /**
+     * @deprecated #1960 will be removed in seminars 6.0, use `DateTIme::createFromImmutable()` instead (PHP >= 7.3)
+     */
+    private function createFromImmutable(\DateTimeInterface $dateTime): \DateTime
+    {
+        return \DateTime::createFromFormat(\DateTimeInterface::ATOM, $dateTime->format(\DateTime::ATOM));
+    }
+
+    /**
      * @test
      */
     public function isSingleton(): void
@@ -82,7 +90,7 @@ final class PriceFinderTest extends UnitTestCase
         $event = new SingleEvent();
         $event->setStandardPrice(0.0);
         $earlyBirdDeadline = $this->now->modify('-1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $result = $this->subject->findApplicablePrices($event);
 
@@ -98,7 +106,7 @@ final class PriceFinderTest extends UnitTestCase
         $event = new SingleEvent();
         $event->setStandardPrice(0.0);
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $result = $this->subject->findApplicablePrices($event);
 
@@ -114,7 +122,7 @@ final class PriceFinderTest extends UnitTestCase
         $event = new SingleEvent();
         $event->setStandardPrice(0.0);
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
         $event->setEarlyBirdPrice(14.5);
 
         $result = $this->subject->findApplicablePrices($event);
@@ -156,7 +164,7 @@ final class PriceFinderTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $earlyBirdDeadline = $this->now->modify('-1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $standardPriceAmount = 1.0;
         $earlyBirdPriceAmount = 2.0;
@@ -183,7 +191,7 @@ final class PriceFinderTest extends UnitTestCase
     public function findApplicablePricesForAllPricesAndEarlyBirdDeadlineNowReturnsNonEarlyBirdPrices(): void
     {
         $event = new SingleEvent();
-        $event->setEarlyBirdDeadline($this->now);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($this->now));
 
         $standardPriceAmount = 1.0;
         $earlyBirdPriceAmount = 2.0;
@@ -211,7 +219,7 @@ final class PriceFinderTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $standardPriceAmount = 1.0;
         $earlyBirdPriceAmount = 2.0;
@@ -243,7 +251,7 @@ final class PriceFinderTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $standardPriceAmount = 1.0;
         $earlyBirdPriceAmount = 2.0;
@@ -265,7 +273,7 @@ final class PriceFinderTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $standardPriceAmount = 1.0;
         $specialPriceAmount = 3.0;
@@ -295,7 +303,7 @@ final class PriceFinderTest extends UnitTestCase
     {
         $event = new SingleEvent();
         $earlyBirdDeadline = $this->now->modify('+1 day');
-        $event->setEarlyBirdDeadline($earlyBirdDeadline);
+        $event->setEarlyBirdDeadline($this->createFromImmutable($earlyBirdDeadline));
 
         $standardPriceAmount = 1.0;
         $earlyBirdPriceAmount = 2.0;
