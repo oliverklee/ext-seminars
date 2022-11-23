@@ -2686,6 +2686,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Maximum bookable seats per registration</source>
 				<target>Maximal buchbare Plätze pro Anmeldung</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
+				<source>People register themselves by default</source>
+				<target>Leute melden sich standardmäßig selbst an</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>

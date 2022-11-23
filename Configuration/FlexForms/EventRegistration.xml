@@ -78,6 +78,17 @@
                             </config>
                         </TCEforms>
                     </settings.maximumBookableSeats>
+                    <settings.registerThemselvesDefault>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.registerThemselvesDefault
+                            </label>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                        </TCEforms>
+                    </settings.registerThemselvesDefault>
                 </el>
             </ROOT>
         </general>
