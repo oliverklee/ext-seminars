@@ -168,7 +168,7 @@ final class EventDateTest extends UnitTestCase
      */
     public function setStartSetsStart(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->subject->setStart($date);
 
         self::assertSame($date, $this->subject->getStart());
@@ -197,7 +197,7 @@ final class EventDateTest extends UnitTestCase
      */
     public function setEndSetsEnd(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->subject->setEnd($date);
 
         self::assertSame($date, $this->subject->getEnd());
@@ -226,7 +226,7 @@ final class EventDateTest extends UnitTestCase
      */
     public function setEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->subject->setEarlyBirdDeadline($date);
 
         self::assertSame($date, $this->subject->getEarlyBirdDeadline());
@@ -255,7 +255,7 @@ final class EventDateTest extends UnitTestCase
      */
     public function setRegistrationDeadlineSetsRegistrationDeadline(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->subject->setRegistrationDeadline($date);
 
         self::assertSame($date, $this->subject->getRegistrationDeadline());
@@ -551,7 +551,7 @@ final class EventDateTest extends UnitTestCase
      */
     public function setRegistrationStartSetsRegistrationStart(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->subject->setRegistrationStart($date);
 
         self::assertSame($date, $this->subject->getRegistrationStart());

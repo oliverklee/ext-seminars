@@ -70,6 +70,26 @@ final class RegistrationGuardTest extends UnitTestCase
         parent::tearDown();
     }
 
+    /**
+     * @deprecated #1960 will be removed in seminars 6.0, use `DateTIme::createFromImmutable()` instead (PHP >= 7.3)
+     */
+    private function createFromImmutable(\DateTimeInterface $dateTime): \DateTime
+    {
+        return \DateTime::createFromFormat(\DateTimeInterface::ATOM, $dateTime->format(\DateTime::ATOM));
+    }
+
+    /**
+     * @test
+     */
+    public function createFromImmutableKeepsDatesComparable(): void
+    {
+        $dateTimeImmutable = new \DateTimeImmutable(self::NOW);
+        $dateTime = $this->createFromImmutable($dateTimeImmutable);
+
+        self::assertFalse($dateTimeImmutable < $dateTime);
+        self::assertFalse($dateTimeImmutable > $dateTime);
+    }
+
     private function now(): \DateTimeImmutable
     {
         return new \DateTimeImmutable(self::NOW);
@@ -151,16 +171,18 @@ final class RegistrationGuardTest extends UnitTestCase
 
     /**
      * @return array<string, array{
-     *             start: ?\DateTimeImmutable,
-     *             registrationStart: ?\DateTimeImmutable,
-     *             registrationDeadline: ?\DateTimeImmutable,
+     *             start: ?\DateTime,
+     *             registrationStart: ?\DateTime,
+     *             registrationDeadline: ?\DateTime,
      *         }>
      */
     public function registrationPossibleDataProvider(): array
     {
-        $now = $this->now();
-        $future = $now->modify('+1 second');
-        $past = $now->modify('-1 second');
+        $now = $this->createFromImmutable($this->now());
+        // We need the clone because `modify` on `DateTime` modifies the original object instead of returning a new one
+        // (which would be the case for `DateTimeImmutable`.
+        $future = (clone $now)->modify('+1 day');
+        $past = (clone $now)->modify('-1 day');
 
         return [
             'start in the future' => [
@@ -200,9 +222,11 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function registrationNotPossibleDataProvider(): array
     {
-        $now = $this->now();
-        $future = $now->modify('+1 second');
-        $past = $now->modify('-1 second');
+        $now = $this->createFromImmutable($this->now());
+        // We need the clone because `modify` on `DateTime` modifies the original object instead of returning a new one
+        // (which would be the case for `DateTimeImmutable`.
+        $future = (clone $now)->modify('+1 day');
+        $past = (clone $now)->modify('-1 day');
 
         return [
             'no dates at all' => [
@@ -264,9 +288,9 @@ final class RegistrationGuardTest extends UnitTestCase
      * @dataProvider registrationPossibleDataProvider
      */
     public function isRegistrationPossibleByDateForEventDateWithRegistrationPossibleReturnsTrue(
-        ?\DateTimeImmutable $start,
-        ?\DateTimeImmutable $registrationStart,
-        ?\DateTimeImmutable $registrationDeadline
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
     ): void {
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
@@ -284,9 +308,9 @@ final class RegistrationGuardTest extends UnitTestCase
      * @dataProvider registrationNotPossibleDataProvider
      */
     public function isRegistrationPossibleByDateForEventDateWithRegistrationNotPossibleReturnsFalse(
-        ?\DateTimeImmutable $start,
-        ?\DateTimeImmutable $registrationStart,
-        ?\DateTimeImmutable $registrationDeadline
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
     ): void {
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
@@ -304,9 +328,9 @@ final class RegistrationGuardTest extends UnitTestCase
      * @dataProvider registrationPossibleDataProvider
      */
     public function isRegistrationPossibleByDateForSingleEventWithRegistrationPossibleReturnsTrue(
-        ?\DateTimeImmutable $start,
-        ?\DateTimeImmutable $registrationStart,
-        ?\DateTimeImmutable $registrationDeadline
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
     ): void {
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
@@ -324,9 +348,9 @@ final class RegistrationGuardTest extends UnitTestCase
      * @dataProvider registrationNotPossibleDataProvider
      */
     public function isRegistrationPossibleByDateForSingleEventWithRegistrationNotPossibleReturnsFalse(
-        ?\DateTimeImmutable $start,
-        ?\DateTimeImmutable $registrationStart,
-        ?\DateTimeImmutable $registrationDeadline
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
     ): void {
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
