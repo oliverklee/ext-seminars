@@ -26,6 +26,20 @@
             </div>
             <f:form.hidden property="seats"/>
 
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <f:if condition="{registration.registeredThemselves}">
+                        <f:then>
+                            <f:translate key="{labelPrefix}.registeredThemselves"/>
+                        </f:then>
+                        <f:else>
+                            <f:translate key="{labelPrefix}.registeredThemselves.not"/>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+            <f:form.hidden property="registeredThemselves"/>
+
             <f:if condition="{registration.interests}">
                 <f:then>
                     <div class="row mb-3">

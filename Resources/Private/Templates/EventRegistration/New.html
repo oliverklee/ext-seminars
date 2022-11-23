@@ -35,7 +35,19 @@
                     </div>
                 </div>
 
-
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <div class="form-check">
+                            <f:form.checkbox property="registeredThemselves" id="{idPrefix}-registeredThemselves"
+                                             class="form-check-input" errorClass="is-invalid" value="1"/>
+                            <label for="{idPrefix}-registeredThemselves" class="form-check-label">
+                                <f:translate key="{labelPrefix}.registeredThemselves"/>
+                            </label>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'registeredThemselves'}"/>
+                        </div>
+                    </div>
+                </div>
             </fieldset>
 
             <fieldset>
