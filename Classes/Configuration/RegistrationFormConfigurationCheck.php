@@ -273,6 +273,9 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
         );
     }
 
+    /**
+     * @deprecated #1947 will be removed in seminars 5.0
+     */
     private function checkLogOutOneTimeAccountsAfterRegistration(): void
     {
         $this->checkIfBoolean(

@@ -150,6 +150,7 @@ plugin.tx_seminars_pi1 {
   showRegistrationFieldsInRegistrationList =
 
   # whether one-time FE users will be automatically logged out after registering for an event
+  # @deprecated #1947 will be removed in seminars 5.0
   logOutOneTimeAccountsAfterRegistration = 1
 
   # whether to add sorting links to the headers in the list view

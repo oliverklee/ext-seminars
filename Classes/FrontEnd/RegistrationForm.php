@@ -673,6 +673,7 @@ class RegistrationForm extends AbstractEditor
             $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
             && Session::getInstance(Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
+            // @deprecated #1947 will be removed in seminars 5.0
             $this->getFrontEndController()->fe_user->logoff();
         }
 
