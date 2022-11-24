@@ -52,17 +52,18 @@
             </f:if>
             <f:form.hidden property="attendeesNames"/>
 
-            <f:if condition="{event.accommodationOptions}">
+            <f:comment>
+                We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
+                only returns the first option. This is probably a bug in Extbase.
+            </f:comment>
+            <f:variable name="accommodationOptionTitles" value="{registration.accommodationOptionTitles}"/>
+            <f:if condition="{accommodationOptionTitles}">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">
                         <f:translate key="{labelPrefix}.accommodationOptions"/>
                     </label>
                     <ul class="col-sm-10">
-                        <f:comment>
-                            We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
-                            only returns the first option. This is probably a bug in Extbase.
-                        </f:comment>
-                        <f:for each="{registration.accommodationOptionTitles}" as="accommodationOptionTitle">
+                        <f:for each="{accommodationOptionTitles}" as="accommodationOptionTitle">
                             <li>
                                 {accommodationOptionTitle}
                             </li>
@@ -75,17 +76,18 @@
                 </div>
             </f:if>
 
-            <f:if condition="{event.foodOptions}">
+            <f:comment>
+                We cannot directly iterate over `registration.foodOptions` here, as Extbase then
+                only returns the first option. This is probably a bug in Extbase.
+            </f:comment>
+            <f:variable name="foodOptionTitles" value="{registration.foodOptionTitles}"/>
+            <f:if condition="{foodOptionTitles}">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">
                         <f:translate key="{labelPrefix}.foodOptions"/>
                     </label>
                     <ul class="col-sm-10">
-                        <f:comment>
-                            We cannot directly iterate over `registration.foodOptions` here, as Extbase then
-                            only returns the first option. This is probably a bug in Extbase.
-                        </f:comment>
-                        <f:for each="{registration.foodOptionTitles}" as="foodOptionTitle">
+                        <f:for each="{foodOptionTitles}" as="foodOptionTitle">
                             <li>
                                 {foodOptionTitle}
                             </li>
