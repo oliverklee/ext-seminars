@@ -41,72 +41,62 @@
             <f:form.hidden property="registeredThemselves"/>
 
             <f:if condition="{registration.interests}">
-                <f:then>
-                    <div class="row mb-3">
-                        <div class="col-sm-2">
-                            <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
-                        </div>
-                        <div class="col-sm-10">
-                            {registration.interests}
-                        </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
                     </div>
-                </f:then>
+                    <div class="col-sm-10">
+                        {registration.interests}
+                    </div>
+                </div>
             </f:if>
             <f:form.hidden property="interests"/>
 
             <f:if condition="{registration.expectations}">
-                <f:then>
-                    <div class="row mb-3">
-                        <div class="col-sm-2">
-                            <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
-                        </div>
-                        <div class="col-sm-10">
-                            {registration.expectations}
-                        </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
                     </div>
-                </f:then>
+                    <div class="col-sm-10">
+                        {registration.expectations}
+                    </div>
+                </div>
             </f:if>
             <f:form.hidden property="expectations"/>
 
             <f:if condition="{registration.backgroundKnowledge}">
-                <f:then>
-                    <div class="row mb-3">
-                        <div class="col-sm-2">
-                            <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
-                        </div>
-                        <div class="col-sm-10">
-                            {registration.backgroundKnowledge}
-                        </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
                     </div>
-                </f:then>
+                    <div class="col-sm-10">
+                        {registration.backgroundKnowledge}
+                    </div>
+                </div>
             </f:if>
             <f:form.hidden property="backgroundKnowledge"/>
 
             <f:if condition="{registration.knownFrom}">
-                <f:then>
-                    <div class="row mb-3">
-                        <div class="col-sm-2">
-                            <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
-                        </div>
-                        <div class="col-sm-10">
-                            {registration.knownFrom}
-                        </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
                     </div>
-                </f:then>
+                    <div class="col-sm-10">
+                        {registration.knownFrom}
+                    </div>
+                </div>
             </f:if>
             <f:form.hidden property="knownFrom"/>
 
             <f:if condition="{registration.comments}">
-                <f:then>
-                    <div class="row mb-3">
-                        <div class="col-sm-2">
-                            <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
-                        </div>
-                        <div class="col-sm-10">
-                            {registration.comments}
-                        </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
                     </div>
-                </f:then>
+                    <div class="col-sm-10">
+                        {registration.comments}
+                    </div>
+                </div>
             </f:if>
             <f:form.hidden property="comments"/>
 
