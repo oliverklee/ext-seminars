@@ -46,7 +46,7 @@
                         <f:translate key="{labelPrefix}.attendeesNames"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.attendeesNames}
+                        {registration.attendeesNames -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -106,7 +106,7 @@
                         <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.interests}
+                        {registration.interests -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -118,7 +118,7 @@
                         <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.expectations}
+                        {registration.expectations -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -130,7 +130,7 @@
                         <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.backgroundKnowledge}
+                        {registration.backgroundKnowledge -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -142,7 +142,7 @@
                         <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.knownFrom}
+                        {registration.knownFrom -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -154,7 +154,7 @@
                         <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
                     </div>
                     <div class="col-sm-10">
-                        {registration.comments}
+                        {registration.comments -> f:format.nl2br()}
                     </div>
                 </div>
             </f:if>
@@ -200,7 +200,7 @@
                                 <s:salutationAwareTranslate key="{labelPrefix}.billingStreetAddress"/>
                             </div>
                             <div class="col-sm-10">
-                                {registration.billingStreetAddress}
+                                {registration.billingStreetAddress -> f:format.nl2br()}
                             </div>
                         </div>
 
