@@ -160,6 +160,19 @@
             </f:if>
             <f:form.hidden property="comments"/>
 
+            <f:if condition="{registration.paymentMethod}">
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <f:translate key="{labelPrefix}.paymentMethod"/>
+                    </div>
+                    <div class="col-sm-10">
+                        {registration.paymentMethod.title}
+                    </div>
+                </div>
+
+                <f:form.hidden property="paymentMethod"/>
+            </f:if>
+
             <f:if condition="{registration.separateBillingAddress}}">
                 <fieldset>
                     <legend>

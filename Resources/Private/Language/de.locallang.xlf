@@ -2890,6 +2890,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Persons to register</source>
 				<target>Anzumeldende Personen</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.paymentMethod">
+				<source>Method of payment</source>
+				<target>Zahlungsmethode</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>
