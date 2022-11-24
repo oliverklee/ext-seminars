@@ -2886,6 +2886,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Accommodation</source>
 				<target>Unterkunft</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.attendeesNames">
+				<source>Persons to register</source>
+				<target>Anzumeldende Personen</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>

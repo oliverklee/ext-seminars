@@ -451,6 +451,9 @@ TYPO3.seminars.findRegistrationFormElements = function() {
     registrationForm: 'form[data-behavior="tx-seminars-registration-form"]',
     billingAddressCheckbox: 'input[data-behavior="tx-seminars-billing-address-toggle"]',
     billingAddressFields: '[data-behavior="tx-seminars-billing-address-fields"]',
+    seats: '[data-behavior="tx-seminars-seats"]',
+    registeredThemselves: '[data-behavior="tx-seminars-registered-themselves"]',
+    attendeesNames: '[data-behavior="tx-seminars-attendees-names"]',
   }
 
   for (const key in selectors) {
@@ -470,10 +473,19 @@ TYPO3.seminars.initializeRegistrationForm = function() {
 
   TYPO3.seminars.updateBillingAddressVisibility();
   TYPO3.seminars.addBillingAddressCheckboxListener();
+
+  TYPO3.seminars.updateAttendeesNamesVisibility();
+  TYPO3.seminars.addSeatsListener();
 };
 
 TYPO3.seminars.addBillingAddressCheckboxListener = function() {
   TYPO3.seminars.elements.billingAddressCheckbox.addEventListener('change', TYPO3.seminars.updateBillingAddressVisibility);
+}
+
+TYPO3.seminars.addSeatsListener = function() {
+  TYPO3.seminars.elements.seats.addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
+  TYPO3.seminars.elements.registeredThemselves
+    .addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
 }
 
 TYPO3.seminars.updateBillingAddressVisibility = function() {
@@ -483,11 +495,31 @@ TYPO3.seminars.updateBillingAddressVisibility = function() {
     return;
   }
 
-  const shouldShowBillingAddress = TYPO3.seminars.elements.billingAddressCheckbox.checked;
+  const shouldShowBillingAddress = !!TYPO3.seminars.elements.billingAddressCheckbox.checked;
   if (shouldShowBillingAddress) {
     TYPO3.seminars.showElement(TYPO3.seminars.elements.billingAddressFields);
   } else {
     TYPO3.seminars.hideElement(TYPO3.seminars.elements.billingAddressFields);
+  }
+};
+
+TYPO3.seminars.updateAttendeesNamesVisibility = function() {
+  if (!(TYPO3.seminars.elements.seats instanceof Element)
+    || !(TYPO3.seminars.elements.registeredThemselves instanceof Element)
+    || !(TYPO3.seminars.elements.attendeesNames instanceof Element)
+  ) {
+    return;
+  }
+
+  const seats = parseInt(TYPO3.seminars.elements.seats.value);
+  const registeredThemselves = !!TYPO3.seminars.elements.registeredThemselves.checked;
+  const otherSeats = seats - (registeredThemselves ? 1 : 0);
+  const shouldShowAttendeesNames = otherSeats > 0;
+
+  if (shouldShowAttendeesNames) {
+    TYPO3.seminars.showElement(TYPO3.seminars.elements.attendeesNames);
+  } else {
+    TYPO3.seminars.hideElement(TYPO3.seminars.elements.attendeesNames);
   }
 };
 
