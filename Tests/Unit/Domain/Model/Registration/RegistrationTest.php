@@ -613,6 +613,34 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getAccommodationOptionTitlesForNoOptionsReturnsEmptyArray(): void
+    {
+        self::assertSame([], $this->subject->getAccommodationOptionTitles());
+    }
+
+    /**
+     * @test
+     */
+    public function getAccommodationOptionTitlesReturnsTitlesOfOptions(): void
+    {
+        /** @var ObjectStorage<AccommodationOption> $options */
+        $options = new ObjectStorage();
+        $title1 = 'this';
+        $option1 = new AccommodationOption();
+        $option1->setTitle($title1);
+        $options->attach($option1);
+        $title2 = 'that';
+        $option2 = new AccommodationOption();
+        $option2->setTitle($title2);
+        $options->attach($option2);
+        $this->subject->setAccommodationOptions($options);
+
+        self::assertSame([$title1, $title2], $this->subject->getAccommodationOptionTitles());
+    }
+
+    /**
+     * @test
+     */
     public function getFoodOptionsInitiallyReturnsEmptyStorage(): void
     {
         $associatedModels = $this->subject->getFoodOptions();
@@ -631,6 +659,34 @@ final class RegistrationTest extends UnitTestCase
         $this->subject->setFoodOptions($associatedModels);
 
         self::assertSame($associatedModels, $this->subject->getFoodOptions());
+    }
+
+    /**
+     * @test
+     */
+    public function getFoodOptionTitlesForNoOptionsReturnsEmptyArray(): void
+    {
+        self::assertSame([], $this->subject->getFoodOptionTitles());
+    }
+
+    /**
+     * @test
+     */
+    public function getFoodOptionTitlesReturnsTitlesOfOptions(): void
+    {
+        /** @var ObjectStorage<FoodOption> $options */
+        $options = new ObjectStorage();
+        $title1 = 'this';
+        $option1 = new FoodOption();
+        $option1->setTitle($title1);
+        $options->attach($option1);
+        $title2 = 'that';
+        $option2 = new FoodOption();
+        $option2->setTitle($title2);
+        $options->attach($option2);
+        $this->subject->setFoodOptions($options);
+
+        self::assertSame([$title1, $title2], $this->subject->getFoodOptionTitles());
     }
 
     /**

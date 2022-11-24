@@ -2166,6 +2166,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.billingEmailAddress">
 				<source>Email address</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.foodOptions">
+				<source>Food</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.accommodationOptions">
+				<source>Accommodation</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>

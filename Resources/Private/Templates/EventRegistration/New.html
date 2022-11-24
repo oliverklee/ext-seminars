@@ -54,6 +54,58 @@
 
             <fieldset>
                 <legend>
+                    <f:translate key="{fieldsetPrefix}.foodAndAccommodation"/>
+                </legend>
+
+                <f:if condition="{event.accommodationOptions}">
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">
+                            <f:translate key="{labelPrefix}.accommodationOptions"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:for each="{event.accommodationOptions}" as="accommodationOption">
+                                <div class="form-check">
+                                    <f:form.checkbox property="accommodationOptions"
+                                                     id="{idPrefix}-accommodationOption-{accommodationOption.uid}"
+                                                     class="form-check-input" errorClass="is-invalid"
+                                                     value="{accommodationOption.uid}"/>
+                                    <label for="{idPrefix}-accommodationOption-{accommodationOption.uid}"
+                                           class="form-check-label">
+                                        {accommodationOption.title}
+                                    </label>
+                                </div>
+                            </f:for>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'accommodationOptions'}"/>
+                        </div>
+                    </div>
+                </f:if>
+
+                <f:if condition="{event.foodOptions}">
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">
+                            <f:translate key="{labelPrefix}.foodOptions"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:for each="{event.foodOptions}" as="foodOption">
+                                <div class="form-check">
+                                    <f:form.checkbox property="foodOptions" id="{idPrefix}-foodOption-{foodOption.uid}"
+                                                     class="form-check-input" errorClass="is-invalid"
+                                                     value="{foodOption.uid}"/>
+                                    <label for="{idPrefix}-foodOption-{foodOption.uid}" class="form-check-label">
+                                        {foodOption.title}
+                                    </label>
+                                </div>
+                            </f:for>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'foodOptions'}"/>
+                        </div>
+                    </div>
+                </f:if>
+            </fieldset>
+
+            <fieldset>
+                <legend>
                     <f:translate key="{fieldsetPrefix}.additionalInformation"/>
                 </legend>
 
