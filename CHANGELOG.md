@@ -35,6 +35,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Also allow installations with Emogrifier 7 (#1748)
 
 ### Deprecated
+- Deprecate the `logOutOneTimeAccountsAfterRegistration` setting (#1983)
 - Deprecate the event headline view (#1951)
 - Deprecate organizer-specific registration storage folders (#1949)
 - Deprecate the `Titled` interface (#1945)

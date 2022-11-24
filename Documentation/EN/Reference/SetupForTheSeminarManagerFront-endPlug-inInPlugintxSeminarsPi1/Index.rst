@@ -795,6 +795,8 @@ override the corresponding value from TS Setup.**
 
          **Note:** This does not affect regular FE user accounts in any way.
 
+         @deprecated #1947 will be removed in seminars 5.0
+
    Default
          1
 
