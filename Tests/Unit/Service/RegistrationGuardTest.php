@@ -105,6 +105,36 @@ final class RegistrationGuardTest extends UnitTestCase
 
     /**
      * @test
+     * @doesNotPerformAssertions
+     */
+    public function assertBookableEventTypeWithSingleEventThrowsNoException(): void
+    {
+        $this->subject->assertBookableEventType(new SingleEvent());
+    }
+
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
+    public function assertBookableEventTypeWithEventDateThrowsNoException(): void
+    {
+        $this->subject->assertBookableEventType(new EventDate());
+    }
+
+    /**
+     * @test
+     */
+    public function assertBookableEventTypeWithEventTopicThrows(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1669377348);
+        $this->expectExceptionMessage('The event must be a SingleEvent or an EventDate.');
+
+        $this->subject->assertBookableEventType(new EventTopic());
+    }
+
+    /**
+     * @test
      */
     public function isRegistrationPossibleAtAnyTimeAtAllForEventTopicReturnsFalse(): void
     {

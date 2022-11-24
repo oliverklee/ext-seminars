@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
-use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\RegistrationGuard;
@@ -63,7 +64,7 @@ class EventRegistrationController extends ActionController
         if (!$this->registrationGuard->isRegistrationPossibleAtAnyTimeAtAll($event)) {
             $this->forwardToDenyAction('noRegistrationPossibleAtAll');
         }
-        \assert($event instanceof EventDateInterface);
+        \assert($event instanceof SingleEvent || $event instanceof EventDate);
         if (!$this->registrationGuard->isRegistrationPossibleByDate($event)) {
             $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
         }
@@ -131,6 +132,8 @@ class EventRegistrationController extends ActionController
      */
     public function newAction(Event $event, ?Registration $registration = null): void
     {
+        $this->registrationGuard->assertBookableEventType($event);
+
         $this->view->assign('event', $event);
 
         if ($registration instanceof Registration) {
@@ -151,6 +154,8 @@ class EventRegistrationController extends ActionController
      */
     public function confirmAction(Event $event, Registration $registration): void
     {
+        $this->registrationGuard->assertBookableEventType($event);
+
         $this->view->assign('event', $event);
         $this->view->assign('registration', $registration);
     }
