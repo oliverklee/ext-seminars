@@ -2878,6 +2878,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Email address</source>
 				<target>E-Mail-Adresse</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.foodOptions">
+				<source>Food</source>
+				<target>Verpflegungswünsche</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.accommodationOptions">
+				<source>Accommodation</source>
+				<target>Unterkunft</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>

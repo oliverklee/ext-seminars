@@ -224,6 +224,23 @@ class Registration extends AbstractEntity
     }
 
     /**
+     * This method can be used to work around that iterating over the accommodation options on the registration
+     * confirmation page only provides the first selected option.
+     *
+     * @return array<int, string>
+     */
+    public function getAccommodationOptionTitles(): array
+    {
+        $titles = [];
+
+        foreach ($this->getAccommodationOptions() as $option) {
+            $titles[] = $option->getTitle();
+        }
+
+        return $titles;
+    }
+
+    /**
      * @return ObjectStorage<FoodOption>
      */
     public function getFoodOptions(): ObjectStorage
@@ -237,6 +254,23 @@ class Registration extends AbstractEntity
     public function setFoodOptions(ObjectStorage $foodOptions): void
     {
         $this->foodOptions = $foodOptions;
+    }
+
+    /**
+     * This method can be used to work around that iterating over the accommodation options on the registration
+     * confirmation page only provides the first selected option.
+     *
+     * @return array<int, string>
+     */
+    public function getFoodOptionTitles(): array
+    {
+        $titles = [];
+
+        foreach ($this->getFoodOptions() as $option) {
+            $titles[] = $option->getTitle();
+        }
+
+        return $titles;
     }
 
     /**

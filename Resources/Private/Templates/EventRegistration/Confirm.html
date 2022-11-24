@@ -40,6 +40,52 @@
             </div>
             <f:form.hidden property="registeredThemselves"/>
 
+            <f:if condition="{event.accommodationOptions}">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">
+                        <f:translate key="{labelPrefix}.accommodationOptions"/>
+                    </label>
+                    <ul class="col-sm-10">
+                        <f:comment>
+                            We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
+                            only returns the first option. This is probably a bug in Extbase.
+                        </f:comment>
+                        <f:for each="{registration.accommodationOptionTitles}" as="accommodationOptionTitle">
+                            <li>
+                                {accommodationOptionTitle}
+                            </li>
+                        </f:for>
+                        <f:for each="{event.accommodationOptions}" as="accommodationOption">
+                            <f:form.checkbox property="accommodationOptions" value="{accommodationOption.uid}"
+                                             class="d-none tx-seminars-display-none"/>
+                        </f:for>
+                    </ul>
+                </div>
+            </f:if>
+
+            <f:if condition="{event.foodOptions}">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">
+                        <f:translate key="{labelPrefix}.foodOptions"/>
+                    </label>
+                    <ul class="col-sm-10">
+                        <f:comment>
+                            We cannot directly iterate over `registration.foodOptions` here, as Extbase then
+                            only returns the first option. This is probably a bug in Extbase.
+                        </f:comment>
+                        <f:for each="{registration.foodOptionTitles}" as="foodOptionTitle">
+                            <li>
+                                {foodOptionTitle}
+                            </li>
+                        </f:for>
+                        <f:for each="{event.foodOptions}" as="foodOption">
+                            <f:form.checkbox property="foodOptions" value="{foodOption.uid}"
+                                             class="d-none tx-seminars-display-none"/>
+                        </f:for>
+                    </ul>
+                </div>
+            </f:if>
+
             <f:if condition="{registration.interests}">
                 <div class="row mb-3">
                     <div class="col-sm-2">
