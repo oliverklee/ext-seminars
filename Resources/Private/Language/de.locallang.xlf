@@ -2842,6 +2842,42 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>I am not registering myself.</source>
 				<target>Ich melde mich selbst nicht an.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
+				<source>Separate billing address</source>
+				<target>Separate Rechnungsadresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCompany">
+				<source>Company</source>
+				<target>Firma</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingFullName">
+				<source>Full name</source>
+				<target>Vollständiger Name</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingStreetAddress">
+				<source>Street address</source>
+				<target>Straße und Hausnummer</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingZipCode">
+				<source>ZIP code</source>
+				<target>PLZ</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCity">
+				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCountry">
+				<source>Country</source>
+				<target>Land</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingPhoneNumber">
+				<source>Phone number</source>
+				<target>Telefonnummer</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingEmailAddress">
+				<source>Email address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standardpreis</target>

@@ -100,6 +100,120 @@
             </f:if>
             <f:form.hidden property="comments"/>
 
+            <f:if condition="{registration.separateBillingAddress}}">
+                <fieldset>
+                    <legend>
+                        <f:translate key="{labelPrefix}.separateBillingAddress"/>
+                    </legend>
+
+                    <f:form.hidden property="separateBillingAddress"/>
+
+                    <f:if condition="{registration.billingCompany}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingCompany"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingCompany}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingCompany"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingFullName}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingFullName"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingFullName}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingFullName"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingStreetAddress}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingStreetAddress"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingStreetAddress}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingStreetAddress"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingZipCode}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingZipCode"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingZipCode}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingZipCode"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingCity}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingCity"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingZipCode}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingCity"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingCountry}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingCountry"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingCountry}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingCountry"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingPhoneNumber}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingPhoneNumber"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingPhoneNumber}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingPhoneNumber"/>
+                    </f:if>
+
+                    <f:if condition="{registration.billingEmailAddress}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <s:salutationAwareTranslate key="{labelPrefix}.billingEmailAddress"/>
+                            </div>
+                            <div class="col-sm-10">
+                                {registration.billingEmailAddress}
+                            </div>
+                        </div>
+
+                        <f:form.hidden property="billingEmailAddress"/>
+                    </f:if>
+                </fieldset>
+            </f:if>
+
             <div class="d-flex justify-content-end mt-3 mb-3">
                 <f:variable name="newActionUri" value="{f:uri.action(action: 'new')}"/>
                 <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.back')}" class="btn btn-secondary me-3"

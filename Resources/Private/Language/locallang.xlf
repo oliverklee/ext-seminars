@@ -2139,6 +2139,33 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
 				<source>I am not registering myself.</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
+				<source>Separate billing address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCompany">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingFullName">
+				<source>Full name</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingStreetAddress">
+				<source>Street address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingZipCode">
+				<source>ZIP code</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCity">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingCountry">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingPhoneNumber">
+				<source>Phone number</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.billingEmailAddress">
+				<source>Email address</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>
