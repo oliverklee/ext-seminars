@@ -2172,6 +2172,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.accommodationOptions">
 				<source>Accommodation</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.attendeesNames">
+				<source>Persons to register</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>
