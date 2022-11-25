@@ -492,6 +492,26 @@
 				<source>Price to pay</source>
 				<target>zu bezahlender Preis</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code">
+				<source>Price code</source>
+				<target>Preiscode</target>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.standard">
+				<source>Regular price</source>
+				<target>Standardpreis</target>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.earlyBird">
+				<source>Early-bird price</source>
+				<target>Frühbucherpreis</target>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.special">
+				<source>Special price</source>
+				<target>Spezialpreis</target>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird">
+				<source>Early-bird special price</source>
+				<target>Frühbucher-Spezialpreis</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.total_price" xml:space="preserve">
 				<source>Total price for this attendance</source>
 				<target>Gesamtpreis dieser Buchung</target>

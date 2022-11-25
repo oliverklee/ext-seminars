@@ -143,7 +143,6 @@ config.tx_extbase.persistence.classes {
         country.mapOnProperty = billingCountry
         telephone.mapOnProperty = billingPhoneNumber
         email.mapOnProperty = billingEmailAddress
-        price.mapOnProperty = priceCode
         method_of_payment.mapOnProperty = paymentMethod
       }
     }

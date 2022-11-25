@@ -121,7 +121,6 @@ return [
             'billingCountry' => ['fieldName' => 'country'],
             'billingPhoneNumber' => ['fieldName' => 'telephone'],
             'billingEmailAddress' => ['fieldName' => 'email'],
-            'priceCode' => ['fieldName' => 'price'],
             'paymentMethod' => ['fieldName' => 'method_of_payment'],
         ],
     ],
