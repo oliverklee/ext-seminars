@@ -4,6 +4,22 @@
 		  product-name="seminars">
 		<header/>
 		<body>
+			<trans-unit id="dateFormat" xml:space="preserve">
+				<source>Y-m-d</source>
+				<target>d.m.Y</target>
+			</trans-unit>
+			<trans-unit id="decimalSeparator" xml:space="preserve">
+				<source>.</source>
+				<target>,</target>
+			</trans-unit>
+			<trans-unit id="thousandsSeparator" xml:space="preserve">
+				<source>,</source>
+				<target>.</target>
+			</trans-unit>
+			<trans-unit id="registrationTitleFormat">
+				<source>%1s / %2s, %3s</source>
+				<target>%1s / %2s, %3s</target>
+			</trans-unit>
 			<trans-unit id="pi1_title" xml:space="preserve">
 				<source>Seminar Manager</source>
 				<target>Управление семинарами</target>

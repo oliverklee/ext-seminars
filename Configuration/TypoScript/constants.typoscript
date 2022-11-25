@@ -7,5 +7,19 @@ plugin {
   tx_seminars.settings {
     # cat=plugin.tx_seminars.settings//; type=options [formal,informal]; label=Salutation mode in the frontend
     salutation = formal
+
+    # price format as used by the Fluid CurrencyViewHelper
+    currency {
+      # cat=plugin.tx_seminars.settings.currency//; type=string; label=Currency symbol
+      currencySign = €
+      # cat=plugin.tx_seminars.settings.currency//; type=boolean; label=Prepend the currency sign (instead of appending it)
+      prependCurrency = 0
+      # cat=plugin.tx_seminars.settings.currency//; type=boolean; label=Separate the currency sign from the number by a single space
+      separateCurrency = 1
+      # cat=plugin.tx_seminars.settings.currency//; type=int[0-3]; label=number of decimal places
+      decimals = 2
+      # cat=plugin.tx_seminars.settings.currency//; type=boolean; label=Use the dash instead of decimal 00
+      useDash = 0
+    }
   }
 }

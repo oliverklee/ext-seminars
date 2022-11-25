@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="currency" value="{settings.currency}"/>
+    <f:variable name="decimalSeparator" value="{f:translate(key: 'decimalSeparator')}"/>
+    <f:variable name="thousandsSeparator" value="{f:translate(key: 'thousandsSeparator')}"/>
+    <f:format.currency currencySign="{currency.currencySign}"
+                       prependCurrency="{currency.prependCurrency}"
+                       separateCurrency="{currency.separateCurrency}"
+                       decimals="{currency.decimals}"
+                       useDash="{currency.useDash}"
+                       decimalSeparator="{decimalSeparator}"
+                       thousandsSeparator="{thousandsSeparator}">
+        {amount}
+    </f:format.currency>
+</html>

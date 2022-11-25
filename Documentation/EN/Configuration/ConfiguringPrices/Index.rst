@@ -12,9 +12,19 @@
    :class:  typoscript
 .. role::   php(code)
 
-
+==================
 Configuring prices
-^^^^^^^^^^^^^^^^^^
+==================
+
+Configuring the currency
+========================
+
+If you are using a different currency than Euro (or you would like to tweak
+the currency format), edit :typoscript:`plugin.tx_seminars.settings.currency`
+in the TypoScript constants (or conveniently in the constants editor).
+
+More price configuration options
+================================
 
 You can set up to six different prices for each event: a “standard
 price” and a “special” price, e.g., for students and people in full
