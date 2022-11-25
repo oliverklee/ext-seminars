@@ -9,6 +9,7 @@ use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -178,10 +179,115 @@ final class RegistrationProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    public function calculateTotalPriceForRegistrationWithoutEventThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1669023165);
+        $this->expectExceptionMessage('The registration has no associated event.');
+
+        $this->subject->calculateTotalPrice(new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function calculateTotalPriceForRegistrationWithoutPriceCodeThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1669393997);
+        $this->expectExceptionMessage('This registration has no valid price code.');
+
+        $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
+
+        $this->subject->calculateTotalPrice($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function calculateTotalPriceForRegistrationWithEmptyPriceCodeThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1669393997);
+        $this->expectExceptionMessage('This registration has no valid price code.');
+
+        $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
+        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
+        $registration->setPriceCode('');
+
+        $this->subject->calculateTotalPrice($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function calculateTotalPriceForRegistrationWithInvalidPriceCodeThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1669393997);
+        $this->expectExceptionMessage('This registration has no valid price code.');
+
+        $registration = new Registration();
+        $registration->setEvent(new SingleEvent());
+        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
+        $registration->setPriceCode('invalid');
+
+        $this->subject->calculateTotalPrice($registration);
+    }
+
+    /**
+     * @return array<string, array{0: Price::PRICE_*, 1: positive-int, 2: float}>
+     */
+    public function priceCalculationDataProvider(): array
+    {
+        return [
+            '1 seat, standard price' => [Price::PRICE_STANDARD, 1, 100.0],
+            '2 seats, standard price' => [Price::PRICE_STANDARD, 2, 200.0],
+            '1 seat, early-bird price' => [Price::PRICE_EARLY_BIRD, 1, 90.0],
+            '2 seats, early-bird price' => [Price::PRICE_EARLY_BIRD, 2, 180.0],
+            '1 seat, special price' => [Price::PRICE_SPECIAL, 1, 80.0],
+            '2 seats, special price' => [Price::PRICE_SPECIAL, 2, 160.0],
+            '1 seat, special early-bird price' => [Price::PRICE_SPECIAL_EARLY_BIRD, 1, 70.0],
+            '2 seats, special early-bird price' => [Price::PRICE_SPECIAL_EARLY_BIRD, 2, 140.0],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Price::PRICE_* $priceCode
+     * @param positive-int $seats
+     * @dataProvider priceCalculationDataProvider
+     */
+    public function calculateTotalPriceSetsTotalPriceToProductOfSeatsAndSelectedPriceAmount(
+        string $priceCode,
+        int $seats,
+        float $expectedAmount
+    ): void {
+        $event = new SingleEvent();
+        $event->setStandardPrice(100.0);
+        $event->setEarlyBirdPrice(90.0);
+        $event->setSpecialPrice(80.0);
+        $event->setSpecialEarlyBirdPrice(70.0);
+
+        $registration = new Registration();
+        $registration->setEvent($event);
+        $registration->setSeats($seats);
+        $registration->setPriceCode($priceCode);
+
+        $this->subject->calculateTotalPrice($registration);
+
+        self::assertSame($expectedAmount, $registration->getTotalPrice());
+    }
+
+    /**
+     * @test
+     */
     public function persistForRegistationWithoutEventThrowsException(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1669036253);
+        $this->expectExceptionCode(1669023165);
         $this->expectExceptionMessage('The registration has no associated event.');
 
         $this->subject->persist(new Registration());

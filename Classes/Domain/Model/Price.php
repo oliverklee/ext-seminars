@@ -32,6 +32,16 @@ class Price
     public const PRICE_SPECIAL_EARLY_BIRD = 'price_special_early';
 
     /**
+     * @var array<int, self::PRICE_*>
+     */
+    private const VALID_PRICE_CODES = [
+        self::PRICE_STANDARD,
+        self::PRICE_EARLY_BIRD,
+        self::PRICE_SPECIAL,
+        self::PRICE_SPECIAL_EARLY_BIRD,
+    ];
+
+    /**
      * @var float
      */
     private $amount;
@@ -79,5 +89,13 @@ class Price
     public function getPriceCode(): string
     {
         return $this->priceCode;
+    }
+
+    /**
+     * @return ($priceCode is self::PRICE_* ? true : false)
+     */
+    public static function isPriceCodeValid(?string $priceCode): bool
+    {
+        return \in_array($priceCode, self::VALID_PRICE_CODES, true);
     }
 }

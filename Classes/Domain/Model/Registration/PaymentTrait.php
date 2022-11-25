@@ -62,6 +62,11 @@ trait PaymentTrait
         $this->priceCode = $priceCode;
     }
 
+    public function hasValidPriceCode(): bool
+    {
+        return Price::isPriceCodeValid($this->getPriceCode());
+    }
+
     public function getHumanReadablePrice(): string
     {
         return $this->humanReadablePrice;

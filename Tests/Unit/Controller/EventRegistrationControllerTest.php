@@ -86,6 +86,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->subject->_set('view', $this->viewMock);
         $this->uriBuilderMock = $this->createMock(UriBuilder::class);
         $this->subject->_set('uriBuilder', $this->uriBuilderMock);
+        $this->subject->_set('settings', []);
     }
 
     protected function tearDown(): void
@@ -456,7 +457,35 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $this->registrationGuardMock->expects(self::once())->method('assertBookableEventType')->with($event);
 
-        $this->subject->confirmAction(new SingleEvent(), new Registration());
+        $this->subject->confirmAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionActionEnrichesRegistrationWithMetadata(): void
+    {
+        $registration = new Registration();
+        $event = new SingleEvent();
+        $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
+        $this->subject->_set('settings', $settings);
+
+        $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
+            ->with($registration, $event, $settings);
+
+        $this->subject->confirmAction($event, $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionCalculatesTotalPrice(): void
+    {
+        $registration = new Registration();
+        $this->registrationProcesserMock->expects(self::once())->method('calculateTotalPrice')
+            ->with($registration);
+
+        $this->subject->confirmAction(new SingleEvent(), $registration);
     }
 
     /**
@@ -529,6 +558,17 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function createActionAssertsBookableEventType(): void
+    {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('assertBookableEventType')->with($event);
+
+        $this->subject->createAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
     public function createActionEnrichesRegistrationWithMetadata(): void
     {
         $registration = new Registration();
@@ -545,10 +585,22 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function createActionCalculatesTotalPrice(): void
+    {
+        $this->subject->_set('settings', []);
+        $registration = new Registration();
+        $this->registrationProcesserMock->expects(self::once())->method('calculateTotalPrice')
+            ->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
     public function createActionCreatesRegistrationTitle(): void
     {
         $registration = new Registration();
-        $this->subject->_set('settings', []);
 
         $this->registrationProcesserMock->expects(self::once())->method('createTitle')->with($registration);
 
@@ -561,7 +613,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionPersistsRegistration(): void
     {
         $registration = new Registration();
-        $this->subject->_set('settings', []);
 
         $this->registrationProcesserMock->expects(self::once())->method('persist')->with($registration);
 
@@ -574,7 +625,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionSendsEmail(): void
     {
         $registration = new Registration();
-        $this->subject->_set('settings', []);
 
         $this->registrationProcesserMock->expects(self::once())->method('sendEmails')->with($registration);
 
@@ -587,7 +637,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createDestroysOneTimeAccountSession(): void
     {
         $registration = new Registration();
-        $this->subject->_set('settings', []);
 
         $this->oneTimeAccountConnectorMock->expects(self::once())->method('destroyOneTimeSession');
 
@@ -600,7 +649,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionRedirectsToThankYouActionAndPassesEvent(): void
     {
         $event = new SingleEvent();
-        $this->subject->_set('settings', []);
 
         $this->subject->expects(self::once())->method('redirect')
             ->with('thankYou', null, null, ['event' => $event])

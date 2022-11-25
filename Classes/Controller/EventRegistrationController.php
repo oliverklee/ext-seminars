@@ -171,6 +171,9 @@ class EventRegistrationController extends ActionController
         $this->registrationGuard->assertBookableEventType($event);
         \assert($event instanceof EventDateInterface);
 
+        $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
+        $this->registrationProcessor->calculateTotalPrice($registration);
+
         $this->view->assign('event', $event);
         $this->view->assign('registration', $registration);
         $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
@@ -183,7 +186,11 @@ class EventRegistrationController extends ActionController
      */
     public function createAction(Event $event, Registration $registration): void
     {
+        $this->registrationGuard->assertBookableEventType($event);
+        \assert($event instanceof EventDateInterface);
+
         $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
+        $this->registrationProcessor->calculateTotalPrice($registration);
         $this->registrationProcessor->createTitle($registration);
         $this->registrationProcessor->persist($registration);
         $this->registrationProcessor->sendEmails($registration);
