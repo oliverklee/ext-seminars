@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   (#1764, #1767, #1829, #1835)
 - Add a `Registration` model and repository
   (#1750, #1752, #1755, #1756, #1757, #1758, #1834, #1840, #1853, #1883, #1950
-  #1996)
+  #1996, #1997)
 - Add a `RegistrationCheckbox` model (#1742)
 - Add a `PaymentMethod` model (#1740)
 - Add a `FoodOption` model (#1738)

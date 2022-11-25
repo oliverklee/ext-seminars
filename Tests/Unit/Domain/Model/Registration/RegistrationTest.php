@@ -275,6 +275,25 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getHumanReadablePriceInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getHumanReadablePrice());
+    }
+
+    /**
+     * @test
+     */
+    public function setHumanReadablePriceSetsHumanReadablePrice(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setHumanReadablePrice($value);
+
+        self::assertSame($value, $this->subject->getHumanReadablePrice());
+    }
+
+    /**
+     * @test
+     */
     public function getSeatsInitiallyReturnsOne(): void
     {
         self::assertSame(1, $this->subject->getSeats());

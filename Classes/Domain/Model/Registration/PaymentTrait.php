@@ -18,10 +18,16 @@ trait PaymentTrait
 {
     /**
      * @var string|null
-     * @phpstan-var Price::PRICE_*|null
+     * @phpstan-var Price::PRICE_*|''|null
      * @Extbase\Validate("StringLength", options={"maximum": 32})
      */
     protected $priceCode;
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     */
+    protected $humanReadablePrice = '';
 
     /**
      * @var float
@@ -41,7 +47,6 @@ trait PaymentTrait
     public function getPriceCode(): ?string
     {
         $priceCode = $this->priceCode;
-        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($priceCode === '') {
             $priceCode = null;
         }
@@ -55,6 +60,16 @@ trait PaymentTrait
     public function setPriceCode(string $priceCode): void
     {
         $this->priceCode = $priceCode;
+    }
+
+    public function getHumanReadablePrice(): string
+    {
+        return $this->humanReadablePrice;
+    }
+
+    public function setHumanReadablePrice(string $humanReadablePrice): void
+    {
+        $this->humanReadablePrice = $humanReadablePrice;
     }
 
     public function getTotalPrice(): float

@@ -5,6 +5,7 @@
         <title>some new registration</title>
         <registration_queue>1</registration_queue>
         <price_code>price_regular_early</price_code>
+        <price>Standard price: 200€</price>
         <seats>3</seats>
         <registered_themselves>1</registered_themselves>
         <total_price>199.99</total_price>
