@@ -137,6 +137,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Registration::class, $result);
 
         self::assertSame(Price::PRICE_EARLY_BIRD, $result->getPriceCode());
+        self::assertSame('Standard price: 200€', $result->getHumanReadablePrice());
         self::assertSame(199.99, $result->getTotalPrice());
         self::assertNull($result->getPaymentMethod());
     }

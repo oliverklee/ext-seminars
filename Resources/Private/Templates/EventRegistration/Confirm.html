@@ -12,6 +12,15 @@
             <f:variable name="labelPrefix" value="plugin.eventRegistration.property"/>
             <f:variable name="actionLabelPrefix" value="plugin.eventRegistration.action"/>
 
+            <f:comment>
+                This is a workaround for Fluid not allowing variable array accesses.
+            </f:comment>
+            <f:for each="{applicablePrices}" as="price">
+                <f:if condition="{price.priceCode} == {registration.priceCode}">
+                    <f:variable name="selectedPrice" value="{price}"/>
+                </f:if>
+            </f:for>
+
             <h3>
                 <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
             </h3>
@@ -166,18 +175,12 @@
                         <f:translate key="{labelPrefix}.priceCode"/>
                     </div>
                     <div class="col-sm-10">
-                        <f:comment>
-                            This is a workaround for Fluid not allowing variable array accesses.
-                        </f:comment>
-                        <f:for each="{applicablePrices}" as="price">
-                            <f:if condition="{price.priceCode} == {registration.priceCode}">
-                                <f:translate key="{price.labelKey}"/>
-                            </f:if>
-                        </f:for>
+                        <f:translate key="{selectedPrice.labelKey}"/>
                     </div>
                 </div>
 
                 <f:form.hidden property="priceCode"/>
+                <f:form.hidden property="humanReadablePrice" value="{f:translate(key: selectedPrice.labelKey)}"/>
             </f:if>
 
             <f:if condition="{registration.paymentMethod}">

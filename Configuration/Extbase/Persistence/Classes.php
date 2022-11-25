@@ -122,6 +122,7 @@ return [
             'billingPhoneNumber' => ['fieldName' => 'telephone'],
             'billingEmailAddress' => ['fieldName' => 'email'],
             'paymentMethod' => ['fieldName' => 'method_of_payment'],
+            'humanReadablePrice' => ['fieldName' => 'price'],
         ],
     ],
     \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [

@@ -144,6 +144,7 @@ config.tx_extbase.persistence.classes {
         telephone.mapOnProperty = billingPhoneNumber
         email.mapOnProperty = billingEmailAddress
         method_of_payment.mapOnProperty = paymentMethod
+        price.mapOnProperty = humanReadablePrice
       }
     }
   }
