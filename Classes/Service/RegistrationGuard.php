@@ -9,6 +9,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -44,6 +45,24 @@ class RegistrationGuard implements SingletonInterface
         return GeneralUtility::makeInstance(Context::class);
     }
 
+    /**
+     * Throws an exception if the event is not a bookable event type.
+     *
+     * We should probably replace this with a redirect to the deny action:
+     * https://github.com/oliverklee/ext-seminars/issues/1978
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function assertBookableEventType(Event $event): void
+    {
+        if (!$event instanceof SingleEvent && !$event instanceof EventDate) {
+            throw new \InvalidArgumentException('The event must be a SingleEvent or an EventDate.', 1669377348);
+        }
+    }
+
+    /**
+     * @return ($event is EventDateInterface ? bool : false)
+     */
     public function isRegistrationPossibleAtAnyTimeAtAll(Event $event): bool
     {
         $isPossible = $event instanceof EventDateInterface && $event->isRegistrationRequired();

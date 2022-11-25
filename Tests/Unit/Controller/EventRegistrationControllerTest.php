@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
@@ -253,7 +254,18 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionPassesProvidedEventToView(): void
+    public function newActionAssertsBookableEventType(): void
+    {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('assertBookableEventType')->with($event);
+
+        $this->subject->newAction(new SingleEvent(), new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithSingleEventPassesProvidedEventToView(): void
     {
         $event = new SingleEvent();
 
@@ -269,17 +281,17 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionPassesProvidedRegistrationToView(): void
+    public function newActionWithEventDatePassesProvidedEventToView(): void
     {
-        $registration = new Registration();
+        $event = new EventDate();
 
         $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
-            ['event', self::anything()],
-            ['registration', $registration],
+            ['event', $event],
+            ['registration', self::anything()],
             ['maximumBookableSeats', self::anything()]
         );
 
-        $this->subject->newAction(new SingleEvent(), $registration);
+        $this->subject->newAction($event, new Registration());
     }
 
     /**
@@ -404,9 +416,35 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function confirmActionPassesProvidedEventToView(): void
+    public function confirmActionAssertsBookableEventType(): void
     {
         $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('assertBookableEventType')->with($event);
+
+        $this->subject->confirmAction(new SingleEvent(), new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionWithSingleEventPassesProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+
+        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['registration', self::anything()]
+        );
+
+        $this->subject->confirmAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionWithEventDatePassesProvidedEventToView(): void
+    {
+        $event = new EventDate();
 
         $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
             ['event', $event],
