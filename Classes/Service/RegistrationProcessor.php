@@ -9,6 +9,7 @@ use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -22,9 +23,10 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * This is the recommended way to process a registration:
  * 1. `enrichWithMetadata`
- * 2. `createTitle`
- * 3. `persist`
- * 4. `sendEmails`
+ * 2. `calculateTotalPrice`
+ * 3. `createTitle`
+ * 4. `persist`
+ * 5. `sendEmails`
  */
 class RegistrationProcessor implements SingletonInterface
 {
@@ -103,6 +105,34 @@ class RegistrationProcessor implements SingletonInterface
         $registration->setPid($folderUid);
     }
 
+    public function calculateTotalPrice(Registration $registration): void
+    {
+        $event = $this->getEventFromRegistration($registration);
+        $priceCode = $registration->getPriceCode();
+        if (!Price::isPriceCodeValid($priceCode)) {
+            throw new \RuntimeException('This registration has no valid price code.', 1669393997);
+        }
+
+        $price = $event->getAllPrices()[$priceCode] ?? null;
+        if ($price instanceof Price) {
+            $totalPrice = $price->getAmount() * $registration->getSeats();
+            $registration->setTotalPrice($totalPrice);
+        }
+    }
+
+    /**
+     * @throws \RuntimeException if the given registration has no associated event
+     */
+    private function getEventFromRegistration(Registration $registration): Event
+    {
+        $event = $registration->getEvent();
+        if (!$event instanceof Event) {
+            throw new \RuntimeException('The registration has no associated event.', 1669023165);
+        }
+
+        return $event;
+    }
+
     /**
      * Sets the title for the registration using the user's full name, the event title and date.
      */
@@ -112,10 +142,7 @@ class RegistrationProcessor implements SingletonInterface
         if (!$user instanceof FrontendUser) {
             throw new \RuntimeException('The registration has no associated user.', 1669023125);
         }
-        $event = $registration->getEvent();
-        if (!$event instanceof Event) {
-            throw new \RuntimeException('The registration has no associated event.', 1669023165);
-        }
+        $event = $this->getEventFromRegistration($registration);
 
         $dateFormat = LocalizationUtility::translate('dateFormat', 'seminars');
         $startDate = $event instanceof EventDateInterface ? $event->getStart() : null;
@@ -137,10 +164,7 @@ class RegistrationProcessor implements SingletonInterface
      */
     public function persist(Registration $registration): void
     {
-        $event = $registration->getEvent();
-        if (!$event instanceof Event) {
-            throw new \RuntimeException('The registration has no associated event.', 1669036253);
-        }
+        $event = $this->getEventFromRegistration($registration);
 
         $this->registrationRepository->add($registration);
         $this->registrationRepository->persistAll();

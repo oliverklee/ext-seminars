@@ -275,6 +275,48 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function hasValidPriceCodeWithoutPriceCodeReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasValidPriceCode());
+    }
+
+    /**
+     * @test
+     */
+    public function hasValidPriceCodeWithEmptyPriceCodeReturnsFalse(): void
+    {
+        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
+        $this->subject->setPriceCode('');
+
+        self::assertFalse($this->subject->hasValidPriceCode());
+    }
+
+    /**
+     * @test
+     */
+    public function hasValidPriceCodeWithInvalidPriceCodeReturnsFalse(): void
+    {
+        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
+        $this->subject->setPriceCode('foo');
+
+        self::assertFalse($this->subject->hasValidPriceCode());
+    }
+
+    /**
+     * @test
+     * @param Price::PRICE_* $priceCode
+     * @dataProvider validPriceCodeDataProvider
+     */
+    public function hasValidPriceCodeWithValidPriceCodeReturnsTrue(string $priceCode): void
+    {
+        $this->subject->setPriceCode($priceCode);
+
+        self::assertTrue($this->subject->hasValidPriceCode());
+    }
+
+    /**
+     * @test
+     */
     public function getHumanReadablePriceInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getHumanReadablePrice());

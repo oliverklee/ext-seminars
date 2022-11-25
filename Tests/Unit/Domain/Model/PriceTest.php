@@ -44,4 +44,48 @@ final class PriceTest extends UnitTestCase
 
         self::assertSame($priceCode, $price->getPriceCode());
     }
+
+    /**
+     * @return array<string, array{0: Price::PRICE_*}>
+     */
+    public function validPriceCodeDataProvider(): array
+    {
+        return [
+            'standard' => [Price::PRICE_STANDARD],
+            'early bird' => [Price::PRICE_EARLY_BIRD],
+            'special' => [Price::PRICE_SPECIAL],
+            'special early bird' => [Price::PRICE_SPECIAL_EARLY_BIRD],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Price::PRICE_* $priceCode
+     * @dataProvider validPriceCodeDataProvider
+     */
+    public function isPriceCodeValidForValidPriceCodeReturnsTrue(string $priceCode): void
+    {
+        self::assertTrue(Price::isPriceCodeValid($priceCode));
+    }
+
+    /**
+     * @return array<string, array{0: string|null}>
+     */
+    public function invalidPriceCodeDataProvider(): array
+    {
+        return [
+            'empty string' => [''],
+            'some random string' => ['Wurstwasser'],
+            'null' => [null],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider invalidPriceCodeDataProvider
+     */
+    public function isPriceCodeValidForInvalidPriceCodeReturnsFalse(?string $priceCode): void
+    {
+        self::assertFalse(Price::isPriceCodeValid($priceCode));
+    }
 }
