@@ -2524,6 +2524,14 @@ This event now has been confirmed.</source>
 				<source>Additional information</source>
 				<target>Extra informatie</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.priceCode">
+				<source>Prijs</source>
+				<target>Preis</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.totalPrice">
+				<source>Total price</source>
+				<target>Totaal prijs</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Standaardprijs</target>

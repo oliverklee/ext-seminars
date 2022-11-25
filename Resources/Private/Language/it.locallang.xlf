@@ -2508,6 +2508,14 @@ This event now has been confirmed.</source>
 				<source>Billing address</source>
 				<target>Indirizzo fatturazione</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.priceCode">
+				<source>Price</source>
+				<target>Prezzo</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.totalPrice">
+				<source>Total price</source>
+				<target>Prezzo totale</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Prezzo regolare</target>

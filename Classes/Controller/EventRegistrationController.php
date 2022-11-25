@@ -6,9 +6,11 @@ namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
+use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -35,6 +37,11 @@ class EventRegistrationController extends ActionController
      */
     private $oneTimeAccountConnector;
 
+    /**
+     * @var PriceFinder
+     */
+    private $priceFinder;
+
     public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
     {
         $this->registrationGuard = $registrationGuard;
@@ -48,6 +55,11 @@ class EventRegistrationController extends ActionController
     public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
     {
         $this->oneTimeAccountConnector = $connector;
+    }
+
+    public function injectPriceFinder(PriceFinder $priceFinder): void
+    {
+        $this->priceFinder = $priceFinder;
     }
 
     /**
@@ -133,6 +145,7 @@ class EventRegistrationController extends ActionController
     public function newAction(Event $event, ?Registration $registration = null): void
     {
         $this->registrationGuard->assertBookableEventType($event);
+        \assert($event instanceof EventDateInterface);
 
         $this->view->assign('event', $event);
 
@@ -145,6 +158,7 @@ class EventRegistrationController extends ActionController
         $this->view->assign('registration', $newRegistration);
 
         $this->view->assign('maximumBookableSeats', (int)($this->settings['maximumBookableSeats'] ?? 10));
+        $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
     }
 
     /**
@@ -155,9 +169,11 @@ class EventRegistrationController extends ActionController
     public function confirmAction(Event $event, Registration $registration): void
     {
         $this->registrationGuard->assertBookableEventType($event);
+        \assert($event instanceof EventDateInterface);
 
         $this->view->assign('event', $event);
         $this->view->assign('registration', $registration);
+        $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
     }
 
     /**
