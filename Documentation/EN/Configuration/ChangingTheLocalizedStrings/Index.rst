@@ -12,9 +12,18 @@
    :class:  typoscript
 .. role::   php(code)
 
+============
+Localization
+============
+
+Changing the salutation mode (formal to informal)
+=================================================
+If you would like to use the informal salutation mode in the frontend, set
+:typoscript:`plugin.tx_seminars.settings.salutation = informal` in the
+TypoScript constants (or conveniently in the constants editor).
 
 Changing the localized strings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==============================
 
 You can change most of the localized strings that are used on the
 front end and for the e-mails. (The localized strings for the back end

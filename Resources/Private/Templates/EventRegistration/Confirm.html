@@ -176,11 +176,13 @@
                     </div>
                     <div class="col-sm-10">
                         <f:translate key="{selectedPrice.labelKey}"/>
+                        <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
                     </div>
                 </div>
 
                 <f:form.hidden property="priceCode"/>
-                <f:form.hidden property="humanReadablePrice" value="{f:translate(key: selectedPrice.labelKey)}"/>
+                <f:form.hidden property="humanReadablePrice"
+                               value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
             </f:if>
 
             <f:if condition="{registration.paymentMethod}">
