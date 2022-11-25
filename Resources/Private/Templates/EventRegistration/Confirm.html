@@ -160,6 +160,26 @@
             </f:if>
             <f:form.hidden property="comments"/>
 
+            <f:if condition="{registration.priceCode}">
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <f:translate key="{labelPrefix}.priceCode"/>
+                    </div>
+                    <div class="col-sm-10">
+                        <f:comment>
+                            This is a workaround for Fluid not allowing variable array accesses.
+                        </f:comment>
+                        <f:for each="{applicablePrices}" as="price">
+                            <f:if condition="{price.priceCode} == {registration.priceCode}">
+                                <f:translate key="{price.labelKey}"/>
+                            </f:if>
+                        </f:for>
+                    </div>
+                </div>
+
+                <f:form.hidden property="priceCode"/>
+            </f:if>
+
             <f:if condition="{registration.paymentMethod}">
                 <div class="row mb-3">
                     <div class="col-sm-2">

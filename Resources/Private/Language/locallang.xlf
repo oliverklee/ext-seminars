@@ -2178,6 +2178,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.paymentMethod">
 				<source>Method of payment</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.priceCode">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.totalPrice">
+				<source>Total price</source>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 			</trans-unit>

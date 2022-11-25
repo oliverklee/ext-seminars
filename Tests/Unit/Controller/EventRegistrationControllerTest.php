@@ -9,8 +9,10 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
+use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -46,6 +48,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
     private $oneTimeAccountConnectorMock;
 
     /**
+     * @var PriceFinder&MockObject
+     */
+    private $priceFinderMock;
+
+    /**
      * @var TemplateView&MockObject
      */
     private $viewMock;
@@ -72,6 +79,8 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->subject->injectRegistrationProcessor($this->registrationProcesserMock);
         $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
         $this->subject->injectOneTimeAccountConnector($this->oneTimeAccountConnectorMock);
+        $this->priceFinderMock = $this->createMock(PriceFinder::class);
+        $this->subject->injectPriceFinder($this->priceFinderMock);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -269,10 +278,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', $event],
             ['registration', self::anything()],
-            ['maximumBookableSeats', self::anything()]
+            ['maximumBookableSeats', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction($event, new Registration());
@@ -285,10 +295,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $event = new EventDate();
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', $event],
             ['registration', self::anything()],
-            ['maximumBookableSeats', self::anything()]
+            ['maximumBookableSeats', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction($event, new Registration());
@@ -302,10 +313,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $registration = new Registration();
         GeneralUtility::addInstance(Registration::class, $registration);
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', self::anything()],
             ['registration', $registration],
-            ['maximumBookableSeats', self::anything()]
+            ['maximumBookableSeats', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction(new SingleEvent(), null);
@@ -319,10 +331,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $registration = new Registration();
         GeneralUtility::addInstance(Registration::class, $registration);
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', self::anything()],
             ['registration', $registration],
-            ['maximumBookableSeats', self::anything()]
+            ['maximumBookableSeats', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction(new SingleEvent(), null);
@@ -333,10 +346,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
      */
     public function newActionWithoutSettingForMaximumBookableSeatsPassesTenToView(): void
     {
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', self::anything()],
             ['registration', self::anything()],
-            ['maximumBookableSeats', 10]
+            ['maximumBookableSeats', 10],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction(new SingleEvent(), new Registration());
@@ -350,13 +364,34 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $maximumBookableSeats = 15;
         $this->subject->_set('settings', ['maximumBookableSeats' => (string)$maximumBookableSeats]);
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', self::anything()],
             ['registration', self::anything()],
-            ['maximumBookableSeats', $maximumBookableSeats]
+            ['maximumBookableSeats', $maximumBookableSeats],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->newAction(new SingleEvent(), new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionPassesApplicablePricesToView(): void
+    {
+        $event = new SingleEvent();
+        $applicablePrices = [new Price(0.0, 'labelKey', Price::PRICE_STANDARD)];
+        $this->priceFinderMock->expects(self::once())->method('findApplicablePrices')->with($event)
+            ->willReturn($applicablePrices);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', self::anything()],
+            ['applicablePrices', $applicablePrices]
+        );
+
+        $this->subject->newAction($event, new Registration());
     }
 
     /**
@@ -431,9 +466,10 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
             ['event', $event],
-            ['registration', self::anything()]
+            ['registration', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->confirmAction($event, new Registration());
@@ -446,9 +482,10 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $event = new EventDate();
 
-        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
             ['event', $event],
-            ['registration', self::anything()]
+            ['registration', self::anything()],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->confirmAction($event, new Registration());
@@ -461,12 +498,32 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $registration = new Registration();
 
-        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
             ['event', self::anything()],
-            ['registration', $registration]
+            ['registration', $registration],
+            ['applicablePrices', self::anything()]
         );
 
         $this->subject->confirmAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionPassesApplicablePricesToView(): void
+    {
+        $event = new SingleEvent();
+        $applicablePrices = [new Price(0.0, 'labelKey', Price::PRICE_STANDARD)];
+        $this->priceFinderMock->expects(self::once())->method('findApplicablePrices')->with($event)
+            ->willReturn($applicablePrices);
+
+        $this->viewMock->expects(self::exactly(3))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['applicablePrices', $applicablePrices]
+        );
+
+        $this->subject->confirmAction($event, new Registration());
     }
 
     /**

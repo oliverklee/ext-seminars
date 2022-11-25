@@ -2236,6 +2236,14 @@ This event now has been confirmed.</source>
 				<source>Additional information</source>
 				<target>Следующая информация</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.priceCode">
+				<source>Price</source>
+				<target>Цена</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.totalPrice">
+				<source>Total price</source>
+				<target>Общая цена</target>
+			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
 				<target>Обычная цена</target>
