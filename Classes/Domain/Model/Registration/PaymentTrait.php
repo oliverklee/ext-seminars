@@ -40,7 +40,13 @@ trait PaymentTrait
      */
     public function getPriceCode(): ?string
     {
-        return $this->priceCode;
+        $priceCode = $this->priceCode;
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
+        if ($priceCode === '') {
+            $priceCode = null;
+        }
+
+        return $priceCode;
     }
 
     /**

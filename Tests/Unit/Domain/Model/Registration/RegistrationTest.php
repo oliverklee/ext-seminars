@@ -231,7 +231,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceCodeInitiallyReturnsEmptyNull(): void
+    public function getPriceCodeInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getPriceCode());
     }
@@ -259,6 +259,17 @@ final class RegistrationTest extends UnitTestCase
         $this->subject->setPriceCode($priceCode);
 
         self::assertSame($priceCode, $this->subject->getPriceCode());
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceCodeWithEmptyStringReturnsNull(): void
+    {
+        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
+        $this->subject->setPriceCode('');
+
+        self::assertNull($this->subject->getPriceCode());
     }
 
     /**

@@ -370,6 +370,21 @@
 			<trans-unit id="tx_seminars_attendances.price" xml:space="preserve">
 				<source>Price to pay</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code">
+				<source>Price code</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.standard">
+				<source>Regular price</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.earlyBird">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.special">
+				<source>Special price</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird">
+				<source>Early-bird special price</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.total_price" xml:space="preserve">
 				<source>Total price for this attendance</source>
 			</trans-unit>
