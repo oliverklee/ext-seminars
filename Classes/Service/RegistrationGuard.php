@@ -51,6 +51,9 @@ class RegistrationGuard implements SingletonInterface
      * We should probably replace this with a redirect to the deny action:
      * https://github.com/oliverklee/ext-seminars/issues/1978
      *
+     * @internal
+     * @deprecated will be removed without notice sometime after seminars 5.0, but before seminars 6.0
+     *
      * @throws \InvalidArgumentException
      */
     public function assertBookableEventType(Event $event): void
