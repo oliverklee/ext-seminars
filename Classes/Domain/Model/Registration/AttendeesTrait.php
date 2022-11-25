@@ -25,6 +25,7 @@ trait AttendeesTrait
 
     /**
      * @var int
+     * @Extbase\Validate("NumberRange", options={"minimum": 1, "maximum": 999})
      */
     protected $seats = 1;
 
