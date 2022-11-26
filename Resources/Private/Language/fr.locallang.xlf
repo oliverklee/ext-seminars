@@ -2569,8 +2569,8 @@ This event now has been confirmed.</source>
 				<target>Prix</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
-				<target>Prix total</target>
+				<source>Total price (incl. VAT)</source>
+				<target>Prix total (TVA incluse)</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

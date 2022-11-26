@@ -2531,8 +2531,8 @@ This event now has been confirmed.</source>
 				<target>Pris</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
-				<target>Pris i alt</target>
+				<source>Total price (incl. VAT)</source>
+				<target>Pris i alt (inkl. moms)</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
