@@ -2064,6 +2064,10 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
 				<source>Your registration has been sent.</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.summary">
+				<source>Summary</source>
+				<target>Zusammenfassung</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.fieldset.payment">
 				<source>Payment</source>
 			</trans-unit>
@@ -2188,7 +2192,7 @@ This event now has been confirmed.</source>
 				<source>Price</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
+				<source>Total price (incl. VAT)</source>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

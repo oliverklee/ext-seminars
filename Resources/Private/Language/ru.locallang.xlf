@@ -2257,8 +2257,8 @@ This event now has been confirmed.</source>
 				<target>Цена</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
-				<target>Общая цена</target>
+				<source>Total price (incl. VAT)</source>
+				<target>Общая цена (включая НДС)</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

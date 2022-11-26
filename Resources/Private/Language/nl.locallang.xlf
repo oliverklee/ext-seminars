@@ -2512,6 +2512,10 @@ This event now has been confirmed.</source>
 				<source>Event registration</source>
 				<target>Evenement registratie</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.summary">
+				<source>Summary</source>
+				<target>Overzicht</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>
 				<target>Voor dit evenement is geen registratie mogelijk.</target>
@@ -2545,8 +2549,8 @@ This event now has been confirmed.</source>
 				<target>Preis</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
-				<target>Totaal prijs</target>
+				<source>Total price (incl. VAT)</source>
+				<target>Totaal prijs (incl. btw)</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

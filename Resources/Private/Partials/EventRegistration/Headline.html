@@ -2,9 +2,5 @@
     <h2>
         <f:translate key="plugin.eventRegistration.heading.eventRegistration"/>
     </h2>
-    <p>
-        {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
-        <f:translate key="plugin.eventRegistration.heading.eventTitleAndDateAndUid"
-                     arguments="{0: event.displayTitle, 1: eventDate, 2: event.uid}"/>
-    </p>
+    <f:render partial="EventRegistration/EventTitleAndDateAndUid" arguments="{event: event}"/>
 </html>

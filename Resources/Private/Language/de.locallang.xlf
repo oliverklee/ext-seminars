@@ -2738,6 +2738,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Your registration has been sent.</source>
 				<target>Deine Anmeldung wurde abgeschickt.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.summary">
+				<source>Summary</source>
+				<target>Zusammenfassung</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.fieldset.payment">
 				<source>Payment</source>
 				<target>Bezahlung</target>
@@ -2907,8 +2911,8 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<target>Preis</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
-				<source>Total price</source>
-				<target>Gesamtpreis</target>
+				<source>Total price (incl. VAT)</source>
+				<target>Gesamtpreis (inkl. MwSt.)</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>
