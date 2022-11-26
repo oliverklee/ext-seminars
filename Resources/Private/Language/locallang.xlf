@@ -2135,6 +2135,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.action.registerWithCosts">
 				<source>Confirm registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.event">
+				<source>Event</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.interests_formal">
 				<source>What are your interests concerning this event?</source>
 			</trans-unit>

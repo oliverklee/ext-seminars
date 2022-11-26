@@ -345,10 +345,17 @@
                 <f:translate key="plugin.eventRegistration.heading.summary"/>
             </h3>
 
-            <f:render partial="EventRegistration/EventTitleAndDateAndUid" arguments="{event: event}"/>
-
             <table class="table table-striped table-primary">
                 <tbody>
+                    <tr>
+                        <th scope="row">
+                            <f:translate key="{labelPrefix}.event"/>
+                        </th>
+                        <td>
+                            <f:render partial="EventRegistration/EventTitleAndDateAndUid" arguments="{event: event}"/>
+                        </td>
+                    </tr>
+
                     <f:if condition="{registration.priceCode}">
                         <tr>
                             <th scope="row">
@@ -375,7 +382,9 @@
                             <f:translate key="{labelPrefix}.totalPrice"/>
                         </th>
                         <td>
-                            <f:render partial="Price" arguments="{amount: registration.totalPrice}"/>
+                            <strong>
+                                <f:render partial="Price" arguments="{amount: registration.totalPrice}"/>
+                            </strong>
                         </td>
                     </tr>
                 </tbody>
