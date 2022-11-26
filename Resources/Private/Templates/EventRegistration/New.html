@@ -76,10 +76,14 @@
 
                 <f:if condition="{event.accommodationOptions}">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <f:translate key="{labelPrefix}.accommodationOptions"/>
-                        </label>
-                        <div class="col-sm-10">
+                        </div>
+                        <fieldset class="col-sm-10">
+                            <legend class="visually-hidden tx-seminars-visually-hidden">
+                                <f:translate key="{labelPrefix}.accommodationOptions"/>
+                            </legend>
+
                             <f:for each="{event.accommodationOptions}" as="accommodationOption">
                                 <div class="form-check">
                                     <f:form.checkbox property="accommodationOptions"
@@ -94,16 +98,20 @@
                             </f:for>
                             <f:render partial="EventRegistration/ValidationResult"
                                       arguments="{property: 'accommodationOptions'}"/>
-                        </div>
+                        </fieldset>
                     </div>
                 </f:if>
 
                 <f:if condition="{event.foodOptions}">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">
+                        <div class="col-sm-2">
                             <f:translate key="{labelPrefix}.foodOptions"/>
-                        </label>
-                        <div class="col-sm-10">
+                        </div>
+                        <fieldset class="col-sm-10">
+                            <legend class="visually-hidden tx-seminars-visually-hidden">
+                                <f:translate key="{labelPrefix}.foodOptions"/>
+                            </legend>
+
                             <f:for each="{event.foodOptions}" as="foodOption">
                                 <div class="form-check">
                                     <f:form.checkbox property="foodOptions" id="{idPrefix}-foodOption-{foodOption.uid}"
@@ -116,7 +124,7 @@
                             </f:for>
                             <f:render partial="EventRegistration/ValidationResult"
                                       arguments="{property: 'foodOptions'}"/>
-                        </div>
+                        </fieldset>
                     </div>
                 </f:if>
             </fieldset>
@@ -244,7 +252,11 @@
                     </div>
                 </div>
 
-                <div data-behavior="tx-seminars-billing-address-fields" class="d-none tx-seminars-display-none">
+                <fieldset data-behavior="tx-seminars-billing-address-fields" class="d-none tx-seminars-display-none">
+                    <legend class="visually-hidden tx-seminars-visually-hidden">
+                        <f:translate key="{labelPrefix}.separateBillingAddress"/>
+                    </legend>
+
                     <div class="row mb-3 ms-3">
                         <label for="{idPrefix}-billingCompany" class="col-sm-2 col-form-label">
                             <s:salutationAwareTranslate key="{labelPrefix}.billingCompany"/>
@@ -349,7 +361,7 @@
                                       arguments="{property: 'billingEmailAddress'}"/>
                         </div>
                     </div>
-                </div>
+                </fieldset>
             </fieldset>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
