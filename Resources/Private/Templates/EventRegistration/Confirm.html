@@ -109,6 +109,33 @@
                         </tr>
                     </f:if>
 
+                    <f:comment>
+                        We cannot directly iterate over `registration.registrationCheckboxes` here, as Extbase then
+                        only returns the first option. This is probably a bug in Extbase.
+                    </f:comment>
+                    <f:variable name="registrationCheckboxTitles" value="{registration.registrationCheckboxTitles}"/>
+                    <f:if condition="{registrationCheckboxTitles}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.registrationCheckboxes"/>
+                            </th>
+                            <td>
+                                <ul>
+                                    <f:for each="{registrationCheckboxTitles}" as="registrationCheckboxTitle">
+                                        <li>
+                                            {registrationCheckboxTitle}
+                                        </li>
+                                    </f:for>
+                                    <f:for each="{event.registrationCheckboxes}" as="registrationCheckbox">
+                                        <f:form.checkbox property="registrationCheckboxes"
+                                                         value="{registrationCheckbox.uid}"
+                                                         class="d-none tx-seminars-display-none"/>
+                                    </f:for>
+                                </ul>
+                            </td>
+                        </tr>
+                    </f:if>
+
                     <f:if condition="{registration.interests}">
                         <tr>
                             <th scope="row">

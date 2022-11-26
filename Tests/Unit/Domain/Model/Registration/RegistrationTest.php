@@ -787,6 +787,34 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getRegistrationCheckboxTitlesForNoOptionsReturnsEmptyArray(): void
+    {
+        self::assertSame([], $this->subject->getRegistrationCheckboxTitles());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationCheckboxTitlesReturnsTitlesOfOptions(): void
+    {
+        /** @var ObjectStorage<RegistrationCheckbox> $options */
+        $options = new ObjectStorage();
+        $title1 = 'this';
+        $option1 = new RegistrationCheckbox();
+        $option1->setTitle($title1);
+        $options->attach($option1);
+        $title2 = 'that';
+        $option2 = new RegistrationCheckbox();
+        $option2->setTitle($title2);
+        $options->attach($option2);
+        $this->subject->setRegistrationCheckboxes($options);
+
+        self::assertSame([$title1, $title2], $this->subject->getRegistrationCheckboxTitles());
+    }
+
+    /**
+     * @test
+     */
     public function getPaymentMethodInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getPaymentMethod());
