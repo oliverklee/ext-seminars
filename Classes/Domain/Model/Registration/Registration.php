@@ -94,12 +94,14 @@ class Registration extends AbstractEntity
     /**
      * @var bool
      * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Extbase\Validate(validator="Boolean", options={"is": "1"})
      */
     protected $consentedToTermsAndConditions = false;
 
     /**
      * @var bool
      * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Extbase\Validate(validator="Boolean", options={"is": "1"})
      */
     protected $consentedToAdditionalTerms = false;
 
