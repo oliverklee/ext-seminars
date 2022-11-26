@@ -66,6 +66,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `Event.getOrganizer()` alias method (#1727)
 
 ### Fixed
+- Add `maxlength` to the `textareas` in the FE forms (#2007)
 - Use `DateTime` instead of `DateTimeImmutable` in the models (#1961)
 - Streamline the HTML and CSS for the FE editor (#1959)
 - Make the `RegistrationManager` injectable (#1915)

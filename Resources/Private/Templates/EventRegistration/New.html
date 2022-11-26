@@ -60,7 +60,8 @@
                         </label>
                         <div class="col-sm-10">
                             <f:form.textarea property="attendeesNames" id="{idPrefix}-attendeesNames"
-                                             class="form-control" errorClass="is-invalid"/>
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
                             <f:render partial="EventRegistration/ValidationResult"
                                       arguments="{property: 'attendeesNames'}"/>
                         </div>
@@ -131,7 +132,8 @@
                     </label>
                     <div class="col-sm-10">
                         <f:form.textarea property="interests" id="{idPrefix}-interests"
-                                         class="form-control" errorClass="is-invalid"/>
+                                         class="form-control" errorClass="is-invalid"
+                                         additionalAttributes="{maxlength: 16383}"/>
                         <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'interests'}"/>
                     </div>
                 </div>
@@ -142,7 +144,8 @@
                     </label>
                     <div class="col-sm-10">
                         <f:form.textarea property="expectations" id="{idPrefix}-expectations"
-                                         class="form-control" errorClass="is-invalid"/>
+                                         class="form-control" errorClass="is-invalid"
+                                         additionalAttributes="{maxlength: 16383}"/>
                         <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'expectations'}"/>
                     </div>
                 </div>
@@ -153,7 +156,8 @@
                     </label>
                     <div class="col-sm-10">
                         <f:form.textarea property="backgroundKnowledge" id="{idPrefix}-backgroundKnowledge"
-                                         class="form-control" errorClass="is-invalid"/>
+                                         class="form-control" errorClass="is-invalid"
+                                         additionalAttributes="{maxlength: 16383}"/>
                         <f:render partial="EventRegistration/ValidationResult"
                                   arguments="{property: 'backgroundKnowledge'}"/>
                     </div>
@@ -165,7 +169,8 @@
                     </label>
                     <div class="col-sm-10">
                         <f:form.textarea property="knownFrom" id="{idPrefix}-knownFrom"
-                                         class="form-control" errorClass="is-invalid"/>
+                                         class="form-control" errorClass="is-invalid"
+                                         additionalAttributes="{maxlength: 16383}"/>
                         <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'knownFrom'}"/>
                     </div>
                 </div>
@@ -176,7 +181,8 @@
                     </label>
                     <div class="col-sm-10">
                         <f:form.textarea property="comments" id="{idPrefix}-comments"
-                                         class="form-control" errorClass="is-invalid"/>
+                                         class="form-control" errorClass="is-invalid"
+                                         additionalAttributes="{maxlength: 16383}"/>
                         <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'comments'}"/>
                     </div>
                 </div>
@@ -272,7 +278,8 @@
                         <div class="col-sm-10">
                             <f:form.textarea property="billingStreetAddress" id="{idPrefix}-billingStreetAddress"
                                              class="form-control" errorClass="is-invalid"
-                                             additionalAttributes="{autocomplete: 'street-address'}"/>
+                                             additionalAttributes="{autocomplete: 'street-address'}"
+                                             additionalAttributes="{maxlength: 255}"/>
                             <f:render partial="EventRegistration/ValidationResult"
                                       arguments="{property: 'billingStreetAddress'}"/>
                         </div>
