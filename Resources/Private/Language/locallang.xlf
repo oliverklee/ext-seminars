@@ -2028,6 +2028,24 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.loginPage">
 				<source>Login page (or with onetimeaccount)</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage">
+				<source>Page with the terms &amp; conditions</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage.description">
+				<source>Activates the term &amp; conditions checkbox for all events.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsLinkTitle">
+				<source>Link title for the link to the page with the terms &amp; conditions</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage">
+				<source>Page with the additional registration terms</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage.description">
+				<source>Activates the additional conditions checkbox only for those events that use it.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsLinkTitle">
+				<source>Link title for the link to the page with the additional registration terms</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
 				<source>Folder in which to store the registrations</source>
 			</trans-unit>
@@ -2063,6 +2081,10 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
 				<source>Your registration has been sent.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
+				<source>Terms and conditions</source>
+				<target>Anmeldebedingungen</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.summary">
 				<source>Summary</source>
@@ -2193,6 +2215,12 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
 				<source>Total price (incl. VAT)</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.consentedToTermsAndConditions">
+				<source>I consent to the %1$s.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.consentedToAdditionalTerms">
+				<source>I consent to the %1$s.</source>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

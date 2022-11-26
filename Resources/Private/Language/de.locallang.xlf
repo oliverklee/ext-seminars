@@ -2690,6 +2690,30 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Loginseite (oder mit Onetimeaccount)</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage">
+				<source>Page with the terms &amp; conditions</source>
+				<target>Seite mit den AGB</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage.description">
+				<source>Activates the term &amp; conditions checkbox for all events.</source>
+				<target>Aktiviert die AGB-Checkbox für alle Veranstaltungen.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.termsAndConditionsLinkTitle">
+				<source>Link title for the link to the page with the terms &amp; conditions</source>
+				<target>Linktitel für den Link zur Seite mit den AGB</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage">
+				<source>Page with the additional registration terms</source>
+				<target>Seite mit den zusätzlichen Anmeldebedingungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsPage.description">
+				<source>Activates the additional conditions checkbox only for those events that use it.</source>
+				<target>Aktiviert die Checkbox mit den Anmeldebedingungen für ausgewählte Veranstaltungen.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalTermsLinkTitle">
+				<source>Link title for the link to the page with the additional registration terms</source>
+				<target>Linktitel für den Link zur Seite mit den zusätzlichen Anmeldebedingungen</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
 				<source>Folder in which to store the registrations</source>
 				<target>Ordner, in dem die Anmeldungen gespeichert werden</target>
@@ -2737,6 +2761,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
 				<source>Your registration has been sent.</source>
 				<target>Deine Anmeldung wurde abgeschickt.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
+				<source>Terms and conditions</source>
+				<target>Anmeldebedingungen</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.summary">
 				<source>Summary</source>
@@ -2913,6 +2941,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
 				<source>Total price (incl. VAT)</source>
 				<target>Gesamtpreis (inkl. MwSt.)</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.consentedToTermsAndConditions">
+				<source>I consent to the %1$s.</source>
+				<target>Ich stimme den %1$s zu.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.consentedToAdditionalTerms">
+				<source>I consent to the %1$s.</source>
+				<target>Ich stimme den %1$s zu.</target>
 			</trans-unit>
 			<trans-unit id="price.standard">
 				<source>Regular price</source>

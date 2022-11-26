@@ -91,6 +91,18 @@ class Registration extends AbstractEntity
      */
     protected $registrationCheckboxes;
 
+    /**
+     * @var bool
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     */
+    protected $consentedToTermsAndConditions = false;
+
+    /**
+     * @var bool
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     */
+    protected $consentedToAdditionalTerms = false;
+
     public function __construct()
     {
         $this->additionalPersons = new ObjectStorage();
@@ -287,5 +299,25 @@ class Registration extends AbstractEntity
     public function setRegistrationCheckboxes(ObjectStorage $registrationCheckboxes): void
     {
         $this->registrationCheckboxes = $registrationCheckboxes;
+    }
+
+    public function hasConsentedToTermsAndConditions(): bool
+    {
+        return $this->consentedToTermsAndConditions;
+    }
+
+    public function setConsentedToTermsAndConditions(bool $consent): void
+    {
+        $this->consentedToTermsAndConditions = $consent;
+    }
+
+    public function hasConsentedToAdditionalTerms(): bool
+    {
+        return $this->consentedToAdditionalTerms;
+    }
+
+    public function setConsentedToAdditionalTerms(bool $consent): void
+    {
+        $this->consentedToAdditionalTerms = $consent;
     }
 }

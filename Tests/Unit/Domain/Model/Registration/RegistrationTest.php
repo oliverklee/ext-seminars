@@ -849,4 +849,40 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getBackgroundKnowledge());
     }
+
+    /**
+     * @test
+     */
+    public function hasConsentedToTermsAndConditionsInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasConsentedToTermsAndConditions());
+    }
+
+    /**
+     * @test
+     */
+    public function setConsentedToTermsAndConditionsSetsConsentedToTermsAndConditions(): void
+    {
+        $this->subject->setConsentedToTermsAndConditions(true);
+
+        self::assertTrue($this->subject->hasConsentedToTermsAndConditions());
+    }
+
+    /**
+     * @test
+     */
+    public function hasConsentedToAdditionalTermsInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasConsentedToAdditionalTerms());
+    }
+
+    /**
+     * @test
+     */
+    public function setConsentedToAdditionalTermsSetsConsentedToAdditionalTerms(): void
+    {
+        $this->subject->setConsentedToAdditionalTerms(true);
+
+        self::assertTrue($this->subject->hasConsentedToAdditionalTerms());
+    }
 }
