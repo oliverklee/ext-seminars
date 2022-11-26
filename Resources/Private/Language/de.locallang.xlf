@@ -2834,6 +2834,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Confirm registration</source>
 				<target>Kostenpflichtig anmelden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.event">
+				<source>Event</source>
+				<target>Veranstaltung</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.interests_formal">
 				<source>What are your interests concerning this event?</source>
 				<target>Was interessiert Sie bei dieser Veranstaltung?</target>
