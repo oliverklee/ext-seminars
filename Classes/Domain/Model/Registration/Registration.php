@@ -237,7 +237,7 @@ class Registration extends AbstractEntity
 
     /**
      * This method can be used to work around that iterating over the accommodation options on the registration
-     * confirmation page only provides the first selected option.
+     * confirmation page only provides the first selected one.
      *
      * @return array<int, string>
      */
@@ -269,8 +269,8 @@ class Registration extends AbstractEntity
     }
 
     /**
-     * This method can be used to work around that iterating over the accommodation options on the registration
-     * confirmation page only provides the first selected option.
+     * This method can be used to work around that iterating over the food options on the registration
+     * confirmation page only provides the first selected one.
      *
      * @return array<int, string>
      */
@@ -299,6 +299,23 @@ class Registration extends AbstractEntity
     public function setRegistrationCheckboxes(ObjectStorage $registrationCheckboxes): void
     {
         $this->registrationCheckboxes = $registrationCheckboxes;
+    }
+
+    /**
+     * This method can be used to work around that iterating over the registration checkboxes on the registration
+     * confirmation page only provides the first selected one.
+     *
+     * @return array<int, string>
+     */
+    public function getRegistrationCheckboxTitles(): array
+    {
+        $titles = [];
+
+        foreach ($this->getRegistrationCheckboxes() as $checkbox) {
+            $titles[] = $checkbox->getTitle();
+        }
+
+        return $titles;
     }
 
     public function hasConsentedToTermsAndConditions(): bool

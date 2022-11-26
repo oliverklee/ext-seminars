@@ -2922,6 +2922,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Email address</source>
 				<target>E-Mail-Adresse</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registrationCheckboxes">
+				<source>Registration options</source>
+				<target>Anmeldeoptionen</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.foodOptions">
 				<source>Food</source>
 				<target>Verpflegungswünsche</target>

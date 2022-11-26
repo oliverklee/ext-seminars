@@ -2201,6 +2201,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.property.billingEmailAddress">
 				<source>Email address</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.registrationCheckboxes">
+				<source>Registration options</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.foodOptions">
 				<source>Food</source>
 			</trans-unit>
