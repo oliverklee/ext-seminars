@@ -7,7 +7,6 @@
         <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
 
         <f:form action="create" name="registration" object="{registration}" class="tx-seminars-event-registration">
-            <f:form.hidden name="event" value="{event}"/>
             <f:variable name="idPrefix" value="seminars-registration"/>
             <f:variable name="labelPrefix" value="plugin.eventRegistration.property"/>
             <f:variable name="actionLabelPrefix" value="plugin.eventRegistration.action"/>
@@ -25,291 +24,266 @@
                 <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationData"/>
             </h3>
 
-            <div class="row mb-3">
-                <div class="col-sm-2">
-                    <f:translate key="{labelPrefix}.seats"/>
-                </div>
-                <div class="col-sm-10">
-                    {registration.seats}
-                </div>
-            </div>
-            <f:form.hidden property="seats"/>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <f:translate key="{labelPrefix}.seats"/>
+                        </th>
+                        <td>
+                            {registration.seats}
+                        </td>
+                    </tr>
 
-            <div class="row mb-3">
-                <div class="col-sm-12">
-                    <f:if condition="{registration.registeredThemselves}">
-                        <f:then>
-                            <f:translate key="{labelPrefix}.registeredThemselves"/>
-                        </f:then>
-                        <f:else>
-                            <f:translate key="{labelPrefix}.registeredThemselves.not"/>
-                        </f:else>
+                    <tr>
+                        <th scope="row">
+                            <f:translate key="{labelPrefix}.attendeesNames"/>
+                        </th>
+                        <td>
+                            <f:if condition="{registration.registeredThemselves}">
+                                <f:then>
+                                    <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                </f:then>
+                                <f:else>
+                                    <f:translate key="{labelPrefix}.registeredThemselves.not"/>
+                                </f:else>
+                            </f:if>
+
+                            <f:if condition="{registration.attendeesNames}">
+                                <br/>
+                                {registration.attendeesNames -> f:format.nl2br()}
+                            </f:if>
+                        </td>
+                    </tr>
+
+                    <f:comment>
+                        We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
+                        only returns the first option. This is probably a bug in Extbase.
+                    </f:comment>
+                    <f:variable name="accommodationOptionTitles" value="{registration.accommodationOptionTitles}"/>
+                    <f:if condition="{accommodationOptionTitles}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.accommodationOptions"/>
+                            </th>
+                            <td>
+                                <ul>
+                                    <f:for each="{accommodationOptionTitles}" as="accommodationOptionTitle">
+                                        <li>
+                                            {accommodationOptionTitle}
+                                        </li>
+                                    </f:for>
+                                    <f:for each="{event.accommodationOptions}" as="accommodationOption">
+                                        <f:form.checkbox property="accommodationOptions"
+                                                         value="{accommodationOption.uid}"
+                                                         class="d-none tx-seminars-display-none"/>
+                                    </f:for>
+                                </ul>
+                            </td>
+                        </tr>
                     </f:if>
-                </div>
-            </div>
-            <f:form.hidden property="registeredThemselves"/>
 
-            <f:if condition="{registration.attendeesNames}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <f:translate key="{labelPrefix}.attendeesNames"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.attendeesNames -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="attendeesNames"/>
+                    <f:comment>
+                        We cannot directly iterate over `registration.foodOptions` here, as Extbase then
+                        only returns the first option. This is probably a bug in Extbase.
+                    </f:comment>
+                    <f:variable name="foodOptionTitles" value="{registration.foodOptionTitles}"/>
+                    <f:if condition="{foodOptionTitles}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.foodOptions"/>
+                            </th>
+                            <td>
+                                <ul>
+                                    <f:for each="{foodOptionTitles}" as="foodOptionTitle">
+                                        <li>
+                                            {foodOptionTitle}
+                                        </li>
+                                    </f:for>
+                                    <f:for each="{event.foodOptions}" as="foodOption">
+                                        <f:form.checkbox property="foodOptions" value="{foodOption.uid}"
+                                                         class="d-none tx-seminars-display-none"/>
+                                    </f:for>
+                                </ul>
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:comment>
-                We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
-                only returns the first option. This is probably a bug in Extbase.
-            </f:comment>
-            <f:variable name="accommodationOptionTitles" value="{registration.accommodationOptionTitles}"/>
-            <f:if condition="{accommodationOptionTitles}">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">
-                        <f:translate key="{labelPrefix}.accommodationOptions"/>
-                    </label>
-                    <ul class="col-sm-10">
-                        <f:for each="{accommodationOptionTitles}" as="accommodationOptionTitle">
-                            <li>
-                                {accommodationOptionTitle}
-                            </li>
-                        </f:for>
-                        <f:for each="{event.accommodationOptions}" as="accommodationOption">
-                            <f:form.checkbox property="accommodationOptions" value="{accommodationOption.uid}"
-                                             class="d-none tx-seminars-display-none"/>
-                        </f:for>
-                    </ul>
-                </div>
-            </f:if>
+                    <f:if condition="{registration.interests}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
+                            </th>
+                            <td>
+                                {registration.interests -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:comment>
-                We cannot directly iterate over `registration.foodOptions` here, as Extbase then
-                only returns the first option. This is probably a bug in Extbase.
-            </f:comment>
-            <f:variable name="foodOptionTitles" value="{registration.foodOptionTitles}"/>
-            <f:if condition="{foodOptionTitles}">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">
-                        <f:translate key="{labelPrefix}.foodOptions"/>
-                    </label>
-                    <ul class="col-sm-10">
-                        <f:for each="{foodOptionTitles}" as="foodOptionTitle">
-                            <li>
-                                {foodOptionTitle}
-                            </li>
-                        </f:for>
-                        <f:for each="{event.foodOptions}" as="foodOption">
-                            <f:form.checkbox property="foodOptions" value="{foodOption.uid}"
-                                             class="d-none tx-seminars-display-none"/>
-                        </f:for>
-                    </ul>
-                </div>
-            </f:if>
+                    <f:if condition="{registration.expectations}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
+                            </th>
+                            <td>
+                                {registration.expectations -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:if condition="{registration.interests}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.interests -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="interests"/>
+                    <f:if condition="{registration.backgroundKnowledge}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
+                            </th>
+                            <td>
+                                {registration.backgroundKnowledge -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:if condition="{registration.expectations}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.expectations -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="expectations"/>
+                    <f:if condition="{registration.knownFrom}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
+                            </th>
+                            <td>
+                                {registration.knownFrom -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:if condition="{registration.backgroundKnowledge}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.backgroundKnowledge -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="backgroundKnowledge"/>
+                    <f:if condition="{registration.comments}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
+                            </th>
+                            <td>
+                                {registration.comments -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:if condition="{registration.knownFrom}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.knownFrom -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="knownFrom"/>
+                    <f:if condition="{registration.priceCode}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.priceCode"/>
+                            </th>
+                            <td>
+                                <f:translate key="{selectedPrice.labelKey}"/>
+                                <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <f:if condition="{registration.comments}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.comments -> f:format.nl2br()}
-                    </div>
-                </div>
-            </f:if>
-            <f:form.hidden property="comments"/>
-
-            <f:if condition="{registration.priceCode}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <f:translate key="{labelPrefix}.priceCode"/>
-                    </div>
-                    <div class="col-sm-10">
-                        <f:translate key="{selectedPrice.labelKey}"/>
-                        <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
-                    </div>
-                </div>
-
-                <f:form.hidden property="priceCode"/>
-                <f:form.hidden property="humanReadablePrice"
-                               value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
-            </f:if>
-
-            <f:if condition="{registration.paymentMethod}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <f:translate key="{labelPrefix}.paymentMethod"/>
-                    </div>
-                    <div class="col-sm-10">
-                        {registration.paymentMethod.title}
-                    </div>
-                </div>
-
-                <f:form.hidden property="paymentMethod"/>
-            </f:if>
+                    <f:if condition="{registration.paymentMethod}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.paymentMethod"/>
+                            </th>
+                            <td>
+                                {registration.paymentMethod.title}
+                            </td>
+                        </tr>
+                    </f:if>
+                </tbody>
+            </table>
 
             <f:if condition="{registration.separateBillingAddress}}">
-                <fieldset>
-                    <legend>
-                        <f:translate key="{labelPrefix}.separateBillingAddress"/>
-                    </legend>
+                <h3>
+                    <f:translate key="{labelPrefix}.separateBillingAddress"/>
+                </h3>
+                <table class="table table-striped">
+                    <tbody>
+                        <f:if condition="{registration.billingCompany}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingCompany"/>
+                                </th>
+                                <td>
+                                    {registration.billingCompany}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:form.hidden property="separateBillingAddress"/>
+                        <f:if condition="{registration.billingFullName}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingFullName"/>
+                                </th>
+                                <td>
+                                    {registration.billingFullName}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{registration.billingCompany}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingCompany"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingCompany}
-                            </div>
-                        </div>
+                        <f:if condition="{registration.billingStreetAddress}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingStreetAddress"/>
+                                </th>
+                                <td>
+                                    {registration.billingStreetAddress -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                        <f:form.hidden property="billingCompany"/>
-                    </f:if>
+                        <f:if condition="{registration.billingZipCode}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingZipCode"/>
+                                </th>
+                                <td>
+                                    {registration.billingZipCode}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{registration.billingFullName}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingFullName"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingFullName}
-                            </div>
-                        </div>
+                        <f:if condition="{registration.billingCity}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingCity"/>
+                                </th>
+                                <td>
+                                    {registration.billingZipCode}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                        <f:form.hidden property="billingFullName"/>
-                    </f:if>
+                        <f:if condition="{registration.billingCountry}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingCountry"/>
+                                </th>
+                                <td>
+                                    {registration.billingCountry}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{registration.billingStreetAddress}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingStreetAddress"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingStreetAddress -> f:format.nl2br()}
-                            </div>
-                        </div>
+                        <f:if condition="{registration.billingPhoneNumber}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingPhoneNumber"/>
+                                </th>
+                                <td>
+                                    {registration.billingPhoneNumber}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                        <f:form.hidden property="billingStreetAddress"/>
-                    </f:if>
-
-                    <f:if condition="{registration.billingZipCode}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingZipCode"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingZipCode}
-                            </div>
-                        </div>
-
-                        <f:form.hidden property="billingZipCode"/>
-                    </f:if>
-
-                    <f:if condition="{registration.billingCity}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingCity"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingZipCode}
-                            </div>
-                        </div>
-
-                        <f:form.hidden property="billingCity"/>
-                    </f:if>
-
-                    <f:if condition="{registration.billingCountry}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingCountry"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingCountry}
-                            </div>
-                        </div>
-
-                        <f:form.hidden property="billingCountry"/>
-                    </f:if>
-
-                    <f:if condition="{registration.billingPhoneNumber}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingPhoneNumber"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingPhoneNumber}
-                            </div>
-                        </div>
-
-                        <f:form.hidden property="billingPhoneNumber"/>
-                    </f:if>
-
-                    <f:if condition="{registration.billingEmailAddress}">
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <s:salutationAwareTranslate key="{labelPrefix}.billingEmailAddress"/>
-                            </div>
-                            <div class="col-sm-10">
-                                {registration.billingEmailAddress}
-                            </div>
-                        </div>
-
-                        <f:form.hidden property="billingEmailAddress"/>
-                    </f:if>
-                </fieldset>
+                        <f:if condition="{registration.billingEmailAddress}">
+                            <tr>
+                                <th scope="row">
+                                    <s:salutationAwareTranslate key="{labelPrefix}.billingEmailAddress"/>
+                                </th>
+                                <td>
+                                    {registration.billingEmailAddress}
+                                </td>
+                            </tr>
+                        </f:if>
+                    </tbody>
+                </table>
             </f:if>
 
             <h3>
@@ -318,37 +292,62 @@
 
             <f:render partial="EventRegistration/EventTitleAndDateAndUid" arguments="{event: event}"/>
 
-            <f:if condition="{registration.priceCode}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <f:translate key="{labelPrefix}.priceCode"/>
-                    </div>
-                    <div class="col-sm-10">
-                        <f:translate key="{selectedPrice.labelKey}"/>
-                        <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
-                    </div>
-                </div>
-            </f:if>
+            <table class="table table-striped table-primary">
+                <tbody>
+                    <f:if condition="{registration.priceCode}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.priceCode"/>
+                            </th>
+                            <td>
+                                <f:translate key="{selectedPrice.labelKey}"/>
+                                <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                            </td>
+                        </tr>
+                    </f:if>
 
-            <div class="row mb-3">
-                <div class="col-sm-2">
-                    <f:translate key="{labelPrefix}.seats"/>
-                </div>
-                <div class="col-sm-10">
-                    {registration.seats}
-                </div>
-            </div>
+                    <tr>
+                        <th scope="row">
+                            <f:translate key="{labelPrefix}.seats"/>
+                        </th>
+                        <td>
+                            {registration.seats}
+                        </td>
+                    </tr>
 
-            <f:if condition="{registration.priceCode}">
-                <div class="row mb-3">
-                    <div class="col-sm-2">
-                        <f:translate key="{labelPrefix}.totalPrice"/>
-                    </div>
-                    <div class="col-sm-10">
-                        <f:render partial="Price" arguments="{amount: registration.totalPrice}"/>
-                    </div>
-                </div>
-            </f:if>
+                    <tr>
+                        <th scope="row">
+                            <f:translate key="{labelPrefix}.totalPrice"/>
+                        </th>
+                        <td>
+                            <f:render partial="Price" arguments="{amount: registration.totalPrice}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <f:form.hidden name="event" value="{event}"/>
+            <f:form.hidden property="seats"/>
+            <f:form.hidden property="registeredThemselves"/>
+            <f:form.hidden property="attendeesNames"/>
+            <f:form.hidden property="interests"/>
+            <f:form.hidden property="expectations"/>
+            <f:form.hidden property="backgroundKnowledge"/>
+            <f:form.hidden property="knownFrom"/>
+            <f:form.hidden property="comments"/>
+            <f:form.hidden property="priceCode"/>
+            <f:form.hidden property="humanReadablePrice"
+                           value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
+            <f:form.hidden property="paymentMethod"/>
+            <f:form.hidden property="separateBillingAddress"/>
+            <f:form.hidden property="billingCompany"/>
+            <f:form.hidden property="billingFullName"/>
+            <f:form.hidden property="billingStreetAddress"/>
+            <f:form.hidden property="billingZipCode"/>
+            <f:form.hidden property="billingCity"/>
+            <f:form.hidden property="billingCountry"/>
+            <f:form.hidden property="billingPhoneNumber"/>
+            <f:form.hidden property="billingEmailAddress"/>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
                 <f:variable name="newActionUri" value="{f:uri.action(action: 'new')}"/>
