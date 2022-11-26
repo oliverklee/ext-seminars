@@ -20,7 +20,8 @@
             </label>
             <div class="col-sm-10">
                 <f:form.textarea property="description" id="{idPrefix}-description"
-                                 class="form-control" rows="5" errorClass="is-invalid"/>
+                                 class="form-control" rows="5" errorClass="is-invalid"
+                                 additionalAttributes="{maxlength: 16383}"/>
                 <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'description'}"/>
             </div>
         </div>
