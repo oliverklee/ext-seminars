@@ -286,6 +286,61 @@
                 </table>
             </f:if>
 
+            <f:if
+                condition="{settings.termsAndConditionsPage} || {event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+                <h3>
+                    <f:translate key="plugin.eventRegistration.heading.termsAndConditions"/>
+                </h3>
+
+                <f:if condition="{settings.termsAndConditionsPage}">
+                    {settings.termsAndConditionsLinkTitle
+                    -> f:format.htmlentities()
+                    -> f:link.page(pageUid: '{settings.termsAndConditionsPage}', target: '_blank')
+                    -> f:variable(name: 'termsAndConditionsLink')}
+
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <f:form.checkbox property="consentedToTermsAndConditions"
+                                                 id="{idPrefix}-consentedToTermsAndConditions"
+                                                 class="form-check-input" errorClass="is-invalid"
+                                                 value="1" checked="{registration.consentedToTermsAndConditions}"/>
+                                <label for="{idPrefix}-consentedToTermsAndConditions" class="form-check-label">
+                                    {f:translate(key: '{labelPrefix}.consentedToTermsAndConditions',
+                                    arguments: {0: termsAndConditionsLink}) -> f:sanitize.html()}
+                                </label>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'consentedToTermsAndConditions'}"/>
+                            </div>
+                        </div>
+                    </div>
+                </f:if>
+
+                <f:if condition="{event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+                    {settings.additionalTermsLinkTitle
+                    -> f:format.htmlentities()
+                    -> f:link.page(pageUid: '{settings.additionalTermsPage}', target: '_blank')
+                    -> f:variable(name: 'additionalTermsLink')}
+
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <f:form.checkbox property="consentedToAdditionalTerms"
+                                                 id="{idPrefix}-consentedToAdditionalTerms"
+                                                 class="form-check-input" errorClass="is-invalid"
+                                                 value="1" checked="{registration.consentedToAdditionalTerms}"/>
+                                <label for="{idPrefix}-consentedToAdditionalTerms" class="form-check-label">
+                                    {f:translate(key: '{labelPrefix}.consentedToAdditionalTerms',
+                                    arguments: {0: additionalTermsLink}) -> f:sanitize.html()}
+                                </label>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'consentedToAdditionalTerms'}"/>
+                            </div>
+                        </div>
+                    </div>
+                </f:if>
+            </f:if>
+
             <h3>
                 <f:translate key="plugin.eventRegistration.heading.summary"/>
             </h3>
