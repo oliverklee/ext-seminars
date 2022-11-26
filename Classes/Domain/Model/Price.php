@@ -43,6 +43,7 @@ class Price
 
     /**
      * @var float
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
      */
     private $amount;
 
@@ -50,11 +51,13 @@ class Price
      * the full localization key in the seminars extension
      *
      * @var non-empty-string
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
      */
     private $labelKey;
 
     /**
      * @var self::PRICE_*
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
      */
     private $priceCode;
 

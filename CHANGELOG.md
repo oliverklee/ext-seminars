@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add salutation-aware localization functionality (#1813, #1818, #1822)
 - Add a `PriceFinder` class (#1799)
 - Add `Event.isFreeOfCharge()` (#1791)
-- Add a (non-persisted) `Price` model (#1771, #1793)
+- Add a (non-persisted) `Price` model (#1771, #1793, #2026)
 - Add registration-specific fields to the `Event` model
   (#1764, #1767, #1829, #1835)
 - Add a `Registration` model and repository
