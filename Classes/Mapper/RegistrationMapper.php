@@ -24,6 +24,7 @@ class RegistrationMapper extends AbstractDataMapper
     protected $relations = [
         'seminar' => EventMapper::class,
         'user' => FrontEndUserMapper::class,
+        // @deprecated #1990 will be removed in seminars 5.0
         'currency' => CurrencyMapper::class,
         'method_of_payment' => PaymentMethodMapper::class,
         'lodgings' => LodgingMapper::class,
