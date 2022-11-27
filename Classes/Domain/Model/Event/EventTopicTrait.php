@@ -54,7 +54,7 @@ trait EventTopicTrait
     /**
      * @var bool
      */
-    protected $additionalTermsAndConditions = false;
+    protected $additionalTerms = false;
 
     /**
      * @var bool
@@ -152,14 +152,14 @@ trait EventTopicTrait
         $this->eventType = $eventType;
     }
 
-    public function hasAdditionalTermsAndConditions(): bool
+    public function hasAdditionalTerms(): bool
     {
-        return $this->additionalTermsAndConditions;
+        return $this->additionalTerms;
     }
 
-    public function setAdditionalTermsAndConditions(bool $additionalTermsAndConditions): void
+    public function setAdditionalTerms(bool $additionalTerms): void
     {
-        $this->additionalTermsAndConditions = $additionalTermsAndConditions;
+        $this->additionalTerms = $additionalTerms;
     }
 
     public function isMultipleRegistrationPossible(): bool

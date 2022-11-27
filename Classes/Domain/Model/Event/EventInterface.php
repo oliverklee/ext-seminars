@@ -62,7 +62,7 @@ interface EventInterface
 
     public function getOwnerUid(): int;
 
-    public function hasAdditionalTermsAndConditions(): bool;
+    public function hasAdditionalTerms(): bool;
 
     public function isMultipleRegistrationPossible(): bool;
 

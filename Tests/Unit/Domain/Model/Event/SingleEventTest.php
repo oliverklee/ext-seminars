@@ -586,19 +586,19 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAdditionalTermsAndConditionsInitiallyReturnsFalse(): void
+    public function hasAdditionalTermsInitiallyReturnsFalse(): void
     {
-        self::assertFalse($this->subject->hasAdditionalTermsAndConditions());
+        self::assertFalse($this->subject->hasAdditionalTerms());
     }
 
     /**
      * @test
      */
-    public function setAdditionalTermsAndConditionsSetsAdditionalTermsAndConditions(): void
+    public function setAdditionalTermsSetsAdditionalTerms(): void
     {
-        $this->subject->setAdditionalTermsAndConditions(true);
+        $this->subject->setAdditionalTerms(true);
 
-        self::assertTrue($this->subject->hasAdditionalTermsAndConditions());
+        self::assertTrue($this->subject->hasAdditionalTerms());
     }
 
     /**

@@ -83,7 +83,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
         self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
-        self::assertTrue($result->hasAdditionalTermsAndConditions());
+        self::assertTrue($result->hasAdditionalTerms());
         self::assertTrue($result->isMultipleRegistrationPossible());
         self::assertSame(5, $result->getNumberOfOfflineRegistrations());
         self::assertSame(EventInterface::STATUS_CONFIRMED, $result->getStatus());
@@ -124,7 +124,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
         self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
-        self::assertTrue($result->hasAdditionalTermsAndConditions());
+        self::assertTrue($result->hasAdditionalTerms());
         self::assertTrue($result->isMultipleRegistrationPossible());
         self::assertEqualsWithDelta(100.0, $result->getSpecialPrice(), 0.0001);
         self::assertEqualsWithDelta(75.0, $result->getSpecialEarlyBirdPrice(), 0.0001);

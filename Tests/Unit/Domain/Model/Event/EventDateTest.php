@@ -570,9 +570,9 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAdditionalTermsAndConditionsWithoutTopicReturnsFalse(): void
+    public function hasAdditionalTermsWithoutTopicReturnsFalse(): void
     {
-        self::assertFalse($this->subject->hasAdditionalTermsAndConditions());
+        self::assertFalse($this->subject->hasAdditionalTerms());
     }
 
     /**
@@ -590,13 +590,13 @@ final class EventDateTest extends UnitTestCase
      * @test
      * @dataProvider boolDataProvider
      */
-    public function hasAdditionalTermsAndConditionsWithTopicReturnsValueFromTopic(bool $value): void
+    public function hasAdditionalTermsWithTopicReturnsValueFromTopic(bool $value): void
     {
         $topic = new EventTopic();
-        $topic->setAdditionalTermsAndConditions($value);
+        $topic->setAdditionalTerms($value);
         $this->subject->setTopic($topic);
 
-        self::assertSame($value, $this->subject->hasAdditionalTermsAndConditions());
+        self::assertSame($value, $this->subject->hasAdditionalTerms());
     }
 
     /**

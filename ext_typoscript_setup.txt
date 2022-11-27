@@ -40,7 +40,7 @@ config.tx_extbase.persistence.classes {
         price_regular_early.mapOnProperty = earlyBirdPrice
         place.mapOnProperty = venues
         owner_feuser.mapOnProperty = ownerUid
-        uses_terms_2.mapOnProperty = additionalTermsAndConditions
+        uses_terms_2.mapOnProperty = additionalTerms
         allows_multiple_registrations.mapOnProperty = multipleRegistrationPossible
         offline_attendees.mapOnProperty = numberOfOfflineRegistrations
         cancelled.mapOnProperty = status
@@ -62,7 +62,7 @@ config.tx_extbase.persistence.classes {
         price_regular.mapOnProperty = standardPrice
         price_regular_early.mapOnProperty = earlyBirdPrice
         owner_feuser.mapOnProperty = ownerUid
-        uses_terms_2.mapOnProperty = additionalTermsAndConditions
+        uses_terms_2.mapOnProperty = additionalTerms
         allows_multiple_registrations.mapOnProperty = multipleRegistrationPossible
         price_special.mapOnProperty = specialPrice
         price_special_early.mapOnProperty = specialEarlyBirdPrice
