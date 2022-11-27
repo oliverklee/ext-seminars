@@ -362,7 +362,9 @@ CREATE TABLE tx_seminars_attendances (
     seats int(11) unsigned DEFAULT '0' NOT NULL,
     registered_themselves tinyint(1) unsigned DEFAULT '0' NOT NULL,
     total_price decimal(10,2) DEFAULT '0.00' NOT NULL,
+    # @deprecated #1990 will be removed in seminars 5.0
     currency int(11) unsigned DEFAULT '0' NOT NULL,
+    # @deprecated #1990 will be removed in seminars 5.0
     including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
     attendees_names text,
     additional_persons int(11) unsigned DEFAULT '0' NOT NULL,

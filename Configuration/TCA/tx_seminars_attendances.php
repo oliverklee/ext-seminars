@@ -313,6 +313,7 @@ $tca = [
                 'default' => 0,
             ],
         ],
+        // @deprecated #1990 will be removed in seminars 5.0
         'currency' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.currency',
@@ -327,6 +328,7 @@ $tca = [
                 'items' => [['', '0']],
             ],
         ],
+        // @deprecated #1990 will be removed in seminars 5.0
         'including_tax' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.including_tax',
