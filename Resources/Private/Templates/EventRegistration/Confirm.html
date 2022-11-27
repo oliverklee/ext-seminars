@@ -300,7 +300,7 @@
             </f:if>
 
             <f:if
-                condition="{settings.termsAndConditionsPage} || {event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+                condition="{settings.termsAndConditionsPage} || {event.additionalTerms} && {settings.additionalTermsPage}">
                 <h3>
                     <f:translate key="plugin.eventRegistration.heading.termsAndConditions"/>
                 </h3>
@@ -335,7 +335,7 @@
                 </f:else>
             </f:if>
 
-            <f:if condition="{event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+            <f:if condition="{event.additionalTerms} && {settings.additionalTermsPage}">
                 <f:then>
                     {settings.additionalTermsLinkTitle
                     -> f:format.htmlentities()

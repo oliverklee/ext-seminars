@@ -86,11 +86,11 @@ class EventDate extends Event implements EventDateInterface
         return $topic instanceof EventTopic ? $topic->getEventType() : null;
     }
 
-    public function hasAdditionalTermsAndConditions(): bool
+    public function hasAdditionalTerms(): bool
     {
         $topic = $this->getTopic();
 
-        return $topic instanceof EventTopic && $topic->hasAdditionalTermsAndConditions();
+        return $topic instanceof EventTopic && $topic->hasAdditionalTerms();
     }
 
     public function isMultipleRegistrationPossible(): bool

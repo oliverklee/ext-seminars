@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `Event.isFreeOfCharge()` (#1791)
 - Add a (non-persisted) `Price` model (#1771, #1793, #2026)
 - Add registration-specific fields to the `Event` model
-  (#1764, #1767, #1829, #1835)
+  (#1764, #1767, #1829, #1835, #2033)
 - Add a `Registration` model and repository
   (#1750, #1752, #1755, #1756, #1757, #1758, #1834, #1840, #1853, #1883, #1950
   #1996, #1997, #2002)
