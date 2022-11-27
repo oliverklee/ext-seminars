@@ -319,7 +319,7 @@
                                 <f:form.checkbox property="consentedToTermsAndConditions"
                                                  id="{idPrefix}-consentedToTermsAndConditions"
                                                  class="form-check-input" errorClass="is-invalid"
-                                                 value="1" checked="{registration.consentedToTermsAndConditions}"/>
+                                                 value="1" checked="false"/>
                                 <label for="{idPrefix}-consentedToTermsAndConditions" class="form-check-label">
                                     {f:translate(key: '{labelPrefix}.consentedToTermsAndConditions',
                                     arguments: {0: termsAndConditionsLink}) -> f:sanitize.html()}
@@ -348,7 +348,7 @@
                                 <f:form.checkbox property="consentedToAdditionalTerms"
                                                  id="{idPrefix}-consentedToAdditionalTerms"
                                                  class="form-check-input" errorClass="is-invalid"
-                                                 value="1" checked="{registration.consentedToAdditionalTerms}"/>
+                                                 value="1" checked="false"/>
                                 <label for="{idPrefix}-consentedToAdditionalTerms" class="form-check-label">
                                     {f:translate(key: '{labelPrefix}.consentedToAdditionalTerms',
                                     arguments: {0: additionalTermsLink}) -> f:sanitize.html()}
