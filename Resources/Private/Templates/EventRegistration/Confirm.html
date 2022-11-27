@@ -73,11 +73,6 @@
                                             {accommodationOptionTitle}
                                         </li>
                                     </f:for>
-                                    <f:for each="{event.accommodationOptions}" as="accommodationOption">
-                                        <f:form.checkbox property="accommodationOptions"
-                                                         value="{accommodationOption.uid}"
-                                                         class="d-none tx-seminars-display-none"/>
-                                    </f:for>
                                 </ul>
                             </td>
                         </tr>
@@ -100,10 +95,6 @@
                                             {foodOptionTitle}
                                         </li>
                                     </f:for>
-                                    <f:for each="{event.foodOptions}" as="foodOption">
-                                        <f:form.checkbox property="foodOptions" value="{foodOption.uid}"
-                                                         class="d-none tx-seminars-display-none"/>
-                                    </f:for>
                                 </ul>
                             </td>
                         </tr>
@@ -125,11 +116,6 @@
                                         <li>
                                             {registrationCheckboxTitle}
                                         </li>
-                                    </f:for>
-                                    <f:for each="{event.registrationCheckboxes}" as="registrationCheckbox">
-                                        <f:form.checkbox property="registrationCheckboxes"
-                                                         value="{registrationCheckbox.uid}"
-                                                         class="d-none tx-seminars-display-none"/>
                                     </f:for>
                                 </ul>
                             </td>
@@ -318,8 +304,10 @@
                 <h3>
                     <f:translate key="plugin.eventRegistration.heading.termsAndConditions"/>
                 </h3>
+            </f:if>
 
-                <f:if condition="{settings.termsAndConditionsPage}">
+            <f:if condition="{settings.termsAndConditionsPage}">
+                <f:then>
                     {settings.termsAndConditionsLinkTitle
                     -> f:format.htmlentities()
                     -> f:link.page(pageUid: '{settings.termsAndConditionsPage}', target: '_blank')
@@ -341,9 +329,14 @@
                             </div>
                         </div>
                     </div>
-                </f:if>
+                </f:then>
+                <f:else>
+                    <f:form.hidden property="consentedToTermsAndConditions" value="1"/>
+                </f:else>
+            </f:if>
 
-                <f:if condition="{event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+            <f:if condition="{event.additionalTermsAndConditions} && {settings.additionalTermsPage}">
+                <f:then>
                     {settings.additionalTermsLinkTitle
                     -> f:format.htmlentities()
                     -> f:link.page(pageUid: '{settings.additionalTermsPage}', target: '_blank')
@@ -365,7 +358,10 @@
                             </div>
                         </div>
                     </div>
-                </f:if>
+                </f:then>
+                <f:else>
+                    <f:form.hidden property="consentedToAdditionalTerms" value="1"/>
+                </f:else>
             </f:if>
 
             <h3>
@@ -417,28 +413,40 @@
                 </tbody>
             </table>
 
-            <f:form.hidden name="event" value="{event}"/>
-            <f:form.hidden property="seats"/>
-            <f:form.hidden property="registeredThemselves"/>
-            <f:form.hidden property="attendeesNames"/>
-            <f:form.hidden property="interests"/>
-            <f:form.hidden property="expectations"/>
-            <f:form.hidden property="backgroundKnowledge"/>
-            <f:form.hidden property="knownFrom"/>
-            <f:form.hidden property="comments"/>
-            <f:form.hidden property="priceCode"/>
-            <f:form.hidden property="humanReadablePrice"
-                           value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
-            <f:form.hidden property="paymentMethod"/>
-            <f:form.hidden property="separateBillingAddress"/>
-            <f:form.hidden property="billingCompany"/>
-            <f:form.hidden property="billingFullName"/>
-            <f:form.hidden property="billingStreetAddress"/>
-            <f:form.hidden property="billingZipCode"/>
-            <f:form.hidden property="billingCity"/>
-            <f:form.hidden property="billingCountry"/>
-            <f:form.hidden property="billingPhoneNumber"/>
-            <f:form.hidden property="billingEmailAddress"/>
+            <div class="d-none tx-seminars-display-none">
+                <f:form.hidden name="event" value="{event}"/>
+                <f:form.hidden property="seats"/>
+                <f:form.hidden property="registeredThemselves"/>
+                <f:form.hidden property="attendeesNames"/>
+                <f:form.hidden property="interests"/>
+                <f:form.hidden property="expectations"/>
+                <f:form.hidden property="backgroundKnowledge"/>
+                <f:form.hidden property="knownFrom"/>
+                <f:form.hidden property="comments"/>
+                <f:form.hidden property="priceCode"/>
+                <f:form.hidden property="humanReadablePrice"
+                               value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
+                <f:form.hidden property="paymentMethod"/>
+                <f:form.hidden property="separateBillingAddress"/>
+                <f:form.hidden property="billingCompany"/>
+                <f:form.hidden property="billingFullName"/>
+                <f:form.hidden property="billingStreetAddress"/>
+                <f:form.hidden property="billingZipCode"/>
+                <f:form.hidden property="billingCity"/>
+                <f:form.hidden property="billingCountry"/>
+                <f:form.hidden property="billingPhoneNumber"/>
+                <f:form.hidden property="billingEmailAddress"/>
+
+                <f:for each="{event.accommodationOptions}" as="accommodationOption">
+                    <f:form.checkbox property="accommodationOptions" value="{accommodationOption.uid}"/>
+                </f:for>
+                <f:for each="{event.foodOptions}" as="foodOption">
+                    <f:form.checkbox property="foodOptions" value="{foodOption.uid}"/>
+                </f:for>
+                <f:for each="{event.registrationCheckboxes}" as="registrationCheckbox">
+                    <f:form.checkbox property="registrationCheckboxes" value="{registrationCheckbox.uid}"/>
+                </f:for>
+            </div>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
                 <f:variable name="newActionUri" value="{f:uri.action(action: 'new')}"/>
