@@ -152,7 +152,7 @@
 			"@ci:php:sniff",
 			"@ci:php:stan"
 		],
-		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --using-cache no --diff",
+		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
