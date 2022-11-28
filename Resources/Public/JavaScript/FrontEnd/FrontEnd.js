@@ -522,7 +522,11 @@ TYPO3.seminars.updateAttendeesNamesVisibility = function() {
   }
   let registeredThemselves = true;
   if (TYPO3.seminars.elements.registeredThemselves instanceof Element) {
-    registeredThemselves = !!TYPO3.seminars.elements.registeredThemselves.checked;
+    if (TYPO3.seminars.elements.registeredThemselves.type === 'checkbox') {
+      registeredThemselves = TYPO3.seminars.elements.registeredThemselves.checked === true;
+    } else if (TYPO3.seminars.elements.registeredThemselves.type === 'hidden') {
+      registeredThemselves = TYPO3.seminars.elements.registeredThemselves.value === '1';
+    }
   }
   const otherSeats = seats - (registeredThemselves ? 1 : 0);
   const shouldShowAttendeesNames = otherSeats > 0;

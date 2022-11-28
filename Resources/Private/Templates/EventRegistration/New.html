@@ -61,7 +61,8 @@
                         </div>
                     </f:then>
                     <f:else>
-                        <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"/>
+                        <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"
+                                       data="{behavior: 'tx-seminars-registered-themselves'}"/>
                     </f:else>
                 </oelib:isFieldEnabled>
 
