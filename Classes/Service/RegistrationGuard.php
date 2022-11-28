@@ -30,6 +30,13 @@ class RegistrationGuard implements SingletonInterface
      */
     private $oneTimeAccountConnector;
 
+    /**
+     * key: event UID, value: vacancies as returned by `getVacancies`
+     *
+     * @var array<positive-int, 0|positive-int|null>
+     */
+    private $vacanciesCache = [];
+
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
@@ -51,10 +58,11 @@ class RegistrationGuard implements SingletonInterface
      * We should probably replace this with a redirect to the deny action:
      * https://github.com/oliverklee/ext-seminars/issues/1978
      *
-     * @internal
+     * @throws \InvalidArgumentException
+     *
      * @deprecated will be removed without notice sometime after seminars 5.0, but before seminars 6.0
      *
-     * @throws \InvalidArgumentException
+     * @internal
      */
     public function assertBookableEventType(Event $event): void
     {
@@ -139,5 +147,39 @@ class RegistrationGuard implements SingletonInterface
         $userUidFromOneTimeAccount = $this->oneTimeAccountConnector->getOneTimeAccountUserUid();
 
         return \is_int($userUidFromLogin) ? $userUidFromLogin : $userUidFromOneTimeAccount;
+    }
+
+    /**
+     * @return 0|positive-int|null 0 for a fully-booked event, null for an event with no registration limit
+     */
+    public function getVacancies(Event $event): ?int
+    {
+        $this->assertBookableEventType($event);
+        \assert($event instanceof SingleEvent || $event instanceof EventDate);
+
+        $eventUid = $event->getUid();
+        if (\array_key_exists($eventUid, $this->vacanciesCache)) {
+            return $this->vacanciesCache[$eventUid];
+        }
+
+        if ($event->allowsUnlimitedRegistrations()) {
+            $this->vacanciesCache[$eventUid] = null;
+            return null;
+        }
+
+        $numberOfOfflineRegistrations = $event->getNumberOfOfflineRegistrations();
+        $maximumNumberOfRegistrations = $event->getMaximumNumberOfRegistrations();
+        if ($numberOfOfflineRegistrations >= $maximumNumberOfRegistrations) {
+            $this->vacanciesCache[$eventUid] = 0;
+            return 0;
+        }
+
+        $registeredSeats = $this->registrationRepository->countSeatsByEvent($eventUid);
+        // This ensures that overbooked events still will not have a negative number of vacancies.
+        $vacancies = \max(0, $maximumNumberOfRegistrations - $registeredSeats - $numberOfOfflineRegistrations);
+
+        $this->vacanciesCache[$eventUid] = $vacancies;
+
+        return $vacancies;
     }
 }
