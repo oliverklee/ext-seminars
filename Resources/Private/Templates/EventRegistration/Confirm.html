@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
-      data-namespace-typo3-fluid="true">
+      xmlns:oelib="OliverKlee\Oelib\ViewHelpers" data-namespace-typo3-fluid="true">
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
@@ -202,102 +202,104 @@
                 </tbody>
             </table>
 
-            <h3>
-                <s:salutationAwareTranslate key="plugin.eventRegistration.heading.personalData"/>
-            </h3>
-            <f:variable name="user" value="{registration.user}"/>
+            <oelib:isFieldEnabled fieldName="personalData">
+                <h3>
+                    <s:salutationAwareTranslate key="plugin.eventRegistration.heading.personalData"/>
+                </h3>
+                <f:variable name="user" value="{registration.user}"/>
 
-            <table class="table table-striped">
-                <tbody>
-                    <f:if condition="{user.company}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.company"/>
-                            </th>
-                            <td>
-                                {user.company}
-                            </td>
-                        </tr>
-                    </f:if>
+                <table class="table table-striped">
+                    <tbody>
+                        <f:if condition="{user.company}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.company"/>
+                                </th>
+                                <td>
+                                    {user.company}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.name}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.fullName"/>
-                            </th>
-                            <td>
-                                {user.name}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.name}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.fullName"/>
+                                </th>
+                                <td>
+                                    {user.name}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.address}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.streetAddress"/>
-                            </th>
-                            <td>
-                                {user.address -> f:format.nl2br()}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.address}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.streetAddress"/>
+                                </th>
+                                <td>
+                                    {user.address -> f:format.nl2br()}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.zip}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.zipCode"/>
-                            </th>
-                            <td>
-                                {user.zip}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.zip}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.zipCode"/>
+                                </th>
+                                <td>
+                                    {user.zip}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.city}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.city"/>
-                            </th>
-                            <td>
-                                {user.city}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.city}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.city"/>
+                                </th>
+                                <td>
+                                    {user.city}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.country}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.country"/>
-                            </th>
-                            <td>
-                                {user.country}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.country}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.country"/>
+                                </th>
+                                <td>
+                                    {user.country}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.telephone}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.phoneNumber"/>
-                            </th>
-                            <td>
-                                {user.telephone}
-                            </td>
-                        </tr>
-                    </f:if>
+                        <f:if condition="{user.telephone}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.phoneNumber"/>
+                                </th>
+                                <td>
+                                    {user.telephone}
+                                </td>
+                            </tr>
+                        </f:if>
 
-                    <f:if condition="{user.email}">
-                        <tr>
-                            <th scope="row">
-                                <f:translate key="{labelPrefix}.emailAddress"/>
-                            </th>
-                            <td>
-                                {user.email}
-                            </td>
-                        </tr>
-                    </f:if>
-                </tbody>
-            </table>
+                        <f:if condition="{user.email}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.emailAddress"/>
+                                </th>
+                                <td>
+                                    {user.email}
+                                </td>
+                            </tr>
+                        </f:if>
+                    </tbody>
+                </table>
+            </oelib:isFieldEnabled>
 
             <f:if condition="{registration.separateBillingAddress}}">
                 <h4>
@@ -403,34 +405,41 @@
                 </h3>
             </f:if>
 
-            <f:if condition="{settings.termsAndConditionsPage}">
+            <oelib:isFieldEnabled fieldName="consentedToTermsAndConditions">
                 <f:then>
-                    {settings.termsAndConditionsLinkTitle
-                    -> f:format.htmlentities()
-                    -> f:link.page(pageUid: '{settings.termsAndConditionsPage}', target: '_blank')
-                    -> f:variable(name: 'termsAndConditionsLink')}
+                    <f:if condition="{settings.termsAndConditionsPage}">
+                        <f:then>
+                            {settings.termsAndConditionsLinkTitle
+                            -> f:format.htmlentities()
+                            -> f:link.page(pageUid: '{settings.termsAndConditionsPage}', target: '_blank')
+                            -> f:variable(name: 'termsAndConditionsLink')}
 
-                    <div class="row mb-3">
-                        <div class="col-sm-12">
-                            <div class="form-check">
-                                <f:form.checkbox property="consentedToTermsAndConditions"
-                                                 id="{idPrefix}-consentedToTermsAndConditions"
-                                                 class="form-check-input" errorClass="is-invalid"
-                                                 value="1" checked="false"/>
-                                <label for="{idPrefix}-consentedToTermsAndConditions" class="form-check-label">
-                                    {f:translate(key: '{labelPrefix}.consentedToTermsAndConditions',
-                                    arguments: {0: termsAndConditionsLink}) -> f:sanitize.html()}
-                                </label>
-                                <f:render partial="EventRegistration/ValidationResult"
-                                          arguments="{property: 'consentedToTermsAndConditions'}"/>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <div class="form-check">
+                                        <f:form.checkbox property="consentedToTermsAndConditions"
+                                                         id="{idPrefix}-consentedToTermsAndConditions"
+                                                         class="form-check-input" errorClass="is-invalid"
+                                                         value="1" checked="false"/>
+                                        <label for="{idPrefix}-consentedToTermsAndConditions" class="form-check-label">
+                                            {f:translate(key: '{labelPrefix}.consentedToTermsAndConditions',
+                                            arguments: {0: termsAndConditionsLink}) -> f:sanitize.html()}
+                                        </label>
+                                        <f:render partial="EventRegistration/ValidationResult"
+                                                  arguments="{property: 'consentedToTermsAndConditions'}"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </f:then>
+                        <f:else>
+                            <f:form.hidden property="consentedToTermsAndConditions" value="1"/>
+                        </f:else>
+                    </f:if>
                 </f:then>
                 <f:else>
                     <f:form.hidden property="consentedToTermsAndConditions" value="1"/>
                 </f:else>
-            </f:if>
+            </oelib:isFieldEnabled>
 
             <f:if condition="{event.additionalTerms} && {settings.additionalTermsPage}">
                 <f:then>

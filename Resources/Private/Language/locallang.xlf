@@ -2061,6 +2061,78 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
 				<source>Form fields</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow">
+				<source>Fields and data to show in the form</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
+				<source>Input fields</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+				<source>Is registering themselves</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
+				<source>Persons to register</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
+				<source>Interests</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
+				<source>Expectations</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
+				<source>Background knowledge</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
+				<source>Known from where?</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
+				<source>Billing address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
+				<source>Separate billing address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
+				<source>Full name</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
+				<source>Street address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
+				<source>ZIP code</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
+				<source>Phone number</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
+				<source>Email address</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
+				<source>Confirmation page</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
+				<source>Personal data</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
+				<source>Consent to terms &amp; conditions</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 			</trans-unit>

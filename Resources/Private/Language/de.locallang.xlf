@@ -2734,6 +2734,102 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Form fields</source>
 				<target>Formularfelder</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow">
+				<source>Fields and data to show in the form</source>
+				<target>Felder und Daten, die im Formular zu sehen sein sollen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
+				<source>Input fields</source>
+				<target>Eingabefelder</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
+				<source>Seats</source>
+				<target>Plätze</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+				<source>Is registering themselves</source>
+				<target>Meldet sich selbst an</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
+				<source>Persons to register</source>
+				<target>Anzumeldende Personen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
+				<source>Interests</source>
+				<target>Interessen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
+				<source>Expectations</source>
+				<target>Erwartungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
+				<source>Background knowledge</source>
+				<target>Hintergrundwissen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
+				<source>Known from where?</source>
+				<target>Wie davon gehört?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
+				<source>Comments</source>
+				<target>Anmerkungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
+				<source>Price</source>
+				<target>Preis</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
+				<source>Billing address</source>
+				<target>Rechnungsadresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
+				<source>Separate billing address</source>
+				<target>Separate Rechnungsadresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
+				<source>Company</source>
+				<target>Firma</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
+				<source>Full name</source>
+				<target>Vollständiger Name</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
+				<source>Street address</source>
+				<target>Straße und Hausnummer</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
+				<source>ZIP code</source>
+				<target>PLZ</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
+				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
+				<source>Country</source>
+				<target>Land</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
+				<source>Phone number</source>
+				<target>Telefonnummer</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
+				<source>Email address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
+				<source>Confirmation page</source>
+				<target>Bestätigungsseite</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
+				<source>Personal data</source>
+				<target>Persönliche Daten</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
+				<source>Consent to terms &amp; conditions</source>
+				<target>AGB-Zustimmung</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>
@@ -2892,7 +2988,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
 				<source>I am not registering myself.</source>
-				<target>Ich melde mich selbst nicht an.</target>
+				<target>Ich melde nicht mich selbst an.</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
 				<source>Separate billing address</source>

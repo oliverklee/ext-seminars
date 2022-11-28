@@ -189,55 +189,6 @@ final class RegistrationProcessorTest extends UnitTestCase
     }
 
     /**
-     * @test
-     */
-    public function calculateTotalPriceForRegistrationWithoutPriceCodeThrowsException(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1669393997);
-        $this->expectExceptionMessage('This registration has no valid price code.');
-
-        $registration = new Registration();
-        $registration->setEvent(new SingleEvent());
-
-        $this->subject->calculateTotalPrice($registration);
-    }
-
-    /**
-     * @test
-     */
-    public function calculateTotalPriceForRegistrationWithEmptyPriceCodeThrowsException(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1669393997);
-        $this->expectExceptionMessage('This registration has no valid price code.');
-
-        $registration = new Registration();
-        $registration->setEvent(new SingleEvent());
-        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
-        $registration->setPriceCode('');
-
-        $this->subject->calculateTotalPrice($registration);
-    }
-
-    /**
-     * @test
-     */
-    public function calculateTotalPriceForRegistrationWithInvalidPriceCodeThrowsException(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1669393997);
-        $this->expectExceptionMessage('This registration has no valid price code.');
-
-        $registration = new Registration();
-        $registration->setEvent(new SingleEvent());
-        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
-        $registration->setPriceCode('invalid');
-
-        $this->subject->calculateTotalPrice($registration);
-    }
-
-    /**
      * @return array<string, array{0: Price::PRICE_*, 1: positive-int, 2: float}>
      */
     public function priceCalculationDataProvider(): array
