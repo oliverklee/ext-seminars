@@ -479,13 +479,21 @@ TYPO3.seminars.initializeRegistrationForm = function() {
 };
 
 TYPO3.seminars.addBillingAddressCheckboxListener = function() {
+  if (!(TYPO3.seminars.elements.billingAddressCheckbox instanceof Element)) {
+    return;
+  }
+
   TYPO3.seminars.elements.billingAddressCheckbox.addEventListener('change', TYPO3.seminars.updateBillingAddressVisibility);
 }
 
 TYPO3.seminars.addSeatsListener = function() {
-  TYPO3.seminars.elements.seats.addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
-  TYPO3.seminars.elements.registeredThemselves
-    .addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
+  if (TYPO3.seminars.elements.seats instanceof Element) {
+    TYPO3.seminars.elements.seats.addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
+  }
+  if (TYPO3.seminars.elements.registeredThemselves instanceof Element) {
+    TYPO3.seminars.elements.registeredThemselves
+      .addEventListener('change', TYPO3.seminars.updateAttendeesNamesVisibility);
+  }
 }
 
 TYPO3.seminars.updateBillingAddressVisibility = function() {
@@ -504,15 +512,18 @@ TYPO3.seminars.updateBillingAddressVisibility = function() {
 };
 
 TYPO3.seminars.updateAttendeesNamesVisibility = function() {
-  if (!(TYPO3.seminars.elements.seats instanceof Element)
-    || !(TYPO3.seminars.elements.registeredThemselves instanceof Element)
-    || !(TYPO3.seminars.elements.attendeesNames instanceof Element)
-  ) {
+  if (!(TYPO3.seminars.elements.attendeesNames instanceof Element)) {
     return;
   }
 
-  const seats = parseInt(TYPO3.seminars.elements.seats.value);
-  const registeredThemselves = !!TYPO3.seminars.elements.registeredThemselves.checked;
+  let seats = 1;
+  if (TYPO3.seminars.elements.seats instanceof Element) {
+    seats = parseInt(TYPO3.seminars.elements.seats.value);
+  }
+  let registeredThemselves = true;
+  if (TYPO3.seminars.elements.registeredThemselves instanceof Element) {
+    registeredThemselves = !!TYPO3.seminars.elements.registeredThemselves.checked;
+  }
   const otherSeats = seats - (registeredThemselves ? 1 : 0);
   const shouldShowAttendeesNames = otherSeats > 0;
 
@@ -524,6 +535,10 @@ TYPO3.seminars.updateAttendeesNamesVisibility = function() {
 };
 
 TYPO3.seminars.showElement = function(element) {
+  if (!(element instanceof Element)) {
+    return;
+  }
+
   for (const classToAdd of TYPO3.seminars.visibilityClasses) {
     element.classList.add(classToAdd);
   }

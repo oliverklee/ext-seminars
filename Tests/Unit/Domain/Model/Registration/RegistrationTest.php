@@ -231,9 +231,9 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceCodeInitiallyReturnsNull(): void
+    public function getPriceCodeInitiallyReturnsStandardPrice(): void
     {
-        self::assertNull($this->subject->getPriceCode());
+        self::assertSame(Price::PRICE_STANDARD, $this->subject->getPriceCode());
     }
 
     /**
@@ -264,54 +264,12 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceCodeWithEmptyStringReturnsNull(): void
+    public function getPriceCodeWithInvalidPriceCodeReturnsStandardPrice(): void
     {
         // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
-        $this->subject->setPriceCode('');
+        $this->subject->setPriceCode('invalid');
 
-        self::assertNull($this->subject->getPriceCode());
-    }
-
-    /**
-     * @test
-     */
-    public function hasValidPriceCodeWithoutPriceCodeReturnsFalse(): void
-    {
-        self::assertFalse($this->subject->hasValidPriceCode());
-    }
-
-    /**
-     * @test
-     */
-    public function hasValidPriceCodeWithEmptyPriceCodeReturnsFalse(): void
-    {
-        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
-        $this->subject->setPriceCode('');
-
-        self::assertFalse($this->subject->hasValidPriceCode());
-    }
-
-    /**
-     * @test
-     */
-    public function hasValidPriceCodeWithInvalidPriceCodeReturnsFalse(): void
-    {
-        // @phpstan-ignore-next-line We're explicitly testing with a contract violation here.
-        $this->subject->setPriceCode('foo');
-
-        self::assertFalse($this->subject->hasValidPriceCode());
-    }
-
-    /**
-     * @test
-     * @param Price::PRICE_* $priceCode
-     * @dataProvider validPriceCodeDataProvider
-     */
-    public function hasValidPriceCodeWithValidPriceCodeReturnsTrue(string $priceCode): void
-    {
-        $this->subject->setPriceCode($priceCode);
-
-        self::assertTrue($this->subject->hasValidPriceCode());
+        self::assertSame(Price::PRICE_STANDARD, $this->subject->getPriceCode());
     }
 
     /**

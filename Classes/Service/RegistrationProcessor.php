@@ -109,10 +109,6 @@ class RegistrationProcessor implements SingletonInterface
     {
         $event = $this->getEventFromRegistration($registration);
         $priceCode = $registration->getPriceCode();
-        if (!Price::isPriceCodeValid($priceCode)) {
-            throw new \RuntimeException('This registration has no valid price code.', 1669393997);
-        }
-
         $price = $event->getAllPrices()[$priceCode] ?? null;
         if ($price instanceof Price) {
             $totalPrice = $price->getAmount() * $registration->getSeats();

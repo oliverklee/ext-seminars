@@ -181,6 +181,33 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.fieldsToShow>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.fieldsToShow
+                            </label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectCheckBox</renderType>
+                                <minitems>0</minitems>
+                                <maxitems>20</maxitems>
+                                <itemsProcFunc>
+                                    OliverKlee\Seminars\Configuration\EventRegistrationFlexForms->buildFields
+                                </itemsProcFunc>
+                                <itemGroups>
+                                    <inputFields>
+                                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.fieldsToShow.group.inputFields
+                                    </inputFields>
+                                    <billingAddress>
+                                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.fieldsToShow.group.billingAddress
+                                    </billingAddress>
+                                    <confirmationPage>
+                                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage
+                                    </confirmationPage>
+                                </itemGroups>
+                            </config>
+                        </TCEforms>
+                    </settings.fieldsToShow>
                 </el>
             </ROOT>
         </formFields>

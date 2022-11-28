@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
-      data-namespace-typo3-fluid="true">
+      xmlns:oelib="OliverKlee\Oelib\ViewHelpers" data-namespace-typo3-fluid="true">
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
@@ -19,115 +19,132 @@
             </h3>
 
             <fieldset>
-                <legend>
-                    <f:translate key="{fieldsetPrefix}.personsToRegister"/>
-                </legend>
+                <oelib:isFieldEnabled fieldName="seats|registeredThemselves|attendeesNames">
+                    <legend>
+                        <f:translate key="{fieldsetPrefix}.personsToRegister"/>
+                    </legend>
+                </oelib:isFieldEnabled>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-seats" class="col-sm-2 col-form-label">
-                        <f:translate key="{labelPrefix}.seats"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textfield property="seats" id="{idPrefix}-seats"
-                                          size="3" maxlength="3" type="number"
-                                          class="form-control-plaintext" errorClass="is-invalid"
-                                          data="{behavior: 'tx-seminars-seats'}"
-                                          additionalAttributes="{autocomplete: 'number', min: '1', max: maximumBookableSeats}"/>
-                        <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'seats'}"/>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <div class="form-check">
-                            <f:form.checkbox property="registeredThemselves" id="{idPrefix}-registeredThemselves"
-                                             class="form-check-input" errorClass="is-invalid"
-                                             value="1" checked="{registration.registeredThemselves}"
-                                             data="{behavior: 'tx-seminars-registered-themselves'}"/>
-                            <label for="{idPrefix}-registeredThemselves" class="form-check-label">
-                                <f:translate key="{labelPrefix}.registeredThemselves"/>
-                            </label>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'registeredThemselves'}"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-none tx-seminars-display-none" data-behavior="tx-seminars-attendees-names">
+                <oelib:isFieldEnabled fieldName="seats">
                     <div class="row mb-3">
-                        <label for="{idPrefix}-attendeesNames" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.attendeesNames"/>
+                        <label for="{idPrefix}-seats" class="col-sm-2 col-form-label">
+                            <f:translate key="{labelPrefix}.seats"/>
                         </label>
                         <div class="col-sm-10">
-                            <f:form.textarea property="attendeesNames" id="{idPrefix}-attendeesNames"
-                                             class="form-control" errorClass="is-invalid"
-                                             additionalAttributes="{maxlength: 16383}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'attendeesNames'}"/>
+                            <f:form.textfield property="seats" id="{idPrefix}-seats"
+                                              size="3" maxlength="3" type="number"
+                                              class="form-control-plaintext" errorClass="is-invalid"
+                                              data="{behavior: 'tx-seminars-seats'}"
+                                              additionalAttributes="{autocomplete: 'number', min: '1', max: maximumBookableSeats}"/>
+                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'seats'}"/>
                         </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="registeredThemselves">
+                    <f:then>
+                        <div class="row mb-3">
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <f:form.checkbox property="registeredThemselves"
+                                                     id="{idPrefix}-registeredThemselves"
+                                                     class="form-check-input" errorClass="is-invalid"
+                                                     value="1" checked="{registration.registeredThemselves}"
+                                                     data="{behavior: 'tx-seminars-registered-themselves'}"/>
+                                    <label for="{idPrefix}-registeredThemselves" class="form-check-label">
+                                        <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                    </label>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'registeredThemselves'}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"/>
+                    </f:else>
+                </oelib:isFieldEnabled>
+
+                <oelib:isFieldEnabled fieldName="attendeesNames">
+                    <div class="d-none tx-seminars-display-none" data-behavior="tx-seminars-attendees-names">
+                        <div class="row mb-3">
+                            <label for="{idPrefix}-attendeesNames" class="col-sm-2 col-form-label">
+                                <f:translate key="{labelPrefix}.attendeesNames"/>
+                            </label>
+                            <div class="col-sm-10">
+                                <f:form.textarea property="attendeesNames" id="{idPrefix}-attendeesNames"
+                                                 class="form-control" errorClass="is-invalid"
+                                                 additionalAttributes="{maxlength: 16383}"/>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'attendeesNames'}"/>
+                            </div>
+                        </div>
+                    </div>
+                </oelib:isFieldEnabled>
             </fieldset>
 
-            <fieldset>
-                <legend>
-                    <f:translate key="{fieldsetPrefix}.foodAndAccommodation"/>
-                </legend>
+            <f:if condition="{event.accommodationOptions} || {event.foodOptions}">
+                <fieldset>
+                    <legend>
+                        <f:translate key="{fieldsetPrefix}.foodAndAccommodation"/>
+                    </legend>
 
-                <f:if condition="{event.accommodationOptions}">
-                    <div class="row mb-3">
-                        <div class="col-sm-2" aria-hidden="true">
-                            <f:translate key="{labelPrefix}.accommodationOptions"/>
-                        </div>
-                        <fieldset class="col-sm-10">
-                            <legend class="visually-hidden tx-seminars-visually-hidden">
+                    <f:if condition="{event.accommodationOptions}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2" aria-hidden="true">
                                 <f:translate key="{labelPrefix}.accommodationOptions"/>
-                            </legend>
+                            </div>
+                            <fieldset class="col-sm-10">
+                                <legend class="visually-hidden tx-seminars-visually-hidden">
+                                    <f:translate key="{labelPrefix}.accommodationOptions"/>
+                                </legend>
 
-                            <f:for each="{event.accommodationOptions}" as="accommodationOption">
-                                <div class="form-check">
-                                    <f:form.checkbox property="accommodationOptions"
-                                                     id="{idPrefix}-accommodationOption-{accommodationOption.uid}"
-                                                     class="form-check-input" errorClass="is-invalid"
-                                                     value="{accommodationOption.uid}"/>
-                                    <label for="{idPrefix}-accommodationOption-{accommodationOption.uid}"
-                                           class="form-check-label">
-                                        {accommodationOption.title}
-                                    </label>
-                                </div>
-                            </f:for>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'accommodationOptions'}"/>
-                        </fieldset>
-                    </div>
-                </f:if>
-
-                <f:if condition="{event.foodOptions}">
-                    <div class="row mb-3">
-                        <div class="col-sm-2" aria-hidden="true">
-                            <f:translate key="{labelPrefix}.foodOptions"/>
+                                <f:for each="{event.accommodationOptions}" as="accommodationOption">
+                                    <div class="form-check">
+                                        <f:form.checkbox property="accommodationOptions"
+                                                         id="{idPrefix}-accommodationOption-{accommodationOption.uid}"
+                                                         class="form-check-input" errorClass="is-invalid"
+                                                         value="{accommodationOption.uid}"/>
+                                        <label for="{idPrefix}-accommodationOption-{accommodationOption.uid}"
+                                               class="form-check-label">
+                                            {accommodationOption.title}
+                                        </label>
+                                    </div>
+                                </f:for>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'accommodationOptions'}"/>
+                            </fieldset>
                         </div>
-                        <fieldset class="col-sm-10">
-                            <legend class="visually-hidden tx-seminars-visually-hidden">
-                                <f:translate key="{labelPrefix}.foodOptions"/>
-                            </legend>
+                    </f:if>
 
-                            <f:for each="{event.foodOptions}" as="foodOption">
-                                <div class="form-check">
-                                    <f:form.checkbox property="foodOptions" id="{idPrefix}-foodOption-{foodOption.uid}"
-                                                     class="form-check-input" errorClass="is-invalid"
-                                                     value="{foodOption.uid}"/>
-                                    <label for="{idPrefix}-foodOption-{foodOption.uid}" class="form-check-label">
-                                        {foodOption.title}
-                                    </label>
-                                </div>
-                            </f:for>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'foodOptions'}"/>
-                        </fieldset>
-                    </div>
-                </f:if>
-            </fieldset>
+                    <f:if condition="{event.foodOptions}">
+                        <div class="row mb-3">
+                            <div class="col-sm-2" aria-hidden="true">
+                                <f:translate key="{labelPrefix}.foodOptions"/>
+                            </div>
+                            <fieldset class="col-sm-10">
+                                <legend class="visually-hidden tx-seminars-visually-hidden">
+                                    <f:translate key="{labelPrefix}.foodOptions"/>
+                                </legend>
+
+                                <f:for each="{event.foodOptions}" as="foodOption">
+                                    <div class="form-check">
+                                        <f:form.checkbox property="foodOptions"
+                                                         id="{idPrefix}-foodOption-{foodOption.uid}"
+                                                         class="form-check-input" errorClass="is-invalid"
+                                                         value="{foodOption.uid}"/>
+                                        <label for="{idPrefix}-foodOption-{foodOption.uid}" class="form-check-label">
+                                            {foodOption.title}
+                                        </label>
+                                    </div>
+                                </f:for>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'foodOptions'}"/>
+                            </fieldset>
+                        </div>
+                    </f:if>
+                </fieldset>
+            </f:if>
 
             <fieldset>
                 <legend>
@@ -162,66 +179,77 @@
                     </div>
                 </f:if>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-interests" class="col-sm-2 col-form-label">
-                        <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textarea property="interests" id="{idPrefix}-interests"
-                                         class="form-control" errorClass="is-invalid"
-                                         additionalAttributes="{maxlength: 16383}"/>
-                        <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'interests'}"/>
+                <oelib:isFieldEnabled fieldName="interests">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-interests" class="col-sm-2 col-form-label">
+                            <s:salutationAwareTranslate key="{labelPrefix}.interests"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="interests" id="{idPrefix}-interests"
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
+                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'interests'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-expectations" class="col-sm-2 col-form-label">
-                        <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textarea property="expectations" id="{idPrefix}-expectations"
-                                         class="form-control" errorClass="is-invalid"
-                                         additionalAttributes="{maxlength: 16383}"/>
-                        <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'expectations'}"/>
+                <oelib:isFieldEnabled fieldName="expectations">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-expectations" class="col-sm-2 col-form-label">
+                            <s:salutationAwareTranslate key="{labelPrefix}.expectations"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="expectations" id="{idPrefix}-expectations"
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'expectations'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-backgroundKnowledge" class="col-sm-2 col-form-label">
-                        <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textarea property="backgroundKnowledge" id="{idPrefix}-backgroundKnowledge"
-                                         class="form-control" errorClass="is-invalid"
-                                         additionalAttributes="{maxlength: 16383}"/>
-                        <f:render partial="EventRegistration/ValidationResult"
-                                  arguments="{property: 'backgroundKnowledge'}"/>
+                <oelib:isFieldEnabled fieldName="backgroundKnowledge">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-backgroundKnowledge" class="col-sm-2 col-form-label">
+                            <s:salutationAwareTranslate key="{labelPrefix}.backgroundKnowledge"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="backgroundKnowledge" id="{idPrefix}-backgroundKnowledge"
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'backgroundKnowledge'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-knownFrom" class="col-sm-2 col-form-label">
-                        <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textarea property="knownFrom" id="{idPrefix}-knownFrom"
-                                         class="form-control" errorClass="is-invalid"
-                                         additionalAttributes="{maxlength: 16383}"/>
-                        <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'knownFrom'}"/>
+                <oelib:isFieldEnabled fieldName="knownFrom">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-knownFrom" class="col-sm-2 col-form-label">
+                            <s:salutationAwareTranslate key="{labelPrefix}.knownFrom"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="knownFrom" id="{idPrefix}-knownFrom"
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
+                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'knownFrom'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-comments" class="col-sm-2 col-form-label">
-                        <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.textarea property="comments" id="{idPrefix}-comments"
-                                         class="form-control" errorClass="is-invalid"
-                                         additionalAttributes="{maxlength: 16383}"/>
-                        <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'comments'}"/>
+                <oelib:isFieldEnabled fieldName="comments">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-comments" class="col-sm-2 col-form-label">
+                            <s:salutationAwareTranslate key="{labelPrefix}.comments"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.textarea property="comments" id="{idPrefix}-comments"
+                                             class="form-control" errorClass="is-invalid"
+                                             additionalAttributes="{maxlength: 16383}"/>
+                            <f:render partial="EventRegistration/ValidationResult" arguments="{property: 'comments'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
             </fieldset>
 
             <fieldset>
@@ -229,24 +257,26 @@
                     <f:translate key="{fieldsetPrefix}.payment"/>
                 </legend>
 
-                <div class="row mb-3">
-                    <label for="{idPrefix}-priceCode" class="col-sm-2 col-form-label">
-                        <f:translate key="{labelPrefix}.priceCode"/>
-                    </label>
-                    <div class="col-sm-10">
-                        <f:form.select property="priceCode" id="{idPrefix}-priceCode"
-                                       class="form-select" errorClass="is-invalid">
-                            <f:for each="{applicablePrices}" as="price">
-                                <f:form.select.option value="{price.priceCode}">
-                                    <f:translate key="{price.labelKey}"/>
-                                    <f:render partial="Price" arguments="{amount: price.amount}"/>
-                                </f:form.select.option>
-                            </f:for>
-                        </f:form.select>
-                        <f:render partial="EventRegistration/ValidationResult"
-                                  arguments="{property: 'priceCode'}"/>
+                <oelib:isFieldEnabled fieldName="priceCode">
+                    <div class="row mb-3">
+                        <label for="{idPrefix}-priceCode" class="col-sm-2 col-form-label">
+                            <f:translate key="{labelPrefix}.priceCode"/>
+                        </label>
+                        <div class="col-sm-10">
+                            <f:form.select property="priceCode" id="{idPrefix}-priceCode"
+                                           class="form-select" errorClass="is-invalid">
+                                <f:for each="{applicablePrices}" as="price">
+                                    <f:form.select.option value="{price.priceCode}">
+                                        <f:translate key="{price.labelKey}"/>
+                                        <f:render partial="Price" arguments="{amount: price.amount}"/>
+                                    </f:form.select.option>
+                                </f:for>
+                            </f:form.select>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'priceCode'}"/>
+                        </div>
                     </div>
-                </div>
+                </oelib:isFieldEnabled>
 
                 <f:if condition="{event.paymentMethods}">
                     <div class="row mb-3">
@@ -264,132 +294,157 @@
                     </div>
                 </f:if>
 
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <div class="form-check">
-                            <f:form.checkbox property="separateBillingAddress" id="{idPrefix}-separateBillingAddress"
-                                             class="form-check-input" errorClass="is-invalid"
-                                             value="1" checked="{registration.separateBillingAddress}"
-                                             data="{behavior: 'tx-seminars-billing-address-toggle'}"/>
-                            <label for="{idPrefix}-separateBillingAddress" class="form-check-label">
-                                <f:translate key="{labelPrefix}.separateBillingAddress"/>
-                            </label>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'separateBillingAddress'}"/>
-                        </div>
-                    </div>
-                </div>
-
-                <fieldset data-behavior="tx-seminars-billing-address-fields" class="d-none tx-seminars-display-none">
-                    <legend class="visually-hidden tx-seminars-visually-hidden">
-                        <f:translate key="{labelPrefix}.separateBillingAddress"/>
-                    </legend>
-
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingCompany" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.company"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingCompany" id="{idPrefix}-billingCompany" maxlength="256"
-                                              class="form-control" errorClass="is-invalid"
-                                              additionalAttributes="{autocomplete: 'organization'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingCompany'}"/>
+                <oelib:isFieldEnabled fieldName="separateBillingAddress">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <f:form.checkbox property="separateBillingAddress"
+                                                 id="{idPrefix}-separateBillingAddress"
+                                                 class="form-check-input" errorClass="is-invalid"
+                                                 value="1" checked="{registration.separateBillingAddress}"
+                                                 data="{behavior: 'tx-seminars-billing-address-toggle'}"/>
+                                <label for="{idPrefix}-separateBillingAddress" class="form-check-label">
+                                    <f:translate key="{labelPrefix}.separateBillingAddress"/>
+                                </label>
+                                <f:render partial="EventRegistration/ValidationResult"
+                                          arguments="{property: 'separateBillingAddress'}"/>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingFullName" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.fullName"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingFullName" id="{idPrefix}-billingFullName" maxlength="80"
-                                              class="form-control" errorClass="is-invalid"
-                                              additionalAttributes="{autocomplete: 'name'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingFullName'}"/>
-                        </div>
-                    </div>
+                    <fieldset data-behavior="tx-seminars-billing-address-fields"
+                              class="d-none tx-seminars-display-none">
+                        <legend class="visually-hidden tx-seminars-visually-hidden">
+                            <f:translate key="{labelPrefix}.separateBillingAddress"/>
+                        </legend>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingStreetAddress" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.streetAddress"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textarea property="billingStreetAddress" id="{idPrefix}-billingStreetAddress"
-                                             class="form-control" errorClass="is-invalid"
-                                             additionalAttributes="{autocomplete: 'street-address'}"
-                                             additionalAttributes="{maxlength: 255}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingStreetAddress'}"/>
-                        </div>
-                    </div>
+                        <oelib:isFieldEnabled fieldName="billingCompany">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingCompany" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.company"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingCompany" id="{idPrefix}-billingCompany"
+                                                      maxlength="256"
+                                                      class="form-control" errorClass="is-invalid"
+                                                      additionalAttributes="{autocomplete: 'organization'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingCompany'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingZipCode" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.zipCode"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingZipCode" id="{idPrefix}-billingZipCode" maxlength="20"
-                                              class="form-control" errorClass="is-invalid"
-                                              additionalAttributes="{autocomplete: 'postal-code'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingZipCode'}"/>
-                        </div>
-                    </div>
+                        <oelib:isFieldEnabled fieldName="billingFullName">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingFullName" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.fullName"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingFullName" id="{idPrefix}-billingFullName"
+                                                      maxlength="80"
+                                                      class="form-control" errorClass="is-invalid"
+                                                      additionalAttributes="{autocomplete: 'name'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingFullName'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingCity" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.city"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingCity" id="{idPrefix}-billingCity" maxlength="50"
-                                              class="form-control" errorClass="is-invalid"
-                                              additionalAttributes="{autocomplete: 'address-level2'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingCity'}"/>
-                        </div>
-                    </div>
+                        <oelib:isFieldEnabled fieldName="billingStreetAddress">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingStreetAddress" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.streetAddress"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textarea property="billingStreetAddress"
+                                                     id="{idPrefix}-billingStreetAddress"
+                                                     class="form-control" errorClass="is-invalid"
+                                                     additionalAttributes="{autocomplete: 'street-address'}"
+                                                     additionalAttributes="{maxlength: 255}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingStreetAddress'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingCountry" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.country"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingCountry" id="{idPrefix}-billingCountry" maxlength="60"
-                                              class="form-control" errorClass="is-invalid"
-                                              additionalAttributes="{autocomplete: 'country-name'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingCountry'}"/>
-                        </div>
-                    </div>
+                        <oelib:isFieldEnabled fieldName="billingZipCode">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingZipCode" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.zipCode"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingZipCode" id="{idPrefix}-billingZipCode"
+                                                      maxlength="20"
+                                                      class="form-control" errorClass="is-invalid"
+                                                      additionalAttributes="{autocomplete: 'postal-code'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingZipCode'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingPhoneNumber" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.phoneNumber"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingPhoneNumber" id="{idPrefix}-billingPhoneNumber"
-                                              maxlength="20" class="form-control" errorClass="is-invalid"
-                                              type="tel" additionalAttributes="{autocomplete: 'tel'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingPhoneNumber'}"/>
-                        </div>
-                    </div>
+                        <oelib:isFieldEnabled fieldName="billingCity">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingCity" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.city"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingCity" id="{idPrefix}-billingCity" maxlength="50"
+                                                      class="form-control" errorClass="is-invalid"
+                                                      additionalAttributes="{autocomplete: 'address-level2'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingCity'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
 
-                    <div class="row mb-3 ms-3">
-                        <label for="{idPrefix}-billingEmailAddress" class="col-sm-2 col-form-label">
-                            <f:translate key="{labelPrefix}.emailAddress"/>
-                        </label>
-                        <div class="col-sm-10">
-                            <f:form.textfield property="billingEmailAddress" id="{idPrefix}-billingEmailAddress"
-                                              maxlength="80" class="form-control" errorClass="is-invalid"
-                                              type="email" additionalAttributes="{autocomplete: 'email'}"/>
-                            <f:render partial="EventRegistration/ValidationResult"
-                                      arguments="{property: 'billingEmailAddress'}"/>
-                        </div>
-                    </div>
-                </fieldset>
+                        <oelib:isFieldEnabled fieldName="billingCountry">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingCountry" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.country"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingCountry" id="{idPrefix}-billingCountry"
+                                                      maxlength="60"
+                                                      class="form-control" errorClass="is-invalid"
+                                                      additionalAttributes="{autocomplete: 'country-name'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingCountry'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
+
+                        <oelib:isFieldEnabled fieldName="billingPhoneNumber">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingPhoneNumber" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.phoneNumber"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingPhoneNumber" id="{idPrefix}-billingPhoneNumber"
+                                                      maxlength="20" class="form-control" errorClass="is-invalid"
+                                                      type="tel" additionalAttributes="{autocomplete: 'tel'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingPhoneNumber'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
+
+                        <oelib:isFieldEnabled fieldName="billingEmailAddress">
+                            <div class="row mb-3 ms-3">
+                                <label for="{idPrefix}-billingEmailAddress" class="col-sm-2 col-form-label">
+                                    <f:translate key="{labelPrefix}.emailAddress"/>
+                                </label>
+                                <div class="col-sm-10">
+                                    <f:form.textfield property="billingEmailAddress" id="{idPrefix}-billingEmailAddress"
+                                                      maxlength="80" class="form-control" errorClass="is-invalid"
+                                                      type="email" additionalAttributes="{autocomplete: 'email'}"/>
+                                    <f:render partial="EventRegistration/ValidationResult"
+                                              arguments="{property: 'billingEmailAddress'}"/>
+                                </div>
+                            </div>
+                        </oelib:isFieldEnabled>
+                    </fieldset>
+                </oelib:isFieldEnabled>
             </fieldset>
 
             <f:form.hidden property="consentedToTermsAndConditions" value="1"/>

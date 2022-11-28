@@ -17,11 +17,11 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 trait PaymentTrait
 {
     /**
-     * @var string|null
-     * @phpstan-var Price::PRICE_*|''|null
+     * @var string
+     * @phpstan-var Price::PRICE_*
      * @Extbase\Validate("StringLength", options={"maximum": 32})
      */
-    protected $priceCode;
+    protected $priceCode = Price::PRICE_STANDARD;
 
     /**
      * @var string
@@ -44,11 +44,11 @@ trait PaymentTrait
     /**
      * @return Price::PRICE_*
      */
-    public function getPriceCode(): ?string
+    public function getPriceCode(): string
     {
         $priceCode = $this->priceCode;
-        if ($priceCode === '') {
-            $priceCode = null;
+        if (!Price::isPriceCodeValid($priceCode)) {
+            $priceCode = Price::PRICE_STANDARD;
         }
 
         return $priceCode;
@@ -60,11 +60,6 @@ trait PaymentTrait
     public function setPriceCode(string $priceCode): void
     {
         $this->priceCode = $priceCode;
-    }
-
-    public function hasValidPriceCode(): bool
-    {
-        return Price::isPriceCodeValid($this->getPriceCode());
     }
 
     public function getHumanReadablePrice(): string
