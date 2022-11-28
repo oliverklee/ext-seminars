@@ -2084,11 +2084,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
 				<source>Terms and conditions</source>
-				<target>Anmeldebedingungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.personalData_formal">
+				<source>Your personal data</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.personalData_informal">
+				<source>Your personal data</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.summary">
 				<source>Summary</source>
-				<target>Zusammenfassung</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.fieldset.payment">
 				<source>Payment</source>

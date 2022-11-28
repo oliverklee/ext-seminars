@@ -2766,6 +2766,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Terms and conditions</source>
 				<target>Anmeldebedingungen</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.personalData_formal">
+				<source>Your personal data</source>
+				<target>Ihre persönlichen Daten</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.personalData_informal">
+				<source>Your personal data</source>
+				<target>Deine persönlichen Daten</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.summary">
 				<source>Summary</source>
 				<target>Zusammenfassung</target>

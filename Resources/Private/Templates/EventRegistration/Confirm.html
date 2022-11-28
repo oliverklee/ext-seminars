@@ -202,10 +202,107 @@
                 </tbody>
             </table>
 
+            <h3>
+                <s:salutationAwareTranslate key="plugin.eventRegistration.heading.personalData"/>
+            </h3>
+            <f:variable name="user" value="{registration.user}"/>
+
+            <table class="table table-striped">
+                <tbody>
+                    <f:if condition="{user.company}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.company"/>
+                            </th>
+                            <td>
+                                {user.company}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.name}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.fullName"/>
+                            </th>
+                            <td>
+                                {user.name}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.address}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.streetAddress"/>
+                            </th>
+                            <td>
+                                {user.address -> f:format.nl2br()}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.zip}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.zipCode"/>
+                            </th>
+                            <td>
+                                {user.zip}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.city}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.city"/>
+                            </th>
+                            <td>
+                                {user.city}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.country}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.country"/>
+                            </th>
+                            <td>
+                                {user.country}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.telephone}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.phoneNumber"/>
+                            </th>
+                            <td>
+                                {user.telephone}
+                            </td>
+                        </tr>
+                    </f:if>
+
+                    <f:if condition="{user.email}">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.emailAddress"/>
+                            </th>
+                            <td>
+                                {user.email}
+                            </td>
+                        </tr>
+                    </f:if>
+                </tbody>
+            </table>
+
             <f:if condition="{registration.separateBillingAddress}}">
-                <h3>
+                <h4>
                     <f:translate key="{labelPrefix}.separateBillingAddress"/>
-                </h3>
+                </h4>
                 <table class="table table-striped">
                     <tbody>
                         <f:if condition="{registration.billingCompany}">
