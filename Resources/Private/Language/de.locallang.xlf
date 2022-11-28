@@ -2890,35 +2890,35 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Separate billing address</source>
 				<target>Separate Rechnungsadresse</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingCompany">
+			<trans-unit id="plugin.eventRegistration.property.company">
 				<source>Company</source>
 				<target>Firma</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingFullName">
+			<trans-unit id="plugin.eventRegistration.property.fullName">
 				<source>Full name</source>
 				<target>Vollständiger Name</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingStreetAddress">
+			<trans-unit id="plugin.eventRegistration.property.streetAddress">
 				<source>Street address</source>
 				<target>Straße und Hausnummer</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingZipCode">
+			<trans-unit id="plugin.eventRegistration.property.zipCode">
 				<source>ZIP code</source>
 				<target>PLZ</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingCity">
+			<trans-unit id="plugin.eventRegistration.property.city">
 				<source>City</source>
 				<target>Stadt</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingCountry">
+			<trans-unit id="plugin.eventRegistration.property.country">
 				<source>Country</source>
 				<target>Land</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingPhoneNumber">
+			<trans-unit id="plugin.eventRegistration.property.phoneNumber">
 				<source>Phone number</source>
 				<target>Telefonnummer</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.property.billingEmailAddress">
+			<trans-unit id="plugin.eventRegistration.property.emailAddress">
 				<source>Email address</source>
 				<target>E-Mail-Adresse</target>
 			</trans-unit>
