@@ -539,4 +539,217 @@ final class RegistrationGuardTest extends UnitTestCase
 
         self::assertSame($userUidFromLogin, $this->subject->getFrontEndUserUidFromSession());
     }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithEventTopicThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1669377348);
+        $this->expectExceptionMessage('The event must be a SingleEvent or an EventDate.');
+
+        $this->subject->getVacancies(new EventTopic());
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithSingleEventWithoutLimitAndNoOfflineRegistrationsReturnsNull(): void
+    {
+        $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(0);
+        $event->setNumberOfOfflineRegistrations(0);
+
+        self::assertNull($this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithEventDateWithoutLimitAndNoOfflineRegistrationsReturnsNull(): void
+    {
+        $event = new EventDate();
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(0);
+        $event->setNumberOfOfflineRegistrations(0);
+
+        self::assertNull($this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithoutLimitAndOfflineRegistrationsReturnsNull(): void
+    {
+        $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(0);
+        $event->setNumberOfOfflineRegistrations(1);
+
+        self::assertNull($this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithLimitAndAllSeatsTakeByOfflineRegistrationsReturnsZero(): void
+    {
+        $maximumNumberOfRegistrations = 10;
+        $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+        $event->setNumberOfOfflineRegistrations($maximumNumberOfRegistrations);
+
+        self::assertSame(0, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesWithLimitAndMoreThanAllSeatsTakeByOfflineRegistrationsReturnsZero(): void
+    {
+        $maximumNumberOfRegistrations = 10;
+        $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+        $event->setNumberOfOfflineRegistrations($maximumNumberOfRegistrations + 1);
+
+        self::assertSame(0, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesForNoRegistrationsAtAllReturnMaximumNumberOfRegistrations(): void
+    {
+        $maximumNumberOfRegistrations = 10;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $eventUid = 5;
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+
+        $this->registrationRepositoryMock->method('countSeatsByEvent')->with($eventUid)->willReturn(0);
+
+        self::assertSame($maximumNumberOfRegistrations, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesEventWithRegistrationsReducesVacanciesBySumOfRegistrationSeats(): void
+    {
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $eventUid = 5;
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $maximumNumberOfRegistrations = 10;
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+
+        $registeredSeats = 3;
+        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+            ->willReturn($registeredSeats);
+
+        self::assertSame($maximumNumberOfRegistrations - $registeredSeats, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesEventForAllSeatsBookedReturnsZero(): void
+    {
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $eventUid = 5;
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $maximumNumberOfRegistrations = 10;
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+
+        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+            ->willReturn($maximumNumberOfRegistrations);
+
+        self::assertSame(0, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesEventForTooManySeatsBookedReturnsZero(): void
+    {
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $eventUid = 5;
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $maximumNumberOfRegistrations = 10;
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+
+        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+            ->willReturn($maximumNumberOfRegistrations + 1);
+
+        self::assertSame(0, $this->subject->getVacancies($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesEventWithRegistrationsReducesVacanciesBySeatsAndOfflineRegistrations(): void
+    {
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $eventUid = 5;
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $maximumNumberOfRegistrations = 10;
+        $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
+        $numberOfOfflineRegistrations = 2;
+        $event->setNumberOfOfflineRegistrations($numberOfOfflineRegistrations);
+
+        $registeredSeats = 3;
+        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+            ->willReturn(3);
+
+        self::assertSame(
+            $maximumNumberOfRegistrations - $registeredSeats - $numberOfOfflineRegistrations,
+            $this->subject->getVacancies($event)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesCalledTwiceForDifferentEventUidsQueryTheRepositoryTwice(): void
+    {
+        $event1 = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event1->method('getUid')->willReturn(1);
+        $event1->setRegistrationRequired(true);
+        $event1->setMaximumNumberOfRegistrations(10);
+        $event2 = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event2->method('getUid')->willReturn(2);
+        $event2->setRegistrationRequired(true);
+        $event2->setMaximumNumberOfRegistrations(10);
+
+        $this->registrationRepositoryMock->expects(self::exactly(2))->method('countSeatsByEvent')
+            ->with(self::anything())->willReturn(0);
+
+        $this->subject->getVacancies($event1);
+        $this->subject->getVacancies($event2);
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesCalledOnceForTheSameEventUidQueryTheRepositoryOnlyOnce(): void
+    {
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn(1);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(10);
+
+        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')
+            ->with(self::anything())->willReturn(0);
+
+        $this->subject->getVacancies($event);
+        $this->subject->getVacancies($event);
+    }
 }
