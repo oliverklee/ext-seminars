@@ -464,7 +464,10 @@
         billingAddressFields: '[data-behavior="tx-seminars-billing-address-fields"]',
         seats: '[data-behavior="tx-seminars-seats"]',
         registeredThemselves: '[data-behavior="tx-seminars-registered-themselves"]',
-        attendeesNames: '[data-behavior="tx-seminars-attendees-names"]',
+        separateAttendeeNames: '[data-behavior="tx-seminars-separate-attendee-names"]',
+        attendeeTemplate: '[data-behavior="tx-seminars-attendee-template"]',
+        humanReadableAttendeeNames: '[data-behavior="tx-seminars-human-readable-attendee-names"]',
+        machineReadableAttendeeNames: '[data-behavior="tx-seminars-machine-readable-attendee-names"]',
       }
 
       for (const [key, selector] of Object.entries(selectors)) {
@@ -485,7 +488,8 @@
       this.updateBillingAddressVisibility();
       this.addBillingAddressCheckboxListener();
 
-      this.updateAttendeesNamesVisibility();
+      this.showOrHideAttendeeNames();
+      this.restoreAttendeeNames();
       this.addSeatsListener();
     }
 
@@ -499,11 +503,11 @@
 
     addSeatsListener() {
       if (this.elements.seats instanceof Element) {
-        this.elements.seats.addEventListener('change', this.updateAttendeesNamesVisibility.bind(this));
+        this.elements.seats.addEventListener('change', this.showOrHideAttendeeNames.bind(this));
       }
       if (this.elements.registeredThemselves instanceof Element) {
         this.elements.registeredThemselves
-          .addEventListener('change', this.updateAttendeesNamesVisibility.bind(this));
+          .addEventListener('change', this.showOrHideAttendeeNames.bind(this));
       }
     }
 
@@ -522,15 +526,81 @@
       }
     }
 
-    updateAttendeesNamesVisibility() {
-      if (!(this.elements.attendeesNames instanceof Element)) {
+    /**
+     * Shows/hides the attendee fields depending on the number of seats.
+     */
+    showOrHideAttendeeNames() {
+      if (!(this.elements.separateAttendeeNames instanceof Element)) {
         return;
       }
 
+      const otherSeats = Math.max(this.numberOfRequiredAdditionalAttendees(), 0);
+      if (otherSeats > 0) {
+        this.showElement(this.elements.separateAttendeeNames);
+      } else {
+        this.hideElement(this.elements.separateAttendeeNames);
+      }
+      if (!(this.elements.attendeeTemplate instanceof Element)) {
+        return;
+      }
+
+      let currentlyVisibleAttendeeFieldsCount = this.elements.separateAttendeeNames.children.length;
+      while (currentlyVisibleAttendeeFieldsCount !== otherSeats) {
+        if (currentlyVisibleAttendeeFieldsCount < otherSeats) {
+          this.addAttendeeLine();
+          currentlyVisibleAttendeeFieldsCount++;
+        } else {
+          this.removeLastAttendeeLine();
+          currentlyVisibleAttendeeFieldsCount--;
+        }
+      }
+    }
+
+    addAttendeeLine() {
+      const newAttendeeLine = this.elements.attendeeTemplate.cloneNode(true);
+      const newAttendeeLineNumber = (this.elements.separateAttendeeNames.children.length + 1).toString();
+
+      for (const inputElement of newAttendeeLine.querySelectorAll('input')) {
+        inputElement.setAttribute('id', inputElement.getAttribute('id').replace('xxx', newAttendeeLineNumber));
+        inputElement.setAttribute('required', 'required');
+        inputElement.addEventListener('change', this.compileAttendeeNames.bind(this));
+      }
+      for (const labelElement of newAttendeeLine.querySelectorAll('label')) {
+        labelElement.setAttribute('for', labelElement.getAttribute('for').replace('xxx', newAttendeeLineNumber));
+      }
+
+      this.showElement(newAttendeeLine);
+      this.elements.separateAttendeeNames.appendChild(newAttendeeLine);
+    }
+
+    /**
+     * @return {NodeList}
+     */
+    getAttendeeLines() {
+      return this.elements.separateAttendeeNames.querySelectorAll('li');
+    }
+
+    removeLastAttendeeLine() {
+      const lines = this.getAttendeeLines();
+      const lastLine = lines[lines.length - 1];
+      for (const inputElement of lastLine.querySelectorAll('input')) {
+        inputElement.removeEventListener('change', this.compileAttendeeNames);
+      }
+
+      lastLine.remove();
+
+      this.compileAttendeeNames();
+    }
+
+    /**
+     * @return {number}
+     */
+    numberOfRequiredAdditionalAttendees() {
       let seats = 1;
       if (this.elements.seats instanceof Element) {
         seats = parseInt(this.elements.seats.value);
       }
+
       let registeredThemselves = true;
       if (this.elements.registeredThemselves instanceof Element) {
         if (this.elements.registeredThemselves.type === 'checkbox') {
@@ -539,13 +609,70 @@
           registeredThemselves = this.elements.registeredThemselves.value === '1';
         }
       }
-      const otherSeats = seats - (registeredThemselves ? 1 : 0);
-      const shouldShowAttendeesNames = otherSeats > 0;
+      return seats - (registeredThemselves ? 1 : 0);
+    }
 
-      if (shouldShowAttendeesNames) {
-        this.showElement(this.elements.attendeesNames);
-      } else {
-        this.hideElement(this.elements.attendeesNames);
+    /**
+     * Takes the names (and potentially email addresses) of the additional attendees from the corresponding separate
+     * input fields and compiles them both human-readable into the `attendeesNames` input field and machine-readable
+     * into the `jsonEncodedAdditionAttendees` input field.
+     */
+    compileAttendeeNames() {
+      if (!(this.elements.separateAttendeeNames instanceof Element)) {
+        return;
+      }
+
+      let humanReadableAttendeeNames = [];
+      let machineReadableAttendeeNames = [];
+      for (const attendeeLine of this.getAttendeeLines()) {
+        const nameInput = attendeeLine.querySelector('input[name="attendeeName"]');
+        const emailInput = attendeeLine.querySelector('input[name="attendeeEmail"]');
+        const name = (nameInput instanceof Element) ? nameInput.value : '';
+        const email = (emailInput instanceof Element) ? emailInput.value : '';
+        humanReadableAttendeeNames.push((name + ' ' + email).trim());
+        machineReadableAttendeeNames.push({name: name, email: email});
+      }
+
+      const hasHumanReadableAttendeeNames = this.elements.humanReadableAttendeeNames instanceof Element;
+      if (hasHumanReadableAttendeeNames) {
+        this.elements.humanReadableAttendeeNames.value = humanReadableAttendeeNames.join("\n").trim();
+      }
+      const hasMachineReadableAttendeeNames = this.elements.machineReadableAttendeeNames instanceof Element;
+      if (hasMachineReadableAttendeeNames) {
+        this.elements.machineReadableAttendeeNames.value = JSON.stringify(machineReadableAttendeeNames);
+      }
+    }
+
+    /**
+     * Takes the machine-readable attendee names from the `jsonEncodedAdditionAttendees` input field and fills the
+     * corresponding separate input fields with the names and email addresses.
+     */
+    restoreAttendeeNames() {
+      const hasMachineReadableAttendeeNames = this.elements.machineReadableAttendeeNames instanceof Element
+        && this.elements.machineReadableAttendeeNames.value !== '';
+      if (!hasMachineReadableAttendeeNames) {
+        return;
+      }
+
+      const attendeeNames = JSON.parse(this.elements.machineReadableAttendeeNames.value);
+      if (!Array.isArray(attendeeNames)) {
+        return;
+      }
+
+      let attendeeIndex = 0;
+      for (const attendeeLine of this.getAttendeeLines()) {
+        if (typeof (attendeeNames[attendeeIndex]) === 'object') {
+          const nameInput = attendeeLine.querySelector('input[name="attendeeName"]');
+          if (nameInput instanceof Element && typeof (attendeeNames[attendeeIndex].name) === 'string') {
+            nameInput.value = attendeeNames[attendeeIndex].name;
+          }
+          const emailInput = attendeeLine.querySelector('input[name="attendeeEmail"]');
+          if (emailInput instanceof Element && typeof (attendeeNames[attendeeIndex].email) === 'string') {
+            emailInput.value = attendeeNames[attendeeIndex].email;
+          }
+        }
+
+        attendeeIndex++;
       }
     }
 

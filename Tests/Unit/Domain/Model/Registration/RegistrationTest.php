@@ -871,4 +871,23 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertTrue($this->subject->hasConsentedToAdditionalTerms());
     }
+
+    /**
+     * @test
+     */
+    public function getJsonEncodedAdditionAttendeesInitiallyReturnsEmptyStringJsonObject(): void
+    {
+        self::assertSame('{}', $this->subject->getJsonEncodedAdditionAttendees());
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonEncodedAdditionAttendeesSetsJsonEncodedAdditionAttendees(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setJsonEncodedAdditionAttendees($value);
+
+        self::assertSame($value, $this->subject->getJsonEncodedAdditionAttendees());
+    }
 }

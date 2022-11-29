@@ -41,6 +41,13 @@ trait AttendeesTrait
     protected $attendeesNames = '';
 
     /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 1024})
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     */
+    protected $jsonEncodedAdditionAttendees = '{}';
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
@@ -91,6 +98,16 @@ trait AttendeesTrait
     public function setAttendeesNames(string $attendeesNames): void
     {
         $this->attendeesNames = $attendeesNames;
+    }
+
+    public function getJsonEncodedAdditionAttendees(): string
+    {
+        return $this->jsonEncodedAdditionAttendees;
+    }
+
+    public function setJsonEncodedAdditionAttendees(string $json): void
+    {
+        $this->jsonEncodedAdditionAttendees = $json;
     }
 
     /**
