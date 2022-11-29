@@ -395,6 +395,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         self::assertTrue($this->subject->existsRegistrationForEventAndUser($event, 1));
     }
+
     /**
      * @test
      */
@@ -404,5 +405,83 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $event = $this->eventRepository->findByUid(1);
 
         self::assertTrue($this->subject->existsRegistrationForEventAndUser($event, 1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventForNonExistentEventUidReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventIgnoresRegistrationsWithZeroSeats(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+
+        self::assertSame(0, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventSumsUpSingleSeatRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoRegistrationsWithSameEventAndUser.xml');
+
+        self::assertSame(2, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventIgnoresSeatFromOtherEvents(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndAdditionalEvent.xml');
+
+        self::assertSame(0, $this->subject->countSeatsByEvent(2));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventSumsUpMultiSeatRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoMultiSeatRegistrationsWithSameEvent.xml');
+
+        self::assertSame(5, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventIgnoresHiddenRegistration(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEvent.xml');
+
+        self::assertSame(0, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventIgnoresDeletedRegistration(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEvent.xml');
+
+        self::assertSame(0, $this->subject->countSeatsByEvent(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countSeatsByEventIgnoresRegistrationOnWaitingList(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEvent.xml');
+
+        self::assertSame(0, $this->subject->countSeatsByEvent(1));
     }
 }

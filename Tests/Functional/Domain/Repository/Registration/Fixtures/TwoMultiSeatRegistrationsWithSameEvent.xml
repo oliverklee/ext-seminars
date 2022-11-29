@@ -3,19 +3,15 @@
     <tx_seminars_attendances>
         <uid>1</uid>
         <seminar>1</seminar>
-        <seats>1</seats>
-        <user>1</user>
+        <seats>2</seats>
     </tx_seminars_attendances>
     <tx_seminars_attendances>
         <uid>2</uid>
         <seminar>1</seminar>
-        <seats>1</seats>
+        <seats>3</seats>
         <user>1</user>
     </tx_seminars_attendances>
     <tx_seminars_seminars>
         <uid>1</uid>
     </tx_seminars_seminars>
-    <fe_users>
-        <uid>1</uid>
-    </fe_users>
 </dataset>
