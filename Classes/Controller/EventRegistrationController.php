@@ -87,6 +87,10 @@ class EventRegistrationController extends ActionController
         if (!$this->registrationGuard->isFreeFromRegistrationConflicts($event, $userUid)) {
             $this->forwardToDenyAction('alreadyRegistered');
         }
+        $vacancies = $this->registrationGuard->getVacancies($event);
+        if ($vacancies === 0) {
+            $this->forwardToDenyAction('fullyBooked');
+        }
 
         $this->redirect('new', null, null, ['event' => $event]);
     }
@@ -157,7 +161,12 @@ class EventRegistrationController extends ActionController
         }
         $this->view->assign('registration', $newRegistration);
 
-        $this->view->assign('maximumBookableSeats', (int)($this->settings['maximumBookableSeats'] ?? 10));
+        $maximumBookableSeats = (int)($this->settings['maximumBookableSeats'] ?? 10);
+        $vacancies = $this->registrationGuard->getVacancies($event);
+        if (\is_int($vacancies)) {
+            $maximumBookableSeats = \min($maximumBookableSeats, $vacancies);
+        }
+        $this->view->assign('maximumBookableSeats', $maximumBookableSeats);
         $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
     }
 

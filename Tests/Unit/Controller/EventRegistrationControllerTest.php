@@ -172,7 +172,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionUserAlreadyRegisteredForwardsToDenyRegistrationAction(): void
+    public function checkPrerequisitesActionForUserAlreadyRegisteredForwardsToDenyRegistrationAction(): void
     {
         $userUid = 17;
         $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
@@ -195,7 +195,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForNoProblemsRedirectsToNewActionAndPassesEvent(): void
+    public function checkPrerequisitesActionForFullyBookedEventForwardsToDenyRegistrationAction(): void
     {
         $userUid = 17;
         $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
@@ -206,6 +206,62 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(true);
         $this->registrationGuardMock->method('isFreeFromRegistrationConflicts')
             ->with($event, $userUid)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())
+            ->method('getVacancies')->with($event)->willReturn(0);
+
+        $this->subject->expects(self::once())->method('forward')
+            ->with('denyRegistration', null, null, ['warningMessageKey' => 'fullyBooked'])
+            ->willThrowException(new StopActionException('forward', 1476045801));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function checkPrerequisitesActionForNoProblemsAndInfiniteVacanciesRedirectsToNewActionAndPassesEvent(): void
+    {
+        $userUid = 17;
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
+
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleAtAnyTimeAtAll')
+            ->with($event)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleByDate')
+            ->with($event)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('existsFrontEndUserUidInSession')->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('isFreeFromRegistrationConflicts')
+            ->with($event, $userUid)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())
+            ->method('getVacancies')->with($event)->willReturn(null);
+
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('new', null, null, ['event' => $event])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
+
+        $this->subject->checkPrerequisitesAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function checkPrerequisitesActionForNoProblemsAndNonZeroVacanciesRedirectsToNewActionAndPassesEvent(): void
+    {
+        $userUid = 17;
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
+
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleAtAnyTimeAtAll')
+            ->with($event)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleByDate')
+            ->with($event)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('existsFrontEndUserUidInSession')->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())->method('isFreeFromRegistrationConflicts')
+            ->with($event, $userUid)->willReturn(true);
+        $this->registrationGuardMock->expects(self::once())
+            ->method('getVacancies')->with($event)->willReturn(1);
 
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
@@ -345,8 +401,11 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionWithoutSettingForMaximumBookableSeatsPassesTenToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsAndUnlimitedVacanciesPassesTenToView(): void
     {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')->with($event)->willReturn(null);
+
         $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
             ['event', self::anything()],
             ['registration', self::anything()],
@@ -354,14 +413,56 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ['applicablePrices', self::anything()]
         );
 
-        $this->subject->newAction(new SingleEvent(), new Registration());
+        $this->subject->newAction($event, new Registration());
     }
 
     /**
      * @test
      */
-    public function newActionPassesMaximumBookableSeatsToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsAndMoreThanTenVacanciesPassesTenToView(): void
     {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')->with($event)->willReturn(11);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', 10],
+            ['applicablePrices', self::anything()]
+        );
+
+        $this->subject->newAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithoutSettingForMaximumBookableSeatsAndLessThanTenVacanciesPassesVacanciesToView(): void
+    {
+        $event = new SingleEvent();
+        $vacancies = 9;
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')
+            ->with($event)->willReturn($vacancies);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', $vacancies],
+            ['applicablePrices', self::anything()]
+        );
+
+        $this->subject->newAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithInfiniteVacanciesPassesMaximumBookableSeatsFromSettingsToView(): void
+    {
+        $event = new SingleEvent();
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')
+            ->with($event)->willReturn(null);
+
         $maximumBookableSeats = 15;
         $this->subject->_set('settings', ['maximumBookableSeats' => (string)$maximumBookableSeats]);
 
@@ -372,7 +473,53 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ['applicablePrices', self::anything()]
         );
 
-        $this->subject->newAction(new SingleEvent(), new Registration());
+        $this->subject->newAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithMoreVacanciesPassesMaximumBookableSeatsFromSettingsToView(): void
+    {
+        $event = new SingleEvent();
+        $vacancies = 16;
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')
+            ->with($event)->willReturn($vacancies);
+
+        $maximumBookableSeats = 15;
+        $this->subject->_set('settings', ['maximumBookableSeats' => (string)$maximumBookableSeats]);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', $maximumBookableSeats],
+            ['applicablePrices', self::anything()]
+        );
+
+        $this->subject->newAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionPassesWithFewerVacanciesPassesActualVacanciesAsBookableSeatsToView(): void
+    {
+        $event = new SingleEvent();
+        $vacancies = 9;
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')
+            ->with($event)->willReturn($vacancies);
+
+        $maximumBookableSeats = 15;
+        $this->subject->_set('settings', ['maximumBookableSeats' => (string)$maximumBookableSeats]);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', $vacancies],
+            ['applicablePrices', self::anything()]
+        );
+
+        $this->subject->newAction($event, new Registration());
     }
 
     /**
