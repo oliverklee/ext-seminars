@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   #1893, #1896, #1898, #1899, #1902, #1906, #1914, #1920, #1932, #1942, #1944,
   #1952, #1953, #1957, #1962, #1966, #1967, #1968, #1974, #1977, #1979, #1982,
   #1988, #2001, #2005, #2006, #2008, #2009, #2011, #2017, #2018, #2019, #2030,
-  #2031, #2036, #2040)
+  #2031, #2036, #2040, #2048)
 - Add `Registration.hasSeparateBillingAddress` (#1821)
 - Add salutation-aware localization functionality (#1813, #1818, #1822)
 - Add a `PriceFinder` class (#1799)

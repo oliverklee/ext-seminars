@@ -2532,6 +2532,10 @@ This event now has been confirmed.</source>
 				<source>You are already registered for this event.</source>
 				<target>Je bent al voor dit evenement bijeenkomst aangemeld.</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.error.fullyBooked">
+				<source>Unfortunately, there are no more vacancies.</source>
+				<target>Helaas, er zijn geen vrije plaatsen meer beschikbaar.</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.fieldset.payment">
 				<source>Payment</source>
 				<target>Betalen</target>
