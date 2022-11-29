@@ -341,7 +341,7 @@
 				<target>Désolé, la période d'inscription pour cet événement est dépassée.</target>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 				<target>Désolé, il n'y a plus de place.</target>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">

@@ -341,7 +341,7 @@
 				<target>Срок регистрации на это мероприятие истёк.</target>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 				<target>Извините, свободных мест не осталось</target>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
