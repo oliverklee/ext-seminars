@@ -341,7 +341,7 @@
 				<target>De registratieperiode voor dit evenement is helaas al voorbij.</target>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 				<target>Helaas, er zijn geen vrije plaatsen meer beschikbaar.</target>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">

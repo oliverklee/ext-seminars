@@ -272,7 +272,7 @@
 				<source>Sorry, the registration period for this event is over.</source>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
 				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>

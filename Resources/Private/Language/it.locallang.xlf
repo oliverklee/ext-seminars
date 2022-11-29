@@ -341,7 +341,7 @@
 				<target>Spiacente, il periodo utile per registrarsi a questo evento è scaduto.</target>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 				<target>Spiacente, non ci sono posti liberi.</target>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">

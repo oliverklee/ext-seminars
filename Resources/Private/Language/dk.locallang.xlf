@@ -341,7 +341,7 @@
 				<target>Desværre er tilmeldingsfristen til dette arrangement overskredet</target>
 			</trans-unit>
 			<trans-unit id="message_noVacancies" xml:space="preserve">
-				<source>Sorry, there are no more vancacies.</source>
+				<source>Sorry, there are no more vacancies.</source>
 				<target>Desværre, der er ikke flere pladser</target>
 			</trans-unit>
 			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
