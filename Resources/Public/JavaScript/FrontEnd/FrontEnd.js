@@ -467,8 +467,8 @@
         attendeesNames: '[data-behavior="tx-seminars-attendees-names"]',
       }
 
-      for (const key in selectors) {
-        this.elements[key] = document.querySelector(selectors[key]);
+      for (const [key, selector] of Object.entries(selectors)) {
+        this.elements[key] = document.querySelector(selector);
       }
     }
 
@@ -554,21 +554,21 @@
         return;
       }
 
-      for (const classToAdd of Seminars.visibilityClasses) {
-        element.classList.add(classToAdd);
-      }
-      for (const classToRemove of Seminars.invisibilityClasses) {
-        element.classList.remove(classToRemove);
-      }
+      Seminars.visibilityClasses.forEach((className) => {
+        element.classList.add(className);
+      });
+      Seminars.invisibilityClasses.forEach((className) => {
+        element.classList.remove(className);
+      });
     }
 
     hideElement(element) {
-      for (const classToAdd of Seminars.invisibilityClasses) {
-        element.classList.add(classToAdd);
-      }
-      for (const classToRemove of Seminars.visibilityClasses) {
-        element.classList.remove(classToRemove);
-      }
+      Seminars.invisibilityClasses.forEach((className) => {
+        element.classList.add(className);
+      });
+      Seminars.visibilityClasses.forEach((className) => {
+        element.classList.remove(className);
+      });
     }
   }
 
