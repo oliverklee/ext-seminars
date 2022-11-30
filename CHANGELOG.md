@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `AccommodationOption` model (#1731, #1736)
 
 ### Changed
-- Modernize the JavaScript and use less jQuery (#1965, #2049, #2055)
+- Modernize the JavaScript and use less jQuery (#1965, #2049, #2055, #2056)
 - Require feuserextrafields >= 3.2.1 (#1902)
 - Allow more versions of mkforms (#1651)
 - Switch the new models from `DateTime` to `DateTimeImmutable` (#1801)
