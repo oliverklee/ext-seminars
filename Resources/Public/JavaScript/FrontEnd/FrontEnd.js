@@ -25,7 +25,7 @@
 
     elements = {}
 
-    constructor () {
+    constructor() {
       document.addEventListener('readystatechange', () => {
         this.initializeSearchWidget();
         this.initializeLegacyRegistrationForm();
@@ -43,7 +43,7 @@
      *        localized confirm message for whether really to mark an attachment for
      *        deletion
      */
-    markAttachmentAsDeleted (listItemId, confirmMessage) {
+    markAttachmentAsDeleted(listItemId, confirmMessage) {
       const listItem = document.getElementById(listItemId);
       const deleteButton = document.getElementById(listItemId + '_button')
 
@@ -59,7 +59,7 @@
      * them into the human-readable "additional attendees" field and the machine-readable
      * "structured attendees" field.
      */
-    compileNames () {
+    compileNames() {
       var $nameFieldsContainer = $('#tx_seminars_pi1_registration_editor_separate_names');
       if ($nameFieldsContainer.length === 0) {
         return;
@@ -122,7 +122,7 @@
      * Restores the separate name fields from the hidden field with the names
      * in a JSON-encoded array.
      */
-    restoreSeparateNameFields () {
+    restoreSeparateNameFields() {
       var machineReadableField = $('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
 
       if (!machineReadableField || machineReadableField.value === '') {
@@ -157,7 +157,7 @@
     /**
      * Adds or drops name fields to match the number of selected seats.
      */
-    fixNameFieldsNumber () {
+    fixNameFieldsNumber() {
       var neededNameLines = this.getNumberOfNeededNameFields();
       var nameLines = $('#tx_seminars_pi1_registration_editor_separate_names .tx_seminars_pi1_registration_editor_name_line');
 
@@ -184,7 +184,7 @@
      *
      * @return {Number} the number of needed name fields, will be >= 0
      */
-    getNumberOfNeededNameFields () {
+    getNumberOfNeededNameFields() {
       var seatsElements = $('#tx_seminars_pi1_registration_editor__seats');
       if (seatsElements.length === 0) {
         return 0;
@@ -216,7 +216,7 @@
      *        be empty
      * @param {String} title the title of the auxiliary record, must not be empty
      */
-    updateAuxiliaryRecordInEditor (htmlId, title) {
+    updateAuxiliaryRecordInEditor(htmlId, title) {
       var labels = $('#' + htmlId);
       if (labels.length === 0) {
         return;
@@ -236,7 +236,7 @@
      *        e.g. "place", "speaker" or "tutor".
      * @param {Array} buttonData the data of the edit button of the record
      */
-    appendAuxiliaryRecordInEditor (uid, title, htmlName, buttonData) {
+    appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
       var container = $('#tx_seminars_pi1_seminars_' + htmlName + ' tbody')[0];
       if (!container) {
         return;
@@ -284,7 +284,7 @@
      * @param {String} title the title of the place, must not be empty
      * @param {Array} buttonData the data of the edit button of the place
      */
-    appendPlaceInEditor (uid, title, buttonData) {
+    appendPlaceInEditor(uid, title, buttonData) {
       this.appendAuxiliaryRecordInEditor(uid, title, "place", buttonData);
     }
 
@@ -295,7 +295,7 @@
      * @param {String} title the name of the speaker, must not be empty
      * @param {Array} buttonData the data of the edit button of the speaker
      */
-    appendSpeakerInEditor (uid, title, buttonData) {
+    appendSpeakerInEditor(uid, title, buttonData) {
       this.appendAuxiliaryRecordInEditor(uid, title, 'speakers', buttonData);
       this.appendAuxiliaryRecordInEditor(uid, title, 'leaders', buttonData);
       this.appendAuxiliaryRecordInEditor(uid, title, 'partners', buttonData);
@@ -309,7 +309,7 @@
      * @param {String} title the title of the checkbox, must not be empty
      * @param {Array} buttonData the data of the edit button of the checkbox
      */
-    appendCheckboxInEditor (uid, title, buttonData) {
+    appendCheckboxInEditor(uid, title, buttonData) {
       this.appendAuxiliaryRecordInEditor(uid, title, 'checkboxes', buttonData);
     }
 
@@ -320,14 +320,14 @@
      * @param {String} title the title of the target group, must not be empty
      * @param {Array} buttonData the data of the edit button of the target group
      */
-    appendTargetGroupInEditor (uid, title, buttonData) {
+    appendTargetGroupInEditor(uid, title, buttonData) {
       this.appendAuxiliaryRecordInEditor(uid, title, 'target_groups', buttonData);
     }
 
     /**
      * Clears the selection of the search widget.
      */
-    clearSearchWidgetFields () {
+    clearSearchWidgetFields() {
       var prefix = 'tx_seminars_pi1';
       var textElements = ['sword', 'search_age', 'price_from', 'price_to'];
       for (var i = 0; i < textElements.length; i++) {
@@ -356,7 +356,7 @@
     /**
      * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
      */
-    convertActionLinks () {
+    convertActionLinks() {
       $('.tx-seminars-pi1 a[data-method]').click(this.executeLinkAction);
     }
 
@@ -365,7 +365,7 @@
      *
      * @param {MouseEvent} event
      */
-    executeLinkAction (event) {
+    executeLinkAction(event) {
       var linkElement = event.target;
       var linkHref = linkElement.getAttribute('href');
 
@@ -398,7 +398,7 @@
     /**
      * Disables all action links (so that they cannot be clicked again once an action is being processed).
      */
-    disableAllActionLinks () {
+    disableAllActionLinks() {
       var linkElements = document.querySelectorAll('a[data-method]');
       for (var i = 0; i < linkElements.length; i++) {
         linkElements[i].onclick = () => {
@@ -410,7 +410,7 @@
     /**
      * Prevents registration form submit event to be called twice.
      */
-    preventMultipleFormSubmit () {
+    preventMultipleFormSubmit() {
       var submitForm = document.getElementById('tx_seminars_pi1_registration_editor');
       var submitButton = document.getElementById('tx_seminars_pi1_registration_editor__button_submit');
       submitForm.addEventListener('submit', (event) => {
@@ -423,7 +423,7 @@
     /**
      * Initializes the search widget.
      */
-    initializeSearchWidget () {
+    initializeSearchWidget() {
       if ($('.tx-seminars-pi1-selectorwidget').length === 0) {
         return;
       }
@@ -436,12 +436,12 @@
     /**
      * This method updates the UI if anything corresponding the number of seats has changed.
      */
-    updateAttendees () {
+    updateAttendees() {
       this.fixNameFieldsNumber();
       this.compileNames();
     }
 
-    initializeLegacyRegistrationForm () {
+    initializeLegacyRegistrationForm() {
       var registrationForm = $('#tx-seminars-pi1-registration-form');
       if (registrationForm.length === 0) {
         return;
@@ -457,7 +457,7 @@
       this.preventMultipleFormSubmit();
     }
 
-    findRegistrationFormElements () {
+    findRegistrationFormElements() {
       const selectors = {
         registrationForm: 'form[data-behavior="tx-seminars-registration-form"]',
         billingAddressCheckbox: 'input[data-behavior="tx-seminars-billing-address-toggle"]',
@@ -472,11 +472,11 @@
       }
     }
 
-    existsRegistrationForm () {
+    existsRegistrationForm() {
       return this.elements.registrationForm instanceof Element;
     }
 
-    initializeRegistrationForm () {
+    initializeRegistrationForm() {
       this.findRegistrationFormElements();
       if (!this.existsRegistrationForm()) {
         return;
@@ -489,7 +489,7 @@
       this.addSeatsListener();
     }
 
-    addBillingAddressCheckboxListener () {
+    addBillingAddressCheckboxListener() {
       if (!(this.elements.billingAddressCheckbox instanceof Element)) {
         return;
       }
@@ -497,7 +497,7 @@
       this.elements.billingAddressCheckbox.addEventListener('change', this.updateBillingAddressVisibility.bind(this));
     }
 
-    addSeatsListener () {
+    addSeatsListener() {
       if (this.elements.seats instanceof Element) {
         this.elements.seats.addEventListener('change', this.updateAttendeesNamesVisibility.bind(this));
       }
@@ -507,7 +507,7 @@
       }
     }
 
-    updateBillingAddressVisibility () {
+    updateBillingAddressVisibility() {
       if (!(this.elements.billingAddressCheckbox instanceof Element)
         || !(this.elements.billingAddressFields instanceof Element)
       ) {
@@ -522,7 +522,7 @@
       }
     }
 
-    updateAttendeesNamesVisibility () {
+    updateAttendeesNamesVisibility() {
       if (!(this.elements.attendeesNames instanceof Element)) {
         return;
       }
@@ -549,7 +549,7 @@
       }
     }
 
-    showElement (element) {
+    showElement(element) {
       if (!(element instanceof Element)) {
         return;
       }
@@ -562,7 +562,7 @@
       }
     }
 
-    hideElement (element) {
+    hideElement(element) {
       for (const classToAdd of Seminars.invisibilityClasses) {
         element.classList.add(classToAdd);
       }
