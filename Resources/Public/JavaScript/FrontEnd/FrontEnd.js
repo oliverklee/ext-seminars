@@ -494,16 +494,16 @@
         return;
       }
 
-      this.elements.billingAddressCheckbox.addEventListener('change', this.updateBillingAddressVisibility);
+      this.elements.billingAddressCheckbox.addEventListener('change', this.updateBillingAddressVisibility.bind(this));
     }
 
     addSeatsListener () {
       if (this.elements.seats instanceof Element) {
-        this.elements.seats.addEventListener('change', this.updateAttendeesNamesVisibility);
+        this.elements.seats.addEventListener('change', this.updateAttendeesNamesVisibility.bind(this));
       }
       if (this.elements.registeredThemselves instanceof Element) {
         this.elements.registeredThemselves
-          .addEventListener('change', this.updateAttendeesNamesVisibility);
+          .addEventListener('change', this.updateAttendeesNamesVisibility.bind(this));
       }
     }
 
@@ -554,19 +554,19 @@
         return;
       }
 
-      for (const classToAdd of this.visibilityClasses) {
+      for (const classToAdd of Seminars.visibilityClasses) {
         element.classList.add(classToAdd);
       }
-      for (const classToRemove of this.invisibilityClasses) {
+      for (const classToRemove of Seminars.invisibilityClasses) {
         element.classList.remove(classToRemove);
       }
     }
 
     hideElement (element) {
-      for (const classToAdd of this.invisibilityClasses) {
+      for (const classToAdd of Seminars.invisibilityClasses) {
         element.classList.add(classToAdd);
       }
-      for (const classToRemove of this.visibilityClasses) {
+      for (const classToRemove of Seminars.visibilityClasses) {
         element.classList.remove(classToRemove);
       }
     }
