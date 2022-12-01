@@ -401,6 +401,26 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function newActionWithoutRegistrationPassesUsesFirstApplicablePriceForNewRegistration(): void
+    {
+        $event = new SingleEvent();
+        $price1 = new Price(100.0, 'labelKey', Price::PRICE_EARLY_BIRD);
+        $price2 = new Price(75.0, 'labelKey', Price::PRICE_SPECIAL_EARLY_BIRD);
+        $applicablePrices = [Price::PRICE_EARLY_BIRD => $price1, Price::PRICE_SPECIAL_EARLY_BIRD => $price2];
+        $this->priceFinderMock->expects(self::once())->method('findApplicablePrices')->with($event)
+            ->willReturn($applicablePrices);
+
+        $registration = new Registration();
+        GeneralUtility::addInstance(Registration::class, $registration);
+
+        $this->subject->newAction($event);
+
+        self::assertSame($price1->getPriceCode(), $registration->getPriceCode());
+    }
+
+    /**
+     * @test
+     */
     public function newActionWithoutSettingForMaximumBookableSeatsAndUnlimitedVacanciesPassesTenToView(): void
     {
         $event = new SingleEvent();

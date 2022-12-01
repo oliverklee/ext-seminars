@@ -177,7 +177,7 @@
                         </tr>
                     </f:if>
 
-                    <f:if condition="{registration.priceCode}">
+                    <f:if condition="{selectedPrice}">
                         <tr>
                             <th scope="row">
                                 <f:translate key="{labelPrefix}.priceCode"/>
@@ -485,7 +485,7 @@
                         </td>
                     </tr>
 
-                    <f:if condition="{registration.priceCode}">
+                    <f:if condition="{selectedPrice}">
                         <tr>
                             <th scope="row">
                                 <f:translate key="{labelPrefix}.priceCode"/>
@@ -531,8 +531,10 @@
                 <f:form.hidden property="knownFrom"/>
                 <f:form.hidden property="comments"/>
                 <f:form.hidden property="priceCode"/>
-                <f:form.hidden property="humanReadablePrice"
-                               value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
+                <f:if condition="{selectedPrice}">
+                    <f:form.hidden property="humanReadablePrice"
+                                   value="{f:translate(key: selectedPrice.labelKey)} {f:render(partial: 'Price', arguments: {amount: registration.totalPrice})}"/>
+                </f:if>
                 <f:form.hidden property="paymentMethod"/>
                 <f:form.hidden property="separateBillingAddress"/>
                 <f:form.hidden property="billingCompany"/>
