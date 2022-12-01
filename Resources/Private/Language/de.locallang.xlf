@@ -2730,6 +2730,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>People register themselves by default</source>
 				<target>Leute melden sich standardmäßig selbst an</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
+				<source>Show an email field for additional attendees</source>
+				<target>Email-Feld für zusätzliche Personen anzeigen</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
 				<source>Form fields</source>
 				<target>Formularfelder</target>

@@ -2058,6 +2058,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
 				<source>People register themselves by default</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
+				<source>Show an email field for additional attendees</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.tab.formFields">
 				<source>Form fields</source>
 			</trans-unit>

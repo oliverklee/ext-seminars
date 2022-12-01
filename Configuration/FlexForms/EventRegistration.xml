@@ -169,6 +169,16 @@
                             </config>
                         </TCEforms>
                     </settings.registerThemselvesDefault>
+                    <settings.showEmailFieldForAdditionalAttendees>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees
+                            </label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showEmailFieldForAdditionalAttendees>
                 </el>
             </ROOT>
         </personsToRegister>
