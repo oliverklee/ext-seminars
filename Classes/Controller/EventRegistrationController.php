@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\PriceFinder;
@@ -153,11 +154,15 @@ class EventRegistrationController extends ActionController
 
         $this->view->assign('event', $event);
 
+        $applicablePrices = $this->priceFinder->findApplicablePrices($event);
         if ($registration instanceof Registration) {
             $newRegistration = $registration;
         } else {
             $newRegistration = GeneralUtility::makeInstance(Registration::class);
             $newRegistration->setRegisteredThemselves((bool)($this->settings['registerThemselvesDefault'] ?? true));
+            $firstPrice = \array_values($applicablePrices)[0] ?? null;
+            $firstPriceCode = $firstPrice instanceof Price ? $firstPrice->getPriceCode() : Price::PRICE_STANDARD;
+            $newRegistration->setPriceCode($firstPriceCode);
         }
         $this->view->assign('registration', $newRegistration);
 
@@ -167,7 +172,7 @@ class EventRegistrationController extends ActionController
             $maximumBookableSeats = \min($maximumBookableSeats, $vacancies);
         }
         $this->view->assign('maximumBookableSeats', $maximumBookableSeats);
-        $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
+        $this->view->assign('applicablePrices', $applicablePrices);
     }
 
     /**
