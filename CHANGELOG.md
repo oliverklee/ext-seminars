@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.3.0
+
+### Added
 - Add TypoScript settings for the Fluid templates (#1927)
 - Add a `OneTimeAccountConnector` (#1865, #1946)
 - Add a `RegistrationGuard` class (#1838, #1846, #1855, #1901, #1937, #2046)
