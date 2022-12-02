@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a rewritten BE module for TYPO3 >= 10LTS
+  (#2074)
 - Add an SVG icon for the BE module (#2071)
 
 ### Changed
