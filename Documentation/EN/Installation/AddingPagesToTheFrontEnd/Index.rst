@@ -73,9 +73,9 @@ you only need some of these pages):
    page as “hide in menu,” but the page must be accessible for all
    visitors, independent of their login status (logged in or not).
 
-#. **New registration form that got introduced in seminars 5.0:**
+#. **New registration form that got introduced in seminars 4.3:**
    Add a plug-in content element and set the type to "Registration form for
-   events".
+   events". Configure it to your needs using the settings in the FlexForms.
 
 #. **Legacy registration form that will be removed in seminar 5.0:**
    Add a “Seminar Manager” plug-in content element. Set the type to
