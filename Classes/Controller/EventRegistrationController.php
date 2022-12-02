@@ -206,6 +206,8 @@ class EventRegistrationController extends ActionController
         $this->registrationProcessor->enrichWithMetadata($registration, $event, $this->settings);
         $this->registrationProcessor->calculateTotalPrice($registration);
         $this->registrationProcessor->createTitle($registration);
+        $userStorageFolderUid = (int)($this->settings['additionalPersonsStorageFolder'] ?? 0);
+        $this->registrationProcessor->createAdditionalPersons($registration, $userStorageFolderUid);
         $this->registrationProcessor->persist($registration);
         $this->registrationProcessor->sendEmails($registration);
 

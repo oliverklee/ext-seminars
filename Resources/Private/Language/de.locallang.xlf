@@ -2718,6 +2718,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Folder in which to store the registrations</source>
 				<target>Ordner, in dem die Anmeldungen gespeichert werden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder">
+				<source>Create additional registered persons as FE user in this folder</source>
+				<target>Zusätzlich angemeldete Personen als FE-User in diesem Ordner anlegen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder.description">
+				<source>Activates that additional attendees will be saved as FE users.</source>
+				<target>Aktiviert, dass zusätzlich angemeldete Personen als FE-User gespeichert werden.</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
 				<source>Persons to register</source>
 				<target>Anzumeldende Personen</target>

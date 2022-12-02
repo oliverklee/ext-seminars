@@ -620,6 +620,18 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function addAdditionalPersonAddsAdditionalPerson(): void
+    {
+        $additionalPerson = new FrontendUser();
+
+        $this->subject->addAdditionalPerson($additionalPerson);
+
+        self::assertTrue($this->subject->getAdditionalPersons()->contains($additionalPerson));
+    }
+
+    /**
+     * @test
+     */
     public function getAccommodationOptionsInitiallyReturnsEmptyStorage(): void
     {
         $associatedModels = $this->subject->getAccommodationOptions();

@@ -235,6 +235,276 @@ final class RegistrationProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    public function createAdditionalPersonsWithFullyFilledUserDataAndZeroStorageAddsNoAttendees(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => 'Baba Doe', 'email' => 'baba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 0);
+
+        self::assertEmpty($registration->getAdditionalPersons());
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithInvalidJsonAddsNoAttendees(): void
+    {
+        $registration = new Registration();
+        $registration->setJsonEncodedAdditionAttendees('[} Du nicht nehmen Kerze!');
+
+        $this->subject->createAdditionalPersons($registration, 17);
+
+        self::assertEmpty($registration->getAdditionalPersons());
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithNonArraySingleDataUserAddsNoAttendees(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode(['Du nicht nehmen Kerze!']);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 17);
+
+        self::assertEmpty($registration->getAdditionalPersons());
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithNonArrayJsonAddsNoAttendees(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode('Du nicht nehmen Kerze!');
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 17);
+
+        self::assertEmpty($registration->getAdditionalPersons());
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithFullyFilledUserDataAndPositiveStorageAddsAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => 'Baba Doe', 'email' => 'baba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+        $this->subject->createAdditionalPersons($registration, 17);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithMultipleDataSetsAddsMultipleAttendees(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode(
+            [
+                ['name' => 'Baba Doe', 'email' => 'baba@example.com'],
+                ['name' => 'Boba Doe', 'email' => 'boba@example.com'],
+            ]
+        );
+        $registration->setJsonEncodedAdditionAttendees($json);
+        $this->subject->createAdditionalPersons($registration, 17);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(2, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithFullyFilledUserDataAndPositiveStorageAddsAttendeeWithGivenPid(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => 'Baba Doe', 'email' => 'baba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+        $storagePid = 17;
+
+        $this->subject->createAdditionalPersons($registration, $storagePid);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertSame($storagePid, $attendee->getPid());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithFullyFilledUserDataAndPositiveStorageAddsAttendeeWithName(): void
+    {
+        $registration = new Registration();
+        $name = 'Baba Doe';
+        $json = \json_encode([['name' => $name, 'email' => 'baba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertSame($name, $attendee->getName());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithNameAndEmptyEmailAddsAttendeeWithName(): void
+    {
+        $registration = new Registration();
+        $name = 'Baba Doe';
+        $json = \json_encode([['name' => $name, 'email' => '']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertSame($name, $attendee->getName());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithNameAndMissingEmailAddsAttendeeWithName(): void
+    {
+        $registration = new Registration();
+        $name = 'Baba Doe';
+        $json = \json_encode([['name' => $name, 'email' => '']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertSame($name, $attendee->getName());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithEmptyNameAndNonEmptyEmailNotAddsAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => '', 'email' => 'boba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithoutNameAndWithNonEmptyEmailNotAddsAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['email' => 'boba@example.com']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithEmptyUserDataNotAddsAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([[]]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithoutUserDataNotAddsAttendee(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithFullyFilledUserDataAddsAttendeeWithEmail(): void
+    {
+        $registration = new Registration();
+        $email = 'baba@example.com';
+        $json = \json_encode([['name' => 'Baba Doe', 'email' => $email]]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertSame($email, $attendee->getEmail());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function createAdditionalPersonsWithCreatesRandomUserName(): void
+    {
+        $registration = new Registration();
+        $json = \json_encode([['name' => 'Baba Doe']]);
+        $registration->setJsonEncodedAdditionAttendees($json);
+
+        $this->subject->createAdditionalPersons($registration, 1);
+
+        $result = $registration->getAdditionalPersons();
+        self::assertCount(1, $result);
+        foreach ($result as $attendee) {
+            self::assertInstanceOf(FrontendUser::class, $attendee);
+            self::assertRegExp('/^additional-attendee-[\\da-f]{32}$/', $attendee->getUsername());
+        }
+    }
+
+    /**
+     * @test
+     */
     public function persistForRegistationWithoutEventThrowsException(): void
     {
         $this->expectException(\RuntimeException::class);

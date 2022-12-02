@@ -128,6 +128,25 @@
                             </config>
                         </TCEforms>
                     </settings.registrationRecordsStorageFolder>
+                    <settings.additionalPersonsStorageFolder>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.additionalPersonsStorageFolder
+                            </label>
+                            <description>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration.settings.additionalPersonsStorageFolder.description
+                            </description>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <minitems>0</minitems>
+                                <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
+                            </config>
+                        </TCEforms>
+                    </settings.additionalPersonsStorageFolder>
                 </el>
             </ROOT>
         </pagesAndFolders>
