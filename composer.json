@@ -92,7 +92,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-main": "4.2.x-dev"
+			"dev-main": "4.3.x-dev"
 		},
 		"helhum/typo3-console": {
 			"install-extension-dummy": "0"
