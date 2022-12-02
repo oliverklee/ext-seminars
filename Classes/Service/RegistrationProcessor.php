@@ -25,8 +25,9 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * 1. `enrichWithMetadata`
  * 2. `calculateTotalPrice`
  * 3. `createTitle`
- * 4. `persist`
- * 5. `sendEmails`
+ * 4. `createAdditionalPersons` (optional)
+ * 5. `persist`
+ * 6. `sendEmails`
  */
 class RegistrationProcessor implements SingletonInterface
 {
@@ -151,6 +152,54 @@ class RegistrationProcessor implements SingletonInterface
         );
 
         $registration->setTitle($title);
+    }
+
+    /**
+     * Creates and attaches additional attendees as FE users.
+     *
+     * The data for the attendees comes from `Registration::jsonEncodedAdditionAttendees`, and the users will be stored
+     * in the given storage folder.
+     *
+     * If no storage folder UID is given, no users will be created.
+     *
+     * @param 0|positive-int $storageFolderUid
+     */
+    public function createAdditionalPersons(Registration $registration, int $storageFolderUid): void
+    {
+        if ($storageFolderUid <= 0) {
+            return;
+        }
+
+        $allUserData = \json_decode($registration->getJsonEncodedAdditionAttendees(), true);
+        if (!\is_array($allUserData)) {
+            return;
+        }
+        foreach ($allUserData as $singleUserData) {
+            if (!\is_array($singleUserData)) {
+                continue;
+            }
+
+            $person = GeneralUtility::makeInstance(FrontendUser::class);
+            $name = (string)($singleUserData['name'] ?? '');
+            if ($name === '') {
+                continue;
+            }
+
+            $person->setPid($storageFolderUid);
+            $person->setName($name);
+            $email = (string)($singleUserData['email'] ?? '');
+            $person->setEmail($email);
+            $person->setUsername($this->generateRandomUserName());
+            $registration->addAdditionalPerson($person);
+        }
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    private function generateRandomUserName(): string
+    {
+        return 'additional-attendee-' . \bin2hex(\random_bytes(16));
     }
 
     /**

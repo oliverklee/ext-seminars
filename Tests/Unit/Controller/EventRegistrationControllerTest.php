@@ -754,7 +754,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
      */
     public function createActionCalculatesTotalPrice(): void
     {
-        $this->subject->_set('settings', []);
         $registration = new Registration();
         $this->registrationProcesserMock->expects(self::once())->method('calculateTotalPrice')
             ->with($registration);
@@ -770,6 +769,34 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $registration = new Registration();
 
         $this->registrationProcesserMock->expects(self::once())->method('createTitle')->with($registration);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionWithoutUserStorageSettingCreatesAdditionalPersonsWithZeroStorageFolderUid(): void
+    {
+        $registration = new Registration();
+
+        $this->registrationProcesserMock->expects(self::once())->method('createAdditionalPersons')
+            ->with($registration, 0);
+
+        $this->subject->createAction(new SingleEvent(), $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionCreatesAdditionalPersonsWithUserStorageFolderUidFromSettings(): void
+    {
+        $folderUid = 15;
+        $this->subject->_set('settings', ['additionalPersonsStorageFolder' => (string)$folderUid]);
+        $registration = new Registration();
+
+        $this->registrationProcesserMock->expects(self::once())->method('createAdditionalPersons')
+            ->with($registration, $folderUid);
 
         $this->subject->createAction(new SingleEvent(), $registration);
     }

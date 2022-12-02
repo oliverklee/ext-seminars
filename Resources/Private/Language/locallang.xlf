@@ -2049,6 +2049,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
 				<source>Folder in which to store the registrations</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder">
+				<source>Create additional registered persons as FE user in this folder</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder.description">
+				<source>Activates that additional attendees will be saved as FE users.</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
 				<source>Persons to register</source>
 			</trans-unit>

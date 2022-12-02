@@ -119,10 +119,15 @@ trait AttendeesTrait
     }
 
     /**
-     * @param ObjectStorage<FrontendUser> $additionalPersons
+     * @param ObjectStorage<FrontendUser> $persons
      */
-    public function setAdditionalPersons(ObjectStorage $additionalPersons): void
+    public function setAdditionalPersons(ObjectStorage $persons): void
     {
-        $this->additionalPersons = $additionalPersons;
+        $this->additionalPersons = $persons;
+    }
+
+    public function addAdditionalPerson(FrontendUser $person): void
+    {
+        $this->additionalPersons->attach($person);
     }
 }
