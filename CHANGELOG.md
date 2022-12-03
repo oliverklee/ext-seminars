@@ -6,9 +6,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add an SVG icon for the BE module (#2071)
 
 ### Changed
-- Use a different hue of orange in the extension icon (#2070)
+- Use a different hue of orange in the extension icon (#2070, #2071)
 
 ### Deprecated
 
