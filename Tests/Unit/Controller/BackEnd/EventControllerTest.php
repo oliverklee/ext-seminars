@@ -47,6 +47,12 @@ final class EventControllerTest extends UnitTestCase
         $this->subject->injectPermissions($this->permissionsMock);
     }
 
+    protected function tearDown(): void
+    {
+        unset($GLOBALS['_GET']['id'], $GLOBALS['_POST']['id']);
+        parent::tearDown();
+    }
+
     /**
      * @test
      */
@@ -58,9 +64,60 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function pageUidIsTakenFromGetId(): void
+    {
+        $pageUid = 15;
+        $GLOBALS['_GET']['id'] = (string)$pageUid;
+
+        self::assertSame($pageUid, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
+    public function pageUidIsTakenFromPostId(): void
+    {
+        $pageUid = 15;
+        $GLOBALS['_POST']['id'] = (string)$pageUid;
+
+        self::assertSame($pageUid, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
+    public function pageUidForNoIdInRequestIsZero(): void
+    {
+        self::assertSame(0, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
     public function indexActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::once())->method('assign')->with('permissions', $this->permissionsMock);
+        $this->viewMock->expects(self::exactly(2))->method('assign')
+            ->withConsecutive(
+                ['permissions', $this->permissionsMock],
+                ['pageUid', self::anything()]
+            );
+
+        $this->subject->indexAction();
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionPassesPageUidToView(): void
+    {
+        $pageUid = 8;
+        $GLOBALS['_GET']['id'] = (string)$pageUid;
+
+        $this->viewMock->expects(self::exactly(2))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', $pageUid]
+            );
 
         $this->subject->indexAction();
     }
