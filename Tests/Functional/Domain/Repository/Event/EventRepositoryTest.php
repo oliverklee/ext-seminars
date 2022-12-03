@@ -754,4 +754,110 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertSame(0, (int)$databaseRow['registrations']);
     }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeForNoEventsReturnsEmptyArray(): void
+    {
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(0);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeFindsSingleEventOnGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeFindsEventDateOnGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeIgnoresEventTopicOnOtherPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeIgnoresSingleEventOnOtherPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(2);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeIgnoresDeletedEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeCanFindHiddenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBookableEventsByPageUidInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.xml');
+
+        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
 }
