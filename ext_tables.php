@@ -2,6 +2,31 @@
 defined('TYPO3_MODE') or die('Access denied.');
 
 $boot = static function (): void {
+    /**
+     * BE module
+     */
+    $typo3Version = new \TYPO3\CMS\Core\Information\Typo3Version();
+    if ($typo3Version->getMajorVersion() >= 10) {
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+            'Seminars',
+            'web',
+            'events',
+            '',
+            [
+                \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index',
+            ],
+            [
+                'access' => 'user,group',
+                'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
+                'labels' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
+            ]
+        );
+    }
+
+    /**
+     * Legacy BE module
+     */
+
     // The legacy BE module will be removed before our 11LTS-compatible release.
     if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 11) {
         return;
