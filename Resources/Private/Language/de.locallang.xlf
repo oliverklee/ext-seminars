@@ -3102,6 +3102,22 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Please select a folder in the page tree.</source>
 				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.noEventsInFolder">
+				<source>There are no event records in the selected folder.</source>
+				<target>In ausgewählten Ordner liegen keine Veranstaltungsdatensätze.</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.uid">
+				<source>UID</source>
+				<target>UID</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.internalTitle">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.date">
+				<source>Date</source>
+				<target>Datum</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

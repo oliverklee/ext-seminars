@@ -1,0 +1,32 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="text-end text-right nowrap">
+                    <f:translate key="backEndModule.events.property.uid"/>
+                </th>
+                <th scope="col" class="col-title col-responsive">
+                    <f:translate key="backEndModule.events.property.internalTitle"/>
+                </th>
+                <th scope="col" class="nowrap">
+                    <f:translate key="backEndModule.events.property.date"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{events}" as="event">
+                <tr>
+                    <td class="text-end text-right nowrap">
+                        {event.uid}
+                    </td>
+                    <td class="col-title col-responsive">
+                        {event.internalTitle}
+                    </td>
+                    <td class="nowrap">
+                        <f:render partial="EventDate" arguments="{event: event}"/>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</html>

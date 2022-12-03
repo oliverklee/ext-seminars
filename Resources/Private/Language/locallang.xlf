@@ -2334,6 +2334,18 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.noEventsInFolder">
+				<source>There are no event records in the selected folder.</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.uid">
+				<source>UID</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.internalTitle">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.date">
+				<source>Date</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
