@@ -33,6 +33,10 @@ Switching to the rewritten registration form
 Starting with seminars 4.3, using the new registration form is recommended.
 (The legacy registration form will be removed in seminars 5.0.)
 
+#.  If you are using the "onetimeaccount" extension on the login page, switch
+    the plugin type to "One-time FE account creator without autologin".
+    (This step is optional, but recommended.)
+
 #.  On the registration page, switch the seminars plugin to a general plugin
     and set the type to "Registration form for events". Configure it to your
     needs using the settings in the FlexForms.
