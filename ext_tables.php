@@ -14,7 +14,7 @@ $boot = static function (): void {
         'labels' => [
             'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
         ],
-        'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
+        'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
     ];
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'seminars', '', '', $moduleConfiguration);
