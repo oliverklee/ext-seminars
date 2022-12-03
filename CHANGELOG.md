@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Use a different hue of orange in the extension icon (#2070)
 
 ### Deprecated
 
