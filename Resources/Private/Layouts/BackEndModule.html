@@ -3,7 +3,26 @@
     xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <be:moduleLayout>
-        <f:flashMessages />
+        <f:flashMessages/>
         <f:render section="Content"/>
+
+        <h2>Debug information</h2>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row">Read access to events</th>
+                    <td>{permissions.readAccessToEvents}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Read access to registrations</th>
+                    <td>{permissions.readAccessToRegistrations}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Current page UID</th>
+                    <td>{pageUid}</td>
+                </tr>
+            </tbody>
+        </table>
     </be:moduleLayout>
 </html>
