@@ -3094,6 +3094,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Early-bird special price</source>
 				<target>Frühbucher-Spezialpreis</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.events">
+				<source>Events</source>
+				<target>Veranstaltungen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.message.selectFolder">
+				<source>Please select a folder in the page tree.</source>
+				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
