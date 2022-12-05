@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html
-    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
-    data-namespace-typo3-fluid="true">
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:layout name="BackEndModule"/>
 
     <f:section name="Content">
@@ -13,7 +11,15 @@
 
             <f:if condition="{pageUid} > 0">
                 <f:then>
-                    <p>I will be an events list when I grow up.</p>
+                    <f:if condition="{events}">
+                        <f:then>
+                            <f:render partial="BackEnd/EventList" arguments="{events: events}"/>
+                        </f:then>
+                        <f:else>
+                            <f:render partial="BackEnd/FlashMessage"
+                                      arguments="{severity: 'info', messageBodyKey: 'noEventsInFolder'}"/>
+                        </f:else>
+                    </f:if>
                 </f:then>
                 <f:else>
                     <f:render partial="BackEnd/FlashMessage"

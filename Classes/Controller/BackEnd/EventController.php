@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\Permissions;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -18,9 +19,19 @@ class EventController extends ActionController
      */
     private $permissions;
 
+    /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+
     public function injectPermissions(Permissions $permissions): void
     {
         $this->permissions = $permissions;
+    }
+
+    public function injectEventRepository(EventRepository $repository): void
+    {
+        $this->eventRepository = $repository;
     }
 
     /**
@@ -35,7 +46,10 @@ class EventController extends ActionController
 
     public function indexAction(): void
     {
+        $pageUid = $this->getPageUid();
+
         $this->view->assign('permissions', $this->permissions);
-        $this->view->assign('pageUid', $this->getPageUid());
+        $this->view->assign('pageUid', $pageUid);
+        $this->view->assign('events', $this->eventRepository->findBookableEventsByPageUidInBackEndMode($pageUid));
     }
 }

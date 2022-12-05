@@ -8,6 +8,8 @@ use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -32,6 +34,11 @@ final class EventControllerTest extends UnitTestCase
      */
     private $permissionsMock;
 
+    /**
+     * @var EventRepository&MockObject
+     */
+    private $eventRepositoryMock;
+
     protected function setUp(): void
     {
         /** @var EventController&AccessibleMockObjectInterface&MockObject $subject */
@@ -45,6 +52,8 @@ final class EventControllerTest extends UnitTestCase
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->subject->injectEventRepository($this->eventRepositoryMock);
     }
 
     protected function tearDown(): void
@@ -96,10 +105,11 @@ final class EventControllerTest extends UnitTestCase
      */
     public function indexActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::exactly(2))->method('assign')
+        $this->viewMock->expects(self::exactly(3))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
-                ['pageUid', self::anything()]
+                ['pageUid', self::anything()],
+                ['events', self::anything()]
             );
 
         $this->subject->indexAction();
@@ -113,10 +123,32 @@ final class EventControllerTest extends UnitTestCase
         $pageUid = 8;
         $GLOBALS['_GET']['id'] = (string)$pageUid;
 
-        $this->viewMock->expects(self::exactly(2))->method('assign')
+        $this->viewMock->expects(self::exactly(3))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
-                ['pageUid', $pageUid]
+                ['pageUid', $pageUid],
+                ['events', self::anything()]
+            );
+
+        $this->subject->indexAction();
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionPassesEventsOnPageUidToView(): void
+    {
+        $pageUid = 8;
+        $GLOBALS['_GET']['id'] = (string)$pageUid;
+
+        $events = [new SingleEvent()];
+        $this->eventRepositoryMock->expects(self::once())->method('findBookableEventsByPageUidInBackEndMode')
+            ->with($pageUid)->willReturn($events);
+        $this->viewMock->expects(self::exactly(3))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['events', $events]
             );
 
         $this->subject->indexAction();
