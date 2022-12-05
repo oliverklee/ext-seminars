@@ -1,11 +1,11 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     {f:variable(name: 'labelPrefix', value: 'plugin.frontEndEditor')}
-    {f:variable(name: 'propertylabelPrefix', value: '{labelPrefix}.property')}
+    {f:variable(name: 'propertyLabelPrefix', value: '{labelPrefix}.property')}
     {f:variable(name: 'idPrefix', value: 'event-editor')}
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label for="{idPrefix}-internalTitle" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.internalTitle"/>
+                <f:translate key="{propertyLabelPrefix}.internalTitle"/>
             </label>
             <div class="col-sm-10">
                 <f:form.textfield property="internalTitle" id="{idPrefix}-internalTitle" maxlength="255"
@@ -16,7 +16,7 @@
 
         <div class="row mb-3">
             <label for="{idPrefix}-description" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.description"/>
+                <f:translate key="{propertyLabelPrefix}.description"/>
             </label>
             <div class="col-sm-10">
                 <f:form.textarea property="description" id="{idPrefix}-description"
@@ -28,7 +28,7 @@
 
         <div class="row mb-3">
             <label for="{idPrefix}-eventType" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.eventType"/>
+                <f:translate key="{propertyLabelPrefix}.eventType"/>
             </label>
             <div class="col-sm-10">
                 <f:comment>
@@ -47,7 +47,7 @@
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label for="{idPrefix}-start" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.start"/>
+                <f:translate key="{propertyLabelPrefix}.start"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield name="event[start][date]" id="{idPrefix}-start" maxlength="16"
@@ -58,7 +58,7 @@
             </div>
 
             <label for="{idPrefix}-end" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.end"/>
+                <f:translate key="{propertyLabelPrefix}.end"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield name="event[end][date]" id="{idPrefix}-end" maxlength="16"
@@ -70,7 +70,7 @@
         </div>
         <div class="row mb-3">
             <label for="{idPrefix}-earlyBirdDeadline" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.earlyBirdDeadline"/>
+                <f:translate key="{propertyLabelPrefix}.earlyBirdDeadline"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield name="event[earlyBirdDeadline][date]" id="{idPrefix}-earlyBirdDeadline" maxlength="16"
@@ -81,7 +81,7 @@
             </div>
 
             <label for="{idPrefix}-registrationDeadline" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.registrationDeadline"/>
+                <f:translate key="{propertyLabelPrefix}.registrationDeadline"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield name="event[registrationDeadline][date]" id="{idPrefix}-registrationDeadline"
@@ -102,7 +102,7 @@
                                      class="form-check-input" errorClass="is-invalid"
                                      value="1" checked="{event.registrationRequired}"/>
                     <label for="{idPrefix}-registrationRequired" class="form-check-label">
-                        <f:translate key="{propertylabelPrefix}.registrationRequired"/>
+                        <f:translate key="{propertyLabelPrefix}.registrationRequired"/>
                     </label>
                     <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'registrationRequired'}"/>
                 </div>
@@ -114,7 +114,7 @@
                                      class="form-check-input" errorClass="is-invalid"
                                      value="1" checked="{event.waitingList}"/>
                     <label for="{idPrefix}-waitingList" class="form-check-label">
-                        <f:translate key="{propertylabelPrefix}.waitingList"/>
+                        <f:translate key="{propertyLabelPrefix}.waitingList"/>
                     </label>
                     <f:render partial="FrontEndEditor/ValidationResult" arguments="{property: 'waitingList'}"/>
                 </div>
@@ -125,7 +125,7 @@
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label for="{idPrefix}-minimumNumberOfRegistrations" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.minimumNumberOfRegistrations"/>
+                <f:translate key="{propertyLabelPrefix}.minimumNumberOfRegistrations"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="minimumNumberOfRegistrations" id="{idPrefix}-minimumNumberOfRegistrations"
@@ -137,7 +137,7 @@
             </div>
 
             <label for="{idPrefix}-maximumNumberOfRegistrations" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.maximumNumberOfRegistrations"/>
+                <f:translate key="{propertyLabelPrefix}.maximumNumberOfRegistrations"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="maximumNumberOfRegistrations" id="{idPrefix}-maximumNumberOfRegistrations"
@@ -153,7 +153,7 @@
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label for="{idPrefix}-standardPrice" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.standardPrice"/>
+                <f:translate key="{propertyLabelPrefix}.standardPrice"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="standardPrice" id="{idPrefix}-standardPrice" maxlength="8"
@@ -164,7 +164,7 @@
             </div>
 
             <label for="{idPrefix}-earlyBirdPrice" class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.earlyBirdPrice"/>
+                <f:translate key="{propertyLabelPrefix}.earlyBirdPrice"/>
             </label>
             <div class="col-sm-4">
                 <f:form.textfield property="earlyBirdPrice" id="{idPrefix}-earlyBirdPrice" maxlength="8"
@@ -179,7 +179,7 @@
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.venues"/>
+                <f:translate key="{propertyLabelPrefix}.venues"/>
             </label>
             <div class="col-sm-10">
                 <f:for each="{venues}" as="venue">
@@ -200,7 +200,7 @@
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.speakers"/>
+                <f:translate key="{propertyLabelPrefix}.speakers"/>
             </label>
             <div class="col-sm-4">
                 <f:for each="{speakers}" as="speaker">
@@ -217,7 +217,7 @@
             </div>
 
             <label class="col-sm-2 col-form-label">
-                <f:translate key="{propertylabelPrefix}.organizers"/>
+                <f:translate key="{propertyLabelPrefix}.organizers"/>
             </label>
             <div class="col-sm-4">
                 <f:for each="{organizers}" as="organizer">

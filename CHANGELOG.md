@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the camelCase of a Fluid variable in the FE editor templates (#2091)
 
 ## 4.3.0
 
