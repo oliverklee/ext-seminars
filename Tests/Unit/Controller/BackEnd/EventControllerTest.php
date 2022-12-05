@@ -136,6 +136,20 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function indexActionEnrichesEventsWithRawData(): void
+    {
+        $events = [new SingleEvent()];
+        $this->eventRepositoryMock->expects(self::once())->method('findBookableEventsByPageUidInBackEndMode')
+            ->with(self::anything())->willReturn($events);
+        $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
+            ->with($events);
+
+        $this->subject->indexAction();
+    }
+
+    /**
+     * @test
+     */
     public function indexActionPassesEventsOnPageUidToView(): void
     {
         $pageUid = 8;

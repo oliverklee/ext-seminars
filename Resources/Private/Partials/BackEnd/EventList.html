@@ -1,9 +1,15 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:variable name="tableName" value="tx_seminars_seminars"/>
+
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th scope="col" class="text-end text-right nowrap">
                     <f:translate key="backEndModule.events.property.uid"/>
+                </th>
+                <th scope="col" class="col-icon nowrap">
                 </th>
                 <th scope="col" class="col-title col-responsive">
                     <f:translate key="backEndModule.events.property.internalTitle"/>
@@ -18,6 +24,9 @@
                 <tr>
                     <td class="text-end text-right nowrap">
                         {event.uid}
+                    </td>
+                    <td class="col-icon nowrap">
+                        <core:iconForRecord table="{tableName}" row="{event.rawData}"/>
                     </td>
                     <td class="col-title col-responsive">
                         {event.internalTitle}
