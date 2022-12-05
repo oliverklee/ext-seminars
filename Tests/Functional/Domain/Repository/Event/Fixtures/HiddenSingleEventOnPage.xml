@@ -3,6 +3,7 @@
     <tx_seminars_seminars>
         <uid>1</uid>
         <pid>1</pid>
+        <title>Hidden single event on page</title>
         <object_type>0</object_type>
         <hidden>1</hidden>
     </tx_seminars_seminars>

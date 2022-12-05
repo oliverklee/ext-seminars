@@ -939,4 +939,24 @@ final class EventDateTest extends UnitTestCase
 
         self::assertFalse($this->subject->allowsUnlimitedRegistrations());
     }
+
+    /**
+     * @test
+     */
+    public function getRawDataInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getRawData());
+    }
+
+    /**
+     * @test
+     */
+    public function setRawDataSetsRawData(): void
+    {
+        $rawData = ['uid' => 5, 'title' => 'foo'];
+
+        $this->subject->setRawData($rawData);
+
+        self::assertSame($rawData, $this->subject->getRawData());
+    }
 }

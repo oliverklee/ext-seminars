@@ -860,4 +860,54 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(SingleEvent::class, $firstMatch);
         self::assertSame(2, $firstMatch->getUid());
     }
+
+    /**
+     * @test
+     */
+    public function enrichWithRawDataCanBeCalledWithEmptyArray(): void
+    {
+        $events = [];
+
+        $this->subject->enrichWithRawData($events);
+
+        self::assertSame([], $events);
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithRawDataAddsRawDataToEvents(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $event = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $event);
+        $events = [$event];
+
+        $this->subject->enrichWithRawData($events);
+
+        $rawData = $event->getRawData();
+        self::assertIsArray($rawData);
+        self::assertSame(1, $rawData['uid']);
+        self::assertSame('Jousting', $rawData['title']);
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithRawDataCanEnrichHiddenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+        $events = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $event = $this->subject->findByUid(1);
+        self::assertCount(1, $events);
+        $event = $events[0];
+        self::assertInstanceOf(SingleEvent::class, $event);
+
+        $this->subject->enrichWithRawData($events);
+
+        $rawData = $event->getRawData();
+        self::assertIsArray($rawData);
+        self::assertSame(1, $rawData['uid']);
+        self::assertSame('Hidden single event on page', $rawData['title']);
+    }
 }
