@@ -6,7 +6,9 @@
     <f:layout name="BackEndModule"/>
 
     <f:section name="Content">
-        <h1>Events list</h1>
-        <p>I will be an events list when I grow up.</p>
+        <f:if condition="{permissions.readAccessToEvents}">
+            <h1>Events list</h1>
+            <p>I will be an events list when I grow up.</p>
+        </f:if>
     </f:section>
 </html>
