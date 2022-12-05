@@ -2349,6 +2349,14 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.hide">
+				<source>Hide record</source>
+				<target>Datensatz verbergen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.unhide">
+				<source>Un-hide record</source>
+				<target>Datensatz sichtbar machen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
