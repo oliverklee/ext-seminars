@@ -7,8 +7,19 @@
 
     <f:section name="Content">
         <f:if condition="{permissions.readAccessToEvents}">
-            <h1>Events list</h1>
-            <p>I will be an events list when I grow up.</p>
+            <h1>
+                <f:translate key="backEndModule.heading.events"/>
+            </h1>
+
+            <f:if condition="{pageUid} > 0">
+                <f:then>
+                    <p>I will be an events list when I grow up.</p>
+                </f:then>
+                <f:else>
+                    <f:render partial="BackEnd/FlashMessage"
+                              arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
+                </f:else>
+            </f:if>
         </f:if>
     </f:section>
 </html>

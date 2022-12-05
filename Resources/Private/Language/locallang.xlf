@@ -2328,6 +2328,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="price.specialEarlyBird">
 				<source>Early-bird special price</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.events">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.message.selectFolder">
+				<source>Please select a folder in the page tree.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
