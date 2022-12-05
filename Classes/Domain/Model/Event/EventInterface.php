@@ -92,4 +92,13 @@ interface EventInterface
      * @throws \UnexpectedValueException if there is no price with that code
      */
     public function getPriceByPriceCode(string $priceCode): Price;
+
+    /**
+     * Returns the raw data as it is stored in the database.
+     *
+     * @return array<string, string|int|float|null>|null
+     *
+     * @internal
+     */
+    public function getRawData(): ?array;
 }

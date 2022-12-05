@@ -14,4 +14,34 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 abstract class Event extends AbstractEntity implements EventInterface
 {
+    /**
+     * @var array<string, string|int|float|null>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @internal
+     */
+    protected $rawData;
+
+    /**
+     * Returns the raw data as it is stored in the database.
+     *
+     * @return array<string, string|int|float|null>|null
+     *
+     * @internal
+     */
+    public function getRawData(): ?array
+    {
+        return $this->rawData;
+    }
+
+    /**
+     * Sets the raw data as it is stored in the database.
+     *
+     * @param array<string, string|int|float|null> $rawData
+     *
+     * @internal
+     */
+    public function setRawData(array $rawData): void
+    {
+        $this->rawData = $rawData;
+    }
 }

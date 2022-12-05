@@ -24,6 +24,8 @@ class EventRepository extends Repository implements DirectPersist
 {
     use DirectPersistTrait;
 
+    private const TABLE_NAME = 'tx_seminars_seminars';
+
     /**
      * @return array<int, Event>
      */
@@ -130,5 +132,56 @@ class EventRepository extends Repository implements DirectPersist
         $events = $query->execute()->toArray();
 
         return $events;
+    }
+
+    /**
+     * Sets the raw data for the provided events.
+     *
+     * This is useful e.g., for creating icons in the backend.
+     *
+     * @param array<string|int, Event> $events
+     *
+     * @internal
+     */
+    public function enrichWithRawData(array $events): void
+    {
+        if ($events === []) {
+            return;
+        }
+
+        /** @var array<positive-int, Event> $eventsByUid */
+        $eventsByUid = [];
+        foreach ($events as $event) {
+            $eventsByUid[$event->getUid()] = $event;
+        }
+
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
+        $queryBuilder->getRestrictions()->removeAll();
+        $query = $queryBuilder->select('*')
+            ->from(self::TABLE_NAME)
+            ->where(
+                $queryBuilder->expr()->in(
+                    'uid',
+                    $queryBuilder->createNamedParameter(\array_keys($eventsByUid), Connection::PARAM_INT_ARRAY)
+                )
+            );
+        if (\method_exists($query, 'executeQuery')) {
+            $queryResult = $query->executeQuery();
+        } else {
+            $queryResult = $query->execute();
+        }
+        if (\method_exists($queryResult, 'fetchAllAssociative')) {
+            $rows = $queryResult->fetchAllAssociative();
+        } else {
+            $rows = $queryResult->fetchAll();
+        }
+
+        foreach ($rows as $row) {
+            $uid = (int)$row['uid'];
+            $event = $eventsByUid[$uid] ?? null;
+            if ($event instanceof Event) {
+                $event->setRawData($row);
+            }
+        }
     }
 }
