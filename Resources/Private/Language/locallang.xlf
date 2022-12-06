@@ -2346,6 +2346,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.events.property.date">
 				<source>Date</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.edit">
+				<source>Edit record</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

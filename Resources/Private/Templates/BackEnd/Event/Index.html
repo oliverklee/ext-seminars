@@ -13,7 +13,7 @@
                 <f:then>
                     <f:if condition="{events}">
                         <f:then>
-                            <f:render partial="BackEnd/EventList" arguments="{events: events}"/>
+                            <f:render partial="BackEnd/EventList" arguments="{_all}"/>
                         </f:then>
                         <f:else>
                             <f:render partial="BackEnd/FlashMessage"
