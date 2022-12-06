@@ -94,4 +94,6 @@ interface EventDateInterface
     public function getAllPrices(): array;
 
     public function allowsUnlimitedRegistrations(): bool;
+
+    public function setStatistics(EventStatistics $statistics): void;
 }

@@ -39,26 +39,53 @@ class RegistrationRepository extends Repository implements DirectPersist
     }
 
     /**
-     * Sums up the non-waiting-list seats of all registrations for the given event UID.
+     * Sums up the regular (i.e., non-waiting-list) seats of all registrations for the given event UID.
      *
      * Registrations with 0 seats will be ignored.
      *
      * @param positive-int $eventUid
+     *
      * @return positive-int|0
      */
-    public function countSeatsByEvent(int $eventUid): int
+    public function countRegularSeatsByEvent(int $eventUid): int
+    {
+        return $this->countSeatsByEvent($eventUid, false);
+    }
+
+    /**
+     * Sums up the waiting-list seats of all registrations for the given event UID.
+     *
+     * Registrations with 0 seats will be ignored.
+     *
+     * @param positive-int $eventUid
+     *
+     * @return positive-int|0
+     */
+    public function countWaitingListSeatsByEvent(int $eventUid): int
+    {
+        return $this->countSeatsByEvent($eventUid, true);
+    }
+
+    /**
+     * Sums up the seats of all registrations for the given event UID.
+     *
+     * Registrations with 0 seats will be ignored.
+     *
+     * @param positive-int $eventUid
+     * @param bool $onWaitingList whether to count waiting list or regular registrations
+     *
+     * @return positive-int|0
+     */
+    private function countSeatsByEvent(int $eventUid, bool $onWaitingList): int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
         $query = $queryBuilder->addSelectLiteral($queryBuilder->expr()->sum('seats'))
             ->from(self::TABLE_NAME)
             ->where(
-                $queryBuilder->expr()->eq(
-                    'seminar',
-                    $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT)
-                ),
+                $queryBuilder->expr()->eq('seminar', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT)),
                 $queryBuilder->expr()->eq(
                     'registration_queue',
-                    $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter((int)$onWaitingList, \PDO::PARAM_INT)
                 )
             );
         if (\method_exists($query, 'executeQuery')) {
