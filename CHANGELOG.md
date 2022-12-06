@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 - Add more `Event` properties and repository methods (#2089)
 - Add a rewritten BE module for TYPO3 >= 10LTS
-  (#2074, #2075, #2076, #2077, #2078, #2084, #2085, #2088)
+  (#2074, #2075, #2076, #2077, #2078, #2084, #2085, #2088, #2094)
 - Add an SVG icon for the BE module (#2071)
 
 ### Changed

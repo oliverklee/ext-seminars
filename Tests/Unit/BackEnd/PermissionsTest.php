@@ -64,6 +64,8 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -80,6 +82,8 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, true],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -96,6 +100,8 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
@@ -112,10 +118,84 @@ final class PermissionsTest extends UnitTestCase
             [
                 ['tables_select', self::EVENTS_TABLE_NAME, false],
                 ['tables_select', self::REGISTRATIONS_TABLE_NAME, true],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
             ]
         );
         $subject = new Permissions();
 
         self::assertTrue($subject->hasReadAccessToRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToEventsForNoAccessReturnsFalse(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertFalse($subject->hasWriteAccessToEvents());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToEventsForAccessReturnsTrue(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, true],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertTrue($subject->hasWriteAccessToEvents());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToRegistrationsForNoAccessReturnsFalse(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, false],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertFalse($subject->hasWriteAccessToRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasWriteAccessToRegistrationsForAccessReturnsTrue(): void
+    {
+        $this->backendUserMock->method('check')->willReturnMap(
+            [
+                ['tables_select', self::EVENTS_TABLE_NAME, false],
+                ['tables_select', self::REGISTRATIONS_TABLE_NAME, false],
+                ['tables_modify', self::EVENTS_TABLE_NAME, false],
+                ['tables_modify', self::REGISTRATIONS_TABLE_NAME, true],
+            ]
+        );
+        $subject = new Permissions();
+
+        self::assertTrue($subject->hasWriteAccessToRegistrations());
     }
 }

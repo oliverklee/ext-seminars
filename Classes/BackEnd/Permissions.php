@@ -31,6 +31,16 @@ class Permissions
      */
     private $readAccessToRegistrations;
 
+    /**
+     * @var bool
+     */
+    private $writeAccessToEvents;
+
+    /**
+     * @var bool
+     */
+    private $writeAccessToRegistrations;
+
     public function __construct()
     {
         $user = $GLOBALS['BE_USER'] ?? null;
@@ -41,6 +51,8 @@ class Permissions
 
         $this->readAccessToEvents = $user->check('tables_select', self::EVENTS_TABLE_NAME);
         $this->readAccessToRegistrations = $user->check('tables_select', self::REGISTRATIONS_TABLE_NAME);
+        $this->writeAccessToEvents = $user->check('tables_modify', self::EVENTS_TABLE_NAME);
+        $this->writeAccessToRegistrations = $user->check('tables_modify', self::REGISTRATIONS_TABLE_NAME);
     }
 
     public function hasReadAccessToEvents(): bool
@@ -51,5 +63,15 @@ class Permissions
     public function hasReadAccessToRegistrations(): bool
     {
         return $this->readAccessToRegistrations;
+    }
+
+    public function hasWriteAccessToEvents(): bool
+    {
+        return $this->writeAccessToEvents;
+    }
+
+    public function hasWriteAccessToRegistrations(): bool
+    {
+        return $this->writeAccessToRegistrations;
     }
 }
