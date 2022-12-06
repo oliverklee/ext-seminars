@@ -3118,6 +3118,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Date</source>
 				<target>Datum</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.edit">
+				<source>Edit record</source>
+				<target>Datensatz bearbeiten</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
