@@ -51,7 +51,7 @@ class EventController extends ActionController
         $this->view->assign('permissions', $this->permissions);
         $this->view->assign('pageUid', $pageUid);
 
-        $events = $this->eventRepository->findBookableEventsByPageUidInBackEndMode($pageUid);
+        $events = $this->eventRepository->findByPageUidInBackEndMode($pageUid);
         $this->eventRepository->enrichWithRawData($events);
         $this->view->assign('events', $events);
     }

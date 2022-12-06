@@ -139,7 +139,7 @@ final class EventControllerTest extends UnitTestCase
     public function indexActionEnrichesEventsWithRawData(): void
     {
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findBookableEventsByPageUidInBackEndMode')
+        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with(self::anything())->willReturn($events);
         $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
             ->with($events);
@@ -156,7 +156,7 @@ final class EventControllerTest extends UnitTestCase
         $GLOBALS['_GET']['id'] = (string)$pageUid;
 
         $events = [new SingleEvent()];
-        $this->eventRepositoryMock->expects(self::once())->method('findBookableEventsByPageUidInBackEndMode')
+        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with($pageUid)->willReturn($events);
         $this->viewMock->expects(self::exactly(3))->method('assign')
             ->withConsecutive(
