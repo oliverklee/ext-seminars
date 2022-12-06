@@ -101,4 +101,6 @@ interface EventInterface
      * @internal
      */
     public function getRawData(): ?array;
+
+    public function getStatistics(): ?EventStatistics;
 }

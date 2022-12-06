@@ -114,6 +114,12 @@ trait EventDateTrait
      */
     protected $registrationCheckboxes;
 
+    /**
+     * @var EventStatistics|null
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     */
+    protected $statistics;
+
     private function initializeEventDate(): void
     {
         $this->venues = new ObjectStorage();
@@ -364,5 +370,15 @@ trait EventDateTrait
     public function allowsUnlimitedRegistrations(): bool
     {
         return $this->isRegistrationRequired() && $this->getMaximumNumberOfRegistrations() === 0;
+    }
+
+    public function getStatistics(): ?EventStatistics
+    {
+        return $this->statistics;
+    }
+
+    public function setStatistics(EventStatistics $statistics): void
+    {
+        $this->statistics = $statistics;
     }
 }

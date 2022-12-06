@@ -548,4 +548,12 @@ final class EventTopicTest extends UnitTestCase
 
         self::assertSame($rawData, $this->subject->getRawData());
     }
+
+    /**
+     * @test
+     */
+    public function getStatisticsReturnsNull(): void
+    {
+        self::assertNull($this->subject->getStatistics());
+    }
 }

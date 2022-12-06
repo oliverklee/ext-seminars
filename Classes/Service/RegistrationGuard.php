@@ -174,7 +174,7 @@ class RegistrationGuard implements SingletonInterface
             return 0;
         }
 
-        $registeredSeats = $this->registrationRepository->countSeatsByEvent($eventUid);
+        $registeredSeats = $this->registrationRepository->countRegularSeatsByEvent($eventUid);
         // This ensures that overbooked events still will not have a negative number of vacancies.
         $vacancies = \max(0, $maximumNumberOfRegistrations - $registeredSeats - $numberOfOfflineRegistrations);
 

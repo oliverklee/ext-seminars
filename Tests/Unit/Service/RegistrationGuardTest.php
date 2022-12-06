@@ -631,7 +631,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setRegistrationRequired(true);
         $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
 
-        $this->registrationRepositoryMock->method('countSeatsByEvent')->with($eventUid)->willReturn(0);
+        $this->registrationRepositoryMock->method('countRegularSeatsByEvent')->with($eventUid)->willReturn(0);
 
         self::assertSame($maximumNumberOfRegistrations, $this->subject->getVacancies($event));
     }
@@ -649,7 +649,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
 
         $registeredSeats = 3;
-        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')->with($eventUid)
             ->willReturn($registeredSeats);
 
         self::assertSame($maximumNumberOfRegistrations - $registeredSeats, $this->subject->getVacancies($event));
@@ -667,7 +667,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $maximumNumberOfRegistrations = 10;
         $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
 
-        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')->with($eventUid)
             ->willReturn($maximumNumberOfRegistrations);
 
         self::assertSame(0, $this->subject->getVacancies($event));
@@ -685,7 +685,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $maximumNumberOfRegistrations = 10;
         $event->setMaximumNumberOfRegistrations($maximumNumberOfRegistrations);
 
-        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')->with($eventUid)
             ->willReturn($maximumNumberOfRegistrations + 1);
 
         self::assertSame(0, $this->subject->getVacancies($event));
@@ -706,7 +706,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setNumberOfOfflineRegistrations($numberOfOfflineRegistrations);
 
         $registeredSeats = 3;
-        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')->with($eventUid)
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')->with($eventUid)
             ->willReturn(3);
 
         self::assertSame(
@@ -729,7 +729,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $event2->setRegistrationRequired(true);
         $event2->setMaximumNumberOfRegistrations(10);
 
-        $this->registrationRepositoryMock->expects(self::exactly(2))->method('countSeatsByEvent')
+        $this->registrationRepositoryMock->expects(self::exactly(2))->method('countRegularSeatsByEvent')
             ->with(self::anything())->willReturn(0);
 
         $this->subject->getVacancies($event1);
@@ -746,7 +746,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $event->setRegistrationRequired(true);
         $event->setMaximumNumberOfRegistrations(10);
 
-        $this->registrationRepositoryMock->expects(self::once())->method('countSeatsByEvent')
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')
             ->with(self::anything())->willReturn(0);
 
         $this->subject->getVacancies($event);

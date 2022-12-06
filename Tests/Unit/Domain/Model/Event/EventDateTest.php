@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
@@ -958,5 +959,24 @@ final class EventDateTest extends UnitTestCase
         $this->subject->setRawData($rawData);
 
         self::assertSame($rawData, $this->subject->getRawData());
+    }
+
+    /**
+     * @test
+     */
+    public function getStatisticsInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getStatistics());
+    }
+
+    /**
+     * @test
+     */
+    public function setStatisticsSetsStatistics(): void
+    {
+        $model = new EventStatistics(0, 0, 0, 0, 0);
+        $this->subject->setStatistics($model);
+
+        self::assertSame($model, $this->subject->getStatistics());
     }
 }
