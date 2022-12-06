@@ -758,9 +758,9 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeForNoEventsReturnsEmptyArray(): void
+    public function findByPageUidInBackEndModeForNoEventsReturnsEmptyArray(): void
     {
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(0);
+        $result = $this->subject->findByPageUidInBackEndMode(0);
 
         self::assertSame([], $result);
     }
@@ -768,11 +768,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeFindsSingleEventOnGivenPage(): void
+    public function findByPageUidInBackEndModeFindsSingleEventOnGivenPage(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
@@ -783,11 +783,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeFindsEventDateOnGivenPage(): void
+    public function findByPageUidInBackEndModeFindsEventDateOnGivenPage(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
@@ -798,23 +798,26 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeIgnoresEventTopicOnOtherPage(): void
+    public function findByPageUidInBackEndModeFindsEventTopicOnGivenPage(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
-        self::assertSame([], $result);
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
     }
 
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeIgnoresSingleEventOnOtherPage(): void
+    public function findByPageUidInBackEndModeIgnoresSingleEventOnOtherPage(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(2);
+        $result = $this->subject->findByPageUidInBackEndMode(2);
 
         self::assertSame([], $result);
     }
@@ -822,11 +825,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeIgnoresDeletedEvent(): void
+    public function findByPageUidInBackEndModeIgnoresDeletedEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
         self::assertSame([], $result);
     }
@@ -834,11 +837,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeCanFindHiddenEvent(): void
+    public function findByPageUidInBackEndModeCanFindHiddenEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
         self::assertCount(1, $result);
         $firstMatch = $result[0];
@@ -849,11 +852,11 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findBookableEventsByPageUidInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
+    public function findByPageUidInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.xml');
 
-        $result = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $result = $this->subject->findByPageUidInBackEndMode(1);
 
         self::assertCount(2, $result);
         $firstMatch = $result[0];
@@ -897,7 +900,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function enrichWithRawDataCanEnrichHiddenEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
-        $events = $this->subject->findBookableEventsByPageUidInBackEndMode(1);
+        $events = $this->subject->findByPageUidInBackEndMode(1);
         $event = $this->subject->findByUid(1);
         self::assertCount(1, $events);
         $event = $events[0];

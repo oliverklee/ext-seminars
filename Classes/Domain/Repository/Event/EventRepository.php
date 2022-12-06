@@ -7,9 +7,7 @@ namespace OliverKlee\Seminars\Domain\Repository\Event;
 use OliverKlee\FeUserExtraFields\Domain\Repository\DirectPersistTrait;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
-use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -100,15 +98,15 @@ class EventRepository extends Repository implements DirectPersist
     }
 
     /**
-     * Finds bookable events (i.e., single events and event dates) on the given page.
+     * Finds events on the given page.
      *
      * This method works in back-end mode, i.e., it will ignore deleted records, but will find hidden or timed records.
      *
      * @param 0|positive-int $pageUid
      *
-     * @return array<int, SingleEvent|EventDate>
+     * @return array<int, Event>
      */
-    public function findBookableEventsByPageUidInBackEndMode(int $pageUid): array
+    public function findByPageUidInBackEndMode(int $pageUid): array
     {
         if ($pageUid <= 0) {
             return [];
@@ -121,17 +119,9 @@ class EventRepository extends Repository implements DirectPersist
         $query->setQuerySettings($querySettings);
         $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
 
-        $pageUidMatcher = $query->equals('pid', $pageUid);
-        $objectTypeMatcher = $query->in(
-            'objectType',
-            [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE]
-        );
-        $query->matching($query->logicalAnd($pageUidMatcher, $objectTypeMatcher));
+        $query->matching($query->equals('pid', $pageUid));
 
-        /** @var array<int, SingleEvent|EventDate> $events */
-        $events = $query->execute()->toArray();
-
-        return $events;
+        return $query->execute()->toArray();
     }
 
     /**
