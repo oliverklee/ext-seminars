@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an SVG icon for the BE module (#2071)
 
 ### Changed
+- Clean up the Fluid templates (#2092)
 - Use a different hue of orange in the extension icon (#2070, #2071)
 
 ### Deprecated

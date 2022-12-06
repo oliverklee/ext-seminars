@@ -1,7 +1,8 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    {f:variable(name: 'labelPrefix', value: 'plugin.frontEndEditor')}
-    {f:variable(name: 'propertyLabelPrefix', value: '{labelPrefix}.property')}
-    {f:variable(name: 'idPrefix', value: 'event-editor')}
+    <f:variable name="labelPrefix" value="plugin.frontEndEditor"/>
+    <f:variable name="propertyLabelPrefix" value="{labelPrefix}.property"/>
+    <f:variable name="idPrefix" value="event-editor"/>
+
     <fieldset class="mb-3">
         <div class="row mb-3">
             <label for="{idPrefix}-internalTitle" class="col-sm-2 col-form-label">
