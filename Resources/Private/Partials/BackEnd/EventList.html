@@ -2,20 +2,20 @@
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       data-namespace-typo3-fluid="true">
     <f:variable name="tableName" value="tx_seminars_seminars"/>
+    <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
 
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th scope="col" class="text-end text-right nowrap">
-                    <f:translate key="backEndModule.events.property.uid"/>
+                    <f:translate key="{propertyLabelPrefix}.uid"/>
                 </th>
-                <th scope="col" class="col-icon nowrap">
-                </th>
+                <th scope="col" class="col-icon nowrap">&nbsp;</th>
                 <th scope="col" class="col-title col-responsive">
-                    <f:translate key="backEndModule.events.property.internalTitle"/>
+                    <f:translate key="{propertyLabelPrefix}.internalTitle"/>
                 </th>
                 <th scope="col" class="nowrap">
-                    <f:translate key="backEndModule.events.property.date"/>
+                    <f:translate key="{propertyLabelPrefix}.date"/>
                 </th>
             </tr>
         </thead>
