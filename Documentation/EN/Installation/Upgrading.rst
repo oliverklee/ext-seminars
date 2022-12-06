@@ -27,6 +27,16 @@ If you are using a different currency than Euro (or you would like to tweak
 the currency format), edit :typoscript:`plugin.tx_seminars.settings.currency`
 in the TypoScript constants (or conveniently in the constants editor).
 
+Switching to the rewritten backend module
+=========================================
+
+Starting with seminars 4.4, using the new backend module form is recommended.
+(The legacy backend module form will be removed in seminars 5.0.)
+
+Edit your backend user or user group permissions, grant the users/groups
+permissions for the new backend module, and drop their permissions for the
+old backend module.
+
 Switching to the rewritten registration form
 ============================================
 
