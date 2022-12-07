@@ -2351,7 +2351,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.seats.minimum">
 				<source>required registrations for the event to take place</source>
-				<target>erforderliche Anmeldungen, damit die Veranstaltung stattfinden kann</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.seats.maximum">
 				<source>maximum available seats at the event</source>
@@ -2367,6 +2366,12 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.registrations.waitingList">
 				<source>Registrations on the waiting list</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.enough">
+				<source>has enough registration to take place</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.fullyBooked">
+				<source>is fully booked</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>

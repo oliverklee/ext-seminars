@@ -3146,6 +3146,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registrations on the waiting list</source>
 				<target>Anmeldungen auf der Warteliste</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.enough">
+				<source>has enough registration to take place</source>
+				<target>hat genug Anmeldungen, um stattzufinden</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.fullyBooked">
+				<source>is fully booked</source>
+				<target>ist ausgebucht</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>
 				<target>Datensatz bearbeiten</target>
