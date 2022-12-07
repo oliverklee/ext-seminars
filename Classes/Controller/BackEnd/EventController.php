@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\Permissions;
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -15,6 +16,16 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventController extends ActionController
 {
+    /**
+     * @var non-empty-string
+     */
+    private const CSV_FILENAME = 'events.csv';
+
+    /**
+     * @var non-empty-string
+     */
+    private const TABLE_NAME = 'tx_seminars_seminars';
+
     /**
      * @var Permissions
      */
@@ -68,5 +79,22 @@ class EventController extends ActionController
             $this->eventStatisticsCalculator->enrichWithStatistics($event);
         }
         $this->view->assign('events', $events);
+    }
+
+    /**
+     * @param 0|positive-int $pageUid
+     */
+    public function exportCsvAction(int $pageUid): string
+    {
+        $GLOBALS['_GET']['table'] = self::TABLE_NAME;
+        $GLOBALS['_GET']['pid'] = $pageUid;
+
+        $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
+
+        $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
+        $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
+        $this->response->setHeader('Content-Disposition', $contentDisposition);
+
+        return $csvContent;
     }
 }

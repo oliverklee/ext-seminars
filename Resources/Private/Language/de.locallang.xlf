@@ -3158,6 +3158,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Un-hide record</source>
 				<target>Datensatz sichtbar machen</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.csvDownload">
+				<source>Download as CSV file</source>
+				<target>CSV-Datei herunterladen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
