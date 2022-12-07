@@ -616,6 +616,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          The charset for the CSV export, e.g., utf-8, iso-8859-1 or
          iso-8859-15. The default is iso-9959-15 because Excel has problems
          with importing utf-8.
+         @deprecated #2107 will be removed in seminars 5.0
 
    Default
          Iso-8859-15

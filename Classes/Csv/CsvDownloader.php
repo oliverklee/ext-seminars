@@ -73,6 +73,7 @@ class CsvDownloader
                     $result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
             }
 
+            // @deprecated #2107 will be removed in seminars 5.0
             $resultCharset = strtolower($this->configuration->getAsString('charsetForCsv'));
             if ($resultCharset !== 'utf-8') {
                 $result = (new CharsetConverter())->conv($result, 'utf-8', $resultCharset);
