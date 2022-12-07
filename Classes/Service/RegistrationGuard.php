@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
@@ -26,6 +27,11 @@ class RegistrationGuard implements SingletonInterface
     private $registrationRepository;
 
     /**
+     * @var EventStatisticsCalculator
+     */
+    private $eventStatisticsCalculator;
+
+    /**
      * @var OneTimeAccountConnector
      */
     private $oneTimeAccountConnector;
@@ -40,6 +46,11 @@ class RegistrationGuard implements SingletonInterface
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
+    }
+
+    public function injectEventStatisticsCalculator(EventStatisticsCalculator $calculator): void
+    {
+        $this->eventStatisticsCalculator = $calculator;
     }
 
     public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
@@ -167,17 +178,13 @@ class RegistrationGuard implements SingletonInterface
             return null;
         }
 
-        $numberOfOfflineRegistrations = $event->getNumberOfOfflineRegistrations();
-        $maximumNumberOfRegistrations = $event->getMaximumNumberOfRegistrations();
-        if ($numberOfOfflineRegistrations >= $maximumNumberOfRegistrations) {
-            $this->vacanciesCache[$eventUid] = 0;
-            return 0;
+        $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        $statistics = $event->getStatistics();
+        if (!$statistics instanceof EventStatistics) {
+            throw new \UnexpectedValueException('The event statistics should have been set.', 1670402765);
         }
 
-        $registeredSeats = $this->registrationRepository->countRegularSeatsByEvent($eventUid);
-        // This ensures that overbooked events still will not have a negative number of vacancies.
-        $vacancies = \max(0, $maximumNumberOfRegistrations - $registeredSeats - $numberOfOfflineRegistrations);
-
+        $vacancies = $statistics->getVacancies();
         $this->vacanciesCache[$eventUid] = $vacancies;
 
         return $vacancies;
