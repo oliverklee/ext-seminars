@@ -10,6 +10,7 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -39,6 +40,11 @@ final class EventControllerTest extends UnitTestCase
      */
     private $eventRepositoryMock;
 
+    /**
+     * @var EventStatisticsCalculator&MockObject
+     */
+    private $eventStatisticsCalculatorMock;
+
     protected function setUp(): void
     {
         /** @var EventController&AccessibleMockObjectInterface&MockObject $subject */
@@ -54,6 +60,8 @@ final class EventControllerTest extends UnitTestCase
         $this->subject->injectPermissions($this->permissionsMock);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->subject->injectEventRepository($this->eventRepositoryMock);
+        $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->subject->injectEventStatisticsCalculator($this->eventStatisticsCalculatorMock);
     }
 
     protected function tearDown(): void
@@ -143,6 +151,21 @@ final class EventControllerTest extends UnitTestCase
             ->with(self::anything())->willReturn($events);
         $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
             ->with($events);
+
+        $this->subject->indexAction();
+    }
+
+    /**
+     * @test
+     */
+    public function indexActionEnrichesEventsWithStatistics(): void
+    {
+        $event = new SingleEvent();
+        $events = [$event];
+        $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
+            ->with(self::anything())->willReturn($events);
+        $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')
+            ->with($event);
 
         $this->subject->indexAction();
     }

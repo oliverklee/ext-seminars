@@ -2346,6 +2346,28 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.events.property.date">
 				<source>Date</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.minimum">
+				<source>required registrations for the event to take place</source>
+				<target>erforderliche Anmeldungen, damit die Veranstaltung stattfinden kann</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.maximum">
+				<source>maximum available seats at the event</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.noLimit">
+				<source>This event allows an unlimited registrations.</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations">
+				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.regular">
+				<source>Regular registrations</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.waitingList">
+				<source>Registrations on the waiting list</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>
 			</trans-unit>

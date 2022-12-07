@@ -3118,6 +3118,34 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Date</source>
 				<target>Datum</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats">
+				<source>Seats</source>
+				<target>Plätze</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.minimum">
+				<source>required registrations for the event to take place</source>
+				<target>erforderliche Anmeldungen, damit die Veranstaltung stattfinden kann</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.maximum">
+				<source>maximum available seats at the event</source>
+				<target>maximal verfügbare Plätze auf der Veranstaltung</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.seats.noLimit">
+				<source>This event allows an unlimited registrations.</source>
+				<target>Bei dieser Veranstaltung sind unbegrenzt viele Anmeldungen möglich.</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations">
+				<source>Registrations</source>
+				<target>Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.regular">
+				<source>Regular registrations</source>
+				<target>Reguläre Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.registrations.waitingList">
+				<source>Registrations on the waiting list</source>
+				<target>Anmeldungen auf der Warteliste</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>
 				<target>Datensatz bearbeiten</target>
