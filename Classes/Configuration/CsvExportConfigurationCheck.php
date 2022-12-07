@@ -24,6 +24,9 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
         $this->checkShowAttendancesOnRegistrationQueueInEmailCsv();
     }
 
+    /**
+     * @deprecated #2107 will be removed in seminars 5.0
+     */
     private function checkCharsetForCsv(): void
     {
         $this->checkForNonEmptyString(

@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use a different hue of orange in the extension icon (#2070, #2071)
 
 ### Deprecated
+- Deprecate the `charsetForCsv` setting (#2108)
 
 ### Removed
 
