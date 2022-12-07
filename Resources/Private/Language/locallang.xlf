@@ -2379,6 +2379,9 @@ This event now has been confirmed.</source>
 				<source>Un-hide record</source>
 				<target>Datensatz sichtbar machen</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.csvDownload">
+				<source>Download as CSV file</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

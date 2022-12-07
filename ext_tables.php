@@ -13,7 +13,7 @@ $boot = static function (): void {
             'events',
             '',
             [
-                \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index',
+                \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index, exportCsv',
             ],
             [
                 'access' => 'user,group',
