@@ -486,13 +486,13 @@ This event now has been confirmed.</source>
 			<trans-unit id="registrationDigestEmail_Subject" xml:space="preserve">
 				<source>New registrations</source>
 			</trans-unit>
-			<trans-unit id="dateFormat" xml:space="preserve">
+			<trans-unit id="dateFormat">
 				<source>Y-m-d</source>
 			</trans-unit>
-			<trans-unit id="decimalSeparator" xml:space="preserve">
+			<trans-unit id="decimalSeparator">
 				<source>.</source>
 			</trans-unit>
-			<trans-unit id="thousandsSeparator" xml:space="preserve">
+			<trans-unit id="thousandsSeparator">
 				<source>,</source>
 			</trans-unit>
 			<trans-unit id="registrationTitleFormat">

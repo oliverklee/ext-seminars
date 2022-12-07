@@ -632,15 +632,15 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>New registrations</source>
 				<target>Neue Anmeldungen</target>
 			</trans-unit>
-			<trans-unit id="dateFormat" xml:space="preserve">
+			<trans-unit id="dateFormat">
 				<source>Y-m-d</source>
 				<target>d.m.Y</target>
 			</trans-unit>
-			<trans-unit id="decimalSeparator" xml:space="preserve">
+			<trans-unit id="decimalSeparator">
 				<source>.</source>
 				<target>,</target>
 			</trans-unit>
-			<trans-unit id="thousandsSeparator" xml:space="preserve">
+			<trans-unit id="thousandsSeparator">
 				<source>,</source>
 				<target>.</target>
 			</trans-unit>
