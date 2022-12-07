@@ -6,8 +6,10 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -83,18 +85,25 @@ class EventController extends ActionController
 
     /**
      * @param 0|positive-int $pageUid
+     *
+     * @return string|ResponseInterface
      */
-    public function exportCsvAction(int $pageUid): string
+    public function exportCsvAction(int $pageUid)
     {
         $GLOBALS['_GET']['table'] = self::TABLE_NAME;
         $GLOBALS['_GET']['pid'] = $pageUid;
 
         $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
 
-        $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
-        $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
-        $this->response->setHeader('Content-Disposition', $contentDisposition);
+        if (isset($this->response)) {
+            // 10LTS path
+            $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
+            $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
+            $this->response->setHeader('Content-Disposition', $contentDisposition);
 
-        return $csvContent;
+            return $csvContent;
+        }
+        // 11LTS path
+        return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 }

@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -13,6 +15,7 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Web\Response;
@@ -67,7 +70,10 @@ final class EventControllerTest extends UnitTestCase
         );
         $this->subject = $subject;
 
-        $this->response = new Response();
+        if (\class_exists(Response::class)) {
+            // 10LTS only
+            $this->response = new Response();
+        }
         $this->subject->_set('response', $this->response);
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -80,11 +86,14 @@ final class EventControllerTest extends UnitTestCase
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);
+        ConfigurationRegistry::getInstance()
+            ->set('plugin.tx_seminars', new DummyConfiguration(['charsetForCsv' => 'utf-8']));
     }
 
     protected function tearDown(): void
     {
         unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table'], $GLOBALS['_POST']['id']);
+        ConfigurationRegistry::purgeInstance();
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -243,6 +252,9 @@ final class EventControllerTest extends UnitTestCase
 
         $result = $this->subject->exportCsvAction(5);
 
+        if ($result instanceof ResponseInterface) {
+            $result = $result->getBody()->getContents();
+        }
         self::assertSame($csvContent, $result);
     }
 
@@ -251,12 +263,21 @@ final class EventControllerTest extends UnitTestCase
      */
     public function exportCsvActionSetsCsvContentType(): void
     {
-        $this->subject->exportCsvAction(9);
+        $result = $this->subject->exportCsvAction(9);
 
-        self::assertContains(
-            'Content-Type: text/csv; header=present; charset=utf-8',
-            $this->response->getHeaders()
-        );
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'text/csv; header=present; charset=utf-8',
+                $result->getHeaders()['Content-Type'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Type: text/csv; header=present; charset=utf-8',
+                $this->response->getHeaders()
+            );
+        }
     }
 
     /**
@@ -264,11 +285,20 @@ final class EventControllerTest extends UnitTestCase
      */
     public function exportCsvActionSetsDownloadFilename(): void
     {
-        $this->subject->exportCsvAction(9);
+        $result = $this->subject->exportCsvAction(9);
 
-        self::assertContains(
-            'Content-Disposition: attachment; filename=events.csv',
-            $this->response->getHeaders()
-        );
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'attachment; filename=events.csv',
+                $result->getHeaders()['Content-Disposition'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Disposition: attachment; filename=events.csv',
+                $this->response->getHeaders()
+            );
+        }
     }
 }
