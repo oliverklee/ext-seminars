@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -24,6 +25,11 @@ class EventController extends ActionController
      */
     private $eventRepository;
 
+    /**
+     * @var EventStatisticsCalculator
+     */
+    private $eventStatisticsCalculator;
+
     public function injectPermissions(Permissions $permissions): void
     {
         $this->permissions = $permissions;
@@ -32,6 +38,11 @@ class EventController extends ActionController
     public function injectEventRepository(EventRepository $repository): void
     {
         $this->eventRepository = $repository;
+    }
+
+    public function injectEventStatisticsCalculator(EventStatisticsCalculator $calculator): void
+    {
+        $this->eventStatisticsCalculator = $calculator;
     }
 
     /**
@@ -53,6 +64,9 @@ class EventController extends ActionController
 
         $events = $this->eventRepository->findByPageUidInBackEndMode($pageUid);
         $this->eventRepository->enrichWithRawData($events);
+        foreach ($events as $event) {
+            $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        }
         $this->view->assign('events', $events);
     }
 }

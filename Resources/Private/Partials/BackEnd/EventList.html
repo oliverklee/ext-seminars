@@ -19,6 +19,12 @@
                 <th scope="col" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.date"/>
                 </th>
+                <th scope="col" class="nowrap">
+                    <f:translate key="{propertyLabelPrefix}.seats"/>
+                </th>
+                <th scope="col" class="nowrap">
+                    <f:translate key="{propertyLabelPrefix}.registrations"/>
+                </th>
                 <f:if condition="{permissions.writeAccessToEvents}">
                     <th scope="col" class="col-control nowrap">&nbsp;</th>
                 </f:if>
@@ -29,6 +35,7 @@
                 <tr>
                     <f:variable name="visible"
                                 value="{f:if(condition: '{event.rawData.hidden}', then: 0, else: 1)}"/>
+                    <f:variable name="statistics" value="{event.statistics}"/>
                     <td class="text-end text-right nowrap">
                         {event.uid}
                     </td>
@@ -49,6 +56,32 @@
                     </td>
                     <td class="nowrap">
                         <f:render partial="EventDate" arguments="{event: event}"/>
+                    </td>
+                    <td class="nowrap">
+                        <f:if condition="{statistics}">
+                            <f:if condition="{statistics.seatsLimit}">
+                                <f:then>
+                                    <span title="{f:translate(key: '{propertyLabelPrefix}.seats.minimum')}">{statistics.minimumRequiredSeats}</span>–<span
+                                    title="{f:translate(key: '{propertyLabelPrefix}.seats.maximum')}">{statistics.seatsLimit}</span>
+                                </f:then>
+                                <f:else>
+                                    <span title="{f:translate(key: '{propertyLabelPrefix}.seats.minimum')}">{statistics.minimumRequiredSeats}</span>–<span
+                                    title="{f:translate(key: '{propertyLabelPrefix}.seats.maximum')}">∞</span>
+                                </f:else>
+                            </f:if>
+                        </f:if>
+                    </td>
+                    <td class="nowrap">
+                        <f:if condition="{statistics}">
+                            <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.regular')}">
+                                {statistics.regularSeatsCount}
+                            </span>
+                            <f:if condition="{statistics.waitingListSeatsCount}">
+                                <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.waitingList')}">
+                                    ({statistics.waitingListSeatsCount})
+                                </span>
+                            </f:if>
+                        </f:if>
                     </td>
                     <f:if condition="{permissions.writeAccessToEvents}">
                         <td class="col-control nowrap">
