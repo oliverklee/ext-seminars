@@ -116,6 +116,16 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Property TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:\\$response \\(TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: Classes/Controller/BackEnd/EventController.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: Classes/Controller/BackEnd/EventController.php
+
+		-
 			message: "#^Parameter \\#1 \\$actionName of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:redirect\\(\\) expects string, null given\\.$#"
 			count: 1
 			path: Classes/Controller/EventRegistrationController.php
