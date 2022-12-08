@@ -34,11 +34,11 @@ class EventRepository extends Repository implements DirectPersist
         }
 
         $query = $this->createQuery();
+        $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
 
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
         $query->setQuerySettings($querySettings);
-        $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
 
         $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
         $ownerMatcher = $query->equals('ownerUid', $ownerUid);

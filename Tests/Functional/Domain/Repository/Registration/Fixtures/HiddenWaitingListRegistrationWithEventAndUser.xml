@@ -3,18 +3,9 @@
     <tx_seminars_attendances>
         <uid>1</uid>
         <seminar>1</seminar>
-        <registration_queue>1</registration_queue>
-        <seats>1</seats>
         <user>1</user>
-        <crdate>1</crdate>
-    </tx_seminars_attendances>
-    <tx_seminars_attendances>
-        <uid>2</uid>
-        <seminar>1</seminar>
         <registration_queue>1</registration_queue>
-        <seats>1</seats>
-        <user>1</user>
-        <crdate>2</crdate>
+        <hidden>1</hidden>
     </tx_seminars_attendances>
     <tx_seminars_seminars>
         <uid>1</uid>

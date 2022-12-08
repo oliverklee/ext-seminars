@@ -10,6 +10,8 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -100,5 +102,49 @@ class RegistrationRepository extends Repository implements DirectPersist
         }
 
         return $registrationCount;
+    }
+
+    /**
+     * @param positive-int $eventUid
+     *
+     * @return array<int, Registration>
+     */
+    public function findRegularRegistrationsByEvent(int $eventUid): array
+    {
+        return $this->findByEventAndWaitingListStatus($eventUid, false);
+    }
+
+    /**
+     * @param positive-int $eventUid
+     *
+     * @return array<int, Registration>
+     */
+    public function findWaitingListRegistrationsByEvent(int $eventUid): array
+    {
+        return $this->findByEventAndWaitingListStatus($eventUid, true);
+    }
+
+    /**
+     * @param positive-int $eventUid
+     *
+     * @return array<int, Registration>
+     */
+    private function findByEventAndWaitingListStatus(int $eventUid, bool $onWaitingList): array
+    {
+        $query = $this->createQuery();
+        $query->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
+
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $query->setQuerySettings($querySettings);
+
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('event', $eventUid),
+                $query->equals('onWaitingList', $onWaitingList)
+            )
+        );
+
+        return $query->execute()->toArray();
     }
 }
