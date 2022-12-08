@@ -32,6 +32,19 @@
                     <th scope="row">Current page UID</th>
                     <td>{pageUid}</td>
                 </tr>
+                <tr>
+                    <th scope="row">Event</th>
+                    <td>
+                        <f:if condition="{event}">
+                            <f:then>
+                                {event.uid}
+                            </f:then>
+                            <f:else>
+                                (none)
+                            </f:else>
+                        </f:if>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </be:moduleLayout>

@@ -3098,6 +3098,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Events</source>
 				<target>Veranstaltungen</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.registrations">
+				<source>Registrations</source>
+				<target>Anmeldungen</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>
@@ -3169,6 +3173,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="backEndModule.action.csvDownload">
 				<source>Download as CSV file</source>
 				<target>CSV-Datei herunterladen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.showRegistrations">
+				<source>show</source>
+				<target>anzeigen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.showRegistrations.long">
+				<source>show registrations</source>
+				<target>Anmeldungen anzeigen</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.backToEventList">
+				<source>Back to the event list</source>
+				<target>Zurück zur Veranstaltungsliste</target>
 			</trans-unit>
 		</body>
 	</file>

@@ -22,7 +22,7 @@
                 <th scope="col" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.seats"/>
                 </th>
-                <th scope="col" class="nowrap">
+                <th scope="col" colspan="2" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.registrations"/>
                 </th>
                 <f:if condition="{permissions.writeAccessToEvents}">
@@ -58,42 +58,19 @@
                         <f:render partial="EventDate" arguments="{event: event}"/>
                     </td>
                     <td class="nowrap">
-                        <f:if condition="{statistics}">
-                            <f:if condition="{statistics.seatsLimit}">
-                                <f:then>
-                                    <span title="{f:translate(key: '{propertyLabelPrefix}.seats.minimum')}">{statistics.minimumRequiredSeats}</span>–<span
-                                    title="{f:translate(key: '{propertyLabelPrefix}.seats.maximum')}">{statistics.seatsLimit}</span>
-                                </f:then>
-                                <f:else>
-                                    <span title="{f:translate(key: '{propertyLabelPrefix}.seats.minimum')}">{statistics.minimumRequiredSeats}</span>–<span
-                                    title="{f:translate(key: '{propertyLabelPrefix}.seats.maximum')}">∞</span>
-                                </f:else>
-                            </f:if>
-                            <f:if condition="({statistics.seatsLimit} && {statistics.fullyBooked})">
-                                <f:then>
-                                    <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.fullyBooked')}"
-                                          class="text-warning">
-                                        <core:icon identifier="actions-bolt"/>
-                                    </span>
-                                </f:then>
-                                <f:else if="({statistics.minimumRequiredSeats} && {statistics.enoughRegistrations})">
-                                    <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.enough')}"
-                                          class="text-success">
-                                        <core:icon identifier="actions-check"/>
-                                    </span>
-                                </f:else>
-                            </f:if>
-                        </f:if>
+                        <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
                     </td>
                     <td class="nowrap">
-                        <f:if condition="{statistics}">
-                            <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.regular')}">
-                                {statistics.regularSeatsCount}
-                            </span>
-                            <f:if condition="{statistics.waitingListSeatsCount}">
-                                <span title="{f:translate(key: '{propertyLabelPrefix}.registrations.waitingList')}">
-                                    ({statistics.waitingListSeatsCount})
-                                </span>
+                        <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
+                    </td>
+                    <td class="nowrap">
+                        <f:if condition="({statistics} && {visible})">
+                            <f:if condition="{statistics.regularSeatsCount}">
+                                <f:link.action
+                                    controller="BackEnd\Registration" action="showForEvent" arguments="{event: event}"
+                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}">
+                                    <f:translate key="{actionLabelPrefix}.showRegistrations"/>
+                                </f:link.action>
                             </f:if>
                         </f:if>
                     </td>

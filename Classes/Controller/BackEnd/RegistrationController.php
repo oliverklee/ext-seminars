@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Controller for the registration list in the BE module.
@@ -29,5 +31,17 @@ class RegistrationController extends AbstractController
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
+    }
+
+    /**
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function showForEventAction(Event $event): void
+    {
+        $this->view->assign('permissions', $this->permissions);
+        $this->view->assign('pageUid', $this->getPageUid());
+
+        $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        $this->view->assign('event', $event);
     }
 }
