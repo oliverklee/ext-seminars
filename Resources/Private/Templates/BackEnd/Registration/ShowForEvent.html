@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:layout name="BackEndModule"/>
+
+    <f:section name="Header">
+        <be:moduleLayout.button.linkButton
+            icon="actions-close"
+            title="{f:translate(key: 'backEndModule.action.backToEventList')}" showLabel="true"
+            link="{be:moduleLink(route: 'web_SeminarsEvents', arguments: '{id: pageUid}')}"
+        />
+    </f:section>
+
+    <f:section name="Content">
+        <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+
+        <f:if condition="{permissions.readAccessToRegistrations}">
+            <h1>
+                <f:translate key="backEndModule.heading.registrations"/>
+            </h1>
+            <h2>
+                {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
+                <f:translate key="plugin.eventRegistration.heading.eventTitleAndDateAndUid"
+                             arguments="{0: event.internalTitle, 1: eventDate, 2: event.uid}"/>
+            </h2>
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="nowrap">
+                            <f:translate key="{propertyLabelPrefix}.seats"/>
+                        </th>
+                        <td class="nowrap">
+                            <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="nowrap">
+                            <f:translate key="{propertyLabelPrefix}.registrations"/>
+                        </th>
+                        <td class="nowrap">
+                            <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </f:if>
+    </f:section>
+</html>

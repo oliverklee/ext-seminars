@@ -2331,6 +2331,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.heading.events">
 				<source>Events</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.registrations">
+				<source>Registrations</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>
@@ -2386,6 +2389,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.csvDownload">
 				<source>Download as CSV file</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.showRegistrations">
+				<source>show</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.showRegistrations.long">
+				<source>show registrations</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.backToEventList">
+				<source>Back to the event list</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -134,5 +135,67 @@ final class RegistrationControllerTest extends UnitTestCase
     public function pageUidForNoIdInRequestIsZero(): void
     {
         self::assertSame(0, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionEnrichesProvidedEventWithStatistics(): void
+    {
+        $event = new SingleEvent();
+
+        $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')->with($event);
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionPassesPermissionsToView(): void
+    {
+        $this->viewMock->expects(self::exactly(3))->method('assign')
+            ->withConsecutive(
+                ['permissions', $this->permissionsMock],
+                ['pageUid', self::anything()],
+                ['event', self::anything()]
+            );
+
+        $this->subject->showForEventAction(new SingleEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionPassesPageUidToView(): void
+    {
+        $pageUid = 8;
+        $GLOBALS['_GET']['id'] = (string)$pageUid;
+
+        $this->viewMock->expects(self::exactly(3))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', $pageUid],
+                ['event', self::anything()]
+            );
+
+        $this->subject->showForEventAction(new SingleEvent());
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionPassesProvidedEventToView(): void
+    {
+        $event = new SingleEvent();
+
+        $this->viewMock->expects(self::exactly(3))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['event', $event]
+            );
+
+        $this->subject->showForEventAction($event);
     }
 }
