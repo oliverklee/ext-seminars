@@ -562,4 +562,204 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         self::assertSame(0, $this->subject->countWaitingListSeatsByEvent(1));
     }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventForNoDataReturnsEmptyArray(): void
+    {
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventFindsRegularRegistrationsForTheGivenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertCount(1, $result);
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventIgnoresWaitingListRegistrationsForTheGivenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEvent.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventFindsRegistrationsOnAnyPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUserOnPage.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertCount(1, $result);
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventIgnoresRegistrationsForDifferentEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(2);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventIgnoresHiddenRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventIgnoresDeletedRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsOrdersByCreationDateNewestFirst(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoRegistrationsWithSameEventAndUser.xml');
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+        self::assertSame(2, $firstRegistration->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventForNoDataReturnsEmptyArray(): void
+    {
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventFindsWaitingListRegistrationsForTheGivenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEvent.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertCount(1, $result);
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventIgnoresRegularRegistrationsForTheGivenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventFindsRegistrationsOnAnyPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEventAndUserOnPage.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertCount(1, $result);
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventIgnoresRegistrationsForDifferentEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEvent.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(2);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventIgnoresHiddenRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenWaitingListRegistrationWithEventAndUser.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventIgnoresDeletedRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedWaitingListRegistrationWithEvent.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventOrdersByCreationDateNewestFirst(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoWaitingListRegistrationsWithSameEventAndUser.xml');
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        $firstRegistration = $result[0];
+        self::assertInstanceOf(Registration::class, $firstRegistration);
+        self::assertSame(2, $firstRegistration->getUid());
+    }
 }
