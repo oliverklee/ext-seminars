@@ -136,11 +136,6 @@ parameters:
 			path: Classes/Controller/BackEnd/RegistrationController.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:\\$registrationRepository is never read, only written\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
 			message: "#^Parameter \\#1 \\$actionName of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:redirect\\(\\) expects string, null given\\.$#"
 			count: 1
 			path: Classes/Controller/EventRegistrationController.php
