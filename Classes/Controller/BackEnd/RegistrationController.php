@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
@@ -58,5 +62,27 @@ class RegistrationController extends AbstractController
                 $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
             }
         }
+    }
+
+    /**
+     * @return string|ResponseInterface
+     */
+    public function exportCsvForEventAction(Event $event)
+    {
+        $GLOBALS['_GET']['table'] = self::TABLE_NAME;
+        $GLOBALS['_GET']['eventUid'] = $event->getUid();
+
+        $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
+
+        if (isset($this->response)) {
+            // 10LTS path
+            $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
+            $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
+            $this->response->setHeader('Content-Disposition', $contentDisposition);
+
+            return $csvContent;
+        }
+        // 11LTS path
+        return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 }
