@@ -254,6 +254,24 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function showForEventActionEnrichesRegularRegistrationsWithRawData(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $regularRegistrations = [new Registration()];
+
+        $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
+            ->with($eventUid)->willReturn($regularRegistrations);
+        $this->registrationRepositoryMock->expects(self::once())->method('enrichWithRawData')
+            ->with($regularRegistrations);
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function showForEventActionForEventWithWaitingListPassesWaitingRegistrationsForProvidedEventToView(): void
     {
         $eventUid = 5;
@@ -273,6 +291,25 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['regularRegistrations', self::anything()],
                 ['waitingListRegistrations', $waitingListRegistrations]
             );
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionForEventWithWaitingListEnrichesWaitingListRegistrationsWithRawData(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $event->method('hasWaitingList')->willReturn(true);
+        $waitingListRegistrations = [new Registration()];
+
+        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+            ->with($eventUid)->willReturn($waitingListRegistrations);
+        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+            ->withConsecutive([self::anything()], [$waitingListRegistrations]);
 
         $this->subject->showForEventAction($event);
     }
