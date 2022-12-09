@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
+use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopicTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
+ * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait
  */
 final class SingleEventTest extends UnitTestCase
 {
@@ -50,6 +52,14 @@ final class SingleEventTest extends UnitTestCase
     public function isAbstractEntity(): void
     {
         self::assertInstanceOf(AbstractEntity::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsRawDataInterface(): void
+    {
+        self::assertInstanceOf(RawDataInterface::class, $this->subject);
     }
 
     /**

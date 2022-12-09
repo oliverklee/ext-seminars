@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Domain\Repository\Event;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
+use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -34,6 +35,14 @@ final class EventRepositoryTest extends UnitTestCase
     public function isRepository(): void
     {
         self::assertInstanceOf(Repository::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function isRawDataCapableRepository(): void
+    {
+        self::assertInstanceOf(AbstractRawDataCapableRepository::class, $this->subject);
     }
 
     /**
