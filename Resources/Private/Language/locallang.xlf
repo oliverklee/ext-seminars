@@ -1650,6 +1650,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.action.unhide" resname="backEndModule.action.unhide" approved="yes">
 				<source>Un-hide record</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.deleteRegistration" resname="backEndModule.action.deleteRegistration" approved="yes">
+				<source>Delete registration</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.deleteRegistrationConfirmation" resname="backEndModule.action.deleteRegistrationConfirmation" approved="yes">
+				<source>Really delete this registration? &quot;%s&quot;</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.csvDownload" resname="backEndModule.action.csvDownload" approved="yes">
 				<source>Download as CSV file</source>
 			</trans-unit>
