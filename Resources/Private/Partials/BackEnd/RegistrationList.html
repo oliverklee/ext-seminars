@@ -1,4 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       data-namespace-typo3-fluid="true">
     <f:variable name="tableName" value="tx_seminars_attendances"/>
@@ -16,6 +17,9 @@
                 <th scope="col" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.seats"/>
                 </th>
+                <f:if condition="{permissions.writeAccessToRegistrations}">
+                    <th scope="col" class="col-control nowrap">&nbsp;</th>
+                </f:if>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +32,30 @@
                         <core:iconForRecord table="{tableName}" row="{registration.rawData}"/>
                     </td>
                     <td class="col-title col-responsive">
-                        {registration.user.name}
+                        <f:if condition="{permissions.writeAccessToRegistrations}">
+                            <f:then>
+                                <be:link.editRecord uid="{registration.uid}" table="{tableName}">
+                                    {registration.user.name}
+                                </be:link.editRecord>
+                            </f:then>
+                            <f:else>
+                                {registration.user.name}
+                            </f:else>
+                        </f:if>
                     </td>
                     <td class="text-end text-right nowrap">
                         {registration.seats}
                     </td>
+                    <f:if condition="{permissions.writeAccessToRegistrations}">
+                        <td class="col-control nowrap">
+                            <div class="btn-group" role="group">
+                                <be:link.editRecord uid="{registration.uid}" table="{tableName}" class="btn btn-default"
+                                                    title="{f:translate(key: '{actionLabelPrefix}.edit')}">
+                                    <core:icon identifier="actions-open"/>
+                                </be:link.editRecord>
+                            </div>
+                        </td>
+                    </f:if>
                 </tr>
             </f:for>
         </tbody>

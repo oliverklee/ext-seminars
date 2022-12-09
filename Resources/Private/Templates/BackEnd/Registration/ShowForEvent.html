@@ -55,7 +55,8 @@
             </h2>
             <f:if condition="{regularRegistrations}">
                 <f:then>
-                    <f:render partial="BackEnd/RegistrationList" arguments="{registrations: regularRegistrations}"/>
+                    <f:render partial="BackEnd/RegistrationList"
+                              arguments="{registrations: regularRegistrations, permissions: permissions}"/>
                 </f:then>
                 <f:else>
                     <f:render partial="BackEnd/FlashMessage"
@@ -69,7 +70,8 @@
                     <f:translate key="backEndModule.heading.waitingListRegistrations"
                                  arguments="{0: '{f:count(subject: waitingListRegistrations)}'}"/>
                 </h2>
-                <f:render partial="BackEnd/RegistrationList" arguments="{registrations: waitingListRegistrations}"/>
+                <f:render partial="BackEnd/RegistrationList"
+                          arguments="{registrations: waitingListRegistrations, permissions: permissions}"/>
             </f:if>
         </f:if>
     </f:section>
