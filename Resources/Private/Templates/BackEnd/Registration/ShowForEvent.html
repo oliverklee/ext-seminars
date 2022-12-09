@@ -2,6 +2,7 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:layout name="BackEndModule"/>
 
@@ -46,6 +47,30 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h2>
+                <core:icon identifier="actions-check"/>
+                <f:translate key="backEndModule.heading.regularRegistrations"
+                             arguments="{0: '{f:count(subject: regularRegistrations)}'}"/>
+            </h2>
+            <f:if condition="{regularRegistrations}">
+                <f:then>
+                    <f:render partial="BackEnd/RegistrationList" arguments="{registrations: regularRegistrations}"/>
+                </f:then>
+                <f:else>
+                    <f:render partial="BackEnd/FlashMessage"
+                              arguments="{severity: 'info', messageBodyKey: 'noRegistrationsForEvent'}"/>
+                </f:else>
+            </f:if>
+
+            <f:if condition="{waitingListRegistrations}">
+                <h2>
+                    <core:icon identifier="actions-clock"/>
+                    <f:translate key="backEndModule.heading.waitingListRegistrations"
+                                 arguments="{0: '{f:count(subject: waitingListRegistrations)}'}"/>
+                </h2>
+                <f:render partial="BackEnd/RegistrationList" arguments="{registrations: waitingListRegistrations}"/>
+            </f:if>
         </f:if>
     </f:section>
 </html>

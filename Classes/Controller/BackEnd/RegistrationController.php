@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
@@ -43,5 +44,17 @@ class RegistrationController extends AbstractController
 
         $this->eventStatisticsCalculator->enrichWithStatistics($event);
         $this->view->assign('event', $event);
+
+        if ($event instanceof EventDateInterface) {
+            $eventUid = $event->getUid();
+            $regularRegistrations = $this->registrationRepository->findRegularRegistrationsByEvent($eventUid);
+            $this->view->assign('regularRegistrations', $regularRegistrations);
+
+            if ($event->hasWaitingList()) {
+                $waitingListRegistrations = $this->registrationRepository
+                    ->findWaitingListRegistrationsByEvent($eventUid);
+                $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
+            }
+        }
     }
 }

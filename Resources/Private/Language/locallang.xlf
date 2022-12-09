@@ -2334,11 +2334,20 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.heading.registrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.regularRegistrations">
+				<source>Regular registrations (%u)</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.heading.waitingListRegistrations">
+				<source>Registrations on the waiting list (%u)</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.message.noEventsInFolder">
 				<source>There are no event records in the selected folder.</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.message.noRegistrationsForEvent">
+				<source>This event does not have any registrations yet.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.uid">
 				<source>UID</source>
@@ -2375,6 +2384,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.registrations.fullyBooked">
 				<source>is fully booked</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.name">
+				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>

@@ -1,0 +1,34 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="nowrap">
+                    <f:translate key="{propertyLabelPrefix}.uid"/>
+                </th>
+                <th scope="col" class="col-title col-responsive">
+                    <f:translate key="{propertyLabelPrefix}.name"/>
+                </th>
+                <th scope="col" class="nowrap">
+                    <f:translate key="{propertyLabelPrefix}.seats"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{registrations}" as="registration">
+                <tr>
+                    <td class="text-end text-right nowrap">
+                        {registration.uid}
+                    </td>
+                    <td class="col-title col-responsive">
+                        {registration.user.name}
+                    </td>
+                    <td class="text-end text-right nowrap">
+                        {registration.seats}
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</html>

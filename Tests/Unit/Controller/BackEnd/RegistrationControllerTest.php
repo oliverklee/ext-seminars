@@ -11,8 +11,10 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -140,9 +142,26 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function showForEventActionWithTopicDoesNotQueryForRegistrations(): void
+    {
+        $event = $this->createMock(EventTopic::class);
+        $event->method('getUid')->willReturn(5);
+
+        $this->registrationRepositoryMock->expects(self::never())->method('findRegularRegistrationsByEvent')
+            ->with(self::anything());
+        $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
+            ->with(self::anything());
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function showForEventActionEnrichesProvidedEventWithStatistics(): void
     {
-        $event = new SingleEvent();
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn(5);
 
         $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')->with($event);
 
@@ -154,14 +173,18 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn(5);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
-                ['event', self::anything()]
+                ['event', self::anything()],
+                ['regularRegistrations', self::anything()]
             );
 
-        $this->subject->showForEventAction(new SingleEvent());
+        $this->subject->showForEventAction($event);
     }
 
     /**
@@ -171,15 +194,18 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $pageUid = 8;
         $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn(5);
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
-                ['event', self::anything()]
+                ['event', self::anything()],
+                ['regularRegistrations', self::anything()]
             );
 
-        $this->subject->showForEventAction(new SingleEvent());
+        $this->subject->showForEventAction($event);
     }
 
     /**
@@ -187,14 +213,81 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionPassesProvidedEventToView(): void
     {
-        $event = new SingleEvent();
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn(5);
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
-                ['event', $event]
+                ['event', $event],
+                ['regularRegistrations', self::anything()]
             );
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionPassesRegularRegistrationsForProvidedEventToView(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $regularRegistrations = [new Registration()];
+
+        $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
+            ->with($eventUid)->willReturn($regularRegistrations);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['event', self::anything()],
+                ['regularRegistrations', $regularRegistrations]
+            );
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionForEventWithWaitingListPassesWaitingRegistrationsForProvidedEventToView(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $event->method('hasWaitingList')->willReturn(true);
+        $waitingListRegistrations = [new Registration()];
+
+        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+            ->with($eventUid)->willReturn($waitingListRegistrations);
+
+        $this->viewMock->expects(self::exactly(5))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['event', self::anything()],
+                ['regularRegistrations', self::anything()],
+                ['waitingListRegistrations', $waitingListRegistrations]
+            );
+
+        $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionForEventWithoutWaitingListDoesNotQueryForWaitingList(): void
+    {
+        $event = $this->createMock(SingleEvent::class);
+        $event->method('getUid')->willReturn(5);
+        $event->method('hasWaitingList')->willReturn(false);
+
+        $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
+            ->with(self::anything());
 
         $this->subject->showForEventAction($event);
     }

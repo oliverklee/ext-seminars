@@ -3102,6 +3102,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registrations</source>
 				<target>Anmeldungen</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.regularRegistrations">
+				<source>Regular registrations (%u)</source>
+				<target>Reguläre Anmeldungen (%u)</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.heading.waitingListRegistrations">
+				<source>Registrations on the waiting list (%u)</source>
+				<target>Anmeldungen auf der Warteliste (%u)</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>
@@ -3109,6 +3117,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="backEndModule.message.noEventsInFolder">
 				<source>There are no event records in the selected folder.</source>
 				<target>In ausgewählten Ordner liegen keine Veranstaltungsdatensätze.</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.message.noRegistrationsForEvent">
+				<source>This event does not have any registrations yet.</source>
+				<target>Für diese Veranstaltung gibt es noch keine Anmeldungen.</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.events.property.uid">
 				<source>UID</source>
@@ -3157,6 +3169,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="backEndModule.events.property.registrations.fullyBooked">
 				<source>is fully booked</source>
 				<target>ist ausgebucht</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.events.property.name">
+				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.edit">
 				<source>Edit record</source>
