@@ -8,24 +8,27 @@ use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * @extends Repository<Registration>
+ * @extends AbstractRawDataCapableRepository<Registration>
  */
-class RegistrationRepository extends Repository implements DirectPersist
+class RegistrationRepository extends AbstractRawDataCapableRepository implements DirectPersist
 {
     use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
     use StoragePageAgnostic;
 
     /**
-     * @var non-empty-string
+     * @return non-empty-string
      */
-    private const TABLE_NAME = 'tx_seminars_attendances';
+    protected function getTableName(): string
+    {
+        return 'tx_seminars_attendances';
+    }
 
     public function existsRegistrationForEventAndUser(EventInterface $event, int $userUid): bool
     {
@@ -80,9 +83,10 @@ class RegistrationRepository extends Repository implements DirectPersist
      */
     private function countSeatsByEvent(int $eventUid, bool $onWaitingList): int
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME);
+        $tableName = $this->getTableName();
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
         $query = $queryBuilder->addSelectLiteral($queryBuilder->expr()->sum('seats'))
-            ->from(self::TABLE_NAME)
+            ->from($tableName)
             ->where(
                 $queryBuilder->expr()->eq('seminar', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT)),
                 $queryBuilder->expr()->eq(

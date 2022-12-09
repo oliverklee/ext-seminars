@@ -14,12 +14,14 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
+use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
+ * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\BillingAddressTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\PaymentTrait
@@ -45,6 +47,14 @@ final class RegistrationTest extends UnitTestCase
     public function isAbstractEntity(): void
     {
         self::assertInstanceOf(AbstractEntity::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsRawDataInterface(): void
+    {
+        self::assertInstanceOf(RawDataInterface::class, $this->subject);
     }
 
     /**
@@ -901,5 +911,25 @@ final class RegistrationTest extends UnitTestCase
         $this->subject->setJsonEncodedAdditionAttendees($value);
 
         self::assertSame($value, $this->subject->getJsonEncodedAdditionAttendees());
+    }
+
+    /**
+     * @test
+     */
+    public function getRawDataInitiallyReturnsNull(): void
+    {
+        self::assertNull($this->subject->getRawData());
+    }
+
+    /**
+     * @test
+     */
+    public function setRawDataSetsRawData(): void
+    {
+        $rawData = ['uid' => 5, 'title' => 'foo'];
+
+        $this->subject->setRawData($rawData);
+
+        self::assertSame($rawData, $this->subject->getRawData());
     }
 }

@@ -24,10 +24,12 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
+ * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\AttendeesTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\BillingAddressTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\PaymentTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Registration\Registration
+ * @covers \OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository
  * @covers \OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository
  */
 final class RegistrationRepositoryTest extends FunctionalTestCase
@@ -761,5 +763,35 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $firstRegistration = $result[0];
         self::assertInstanceOf(Registration::class, $firstRegistration);
         self::assertSame(2, $firstRegistration->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithRawDataCanBeCalledWithEmptyArray(): void
+    {
+        $events = [];
+
+        $this->subject->enrichWithRawData($events);
+
+        self::assertSame([], $events);
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithRawDataAddsRawDataToRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $registration = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $registration);
+        $registrations = [$registration];
+
+        $this->subject->enrichWithRawData($registrations);
+
+        $rawData = $registration->getRawData();
+        self::assertIsArray($rawData);
+        self::assertSame(1, $rawData['uid']);
+        self::assertSame('some new registration', $rawData['title']);
     }
 }

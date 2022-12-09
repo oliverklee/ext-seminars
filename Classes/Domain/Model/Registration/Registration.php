@@ -10,6 +10,8 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\FoodOption;
+use OliverKlee\Seminars\Domain\Model\RawDataInterface;
+use OliverKlee\Seminars\Domain\Model\RawDataTrait;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -19,8 +21,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * This class represents a registration (or a waiting list entry) for an event.
  */
-class Registration extends AbstractEntity
+class Registration extends AbstractEntity implements RawDataInterface
 {
+    use RawDataTrait;
     use AttendeesTrait;
     use BillingAddressTrait;
     use PaymentTrait;
