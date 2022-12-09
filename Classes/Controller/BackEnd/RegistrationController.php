@@ -48,11 +48,13 @@ class RegistrationController extends AbstractController
         if ($event instanceof EventDateInterface) {
             $eventUid = $event->getUid();
             $regularRegistrations = $this->registrationRepository->findRegularRegistrationsByEvent($eventUid);
+            $this->registrationRepository->enrichWithRawData($regularRegistrations);
             $this->view->assign('regularRegistrations', $regularRegistrations);
 
             if ($event->hasWaitingList()) {
                 $waitingListRegistrations = $this->registrationRepository
                     ->findWaitingListRegistrationsByEvent($eventUid);
+                $this->registrationRepository->enrichWithRawData($waitingListRegistrations);
                 $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
             }
         }
