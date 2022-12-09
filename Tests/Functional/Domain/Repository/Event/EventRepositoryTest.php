@@ -30,6 +30,8 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopicTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
+ * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait
+ * @covers \OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository
  * @covers \OliverKlee\Seminars\Domain\Repository\Event\EventRepository
  */
 final class EventRepositoryTest extends FunctionalTestCase

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Add `EventStatisticsCalculator` and `Event/EventStatistics` (#2101, #2102)
-- Add more `Event` properties and repository methods (#2089)
+- Add more `Event` properties and repository methods (#2089, #2124)
 - Add a rewritten BE module for TYPO3 >= 10LTS
   (#2074, #2075, #2076, #2077, #2078, #2084, #2085, #2088, #2094, #2095, #2097
   #2100, #2105, #2109, #2113, #2114, #2116, #2120, #2122, #2123)

@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventTopicInterface;
 use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
+use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -20,6 +21,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopic
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTopicTrait
  * @covers \OliverKlee\Seminars\Domain\Model\Event\EventTrait
+ * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait
  */
 final class EventTopicTest extends UnitTestCase
 {
@@ -41,6 +43,14 @@ final class EventTopicTest extends UnitTestCase
     public function isAbstractEntity(): void
     {
         self::assertInstanceOf(AbstractEntity::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsRawDataInterface(): void
+    {
+        self::assertInstanceOf(RawDataInterface::class, $this->subject);
     }
 
     /**
