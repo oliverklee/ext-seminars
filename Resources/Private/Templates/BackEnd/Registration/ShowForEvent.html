@@ -11,7 +11,17 @@
             icon="actions-close"
             title="{f:translate(key: 'backEndModule.action.backToEventList')}" showLabel="true"
             link="{be:moduleLink(route: 'web_SeminarsEvents', arguments: '{id: pageUid}')}"
+            group="0"
         />
+
+        <f:if condition="({permissions.readAccessToRegistrations} && {regularRegistrations})">
+            <be:moduleLayout.button.linkButton
+                icon="actions-document-export-csv"
+                title="{f:translate(key: 'backEndModule.action.csvDownload')}" showLabel="true"
+                link="{f:uri.action(action: 'exportCsvForEvent', arguments: {event: event})}"
+                group="1"
+            />
+        </f:if>
     </f:section>
 
     <f:section name="Content">

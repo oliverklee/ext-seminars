@@ -126,12 +126,12 @@ parameters:
 			path: Classes/Controller/BackEnd/EventController.php
 
 		-
-			message: "#^Constant OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:CSV_FILENAME is unused\\.$#"
+			message: "#^Property TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:\\$response \\(TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
 
 		-
-			message: "#^Constant OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:TABLE_NAME is unused\\.$#"
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
 

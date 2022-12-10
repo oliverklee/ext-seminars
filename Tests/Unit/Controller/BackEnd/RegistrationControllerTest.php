@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Web\Response;
@@ -94,7 +95,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table'], $GLOBALS['_POST']['id']);
+        unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table'], $GLOBALS['_GET']['eventUid'], $GLOBALS['_POST']['id']);
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::purgeInstances();
 
@@ -331,5 +332,88 @@ final class RegistrationControllerTest extends UnitTestCase
             ->with(self::anything());
 
         $this->subject->showForEventAction($event);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForEventActionProvidesCsvDownloaderWithEventsTableName(): void
+    {
+        $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+
+        self::assertSame('tx_seminars_attendances', $GLOBALS['_GET']['table']);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForEventActionProvidesCsvDownloaderWithUidOfProvidedEvent(): void
+    {
+        $eventUid = 9;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+
+        $this->subject->exportCsvForEventAction($event);
+
+        self::assertSame($eventUid, $GLOBALS['_GET']['eventUid']);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForEventActionReturnsCsvData(): void
+    {
+        $csvContent = 'foo,bar';
+        $this->csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvContent);
+
+        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+
+        if ($result instanceof ResponseInterface) {
+            $result = $result->getBody()->getContents();
+        }
+        self::assertSame($csvContent, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForEventActionSetsCsvContentType(): void
+    {
+        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'text/csv; header=present; charset=utf-8',
+                $result->getHeaders()['Content-Type'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Type: text/csv; header=present; charset=utf-8',
+                $this->response->getHeaders()
+            );
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForEventActionSetsDownloadFilename(): void
+    {
+        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'attachment; filename=registrations.csv',
+                $result->getHeaders()['Content-Disposition'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Disposition: attachment; filename=registrations.csv',
+                $this->response->getHeaders()
+            );
+        }
     }
 }
