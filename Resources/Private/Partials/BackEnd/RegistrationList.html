@@ -49,10 +49,21 @@
                     <f:if condition="{permissions.writeAccessToRegistrations}">
                         <td class="col-control nowrap">
                             <div class="btn-group" role="group">
+                                <span class="btn btn-default disabled">
+                                    <core:icon identifier="empty-empty"/>
+                                </span>
+
                                 <be:link.editRecord uid="{registration.uid}" table="{tableName}" class="btn btn-default"
                                                     title="{f:translate(key: '{actionLabelPrefix}.edit')}">
                                     <core:icon identifier="actions-open"/>
                                 </be:link.editRecord>
+
+                                <span class="btn btn-default disabled">
+                                    <core:icon identifier="empty-empty"/>
+                                </span>
+                                <span class="btn btn-default disabled">
+                                    <core:icon identifier="empty-empty"/>
+                                </span>
                             </div>
                         </td>
                     </f:if>
