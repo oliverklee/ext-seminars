@@ -24,7 +24,9 @@ use TYPO3\CMS\Extbase\Mvc\Web\Response;
 use TYPO3\CMS\Fluid\View\TemplateView;
 
 /**
- * @covers \OliverKlee\Seminars\Controller\BackEnd\AbstractController
+ * @covers \OliverKlee\Seminars\Controller\BackEnd\EventStatisticsTrait
+ * @covers \OliverKlee\Seminars\Controller\BackEnd\PageUidTrait
+ * @covers \OliverKlee\Seminars\Controller\BackEnd\PermissionsTrait
  * @covers \OliverKlee\Seminars\Controller\BackEnd\RegistrationController
  */
 final class RegistrationControllerTest extends UnitTestCase

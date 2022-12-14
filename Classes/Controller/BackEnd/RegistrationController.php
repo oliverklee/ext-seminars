@@ -12,12 +12,17 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for the registration list in the BE module.
  */
-class RegistrationController extends AbstractController
+class RegistrationController extends ActionController
 {
+    use EventStatisticsTrait;
+    use PageUidTrait;
+    use PermissionsTrait;
+
     /**
      * @var non-empty-string
      */

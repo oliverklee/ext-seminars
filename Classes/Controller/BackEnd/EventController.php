@@ -9,12 +9,17 @@ use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for the event list in the BE module.
  */
-class EventController extends AbstractController
+class EventController extends ActionController
 {
+    use EventStatisticsTrait;
+    use PageUidTrait;
+    use PermissionsTrait;
+
     /**
      * @var non-empty-string
      */
