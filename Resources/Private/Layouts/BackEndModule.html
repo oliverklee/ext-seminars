@@ -7,45 +7,5 @@
 
         <f:flashMessages/>
         <f:render section="Content"/>
-
-        <h2>Debug information</h2>
-
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th scope="row">Read access to events</th>
-                    <td>{permissions.readAccessToEvents}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Read access to registrations</th>
-                    <td>{permissions.readAccessToRegistrations}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Write access to events</th>
-                    <td>{permissions.writeAccessToEvents}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Write access to registrations</th>
-                    <td>{permissions.writeAccessToRegistrations}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Current page UID</th>
-                    <td>{pageUid}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Event</th>
-                    <td>
-                        <f:if condition="{event}">
-                            <f:then>
-                                {event.uid}
-                            </f:then>
-                            <f:else>
-                                (none)
-                            </f:else>
-                        </f:if>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </be:moduleLayout>
 </html>
