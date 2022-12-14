@@ -31,7 +31,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -4611,35 +4610,6 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function managedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
-        }
-
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
-        $editorPageSlug = '/eventEditor';
-        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
-        $this->subject->setConfigurationValue('eventEditorPID', $editorPageUid);
-
-        $result = $this->subject->main('', []);
-
-        // @phpstan-ignore-next-line PHPStan does not know that we are running the tests on two versions.
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            $expectedUrl = $editorPageSlug;
-        } else {
-            $expectedUrl = 'index.php?id=' . $editorPageUid;
-        }
-        self::assertStringContainsString($expectedUrl, $result);
-    }
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     // Tests concerning allowCsvExportOfRegistrationsInMyVipEventsView in the "my vip events" list view
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6599,95 +6569,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
-        }
-
-        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
-        $editorPageSlug = '/eventEditor';
-        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
-
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = ['eventEditorPID' => $editorPageUid];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $subject->setSeminar($event);
-
-        $result = $subject->createAllEditorLinks();
-
-        $expectedQueryParameters = 'tx_seminars_pi1%5Bseminar%5D=91';
-        self::assertStringContainsString($expectedQueryParameters, $result);
-        $expectedLabel = $this->translate('label_edit');
-        self::assertStringContainsString($expectedLabel, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
-        }
-
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(true);
-        $event->method('isHidden')->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertStringContainsString(
-            '<a href="index.php?id=' . $this->rootPageUid .
-            '" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->translate('label_hide') . '</a>',
-            $subject->createAllEditorLinks()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
-        }
-
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(true);
-        $event->method('isHidden')->willReturn(true);
-        $subject->setSeminar($event);
-
-        self::assertStringContainsString(
-            '<a href="index.php?id=' . $this->rootPageUid .
-            '" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->translate('label_unhide') . '</a>',
-            $subject->createAllEditorLinks()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink(): void
     {
         $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
@@ -6763,35 +6644,6 @@ final class DefaultControllerTest extends TestCase
         $subject->setSeminar($event);
 
         self::assertStringNotContainsString('tx_seminars_pi1[action%5D=copy', $subject->createAllEditorLinks());
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is flaky in V10 and needs to be rewritten as a functional test.');
-        }
-
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(true);
-        $event->method('isHidden')->willReturn(true);
-        $subject->setSeminar($event);
-
-        self::assertStringContainsString(
-            '<a href="index.php?id=' . $this->rootPageUid .
-            '" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
-            $this->translate('label_copy') . '</a>',
-            $subject->createAllEditorLinks()
-        );
     }
 
     // Tests concerning the hide/unhide and copy functionality
