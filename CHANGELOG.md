@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 4.4.0
+
+### Added
 - Add `EventStatisticsCalculator` and `Event/EventStatistics` (#2101, #2102)
 - Add more `Event` properties and repository methods (#2089, #2124)
 - Add a rewritten BE module for TYPO3 >= 10LTS
@@ -21,8 +33,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 - Deprecate the `charsetForCsv` setting (#2108)
-
-### Removed
 
 ### Fixed
 - Fix the camelCase of a Fluid variable in the FE editor templates (#2091)
