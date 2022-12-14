@@ -23,8 +23,6 @@ updates:
         versions: [ ">= 3.0.0" ]
       - dependency-name: "oliverklee/oelib"
       - dependency-name: "pelago/emogrifier"
-      - dependency-name: "phpstan/extension-installer"
-        versions: [ ">= 1.2.0" ]
       - dependency-name: "saschaegerer/phpstan-typo3"
         versions: [ ">= 1.8.0" ]
       - dependency-name: "phpunit/phpunit"
