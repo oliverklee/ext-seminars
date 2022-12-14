@@ -152,7 +152,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyOrganizers($registration);
 
         $expectedExpression = '/' . $this->translate('label_vacancies') . ': 1\\n*$/';
-        self::assertRegExp($expectedExpression, $this->getTextBodyOfEmail($this->email));
+        self::assertRegExp($expectedExpression, $this->email->getTextBody());
     }
 
     // Tests concerning getRegistrationLink

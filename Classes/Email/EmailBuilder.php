@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailBuilder
 {
     /**
-     * @var MailMessage|\Swift_Message
+     * @var MailMessage
      */
     private $email;
 
@@ -60,11 +60,7 @@ class EmailBuilder
      */
     public function text(string $body): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            $this->email->setBody($body);
-        } else {
-            $this->email->text($body);
-        }
+        $this->email->text($body);
 
         return $this;
     }
@@ -76,11 +72,7 @@ class EmailBuilder
      */
     public function html(string $html): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            $this->email->addPart($html, 'text/html');
-        } else {
-            $this->email->html($html);
-        }
+        $this->email->html($html);
 
         return $this;
     }
@@ -94,18 +86,12 @@ class EmailBuilder
      */
     public function to(...$recipients): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            foreach ($recipients as $recipient) {
-                $this->email->addTo($recipient->getEmailAddress(), $recipient->getName());
-            }
-        } else {
-            /** @var array<int, Address> $preparedRecipients */
-            $preparedRecipients = [];
-            foreach ($recipients as $recipient) {
-                $preparedRecipients[] = $this->mailRoleToAddress($recipient);
-            }
-            $this->email->to(...$preparedRecipients);
+        /** @var array<int, Address> $preparedRecipients */
+        $preparedRecipients = [];
+        foreach ($recipients as $recipient) {
+            $preparedRecipients[] = $this->mailRoleToAddress($recipient);
         }
+        $this->email->to(...$preparedRecipients);
 
         return $this;
     }
@@ -117,11 +103,7 @@ class EmailBuilder
      */
     public function from(MailRole $from): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            $this->email->setFrom($this->mailRoleToSwiftMailerAddress($from));
-        } else {
-            $this->email->from($this->mailRoleToAddress($from));
-        }
+        $this->email->from($this->mailRoleToAddress($from));
 
         return $this;
     }
@@ -135,18 +117,12 @@ class EmailBuilder
      */
     public function replyTo(...$recipients): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            foreach ($recipients as $recipient) {
-                $this->email->addReplyTo($recipient->getEmailAddress(), $recipient->getName());
-            }
-        } else {
-            /** @var array<int, Address> $preparedRecipients */
-            $preparedRecipients = [];
-            foreach ($recipients as $recipient) {
-                $preparedRecipients[] = $this->mailRoleToAddress($recipient);
-            }
-            $this->email->replyTo(...$preparedRecipients);
+        /** @var array<int, Address> $preparedRecipients */
+        $preparedRecipients = [];
+        foreach ($recipients as $recipient) {
+            $preparedRecipients[] = $this->mailRoleToAddress($recipient);
         }
+        $this->email->replyTo(...$preparedRecipients);
 
         return $this;
     }
@@ -162,12 +138,7 @@ class EmailBuilder
      */
     public function attach(string $body, ?string $contentType = null, ?string $fileName = null): self
     {
-        if ($this->email instanceof \Swift_Message) {
-            $attachment = \Swift_Attachment::newInstance($body, $fileName, $contentType);
-            $this->email->attach($attachment);
-        } else {
-            $this->email->attach($body, $fileName, $contentType);
-        }
+        $this->email->attach($body, $fileName, $contentType);
 
         return $this;
     }
@@ -175,13 +146,5 @@ class EmailBuilder
     private function mailRoleToAddress(MailRole $mailRole): Address
     {
         return new Address($mailRole->getEmailAddress(), $mailRole->getName());
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    private function mailRoleToSwiftMailerAddress(MailRole $mailRole): array
-    {
-        return [$mailRole->getEmailAddress() => $mailRole->getName()];
     }
 }

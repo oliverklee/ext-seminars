@@ -1740,7 +1740,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringContainsString('foo Event', $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString('foo Event', $this->email->getTextBody());
     }
 
     /**
@@ -1778,7 +1778,7 @@ final class EventEditorTest extends TestCase
                 $this->subject->getConfValueString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME']
             ),
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -1811,7 +1811,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString('###PUBLISH_EVENT_DATE###', $this->getTextBodyOfEmail($this->email));
+        self::assertStringNotContainsString('###PUBLISH_EVENT_DATE###', $this->email->getTextBody());
     }
 
     /**
@@ -1844,7 +1844,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString('foo event,', $this->getTextBodyOfEmail($this->email));
+        self::assertStringNotContainsString('foo event,', $this->email->getTextBody());
     }
 
     /**
@@ -1875,7 +1875,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringNotContainsString('###', $this->getTextBodyOfEmail($this->email));
+        self::assertStringNotContainsString('###', $this->email->getTextBody());
     }
 
     /**
@@ -1907,7 +1907,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendEmailToReviewer();
 
-        self::assertStringContainsString('Foo Description', $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString('Foo Description', $this->email->getTextBody());
     }
 
     /**
@@ -1940,7 +1940,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -2278,7 +2278,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             $this->translate('label_save_event_text'),
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -2298,7 +2298,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringContainsString(
             $this->translate('label_save_event_overview'),
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -2318,7 +2318,7 @@ final class EventEditorTest extends TestCase
 
         self::assertStringNotContainsString(
             '###',
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -2339,7 +2339,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString($title, $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString($title, $this->email->getTextBody());
     }
 
     /**
@@ -2359,7 +2359,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString($description, $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString($description, $this->email->getTextBody());
     }
 
     /**
@@ -2380,7 +2380,7 @@ final class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertStringContainsString('02.04.1975', $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString('02.04.1975', $this->email->getTextBody());
     }
 
     ///////////////////////////////////////////

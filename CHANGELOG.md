@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the SwiftMailer dependency (#2158)
 - Drop support for TYPO3 9LTS (#2156)
 
 ### Fixed

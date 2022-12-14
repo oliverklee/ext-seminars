@@ -270,7 +270,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', $body);
 
-        self::assertStringContainsString($body, $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString($body, $this->email->getTextBody());
     }
 
     /**
@@ -352,7 +352,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation (This was the salutation)');
 
-        self::assertStringContainsString($this->user->getName(), $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString($this->user->getName(), $this->email->getTextBody());
     }
 
     /**
@@ -367,7 +367,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Hello ' . $this->user->getName() . '!',
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -383,7 +383,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Event: ' . $this->event->getTitle(),
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -401,7 +401,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Date: ' . $formattedDate,
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -419,7 +419,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringNotContainsString(
             '-- ',
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 
@@ -435,7 +435,7 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             "\n-- \n" . $this->organizer->getEmailFooter(),
-            $this->getTextBodyOfEmail($this->email)
+            $this->email->getTextBody()
         );
     }
 }

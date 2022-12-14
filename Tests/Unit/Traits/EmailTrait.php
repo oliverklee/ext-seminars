@@ -43,14 +43,7 @@ trait EmailTrait
      */
     private function getToOfEmail(MailMessage $message): array
     {
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($message instanceof \Swift_Message) {
-            $addresses = $message->getTo();
-        } else {
-            $addresses = $this->addressesToArray($message->getTo());
-        }
-
-        return $addresses;
+        return $this->addressesToArray($message->getTo());
     }
 
     /**
@@ -61,14 +54,7 @@ trait EmailTrait
      */
     private function getFromOfEmail(MailMessage $message): array
     {
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($message instanceof \Swift_Message) {
-            $addresses = $message->getFrom();
-        } else {
-            $addresses = $this->addressesToArray($message->getFrom());
-        }
-
-        return $addresses;
+        return $this->addressesToArray($message->getFrom());
     }
 
     /**
@@ -79,15 +65,7 @@ trait EmailTrait
      */
     private function getReplyToOfEmail(MailMessage $message): array
     {
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($message instanceof \Swift_Message) {
-            /** @var array<string, string> $addresses */
-            $addresses = $message->getReplyTo();
-        } else {
-            $addresses = $this->addressesToArray($message->getReplyTo());
-        }
-
-        return $addresses;
+        return $this->addressesToArray($message->getReplyTo());
     }
 
     /**
@@ -105,38 +83,6 @@ trait EmailTrait
     }
 
     /**
-     * Returns plain-text content of an email.
-     */
-    private function getTextBodyOfEmail(MailMessage $message): string
-    {
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($message instanceof \Swift_Message) {
-            /** @var array<string, string> $text */
-            $text = $message->getBody();
-        } else {
-            $text = $message->getTextBody();
-        }
-
-        return $text;
-    }
-
-    /**
-     * Returns HTML content of an email.
-     */
-    private function getHtmlBodyOfEmail(MailMessage $message): string
-    {
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($message instanceof \Swift_Message) {
-            $htmlPart = $this->filterSwiftMimePartsByType($message, 'text/html')[0] ?? null;
-            $htmlBody = $htmlPart instanceof \Swift_Mime_MimeEntity ? (string)$htmlPart->getBody() : '';
-        } else {
-            $htmlBody = (string)$message->getHtmlBody();
-        }
-
-        return $htmlBody;
-    }
-
-    /**
      * Returns the attachments of $email that have a content type with the given content type.
      *
      * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
@@ -149,43 +95,8 @@ trait EmailTrait
         /** @var array<int, DataPart> $matches */
         $matches = [];
 
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        if ($email instanceof \Swift_Message) {
-            $mimeParts = $this->filterSwiftMimePartsByType($email, $contentType);
-            foreach ($mimeParts as $mimePart) {
-                if (!$mimePart instanceof \Swift_Attachment) {
-                    continue;
-                }
-
-                // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-                $matches[] = new DataPart($mimePart->getBody(), $mimePart->getFileName(), $mimePart->getContentType());
-            }
-        } else {
-            foreach ($email->getAttachments() as $attachment) {
-                if (\strpos($this->getContentTypeForDataPart($attachment), $contentType) !== false) {
-                    $matches[] = $attachment;
-                }
-            }
-        }
-
-        return $matches;
-    }
-
-    /**
-     * Returns the attachments of $email that have a content type with the given content type.
-     *
-     * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
-     * as the content type.
-     *
-     * @return array<int, \Swift_Mime_MimeEntity>
-     */
-    private function filterSwiftMimePartsByType(\Swift_Message $email, string $contentType): array
-    {
-        /** @var array<int, \Swift_Mime_MimeEntity> $matches */
-        $matches = [];
-
-        foreach ($email->getChildren() as $attachment) {
-            if (\strpos($attachment->getContentType(), $contentType) !== false) {
+        foreach ($email->getAttachments() as $attachment) {
+            if (\strpos($this->getContentTypeForDataPart($attachment), $contentType) !== false) {
                 $matches[] = $attachment;
             }
         }

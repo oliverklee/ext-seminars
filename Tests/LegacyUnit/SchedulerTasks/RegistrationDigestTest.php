@@ -272,8 +272,8 @@ final class RegistrationDigestTest extends TestCase
 
         $this->subject->execute();
 
-        self::assertSame($expectedPlaintextBody, $this->getTextBodyOfEmail($this->email));
-        self::assertSame($expectedHtmlBody, $this->getTextBodyOfEmail($this->email));
+        self::assertSame($expectedPlaintextBody, $this->email->getTextBody());
+        self::assertSame($expectedHtmlBody, $this->email->getTextBody());
     }
 
     /**
