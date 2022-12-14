@@ -7,7 +7,7 @@ parameters:
       # Don't be overly greedy on machines with more CPU's to be a good neighbor especially on CI
       maximumNumberOfProcesses: 5
 
-  level: 6
+  level: 9
 
   bootstrapFiles:
     - .Build/vendor/autoload.php

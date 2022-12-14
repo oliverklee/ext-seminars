@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Raise PHPStan to level 9 (#2160)
 
 ### Deprecated
 
