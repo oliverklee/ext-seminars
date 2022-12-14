@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:layout name="BackEndModule"/>
+
+    <f:section name="Header">
+        <be:moduleLayout.button.linkButton
+            icon="actions-close"
+            title="{f:translate(key: 'backEndModule.action.backToEventList')}" showLabel="true"
+            link="{be:moduleLink(route: 'web_SeminarsEvents', arguments: '{id: pageUid}')}"
+            group="0"
+        />
+    </f:section>
+
+    <f:section name="Content">
+        <f:variable name="labelPrefix" value="backEndModule.email"/>
+        <f:variable name="idPrefix" value="email-form"/>
+
+        <h1>
+            <f:translate key="backEndModule.heading.email"/>
+        </h1>
+        <h2>
+            {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
+            <f:translate key="plugin.eventRegistration.heading.eventTitleAndDateAndUid"
+                         arguments="{0: event.internalTitle, 1: eventDate, 2: event.uid}"/>
+        </h2>
+
+        <f:form action="send">
+            <f:form.hidden name="event" value="{event}"/>
+            <f:form.hidden name="pageUid" value="{pageUid}"/>
+
+            <fieldset class="form-section">
+                <div class="form-group">
+                    <label for="{idPrefix}-subject" class="form-label">
+                        <f:translate key="{labelPrefix}.subject"/>
+                    </label>
+                    <div class="formengine-field-item">
+                        <div class="form-control-wrap">
+                            <f:form.textfield name="subject" id="{idPrefix}-subject"
+                                              class="form-control" value="{subject}" required="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{idPrefix}-body" class="form-label">
+                        <f:translate key="{labelPrefix}.body"/>
+                    </label>
+                    <div class="formengine-field-item">
+                        <div class="form-control-wrap">
+                            <f:form.textarea name="body" id="{idPrefix}-body" class="form-control"
+                                             rows="10" value="{body}" required="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-control-wrap">
+                        <f:form.button type="submit" class="btn btn-default">
+                            <core:icon identifier="content-elements-mailform"/>
+                            <f:translate key="backEndModule.action.sendEmail"/>
+                        </f:form.button>
+                    </div>
+                </div>
+            </fieldset>
+        </f:form>
+    </f:section>
+</html>

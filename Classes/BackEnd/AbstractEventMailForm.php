@@ -28,6 +28,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This is the base class for e-mail forms in the back end.
@@ -92,7 +93,7 @@ abstract class AbstractEventMailForm
     /**
      * The constructor of this class. Instantiates an event object.
      *
-     * @param positive-int $eventUid UID of an event, must be > 0
+     * @param positive-int $eventUid
      *
      * @throws \InvalidArgumentException
      * @throws NotFoundException if event could not be instantiated
@@ -381,7 +382,7 @@ abstract class AbstractEventMailForm
     /**
      * Sends an e-mail to the attendees to inform about the changed event status.
      */
-    private function sendEmailToAttendees(): void
+    public function sendEmailToAttendees(): void
     {
         $event = $this->getEvent();
         $organizer = $event->getFirstOrganizer();
@@ -414,7 +415,7 @@ abstract class AbstractEventMailForm
 
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $this->getLanguageService()->getLL('message_emailToAttendeesSent'),
+                LocalizationUtility::translate('message_emailToAttendeesSent', 'seminars'),
                 '',
                 FlashMessage::OK,
                 true

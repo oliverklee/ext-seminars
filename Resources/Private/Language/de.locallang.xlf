@@ -3110,6 +3110,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registrations on the waiting list (%u)</source>
 				<target>Anmeldungen auf der Warteliste (%u)</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.email">
+				<source>Send an email to all registered persons</source>
+				<target>Email an alle angemeldeten Personen schicken</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>
@@ -3201,6 +3205,26 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="backEndModule.action.backToEventList">
 				<source>Back to the event list</source>
 				<target>Zurück zur Veranstaltungsliste</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.email">
+				<source>Email</source>
+				<target>Email</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.email.long">
+				<source>Send an email to all registered persons</source>
+				<target>Email an alle angemeldeten Personen schicken</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.sendEmail">
+				<source>Send email</source>
+				<target>Email verschicken</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.email.subject">
+				<source>Subject</source>
+				<target>Betreff</target>
+			</trans-unit>
+			<trans-unit id="backEndModule.email.body">
+				<source>Email body</source>
+				<target>Mailtext</target>
 			</trans-unit>
 		</body>
 	</file>

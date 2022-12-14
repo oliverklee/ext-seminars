@@ -27,6 +27,9 @@
                 <th scope="col" colspan="2" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.registrations"/>
                 </th>
+                <f:if condition="{permissions.readAccessToRegistrations}">
+                    <th scope="col" class="col-control nowrap">&nbsp;</th>
+                </f:if>
             </tr>
         </thead>
         <tbody>
@@ -109,6 +112,19 @@
                             </f:if>
                         </f:if>
                     </td>
+                    <f:if condition="({permissions.readAccessToRegistrations})">
+                        <td class="col-icon nowrap">
+                            <f:if condition="({visible} && {statistics} && {statistics.regularSeatsCount})">
+                                <f:link.action controller="BackEnd\Email" action="compose"
+                                               title="{f:translate(key: '{actionLabelPrefix}.email.long')}"
+                                               arguments="{event: event, pageUid: pageUid}"
+                                               class="btn btn-default" additionalAttributes="{role: 'button'}">
+                                    <core:icon identifier="content-elements-mailform"/>
+                                    <f:translate key="{actionLabelPrefix}.email"/>
+                                </f:link.action>
+                            </f:if>
+                        </td>
+                    </f:if>
                 </tr>
             </f:for>
         </tbody>

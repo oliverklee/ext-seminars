@@ -2340,6 +2340,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.heading.waitingListRegistrations">
 				<source>Registrations on the waiting list (%u)</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.heading.email">
+				<source>Send an email to all registered persons</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>
@@ -2410,6 +2413,21 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.backToEventList">
 				<source>Back to the event list</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.email.long">
+				<source>Send an email to all registered persons</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.sendEmail">
+				<source>Send email</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.email.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.email.body">
+				<source>Email body</source>
 			</trans-unit>
 		</body>
 	</file>
