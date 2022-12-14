@@ -67,9 +67,9 @@ abstract class AbstractRawDataCapableRepository extends Repository
 
         foreach ($rows as $row) {
             $uid = (int)$row['uid'];
-            $event = $modelsByUid[$uid] ?? null;
-            if ($event instanceof RawDataInterface) {
-                $event->setRawData($row);
+            $model = $modelsByUid[$uid] ?? null;
+            if ($model instanceof RawDataInterface) {
+                $model->setRawData($row);
             }
         }
     }
