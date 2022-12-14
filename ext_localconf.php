@@ -100,36 +100,33 @@ defined('TYPO3_MODE') or die('Access denied.');
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarAttachmentsToFal']
         = \OliverKlee\Seminars\UpgradeWizards\SeminarAttachmentsToFalUpgradeWizard::class;
 
-    $typo3Version = new \TYPO3\CMS\Core\Information\Typo3Version();
-    if ($typo3Version->getMajorVersion() >= 10) {
-        // This makes the plugin available for front-end rendering.
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
-            'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
-            // all actions
-            [
-                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
-            ],
-            // non-cacheable actions
-            [
-                \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
-            ]
-        );
+    // This makes the plugin available for front-end rendering.
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+        'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [
+            \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
+        ],
+        // non-cacheable actions
+        [
+            \OliverKlee\Seminars\Controller\FrontEndEditorController::class => 'index, edit, update, new, create',
+        ]
+    );
 
-        // This makes the plugin available for front-end rendering.
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
-            'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
-            // all actions
-            [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class
-                => 'checkPrerequisites, denyRegistration, new, confirm, create, thankYou',
-            ],
-            // non-cacheable actions
-            [
-                \OliverKlee\Seminars\Controller\EventRegistrationController::class
-                => 'checkPrerequisites, new, confirm, create',
-            ]
-        );
-    }
+    // This makes the plugin available for front-end rendering.
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+        'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [
+            \OliverKlee\Seminars\Controller\EventRegistrationController::class
+            => 'checkPrerequisites, denyRegistration, new, confirm, create, thankYou',
+        ],
+        // non-cacheable actions
+        [
+            \OliverKlee\Seminars\Controller\EventRegistrationController::class
+            => 'checkPrerequisites, new, confirm, create',
+        ]
+    );
 })();
