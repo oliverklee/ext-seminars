@@ -16,6 +16,7 @@ $boot = static function (): void {
                 \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index, exportCsv',
                 \OliverKlee\Seminars\Controller\BackEnd\RegistrationController::class
                 => 'showForEvent, exportCsvForEvent',
+                \OliverKlee\Seminars\Controller\BackEnd\EmailController::class => 'compose, send',
             ],
             [
                 'access' => 'user,group',
