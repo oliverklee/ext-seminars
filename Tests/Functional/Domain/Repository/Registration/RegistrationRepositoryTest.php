@@ -160,11 +160,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
         $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
     }
@@ -182,11 +178,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_attendances');
         $query = 'SELECT * FROM tx_seminars_attendances WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => $registration->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
     }

@@ -183,11 +183,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
     }
@@ -204,11 +200,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame(EventInterface::TYPE_SINGLE_EVENT, $databaseRow['object_type']);
@@ -226,11 +218,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame(EventInterface::TYPE_EVENT_TOPIC, $databaseRow['object_type']);
@@ -248,11 +236,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame(EventInterface::TYPE_EVENT_DATE, $databaseRow['object_type']);
@@ -732,11 +716,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
         self::assertIsArray($databaseRow);
 
         self::assertSame(0, (int)$databaseRow['registrations']);
@@ -755,11 +735,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
         self::assertIsArray($databaseRow);
 
         self::assertSame(2, (int)$databaseRow['registrations']);
@@ -778,11 +754,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
         self::assertIsArray($databaseRow);
 
         self::assertSame(0, (int)$databaseRow['registrations']);
@@ -801,11 +773,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
         $result = $connection->executeQuery($query, ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
         self::assertIsArray($databaseRow);
 
         self::assertSame(0, (int)$databaseRow['registrations']);
