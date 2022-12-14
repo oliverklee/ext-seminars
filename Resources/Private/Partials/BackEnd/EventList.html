@@ -101,7 +101,9 @@
                             <f:if condition="{statistics.regularSeatsCount}">
                                 <f:link.action
                                     controller="BackEnd\Registration" action="showForEvent" arguments="{event: event}"
-                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}">
+                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}"
+                                    class="btn btn-default" additionalAttributes="{role: 'button'}">
+                                    <core:icon identifier="actions-list"/>
                                     <f:translate key="{actionLabelPrefix}.showRegistrations"/>
                                 </f:link.action>
                             </f:if>
