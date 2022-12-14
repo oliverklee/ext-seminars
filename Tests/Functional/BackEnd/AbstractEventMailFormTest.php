@@ -139,7 +139,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertStringContainsString('Joe Johnson', $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
     }
 
     /**
@@ -243,7 +243,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertStringContainsString("\n-- \nThe one and only", $this->getTextBodyOfEmail($this->email));
+        self::assertStringContainsString("\n-- \nThe one and only", $this->email->getTextBody());
     }
 
     /**

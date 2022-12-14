@@ -8,7 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Tests\Unit\Email\Fixtures\TestingMailRole;
 use Symfony\Component\Mime\Part\DataPart;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -24,20 +23,6 @@ final class EmailBuilderTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = new EmailBuilder();
-    }
-
-    private function runInV9Only(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is intended for V9 only.');
-        }
-    }
-
-    private function runInV10AndHigherOnly(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() <= 9) {
-            self::markTestSkipped('This test is intended for V10 and higher only.');
-        }
     }
 
     /**
@@ -78,26 +63,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function subjectSetsSubjectInV9(): void
+    public function subjectSetsSubject(): void
     {
-        $this->runInV9Only();
-
-        $emailSubject = 'Good news!';
-        $this->subject->subject($emailSubject);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame($emailSubject, $email->getSubject());
-    }
-
-    /**
-     * @test
-     */
-    public function subjectSetsSubjectInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $emailSubject = 'Good news!';
         $this->subject->subject($emailSubject);
 
@@ -117,26 +84,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function textSetsPlainTextBodyInV9(): void
+    public function textSetsPlainTextBody(): void
     {
-        $this->runInV9Only();
-
-        $body = 'Good news!';
-        $this->subject->text($body);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame($body, $email->getBody());
-    }
-
-    /**
-     * @test
-     */
-    public function textSetsPlainTextBodyInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $body = 'Good news!';
         $this->subject->text($body);
 
@@ -156,62 +105,14 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function htmlSetsHtmlBodyInV9(): void
+    public function htmlSetsHtmlBody(): void
     {
-        $this->runInV9Only();
-
-        $body = 'Good news!';
-        $this->subject->html($body);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        $htmlBody = $this->filterSwiftMailerEmailAttachmentsByType($email, 'text/html')[0]->getBody();
-        self::assertSame($body, $htmlBody);
-    }
-
-    /**
-     * @test
-     */
-    public function htmlSetsHtmlBodyInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $body = 'Good news!';
         $this->subject->html($body);
 
         $email = $this->subject->build();
 
         self::assertSame($body, $email->getHtmlBody());
-    }
-
-    /**
-     * Returns the attachments of $email that have a content type that contains $contentType.
-     *
-     * Example: a $contentType of "text/calendar" will also find attachments that have 'text/calendar; charset="utf-8"'
-     * as the content type.
-     *
-     * @return array<int, \Swift_Mime_MimeEntity>
-     */
-    private function filterSwiftMailerEmailAttachmentsByType(\Swift_Message $email, string $contentType): array
-    {
-        $matches = [];
-
-        foreach ($this->getAttachmentsForSwiftMailerMessage($email) as $attachment) {
-            if (\strpos($attachment->getContentType(), $contentType) !== false) {
-                $matches[] = $attachment;
-            }
-        }
-
-        return $matches;
-    }
-
-    /**
-     * @return array<int, \Swift_Mime_MimeEntity>
-     */
-    private function getAttachmentsForSwiftMailerMessage(\Swift_Message $email): array
-    {
-        return $email->getChildren();
     }
 
     /**
@@ -225,26 +126,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function toCanSetOneRecipientInV9(): void
+    public function toCanSetOneRecipient(): void
     {
-        $this->runInV9Only();
-
-        $to = new TestingMailRole('max', 'max@example.com');
-        $this->subject->to($to);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame([$to->getEmailAddress() => $to->getName()], $email->getTo());
-    }
-
-    /**
-     * @test
-     */
-    public function toCanSetOneRecipientInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $to = new TestingMailRole('max', 'max@example.com');
         $this->subject->to($to);
 
@@ -257,33 +140,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function toCanSetTwoRecipientsInV9(): void
+    public function toCanSetTwoRecipients(): void
     {
-        $this->runInV9Only();
-
-        $to1 = new TestingMailRole('max', 'max@example.com');
-        $to2 = new TestingMailRole('ben', 'ben@example.com');
-        $this->subject->to($to1, $to2);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame(
-            [
-                $to1->getEmailAddress() => $to1->getName(),
-                $to2->getEmailAddress() => $to2->getName(),
-            ],
-            $email->getTo()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function toCanSetTwoRecipientsInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $to1 = new TestingMailRole('max', 'max@example.com');
         $to2 = new TestingMailRole('ben', 'ben@example.com');
         $this->subject->to($to1, $to2);
@@ -307,26 +165,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromCanSetFromInV9(): void
+    public function fromCanSetFrom(): void
     {
-        $this->runInV9Only();
-
-        $from = new TestingMailRole('max', 'max@example.com');
-        $this->subject->from($from);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame([$from->getEmailAddress() => $from->getName()], $email->getFrom());
-    }
-
-    /**
-     * @test
-     */
-    public function fromCanSetFromInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $from = new TestingMailRole('max', 'max@example.com');
         $this->subject->from($from);
 
@@ -347,28 +187,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function replyToCanSetOneRecipientInV9(): void
+    public function replyToCanSetOneRecipient(): void
     {
-        $this->runInV9Only();
-
-        $replyTo = new TestingMailRole('max', 'max@example.com');
-        $this->subject->replyTo($replyTo);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        /** @var array<string, string> $actualReplyTo */
-        $actualReplyTo = $email->getReplyTo();
-        self::assertSame([$replyTo->getEmailAddress() => $replyTo->getName()], $actualReplyTo);
-    }
-
-    /**
-     * @test
-     */
-    public function replyToCanSetOneRecipientInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $replyTo = new TestingMailRole('max', 'max@example.com');
         $this->subject->replyTo($replyTo);
 
@@ -381,35 +201,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function replyToCanSetTwoRecipientsInV9(): void
+    public function replyToCanSetTwoRecipients(): void
     {
-        $this->runInV9Only();
-
-        $replyTo1 = new TestingMailRole('max', 'max@example.com');
-        $replyTo2 = new TestingMailRole('ben', 'ben@example.com');
-        $this->subject->replyTo($replyTo1, $replyTo2);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        /** @var array<string, string> $actualReplyTo */
-        $actualReplyTo = $email->getReplyTo();
-        self::assertSame(
-            [
-                $replyTo1->getEmailAddress() => $replyTo1->getName(),
-                $replyTo2->getEmailAddress() => $replyTo2->getName(),
-            ],
-            $actualReplyTo
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function replyToCanSetTwoRecipientsInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $replyTo1 = new TestingMailRole('max', 'max@example.com');
         $replyTo2 = new TestingMailRole('ben', 'ben@example.com');
         $this->subject->replyTo($replyTo1, $replyTo2);
@@ -433,23 +226,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function emailInitiallyHasNoAttachmentsInV9(): void
+    public function emailInitiallyHasNoAttachments(): void
     {
-        $this->runInV9Only();
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        self::assertSame([], $this->getAttachmentsForSwiftMailerMessage($email));
-    }
-
-    /**
-     * @test
-     */
-    public function emailInitiallyHasNoAttachmentsInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $email = $this->subject->build();
 
         self::assertSame([], $email->getAttachments());
@@ -458,49 +236,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function attachCanAddOneAttachmentInV9(): void
+    public function attachCanAddOneAttachment(): void
     {
-        $this->runInV9Only();
-
-        $body = 'The cake is a lie';
-        $contentType = 'text/plain';
-        $fileName = 'message.txt';
-        $this->subject->attach($body, $contentType, $fileName);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        $attachments = $this->getAttachmentsForSwiftMailerMessage($email);
-        self::assertContainsOnlyInstancesOf(\Swift_Mime_MimeEntity::class, $attachments);
-        $firstAttachment = $attachments[0];
-        self::assertSame($body, $firstAttachment->getBody());
-        self::assertSame($contentType, $firstAttachment->getContentType());
-    }
-
-    /**
-     * @test
-     */
-    public function attachUsesApplicationOctetStreamAsDefaultForContentTypeInV9(): void
-    {
-        $this->runInV9Only();
-
-        $body = 'The cake is a lie';
-        $this->subject->attach($body);
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        $attachments = $this->getAttachmentsForSwiftMailerMessage($email);
-        self::assertSame('application/octet-stream', $attachments[0]->getContentType());
-    }
-
-    /**
-     * @test
-     */
-    public function attachCanAddOneAttachmentInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $body = 'The cake is a lie';
         $contentType = 'text/plain';
         $fileName = 'message.txt';
@@ -523,10 +260,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function attachUsesApplicationOctetStreamAsDefaultForContentTypeInV10(): void
+    public function attachUsesApplicationOctetStreamAsDefaultForContentType(): void
     {
-        $this->runInV10AndHigherOnly();
-
         $body = 'The cake is a lie';
         $this->subject->attach($body);
 
@@ -542,27 +277,8 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function attachCanAddTwoAttachmentsInV9(): void
+    public function attachCanAddTwoAttachments(): void
     {
-        $this->runInV9Only();
-
-        $this->subject->attach('The cake is a lie');
-        $this->subject->attach('There is no spoon.');
-
-        /** @var \Swift_Message $email */
-        $email = $this->subject->build();
-
-        $attachments = $this->getAttachmentsForSwiftMailerMessage($email);
-        self::assertCount(2, $attachments);
-    }
-
-    /**
-     * @test
-     */
-    public function attachCanAddTwoAttachmentsInV10(): void
-    {
-        $this->runInV10AndHigherOnly();
-
         $this->subject->attach('The cake is a lie');
         $this->subject->attach('There is no spoon.');
 

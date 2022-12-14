@@ -120,7 +120,7 @@ final class EmailTraitTest extends UnitTestCase
         // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
         $mock->setBody($textBody);
 
-        self::assertSame($textBody, $this->getTextBodyOfEmail($mock));
+        self::assertSame($textBody, $mock->getTextBody());
     }
 
     /**
@@ -134,7 +134,7 @@ final class EmailTraitTest extends UnitTestCase
         $mock = $this->createEmailMock();
         $mock->text($textBody);
 
-        self::assertSame($textBody, $this->getTextBodyOfEmail($mock));
+        self::assertSame($textBody, $mock->getTextBody());
     }
 
     /**
@@ -144,7 +144,7 @@ final class EmailTraitTest extends UnitTestCase
     {
         $email = (new EmailBuilder())->build();
 
-        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+        self::assertSame('', (string)$email->getHtmlBody());
     }
 
     /**
@@ -154,7 +154,7 @@ final class EmailTraitTest extends UnitTestCase
     {
         $email = (new EmailBuilder())->text('There is only text.')->build();
 
-        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+        self::assertSame('', (string)$email->getHtmlBody());
     }
 
     /**
@@ -164,7 +164,7 @@ final class EmailTraitTest extends UnitTestCase
     {
         $email = (new EmailBuilder())->text('There is only text.')->html('')->build();
 
-        self::assertSame('', $this->getHtmlBodyOfEmail($email));
+        self::assertSame('', (string)$email->getHtmlBody());
     }
 
     /**
@@ -175,7 +175,7 @@ final class EmailTraitTest extends UnitTestCase
         $htmlBody = '<p>There also is HTML.</p>';
         $email = (new EmailBuilder())->text('There is some text.')->html($htmlBody)->build();
 
-        self::assertSame($htmlBody, $this->getHtmlBodyOfEmail($email));
+        self::assertSame($htmlBody, (string)$email->getHtmlBody());
     }
 
     /**
@@ -186,7 +186,7 @@ final class EmailTraitTest extends UnitTestCase
         $htmlBody = '<p>There also is HTML.</p>';
         $email = (new EmailBuilder())->html($htmlBody)->build();
 
-        self::assertSame($htmlBody, $this->getHtmlBodyOfEmail($email));
+        self::assertSame($htmlBody, (string)$email->getHtmlBody());
     }
 
     /**
