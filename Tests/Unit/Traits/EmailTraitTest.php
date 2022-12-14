@@ -8,7 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Mime\Part\DataPart;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -17,20 +16,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 final class EmailTraitTest extends UnitTestCase
 {
     use EmailTrait;
-
-    private function runInV9Only(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() >= 10) {
-            self::markTestSkipped('This test is intended for V9 only.');
-        }
-    }
-
-    private function runInV10AndHigherOnly(): void
-    {
-        if ((new Typo3Version())->getMajorVersion() <= 9) {
-            self::markTestSkipped('This test is intended for V10 and higher only.');
-        }
-    }
 
     /**
      * @test
@@ -111,25 +96,8 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersTextBodyInV9(): void
-    {
-        $this->runInV9Only();
-
-        $textBody = 'What is love?';
-        $mock = $this->createEmailMock();
-        // @phpstan-ignore-next-line This line is V9-specific, and we are running PHPStan with V10.
-        $mock->setBody($textBody);
-
-        self::assertSame($textBody, $mock->getTextBody());
-    }
-
-    /**
-     * @test
-     */
     public function mockRemembersTextBodyInV10(): void
     {
-        $this->runInV10AndHigherOnly();
-
         $textBody = 'What is love?';
         $mock = $this->createEmailMock();
         $mock->text($textBody);

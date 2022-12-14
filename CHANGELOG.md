@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop `.htaccess` files (#2164)
 - Drop support for Emogrifier 4 and 5 (#2163)
 - Drop the SwiftMailer dependency (#2158)
-- Drop support for TYPO3 9LTS (#2156)
+- Drop support for TYPO3 9LTS (#2156, #2165)
 
 ### Fixed
 
