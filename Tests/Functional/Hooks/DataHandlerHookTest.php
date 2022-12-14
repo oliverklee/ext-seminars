@@ -95,11 +95,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     {
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $this->dataHandler->datamap[self::TABLE_SEMINARS][$uid] = $data;
 
         $this->subject->processDatamap_afterAllOperations($this->dataHandler);
@@ -109,11 +105,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     {
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $temporaryUid = 'NEW5e0f43477dcd4869591288';
         $this->dataHandler->datamap[self::TABLE_SEMINARS][$temporaryUid] = $data;
         $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
@@ -130,11 +122,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $uid = 1;
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
 
         $hook = $this->createMock(DataSanitization::class);
         $hook->expects(self::once())->method('sanitizeEventData')
@@ -157,11 +145,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $uid = 1;
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedTitle = 'ModifiedUpdateTitle';
 
         $hook = $this->createMock(DataSanitization::class);
@@ -177,11 +161,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
+
         self::assertSame($expectedTitle, $row['title']);
     }
 
@@ -194,11 +175,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $uid = 1;
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
 
         $hook = $this->createMock(DataSanitization::class);
         $hook->expects(self::once())->method('sanitizeEventData')
@@ -221,11 +198,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $uid = 1;
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedTitle = 'ModifiedNewTitle';
 
         $hook = $this->createMock(DataSanitization::class);
@@ -241,11 +214,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedTitle, $row['title']);
     }
 
@@ -272,22 +241,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook.xml');
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedDeadline = $data['deadline_registration'];
 
         $this->processUpdateActionForSeminarsTable($uid);
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDeadline, $row['deadline_registration']);
     }
 
@@ -315,11 +276,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame(0, $row['deadline_registration']);
     }
 
@@ -336,11 +293,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame(0, $row['deadline_registration']);
     }
 
@@ -367,22 +320,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook.xml');
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedDeadline = $data['deadline_early_bird'];
 
         $this->processUpdateActionForSeminarsTable($uid);
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDeadline, $row['deadline_early_bird']);
     }
 
@@ -411,11 +356,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame(0, $row['deadline_early_bird']);
     }
 
@@ -432,11 +373,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame(0, $row['deadline_early_bird']);
     }
 
@@ -449,22 +386,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook/TimeSlots.xml');
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedDate = $data['begin_date'];
 
         $this->processUpdateActionForSeminarsTable($uid);
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['begin_date']);
     }
 
@@ -492,11 +421,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['begin_date']);
     }
 
@@ -509,22 +434,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook/TimeSlots.xml');
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedDate = $data['begin_date'];
 
         $this->processNewActionForSeminarsTable($uid);
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['begin_date']);
     }
 
@@ -541,11 +458,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['begin_date']);
     }
 
@@ -573,11 +486,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['end_date']);
     }
 
@@ -590,22 +499,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataHandlerHook/TimeSlots.xml');
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $data = $result->fetchAssociative();
-        } else {
-            $data = $result->fetch();
-        }
+        $data = $result->fetchAssociative();
         $expectedDate = $data['end_date'];
 
         $this->processNewActionForSeminarsTable($uid);
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['end_date']);
     }
 
@@ -622,11 +523,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame($expectedDate, $row['end_date']);
     }
 
@@ -699,11 +596,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('unchanged-slug', $row['slug']);
     }
 
@@ -719,11 +612,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('unchanged-slug', $row['slug']);
     }
 
@@ -739,11 +628,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('unchanged-slug', $row['slug']);
     }
 
@@ -759,11 +644,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('single-event-without-slug', $row['slug']);
     }
 
@@ -779,11 +660,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('topic-without-slug', $row['slug']);
     }
 
@@ -799,11 +676,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $row = $result->fetchAssociative();
-        } else {
-            $row = $result->fetch();
-        }
+        $row = $result->fetchAssociative();
         self::assertSame('topic-with-slug', $row['slug']);
     }
 

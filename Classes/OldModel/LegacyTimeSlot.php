@@ -61,7 +61,7 @@ class LegacyTimeSlot extends AbstractTimeSpan
 
         $table = 'tx_seminars_sites';
         $row = self::getConnectionForTable($table)
-            ->select(['title'], $table, ['uid' => $this->getPlace()])->fetch();
+            ->select(['title'], $table, ['uid' => $this->getPlace()])->fetchAssociative();
 
         return \is_array($row) ? $row['title'] : '';
     }

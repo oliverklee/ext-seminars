@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use TYPO3\CMS\Core\Database\Connection;
@@ -89,9 +90,8 @@ class DataHandlerHook
      */
     private function processSingleEvent(int $uid): void
     {
-        /** @var array|bool $originalData */
         $originalData = $this->getConnectionForTable(self::TABLE_EVENTS)
-            ->select(['*'], self::TABLE_EVENTS, ['uid' => $uid])->fetch();
+            ->select(['*'], self::TABLE_EVENTS, ['uid' => $uid])->fetchAssociative();
         if (!\is_array($originalData)) {
             return;
         }
@@ -159,26 +159,28 @@ class DataHandlerHook
     private function copyBeginDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
-        $result = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
+        $queryResult = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
-            ->execute()->fetch();
+            ->execute();
+        $queryResultData = $queryResult instanceof Result ? $queryResult->fetchAssociative() : false;
 
-        if (\is_array($result)) {
-            $data['begin_date'] = (int)$result['begin_date'];
+        if (\is_array($queryResultData)) {
+            $data['begin_date'] = (int)$queryResultData['begin_date'];
         }
     }
 
     private function copyEndDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
-        $result = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
+        $queryResult = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
-            ->execute()->fetch();
+            ->execute();
+        $queryResultData = $queryResult instanceof Result ? $queryResult->fetchAssociative() : false;
 
-        if (\is_array($result)) {
-            $data['end_date'] = (int)$result['end_date'];
+        if (\is_array($queryResultData)) {
+            $data['end_date'] = (int)$queryResultData['end_date'];
         }
     }
 

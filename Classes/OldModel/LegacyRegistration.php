@@ -181,7 +181,7 @@ class LegacyRegistration extends AbstractModel
 
         $table = 'fe_users';
         /** @var array<string, string|int|bool>|false $data */
-        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetchAssociative();
         if (!\is_array($data)) {
             throw new NotFoundException(
                 'The FE user with the UID ' . $uid . ' could not be retrieved.',

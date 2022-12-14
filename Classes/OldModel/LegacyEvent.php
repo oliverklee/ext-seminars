@@ -1189,7 +1189,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $table = 'tx_seminars_payment_methods';
-        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetchAssociative();
         if (!\is_array($data)) {
             return '';
         }
@@ -1219,7 +1219,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $table = 'tx_seminars_payment_methods';
-        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetchAssociative();
 
         return \is_array($data) ? (string)$data['title'] : '';
     }
@@ -1247,7 +1247,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $table = 'static_languages';
         $data = self::getConnectionForTable($table)
-            ->select(['lg_name_local'], $table, ['lg_iso_2' => $isoCode])->fetch();
+            ->select(['lg_name_local'], $table, ['lg_iso_2' => $isoCode])->fetchAssociative();
 
         return \is_array($data) ? (string)$data['lg_name_local'] : '';
     }
@@ -1295,7 +1295,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         $table = 'tx_seminars_event_types';
         $data = self::getConnectionForTable($table)
-            ->select(['title'], $table, ['uid' => $this->getTopicInteger('event_type')])->fetch();
+            ->select(['title'], $table, ['uid' => $this->getTopicInteger('event_type')])->fetchAssociative();
 
         return \is_array($data) ? (string)$data['title'] : '';
     }
