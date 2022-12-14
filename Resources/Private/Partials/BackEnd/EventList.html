@@ -18,15 +18,15 @@
                 <th scope="col" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.date"/>
                 </th>
+                <f:if condition="{permissions.writeAccessToEvents}">
+                    <th scope="col" class="col-control nowrap">&nbsp;</th>
+                </f:if>
                 <th scope="col" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.seats"/>
                 </th>
                 <th scope="col" colspan="2" class="nowrap">
                     <f:translate key="{propertyLabelPrefix}.registrations"/>
                 </th>
-                <f:if condition="{permissions.writeAccessToEvents}">
-                    <th scope="col" class="col-control nowrap">&nbsp;</th>
-                </f:if>
             </tr>
         </thead>
         <tbody>
@@ -55,23 +55,6 @@
                     </td>
                     <td class="nowrap">
                         <f:render partial="EventDate" arguments="{event: event}"/>
-                    </td>
-                    <td class="nowrap">
-                        <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
-                    </td>
-                    <td class="nowrap">
-                        <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
-                    </td>
-                    <td class="nowrap">
-                        <f:if condition="({statistics} && {visible})">
-                            <f:if condition="{statistics.regularSeatsCount}">
-                                <f:link.action
-                                    controller="BackEnd\Registration" action="showForEvent" arguments="{event: event}"
-                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}">
-                                    <f:translate key="{actionLabelPrefix}.showRegistrations"/>
-                                </f:link.action>
-                            </f:if>
-                        </f:if>
                     </td>
                     <f:if condition="{permissions.writeAccessToEvents}">
                         <td class="col-control nowrap">
@@ -107,6 +90,23 @@
                             </div>
                         </td>
                     </f:if>
+                    <td class="nowrap">
+                        <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
+                    </td>
+                    <td class="nowrap">
+                        <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
+                    </td>
+                    <td class="nowrap">
+                        <f:if condition="({statistics} && {visible})">
+                            <f:if condition="{statistics.regularSeatsCount}">
+                                <f:link.action
+                                    controller="BackEnd\Registration" action="showForEvent" arguments="{event: event}"
+                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}">
+                                    <f:translate key="{actionLabelPrefix}.showRegistrations"/>
+                                </f:link.action>
+                            </f:if>
+                        </f:if>
+                    </td>
                 </tr>
             </f:for>
         </tbody>
