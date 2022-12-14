@@ -1,7 +1,8 @@
 {
 	"name": "oliverklee/seminars",
-	"type": "typo3-cms-extension",
 	"description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
+	"license": "GPL-2.0-or-later",
+	"type": "typo3-cms-extension",
 	"keywords": [
 		"seminars",
 		"workshops",
@@ -10,8 +11,6 @@
 		"education",
 		"talks"
 	],
-	"homepage": "https://www.oliverklee.de/typo3-services/seminarmanager/",
-	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
 			"name": "Oliver Klee",
@@ -20,6 +19,11 @@
 			"role": "developer"
 		}
 	],
+	"homepage": "https://www.oliverklee.de/typo3-services/seminarmanager/",
+	"support": {
+		"issues": "https://github.com/oliverklee/ext-seminars/issues",
+		"source": "https://github.com/oliverklee/ext-seminars"
+	},
 	"require": {
 		"php": "^7.2.0 || ~8.0.0",
 		"ext-json": "*",
@@ -43,14 +47,8 @@
 		"typo3/cms-frontend": "^10.4.11",
 		"typo3fluid/fluid": "^2.6.10"
 	},
-	"replace": {
-		"typo3-ter/seminars": "self.version"
-	},
-	"conflict": {
-		"helhum/typo3-console-plugin": "< 2.0.7"
-	},
 	"require-dev": {
-		"ergebnis/composer-normalize": "~2.15.0",
+		"ergebnis/composer-normalize": "~2.19.0",
 		"friendsofphp/php-cs-fixer": "^3.4.0",
 		"helhum/typo3-console": "^5.8.6 || ^6.7.2 || ^7.1.2",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
@@ -70,9 +68,26 @@
 		"typo3/cms-scheduler": "^10.4.11",
 		"typo3/coding-standards": "^0.5.5"
 	},
+	"replace": {
+		"typo3-ter/seminars": "self.version"
+	},
+	"conflict": {
+		"helhum/typo3-console-plugin": "< 2.0.7"
+	},
 	"suggest": {
 		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
 		"typo3/cms-install": "for running the upgrade wizards"
+	},
+	"prefer-stable": true,
+	"autoload": {
+		"psr-4": {
+			"OliverKlee\\Seminars\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"OliverKlee\\Seminars\\Tests\\": "Tests/"
+		}
 	},
 	"config": {
 		"allow-plugins": {
@@ -102,17 +117,6 @@
 			"web-dir": ".Build/public"
 		}
 	},
-	"autoload": {
-		"psr-4": {
-			"OliverKlee\\Seminars\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"OliverKlee\\Seminars\\Tests\\": "Tests/"
-		}
-	},
-	"prefer-stable": true,
 	"scripts": {
 		"post-autoload-dump": [
 			"@link-extension"
@@ -240,9 +244,5 @@
 		"php:rector": "Updates the code with Rector.",
 		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
 		"prepare-release": "Removes development-only files in preparation of a TER release."
-	},
-	"support": {
-		"issues": "https://github.com/oliverklee/ext-seminars/issues",
-		"source": "https://github.com/oliverklee/ext-seminars"
 	}
 }
