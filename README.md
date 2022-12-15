@@ -23,13 +23,6 @@ which the survey determines that nobody uses them will be removed quite soon.
 Please take a few minutes to fill out the survey to ensure your favorite
 features will not be removed. Thank you! :pray:
 
-## Compatibility with TYPO3 11LTS/11.5
-
-This extension is not compatible TYPO3 11LTS/11.5 yet.
-Please consider supporting the
-[crowdfunding campaign](https://github.com/oliverklee/ext-seminars/wiki/11LTS-Crowdfunding-Campaign)
-to make this happen.
-
 ## Give it a try!
 
 If you would like to test the extension yourself, there is a
