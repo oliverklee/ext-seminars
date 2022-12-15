@@ -3196,11 +3196,6 @@ parameters:
 			path: Tests/Functional/Configuration/CsvExportConfigurationCheckTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationFormConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/Configuration/RegistrationFormConfigurationCheckTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\RegistrationListConfigurationCheckTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Configuration/RegistrationListConfigurationCheckTest.php
