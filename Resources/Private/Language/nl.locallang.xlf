@@ -920,10 +920,6 @@ This event now has been confirmed.</source>
 				<source>Event Editor</source>
 				<target>Evenement editor</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_entered_events" xml:space="preserve">
-				<source>Events which I have entered</source>
-				<target>Evenementen die ik heb ingevoerd</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
 				<source>Countdown to the next event</source>
 				<target>Aftellen naar het volgende evenement</target>
@@ -1347,14 +1343,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_myvipevents_informal" xml:space="preserve">
 				<source>You are an editor for the following events:</source>
 				<target>Jij bent een VIP voor de volgende evenementen:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>U heeft de volgende evenementen ingevoerd:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents_informal" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>Jij hebt de volgende evenementen ingevoerd:</target>
 			</trans-unit>
 			<trans-unit id="label_category" xml:space="preserve">
 				<source>Category</source>

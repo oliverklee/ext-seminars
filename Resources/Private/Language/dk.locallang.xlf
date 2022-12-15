@@ -930,10 +930,6 @@ This event now has been confirmed.</source>
 				<source>Event Editor</source>
 				<target>Arrangementsredaktør</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_entered_events" xml:space="preserve">
-				<source>Events which I have entered</source>
-				<target>Arrangementer som jeg er tilmeldt</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
 				<source>Countdown to the next event</source>
 				<target>Nedtælling til næste arrangement</target>
@@ -1357,14 +1353,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_myvipevents_informal" xml:space="preserve">
 				<source>You are an editor for the following events:</source>
 				<target>Du er VIP ved de følgende arrangementer:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>Du har tilmeldt dig følgende arrangementer:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents_informal" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>Du har tilmeldt dig følgende arrangementer:</target>
 			</trans-unit>
 			<trans-unit id="label_category" xml:space="preserve">
 				<source>Category</source>

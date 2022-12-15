@@ -431,27 +431,6 @@ class EventBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the bag to events where the FE user given in the parameter
-     * $feUserUid is the owner.
-     *
-     * @param int<0, max> $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation
-     */
-    public function limitToOwner(int $feUserUid): void
-    {
-        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
-        if ($feUserUid < 0) {
-            throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
-        }
-
-        if ($feUserUid === 0) {
-            unset($this->whereClauseParts['owner']);
-            return;
-        }
-
-        $this->whereClauseParts['owner'] = 'tx_seminars_seminars.owner_feuser = ' . $feUserUid;
-    }
-
-    /**
      * Limits the bag to date and single records.
      */
     public function limitToDateAndSingleRecords(): void

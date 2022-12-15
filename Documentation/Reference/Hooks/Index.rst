@@ -114,7 +114,6 @@ There are 7 types of lists your implementation must handle:
 * seminar list (`seminar_list`)
 * my seminars (`my_events`)
 * my VIP seminars (`my_vip_events`)
-* my entered events (`my_entered_events`)
 * events next day (`events_next_day`)
 * other dates (`other_dates`)
 
@@ -152,7 +151,7 @@ Implement the methods required by the interface:
          * @param DefaultController $controller the calling controller
          * @param EventBagBuilder $builder the bag builder
          * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
-         *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
+         *        'my_vip_events', 'events_next_day' or 'other_dates'
          */
         public function modifyEventBagBuilder(
             DefaultController $controller,
