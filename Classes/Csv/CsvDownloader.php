@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -71,12 +70,6 @@ class CsvDownloader
                     break;
                 default:
                     $result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
-            }
-
-            // @deprecated #2107 will be removed in seminars 5.0
-            $resultCharset = strtolower($this->configuration->getAsString('charsetForCsv'));
-            if ($resultCharset !== 'utf-8') {
-                $result = (new CharsetConverter())->conv($result, 'utf-8', $resultCharset);
             }
         } catch (\Exception $exception) {
             HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
@@ -255,9 +248,7 @@ class CsvDownloader
     private function setPageTypeAndDisposition(string $csvFileName): void
     {
         $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
-        $headerProxy->addHeader(
-            'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
-        );
+        $headerProxy->addHeader('Content-type: text/csv; header=present; charset=utf-8');
         $headerProxy->addHeader('Content-disposition: attachment; filename=' . $csvFileName);
     }
 

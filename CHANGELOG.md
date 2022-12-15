@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- !!! Switch the CSV export to always use UTF-8 (#2181)
 - !!! Stop allowing single events as topics for date records (#2180)
 - Require oelib >= 5.0.1 (#2178)
 - Require feuserextrafields >= 5.2.1 (#2178)
@@ -16,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the the `charsetForCsv` setting (#2181)
 - Drop obsolete package conflicts (#2171)
 - Drop `.htaccess` files (#2164)
 - Drop support for Emogrifier 4 and 5 (#2163)

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Http\Stream;
 
@@ -20,10 +19,7 @@ class CsvResponse extends Response
         $body->rewind();
         parent::__construct($body);
 
-        // @deprecated #2107 will be removed in seminars 5.0
-        $charset = ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('charsetForCsv');
-
-        $this->headers['Content-Type'][] = 'text/csv; header=present; charset=' . $charset;
+        $this->headers['Content-Type'][] = 'text/csv; header=present; charset=utf-8';
         $this->lowercasedHeaderNames['content-type'] = 'Content-Type';
 
         $contentDisposition = 'attachment';
