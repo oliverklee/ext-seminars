@@ -20,11 +20,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkDisplayFrontEndEditorFields();
         $this->checkRequiredFrontEndEditorFields();
         $this->checkRequiredFrontEndEditorPlaceFields();
-
-        $this->checkAllowFrontEndEditingOfCheckboxes();
-        $this->checkAllowFrontEndEditingOfPlaces();
-        $this->checkAllowFrontEndEditingOfSpeakers();
-        $this->checkAllowFrontEndEditingOfTargetGroups();
     }
 
     private function checkEventEditorTemplateFile(): void
@@ -182,46 +177,6 @@ class EventEditorConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'homepage',
                 'directions',
             ]
-        );
-    }
-
-    private function checkAllowFrontEndEditingOfCheckboxes(): void
-    {
-        $this->checkIfBoolean(
-            'allowFrontEndEditingOfCheckboxes',
-            'This value specifies whether front-end editing of checkboxes is possible.
-            If this value is incorrect, front-end editing of checkboxes might be possible even when this is not desired
-            (or vice versa).'
-        );
-    }
-
-    private function checkAllowFrontEndEditingOfPlaces(): void
-    {
-        $this->checkIfBoolean(
-            'allowFrontEndEditingOfPlaces',
-            'This value specifies whether front-end editing of places is possible.
-            If this value is incorrect, front-end editing of places might be possible even when this is not desired
-            (or vice versa).'
-        );
-    }
-
-    private function checkAllowFrontEndEditingOfSpeakers(): void
-    {
-        $this->checkIfBoolean(
-            'allowFrontEndEditingOfSpeakers',
-            'This value specifies whether front-end editing of speakers is possible.
-            If this value is incorrect, front-end editing of  speakers might be possible even when this is not desired
-            (or vice versa).'
-        );
-    }
-
-    private function checkAllowFrontEndEditingOfTargetGroups(): void
-    {
-        $this->checkIfBoolean(
-            'allowFrontEndEditingOfTargetGroups',
-            'This value specifies whether front-end editing of target groups is possible.
-            If this value is incorrect, front-end editing of target groups might be possible
-            even when this is not desired (or vice versa).'
         );
     }
 }

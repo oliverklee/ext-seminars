@@ -1355,66 +1355,6 @@ override the corresponding value from TS Setup.**
          160
 
 
-.. container:: table-row
-
-   Property
-         allowFrontEndEditingOfSpeakers
-
-   Data type
-         boolean
-
-   Description
-         whether to allow front-end editing of speakers
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         allowFrontEndEditingOfPlaces
-
-   Data type
-         boolean
-
-   Description
-         whether to allow front-end editing of places
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         allowFrontEndEditingOfCheckboxes
-
-   Data type
-         boolean
-
-   Description
-         whether to allow front-end editing of checkboxes
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         allowFrontEndEditingOfTargetGroups
-
-   Data type
-         boolean
-
-   Description
-         whether to allow front-end editing of target groups
-
-   Default
-         0
-
-
 .. ###### END~OF~TABLE ######
 
 [tsref:plugin.tx\_seminars\_pi1]

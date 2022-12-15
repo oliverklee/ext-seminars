@@ -1344,50 +1344,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>(from TS setup)</source>
 				<target>(aus dem TS-Setup)</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" xml:space="preserve">
-				<source>Allow editing speakers:</source>
-				<target>Erlaube das Bearbeiten von ReferentInnen:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPlaces" xml:space="preserve">
-				<source>Allow editing places:</source>
-				<target>Erlaube das Bearbeiten von Veranstaltungsorten:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" xml:space="preserve">
-				<source>Allow editing organizers:</source>
-				<target>Erlaube das Bearbeiten von Veranstaltern:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
-				<source>Allow editing payment methods:</source>
-				<target>Erlaube das Bearbeiten von Zahlungsarten:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" xml:space="preserve">
-				<source>Allow editing event types:</source>
-				<target>Erlaube das Bearbeiten von Veranstaltungsarten:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" xml:space="preserve">
-				<source>Allow editing checkboxes:</source>
-				<target>Erlaube das Bearbeiten von Checkboxen:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfLodgings" xml:space="preserve">
-				<source>Allow editing lodgings:</source>
-				<target>Erlaube das Bearbeiten von Unterbringungen:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfFoods" xml:space="preserve">
-				<source>Allow editing foods:</source>
-				<target>Erlaube das Bearbeiten von Verpflegungen:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
-				<source>Allow editing target groups:</source>
-				<target>Erlaube das Bearbeiten von Zielgruppen:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCategories" xml:space="preserve">
-				<source>Allow editing categories:</source>
-				<target>Erlaube das Bearbeiten von Kategorien:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSkills" xml:space="preserve">
-				<source>Allow editing skills:</source>
-				<target>Erlaube das Bearbeiten von Fähigkeiten:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
 				<source>0 levels (only selected page)</source>
 				<target>0 Ebenen (nur die ausgewählte Seite)</target>
@@ -2180,10 +2136,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Please enter a title.</source>
 				<target>Bitte geben Sie einen Titel ein.</target>
 			</trans-unit>
-			<trans-unit id="message_emptyName" xml:space="preserve">
-				<source>Please enter a name.</source>
-				<target>Bitte geben Sie einen Namen an.</target>
-			</trans-unit>
 			<trans-unit id="message_emptyOrganizer" xml:space="preserve">
 				<source>Please select at least one organizer.</source>
 				<target>Bitte wählen Sie mindestens einen Veranstalter aus.</target>
@@ -2491,22 +2443,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
 				<source>seconds</source>
 				<target>Sekunden</target>
-			</trans-unit>
-			<trans-unit id="newPlaceButton" xml:space="preserve">
-				<source>Create new place</source>
-				<target>Neuen Veranstaltungsort anlegen</target>
-			</trans-unit>
-			<trans-unit id="newSpeakerButton" xml:space="preserve">
-				<source>Create new speaker</source>
-				<target>Neue ReferentIn anlegen</target>
-			</trans-unit>
-			<trans-unit id="newCheckboxButton" xml:space="preserve">
-				<source>Create new checkbox</source>
-				<target>Neue Checkbox anlegen</target>
-			</trans-unit>
-			<trans-unit id="newTargetGroupButton" xml:space="preserve">
-				<source>Create new target group</source>
-				<target>Neue Zielgruppe anlegen</target>
 			</trans-unit>
 			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
 				<source>The event has been published.</source>

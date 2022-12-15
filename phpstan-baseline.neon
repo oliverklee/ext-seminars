@@ -1426,133 +1426,13 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Cannot access offset 'editCheckbox_title' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editCheckbox_uid' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_address' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_city' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_country' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_directions' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_homepage' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_title' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_uid' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editPlace_zip' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editTargetGroup_uid' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'editTargetGroup…' on mixed\\.$#"
-			count: 3
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newCheckbox_title' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_address' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_city' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_country' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_directions' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_homepage' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_title' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newPlace_zip' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newTargetGroup_title' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot access offset 'newTargetGroup…' on mixed\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Cannot access property \\$sXPath on formidable_mainrenderlet\\|null\\.$#"
-			count: 4
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot call method _makeRenderlet\\(\\) on tx_mkforms_forms_Base\\|null\\.$#"
-			count: 4
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Cannot call method getAuxiliaryRecordsPid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 3
+			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
@@ -1582,22 +1462,17 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 5
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Casting to int something that's already int\\<1, max\\>\\.$#"
-			count: 4
+			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 15
+			count: 2
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
@@ -1607,21 +1482,11 @@ parameters:
 
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 8
+			count: 4
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createBasicAuxiliaryData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createNewSpeaker\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -1646,53 +1511,18 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:openEditSpeakerModalBox\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:populateListCountries\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:populateListSpeakers\\(\\) should return array\\<int, array\\{caption\\: string, value\\: int\\}\\> but returns list\\<array\\{caption\\: string, value\\: int, labelcustom\\?\\: non\\-falsy\\-string, wrapitem\\: non\\-falsy\\-string\\}\\|array\\{uid\\: int, selected\\: 0\\|1, name\\: string, edit\\: 0\\|1\\}\\>\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:updateSpeaker\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:populateListSpeakers\\(\\) should return array\\<int, array\\{caption\\: string, value\\: int\\}\\> but returns list\\<array\\{caption\\: string, value\\: int, wrapitem\\: '\\|\\</td\\>\\<td\\>&nbsp;'\\}\\|array\\{uid\\: int, selected\\: 0\\|1, name\\: string\\}\\>\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Only booleans are allowed in &&, OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null given on the right side\\.$#"
 			count: 4
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Only booleans are allowed in &&, int\\|false given on the left side\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Only booleans are allowed in &&, int\\|false given on the right side\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Only booleans are allowed in an if condition, OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$editButtonConfiguration has no value type specified in iterable type array\\.$#"
-			count: 7
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$results has no value type specified in iterable type array\\.$#"
-			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
@@ -1706,23 +1536,8 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$gender of method OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\:\\:setGender\\(\\) expects 0\\|1\\|2, 0\\|1\\|99 given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#1 \\$list of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:inList\\(\\) expects string, array\\|string given\\.$#"
 			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$organization of method OliverKlee\\\\Seminars\\\\Model\\\\Speaker\\:\\:setOrganization\\(\\) expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$path of method tx_ameosformidable\\:\\:_navConf\\(\\) expects string, string\\|null given\\.$#"
-			count: 7
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
@@ -1731,27 +1546,12 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function strip_tags expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 14
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function trim expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 9
+			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Parameter \\#1 \\$subparts of method OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:hideSubpartsArray\\(\\) expects array\\<int\\|string, non\\-empty\\-string\\>, array\\<string\\> given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$title of method OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\:\\:setTitle\\(\\) expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$title of method OliverKlee\\\\Seminars\\\\Model\\\\TargetGroup\\:\\:setTitle\\(\\) expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -1761,52 +1561,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#2 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateCheckbox\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validatePlace\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateSpeaker\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:validateTargetGroup\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$sXPath of method tx_ameosformidable\\:\\:_makeRenderlet\\(\\) expects string, string\\|null given\\.$#"
-			count: 3
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#3 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:setCheckboxData\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, mixed given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#3 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:setPlaceData\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, mixed given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#3 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:setSpeakerData\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#3 \\$formData of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:setTargetGroupData\\(\\) expects array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\>, mixed given\\.$#"
 			count: 2
 			path: Classes/FrontEnd/EventEditor.php
 

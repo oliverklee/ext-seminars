@@ -1020,39 +1020,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
 				<source>(from TS setup)</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" xml:space="preserve">
-				<source>Allow editing speakers:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPlaces" xml:space="preserve">
-				<source>Allow editing places:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" xml:space="preserve">
-				<source>Allow editing organizers:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
-				<source>Allow editing payment methods:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" xml:space="preserve">
-				<source>Allow editing event types:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" xml:space="preserve">
-				<source>Allow editing checkboxes:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfLodgings" xml:space="preserve">
-				<source>Allow editing lodgings:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfFoods" xml:space="preserve">
-				<source>Allow editing foods:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
-				<source>Allow editing target groups:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCategories" xml:space="preserve">
-				<source>Allow editing categories:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSkills" xml:space="preserve">
-				<source>Allow editing skills:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
 				<source>0 levels (only selected page)</source>
 			</trans-unit>
@@ -1647,9 +1614,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_emptyTitle" xml:space="preserve">
 				<source>Please enter a title.</source>
 			</trans-unit>
-			<trans-unit id="message_emptyName" xml:space="preserve">
-				<source>Please enter a name.</source>
-			</trans-unit>
 			<trans-unit id="message_emptyOrganizer" xml:space="preserve">
 				<source>Please select at least one organizer.</source>
 			</trans-unit>
@@ -1880,18 +1844,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
 				<source>seconds</source>
-			</trans-unit>
-			<trans-unit id="newPlaceButton" xml:space="preserve">
-				<source>Create new place</source>
-			</trans-unit>
-			<trans-unit id="newSpeakerButton" xml:space="preserve">
-				<source>Create new speaker</source>
-			</trans-unit>
-			<trans-unit id="newCheckboxButton" xml:space="preserve">
-				<source>Create new checkbox</source>
-			</trans-unit>
-			<trans-unit id="newTargetGroupButton" xml:space="preserve">
-				<source>Create new target group</source>
 			</trans-unit>
 			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
 				<source>The event has been published.</source>
