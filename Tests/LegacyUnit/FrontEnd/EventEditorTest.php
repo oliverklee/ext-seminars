@@ -25,6 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractEditor
  * @covers \OliverKlee\Seminars\FrontEnd\EventEditor
  */
 final class EventEditorTest extends TestCase

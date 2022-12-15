@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
@@ -23,7 +22,6 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use SJBR\StaticInfoTables\PiBaseApi;
-use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1132,45 +1130,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Returns a data item of the currently logged-in FE user or, if that data
-     * has additionally been stored in the FE user session (as billing address),
-     * the data from the session.
-     *
-     * This function may only be called when a FE user is logged in.
-     *
-     * The caller needs to take care of htmlspecialcharing the data.
-     *
-     * @param array $params contents of the "params" XML child of the userobj node (needs to contain an element with
-     *        the key "key")
-     *
-     * @return string the contents of the element
-     */
-    public function getFeUserData(array $params): string
-    {
-        $result = $this->retrieveDataFromSession($params);
-        if (!empty($result)) {
-            return $result;
-        }
-
-        $key = $params['key'];
-        $feUserData = $this->getFrontEndController()->fe_user->user;
-        $result = (string)$feUserData[$key];
-
-        // If the country is empty, try the static info country instead.
-        if (empty($result) && ($key === 'country')) {
-            $staticInfoCountry = $feUserData['static_info_country'];
-            if (empty($staticInfoCountry)) {
-                $result = $this->getDefaultCountry();
-            } else {
-                $this->initStaticInfo();
-                $result = (string)$this->staticInfo->getStaticInfoName('COUNTRIES', $staticInfoCountry, '', '', true);
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Provides a localized list of country names from static_tables.
      *
      * @return array[] localized country names from static_tables as an
@@ -1193,27 +1152,6 @@ class RegistrationForm extends AbstractEditor
                 'value' => $currentCountryName,
             ];
         }
-
-        return $result;
-    }
-
-    /**
-     * Returns the default country as localized string.
-     *
-     * @return string the default country's localized name, will be empty if there is no default country
-     */
-    private function getDefaultCountry(): string
-    {
-        $defaultCountryCode = ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
-        if ($defaultCountryCode === '') {
-            return '';
-        }
-
-        $this->initStaticInfo();
-
-        $currentLanguageCode = ConfigurationRegistry::get('config')->getAsString('language');
-        $identifiers = ['iso' => $defaultCountryCode];
-        $result = LocalizationUtility::getLabelFieldValue($identifiers, 'static_countries', $currentLanguageCode, true);
 
         return $result;
     }
@@ -1369,37 +1307,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Returns the UID of the preselected payment method.
-     *
-     * This will be:
-     * a) the same payment method as previously selected (within the current
-     * session) if that method is available for the current event
-     * b) if only one payment method is available, that payment method
-     * c) 0 in all other cases
-     *
-     * @return int the UID of the preselected payment method or 0 if should will be preselected
-     */
-    public function getPreselectedPaymentMethod(): int
-    {
-        $availablePaymentMethods = $this->populateListPaymentMethods();
-        if (count($availablePaymentMethods) === 1) {
-            return (int)$availablePaymentMethods[0]['value'];
-        }
-
-        $result = 0;
-        $paymentMethodFromSession = $this->retrieveSavedMethodOfPayment();
-
-        foreach ($availablePaymentMethods as $paymentMethod) {
-            if ((int)$paymentMethod['value'] === $paymentMethodFromSession) {
-                $result = (int)$paymentMethod['value'];
-                break;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Saves the following data to the FE user session:
      * - payment method
      * - account number
@@ -1442,30 +1349,6 @@ class RegistrationForm extends AbstractEditor
                     ->setAsString($this->prefixId . '_' . $currentKey, $parameters[$currentKey]);
             }
         }
-    }
-
-    /**
-     * Retrieves the saved payment method from the FE user session.
-     *
-     * @return int the UID of the payment method that has been saved in the FE user session or 0 if there is none
-     */
-    private function retrieveSavedMethodOfPayment(): int
-    {
-        return (int)$this->retrieveDataFromSession(['key' => 'method_of_payment']);
-    }
-
-    /**
-     * Retrieves the data for a given key from the FE user session. Returns an
-     * empty string if no data for that key is stored.
-     *
-     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
-     *        (used for retrieving the current form field name)
-     *
-     * @return string the data stored in the FE user session under the given key, might be empty
-     */
-    public function retrieveDataFromSession(array $parameters): string
-    {
-        return Session::getInstance(Session::TYPE_USER)->getAsString($this->prefixId . '_' . $parameters['key']);
     }
 
     /**
