@@ -618,64 +618,6 @@ final class EventsListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsCsvExportButtonForEventWithRegistration(): void
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'needs_registration' => 1,
-            ]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'seminar' => $eventUid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            '=' . $eventUid,
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showDoesNotContainCsvExportButtonForHiddenEventWithRegistration(): void
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'hidden' => 1,
-                'needs_registration' => 1,
-            ]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'seminar' => $eventUid,
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            '<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
-            $this->dummySysFolderPid .
-            '&amp;table=tx_seminars_attendances' .
-            '&amp;eventUid=' . $eventUid . '">',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function showContainsEventFromSubfolder(): void
     {
         $subfolderPid = $this->testingFramework->createSystemFolder(

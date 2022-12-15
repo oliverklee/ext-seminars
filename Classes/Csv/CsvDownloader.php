@@ -151,9 +151,6 @@ class CsvDownloader
         if ($pageUid <= 0) {
             return $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
         }
-        if (!$this->canAccessListOfEvents($pageUid)) {
-            return $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
-        }
 
         $this->setContentTypeForEventLists();
 
@@ -192,7 +189,7 @@ class CsvDownloader
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                $result = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class)->hasAccess();
+                $result = true;
                 break;
             case 'FE':
                 $event = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid, false, true);
@@ -205,21 +202,6 @@ class CsvDownloader
         }
 
         return $result;
-    }
-
-    /**
-     * Checks whether the logged-in BE user has access to the event list.
-     *
-     * @param int $pageUid PID of the page with events for which to check access, must be >= 0
-     *
-     * @return bool TRUE if the list of events may be exported as CSV, FALSE otherwise
-     */
-    protected function canAccessListOfEvents(int $pageUid): bool
-    {
-        $accessCheck = GeneralUtility::makeInstance(BackEndEventAccessCheck::class);
-        $accessCheck->setPageUid($pageUid);
-
-        return $accessCheck->hasAccess();
     }
 
     /**
@@ -293,9 +275,7 @@ class CsvDownloader
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                $accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
-                $accessCheck->setPageUid($pageUid);
-                $result = $accessCheck->hasAccess();
+                $result = true;
                 break;
             case 'FE':
                 // The fall-through is intentional.
