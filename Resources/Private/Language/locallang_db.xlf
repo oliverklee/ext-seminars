@@ -400,18 +400,6 @@
 			<trans-unit id="tx_seminars_attendances.method_of_payment" xml:space="preserve">
 				<source>Method of payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_number" xml:space="preserve">
-				<source>Account number</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_code" xml:space="preserve">
-				<source>Bank code</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_name" xml:space="preserve">
-				<source>Bank name</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve">
-				<source>Account owner</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.separate_billing_address">
 				<source>Separate billing address</source>
 			</trans-unit>

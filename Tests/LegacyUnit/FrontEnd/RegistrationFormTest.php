@@ -568,22 +568,6 @@ final class RegistrationFormTest extends TestCase
                 'key' => 'method_of_payment',
                 'self-contained' => false,
             ],
-            'account_number' => [
-                'key' => 'account_number',
-                'self-contained' => false,
-            ],
-            'bank_code' => [
-                'key' => 'bank_code',
-                'self-contained' => false,
-            ],
-            'bank_name' => [
-                'key' => 'bank_name',
-                'self-contained' => false,
-            ],
-            'account_owner' => [
-                'key' => 'account_owner',
-                'self-contained' => false,
-            ],
             'billing_address' => [
                 'key' => 'billing_address',
                 'self-contained' => false,

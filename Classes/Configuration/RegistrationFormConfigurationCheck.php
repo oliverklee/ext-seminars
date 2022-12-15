@@ -44,7 +44,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
 
         $this->checkListPid();
         $this->checkLoginPid();
-        $this->checkBankTransferUid();
         $this->checkLogOutOneTimeAccountsAfterRegistration();
         $this->checkMyEventsPid();
         $this->checkDetailPid();
@@ -130,14 +129,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
                 'step_counter',
                 'price',
                 'method_of_payment',
-                // @deprecated #1571 will be removed in seminars 5.0
-                'account_number',
-                // @deprecated #1571 will be removed in seminars 5.0
-                'bank_code',
-                // @deprecated #1571 will be removed in seminars 5.0
-                'bank_name',
-                // @deprecated #1571 will be removed in seminars 5.0
-                'account_owner',
                 'billing_address',
                 'company',
                 'gender',
@@ -257,19 +248,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
             'userGroupUidsForAdditionalAttendeesFrontEndUsers',
             'This value specifies the FE user groups for the FE users created for additional attendees.
             If this value is not set correctly, those FE users might not be able to log in.'
-        );
-    }
-
-    /**
-     * @deprecated #1571 will be removed in seminars 5.0
-     */
-    private function checkBankTransferUid(): void
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'bankTransferUID',
-            'This value specifies the payment method that corresponds to a bank transfer.
-            If this value is not set correctly,
-            validation of the bank data in the event registration form will not work correctly.'
         );
     }
 

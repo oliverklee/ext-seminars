@@ -195,12 +195,6 @@ class LegacyRegistration extends AbstractModel
         }
         $this->setMethodOfPaymentUid($methodOfPayment);
 
-        // @deprecated #1571 will be removed in seminars 5.0
-        $this->recordData['account_number'] = $registrationData['account_number'];
-        $this->recordData['bank_code'] = $registrationData['bank_code'];
-        $this->recordData['bank_name'] = $registrationData['bank_name'];
-        $this->recordData['account_owner'] = $registrationData['account_owner'];
-
         $this->recordData['company'] = $registrationData['company'];
         $this->recordData['gender'] = $registrationData['gender'];
         $this->recordData['name'] = $registrationData['name'];

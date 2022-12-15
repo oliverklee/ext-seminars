@@ -1296,23 +1296,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         bankTransferUID
-
-   Data type
-         record\_id
-
-   Description
-         UID of the payment method that corresponds to "bank transfer", used
-         for input validation in the registration form,
-         @deprecated #1571, will be removed in seminars 5.0
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
          externalLinkTarget
 
    Data type

@@ -1832,22 +1832,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Payment</source>
 				<target>Bezahlung</target>
 			</trans-unit>
-			<trans-unit id="label_account_number" xml:space="preserve">
-				<source>Account number:</source>
-				<target>Kontonummer:</target>
-			</trans-unit>
-			<trans-unit id="label_bank_code" xml:space="preserve">
-				<source>Bank code:</source>
-				<target>Bankleitzahl:</target>
-			</trans-unit>
-			<trans-unit id="label_bank_name" xml:space="preserve">
-				<source>Bank name:</source>
-				<target>Name der Bank:</target>
-			</trans-unit>
-			<trans-unit id="label_account_owner" xml:space="preserve">
-				<source>Account owner:</source>
-				<target>Kontoinhaber:</target>
-			</trans-unit>
 			<trans-unit id="label_billing_address" xml:space="preserve">
 				<source>Billing address</source>
 				<target>Rechnungsadresse</target>
@@ -2327,10 +2311,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
 				<source>Please select a method of payment.</source>
 				<target>Bitte wählen Sie eine Zahlungsart aus.</target>
-			</trans-unit>
-			<trans-unit id="message_provideBankData" xml:space="preserve">
-				<source>Please provide your bank data.</source>
-				<target>Bitte geben Sie Ihre Bankverbindung an.</target>
 			</trans-unit>
 			<trans-unit id="message_selectLodging" xml:space="preserve">
 				<source>Please select at least one lodging option.</source>

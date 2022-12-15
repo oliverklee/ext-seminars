@@ -366,14 +366,6 @@ CREATE TABLE tx_seminars_attendances (
     additional_persons int(11) unsigned DEFAULT '0' NOT NULL,
     datepaid int(11) unsigned DEFAULT '0' NOT NULL,
     method_of_payment int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated #1571 will be removed in seminars 5.0
-    account_number tinytext,
-    # @deprecated #1571 will be removed in seminars 5.0
-    bank_code tinytext,
-    # @deprecated #1571 will be removed in seminars 5.0
-    bank_name tinytext,
-    # @deprecated #1571 will be removed in seminars 5.0
-    account_owner tinytext,
     separate_billing_address tinyint(1) unsigned DEFAULT '0' NOT NULL,
     company tinytext,
     name varchar(80) DEFAULT '' NOT NULL,

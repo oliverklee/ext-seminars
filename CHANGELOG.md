@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop anything bank-data related (#2192)
 - Remove the board-related prices (#2190)
 - Drop the upgrade wizards (#2187)
 - Drop unused model methods and mapper relations (#2185)

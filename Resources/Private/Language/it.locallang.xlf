@@ -1792,22 +1792,6 @@ This event now has been confirmed.</source>
 				<source>Payment</source>
 				<target>Pagamento</target>
 			</trans-unit>
-			<trans-unit id="label_account_number" xml:space="preserve">
-				<source>Account number:</source>
-				<target>Numero conto:</target>
-			</trans-unit>
-			<trans-unit id="label_bank_code" xml:space="preserve">
-				<source>Bank code:</source>
-				<target>Codice banca:</target>
-			</trans-unit>
-			<trans-unit id="label_bank_name" xml:space="preserve">
-				<source>Bank name:</source>
-				<target>Nome banca:</target>
-			</trans-unit>
-			<trans-unit id="label_account_owner" xml:space="preserve">
-				<source>Account owner:</source>
-				<target>Titolare del conto:</target>
-			</trans-unit>
 			<trans-unit id="label_billing_address" xml:space="preserve">
 				<source>Billing address</source>
 				<target>Indirizzo di fatturazione</target>
@@ -2287,10 +2271,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
 				<source>Please select a method of payment.</source>
 				<target>Selezionare un metodo di pagamento.</target>
-			</trans-unit>
-			<trans-unit id="message_provideBankData" xml:space="preserve">
-				<source>Please provide your bank data.</source>
-				<target>Inserire i dati bancari.</target>
 			</trans-unit>
 			<trans-unit id="message_selectLodging" xml:space="preserve">
 				<source>Please select at least one lodging option.</source>
