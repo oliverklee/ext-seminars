@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)
 - !!! Stop allowing single events as topics for date records (#2180)
 - Require oelib >= 5.0.1 (#2178)
