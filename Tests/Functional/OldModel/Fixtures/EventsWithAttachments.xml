@@ -8,7 +8,7 @@
     <tx_seminars_seminars>
         <uid>2</uid>
         <title>Event with non-migrated attachment</title>
-        <attached_files>handout.pdf</attached_files>
+        <attached_files>1</attached_files>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>3</uid>

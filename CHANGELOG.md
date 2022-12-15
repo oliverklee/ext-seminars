@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Switch the FAL-related fields in the DB to int (#2187)
 - Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)
 - !!! Stop allowing single events as topics for date records (#2180)
@@ -18,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the upgrade wizards (#2187)
 - Drop unused model methods and mapper relations (#2185)
 - Drop the legacy FE editor (#2184)
 - Drop the unused `CommaSeparatedTitlesViewHelper` (#2182)
