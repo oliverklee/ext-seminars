@@ -21,7 +21,6 @@ updates:
       - dependency-name: "helhum/typo3-console"
       - dependency-name: "helmich/typo3-typoscript-lint"
         versions: [ ">= 3.0.0" ]
-      - dependency-name: "oliverklee/oelib"
       - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
         versions: [ ">= 9" ]
