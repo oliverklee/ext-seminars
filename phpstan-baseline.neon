@@ -36,12 +36,7 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<mixed\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$object of function get_class expects object, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
@@ -2261,12 +2256,7 @@ parameters:
 			path: Classes/Hooks/HookProvider.php
 
 		-
-			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<mixed\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/Hooks/HookProvider.php
-
-		-
-			message: "#^Parameter \\#1 \\$object of function get_class expects object, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
 			count: 1
 			path: Classes/Hooks/HookProvider.php
 
@@ -6066,6 +6056,31 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:key\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetSet\\(\\) expects Model, string\\|null given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetExists\\(\\) expects int\\|Model, string given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetGet\\(\\) expects int\\|Model, string given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetUnset\\(\\) expects int\\|Model, string given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
 			message: "#^Cannot call method toString\\(\\) on Symfony\\\\Component\\\\Mime\\\\Header\\\\HeaderInterface\\|null\\.$#"
 			count: 1
 			path: Tests/Unit/Email/EmailBuilderTest.php
@@ -6169,6 +6184,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:nameUserDataDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^There is no request attribute \"\" configured so we can't figure out the exact type to return when calling OliverKlee\\\\Seminars\\\\Rendering\\\\NullRequest\\:\\:getAttribute$#"
+			count: 1
+			path: Tests/Unit/Rendering/NullRequestTest.php
 
 		-
 			message: "#^Cannot access property \\$fe_user on mixed\\.$#"
