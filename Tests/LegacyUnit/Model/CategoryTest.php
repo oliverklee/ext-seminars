@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Seminars\Model\Category;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\Category
+ */
 final class CategoryTest extends TestCase
 {
     /**

@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * This test case holds all tests specific to event topics.
  *
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
 final class EventTopicTest extends TestCase

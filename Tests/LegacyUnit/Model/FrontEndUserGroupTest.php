@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\FrontEndUserGroup
+ */
 final class FrontEndUserGroupTest extends TestCase
 {
     /**

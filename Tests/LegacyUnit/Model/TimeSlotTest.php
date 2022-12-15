@@ -8,6 +8,10 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\TimeSlot;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
+ * @covers \OliverKlee\Seminars\Model\TimeSlot
+ */
 final class TimeSlotTest extends TestCase
 {
     /**

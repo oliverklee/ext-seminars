@@ -10,6 +10,9 @@ use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\BackEndUser
+ */
 final class BackEndUserTest extends TestCase
 {
     /**

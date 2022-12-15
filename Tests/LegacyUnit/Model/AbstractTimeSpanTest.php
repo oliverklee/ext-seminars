@@ -8,6 +8,9 @@ use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
+ */
 final class AbstractTimeSpanTest extends TestCase
 {
     /**

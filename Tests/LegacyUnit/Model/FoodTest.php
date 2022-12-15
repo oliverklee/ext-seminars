@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Seminars\Model\Food;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\Food
+ */
 final class FoodTest extends TestCase
 {
     /**

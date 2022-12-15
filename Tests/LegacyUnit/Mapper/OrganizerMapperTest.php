@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\Organizer;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\OrganizerMapper
+ */
 final class OrganizerMapperTest extends TestCase
 {
     /**

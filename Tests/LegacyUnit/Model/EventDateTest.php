@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * This test case holds all tests specific to event dates.
  *
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
 final class EventDateTest extends TestCase

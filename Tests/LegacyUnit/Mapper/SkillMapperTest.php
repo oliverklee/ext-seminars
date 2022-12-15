@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Model\Skill;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\SkillMapper
+ */
 final class SkillMapperTest extends TestCase
 {
     /**

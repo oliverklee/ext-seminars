@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Model\Organizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
 final class EventTest extends UnitTestCase
