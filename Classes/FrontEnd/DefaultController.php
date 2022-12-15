@@ -1022,7 +1022,6 @@ class DefaultController extends TemplateHelper
 
         $this->setSingleViewRegularPriceMarkers();
         $this->setSingleViewSpecialPriceMarkers();
-        $this->setSingleViewBoardPriceMarkers();
     }
 
     /**
@@ -1038,7 +1037,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker('price_regular', $this->seminar->getCurrentPriceRegular());
         $this->hideSubparts(
-            'price_special,price_earlybird_regular,price_earlybird_special,price_board_regular,price_board_special',
+            'price_special,price_earlybird_regular,price_earlybird_special',
             'field_wrapper'
         );
     }
@@ -1084,27 +1083,6 @@ class DefaultController extends TemplateHelper
         } else {
             $this->hideSubparts('price_special', 'field_wrapper');
             $this->hideSubparts('price_earlybird_special', 'field_wrapper');
-        }
-    }
-
-    /**
-     * Sets the prices with board (regular and special) or hides the corresponding subparts if those prices
-     * are not available.
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    private function setSingleViewBoardPriceMarkers(): void
-    {
-        if ($this->seminar->hasPriceRegularBoard()) {
-            $this->setMarker('price_board_regular', $this->seminar->getPriceRegularBoard());
-        } else {
-            $this->hideSubparts('price_board_regular', 'field_wrapper');
-        }
-
-        if ($this->seminar->hasPriceSpecialBoard()) {
-            $this->setMarker('price_board_special', $this->seminar->getPriceSpecialBoard());
-        } else {
-            $this->hideSubparts('price_board_special', 'field_wrapper');
         }
     }
 

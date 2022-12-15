@@ -111,10 +111,8 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame('the first one to the left', $subject->getRoom());
         self::assertSame('1234.56', $subject->getPriceRegular());
         self::assertSame('234.56', $subject->getEarlyBirdPriceRegular());
-        self::assertSame('2234.56', $subject->getPriceRegularBoard());
         self::assertSame('1134.54', $subject->getPriceSpecial());
         self::assertSame('1034.54', $subject->getEarlyBirdPriceSpecial());
-        self::assertSame('1334.54', $subject->getPriceSpecialBoard());
         self::assertSame('Nothing to see here.', $subject->getAdditionalInformation());
         self::assertTrue($subject->needsRegistration());
         self::assertTrue($subject->allowsMultipleRegistrations());

@@ -901,18 +901,8 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method getPriceRegularBoard\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method getPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method getPriceSpecialBoard\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1126,17 +1116,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method hasPriceRegularBoard\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method hasPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method hasPriceSpecialBoard\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -3706,17 +3686,7 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPriceRegularBoard\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Cannot call method getPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot call method getPriceSpecialBoard\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 

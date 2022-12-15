@@ -1051,10 +1051,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_early</numIndex>
 										<numIndex index="1">price_regular_early</numIndex>
 									</numIndex>
-									<numIndex index="23" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board</numIndex>
-										<numIndex index="1">price_regular_board</numIndex>
-									</numIndex>
 									<numIndex index="24" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special</numIndex>
 										<numIndex index="1">price_special</numIndex>
@@ -1062,10 +1058,6 @@
 									<numIndex index="25" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_early</numIndex>
 										<numIndex index="1">price_special_early</numIndex>
-									</numIndex>
-									<numIndex index="26" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board</numIndex>
-										<numIndex index="1">price_special_board</numIndex>
 									</numIndex>
 									<numIndex index="27" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.payment_methods</numIndex>
@@ -1222,10 +1214,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_early</numIndex>
 										<numIndex index="1">price_regular_early</numIndex>
 									</numIndex>
-									<numIndex index="23" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board</numIndex>
-										<numIndex index="1">price_regular_board</numIndex>
-									</numIndex>
 									<numIndex index="24" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special</numIndex>
 										<numIndex index="1">price_special</numIndex>
@@ -1233,10 +1221,6 @@
 									<numIndex index="25" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_early</numIndex>
 										<numIndex index="1">price_special_early</numIndex>
-									</numIndex>
-									<numIndex index="26" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board</numIndex>
-										<numIndex index="1">price_special_board</numIndex>
 									</numIndex>
 									<numIndex index="27" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.payment_methods</numIndex>

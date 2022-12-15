@@ -1230,11 +1230,6 @@ class EventBagBuilder extends AbstractBagBuilder
             ' OR ' .
             \sprintf($notZeroAndInRange, 'price_special_early', $maximumPrice) .
             '))) ' .
-            // @deprecated #1773 will be removed in seminars 5.0
-            'OR ' .
-            \sprintf($notZeroAndInRange, 'price_regular_board', $maximumPrice) . ' OR ' .
-            // @deprecated #1773 will be removed in seminars 5.0
-            \sprintf($notZeroAndInRange, 'price_special_board', $maximumPrice) .
             ')';
 
         $table = 'tx_seminars_seminars';
@@ -1286,9 +1281,7 @@ class EventBagBuilder extends AbstractBagBuilder
             'OR (price_regular_early >= ' . $minimumPrice . ' ' .
             'OR price_special_early >= ' . $minimumPrice . ') ' .
             ')) ' .
-            // @deprecated #1773 will be removed in seminars 5.0
-            'OR price_regular_board >= ' . $minimumPrice . ' ' .
-            'OR price_special_board >= ' . $minimumPrice . ') ';
+            ') ';
 
         $table = 'tx_seminars_seminars';
         $queryBuilder = $this->getQueryBuilderForTable($table);

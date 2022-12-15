@@ -120,10 +120,6 @@
 				<source>Early-bird price</source>
 				<target>Prezzo anticipato</target>
 			</trans-unit>
-			<trans-unit id="label_price_board_regular" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Prezzo regolare pensione completa</target>
-			</trans-unit>
 			<trans-unit id="label_price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Prezzo speciale</target>
@@ -135,10 +131,6 @@
 			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
 				<source>Early-bird special price</source>
 				<target>Prezzo speciale anticipato</target>
-			</trans-unit>
-			<trans-unit id="label_price_board_special" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Prezzo speciale pensione completa</target>
 			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Method of payment</source>
@@ -1552,10 +1544,6 @@ This event now has been confirmed.</source>
 				<source>Early-bird price</source>
 				<target>Prezzo anticipato</target>
 			</trans-unit>
-			<trans-unit id="label_price_board_regular" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Prezzo regolare inclusa pensione completa</target>
-			</trans-unit>
 			<trans-unit id="label_price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Prezzo speciale</target>
@@ -1563,10 +1551,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
 				<source>Early-bird special price</source>
 				<target>Prezzo speciale anticipato</target>
-			</trans-unit>
-			<trans-unit id="label_price_board_special" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Prezzo speciale inclusa pensione completa</target>
 			</trans-unit>
 			<trans-unit id="label_total_price" xml:space="preserve">
 				<source>Total price</source>
@@ -2216,20 +2200,12 @@ This event now has been confirmed.</source>
 				<source>Please enter a valid regular early bird price.</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="message_invalidPriceRegularBoard" xml:space="preserve">
-				<source>Please enter a valid regular board price.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_invalidPriceSpecial" xml:space="preserve">
 				<source>Please enter a valid special price.</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="message_invalidPriceSpecialEarly" xml:space="preserve">
 				<source>Please enter a valid special early bird price.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceSpecialBoard" xml:space="preserve">
-				<source>Please enter a valid special board price.</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="message_emptyAdditionalInformation" xml:space="preserve">

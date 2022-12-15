@@ -237,8 +237,8 @@ override the corresponding value from TS Setup.**
          output.Allowed values are in: event\_type, title, subtitle, language,
          description, accreditation\_number, credit\_points, category, date,
          uid, time, place, room, expiry, speakers, partners, tutors, leaders, p
-         rice\_regular,price\_board\_regular,price\_special,price\_board\_speci
-         al,additional\_information, target\_groups, attached\_files,
+         rice\_regular,price\_special,additional\_information,
+         target\_groups, attached\_files,
          paymentmethods, target\_groups, organizers, vacancies,
          deadline\_registration, otherdates, eventsnextday, registration, back,
          image, requirements, dependencies
@@ -1234,8 +1234,8 @@ override the corresponding value from TS Setup.**
          deadline\_registration, needs\_registration,
          allows\_multiple\_registrations, queue\_size, offline\_attendees,
          attendees\_min, attendees\_max, target\_groups, price\_regular,
-         price\_regular\_early, price\_regular\_board, price\_special,
-         price\_special\_early, price\_special\_board, payment\_methods, place,
+         price\_regular\_early, price\_special,
+         price\_special\_early, payment\_methods, place,
          room, lodgings, foods, speakers, leaders, partners, tutors,
          checkboxes, uses\_terms\_2, attached\_file\_box, notes
 
@@ -1245,8 +1245,8 @@ override the corresponding value from TS Setup.**
          ate,begin\_date\_registration,deadline\_early\_bird,deadline\_registra
          tion,needs\_registration,allows\_multiple\_registrations,queue\_size,o
          ffline\_attendees,attendees\_min,attendees\_max,target\_groups,price\_
-         regular,price\_regular\_early,price\_regular\_board,price\_special,pri
-         ce\_special\_early,price\_special\_board,payment\_methods,place,room,l
+         regular,price\_regular\_early,price\_special,price\_special\_early,
+         payment\_methods,place,room,l
          odgings,foods,speakers,leaders,partners,tutors,checkboxes,uses\_terms\
          _2,attached\_file\_box,notes
 
@@ -1268,8 +1268,8 @@ override the corresponding value from TS Setup.**
          deadline\_registration, needs\_registration,
          allows\_multiple\_registrations, queue\_size, attendees\_min,
          attendees\_max, offline\_attendees, target\_groups, price\_regular,
-         price\_regular\_early, price\_regular\_board, price\_special,
-         price\_special\_early, price\_special\_board, payment\_methods, place,
+         price\_regular\_early, price\_special,
+         price\_special\_early, payment\_methods, place,
          room, lodgings, foods, speakers, leaders, partners, tutors,
          checkboxes, uses\_terms\_2, attached\_file\_box, notes
 

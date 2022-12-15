@@ -73,12 +73,8 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
                 'leaders',
                 'price_regular',
                 'price_regular_early',
-                // @deprecated #1773 will be removed in seminars 5.0
-                'price_regular_board',
                 'price_special',
                 'price_special_early',
-                // @deprecated #1773 will be removed in seminars 5.0
-                'price_special_board',
                 'additional_information',
                 'payment_methods',
                 'organizers',
