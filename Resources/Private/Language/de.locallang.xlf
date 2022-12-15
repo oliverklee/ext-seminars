@@ -964,10 +964,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Event Editor</source>
 				<target>Veranstaltungs-Editor</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.my_entered_events" xml:space="preserve">
-				<source>Events which I have entered</source>
-				<target>Veranstaltungen, die ich eingegeben habe</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
 				<source>Countdown to the next event</source>
 				<target>Countdown zur nächsten Veranstaltung</target>
@@ -1399,14 +1395,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_myvipevents_informal" xml:space="preserve">
 				<source>You are an editor for the following events:</source>
 				<target>Du bist für die folgenden Veranstaltungen als Bearbeiter eingetragen:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>Sie haben die folgenden Veranstaltungen eingetragen:</target>
-			</trans-unit>
-			<trans-unit id="label_myenteredevents_informal" xml:space="preserve">
-				<source>You have entered the following events:</source>
-				<target>Du hast die folgenden Veranstaltungen eingetragen:</target>
 			</trans-unit>
 			<trans-unit id="label_category" xml:space="preserve">
 				<source>Category</source>

@@ -53,10 +53,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.event_editor</numIndex>
 										<numIndex index="1">edit_event</numIndex>
 									</numIndex>
-									<numIndex index="8" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.my_entered_events</numIndex>
-										<numIndex index="1">my_entered_events</numIndex>
-									</numIndex>
 									<numIndex index="9" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.countdown</numIndex>
 										<numIndex index="1">countdown</numIndex>

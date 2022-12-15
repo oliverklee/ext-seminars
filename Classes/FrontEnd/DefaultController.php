@@ -23,7 +23,6 @@ use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
-use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
@@ -350,10 +349,6 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'my_vip_events':
-                // The fallthrough is intended
-                // because createListView() will differentiate later.
-                // We still use the processEventEditorActions call in the next case.
-            case 'my_entered_events':
                 $this->processEventEditorActions();
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -1546,21 +1541,6 @@ class DefaultController extends TemplateHelper
                 }
 
                 break;
-            case 'my_entered_events':
-                if ($this->hasEventEditorAccess()) {
-                    $result .= $this->getSubpart('MESSAGE_MY_ENTERED_EVENTS');
-                    if ($this->isConfigurationCheckEnabled()) {
-                        $configurationCheck = new MyEnteredEventsConfigurationCheck(
-                            $this->getConfigurationWithFlexForms(),
-                            'plugin.tx_seminars_pi1'
-                        );
-                        $configurationCheck->check();
-                        $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-                    }
-                } else {
-                    $isOkay = false;
-                }
-                break;
             default:
             // nothing to do
             }
@@ -1648,7 +1628,7 @@ class DefaultController extends TemplateHelper
         if ($whatToDisplay !== 'my_events') {
             $this->limitForAdditionalParameters($builder);
         }
-        if (!in_array($whatToDisplay, ['my_entered_events', 'my_events', 'topic_list'], true)) {
+        if (!in_array($whatToDisplay, ['my_events', 'topic_list'], true)) {
             $builder->limitToDateAndSingleRecords();
             $this->limitToTimeFrameSetting($builder);
         }
@@ -1674,10 +1654,6 @@ class DefaultController extends TemplateHelper
                     // current user is manually added as a VIP.
                     $builder->limitToEventManager($this->getLoggedInFrontEndUserUid());
                 }
-                break;
-            case 'my_entered_events':
-                $builder->limitToOwner($user !== null ? $user->getUid() : 0);
-                $builder->showHiddenRecords();
                 break;
             case 'events_next_day':
                 $builder->limitToEventsNextDay($this->seminar);
@@ -2413,10 +2389,7 @@ class DefaultController extends TemplateHelper
     {
         $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
-        if (
-            $whatToDisplay !== 'my_entered_events'
-            && !($whatToDisplay === 'my_vip_events' && $mayManagersEditTheirEvents)
-        ) {
+        if (!($whatToDisplay === 'my_vip_events' && $mayManagersEditTheirEvents)) {
             $this->hideColumns(['edit']);
         }
     }
@@ -2470,11 +2443,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideRegisterColumnIfNecessary(string $whatToDisplay): void
     {
-        if (
-            $whatToDisplay === 'my_vip_events'
-            || $whatToDisplay === 'my_entered_events'
-            || !$this->isRegistrationEnabled()
-        ) {
+        if ($whatToDisplay === 'my_vip_events' || !$this->isRegistrationEnabled()) {
             $this->hideColumns(['registration']);
         }
     }
@@ -3107,7 +3076,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideStatusColumnIfNotUsed(string $whatToDisplay): void
     {
-        if ($whatToDisplay === 'my_entered_events' || $whatToDisplay === 'my_vip_events') {
+        if ($whatToDisplay === 'my_vip_events') {
             return;
         }
 
