@@ -347,10 +347,8 @@ class DefaultController extends TemplateHelper
                 }
                 break;
             case 'my_vip_events':
-                $this->processEventEditorActions();
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
-                // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -2221,15 +2219,7 @@ class DefaultController extends TemplateHelper
             return '';
         }
 
-        /** @var string[] $links */
-        $links = [$this->createEditLink()];
-
-        if ($this->seminar->isPublished()) {
-            // @deprecated #1568 will be removed in seminars 5.0
-            $links[] = $this->seminar->isHidden() ? $this->createUnhideLink() : $this->createHideLink();
-        }
-
-        return implode(' ', $links);
+        return $this->createEditLink();
     }
 
     /**
@@ -2246,66 +2236,6 @@ class DefaultController extends TemplateHelper
             (string)$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
             ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
         );
-    }
-
-    /**
-     * Creates a "hide" link (to the current page) for the current event.
-     *
-     * This function does not check the edit permissions for this event.
-     *
-     * @return string HTML for the link, will not be empty
-     *
-     * @deprecated #1568 will be removed in seminars 5.0
-     */
-    protected function createHideLink(): string
-    {
-        return $this->createActionLink('hide');
-    }
-
-    /**
-     * Creates a "unhide" link (to the current page) for the current event.
-     *
-     * This function does not check the edit permissions for this event.
-     *
-     * @return string HTML for the link, will not be empty
-     *
-     * @deprecated #1568 will be removed in seminars 5.0
-     */
-    protected function createUnhideLink(): string
-    {
-        return $this->createActionLink('unhide');
-    }
-
-    /**
-     * Creates an action link (to the current page or $pageUid) for the current event.
-     *
-     * This function does not check the edit permissions for this event.
-     *
-     * @param string $action "hide", "unhide" or "copy"
-     *
-     * @return string HTML for the link, will not be empty
-     */
-    protected function createActionLink(string $action): string
-    {
-        $seminarUid = $this->seminar->getUid();
-
-        $aTag = $this->cObj
-            ->getTypoLink($this->translate('label_' . $action), (string)$this->getFrontEndController()->id);
-
-        /** @var string[] $dataAttributes */
-        $dataAttributes = [
-            'method' => 'post',
-            'post-tx_seminars_pi1-action' => $action,
-            'post-tx_seminars_pi1-seminar' => $seminarUid,
-        ];
-        $flattenedDataAttributes = '';
-        foreach ($dataAttributes as $key => $value) {
-            $flattenedDataAttributes .= ' data-' . $key . '="' . $value . '"';
-        }
-
-        $replacement = preg_replace('/" *>/', '"' . $flattenedDataAttributes . '>', $aTag);
-
-        return $replacement;
     }
 
     /**
@@ -3090,76 +3020,6 @@ class DefaultController extends TemplateHelper
             // Ignores the exception because the user will be warned of the
             // problem by the configuration check.
         }
-    }
-
-    /**
-     * Processes hide/unhide and copy events for the FE-editable events.
-     */
-    protected function processEventEditorActions(): void
-    {
-        $eventUid = (int)($this->piVars['seminar'] ?? 0);
-        if ($eventUid <= 0) {
-            return;
-        }
-
-        // hasAccessMessage returns an empty string only if an event record with
-        // the UID set in the piVar "seminar" exists and the currently
-        // logged-in FE user is allowed to edit it.
-        if ($this->createEventEditorInstance()->hasAccessMessage() !== '') {
-            return;
-        }
-
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $event = $mapper->find($eventUid);
-        if (!$event->isPublished()) {
-            return;
-        }
-
-        switch ((string)($this->piVars['action'] ?? '')) {
-            case 'hide':
-                // @deprecated #1568 will be removed in seminars 5.0
-                $this->hideEvent($event);
-                break;
-            case 'unhide':
-                // @deprecated #1568 will be removed in seminars 5.0
-                $this->unhideEvent($event);
-                break;
-            default:
-            // nothing to do
-            }
-    }
-
-    /**
-     * Marks the given event as hidden and saves it.
-     */
-    protected function hideEvent(Event $event): void
-    {
-        $event->markAsHidden();
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $mapper->save($event);
-
-        $this->redirectToCurrentUrl();
-    }
-
-    /**
-     * Marks the given event as visible and saves it.
-     */
-    protected function unhideEvent(Event $event): void
-    {
-        $event->markAsVisible();
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $mapper->save($event);
-
-        $this->redirectToCurrentUrl();
-    }
-
-    /**
-     * Redirects to the current URL.
-     */
-    protected function redirectToCurrentUrl(): void
-    {
-        $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
-        HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
     }
 
     /**

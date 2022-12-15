@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures;
 
 use OliverKlee\Seminars\FrontEnd\DefaultController;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -26,20 +25,5 @@ class TestingDefaultController extends DefaultController
     public function mayCurrentUserEditCurrentEvent(): bool
     {
         return parent::mayCurrentUserEditCurrentEvent();
-    }
-
-    public function processEventEditorActions(): void
-    {
-        parent::processEventEditorActions();
-    }
-
-    public function hideEvent(Event $event): void
-    {
-        parent::hideEvent($event);
-    }
-
-    public function unhideEvent(Event $event): void
-    {
-        parent::unhideEvent($event);
     }
 }

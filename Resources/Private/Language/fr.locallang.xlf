@@ -1672,14 +1672,6 @@ This event now has been confirmed.</source>
 				<source>Edit</source>
 				<target>Modifier</target>
 			</trans-unit>
-			<trans-unit id="label_hide" xml:space="preserve">
-				<source>hide</source>
-				<target>cacher</target>
-			</trans-unit>
-			<trans-unit id="label_unhide" xml:space="preserve">
-				<source>unhide</source>
-				<target>rendre visible</target>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Retour à la liste</target>

@@ -692,7 +692,7 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 5
+			count: 4
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -962,7 +962,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getTypoLink\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -972,7 +972,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 9
+			count: 8
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1157,17 +1157,12 @@ parameters:
 
 		-
 			message: "#^Cannot call method isHidden\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
 			message: "#^Cannot call method isOwnerFeUser\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method isPublished\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1197,7 +1192,7 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1218,11 +1213,6 @@ parameters:
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
 			count: 3
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:createActionLink\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
