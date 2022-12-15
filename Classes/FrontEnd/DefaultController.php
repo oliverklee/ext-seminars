@@ -25,7 +25,6 @@ use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
-use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SingleViewConfigurationCheck;
@@ -2641,15 +2640,6 @@ class DefaultController extends TemplateHelper
 
         $output = $this->createRegistrationHeading($errorMessage) . $registrationForm .
             $this->createRegistrationFooter();
-
-        if ($this->isConfigurationCheckEnabled()) {
-            $configurationCheck = new RegistrationFormConfigurationCheck(
-                $this->getConfigurationWithFlexForms(),
-                'plugin.tx_seminars_pi1'
-            );
-            $configurationCheck->check();
-            $output .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-        }
 
         return $output;
     }
