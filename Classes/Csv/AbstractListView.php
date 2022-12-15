@@ -7,9 +7,7 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a CSV export of registrations.
@@ -79,19 +77,10 @@ abstract class AbstractListView
             $languageService = $this->getLanguageService();
         } else {
             $backEndUser = $this->getBackEndUser();
-            if ((new Typo3Version())->getMajorVersion() >= 10) {
-                if ($backEndUser instanceof BackendUserAuthentication) {
-                    $languageService = LanguageService::createFromUserPreferences($backEndUser);
-                } else {
-                    $languageService = LanguageService::create('default');
-                }
+            if ($backEndUser instanceof BackendUserAuthentication) {
+                $languageService = LanguageService::createFromUserPreferences($backEndUser);
             } else {
-                $languageService = GeneralUtility::makeInstance(LanguageService::class);
-                if ($backEndUser instanceof BackendUserAuthentication) {
-                    $languageService->init($backEndUser->uc['lang']);
-                } else {
-                    $languageService->init('default');
-                }
+                $languageService = LanguageService::create('default');
             }
         }
 

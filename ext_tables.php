@@ -5,26 +5,23 @@ $boot = static function (): void {
     /**
      * BE module
      */
-    $typo3Version = new \TYPO3\CMS\Core\Information\Typo3Version();
-    if ($typo3Version->getMajorVersion() >= 10) {
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'Seminars',
-            'web',
-            'events',
-            '',
-            [
-                \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index, exportCsv',
-                \OliverKlee\Seminars\Controller\BackEnd\RegistrationController::class
-                => 'showForEvent, exportCsvForEvent',
-                \OliverKlee\Seminars\Controller\BackEnd\EmailController::class => 'compose, send',
-            ],
-            [
-                'access' => 'user,group',
-                'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
-                'labels' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
-            ]
-        );
-    }
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Seminars',
+        'web',
+        'events',
+        '',
+        [
+            \OliverKlee\Seminars\Controller\BackEnd\EventController::class => 'index, exportCsv',
+            \OliverKlee\Seminars\Controller\BackEnd\RegistrationController::class
+            => 'showForEvent, exportCsvForEvent',
+            \OliverKlee\Seminars\Controller\BackEnd\EmailController::class => 'compose, send',
+        ],
+        [
+            'access' => 'user,group',
+            'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
+            'labels' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
+        ]
+    );
 
     /**
      * Legacy BE module
