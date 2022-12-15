@@ -19,7 +19,6 @@ class SpeakerMapper extends AbstractDataMapper
     protected $modelClassName = Speaker::class;
 
     protected $relations = [
-        'skills' => SkillMapper::class,
         'owner' => FrontEndUserMapper::class,
     ];
 }

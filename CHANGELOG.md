@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop unused model methods and mapper relations (#2185)
 - Drop the legacy FE editor (#2184)
 - Drop the unused `CommaSeparatedTitlesViewHelper` (#2182)
 - Drop the the `charsetForCsv` setting (#2181)

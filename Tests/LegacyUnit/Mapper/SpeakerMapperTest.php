@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Speaker;
@@ -67,74 +65,6 @@ final class SpeakerMapperTest extends TestCase
         self::assertEquals(
             'John Doe',
             $model->getName()
-        );
-    }
-
-    // Tests regarding the skills.
-
-    /**
-     * @test
-     */
-    public function getSkillsReturnsListInstance(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(Collection::class, $model->getSkills());
-    }
-
-    /**
-     * @test
-     */
-    public function getSkillsWithoutSkillsReturnsEmptyList(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
-
-        $model = $this->subject->find($uid);
-        self::assertTrue(
-            $model->getSkills()->isEmpty()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSkillsWithOneSkillReturnsNonEmptyList(): void
-    {
-        $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = MapperRegistry::get(SkillMapper::class)->getNewGhost();
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_speakers',
-            $speakerUid,
-            $skill->getUid(),
-            'skills'
-        );
-
-        $model = $this->subject->find($speakerUid);
-        self::assertFalse(
-            $model->getSkills()->isEmpty()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSkillsWithOneSkillReturnsOneSkill(): void
-    {
-        $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = MapperRegistry::get(SkillMapper::class)
-            ->getNewGhost();
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_speakers',
-            $speakerUid,
-            $skill->getUid(),
-            'skills'
-        );
-
-        $model = $this->subject->find($speakerUid);
-        self::assertEquals(
-            $skill->getUid(),
-            $model->getSkills()->getUids()
         );
     }
 
