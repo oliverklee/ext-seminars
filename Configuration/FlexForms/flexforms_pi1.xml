@@ -1293,38 +1293,6 @@
 							</config>
 						</TCEforms>
 					</requiredFrontEndEditorFields>
-					<allowFrontEndEditingOfSpeakers>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.allowFrontEndEditingOfSpeakers</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfSpeakers>
-					<allowFrontEndEditingOfPlaces>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.allowFrontEndEditingOfPlaces</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfPlaces>
-					<allowFrontEndEditingOfCheckboxes>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.allowFrontEndEditingOfCheckboxes</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfCheckboxes>
-					<allowFrontEndEditingOfTargetGroups>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.allowFrontEndEditingOfTargetGroups</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfTargetGroups>
 				</el>
 			</ROOT>
 		</s_fe_editing>

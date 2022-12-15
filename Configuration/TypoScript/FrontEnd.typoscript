@@ -262,18 +262,6 @@ plugin.tx_seminars_pi1 {
   # the maximum height of the image of a seminar in the single view
   seminarImageSingleViewHeight = 160
 
-  # whether to allow front-end editing of speakers
-  allowFrontEndEditingOfSpeakers = 0
-
-  # whether to allow front-end editing of places
-  allowFrontEndEditingOfPlaces = 0
-
-  # whether to allow front-end editing of checkboxes
-  allowFrontEndEditingOfCheckboxes = 0
-
-  # whether to allow front-end editing of target groups
-  allowFrontEndEditingOfTargetGroups = 0
-
   # location of language file for substitution of LABEL markers
   locallangFilename = EXT:seminars/Resources/Private/Language/locallang.xlf
 

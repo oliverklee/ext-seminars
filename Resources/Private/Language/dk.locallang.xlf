@@ -1302,50 +1302,6 @@ This event now has been confirmed.</source>
 				<source>(from TS setup)</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" xml:space="preserve">
-				<source>Allow editing speakers:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPlaces" xml:space="preserve">
-				<source>Allow editing places:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" xml:space="preserve">
-				<source>Allow editing organizers:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
-				<source>Allow editing payment methods:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" xml:space="preserve">
-				<source>Allow editing event types:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" xml:space="preserve">
-				<source>Allow editing checkboxes:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfLodgings" xml:space="preserve">
-				<source>Allow editing lodgings:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfFoods" xml:space="preserve">
-				<source>Allow editing foods:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
-				<source>Allow editing target groups:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCategories" xml:space="preserve">
-				<source>Allow editing categories:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSkills" xml:space="preserve">
-				<source>Allow editing skills:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
 				<source>0 levels (only selected page)</source>
 				<target></target>
@@ -2138,10 +2094,6 @@ This event now has been confirmed.</source>
 				<source>Please enter a title.</source>
 				<target>Indtast en overskrift for dette arrangement.</target>
 			</trans-unit>
-			<trans-unit id="message_emptyName" xml:space="preserve">
-				<source>Please enter a name.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_emptyOrganizer" xml:space="preserve">
 				<source>Please select at least one organizer.</source>
 				<target>Vælg mindst én arrangør</target>
@@ -2449,22 +2401,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
 				<source>seconds</source>
 				<target>sekunder</target>
-			</trans-unit>
-			<trans-unit id="newPlaceButton" xml:space="preserve">
-				<source>Create new place</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="newSpeakerButton" xml:space="preserve">
-				<source>Create new speaker</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="newCheckboxButton" xml:space="preserve">
-				<source>Create new checkbox</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="newTargetGroupButton" xml:space="preserve">
-				<source>Create new target group</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
 				<source>The event has been published.</source>
