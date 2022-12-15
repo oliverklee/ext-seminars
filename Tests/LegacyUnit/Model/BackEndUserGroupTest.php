@@ -111,34 +111,4 @@ final class BackEndUserGroupTest extends TestCase
             $this->subject->getRegistrationFolder()
         );
     }
-
-    ///////////////////////////////////////////////
-    // Tests concerning getAuxiliaryRecordsFolder
-    ///////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolderReturnsZero(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertEquals(
-            0,
-            $this->subject->getAuxiliaryRecordFolder()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolderReturnsAuxiliaryRecordsFolderPid(): void
-    {
-        $this->subject->setData(['tx_seminars_auxiliaries_folder' => 42]);
-
-        self::assertEquals(
-            42,
-            $this->subject->getAuxiliaryRecordFolder()
-        );
-    }
 }

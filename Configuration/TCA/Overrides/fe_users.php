@@ -168,25 +168,11 @@ defined('TYPO3') or die('Access denied.');
                 'maxitems' => 1,
             ],
         ],
-        'tx_seminars_auxiliaries_folder' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tx_seminars_auxiliaries_folder',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'pages',
-                'default' => 0,
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-        ],
     ]
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'be_groups',
     '--div--;' . 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tab_event_management,' .
-    'tx_seminars_events_folder,tx_seminars_registrations_folder,' .
-    'tx_seminars_auxiliaries_folder,'
+    'tx_seminars_events_folder,tx_seminars_registrations_folder'
 );

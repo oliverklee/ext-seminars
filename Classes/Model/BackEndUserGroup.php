@@ -33,18 +33,4 @@ class BackEndUserGroup extends OelibBackEndUserGroup implements Titled
     {
         return $this->getAsInteger('tx_seminars_registrations_folder');
     }
-
-    /**
-     * Returns the PID for the storage of auxiliary records.
-     *
-     * Auxiliary records are all seminars record types with the exception of
-     * events and registrations.
-     *
-     * @return int the PID for the storage of new auxiliary records, will
-     *                 be 0 if no PID has been set
-     */
-    public function getAuxiliaryRecordFolder(): int
-    {
-        return $this->getAsInteger('tx_seminars_auxiliaries_folder');
-    }
 }

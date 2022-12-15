@@ -38,19 +38,6 @@ class BackEndUser extends OelibBackEndUser
     }
 
     /**
-     * Returns the PID for newly created auxiliary records.
-     *
-     * This will be the first set PID found in the user's groups.
-     *
-     * @return int the PID for newly created auxiliary records, will be
-     *                 0 if no group has a PID set for new auxiliary records
-     */
-    public function getAuxiliaryRecordsFolder(): int
-    {
-        return $this->getRecordFolderFromGroup('auxiliary');
-    }
-
-    /**
      * Returns the PID for newly created records of the given type.
      *
      * This will be the first set PID found in the user's groups.
@@ -79,9 +66,6 @@ class BackEndUser extends OelibBackEndUser
                     break;
                 case 'registration':
                     $recordFolderPid = $group->getRegistrationFolder();
-                    break;
-                case 'auxiliary':
-                    $recordFolderPid = $group->getAuxiliaryRecordFolder();
                     break;
                 default:
                     throw new \InvalidArgumentException(

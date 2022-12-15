@@ -26,7 +26,6 @@ CREATE TABLE fe_groups (
 CREATE TABLE be_groups (
     tx_seminars_events_folder int(11) unsigned DEFAULT '0' NOT NULL,
     tx_seminars_registrations_folder int(11) unsigned DEFAULT '0' NOT NULL,
-    tx_seminars_auxiliaries_folder int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 
