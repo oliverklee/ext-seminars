@@ -129,51 +129,6 @@ abstract class AbstractList
     }
 
     /**
-     * Generates a linked "delete" record icon with a JavaScript confirmation window.
-     *
-     * @param int $recordUid the UID of the record, must be > 0
-     * @param int $pageUid the PID of the record, must be >= 0
-     *
-     * @return string the HTML source code to return
-     */
-    public function getDeleteIcon(int $recordUid, int $pageUid): string
-    {
-        $result = '';
-
-        $languageService = $this->getLanguageService();
-
-        if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
-            $referenceWarning = BackendUtility::referenceCount(
-                $this->tableName,
-                (string)$recordUid,
-                ' ' . $languageService->getLL('referencesWarning')
-            );
-
-            $confirmation = \htmlspecialchars(
-                'if (confirm(' . GeneralUtility::quoteJSvalue(
-                    $languageService->getLL('deleteWarning') . $referenceWarning
-                ) . ')) {return true;} else {return false;}',
-                ENT_QUOTES | ENT_HTML5
-            );
-            $urlParameters = [
-                'cmd' => [$this->tableName => [$recordUid => ['delete' => 1]]],
-                'redirect' => GeneralUtility::getIndpEnv('REQUEST_URI'),
-            ];
-            $url = $this->getRouteUrl('tce_db', $urlParameters);
-            $langDelete = $languageService->getLL('delete');
-            $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) .
-                '" onclick="' . $confirmation . '">' .
-                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-                'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
-                '" alt="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) . '" class="deleteicon" />' .
-                '</a>';
-        }
-
-        return $result;
-    }
-
-    /**
      * Returns a "create new record" image tag that is linked to the new record view.
      *
      * @param int $pid the page ID where the record should be stored, must be > 0

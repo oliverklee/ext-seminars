@@ -149,10 +149,6 @@ class EventsList extends AbstractList
                 $this->getEditIcon($event->getUid(), $event->getPageUid())
             );
             $this->template->setMarker(
-                'delete_button',
-                $this->getDeleteIcon($event->getUid(), $event->getPageUid())
-            );
-            $this->template->setMarker(
                 'hide_unhide_button',
                 $this->getHideUnhideIcon(
                     $event->getUid(),
