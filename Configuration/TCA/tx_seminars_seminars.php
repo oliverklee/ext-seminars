@@ -30,9 +30,6 @@ $tca = [
         'hideAtCopy' => true,
         'searchFields' => 'title,accreditation_number',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,organizers_notified_about_minimum_reached,mute_notification_emails,target_groups,skip_collision_check,registrations,cancelled,automatic_confirmation_cancelation,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips,price_on_request,date_of_last_registration_digest',
-    ],
     'columns' => [
         'object_type' => [
             'exclude' => 1,

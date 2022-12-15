@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Lodging.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

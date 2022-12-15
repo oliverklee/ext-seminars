@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/EventType.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title, single_view_page',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

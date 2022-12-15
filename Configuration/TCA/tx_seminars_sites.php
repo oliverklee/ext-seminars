@@ -14,9 +14,6 @@ $tca = [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Place.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title,address,zip,city,homepage,directions,notes,owner',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

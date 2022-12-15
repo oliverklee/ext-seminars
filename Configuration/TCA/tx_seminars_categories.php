@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Category.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title, icon, single_view_page',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

@@ -14,9 +14,6 @@ $tca = [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/TimeSlot.gif',
         'searchFields' => '',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'begin_date, end_date, entry_date, speakers, place, room',
-    ],
     'columns' => [
         'seminar' => [
             'config' => [

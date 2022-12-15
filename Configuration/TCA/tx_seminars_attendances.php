@@ -17,9 +17,6 @@ $tca = [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Registration.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,price_code,seats,registered_themselves,total_price,currency,including_tax,attendees_names,additional_persons,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,separate_billing_address,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

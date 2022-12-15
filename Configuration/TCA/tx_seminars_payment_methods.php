@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/PaymentMethod.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title, description',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

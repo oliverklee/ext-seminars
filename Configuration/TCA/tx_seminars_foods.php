@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Food.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

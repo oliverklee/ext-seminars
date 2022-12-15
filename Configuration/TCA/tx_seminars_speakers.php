@@ -19,10 +19,6 @@ $tca = [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Speaker.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden, title, organization, homepage, description, image, skills, notes, ' .
-            'address, phone_work, phone_home, phone_mobile, email, cancelation_period, owner',
-    ],
     'columns' => [
         'hidden' => [
             'exclude' => 1,
