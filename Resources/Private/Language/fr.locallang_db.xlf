@@ -308,10 +308,6 @@
 				<source>Regular price (early bird)</source>
 				<target>Prix normal (précommande)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_board" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Prix normal avec pension complète</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Prix spécial</target>
@@ -319,10 +315,6 @@
 			<trans-unit id="tx_seminars_seminars.price_special_early" xml:space="preserve">
 				<source>Special price (early bird)</source>
 				<target>Prix spécial (précommande)</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_board" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Prix spécial avec pension complète</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.payment_methods" xml:space="preserve">
 				<source>Allowed methods of payment</source>

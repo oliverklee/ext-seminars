@@ -718,47 +718,6 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @return float our regular board price, will be 0.00 if this event has no
-     *               regular board price, will be >= 0.00
-     */
-    public function getRegularBoardPrice(): float
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->getRegularBoardPrice()
-            : $this->getAsFloat('price_regular_board');
-    }
-
-    /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @param float $price our regular board price, must be >= 0.00
-     */
-    public function setRegularBoardPrice(float $price): void
-    {
-        if ($price < 0.00) {
-            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
-        }
-
-        if ($this->isEventDate()) {
-            $this->getTopic()->setRegularBoardPrice($price);
-        } else {
-            $this->setAsFloat('price_regular_board', $price);
-        }
-    }
-
-    /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    public function hasRegularBoardPrice(): bool
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->hasRegularBoardPrice()
-            : $this->hasFloat('price_regular_board');
-    }
-
-    /**
      * @return float our special price, will be 0.00 if this event has no special price, will be >= 0.00
      */
     public function getSpecialPrice(): float
@@ -826,47 +785,6 @@ class Event extends AbstractTimeSpan implements Titled
     }
 
     /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @return float our special board price, will be 0.00 if this event has no
-     *               special board price, will be >= 0.00
-     */
-    public function getSpecialBoardPrice(): float
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->getSpecialBoardPrice()
-            : $this->getAsFloat('price_special_board');
-    }
-
-    /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @param float $price our special board price, must be >= 0.00
-     */
-    public function setSpecialBoardPrice(float $price): void
-    {
-        if ($price < 0.00) {
-            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
-        }
-
-        if ($this->isEventDate()) {
-            $this->getTopic()->setSpecialBoardPrice($price);
-        } else {
-            $this->setAsFloat('price_special_board', $price);
-        }
-    }
-
-    /**
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    public function hasSpecialBoardPrice(): bool
-    {
-        return $this->isEventDate()
-            ? $this->getTopic()->hasSpecialBoardPrice()
-            : $this->hasFloat('price_special_board');
-    }
-
-    /**
      * Checks whether this event is sold with early bird prices.
      *
      * This will return TRUE if the event has a deadline and a price defined
@@ -926,8 +844,7 @@ class Event extends AbstractTimeSpan implements Titled
      * not passed yet, the early-bird price is used.
      *
      * The possible keys of the return value are:
-     * regular, regular_early, regular_board,
-     * special, special_early, special_board
+     * regular, regular_early, special, special_early
      *
      * @return array<string, float> the available prices as an associative array, will not be empty
      */
@@ -949,15 +866,6 @@ class Event extends AbstractTimeSpan implements Titled
             } else {
                 $result['special'] = $this->getSpecialPrice();
             }
-        }
-
-        // @deprecated #1773 will be removed in seminars 5.0
-        if ($this->hasRegularBoardPrice()) {
-            $result['regular_board'] = $this->getRegularBoardPrice();
-        }
-        // @deprecated #1773 will be removed in seminars 5.0
-        if ($this->hasSpecialBoardPrice()) {
-            $result['special_board'] = $this->getSpecialBoardPrice();
         }
 
         return $result;

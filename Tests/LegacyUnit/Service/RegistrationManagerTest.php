@@ -7116,17 +7116,15 @@ final class RegistrationManagerTest extends TestCase
             [
                 'price_regular' => '100.00',
                 'price_regular_early' => '90.00',
-                'price_regular_board' => '150.00',
                 'price_special' => '50.00',
                 'price_special_early' => '45.00',
-                'price_special_board' => '75.00',
             ]
         );
         $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        self::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+        self::assertSame(['regular', 'special'], array_keys($prices));
     }
 
     /**
@@ -7146,17 +7144,15 @@ final class RegistrationManagerTest extends TestCase
             [
                 'price_regular' => '100.00',
                 'price_regular_early' => '90.00',
-                'price_regular_board' => '150.00',
                 'price_special' => '50.00',
                 'price_special_early' => '45.00',
-                'price_special_board' => '75.00',
             ]
         );
         $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        self::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+        self::assertSame(['regular', 'special'], array_keys($prices));
     }
 
     /**
@@ -7174,17 +7170,15 @@ final class RegistrationManagerTest extends TestCase
             [
                 'price_regular' => '100.00',
                 'price_regular_early' => '90.00',
-                'price_regular_board' => '150.00',
                 'price_special' => '50.00',
                 'price_special_early' => '45.00',
-                'price_special_board' => '75.00',
             ]
         );
         $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        self::assertSame(['regular', 'regular_board'], array_keys($prices));
+        self::assertSame(['regular'], array_keys($prices));
     }
 
     /**
@@ -7204,17 +7198,15 @@ final class RegistrationManagerTest extends TestCase
             [
                 'price_regular' => '100.00',
                 'price_regular_early' => '90.00',
-                'price_regular_board' => '150.00',
                 'price_special' => '50.00',
                 'price_special_early' => '45.00',
-                'price_special_board' => '75.00',
             ]
         );
         $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        self::assertSame(['special', 'special_board'], array_keys($prices));
+        self::assertSame(['special'], array_keys($prices));
     }
 
     /**
@@ -7234,14 +7226,13 @@ final class RegistrationManagerTest extends TestCase
             [
                 'price_regular' => '100.00',
                 'price_regular_early' => '90.00',
-                'price_regular_board' => '150.00',
             ]
         );
         $event = new LegacyEvent($eventUid);
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        self::assertSame(['regular', 'regular_board'], array_keys($prices));
+        self::assertSame(['regular'], array_keys($prices));
     }
 
     private function getConnectionPool(): ConnectionPool

@@ -649,8 +649,8 @@ only be configured using your TypoScript setup, but not via flexforms.
          accreditation\_number, credit\_points, date, time,
          deadline\_registration, deadline\_early\_bird, place, room, lodgings,
          foods, speakers, partners, tutors, leaders, price\_regular,
-         price\_regular\_early, price\_regular\_board, price\_special,
-         price\_special\_early, price\_special\_board, additional\_information,
+         price\_regular\_early, price\_special,
+         price\_special\_early, additional\_information,
          payment\_methods, organizers, attendees\_min, attendees\_max,
          attendees, vacancies, enough\_attendees, is\_full, cancelled
 

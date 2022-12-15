@@ -108,10 +108,6 @@
 				<source>Early-bird price</source>
 				<target>Frühbucherpreis</target>
 			</trans-unit>
-			<trans-unit id="label_price_board_regular" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Standardpreis inklusive Vollpension</target>
-			</trans-unit>
 			<trans-unit id="label_price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Spezialpreis</target>
@@ -123,10 +119,6 @@
 			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
 				<source>Early-bird special price</source>
 				<target>Frühbucher-Spezialpreis</target>
-			</trans-unit>
-			<trans-unit id="label_price_board_special" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Spezialpreis inklusive Vollpension</target>
 			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Method of payment</source>
@@ -1592,10 +1584,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Early-bird price</source>
 				<target>Frühbucherpreis</target>
 			</trans-unit>
-			<trans-unit id="label_price_board_regular" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Standardpreis inklusive Vollpension</target>
-			</trans-unit>
 			<trans-unit id="label_price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Spezialpreis</target>
@@ -1603,10 +1591,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
 				<source>Early-bird special price</source>
 				<target>Frühbucher-Spezialpreis</target>
-			</trans-unit>
-			<trans-unit id="label_price_board_special" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Spezialpreis inklusive Vollpension</target>
 			</trans-unit>
 			<trans-unit id="label_total_price" xml:space="preserve">
 				<source>Total price</source>
@@ -2256,10 +2240,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Please enter a valid regular early bird price.</source>
 				<target>Bitte geben Sie einen gültigen Standardpreis für Frühbucher an.</target>
 			</trans-unit>
-			<trans-unit id="message_invalidPriceRegularBoard" xml:space="preserve">
-				<source>Please enter a valid regular board price.</source>
-				<target>Bitte geben Sie einen gültigen Standardpreis inlusive Vollpension an.</target>
-			</trans-unit>
 			<trans-unit id="message_invalidPriceSpecial" xml:space="preserve">
 				<source>Please enter a valid special price.</source>
 				<target>Bitte geben Sie einen gültigen Spezialpreis an.</target>
@@ -2267,10 +2247,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="message_invalidPriceSpecialEarly" xml:space="preserve">
 				<source>Please enter a valid special early bird price.</source>
 				<target>Bitte geben Sie einen gültigen Spezialpreis für Frühbucher an.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceSpecialBoard" xml:space="preserve">
-				<source>Please enter a valid special board price.</source>
-				<target>Bitte geben Sie einen gültigen Spezialpreis inlusive Vollpension an.</target>
 			</trans-unit>
 			<trans-unit id="message_emptyAdditionalInformation" xml:space="preserve">
 				<source>Please enter additional information.</source>

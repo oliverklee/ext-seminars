@@ -19,10 +19,8 @@
         <room>the first one to the left</room>
         <price_regular>1234.56</price_regular>
         <price_regular_early>234.56</price_regular_early>
-        <price_regular_board>2234.56</price_regular_board>
         <price_special>1134.54</price_special>
         <price_special_early>1034.54</price_special_early>
-        <price_special_board>1334.54</price_special_board>
         <additional_information>Nothing to see here.</additional_information>
         <event_takes_place_reminder_sent>1</event_takes_place_reminder_sent>
         <cancelation_deadline_reminder_sent>1</cancelation_deadline_reminder_sent>

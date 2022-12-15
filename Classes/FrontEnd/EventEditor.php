@@ -506,10 +506,8 @@ class EventEditor extends AbstractEditor
         $priceFields = [
             'price_regular',
             'price_regular_early',
-            'price_regular_board',
             'price_special',
             'price_special_early',
-            'price_special_board',
         ];
 
         foreach ($priceFields as $key) {
@@ -752,13 +750,11 @@ class EventEditor extends AbstractEditor
                     'regular_prices' => [
                         'price_regular' => false,
                         'price_regular_early' => false,
-                        'price_regular_board' => false,
                         'payment_methods' => false,
                     ],
                     'special_prices' => [
                         'price_special' => false,
                         'price_special_early' => false,
-                        'price_special_board' => false,
                     ],
                 ],
             ],

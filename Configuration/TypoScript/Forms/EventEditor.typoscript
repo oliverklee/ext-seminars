@@ -744,27 +744,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       }
     }
 
-    price_regular_board = renderlet:TEXT
-    price_regular_board {
-      name = price_regular_board
-      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board
-      sanitize = false
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularBoard
-          userobj {
-            extension = this
-            method = validatePrice
-            params.10 {
-              name = elementName
-              value = price_regular_board
-            }
-          }
-        }
-      }
-    }
-
     price_special = renderlet:TEXT
     price_special {
       name = price_special
@@ -801,27 +780,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
             params.10 {
               name = elementName
               value = price_special_early
-            }
-          }
-        }
-      }
-    }
-
-    price_special_board = renderlet:TEXT
-    price_special_board {
-      name = price_special_board
-      label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board
-      sanitize = false
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialBoard
-          userobj {
-            extension = this
-            method = validatePrice
-            params.10 {
-              name = elementName
-              value = price_special_board
             }
           }
         }

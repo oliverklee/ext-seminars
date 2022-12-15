@@ -26,11 +26,10 @@ in the TypoScript constants (or conveniently in the constants editor).
 More price configuration options
 ================================
 
-You can set up to six different prices for each event: a “standard
+You can set up to four different prices for each event: a “standard
 price” and a “special” price, e.g., for students and people in full
 employment (each of them can also be saved as an early bird price). In
-addition, there a two prices including full boarding (“regular” and
-“special”). In the registration form, the user can select the price to
+addition. In the registration form, the user can select the price to
 pay.
 
 **Events for free:** In the single view, the standard price always
@@ -67,15 +66,15 @@ and “Children.” You can change them using these variables:
 - For the front-end list view and detail view:
 
   - plugin.tx\_seminars\_pi1.\_LOCAL\_LANG. *language*
-    .label\_price\_regular / price\_regular\_early / price\_regular\_board
-    / price\_special / price\_special\_early / price\_special\_board
+    .label\_price\_regular / price\_regular\_early /
+    / price\_special / price\_special\_early
 
 - For the e-mails to the attendees and the drop-down box in the
   registration form:
 
   - plugin.tx\_seminars.\_LOCAL\_LANG. *language* .label\_price\_regular /
-    price\_regular\_early / price\_regular\_board / price\_special /
-    price\_special\_early / price\_special\_board
+    price\_regular\_early / price\_special /
+    price\_special\_early
 
 Replace “ *language* ” with your two-letter language code if you use a
 language other than English, e.g., “de” for German. Use “default” as

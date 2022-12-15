@@ -320,10 +320,6 @@
 				<source>Regular price (early bird)</source>
 				<target>Standardpreis für Frühbucher</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_board" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Standardpreis inklusive Vollpension</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Spezialpreis</target>
@@ -331,10 +327,6 @@
 			<trans-unit id="tx_seminars_seminars.price_special_early" xml:space="preserve">
 				<source>Special price (early bird)</source>
 				<target>Spezialpreis für Frühbucher</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_board" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Spezialpreis inklusive Vollpension</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.payment_methods" xml:space="preserve">
 				<source>Allowed methods of payment</source>

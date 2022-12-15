@@ -257,15 +257,11 @@ the front end:
 
 - default price (early bird), without the currency name
 
-- default price including full board, without the currency name
-
 - special price (will only get displayed if it is not 0.00), without the
   currency name
 
 - special price (early bird, will only get displayed if it is not 0.00),
   without the currency name
-
-- special price including full board, without the currency name
 
 - additional information about the event, payment workflow etc. can be
   entered in this RTE enabled field (you can use HTML here)

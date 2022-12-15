@@ -1168,82 +1168,6 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->hasTopicDecimal('price_special');
     }
 
-    /**
-     * Gets our regular price (including full board) as a string containing
-     * amount and currency. Returns an empty string if there is no regular price
-     * (including full board) set.
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @return string the regular event price (including full board)
-     */
-    public function getPriceRegularBoard(): string
-    {
-        return $this->hasPriceRegularBoard()
-            ? $this->formatPrice($this->getPriceRegularBoardAmount()) : '';
-    }
-
-    /**
-     * Gets our regular price (including full board) as a decimal.
-     *
-     * If there is no regular price (including full board), this function
-     * returns "0.00".
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     *
-     * @return string the regular event price (including full board)
-     */
-    private function getPriceRegularBoardAmount(): string
-    {
-        return $this->getTopicDecimal('price_regular_board');
-    }
-
-    /**
-     * Checks whether this event has a non-zero regular price (including full board) set.
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    public function hasPriceRegularBoard(): bool
-    {
-        return $this->hasTopicDecimal('price_regular_board');
-    }
-
-    /**
-     * Gets our special price (including full board) as a string containing
-     * amount and currency. Returns an empty string if there is no special price
-     * (including full board) set.
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    public function getPriceSpecialBoard(): string
-    {
-        return $this->hasPriceSpecialBoard()
-            ? $this->formatPrice($this->getPriceSpecialBoardAmount()) : '';
-    }
-
-    /**
-     * Gets our special price (including full board) as a decimal.
-     *
-     * If there is no special price (including full board), this function
-     * returns "0.00".
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    private function getPriceSpecialBoardAmount(): string
-    {
-        return $this->getTopicDecimal('price_special_board');
-    }
-
-    /**
-     * Checks whether this event has a non-zero special price (including full board) set.
-     *
-     * @deprecated #1773 will be removed in seminars 5.0
-     */
-    public function hasPriceSpecialBoard(): bool
-    {
-        return $this->hasTopicDecimal('price_special_board');
-    }
-
     public function getPriceOnRequest(): bool
     {
         return $this->getTopicBoolean('price_on_request');
@@ -3238,19 +3162,11 @@ class LegacyEvent extends AbstractTimeSpan
             case 'price_regular_early':
                 $result = $this->getEarlyBirdPriceRegular();
                 break;
-            case 'price_regular_board':
-                // @deprecated #1773 will be removed in seminars 5.0
-                $result = $this->getPriceRegularBoard();
-                break;
             case 'price_special':
                 $result = $this->getPriceSpecial();
                 break;
             case 'price_special_early':
                 $result = $this->getEarlyBirdPriceSpecial();
-                break;
-            case 'price_special_board':
-                // @deprecated #1773 will be removed in seminars 5.0
-                $result = $this->getPriceSpecialBoard();
                 break;
             case 'additional_information':
                 $result = $this->getAdditionalInformation();
@@ -3311,17 +3227,11 @@ class LegacyEvent extends AbstractTimeSpan
      *   'amount'  => '50.00',
      *   'caption' => 'Regular price: 50 EUR'
      * ),
-     * 'regular_board' => (
-     *   'value'   => 'regular_board',
-     *   'amount'  => '80.00',
-     *   'caption' => 'Regular price with full board: 80 EUR'
-     * )
      *
      * So the keys for the sub-arrays and their "value" elements are the same.
      *
      * The possible keys are:
-     * regular, regular_early, regular_board,
-     * special, special_early, special_board
+     * regular, regular_early, special, special_early
      *
      * The return array's pointer will already be reset to its first element.
      *
@@ -3346,15 +3256,6 @@ class LegacyEvent extends AbstractTimeSpan
                     . ': ' . $this->getPriceRegular(),
             ];
         }
-        // @deprecated #1773 will be removed in seminars 5.0
-        if ($this->hasPriceRegularBoard()) {
-            $result['regular_board'] = [
-                'value' => 'regular_board',
-                'amount' => $this->getPriceRegularBoardAmount(),
-                'caption' => $this->translate('label_price_board_regular')
-                    . ': ' . $this->getPriceRegularBoard(),
-            ];
-        }
 
         if ($this->hasPriceSpecial()) {
             if ($this->hasEarlyBirdPriceSpecial() && $this->earlyBirdApplies()) {
@@ -3373,15 +3274,6 @@ class LegacyEvent extends AbstractTimeSpan
                 ];
             }
         }
-        // @deprecated #1773 will be removed in seminars 5.0
-        if ($this->hasPriceSpecialBoard()) {
-            $result['special_board'] = [
-                'value' => 'special_board',
-                'amount' => $this->getPriceSpecialBoardAmount(),
-                'caption' => $this->translate('label_price_board_special')
-                    . ': ' . $this->getPriceSpecialBoard(),
-            ];
-        }
 
         // reset the pointer for the result array to the first element
         reset($result);
@@ -3394,7 +3286,7 @@ class LegacyEvent extends AbstractTimeSpan
      * event.
      *
      * The allowed price category codes are:
-     * regular, regular_early, regular_board, special, special_early, special_board
+     * regular, regular_early, special, special_early
      *
      * @param string $priceCode code for the price category to check, may be empty or null
      *
@@ -3422,10 +3314,6 @@ class LegacyEvent extends AbstractTimeSpan
         } else {
             $result = $this->hasPriceRegular() || $this->hasPriceSpecial();
         }
-
-        // There is no early-bird version of the prices that include full board.
-        // @deprecated #1773 will be removed in seminars 5.0
-        $result = $result || $this->hasPriceRegularBoard() || $this->hasPriceSpecialBoard();
 
         return $result;
     }

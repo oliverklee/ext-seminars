@@ -308,10 +308,6 @@
 				<source>Regular price (early bird)</source>
 				<target>Reguliere prijs (vroegboeking)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_board" xml:space="preserve">
-				<source>Regular price including full board</source>
-				<target>Reguliere prijs inclusief vol pension</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Speciale prijs</target>
@@ -319,10 +315,6 @@
 			<trans-unit id="tx_seminars_seminars.price_special_early" xml:space="preserve">
 				<source>Special price (early bird)</source>
 				<target>Speciale prijs (vroegboeking)</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_board" xml:space="preserve">
-				<source>Special price including full board</source>
-				<target>Speciale prijs inclusief vol pension</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.payment_methods" xml:space="preserve">
 				<source>Allowed methods of payment</source>

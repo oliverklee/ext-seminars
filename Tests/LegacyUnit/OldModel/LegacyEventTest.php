@@ -8226,8 +8226,6 @@ final class LegacyEventTest extends TestCase
      *               [earlyBirdApplies] the return value of that function
      *               [hasEarlyBirdPriceRegular] the return value of that function
      *               [hasEarlyBirdPriceSpecial] the return value of that function
-     *               [hasPriceRegularBoard] the return value of that function
-     *               [hasPriceSpecialBoard] the return value of that function
      */
     public function hasAnyPriceDataProvider(): array
     {
@@ -8239,8 +8237,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => false,
                 'hasEarlyBirdPriceRegular' => false,
                 'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'regularPrice' => [
                 'expectedHasAnyPrice' => true,
@@ -8249,8 +8245,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => false,
                 'hasEarlyBirdPriceRegular' => false,
                 'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'specialPrice' => [
                 'expectedHasAnyPrice' => true,
@@ -8259,8 +8253,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => false,
                 'hasEarlyBirdPriceRegular' => false,
                 'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'regularEarlyBirdApplies' => [
                 'expectedHasAnyPrice' => true,
@@ -8269,8 +8261,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => true,
                 'hasEarlyBirdPriceRegular' => true,
                 'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'regularEarlyBirdNotApplies' => [
                 'expectedHasAnyPrice' => false,
@@ -8279,8 +8269,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => false,
                 'hasEarlyBirdPriceRegular' => true,
                 'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'specialEarlyBirdApplies' => [
                 'expectedHasAnyPrice' => true,
@@ -8289,8 +8277,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => true,
                 'hasEarlyBirdPriceRegular' => false,
                 'hasEarlyBirdPriceSpecial' => true,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
             ],
             'specialEarlyBirdNotApplies' => [
                 'expectedHasAnyPrice' => false,
@@ -8299,28 +8285,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies' => false,
                 'hasEarlyBirdPriceRegular' => false,
                 'hasEarlyBirdPriceSpecial' => true,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => false,
-            ],
-            'regularBoard' => [
-                'expectedHasAnyPrice' => true,
-                'hasPriceRegular' => false,
-                'hasPriceSpecial' => false,
-                'earlyBirdApplies' => false,
-                'hasEarlyBirdPriceRegular' => false,
-                'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => true,
-                'hasPriceSpecialBoard' => false,
-            ],
-            'specialBoard' => [
-                'expectedHasAnyPrice' => true,
-                'hasPriceRegular' => false,
-                'hasPriceSpecial' => false,
-                'earlyBirdApplies' => false,
-                'hasEarlyBirdPriceRegular' => false,
-                'hasEarlyBirdPriceSpecial' => false,
-                'hasPriceRegularBoard' => false,
-                'hasPriceSpecialBoard' => true,
             ],
         ];
     }
@@ -8336,8 +8300,6 @@ final class LegacyEventTest extends TestCase
      * @param bool $earlyBirdApplies the return value of earlyBirdApplies
      * @param bool $hasEarlyBirdPriceRegular the return value of earlyBirdApplies
      * @param bool $hasEarlyBirdPriceSpecial the return value of hasEarlyBirdPriceSpecial
-     * @param bool $hasPriceRegularBoard the return value of hasPriceRegularBoard
-     * @param bool $hasPriceSpecialBoard the return value of hasPriceSpecialBoard
      */
     public function hasAnyPriceWithDataProvider(
         bool $expectedHasAnyPrice,
@@ -8345,9 +8307,7 @@ final class LegacyEventTest extends TestCase
         bool $hasPriceSpecial,
         bool $earlyBirdApplies,
         bool $hasEarlyBirdPriceRegular,
-        bool $hasEarlyBirdPriceSpecial,
-        bool $hasPriceRegularBoard,
-        bool $hasPriceSpecialBoard
+        bool $hasEarlyBirdPriceSpecial
     ): void {
         $subject = $this->createPartialMock(
             LegacyEvent::class,
@@ -8357,8 +8317,6 @@ final class LegacyEventTest extends TestCase
                 'earlyBirdApplies',
                 'hasEarlyBirdPriceRegular',
                 'hasEarlyBirdPriceSpecial',
-                'hasPriceRegularBoard',
-                'hasPriceSpecialBoard',
             ]
         );
 
@@ -8372,10 +8330,6 @@ final class LegacyEventTest extends TestCase
             ->willReturn($hasEarlyBirdPriceRegular);
         $subject->method('hasEarlyBirdPriceSpecial')
             ->willReturn($hasEarlyBirdPriceSpecial);
-        $subject->method('hasPriceRegularBoard')
-            ->willReturn($hasPriceRegularBoard);
-        $subject->method('hasPriceSpecialBoard')
-            ->willReturn($hasPriceSpecialBoard);
 
         self::assertSame(
             $expectedHasAnyPrice,
@@ -8679,13 +8633,11 @@ final class LegacyEventTest extends TestCase
     {
         $this->subject->setRecordPropertyString('price_regular', '100.00');
         $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_regular_board', '150.00');
         $this->subject->setRecordPropertyString('price_special', '50.00');
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
-        $this->subject->setRecordPropertyString('price_special_board', '75.00');
 
         self::assertSame(
-            ['regular', 'regular_board', 'special', 'special_board'],
+            ['regular', 'special'],
             array_keys($this->subject->getAvailablePrices())
         );
     }
@@ -8697,14 +8649,12 @@ final class LegacyEventTest extends TestCase
     {
         $this->subject->setRecordPropertyString('price_regular', '100.00');
         $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_regular_board', '150.00');
         $this->subject->setRecordPropertyString('price_special', '50.00');
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
-        $this->subject->setRecordPropertyString('price_special_board', '75.00');
         $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now - 1000);
 
         self::assertSame(
-            ['regular', 'regular_board', 'special', 'special_board'],
+            ['regular', 'special'],
             array_keys($this->subject->getAvailablePrices())
         );
     }
@@ -8716,14 +8666,12 @@ final class LegacyEventTest extends TestCase
     {
         $this->subject->setRecordPropertyString('price_regular', '100.00');
         $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_regular_board', '150.00');
         $this->subject->setRecordPropertyString('price_special', '50.00');
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
-        $this->subject->setRecordPropertyString('price_special_board', '75.00');
         $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now + 1000);
 
         self::assertSame(
-            ['regular_early', 'regular_board', 'special_early', 'special_board'],
+            ['regular_early', 'special_early'],
             array_keys($this->subject->getAvailablePrices())
         );
     }
