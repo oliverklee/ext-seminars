@@ -11,9 +11,6 @@ $tca = [
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY crdate DESC',
         'delete' => 'deleted',
-        'enablecolumns' => [
-            'disabled' => 'hidden',
-        ],
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Registration.gif',
         'searchFields' => 'title',
     ],
@@ -64,14 +61,6 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.been_there',
             'config' => [
                 'type' => 'check',
-            ],
-        ],
-        'hidden' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
             ],
         ],
         'registration_queue' => [
@@ -481,7 +470,7 @@ $tca = [
     'types' => [
         '0' => [
             'showitem' => '' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user, been_there, hidden, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user, been_there, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, price_code, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, ' .

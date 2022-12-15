@@ -368,17 +368,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function existsRegistrationForHiddenMatchingRegistrationReturnsFalse(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
-        $event = $this->eventRepository->findByUid(1);
-
-        self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
-    }
-
-    /**
-     * @test
-     */
     public function existsRegistrationForDeletedMatchingRegistrationReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEventAndUser.xml');
@@ -460,16 +449,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countRegularSeatsByEventIgnoresHiddenRegistration(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEvent.xml');
-
-        self::assertSame(0, $this->subject->countRegularSeatsByEvent(1));
-    }
-
-    /**
-     * @test
-     */
     public function countRegularSeatsByEventIgnoresDeletedRegistration(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEvent.xml');
@@ -533,16 +512,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/TwoMultiSeatWaitingListRegistrationsWithSameEvent.xml');
 
         self::assertSame(5, $this->subject->countWaitingListSeatsByEvent(1));
-    }
-
-    /**
-     * @test
-     */
-    public function countWaitingListSeatsByEventIgnoresHiddenRegistration(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenWaitingListRegistrationWithEvent.xml');
-
-        self::assertSame(0, $this->subject->countWaitingListSeatsByEvent(1));
     }
 
     /**
@@ -623,18 +592,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
 
         $result = $this->subject->findRegularRegistrationsByEvent(2);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findRegularRegistrationsByEventIgnoresHiddenRegistrations(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
-
-        $result = $this->subject->findRegularRegistrationsByEvent(1);
 
         self::assertSame([], $result);
     }
@@ -723,18 +680,6 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationWithEvent.xml');
 
         $result = $this->subject->findWaitingListRegistrationsByEvent(2);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findWaitingListRegistrationsByEventIgnoresHiddenRegistrations(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenWaitingListRegistrationWithEventAndUser.xml');
-
-        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
 
         self::assertSame([], $result);
     }
