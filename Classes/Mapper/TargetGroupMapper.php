@@ -17,8 +17,4 @@ class TargetGroupMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_target_groups';
 
     protected $modelClassName = TargetGroup::class;
-
-    protected $relations = [
-        'owner' => FrontEndUserMapper::class,
-    ];
 }

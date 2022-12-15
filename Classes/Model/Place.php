@@ -68,12 +68,4 @@ class Place extends AbstractModel implements Titled
     {
         return $this->getCountry() !== null;
     }
-
-    public function getOwner(): ?FrontEndUser
-    {
-        /** @var FrontEndUser|null $owner */
-        $owner = $this->getAsModel('owner');
-
-        return $owner;
-    }
 }

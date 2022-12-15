@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacySpeaker;
 
@@ -178,29 +175,6 @@ final class LegacySpeakerTest extends UnitTestCase
 
         self::assertTrue($subject->hasCancelationPeriod());
     }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithoutOwnerReturnsNull(): void
-    {
-        $subject = new LegacySpeaker();
-        self::assertNull($subject->getOwner());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithOwnerReturnsOwner(): void
-    {
-        $subject = new LegacySpeaker();
-        /** @var FrontEndUser $frontEndUser */
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
-        $subject->setOwner($frontEndUser);
-
-        self::assertSame($frontEndUser, $subject->getOwner());
-    }
-
     /**
      * @test
      */

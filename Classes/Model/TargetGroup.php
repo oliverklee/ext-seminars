@@ -19,12 +19,4 @@ class TargetGroup extends AbstractModel implements Titled
     {
         return $this->getAsString('title');
     }
-
-    public function getOwner(): ?FrontEndUser
-    {
-        /** @var FrontEndUser|null $owner */
-        $owner = $this->getAsModel('owner');
-
-        return $owner;
-    }
 }

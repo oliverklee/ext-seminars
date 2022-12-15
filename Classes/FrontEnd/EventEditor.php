@@ -274,14 +274,6 @@ class EventEditor extends AbstractEditor
 
         /** @var Place $place */
         foreach ($places as $place) {
-            $frontEndUserIsOwner = $place->getOwner() === $frontEndUser;
-
-            // Only shows places which have no owner or where the owner is the
-            // currently logged in front-end user.
-            if (!$frontEndUserIsOwner && $place->getOwner()) {
-                continue;
-            }
-
             $result[] = [
                 'caption' => $place->getTitle(),
                 'value' => $place->getUid(),
@@ -319,14 +311,6 @@ class EventEditor extends AbstractEditor
 
         /** @var Speaker $speaker */
         foreach ($speakers as $speaker) {
-            $frontEndUserIsOwner = ($speaker->getOwner() === $frontEndUser);
-
-            // Only shows speakers which have no owner or where the owner is
-            // the currently logged in front-end user.
-            if (!$frontEndUserIsOwner && $speaker->getOwner()) {
-                continue;
-            }
-
             // the new method to list the speakers
             if ($isLister) {
                 $result[] = [
@@ -364,14 +348,6 @@ class EventEditor extends AbstractEditor
 
         /** @var Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
-            $frontEndUserIsOwner = ($checkbox->getOwner() === $frontEndUser);
-
-            // Only shows checkboxes which have no owner or where the owner is
-            // the currently logged in front-end user.
-            if (!$frontEndUserIsOwner && $checkbox->getOwner()) {
-                continue;
-            }
-
             $result[] = [
                 'caption' => $checkbox->getTitle(),
                 'value' => $checkbox->getUid(),
@@ -400,14 +376,6 @@ class EventEditor extends AbstractEditor
 
         /** @var TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
-            $frontEndUserIsOwner = ($targetGroup->getOwner() === $frontEndUser);
-
-            // Only shows target groups which have no owner or where the owner
-            // is the currently logged in front-end user.
-            if (!$frontEndUserIsOwner && $targetGroup->getOwner()) {
-                continue;
-            }
-
             $result[] = [
                 'caption' => $targetGroup->getTitle(),
                 'value' => $targetGroup->getUid(),
