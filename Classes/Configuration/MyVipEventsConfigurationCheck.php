@@ -13,13 +13,7 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
     {
         $this->checkRegistrationsVipListPid();
         $this->checkDefaultEventVipsFeGroupID();
-        $this->checkMayManagersEditTheirEvents();
         $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
-
-        // @deprecated #1633 will be removed in seminars 5.0
-        if ($this->configuration->getAsBoolean('mayManagersEditTheirEvents')) {
-            $this->checkEventEditorPID();
-        }
     }
 
     private function checkRegistrationsVipListPid(): void
@@ -28,19 +22,6 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'registrationsVipListPID',
             'This value specifies the page that contains the list of registrations for an event.
             If this value is not set correctly, the link to that page will not work.'
-        );
-    }
-
-    /**
-     * @deprecated #1633 will be removed in seminars 5.0
-     */
-    private function checkMayManagersEditTheirEvents(): void
-    {
-        $this->checkIfBoolean(
-            'mayManagersEditTheirEvents',
-            'This value specifies whether VIPs may edit their events.
-            If this value is incorrect, VIPs may be allowed to edit their events although they should not be allowed to
-            (or vice versa).'
         );
     }
 

@@ -61,17 +61,4 @@ final class MyVipEventsConfigurationCheckTest extends UnitTestCase
         self::assertArrayHasKey(1, $result);
         self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
     }
-
-    /**
-     * @test
-     */
-    public function checkWithEmptyConfigurationWithManagerPermissionsEnabledUsesProvidedNamespaceForErrors(): void
-    {
-        $this->configuration->setAsBoolean('mayManagersEditTheirEvents', true);
-
-        $this->subject->check();
-
-        $result = $this->subject->getWarningsAsHtml();
-        self::assertNotSame([], $result);
-    }
 }

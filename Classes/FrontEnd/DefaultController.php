@@ -1589,7 +1589,6 @@ class DefaultController extends TemplateHelper
         $this->hideColumnsForAllViewsExceptMyEvents($whatToDisplay);
         $this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
         $this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
-        $this->hideEditColumnIfNecessary($whatToDisplay);
         $this->hideFilesColumnIfUserCannotAccessFiles();
         $this->hideStatusColumnIfNotUsed($whatToDisplay);
 
@@ -1917,8 +1916,6 @@ class DefaultController extends TemplateHelper
 
             $this->setVisibilityStatusMarker();
 
-            $this->setMarker('edit', $this->createAllEditorLinks());
-
             $this->setMarker('registrations', $this->getCsvExportLink());
 
             $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
@@ -2208,58 +2205,6 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Creates the "edit", "hide" and "unhide" links for the current event in
-     * the list view, depending on the logged-in FE user's permissions and the event's status.
-     *
-     * @return string HTML with the links, will be empty if the FE user can not edit the current event
-     */
-    protected function createAllEditorLinks(): string
-    {
-        if (!$this->mayCurrentUserEditCurrentEvent()) {
-            return '';
-        }
-
-        return $this->createEditLink();
-    }
-
-    /**
-     * Creates the link to the event editor for the current event.
-     *
-     * This function does not check the edit permissions for this event.
-     *
-     * @return string HTML for the link, will not be empty
-     */
-    protected function createEditLink(): string
-    {
-        return $this->cObj->getTypoLink(
-            $this->translate('label_edit'),
-            (string)$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
-            ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
-        );
-    }
-
-    /**
-     * Checks whether the currently logged-in FE user is allowed to edit the current event in the list view.
-     */
-    protected function mayCurrentUserEditCurrentEvent(): bool
-    {
-        if ($this->seminar->isOwnerFeUser()) {
-            return true;
-        }
-
-        // @deprecated #1633 will be removed in seminars 5.0
-        $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
-
-        // @deprecated #1633 will be removed in seminars 5.0
-        $isUserManager = $this->seminar->isUserVip(
-            $this->getLoggedInFrontEndUserUid(),
-            $this->getConfValueInteger('defaultEventVipsFeGroupID')
-        );
-
-        return $mayManagersEditTheirEvents && $isUserManager;
-    }
-
-    /**
      * Hides the columns specified in the parameter.
      *
      * @param array<int, non-empty-string> $columnsToHide the columns to hide, may be empty
@@ -2286,25 +2231,6 @@ class DefaultController extends TemplateHelper
 
         $this->unhideSubpartsArray($columnsToUnhide, $permanentlyHiddenColumns, 'LISTHEADER_WRAPPER');
         $this->unhideSubpartsArray($columnsToUnhide, $permanentlyHiddenColumns, 'LISTITEM_WRAPPER');
-    }
-
-    /**
-     * Hides the edit column if necessary.
-     *
-     * It is necessary if the list to display is not the "events which I have
-     * entered" list and is not the "my vip events" list and VIPs are not
-     * allowed to edit their events.
-     *
-     * @param string $whatToDisplay a string selecting the flavor of list view:
-     *        either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
-     */
-    private function hideEditColumnIfNecessary(string $whatToDisplay): void
-    {
-        $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
-
-        if (!($whatToDisplay === 'my_vip_events' && $mayManagersEditTheirEvents)) {
-            $this->hideColumns(['edit']);
-        }
     }
 
     /**

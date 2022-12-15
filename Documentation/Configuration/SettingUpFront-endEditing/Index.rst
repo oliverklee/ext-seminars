@@ -113,7 +113,3 @@ front-end editing is enabled for managers.
 #. In the tab “Front-end editing”, select the front-end group that is
    allowed to edit events. Alternatively, you can set this using the TS
    setup variable plugin.tx\_seminars\_pi1.eventEditorFeGroupID.
-
-#. Select the page with the event editor plug-in (that is the page which
-   you have just created). Alternatively, you can set this using the TS
-   setup variable plugin.tx\_seminars\_pi1.eventEditorPID.

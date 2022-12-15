@@ -107,9 +107,6 @@ plugin.tx_seminars_pi1 {
   # whether to allow the CSV export in the "my VIP events" view
   allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
-  # whether managers may edit their events, @deprecated #1633 will be removed in seminars 5.0
-  mayManagersEditTheirEvents = 0
-
   # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
   eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
@@ -224,9 +221,6 @@ plugin.tx_seminars_pi1 {
 
   # UID of the FE user group for event managers
   defaultEventVipsFeGroupID =
-
-  # PID of the page where the plug-in for editing events is located
-  eventEditorPID =
 
   # PID of the folder where FE-created events will be stored
   createEventsPID =

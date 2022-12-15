@@ -27,7 +27,6 @@ use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
@@ -189,11 +188,6 @@ final class DefaultControllerTest extends TestCase
     ///////////////////////
     // Utility functions.
     ///////////////////////
-
-    private function getFrontEndController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
-    }
 
     /**
      * Inserts a target group record into the database and creates a relation to
@@ -4562,17 +4556,12 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
-    // Tests concerning mayManagersEditTheirEvents in the "my vip events" list view
-    /////////////////////////////////////////////////////////////////////////////////
-
     /**
      * @test
      */
-    public function editSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView(): void
+    public function editSubpartIsHiddenInMyVipEventsListView(): void
     {
         $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         $this->subject->main('', []);
@@ -6209,209 +6198,6 @@ final class DefaultControllerTest extends TestCase
             $this->subject->pi_getClassName('registration-deadline-over'),
             $output
         );
-    }
-
-    ////////////////////////////////////////////////////
-    // Tests concerning mayCurrentUserEditCurrentEvent
-    ////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function mayCurrentUserEditCurrentEventForLoggedInUserAsOwnerIsTrue(): void
-    {
-        $subject = new TestingDefaultController();
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
-        $event->method('isUserVip')
-            ->willReturn(false);
-        $event->method('isOwnerFeUser')
-            ->willReturn(true);
-        $subject->setSeminar($event);
-
-        self::assertTrue(
-            $subject->mayCurrentUserEditCurrentEvent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndVipEditorAccessIsTrue(): void
-    {
-        $subject = new TestingDefaultController();
-
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = ['mayManagersEditTheirEvents' => true];
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
-        $event->method('isUserVip')
-            ->willReturn(true);
-        $event->method('isOwnerFeUser')
-            ->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertTrue(
-            $subject->mayCurrentUserEditCurrentEvent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndNoVipEditorAccessIsFalse(): void
-    {
-        $subject = new TestingDefaultController();
-
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = ['mayManagersEditTheirEvents' => false];
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
-        $event->method('isUserVip')
-            ->willReturn(true);
-        $event->method('isOwnerFeUser')
-            ->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertFalse(
-            $subject->mayCurrentUserEditCurrentEvent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function mayCurrentUserEditCurrentEventForLoggedInUserNeitherVipNorOwnerIsFalse(): void
-    {
-        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
-        $editorPageSlug = '/eventEditor';
-        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
-
-        $subject = new TestingDefaultController();
-
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [
-            'eventEditorPID' => $editorPageUid,
-            'mayManagersEditTheirEvents' => true,
-        ];
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
-        $event->method('getUid')
-            ->willReturn(91);
-        $event->method('isUserVip')
-            ->willReturn(false);
-        $event->method('isOwnerFeUser')
-            ->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertFalse(
-            $subject->mayCurrentUserEditCurrentEvent()
-        );
-    }
-
-    // Tests concerning the "edit", "hide", "unhide" and "copy" links
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString(): void
-    {
-        $editorPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
-        $editorPageSlug = '/eventEditor';
-        $this->testingFramework->changeRecord('pages', $editorPageUid, ['slug' => $editorPageSlug]);
-
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = ['eventEditorPID' => $editorPageUid];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(false);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $subject->setSeminar($event);
-
-        self::assertEquals(
-            '',
-            $subject->createAllEditorLinks()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink(): void
-    {
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(false);
-        $event->method('isHidden')->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=hide', $subject->createAllEditorLinks());
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesUnhideLink(): void
-    {
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(false);
-        $event->method('isHidden')->willReturn(true);
-        $subject->setSeminar($event);
-
-        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=unhide', $subject->createAllEditorLinks());
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesCopyLink(): void
-    {
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(false);
-        $event->method('isHidden')->willReturn(true);
-        $subject->setSeminar($event);
-
-        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=copy', $subject->createAllEditorLinks());
-    }
-
-    /**
-     * @test
-     */
-    public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesCopyLink(): void
-    {
-        $subject = $this->createPartialMock(TestingDefaultController::class, ['mayCurrentUserEditCurrentEvent']);
-        $subject->cObj = $this->getFrontEndController()->cObj;
-        $subject->conf = [];
-        $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->willReturn(true);
-
-        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
-        $event->method('getUid')->willReturn(91);
-        $event->method('isPublished')->willReturn(false);
-        $event->method('isHidden')->willReturn(false);
-        $subject->setSeminar($event);
-
-        self::assertStringNotContainsString('tx_seminars_pi1[action%5D=copy', $subject->createAllEditorLinks());
     }
 
     //////////////////////////////////

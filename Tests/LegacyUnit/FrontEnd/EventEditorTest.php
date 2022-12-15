@@ -496,75 +496,13 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult(): void
+    public function hasAccessMessageWithLoggedInFeUserNotOwnerReturnsNonEmptyResult(): void
     {
-        $this->subject->setObjectUid(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars'
-            )
-        );
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
+        $this->subject->setObjectUid($this->testingFramework->createRecord('tx_seminars_seminars'));
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertStringContainsString(
             $this->translate('message_noAccessToEventEditor'),
-            $this->subject->hasAccessMessage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult(): void
-    {
-        $this->subject->setObjectUid(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars'
-            )
-        );
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
-        $this->createLogInAndAddFeUserAsVip();
-
-        self::assertEquals(
-            '',
-            $this->subject->hasAccessMessage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult(): void
-    {
-        $this->subject->setObjectUid(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars'
-            )
-        );
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
-        $this->createLogInAndAddFeUserAsDefaultVip();
-
-        self::assertStringContainsString(
-            $this->translate('message_noAccessToEventEditor'),
-            $this->subject->hasAccessMessage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult(): void
-    {
-        $this->subject->setObjectUid(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars'
-            )
-        );
-        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
-        $this->createLogInAndAddFeUserAsDefaultVip();
-
-        self::assertEquals(
-            '',
             $this->subject->hasAccessMessage()
         );
     }
