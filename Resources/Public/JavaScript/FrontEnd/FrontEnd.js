@@ -29,7 +29,6 @@
       document.addEventListener('readystatechange', () => {
         this.initializeSearchWidget();
         this.initializeLegacyRegistrationForm();
-        this.convertActionLinks();
         this.initializeRegistrationForm();
       });
     }
@@ -214,60 +213,6 @@
             element.options[k].selected = false;
           }
         }
-      }
-    }
-
-    /**
-     * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
-     */
-    convertActionLinks() {
-      $('.tx-seminars-pi1 a[data-method]').click(this.executeLinkAction);
-    }
-
-    /**
-     * Executes the action on a link.
-     *
-     * @param {MouseEvent} event
-     */
-    executeLinkAction(event) {
-      var linkElement = event.target;
-      var linkHref = linkElement.getAttribute('href');
-
-      this.disableAllActionLinks();
-
-      var formElement = document.createElement("form");
-      formElement.style.display = 'none';
-      formElement.setAttribute('method', 'post');
-      formElement.setAttribute('action', linkHref);
-
-      for (var j = 0; j < linkElement.attributes.length; j++) {
-        var attribute = linkElement.attributes[j];
-        var name = attribute.name;
-        if (/^data-post-/.test(name)) {
-          var dataParts = name.split('-');
-          var inputElement = document.createElement('input');
-          inputElement.setAttribute('type', 'hidden');
-          inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
-          inputElement.setAttribute('value', attribute.value);
-          formElement.appendChild(inputElement);
-        }
-      }
-
-      linkElement.appendChild(formElement);
-      formElement.submit();
-
-      return false;
-    }
-
-    /**
-     * Disables all action links (so that they cannot be clicked again once an action is being processed).
-     */
-    disableAllActionLinks() {
-      var linkElements = document.querySelectorAll('a[data-method]');
-      for (var i = 0; i < linkElements.length; i++) {
-        linkElements[i].onclick = () => {
-          return false;
-        };
       }
     }
 

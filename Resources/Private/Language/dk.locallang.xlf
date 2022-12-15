@@ -1662,14 +1662,6 @@ This event now has been confirmed.</source>
 				<source>Edit</source>
 				<target>Redigér</target>
 			</trans-unit>
-			<trans-unit id="label_hide" xml:space="preserve">
-				<source>hide</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_unhide" xml:space="preserve">
-				<source>unhide</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Tilbage til liste</target>

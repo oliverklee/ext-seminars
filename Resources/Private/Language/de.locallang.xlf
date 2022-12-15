@@ -1704,14 +1704,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Edit</source>
 				<target>bearbeiten</target>
 			</trans-unit>
-			<trans-unit id="label_hide" xml:space="preserve">
-				<source>hide</source>
-				<target>ausblenden</target>
-			</trans-unit>
-			<trans-unit id="label_unhide" xml:space="preserve">
-				<source>unhide</source>
-				<target>einblenden</target>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Zur Übersicht</target>

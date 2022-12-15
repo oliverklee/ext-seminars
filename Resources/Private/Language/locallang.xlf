@@ -1290,12 +1290,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_edit" xml:space="preserve">
 				<source>Edit</source>
 			</trans-unit>
-			<trans-unit id="label_hide" xml:space="preserve">
-				<source>hide</source>
-			</trans-unit>
-			<trans-unit id="label_unhide" xml:space="preserve">
-				<source>unhide</source>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 			</trans-unit>
