@@ -28,4 +28,3 @@ Users manual
    ManagingRegistrations/Index
    LinkingToSingleSeminarRecords/Index
    RolesRelatedToEventRecords/Index
-   PublishingEventsCreatedInTheFront-endEditor/Index

@@ -10,11 +10,8 @@ CREATE TABLE fe_users (
 # Table structure for table 'fe_groups'
 #
 CREATE TABLE fe_groups (
-    # @deprecated #1543 will be removed in seminars 5.0
-    tx_seminars_publish_events tinyint(1) DEFAULT '0' NOT NULL,
     tx_seminars_events_pid int(11) unsigned DEFAULT '0' NOT NULL,
     tx_seminars_auxiliary_records_pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL,
     tx_seminars_default_categories int(11) unsigned DEFAULT '0' NOT NULL,
     tx_seminars_default_organizer int(11) unsigned DEFAULT '0' NOT NULL
 );
@@ -269,8 +266,6 @@ CREATE TABLE tx_seminars_seminars (
     image int(11) unsigned DEFAULT '0' NOT NULL,
     requirements int(11) unsigned DEFAULT '0' NOT NULL,
     dependencies int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated #1543 will be removed in seminars 5.0
-    publication_hash text,
     organizers_notified_about_minimum_reached tinyint(1) unsigned DEFAULT '0' NOT NULL,
     mute_notification_emails tinyint(1) unsigned DEFAULT '0' NOT NULL,
     automatic_confirmation_cancelation tinyint(1) unsigned DEFAULT '0' NOT NULL,

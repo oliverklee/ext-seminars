@@ -24,29 +24,6 @@ defined('TYPO3') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
     'fe_groups',
     [
-        // @deprecated #1543 will be removed in seminars 5.0
-        'tx_seminars_publish_events' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events',
-            'config' => [
-                'type' => 'radio',
-                'default' => 0,
-                'items' => [
-                    [
-                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.0',
-                        0,
-                    ],
-                    [
-                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.1',
-                        1,
-                    ],
-                    [
-                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.2',
-                        2,
-                    ],
-                ],
-            ],
-        ],
         'tx_seminars_events_pid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_events_pid',
@@ -67,19 +44,6 @@ defined('TYPO3') or die('Access denied.');
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'default' => 0,
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-        ],
-        'tx_seminars_reviewer' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_reviewer',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'be_users',
                 'default' => 0,
                 'size' => 1,
                 'minitems' => 0,
@@ -133,9 +97,8 @@ defined('TYPO3') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_groups',
     '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tab_event_management,' .
-    // @deprecated #1543 will be removed in seminars 5.0
-    'tx_seminars_publish_events,tx_seminars_events_pid,' .
-    'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
+    'tx_seminars_events_pid,' .
+    'tx_seminars_auxiliary_records_pid,' .
     'tx_seminars_default_categories, tx_seminars_default_organizer'
 );
 

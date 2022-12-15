@@ -798,22 +798,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
-
-   Data type
-         boolean
-
-   Description
-        sendAdditionalNotificationEmailInFrontEndEditor,
-        @deprecated #1543, will be removed in seminars 5.0
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          speakerImageWidth
 
    Data type

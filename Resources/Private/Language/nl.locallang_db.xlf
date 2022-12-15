@@ -340,10 +340,6 @@
 				<source>Requirement for</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.publication_hash" xml:space="preserve">
-				<source>Publication hash</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Sprekers</target>
@@ -780,32 +776,12 @@
 				<source>Seminar Manager</source>
 				<target>Seminar manager</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events" xml:space="preserve">
-				<source>Publish FE-edited events</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.0" xml:space="preserve">
-				<source>publish immediately</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.1" xml:space="preserve">
-				<source>only newly created events are hidden</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.2" xml:space="preserve">
-				<source>newly created and edited events are hidden</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
 				<source>Event management</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="fe_groups.tx_seminars_auxiliary_records_pid" xml:space="preserve">
 				<source>Store auxiliary records for seminars in page</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_reviewer" xml:space="preserve">
-				<source>BE user to receive the publication e-mail for FE-edited events</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">

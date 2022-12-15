@@ -17,7 +17,6 @@ use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Food;
 use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\Organizer;
@@ -677,71 +676,6 @@ final class EventMapperTest extends TestCase
         self::assertEquals(
             $frontEndUser->getUid(),
             $model->getEventManagers()->getUids()
-        );
-    }
-
-    // Tests concerning findByPublicationHash
-
-    /**
-     * @test
-     */
-    public function findByPublicationHashForEmptyPublicationHashGivenThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The given publication hash was empty.'
-        );
-
-        $this->subject->findByPublicationHash('');
-    }
-
-    /**
-     * @test
-     */
-    public function findByPublicationForEventWithProvidedPublicationHashReturnsThisEvent(): void
-    {
-        $publicationHash = 'blubb';
-
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['publication_hash' => $publicationHash]
-        );
-
-        self::assertEquals(
-            $eventUid,
-            $this->subject->findByPublicationHash($publicationHash)->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findByPublicationForNoEventWithProvidedPublicationHashReturnsNull(): void
-    {
-        $this->testingFramework->createRecord('tx_seminars_seminars');
-
-        self::assertNull(
-            $this->subject->findByPublicationHash('foo')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findByPublicationForEventWithProvidedPublicationHashReturnsEventModel(): void
-    {
-        $publicationHash = 'blubb';
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['publication_hash' => $publicationHash]
-        );
-
-        self::assertInstanceOf(
-            Event::class,
-            $this->subject->findByPublicationHash($publicationHash)
         );
     }
 

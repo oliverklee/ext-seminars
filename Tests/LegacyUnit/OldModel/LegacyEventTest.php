@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -7257,61 +7256,6 @@ final class LegacyEventTest extends TestCase
 
         self::assertTrue(
             $date->hasTopicInteger('credit_points')
-        );
-    }
-
-    // Tests concerning the publication status
-
-    /**
-     * @test
-     */
-    public function getPublicationHashReturnsPublicationHash(): void
-    {
-        $this->subject->setRecordPropertyString(
-            'publication_hash',
-            '5318761asdf35as5sad35asd35asd'
-        );
-
-        self::assertSame(
-            '5318761asdf35as5sad35asd35asd',
-            $this->subject->getPublicationHash()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPublicationHashSetsPublicationHash(): void
-    {
-        $this->subject->setPublicationHash('5318761asdf35as5sad35asd35asd');
-
-        self::assertSame(
-            '5318761asdf35as5sad35asd35asd',
-            $this->subject->getPublicationHash()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isPublishedForEventWithoutPublicationHashIsTrue(): void
-    {
-        $this->subject->setPublicationHash('');
-
-        self::assertTrue(
-            $this->subject->isPublished()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isPublishedForEventWithPublicationHashIsFalse(): void
-    {
-        $this->subject->setPublicationHash('5318761asdf35as5sad35asd35asd');
-
-        self::assertFalse(
-            $this->subject->isPublished()
         );
     }
 

@@ -2340,46 +2340,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>seconds</source>
 				<target>Sekunden</target>
 			</trans-unit>
-			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
-				<source>The event has been published.</source>
-				<target>Die Veranstaltung wurde veröffentlicht.</target>
-			</trans-unit>
-			<trans-unit id="message_publishingFailed" xml:space="preserve">
-				<source>There is no such pending event.</source>
-				<target>Es konnte keine entsprechend ausstehende Veranstaltung gefunden werden.</target>
-			</trans-unit>
-			<trans-unit id="publish_event_subject" xml:space="preserve">
-				<source>Event available for publication</source>
-				<target>Veranstaltung zum Freischalten verfügbar</target>
-			</trans-unit>
-			<trans-unit id="save_event_subject" xml:space="preserve">
-				<source>Event created/updated</source>
-				<target>Veranstaltung angelegt/aktualisiert</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor and currently is awaiting publication.</source>
-				<target>Eine Veranstaltung ist im Front-end bearbeitet worden und müsste noch veröffentlicht werden.</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target>Die eingegebenen Daten in der Übersicht:</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_link" xml:space="preserve">
-				<source>If you want to publish this event, please click this link:</source>
-				<target>Wenn Sie diese Veranstaltung veröffentlichen möchten, klicken Sie bitte auf diesen Link:</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_notice" xml:space="preserve">
-				<source>If you do not want to publish this event, no action is needed.</source>
-				<target>Wenn Sie die Veranstaltung nicht veröffentlichen möchten, brauchen Sie einfach nichts zu tun.</target>
-			</trans-unit>
-			<trans-unit id="label_save_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor.</source>
-				<target>Eine Veranstaltung ist im Front-end bearbeitet worden.</target>
-			</trans-unit>
-			<trans-unit id="label_save_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target>Die eingegebenen Daten in der Übersicht:</target>
-			</trans-unit>
 			<trans-unit id="speakerImage.alt">
 				<source>portrait image</source>
 				<target>Porträt</target>

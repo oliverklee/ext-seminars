@@ -1336,11 +1336,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Cannot call method getAuxiliaryRecordsPid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
@@ -1351,22 +1346,12 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Cannot call method getReviewerFromGroup\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Cannot call method hasGroupMembership\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Cannot call method typoLink_URL\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -1441,11 +1426,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$path of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:locationHeaderUrl\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function trim expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
@@ -1453,11 +1433,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$subparts of method OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:hideSubpartsArray\\(\\) expects array\\<int\\|string, non\\-empty\\-string\\>, array\\<string\\> given\\.$#"
 			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:replyTo\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null given\\.$#"
-			count: 2
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
@@ -1479,11 +1454,6 @@ parameters:
 			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
 			count: 2
 			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventPublication.php
 
 		-
 			message: "#^Binary operation \"\\.\" between non\\-falsy\\-string and array\\|string results in an error\\.$#"
@@ -3556,11 +3526,6 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPublicationHash\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Cannot call method getRegistrationBeginAsUnixTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
@@ -4711,33 +4676,8 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 32
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 13
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
@@ -4756,57 +4696,12 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 7
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$models of static method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:makeListToFormidableList\\(\\) expects OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel&OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\> given\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractEditor\\:\\:setObjectUid\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 32
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int, mixed given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
@@ -4844,11 +4739,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\SelectorWidgetTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Event\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/EventMapperTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\|null\\.$#"

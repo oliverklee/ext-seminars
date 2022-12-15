@@ -2312,46 +2312,6 @@ This event now has been confirmed.</source>
 				<source>seconds</source>
 				<target>secondes</target>
 			</trans-unit>
-			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
-				<source>The event has been published.</source>
-				<target>L'événement a été publié.</target>
-			</trans-unit>
-			<trans-unit id="message_publishingFailed" xml:space="preserve">
-				<source>There is no such pending event.</source>
-				<target>Il n'existe pas de tel événement en attente.</target>
-			</trans-unit>
-			<trans-unit id="publish_event_subject" xml:space="preserve">
-				<source>Event available for publication</source>
-				<target>Événement disponible à la publication</target>
-			</trans-unit>
-			<trans-unit id="save_event_subject" xml:space="preserve">
-				<source>Event created/updated</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor and currently is awaiting publication.</source>
-				<target>Un événement publié en front end est disponible pour publication.</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target>Aperçu des données entrées :</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_link" xml:space="preserve">
-				<source>If you want to publish this event, please click this link:</source>
-				<target>Si vous désirez publier cet événement, cliquez sur ce lien :</target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_notice" xml:space="preserve">
-				<source>If you do not want to publish this event, no action is needed.</source>
-				<target>Si vous ne désirez pas publier cet événement, aucune action n'est requise.</target>
-			</trans-unit>
-			<trans-unit id="label_save_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_save_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.loginPage">
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Page de login (ou avec onetimeaccount):</target>

@@ -2304,46 +2304,6 @@ This event now has been confirmed.</source>
 				<source>seconds</source>
 				<target>secondi</target>
 			</trans-unit>
-			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
-				<source>The event has been published.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_publishingFailed" xml:space="preserve">
-				<source>There is no such pending event.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="publish_event_subject" xml:space="preserve">
-				<source>Event available for publication</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="save_event_subject" xml:space="preserve">
-				<source>Event created/updated</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor and currently is awaiting publication.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_link" xml:space="preserve">
-				<source>If you want to publish this event, please click this link:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_publish_event_notice" xml:space="preserve">
-				<source>If you do not want to publish this event, no action is needed.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_save_event_text" xml:space="preserve">
-				<source>An event has been edited in the front-end editor.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_save_event_overview" xml:space="preserve">
-				<source>The entered data as an overview:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
 				<source>You are already registered for this event.</source>
 				<target>Lei è già registrato per questo evento.</target>

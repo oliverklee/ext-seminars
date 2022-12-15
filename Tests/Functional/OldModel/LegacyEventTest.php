@@ -122,7 +122,6 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(3, $subject->getOfflineRegistrations());
         self::assertTrue($subject->isCanceled());
         self::assertTrue($subject->hasTerms2());
-        self::assertSame('abc34345', $subject->getPublicationHash());
         self::assertTrue($subject->haveOrganizersBeenNotifiedAboutEnoughAttendees());
         self::assertTrue($subject->shouldMuteNotificationEmails());
         self::assertTrue($subject->shouldAutomaticallyConfirmOrCancel());

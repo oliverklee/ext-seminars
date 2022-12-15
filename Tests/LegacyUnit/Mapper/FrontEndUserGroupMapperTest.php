@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
-use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Model\Category;
@@ -50,23 +47,6 @@ final class FrontEndUserGroupMapperTest extends TestCase
     public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance(): void
     {
         self::assertInstanceOf(FrontEndUserGroup::class, $this->subject->getNewGhost());
-    }
-
-    // Tests concerning the reviewer
-
-    /**
-     * @test
-     */
-    public function frontEndUserGroupCanReturnBackEndUserModel(): void
-    {
-        $backEndUser = MapperRegistry::get(OelibBackEndUserMapper::class)->getNewGhost();
-        $frontEndUserGroup = $this->subject->getLoadedTestingModel(
-            ['tx_seminars_reviewer' => $backEndUser->getUid()]
-        );
-
-        $model = $this->subject->find($frontEndUserGroup->getUid());
-
-        self::assertInstanceOf(OelibBackEndUser::class, $model->getReviewer());
     }
 
     // Tests concerning the default categories

@@ -49,26 +49,6 @@ class EventMapper extends AbstractDataMapper
     ];
 
     /**
-     * Retrieves an event model with the publication hash provided.
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public function findByPublicationHash(string $publicationHash): ?Event
-    {
-        if ($publicationHash === '') {
-            throw new \InvalidArgumentException('The given publication hash was empty.', 1333292411);
-        }
-
-        try {
-            $result = $this->findSingleByWhereClause(['publication_hash' => $publicationHash]);
-        } catch (NotFoundException $exception) {
-            $result = null;
-        }
-
-        return $result;
-    }
-
-    /**
      * Retrieves all events that have a begin date of at least $minimum up to
      * $maximum.
      *

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
 /**
@@ -13,38 +12,6 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
  */
 class FrontEndUser extends OelibFrontEndUser
 {
-    /**
-     * Returns the publish setting for the user groups the user is assigned to.
-     *
-     * The function will always return PUBLISH_IMMEDIATELY if the user has no
-     * groups.
-     *
-     * If the user has more than one group, the strictest setting of the groups
-     * will be returned.
-     *
-     * @return FrontEndUserGroup::PUBLISH_*
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public function getPublishSetting(): int
-    {
-        $userGroups = $this->getUserGroups();
-        if ($userGroups->isEmpty()) {
-            return FrontEndUserGroup::PUBLISH_IMMEDIATELY;
-        }
-
-        $result = FrontEndUserGroup::PUBLISH_IMMEDIATELY;
-
-        /** @var FrontEndUserGroup $userGroup */
-        foreach ($userGroups as $userGroup) {
-            $groupPermissions = $userGroup->getPublishSetting();
-
-            $result = ($groupPermissions > $result) ? $groupPermissions : $result;
-        }
-
-        return $result;
-    }
-
     /**
      * Returns the PID where to store the auxiliary records created by this
      * front-end user.
@@ -71,26 +38,6 @@ class FrontEndUser extends OelibFrontEndUser
         }
 
         return $auxiliaryRecordsPid;
-    }
-
-    /**
-     * Returns the reviewer set in the groups of this user.
-     *
-     * Will return the first reviewer found.
-     */
-    public function getReviewerFromGroup(): ?OelibBackEndUser
-    {
-        $result = null;
-
-        /** @var FrontEndUserGroup $userGroup */
-        foreach ($this->getUserGroups() as $userGroup) {
-            if ($userGroup->hasReviewer()) {
-                $result = $userGroup->getReviewer();
-                break;
-            }
-        }
-
-        return $result;
     }
 
     /**

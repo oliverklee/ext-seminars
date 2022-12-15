@@ -13,14 +13,11 @@ use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
-use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
-use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
 use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
@@ -32,9 +29,7 @@ use OliverKlee\Seminars\Mapper\SkillMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Checkbox;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
@@ -66,11 +61,6 @@ class EventEditor extends AbstractEditor
      * @var string[] the fields required to file a new event.
      */
     private $requiredFormFields = [];
-
-    /**
-     * @var string the publication hash for the event to edit/create
-     */
-    private $publicationHash = '';
 
     /**
      * @var mixed[]
@@ -585,42 +575,6 @@ class EventEditor extends AbstractEditor
     }
 
     /**
-     * Checks the publication settings of the user and hides the event record if necessary.
-     *
-     * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified
-     *        if the seminar must be hidden corresponding to the publish settings of the user, must not be empty
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    private function checkPublishSettings(array &$formData): void
-    {
-        $user = self::getLoggedInUser();
-        $publishSetting = $user instanceof FrontEndUser
-            ? $user->getPublishSetting() : FrontEndUserGroup::PUBLISH_IMMEDIATELY;
-        $eventUid = $this->getObjectUid();
-        $isNew = $eventUid === 0;
-
-        $hideEditedObject = !$isNew && $publishSetting === FrontEndUserGroup::PUBLISH_HIDE_EDITED;
-        $hideNewObject = $isNew && $publishSetting > FrontEndUserGroup::PUBLISH_IMMEDIATELY;
-
-        if ($isNew) {
-            $eventIsHidden = false;
-        } else {
-            $mapper = MapperRegistry::get(EventMapper::class);
-            $event = $mapper->find($eventUid);
-            $eventIsHidden = $event->isHidden();
-        }
-
-        if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
-            $formData['hidden'] = 1;
-            $formData['publication_hash'] = uniqid('', true);
-            $this->publicationHash = $formData['publication_hash'];
-        } else {
-            $this->publicationHash = '';
-        }
-    }
-
-    /**
      * Unifies decimal separators, processes the deletion of attachments and
      * purges non-seminars-fields.
      *
@@ -637,7 +591,6 @@ class EventEditor extends AbstractEditor
         $this->purgeNonSeminarsFields($modifiedFormData);
         $this->unifyDecimalSeparators($modifiedFormData);
         $this->addAdministrativeData($modifiedFormData);
-        $this->checkPublishSettings($modifiedFormData);
         $this->addCategoriesOfUser($modifiedFormData);
 
         $this->savedFormData = $modifiedFormData;
@@ -902,171 +855,6 @@ class EventEditor extends AbstractEditor
         }
 
         return preg_match('/^\\d+([,.]\\d{1,2})?$/', $formData['value']) == 1;
-    }
-
-    /**
-     * Sends the publishing e-mail to the reviewer if necessary.
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public function sendEmailToReviewer(): void
-    {
-        if ($this->publicationHash === '') {
-            return;
-        }
-        $reviewer = $this->getReviewer();
-        if ($reviewer === null) {
-            return;
-        }
-
-        $event = MapperRegistry::get(EventMapper::class)->findByPublicationHash($this->publicationHash);
-        if ($event instanceof Event && $event->isHidden()) {
-            $sender = $this->getEmailSender();
-            $loggedInUser = self::getLoggedInUser();
-
-            GeneralUtility::makeInstance(EmailBuilder::class)
-                ->to($reviewer)
-                ->from($sender)
-                ->replyTo($loggedInUser)
-                ->subject($this->translate('publish_event_subject'))
-                ->text($this->createEmailContent($event))
-                ->build()->send();
-        }
-    }
-
-    /**
-     * Gets the reviewer for new/edited records.
-     */
-    protected function getReviewer(): ?OelibBackEndUser
-    {
-        MapperRegistry::purgeInstance();
-        return self::getLoggedInUser()->getReviewerFromGroup();
-    }
-
-    /**
-     * Builds the content for the publishing e-mail to the reviewer.
-     *
-     * @param Event $event the event to send the publication e-mail for
-     *
-     * @return string the e-mail body for the publishing e-mail, will not be empty
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    private function createEmailContent(Event $event): string
-    {
-        $this->getTemplateCode(true);
-        $this->setLabels();
-
-        $markerPrefix = 'publish_event';
-
-        if ($event->hasBeginDate()) {
-            $beginDate = \strftime($this->getDateFormat(), $event->getBeginDateAsUnixTimeStamp());
-        } else {
-            $beginDate = '';
-        }
-
-        $this->setMarker('title', $event->getTitle(), $markerPrefix);
-        $this->setOrDeleteMarkerIfNotEmpty(
-            'date',
-            $beginDate,
-            $markerPrefix,
-            'wrapper_publish_event'
-        );
-        $this->setMarker(
-            'description',
-            $event->getDescription(),
-            $markerPrefix
-        );
-
-        $this->setMarker('link', $this->createReviewUrl(), $markerPrefix);
-
-        return $this->getSubpart('MAIL_PUBLISH_EVENT');
-    }
-
-    /**
-     * Builds the URL for the reviewer e-mail.
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     *
-     * @return string the URL for the plain text e-mail, will not be empty
-     */
-    private function createReviewUrl(): string
-    {
-        $url = $this->cObj->typoLink_URL(
-            [
-                'parameter' => $this->getFrontEndController()->id . ','
-                    . EventPublication::PUBLICATION_TYPE_NUMBER,
-                'additionalParams' => GeneralUtility::implodeArrayForUrl(
-                    'tx_seminars_publication',
-                    ['hash' => $this->publicationHash],
-                    '',
-                    false,
-                    true
-                ),
-                'type' => EventPublication::PUBLICATION_TYPE_NUMBER,
-            ]
-        );
-
-        return GeneralUtility::locationHeaderUrl(preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $url));
-    }
-
-    /**
-     * Sends an additional notification email to the review if this is enabled in the configuration and if the event has
-     * been newly created.
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public function sendAdditionalNotificationEmailToReviewer(): void
-    {
-        if (!self::getSeminarsConfiguration()->getAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor')) {
-            return;
-        }
-        $reviewer = $this->getReviewer();
-        if ($reviewer === null) {
-            return;
-        }
-
-        $sender = $this->getEmailSender();
-        $loggedInUser = self::getLoggedInUser();
-
-        GeneralUtility::makeInstance(EmailBuilder::class)
-            ->to($reviewer)
-            ->from($sender)
-            ->replyTo($loggedInUser)
-            ->subject($this->translate('save_event_subject'))
-            ->text($this->createAdditionalEmailContent())
-            ->build()->send();
-    }
-
-    /**
-     * Builds the content for the additional notification e-mail to the reviewer.
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     *
-     * @return string the e-mail body for the notification e-mail, will not be empty
-     */
-    protected function createAdditionalEmailContent(): string
-    {
-        $this->getTemplateCode(true);
-        $this->setLabels();
-
-        $markerPrefix = 'save_event';
-
-        $title = $this->savedFormData['title'] ?? '';
-        $this->setMarker('title', $title, $markerPrefix);
-        $description = $this->savedFormData['description'] ?? '';
-        $this->setMarker('description', $description, $markerPrefix);
-
-        $beginDateAsTimeStamp = isset($this->savedFormData['begin_date']) ? (int)$this->savedFormData['begin_date'] : 0;
-        $beginDate = $beginDateAsTimeStamp !== 0 ? \strftime($this->getDateFormat(), $beginDateAsTimeStamp) : '';
-        $this->setOrDeleteMarkerIfNotEmpty(
-            'date',
-            $beginDate,
-            $markerPrefix,
-            'wrapper_save_event'
-        );
-
-        return $this->getSubpart('MAIL_SAVE_EVENT');
     }
 
     /**

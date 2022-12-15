@@ -113,18 +113,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
     }
 
     actionlets {
-      10 = actionlet:USEROBJ
-      10.userobj {
-        extension = this
-        method = sendEMailToReviewer
-      }
-
-      20 = actionlet:USEROBJ
-      20.userobj {
-        extension = this
-        method = sendAdditionalNotificationEmailToReviewer
-      }
-
       30 = actionlet:REDIRECT
       30.url.userobj {
         extension = this
