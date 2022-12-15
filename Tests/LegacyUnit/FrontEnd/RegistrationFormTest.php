@@ -16,10 +16,10 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractEditor
  * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
  */
 final class RegistrationFormTest extends TestCase
@@ -257,37 +257,6 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////
-    // Tests concerning retrieveDataFromSession
-    /////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function retrieveDataFromSessionWithUnusedKeyReturnsEmptyString(): void
-    {
-        self::assertEquals(
-            '',
-            $this->subject->retrieveDataFromSession(['key' => 'foo'])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function retrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey(): void
-    {
-        $this->session->setAsString(
-            'tx_seminars_registration_editor_zip',
-            '12345'
-        );
-
-        self::assertEquals(
-            '12345',
-            $this->subject->retrieveDataFromSession(['key' => 'zip'])
-        );
-    }
-
     ////////////////////////////////////////////////
     // Tests concerning populateListPaymentMethods
     ////////////////////////////////////////////////
@@ -482,59 +451,6 @@ final class RegistrationFormTest extends TestCase
         self::assertContains(
             ['caption' => 'Deutschland', 'value' => 'Deutschland'],
             $this->subject->populateListCountries()
-        );
-    }
-
-    // Tests concerning getFeUserData().
-
-    /**
-     * @test
-     */
-    public function getFeUserDataWithKeyCountryAndNoCountrySetReturnsDefaultCountrySetViaTypoScriptSetup(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->infoTablesConfiguration->setAsString('countryCode', 'DEU');
-
-        self::assertEquals(
-            'Deutschland',
-            $this->subject->getFeUserData(['key' => 'country'])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getFeUserDataWithKeyCountryAndStaticInfoCountrySetReturnsStaticInfoCountry(): void
-    {
-        if (!ExtensionManagementUtility::isLoaded('sr_feuser_register')) {
-            self::markTestSkipped('This test only is available is sr_feuser_register is installed.');
-        }
-
-        $this->testingFramework->createAndLoginFrontEndUser(
-            '',
-            ['static_info_country' => 'GBR']
-        );
-
-        self::assertEquals(
-            'United Kingdom',
-            $this->subject->getFeUserData(['key' => 'country'])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser(
-            '',
-            ['country' => 'Taka-Tuka-Land']
-        );
-
-        self::assertEquals(
-            'Taka-Tuka-Land',
-            $this->subject->getFeUserData(['key' => 'country'])
         );
     }
 
@@ -1380,84 +1296,6 @@ final class RegistrationFormTest extends TestCase
 
         self::assertFalse(
             $subject->validateAdditionalPersonsEmailAddresses()
-        );
-    }
-
-    /////////////////////////////////////////////////
-    // Tests concerning getPreselectedPaymentMethod
-    /////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid(): void
-    {
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods',
-            ['title' => 'foo']
-        );
-
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $paymentMethodUid
-        );
-
-        self::assertEquals(
-            $paymentMethodUid,
-            $this->subject->getPreselectedPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPreselectedPaymentMethodForTwoNotSelectedPaymentMethodsReturnsZero(): void
-    {
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods')
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods')
-        );
-
-        self::assertEquals(
-            0,
-            $this->subject->getPreselectedPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNotReturnsUidOfSelectedRecord(): void
-    {
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods')
-        );
-        $selectedPaymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods'
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $selectedPaymentMethodUid
-        );
-
-        $this->session->setAsInteger(
-            'tx_seminars_registration_editor_method_of_payment',
-            $selectedPaymentMethodUid
-        );
-
-        self::assertEquals(
-            $selectedPaymentMethodUid,
-            $this->subject->getPreselectedPaymentMethod()
         );
     }
 

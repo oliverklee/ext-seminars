@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractEditor
  * @covers \OliverKlee\Seminars\FrontEnd\EventEditor
  */
 final class EventEditorTest extends FunctionalTestCase

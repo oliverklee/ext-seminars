@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractEditor
  * @covers \OliverKlee\Seminars\FrontEnd\RegistrationForm
  */
 final class RegistrationFormTest extends FunctionalTestCase

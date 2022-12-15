@@ -1612,12 +1612,12 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$fe_user on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
 			message: "#^Cannot access property \\$user on string\\|TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
@@ -1647,7 +1647,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 8
+			count: 5
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
@@ -1682,11 +1682,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getCaptionsForSelectedOptions\\(\\) has parameter \\$availableOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getFeUserData\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1761,11 +1756,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:retrieveDataFromSession\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:saveDataToSession\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
@@ -1776,17 +1766,7 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Offset 'static_info_country' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Offset 3 on array\\{string, string, string, string\\} in isset\\(\\) always exists and is not nullable\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Offset mixed might not exist on array\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
