@@ -43,5 +43,13 @@ The content of this document is related to TYPO3 - a GNU/GPL CMS/Framework avail
    :titlesonly:
    :glob:
 
-   EN/Index
-   DE/Index
+   Introduction/Index
+   KeepingUp-to-dateAndGettingSupport/Index
+   YourHelpIsWanted/Index
+   Installation/Index
+   Configuration/Index
+   UsersManual/Index
+   Reference/Index
+   DevelopmentWorkflow/Index
+   HelpingOut/Index
+   KnownProblems/Index
