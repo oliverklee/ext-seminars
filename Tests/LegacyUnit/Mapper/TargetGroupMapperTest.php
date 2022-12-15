@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\TargetGroup;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\TargetGroupMapper
+ */
 final class TargetGroupMapperTest extends TestCase
 {
     /**

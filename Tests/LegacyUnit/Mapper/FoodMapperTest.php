@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Model\Food;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\FoodMapper
+ */
 final class FoodMapperTest extends TestCase
 {
     /**

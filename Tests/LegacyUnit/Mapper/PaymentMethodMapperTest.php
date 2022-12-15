@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\PaymentMethodMapper
+ */
 final class PaymentMethodMapperTest extends TestCase
 {
     /**

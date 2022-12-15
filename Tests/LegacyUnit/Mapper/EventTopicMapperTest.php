@@ -16,7 +16,6 @@ use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Checkbox;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\TargetGroup;

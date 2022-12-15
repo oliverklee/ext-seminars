@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Seminars\Model\EventType;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\EventType
+ */
 final class EventTypeTest extends TestCase
 {
     /**

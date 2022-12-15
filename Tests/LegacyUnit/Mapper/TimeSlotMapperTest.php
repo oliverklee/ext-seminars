@@ -17,6 +17,9 @@ use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TimeSlot;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\TimeSlotMapper
+ */
 final class TimeSlotMapperTest extends TestCase
 {
     /**

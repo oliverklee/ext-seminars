@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Model\Category;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\CategoryMapper
+ */
 final class CategoryMapperTest extends TestCase
 {
     /**

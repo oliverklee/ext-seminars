@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\PaymentMethod
+ */
 final class PaymentMethodTest extends TestCase
 {
     /**

@@ -16,6 +16,9 @@ use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\FrontEndUser
+ */
 final class FrontEndUserTest extends TestCase
 {
     /**

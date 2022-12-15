@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\PlaceMapper
+ */
 final class PlaceMapperTest extends TestCase
 {
     /**

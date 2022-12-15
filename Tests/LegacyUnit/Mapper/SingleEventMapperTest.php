@@ -23,6 +23,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds tests which are specific to single events.
+ *
+ * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
 final class SingleEventMapperTest extends TestCase
 {

@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Speaker;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\SpeakerMapper
+ */
 final class SpeakerMapperTest extends TestCase
 {
     /**

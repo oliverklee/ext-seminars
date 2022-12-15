@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
 final class EventTest extends TestCase

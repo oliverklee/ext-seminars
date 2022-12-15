@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\CheckboxMapper
+ */
 final class CheckboxMapperTest extends TestCase
 {
     /**

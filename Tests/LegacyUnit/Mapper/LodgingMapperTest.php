@@ -9,6 +9,9 @@ use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Model\Lodging;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\LodgingMapper
+ */
 final class LodgingMapperTest extends TestCase
 {
     /**

@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Seminars\Model\BackEndUserGroup;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Model\BackEndUserGroup
+ */
 final class BackEndUserGroupTest extends TestCase
 {
     /**
