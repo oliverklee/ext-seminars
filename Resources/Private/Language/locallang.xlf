@@ -513,9 +513,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="subModuleTitle_speakers" xml:space="preserve">
 				<source>Speakers</source>
 			</trans-unit>
-			<trans-unit id="subModuleTitle_organizers" xml:space="preserve">
-				<source>Organizers</source>
-			</trans-unit>
 			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
 				<source>Accreditation number</source>
 			</trans-unit>

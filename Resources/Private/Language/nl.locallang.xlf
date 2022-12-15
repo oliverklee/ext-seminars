@@ -628,10 +628,6 @@ This event now has been confirmed.</source>
 				<source>Speakers</source>
 				<target>Sprekers</target>
 			</trans-unit>
-			<trans-unit id="subModuleTitle_organizers" xml:space="preserve">
-				<source>Organizers</source>
-				<target>Organisatoren</target>
-			</trans-unit>
 			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
 				<source>Accreditation number</source>
 				<target></target>
