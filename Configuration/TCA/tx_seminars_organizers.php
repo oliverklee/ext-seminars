@@ -14,9 +14,6 @@ $tca = [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Organizer.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title,description,homepage,email,email_footer',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,

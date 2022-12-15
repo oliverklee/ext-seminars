@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 9LTS (#2156, #2165, #2170, #2176, #2179)
 
 ### Fixed
-- Drop usages of deprecated classes (#2160, #2166, #2178, #2183)
+- Drop usages of deprecated classes (#2160, #2166, #2178, #2183, #2186)
 
 ## 4.4.0
 

@@ -14,9 +14,6 @@ return [
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/TargetGroup.gif',
         'searchFields' => 'title',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'title,minimum_age,maximum_age,owner',
-    ],
     'columns' => [
         'title' => [
             'exclude' => 0,
