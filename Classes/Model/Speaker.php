@@ -27,12 +27,4 @@ class Speaker extends AbstractModel implements MailRole
     {
         return $this->getAsString('email');
     }
-
-    public function getOwner(): ?FrontEndUser
-    {
-        /** @var FrontEndUser|null $owner */
-        $owner = $this->getAsModel('owner');
-
-        return $owner;
-    }
 }

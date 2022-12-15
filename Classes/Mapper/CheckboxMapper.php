@@ -17,8 +17,4 @@ class CheckboxMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_checkboxes';
 
     protected $modelClassName = Checkbox::class;
-
-    protected $relations = [
-        'owner' => FrontEndUserMapper::class,
-    ];
 }

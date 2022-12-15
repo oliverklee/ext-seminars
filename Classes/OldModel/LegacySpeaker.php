@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
 
 /**
@@ -269,21 +266,6 @@ class LegacySpeaker extends AbstractModel
     public function setCancelationPeriod(int $cancelationPeriod): void
     {
         $this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
-    }
-
-    public function getOwner(): ?FrontEndUser
-    {
-        if (!$this->hasRecordPropertyInteger('owner')) {
-            return null;
-        }
-
-        return MapperRegistry::get(FrontEndUserMapper::class)
-            ->find($this->getRecordPropertyInteger('owner'));
-    }
-
-    public function setOwner(FrontEndUser $frontEndUser): void
-    {
-        $this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
     }
 
     /**

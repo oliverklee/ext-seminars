@@ -1501,11 +1501,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Only booleans are allowed in &&, OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null given on the right side\\.$#"
-			count: 4
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#1 \\$configuration \\(array\\|tx_mkforms_forms_IForm\\|null\\) of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) should be contravariant with parameter \\$configuration \\(mixed\\) of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:init\\(\\)$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php

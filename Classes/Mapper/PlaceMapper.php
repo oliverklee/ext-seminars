@@ -17,8 +17,4 @@ class PlaceMapper extends AbstractDataMapper
     protected $tableName = 'tx_seminars_sites';
 
     protected $modelClassName = Place::class;
-
-    protected $relations = [
-        'owner' => FrontEndUserMapper::class,
-    ];
 }

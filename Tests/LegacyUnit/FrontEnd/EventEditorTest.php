@@ -914,14 +914,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////////
-    // Tests concerning populateListPlaces().
-    ///////////////////////////////////////////
-
     /**
      * @test
      */
-    public function populateListPlacesShowsPlaceWithoutOwner(): void
+    public function populateListPlacesShowsPlace(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
@@ -930,48 +926,6 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            [
-                'caption' => '',
-                'value' => $placeUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListPlaces([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesShowsPlaceWithOwnerIsLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertContains(
-            [
-                'caption' => '',
-                'value' => $placeUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListPlaces([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesHidesPlaceWithOwnerIsNotLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertNotContains(
             [
                 'caption' => '',
                 'value' => $placeUid,
@@ -1010,7 +964,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCheckboxesShowsCheckboxWithoutOwner(): void
+    public function populateListCheckboxesShowsCheckbox(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
@@ -1019,48 +973,6 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            [
-                'caption' => '',
-                'value' => $checkboxUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListCheckboxes([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesShowsCheckboxWithOwnerIsLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes',
-            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertContains(
-            [
-                'caption' => '',
-                'value' => $checkboxUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListCheckboxes([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesHidesCheckboxWithOwnerIsNotLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes',
-            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertNotContains(
             [
                 'caption' => '',
                 'value' => $checkboxUid,
@@ -1099,7 +1011,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListTargetGroupsShowsTargetGroupWithoutOwner(): void
+    public function populateListTargetGroupsShowsTargetGroup(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
@@ -1108,48 +1020,6 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            [
-                'caption' => '',
-                'value' => $targetGroupUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListTargetGroups([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsShowsTargetGroupWithOwnerIsLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups',
-            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertContains(
-            [
-                'caption' => '',
-                'value' => $targetGroupUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListTargetGroups([])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsHidesTargetGroupWithOwnerIsNotLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups',
-            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertNotContains(
             [
                 'caption' => '',
                 'value' => $targetGroupUid,
@@ -1188,7 +1058,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSpeakersShowsSpeakerWithoutOwner(): void
+    public function populateListSpeakersShowsSpeaker(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
@@ -1197,48 +1067,6 @@ final class EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            [
-                'caption' => '',
-                'value' => $speakerUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListSpeakers()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersShowsSpeakerWithOwnerIsLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers',
-            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertContains(
-            [
-                'caption' => '',
-                'value' => $speakerUid,
-                'wrapitem' => '|</td><td>&nbsp;',
-            ],
-            $this->subject->populateListSpeakers()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersHidesSpeakerWithOwnerIsNotLoggedInFrontEndUser(): void
-    {
-        $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers',
-            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
-        );
-
-        self::assertNotContains(
             [
                 'caption' => '',
                 'value' => $speakerUid,

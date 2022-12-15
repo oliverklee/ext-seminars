@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
-use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Speaker;
 use PHPUnit\Framework\TestCase;
 
@@ -69,31 +66,5 @@ final class SpeakerMapperTest extends TestCase
             'John Doe',
             $model->getName()
         );
-    }
-
-    // Tests regarding the owner.
-
-    /**
-     * @test
-     */
-    public function getOwnerWithoutOwnerReturnsNull(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertNull($testingModel->getOwner());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithOwnerReturnsOwnerInstance(): void
-    {
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)
-            ->getLoadedTestingModel([]);
-        $testingModel = $this->subject->getLoadedTestingModel(
-            ['owner' => $frontEndUser->getUid()]
-        );
-
-        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 }
