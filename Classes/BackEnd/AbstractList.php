@@ -195,10 +195,6 @@ abstract class AbstractList
                 ->getMessageQueueByIdentifier()->renderFlashMessages();
 
             $result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
-
-            if ($this->getBackEndUser()->isAdmin()) {
-                $result .= $this->createFeatureSurveyMessage();
-            }
         }
 
         return $result;
@@ -293,38 +289,6 @@ abstract class AbstractList
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
         return MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-    }
-
-    /**
-     * @return non-empty-string
-     */
-    private function createFeatureSurveyMessage(): string
-    {
-        return <<<HTML
-<div class="typo3-messages">
-    <div class="alert alert-info">
-        <div class="media">
-            <div class="media-left">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-info fa-stack-1x"></i>
-                </span>
-            </div>
-            <div class="media-body">
-                <p class="alert-info">
-                    There is a <strong><a href="https://forms.gle/uMZsDpuJnnqYbQvX6>">feature survey</a></strong>
-                    underway to determine which features of this extension are actually in use. Features for which the
-                    survey determines that nobody uses them will be removed quite soon.
-                </p>
-                <p>
-                    Please take a few minutes to fill out the survey to ensure your favorite features will not be
-                    removed. Thank you!
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-HTML;
     }
 
     /**
