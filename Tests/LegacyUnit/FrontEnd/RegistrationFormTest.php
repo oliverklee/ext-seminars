@@ -92,7 +92,6 @@ final class RegistrationFormTest extends TestCase
                 'thankYouAfterRegistrationPID' => $rootPageUid,
                 'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'logOutOneTimeAccountsAfterRegistration' => 1,
                 'showRegistrationFields' => 'registered_themselves,attendees_names',
                 'showFeUserFieldsInRegistrationForm' => 'name,email',
                 'showFeUserFieldsInRegistrationFormWithLabel' => 'email',
