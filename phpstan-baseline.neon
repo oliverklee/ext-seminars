@@ -5172,7 +5172,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 9
+			count: 7
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -5182,7 +5182,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 6
+			count: 4
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-

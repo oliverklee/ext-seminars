@@ -13,7 +13,6 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
 {
     protected function checkAllConfigurationValues(): void
     {
-        $this->checkCharsetForCsv();
         $this->checkFilenameForEventsCsv();
         $this->checkFilenameForRegistrationsCsv();
         $this->checkFieldsFromEventsForCsv();
@@ -22,18 +21,6 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
         $this->checkFieldsFromFeUserForEmailCsv();
         $this->checkFieldsFromAttendanceForEmailCsv();
         $this->checkShowAttendancesOnRegistrationQueueInEmailCsv();
-    }
-
-    /**
-     * @deprecated #2107 will be removed in seminars 5.0
-     */
-    private function checkCharsetForCsv(): void
-    {
-        $this->checkForNonEmptyString(
-            'charsetForCsv',
-            'This value specifies the charset to use for the CSV export.
-            If this value is not set, no charset information will be provided for CSV downloads.'
-        );
     }
 
     private function checkFilenameForEventsCsv(): void

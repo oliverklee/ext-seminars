@@ -64,28 +64,14 @@ final class CsvResponseTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, non-empty-string>>
-     */
-    public function charsetDataProvider(): array
-    {
-        return [
-            'iso-8859-15' => ['iso-8859-15'],
-            'utf-8' => ['utf-8'],
-        ];
-    }
-
-    /**
      * @test
-     *
-     * @dataProvider charsetDataProvider
      */
-    public function usesCharsetFromConfigurationForTheContentType(string $charset): void
+    public function usesUtf8ForTheContentType(): void
     {
-        $this->configuration->setAsString('charsetForCsv', $charset);
         $subject = new CsvResponse('');
 
         $contentTypeHeader = $subject->getHeader('Content-Type')[0];
-        self::assertStringContainsString('charset=' . $charset, $contentTypeHeader);
+        self::assertStringContainsString('charset=utf-8', $contentTypeHeader);
     }
 
     /**

@@ -45,7 +45,6 @@ final class CsvDownloaderTest extends TestCase
     protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
-        $this->configuration->setAsString('charsetForCsv', 'utf-8');
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -666,7 +665,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanKeepEventDataInUtf8(): void
+    public function mainKeepsEventDataInUtf8(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -690,33 +689,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanChangeEventDataToIso885915(): void
-    {
-        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->pid,
-                'title' => 'Schöne Bären führen',
-            ]
-        );
-
-        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
-        $GLOBALS['_GET']['pid'] = $this->pid;
-
-        $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
-
-        self::assertStringContainsString(
-            'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
-            $this->subject->main()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function mainCanKeepRegistrationDataInUtf8(): void
+    public function mainKeepsRegistrationDataInUtf8(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'title');
@@ -736,35 +709,6 @@ final class CsvDownloaderTest extends TestCase
 
         self::assertStringContainsString(
             'Schöne Bären führen',
-            $this->subject->main()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function mainCanChangeRegistrationDataToIso885915(): void
-    {
-        $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'title');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->pid,
-                'title' => 'Schöne Bären führen',
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-            ]
-        );
-
-        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
-        $GLOBALS['_GET']['pid'] = $this->pid;
-
-        $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
-
-        self::assertStringContainsString(
-            'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
             $this->subject->main()
         );
     }

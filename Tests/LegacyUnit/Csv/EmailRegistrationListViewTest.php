@@ -47,7 +47,6 @@ final class EmailRegistrationListViewTest extends TestCase
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new DummyConfiguration());
         $this->configuration = new DummyConfiguration();
-        $this->configuration->setAsString('charsetForCsv', 'utf-8');
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $pageUid = $this->testingFramework->createSystemFolder();

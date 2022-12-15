@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -89,14 +87,11 @@ final class EventControllerTest extends UnitTestCase
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);
-        ConfigurationRegistry::getInstance()
-            ->set('plugin.tx_seminars', new DummyConfiguration(['charsetForCsv' => 'utf-8']));
     }
 
     protected function tearDown(): void
     {
         unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table'], $GLOBALS['_POST']['id']);
-        ConfigurationRegistry::purgeInstance();
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
