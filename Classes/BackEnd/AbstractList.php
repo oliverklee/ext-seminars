@@ -260,33 +260,6 @@ abstract class AbstractList
     }
 
     /**
-     * Returns a "CSV export" image tag that is linked to the CSV export,
-     * corresponding to the list that is visible in the BE.
-     *
-     * This icon is intended to be used next to the "create new record" icon.
-     *
-     * @return string the HTML source code of the linked CSV icon
-     */
-    protected function getCsvIcon(): string
-    {
-        $pageData = $this->page->getPageData();
-        $csvLabel = $this->getLanguageService()->getLL('csvExport');
-        $urlParameters = ['id' => (int)$pageData['uid'], 'csv' => '1', 'table' => $this->tableName];
-        $csvUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-
-        return '<div id="typo3-csvLink">' .
-            '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
-            $this->getAdditionalCsvParameters() . '">' .
-            '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="" class="icon" />' .
-            // We use an empty alt attribute as we already have a textual
-            // representation directly next to the icon.
-            $csvLabel .
-            '</a>' .
-            '</div>';
-    }
-
-    /**
      * Generates a linked hide or unhide icon depending on the record's hidden
      * status.
      *
@@ -365,20 +338,6 @@ abstract class AbstractList
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
         return MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-    }
-
-    /**
-     * Returns the parameters to add to the CSV icon link.
-     *
-     * @return string the additional link parameters for the CSV icon link, will
-     *                always start with an &amp and be htmlspecialchared, may
-     *                be empty
-     */
-    protected function getAdditionalCsvParameters(): string
-    {
-        $pageData = $this->page->getPageData();
-
-        return '&amp;pid=' . $pageData['uid'];
     }
 
     /**

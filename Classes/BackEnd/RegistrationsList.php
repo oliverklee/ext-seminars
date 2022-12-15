@@ -104,10 +104,6 @@ class RegistrationsList extends AbstractList
             'wrapper'
         );
         $this->template->setMarker('new_record_button', $newButton);
-        $this->template->setMarker(
-            'csv_export_button',
-            ($areAnyRegularRegistrationsVisible ? $this->getCsvIcon() : '')
-        );
         $this->template->setMarker('complete_table', $registrationTables);
 
         $content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
@@ -244,24 +240,6 @@ class RegistrationsList extends AbstractList
     protected function getNewRecordPid(): int
     {
         return $this->getLoggedInUser()->getRegistrationFolderFromGroup();
-    }
-
-    /**
-     * Returns the parameters to add to the CSV icon link.
-     *
-     * @return string the additional link parameters for the CSV icon link, will
-     *                always start with an &amp and be htmlspecialchared, may
-     *                be empty
-     */
-    protected function getAdditionalCsvParameters(): string
-    {
-        if ($this->eventUid > 0) {
-            $result = '&amp;eventUid=' . $this->eventUid;
-        } else {
-            $result = parent::getAdditionalCsvParameters();
-        }
-
-        return $result;
     }
 
     /**

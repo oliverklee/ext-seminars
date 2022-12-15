@@ -6,9 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
-use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -35,11 +33,6 @@ class EventsList extends AbstractList
     protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/EventsList.html';
 
     /**
-     * @var BackEndRegistrationAccessCheck
-     */
-    protected $accessCheck;
-
-    /**
      * Generates and prints out an event list.
      *
      * @return string the HTML source code of the event list
@@ -62,11 +55,6 @@ class EventsList extends AbstractList
         $this->template->setMarker(
             'new_record_button',
             $this->getNewIcon((int)$pageData['uid'])
-        );
-
-        $this->template->setMarker(
-            'csv_event_export_button',
-            (!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
         );
 
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
@@ -173,11 +161,6 @@ class EventsList extends AbstractList
                 )
             );
             $this->template->setMarker(
-                'csv_registration_export_button',
-                (($event->needsRegistration() && !$event->isHidden())
-                    ? $this->getRegistrationsCsvIcon($event) : '')
-            );
-            $this->template->setMarker(
                 'number_of_attendees',
                 ($event->needsRegistration() ? $event->getAttendances() : '')
             );
@@ -261,52 +244,6 @@ class EventsList extends AbstractList
             ExtensionManagementUtility::extPath('seminars')
         ) . 'Resources/Public/Icons/' . $icon .
             '" title="' . $label . '" alt="' . $label . '"/>';
-    }
-
-    /**
-     * Generates a linked CSV export icon for registrations from $event if that event has at least one registration and access to
-     * the registration records is granted.
-     *
-     * @param LegacyEvent $event the event to get the registrations CSV icon for
-     *
-     * @return string the HTML for the linked image (followed by a non-breaking space) or an empty string
-     */
-    public function getRegistrationsCsvIcon(LegacyEvent $event): string
-    {
-        if (!$event->hasAttendances() || !$this->getAccessCheck()->hasAccess()) {
-            return '';
-        }
-
-        $pageData = $this->page->getPageData();
-        $csvLabel = $this->getLanguageService()->getLL('csvExport');
-
-        $imageTag = '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
-
-        $urlParameters = [
-            'id' => (int)$pageData['uid'],
-            'csv' => '1',
-            'table' => 'tx_seminars_attendances',
-            'eventUid' => $event->getUid(),
-        ];
-        $csvUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-
-        return '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) . '">' .
-            $imageTag . '</a>&nbsp;';
-    }
-
-    /**
-     * Gets the access check instance (and creates it if needed).
-     *
-     * @return BackEndRegistrationAccessCheck
-     */
-    protected function getAccessCheck(): BackEndRegistrationAccessCheck
-    {
-        if ($this->accessCheck === null) {
-            $this->accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
-        }
-
-        return $this->accessCheck;
     }
 
     /**

@@ -6,10 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
-use OliverKlee\Seminars\Csv\CsvDownloader;
-use OliverKlee\Seminars\Csv\CsvResponse;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -32,27 +29,8 @@ class Controller extends AbstractModule
     public function mainAction(): ResponseInterface
     {
         $this->init();
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        if ((bool)GeneralUtility::_GET('csv')) {
-            switch (GeneralUtility::_GET('table')) {
-                case 'tx_seminars_seminars':
-                    $filename = $configuration->getAsString('filenameForEventsCsv');
-                    break;
-                case 'tx_seminars_attendances':
-                    $filename = $configuration->getAsString('filenameForRegistrationsCsv');
-                    break;
-                default:
-                    $filename = null;
-            }
 
-            $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
-            $response = new CsvResponse($csvContent, $filename);
-        } else {
-            $htmlContent = $this->main();
-            $response = new HtmlResponse($htmlContent);
-        }
-
-        return $response;
+        return new HtmlResponse($this->main());
     }
 
     /**
@@ -165,9 +143,6 @@ class Controller extends AbstractModule
             $sharedConfigurationCheck = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');
             $sharedConfigurationCheck->check();
             $content .= \implode("\n", $sharedConfigurationCheck->getWarningsAsHtml());
-            $csvConfigurationCheck = new CsvExportConfigurationCheck($configuration, 'plugin.tx_seminars');
-            $csvConfigurationCheck->check();
-            $content .= \implode("\n", $csvConfigurationCheck->getWarningsAsHtml());
         }
 
         return $content . $document->endPage();

@@ -448,52 +448,6 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForNonEmptyRegularRegistrationsListContainsCsvExportButton(): void
-    {
-        $seminarUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'title' => 'event_1',
-            ]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'seminar' => $seminarUid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'csv=1',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showForEmptyRegularRegistrationsListContainsCsvExportButton(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'title' => 'event_1',
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            'mod.php?M=web_txseminarsM2&amp;csv=1',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function showForEventUidSetShowsTitleOfThisEvent(): void
     {
         $_GET['eventUid'] = $this->testingFramework->createRecord(
@@ -579,82 +533,6 @@ final class RegistrationsListTest extends TestCase
 
         self::assertStringNotContainsString(
             'user_foo',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showForEventUidAddsEventUidToCsvExportIcon(): void
-    {
-        $userUid = $this->testingFramework->createFrontEndUser(
-            '',
-            ['name' => 'user_foo']
-        );
-        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $userUid,
-            ]
-        );
-
-        $_GET['eventUid'] = $eventUid;
-
-        self::assertStringContainsString(
-            'eventUid=' . $eventUid,
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showForEventUidDoesNotAddPidToCsvExportIcon(): void
-    {
-        $userUid = $this->testingFramework->createFrontEndUser(
-            '',
-            ['name' => 'user_foo']
-        );
-        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $userUid,
-            ]
-        );
-
-        $_GET['eventUid'] = $eventUid;
-
-        self::assertStringNotContainsString(
-            'pid=',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon(): void
-    {
-        $userUid = $this->testingFramework->createFrontEndUser(
-            '',
-            ['name' => 'user_foo']
-        );
-        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $userUid,
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            'eventUid=',
             $this->subject->show()
         );
     }

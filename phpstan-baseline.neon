@@ -2981,21 +2981,6 @@ parameters:
 			path: Tests/Functional/BackEnd/ConfirmEventMailFormTest.php
 
 		-
-			message: "#^Cannot access offset 'csv' on mixed\\.$#"
-			count: 3
-			path: Tests/Functional/BackEnd/ControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/ControllerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\ControllerTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/ControllerTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\EventsListTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/EventsListTest.php
@@ -4479,16 +4464,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$mockedClassNames \\(array\\<int, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>\\>\\) does not accept array\\<int, class\\-string\\>\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\BackEndEventAccessCheckTest\\:\\:\\$backEndUserBackup \\(TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/BackEndEventAccessCheckTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\BackEndRegistrationAccessCheckTest\\:\\:\\$backEndUserBackup \\(TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/BackEndRegistrationAccessCheckTest.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
