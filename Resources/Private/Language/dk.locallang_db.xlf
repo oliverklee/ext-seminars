@@ -836,10 +836,6 @@
 				<source>Sysfolder for new registrations</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_auxiliaries_folder" xml:space="preserve">
-				<source>Sysfolder for new auxiliary records</source>
-				<target></target>
-			</trans-unit>
 		</body>
 	</file>
 </xliff>
