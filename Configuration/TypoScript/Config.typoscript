@@ -1,6 +1,4 @@
 config {
-  uniqueLinkVars = 1
-
   tx_mkforms {
     loadJsFramework = 1
     mayLoadScriptaculous = 1
