@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -6693,84 +6692,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function processEventEditorActionsForCopyActionWithAccessGrantedCallsCopyEvent(): void
-    {
-        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-
-        $subject = $this->createPartialMock(
-            TestingDefaultController::class,
-            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
-        );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
-            $eventEditor
-        );
-        $subject->expects(self::once())->method('copyEvent')->with($event);
-
-        $subject->piVars['seminar'] = $event->getUid();
-        $subject->piVars['action'] = 'copy';
-
-        $subject->processEventEditorActions();
-    }
-
-    /**
-     * @test
-     */
-    public function processEventEditorActionsForCopyActionWithUnpublishedEventAndAccessGrantedNotCallsCopyEvent(): void
-    {
-        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
-
-        $event = MapperRegistry::get(EventMapper::class)
-            ->getLoadedTestingModel(['publication_hash' => 'foo']);
-
-        $subject = $this->createPartialMock(
-            TestingDefaultController::class,
-            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
-        );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
-            $eventEditor
-        );
-        $subject->expects(self::never())->method('copyEvent');
-
-        $subject->piVars['seminar'] = $event->getUid();
-        $subject->piVars['action'] = 'copy';
-
-        $subject->processEventEditorActions();
-    }
-
-    /**
-     * @test
-     */
-    public function processEventEditorActionsForCopyActionWithAccessDeniedNotCallsCopyEvent(): void
-    {
-        $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn(
-            'access denied'
-        );
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-
-        $subject = $this->createPartialMock(
-            TestingDefaultController::class,
-            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
-        );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
-            $eventEditor
-        );
-        $subject->expects(self::never())->method('copyEvent');
-
-        $subject->piVars['seminar'] = $event->getUid();
-        $subject->piVars['action'] = 'copy';
-
-        $subject->processEventEditorActions();
-    }
-
-    /**
-     * @test
-     */
     public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(): void
     {
         $eventEditor = $this->createPartialMock(EventEditor::class, ['hasAccessMessage']);
@@ -6958,72 +6879,6 @@ final class DefaultControllerTest extends TestCase
         $subject = new TestingDefaultController();
 
         $subject->unhideEvent($event);
-
-        $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
-        self::assertSame(
-            'Location: ' . $currentUrl,
-            $this->headerCollector->getLastAddedHeader()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function copySavesHiddenCloneOfEvent(): void
-    {
-        $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['save'])->getMock();
-        MapperRegistry::set(EventMapper::class, $mapper);
-
-        $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
-
-        $hiddenClone = clone $event;
-        $hiddenClone->markAsHidden();
-        $mapper->expects(self::once())->method('save')->with($hiddenClone);
-
-        $subject = new TestingDefaultController();
-
-        $subject->copyEvent($event);
-    }
-
-    /**
-     * @test
-     */
-    public function copyRemovesRegistrationsFromEvent(): void
-    {
-        $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['save'])->getMock();
-        MapperRegistry::set(EventMapper::class, $mapper);
-
-        $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
-        /** @var Collection<Registration> $registrations */
-        $registrations = new Collection();
-        $registrations->add(new Registration());
-        $event->setRegistrations($registrations);
-
-        /** @var Collection<Registration> $cloneRegistrations */
-        $cloneRegistrations = new Collection();
-        $hiddenClone = clone $event;
-        $hiddenClone->markAsHidden();
-        $hiddenClone->setRegistrations($cloneRegistrations);
-        $mapper->expects(self::once())->method('save')->with($hiddenClone);
-
-        $subject = new TestingDefaultController();
-
-        $subject->copyEvent($event);
-    }
-
-    /**
-     * @test
-     */
-    public function copyEventRedirectsToRequestUrl(): void
-    {
-        $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['save'])->getMock();
-        MapperRegistry::set(EventMapper::class, $mapper);
-
-        $event = $mapper->getLoadedTestingModel([]);
-
-        $subject = new TestingDefaultController();
-
-        $subject->copyEvent($event);
 
         $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
         self::assertSame(

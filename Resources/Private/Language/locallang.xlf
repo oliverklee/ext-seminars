@@ -1299,9 +1299,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_unhide" xml:space="preserve">
 				<source>unhide</source>
 			</trans-unit>
-			<trans-unit id="label_copy" xml:space="preserve">
-				<source>copy</source>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 			</trans-unit>

@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove the "duplicate event" functionality from the FE editor (#2204)
 - Remove the `logOutOneTimeAccountsAfterRegistration` setting (#2199)
 - Drop the legacy registration form (#2196, #2198, #2199)
 - Drop anything bank-data related (#2192)
