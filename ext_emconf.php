@@ -17,7 +17,6 @@ $EM_CONF[$_EXTKEY] = [
             'static_info_tables' => '6.9.5-11.5.99',
         ],
         'conflicts' => [
-            'sourceopt' => '',
         ],
         'suggests' => [
             'onetimeaccount' => '',

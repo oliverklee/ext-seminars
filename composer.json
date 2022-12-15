@@ -71,9 +71,6 @@
 	"replace": {
 		"typo3-ter/seminars": "self.version"
 	},
-	"conflict": {
-		"helhum/typo3-console-plugin": "< 2.0.7"
-	},
 	"suggest": {
 		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
 		"typo3/cms-install": "for running the upgrade wizards"
