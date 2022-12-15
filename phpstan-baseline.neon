@@ -186,36 +186,6 @@ parameters:
 			path: Classes/BackEnd/RegistrationsList.php
 
 		-
-			message: "#^Cannot call method getPageUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 3
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
-			message: "#^Cannot call method getRecordIcon\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 1
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
-			message: "#^Cannot call method getSkillsShort\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 1
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
-			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 1
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 3
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
-			message: "#^Cannot call method isHidden\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
-			count: 1
-			path: Classes/BackEnd/SpeakersList.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/TceForms.php
@@ -4409,61 +4379,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Cannot access property \\$lang on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"

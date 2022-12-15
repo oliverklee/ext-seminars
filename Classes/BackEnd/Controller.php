@@ -117,9 +117,6 @@ class Controller extends AbstractModule
         if ($backEndUser->check('tables_select', 'tx_seminars_attendances')) {
             $this->availableSubModules[2] = $languageService->getLL('subModuleTitle_registrations');
         }
-        if ($backEndUser->check('tables_select', 'tx_seminars_speakers')) {
-            $this->availableSubModules[3] = $languageService->getLL('subModuleTitle_speakers');
-        }
 
         // Read the selected sub module (from the tab menu) and make it available within this class.
         $this->subModule = (int)GeneralUtility::_GET('subModule');
@@ -147,9 +144,6 @@ class Controller extends AbstractModule
         switch ($this->subModule) {
             case 2:
                 $content .= GeneralUtility::makeInstance(RegistrationsList::class, $this)->show();
-                break;
-            case 3:
-                $content .= GeneralUtility::makeInstance(SpeakersList::class, $this)->show();
                 break;
             case 1:
                 if ($this->isGeneralEmailFormRequested()) {

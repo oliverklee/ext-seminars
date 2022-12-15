@@ -636,10 +636,6 @@ This event now has been confirmed.</source>
 				<source>Events</source>
 				<target>Eventi</target>
 			</trans-unit>
-			<trans-unit id="subModuleTitle_speakers" xml:space="preserve">
-				<source>Speakers</source>
-				<target>Oratori</target>
-			</trans-unit>
 			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
 				<source>Accreditation number</source>
 				<target></target>
@@ -707,18 +703,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="eventlist_button_cancel" xml:space="preserve">
 				<source>Cancel</source>
 				<target></target>
-			</trans-unit>
-			<trans-unit id="speakerlist.title" xml:space="preserve">
-				<source>Name</source>
-				<target>Nome</target>
-			</trans-unit>
-			<trans-unit id="speakerlist.skills" xml:space="preserve">
-				<source>Skills</source>
-				<target>Capacità</target>
-			</trans-unit>
-			<trans-unit id="organizerlist.title" xml:space="preserve">
-				<source>Name</source>
-				<target>Nome</target>
 			</trans-unit>
 			<trans-unit id="registrationlist.feuser.name" xml:space="preserve">
 				<source>Name</source>
