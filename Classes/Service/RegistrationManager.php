@@ -534,21 +534,6 @@ class RegistrationManager
             }
         }
 
-        // @deprecated #1571 will be removed in seminars 5.0
-        $accountNumber = isset($formData['account_number'])
-            ? strip_tags($this->unifyWhitespace($formData['account_number'])) : '';
-        $registration->setAccountNumber($accountNumber);
-        $bankCode = isset($formData['bank_code']) ? strip_tags($this->unifyWhitespace($formData['bank_code'])) : '';
-        $registration->setBankCode($bankCode);
-        $bankName = isset($formData['bank_name']) ? strip_tags($this->unifyWhitespace($formData['bank_name'])) : '';
-        $registration->setBankName($bankName);
-        $accountOwner = isset($formData['account_owner']) ? strip_tags(
-            $this->unifyWhitespace(
-                $formData['account_owner']
-            )
-        ) : '';
-        $registration->setAccountOwner($accountOwner);
-
         $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
         $registration->setCompany($company);
 

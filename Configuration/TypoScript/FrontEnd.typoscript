@@ -250,9 +250,6 @@ plugin.tx_seminars_pi1 {
   # comma-separated list of the place fields which are required to be filled in the FE editor
   requiredFrontEndEditorPlaceFields = city
 
-  # UID of the payment method that corresponds to "bank transfer", @deprecated #1571 will be removed in seminars 5.0
-  bankTransferUID =
-
   # The target for external links in seminars.
   externalLinkTarget =
 

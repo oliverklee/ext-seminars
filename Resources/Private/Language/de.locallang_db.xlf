@@ -532,22 +532,6 @@
 				<source>Method of payment</source>
 				<target>Zahlungsart</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_number" xml:space="preserve">
-				<source>Account number</source>
-				<target>Kontonummer</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_code" xml:space="preserve">
-				<source>Bank code</source>
-				<target>Bankleitzahl</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_name" xml:space="preserve">
-				<source>Bank name</source>
-				<target>Name der Bank</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve">
-				<source>Account owner</source>
-				<target>Kontoinhaber</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.separate_billing_address">
 				<source>Separate billing address</source>
 				<target>Abweichende Rechnungsadresse</target>

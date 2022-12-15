@@ -97,10 +97,6 @@ class RegistrationForm extends AbstractEditor
         'seats',
         'total_price',
         'method_of_payment',
-        'account_number',
-        'bank_code',
-        'bank_name',
-        'account_owner',
         'attendees_names',
         'lodgings',
         'accommodation',
@@ -535,15 +531,7 @@ class RegistrationForm extends AbstractEditor
         // are containers and depend on their content being displayed.
         switch ($key) {
             case 'payment':
-                $result = $this->isFormFieldEnabled('price')
-                    || $this->isFormFieldEnabled('method_of_payment')
-                    || $this->isFormFieldEnabled('banking_data');
-                break;
-            case 'banking_data':
-                $result = $this->isFormFieldEnabled('account_number')
-                    || $this->isFormFieldEnabled('account_owner')
-                    || $this->isFormFieldEnabled('bank_code')
-                    || $this->isFormFieldEnabled('bank_name');
+                $result = $this->isFormFieldEnabled('price') || $this->isFormFieldEnabled('method_of_payment');
                 break;
             case 'billing_address':
                 // This fields actually can also be disabled via TS setup.
@@ -607,15 +595,6 @@ class RegistrationForm extends AbstractEditor
             case 'method_of_payment':
                 $result = $result && $this->showMethodsOfPayment();
                 break;
-            case 'account_number':
-                // The fallthrough is intended.
-            case 'bank_code':
-                // The fallthrough is intended.
-            case 'bank_name':
-                // The fallthrough is intended.
-            case 'account_owner':
-                $result = $result && $this->getSeminar()->hasAnyPrice();
-                break;
             case 'lodgings':
                 $result = $result && $this->hasLodgings();
                 break;
@@ -633,28 +612,6 @@ class RegistrationForm extends AbstractEditor
             }
 
         return $result;
-    }
-
-    /**
-     * Checks whether a form field should be displayed (and evaluated) at all.
-     * This is specified via TS setup (or flexforms) using the
-     * "showRegistrationFields" variable.
-     *
-     * This function also checks if the current event has a price set at all,
-     * and returns only TRUE if the event has a price (i.e., is not completely for
-     * free) and the current form field should be displayed.
-     *
-     * @deprecated #1571 will be removed in seminars 5.0
-     *
-     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
-     *        (used for retrieving the current form field name)
-     *
-     * @return bool TRUE if the current form field should be displayed AND the current event is not completely for free,
-     *              FALSE otherwise
-     */
-    public function hasBankDataFormField(array $parameters): bool
-    {
-        return $this->hasRegistrationFormField($parameters) && $this->getSeminar()->hasAnyPrice();
     }
 
     /**
@@ -1175,35 +1132,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Checks whether the current field is non-empty if the payment method
-     * "bank transfer" is selected. If a different payment method is selected
-     * (or none is defined as "bank transfer"), the check is always positive and
-     * returns TRUE.
-     *
-     * @deprecated #1571 will be removed in seminars 5.0
-     *
-     * @param array $formData associative array with the element "value" in which the value of the current field is provided
-     *
-     * @return bool TRUE if the field is non-empty or "bank transfer" is not selected
-     */
-    public function hasBankData(array $formData): bool
-    {
-        $result = true;
-
-        if (empty($formData['value'])) {
-            $bankTransferUid = $this->getConfValueInteger('bankTransferUID');
-
-            $paymentMethod = (int)$this->getFormValue('method_of_payment');
-
-            if (($bankTransferUid > 0) && ($paymentMethod == $bankTransferUid)) {
-                $result = false;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Returns a data item of the currently logged-in FE user or, if that data
      * has additionally been stored in the FE user session (as billing address),
      * the data from the session.
@@ -1477,7 +1405,6 @@ class RegistrationForm extends AbstractEditor
      * - account number
      * - bank code
      * - bank name
-     * - account_owner
      * - gender
      * - name
      * - address
@@ -1497,10 +1424,6 @@ class RegistrationForm extends AbstractEditor
 
         $parametersToSave = [
             'method_of_payment',
-            'account_number',
-            'bank_code',
-            'bank_name',
-            'account_owner',
             'company',
             'gender',
             'name',
@@ -1546,23 +1469,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Gets the prefill value for the account owner: If it is provided, the
-     * account owner from a previous registration in the same FE user session, or the FE user's name.
-     *
-     * @return string a name to prefill the account owner
-     */
-    public function prefillAccountOwner(): string
-    {
-        $result = $this->retrieveDataFromSession(['key' => 'account_owner']);
-
-        if (empty($result)) {
-            $result = $this->getFeUserData(['key' => 'name']);
-        }
-
-        return $result;
-    }
-
-    /**
      * Creates and initializes $this->staticInfo (if that hasn't been done yet).
      */
     private function initStaticInfo(): void
@@ -1584,11 +1490,6 @@ class RegistrationForm extends AbstractEditor
             'payment',
             'price',
             'method_of_payment',
-            'banking_data',
-            'account_number',
-            'bank_code',
-            'bank_name',
-            'account_owner',
             'billing_address',
             'billing_data',
             'company',

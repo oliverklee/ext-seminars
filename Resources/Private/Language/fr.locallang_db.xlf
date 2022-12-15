@@ -488,22 +488,6 @@
 				<source>Method of payment</source>
 				<target>Méthode de paiement</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_number" xml:space="preserve">
-				<source>Account number</source>
-				<target>Numéro de compte</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_code" xml:space="preserve">
-				<source>Bank code</source>
-				<target>Code bancaire</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_name" xml:space="preserve">
-				<source>Bank name</source>
-				<target>Nom de la banque</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve">
-				<source>Account owner</source>
-				<target>Propriétaire du compte</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve">
 				<source>Company</source>
 				<target>Entreprise</target>

@@ -1248,29 +1248,6 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationFieldsFromEmailConfiguration(): void
-    {
-        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'bank_name');
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'bank_name' => 'foo bank',
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            'foo bank',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
-        );
-    }
-
-    /**
-     * @test
-     */
     public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromConfiguration(): void
     {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
@@ -1290,7 +1267,6 @@ final class CsvDownloaderTest extends TestCase
             [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-                'bank_name' => 'foo bank',
                 'registration_queue' => 1,
             ]
         );
