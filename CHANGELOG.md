@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require oelib >= 5.0.1 (#2178)
+- Require feuserextrafields >= 5.2.1 (#2178)
 - Raise PHPStan to level 9 (#2160)
 
 ### Deprecated
