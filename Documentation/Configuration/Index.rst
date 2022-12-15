@@ -31,7 +31,6 @@ Configuration
    ChangingTheCompanyField(inTheBillingAddressInTheRegistrationForm)FromInputFieldToTextarea/Index
    SettingUpFront-endEditing/Index
    SettingUpTheDefaultEditorsFeature/Index
-   SettingUpFront-endEditingForManagers/Index
    SettingUpTheCountdown/Index
    PreselectionInTheListViewUrl/Index
 

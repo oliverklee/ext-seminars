@@ -426,12 +426,7 @@ class EventEditor extends AbstractEditor
 
         $user = self::getLoggedInUser();
         if ($uid > 0 && $event instanceof LegacyEvent) {
-            $isUserVip = $event->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
-            $isUserOwner = $event->isOwnerFeUser();
-            // @deprecated #1633 will be removed in seminars 5.0
-            $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
-
-            $hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
+            $hasAccess = $event->isOwnerFeUser();
         } else {
             $eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
             $hasAccess = $eventEditorGroupUid !== 0 && $user->hasGroupMembership((string)$eventEditorGroupUid);

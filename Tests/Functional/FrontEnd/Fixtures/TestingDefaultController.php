@@ -16,14 +16,4 @@ class TestingDefaultController extends DefaultController
     {
         parent::setSeminar($event);
     }
-
-    public function createAllEditorLinks(): string
-    {
-        return parent::createAllEditorLinks();
-    }
-
-    public function mayCurrentUserEditCurrentEvent(): bool
-    {
-        return parent::mayCurrentUserEditCurrentEvent();
-    }
 }

@@ -1064,10 +1064,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Show only events which have vacancies:</source>
 				<target>Zeige nur Veranstaltungen mit freien Plätzen:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.mayManagersEditTheirEvents" xml:space="preserve">
-				<source>Event managers may edit their events:</source>
-				<target>Verwalter können ihre Veranstaltungen bearbeiten:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
 				<source>Single view</source>
 				<target>Einzelansicht</target>
@@ -1247,10 +1243,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="seminars.pi_flexform.eventEditorFeGroupID" xml:space="preserve">
 				<source>FE user group that is allowed to enter and edit events</source>
 				<target>FE-User-Gruppe, die Veranstaltungen eingeben und bearbeiten darf</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventEditorPID" xml:space="preserve">
-				<source>Page that contains the plug-in for editing event records</source>
-				<target>Seite mit dem Plugin zum Bearbeiten von Veranstaltungen</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
 				<source>Sysfolder to store FE-created events in</source>
@@ -1679,10 +1671,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_eventsnextday" xml:space="preserve">
 				<source>Subsequent events</source>
 				<target>Veranstaltungen im Anschluss</target>
-			</trans-unit>
-			<trans-unit id="label_actions" xml:space="preserve">
-				<source>Actions</source>
-				<target>Aktionen</target>
 			</trans-unit>
 			<trans-unit id="label_edit" xml:space="preserve">
 				<source>Edit</source>

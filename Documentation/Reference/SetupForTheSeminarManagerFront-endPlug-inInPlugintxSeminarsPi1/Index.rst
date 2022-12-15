@@ -547,22 +547,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         mayManagersEditTheirEvents
-
-   Data type
-         boolean
-
-   Description
-         whether managers may edit their events,
-         @deprecated #1633 will be removed in seminars 5.0
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          eventFieldsOnRegistrationPage
 
    Data type
@@ -1131,21 +1115,6 @@ override the corresponding value from TS Setup.**
    Description
          UID of the FE user group that is allowed to see the registrations of
          all events
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         eventEditorPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the page where the plug-in for editing events is located
 
    Default
          None

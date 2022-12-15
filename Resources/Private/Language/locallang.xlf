@@ -810,9 +810,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies" xml:space="preserve">
 				<source>Show only events which have vacancies:</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.mayManagersEditTheirEvents" xml:space="preserve">
-				<source>Event managers may edit their events:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
 				<source>Single view</source>
 			</trans-unit>
@@ -947,9 +944,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.eventEditorFeGroupID" xml:space="preserve">
 				<source>FE user group that is allowed to enter and edit events</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventEditorPID" xml:space="preserve">
-				<source>Page that contains the plug-in for editing event records</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
 				<source>Sysfolder to store FE-created events in</source>
@@ -1271,9 +1265,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="label_eventsnextday" xml:space="preserve">
 				<source>Subsequent events</source>
-			</trans-unit>
-			<trans-unit id="label_actions" xml:space="preserve">
-				<source>Actions</source>
 			</trans-unit>
 			<trans-unit id="label_edit" xml:space="preserve">
 				<source>Edit</source>
