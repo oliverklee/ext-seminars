@@ -92,14 +92,6 @@ defined('TYPO3') or die('Access denied.');
 '
     );
 
-    // FAL upgrade wizards
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateCategoryIconsToFal']
-        = \OliverKlee\Seminars\UpgradeWizards\CategoryIconToFalUpgradeWizard::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarImagesToFal']
-        = \OliverKlee\Seminars\UpgradeWizards\SeminarImageToFalUpgradeWizard::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeminarAttachmentsToFal']
-        = \OliverKlee\Seminars\UpgradeWizards\SeminarAttachmentsToFalUpgradeWizard::class;
-
     // This makes the plugin available for front-end rendering.
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Seminars', // extension name, matching the PHP namespaces (but without the vendor)

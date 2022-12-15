@@ -26,7 +26,7 @@
     <tx_seminars_categories>
         <uid>4</uid>
         <title>Remote events</title>
-        <icon>icon.png</icon>
+        <icon>1</icon>
     </tx_seminars_categories>
 
     <sys_file>

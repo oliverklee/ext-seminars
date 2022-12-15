@@ -270,8 +270,8 @@ CREATE TABLE tx_seminars_seminars (
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
     uses_terms_2 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     notes text,
-    attached_files text,
-    image tinytext,
+    attached_files int(11) unsigned DEFAULT '0' NOT NULL,
+    image int(11) unsigned DEFAULT '0' NOT NULL,
     requirements int(11) unsigned DEFAULT '0' NOT NULL,
     dependencies int(11) unsigned DEFAULT '0' NOT NULL,
     # @deprecated #1543 will be removed in seminars 5.0
@@ -648,7 +648,7 @@ CREATE TABLE tx_seminars_target_groups (
 CREATE TABLE tx_seminars_categories (
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
-    icon tinytext,
+    icon int(11) unsigned DEFAULT '0' NOT NULL,
     single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
     KEY dummy (is_dummy_record),
