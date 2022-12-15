@@ -1612,7 +1612,7 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$fe_user on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
@@ -1627,11 +1627,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot call method logoff\\(\\) on string\\|TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 

@@ -616,22 +616,10 @@ class RegistrationForm extends AbstractEditor
      * Gets the URL of the page that should be displayed after a user has signed up for an event,
      * but only if the form has been submitted from stage 2 (the confirmation page).
      *
-     * If the current FE user account is a one-time account and
-     * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
-     * the FE user will be automatically logged out.
-     *
      * @return string complete URL of the FE page with a message
      */
     public function getThankYouAfterRegistrationUrl(): string
     {
-        if (
-            $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-            && Session::getInstance(Session::TYPE_USER)->getAsBoolean('onetimeaccount')
-        ) {
-            // @deprecated #1947 will be removed in seminars 5.0
-            $this->getFrontEndController()->fe_user->logoff();
-        }
-
         $pageUid = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
         $sendParameters = $this->getConfValueBoolean(
             'sendParametersToThankYouAfterRegistrationPageUrl',

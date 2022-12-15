@@ -784,26 +784,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         logOutOneTimeAccountsAfterRegistration
-
-   Data type
-         boolean
-
-   Description
-         Whether one-time FE user accounts will be automatically logged out
-         after they have registered for an event.
-
-         **Note:** This does not affect regular FE user accounts in any way.
-
-         @deprecated #1947 will be removed in seminars 5.0
-
-   Default
-         1
-
-
-.. container:: table-row
-
-   Property
          enableSortingLinksInListView
 
    Data type
