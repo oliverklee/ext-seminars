@@ -21,7 +21,6 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
-use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
@@ -2794,14 +2793,6 @@ class DefaultController extends TemplateHelper
 
         if ($hasAccessMessage === '') {
             $result = $eventEditor->render();
-            if ($this->isConfigurationCheckEnabled()) {
-                $configurationCheck = new EventEditorConfigurationCheck(
-                    $this->getConfigurationWithFlexForms(),
-                    'plugin.tx_seminars_pi1'
-                );
-                $configurationCheck->check();
-                $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-            }
         } else {
             $result = $hasAccessMessage;
             HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
