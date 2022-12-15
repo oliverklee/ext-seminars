@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 /**
@@ -20,7 +19,6 @@ class FrontEndUserGroupMapper extends AbstractDataMapper
     protected $modelClassName = FrontEndUserGroup::class;
 
     protected $relations = [
-        'tx_seminars_reviewer' => OelibBackEndUserMapper::class,
         'tx_seminars_default_categories' => CategoryMapper::class,
         'tx_seminars_default_organizer' => OrganizerMapper::class,
     ];

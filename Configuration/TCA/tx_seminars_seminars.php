@@ -919,17 +919,6 @@ $tca = [
                 ]
             ),
         ],
-        // @deprecated #1543 will be removed in seminars 5.0
-        'publication_hash' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.publication_hash',
-            'config' => [
-                'type' => 'input',
-                'size' => 20,
-                'max' => 255,
-                'eval' => 'trim',
-            ],
-        ],
         'price_on_request' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_on_request',

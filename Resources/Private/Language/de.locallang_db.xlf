@@ -352,10 +352,6 @@
 				<source>Requirement for</source>
 				<target>Voraussetzungen für</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.publication_hash" xml:space="preserve">
-				<source>Publication hash</source>
-				<target>Veröffentlichungscode</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.price_on_request" xml:space="preserve">
 				<source>Price on request</source>
 				<target>Preis auf Anfrage</target>
@@ -828,22 +824,6 @@
 				<source>Seminar Manager</source>
 				<target>Seminarmanager</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events" xml:space="preserve">
-				<source>Publish FE-edited events</source>
-				<target>Im FE-Editor eingegebene Veranstaltungen</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.0" xml:space="preserve">
-				<source>publish immediately</source>
-				<target>Veranstaltungen sofort veröffentlichen</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.1" xml:space="preserve">
-				<source>only newly created events are hidden</source>
-				<target>nur neu erstellte Veranstaltungen verstecken</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.2" xml:space="preserve">
-				<source>newly created and edited events are hidden</source>
-				<target>neu erstellte und bearbeitete Veranstaltungen verstecken</target>
-			</trans-unit>
 			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
 				<source>Event management</source>
 				<target>Veranstaltungsverwaltung</target>
@@ -851,10 +831,6 @@
 			<trans-unit id="fe_groups.tx_seminars_auxiliary_records_pid" xml:space="preserve">
 				<source>Store auxiliary records for seminars in page</source>
 				<target>Speichere Hilfsdatensätze für seminars in Seite</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_reviewer" xml:space="preserve">
-				<source>BE user to receive the publication e-mail for FE-edited events</source>
-				<target>BE-Benutzer, der die Freischaltmail für im FE bearbeitete Veranstaltungen bekommt</target>
 			</trans-unit>
 			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">
 				<source>Store events created in the FE-editor in this page</source>

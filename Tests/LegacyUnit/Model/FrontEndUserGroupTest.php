@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
@@ -25,62 +24,6 @@ final class FrontEndUserGroupTest extends TestCase
     protected function setUp(): void
     {
         $this->subject = new FrontEndUserGroup();
-    }
-
-    ///////////////////////////////////////
-    // Tests concerning getPublishSetting
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getPublishSettingWithoutPublishSettingReturnsPublishAll(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertEquals(
-            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-            $this->subject->getPublishSetting()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPublishSettingWithPublishSettingSetToZeroReturnsPublishAll(): void
-    {
-        $this->subject->setData(['tx_seminars_publish_events' => 0]);
-
-        self::assertEquals(
-            FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-            $this->subject->getPublishSetting()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPublishSettingWithPublishSettingSetToOneReturnsHideNew(): void
-    {
-        $this->subject->setData(['tx_seminars_publish_events' => 1]);
-
-        self::assertEquals(
-            FrontEndUserGroup::PUBLISH_HIDE_NEW,
-            $this->subject->getPublishSetting()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPublishSettingWithPublishSettingSetToTwoReturnsHideEdited(): void
-    {
-        $this->subject->setData(['tx_seminars_publish_events' => 2]);
-
-        self::assertEquals(
-            FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-            $this->subject->getPublishSetting()
-        );
     }
 
     ///////////////////////////////////////////////
@@ -138,63 +81,6 @@ final class FrontEndUserGroupTest extends TestCase
 
         self::assertTrue(
             $this->subject->hasAuxiliaryRecordsPid()
-        );
-    }
-
-    //////////////////////////////////
-    // Tests concerning the reviewer
-    //////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasReviewerForGroupWithoutReviewerReturnsFalse(): void
-    {
-        $this->subject->setData(['tx_seminars_reviewer' => null]);
-
-        self::assertFalse(
-            $this->subject->hasReviewer()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasReviewerForGroupWithReviewerReturnsTrue(): void
-    {
-        $backEndUser = new OelibBackEndUser();
-
-        $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
-
-        self::assertTrue(
-            $this->subject->hasReviewer()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getReviewerForGroupWithoutReviewerReturnsNull(): void
-    {
-        $this->subject->setData(['tx_seminars_reviewer' => null]);
-
-        self::assertNull(
-            $this->subject->getReviewer()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getReviewerForGroupWithReviewerReturnsReviewer(): void
-    {
-        $backEndUser = new OelibBackEndUser();
-
-        $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
-
-        self::assertSame(
-            $backEndUser,
-            $this->subject->getReviewer()
         );
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUserGroup as OelibFrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
@@ -14,45 +13,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  */
 class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
 {
-    /**
-     * @var int the publication setting to immediately publish all events edited
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public const PUBLISH_IMMEDIATELY = 0;
-
-    /**
-     * @var int the publication setting for hiding only new events created
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public const PUBLISH_HIDE_NEW = 1;
-
-    /**
-     * @var int the publication setting for hiding newly created and edited events
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public const PUBLISH_HIDE_EDITED = 2;
-
-    /**
-     * Returns the setting for event publishing.
-     *
-     * If no publish settings have been set, PUBLISH_IMMEDIATELY is returned.
-     *
-     * @return self::PUBLISH_*
-     *
-     * @deprecated #1543 will be removed in seminars 5.0
-     */
-    public function getPublishSetting(): int
-    {
-        $setting = $this->getAsInteger('tx_seminars_publish_events');
-        $validSettings = [self::PUBLISH_IMMEDIATELY, self::PUBLISH_HIDE_NEW, self::PUBLISH_HIDE_EDITED];
-        \assert(\in_array($setting, $validSettings, true));
-
-        return $setting;
-    }
-
     /**
      * Returns the PID where to store the auxiliary records created by this
      * front-end user group.
@@ -68,19 +28,6 @@ class FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
     public function hasAuxiliaryRecordsPid(): bool
     {
         return $this->hasInteger('tx_seminars_auxiliary_records_pid');
-    }
-
-    public function hasReviewer(): bool
-    {
-        return $this->getReviewer() !== null;
-    }
-
-    public function getReviewer(): ?OelibBackEndUser
-    {
-        /** @var OelibBackEndUser|null $reviewer */
-        $reviewer = $this->getAsModel('tx_seminars_reviewer');
-
-        return $reviewer;
     }
 
     /**
