@@ -191,13 +191,6 @@ class RegistrationsList extends AbstractList
                     $registration->getPageUid()
                 )
             );
-            $this->template->setMarker(
-                'delete_button',
-                $this->getDeleteIcon(
-                    $registration->getUid(),
-                    $registration->getPageUid()
-                )
-            );
 
             $this->getListViewHookProvider()->executeHook(
                 'modifyListRow',
