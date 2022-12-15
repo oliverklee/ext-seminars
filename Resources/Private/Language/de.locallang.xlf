@@ -1716,10 +1716,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>unhide</source>
 				<target>einblenden</target>
 			</trans-unit>
-			<trans-unit id="label_copy" xml:space="preserve">
-				<source>copy</source>
-				<target>kopieren</target>
-			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Zur Übersicht</target>

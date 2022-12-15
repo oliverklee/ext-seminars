@@ -42,9 +42,4 @@ class TestingDefaultController extends DefaultController
     {
         parent::unhideEvent($event);
     }
-
-    public function copyEvent(Event $event): void
-    {
-        parent::copyEvent($event);
-    }
 }

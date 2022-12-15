@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -38,7 +37,6 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -2227,7 +2225,6 @@ class DefaultController extends TemplateHelper
         $links = [$this->createEditLink()];
 
         if ($this->seminar->isPublished()) {
-            $links[] = $this->createCopyLink();
             // @deprecated #1568 will be removed in seminars 5.0
             $links[] = $this->seminar->isHidden() ? $this->createUnhideLink() : $this->createHideLink();
         }
@@ -2277,20 +2274,6 @@ class DefaultController extends TemplateHelper
     protected function createUnhideLink(): string
     {
         return $this->createActionLink('unhide');
-    }
-
-    /**
-     * Creates a "copy" link (to the current page) for the current event.
-     *
-     * This function does not check the edit permissions for this event.
-     *
-     * @return string HTML for the link, will not be empty
-     *
-     * @deprecated #1862 will be removed in seminars 5.0
-     */
-    protected function createCopyLink(): string
-    {
-        return $this->createActionLink('copy');
     }
 
     /**
@@ -3141,10 +3124,6 @@ class DefaultController extends TemplateHelper
                 // @deprecated #1568 will be removed in seminars 5.0
                 $this->unhideEvent($event);
                 break;
-            case 'copy':
-                // @deprecated #1862 will be removed in seminars 5.0
-                $this->copyEvent($event);
-                break;
             default:
             // nothing to do
             }
@@ -3170,25 +3149,6 @@ class DefaultController extends TemplateHelper
         $event->markAsVisible();
         $mapper = MapperRegistry::get(EventMapper::class);
         $mapper->save($event);
-
-        $this->redirectToCurrentUrl();
-    }
-
-    /**
-     * Creates a hidden copy of the given and saves it.
-     *
-     * @deprecated #1862 will be removed in seminars 5.0
-     */
-    protected function copyEvent(Event $event): void
-    {
-        /** @var Collection<Registration> $registrations */
-        $registrations = new Collection();
-        $copy = clone $event;
-        $copy->markAsHidden();
-        $copy->setRegistrations($registrations);
-
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $mapper->save($copy);
 
         $this->redirectToCurrentUrl();
     }
