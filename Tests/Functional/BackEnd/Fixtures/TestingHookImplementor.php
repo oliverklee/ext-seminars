@@ -19,43 +19,13 @@ final class TestingHookImplementor implements BackEndModule, SingletonInterface
      */
     private $countCallForGeneralEmail = 0;
 
-    /**
-     * @var int
-     */
-    private $countCallForConfirmEmail = 0;
-
-    /**
-     * @var int
-     */
-    private $countCallForCancelEmail = 0;
-
     public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void
     {
         $this->countCallForGeneralEmail++;
     }
 
-    public function modifyConfirmEmail(Registration $registration, MailMessage $eMail): void
-    {
-        $this->countCallForConfirmEmail++;
-    }
-
-    public function modifyCancelEmail(Registration $registration, MailMessage $eMail): void
-    {
-        $this->countCallForCancelEmail++;
-    }
-
     public function getCountCallForGeneralEmail(): int
     {
         return $this->countCallForGeneralEmail;
-    }
-
-    public function getCountCallForConfirmEmail(): int
-    {
-        return $this->countCallForConfirmEmail;
-    }
-
-    public function getCountCallForCancelEmail(): int
-    {
-        return $this->countCallForCancelEmail;
     }
 }

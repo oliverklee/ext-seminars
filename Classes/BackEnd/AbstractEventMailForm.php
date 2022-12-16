@@ -513,9 +513,6 @@ abstract class AbstractEventMailForm
      * Appends the title and the date to the subject.
      *
      * @param string $prefix
-     *        the prefix for the locallang key of the subject, must be either
-     *        "cancelMailForm_prefillField_" or "confirmMailForm_prefillField_"
-     *        and always have a trailing underscore
      *
      * @return string the subject for the mail form suffixed with the event
      *                title and date, will be empty if no locallang label
@@ -531,10 +528,6 @@ abstract class AbstractEventMailForm
      * the salutation.
      *
      * @param string $prefix
-     *        the prefix for the locallang key of the messageBody, must be
-     *        either "cancelMailForm_prefillField_" or
-     *        "confirmMailForm_prefillField_" and always have a trailing
-     *        underscore
      *
      * @return string the content for the prefilled messageBody field with the
      *                replaced placeholders, will be empty if no locallang label
