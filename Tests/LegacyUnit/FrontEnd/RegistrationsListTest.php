@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \OliverKlee\Seminars\BackEnd\RegistrationsList
+ * @covers \OliverKlee\Seminars\FrontEnd\RegistrationsList
  */
 final class RegistrationsListTest extends TestCase
 {

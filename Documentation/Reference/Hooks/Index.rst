@@ -31,7 +31,6 @@ are hooks for these parts of seminars:
 * :ref:`emailsalutation_en`
 * :ref:`datatimespan_en`
 * :ref:`backendemail_en`
-* :ref:`backendregistrationlistview_en`
 * :ref:`registrationlistcsv_en`
 * :ref:`datasanitization_en`
 
@@ -629,108 +628,6 @@ It's used like this:
         *        the registration to which the e-mail refers
         */
          public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void {…}
-
-.. _backendregistrationlistview_en:
-
-Hooks for the backend registration list
-"""""""""""""""""""""""""""""""""""""""
-
-There are 3 hooks into the backend registration list. The hooks are called during
-backend registration list creation:
-
-* just before the table header is rendered to HTML
-* just before a table row for a certain registration is rendered to HTML
-* just before the table footer is rendered to HTML
-
-In these hooks, you may set custom markers or change existing values for markers. For
-available properties and methods, see :file:`Classes/Model/Registration.php` of `seminars`
-and :file:`Classes/Template.php` of extension `oelib`.
-
-There are 2 types of lists your implementation must handle:
-
-* List of regular registrations (`REGULAR_REGISTRATIONS`)
-* List of enqueued registrations (`REGISTRATIONS_ON_QUEUE`)
-
-Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView`
-like this in :file:`ext_localconf.php` of your extension:
-
-.. code-block:: php
-
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView::class][]
-        = \Tx_Seminarspaypal_Hooks_BackendRegistrationListView::class;
-
-Implement the methods required by the interface:
-
-.. code-block:: php
-
-    use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
-
-    class Tx_Seminarspaypal_Hooks_BackendRegistrationListView implements BackendRegistrationListView
-    {
-        /**
-         * Modifies the list row template content just before it is rendered to HTML.
-         *
-         * This method is called once per list row, but the row may appear in the list of regular registrations or the
-         * list of registrations on queue. Check $registrationsToShow (can be one of
-         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
-         *
-         * @param Registration $registration
-         *        the registration the row is made from
-         * @param Template $template the template that will be used to create the registration list
-         * @param iRegistrationsList::REGISTRATIONS_ON_QUEUE|RegistrationsList::REGULAR_REGISTRATIONS $registrationsToShow
-         */
-        public function modifyListRow(
-            Registration $registration,
-            Template $template,
-            int $registrationsToShow
-        ): void {
-            // Your code here
-        }
-
-        /**
-         * Modifies the list heading template content just before it is rendered to HTML.
-         *
-         * This method is called twice per list: First for the list of regular registrations, then for the list of
-         * registrations on queue. Check $registrationsToShow (can be one of
-         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
-         *
-         * @param RegistrationBag $registrationBag
-         *        the registrationBag the heading is made for
-         * @param Template $template the template that will be used to create the registration list
-         * @param int $registrationsToShow
-         *        the type of registration shown in the list
-         */
-        public function modifyListHeader(
-            RegistrationBag $registrationBag,
-            Template $template,
-            int $registrationsToShow
-        ): void {
-            // Your code here
-        }
-
-        /**
-         * Modifies the complete list template content just before it is rendered to HTML.
-         *
-         * This method is called twice per list: First for the list of regular registrations, then for the list of
-         * registrations on queue. Check $registrationsToShow (can be one of
-         * `::REGISTRATIONS_ON_QUEUE` and `::REGULAR_REGISTRATIONS`) to distinguish.
-         *
-         * @param RegistrationBag $registrationBag
-         *        the registrationBag the table is made for
-         * @param Template $template the template that will be used to create the registration list
-         * @param int $registrationsToShow
-         *        the type of registration shown in the list
-         */
-        public function modifyList(
-            RegistrationBag $registrationBag,
-            Template $template,
-            int $registrationsToShow
-        ): void {
-            // Your code here
-        }
-    }
-
-.. _registrationlistcsv_en:
 
 Hooks for the CSV generation of registration lists
 """"""""""""""""""""""""""""""""""""""""""""""""""

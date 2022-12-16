@@ -65,20 +65,6 @@ abstract class AbstractModule
      */
     protected $moduleTemplate;
 
-    /**
-     * available sub modules
-     *
-     * @var array<int, string>
-     */
-    protected $availableSubModules = [];
-
-    /**
-     * the ID of the currently selected submodule
-     *
-     * @var int
-     */
-    protected $subModule = 0;
-
     public function __construct()
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
