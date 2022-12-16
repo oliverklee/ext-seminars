@@ -1458,14 +1458,6 @@ This event now has been confirmed.</source>
 				<source>Food:</source>
 				<target>Kost:</target>
 			</trans-unit>
-			<trans-unit id="label_register_entered_data" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Dine registrerede informationer</target>
-			</trans-unit>
-			<trans-unit id="label_register_entered_data_informal" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Dine registrerede informationer</target>
-			</trans-unit>
 			<trans-unit id="label_register_all_terms" xml:space="preserve">
 				<source>Registration terms</source>
 				<target>Tilmeldingsbetingelser</target>
@@ -1489,14 +1481,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_back_registration" xml:space="preserve">
 				<source>Back</source>
 				<target>Tilbage</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Dine adresse informationer:</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data_informal" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Dine adresse informationer:</target>
 			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Selected method of payment:</source>

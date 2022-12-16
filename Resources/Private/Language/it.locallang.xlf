@@ -1460,14 +1460,6 @@ This event now has been confirmed.</source>
 				<source>Food:</source>
 				<target>Vitto:</target>
 			</trans-unit>
-			<trans-unit id="label_register_entered_data" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Dati di registrazione</target>
-			</trans-unit>
-			<trans-unit id="label_register_entered_data_informal" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Dati di registrazione</target>
-			</trans-unit>
 			<trans-unit id="label_register_all_terms" xml:space="preserve">
 				<source>Registration terms</source>
 				<target>Termini di registrazione</target>
@@ -1491,14 +1483,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_back_registration" xml:space="preserve">
 				<source>Back</source>
 				<target>Indietro</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Il suo indirizzo:</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data_informal" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Il tuo indirizzo:</target>
 			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Selected method of payment:</source>

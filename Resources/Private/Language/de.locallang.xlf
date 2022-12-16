@@ -1500,14 +1500,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Food:</source>
 				<target>Art der Verpflegung:</target>
 			</trans-unit>
-			<trans-unit id="label_register_entered_data" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Ihre Anmeldungsdaten</target>
-			</trans-unit>
-			<trans-unit id="label_register_entered_data_informal" xml:space="preserve">
-				<source>Your registration data</source>
-				<target>Deine Anmeldungsdaten</target>
-			</trans-unit>
 			<trans-unit id="label_register_all_terms" xml:space="preserve">
 				<source>Registration terms</source>
 				<target>Anmeldebedingungen</target>
@@ -1531,14 +1523,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_back_registration" xml:space="preserve">
 				<source>Back</source>
 				<target>Zurück</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Ihre Adressdaten</target>
-			</trans-unit>
-			<trans-unit id="label_your_user_data_informal" xml:space="preserve">
-				<source>Your address data:</source>
-				<target>Deine Adressdaten</target>
 			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Selected method of payment:</source>

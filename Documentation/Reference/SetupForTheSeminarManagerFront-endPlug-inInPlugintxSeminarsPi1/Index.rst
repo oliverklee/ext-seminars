@@ -519,37 +519,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         showFeUserFieldsInRegistrationForm
-
-   Data type
-         string
-
-   Description
-         fe\_users DB fields to show for in the registration form
-
-   Default
-         name,company,address,zip,city,country,telephone,email
-
-
-.. container:: table-row
-
-   Property
-         showFeUserFieldsInRegistrationFormWithLabel
-
-   Data type
-         string
-
-   Description
-         fe\_users DB fields on the registration form that should be displayed
-         with a label
-
-   Default
-         telephone,email
-
-
-.. container:: table-row
-
-   Property
          showSpeakerDetails
 
    Data type
