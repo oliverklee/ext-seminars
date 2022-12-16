@@ -129,78 +129,6 @@ abstract class AbstractList
     }
 
     /**
-     * Returns a "create new record" image tag that is linked to the new record view.
-     *
-     * @param int $pid the page ID where the record should be stored, must be > 0
-     *
-     * @return string the HTML source code to return
-     */
-    public function getNewIcon(int $pid): string
-    {
-        $result = '';
-        $languageService = $this->getLanguageService();
-
-        $newRecordPid = $this->getNewRecordPid();
-        $pid = ($newRecordPid > 0) ? $newRecordPid : $pid;
-        $pageData = $this->page->getPageData();
-
-        if (
-            (int)$pageData['doktype'] === self::SYSFOLDER_TYPE
-            && $this->doesUserHaveAccess($pid)
-            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
-        ) {
-            if ((int)$pageData['uid'] === $pid) {
-                $storageLabel = sprintf(
-                    $languageService->getLL('label_create_record_in_current_folder'),
-                    $pageData['title'],
-                    $pageData['uid']
-                );
-            } else {
-                /** @var array $storagePageData */
-                $storagePageData = BackendUtility::readPageAccess($pid, '');
-                $storageLabel = \sprintf(
-                    $languageService->getLL('label_create_record_in_foreign_folder'),
-                    (string)$storagePageData['title'],
-                    $pid
-                );
-            }
-            $urlParameters = [
-                'edit' => [$this->tableName => [$pid => 'new']],
-                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
-            ];
-            $actionUrl = $this->getRouteUrl('record_edit', $urlParameters);
-
-            $langNew = $languageService->getLL('newRecordGeneral');
-
-            $result = '<div id="typo3-newRecordLink">' .
-                '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
-                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-                'Resources/Public/Icons/New.gif"' .
-                // We use an empty alt attribute as we already have a textual
-                // representation directly next to the icon.
-                ' title="' . $langNew . '" alt="" />' .
-                $langNew .
-                '</a>' .
-                '</div>';
-
-            $message = GeneralUtility::makeInstance(
-                FlashMessage::class,
-                $storageLabel,
-                '',
-                FlashMessage::INFO
-            );
-            $this->addFlashMessage($message);
-
-            $renderedFlashMessages = GeneralUtility::makeInstance(FlashMessageService::class)
-                ->getMessageQueueByIdentifier()->renderFlashMessages();
-
-            $result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
-        }
-
-        return $result;
-    }
-
-    /**
      * Adds a flash message to the queue.
      */
     protected function addFlashMessage(FlashMessage $flashMessage): void
@@ -269,16 +197,6 @@ abstract class AbstractList
 
         return $this->accessRights[$pageUid];
     }
-
-    /**
-     * Returns the PID for new records to store.
-     *
-     * This will be determined by the storage setting of the logged-in BE-user's
-     * groups.
-     *
-     * @return int the PID for the storage of new records, will be >= 0
-     */
-    abstract protected function getNewRecordPid(): int;
 
     /**
      * Gets the currently logged in back-end user.

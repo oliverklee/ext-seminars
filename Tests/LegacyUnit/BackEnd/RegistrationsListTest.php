@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
-use OliverKlee\Oelib\Authentication\BackEndLoginManager;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
-use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
-use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
@@ -551,7 +547,7 @@ final class RegistrationsListTest extends TestCase
             ]
         );
 
-        $hook = $this->createMock(BackEndRegistrationListView::class);
+        $hook = $this->createMock(BackendRegistrationListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with(
             self::isInstanceOf(Registration::class),
             self::isInstanceOf(Template::class),
@@ -587,24 +583,5 @@ final class RegistrationsListTest extends TestCase
         $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->show();
-    }
-
-    //////////////////////////////////////
-    // Tests concerning the "new" button
-    //////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function newButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
-    {
-        $newRegistrationFolder = $this->dummySysFolderPid + 1;
-        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)
-            ->getLoadedTestingModel(['tx_seminars_registrations_folder' => $newRegistrationFolder]);
-        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)
-            ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
-        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
-
-        self::assertStringContainsString((string)$newRegistrationFolder, $this->subject->show());
     }
 }

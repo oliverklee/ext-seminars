@@ -12,25 +12,4 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  */
 class BackEndUserGroup extends OelibBackEndUserGroup implements Titled
 {
-    /**
-     * Returns the PID for the storage of new events.
-     *
-     * @return int the PID for the storage of new events, will be 0 if no
-     *                 PID has been set
-     */
-    public function getEventFolder(): int
-    {
-        return $this->getAsInteger('tx_seminars_events_folder');
-    }
-
-    /**
-     * Returns the PID for the storage of new registrations.
-     *
-     * @return int the PID for the storage of new registrations, will be 0
-     *                 if no PID has been set
-     */
-    public function getRegistrationFolder(): int
-    {
-        return $this->getAsInteger('tx_seminars_registrations_folder');
-    }
 }

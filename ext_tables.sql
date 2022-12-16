@@ -16,16 +16,6 @@ CREATE TABLE fe_groups (
     tx_seminars_default_organizer int(11) unsigned DEFAULT '0' NOT NULL
 );
 
-
-#
-# Table structure for table 'be_groups'
-#
-CREATE TABLE be_groups (
-    tx_seminars_events_folder int(11) unsigned DEFAULT '0' NOT NULL,
-    tx_seminars_registrations_folder int(11) unsigned DEFAULT '0' NOT NULL,
-);
-
-
 #
 # Table structure for table 'tx_seminars_test'
 #

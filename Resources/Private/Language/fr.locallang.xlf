@@ -744,14 +744,6 @@ This event now has been confirmed.</source>
 				<source>Registrations for event &quot;%s&quot; (UID %u)</source>
 				<target>Inscriptions pour l'événement &quot;%s&quot; (UID %u)</target>
 			</trans-unit>
-			<trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
-				<source>The new record will be created in the folder: %s (UID %u)</source>
-				<target>Le nouvel enregistrement sera créé dans le folder &quot;%s&quot; (UID %u)</target>
-			</trans-unit>
-			<trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
-				<source>The new record will be created in the current folder: %s (UID %u).</source>
-				<target>nouvel enregistrement sera créé dans le folder actif &quot;%s&quot; (UID %u).</target>
-			</trans-unit>
 			<trans-unit id="eventMailForm_subject" xml:space="preserve">
 				<source>Subject:</source>
 				<target>Sujet :</target>

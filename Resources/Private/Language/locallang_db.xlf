@@ -637,15 +637,6 @@
 			<trans-unit id="owner_feuser" xml:space="preserve">
 				<source>Front-end user who has created this record</source>
 			</trans-unit>
-			<trans-unit id="be_groups.tab_event_management" xml:space="preserve">
-				<source>Event management</source>
-			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_events_folder" xml:space="preserve">
-				<source>Sysfolder for new events</source>
-			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_registrations_folder" xml:space="preserve">
-				<source>Sysfolder for new registrations</source>
-			</trans-unit>
 		</body>
 	</file>
 </xliff>
