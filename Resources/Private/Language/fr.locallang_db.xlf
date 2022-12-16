@@ -776,14 +776,6 @@
 				<source>Seminar Manager</source>
 				<target>Gestionnaire de séminaires</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
-				<source>Event management</source>
-				<target>Gestion des événements</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">
-				<source>Store events created in the FE-editor in this page</source>
-				<target>Enregistrer les événements créés en front end dans cette page</target>
-			</trans-unit>
 			<trans-unit id="owner_feuser" xml:space="preserve">
 				<source>Front-end user who has created this record</source>
 				<target>Utilisateur front end qui a créé cet enregistrement</target>

@@ -776,7 +776,6 @@
 				<source>Seminar Manager</source>
 				<target>Seminar manager</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
 		</body>
 	</file>
 </xliff>

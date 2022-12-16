@@ -619,12 +619,6 @@
 			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve">
 				<source>Seminar Manager</source>
 			</trans-unit>
-			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
-				<source>Event management</source>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">
-				<source>Store events created in the FE-editor in this page</source>
-			</trans-unit>
 			<trans-unit id="owner_feuser" xml:space="preserve">
 				<source>Front-end user who has created this record</source>
 			</trans-unit>

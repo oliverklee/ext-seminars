@@ -310,8 +310,9 @@ class EventEditor extends AbstractEditor
 
     /**
      * Adds some values to the form data before insertion into the database.
-     * Added values for new objects are: 'crdate', 'tstamp', 'pid' and
+     * Added values for new objects are: 'crdate', 'tstamp' and
      * 'owner_feuser'.
+     *
      * For objects to update, just the 'tstamp' will be refreshed.
      *
      * @param array<string, string|int|array<int, string|int>> $formData form data, will be modified, must not be empty
@@ -329,13 +330,9 @@ class EventEditor extends AbstractEditor
         $formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
         if ($user instanceof FrontEndUser) {
             $formData['owner_feuser'] = $user->getUid();
-            $eventPid = $user->getEventRecordsPid();
         } else {
             $formData['owner_feuser'] = 0;
-            $eventPid = 0;
         }
-
-        $formData['pid'] = $eventPid > 0 ? $eventPid : $this->getConfValueInteger('createEventsPID', 's_fe_editing');
     }
 
     /**
