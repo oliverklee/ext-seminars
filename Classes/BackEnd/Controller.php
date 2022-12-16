@@ -43,15 +43,6 @@ class Controller extends AbstractModule
         $languageService = $this->getLanguageService();
         $backEndUser = $this->getBackendUser();
 
-        $pageRenderer = $this->getPageRenderer();
-        $pageRenderer->addCssFile(
-            '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
-            'stylesheet',
-            'all',
-            '',
-            false
-        );
-
         $document = GeneralUtility::makeInstance(DocumentTemplate::class);
         $content = $document->startPage($languageService->getLL('title')) .
             '<h1>' . $languageService->getLL('title') . '</h1></div>';
@@ -250,18 +241,18 @@ class Controller extends AbstractModule
     private function getTabMenuRaw(array $menuItems): string
     {
         $options = '';
-        foreach ($menuItems as $id => $definition) {
+        foreach ($menuItems as $definition) {
             $class = $definition['isActive'] ? 'active' : '';
             $label = $definition['label'];
             $url = \htmlspecialchars($definition['url'], ENT_QUOTES | ENT_HTML5);
             $params = $definition['addParams'];
 
-            $options .= '<li class="' . $class . '">' .
-                '<a href="' . $url . '" ' . $params . '>' . $label . '</a>' .
+            $options .= '<li class="nav-item">' .
+                '<a href="' . $url . '" class="nav-link ' . $class . '" ' . $params . '>' . $label . '</a>' .
                 '</li>';
         }
 
-        return '<ul class="nav nav-tabs" role="tablist">' .
+        return '<ul class="nav nav-tabs">' .
             $options .
             '</ul>';
     }

@@ -1,73 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Template for the back-end events list</title>
-</head>
-<body>
-<!-- ###SEMINARS_EVENT_LIST### -->
-    <table cellpadding="0" class="typo3-dblist">
-        <thead>
-            <tr class="t3-row-header">
-                <td>&nbsp;</td>
-                <td>###LABEL_ACCREDITATION_NUMBER###</td>
-                <td>###LABEL_TITLE###</td>
-                <td>###LABEL_DATE###</td>
-                <td>###LABEL_ATTENDEES###</td>
-                <td>###LABEL_NUMBER_OF_ATTENDEES_ON_QUEUE###</td>
-                <td>###LABEL_MINIMUM_NUMBER_OF_ATTENDEES###</td>
-                <td>###LABEL_MAXIMUM_NUMBER_OF_ATTENDEES###</td>
-                <td>###LABEL_HAS_ENOUGH_ATTENDEES###</td>
-                <td>###LABEL_IS_FULLY_BOOKED###</td>
-                <td>###LABEL_STATUS###</td>
-                <td>&nbsp;</td>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- ###EVENT_ROW### -->
-            <tr>
-                <td>
-                    ###ICON###
-                </td>
-                <td>
-                    ###ACCREDITATION_NUMBER###
-                </td>
-                <td>
-                    ###TITLE###
-                </td>
-                <td class="datecol">
-                    ###DATE###
-                </td>
-                <td class="attendees">
-                    ###SHOW_REGISTRATIONS###&nbsp;###NUMBER_OF_ATTENDEES###
-                </td>
-                <td class="queue">
-                    ###NUMBER_OF_ATTENDEES_ON_QUEUE###
-                </td>
-                <td class="attendees_min">
-                    ###MINIMUM_NUMBER_OF_ATTENDEES###
-                </td>
-                <td class="attendees_max">
-                    ###MAXIMUM_NUMBER_OF_ATTENDEES###
-                </td>
-                <td class="enough_attendees">
-                    ###HAS_ENOUGH_ATTENDEES###
-                </td>
-                <td class="is_full">
-                    ###IS_FULLY_BOOKED###
-                </td>
-                <td class="status">
-                    ###STATUS###
-                </td>
-                <td class="email_button">
-                    <!-- ###EMAIL_BUTTON### -->
-                        <form action="###EMAIL_BUTTON_URL###" method="post"><p><button><p>###LABEL_EMAIL_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="sendEmail" /></p></form>
-                    <!-- ###EMAIL_BUTTON### -->
-                </td>
-            </tr>
-            <!-- ###EVENT_ROW### -->
-        </tbody>
-    </table>
-<!-- ###SEMINARS_EVENT_LIST### -->
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Template for the back-end events list</title>
+    </head>
+    <body>
+        <!-- ###SEMINARS_EVENT_LIST### -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>###LABEL_ACCREDITATION_NUMBER###</td>
+                    <td>###LABEL_TITLE###</td>
+                    <td>###LABEL_DATE###</td>
+                    <td>###LABEL_ATTENDEES###</td>
+                    <td>###LABEL_NUMBER_OF_ATTENDEES_ON_QUEUE###</td>
+                    <td>###LABEL_MINIMUM_NUMBER_OF_ATTENDEES###</td>
+                    <td>###LABEL_MAXIMUM_NUMBER_OF_ATTENDEES###</td>
+                    <td>###LABEL_HAS_ENOUGH_ATTENDEES###</td>
+                    <td>###LABEL_IS_FULLY_BOOKED###</td>
+                    <td>###LABEL_STATUS###</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ###EVENT_ROW### -->
+                <tr>
+                    <td>
+                        ###ICON###
+                    </td>
+                    <td>
+                        ###ACCREDITATION_NUMBER###
+                    </td>
+                    <td>
+                        ###TITLE###
+                    </td>
+                    <td>
+                        ###DATE###
+                    </td>
+                    <td>
+                        ###NUMBER_OF_ATTENDEES### ###SHOW_REGISTRATIONS###
+                    </td>
+                    <td>
+                        ###NUMBER_OF_ATTENDEES_ON_QUEUE###
+                    </td>
+                    <td>
+                        ###MINIMUM_NUMBER_OF_ATTENDEES###
+                    </td>
+                    <td>
+                        ###MAXIMUM_NUMBER_OF_ATTENDEES###
+                    </td>
+                    <td>
+                        ###HAS_ENOUGH_ATTENDEES###
+                    </td>
+                    <td>
+                        ###IS_FULLY_BOOKED###
+                    </td>
+                    <td>
+                        ###STATUS###
+                    </td>
+                    <td>
+                        <!-- ###EMAIL_BUTTON### -->
+                        <form action="###EMAIL_BUTTON_URL###" method="post">
+                            <button type="submit" class="btn btn-default">
+                                ###LABEL_EMAIL_BUTTON###
+                            </button>
+                            <input type="hidden" name="eventUid" value="###UID###"/>
+                            <input type="hidden" name="action" value="sendEmail"/>
+                        </form>
+                        <!-- ###EMAIL_BUTTON### -->
+                    </td>
+                </tr>
+                <!-- ###EVENT_ROW### -->
+            </tbody>
+        </table>
+        <!-- ###SEMINARS_EVENT_LIST### -->
+    </body>
 </html>

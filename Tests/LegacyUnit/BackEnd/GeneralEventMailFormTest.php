@@ -79,19 +79,6 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsSubmitButton(): void
-    {
-        self::assertStringContainsString(
-            '<button class="submitButton sendEmail"><p>' .
-            $this->translate('generalMailForm_sendButton') .
-            '</p></button>',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation(): void
     {
         self::assertStringContainsString('salutation', $this->subject->render());

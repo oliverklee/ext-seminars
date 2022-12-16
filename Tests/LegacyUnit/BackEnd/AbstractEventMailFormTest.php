@@ -208,20 +208,6 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderFormContainsCancelButton(): void
-    {
-        self::assertStringContainsString(
-            '<input type="button" value="' .
-            $this->translate('eventMailForm_backButton') .
-            '" class="backButton"' .
-            ' onclick="window.location=window.location" />',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField(): void
     {
         $this->subject->setPostData(

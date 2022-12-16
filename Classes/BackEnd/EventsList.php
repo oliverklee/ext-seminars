@@ -216,10 +216,8 @@ class EventsList extends AbstractList
         }
         $label = $this->getLanguageService()->getLL($labelKey);
 
-        return '<img src="/' . PathUtility::stripPathSitePrefix(
-            ExtensionManagementUtility::extPath('seminars')
-        ) . 'Resources/Public/Icons/' . $icon .
-            '" title="' . $label . '" alt="' . $label . '"/>';
+        return '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
+            'Resources/Public/Icons/' . $icon . '" title="' . $label . '" alt="' . $label . '"/>';
     }
 
     /**
@@ -265,7 +263,8 @@ class EventsList extends AbstractList
         $urlParameters = ['id' => (int)$pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()];
         $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
-        return '<a class="btn btn-default" href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
+        return '<a class="btn btn-default" role="button" href="' .
+            \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
             $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
     }
 }
