@@ -22,27 +22,6 @@ $boot = static function (): void {
             'labels' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
         ]
     );
-
-    /**
-     * Legacy BE module
-     */
-
-    // The legacy BE module will be removed before our 11LTS-compatible release.
-    if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 11) {
-        return;
-    }
-
-    $moduleConfiguration = [
-        'routeTarget' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
-        'access' => 'user,group',
-        'name' => 'web_seminars',
-        'labels' => [
-            'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
-        ],
-        'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.svg',
-    ];
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'seminars', '', '', $moduleConfiguration);
 };
 
 $boot();

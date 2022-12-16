@@ -495,30 +495,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_404_registrations" xml:space="preserve">
 				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 			</trans-unit>
-			<trans-unit id="title" xml:space="preserve">
-				<source>Events</source>
-			</trans-unit>
-			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
-				<source>Accreditation number</source>
-			</trans-unit>
-			<trans-unit id="eventlist.date" xml:space="preserve">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="eventlist.begin_date" xml:space="preserve">
-				<source>Begin date and time</source>
-			</trans-unit>
-			<trans-unit id="eventlist.end_date" xml:space="preserve">
-				<source>End date and time</source>
-			</trans-unit>
-			<trans-unit id="eventlist.title" xml:space="preserve">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
-				<source>Please select a folder in the page tree.</source>
-			</trans-unit>
-			<trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
-				<source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
-			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
 				<source>The e-mail to the attendees has been sent.</source>
 			</trans-unit>
@@ -526,10 +502,10 @@ This event now has been confirmed.</source>
 				<source>Events</source>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
-				<source>This module allows you to manage events, registrations, event sites and speakers.</source>
+				<source>This module allows you to manage events and registrations.</source>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tablabel" xml:space="preserve">
-				<source>Events</source>
+				<source>This module allows you to manage events and registrations.</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.sheet_general" xml:space="preserve">
 				<source>General</source>
