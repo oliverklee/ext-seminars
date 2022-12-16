@@ -13,6 +13,9 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Information\Typo3Version;
 
+/**
+ * @covers \OliverKlee\Seminars\BackEnd\AbstractEventMailForm
+ */
 final class AbstractEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
