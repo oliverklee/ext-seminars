@@ -806,23 +806,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         automaticSpecialPriceForSubsequentRegistrationsBySameUser
-
-   Data type
-         boolean
-
-   Description
-         Set this to 1 to hide the special price for the first registration of a
-         user and to automatically offer the special price for the 2nd, 3rd etc.
-         registrations of the same user.
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          attendancesPID
 
    Data type

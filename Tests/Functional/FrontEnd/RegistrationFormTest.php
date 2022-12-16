@@ -114,53 +114,6 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateCheckboxesForEventWithoutCheckboxesReturnsEmptyArray(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
-
-        $event = LegacyEvent::fromUid(1);
-        $this->subject->setSeminar($event);
-
-        $result = $this->subject->populateCheckboxes();
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxes(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
-
-        $event = LegacyEvent::fromUid(2);
-        $this->subject->setSeminar($event);
-
-        $result = $this->subject->populateCheckboxes();
-
-        $expected = [['caption' => 'Checkbox 1', 'value' => 1]];
-        self::assertSame($expected, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxesOrderedBySorting(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
-
-        $event = LegacyEvent::fromUid(3);
-        $this->subject->setSeminar($event);
-
-        $result = $this->subject->populateCheckboxes();
-
-        $expected = [['caption' => 'Checkbox 2', 'value' => 2], ['caption' => 'Checkbox 1', 'value' => 1]];
-        self::assertSame($expected, $result);
-    }
-
-    /**
-     * @test
-     */
     public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldDisabledReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');

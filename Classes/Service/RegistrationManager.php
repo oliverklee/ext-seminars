@@ -1462,36 +1462,6 @@ class RegistrationManager
         return MapperRegistry::get(RegistrationMapper::class);
     }
 
-    /**
-     * Returns the prices that are actually available for the given user, depending on whether automatic prices are
-     * enabled using the plugin.tx_seminars.automaticSpecialPriceForSubsequentRegistrationsBySameUser setting.
-     *
-     * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title)
-     *                    and "value (for the price code), might be empty
-     */
-    public function getPricesAvailableForUser(
-        LegacyEvent $event,
-        FrontEndUser $user
-    ): array {
-        $prices = $event->getAvailablePrices();
-        if (
-            !$this->getSharedConfiguration()
-                ->getAsBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')
-        ) {
-            return $prices;
-        }
-
-        $useSpecialPrice = $event->hasPriceSpecial() && $this->getRegistrationMapper()->countByFrontEndUser($user) > 0;
-
-        if ($useSpecialPrice) {
-            unset($prices['regular'], $prices['regular_early']);
-        } else {
-            unset($prices['special'], $prices['special_early']);
-        }
-
-        return $prices;
-    }
-
     private function getConnectionForTable(string $table): Connection
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);

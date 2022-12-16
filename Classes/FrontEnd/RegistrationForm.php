@@ -14,8 +14,6 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use SJBR\StaticInfoTables\PiBaseApi;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -63,11 +61,6 @@ class RegistrationForm extends AbstractEditor
         'country',
         'telephone',
     ];
-
-    /**
-     * @var PiBaseApi
-     */
-    private $staticInfo;
 
     /**
      * @var LegacyEvent seminar object
@@ -591,77 +584,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Provides data items for the list of available payment methods.
-     *
-     * @return array[] items from the payment methods table as an array
-     *               with the keys "caption" (for the title) and "value" (for the uid)
-     */
-    public function populateListPaymentMethods(): array
-    {
-        if (!$this->getSeminar()->hasPaymentMethods()) {
-            return [];
-        }
-
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_seminars_payment_methods');
-        $rows = $queryBuilder
-            ->select('uid', 'title')
-            ->from('tx_seminars_payment_methods')
-            ->join(
-                'tx_seminars_payment_methods',
-                'tx_seminars_seminars_payment_methods_mm',
-                'mm',
-                $queryBuilder->expr()->eq(
-                    'mm.uid_foreign',
-                    $queryBuilder->quoteIdentifier('tx_seminars_payment_methods.uid')
-                )
-            )
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'mm.uid_local',
-                    $queryBuilder->createNamedParameter($this->getSeminar()->getTopicOrSelfUid(), \PDO::PARAM_INT)
-                )
-            )
-            ->execute()
-            ->fetchAll();
-
-        $result = [];
-        foreach ($rows as $row) {
-            $result[] = [
-                'caption' => $row['title'],
-                'value' => $row['uid'],
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Creates the data for the seats drop-down.
-     *
-     * @return int[][] array with sub arrays: [caption => i, value => i]
-     */
-    public function populateSeats(): array
-    {
-        $result = [];
-
-        $event = $this->getEvent();
-        $maximumBookableSeats = $this->getConfValueInteger('maximumBookableSeats');
-        if ($event->hasMaximumAttendees() && $event->hasVacancies()) {
-            $numberOfVacancies = $event->getVacancies();
-            $availableSeatsForBooking = min($numberOfVacancies, $maximumBookableSeats);
-        } else {
-            $availableSeatsForBooking = $maximumBookableSeats;
-        }
-
-        for ($i = 1; $i <= $availableSeatsForBooking; $i++) {
-            $result[] = ['caption' => $i, 'value' => $i];
-        }
-
-        return $result;
-    }
-
-    /**
      * Checks whether the methods of payment should be displayed at all,
      * i.e., whether they are enable in the setup and the current event actually
      * has any payment methods assigned and has at least one price.
@@ -943,16 +865,7 @@ class RegistrationForm extends AbstractEditor
      */
     private function getSelectedPaymentMethod(): string
     {
-        $result = '';
-        foreach ($this->populateListPaymentMethods() as $paymentMethod) {
-            if ($paymentMethod['value'] == $this->getFormValue('method_of_payment')) {
-                $result = $paymentMethod['caption'];
-                break;
-            }
-        }
-
-        // We use strip_tags to remove any trailing <br /> tags.
-        return strip_tags($result);
+        return '';
     }
 
     /**
@@ -1025,44 +938,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Provides a localized list of country names from static_tables.
-     *
-     * @return array[] localized country names from static_tables as an
-     *               array with the keys "caption" (for the title) and "value"
-     *               (in this case, the same as the caption)
-     */
-    public function populateListCountries(): array
-    {
-        $this->initStaticInfo();
-        /** @var string[] $allCountries */
-        $allCountries = $this->staticInfo->initCountries('ALL', '', true);
-
-        $result = [];
-        // Puts an empty item at the top so we won't have Afghanistan (the first entry) pre-selected for empty values.
-        $result[] = ['caption' => '', 'value' => ''];
-
-        foreach ($allCountries as $currentCountryName) {
-            $result[] = [
-                'caption' => $currentCountryName,
-                'value' => $currentCountryName,
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Provides data items for the list of option checkboxes for this event.
-     *
-     * @return array[] items from the checkboxes table as an array
-     *                 with the keys "caption" (for the title) and "value" (for the uid)
-     */
-    public function populateCheckboxes(): array
-    {
-        return $this->getSeminar()->hasCheckboxes() ? $this->getSeminar()->getCheckboxes() : [];
-    }
-
-    /**
      * Checks whether our current event has any option checkboxes AND the
      * checkboxes should be displayed at all.
      *
@@ -1071,22 +946,6 @@ class RegistrationForm extends AbstractEditor
     public function hasCheckboxes(): bool
     {
         return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(['elementname' => 'checkboxes']);
-    }
-
-    /**
-     * Provides data items for the list of lodging options for this event.
-     *
-     * @return array[] items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
-     */
-    public function populateLodgings(): array
-    {
-        $result = [];
-
-        if ($this->getSeminar()->hasLodgings()) {
-            $result = $this->getSeminar()->getLodgings();
-        }
-
-        return $result;
     }
 
     /**
@@ -1112,23 +971,6 @@ class RegistrationForm extends AbstractEditor
     public function hasLodgings(): bool
     {
         return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(['elementname' => 'lodgings']);
-    }
-
-    /**
-     * Provides data items for the list of food options for this event.
-     *
-     * @return array[] items from the foods table as an array with the keys "caption" (for the title) and "value"
-     *         (for the uid)
-     */
-    public function populateFoods(): array
-    {
-        $result = [];
-
-        if ($this->getSeminar()->hasFoods()) {
-            $result = $this->getSeminar()->getFoods();
-        }
-
-        return $result;
     }
 
     /**
@@ -1172,19 +1014,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Provides data items for the prices for this event.
-     *
-     * @return string[][] available prices as an array with the keys "caption" (for the title) and "value"
-     */
-    public function populatePrices(): array
-    {
-        return $this->getRegistrationManager()->getPricesAvailableForUser(
-            $this->getSeminar(),
-            $this->getLoggedInUser()
-        );
-    }
-
-    /**
      * Checks whether a valid price is selected or the "price" registration
      * field is not visible in the registration form (in which case it is not
      * possible to select a price).
@@ -1199,17 +1028,6 @@ class RegistrationForm extends AbstractEditor
     {
         return $this->getSeminar()->isPriceAvailable($formData['value'])
             || !$this->hasRegistrationFormField(['elementname' => 'price']);
-    }
-
-    /**
-     * Creates and initializes $this->staticInfo (if that hasn't been done yet).
-     */
-    private function initStaticInfo(): void
-    {
-        if ($this->staticInfo === null) {
-            $this->staticInfo = GeneralUtility::makeInstance(PiBaseApi::class);
-            $this->staticInfo->init();
-        }
     }
 
     /**

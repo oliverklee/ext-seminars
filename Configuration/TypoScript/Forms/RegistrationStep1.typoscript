@@ -27,10 +27,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     price = renderlet:LISTBOX
     price {
       name = price
-      data.userobj {
-        extension = this
-        method = populatePrices
-      }
 
       validators {
         10 = validator:STANDARD
@@ -56,12 +52,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     method_of_payment = renderlet:RADIOBUTTON
     method_of_payment {
       name = method_of_payment
-      data {
-        userobj {
-          extension = this
-          method = populateListPaymentMethods
-        }
-      }
 
       wrapitem = |<br/>
       validators {
@@ -186,12 +176,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     country = renderlet:LISTBOX
     country {
       name = country
-      data {
-        userobj {
-          extension = this
-          method = populateListCountries
-        }
-      }
 
       process.userobj {
         extension = this
@@ -236,14 +220,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     seats = renderlet:LISTBOX
     seats {
       name = seats
-      data {
-        userobj {
-          extension = this
-          method = populateSeats
-        }
-
-        defaultvalue = 1
-      }
 
       validators {
         10 = validator:PREG
@@ -368,10 +344,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     lodgings = renderlet:CHECKBOX
     lodgings {
       name = lodgings
-      data.userobj {
-        extension = this
-        method = populateLodgings
-      }
 
       validators {
         10 = validator:STANDARD
@@ -407,10 +379,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     foods = renderlet:CHECKBOX
     foods {
       name = foods
-      data.userobj {
-        extension = this
-        method = populateFoods
-      }
 
       validators {
         10 = validator:STANDARD
@@ -450,10 +418,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     checkboxes = renderlet:CHECKBOX
     checkboxes {
       name = checkboxes
-      data.userobj {
-        extension = this
-        method = populateCheckboxes
-      }
 
       process.userobj {
         extension = this

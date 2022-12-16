@@ -348,10 +348,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
     lodgings = renderlet:CHECKBOX
     lodgings {
       name = lodgings
-      data.userobj {
-        extension = this
-        method = populateLodgings
-      }
 
       validators {
         10 = validator:STANDARD
@@ -386,10 +382,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
     foods = renderlet:CHECKBOX
     foods {
       name = foods
-      data.userobj {
-        extension = this
-        method = populateFoods
-      }
 
       validators {
         10 = validator:STANDARD
@@ -424,10 +416,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
     checkboxes = renderlet:CHECKBOX
     checkboxes {
       name = checkboxes
-      data.userobj {
-        extension = this
-        method = populateCheckboxes
-      }
 
       process.userobj {
         extension = this

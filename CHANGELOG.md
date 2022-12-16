@@ -32,7 +32,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the "duplicate event" functionality from the FE editor (#2204)
 - Remove the `logOutOneTimeAccountsAfterRegistration` setting (#2199)
 - Drop the legacy registration form
-  (#2196, #2198, #2199, #2225, #2226, #2244, #2246)
+  (#2196, #2198, #2199, #2225, #2226, #2244, #2246, #2248, #2250)
 - Drop anything bank-data related (#2192)
 - Remove the board-related prices (#2190)
 - Drop the upgrade wizards (#2187)
