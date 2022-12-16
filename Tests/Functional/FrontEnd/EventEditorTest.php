@@ -165,33 +165,6 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertSame($userUid, $result['owner_feuser']);
     }
 
-    /**
-     * @test
-     */
-    public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid(): void
-    {
-        $this->logInUser(1);
-        $pageUid = 42;
-        $this->subject->setConfigurationValue('createEventsPID', $pageUid);
-
-        $result = $this->subject->modifyDataToInsert([]);
-
-        self::assertSame($pageUid, $result['pid']);
-    }
-
-    /**
-     * @test
-     */
-    public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid(): void
-    {
-        $this->logInUser(2);
-        $this->subject->setConfigurationValue('createEventsPID', 42);
-
-        $result = $this->subject->modifyDataToInsert([]);
-
-        self::assertSame(21, $result['pid']);
-    }
-
     // Tests concerning validateCheckboxes
 
     /**

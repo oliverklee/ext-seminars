@@ -28,7 +28,6 @@
     <fe_groups>
         <uid>2</uid>
         <title>FE editor settings: hide new</title>
-        <tx_seminars_events_pid>21</tx_seminars_events_pid>
     </fe_groups>
 
     <fe_users>

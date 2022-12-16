@@ -87,10 +87,6 @@ front-end editing is enabled for managers.
    allowed to edit events. Alternatively, you can set this using the TS
    setup variable plugin.tx\_seminars\_pi1.eventEditorFeGroupID.
 
-#. Select the system folder where the created events will be stored.
-   Alternatively, you can set this using the TS setup variable
-   plugin.tx\_seminars\_pi1.createEventsPID.
-
 #. Select the the page that will be shown when an event has been saved.
    This can be the page with the user-entered events (which we will
    create in the next page) or a separate thank-you page. Alternatively,
