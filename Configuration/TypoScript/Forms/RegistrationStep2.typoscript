@@ -324,21 +324,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
       }
     }
 
-    structured_attendees_names = renderlet:HIDDEN
-    structured_attendees_names {
-      name = structured_attendees_names
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
-          userobj {
-            extension = this
-            method = validateAdditionalPersonsEMailAddresses
-          }
-        }
-      }
-    }
-
     kids = renderlet:HIDDEN
     kids {
       name = kids

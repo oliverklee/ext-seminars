@@ -1044,18 +1044,6 @@ This event now has been confirmed.</source>
 				<source>Send parameters to page which is displayed after unregistration</source>
 				<target>Invia i parametri alla pagina visualizzata dopo la cancellazione</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve">
-				<source>Create FE user records for additional attendees</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve">
-				<source>System folder in which the created FE user records will be stored</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
-				<source>FE user groups for the created FE users</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target></target>
@@ -1512,10 +1500,6 @@ This event now has been confirmed.</source>
 				<source>Last name:</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="label_position" xml:space="preserve">
-				<source>Position:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_register_seats" xml:space="preserve">
 				<source>Seats to book:</source>
 				<target></target>
@@ -1822,10 +1806,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
 				<source>Please provide the names of all persons to register.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidEMailAddress" xml:space="preserve">
-				<source>Please enter a valid e-mail address for each person.</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="message_noKidsNumber" xml:space="preserve">

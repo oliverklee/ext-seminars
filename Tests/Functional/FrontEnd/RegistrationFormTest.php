@@ -255,31 +255,6 @@ final class RegistrationFormTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function processRegistrationWithAdditionalAttendeeCreatesAdditionalUser(): void
-    {
-        $email = 'max@example.com';
-        $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-        $subject->setTestMode();
-        $subject->setFormConfiguration(['form.' => []]);
-
-        $event = LegacyEvent::fromData(['needs_registration' => 1]);
-        $subject->setSeminar($event);
-
-        $attendeeData = \json_encode([['Max', 'Maxowski', 'developer', $email]]);
-        $subject->setFakedFormValue('structured_attendees_names', $attendeeData);
-
-        $subject->processRegistration([]);
-
-        self::assertSame(
-            1,
-            $this->getDatabaseConnection()->selectCount('*', 'fe_users', 'username = "' . $email . '"')
-        );
-    }
-
     // Tests concerning getThankYouAfterRegistrationUrl
 
     /**

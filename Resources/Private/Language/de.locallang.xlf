@@ -1080,18 +1080,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Send parameters to page which is displayed after unregistration</source>
 				<target>Parameter an Seite schicken, die nach erfolgreicher Abmeldung angezeigt wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve">
-				<source>Create FE user records for additional attendees</source>
-				<target>FE-Benutzer-Datensätze für die zusätzlich angemeldeten Personen anlegen</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve">
-				<source>System folder in which the created FE user records will be stored</source>
-				<target>Ordner für die angelegten FE-Benutzer-Datensätze</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
-				<source>FE user groups for the created FE users</source>
-				<target>FE-Benutzergruppen für die angelegten FE-Benutzer-Datensätze</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target>Anzeige der Kategorien:</target>
@@ -1548,10 +1536,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Last name:</source>
 				<target>Nachname:</target>
 			</trans-unit>
-			<trans-unit id="label_position" xml:space="preserve">
-				<source>Position:</source>
-				<target>Position:</target>
-			</trans-unit>
 			<trans-unit id="label_register_seats" xml:space="preserve">
 				<source>Seats to book:</source>
 				<target>Zu buchende Plätze:</target>
@@ -1859,10 +1843,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
 				<source>Please provide the names of all persons to register.</source>
 				<target>Bitte gib die Namen aller anzumeldenden Personen an.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidEMailAddress" xml:space="preserve">
-				<source>Please enter a valid e-mail address for each person.</source>
-				<target>Bitte geben Sie für alle angemeldeten Personen eine gültige E-Mail-Adresse an.</target>
 			</trans-unit>
 			<trans-unit id="message_noKidsNumber" xml:space="preserve">
 				<source>Please enter only numbers for the number of kids.</source>

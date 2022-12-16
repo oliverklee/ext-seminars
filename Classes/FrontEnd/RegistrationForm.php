@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Model\FrontEndUserGroup;
-use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use SJBR\StaticInfoTables\PiBaseApi;
-use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -263,10 +256,6 @@ class RegistrationForm extends AbstractEditor
         $this->setLabels();
         $this->hideUnusedFormFields();
 
-        if (!$this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-            $this->hideSubparts('attendees_position_and_email');
-        }
-
         $this->setMarker('feuser_data', $this->getAllFeUserData());
         $this->setMarker('billing_address', $this->getBillingAddress());
         $this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
@@ -337,79 +326,8 @@ class RegistrationForm extends AbstractEditor
             return;
         }
 
-        $newRegistration = $registrationManager->createRegistration($this->getSeminar(), $parameters, $this);
-        if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-            $this->createAdditionalAttendees($newRegistration);
-        }
-
+        $registrationManager->createRegistration($this->getSeminar(), $parameters, $this);
         $registrationManager->sendEmailsForNewRegistration($this);
-    }
-
-    /**
-     * Creates additional attendees as FE users and adds them to the provided registration.
-     */
-    protected function createAdditionalAttendees(Registration $registration): void
-    {
-        $allPersonsData = $this->getAdditionalRegisteredPersonsData();
-        if (empty($allPersonsData)) {
-            return;
-        }
-
-        $userMapper = MapperRegistry::get(FrontEndUserMapper::class);
-        $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
-
-        $userGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
-        /** @var Collection<FrontEndUserGroup> $userGroups */
-        $userGroups = new Collection();
-        $userGroupUids = GeneralUtility::intExplode(
-            ',',
-            $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'),
-            true
-        );
-        foreach ($userGroupUids as $uid) {
-            $userGroup = $userGroupMapper->find($uid);
-            $userGroups->add($userGroup);
-        }
-
-        $random = GeneralUtility::makeInstance(Random::class);
-        $additionalPersons = $registration->getAdditionalPersons();
-        /** @var array $personData */
-        foreach ($allPersonsData as $personData) {
-            $user = GeneralUtility::makeInstance(FrontEndUser::class);
-            $user->setPageUid($pageUid);
-            $user->setPassword($random->generateRandomHexString(8));
-            $eMailAddress = $personData[3];
-            $user->setEmailAddress($eMailAddress);
-
-            $isUnique = false;
-            $suffixCounter = 0;
-            do {
-                $userName = $eMailAddress;
-                if ($suffixCounter > 0) {
-                    $userName .= '-' . $suffixCounter;
-                }
-                try {
-                    $userMapper->findByUserName($userName);
-                } catch (NotFoundException $exception) {
-                    $isUnique = true;
-                }
-
-                $suffixCounter++;
-            } while (!$isUnique);
-
-            $user->setUserName($userName);
-            $user->setUserGroups($userGroups);
-
-            $user->setFirstName($personData[0]);
-            $user->setLastName($personData[1]);
-            $user->setName($personData[0] . ' ' . $personData[1]);
-            $user->setJobTitle($personData[2]);
-
-            $additionalPersons->add($user);
-        }
-
-        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
-        $registrationMapper->save($registration);
     }
 
     /**
@@ -929,15 +847,6 @@ class RegistrationForm extends AbstractEditor
                     $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
                     $user = MapperRegistry::get(FrontEndUserMapper::class)->find($userUid);
                     $userData = [$user->getName()];
-                    if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-                        if ($user->hasJobTitle()) {
-                            $userData[] = $user->getJobTitle();
-                        }
-                        if ($user->hasEmailAddress()) {
-                            $userData[] = $user->getEmailAddress();
-                        }
-                    }
-
                     $currentFormData = implode(', ', $userData) . "\r" . $currentFormData;
                 }
                 break;
@@ -1438,32 +1347,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Returns the data of the additional registered persons.
-     *
-     * The inner array will have the following format:
-     * 0 => first name
-     * 1 => last name
-     * 2 => job title
-     * 3 => e-mail address
-     *
-     * @return array<int, array{0: string, 1: string, 2: string, 3: string}> the entered person's data, might be empty
-     */
-    public function getAdditionalRegisteredPersonsData(): array
-    {
-        $jsonEncodedData = $this->getFormValue('structured_attendees_names');
-        if (!is_string($jsonEncodedData) || $jsonEncodedData === '') {
-            return [];
-        }
-
-        $result = \json_decode($jsonEncodedData, true);
-        if (!is_array($result)) {
-            $result = [];
-        }
-
-        return $result;
-    }
-
-    /**
      * Gets the number of entered persons in the form by counting the lines
      * in the "additional attendees names" field and the state of the "register myself" checkbox.
      *
@@ -1478,7 +1361,7 @@ class RegistrationForm extends AbstractEditor
             $themselves = $this->getConfValueInteger('registerThemselvesByDefaultForHiddenCheckbox');
         }
 
-        return $themselves + count($this->getAdditionalRegisteredPersonsData());
+        return $themselves;
     }
 
     /**
@@ -1497,35 +1380,6 @@ class RegistrationForm extends AbstractEditor
         }
 
         return (int)$this->getFormValue('seats') === $this->getNumberOfEnteredPersons();
-    }
-
-    /**
-     * Validates the e-mail addresses of additional persons for non-emptiness and validity.
-     *
-     * If the entering of additional persons as FE user records is disabled, this function will always return TRUE.
-     *
-     * @return bool
-     *         TRUE if either additional persons as FE users are disabled or all entered e-mail addresses are non-empty and valid,
-     *         FALSE otherwise
-     */
-    public function validateAdditionalPersonsEmailAddresses(): bool
-    {
-        if (!$this->isFormFieldEnabled('attendees_names')) {
-            return true;
-        }
-        if (!$this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-            return true;
-        }
-
-        $isValid = true;
-        foreach ($this->getAdditionalRegisteredPersonsData() as $onePersonData) {
-            if (!isset($onePersonData[3]) || !GeneralUtility::validEmail($onePersonData[3])) {
-                $isValid = false;
-                break;
-            }
-        }
-
-        return $isValid;
     }
 
     /**

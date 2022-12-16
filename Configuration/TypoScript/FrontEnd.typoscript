@@ -180,14 +180,6 @@ plugin.tx_seminars_pi1 {
   # to storing them in a text field)
   createAdditionalAttendeesAsFrontEndUsers = 0
 
-  # UID of the sys folder in which FE users created as additional attendees in
-  # the registration form get stored
-  sysFolderForAdditionalAttendeeUsersPID =
-
-  # comma-separated list of front-end user group UIDs to which the FE users
-  # created in the registration form will be assigned
-  userGroupUidsForAdditionalAttendeesFrontEndUsers =
-
   # PID of the FE page that contains the login form or onetimeaccount
   loginPID =
 
