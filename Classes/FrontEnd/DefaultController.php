@@ -1279,7 +1279,7 @@ class DefaultController extends TemplateHelper
         $this->setMarker(
             'registration',
             $this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)
-                ? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage($this, $this->seminar)
+                ? $this->getRegistrationManager()->getLinkToRegistrationPage($this, $this->seminar)
                 : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar)
         );
     }

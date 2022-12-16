@@ -208,7 +208,7 @@ class RegistrationManager
             return '';
         }
 
-        return $this->getLinkToRegistrationOrLoginPage($plugin, $event);
+        return $this->getLinkToRegistrationPage($plugin, $event);
     }
 
     /**
@@ -221,9 +221,13 @@ class RegistrationManager
      *
      * @return string HTML with the link
      */
-    public function getLinkToRegistrationOrLoginPage(DefaultController $plugin, LegacyEvent $event): string
+    public function getLinkToRegistrationPage(DefaultController $plugin, LegacyEvent $event): string
     {
-        return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $event, $this->getRegistrationLabel($event));
+        return $plugin->cObj->getTypoLink(
+            $this->getRegistrationLabel($event),
+            (string)$plugin->getConfValueInteger('registerPID'),
+            ['tx_seminars_eventregistration[event]' => $event->getUid()]
+        );
     }
 
     /**
@@ -251,43 +255,6 @@ class RegistrationManager
         }
 
         return $label;
-    }
-
-    /**
-     * Creates an HTML link to either the registration page (if a user is logged in) or the login page (if no user is logged in).
-     *
-     * This function only creates the link to the standard registration or login
-     * page; it should not be used if the seminar has a separate details page.
-     *
-     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
-     * @param string $label label for the link, must not be empty
-     *
-     * @return string HTML with the link
-     */
-    private function getLinkToStandardRegistrationOrLoginPage(
-        DefaultController $plugin,
-        LegacyEvent $event,
-        string $label
-    ): string {
-        if (FrontEndLoginManager::getInstance()->isLoggedIn()) {
-            // provides the registration link
-            $result = $plugin->cObj->getTypoLink(
-                $label,
-                (string)$plugin->getConfValueInteger('registerPID'),
-                [
-                    'tx_seminars_eventregistration[event]' => $event->getUid(),
-                    // @deprecated #1545 These parameters can be removed in seminars 5.0
-                    // when the legacy registration form is removed.
-                    'tx_seminars_pi1[seminar]' => $event->getUid(),
-                    'tx_seminars_pi1[action]' => 'register',
-                ]
-            );
-        } else {
-            // provides the login link
-            $result = $plugin->getLoginLink($label, $plugin->getConfValueInteger('registerPID'), $event->getUid());
-        }
-
-        return $result;
     }
 
     /**

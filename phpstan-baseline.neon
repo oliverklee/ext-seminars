@@ -1191,7 +1191,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#2 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLinkToRegistrationOrLoginPage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
+			message: "#^Parameter \\#2 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLinkToRegistrationPage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 

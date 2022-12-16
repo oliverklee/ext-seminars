@@ -6,11 +6,6 @@
     </pages>
     <pages>
         <pid>1</pid>
-        <uid>2</uid>
-        <slug>/login</slug>
-    </pages>
-    <pages>
-        <pid>1</pid>
         <uid>3</uid>
         <slug>/registration</slug>
     </pages>
