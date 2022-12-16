@@ -1136,10 +1136,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>FE user groups for the created FE users</source>
 				<target>FE-Benutzergruppen für die angelegten FE-Benutzer-Datensätze</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
-				<source>Event headline</source>
-				<target>Veranstaltungsüberschrift</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target>Anzeige der Kategorien:</target>

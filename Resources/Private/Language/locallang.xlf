@@ -864,9 +864,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
 				<source>FE user groups for the created FE users</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
-				<source>Event headline</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 			</trans-unit>

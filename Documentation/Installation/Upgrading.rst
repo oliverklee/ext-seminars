@@ -28,6 +28,7 @@ changes. So it is recommended you do the upgrade in the following order.
 Some content elements have been removed in seminars 5.0.
 
 #.  If you are using the event countdown, delete those content elements.
+#.  If you are using the event headline plugin, delete those content elements.
 
 2. Upgrade to seminars 4.4
 ==========================

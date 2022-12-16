@@ -53,10 +53,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.category_list</numIndex>
 										<numIndex index="1">category_list</numIndex>
 									</numIndex>
-									<numIndex index="11" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.event_headline</numIndex>
-										<numIndex index="1">event_headline</numIndex>
-									</numIndex>
 								</items>
 								<size>1</size>
 								<maxitems>1</maxitems>
