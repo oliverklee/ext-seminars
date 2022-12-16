@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the custom BE user and BE user group models (#2221)
 - Drop the approval workflow for the FE editor (#2214, #2220)
 - Drop the hide/unhide FE editor functionality (#2206)
 - Drop the legacy BE module (#2205, #2207, #2208, #2215, #2219)

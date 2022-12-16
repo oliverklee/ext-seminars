@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Mapper\BackEndUserGroupMapper;
+use OliverKlee\Oelib\Mapper\BackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
-use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;

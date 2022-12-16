@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use OliverKlee\Oelib\Authentication\BackEndLoginManager;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
-use OliverKlee\Seminars\Mapper\BackEndUserMapper;
-use OliverKlee\Seminars\Model\BackEndUser;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -196,17 +192,6 @@ abstract class AbstractList
         }
 
         return $this->accessRights[$pageUid];
-    }
-
-    /**
-     * Gets the currently logged in back-end user.
-     *
-     * @return BackEndUser the currently logged in back-end user
-     */
-    protected function getLoggedInUser(): BackEndUser
-    {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        return MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
     }
 
     /**
