@@ -62,7 +62,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'seminar_registration',
                 'list_registrations',
                 'list_vip_registrations',
-                'edit_event',
                 // @deprecated #1809 will be removed in seminars 5.0
                 'countdown',
                 'category_list',
@@ -176,16 +175,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'This value specifies the how deep the recursion will be for selecting
             the pages that contain the event records for the list view.
             If this value is not set correctly, some events might not get displayed in the list view.'
-        );
-    }
-
-    protected function checkEventEditorFeGroupID(): void
-    {
-        $this->checkIfPositiveInteger(
-            'eventEditorFeGroupID',
-            'This value specifies the front-end user group that is allowed
-            to enter and edit event records in the front end.
-            If this value is not set correctly, FE editing for events will not work.'
         );
     }
 

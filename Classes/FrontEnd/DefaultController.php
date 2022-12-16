@@ -266,9 +266,6 @@ class DefaultController extends TemplateHelper
             case 'single_view':
                 $result = $this->createSingleView();
                 break;
-            case 'edit_event':
-                $result = $this->createEventEditorHtml();
-                break;
             case 'seminar_registration':
                 $result = $this->createRegistrationPage();
                 break;
@@ -2522,47 +2519,6 @@ class DefaultController extends TemplateHelper
         }
     }
 
-    /////////////////////////////////
-    // Event editor view functions.
-    /////////////////////////////////
-
-    /**
-     * Checks whether logged-in FE user has access to the event editor and then
-     * either creates the event editor HTML or a localized error message.
-     *
-     * @return string HTML for the event editor, or an error message if the
-     *                FE user doesn't have access to the editor
-     *
-     * @deprecated #1544 will be removed in seminars 5.0.
-     */
-    protected function createEventEditorHtml(): string
-    {
-        $eventEditor = $this->createEventEditorInstance();
-        $hasAccessMessage = $eventEditor->hasAccessMessage();
-
-        if ($hasAccessMessage === '') {
-            $result = $eventEditor->render();
-        } else {
-            $result = $hasAccessMessage;
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
-        }
-
-        return $result;
-    }
-
-    /**
-     * Creates an event editor instance and returns it.
-     *
-     * @deprecated #1544 will be removed in seminars 5.0.
-     */
-    protected function createEventEditorInstance(): EventEditor
-    {
-        $eventEditor = GeneralUtility::makeInstance(EventEditor::class, $this->conf, $this->cObj);
-        $eventEditor->setObjectUid((int)($this->piVars['seminar'] ?? 0));
-
-        return $eventEditor;
-    }
-
     /**
      * Creates the category icon IMG tag with the icon title as title attribute.
      *
@@ -2828,17 +2784,6 @@ class DefaultController extends TemplateHelper
 
         return !$limitToAttendees
             || ($this->isLoggedIn() && $this->seminar->isUserRegistered($this->getLoggedInFrontEndUserUid()));
-    }
-
-    /**
-     * Checks if the current FE user has access to the event editor and thus may
-     * see the "my entered events" list.
-     */
-    private function hasEventEditorAccess(): bool
-    {
-        $eventEditor = $this->createEventEditorInstance();
-
-        return $eventEditor->hasAccessMessage() == '';
     }
 
     /**

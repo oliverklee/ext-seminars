@@ -115,21 +115,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         eventEditorTemplateFile
-
-   Data type
-         string
-
-   Description
-         location of the front-endevent editor template file
-
-   Default
-         EXT:seminars/Resources/Private/Templates/FrontEnd/EventEditor.html
-
-
-.. container:: table-row
-
-   Property
          registrationEditorTemplateFile
 
    Data type
@@ -1060,22 +1045,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         eventEditorFeGroupID
-
-   Data type
-         integer
-
-   Description
-         UID of the FE user group that is allowed to enter and edit event
-         records in the FE
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
          defaultEventVipsFeGroupID
 
    Data type
@@ -1087,113 +1056,6 @@ override the corresponding value from TS Setup.**
 
    Default
          None
-
-
-.. container:: table-row
-
-   Property
-         createEventsPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the sysfolder where FE-created events will be stored
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         eventSuccessfullySavedPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the page that will be shown when an event has been successfully
-         entered on the FE
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         displayFrontEndEditorFields
-
-   Data type
-         String
-
-   Description
-         comma-separated list of the fields to show in the FE-editor; allowed
-         values are: subtitle,accreditation\_number, credit\_points,
-         categories, event\_type, cancelled, teaser,description,
-         additional\_information, begin\_date, end\_date,
-         begin\_date\_registration, deadline\_early\_bird,
-         deadline\_registration, needs\_registration,
-         allows\_multiple\_registrations, queue\_size, offline\_attendees,
-         attendees\_min, attendees\_max, target\_groups, price\_regular,
-         price\_regular\_early, price\_special,
-         price\_special\_early, payment\_methods, place,
-         room, lodgings, foods, speakers, leaders, partners, tutors,
-         checkboxes, uses\_terms\_2, attached\_file\_box, notes
-
-   Default
-         subtitle,accreditation\_number,credit\_points,categories,event\_type,c
-         ancelled,teaser,description,additional\_information,begin\_date,end\_d
-         ate,begin\_date\_registration,deadline\_early\_bird,deadline\_registra
-         tion,needs\_registration,allows\_multiple\_registrations,queue\_size,o
-         ffline\_attendees,attendees\_min,attendees\_max,target\_groups,price\_
-         regular,price\_regular\_early,price\_special,price\_special\_early,
-         payment\_methods,place,room,l
-         odgings,foods,speakers,leaders,partners,tutors,checkboxes,uses\_terms\
-         _2,attached\_file\_box,notes
-
-
-.. container:: table-row
-
-   Property
-         requiredFrontEndEditorFields
-
-   Data type
-         String
-
-   Description
-         comma-separated list of the event fields which are required to be
-         filled in the FE editor; allowed values are: subtitle,
-         accreditation\_number, credit\_points, categories, event\_type,
-         cancelled, teaser, description, additional\_information, begin\_date,
-         end\_date, begin\_date\_registration, deadline\_early\_bird,
-         deadline\_registration, needs\_registration,
-         allows\_multiple\_registrations, queue\_size, attendees\_min,
-         attendees\_max, offline\_attendees, target\_groups, price\_regular,
-         price\_regular\_early, price\_special,
-         price\_special\_early, payment\_methods, place,
-         room, lodgings, foods, speakers, leaders, partners, tutors,
-         checkboxes, uses\_terms\_2, attached\_file\_box, notes
-
-   Default
-
-
-.. container:: table-row
-
-   Property
-         requiredFrontEndEditorPlaceFields
-
-   Data type
-         String
-
-   Description
-         comma-separated list of the place fields which are required to be
-         filled in the FE editor; allowed values are: address, zip, city,
-         country, homepage, directions
-
-   Default
-         city
 
 
 .. container:: table-row

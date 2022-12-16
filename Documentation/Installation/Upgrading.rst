@@ -12,12 +12,23 @@
    :class:  typoscript
 .. role::   php(code)
 
-==========================================
-Upgrading from seminars 4.x to 4.3 and 5.0
-==========================================
+==================================
+Upgrading from seminars 4.x to 5.0
+==================================
 
-New configuration values
-========================
+Upgrading in multiple steps
+===========================
+
+As this extension follow semantic versioning, seminars 5.0 has all the breaking
+changes. So it is recommended you do the upgrade in the following order.
+
+1. Upgrade to seminars 4.4
+==========================
+
+Upgrade to seminars 4.4 and run the upgrade wizards (just to be sure).
+
+2. Set new configuration values
+===============================
 
 If you would like to use the informal salutation mode in the frontend, set
 :typoscript:`plugin.tx_seminars.settings.salutation = informal` in the
@@ -27,21 +38,21 @@ If you are using a different currency than Euro (or you would like to tweak
 the currency format), edit :typoscript:`plugin.tx_seminars.settings.currency`
 in the TypoScript constants (or conveniently in the constants editor).
 
-Switching to the rewritten backend module
-=========================================
+3. Switch to the rewritten FE editor
+====================================
 
-Starting with seminars 4.4, using the new backend module form is recommended.
-(The legacy backend module form will be removed in seminars 5.0.)
+Starting with seminars 4.2, using the new FE editor is recommended.
+(The legacy FE editor was removed in seminars 5.0.)
 
-Edit your backend user or user group permissions, grant the users/groups
-permissions for the new backend module, and drop their permissions for the
-old backend module.
+#.  On the FE editor page, switch the seminars plugin to a general plugin
+    and set the type to "Front-end editor for events". Configure it to your
+    needs using the settings in the FlexForms.
 
-Switching to the rewritten registration form
+4. Switch to the rewritten registration form
 ============================================
 
 Starting with seminars 4.3, using the new registration form is recommended.
-(The legacy registration form will be removed in seminars 5.0.)
+(The legacy registration form was removed in seminars 5.0.)
 
 #.  If you are using the "onetimeaccount" extension on the login page, switch
     the plugin type to "One-time FE account creator without autologin".
@@ -54,12 +65,20 @@ Starting with seminars 4.3, using the new registration form is recommended.
 #.  Delete the thank-you page that was be display after someone has registered
     for an event. (This is now part of the registration form plugin.)
 
-Switching to the rewritten FE editor
-====================================
+5. Switch to the rewritten backend module
+=========================================
 
-Starting with seminars 4.2, using the new FE editor is recommended.
-(The legacy FE editor will be removed in seminars 5.0.)
+Starting with seminars 4.4, using the new backend module form is recommended.
+(The legacy backend module form was removed in seminars 5.0.)
 
-#.  On the FE editor page, switch the seminars plugin to a general plugin
-    and set the type to "Front-end editor for events". Configure it to your
-    needs using the settings in the FlexForms.
+Edit your backend user or user group permissions, grant the users/groups
+permissions for the new backend module, and drop their permissions for the
+old backend module.
+
+6. Configuration updates
+========================
+
+#.  Enable the automatic configuration check in the extension settings.
+#.  Click through all your seminars-related content elements, watch for
+    configuration check warnings, and fix them.
+#.  Disable the automatic configuration check in the extension settings again.

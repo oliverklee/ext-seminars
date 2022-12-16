@@ -1172,7 +1172,7 @@ parameters:
 
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1324,101 +1324,6 @@ parameters:
 			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
 			count: 2
 			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot access offset 'DBMM' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot call method hasGroupMembership\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Cannot call method typoLink_URL\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 4
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:createTemplateStructure\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:getEmailSender\\(\\) should return OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole but returns OliverKlee\\\\Oelib\\\\Email\\\\GeneralEmailRole\\|OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:modifyDataToInsert\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$configuration \\(array\\|tx_mkforms_forms_IForm\\|null\\) of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) should be contravariant with parameter \\$configuration \\(mixed\\) of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:init\\(\\)$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$field of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:isFieldRequired\\(\\) expects array\\<string\\>, array\\<string, array\\<int, int\\|string\\>\\|int\\|string\\> given\\.$#"
-			count: 5
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of function trim expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#1 \\$subparts of method OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:hideSubpartsArray\\(\\) expects array\\<int\\|string, non\\-empty\\-string\\>, array\\<string\\> given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, array\\<int, int\\|string\\>\\|int\\|string given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:\\$validationError is never read, only written\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
-			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
-			count: 2
-			path: Classes/FrontEnd/EventEditor.php
 
 		-
 			message: "#^Binary operation \"\\.\" between non\\-falsy\\-string and array\\|string results in an error\\.$#"
@@ -3156,21 +3061,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
 
 		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:buildSubject\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventEditorTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
@@ -4619,31 +4509,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createLoginAndAddFrontEndUserToEventEditorFrontEndGroup\\(\\) has parameter \\$frontEndUserGroupData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractEditor\\:\\:setObjectUid\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
