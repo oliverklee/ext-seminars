@@ -676,26 +676,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="eventlist_button_email" xml:space="preserve">
-				<source>E-mail</source>
-				<target>E-Mail</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_subject" xml:space="preserve">
-				<source>Subject:</source>
-				<target>Betreff:</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_message" xml:space="preserve">
-				<source>Message:</source>
-				<target>Mitteilung:</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_backButton" xml:space="preserve">
-				<source>Back</source>
-				<target>Zurück</target>
-			</trans-unit>
-			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
-				<source>Send e-mail</source>
-				<target>E-Mail senden</target>
-			</trans-unit>
 			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
 				<source>Please select a folder in the page tree.</source>
 				<target>Bitte wählen Sie einen Ordner im Seitenbaum aus.</target>

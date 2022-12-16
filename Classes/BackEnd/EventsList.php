@@ -107,37 +107,10 @@ class EventsList extends AbstractList
                 'date',
                 ($event->hasDate() ? $event->getDate() : '')
             );
-            $this->setEmailButtonMarkers($event);
 
             $tableRows .= $this->template->getSubpart('EVENT_ROW');
         }
 
         $this->template->setSubpart('EVENT_ROW', $tableRows);
-    }
-
-    /**
-     * Sets the markers of a button for sending an e-mail to the attendees of an
-     * event.
-     *
-     * The button will only be visible if the event has at least one registration.
-     */
-    private function setEmailButtonMarkers(LegacyEvent $event): void
-    {
-        if (!$event->hasAttendances()) {
-            $this->template->hideSubpartsArray(['EMAIL_BUTTON']);
-            return;
-        }
-
-        $this->template->unhideSubpartsArray(['EMAIL_BUTTON']);
-        $pageData = $this->page->getPageData();
-
-        $this->template->setMarker('uid', $event->getUid());
-        $urlParameters = ['id' => (int)$pageData['uid']];
-        $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-        $this->template->setMarker('email_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
-        $this->template->setMarker(
-            'label_email_button',
-            $this->getLanguageService()->getLL('eventlist_button_email')
-        );
     }
 }

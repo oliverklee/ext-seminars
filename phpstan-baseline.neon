@@ -26,11 +26,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setPostData\\(\\) has parameter \\$postData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
@@ -106,22 +101,7 @@ parameters:
 			path: Classes/BackEnd/AbstractModule.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/BackEnd/Controller.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\Controller\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/Controller.php
-
-		-
 			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string, int\\|string\\>, array\\|false given\\.$#"
-			count: 1
-			path: Classes/BackEnd/Controller.php
-
-		-
-			message: "#^Parameter \\#1 \\$postData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setPostData\\(\\) expects array, mixed given\\.$#"
 			count: 1
 			path: Classes/BackEnd/Controller.php
 
@@ -2536,11 +2516,6 @@ parameters:
 			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
 
 		-
-			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -2558,11 +2533,6 @@ parameters:
 		-
 			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
 			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getRouteUrl\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
-			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
@@ -3433,71 +3403,6 @@ parameters:
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 2
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot access property \\$lang on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventUid of class OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm constructor expects int\\<1, max\\>, int given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
 			path: Tests/LegacyUnit/BackEnd/AbstractModuleTest.php
 
 		-
@@ -3609,71 +3514,6 @@ parameters:
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/BackEnd/FlexFormsTest.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Cannot access property \\$lang on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventUid of class OliverKlee\\\\Seminars\\\\BackEnd\\\\GeneralEventMailForm constructor expects int\\<1, max\\>, int given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
