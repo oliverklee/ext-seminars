@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
@@ -125,136 +124,6 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * Sets this registration's data if this registration is newly created instead of from a DB query.
-     *
-     * This function must be called directly after construction or this object will not be usable.
-     *
-     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
-     * @param int $userUid UID of the FE user who wants to sign up
-     * @param array $registrationData associative array with the registration data the user has just entered, may be empty
-     */
-    public function setRegistrationData(LegacyEvent $event, int $userUid, array $registrationData): void
-    {
-        $this->seminar = $event;
-
-        $this->recordData = [];
-
-        $this->recordData['seminar'] = $event->getUid();
-        $this->recordData['user'] = $userUid;
-        $this->recordData['registration_queue'] = (!$event->hasVacancies()) ? 1 : 0;
-
-        $seats = (int)$registrationData['seats'];
-        if ($seats < 1) {
-            $seats = 1;
-        }
-        $this->recordData['seats'] = $seats;
-        $this->recordData['registered_themselves'] = (int)$registrationData['registered_themselves'] ? 1 : 0;
-
-        $availablePrices = $event->getAvailablePrices();
-        // If no (available) price is selected, use the first price by default.
-        $selectedPrice = isset($registrationData['price']) ? $registrationData['price'] : key($availablePrices);
-        $this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
-
-        $this->recordData['total_price'] = $seats * (float)$availablePrices[$selectedPrice]['amount'];
-
-        $this->recordData['attendees_names'] = $registrationData['attendees_names'];
-
-        $this->recordData['kids'] = $registrationData['kids'];
-
-        $methodOfPayment = (int)$registrationData['method_of_payment'];
-        // Auto-select the only payment method if no payment method has been
-        // selected, there actually is anything to pay and only one payment
-        // method is provided.
-        if (!$methodOfPayment && $this->recordData['total_price'] > 0.00 && $event->getNumberOfPaymentMethods() === 1) {
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-                ->getQueryBuilderForTable('tx_seminars_payment_methods');
-            $rows = $queryBuilder
-                ->select('uid')
-                ->from('tx_seminars_payment_methods')
-                ->join(
-                    'tx_seminars_payment_methods',
-                    'tx_seminars_seminars_payment_methods_mm',
-                    'mm',
-                    $queryBuilder->expr()->eq(
-                        'mm.uid_foreign',
-                        $queryBuilder->quoteIdentifier('tx_seminars_payment_methods.uid')
-                    )
-                )
-                ->where(
-                    $queryBuilder->expr()->eq(
-                        'mm.uid_local',
-                        $queryBuilder->createNamedParameter($event->getTopicOrSelfUid(), \PDO::PARAM_INT)
-                    )
-                )
-                ->orderBy('mm.sorting')
-                ->execute()
-                ->fetchAll();
-
-            $methodOfPayment = (int)$rows[0]['uid'];
-        }
-        $this->setMethodOfPaymentUid($methodOfPayment);
-
-        $this->recordData['company'] = $registrationData['company'];
-        $this->recordData['gender'] = $registrationData['gender'];
-        $this->recordData['name'] = $registrationData['name'];
-        $this->recordData['address'] = $registrationData['address'];
-        $this->recordData['zip'] = $registrationData['zip'];
-        $this->recordData['city'] = $registrationData['city'];
-        $this->recordData['country'] = $registrationData['country'];
-        $this->recordData['telephone'] = $registrationData['telephone'];
-        $this->recordData['email'] = $registrationData['email'];
-
-        $lodgings = (isset($registrationData['lodgings']) && \is_array($registrationData['lodgings']))
-            ? $registrationData['lodgings'] : [];
-        \array_walk($lodgings, '\\intval');
-        $this->lodgings = $lodgings;
-        $this->recordData['lodgings'] = \count($lodgings);
-
-        $foods = (isset($registrationData['foods']) && \is_array($registrationData['foods']))
-            ? $registrationData['foods'] : [];
-        \array_walk($foods, '\\intval');
-        $this->foods = $foods;
-        $this->recordData['foods'] = \count($foods);
-
-        $checkboxes = (isset($registrationData['checkboxes']) && \is_array($registrationData['checkboxes']))
-            ? $registrationData['checkboxes'] : [];
-        \array_walk($checkboxes, '\\intval');
-        $this->checkboxes = $checkboxes;
-        $this->recordData['checkboxes'] = \count($checkboxes);
-
-        $this->recordData['interests'] = $registrationData['interests'];
-        $this->recordData['expectations'] = $registrationData['expectations'];
-        $this->recordData['background_knowledge'] = $registrationData['background_knowledge'];
-        $this->recordData['accommodation'] = $registrationData['accommodation'];
-        $this->recordData['food'] = $registrationData['food'];
-        $this->recordData['known_from'] = $registrationData['known_from'];
-        $this->recordData['notes'] = $registrationData['notes'];
-
-        // @deprecated #1922 organizer-specific registration folders will be removed in seminars 5.0
-        $this->recordData['pid'] = $this->seminar->hasAttendancesPid()
-            ? $this->seminar->getAttendancesPid() : $this->getSharedConfiguration()->getAsInteger('attendancesPID');
-
-        $this->processAdditionalRegistrationData($registrationData);
-
-        if ($this->isOk()) {
-            // Stores the user data in $this->userData.
-            $this->retrieveUserData();
-            $this->createTitle();
-        }
-    }
-
-    /**
-     * Processes additional registration data.
-     *
-     * This function is intended to be overwritten in subclasses.
-     *
-     * @param array $registrationData associative array with the registration data the user has just entered, may be empty
-     */
-    protected function processAdditionalRegistrationData(array $registrationData): void
-    {
-    }
-
-    /**
      * Gets the number of seats that are registered with this registration.
      *
      * If no value is saved in the record, 1 will be returned.
@@ -296,18 +165,6 @@ class LegacyRegistration extends AbstractModel
     public function hasSeats(): bool
     {
         return $this->hasRecordPropertyInteger('seats');
-    }
-
-    /**
-     * Creates our title and writes it to $this->title.
-     *
-     * The title is constructed like this:
-     *   Name of Attendee / Title of Seminar seminardate
-     */
-    private function createTitle(): void
-    {
-        $this->recordData['title'] = $this->getUserName() .
-            ' / ' . $this->getSeminarObject()->getTitle() . ', ' . $this->getSeminarObject()->getDate('-');
     }
 
     /**

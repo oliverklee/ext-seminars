@@ -10,7 +10,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
 
   control {
     datahandler = datahandler:RAW
-    datahandler.parentcallback = processRegistration
 
     renderer = renderer:TEMPLATE
     renderer.template {

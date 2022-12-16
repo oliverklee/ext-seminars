@@ -11,7 +11,6 @@ use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
@@ -25,10 +24,8 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -39,7 +36,6 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This service checks and creates registrations for seminars.
@@ -391,33 +387,6 @@ class RegistrationManager
     }
 
     /**
-     * Creates a registration to $this->registration, writes it to DB,
-     * and notifies the organizer and the user (both via e-mail).
-     *
-     * The additional notifications will only be sent if this is enabled in the
-     * TypoScript setup (which is the default).
-     *
-     * @param LegacyEvent $event the seminar we would like to register for
-     * @param array $formData the raw registration data from the registration form
-     * @param AbstractPlugin $plugin live plugin object
-     *
-     * @return Registration the created, saved registration
-     */
-    public function createRegistration(LegacyEvent $event, array $formData, AbstractPlugin $plugin): Registration
-    {
-        $this->registration = GeneralUtility::makeInstance(LegacyRegistration::class);
-        $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
-        $this->registration->commitToDatabase();
-        $event->increaseNumberOfAssociatedRegistrationRecords();
-        $event->calculateStatistics();
-        $event->commitToDatabase();
-
-        $event->getAttendances();
-
-        return MapperRegistry::get(RegistrationMapper::class)->find($this->registration->getUid());
-    }
-
-    /**
      * Sends the e-mails for a new registration.
      */
     public function sendEmailsForNewRegistration(TemplateHelper $plugin): void
@@ -433,110 +402,6 @@ class RegistrationManager
         if ($this->getSharedConfiguration()->getAsBoolean('sendAdditionalNotificationEmails')) {
             $this->sendAdditionalNotification($this->registration);
         }
-    }
-
-    /**
-     * Fills $registration with $formData (as submitted via the registration form).
-     *
-     * This function sets all necessary registration data except for three
-     * things:
-     * - event
-     * - user
-     * - whether the registration is on the queue
-     *
-     * Note: This functions does not check whether registration is possible at all.
-     *
-     * @param Registration $registration the registration to fill, must already have an event assigned
-     * @param array $formData the raw data submitted via the form, may be empty
-     */
-    protected function setRegistrationData(Registration $registration, array $formData): void
-    {
-        $event = $registration->getEvent();
-
-        $seats = isset($formData['seats']) ? (int)$formData['seats'] : 1;
-        if ($seats < 1) {
-            $seats = 1;
-        }
-        $registration->setSeats($seats);
-
-        $registeredThemselves = isset($formData['registered_themselves'])
-            ? (bool)$formData['registered_themselves'] : false;
-        $registration->setRegisteredThemselves($registeredThemselves);
-
-        $availablePrices = $event->getAvailablePrices();
-        if (isset($formData['price'], $availablePrices[$formData['price']])) {
-            $priceCode = $formData['price'];
-        } else {
-            reset($availablePrices);
-            $priceCode = key($availablePrices);
-        }
-        $registration->setPrice($priceCode);
-        $totalPrice = $availablePrices[$priceCode] * $seats;
-        $registration->setTotalPrice($totalPrice);
-
-        $attendeesNames = isset($formData['attendees_names']) ? strip_tags($formData['attendees_names']) : '';
-        $registration->setAttendeesNames($attendeesNames);
-
-        $kids = isset($formData['kids']) ? max(0, (int)$formData['kids']) : 0;
-        $registration->setKids($kids);
-
-        $paymentMethod = null;
-        if ($totalPrice > 0) {
-            $availablePaymentMethods = $event->getPaymentMethods();
-            if (!$availablePaymentMethods->isEmpty()) {
-                if ($availablePaymentMethods->count() == 1) {
-                    /** @var PaymentMethod|null $paymentMethod */
-                    $paymentMethod = $availablePaymentMethods->first();
-                } else {
-                    $paymentMethodUid = isset($formData['method_of_payment'])
-                        ? max(0, (int)$formData['method_of_payment']) : 0;
-                    if ($paymentMethodUid > 0 && $availablePaymentMethods->hasUid($paymentMethodUid)) {
-                        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->find($paymentMethodUid);
-                    }
-                }
-                $registration->setPaymentMethod($paymentMethod);
-            }
-        }
-
-        $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
-        $registration->setCompany($company);
-
-        $validGenderMale = (string)OelibFrontEndUser::GENDER_MALE;
-        $validGenderFemale = (string)OelibFrontEndUser::GENDER_FEMALE;
-        if (
-            isset($formData['gender'])
-            && (
-                ($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
-            )
-        ) {
-            $gender = (int)$formData['gender'];
-        } else {
-            $gender = OelibFrontEndUser::GENDER_UNKNOWN;
-        }
-        $registration->setGender($gender);
-
-        $name = isset($formData['name']) ? strip_tags($this->unifyWhitespace($formData['name'])) : '';
-        $registration->setName($name);
-        $address = isset($formData['address']) ? strip_tags($formData['address']) : '';
-        $registration->setAddress($address);
-        $zip = isset($formData['zip']) ? strip_tags($this->unifyWhitespace($formData['zip'])) : '';
-        $registration->setZip($zip);
-        $city = isset($formData['city']) ? strip_tags($this->unifyWhitespace($formData['city'])) : '';
-        $registration->setCity($city);
-        $country = isset($formData['country']) ? strip_tags($this->unifyWhitespace($formData['country'])) : '';
-        $registration->setCountry($country);
-    }
-
-    /**
-     * Replaces all non-space whitespace in $rawString with single regular spaces.
-     *
-     * @param string $rawString the string to unify, may be empty
-     *
-     * @return string the given string with all whitespace changed to regular spaces
-     */
-    private function unifyWhitespace(string $rawString): string
-    {
-        return preg_replace('/[\\r\\n\\t ]+/', ' ', $rawString);
     }
 
     /**

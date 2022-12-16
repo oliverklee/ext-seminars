@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -20,18 +19,16 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
-use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
-use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -52,7 +49,7 @@ final class RegistrationManagerTest extends TestCase
     use MakeInstanceTrait;
 
     /**
-     * @var TestingRegistrationManager
+     * @var RegistrationManager
      */
     private $subject;
 
@@ -161,7 +158,7 @@ final class RegistrationManagerTest extends TestCase
 
         LegacyRegistration::purgeCachedSeminars();
         $this->extensionConfiguration = new DummyConfiguration(
-            ['eMailFormatForAttendees' => TestingRegistrationManager::SEND_TEXT_MAIL]
+            ['eMailFormatForAttendees' => RegistrationManager::SEND_TEXT_MAIL]
         );
         ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
         $configurationRegistry = ConfigurationRegistry::getInstance();
@@ -203,7 +200,7 @@ final class RegistrationManagerTest extends TestCase
         $this->headerCollector = $headerProxyFactory->getHeaderCollector();
 
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
-        $this->subject = TestingRegistrationManager::getInstance();
+        $this->subject = RegistrationManager::getInstance();
 
         $linkBuilder = $this->createPartialMock(
             SingleViewLinkBuilder::class,
@@ -223,7 +220,7 @@ final class RegistrationManagerTest extends TestCase
         $this->purgeMockedInstances();
 
         ConfigurationProxy::purgeInstances();
-        TestingRegistrationManager::purgeInstance();
+        RegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
 
@@ -1449,7 +1446,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail(): void
     {
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_TEXT_MAIL);
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
@@ -1487,7 +1484,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail(): void
     {
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
@@ -1715,7 +1712,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $pi1 = new DefaultController();
         $pi1->init();
 
@@ -1762,7 +1759,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $pi1 = new DefaultController();
         $pi1->init();
 
@@ -1779,7 +1776,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -1802,7 +1799,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -1825,7 +1822,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -1847,7 +1844,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             ['email' => 'foo@bar.com']
@@ -1972,7 +1969,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2026,7 +2023,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2151,7 +2148,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2340,7 +2337,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2373,7 +2370,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2513,7 +2510,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', RegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsString(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3645,7 +3642,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice(): void
     {
-        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
+        $subject = $this->getMockBuilder(RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
@@ -3675,7 +3672,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
 
-        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
+        $subject = $this->getMockBuilder(RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -3702,7 +3699,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
-        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
+        $subject = $this->getMockBuilder(RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -3734,7 +3731,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
-        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
+        $subject = $this->getMockBuilder(RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
@@ -3771,7 +3768,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 
-        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
+        $subject = $this->getMockBuilder(RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
@@ -4249,8 +4246,8 @@ final class RegistrationManagerTest extends TestCase
         );
 
         unset($this->subject);
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -4277,8 +4274,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -4298,8 +4295,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -4322,8 +4319,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
@@ -4353,8 +4350,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -4377,8 +4374,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
@@ -4402,8 +4399,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -4423,8 +4420,8 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -4446,8 +4443,8 @@ final class RegistrationManagerTest extends TestCase
         );
 
         unset($this->subject);
-        TestingRegistrationManager::purgeInstance();
-        $this->subject = TestingRegistrationManager::getInstance();
+        RegistrationManager::purgeInstance();
+        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -4510,7 +4507,7 @@ final class RegistrationManagerTest extends TestCase
             ['attendees_min' => 5, 'attendees_max' => 5]
         );
 
-        $subject = new TestingRegistrationManager();
+        $subject = new RegistrationManager();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -4827,1510 +4824,6 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertFalse(
             $this->subject->registrationHasStarted($this->seminar)
-        );
-    }
-
-    // Tests concerning createRegistration
-
-    /**
-     * @TODO: This is just a transitional test that needs to be removed once
-     * createRegistration uses the data mapper to save the registration.
-     *
-     * @test
-     */
-    public function createRegistrationSavesRegistration(): void
-    {
-        $this->createAndLogInFrontEndUser();
-
-        $plugin = new DefaultController();
-        $plugin->cObj = $this->getFrontEndController()->cObj;
-        $subject = $this->createPartialMock(
-            TestingRegistrationManager::class,
-            [
-                'notifyAttendee',
-                'notifyOrganizers',
-                'sendAdditionalNotification',
-                'setRegistrationData',
-            ]
-        );
-
-        $subject->createRegistration($this->seminar, [], $plugin);
-
-        self::assertInstanceOf(
-            LegacyRegistration::class,
-            $subject->getRegistration()
-        );
-        $uid = $subject->getRegistration()->getUid();
-        $connection = $this->getConnectionForTable('tx_seminars_attendances');
-        // We're not using the testing framework here because the record
-        // is not marked as dummy record.
-        $result = $connection->count('*', 'tx_seminars_attendances', ['uid' => $uid]);
-        self::assertSame(1, $result);
-
-        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
-    }
-
-    /**
-     * @test
-     */
-    public function createRegistrationIncreasesRegistrationCountInEventFromZeroToOne(): void
-    {
-        $this->createAndLogInFrontEndUser();
-
-        $plugin = new DefaultController();
-        $plugin->cObj = $this->getFrontEndController()->cObj;
-        $subject = $this->createPartialMock(
-            TestingRegistrationManager::class,
-            [
-                'notifyAttendee',
-                'notifyOrganizers',
-                'sendAdditionalNotification',
-                'setRegistrationData',
-            ]
-        );
-
-        $subject->createRegistration($this->seminar, [], $plugin);
-        $seminarsConnection = $this->getConnectionForTable('tx_seminars_seminars');
-        $seminarData = $seminarsConnection->select(['*'], 'tx_seminars_seminars', ['uid' => $this->seminarUid])
-            ->fetch();
-
-        $registrationUid = $subject->getRegistration()->getUid();
-
-        $attendancesConnection = $this->getConnectionForTable('tx_seminars_attendances');
-        $attendancesConnection->delete('tx_seminars_attendances', ['uid' => $registrationUid]);
-
-        self::assertSame(1, (int)$seminarData['registrations']);
-    }
-
-    /**
-     * @test
-     */
-    public function createRegistrationReturnsRegistration(): void
-    {
-        $this->createAndLogInFrontEndUser();
-
-        $plugin = new DefaultController();
-        $plugin->cObj = $this->getFrontEndController()->cObj;
-        $subject = $this->createPartialMock(
-            TestingRegistrationManager::class,
-            [
-                'notifyAttendee',
-                'notifyOrganizers',
-                'sendAdditionalNotification',
-                'setRegistrationData',
-            ]
-        );
-
-        $registration = $subject->createRegistration($this->seminar, [], $plugin);
-
-        $uid = $subject->getRegistration()->getUid();
-        // @TODO: This line needs to be removed once createRegistration uses
-        // the data mapper to save the registration.
-        $connection = $this->getConnectionForTable('tx_seminars_attendances');
-        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
-
-        self::assertInstanceOf(
-            Registration::class,
-            $registration
-        );
-    }
-
-    /**
-     * @TODO: This is just a transitional test that can be removed once
-     * createRegistration does not use the old registration model anymore.
-     *
-     * @test
-     */
-    public function createRegistrationCreatesOldAndNewRegistrationModelForTheSameUid(): void
-    {
-        // Drops the non-saving mapper so that the registration mapper (once we use it) actually saves the registration.
-        MapperRegistry::purgeInstance();
-        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
-        $this->testingFramework->markTableAsDirty('tx_seminars_seminars');
-
-        $this->createAndLogInFrontEndUser();
-
-        $plugin = new DefaultController();
-        $plugin->cObj = $this->getFrontEndController()->cObj;
-        $subject = $this->createPartialMock(
-            TestingRegistrationManager::class,
-            [
-                'notifyAttendee',
-                'notifyOrganizers',
-                'sendAdditionalNotification',
-                'setRegistrationData',
-            ]
-        );
-
-        $registration = $subject->createRegistration(
-            $this->seminar,
-            [],
-            $plugin
-        );
-
-        $uid = $subject->getRegistration()->getUid();
-        // @TODO: This line needs to be removed once createRegistration uses
-        // the data mapper to save the registration.
-        $connection = $this->getConnectionForTable('tx_seminars_attendances');
-        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
-
-        self::assertSame(
-            $registration->getUid(),
-            $subject->getRegistration()->getUid()
-        );
-    }
-
-    // Tests concerning setRegistrationData()
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForPositiveSeatsSetsSeats(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['seats' => '3']
-        );
-
-        self::assertSame(
-            3,
-            $registration->getSeats()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingSeatsSetsOneSeat(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertSame(
-            1,
-            $registration->getSeats()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForZeroSeatsSetsOneSeat(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['seats' => '0']
-        );
-
-        self::assertSame(
-            1,
-            $registration->getSeats()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNegativeSeatsSetsOneSeat(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['seats' => '-1']
-        );
-
-        self::assertSame(
-            1,
-            $registration->getSeats()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['registered_themselves' => '1']
-        );
-
-        self::assertTrue(
-            $registration->hasRegisteredThemselves()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['registered_themselves' => '0']
-        );
-
-        self::assertFalse(
-            $registration->hasRegisteredThemselves()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertFalse(
-            $registration->hasRegisteredThemselves()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12, 'special' => 3]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['price' => 'special']
-        );
-
-        self::assertSame(
-            'special',
-            $registration->getPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['price' => 'early_bird_regular']
-        );
-
-        self::assertSame(
-            'regular',
-            $registration->getPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertSame(
-            'regular',
-            $registration->getPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 0]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertSame(
-            'regular',
-            $registration->getPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['price' => 'regular', 'seats' => '1']
-        );
-
-        self::assertSame(
-            12.0,
-            $registration->getTotalPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new Collection()]);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['price' => 'regular', 'seats' => '2']
-        );
-
-        self::assertSame(
-            24.0,
-            $registration->getTotalPrice()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['attendees_names' => "John Doe\nJane Doe"]
-        );
-
-        self::assertSame(
-            "John Doe\nJane Doe",
-            $registration->getAttendeesNames()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromAttendeesNames(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['attendees_names' => 'John <em>Doe</em>']
-        );
-
-        self::assertSame(
-            'John Doe',
-            $registration->getAttendeesNames()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['attendees_names' => '']
-        );
-
-        self::assertSame(
-            '',
-            $registration->getAttendeesNames()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertSame(
-            '',
-            $registration->getAttendeesNames()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForPositiveKidsSetsNumberOfKids(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['kids' => '3']
-        );
-
-        self::assertSame(
-            3,
-            $registration->getKids()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingKidsSetsZeroKids(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertSame(
-            0,
-            $registration->getKids()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForZeroKidsSetsZeroKids(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['kids' => '0']
-        );
-
-        self::assertSame(
-            0,
-            $registration->getKids()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNegativeKidsSetsZeroKids(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['kids' => '-1']
-        );
-
-        self::assertSame(
-            0,
-            $registration->getKids()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
-
-        self::assertSame(
-            $paymentMethod,
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod1);
-        $paymentMethods->add($paymentMethod2);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod2->getUid()]);
-
-        self::assertSame(
-            $paymentMethod2,
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 0]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
-
-        self::assertNull(
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 0]);
-        $event->method('getPaymentMethods')
-            ->willReturn(new Collection());
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            []
-        );
-
-        self::assertNull(
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod1);
-        $paymentMethods->add($paymentMethod2);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertNull(
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            $paymentMethod,
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod1 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethod2 = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod1);
-        $paymentMethods->add($paymentMethod2);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['method_of_payment' => max($paymentMethod1->getUid(), $paymentMethod2->getUid()) + 1]
-        );
-
-        self::assertNull(
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $paymentMethods = new Collection();
-        $paymentMethods->add($paymentMethod);
-
-        $event = $this->createPartialMock(Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->method('getAvailablePrices')
-            ->willReturn(['regular' => 12]);
-        $event->method('getPaymentMethods')
-            ->willReturn($paymentMethods);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid() + 1]);
-
-        self::assertSame(
-            $paymentMethod,
-            $registration->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyCompanySetsCompany(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['company' => "Business Ltd.\nTom, Dick & Harry"]
-        );
-
-        self::assertSame(
-            "Business Ltd.\nTom, Dick & Harry",
-            $registration->getCompany()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromCompany(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['company' => 'Business <em>Ltd.</em>']);
-
-        self::assertSame(
-            'Business Ltd.',
-            $registration->getCompany()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyCompanySetsEmptyCompany(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['company' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getCompany()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingCompanySetsEmptyCompany(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getCompany()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMaleGenderSetsGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['gender' => (string)OelibFrontEndUser::GENDER_MALE]
-        );
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_MALE,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForFemaleGenderSetsGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData(
-            $registration,
-            ['gender' => (string)OelibFrontEndUser::GENDER_FEMALE]
-        );
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_FEMALE,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['gender' => '42']);
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForInvalidStringGenderSetsUnknownGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['gender' => 'Mr. Fantastic']);
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyGenderSetsUnknownGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['gender' => '']);
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingGenderSetsUnknownGender(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
-            $registration->getGender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyNameSetsName(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['name' => 'John Doe']);
-
-        self::assertSame(
-            'John Doe',
-            $registration->getName()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromName(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['name' => 'John <em>Doe</em>']);
-
-        self::assertSame(
-            'John Doe',
-            $registration->getName()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataChangesWhitespaceToSpaceInName(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['name' => "John\r\n\t Doe"]);
-
-        self::assertSame(
-            'John Doe',
-            $registration->getName()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyNameSetsEmptyName(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['name' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getName()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingNameSetsEmptyName(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getName()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyAddressSetsAddress(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['address' => "Back Road 42\n(second door)"]);
-
-        self::assertSame(
-            "Back Road 42\n(second door)",
-            $registration->getAddress()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromAddress(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['address' => 'Back <em>Road</em> 42']);
-
-        self::assertSame(
-            'Back Road 42',
-            $registration->getAddress()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyAddressSetsEmptyAddress(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['address' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getAddress()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingAddressSetsEmptyAddress(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getAddress()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyZipSetsZip(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['zip' => '12345 ABC']);
-
-        self::assertSame(
-            '12345 ABC',
-            $registration->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromZip(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['zip' => '12345 <em>ABC</em>']);
-
-        self::assertSame(
-            '12345 ABC',
-            $registration->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataChangesWhitespaceToSpaceInZip(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['zip' => "12345\r\n\t ABC"]);
-
-        self::assertSame(
-            '12345 ABC',
-            $registration->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyZipSetsEmptyZip(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['zip' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingZipSetsEmptyZip(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getZip()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyCitySetsCity(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['city' => 'Elmshorn']);
-
-        self::assertSame(
-            'Elmshorn',
-            $registration->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromCity(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['city' => 'Santiago de <em>Chile</em>']);
-
-        self::assertSame(
-            'Santiago de Chile',
-            $registration->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataChangesWhitespaceToSpaceInCity(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['city' => "Santiago\r\n\t de Chile"]);
-
-        self::assertSame(
-            'Santiago de Chile',
-            $registration->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyCitySetsEmptyCity(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['city' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingCitySetsEmptyCity(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getCity()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNonEmptyCountrySetsCountry(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['country' => 'Brazil']);
-
-        self::assertSame(
-            'Brazil',
-            $registration->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataDropsHtmlTagsFromCountry(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['country' => 'South <em>Africa</em>']);
-
-        self::assertSame(
-            'South Africa',
-            $registration->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataChangesWhitespaceToSpaceInCountry(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['country' => "South\r\n\t Africa"]);
-
-        self::assertSame(
-            'South Africa',
-            $registration->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForEmptyCountrySetsEmptyCountry(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, ['country' => '']);
-
-        self::assertSame(
-            '',
-            $registration->getCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForMissingCountrySetsEmptyCountry(): void
-    {
-        $subject = new TestingRegistrationManager();
-
-        $event = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
-        $registration = new Registration();
-        $registration->setEvent($event);
-
-        $subject->setRegistrationData($registration, []);
-
-        self::assertSame(
-            '',
-            $registration->getCountry()
         );
     }
 

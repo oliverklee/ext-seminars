@@ -1525,18 +1525,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Increases the number of associated registration records by one.
-     *
-     * This method does not save this model.
-     *
-     * @deprecated #1324 will be removed in seminars 5.0
-     */
-    public function increaseNumberOfAssociatedRegistrationRecords(): void
-    {
-        $this->setRecordPropertyInteger('registrations', $this->getNumberOfAssociatedRegistrationRecords() + 1);
-    }
-
-    /**
      * Returns TRUE if this seminar has at least one target group, FALSE
      * otherwise.
      *
@@ -3201,78 +3189,6 @@ class LegacyEvent extends AbstractTimeSpan
             : str_replace("\r", "\n", $result);
 
         return preg_replace('/\\x0a{2,}/', "\n", $carriageReturnRemoved);
-    }
-
-    /**
-     * Gets the list of available prices, prepared for a drop-down list.
-     * In the sub-arrays, the "caption" element contains the description of
-     * the price (e.g. "Standard price" or "Early-bird price"), the "value"
-     * element contains a code for the price, but not the price itself (so two
-     * different price categories that cost the same are no problem). In
-     * addition, the "amount" element contains the amount (without currency).
-     *
-     * If there is an early-bird price available and the early-bird deadline has
-     * not passed yet, the early-bird price is used.
-     *
-     * This function returns an array of arrays, e.g.
-     *
-     * 'regular' => (
-     *   'value'   => 'regular',
-     *   'amount'  => '50.00',
-     *   'caption' => 'Regular price: 50 EUR'
-     * ),
-     *
-     * So the keys for the sub-arrays and their "value" elements are the same.
-     *
-     * The possible keys are:
-     * regular, regular_early, special, special_early
-     *
-     * The return array's pointer will already be reset to its first element.
-     *
-     * @return array<string, array{value: string, amount: string, caption: string}> the available prices, might be empty
-     */
-    public function getAvailablePrices(): array
-    {
-        $result = [];
-
-        if ($this->hasEarlyBirdPriceRegular() && $this->earlyBirdApplies()) {
-            $result['regular_early'] = [
-                'value' => 'regular_early',
-                'amount' => $this->getEarlyBirdPriceRegularAmount(),
-                'caption' => $this->translate('label_price_earlybird_regular')
-                    . ': ' . $this->getEarlyBirdPriceRegular(),
-            ];
-        } else {
-            $result['regular'] = [
-                'value' => 'regular',
-                'amount' => $this->getPriceRegularAmount(),
-                'caption' => $this->translate('label_price_regular')
-                    . ': ' . $this->getPriceRegular(),
-            ];
-        }
-
-        if ($this->hasPriceSpecial()) {
-            if ($this->hasEarlyBirdPriceSpecial() && $this->earlyBirdApplies()) {
-                $result['special_early'] = [
-                    'value' => 'special_early',
-                    'amount' => $this->getEarlyBirdPriceSpecialAmount(),
-                    'caption' => $this->translate('label_price_earlybird_special')
-                        . ': ' . $this->getEarlyBirdPriceSpecial(),
-                ];
-            } else {
-                $result['special'] = [
-                    'value' => 'special',
-                    'amount' => $this->getPriceSpecialAmount(),
-                    'caption' => $this->translate('label_price_special')
-                        . ': ' . $this->getPriceSpecial(),
-                ];
-            }
-        }
-
-        // reset the pointer for the result array to the first element
-        reset($result);
-
-        return $result;
     }
 
     /**
