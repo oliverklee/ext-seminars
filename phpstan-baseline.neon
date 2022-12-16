@@ -1271,11 +1271,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#1 \\$mapper of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventHeadline\\:\\:injectEventMapper\\(\\) expects OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper, OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Parameter \\#1 \\$maximumPrice of method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:limitToMaximumPrice\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -2914,16 +2909,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\SingleViewTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\EventHeadlineTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/EventHeadlineTest.php
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"

@@ -63,8 +63,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'list_registrations',
                 'list_vip_registrations',
                 'category_list',
-                // @deprecated #1924 will be removed in seminars 5.0
-                'event_headline',
             ]
         );
     }

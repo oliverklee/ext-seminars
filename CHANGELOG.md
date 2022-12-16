@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the event headline plugin (#2242)
 - Drop the event countdown (#2237)
 - Drop the CSV export of registrations in the FE (#2222)
 - Drop the custom BE user and BE user group models (#2221)

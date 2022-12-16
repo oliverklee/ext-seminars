@@ -1088,10 +1088,6 @@ This event now has been confirmed.</source>
 				<source>FE user groups for the created FE users</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
-				<source>Event headline</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target></target>

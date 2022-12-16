@@ -19,7 +19,6 @@ use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
-use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
@@ -298,24 +297,6 @@ class DefaultController extends TemplateHelper
                 $result = $categoryList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new CategoryListConfigurationCheck(
-                        $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
-                    );
-                    $configurationCheck->check();
-                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-                }
-                break;
-            case 'event_headline':
-                // @deprecated #1924 will be removed in seminars 5.0
-                $eventHeadline = GeneralUtility::makeInstance(
-                    EventHeadline::class,
-                    $this->conf,
-                    $this->cObj
-                );
-                $eventHeadline->injectEventMapper($this->eventMapper);
-                $result = $eventHeadline->render();
-                if ($this->isConfigurationCheckEnabled()) {
-                    $configurationCheck = new EventHeadlineConfigurationCheck(
                         $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );
