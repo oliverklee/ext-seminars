@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -1392,16 +1394,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUseHtmlSeparatesAttendeesNamesWithListItems(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['attendees_names' => "foo\nbar"]
-        );
+        $subject = LegacyRegistration::fromData(['attendees_names' => "foo\nbar"]);
 
         self::assertSame(
             '<ol><li>foo</li><li>bar</li></ol>',
-            $this->subject->getEnumeratedAttendeeNames(true)
+            $subject->getEnumeratedAttendeeNames(true)
         );
     }
 
@@ -1410,16 +1407,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUseHtmlAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['attendees_names' => '']
-        );
+        $subject = LegacyRegistration::fromData(['attendees_names' => '']);
 
         self::assertSame(
             '',
-            $this->subject->getEnumeratedAttendeeNames(true)
+            $subject->getEnumeratedAttendeeNames(true)
         );
     }
 
@@ -1428,16 +1420,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUsePlainTextSeparatesAttendeesNamesWithLineFeed(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['attendees_names' => "foo\nbar"]
-        );
+        $subject = LegacyRegistration::fromData(['attendees_names' => "foo\nbar"]);
 
         self::assertSame(
             "1. foo\n2. bar",
-            $this->subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames()
         );
     }
 
@@ -1446,16 +1433,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesWithUsePlainTextAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['attendees_names' => '']
-        );
+        $subject = LegacyRegistration::fromData(['attendees_names' => '']);
 
         self::assertSame(
             '',
-            $this->subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames()
         );
     }
 
@@ -1464,17 +1446,14 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndNoAttendeeNamesReturnsUsersName(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            $this->feUserUid,
-            ['attendees_names' => '']
-        );
-        $this->subject->setRegisteredThemselves(true);
+        $subject = LegacyRegistration::fromData(['attendees_names' => '']);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->getLoadedTestingModel(['name' => 'foo_user']);
+        $subject->setFrontEndUser($user);
+        $subject->setRegisteredThemselves(true);
 
         self::assertSame(
             '1. foo_user',
-            $this->subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames()
         );
     }
 
@@ -1483,17 +1462,14 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndAttendeeNamesReturnsUserInFirstPosition(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            $this->feUserUid,
-            ['attendees_names' => 'foo']
-        );
-        $this->subject->setRegisteredThemselves(true);
+        $subject = LegacyRegistration::fromData(['attendees_names' => 'foo']);
+        $user = MapperRegistry::get(FrontEndUserMapper::class)->getLoadedTestingModel(['name' => 'foo_user']);
+        $subject->setFrontEndUser($user);
+        $subject->setRegisteredThemselves(true);
 
         self::assertSame(
             "1. foo_user\n2. foo",
-            $this->subject->getEnumeratedAttendeeNames()
+            $subject->getEnumeratedAttendeeNames()
         );
     }
 
@@ -1505,13 +1481,11 @@ final class LegacyRegistrationTest extends TestCase
     public function getFoodReturnsFood(): void
     {
         $food = 'a hamburger';
-
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => $food]);
+        $subject = LegacyRegistration::fromData(['food' => $food]);
 
         self::assertSame(
             $food,
-            $this->subject->getFood()
+            $subject->getFood()
         );
     }
 
@@ -1520,11 +1494,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasFoodForEmptyFoodReturnsFalse(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => '']);
+        $subject = LegacyRegistration::fromData(['food' => '']);
 
         self::assertFalse(
-            $this->subject->hasFood()
+            $subject->hasFood()
         );
     }
 
@@ -1533,11 +1506,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasFoodForNonEmptyFoodReturnsTrue(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => 'two donuts']);
+        $subject = LegacyRegistration::fromData(['food' => 'two donuts']);
 
         self::assertTrue(
-            $this->subject->hasFood()
+            $subject->hasFood()
         );
     }
 
@@ -1550,12 +1522,11 @@ final class LegacyRegistrationTest extends TestCase
     {
         $accommodation = 'a tent in the woods';
 
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => $accommodation]);
+        $subject = LegacyRegistration::fromData(['accommodation' => $accommodation]);
 
         self::assertSame(
             $accommodation,
-            $this->subject->getAccommodation()
+            $subject->getAccommodation()
         );
     }
 
@@ -1564,11 +1535,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasAccommodationForEmptyAccommodationReturnsFalse(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => '']);
+        $subject = LegacyRegistration::fromData(['accommodation' => '']);
 
         self::assertFalse(
-            $this->subject->hasAccommodation()
+            $subject->hasAccommodation()
         );
     }
 
@@ -1577,11 +1547,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasAccommodationForNonEmptyAccommodationReturnsTrue(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => 'a youth hostel']);
+        $subject = LegacyRegistration::fromData(['accommodation' => 'a youth hostel']);
 
         self::assertTrue(
-            $this->subject->hasAccommodation()
+            $subject->hasAccommodation()
         );
     }
 
@@ -1594,12 +1563,11 @@ final class LegacyRegistrationTest extends TestCase
     {
         $interests = 'new experiences';
 
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => $interests]);
+        $subject = LegacyRegistration::fromData(['interests' => $interests]);
 
         self::assertSame(
             $interests,
-            $this->subject->getInterests()
+            $subject->getInterests()
         );
     }
 
@@ -1608,11 +1576,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasInterestsForEmptyInterestsReturnsFalse(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => '']);
+        $subject = LegacyRegistration::fromData(['interests' => '']);
 
         self::assertFalse(
-            $this->subject->hasInterests()
+            $subject->hasInterests()
         );
     }
 
@@ -1621,11 +1588,10 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasInterestsForNonEmptyInterestsReturnsTrue(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => 'meeting people']);
+        $subject = LegacyRegistration::fromData(['interests' => 'meeting people']);
 
         self::assertTrue(
-            $this->subject->hasInterests()
+            $subject->hasInterests()
         );
     }
 }
