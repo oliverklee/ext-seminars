@@ -82,50 +82,6 @@ final class EventsListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsNoBodyHeaderWithEmptySystemFolder(): void
-    {
-        self::assertStringNotContainsString(
-            '<td class="datecol">',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showContainsTableBodyHeaderForOneEvent(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['pid' => $this->dummySysFolderPid]
-        );
-
-        self::assertStringContainsString(
-            '<td class="datecol">',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showContainsNoBodyHeaderIfEventIsOnOtherPage(): void
-    {
-        // Puts this record on a non-existing page. This is intentional.
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['pid' => $this->dummySysFolderPid + 1]
-        );
-
-        self::assertStringNotContainsString(
-            '<td class="datecol">',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function showContainsEventTitleForOneEvent(): void
     {
         $this->testingFramework->createRecord(
@@ -310,32 +266,6 @@ final class EventsListTest extends TestCase
 
         self::assertStringNotContainsString(
             '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showForEventWithRegistrationsContainsEmailButton(): void
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'registrations' => 1,
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'seminar' => $eventUid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            '<button><p>E-mail</p></button>',
             $this->subject->show()
         );
     }

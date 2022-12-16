@@ -150,16 +150,15 @@ abstract class AbstractEventMailForm
         $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
         $formAction = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
-        return '<fieldset id="EventMailForm"><form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) .
-            '" method="post">' .
+        return '<form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) . '" method="post">' .
             $this->createSubjectFormElement() .
             $this->createMessageBodyFormElement() .
             $this->createBackButton() .
             $this->createSubmitButton() .
-            '<p><input type="hidden" name="action" value="' . $this->action .
-            '" /><input type="hidden" name="eventUid" value="' .
-            $this->getEvent()->getUid() . '" /><input type="hidden" ' .
-            'name="isSubmitted" value="1" /></p></form></fieldset>';
+            '<input type="hidden" name="action" value="' . $this->action . '" />' .
+            '<input type="hidden" name="eventUid" value="' . $this->getEvent()->getUid() . '" />' .
+            '<input type="hidden" name="isSubmitted" value="1" />' .
+            '</form>';
     }
 
     /**
@@ -236,13 +235,13 @@ abstract class AbstractEventMailForm
      */
     protected function createSubjectFormElement(): string
     {
-        $classMarker = $this->hasErrorMessage('subject') ? 'class="error" ' : '';
-
-        return '<p><label for="subject">' .
-            $this->getLanguageService()->getLL('eventMailForm_subject') . '</label>' .
-            '<input type="text" id="subject" name="subject" value="' .
-            \htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES | ENT_HTML5, 'utf-8') . '" ' .
-            $classMarker . '/>' . $this->getErrorMessage('subject') . '</p>';
+        return '<div class="mb-3">' .
+            '<label for="subject" class="form-label">' . $this->getLanguageService()->getLL('eventMailForm_subject') .
+            '</label>' .
+            '<input type="text" class="form-control"  id="subject" name="subject" required ' .
+            'value="' . \htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES | ENT_HTML5, 'utf-8') . '" />' .
+            $this->getErrorMessage('subject') .
+            '</div>';
     }
 
     /**
@@ -255,14 +254,14 @@ abstract class AbstractEventMailForm
     protected function createMessageBodyFormElement(): string
     {
         $messageBody = $this->fillFormElement('messageBody');
-        $classMarker = $this->hasErrorMessage('messageBody') ? ', error' : '';
 
-        return '<p><label for="messageBody">' .
+        return '<div class="mb-3">' .
+            '<label for="messageBody"  class="form-label">' .
             $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .
-            '<textarea cols="50" rows="20" class="eventMailForm_message' .
-            $classMarker . '" id="messageBody" name="messageBody">' .
+            '<textarea cols="50" rows="20" class="form-control" id="messageBody" name="messageBody" required>' .
             \htmlspecialchars($messageBody, ENT_QUOTES | ENT_HTML5) . '</textarea>' .
-            $this->getErrorMessage('messageBody') . '</p>';
+            $this->getErrorMessage('messageBody') .
+            '</div>';
     }
 
     /**
@@ -272,10 +271,9 @@ abstract class AbstractEventMailForm
      */
     protected function createBackButton(): string
     {
-        return '<p><input type="button" value="' .
+        return '<button type="button"  class="btn btn-secondary" onclick="window.location=window.location">' .
             $this->getLanguageService()->getLL('eventMailForm_backButton') .
-            '" class="backButton" onclick="window.location=window.location" />' .
-            '</p>';
+            '</button>';
     }
 
     /**
@@ -468,8 +466,7 @@ abstract class AbstractEventMailForm
      */
     protected function createSubmitButton(): string
     {
-        return '<p><button class="submitButton ' . $this->action . '">' .
-            '<p>' . $this->getSubmitButtonLabel() . '</p></button></p>';
+        return '<button class="btn btn-primary">' . $this->getSubmitButtonLabel() . '</button>';
     }
 
     /**
