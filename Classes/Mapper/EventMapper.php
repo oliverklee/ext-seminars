@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Mapper;
 
 use Doctrine\DBAL\Driver\Connection;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -93,52 +92,6 @@ class EventMapper extends AbstractDataMapper
             ->fetchAll();
 
         return $this->getListOfModels($rows);
-    }
-
-    /**
-     * Returns the next upcoming event.
-     *
-     * @return Event the next upcoming event
-     *
-     * @throws NotFoundException
-     *
-     * @deprecated #1809 will be removed in seminars 5.0
-     */
-    public function findNextUpcoming(): Event
-    {
-        $columns = explode(',', $this->columns);
-        $queryBuilder = $this->getQueryBuilderForTable($this->tableName);
-        foreach ($columns as $column) {
-            $queryBuilder->addSelect($column);
-        }
-        $row = $queryBuilder
-            ->from($this->tableName)
-            ->where(
-                $queryBuilder->expr()->neq(
-                    'cancelled',
-                    $queryBuilder->createNamedParameter(EventInterface::STATUS_CANCELED, \PDO::PARAM_INT)
-                ),
-                $queryBuilder->expr()->neq(
-                    'object_type',
-                    $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, \PDO::PARAM_INT)
-                ),
-                $queryBuilder->expr()->gt(
-                    'begin_date',
-                    $queryBuilder->createNamedParameter($GLOBALS['SIM_ACCESS_TIME'], \PDO::PARAM_INT)
-                )
-            )
-            ->orderBy('begin_date')
-            ->execute()
-            ->fetch();
-
-        if ($row === false) {
-            throw new NotFoundException('Not found.', 1574004668);
-        }
-
-        /** @var Event $next */
-        $next = $this->getModel($row);
-
-        return $next;
     }
 
     /**

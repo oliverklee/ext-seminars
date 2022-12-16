@@ -40,10 +40,7 @@ Key features
 - front-end list of registrations for an event (visible to participants
   and editors)
 
-- front-end countdown to the next upcoming event
-
-- back-end module for managing seminars, speakers, organizers, seminar
-  sites, payment methods and registrations
+- back-end module for managing event and registrations
 
 - front-end editing of event records
 

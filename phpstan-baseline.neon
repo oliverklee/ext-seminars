@@ -1271,11 +1271,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#1 \\$mapper of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\Countdown\\:\\:injectEventMapper\\(\\) expects OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper, OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Parameter \\#1 \\$mapper of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventHeadline\\:\\:injectEventMapper\\(\\) expects OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper, OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\|null given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1751,18 +1746,8 @@ parameters:
 			path: Classes/Hooks/Interfaces/DataSanitization.php
 
 		-
-			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
-			count: 1
-			path: Classes/Mapper/EventMapper.php
-
-		-
 			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
 			count: 2
-			path: Classes/Mapper/EventMapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getModel\\(\\) expects array\\<string, bool\\|float\\|int\\|string\\|null\\>, mixed given\\.$#"
-			count: 1
 			path: Classes/Mapper/EventMapper.php
 
 		-
@@ -2609,21 +2594,6 @@ parameters:
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: Classes/Service/SingleViewLinkBuilder.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/ViewHelpers/CountdownViewHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$format of function sprintf expects string, string\\|null given\\.$#"
-			count: 1
-			path: Classes/ViewHelpers/CountdownViewHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\$countdownText of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\CountdownViewHelper\\:\\:getFormattedMessage\\(\\) expects string, string\\|null given\\.$#"
-			count: 4
-			path: Classes/ViewHelpers/CountdownViewHelper.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\DateRangeViewHelper\\:\\:getAsDateFormatYmd\\(\\) should return string but returns string\\|false\\.$#"
@@ -3586,11 +3556,6 @@ parameters:
 			path: Tests/Functional/Service/SingleViewLinkBuilderTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\CountdownViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/ViewHelpers/CountdownViewHelperTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/ViewHelpers/SalutationAwareTranslateViewHelperTest.php
@@ -4199,16 +4164,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
 			count: 10
 			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CountdownTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/CountdownTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/CountdownTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"

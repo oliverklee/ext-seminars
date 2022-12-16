@@ -62,8 +62,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'seminar_registration',
                 'list_registrations',
                 'list_vip_registrations',
-                // @deprecated #1809 will be removed in seminars 5.0
-                'countdown',
                 'category_list',
                 // @deprecated #1924 will be removed in seminars 5.0
                 'event_headline',

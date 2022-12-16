@@ -100,10 +100,3 @@ you only need some of these pages):
    has signed up. If you want this list to show all events instead of
    current and upcoming, set “Only show events from this time-frame” to
    “all events” (you'll probably want to do this).
-
-#. [optional] To show the countdown in the front-end, simply add a
-   “Seminar Manager”-plug-in content element at the page/column where you
-   want it to be shown. In the settings of this content element, just
-   select “Countdown to the next event” from the “what to show” drop-down
-   list.
-

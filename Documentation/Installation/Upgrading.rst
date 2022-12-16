@@ -22,12 +22,19 @@ Upgrading in multiple steps
 As this extension follow semantic versioning, seminars 5.0 has all the breaking
 changes. So it is recommended you do the upgrade in the following order.
 
-1. Upgrade to seminars 4.4
+1. Drop removed content elements
+================================
+
+Some content elements have been removed in seminars 5.0.
+
+#.  If you are using the event countdown, delete those content elements.
+
+2. Upgrade to seminars 4.4
 ==========================
 
 Upgrade to seminars 4.4 and run the upgrade wizards (just to be sure).
 
-2. Set new configuration values
+3. Set new configuration values
 ===============================
 
 If you would like to use the informal salutation mode in the frontend, set
@@ -38,7 +45,7 @@ If you are using a different currency than Euro (or you would like to tweak
 the currency format), edit :typoscript:`plugin.tx_seminars.settings.currency`
 in the TypoScript constants (or conveniently in the constants editor).
 
-3. Switch to the rewritten FE editor
+4. Switch to the rewritten FE editor
 ====================================
 
 Starting with seminars 4.2, using the new FE editor is recommended.
@@ -48,7 +55,7 @@ Starting with seminars 4.2, using the new FE editor is recommended.
     and set the type to "Front-end editor for events". Configure it to your
     needs using the settings in the FlexForms.
 
-4. Switch to the rewritten registration form
+5. Switch to the rewritten registration form
 ============================================
 
 Starting with seminars 4.3, using the new registration form is recommended.
@@ -65,7 +72,7 @@ Starting with seminars 4.3, using the new registration form is recommended.
 #.  Delete the thank-you page that was be display after someone has registered
     for an event. (This is now part of the registration form plugin.)
 
-5. Switch to the rewritten backend module
+6. Switch to the rewritten backend module
 =========================================
 
 Starting with seminars 4.4, using the new backend module form is recommended.
@@ -75,8 +82,8 @@ Edit your backend user or user group permissions, grant the users/groups
 permissions for the new backend module, and drop their permissions for the
 old backend module.
 
-6. Configuration updates
-========================
+6. Update the configuration
+===========================
 
 #.  Enable the automatic configuration check in the extension settings.
 #.  Click through all your seminars-related content elements, watch for

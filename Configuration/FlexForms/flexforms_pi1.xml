@@ -49,10 +49,6 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.list_vip_registrations</numIndex>
 										<numIndex index="1">list_vip_registrations</numIndex>
 									</numIndex>
-									<numIndex index="9" type="array">
-										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.countdown</numIndex>
-										<numIndex index="1">countdown</numIndex>
-									</numIndex>
 									<numIndex index="10" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.category_list</numIndex>
 										<numIndex index="1">category_list</numIndex>

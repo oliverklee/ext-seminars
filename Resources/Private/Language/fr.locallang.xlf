@@ -860,10 +860,6 @@ This event now has been confirmed.</source>
 				<source>List of Registrations (for event managers)</source>
 				<target>Liste des inscriptions (pour les responsables d'événements)</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
-				<source>Countdown to the next event</source>
-				<target>Compte à rebours jusqu'au prochain événement</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.category_list" xml:space="preserve">
 				<source>Category List</source>
 				<target>Liste des catégories</target>
@@ -1952,18 +1948,6 @@ This event now has been confirmed.</source>
 				<source>Please accept the terms for travelling in order to register for this event.</source>
 				<target>Veuillez accepter les conditions générales de voyage pour pouvoir vous inscrire à cet événement.</target>
 			</trans-unit>
-			<trans-unit id="message_countdown" xml:space="preserve">
-				<source>%d %s left until the next event starts!</source>
-				<target>%d %s avant le début de l'événement!</target>
-			</trans-unit>
-			<trans-unit id="message_countdown_noEventFound" xml:space="preserve">
-				<source>There are no upcoming events. Please come back later.</source>
-				<target>Il n'y a aucun événement à venir. Merci de revenir plus tard.</target>
-			</trans-unit>
-			<trans-unit id="message_countdown_noEventFound_informal" xml:space="preserve">
-				<source>There are no upcoming events. Please come back later.</source>
-				<target>Il n'y a aucun événement à venir. Merci de revenir plus tard.</target>
-			</trans-unit>
 			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
 				<source>You are not registered for this event.</source>
 				<target>Vous n'êtes pas inscrit à cet événement.</target>
@@ -1995,34 +1979,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
 				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
 				<target>Veuillez entrer un âge maximal égal ou supérieur à l'âge minimal.</target>
-			</trans-unit>
-			<trans-unit id="countdown_days_plural" xml:space="preserve">
-				<source>days</source>
-				<target>jours</target>
-			</trans-unit>
-			<trans-unit id="countdown_days_singular" xml:space="preserve">
-				<source>day</source>
-				<target>jour</target>
-			</trans-unit>
-			<trans-unit id="countdown_hours_plural" xml:space="preserve">
-				<source>hours</source>
-				<target>heures</target>
-			</trans-unit>
-			<trans-unit id="countdown_hours_singular" xml:space="preserve">
-				<source>hour</source>
-				<target>heure</target>
-			</trans-unit>
-			<trans-unit id="countdown_minutes_plural" xml:space="preserve">
-				<source>minutes</source>
-				<target>minutes</target>
-			</trans-unit>
-			<trans-unit id="countdown_minutes_singular" xml:space="preserve">
-				<source>minute</source>
-				<target>minute</target>
-			</trans-unit>
-			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
-				<source>seconds</source>
-				<target>secondes</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.loginPage">
 				<source>Login page (or with onetimeaccount)</source>

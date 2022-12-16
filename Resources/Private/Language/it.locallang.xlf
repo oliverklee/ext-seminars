@@ -852,10 +852,6 @@ This event now has been confirmed.</source>
 				<source>List of Registrations (for event managers)</source>
 				<target>Lista registrazioni (per VIP)</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
-				<source>Countdown to the next event</source>
-				<target>Countdown al prossimo evento</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.category_list" xml:space="preserve">
 				<source>Category List</source>
 				<target>Lista categorie</target>
@@ -1944,18 +1940,6 @@ This event now has been confirmed.</source>
 				<source>Please accept the terms for travelling in order to register for this event.</source>
 				<target>E' necessario accettare i termini e le condizioni per registrarsi all'evento.</target>
 			</trans-unit>
-			<trans-unit id="message_countdown" xml:space="preserve">
-				<source>%d %s left until the next event starts!</source>
-				<target>%d %s prima che il prossimo evento inizi.</target>
-			</trans-unit>
-			<trans-unit id="message_countdown_noEventFound" xml:space="preserve">
-				<source>There are no upcoming events. Please come back later.</source>
-				<target>Non ci sono eventi futuri. La preghiamo di ritornare più avanti.</target>
-			</trans-unit>
-			<trans-unit id="message_countdown_noEventFound_informal" xml:space="preserve">
-				<source>There are no upcoming events. Please come back later.</source>
-				<target>Non ci sono eventi futuri. Ti preghiamo di ritornare più avanti.</target>
-			</trans-unit>
 			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
 				<source>You are not registered for this event.</source>
 				<target>Non è registrato per l'evento.</target>
@@ -1987,34 +1971,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
 				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
 				<target></target>
-			</trans-unit>
-			<trans-unit id="countdown_days_plural" xml:space="preserve">
-				<source>days</source>
-				<target>giorni</target>
-			</trans-unit>
-			<trans-unit id="countdown_days_singular" xml:space="preserve">
-				<source>day</source>
-				<target>giorno</target>
-			</trans-unit>
-			<trans-unit id="countdown_hours_plural" xml:space="preserve">
-				<source>hours</source>
-				<target>ore</target>
-			</trans-unit>
-			<trans-unit id="countdown_hours_singular" xml:space="preserve">
-				<source>hour</source>
-				<target>ora</target>
-			</trans-unit>
-			<trans-unit id="countdown_minutes_plural" xml:space="preserve">
-				<source>minutes</source>
-				<target>minuti</target>
-			</trans-unit>
-			<trans-unit id="countdown_minutes_singular" xml:space="preserve">
-				<source>minute</source>
-				<target>minuto</target>
-			</trans-unit>
-			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
-				<source>seconds</source>
-				<target>secondi</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
 				<source>You are already registered for this event.</source>
