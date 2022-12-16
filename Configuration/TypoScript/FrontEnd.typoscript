@@ -101,12 +101,6 @@ plugin.tx_seminars_pi1 {
   # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
   eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
-  # fe_users DB fields to show for in the registration form
-  showFeUserFieldsInRegistrationForm = name,company,address,zip,city,country,telephone,email
-
-  # fe_users DB fields on the registration form that should be displayed with a label
-  showFeUserFieldsInRegistrationFormWithLabel = telephone,email
-
   # whether detailed information for the speakers is shown in the single view
   showSpeakerDetails = 1
 

@@ -5534,47 +5534,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function registrationFormForEventWithOneNotFullfilledRequirementIsHidden(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $requiredTopic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $topic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $date = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'attendees_max' => 10,
-                'topic' => $topic,
-            ]
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topic,
-            $requiredTopic,
-            'requirements'
-        );
-        $this->subject->piVars['seminar'] = $date;
-
-        self::assertStringNotContainsString(
-            $this->translate('label_your_user_data'),
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
     public function listOfRequirementsForEventWithOneNotFulfilledRequirementListIsShown(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
