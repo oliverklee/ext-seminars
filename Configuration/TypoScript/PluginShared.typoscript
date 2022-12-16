@@ -139,10 +139,6 @@ plugin.tx_seminars {
   # how many days before an events' begin date the organizers should be reminded about this event via e-mail, zero disables the reminder
   sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
 
-  # Set this to 1 to hide the special price for the first registration of a user and to automatically offer the special
-  # price for the 2nd, 3rd etc. registrations of the same user.
-  automaticSpecialPriceForSubsequentRegistrationsBySameUser = 0
-
   # The following variables don't have any default values provided.
   # You need to set them yourself for this extension to work correctly.
 

@@ -113,9 +113,6 @@ plugin.tx_seminars_pi1 {
   # fe_users DB fields on the registration form that should be displayed with a label
   showFeUserFieldsInRegistrationFormWithLabel = telephone,email
 
-  # the maximum number of seats that can be booked in one registration
-  maximumBookableSeats = 10
-
   # whether detailed information for the speakers is shown in the single view
   showSpeakerDetails = 1
 
