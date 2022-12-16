@@ -2019,7 +2019,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList(): void
+    public function notifyAttendeeForHtmlMailReturnsAttendeesNames(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2036,10 +2036,10 @@ final class RegistrationManagerTest extends TestCase
         $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertRegExp(
-            '/\\<ol>.*<li>foo1<\\/li>.*<li>foo2<\\/li>.*<\\/ol>/s',
-            (string)$this->email->getHtmlBody()
-        );
+        $emailBody = (string)$this->email->getHtmlBody();
+
+        self::assertStringContainsString('foo1', $emailBody);
+        self::assertStringContainsString('foo2', $emailBody);
     }
 
     /**
@@ -2144,7 +2144,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks(): void
+    public function notifyAttendeeForHtmlMailHasPlacesTitleAndAddress(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2171,7 +2171,10 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString('place_title<br>place_address', (string)$this->email->getHtmlBody());
+        $emailBody = (string)$this->email->getHtmlBody();
+
+        self::assertStringContainsString('place_title', $emailBody);
+        self::assertStringContainsString('place_address', $emailBody);
     }
 
     /**
@@ -2506,7 +2509,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks(): void
+    public function notifyAttendeeForPlaceAddressAndHtmlMailsHasAddressAndCity(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2533,7 +2536,10 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertStringContainsString('address<br>footown', (string)$this->email->getHtmlBody());
+        $emailBody = (string)$this->email->getHtmlBody();
+
+        self::assertStringContainsString('address', $emailBody);
+        self::assertStringContainsString('footown', $emailBody);
     }
 
     /**

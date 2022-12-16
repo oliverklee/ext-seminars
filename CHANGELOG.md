@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Use SimpleCSS for the email CSS (#2261)
+- Use SimpleCSS for the email CSS (#2261, #2262)
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
 
 ### Changed
