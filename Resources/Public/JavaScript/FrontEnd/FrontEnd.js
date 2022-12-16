@@ -28,163 +28,8 @@
     constructor() {
       document.addEventListener('readystatechange', () => {
         this.initializeSearchWidget();
-        this.initializeLegacyRegistrationForm();
         this.initializeRegistrationForm();
       });
-    }
-
-    /**
-     * Collects the names from the first/last name field pairs and compiles/inserts
-     * them into the human-readable "additional attendees" field and the machine-readable
-     * "structured attendees" field.
-     */
-    compileNames() {
-      var $nameFieldsContainer = $('#tx_seminars_pi1_registration_editor_separate_names');
-      if ($nameFieldsContainer.length === 0) {
-        return;
-      }
-
-      var humanReadableField = $('#tx_seminars_pi1_registration_editor__attendees_names')[0];
-      var machineReadableField = $('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
-
-      var separateNamesElement = $('#tx_seminars_pi1_registration_editor_separate_names');
-
-      var firstNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_first_name');
-      var lastNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_last_name');
-      var positions = separateNamesElement.find('.tx_seminars_pi1_registration_editor_position');
-      var eMailAddresses = separateNamesElement.find('.tx_seminars_pi1_registration_editor_attendee_email');
-
-      var humanReadableNames = '';
-      var machineReadableNames = [];
-
-      var numberOfLines = firstNames.length;
-
-      for (var i = 0; i < numberOfLines; i++) {
-        var firstName = $.trim(firstNames[i].value);
-        var lastName = $.trim(lastNames[i].value);
-
-        if (firstName === '' && lastName === '') {
-          continue;
-        }
-
-        var position = '';
-        if (i < positions.length) {
-          position = $.trim(positions[i].value);
-        }
-
-        var eMailAddress = '';
-        if (i < eMailAddresses.length) {
-          eMailAddress = $.trim(eMailAddresses[i].value);
-        }
-
-        var fullName = $.trim(firstName + ' ' + lastName);
-        if (humanReadableNames !== '') {
-          humanReadableNames += "\r\n";
-        }
-        humanReadableNames += fullName;
-
-        if (position !== '') {
-          humanReadableNames += ', ' + position;
-        }
-        if (eMailAddress !== '') {
-          humanReadableNames += ', ' + eMailAddress;
-        }
-
-        machineReadableNames[i] = [firstName, lastName, position, eMailAddress];
-      }
-
-      humanReadableField.value = humanReadableNames;
-      machineReadableField.value = JSON.stringify(machineReadableNames);
-    }
-
-    /**
-     * Restores the separate name fields from the hidden field with the names
-     * in a JSON-encoded array.
-     */
-    restoreSeparateNameFields() {
-      var machineReadableField = $('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
-
-      if (!machineReadableField || machineReadableField.value === '') {
-        return;
-      }
-
-      var separateNamesElement = $('#tx_seminars_pi1_registration_editor_separate_names');
-      var firstNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_first_name');
-      var lastNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_last_name');
-      var positions = separateNamesElement.find('.tx_seminars_pi1_registration_editor_position');
-      var eMailAddresses = separateNamesElement.find('.tx_seminars_pi1_registration_editor_attendee_email');
-
-      if (firstNames.length !== lastNames.length) {
-        return;
-      }
-
-      var allNames = JSON.parse(machineReadableField.value);
-      var numberOfNames = Math.min(firstNames.length, allNames.length);
-
-      for (var i = 0; i < numberOfNames; i++) {
-        firstNames[i].value = allNames[i][0];
-        lastNames[i].value = allNames[i][1];
-        if (positions[i]) {
-          positions[i].value = allNames[i][2];
-        }
-        if (eMailAddresses[i]) {
-          eMailAddresses[i].value = allNames[i][3];
-        }
-      }
-    }
-
-    /**
-     * Adds or drops name fields to match the number of selected seats.
-     */
-    fixNameFieldsNumber() {
-      var neededNameLines = this.getNumberOfNeededNameFields();
-      var nameLines = $('#tx_seminars_pi1_registration_editor_separate_names .tx_seminars_pi1_registration_editor_name_line');
-
-      if (nameLines.length < neededNameLines) {
-        var nameLineTemplate = $('#tx_seminars_pi1_registration_editor_name_template .tx_seminars_pi1_registration_editor_name_line')[0];
-        if (!nameLineTemplate) {
-          return;
-        }
-
-        var nameLinesContainer = $('#tx_seminars_pi1_registration_editor_separate_names');
-
-        for (var i = nameLines.length; i < neededNameLines; i++) {
-          nameLinesContainer.append(nameLineTemplate.cloneNode(true));
-        }
-      } else if (nameLines.length > neededNameLines) {
-        for (var j = nameLines.length; j > neededNameLines; j--) {
-          $(nameLines[j - 1]).remove();
-        }
-      }
-    }
-
-    /**
-     * Gets the number of needed name fields.
-     *
-     * @return {Number} the number of needed name fields, will be >= 0
-     */
-    getNumberOfNeededNameFields() {
-      var seatsElements = $('#tx_seminars_pi1_registration_editor__seats');
-      if (seatsElements.length === 0) {
-        return 0;
-      }
-
-      var seats = parseInt(seatsElements[0].value);
-
-      var myselfSelector = $('#tx_seminars_pi1_registration_editor__registered_themselves');
-      var selfSeat;
-      if (myselfSelector.length > 0) {
-        selfSeat = parseInt(myselfSelector.attr('value'));
-      } else {
-        var $defaultValue = $('#tx-seminars-pi1-themselves-default');
-        if ($defaultValue.length > 0) {
-          selfSeat = parseInt($defaultValue.data('value'));
-        } else {
-          selfSeat = 1;
-        }
-      }
-
-      return seats - selfSeat;
     }
 
     /**
@@ -217,19 +62,6 @@
     }
 
     /**
-     * Prevents registration form submit event to be called twice.
-     */
-    preventMultipleFormSubmit() {
-      var submitForm = document.getElementById('tx_seminars_pi1_registration_editor');
-      var submitButton = document.getElementById('tx_seminars_pi1_registration_editor__button_submit');
-      submitForm.addEventListener('submit', (event) => {
-        if (submitButton.hasAttribute('disabled')) {
-          event.preventDefault();
-        }
-      });
-    }
-
-    /**
      * Initializes the search widget.
      */
     initializeSearchWidget() {
@@ -240,30 +72,6 @@
       $('#tx-seminars-pi1-clear-search-widget').click(() => {
         this.clearSearchWidgetFields();
       });
-    }
-
-    /**
-     * This method updates the UI if anything corresponding the number of seats has changed.
-     */
-    updateAttendees() {
-      this.fixNameFieldsNumber();
-      this.compileNames();
-    }
-
-    initializeLegacyRegistrationForm() {
-      var registrationForm = $('#tx-seminars-pi1-registration-form');
-      if (registrationForm.length === 0) {
-        return;
-      }
-
-      registrationForm.find('#tx_seminars_pi1_registration_editor_separate_names').on('blur', 'input', this.compileNames);
-      registrationForm.find('#tx_seminars_pi1_registration_editor__seats').change(this.updateAttendees);
-      registrationForm.find('#tx_seminars_pi1_registration_editor__registered_themselves_checkbox').click(this.updateAttendees);
-
-      this.fixNameFieldsNumber();
-      this.restoreSeparateNameFields();
-      this.compileNames();
-      this.preventMultipleFormSubmit();
     }
 
     findRegistrationFormElements() {
