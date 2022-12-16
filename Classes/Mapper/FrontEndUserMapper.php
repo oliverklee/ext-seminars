@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Mapper;
 
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
@@ -23,18 +22,4 @@ class FrontEndUserMapper extends AbstractDataMapper
         'usergroup' => FrontEndUserGroupMapper::class,
         'tx_seminars_registration' => RegistrationMapper::class,
     ];
-
-    protected $additionalKeys = ['username'];
-
-    /**
-     * Finds a front-end user by username. Hidden user records will be retrieved as well.
-     *
-     * @param non-empty-string $userName username, case-insensitive
-     *
-     * @throws NotFoundException if there is no front-end user with the provided username in the database
-     */
-    public function findByUserName(string $userName): FrontEndUser
-    {
-        return $this->findOneByKey('username', $userName);
-    }
 }

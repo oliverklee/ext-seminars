@@ -876,52 +876,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         createAdditionalAttendeesAsFrontEndUsers
-
-   Data type
-         boolean
-
-   Description
-         whether to create FE user records for additional attendees (in
-         addition to storing them in a text field)
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         sysFolderForAdditionalAttendeeUsersPID
-
-   Data type
-         page\_id
-
-   Description
-         UID of the sysfolder in which FE users created as additional attendees
-         in the registration form get stored
-
-   Default
-
-
-.. container:: table-row
-
-   Property
-         userGroupUidsForAdditionalAttendeesFrontEndUsers
-
-   Data type
-         string
-
-   Description
-         comma-separated list of front-end user group UIDs to which the FE
-         users created in the registration form will be assigned
-
-   Default
-
-
-.. container:: table-row
-
-   Property
          pageToShowAfterUnregistrationPID
 
    Data type

@@ -1367,7 +1367,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 5
+			count: 4
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
@@ -1387,11 +1387,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:canRegisterSeats\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getAdditionalRegisteredPersonsData\\(\\) should return array\\<int, array\\{string, string, string, string\\}\\> but returns array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1482,16 +1477,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setPage\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Offset 3 on array\\{string, string, string, string\\} in isset\\(\\) always exists and is not nullable\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$personData has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -2891,11 +2876,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractEditor\\:\\:setFakedFormValue\\(\\) expects int\\|string, string\\|false given\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
@@ -2954,11 +2934,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/FrontEndUserGroupMapperTest.php
-
-		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 4
-			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
