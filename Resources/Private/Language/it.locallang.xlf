@@ -1600,18 +1600,6 @@ This event now has been confirmed.</source>
 				<source>View the list of registrations</source>
 				<target>Visualizza la lista delle registrazioni</target>
 			</trans-unit>
-			<trans-unit id="label_status" xml:space="preserve">
-				<source>Status</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="visibility_status_published" xml:space="preserve">
-				<source>published</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="visibility_status_pending" xml:space="preserve">
-				<source>pending</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_list_otherdates" xml:space="preserve">
 				<source>Other dates for this topic</source>
 				<target>Altre date per questo argomento</target>

@@ -88,7 +88,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
                 'status_registration',
                 'registration',
                 'list_registrations',
-                'status',
             ]
         );
     }

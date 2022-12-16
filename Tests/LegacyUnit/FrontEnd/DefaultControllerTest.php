@@ -4731,51 +4731,6 @@ final class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function myVipEventsShowsStatusColumnByDefault(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        $this->subject->main('', []);
-
-        self::assertTrue(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function myVipEventsForStatusColumnHiddenByTsSetupHidesStatusColumn(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-        $this->subject->setConfigurationValue('hideColumns', 'status');
-
-        $this->subject->main('', []);
-
-        self::assertFalse(
-            $this->subject->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function myVipEventsForVisibleEventShowsPublishedStatus(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        self::assertStringContainsString(
-            $this->translate('visibility_status_published'),
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
     public function myVipEventsHidesRegistrationColumn(): void
     {
         $this->createLogInAndAddFeUserAsVip();
