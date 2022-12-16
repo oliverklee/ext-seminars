@@ -5,9 +5,6 @@ plugin.tx_seminars_pi1 {
   # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
   enableRegistration = 1
 
-  # number of clicks to registration (valid options are 2 or 3)
-  numberOfClicksForRegistration = 3
-
   # location of the HTML template file
   templateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html
 
@@ -105,7 +102,7 @@ plugin.tx_seminars_pi1 {
   eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
   # list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
-  showRegistrationFields = step_counter,price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
+  showRegistrationFields = price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
 
   # whether the logged-in user should be registered themselves by default in the registration form (only applicable if the checkbox is hidden)
   registerThemselvesByDefaultForHiddenCheckbox = 1
@@ -115,12 +112,6 @@ plugin.tx_seminars_pi1 {
 
   # fe_users DB fields on the registration form that should be displayed with a label
   showFeUserFieldsInRegistrationFormWithLabel = telephone,email
-
-  # the displayed number of the first registration page (for "step x of y")
-  numberOfFirstRegistrationPage = 1
-
-  # the displayed number of the last registration page (for "step x of y")
-  numberOfLastRegistrationPage = 2
 
   # the maximum number of seats that can be booked in one registration
   maximumBookableSeats = 10

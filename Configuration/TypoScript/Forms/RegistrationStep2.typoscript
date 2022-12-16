@@ -31,15 +31,6 @@ plugin.tx_seminars_pi1.form.registration.step2 {
   }
 
   elements {
-    step_counter = renderlet:LABEL
-    step_counter {
-      name = step_counter
-      data.value.userobj {
-        extension = this
-        method = getStepCounter
-      }
-    }
-
     terms = renderlet:CHECKSINGLE
     terms {
       name = terms

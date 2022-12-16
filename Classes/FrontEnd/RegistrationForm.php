@@ -1357,7 +1357,6 @@ class RegistrationForm extends AbstractEditor
     private function hideUnusedFormFields(): void
     {
         static $availableFormFields = [
-            'step_counter',
             'payment',
             'price',
             'method_of_payment',
@@ -1399,55 +1398,21 @@ class RegistrationForm extends AbstractEditor
         ];
 
         $formFieldsToHide = [];
-
         foreach ($availableFormFields as $key) {
             if (!$this->isFormFieldEnabled($key)) {
                 $formFieldsToHide[$key] = $key;
             }
         }
 
-        $numberOfClicks = $this->getConfValueInteger('numberOfClicksForRegistration', 's_registration');
-
         // If we first visit the registration form, the value of
         // $this->currentPageNumber is 0.
         // If we had an error in our form input and we were send back to the
         // registration form, $this->currentPageNumber is 2.
-        if (($this->currentPageNumber == 0) || ($this->currentPageNumber == 2)) {
-            switch ($numberOfClicks) {
-                case 2:
-                    $formFieldsToHide['button_continue'] = 'button_continue';
-                    break;
-                case 3:
-                    // The fall-through is intended.
-                default:
-                    $formFieldsToHide['button_submit'] = 'button_submit';
-            }
+        if ($this->currentPageNumber === 0 || $this->currentPageNumber === 2) {
+            $formFieldsToHide['button_continue'] = 'button_continue';
         }
 
         $this->hideSubparts(implode(',', $formFieldsToHide), 'registration_wrapper');
-    }
-
-    /**
-     * Provides a string "Registration form: step x of y" for the current page.
-     * The number of the first and last page can be configured via TS setup.
-     *
-     * @return string a localized string displaying the number of the current and the last page
-     */
-    public function getStepCounter(): string
-    {
-        $lastPageNumberForDisplay = $this->getConfValueInteger('numberOfLastRegistrationPage');
-        $currentPageNumber = $this->getConfValueInteger('numberOfFirstRegistrationPage') + $this->currentPageNumber;
-
-        // Decreases $lastPageNumberForDisplay by one if we only have 2 clicks to registration.
-        $numberOfClicks = $this->getConfValueInteger('numberOfClicksForRegistration', 's_registration');
-
-        if ($numberOfClicks === 2) {
-            $lastPageNumberForDisplay--;
-        }
-
-        $currentPageNumberForDisplay = min($lastPageNumberForDisplay, $currentPageNumber);
-
-        return sprintf($this->translate('label_step_counter'), $currentPageNumberForDisplay, $lastPageNumberForDisplay);
     }
 
     /**

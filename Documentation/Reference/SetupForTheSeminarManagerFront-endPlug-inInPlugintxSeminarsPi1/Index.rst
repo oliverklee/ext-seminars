@@ -66,21 +66,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         numberOfClicksForRegistration
-
-   Data type
-         integer
-
-   Description
-         number of clicks to registration (valid options are 2 or 3)
-
-   Default
-         3
-
-
-.. container:: table-row
-
-   Property
          what\_to\_display
 
    Data type
@@ -608,37 +593,6 @@ override the corresponding value from TS Setup.**
 
    Default
          telephone,email
-
-
-.. container:: table-row
-
-   Property
-         numberOfFirstRegistrationPage
-
-   Data type
-         integer
-
-   Description
-         the displayed number of the first registration page (for "step x of
-         y")
-
-   Default
-         1
-
-
-.. container:: table-row
-
-   Property
-         numberOfLastRegistrationPage
-
-   Data type
-         integer
-
-   Description
-         the displayed number of the last registration page (for "step x of y")
-
-   Default
-         2
 
 
 .. container:: table-row

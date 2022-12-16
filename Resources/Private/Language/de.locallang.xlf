@@ -1124,10 +1124,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registration</source>
 				<target>Veranstaltungsanmeldung</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.numberOfClicksForRegistration" xml:space="preserve">
-				<source>Number of clicks for registration</source>
-				<target>Anzahl an Klicks bis zur Anmeldung</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
 				<source>Page that will be displayed after a user has registered for an event</source>
 				<target>Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</target>
@@ -1551,10 +1547,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Zur Übersicht</target>
-			</trans-unit>
-			<trans-unit id="label_step_counter" xml:space="preserve">
-				<source>Registration form: step %d of %d</source>
-				<target>Anmeldeformular: Schritt %d von %d</target>
 			</trans-unit>
 			<trans-unit id="label_register_additional_information" xml:space="preserve">
 				<source>Additional information</source>

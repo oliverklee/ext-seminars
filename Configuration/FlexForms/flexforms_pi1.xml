@@ -755,32 +755,6 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<numberOfClicksForRegistration>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.numberOfClicksForRegistration</label>
-							<config>
-								<type>select</type>
-								<renderType>selectSingle</renderType>
-								<items type="array">
-									<numIndex index="0" type="array">
-										<numIndex index="0"></numIndex>
-										<numIndex index="1">0</numIndex>
-									</numIndex>
-									<numIndex index="1" type="array">
-										<numIndex index="0">2</numIndex>
-										<numIndex index="1">2</numIndex>
-									</numIndex>
-									<numIndex index="2" type="array">
-										<numIndex index="0">3</numIndex>
-										<numIndex index="1">3</numIndex>
-									</numIndex>
-								</items>
-								<size>1</size>
-								<maxitems>1</maxitems>
-							</config>
-						</TCEforms>
-					</numberOfClicksForRegistration>
 					<thankYouAfterRegistrationPID>
 						<TCEforms>
 							<exclude>1</exclude>

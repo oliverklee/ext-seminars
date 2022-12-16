@@ -1088,10 +1088,6 @@ This event now has been confirmed.</source>
 				<source>Registration</source>
 				<target>Registrazione</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.numberOfClicksForRegistration" xml:space="preserve">
-				<source>Number of clicks for registration</source>
-				<target>Numero di click per registrazione</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
 				<source>Page that will be displayed after a user has registered for an event</source>
 				<target>Pagina da visualizzare dopo che l'utente si è registrato all'evento</target>
@@ -1515,10 +1511,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
 				<target>Ritorna alla lista</target>
-			</trans-unit>
-			<trans-unit id="label_step_counter" xml:space="preserve">
-				<source>Registration form: step %d of %d</source>
-				<target>Registrazione: passo %d di %d</target>
 			</trans-unit>
 			<trans-unit id="label_register_additional_information" xml:space="preserve">
 				<source>Additional information</source>
