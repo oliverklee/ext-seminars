@@ -28,17 +28,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     price {
       name = price
 
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
-          userobj {
-            extension = this
-            method = isValidPriceSelected
-          }
-        }
-      }
-
       process.userobj {
         extension = this
         method = hasRegistrationFormField
@@ -54,16 +43,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
       name = method_of_payment
 
       wrapitem = |<br/>
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
-          userobj {
-            extension = this
-            method = isMethodOfPaymentSelected
-          }
-        }
-      }
 
       process.userobj {
         extension = this
@@ -221,36 +200,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     seats {
       name = seats
 
-      validators {
-        10 = validator:PREG
-        10.pattern {
-          value = /^[\d]*$/
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noSeatsNumber
-        }
-
-        20 = validator:STANDARD
-        20.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
-          userobj {
-            extension = this
-            method = canRegisterSeats
-          }
-        }
-
-        30 = validator:STANDARD
-        30.custom {
-          message.userobj {
-            extension = this
-            method = getMessageForSeatsNotMatchingRegisteredPersons
-          }
-
-          userobj {
-            extension = this
-            method = validateNumberOfRegisteredPersons
-          }
-        }
-      }
-
       process.userobj {
         extension = this
         method = hasRegistrationFormField
@@ -323,14 +272,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         }
       }
 
-      validators {
-        10 = validator:PREG
-        10.pattern {
-          value = /^[\d]*$/
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noKidsNumber
-        }
-      }
-
       process.userobj {
         extension = this
         method = hasRegistrationFormField
@@ -344,17 +285,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     lodgings = renderlet:CHECKBOX
     lodgings {
       name = lodgings
-
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
-          userobj {
-            extension = this
-            method = isLodgingSelected
-          }
-        }
-      }
 
       process.userobj {
         extension = this
@@ -379,17 +309,6 @@ plugin.tx_seminars_pi1.form.registration.step1 {
     foods = renderlet:CHECKBOX
     foods {
       name = foods
-
-      validators {
-        10 = validator:STANDARD
-        10.custom {
-          message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
-          userobj {
-            extension = this
-            method = isFoodSelected
-          }
-        }
-      }
 
       process.userobj {
         extension = this

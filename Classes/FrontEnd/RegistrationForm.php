@@ -251,10 +251,7 @@ class RegistrationForm extends AbstractEditor
         $this->setMarker('feuser_data', $this->getAllFeUserData());
         $this->setMarker('billing_address', $this->getBillingAddress());
         $this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
-        $this->setMarker(
-            'themselves_default_value',
-            (int)$this->getConfValueString('registerThemselvesByDefaultForHiddenCheckbox')
-        );
+        $this->setMarker('themselves_default_value', 1);
 
         return $this->getSubpart();
     }
@@ -294,16 +291,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Checks whether we are on the last page of the registration form and we can proceed to saving the registration.
-     *
-     * @return bool TRUE if we can proceed to saving the registration, FALSE otherwise
-     */
-    public function isLastPage(): bool
-    {
-        return $this->currentPageNumber == 2;
-    }
-
-    /**
      * Processes the entered/edited registration and stores it in the DB.
      *
      * In addition, the entered payment data is stored in the FE user session.
@@ -313,38 +300,9 @@ class RegistrationForm extends AbstractEditor
     public function processRegistration(array $parameters): void
     {
         $registrationManager = $this->getRegistrationManager();
-        if (!$registrationManager->canCreateRegistration($this->getSeminar(), $parameters)) {
-            return;
-        }
 
         $registrationManager->createRegistration($this->getSeminar(), $parameters, $this);
         $registrationManager->sendEmailsForNewRegistration($this);
-    }
-
-    /**
-     * Checks whether there are at least the number of seats provided in $formData['value'] available.
-     *
-     * @param array $formData associative array with the element "value" in which the number of seats to check for
-     *        is stored
-     *
-     * @return bool TRUE if there are at least $formData['value'] seats available, FALSE otherwise
-     */
-    public function canRegisterSeats(array $formData): bool
-    {
-        return $this->getRegistrationManager()->canRegisterSeats($this->getSeminar(), (int)$formData['value']);
-    }
-
-    /**
-     * Checks whether a checkbox is checked OR the "finish registration" button has not just been clicked.
-     *
-     * @param array $formData associative array with the element "value" in which the current value
-     *        of the checkbox (0 or 1) is stored
-     *
-     * @return bool TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
-     */
-    public function isTermsChecked(array $formData): bool
-    {
-        return (bool)$formData['value'] || ($this->currentPageNumber != 2);
     }
 
     /**
@@ -354,48 +312,6 @@ class RegistrationForm extends AbstractEditor
     public function isTerms2Enabled(): bool
     {
         return $this->hasRegistrationFormField(['elementname' => 'terms_2']) && $this->getSeminar()->hasTerms2();
-    }
-
-    /**
-     * Checks whether the "terms_2" checkbox is checked (if it is enabled in the
-     * configuration). If the checkbox is disabled in the configuration, this
-     * function always returns TRUE. It also always returns TRUE if the
-     * "finish registration" button hasn't just been clicked.
-     *
-     * @param array $formData associative array with the element "value" in which the current value of the checkbox
-     *        (0 or 1) is stored
-     */
-    public function isTerms2CheckedAndEnabled(array $formData): bool
-    {
-        return (bool)$formData['value'] || !$this->isTerms2Enabled() || ($this->currentPageNumber != 2);
-    }
-
-    /**
-     * Checks whether a method of payment is selected OR this event has no
-     * payment methods set at all OR the corresponding registration field is
-     * not visible in the registration form (in which case it is neither
-     * necessary nor possible to select any payment method) OR this event has
-     * no price at all.
-     *
-     * @param array $formData associative array with the element "value" in which the currently selected value
-     *        (a positive integer or NULL if no radiobutton is selected) is stored
-     */
-    public function isMethodOfPaymentSelected(array $formData): bool
-    {
-        return $this->isRadioButtonSelected($formData['value']) || !$this->getSeminar()->hasPaymentMethods()
-            || !$this->getSeminar()->hasAnyPrice() || !$this->showMethodsOfPayment();
-    }
-
-    /**
-     * Checks whether a radio button in a radio button group is selected.
-     *
-     * @param mixed $radioGroupValue the currently selected value (a positive integer) or NULL if no button is selected
-     *
-     * @return bool TRUE if a radio button is selected, FALSE if none is selected
-     */
-    private function isRadioButtonSelected($radioGroupValue): bool
-    {
-        return (bool)$radioGroupValue;
     }
 
     /**
@@ -593,9 +509,7 @@ class RegistrationForm extends AbstractEditor
     public function showMethodsOfPayment(): bool
     {
         $event = $this->getSeminar();
-        return $event->hasPaymentMethods()
-            && $this->getSeminar()->hasAnyPrice()
-            && $this->hasRegistrationFormField(['elementname' => 'method_of_payment']);
+        return $event->hasPaymentMethods() && $this->hasRegistrationFormField(['elementname' => 'method_of_payment']);
     }
 
     /**
@@ -812,15 +726,7 @@ class RegistrationForm extends AbstractEditor
      */
     private function getKeyOfSelectedPrice(): string
     {
-        $availablePrices = $this->getSeminar()->getAvailablePrices();
-        $selectedPrice = $this->getFormValue('price');
-
-        // If no (available) price is selected, use the first price by default.
-        if (!$this->getSeminar()->isPriceAvailable($selectedPrice)) {
-            $selectedPrice = key($availablePrices);
-        }
-
-        return $selectedPrice;
+        return $this->getFormValue('price');
     }
 
     /**
@@ -949,20 +855,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Checks whether at least one lodging option is selected (if there is at
-     * least one lodging option for this event and the lodging options should
-     * be displayed).
-     *
-     * @param array $formData the value of the current field in an associative array witch the element "value"
-     *
-     * @return bool TRUE if at least one item is selected or no lodging options can be selected
-     */
-    public function isLodgingSelected(array $formData): bool
-    {
-        return !empty($formData['value']) || !$this->hasLodgings();
-    }
-
-    /**
      * Checks whether our current event has any lodging options and the
      * lodging options should be displayed at all.
      *
@@ -985,21 +877,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Checks whether at least one food option is selected (if there is at
-     * least one food option for this event and the food options should
-     * be displayed).
-     *
-     * @param array $formData associative array with the element "value" in which the value of the current field is
-     *        provided
-     *
-     * @return bool TRUE if at least one item is selected or no food options can be selected
-     */
-    public function isFoodSelected(array $formData): bool
-    {
-        return !empty($formData['value']) || !$this->hasFoods();
-    }
-
-    /**
      * @throws \BadMethodCallException if this method is called without a logged-in FE user
      */
     protected function getLoggedInUser(): FrontEndUser
@@ -1011,23 +888,6 @@ class RegistrationForm extends AbstractEditor
         }
 
         return $user;
-    }
-
-    /**
-     * Checks whether a valid price is selected or the "price" registration
-     * field is not visible in the registration form (in which case it is not
-     * possible to select a price).
-     *
-     * @param array $formData associative array with the element "value" in which the currently selected value
-     *        (a positive integer) or NULL if no radiobutton is selected is provided
-     *
-     * @return bool true if a valid price is selected or the price field
-     *                 is hidden, false if none is selected, but could have been selected
-     */
-    public function isValidPriceSelected(array $formData): bool
-    {
-        return $this->getSeminar()->isPriceAvailable($formData['value'])
-            || !$this->hasRegistrationFormField(['elementname' => 'price']);
     }
 
     /**
@@ -1115,64 +975,6 @@ class RegistrationForm extends AbstractEditor
         }
 
         $this->getRegistrationManager()->removeRegistration($this->getRegistration()->getUid(), $this);
-    }
-
-    /**
-     * Gets the number of entered persons in the form by counting the lines
-     * in the "additional attendees names" field and the state of the "register myself" checkbox.
-     *
-     * @return int the number of entered persons, will be >= 0
-     */
-    public function getNumberOfEnteredPersons(): int
-    {
-        if ($this->isFormFieldEnabled('registered_themselves')) {
-            $formData = (int)$this->getFormValue('registered_themselves');
-            $themselves = ($formData > 0) ? 1 : 0;
-        } else {
-            $themselves = $this->getConfValueInteger('registerThemselvesByDefaultForHiddenCheckbox');
-        }
-
-        return $themselves;
-    }
-
-    /**
-     * Checks whether the number of selected seats matches the number of
-     * registered persons (including the FE user themselves as well as the additional attendees).
-     *
-     * @return bool whether the number of seats matches the number of registered persons
-     */
-    public function validateNumberOfRegisteredPersons(): bool
-    {
-        if ((int)$this->getFormValue('seats') <= 0) {
-            return false;
-        }
-        if (!$this->isFormFieldEnabled('attendees_names')) {
-            return true;
-        }
-
-        return (int)$this->getFormValue('seats') === $this->getNumberOfEnteredPersons();
-    }
-
-    /**
-     * Gets the error message to return if the number of registered persons
-     * does not match the number of seats.
-     *
-     * @return string the localized error message, will be empty if both numbers match
-     */
-    public function getMessageForSeatsNotMatchingRegisteredPersons(): string
-    {
-        $seats = (int)$this->getFormValue('seats');
-        $persons = $this->getNumberOfEnteredPersons();
-
-        if ($persons < $seats) {
-            $result = $this->translate('message_lessAttendeesThanSeats');
-        } elseif ($persons > $seats) {
-            $result = $this->translate('message_moreAttendeesThanSeats');
-        } else {
-            $result = '';
-        }
-
-        return $result;
     }
 
     private function getRegistrationManager(): RegistrationManager

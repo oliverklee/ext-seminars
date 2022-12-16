@@ -104,9 +104,6 @@ plugin.tx_seminars_pi1 {
   # list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
   showRegistrationFields = price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
 
-  # whether the logged-in user should be registered themselves by default in the registration form (only applicable if the checkbox is hidden)
-  registerThemselvesByDefaultForHiddenCheckbox = 1
-
   # fe_users DB fields to show for in the registration form
   showFeUserFieldsInRegistrationForm = name,company,address,zip,city,country,telephone,email
 

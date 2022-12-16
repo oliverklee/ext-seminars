@@ -391,42 +391,6 @@ class RegistrationManager
     }
 
     /**
-     * Checks whether the data the user has just entered is okay for creating
-     * a registration, e.g., mandatory fields are filled, number fields only
-     * contain numbers, the number of seats to register is not too high etc.
-     *
-     * Please note that this function does not create a registration - it just checks.
-     *
-     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
-     * @param array $registrationData associative array with the registration data the user has just entered
-     *
-     * @return bool TRUE if the data is okay, FALSE otherwise
-     */
-    public function canCreateRegistration(LegacyEvent $event, array $registrationData): bool
-    {
-        return $this->canRegisterSeats($event, (int)$registrationData['seats']);
-    }
-
-    /**
-     * Checks whether a registration with a given number of seats could be
-     * created, ie. an actual number is given and there are at least that many vacancies.
-     *
-     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
-     * @param int $numberOfSeats the number of seats to check
-     */
-    public function canRegisterSeats(LegacyEvent $event, int $numberOfSeats): bool
-    {
-        // If no number of seats is given, ie. the user has not entered anything
-        // or the field is not shown at all, assume 1.
-        if ($numberOfSeats === 0) {
-            $numberOfSeats = 1;
-        }
-
-        return $event->hasUnlimitedVacancies()
-            || $event->hasRegistrationQueue() || $event->getVacancies() >= $numberOfSeats;
-    }
-
-    /**
      * Creates a registration to $this->registration, writes it to DB,
      * and notifies the organizer and the user (both via e-mail).
      *

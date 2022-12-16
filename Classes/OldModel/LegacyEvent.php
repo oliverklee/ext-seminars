@@ -3281,43 +3281,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether a given price category currently is available for this
-     * event.
-     *
-     * The allowed price category codes are:
-     * regular, regular_early, special, special_early
-     *
-     * @param string $priceCode code for the price category to check, may be empty or null
-     *
-     * @return bool TRUE if $priceCode matches a currently available
-     *                 price, FALSE otherwise
-     */
-    public function isPriceAvailable(string $priceCode): bool
-    {
-        $availablePrices = $this->getAvailablePrices();
-
-        return !empty($priceCode) && isset($availablePrices[$priceCode]);
-    }
-
-    /**
-     * Checks whether this event currently has at least one non-free price
-     * (taking into account whether we still are in the early-bird period).
-     *
-     * @return bool true if this event currently has at least one non-zero price, false otherwise
-     */
-    public function hasAnyPrice(): bool
-    {
-        if ($this->earlyBirdApplies()) {
-            $result = $this->hasEarlyBirdPriceRegular()
-                || $this->hasEarlyBirdPriceSpecial();
-        } else {
-            $result = $this->hasPriceRegular() || $this->hasPriceSpecial();
-        }
-
-        return $result;
-    }
-
-    /**
      * Checks whether a front-end user is already blocked during the time for
      * a given event by other booked events.
      *

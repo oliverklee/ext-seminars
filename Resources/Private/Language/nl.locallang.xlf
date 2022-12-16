@@ -336,14 +336,6 @@
 				<source>Sorry, there are no more vacancies.</source>
 				<target>Helaas, er zijn geen vrije plaatsen meer beschikbaar.</target>
 			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-				<target>Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve">
-				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-				<target>Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</target>
-			</trans-unit>
 			<trans-unit id="message_willBeAnnounced" xml:space="preserve">
 				<source>will be announced</source>
 				<target>zal worden aangekondigd</target>
@@ -1707,58 +1699,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>Prijs is geldig en er kan geboekt worden tot %s</target>
-			</trans-unit>
-			<trans-unit id="message_noSeatsNumber" xml:space="preserve">
-				<source>Please enter only numbers for the number of seats.</source>
-				<target>Geef alleen cijfers voor het aantal plaatsen.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-				<source>Sorry, there are not that many vacancies for this event.</source>
-				<target>Sorry, er zijn genoeg vrije plaatsen voor dit evenement.</target>
-			</trans-unit>
-			<trans-unit id="message_moreAttendeesThanSeats" xml:space="preserve">
-				<source>Please register only as many persons as you are booking seats.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_moreAttendeesThanSeats_informal" xml:space="preserve">
-				<source>Please register only as many persons as you are booking seats.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_lessAttendeesThanSeats" xml:space="preserve">
-				<source>Please provide the names of all persons to register.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
-				<source>Please provide the names of all persons to register.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noKidsNumber" xml:space="preserve">
-				<source>Please enter only numbers for the number of kids.</source>
-				<target>Geef alleen cijfers voor het aantal kinderen.</target>
-			</trans-unit>
-			<trans-unit id="message_choosePrice" xml:space="preserve">
-				<source>Please select a price.</source>
-				<target>Kies een prijs.</target>
-			</trans-unit>
-			<trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
-				<source>Please select a method of payment.</source>
-				<target>Kies een betaal methode.</target>
-			</trans-unit>
-			<trans-unit id="message_selectLodging" xml:space="preserve">
-				<source>Please select at least one lodging option.</source>
-				<target>Geef tenminste 1 acomodatie optie.</target>
-			</trans-unit>
-			<trans-unit id="message_selectFood" xml:space="preserve">
-				<source>Please select at least one food option.</source>
-				<target>Geef tenminste 1 voeding keuze.</target>
-			</trans-unit>
-			<trans-unit id="message_acceptTerms" xml:space="preserve">
-				<source>Please accept the terms and conditions in order to register for this event.</source>
-				<target>Accepteer de voorwaarden om voor dit Seminar te registreren</target>
-			</trans-unit>
-			<trans-unit id="message_acceptTerms2" xml:space="preserve">
-				<source>Please accept the terms for travelling in order to register for this event.</source>
-				<target>Accepteer de reisvoorwaarden om voor dit Seminar te registreren.</target>
 			</trans-unit>
 			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
 				<source>You are not registered for this event.</source>
