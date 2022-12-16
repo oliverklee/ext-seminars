@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -83,23 +82,6 @@ final class AbstractEventMailFormTest extends TestCase
             $this->testingFramework->cleanUp();
         }
         $this->restoreOriginalEnvironment();
-    }
-
-    ///////////////////////////////////////////////////
-    // Tests regarding the error handling of the form
-    ///////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function renderThrowsExceptionForInvalidEventUid(): void
-    {
-        $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage('There is no event with this UID.');
-
-        new TestingEventMailForm(
-            $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
-        );
     }
 
     //////////////////////////////////////////////
@@ -208,44 +190,6 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField(): void
-    {
-        $this->subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'subject' => '',
-            ]
-        );
-
-        self::assertStringContainsString(
-            $this->translate('eventMailForm_error_subjectMustNotBeEmpty'),
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField(): void
-    {
-        $this->subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'messageBody' => '',
-            ]
-        );
-
-        self::assertStringContainsString(
-            $this->translate('eventMailForm_error_messageBodyMustNotBeEmpty'),
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered(): void
     {
         $this->subject->setPostData(
@@ -255,7 +199,6 @@ final class AbstractEventMailFormTest extends TestCase
                 'subject' => 'foo bar',
             ]
         );
-        $this->subject->markAsIncomplete();
 
         self::assertStringContainsString(
             'foo bar',
@@ -275,7 +218,6 @@ final class AbstractEventMailFormTest extends TestCase
                 'subject' => '<foo> & "bar"',
             ]
         );
-        $this->subject->markAsIncomplete();
         self::assertStringContainsString(
             '&lt;foo&gt; &amp; &quot;bar&quot;',
             $this->subject->render()
@@ -294,7 +236,6 @@ final class AbstractEventMailFormTest extends TestCase
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->subject->markAsIncomplete();
 
         self::assertStringContainsString(
             'foo bar',
@@ -364,69 +305,5 @@ final class AbstractEventMailFormTest extends TestCase
         );
 
         $this->subject->getInitialValue('foo');
-    }
-
-    ////////////////////////////////////////
-    // Tests concerning the error messages
-    ////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString(): void
-    {
-        $this->subject->markAsIncomplete();
-
-        self::assertEquals(
-            '',
-            $this->subject->getErrorMessage('subject')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage(): void
-    {
-        $this->subject->setErrorMessage('subject', 'Foo');
-
-        self::assertStringContainsString(
-            'Foo',
-            $this->subject->getErrorMessage('subject')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getErrorMessageForInCompleteFormAndStoredMessageReturnsThisErrorMessage(): void
-    {
-        $this->subject->markAsIncomplete();
-        $this->subject->setErrorMessage('subject', 'Foo');
-
-        self::assertStringContainsString(
-            'Foo',
-            $this->subject->getErrorMessage('subject')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setErrorMessageForAlreadySetErrorMessageAppendsNewMessage(): void
-    {
-        $this->subject->markAsIncomplete();
-        $this->subject->setErrorMessage('subject', 'Foo');
-        $this->subject->setErrorMessage('subject', 'Bar');
-        $errorMessage = $this->subject->getErrorMessage('subject');
-
-        self::assertStringContainsString(
-            'Foo',
-            $errorMessage
-        );
-        self::assertStringContainsString(
-            'Bar',
-            $errorMessage
-        );
     }
 }

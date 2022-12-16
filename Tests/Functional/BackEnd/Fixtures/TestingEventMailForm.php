@@ -41,30 +41,4 @@ final class TestingEventMailForm extends AbstractEventMailForm
     {
         return parent::getInitialValue($fieldName);
     }
-
-    /**
-     * Sets an error message.
-     *
-     * @param non-empty-string $fieldName the field name to set the error message for,
-     *        must be "messageBody" or "subject"
-     * @param string $message the error message to set, may be empty
-     */
-    public function setErrorMessage(string $fieldName, string $message): void
-    {
-        parent::setErrorMessage($fieldName, $message);
-    }
-
-    /**
-     * Returns all error messages set via setErrorMessage for the given field
-     * name.
-     *
-     * @param non-empty-string $fieldName the field name for which the error message should be returned
-     *
-     * @return string the error message for the field, will be empty if there's
-     *                no error message for this field
-     */
-    public function getErrorMessage(string $fieldName): string
-    {
-        return parent::getErrorMessage($fieldName);
-    }
 }

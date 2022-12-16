@@ -51,16 +51,6 @@ abstract class AbstractEventMailForm
     private $event;
 
     /**
-     * @var bool whether the form is complete
-     */
-    private $isComplete = true;
-
-    /**
-     * @var string[]
-     */
-    private $errorMessages = [];
-
-    /**
      * @var array
      */
     private $postData = [];
@@ -141,7 +131,7 @@ abstract class AbstractEventMailForm
             return '';
         }
 
-        if ($this->isSubmitted() && $this->validateFormData()) {
+        if ($this->isSubmitted()) {
             $this->setEventStatus();
             $this->sendEmailToAttendees();
             $this->redirectToListView();
@@ -172,49 +162,6 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Validates the input that comes via POST data. If a field contains invalid
-     * data, an error message for this field is stored in $this->errorMessages.
-     *
-     * The following fields are tested for being non-empty:
-     * - subject
-     * - messageBody
-     *
-     * @return bool TRUE if the form data is valid, FALSE otherwise
-     */
-    private function validateFormData(): bool
-    {
-        if ($this->getPostData('subject') === '') {
-            $this->markAsIncomplete();
-            $this->setErrorMessage(
-                'subject',
-                $this->getLanguageService()->getLL('eventMailForm_error_subjectMustNotBeEmpty')
-            );
-        }
-
-        if ($this->getPostData('messageBody') === '') {
-            $this->markAsIncomplete();
-            $this->setErrorMessage(
-                'messageBody',
-                $this->getLanguageService()->getLL('eventMailForm_error_messageBodyMustNotBeEmpty')
-            );
-        }
-
-        return $this->isComplete;
-    }
-
-    /**
-     * Marks the form as incomplete (i.e. some fields were empty or not filled
-     * with valid data). This will hinder the later process to really send the
-     * mail and do any further processing with the event.
-     *
-     * This method is public for testing only.
-     */
-    public function markAsIncomplete(): void
-    {
-        $this->isComplete = false;
-    }
-
-    /**
      * Checks whether the current back-end user has the needed permissions to
      * access this form.
      *
@@ -240,7 +187,6 @@ abstract class AbstractEventMailForm
             '</label>' .
             '<input type="text" class="form-control"  id="subject" name="subject" required ' .
             'value="' . \htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES | ENT_HTML5, 'utf-8') . '" />' .
-            $this->getErrorMessage('subject') .
             '</div>';
     }
 
@@ -260,7 +206,6 @@ abstract class AbstractEventMailForm
             $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .
             '<textarea cols="50" rows="20" class="form-control" id="messageBody" name="messageBody" required>' .
             \htmlspecialchars($messageBody, ENT_QUOTES | ENT_HTML5) . '</textarea>' .
-            $this->getErrorMessage('messageBody') .
             '</div>';
     }
 
@@ -294,24 +239,6 @@ abstract class AbstractEventMailForm
     protected function getEvent(): Event
     {
         return $this->event;
-    }
-
-    /**
-     * Returns all error messages set via setErrorMessage for the given field name.
-     *
-     * @param non-empty-string $fieldName the field name for which the error message should be returned
-     *
-     * @return string HTML with error message for the field, will be empty if there's no error message for this field
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function getErrorMessage(string $fieldName): string
-    {
-        if (!$this->hasErrorMessage($fieldName)) {
-            return '';
-        }
-
-        return '<p>' . \htmlspecialchars($this->errorMessages[$fieldName], ENT_QUOTES | ENT_HTML5) . '</p>';
     }
 
     /**
@@ -573,33 +500,6 @@ abstract class AbstractEventMailForm
     protected function getMessageBodyFormContent(): string
     {
         return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
-    }
-
-    /**
-     * Sets an error message.
-     *
-     * @param string $fieldName the field name to set the error message for, must be "messageBody" or "subject"
-     * @param string $message the error message to set, may be empty
-     */
-    protected function setErrorMessage(string $fieldName, string $message): void
-    {
-        if ($this->hasErrorMessage($fieldName)) {
-            $this->errorMessages[$fieldName] .= '<br />' . $message;
-        } else {
-            $this->errorMessages[$fieldName] = $message;
-        }
-    }
-
-    /**
-     * Checks whether an error message has been set for the given field name.
-     *
-     * @param string $fieldName the field to check the error message for, must not be empty
-     *
-     * @return bool whether an error message has been stored for the given field name
-     */
-    private function hasErrorMessage(string $fieldName): bool
-    {
-        return isset($this->errorMessages[$fieldName]);
     }
 
     /**

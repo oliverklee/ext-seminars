@@ -756,22 +756,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Back</source>
 				<target>Zurück</target>
 			</trans-unit>
-			<trans-unit id="eventMailForm_error_subjectMustNotBeEmpty" xml:space="preserve">
-				<source>Please enter a subject.</source>
-				<target>Bitte geben Sie einen Betreff ein.</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_error_messageBodyMustNotBeEmpty" xml:space="preserve">
-				<source>Please enter a message body.</source>
-				<target>Bitte geben Sie eine Mitteilung ein.</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_error_noDetailsPageFound" xml:space="preserve">
-				<source>The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</source>
-				<target>Die Einzelansichtsseite ist nicht gesetzt. Wenn diese nicht gesetzt ist, kann kein Link zur Einzelansichtsseite in der Absage gesendet werden. Um dieses Problem zu beheben, setzen Sie bitte plugin.tx_seminars_pi1.detailPID im TS-Setup der gerade ausgewählten Seite.</target>
-			</trans-unit>
-			<trans-unit id="referencesWarning" xml:space="preserve">
-				<source>(There are %s reference(s) to this record!)</source>
-				<target>(Es gibt %s Verbindung(en) zu diesem Datensatz!)</target>
-			</trans-unit>
 			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
 				<source>Send e-mail</source>
 				<target>E-Mail senden</target>

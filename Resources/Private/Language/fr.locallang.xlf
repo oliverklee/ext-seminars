@@ -736,22 +736,6 @@ This event now has been confirmed.</source>
 				<source>Back</source>
 				<target>Retour</target>
 			</trans-unit>
-			<trans-unit id="eventMailForm_error_subjectMustNotBeEmpty" xml:space="preserve">
-				<source>Please enter a subject.</source>
-				<target>Entrez un sujet svp.</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_error_messageBodyMustNotBeEmpty" xml:space="preserve">
-				<source>Please enter a message body.</source>
-				<target>Entrez svp un corps de message.</target>
-			</trans-unit>
-			<trans-unit id="eventMailForm_error_noDetailsPageFound" xml:space="preserve">
-				<source>The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</source>
-				<target>La vue de détail n'est pas paramétrée. Si ce paramètre n'existe pas, le lien vers la vue de détail ne peut pas être envoyé dans le mail d'annulation. Pour résoudre ce problème, indiquez svp plugin.tx_seminars_pi1.detailPID dans le TS setup de la page courante.</target>
-			</trans-unit>
-			<trans-unit id="referencesWarning" xml:space="preserve">
-				<source>(There are %s reference(s) to this record!)</source>
-				<target>(Il y a %s référence(s) à cet enregistrement!)</target>
-			</trans-unit>
 			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
 				<source>Send e-mail</source>
 				<target></target>
