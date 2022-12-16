@@ -174,13 +174,6 @@ class RegistrationsList extends AbstractList
             $this->template->setMarker('event_accreditation_number', $accreditationNumber);
             $this->template->setMarker('event_title', $eventTitle);
             $this->template->setMarker('event_date', $eventDate);
-            $this->template->setMarker(
-                'edit_button',
-                $this->getEditIcon(
-                    $registration->getUid(),
-                    $registration->getPageUid()
-                )
-            );
 
             $this->getListViewHookProvider()->executeHook(
                 'modifyListRow',
