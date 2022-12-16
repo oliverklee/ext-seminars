@@ -140,18 +140,6 @@ class EventsList extends AbstractList
                 ($event->hasDate() ? $event->getDate() : '')
             );
             $this->template->setMarker(
-                'edit_button',
-                $this->getEditIcon($event->getUid(), $event->getPageUid())
-            );
-            $this->template->setMarker(
-                'hide_unhide_button',
-                $this->getHideUnhideIcon(
-                    $event->getUid(),
-                    $event->getPageUid(),
-                    $event->isHidden()
-                )
-            );
-            $this->template->setMarker(
                 'number_of_attendees',
                 ($event->needsRegistration() ? $event->getAttendances() : '')
             );
