@@ -13,8 +13,6 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
-use TYPO3\CMS\Core\Imaging\Icon;
-use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
@@ -416,20 +414,6 @@ abstract class AbstractModel
     public function setTitle(string $title): void
     {
         $this->setRecordPropertyString('title', $title);
-    }
-
-    /**
-     * Gets an HTML image tag with the URL of the icon file of the record as
-     * configured in TCA.
-     *
-     * @return string our HTML image tag with the URL of the icon file of
-     *                the record or a "not found" icon if there's no icon
-     *                for this record
-     */
-    public function getRecordIcon(): string
-    {
-        return GeneralUtility::makeInstance(IconFactory::class)
-            ->getIconForRecord(static::$tableName, $this->recordData, Icon::SIZE_SMALL)->render();
     }
 
     /**

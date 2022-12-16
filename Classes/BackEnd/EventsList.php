@@ -7,9 +7,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * This class creates an events list in the back end.
@@ -101,10 +99,6 @@ class EventsList extends AbstractList
             'label_is_fully_booked',
             $languageService->getLL('eventlist.is_full')
         );
-        $this->template->setMarker(
-            'label_status',
-            $languageService->getLL('eventlist_status')
-        );
     }
 
     /**
@@ -119,7 +113,6 @@ class EventsList extends AbstractList
         /** @var LegacyEvent $event */
         foreach ($events as $event) {
             $this->template->setMarker('uid', $event->getUid());
-            $this->template->setMarker('icon', $event->getRecordIcon());
             $this->template->setMarker(
                 'accreditation_number',
                 \htmlspecialchars($event->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
@@ -176,10 +169,6 @@ class EventsList extends AbstractList
                 $this->template->setMarker('has_enough_attendees', '');
                 $this->template->setMarker('is_fully_booked', '');
             }
-            $this->template->setMarker(
-                'status',
-                $this->getStatusIcon($event)
-            );
 
             $this->setEmailButtonMarkers($event);
 
@@ -187,37 +176,6 @@ class EventsList extends AbstractList
         }
 
         $this->template->setSubpart('EVENT_ROW', $tableRows);
-    }
-
-    /**
-     * Returns an HTML image tag for an icon that represents the status "canceled"
-     * or "confirmed". If the event's status is "planned", an empty string will be
-     * returned.
-     *
-     * @param LegacyEvent $event the event to get the status icon for
-     *
-     * @return string HTML image tag, may be empty
-     */
-    private function getStatusIcon(LegacyEvent $event): string
-    {
-        if (!$event->isCanceled() && !$event->isConfirmed()) {
-            return '';
-        }
-
-        if ($event->isConfirmed()) {
-            $icon = 'Confirmed.png';
-            $labelKey = 'eventlist_status_confirmed';
-        } elseif ($event->isCanceled()) {
-            $icon = 'Canceled.png';
-            $labelKey = 'eventlist_status_canceled';
-        } else {
-            $icon = '';
-            $labelKey = '';
-        }
-        $label = $this->getLanguageService()->getLL($labelKey);
-
-        return '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
-            'Resources/Public/Icons/' . $icon . '" title="' . $label . '" alt="' . $label . '"/>';
     }
 
     /**

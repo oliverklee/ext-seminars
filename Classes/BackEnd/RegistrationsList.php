@@ -169,7 +169,6 @@ class RegistrationsList extends AbstractList
                 $accreditationNumber = '';
             }
 
-            $this->template->setMarker('icon', $registration->getRecordIcon());
             $this->template->setMarker('attendee_full_name', $userName);
             $this->template->setMarker('event_accreditation_number', $accreditationNumber);
             $this->template->setMarker('event_title', $eventTitle);
