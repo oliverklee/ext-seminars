@@ -688,18 +688,6 @@ This event now has been confirmed.</source>
 				<source>Full</source>
 				<target>Complet</target>
 			</trans-unit>
-			<trans-unit id="eventlist_status" xml:space="preserve">
-				<source>Status</source>
-				<target>Statut</target>
-			</trans-unit>
-			<trans-unit id="eventlist_status_canceled" xml:space="preserve">
-				<source>canceled</source>
-				<target>annulé</target>
-			</trans-unit>
-			<trans-unit id="eventlist_status_confirmed" xml:space="preserve">
-				<source>confirmed</source>
-				<target>confirmé</target>
-			</trans-unit>
 			<trans-unit id="eventlist_button_email" xml:space="preserve">
 				<source>E-mail</source>
 				<target></target>

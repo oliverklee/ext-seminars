@@ -708,18 +708,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Full</source>
 				<target>Voll</target>
 			</trans-unit>
-			<trans-unit id="eventlist_status" xml:space="preserve">
-				<source>Status</source>
-				<target>Status</target>
-			</trans-unit>
-			<trans-unit id="eventlist_status_canceled" xml:space="preserve">
-				<source>canceled</source>
-				<target>abgesagt</target>
-			</trans-unit>
-			<trans-unit id="eventlist_status_confirmed" xml:space="preserve">
-				<source>confirmed</source>
-				<target>bestätigt</target>
-			</trans-unit>
 			<trans-unit id="eventlist_button_email" xml:space="preserve">
 				<source>E-mail</source>
 				<target>E-Mail</target>

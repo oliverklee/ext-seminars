@@ -11,7 +11,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
@@ -211,68 +210,6 @@ final class EventsListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsCanceledStatusIconForCanceledEvent(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'cancelled' => EventInterface::STATUS_CANCELED,
-            ]
-        );
-
-        self::assertStringContainsString(
-            '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showContainsConfirmedStatusIconForConfirmedEvent(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'cancelled' => EventInterface::STATUS_CONFIRMED,
-            ]
-        );
-
-        self::assertStringContainsString(
-            '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function showDoesNotContainCanceledOrConfirmedStatusIconForPlannedEvent(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'cancelled' => EventInterface::STATUS_PLANNED,
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
-            $this->subject->show()
-        );
-
-        self::assertStringNotContainsString(
-            '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function showContainsEventFromSubfolder(): void
     {
         $subfolderPid = $this->testingFramework->createSystemFolder(
@@ -376,30 +313,6 @@ final class EventsListTest extends TestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_show_event_registrations'),
-            $this->subject->show()
-        );
-    }
-
-    /////////////////////////
-    // Tests for the icons.
-    /////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasEventIcon(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'title' => 'event_1',
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'EventComplete.gif',
             $this->subject->show()
         );
     }
