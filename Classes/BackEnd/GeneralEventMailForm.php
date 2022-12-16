@@ -13,23 +13,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 class GeneralEventMailForm extends AbstractEventMailForm
 {
     /**
-     * the action of this form
-     *
-     * @var string
-     */
-    protected $action = 'sendEmail';
-
-    /**
-     * Returns the label for the submit button.
-     *
-     * @return string label for the submit button, will not be empty
-     */
-    protected function getSubmitButtonLabel(): string
-    {
-        return $this->getLanguageService()->getLL('generalMailForm_sendButton');
-    }
-
-    /**
      * Calls all registered hooks for modifying the e-mail.
      */
     protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void

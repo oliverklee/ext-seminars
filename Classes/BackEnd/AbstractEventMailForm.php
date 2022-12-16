@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Email\EmailBuilder;
@@ -20,7 +18,6 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -36,11 +33,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 abstract class AbstractEventMailForm
 {
     /**
-     * @var string
-     */
-    private const MODULE_NAME = 'web_seminars';
-
-    /**
      * @var LegacyEvent the event which this e-mail form refers to
      */
     private $oldEvent;
@@ -54,11 +46,6 @@ abstract class AbstractEventMailForm
      * @var array
      */
     private $postData = [];
-
-    /**
-     * @var string the action of this form
-     */
-    protected $action = '';
 
     /**
      * hook objects for the list view
@@ -113,109 +100,6 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Returns the HTML needed to show the form. If the current user has not
-     * the necessary permissions, an empty string is returned.
-     *
-     * @return string HTML for the whole form, will be empty if the user has
-     *                insufficient permissions
-     */
-    public function render(): string
-    {
-        if (!$this->checkAccess()) {
-            return '';
-        }
-
-        if ($this->isSubmitted()) {
-            $this->setEventStatus();
-            $this->sendEmailToAttendees();
-            $this->redirectToListView();
-        }
-
-        $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
-        $formAction = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-
-        return '<form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) . '" method="post">' .
-            $this->createSubjectFormElement() .
-            $this->createMessageBodyFormElement() .
-            $this->createBackButton() .
-            $this->createSubmitButton() .
-            '<input type="hidden" name="action" value="' . $this->action . '" />' .
-            '<input type="hidden" name="eventUid" value="' . $this->getEvent()->getUid() . '" />' .
-            '<input type="hidden" name="isSubmitted" value="1" />' .
-            '</form>';
-    }
-
-    /**
-     * Checks whether the form was already submitted by the user.
-     *
-     * @return bool TRUE if the form was submitted by the user, FALSE otherwise
-     */
-    protected function isSubmitted(): bool
-    {
-        return $this->getPostData('isSubmitted') === '1';
-    }
-
-    /**
-     * Checks whether the current back-end user has the needed permissions to
-     * access this form.
-     *
-     * @return bool whether the user is allowed to see/use the form
-     */
-    public function checkAccess(): bool
-    {
-        return $this->getBackEndUser()->check('tables_select', 'tx_seminars_seminars');
-    }
-
-    /**
-     * Returns the HTML for the subject field of the form. It gets pre-filled
-     * depending on the implementation of this abstract class. Shows an error
-     * message next to the field if required after validation of this field.
-     *
-     * @return string HTML for the subject field, optionally with an error
-     *                message, will not be empty
-     */
-    protected function createSubjectFormElement(): string
-    {
-        return '<div class="mb-3">' .
-            '<label for="subject" class="form-label">' . $this->getLanguageService()->getLL('eventMailForm_subject') .
-            '</label>' .
-            '<input type="text" class="form-control"  id="subject" name="subject" required ' .
-            'value="' . \htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES | ENT_HTML5, 'utf-8') . '" />' .
-            '</div>';
-    }
-
-    /**
-     * Returns the HTML for the message body field of the form. It gets pre-filled
-     * depending on the implementation of this abstract class. Shows an error
-     * message next to the field if required after validation of this field.
-     *
-     * @return string HTML for the subject field, optionally with an error message
-     */
-    protected function createMessageBodyFormElement(): string
-    {
-        $messageBody = $this->fillFormElement('messageBody');
-
-        return '<div class="mb-3">' .
-            '<label for="messageBody"  class="form-label">' .
-            $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .
-            '<textarea cols="50" rows="20" class="form-control" id="messageBody" name="messageBody" required>' .
-            \htmlspecialchars($messageBody, ENT_QUOTES | ENT_HTML5) . '</textarea>' .
-            '</div>';
-    }
-
-    /**
-     * Returns the HTML for the back button.
-     *
-     * @return string HTML for the back button, will not be empty
-     */
-    protected function createBackButton(): string
-    {
-        return '<button type="button"  class="btn btn-secondary" onclick="window.location=window.location">' .
-            $this->getLanguageService()->getLL('eventMailForm_backButton') .
-            '</button>';
-    }
-
-    /**
      * Returns the event object.
      *
      * @return LegacyEvent the event object
@@ -233,28 +117,6 @@ abstract class AbstractEventMailForm
     protected function getEvent(): Event
     {
         return $this->event;
-    }
-
-    /**
-     * Returns either a default value or the value that was sent via POST data
-     * for a given field.
-     *
-     * For the subject field, we fill in the event's title and date after the
-     * default subject for confirming an event.
-     *
-     * @param non-empty-string $fieldName the field name
-     *
-     * @return string either the data from POST array or a default value for this field
-     */
-    protected function fillFormElement(string $fieldName): string
-    {
-        if ($this->isSubmitted()) {
-            $result = $this->getPostData($fieldName);
-        } else {
-            $result = '';
-        }
-
-        return $result;
     }
 
     /**
@@ -363,41 +225,6 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Marks an event according to the status to set (if any) and commits the change to the database.
-     */
-    protected function setEventStatus(): void
-    {
-    }
-
-    /**
-     * Redirects to the list view.
-     */
-    private function redirectToListView(): void
-    {
-        $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
-        $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-
-        HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
-    }
-
-    /**
-     * Returns the HTML for the submit button.
-     *
-     * @return string HTML for the submit button, will not be empty
-     */
-    protected function createSubmitButton(): string
-    {
-        return '<button class="btn btn-primary">' . $this->getSubmitButtonLabel() . '</button>';
-    }
-
-    /**
-     * Returns the label for the submit button.
-     *
-     * @return string label for the submit button, will not be empty
-     */
-    abstract protected function getSubmitButtonLabel(): string;
-
-    /**
      * Creates the message body for the e-mail.
      *
      * @param FrontEndUser $user the recipient of the e-mail
@@ -449,28 +276,6 @@ abstract class AbstractEventMailForm
         }
 
         return $this->hooks;
-    }
-
-    /**
-     * Returns the URL to a given module.
-     *
-     * @param string $moduleName name of the module
-     * @param array $urlParameters URL parameters that should be added as key-value pairs
-     *
-     * @return string calculated URL
-     */
-    protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
-    {
-        $uriBuilder = $this->getUriBuilder();
-        try {
-            $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (RouteNotFoundException $e) {
-            // no route registered, use the fallback logic to check for a module
-            // @phpstan-ignore-next-line This line is for TYPO3 9LTS only, and we check with 10LTS.
-            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
-        }
-
-        return (string)$uri;
     }
 
     protected function getUriBuilder(): UriBuilder

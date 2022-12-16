@@ -519,21 +519,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="eventlist.title" xml:space="preserve">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="eventlist_button_email" xml:space="preserve">
-				<source>E-mail</source>
-			</trans-unit>
-			<trans-unit id="eventMailForm_subject" xml:space="preserve">
-				<source>Subject:</source>
-			</trans-unit>
-			<trans-unit id="eventMailForm_message" xml:space="preserve">
-				<source>Message:</source>
-			</trans-unit>
-			<trans-unit id="eventMailForm_backButton" xml:space="preserve">
-				<source>Back</source>
-			</trans-unit>
-			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
-				<source>Send e-mail</source>
-			</trans-unit>
 			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>

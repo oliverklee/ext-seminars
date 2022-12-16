@@ -5,18 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Http\HeaderCollector;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
-use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\BackEnd\AbstractEventMailForm
@@ -34,11 +27,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     ];
 
     /**
-     * @var HeaderCollector
-     */
-    private $headerProxy;
-
-    /**
      * @var array<string, array<string, non-empty-string>>
      */
     protected $configurationToUseInTestInstance = [
@@ -52,44 +40,10 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
-        }
-
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
         $this->email = $this->createEmailMock();
-
-        $headerProxyFactory = HeaderProxyFactory::getInstance();
-        $headerProxyFactory->enableTestMode();
-        $this->headerProxy = $headerProxyFactory->getHeaderCollector();
-    }
-
-    /**
-     * Returns the URL to a given module.
-     *
-     * @param string $moduleName name of the module
-     * @param array $urlParameters URL parameters that should be added as key-value pairs
-     *
-     * @return string calculated URL
-     */
-    private function getRouteUrl(string $moduleName, array $urlParameters = []): string
-    {
-        $uriBuilder = $this->getUriBuilder();
-        try {
-            $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (RouteNotFoundException $e) {
-            // no route registered, use the fallback logic to check for a module
-            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
-        }
-
-        return (string)$uri;
-    }
-
-    private function getUriBuilder(): UriBuilder
-    {
-        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 
     /**
@@ -291,30 +245,5 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
             ]
         );
         $subject->sendEmailToAttendees();
-    }
-
-    /**
-     * @test
-     */
-    public function renderRedirectsToListViewAfterSendingEmail(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
-
-        $pageUid = 3;
-        PageFinder::getInstance()->setPageUid($pageUid);
-
-        $subject = new TestingEventMailForm(4);
-        $subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'subject' => 'Hello!',
-                'messageBody' => 'Hello!',
-            ]
-        );
-        $subject->render();
-
-        $url = $this->getRouteUrl('web_seminars', ['id' => $pageUid]);
-        self::assertSame('Location: ' . $url, $this->headerProxy->getLastAddedHeader());
     }
 }
