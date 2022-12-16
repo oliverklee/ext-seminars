@@ -10,11 +10,11 @@ use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * @covers \OliverKlee\Seminars\BackEnd\AbstractEventMailForm
  * @covers \OliverKlee\Seminars\BackEnd\GeneralEventMailForm
  */
 final class GeneralEventMailFormTest extends FunctionalTestCase
@@ -33,10 +33,6 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            self::markTestSkipped('Skipping because this code will be removed before adding 11LTS compatibility.');
-        }
-
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'] = [];
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
@@ -46,9 +42,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        // Manually purge the TYPO3 FIFO queue
-        GeneralUtility::makeInstance(MailMessage::class);
-        GeneralUtility::makeInstance(MailMessage::class);
+        GeneralUtility::purgeInstances();
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule']);
 
         parent::tearDown();
@@ -57,7 +51,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailCallsHookWithRegistration(): void
+    public function sendEmailToAttendeesCallsHookWithRegistration(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -79,7 +73,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject->render();
+        $subject->sendEmailToAttendees();
 
         self::assertSame(1, $hook->getCountCallForGeneralEmail());
     }
@@ -87,7 +81,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailForTwoRegistrationsCallsHookTwice(): void
+    public function sendEmailToAttendeesForTwoRegistrationsCallsHookTwice(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -110,7 +104,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject->render();
+        $subject->sendEmailToAttendees();
 
         self::assertSame(2, $hook->getCountCallForGeneralEmail());
     }
