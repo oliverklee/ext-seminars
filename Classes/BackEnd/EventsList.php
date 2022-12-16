@@ -75,30 +75,6 @@ class EventsList extends AbstractList
             'label_date',
             $languageService->getLL('eventlist.date')
         );
-        $this->template->setMarker(
-            'label_attendees',
-            $languageService->getLL('eventlist.attendees')
-        );
-        $this->template->setMarker(
-            'label_number_of_attendees_on_queue',
-            $languageService->getLL('eventlist.attendeesOnRegistrationQueue')
-        );
-        $this->template->setMarker(
-            'label_minimum_number_of_attendees',
-            $languageService->getLL('eventlist.attendees_min')
-        );
-        $this->template->setMarker(
-            'label_maximum_number_of_attendees',
-            $languageService->getLL('eventlist.attendees_max')
-        );
-        $this->template->setMarker(
-            'label_has_enough_attendees',
-            $languageService->getLL('eventlist.enough_attendees')
-        );
-        $this->template->setMarker(
-            'label_is_fully_booked',
-            $languageService->getLL('eventlist.is_full')
-        );
     }
 
     /**
@@ -131,40 +107,6 @@ class EventsList extends AbstractList
                 'date',
                 ($event->hasDate() ? $event->getDate() : '')
             );
-            $this->template->setMarker(
-                'number_of_attendees',
-                ($event->needsRegistration() ? $event->getAttendances() : '')
-            );
-            $this->template->setMarker(
-                'number_of_attendees_on_queue',
-                ($event->hasRegistrationQueue()
-                    ? $event->getAttendancesOnRegistrationQueue() : '')
-            );
-            $this->template->setMarker(
-                'minimum_number_of_attendees',
-                ($event->needsRegistration() ? $event->getAttendancesMin() : '')
-            );
-            $this->template->setMarker(
-                'maximum_number_of_attendees',
-                ($event->needsRegistration() ? $event->getAttendancesMax() : '')
-            );
-            if ($event->needsRegistration()) {
-                $this->template->setMarker(
-                    'has_enough_attendees',
-                    $event->hasEnoughAttendances() ? $this->getLanguageService()->getLL(
-                        'yes'
-                    ) : $this->getLanguageService()->getLL('no')
-                );
-                $this->template->setMarker(
-                    'is_fully_booked',
-                    $event->isFull() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService(
-                    )->getLL('no')
-                );
-            } else {
-                $this->template->setMarker('has_enough_attendees', '');
-                $this->template->setMarker('is_fully_booked', '');
-            }
-
             $this->setEmailButtonMarkers($event);
 
             $tableRows .= $this->template->getSubpart('EVENT_ROW');
