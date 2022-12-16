@@ -76,11 +76,6 @@ parameters:
 			path: Classes/BackEnd/AbstractList.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$storagePageData has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractList.php
-
-		-
 			message: "#^Parameter \\#1 \\$row of method TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\:\\:doesUserHaveAccess\\(\\) expects array, array\\|null given\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractList.php

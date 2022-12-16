@@ -848,18 +848,6 @@
 				<source>Front-end user who has created this record</source>
 				<target>Frontend-User, der diesen Datensatz eingetragen hat</target>
 			</trans-unit>
-			<trans-unit id="be_groups.tab_event_management" xml:space="preserve">
-				<source>Event management</source>
-				<target>Veranstaltungsverwaltung</target>
-			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_events_folder" xml:space="preserve">
-				<source>Sysfolder for new events</source>
-				<target>Ordner für neue Veranstaltungen</target>
-			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_registrations_folder" xml:space="preserve">
-				<source>Sysfolder for new registrations</source>
-				<target>Ordner für neue Anmeldungen</target>
-			</trans-unit>
 		</body>
 	</file>
 </xliff>

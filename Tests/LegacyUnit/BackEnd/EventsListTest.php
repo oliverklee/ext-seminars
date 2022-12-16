@@ -61,8 +61,7 @@ final class EventsListTest extends TestCase
 
         $this->subject = new EventsList($backEndModule);
 
-        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)
-            ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);
+        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
         $backEndUser = MapperRegistry::get(BackEndUserMapper::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
@@ -759,80 +758,5 @@ final class EventsListTest extends TestCase
     public function localizationReturnsLocalizedStringForExistingKey(): void
     {
         self::assertSame('Events', $this->translate('title'));
-    }
-
-    ///////////////////////////////////////////
-    // Tests concerning the new record button
-    ///////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function eventListCanContainNewButton(): void
-    {
-        self::assertStringContainsString(
-            'newRecordLink',
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function newButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid(): void
-    {
-        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getLoadedTestingModel([]);
-        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
-
-        self::assertStringContainsString((string)$this->dummySysFolderPid, $this->subject->show());
-    }
-
-    /**
-     * @test
-     */
-    public function newButtonForEventStoredOnCurrentPageHasCurrentFolderLabel(): void
-    {
-        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getLoadedTestingModel([]);
-        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
-
-        self::assertStringContainsString(
-            \sprintf(
-                $this->translate('label_create_record_in_current_folder'),
-                '',
-                $this->dummySysFolderPid
-            ),
-            $this->subject->show()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function newButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
-    {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        $loggedInUser = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $newEventFolder = $loggedInUser->getEventFolderFromGroup();
-
-        self::assertStringContainsString((string)$newEventFolder, $this->subject->show());
-    }
-
-    /**
-     * @test
-     */
-    public function newButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel(): void
-    {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        $loggedInUser = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $newEventFolder = $loggedInUser->getEventFolderFromGroup();
-
-        self::assertStringContainsString(
-            \sprintf(
-                $this->translate('label_create_record_in_foreign_folder'),
-                '',
-                $newEventFolder
-            ),
-            $this->subject->show()
-        );
     }
 }

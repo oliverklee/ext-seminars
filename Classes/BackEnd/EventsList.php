@@ -52,11 +52,6 @@ class EventsList extends AbstractList
         $seminarBag = $builder->build();
         $this->createListBody($seminarBag);
 
-        $this->template->setMarker(
-            'new_record_button',
-            $this->getNewIcon((int)$pageData['uid'])
-        );
-
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 
         return $content;
@@ -334,19 +329,6 @@ class EventsList extends AbstractList
         } else {
             $this->template->hideSubpartsArray(['CONFIRM_BUTTON']);
         }
-    }
-
-    /**
-     * Returns the storage folder for new event records.
-     *
-     * This will be determined by the event folder storage setting of the
-     * currently logged-in BE-user.
-     *
-     * @return int the PID for new event records, will be >= 0
-     */
-    protected function getNewRecordPid(): int
-    {
-        return $this->getLoggedInUser()->getEventFolderFromGroup();
     }
 
     /**

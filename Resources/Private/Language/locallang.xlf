@@ -585,12 +585,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="registrationlist.label_registrationsHeading" xml:space="preserve">
 				<source>Registrations for event &quot;%s&quot; (UID %u)</source>
 			</trans-unit>
-			<trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
-				<source>The new record will be created in the folder: %s (UID %u)</source>
-			</trans-unit>
-			<trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
-				<source>The new record will be created in the current folder: %s (UID %u).</source>
-			</trans-unit>
 			<trans-unit id="eventMailForm_subject" xml:space="preserve">
 				<source>Subject:</source>
 			</trans-unit>

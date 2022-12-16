@@ -63,8 +63,6 @@ class RegistrationsList extends AbstractList
     {
         $content = '';
 
-        $pageData = $this->page->getPageData();
-
         $languageService = $this->getLanguageService();
         $this->template->setMarker('label_attendee_full_name', $languageService->getLL('registrationlist.feuser.name'));
         $this->template->setMarker(
@@ -84,15 +82,11 @@ class RegistrationsList extends AbstractList
                 \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5),
                 $event->getUid()
             );
-            $newButton = '';
         } else {
             $registrationsHeading = '';
-            $newButton = $this->getNewIcon((int)$pageData['uid']);
         }
 
-        $areAnyRegularRegistrationsVisible = $this->setRegistrationTableMarkers(
-            self::REGULAR_REGISTRATIONS
-        );
+        $this->setRegistrationTableMarkers(self::REGULAR_REGISTRATIONS);
         $registrationTables = $this->template->getSubpart('REGISTRATION_TABLE');
         $this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE);
         $registrationTables .= $this->template->getSubpart('REGISTRATION_TABLE');
@@ -103,7 +97,6 @@ class RegistrationsList extends AbstractList
             '',
             'wrapper'
         );
-        $this->template->setMarker('new_record_button', $newButton);
         $this->template->setMarker('complete_table', $registrationTables);
 
         $content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
@@ -125,10 +118,8 @@ class RegistrationsList extends AbstractList
      *        be either
      *        RegistrationsList::REGISTRATIONS_ON_QUEUE or
      *        RegistrationsList::REGULAR_REGISTRATIONS
-     *
-     * @return bool whether the generated list is non-empty
      */
-    private function setRegistrationTableMarkers(int $registrationsToShow): bool
+    private function setRegistrationTableMarkers(int $registrationsToShow): void
     {
         $builder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $pageData = $this->page->getPageData();
@@ -152,7 +143,6 @@ class RegistrationsList extends AbstractList
         }
 
         $registrationBag = $builder->build();
-        $result = !$registrationBag->isEmpty();
 
         $tableRows = '';
         $languageService = $this->getLanguageService();
@@ -218,21 +208,6 @@ class RegistrationsList extends AbstractList
             $this->template,
             $registrationsToShow
         );
-
-        return $result;
-    }
-
-    /**
-     * Returns the storage folder for new registration records.
-     *
-     * This will be determined by the registration folder storage setting of the
-     * currently logged-in BE-user.
-     *
-     * @return int the PID for new registration records, will be >= 0
-     */
-    protected function getNewRecordPid(): int
-    {
-        return $this->getLoggedInUser()->getRegistrationFolderFromGroup();
     }
 
     /**
