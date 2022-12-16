@@ -3033,12 +3033,7 @@ class LegacyEvent extends AbstractTimeSpan
      * If we are a date record, this is checked for the corresponding topic
      * record.
      *
-     * Note: This is not related to entries in the showRegistrationFields
-     * configuration variable. This function checks this on a per-event basis
-     * whereas showRegistrationFields is a global option.
-     *
-     * @return bool TRUE if the "travelling terms" checkbox should
-     *                 be displayed, FALSE otherwise
+     * @return bool whether if the "travelling terms" checkbox should be displayed
      */
     public function hasTerms2(): bool
     {

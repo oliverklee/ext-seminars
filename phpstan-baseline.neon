@@ -1341,11 +1341,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getAllFeUserData\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
@@ -1357,11 +1352,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getKeyOfSelectedPrice\\(\\) should return string but returns array\\|string\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:hasRegistrationFormField\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -2737,7 +2727,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setSeminar\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 4
+			count: 2
 			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
 
 		-
@@ -3807,11 +3797,6 @@ parameters:
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:formFieldsDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
 

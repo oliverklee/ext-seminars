@@ -928,10 +928,6 @@ This event now has been confirmed.</source>
 				<source>Event data that should be displayed on the registration page:</source>
 				<target>Dati dell'evento che devono essere visualizzati nella pagina di registrazione:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-				<target>Visualizza campi di input testuali per la form di registrazione (lista separata da virgole):</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Visualizza dettagli oratore</target>

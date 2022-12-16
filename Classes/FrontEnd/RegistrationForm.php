@@ -15,7 +15,6 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is a controller which allows to create registrations on the FE.
@@ -30,13 +29,6 @@ class RegistrationForm extends AbstractEditor
      * @var string
      */
     public $prefixId = 'tx_seminars_registration_editor';
-
-    /**
-     * the names of the form fields to show (with the keys being the same as the values for performance reasons)
-     *
-     * @var string[]
-     */
-    private $formFieldsToShow = [];
 
     /**
      * the number of the current page of the form (starting with 0 for the first page)
@@ -99,34 +91,6 @@ class RegistrationForm extends AbstractEditor
      * @var string[]
      */
     protected $alwaysEnabledFormFields = [];
-
-    /**
-     * The constructor.
-     *
-     * This class may only be instantiated after is has already been made sure
-     * that the logged-in user is allowed to register for the corresponding
-     * event (or edit a registration).
-     *
-     * Please note that it is necessary to call setAction() and setSeminar()
-     * directly after instantiation.
-     *
-     * @param array $configuration TypoScript configuration for the plugin
-     * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
-     */
-    public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
-    {
-        parent::__construct($configuration, $contentObjectRenderer);
-
-        /** @var array<int, non-empty-string> $fieldKeys */
-        $fieldKeys = GeneralUtility::trimExplode(
-            ',',
-            $this->getConfValueString('showRegistrationFields', 's_template_special'),
-            true
-        );
-        foreach ($fieldKeys as $fieldKey) {
-            $this->formFieldsToShow[$fieldKey] = $fieldKey;
-        }
-    }
 
     /**
      * @param string $action action for which to create the form, must be either "register" or "unregister",
@@ -246,7 +210,6 @@ class RegistrationForm extends AbstractEditor
         $rawForm = preg_replace('/<label[^>]*><\\/label>/', '', $rawForm);
         $this->processTemplate($rawForm);
         $this->setLabels();
-        $this->hideUnusedFormFields();
 
         $this->setMarker('feuser_data', $this->getAllFeUserData());
         $this->setMarker('billing_address', $this->getBillingAddress());
@@ -311,130 +274,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function isTerms2Enabled(): bool
     {
-        return $this->hasRegistrationFormField(['elementname' => 'terms_2']) && $this->getSeminar()->hasTerms2();
-    }
-
-    /**
-     * Checks whether a form field should be displayed (and evaluated) at all.
-     * This is specified via TS setup (or flexforms) using the
-     * "showRegistrationFields" variable.
-     *
-     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
-     *        (used for retrieving the current form field name)
-     */
-    public function hasRegistrationFormField(array $parameters): bool
-    {
-        return isset($this->formFieldsToShow[$parameters['elementname']]);
-    }
-
-    /**
-     * Checks whether a form field should be displayed (and evaluated) at all.
-     * This is specified via TS setup (or flexforms) using the
-     * "showRegistrationFields" variable.
-     *
-     * In addition, this function takes into account whether the form field
-     * actually has any meaningful content.
-     * Example: The payment methods field will be disabled if the current event
-     * does not have any payment methods.
-     *
-     * After some refactoring, this function will replace the function hasRegistrationFormField.
-     *
-     * @param string $key the key of the field to test, must not be empty
-     *
-     * @return bool TRUE if the current form field should be displayed, FALSE otherwise
-     */
-    public function isFormFieldEnabled(string $key): bool
-    {
-        $isFormFieldAlwaysEnabled = in_array($key, $this->alwaysEnabledFormFields, true);
-        if ($isFormFieldAlwaysEnabled) {
-            return true;
-        }
-
-        // Some containers cannot be enabled or disabled via TS setup, but
-        // are containers and depend on their content being displayed.
-        switch ($key) {
-            case 'payment':
-                $result = $this->isFormFieldEnabled('price') || $this->isFormFieldEnabled('method_of_payment');
-                break;
-            case 'billing_address':
-                // This fields actually can also be disabled via TS setup.
-                $result = isset($this->formFieldsToShow[$key])
-                    && (
-                        $this->isFormFieldEnabled('company')
-                        || $this->isFormFieldEnabled('gender')
-                        || $this->isFormFieldEnabled('name')
-                        || $this->isFormFieldEnabled('address')
-                        || $this->isFormFieldEnabled('zip')
-                        || $this->isFormFieldEnabled('city')
-                        || $this->isFormFieldEnabled('country')
-                        || $this->isFormFieldEnabled('telephone')
-                        || $this->isFormFieldEnabled('email')
-                    );
-                break;
-            case 'more_seats':
-                $result = $this->isFormFieldEnabled('seats')
-                    || $this->isFormFieldEnabled('attendees_names')
-                    || $this->isFormFieldEnabled('kids');
-                break;
-            case 'lodging_and_food':
-                $result = $this->isFormFieldEnabled('lodgings')
-                    || $this->isFormFieldEnabled('accommodation')
-                    || $this->isFormFieldEnabled('foods')
-                    || $this->isFormFieldEnabled('food');
-                break;
-            case 'additional_information':
-                $result = $this->isFormFieldEnabled('checkboxes')
-                    || $this->isFormFieldEnabled('interests')
-                    || $this->isFormFieldEnabled('expectations')
-                    || $this->isFormFieldEnabled('background_knowledge')
-                    || $this->isFormFieldEnabled('known_from')
-                    || $this->isFormFieldEnabled('notes');
-                break;
-            case 'entered_data':
-                $result = $this->isFormFieldEnabled('feuser_data')
-                    || $this->isFormFieldEnabled('billing_address')
-                    || $this->isFormFieldEnabled('registration_data');
-                break;
-            case 'all_terms':
-                $result = $this->isFormFieldEnabled('terms')
-                    || $this->isFormFieldEnabled('terms_2');
-                break;
-            case 'traveling_terms':
-                // "traveling_terms" is an alias for "terms_2" which we use to
-                // avoid the problem that subpart names need to be prefix-free.
-                $result = $this->isFormFieldEnabled('terms_2');
-                break;
-            case 'billing_data':
-                // "billing_data" is an alias for "billing_address" which we use
-                // to prevent two subparts from having the same name.
-                $result = $this->isFormFieldEnabled('billing_address');
-                break;
-            default:
-                $result = isset($this->formFieldsToShow[$key]);
-        }
-
-        // Some fields depend on the availability of their data.
-        switch ($key) {
-            case 'method_of_payment':
-                $result = $result && $this->showMethodsOfPayment();
-                break;
-            case 'lodgings':
-                $result = $result && $this->hasLodgings();
-                break;
-            case 'foods':
-                $result = $result && $this->hasFoods();
-                break;
-            case 'checkboxes':
-                $result = $result && $this->hasCheckboxes();
-                break;
-            case 'terms_2':
-                $result = $result && $this->isTerms2Enabled();
-                break;
-            default:
-            // nothing to do
-            }
-
-        return $result;
+        return $this->getSeminar()->hasTerms2();
     }
 
     /**
@@ -508,8 +348,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function showMethodsOfPayment(): bool
     {
-        $event = $this->getSeminar();
-        return $event->hasPaymentMethods() && $this->hasRegistrationFormField(['elementname' => 'method_of_payment']);
+        return $this->getSeminar()->hasPaymentMethods();
     }
 
     /**
@@ -569,9 +408,7 @@ class RegistrationForm extends AbstractEditor
         $result = '';
 
         foreach ($this->getAllFieldKeysForConfirmationPage() as $key) {
-            if ($this->isFormFieldEnabled($key)) {
-                $result .= $this->getFormDataItemAndLabelForConfirmation($key);
-            }
+            $result .= $this->getFormDataItemAndLabelForConfirmation($key);
         }
 
         return $result;
@@ -674,10 +511,7 @@ class RegistrationForm extends AbstractEditor
                 );
                 break;
             case 'attendees_names':
-                if (
-                    $this->isFormFieldEnabled('registered_themselves')
-                    && $this->getFormValue('registered_themselves') == '1'
-                ) {
+                if ($this->getFormValue('registered_themselves') == '1') {
                     $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
                     $user = MapperRegistry::get(FrontEndUserMapper::class)->find($userUid);
                     $userData = [$user->getName()];
@@ -712,9 +546,7 @@ class RegistrationForm extends AbstractEditor
      */
     private function getSelectedPrice(): string
     {
-        $availablePrices = $this->getSeminar()->getAvailablePrices();
-
-        return $availablePrices[$this->getKeyOfSelectedPrice()]['caption'];
+        return '';
     }
 
     /**
@@ -851,7 +683,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function hasCheckboxes(): bool
     {
-        return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(['elementname' => 'checkboxes']);
+        return $this->getSeminar()->hasCheckboxes();
     }
 
     /**
@@ -862,7 +694,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function hasLodgings(): bool
     {
-        return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(['elementname' => 'lodgings']);
+        return $this->getSeminar()->hasLodgings();
     }
 
     /**
@@ -873,7 +705,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function hasFoods(): bool
     {
-        return $this->getSeminar()->hasFoods() && $this->hasRegistrationFormField(['elementname' => 'foods']);
+        return $this->getSeminar()->hasFoods();
     }
 
     /**
@@ -888,71 +720,6 @@ class RegistrationForm extends AbstractEditor
         }
 
         return $user;
-    }
-
-    /**
-     * Hides form fields that are either disabled via TS setup or that have
-     * nothing to select (e.g. if there are no payment methods) from the templating process.
-     */
-    private function hideUnusedFormFields(): void
-    {
-        static $availableFormFields = [
-            'payment',
-            'price',
-            'method_of_payment',
-            'billing_address',
-            'billing_data',
-            'company',
-            'gender',
-            'name',
-            'address',
-            'zip',
-            'city',
-            'country',
-            'telephone',
-            'email',
-            'additional_information',
-            'interests',
-            'expectations',
-            'background_knowledge',
-            'lodging_and_food',
-            'accommodation',
-            'food',
-            'known_from',
-            'more_seats',
-            'seats',
-            'registered_themselves',
-            'attendees_names',
-            'kids',
-            'lodgings',
-            'foods',
-            'checkboxes',
-            'notes',
-            'entered_data',
-            'feuser_data',
-            'registration_data',
-            'all_terms',
-            'terms',
-            'terms_2',
-            'traveling_terms',
-        ];
-
-        $formFieldsToHide = [];
-        foreach ($availableFormFields as $key) {
-            if (!$this->isFormFieldEnabled($key)) {
-                $formFieldsToHide[$key] = $key;
-            }
-        }
-
-        // If we first visit the registration form, the value of
-        // $this->currentPageNumber is 0.
-        // If we had an error in our form input and we were send back to the
-        // registration form, $this->currentPageNumber is 2.
-        if ($this->currentPageNumber === 0 || $this->currentPageNumber === 2) {
-            $formFieldsToHide['button_continue'] = 'button_continue';
-        }
-
-        $this->hideSubparts(implode(',', $formFieldsToHide), 'registration_wrapper');
     }
 
     /**
