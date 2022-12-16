@@ -358,75 +358,6 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    ////////////////////////////////////
-    // Tests concerning getStepCounter
-    ////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage(): void
-    {
-        $this->subject->setConfigurationValue(
-            'numberOfFirstRegistrationPage',
-            1
-        );
-        $this->subject->setConfigurationValue(
-            'numberOfLastRegistrationPage',
-            2
-        );
-
-        $this->subject->setPage(['next_page' => 0]);
-
-        self::assertStringContainsString(
-            '1',
-            $this->subject->getStepCounter()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getStepCounterReturnsNumberOfLastRegistrationPage(): void
-    {
-        $this->subject->setConfigurationValue(
-            'numberOfFirstRegistrationPage',
-            1
-        );
-        $this->subject->setConfigurationValue(
-            'numberOfLastRegistrationPage',
-            2
-        );
-        $this->subject->setPage(['next_page' => 0]);
-
-        self::assertStringContainsString(
-            '2',
-            $this->subject->getStepCounter()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getStepCounterForNumberAboveLastRegistrationPageReturnsNumberOfLastRegistrationPageAsCurrentPage(): void
-    {
-        $this->subject->setConfigurationValue(
-            'numberOfFirstRegistrationPage',
-            1
-        );
-        $this->subject->setConfigurationValue(
-            'numberOfLastRegistrationPage',
-            2
-        );
-
-        $this->subject->setPage(['next_page' => 5]);
-
-        self::assertEquals(
-            \sprintf($this->translate('label_step_counter'), 2, 2),
-            $this->subject->getStepCounter()
-        );
-    }
-
     //////////////////////////////////////////////
     // Tests concerning populateListCountries().
     //////////////////////////////////////////////
@@ -471,10 +402,6 @@ final class RegistrationFormTest extends TestCase
     public function formFieldsDataProvider(): array
     {
         return [
-            'step_counter' => [
-                'key' => 'step_counter',
-                'self-contained' => true,
-            ],
             'price' => [
                 'key' => 'price',
                 'self-contained' => true,

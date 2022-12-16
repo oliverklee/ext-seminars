@@ -855,9 +855,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.sheet_registration" xml:space="preserve">
 				<source>Registration</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.numberOfClicksForRegistration" xml:space="preserve">
-				<source>Number of clicks for registration</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
 				<source>Page that will be displayed after a user has registered for an event</source>
 			</trans-unit>
@@ -1175,9 +1172,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="label_back" xml:space="preserve">
 				<source>Back to listing</source>
-			</trans-unit>
-			<trans-unit id="label_step_counter" xml:space="preserve">
-				<source>Registration form: step %d of %d</source>
 			</trans-unit>
 			<trans-unit id="label_register_additional_information" xml:space="preserve">
 				<source>Additional information</source>
