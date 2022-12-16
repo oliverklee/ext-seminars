@@ -20,13 +20,6 @@ class GeneralEventMailForm extends AbstractEventMailForm
     protected $action = 'sendEmail';
 
     /**
-     * the prefix for all locallang keys for prefilling the form
-     *
-     * @var string
-     */
-    protected $formFieldPrefix = 'generalMailForm_prefillField_';
-
-    /**
      * Returns the label for the submit button.
      *
      * @return string label for the submit button, will not be empty

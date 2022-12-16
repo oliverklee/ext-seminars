@@ -26,7 +26,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the approval workflow for the FE editor (#2214, #2220)
 - Drop the hide/unhide FE editor functionality (#2206)
 - Drop the legacy BE module
-  (#2205, #2207, #2208, #2215, #2219, #2232, #2235, #2236, #2238, #2243, #2245)
+  (#2205, #2207, #2208, #2215, #2219, #2232, #2235, #2236, #2238, #2243, #2245,
+  #2247)
 - Remove the "duplicate event" functionality from the FE editor (#2204)
 - Remove the `logOutOneTimeAccountsAfterRegistration` setting (#2199)
 - Drop the legacy registration form

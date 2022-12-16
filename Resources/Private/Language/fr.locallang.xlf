@@ -676,14 +676,6 @@ This event now has been confirmed.</source>
 				<source>Send e-mail</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="generalMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="generalMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
 				<source>Please select a folder in the page tree.</source>
 				<target>Sélectionnez une folder dans l'arborescence des pages,</target>
@@ -691,18 +683,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
 				<source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
 				<target>Aucun template statique n'a été trouvé. Incluez svp les template statique seminars dans le TS setup de ce folder.</target>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_subject" xml:space="preserve">
-				<source>Event tested</source>
-				<target>Événement testé</target>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_messageBody" xml:space="preserve">
-				<source>This is the message body.</source>
-				<target>Ceci est le corps du message.</target>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
-				<source>This is the introduction: %s</source>
-				<target>Ceci est l'introduction: %s</target>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
 				<source>The e-mail to the attendees has been sent.</source>
