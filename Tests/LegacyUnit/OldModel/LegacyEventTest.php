@@ -8142,32 +8142,6 @@ final class LegacyEventTest extends TestCase
         self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
     }
 
-    /**
-     * @test
-     */
-    public function increaseNumberOfAssociatedRegistrationRecordsCanIncreaseItFromZeroToOne(): void
-    {
-        $this->subject->increaseNumberOfAssociatedRegistrationRecords();
-
-        self::assertSame(1, $this->subject->getNumberOfAssociatedRegistrationRecords());
-    }
-
-    /**
-     * @test
-     */
-    public function increaseNumberOfAssociatedRegistrationRecordsCanIncreaseItFromTwoToThree(): void
-    {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['registrations' => 2]
-        );
-        $subject = new TestingLegacyEvent($uid);
-
-        $subject->increaseNumberOfAssociatedRegistrationRecords();
-
-        self::assertSame(3, $subject->getNumberOfAssociatedRegistrationRecords());
-    }
-
     // Tests concerning the price
 
     /**
@@ -8296,63 +8270,5 @@ final class LegacyEventTest extends TestCase
         $result = $this->subject->getCurrentPriceSpecial();
 
         self::assertSame($this->translate('message_onRequest'), $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getAvailablePricesForAllPricesAvailableWithoutEarlyBirdDeadlineReturnsAllLatePrices(): void
-    {
-        $this->subject->setRecordPropertyString('price_regular', '100.00');
-        $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_special', '50.00');
-        $this->subject->setRecordPropertyString('price_special_early', '45.00');
-
-        self::assertSame(
-            ['regular', 'special'],
-            array_keys($this->subject->getAvailablePrices())
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAvailablePricesForAllPricesAvailableWithPastEarlyBirdDeadlineReturnsAllLatePrices(): void
-    {
-        $this->subject->setRecordPropertyString('price_regular', '100.00');
-        $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_special', '50.00');
-        $this->subject->setRecordPropertyString('price_special_early', '45.00');
-        $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now - 1000);
-
-        self::assertSame(
-            ['regular', 'special'],
-            array_keys($this->subject->getAvailablePrices())
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAvailablePricesForAllPricesAvailableWithFuturEarlyBirdDeadlineReturnsAllEarlyBirdPrices(): void
-    {
-        $this->subject->setRecordPropertyString('price_regular', '100.00');
-        $this->subject->setRecordPropertyString('price_regular_early', '90.00');
-        $this->subject->setRecordPropertyString('price_special', '50.00');
-        $this->subject->setRecordPropertyString('price_special_early', '45.00');
-        $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now + 1000);
-
-        self::assertSame(
-            ['regular_early', 'special_early'],
-            array_keys($this->subject->getAvailablePrices())
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAvailablePricesForNoPricesSetReturnsRegularPriceOnly(): void
-    {
-        self::assertSame(['regular'], array_keys($this->subject->getAvailablePrices()));
     }
 }

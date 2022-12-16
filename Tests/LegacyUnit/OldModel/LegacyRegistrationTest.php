@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
@@ -168,56 +167,6 @@ final class LegacyRegistrationTest extends TestCase
         self::assertTrue($this->subject->isOk());
     }
 
-    // Tests concerning the payment method in setRegistrationData
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataUsesPaymentMethodUidFromSetRegistrationData(): void
-    {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['method_of_payment' => 42]
-        );
-
-        self::assertSame(
-            42,
-            $this->subject->getMethodOfPaymentUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod(): void
-    {
-        $this->configuration->setAsString('currency', 'EUR');
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['price_regular' => 31.42]
-        );
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods'
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $paymentMethodUid,
-            'payment_methods'
-        );
-
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData($seminar, 0, []);
-
-        self::assertSame(
-            $paymentMethodUid,
-            $this->subject->getMethodOfPaymentUid()
-        );
-    }
-
     // Tests regarding the registration queue.
 
     /**
@@ -326,16 +275,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getRegistrationDataForNotesWithCarriageReturnRemovesCarriageReturnFromNotes(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['notes' => "foo\r\nbar"]
-        );
+        $subject = LegacyRegistration::fromData(['notes' => "foo\r\nbar"]);
 
         self::assertStringNotContainsString(
             "\r\n",
-            $this->subject->getRegistrationData('notes')
+            $subject->getRegistrationData('notes')
         );
     }
 
@@ -344,16 +288,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['notes' => "foo\r\nbar"]
-        );
+        $subject = LegacyRegistration::fromData(['notes' => "foo\r\nbar"]);
 
         self::assertSame(
             "foo\nbar",
-            $this->subject->getRegistrationData('notes')
+            $subject->getRegistrationData('notes')
         );
     }
 
@@ -362,16 +301,11 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function getRegistrationDataForMultipleAttendeeNamesReturnsAttendeeNamesWithEnumeration(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $this->subject->setRegistrationData(
-            $seminar,
-            0,
-            ['attendees_names' => "foo\nbar"]
-        );
+        $subject = LegacyRegistration::fromData(['attendees_names' => "foo\nbar"]);
 
         self::assertSame(
             "1. foo\n2. bar",
-            $this->subject->getRegistrationData('attendees_names')
+            $subject->getRegistrationData('attendees_names')
         );
     }
 
@@ -552,9 +486,7 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function commitToDbCanCreateNewRecord(): void
     {
-        $seminar = new LegacyEvent($this->seminarUid);
         $registration = new LegacyRegistration();
-        $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
@@ -566,139 +498,6 @@ final class LegacyRegistrationTest extends TestCase
             1,
             $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function commitToDbCanCreateLodgingsRelation(): void
-    {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $lodgingsUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings'
-        );
-
-        $registration = new LegacyRegistration();
-        $registration->setRegistrationData(
-            $seminar,
-            0,
-            ['lodgings' => [$lodgingsUid]]
-        );
-        $registration->enableTestMode();
-        $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
-        $this->testingFramework->markTableAsDirty(
-            'tx_seminars_attendances_lodgings_mm'
-        );
-
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
-
-        self::assertTrue(
-            $registration->commitToDatabase()
-        );
-        self::assertSame(
-            1,
-            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
-            'The registration record cannot be found in the DB.'
-        );
-
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_lodgings_mm');
-
-        self::assertSame(
-            1,
-            $connection->count(
-                '*',
-                'tx_seminars_attendances_lodgings_mm',
-                ['uid_local' => $registration->getUid(), 'uid_foreign' => $lodgingsUid]
-            ),
-            'The relation record cannot be found in the DB.'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function commitToDbCanCreateFoodsRelation(): void
-    {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $foodsUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods'
-        );
-
-        $registration = new LegacyRegistration();
-        $registration->setRegistrationData(
-            $seminar,
-            0,
-            ['foods' => [$foodsUid]]
-        );
-        $registration->enableTestMode();
-        $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
-        $this->testingFramework->markTableAsDirty(
-            'tx_seminars_attendances_foods_mm'
-        );
-
-        self::assertTrue(
-            $registration->commitToDatabase()
-        );
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
-
-        self::assertSame(
-            1,
-            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
-            'The registration record cannot be found in the DB.'
-        );
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_foods_mm');
-        self::assertSame(
-            1,
-            $connection->count(
-                '*',
-                'tx_seminars_attendances_foods_mm',
-                ['uid_local' => $registration->getUid(), 'uid_foreign' => $foodsUid]
-            ),
-            'The relation record cannot be found in the DB.'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function commitToDbCanCreateCheckboxesRelation(): void
-    {
-        $seminar = new LegacyEvent($this->seminarUid);
-        $checkboxesUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes'
-        );
-
-        $registration = new LegacyRegistration();
-        $registration->setRegistrationData(
-            $seminar,
-            0,
-            ['checkboxes' => [$checkboxesUid]]
-        );
-        $registration->enableTestMode();
-        $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
-        $this->testingFramework->markTableAsDirty(
-            'tx_seminars_attendances_checkboxes_mm'
-        );
-
-        self::assertTrue(
-            $registration->commitToDatabase()
-        );
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
-        self::assertSame(
-            1,
-            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
-            'The registration record cannot be found in the DB.'
-        );
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_checkboxes_mm');
-        self::assertSame(
-            1,
-            $connection->count(
-                '*',
-                'tx_seminars_attendances_checkboxes_mm',
-                ['uid_local' => $registration->getUid(), 'uid_foreign' => $checkboxesUid]
-            ),
-            'The relation record cannot be found in the DB.'
         );
     }
 
@@ -826,191 +625,6 @@ final class LegacyRegistrationTest extends TestCase
 
         self::assertFalse(
             $this->subject->hasExistingFrontEndUser()
-        );
-    }
-
-    // Tests concerning setRegistrationData
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithNoFoodOptionsInitializesFoodOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            []
-        );
-
-        self::assertIsArray($this->subject->getFoodsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataForFoodOptionsStoresFoodOptionsInFoodsVariable(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $foods = [1, 2, 3];
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['foods' => $foods]
-        );
-
-        self::assertSame($foods, $this->subject->getFoodsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithEmptyFoodOptionsInitializesFoodOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['foods' => '']
-        );
-
-        self::assertIsArray($this->subject->getFoodsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithNoLodgingOptionsInitializesLodgingOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            []
-        );
-
-        self::assertIsArray($this->subject->getLodgingsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithLodgingOptionsStoresLodgingOptionsInLodgingVariable(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $lodgings = [1, 2, 3];
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['lodgings' => $lodgings]
-        );
-
-        self::assertSame($lodgings, $this->subject->getLodgingsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithEmptyLodgingOptionsInitializesLodgingOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['lodgings' => '']
-        );
-
-        self::assertIsArray($this->subject->getLodgingsUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithNoCheckboxOptionsInitializesCheckboxOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            []
-        );
-
-        self::assertIsArray($this->subject->getCheckboxesUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithCheckboxOptionsStoresCheckboxOptionsInCheckboxVariable(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $checkboxes = [1, 2, 3];
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['checkboxes' => $checkboxes]
-        );
-
-        self::assertSame($checkboxes, $this->subject->getCheckboxesUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithEmptyCheckboxOptionsInitializesCheckboxOptionsAsArray(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['checkboxes' => '']
-        );
-
-        self::assertIsArray($this->subject->getCheckboxesUids());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithRegisteredThemselvesGivenStoresRegisteredThemselvesIntoTheObject(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['registered_themselves' => 1]
-        );
-
-        self::assertSame(
-            $this->translate('label_yes'),
-            $this->subject->getRegistrationData('registered_themselves')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDataWithCompanyGivenStoresCompanyIntoTheObject(): void
-    {
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setRegistrationData(
-            $this->subject->getSeminarObject(),
-            $userUid,
-            ['company' => "Foo\nBar Inc"]
-        );
-
-        self::assertSame(
-            "Foo\nBar Inc",
-            $this->subject->getRegistrationData('company')
         );
     }
 

@@ -204,21 +204,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Processes the entered/edited registration and stores it in the DB.
-     *
-     * In addition, the entered payment data is stored in the FE user session.
-     *
-     * @param array $parameters the entered form data with the field names as array keys (including the submit button)
-     */
-    public function processRegistration(array $parameters): void
-    {
-        $registrationManager = $this->getRegistrationManager();
-
-        $registrationManager->createRegistration($this->getSeminar(), $parameters, $this);
-        $registrationManager->sendEmailsForNewRegistration($this);
-    }
-
-    /**
      * Checks whether the "travelling terms" checkbox (ie. the second "terms" checkbox) is enabled in the event record
      * *and* via TS setup.
      */

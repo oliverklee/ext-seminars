@@ -142,39 +142,6 @@ final class RegistrationFormTest extends FunctionalTestCase
         self::assertTrue($subject->hasCheckboxes());
     }
 
-    /**
-     * @test
-     */
-    public function processRegistrationWithoutEventThrowsException(): void
-    {
-        $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Please set a proper seminar object via $this->setSeminar().');
-        $this->expectExceptionCode(1333293187);
-
-        $this->subject->processRegistration([]);
-    }
-
-    /**
-     * @test
-     */
-    public function processRegistrationWithoutAdditionalAttendeesNotCreatesAdditionalUsers(): void
-    {
-        $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-        $subject->setTestMode();
-        $subject->setFormConfiguration(['form.' => []]);
-
-        $event = LegacyEvent::fromData(['needs_registration' => 1]);
-        $subject->setSeminar($event);
-
-        $subject->processRegistration([]);
-
-        self::assertSame(
-            0,
-            $this->getDatabaseConnection()->selectCount('*', 'fe_users')
-        );
-    }
-
     // Tests concerning getThankYouAfterRegistrationUrl
 
     /**

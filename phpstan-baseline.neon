@@ -1271,11 +1271,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:processRegistration\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setPage\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
@@ -1886,37 +1881,12 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Cannot access offset 'uid' on mixed\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Cannot call method getAttendancesPid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Cannot call method hasAttendancesPid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Cannot call method mailto_makelinks\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
@@ -1931,47 +1901,12 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:processAdditionalRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setRegistrationData\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Only booleans are allowed in a negated boolean, int given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Only booleans are allowed in a ternary operator condition, int given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|false given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
 			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:\\$checkboxes \\(array\\<int, int\\>\\) does not accept array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:\\$foods \\(array\\<int, int\\>\\) does not accept array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:\\$lodgings \\(array\\<int, int\\>\\) does not accept array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
@@ -2231,27 +2166,7 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:createRegistration\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:formatDateForCalendar\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:unifyWhitespace\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
@@ -3916,11 +3831,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\TestingRegistrationManager\\:\\:setRegistrationData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/Fixtures/TestingRegistrationManager.php
-
-		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
@@ -3938,11 +3848,6 @@ parameters:
 		-
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 9
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot access offset 'registrations' on mixed\\.$#"
-			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3981,17 +3886,12 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getFrontEndController\\(\\) is unused\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
