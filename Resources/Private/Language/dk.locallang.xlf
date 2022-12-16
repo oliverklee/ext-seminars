@@ -694,14 +694,6 @@ This event now has been confirmed.</source>
 				<source>E-mail</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="eventlist_button_confirm" xml:space="preserve">
-				<source>Confirm</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="eventlist_button_cancel" xml:space="preserve">
-				<source>Cancel</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="registrationlist.feuser.name" xml:space="preserve">
 				<source>Name</source>
 				<target>Navn</target>
@@ -762,38 +754,6 @@ This event now has been confirmed.</source>
 				<source>(There are %s reference(s) to this record!)</source>
 				<target>(Der er %s reference(r) til denne record!)</target>
 			</trans-unit>
-			<trans-unit id="confirmMailForm_sendButton" xml:space="preserve">
-				<source>Confirm and send</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event confirmed:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_messageBody" xml:space="preserve">
-				<source>This event now is confirmed.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_sendButton" xml:space="preserve">
-				<source>Send cancelation</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event canceled</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_messageBody" xml:space="preserve">
-				<source>Unfortunately, we had to cancel this event.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
 				<source>Send e-mail</source>
 				<target></target>
@@ -832,14 +792,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
 				<source>The e-mail to the attendees has been sent.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_eventCanceled" xml:space="preserve">
-				<source>The event has been canceled.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_eventConfirmed" xml:space="preserve">
-				<source>The event has been confirmed.</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" xml:space="preserve">

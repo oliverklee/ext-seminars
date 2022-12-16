@@ -162,7 +162,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setPostData(
             [
-                'action' => 'cancelEvent',
+                'action' => 'sendEmail',
                 'isSubmitted' => '1',
                 'subject' => '',
             ]
@@ -192,7 +192,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setPostData(
             [
-                'action' => 'confirmEvent',
+                'action' => 'sendEmail',
                 'isSubmitted' => '1',
                 'messageBody' => '<test>',
             ]
@@ -226,7 +226,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setPostData(
             [
-                'action' => 'confirmEvent',
+                'action' => 'sendEmail',
                 'isSubmitted' => '1',
                 'subject' => '',
             ]
@@ -245,7 +245,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setPostData(
             [
-                'action' => 'confirmEvent',
+                'action' => 'sendEmail',
                 'isSubmitted' => '1',
                 'messageBody' => '',
             ]
@@ -303,7 +303,7 @@ final class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setPostData(
             [
-                'action' => 'confirmEvent',
+                'action' => 'sendEmail',
                 'isSubmitted' => '1',
                 'messageBody' => 'foo bar',
             ]

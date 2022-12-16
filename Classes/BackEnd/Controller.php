@@ -126,10 +126,6 @@ class Controller extends AbstractModule
             case 1:
                 if ($this->isGeneralEmailFormRequested()) {
                     $content .= $this->getGeneralMailForm();
-                } elseif ($this->isConfirmEventFormRequested()) {
-                    $content .= $this->getConfirmEventMailForm();
-                } elseif ($this->isCancelEventFormRequested()) {
-                    $content .= $this->getCancelEventMailForm();
                 } else {
                     $content .= GeneralUtility::makeInstance(EventsList::class, $this)->show();
                 }
@@ -193,37 +189,6 @@ class Controller extends AbstractModule
     }
 
     /**
-     * Checks whether the user requested the form for confirming an event and
-     * whether all pre-conditions for showing the form are met.
-     *
-     * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
-     */
-    private function isConfirmEventFormRequested(): bool
-    {
-        if ($this->getEventUid() <= 0) {
-            return false;
-        }
-
-        return GeneralUtility::_POST('action') === 'confirmEvent';
-    }
-
-    /**
-     * Checks whether the user requested the form for canceling an event and
-     * whether all pre-conditions for showing the form are met.
-     *
-     * @return bool TRUE if the form was requested and pre-conditions are
-     *                 met, FALSE otherwise
-     */
-    private function isCancelEventFormRequested(): bool
-    {
-        if ($this->getEventUid() <= 0) {
-            return false;
-        }
-
-        return GeneralUtility::_POST('action') === 'cancelEvent';
-    }
-
-    /**
      * Returns the form to send an e-mail.
      *
      * @return string the HTML source for the form
@@ -231,32 +196,6 @@ class Controller extends AbstractModule
     private function getGeneralMailForm(): string
     {
         $form = GeneralUtility::makeInstance(GeneralEventMailForm::class, $this->getEventUid());
-        $form->setPostData(GeneralUtility::_POST());
-
-        return $form->render();
-    }
-
-    /**
-     * Returns the form to confirm an event.
-     *
-     * @return string the HTML source for the form
-     */
-    private function getConfirmEventMailForm(): string
-    {
-        $form = GeneralUtility::makeInstance(ConfirmEventMailForm::class, $this->getEventUid());
-        $form->setPostData(GeneralUtility::_POST());
-
-        return $form->render();
-    }
-
-    /**
-     * Returns the form to canceling an event.
-     *
-     * @return string the HTML source for the form
-     */
-    private function getCancelEventMailForm(): string
-    {
-        $form = GeneralUtility::makeInstance(CancelEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
         return $form->render();

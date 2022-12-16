@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -183,8 +182,6 @@ class EventsList extends AbstractList
             );
 
             $this->setEmailButtonMarkers($event);
-            $this->setCancelButtonMarkers($event);
-            $this->setConfirmButtonMarkers($event);
 
             $tableRows .= $this->template->getSubpart('EVENT_ROW');
         }
@@ -249,74 +246,6 @@ class EventsList extends AbstractList
             'label_email_button',
             $this->getLanguageService()->getLL('eventlist_button_email')
         );
-    }
-
-    /**
-     * Sets the markers of a button for canceling an event. The button will only
-     * be visible if
-     * - the current record is either a date or single event record
-     * - the event is not canceled yet
-     * - the event has not started yet
-     * In all other cases the corresponding subpart is hidden.
-     *
-     * @param LegacyEvent $event the event to get the cancel button for
-     */
-    private function setCancelButtonMarkers(LegacyEvent $event): void
-    {
-        $this->template->unhideSubpartsArray(['CANCEL_BUTTON']);
-        $pageData = $this->page->getPageData();
-
-        if (
-            ($event->getRecordType() !== EventInterface::TYPE_EVENT_TOPIC)
-            && !$event->isHidden() && !$event->isCanceled()
-            && !$event->hasStarted()
-            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
-            && $this->doesUserHaveAccess($event->getPageUid())
-        ) {
-            $this->template->setMarker('uid', $event->getUid());
-            $urlParameters = ['id' => (int)$pageData['uid']];
-            $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-            $this->template->setMarker('cancel_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
-            $this->template->setMarker(
-                'label_cancel_button',
-                $this->getLanguageService()->getLL('eventlist_button_cancel')
-            );
-        } else {
-            $this->template->hideSubpartsArray(['CANCEL_BUTTON']);
-        }
-    }
-
-    /**
-     * Sets the markers of a button for confirming an event. The button will
-     * only be visible if
-     * - the current record is either a date or single event record
-     * - the event is not confirmed yet
-     * - the event has not started yet
-     * In all other cases the corresponding subpart is hidden.
-     */
-    private function setConfirmButtonMarkers(LegacyEvent $event): void
-    {
-        $this->template->unhideSubpartsArray(['CONFIRM_BUTTON']);
-        $pageData = $this->page->getPageData();
-
-        if (
-            ($event->getRecordType() !== EventInterface::TYPE_EVENT_TOPIC)
-            && !$event->isHidden() && !$event->isConfirmed()
-            && !$event->hasStarted()
-            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
-            && $this->doesUserHaveAccess($event->getPageUid())
-        ) {
-            $this->template->setMarker('uid', $event->getUid());
-            $urlParameters = ['id' => (int)$pageData['uid']];
-            $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-            $this->template->setMarker('confirm_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
-            $this->template->setMarker(
-                'label_confirm_button',
-                $this->getLanguageService()->getLL('eventlist_button_confirm')
-            );
-        } else {
-            $this->template->hideSubpartsArray(['CONFIRM_BUTTON']);
-        }
     }
 
     /**

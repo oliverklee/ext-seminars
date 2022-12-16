@@ -100,7 +100,7 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsTheCancelEventActionForThisForm(): void
+    public function renderContainsTheSendEmailActionForThisForm(): void
     {
         self::assertStringContainsString(
             '<input type="hidden" name="action" value="sendEmail" />',

@@ -555,12 +555,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="eventlist_button_email" xml:space="preserve">
 				<source>E-mail</source>
 			</trans-unit>
-			<trans-unit id="eventlist_button_confirm" xml:space="preserve">
-				<source>Confirm</source>
-			</trans-unit>
-			<trans-unit id="eventlist_button_cancel" xml:space="preserve">
-				<source>Cancel</source>
-			</trans-unit>
 			<trans-unit id="registrationlist.feuser.name" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>
@@ -606,30 +600,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="referencesWarning" xml:space="preserve">
 				<source>(There are %s reference(s) to this record!)</source>
 			</trans-unit>
-			<trans-unit id="confirmMailForm_sendButton" xml:space="preserve">
-				<source>Confirm and send</source>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event confirmed:</source>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_messageBody" xml:space="preserve">
-				<source>This event now is confirmed.</source>
-			</trans-unit>
-			<trans-unit id="confirmMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_sendButton" xml:space="preserve">
-				<source>Send cancelation</source>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event canceled</source>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_messageBody" xml:space="preserve">
-				<source>Unfortunately, we had to cancel this event.</source>
-			</trans-unit>
-			<trans-unit id="cancelMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-			</trans-unit>
 			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
 				<source>Send e-mail</source>
 			</trans-unit>
@@ -659,12 +629,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
 				<source>The e-mail to the attendees has been sent.</source>
-			</trans-unit>
-			<trans-unit id="message_eventCanceled" xml:space="preserve">
-				<source>The event has been canceled.</source>
-			</trans-unit>
-			<trans-unit id="message_eventConfirmed" xml:space="preserve">
-				<source>The event has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" xml:space="preserve">
 				<source>Events</source>

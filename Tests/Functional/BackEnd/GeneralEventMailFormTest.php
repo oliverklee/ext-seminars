@@ -114,31 +114,4 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
 
         self::assertSame(2, $hook->getCountCallForGeneralEmail());
     }
-
-    /**
-     * @test
-     */
-    public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
-
-        $subject = new GeneralEventMailForm(1);
-
-        $messageBody = '%salutation' . $this->translate('cancelMailForm_prefillField_messageBody');
-        $subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => $messageBody,
-            ]
-        );
-
-        $this->email->expects(self::once())->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $subject->render();
-
-        self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
-    }
 }

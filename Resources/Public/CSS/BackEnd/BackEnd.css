@@ -98,16 +98,6 @@ td.email_button button p {
     padding: 0;
 }
 
-td.confirm_button button p {
-    background: transparent url(../../Icons/Confirmed.png) no-repeat top left;
-    padding: 0 0 0 17px;
-}
-
-td.cancel_button button p {
-    background: transparent url(../../Icons/Canceled.png) no-repeat top left;
-    padding: 0 0 0 17px;
-}
-
 #EventMailForm label {
     display: block;
     width: 80px;
@@ -129,14 +119,6 @@ td.cancel_button button p {
 #EventMailForm .submitButton {
     width: 180px;
     margin-left: 30px;
-}
-
-#EventMailForm .confirmEvent p {
-    background: transparent url(../../Icons/Confirmed.png) no-repeat top left;
-}
-
-#EventMailForm .cancelEvent p {
-    background: transparent url(../../Icons/Canceled.png) no-repeat top left;
 }
 
 #EventMailForm .backButton {
