@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventType;
@@ -261,6 +262,28 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertIsArray($databaseRow);
         self::assertSame(EventInterface::TYPE_EVENT_DATE, $databaseRow['object_type']);
+    }
+
+    /**
+     * @test
+     */
+    public function canPersistsSingleEventWithStatistics(): void
+    {
+        $event = new SingleEvent();
+        $event->setStatistics(new EventStatistics(0, 0, 0, 0, 0));
+        $this->subject->add($event);
+        $this->subject->persistAll();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => $event->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
     }
 
     /**
