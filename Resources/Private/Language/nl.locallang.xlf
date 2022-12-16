@@ -604,53 +604,17 @@ you registered for the event &quot;%eventTitle&quot; (%eventDate).
 This event now has been confirmed.</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="title" xml:space="preserve">
-				<source>Events</source>
-				<target>Evenementen</target>
-			</trans-unit>
-			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
-				<source>Accreditation number</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="eventlist.date" xml:space="preserve">
-				<source>Date</source>
-				<target>Datum</target>
-			</trans-unit>
-			<trans-unit id="eventlist.begin_date" xml:space="preserve">
-				<source>Begin date and time</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="eventlist.end_date" xml:space="preserve">
-				<source>End date and time</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="eventlist.title" xml:space="preserve">
-				<source>Title</source>
-				<target>Titel</target>
-			</trans-unit>
-			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
-				<source>Please select a folder in the page tree.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
-				<source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
-				<source>The e-mail to the attendees has been sent.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" xml:space="preserve">
 				<source>Events</source>
 				<target>Bijeenkomsten</target>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
-				<source>This module allows you to manage events, registrations, event sites and speakers.</source>
-				<target>Deze module biedt de functionaliteit, beheer van evenementen, registraties, evenement locaties en sprekers.</target>
+				<source>This module allows you to manage events and registrations.</source>
+				<target>Deze module biedt de functionaliteit, beheer van evenementen en registraties.</target>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tablabel" xml:space="preserve">
-				<source>Events</source>
-				<target>Bijeenkomsten</target>
+				<source>This module allows you to manage events and registrations.</source>
+				<target>Deze module biedt de functionaliteit, beheer van evenementen en registraties.</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.sheet_general" xml:space="preserve">
 				<source>General</source>
