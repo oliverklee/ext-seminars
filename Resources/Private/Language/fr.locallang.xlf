@@ -656,30 +656,6 @@ This event now has been confirmed.</source>
 				<source>Title</source>
 				<target>Titre</target>
 			</trans-unit>
-			<trans-unit id="eventlist.attendees" xml:space="preserve">
-				<source>Cur.</source>
-				<target>Courants</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendeesOnRegistrationQueue" xml:space="preserve">
-				<source>Waiting</source>
-				<target>En attente</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendees_min" xml:space="preserve">
-				<source>Min.</source>
-				<target>Min</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendees_max" xml:space="preserve">
-				<source>Max.</source>
-				<target>Max</target>
-			</trans-unit>
-			<trans-unit id="eventlist.enough_attendees" xml:space="preserve">
-				<source>Enough</source>
-				<target>Assez</target>
-			</trans-unit>
-			<trans-unit id="eventlist.is_full" xml:space="preserve">
-				<source>Full</source>
-				<target>Complet</target>
-			</trans-unit>
 			<trans-unit id="eventlist_button_email" xml:space="preserve">
 				<source>E-mail</source>
 				<target></target>

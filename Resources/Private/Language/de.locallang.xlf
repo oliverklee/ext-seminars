@@ -676,30 +676,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="eventlist.attendees" xml:space="preserve">
-				<source>Cur.</source>
-				<target>Akt.</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendeesOnRegistrationQueue" xml:space="preserve">
-				<source>Waiting</source>
-				<target>Wartend</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendees_min" xml:space="preserve">
-				<source>Min.</source>
-				<target>Min.</target>
-			</trans-unit>
-			<trans-unit id="eventlist.attendees_max" xml:space="preserve">
-				<source>Max.</source>
-				<target>Max.</target>
-			</trans-unit>
-			<trans-unit id="eventlist.enough_attendees" xml:space="preserve">
-				<source>Enough</source>
-				<target>Genug</target>
-			</trans-unit>
-			<trans-unit id="eventlist.is_full" xml:space="preserve">
-				<source>Full</source>
-				<target>Voll</target>
-			</trans-unit>
 			<trans-unit id="eventlist_button_email" xml:space="preserve">
 				<source>E-mail</source>
 				<target>E-Mail</target>
