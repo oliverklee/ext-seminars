@@ -79,14 +79,6 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsPrefilledBodyFieldWithLocalizedSalutation(): void
-    {
-        self::assertStringContainsString('salutation', $this->subject->render());
-    }
-
-    /**
-     * @test
-     */
     public function renderContainsTheSendEmailActionForThisForm(): void
     {
         self::assertStringContainsString(

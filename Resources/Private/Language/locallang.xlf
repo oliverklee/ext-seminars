@@ -534,26 +534,11 @@ This event now has been confirmed.</source>
 			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
 				<source>Send e-mail</source>
 			</trans-unit>
-			<trans-unit id="generalMailForm_prefillField_subject" xml:space="preserve">
-				<source>Event</source>
-			</trans-unit>
-			<trans-unit id="generalMailForm_prefillField_introduction" xml:space="preserve">
-				<source>you registered for the event %s.</source>
-			</trans-unit>
 			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
 				<source>Please select a folder in the page tree.</source>
 			</trans-unit>
 			<trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
 				<source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_subject" xml:space="preserve">
-				<source>Event tested</source>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_messageBody" xml:space="preserve">
-				<source>This is the message body.</source>
-			</trans-unit>
-			<trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
-				<source>This is the introduction: %s</source>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
 				<source>The e-mail to the attendees has been sent.</source>

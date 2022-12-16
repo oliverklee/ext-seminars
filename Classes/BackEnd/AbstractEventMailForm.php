@@ -61,12 +61,6 @@ abstract class AbstractEventMailForm
     protected $action = '';
 
     /**
-     * @var string the prefix for all locallang keys for prefilling the form,
-     *             must not be empty
-     */
-    protected $formFieldPrefix = '';
-
-    /**
      * hook objects for the list view
      *
      * @var array<int, BackEndModule>
@@ -257,7 +251,7 @@ abstract class AbstractEventMailForm
         if ($this->isSubmitted()) {
             $result = $this->getPostData($fieldName);
         } else {
-            $result = $this->getInitialValue($fieldName);
+            $result = '';
         }
 
         return $result;
@@ -404,72 +398,6 @@ abstract class AbstractEventMailForm
     abstract protected function getSubmitButtonLabel(): string;
 
     /**
-     * Returns the initial value for a certain field.
-     *
-     * @param string $fieldName
-     *        the name of the field for which to get the initial value, must be
-     *        either 'subject' or 'messageBody'
-     *
-     * @return string the initial value of the field, will be empty if no initial value is defined
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function getInitialValue(string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'subject':
-                $result = $this->appendTitleAndDate($this->formFieldPrefix);
-                break;
-            case 'messageBody':
-                $result = $this->getMessageBodyFormContent();
-                break;
-            default:
-                throw new \InvalidArgumentException(
-                    'There is no initial value for the field "' . $fieldName . '" defined.',
-                    1333292199
-                );
-        }
-
-        return $result;
-    }
-
-    /**
-     * Appends the title and the date to the subject.
-     *
-     * @param string $prefix
-     *
-     * @return string the subject for the mail form suffixed with the event
-     *                title and date, will be empty if no locallang label
-     *                could be found for the given prefix
-     */
-    private function appendTitleAndDate(string $prefix): string
-    {
-        return $this->getLanguageService()->getLL($prefix . 'subject') . ' ' . $this->getOldEvent()->getTitleAndDate();
-    }
-
-    /**
-     * Replaces the string placeholder "%s" with a localized placeholder for
-     * the salutation.
-     *
-     * @param string $prefix
-     *
-     * @return string the content for the prefilled messageBody field with the
-     *                replaced placeholders, will be empty if no locallang label
-     *                for the given prefix could be found
-     */
-    protected function localizeSalutationPlaceholder(string $prefix): string
-    {
-        $eventDetails = GeneralUtility::makeInstance(Salutation::class)->createIntroduction(
-            '"%s"',
-            $this->getOldEvent()
-        );
-        $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
-
-        return "%salutation\n\n" . $introduction . "\n"
-            . $this->getLanguageService()->getLL($prefix . 'messageBody');
-    }
-
-    /**
      * Creates the message body for the e-mail.
      *
      * @param FrontEndUser $user the recipient of the e-mail
@@ -490,16 +418,6 @@ abstract class AbstractEventMailForm
             ? "\n-- \n" . $organizer->getEmailFooter() : '';
 
         return $messageText . $messageFooter;
-    }
-
-    /**
-     * Gets the content of the message body for the e-mail.
-     *
-     * @return string the content for the message body, will not be empty
-     */
-    protected function getMessageBodyFormContent(): string
-    {
-        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
     }
 
     /**
