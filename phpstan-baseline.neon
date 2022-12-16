@@ -1332,26 +1332,16 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 3
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
-			count: 2
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 4
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:canRegisterSeats\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
+			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
+			count: 3
+			path: Classes/FrontEnd/RegistrationForm.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1366,42 +1356,12 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getKeyOfSelectedPrice\\(\\) should return string but returns array\\|string\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getKeyOfSelectedPrice\\(\\) should return string but returns array\\|string\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:hasRegistrationFormField\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isFoodSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isLodgingSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isMethodOfPaymentSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isTerms2CheckedAndEnabled\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isTermsChecked\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:isValidPriceSelected\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1412,11 +1372,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setPage\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$priceCode of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isPriceAvailable\\(\\) expects string, array\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 
@@ -1872,7 +1827,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 5
+			count: 4
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -2382,11 +2337,6 @@ parameters:
 
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canCreateRegistration\\(\\) has parameter \\$registrationData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 

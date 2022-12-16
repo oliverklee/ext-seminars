@@ -328,14 +328,6 @@
 				<source>Sorry, there are no more vacancies.</source>
 				<target>Es sind leider keine Plätze mehr frei.</target>
 			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-				<target>Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve">
-				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-				<target>Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</target>
-			</trans-unit>
 			<trans-unit id="message_willBeAnnounced" xml:space="preserve">
 				<source>will be announced</source>
 				<target>wird noch bekannt gegeben</target>
@@ -1755,58 +1747,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>Preis gültig und buchbar bis %s</target>
-			</trans-unit>
-			<trans-unit id="message_noSeatsNumber" xml:space="preserve">
-				<source>Please enter only numbers for the number of seats.</source>
-				<target>Bitte geben Sie nur Zahlen für die Anzahl der Pätze ein.</target>
-			</trans-unit>
-			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-				<source>Sorry, there are not that many vacancies for this event.</source>
-				<target>Sorry, so viele Plätze sind leider nicht mehr frei.</target>
-			</trans-unit>
-			<trans-unit id="message_moreAttendeesThanSeats" xml:space="preserve">
-				<source>Please register only as many persons as you are booking seats.</source>
-				<target>Bitte melden Sie nur so viele Personen an, wie Sie Plätze buchen.</target>
-			</trans-unit>
-			<trans-unit id="message_moreAttendeesThanSeats_informal" xml:space="preserve">
-				<source>Please register only as many persons as you are booking seats.</source>
-				<target>Bitte melde nur so viele Personen an, wie du Plätze buchst.</target>
-			</trans-unit>
-			<trans-unit id="message_lessAttendeesThanSeats" xml:space="preserve">
-				<source>Please provide the names of all persons to register.</source>
-				<target>Bitte geben Sie die Namen aller anzumeldenden Personen an.</target>
-			</trans-unit>
-			<trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
-				<source>Please provide the names of all persons to register.</source>
-				<target>Bitte gib die Namen aller anzumeldenden Personen an.</target>
-			</trans-unit>
-			<trans-unit id="message_noKidsNumber" xml:space="preserve">
-				<source>Please enter only numbers for the number of kids.</source>
-				<target>Bitte geben Sie nur Zahlen für die Anzahl der Kinder ein.</target>
-			</trans-unit>
-			<trans-unit id="message_choosePrice" xml:space="preserve">
-				<source>Please select a price.</source>
-				<target>Bitte wählen Sie einen Preis aus.</target>
-			</trans-unit>
-			<trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
-				<source>Please select a method of payment.</source>
-				<target>Bitte wählen Sie eine Zahlungsart aus.</target>
-			</trans-unit>
-			<trans-unit id="message_selectLodging" xml:space="preserve">
-				<source>Please select at least one lodging option.</source>
-				<target>Bitte wählen Sie mindestens eine Unterbringungsart aus.</target>
-			</trans-unit>
-			<trans-unit id="message_selectFood" xml:space="preserve">
-				<source>Please select at least one food option.</source>
-				<target>Bitte wählen Sie mindestens eine Verpflegungsart aus.</target>
-			</trans-unit>
-			<trans-unit id="message_acceptTerms" xml:space="preserve">
-				<source>Please accept the terms and conditions in order to register for this event.</source>
-				<target>Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</target>
-			</trans-unit>
-			<trans-unit id="message_acceptTerms2" xml:space="preserve">
-				<source>Please accept the terms for travelling in order to register for this event.</source>
-				<target>Bitte akzeptieren Sie die Reisebedingungen, um sich für diese Veranstaltung anzumelden.</target>
 			</trans-unit>
 			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
 				<source>You are not registered for this event.</source>

@@ -152,8 +152,7 @@ class LegacyRegistration extends AbstractModel
 
         $availablePrices = $event->getAvailablePrices();
         // If no (available) price is selected, use the first price by default.
-        $selectedPrice = (isset($registrationData['price']) && $event->isPriceAvailable($registrationData['price']))
-            ? $registrationData['price'] : key($availablePrices);
+        $selectedPrice = isset($registrationData['price']) ? $registrationData['price'] : key($availablePrices);
         $this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
 
         $this->recordData['total_price'] = $seats * (float)$availablePrices[$selectedPrice]['amount'];

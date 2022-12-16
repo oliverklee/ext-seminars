@@ -551,22 +551,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         registerThemselvesByDefaultForHiddenCheckbox
-
-   Data type
-         boolean
-
-   Description
-         whether the logged-in user should be registered themselves by default
-         in the registration form (only applicable if the checkbox is hidden)
-
-   Default
-         1
-
-
-.. container:: table-row
-
-   Property
          showFeUserFieldsInRegistrationForm
 
    Data type
