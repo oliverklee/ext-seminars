@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -95,31 +92,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
         return $controller;
     }
 
-    /**
-     * @return positive-int user UID
-     */
-    private function createAndLogInUser(): int
-    {
-        $userUid = 1;
-        $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUser.xml');
-        $this->logInUser($userUid);
-
-        return $userUid;
-    }
-
-    private function logInUser(int $uid): void
-    {
-        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($uid);
-        FrontEndLoginManager::getInstance()->logInUser($user);
-    }
-
     private function setUpFrontEndForRegistrationLink(): DefaultController
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationAndLoginPage.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationPage.xml');
         $this->testingFramework->createFakeFrontEnd(1);
         $controller = new DefaultController();
         $controller->cObj = $this->getFrontEndController()->cObj;
-        $controller->conf = ['loginPID' => '2', 'registerPID' => '3'];
+        $controller->conf = ['registerPID' => '3'];
 
         return $controller;
     }
@@ -160,55 +139,39 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRegistrationLinkWithoutLoginAndPastEventReturnsEmptyString(): void
+    public function getRegistrationLinkWithEventWithVacanciesReturnsLinkToRegistrationPage(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
 
-        $this->importDataSet(__DIR__ . '/Fixtures/PastEventWithVacancies.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
 
         $result = $this->subject->getRegistrationLink($plugin, $event);
 
-        self::assertSame('', $result);
+        self::assertStringContainsString('/registration', $result);
     }
 
     /**
      * @test
      */
-    public function getRegistrationLinkWithoutLoginWithFutureEventWithPassedDeadlineReturnsEmptyString(): void
+    public function getRegistrationLinkWithEventWithVacanciesReturnsLinkWithEventUid(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
 
-        $this->importDataSet(__DIR__ . '/Fixtures/FutureEventWithPassedRegistrationDeadline.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
 
         $result = $this->subject->getRegistrationLink($plugin, $event);
 
-        self::assertSame('', $result);
+        self::assertStringContainsString('%5Bevent%5D=1', $result);
     }
 
     /**
      * @test
      */
-    public function getRegistrationLinkWithoutLoginAndPriceOnRequestReturnsEmptyString(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithPriceOnRequest.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertSame('', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkWithoutLoginAndFullyBookedEventReturnsEmptyString(): void
+    public function getRegistrationLinkWithFullyBookedEventReturnsEmptyString(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
 
@@ -224,23 +187,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRegistrationLinkWithoutLoginAndEventWithVacanciesReturnsLoginLink(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertStringContainsString('/login', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkWithoutLoginAndEventWithUnlimitedVacanciesReturnsLoginLink(): void
+    public function getRegistrationLinkWithEventWithUnlimitedVacanciesReturnsLinkWithEventUid(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
 
@@ -250,13 +197,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $result = $this->subject->getRegistrationLink($plugin, $event);
 
-        self::assertStringContainsString('/login', $result);
+        self::assertStringContainsString('%5Bevent%5D=1', $result);
     }
 
     /**
      * @test
      */
-    public function getRegistrationLinkWithoutLoginAndFullyBookedEventWithQueueEnabledReturnsLoginLink(): void
+    public function getRegistrationLinkWithFullyBookedEventWithQueueReturnsLinkWithEventUid(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
 
@@ -266,188 +213,54 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $result = $this->subject->getRegistrationLink($plugin, $event);
 
-        self::assertStringContainsString('/login', $result);
+        self::assertStringContainsString('%5Bevent%5D=1', $result);
     }
+
+    // Tests concerning getLinkToRegistrationPage
 
     /**
      * @test
      */
-    public function getRegistrationLinkWithLoginAndEventWithVacanciesReturnsLinkToRegistrationPage(): void
+    public function getLinkToRegistrationPageCreatesLinkToRegistrationPageWithEventUid(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->createAndLogInUser();
-
         $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
 
-        $result = $this->subject->getRegistrationLink($plugin, $event);
+        $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
         self::assertStringContainsString('/registration', $result);
+        self::assertStringContainsString('%5Bevent%5D=1', $result);
     }
 
     /**
      * @test
      */
-    public function getRegistrationLinkWithLoginAndEventWithVacanciesReturnsLinkWithEventUid(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->createAndLogInUser();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertStringContainsString('%5Bseminar%5D=1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkWithLoginAndFullyBookedEventReturnsEmptyString(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->createAndLogInUser();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/FullyBookedEvent.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertSame('', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkWithLoginAndEventWithUnlimitedVacanciesReturnsLinkWithEventUid(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->createAndLogInUser();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithUnlimitedVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertStringContainsString('%5Bseminar%5D=1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationLinkWithLoginAndFullyBookedEventWithQueueReturnsLinkWithEventUid(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->createAndLogInUser();
-
-        $this->importDataSet(__DIR__ . '/Fixtures/FullyBookedEventWithQueue.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getRegistrationLink($plugin, $event);
-
-        self::assertStringContainsString('%5Bseminar%5D=1', $result);
-    }
-
-    // Tests concerning getLinkToRegistrationOrLoginPage
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkToLoginPage(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
-
-        self::assertStringContainsString('href="/login', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesRedirectWithEventUid(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
-
-        self::assertStringContainsString('%255Bseminar%255D%3D1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkToRegistrationPageWithEventUid(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
-
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
-
-        self::assertStringContainsString('/registration', $result);
-        self::assertStringContainsString('%5Bseminar%5D=1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkWithoutRedirect(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacancies.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
-
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
-
-        self::assertStringNotContainsString('redirect_url', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoginAndSeparateDetailsPageCreatesLinkToRegistrationPage(): void
+    public function getLinkToRegistrationPageWithSeparateDetailsPageCreatesLinkToRegistrationPage(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
         $this->importDataSet(__DIR__ . '/Fixtures/EventWithVacanciesWithSeparateDetailsPage.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
 
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
+        $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
         self::assertStringContainsString('/registration', $result);
-        self::assertStringContainsString('%5Bseminar%5D=1', $result);
+        self::assertStringContainsString('%5Bevent%5D=1', $result);
     }
 
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoginAndEventWithoutDateCreatesPrebookingLabel(): void
+    public function getLinkToRegistrationPageWithEventWithoutDateCreatesPrebookingLabel(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
         $this->importDataSet(__DIR__ . '/Fixtures/EventWithoutDate.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
 
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
+        $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
         self::assertStringContainsString($this->translate('label_onlinePrebooking'), $result);
     }
@@ -455,15 +268,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoginAndFullyBookedWithoutDateCreatesRegistrationLabel(): void
+    public function getLinkToRegistrationPageWithFullyBookedWithoutDateCreatesRegistrationLabel(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
         $this->importDataSet(__DIR__ . '/Fixtures/FullyBookedEventWithoutDate.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
 
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
+        $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
         self::assertStringContainsString($this->translate('label_onlineRegistration'), $result);
     }
@@ -471,31 +283,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithoutLoginAndFullyBookedWithQueueCreatesQueueLabel(): void
+    public function getLinkToRegistrationPageWithFullyBookedWithQueueCreatesQueueLabel(): void
     {
         $plugin = $this->setUpFrontEndForRegistrationLink();
         $this->importDataSet(__DIR__ . '/Fixtures/FullyBookedEventWithQueue.xml');
         $event = LegacyEvent::fromUid(1);
         self::assertInstanceOf(LegacyEvent::class, $event);
 
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
-
-        $expected = \sprintf($this->translate('label_onlineRegistrationOnQueue'), 0);
-        self::assertStringContainsString($expected, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkToRegistrationOrLoginPageWithLoginAndFullyBookedWithQueueCreatesQueueLabel(): void
-    {
-        $plugin = $this->setUpFrontEndForRegistrationLink();
-        $this->importDataSet(__DIR__ . '/Fixtures/FullyBookedEventWithQueue.xml');
-        $event = LegacyEvent::fromUid(1);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-        $this->createAndLogInUser();
-
-        $result = $this->subject->getLinkToRegistrationOrLoginPage($plugin, $event);
+        $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
         $expected = \sprintf($this->translate('label_onlineRegistrationOnQueue'), 0);
         self::assertStringContainsString($expected, $result);
