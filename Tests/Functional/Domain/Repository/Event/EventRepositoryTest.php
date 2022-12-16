@@ -714,6 +714,52 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function updateRegistrationCounterCacheIgnoresHiddenRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(0, (int)$databaseRow['registrations']);
+    }
+
+    /**
+     * @test
+     */
+    public function updateRegistrationCounterCacheIgnoresDeletedRegistrations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithHiddenRegistrationWithZeroCounterCache.xml');
+        $event = $this->subject->findByUid(1);
+
+        $this->subject->updateRegistrationCounterCache($event);
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $query = 'SELECT * FROM tx_seminars_seminars WHERE uid = :uid';
+        $result = $connection->executeQuery($query, ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+        self::assertIsArray($databaseRow);
+
+        self::assertSame(0, (int)$databaseRow['registrations']);
+    }
+
+    /**
+     * @test
+     */
     public function findByPageUidInBackEndModeForNoEventsReturnsEmptyArray(): void
     {
         $result = $this->subject->findByPageUidInBackEndMode(0);

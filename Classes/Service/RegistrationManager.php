@@ -594,7 +594,7 @@ class RegistrationManager
 
         $this->getConnectionForTable('tx_seminars_attendances')->update(
             'tx_seminars_attendances',
-            ['deleted' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']],
+            ['hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']],
             ['uid' => $uid]
         );
 

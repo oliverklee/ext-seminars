@@ -1329,7 +1329,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function removeRegistrationDeletesRegistrationUser(): void
+    public function removeRegistrationHidesRegistrationOfUser(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -1340,6 +1340,7 @@ final class RegistrationManagerTest extends TestCase
             [
                 'user' => $userUid,
                 'seminar' => $seminarUid,
+                'hidden' => 0,
             ]
         );
 
@@ -1352,7 +1353,7 @@ final class RegistrationManagerTest extends TestCase
             ->where(
                 $query->expr()->eq('user', $query->createNamedParameter($userUid, \PDO::PARAM_INT)),
                 $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, \PDO::PARAM_INT)),
-                $query->expr()->eq('deleted', $query->createNamedParameter(1, \PDO::PARAM_INT))
+                $query->expr()->eq('hidden', $query->createNamedParameter(1, \PDO::PARAM_INT))
             )
             ->execute()
             ->fetchColumn(0);

@@ -8,7 +8,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Make registrations non-hideable (#2191)
 - Switch the FAL-related fields in the DB to int (#2187)
 - Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)
