@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Session\FakeSession;
-use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Model\Event;
@@ -37,11 +35,6 @@ final class RegistrationFormTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var FakeSession
-     */
-    private $session;
-
-    /**
      * @var int the UID of the event the fixture relates to
      */
     private $seminarUid = 0;
@@ -50,11 +43,6 @@ final class RegistrationFormTest extends TestCase
      * @var LegacyEvent
      */
     private $seminar;
-
-    /**
-     * @var DummyConfiguration
-     */
-    private $infoTablesConfiguration;
 
     protected function setUp(): void
     {
@@ -67,15 +55,12 @@ final class RegistrationFormTest extends TestCase
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
-        $this->session = new FakeSession();
-        Session::setInstance(Session::TYPE_USER, $this->session);
-
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configuration = new DummyConfiguration();
         $configuration->setAsString('currency', 'EUR');
         $configurationRegistry->set('plugin.tx_seminars', $configuration);
-        $this->infoTablesConfiguration = new DummyConfiguration();
-        $configurationRegistry->set('plugin.tx_staticinfotables_pi1', $this->infoTablesConfiguration);
+        $infoTablesConfiguration = new DummyConfiguration();
+        $configurationRegistry->set('plugin.tx_staticinfotables_pi1', $infoTablesConfiguration);
 
         $this->seminar = new LegacyEvent(
             $this->testingFramework->createRecord(
@@ -176,83 +161,6 @@ final class RegistrationFormTest extends TestCase
         self::assertStringNotContainsString(
             '###',
             $this->subject->getAllFeUserData()
-        );
-    }
-
-    ///////////////////////////////////////
-    // Tests concerning saveDataToSession
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function saveDataToSessionCanWriteEmptyZipToUserSession(): void
-    {
-        $this->subject->processRegistration(['zip' => '']);
-
-        self::assertEquals(
-            '',
-            $this->session->getAsString('tx_seminars_registration_editor_zip')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function saveDataToSessionCanWriteNonEmptyZipToUserSession(): void
-    {
-        $this->subject->processRegistration(['zip' => '12345']);
-
-        self::assertEquals(
-            '12345',
-            $this->session->getAsString('tx_seminars_registration_editor_zip')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function saveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession(): void
-    {
-        $this->session->setAsString(
-            'tx_seminars_registration_editor_zip',
-            '12345'
-        );
-        $this->subject->processRegistration(['zip' => '']);
-
-        self::assertEquals(
-            '',
-            $this->session->getAsString('tx_seminars_registration_editor_zip')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function saveDataToSessionCanStoreCompanyInSession(): void
-    {
-        $this->subject->processRegistration(['company' => 'foo inc.']);
-
-        self::assertEquals(
-            'foo inc.',
-            $this->session->getAsString(
-                'tx_seminars_registration_editor_company'
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function saveDataToSessionCanStoreNameInSession(): void
-    {
-        $this->subject->processRegistration(['name' => 'foo']);
-
-        self::assertEquals(
-            'foo',
-            $this->session->getAsString(
-                'tx_seminars_registration_editor_name'
-            )
         );
     }
 

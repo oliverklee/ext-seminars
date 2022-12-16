@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\FrontEnd;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -320,7 +319,6 @@ class RegistrationForm extends AbstractEditor
      */
     public function processRegistration(array $parameters): void
     {
-        $this->saveDataToSession($parameters);
         $registrationManager = $this->getRegistrationManager();
         if (!$registrationManager->canCreateRegistration($this->getSeminar(), $parameters)) {
             return;
@@ -1201,51 +1199,6 @@ class RegistrationForm extends AbstractEditor
     {
         return $this->getSeminar()->isPriceAvailable($formData['value'])
             || !$this->hasRegistrationFormField(['elementname' => 'price']);
-    }
-
-    /**
-     * Saves the following data to the FE user session:
-     * - payment method
-     * - account number
-     * - bank code
-     * - bank name
-     * - gender
-     * - name
-     * - address
-     * - zip
-     * - city
-     * - country
-     * - telephone
-     * - email
-     *
-     * @param array $parameters the form data (may be empty)
-     */
-    private function saveDataToSession(array $parameters): void
-    {
-        if (empty($parameters)) {
-            return;
-        }
-
-        $parametersToSave = [
-            'method_of_payment',
-            'company',
-            'gender',
-            'name',
-            'address',
-            'zip',
-            'city',
-            'country',
-            'telephone',
-            'email',
-            'registered_themselves',
-        ];
-
-        foreach ($parametersToSave as $currentKey) {
-            if (isset($parameters[$currentKey])) {
-                Session::getInstance(Session::TYPE_USER)
-                    ->setAsString($this->prefixId . '_' . $currentKey, $parameters[$currentKey]);
-            }
-        }
     }
 
     /**
