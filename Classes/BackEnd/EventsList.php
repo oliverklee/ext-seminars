@@ -136,11 +136,6 @@ class EventsList extends AbstractList
                 ($event->needsRegistration() ? $event->getAttendances() : '')
             );
             $this->template->setMarker(
-                'show_registrations',
-                !$event->isHidden() && $event->needsRegistration() && $event->hasAttendances()
-                    ? $this->createEventRegistrationsLink($event) : ''
-            );
-            $this->template->setMarker(
                 'number_of_attendees_on_queue',
                 ($event->hasRegistrationQueue()
                     ? $event->getAttendancesOnRegistrationQueue() : '')
@@ -202,27 +197,5 @@ class EventsList extends AbstractList
             'label_email_button',
             $this->getLanguageService()->getLL('eventlist_button_email')
         );
-    }
-
-    /**
-     * Creates a link to the registrations page, showing the attendees for the
-     * given event UID.
-     *
-     * @param LegacyEvent $event
-     *        the event to show the registrations for, must be >= 0
-     *
-     * @return string the URL to the registrations tab with the registration for
-     *                the current event, will not be empty
-     */
-    private function createEventRegistrationsLink(LegacyEvent $event): string
-    {
-        $pageData = $this->page->getPageData();
-
-        $urlParameters = ['id' => (int)$pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()];
-        $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
-
-        return '<a class="btn btn-default" role="button" href="' .
-            \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
-            $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
     }
 }

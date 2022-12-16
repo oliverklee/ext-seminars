@@ -616,14 +616,6 @@ This event now has been confirmed.</source>
 				<source>Events</source>
 				<target>Evenementen</target>
 			</trans-unit>
-			<trans-unit id="subModuleTitle_registrations" xml:space="preserve">
-				<source>Registrations</source>
-				<target>Registraties</target>
-			</trans-unit>
-			<trans-unit id="subModuleTitle_events" xml:space="preserve">
-				<source>Events</source>
-				<target>Evenementen</target>
-			</trans-unit>
 			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
 				<source>Accreditation number</source>
 				<target></target>
@@ -672,38 +664,6 @@ This event now has been confirmed.</source>
 				<source>E-mail</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="registrationlist.feuser.name" xml:space="preserve">
-				<source>Name</source>
-				<target>Naam</target>
-			</trans-unit>
-			<trans-unit id="registrationlist.deleted" xml:space="preserve">
-				<source>(deleted)</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="registrationlist.seminar.accreditation_number" xml:space="preserve">
-				<source>Accreditation number</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="registrationlist.seminar.title" xml:space="preserve">
-				<source>Event</source>
-				<target>Evenement</target>
-			</trans-unit>
-			<trans-unit id="registrationlist.seminar.date" xml:space="preserve">
-				<source>Event date</source>
-				<target>Evenement datum</target>
-			</trans-unit>
-			<trans-unit id="registrationlist.label_regularRegistrations" xml:space="preserve">
-				<source>Regular attendances</source>
-				<target>Standaard deelnemers</target>
-			</trans-unit>
-			<trans-unit id="registrationlist.label_queueRegistrations" xml:space="preserve">
-				<source>Attendances on the registration queue</source>
-				<target>Deelnemers in de registratie queue</target>
-			</trans-unit>
-			<trans-unit id="registrationlist.label_registrationsHeading" xml:space="preserve">
-				<source>Registrations for event &quot;%s&quot; (UID %u)</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="eventMailForm_subject" xml:space="preserve">
 				<source>Subject:</source>
 				<target></target>
@@ -746,10 +706,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
 				<source>This is the introduction: %s</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_show_event_registrations" xml:space="preserve">
-				<source>show</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
