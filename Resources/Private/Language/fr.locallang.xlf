@@ -1576,14 +1576,6 @@ This event now has been confirmed.</source>
 				<source>Attached files</source>
 				<target>Fichiers joints</target>
 			</trans-unit>
-			<trans-unit id="label_registrations" xml:space="preserve">
-				<source>Registrations</source>
-				<target>Inscriptions</target>
-			</trans-unit>
-			<trans-unit id="label_registrationsAsCsv" xml:space="preserve">
-				<source>registrations (as CSV)</source>
-				<target>Inscription (en CSV)</target>
-			</trans-unit>
 			<trans-unit id="label_onlineRegistration" xml:space="preserve">
 				<source>Register now</source>
 				<target>Inscrivez-vous maintenant</target>

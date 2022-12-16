@@ -9,5 +9,4 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:./FrontEnd.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./ListView.typoscript">
 <INCLUDE_TYPOSCRIPT: source="DIR: ./Forms" extensions="typoscript">
-<INCLUDE_TYPOSCRIPT: source="FILE:./CsvExport.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./RegistrationDigestEmail.typoscript">

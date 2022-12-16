@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Csv;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Http\HeaderCollector;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 
@@ -31,11 +29,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
     private $subject;
 
     /**
-     * @var HeaderCollector
-     */
-    private $headerProxy;
-
-    /**
      * @var DummyConfiguration
      */
     private $configuration;
@@ -43,10 +36,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $headerProxyFactory = HeaderProxyFactory::getInstance();
-        $headerProxyFactory->enableTestMode();
-        $this->headerProxy = $headerProxyFactory->getHeaderCollector();
 
         $this->setUpBackendUserFromFixture(1);
         $this->setUpExtensionConfiguration();
@@ -73,26 +62,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
     private function localizeAndRemoveColon(string $key): string
     {
         return \rtrim($this->translate($key), ':');
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForInexistentEventUidSetsNotFoundHeader(): void
-    {
-        $this->subject->createAndOutputListOfRegistrations(1);
-
-        self::assertStringContainsString('404', $this->headerProxy->getLastAddedHeader());
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForInexistentEventUidReturnsNotFoundMessage(): void
-    {
-        $result = $this->subject->createAndOutputListOfRegistrations(1);
-
-        self::assertSame($this->translate('message_404'), $result);
     }
 
     /**

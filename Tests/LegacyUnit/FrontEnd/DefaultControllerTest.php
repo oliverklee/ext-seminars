@@ -4570,85 +4570,8 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Tests concerning allowCsvExportOfRegistrationsInMyVipEventsView in the "my vip events" list view
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-
-        $this->subject->main(
-            '',
-            [
-                'allowCsvExportOfRegistrationsInMyVipEventsView' => 0,
-                'what_to_display' => 'my_vip_events',
-            ]
-        );
-        self::assertFalse(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue(
-            'allowCsvExportOfRegistrationsInMyVipEventsView',
-            1
-        );
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        $this->subject->main('', []);
-        self::assertTrue(
-            $this->subject->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function myVipEventsViewForAllowCsvExportOfRegistrationsInTrueHasEventUidPiVarInRegistrationLink(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue(
-            'allowCsvExportOfRegistrationsInMyVipEventsView',
-            1
-        );
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        self::assertStringContainsString(
-            'eventUid',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function myVipEventsViewForAllowCsvExportOfRegistrationsInTrueHasTablePiVarInRegistrationLink(): void
-    {
-        $this->createLogInAndAddFeUserAsVip();
-        $this->subject->setConfigurationValue(
-            'allowCsvExportOfRegistrationsInMyVipEventsView',
-            1
-        );
-        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
-
-        self::assertStringContainsString(
-            'table=tx_seminars_attendances',
-            $this->subject->main('', [])
-        );
-    }
-
     /////////////////////////////////////////////////////////////////
-    // Tests concerning the category list in the my vip events view
+    // Tests concerning the category list in the "my VIP events" view
     /////////////////////////////////////////////////////////////////
 
     /**

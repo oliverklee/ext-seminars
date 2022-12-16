@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the CSV export of registrations in the FE (#2222)
 - Drop the custom BE user and BE user group models (#2221)
 - Drop the approval workflow for the FE editor (#2214, #2220)
 - Drop the hide/unhide FE editor functionality (#2206)

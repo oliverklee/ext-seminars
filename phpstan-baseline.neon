@@ -442,7 +442,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 3
+			count: 2
 			path: Classes/Csv/CsvDownloader.php
 
 		-
@@ -657,7 +657,7 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 4
+			count: 3
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -937,7 +937,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 7
+			count: 6
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1142,7 +1142,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method typoLink\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1167,7 +1167,7 @@ parameters:
 
 		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
-			count: 4
+			count: 3
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -4422,7 +4422,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -4432,7 +4432,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 7
+			count: 2
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -4457,11 +4457,6 @@ parameters:
 
 		-
 			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Csv\\\\CsvDownloader\\:\\:createAndOutputListOfRegistrations\\(\\) expects int, int\\|null given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 

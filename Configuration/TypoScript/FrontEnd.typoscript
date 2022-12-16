@@ -104,9 +104,6 @@ plugin.tx_seminars_pi1 {
   # "attendees_and_managers", "login" or "world"
   accessToFrontEndRegistrationLists = attendees_and_managers
 
-  # whether to allow the CSV export in the "my VIP events" view
-  allowCsvExportOfRegistrationsInMyVipEventsView = 0
-
   # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
   eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 

@@ -532,21 +532,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         allowCsvExportOfRegistrationsInMyVipEventsView
-
-   Data type
-         boolean
-
-   Description
-         whether to allow the CSV export in the "my VIP events" view
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          eventFieldsOnRegistrationPage
 
    Data type
