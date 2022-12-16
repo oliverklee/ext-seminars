@@ -2701,11 +2701,6 @@ parameters:
 			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$fieldName \\(non\\-empty\\-string\\) of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm\\:\\:setErrorMessage\\(\\) should be contravariant with parameter \\$fieldName \\(string\\) of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setErrorMessage\\(\\)$#"
-			count: 1
-			path: Tests/Functional/BackEnd/Fixtures/TestingEventMailForm.php
-
-		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
@@ -3598,11 +3593,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$eventUid of class OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm constructor expects int\\<1, max\\>, int given\\.$#"
 			count: 2
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventUid of class OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\Fixtures\\\\TestingEventMailForm constructor expects int\\<1, max\\>, int\\|null given\\.$#"
-			count: 1
 			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
 
 		-
