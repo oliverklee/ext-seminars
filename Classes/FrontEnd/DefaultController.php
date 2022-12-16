@@ -18,7 +18,6 @@ use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
-use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
@@ -283,24 +282,6 @@ class DefaultController extends TemplateHelper
                 $result = $registrationsList->render();
                 if ($this->isConfigurationCheckEnabled()) {
                     $configurationCheck = new RegistrationListConfigurationCheck(
-                        $this->getConfigurationWithFlexForms(),
-                        'plugin.tx_seminars_pi1'
-                    );
-                    $configurationCheck->check();
-                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
-                }
-                break;
-            case 'countdown':
-                // @deprecated #1809 will be removed in seminars 5.0
-                $countdown = GeneralUtility::makeInstance(
-                    Countdown::class,
-                    $this->conf,
-                    $this->cObj
-                );
-                $countdown->injectEventMapper($this->eventMapper);
-                $result = $countdown->render();
-                if ($this->isConfigurationCheckEnabled()) {
-                    $configurationCheck = new CountdownConfigurationCheck(
                         $this->getConfigurationWithFlexForms(),
                         'plugin.tx_seminars_pi1'
                     );

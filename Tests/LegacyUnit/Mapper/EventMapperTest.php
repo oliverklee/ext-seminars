@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
@@ -886,71 +885,6 @@ final class EventMapperTest extends TestCase
         self::assertEquals(
             2,
             $this->subject->findAllByBeginDate(42, 91)->count()
-        );
-    }
-
-    //////////////////////////////////////
-    // Tests concerning findNextUpcoming
-    //////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $this->subject->findNextUpcoming();
-    }
-
-    /**
-     * @test
-     */
-    public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000]
-        );
-
-        $this->subject->findNextUpcoming();
-    }
-
-    /**
-     * @test
-     */
-    public function findNextUpcomingWithUpcomingEventReturnsModelOfUpcomingEvent(): void
-    {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
-        );
-
-        self::assertSame(
-            $uid,
-            $this->subject->findNextUpcoming()->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findNextUpcomingWithTwoUpcomingEventsReturnsOnlyModelOfNextUpcomingEvent(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000]
-        );
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
-        );
-
-        self::assertSame(
-            $uid,
-            $this->subject->findNextUpcoming()->getUid()
         );
     }
 
