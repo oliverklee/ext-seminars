@@ -254,46 +254,6 @@ final class AbstractRegistrationListViewTest extends TestCase
 
     /**
      * @test
-     *
-     * @doesNotPerformAssertions
-     */
-    public function setPageUidWithPositivePageUidNotThrowsException(): void
-    {
-        $this->subject->setPageUid($this->testingFramework->createSystemFolder());
-    }
-
-    /**
-     * @test
-     *
-     * @doesNotPerformAssertions
-     */
-    public function setPageUidWithZeroPageUidNotThrowsException(): void
-    {
-        $this->subject->setPageUid(0);
-    }
-
-    /**
-     * @test
-     */
-    public function setPageUidWithNegativePageUidThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->subject->setPageUid(-1);
-    }
-
-    /**
-     * @test
-     *
-     * @doesNotPerformAssertions
-     */
-    public function setEventUidWithZeroEventUidNotThrowsException(): void
-    {
-        $this->subject->setEventUid(0);
-    }
-
-    /**
-     * @test
      */
     public function setEventUidWithNegativeEventUidThrowsException(): void
     {
@@ -315,20 +275,6 @@ final class AbstractRegistrationListViewTest extends TestCase
             '',
             $subject->render()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForPageAndEventThrowsException(): void
-    {
-        $this->expectException(\BadMethodCallException::class);
-
-        $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
-        $subject->setEventUid($this->eventUid);
-        $subject->setPageUid($this->pageUid);
-
-        $subject->render();
     }
 
     /**
@@ -754,85 +700,6 @@ final class AbstractRegistrationListViewTest extends TestCase
 
         self::assertSame(
             "\r\n",
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderReturnsRegistrationsOnSetPage(): void
-    {
-        $this->subject->setEventUid(0);
-        $this->subject->setPageUid($this->pageUid);
-
-        $this->registrationFieldKeys = ['address'];
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $this->pageUid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'foo',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderNotReturnsRegistrationsOnOtherPage(): void
-    {
-        $this->subject->setEventUid(0);
-        $this->subject->setPageUid($this->pageUid);
-
-        $this->registrationFieldKeys = ['address'];
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $this->pageUid + 1,
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            'foo',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderReturnsRegistrationsOnSubpageOfGivenPage(): void
-    {
-        $this->subject->setEventUid(0);
-        $this->subject->setPageUid($this->pageUid);
-
-        $subpagePid = $this->testingFramework->createSystemFolder($this->pageUid);
-        $this->registrationFieldKeys = ['address'];
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $subpagePid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'foo',
             $this->subject->render()
         );
     }

@@ -567,37 +567,6 @@ final class CsvDownloaderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function createListOfRegistrationsForFrontEndModeCanExportRegistrationsBelongingToAnEvent(): void
-    {
-        $this->subject->setTypo3Mode('FE');
-        $globalBackEndUser = $GLOBALS['BE_USER'];
-        $GLOBALS['BE_USER'] = null;
-
-        $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'company');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'company' => 'foo bar inc.',
-            ]
-        );
-
-        $result = $this->subject->createListOfRegistrations($this->eventUid);
-
-        $GLOBALS['BE_USER'] = $globalBackEndUser;
-
-        self::assertStringContainsString(
-            'foo bar inc.',
-            $result
-        );
-    }
-
     // Tests concerning the main function
 
     /**
@@ -705,7 +674,7 @@ final class CsvDownloaderTest extends TestCase
         );
 
         $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
-        $GLOBALS['_GET']['pid'] = $this->pid;
+        $GLOBALS['_GET']['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',
@@ -741,6 +710,7 @@ final class CsvDownloaderTest extends TestCase
         );
 
         $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
+
         self::assertStringContainsString(
             (string)$firstRegistrationUid,
             $registrationsList
@@ -1103,124 +1073,13 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage(): void
+    public function createAndOutputListOfRegistrationsForNoEventUidGivenThrowsException(): void
     {
-        $GLOBALS['_GET']['pid'] = $this->pid;
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('No event UID set');
+        $this->expectExceptionCode(1390320210);
 
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $this->pid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'foo',
-            $this->subject->createAndOutputListOfRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage(): void
-    {
-        $GLOBALS['_GET']['pid'] = $this->pid;
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $this->pid + 1,
-            ]
-        );
-
-        self::assertStringNotContainsString(
-            'foo',
-            $this->subject->createAndOutputListOfRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage(): void
-    {
-        $GLOBALS['_GET']['pid'] = $this->pid;
-        $subpagePid = $this->testingFramework->createSystemFolder($this->pid);
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo',
-                'pid' => $subpagePid,
-            ]
-        );
-
-        self::assertStringContainsString(
-            'foo',
-            $this->subject->createAndOutputListOfRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader(): void
-    {
-        $this->subject->createAndOutputListOfRegistrations(
-            $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
-        );
-
-        self::assertStringContainsString('404', $this->headerProxy->getLastAddedHeader());
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader(): void
-    {
-        $this->subject->setTypo3Mode('FE');
         $this->subject->createAndOutputListOfRegistrations();
-
-        self::assertStringContainsString('403', $this->headerProxy->getLastAddedHeader());
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv(): void
-    {
-        $this->subject->createAndOutputListOfRegistrations($this->eventUid);
-
-        self::assertContains(
-            'Content-type: text/csv; header=present; charset=utf-8',
-            $this->headerProxy->getAllAddedHeaders()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv(): void
-    {
-        $GLOBALS['_GET']['pid'] = $this->pid;
-        $this->subject->createAndOutputListOfRegistrations();
-
-        self::assertContains(
-            'Content-type: text/csv; header=present; charset=utf-8',
-            $this->headerProxy->getAllAddedHeaders()
-        );
     }
 
     // Tests concerning the export mode and the configuration

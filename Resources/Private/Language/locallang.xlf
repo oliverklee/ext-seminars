@@ -1215,12 +1215,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_attached_files" xml:space="preserve">
 				<source>Attached files</source>
 			</trans-unit>
-			<trans-unit id="label_registrations" xml:space="preserve">
-				<source>Registrations</source>
-			</trans-unit>
-			<trans-unit id="label_registrationsAsCsv" xml:space="preserve">
-				<source>registrations (as CSV)</source>
-			</trans-unit>
 			<trans-unit id="label_onlineRegistration" xml:space="preserve">
 				<source>Register now</source>
 			</trans-unit>

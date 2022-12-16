@@ -27,7 +27,6 @@ use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SingleViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
-use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
@@ -1587,7 +1586,6 @@ class DefaultController extends TemplateHelper
         $this->hideColumnsForAllViewsFromTypoScriptSetup();
         $this->hideRegisterColumnIfNecessary($whatToDisplay);
         $this->hideColumnsForAllViewsExceptMyEvents($whatToDisplay);
-        $this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
         $this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
         $this->hideFilesColumnIfUserCannotAccessFiles();
 
@@ -1760,7 +1758,6 @@ class DefaultController extends TemplateHelper
             'registration',
             'list_registrations',
             'edit',
-            'registrations',
         ];
 
         foreach ($availableColumns as $column) {
@@ -1911,7 +1908,6 @@ class DefaultController extends TemplateHelper
             $this->setRegistrationLinkMarker($whatToDisplay);
 
             $this->setMarker('list_registrations', $this->getRegistrationsListLink());
-            $this->setMarker('registrations', $this->getCsvExportLink());
 
             $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
 
@@ -2283,23 +2279,6 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Hides the registrations column if we are not on the "my_vip_events" view
-     * or the CSV export of registrations is not allowed on the "my_vip_events" view.
-     *
-     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
-     *        (for the default list view), the value from "what_to_display" or "other_dates"
-     */
-    private function hideCsvExportOfRegistrationsColumnIfNecessary(string $whatToDisplay): void
-    {
-        $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-            = $this->getConfValueBoolean('allowCsvExportOfRegistrationsInMyVipEventsView');
-
-        if ($whatToDisplay != 'my_vip_events' || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed) {
-            $this->hideColumns(['registrations']);
-        }
-    }
-
-    /**
      * Hides columns which are not needed for the "topic_list" view.
      */
     private function hideColumnsForTheTopicListView(): void
@@ -2347,29 +2326,6 @@ class DefaultController extends TemplateHelper
             true
         );
         $this->hideColumns($columns);
-    }
-
-    /**
-     * Gets the link to the CSV export.
-     *
-     * @return string the link to the CSV export
-     */
-    private function getCsvExportLink(): string
-    {
-        return $this->cObj->typoLink(
-            $this->translate('label_registrationsAsCsv'),
-            [
-                'parameter' => (int)$this->getFrontEndController()->id,
-                'additionalParams' => GeneralUtility::implodeArrayForUrl(
-                    '',
-                    [
-                        'type' => CsvDownloader::CSV_TYPE_NUMBER,
-                        'table' => 'tx_seminars_attendances',
-                        'eventUid' => $this->seminar->getUid(),
-                    ]
-                ),
-            ]
-        );
     }
 
     // Registration view functions.

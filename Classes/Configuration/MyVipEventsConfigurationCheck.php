@@ -13,7 +13,6 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
     {
         $this->checkRegistrationsVipListPid();
         $this->checkDefaultEventVipsFeGroupID();
-        $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
     }
 
     private function checkRegistrationsVipListPid(): void
@@ -22,17 +21,6 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'registrationsVipListPID',
             'This value specifies the page that contains the list of registrations for an event.
             If this value is not set correctly, the link to that page will not work.'
-        );
-    }
-
-    private function checkAllowCsvExportOfRegistrationsInMyVipEventsView(): void
-    {
-        $this->checkIfBoolean(
-            'allowCsvExportOfRegistrationsInMyVipEventsView',
-            'This value specifies whether managers are allowed to access the CSV export of registrations
-            from the &quot;my VIP events&quot; view.
-            If this value is incorrect, managers may be allowed to access the CSV export of registrations
-            from the &quot;my VIP events&quot; view although they should not be allowed to (or vice versa).'
         );
     }
 }
