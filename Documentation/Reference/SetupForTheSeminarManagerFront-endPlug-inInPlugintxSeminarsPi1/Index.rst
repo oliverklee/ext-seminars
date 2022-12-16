@@ -218,7 +218,7 @@ override the corresponding value from TS Setup.**
    Default
          Image,category,subtitle,event\_type,language,accreditation\_number,cre
          dit\_points,teaser,time,expiry,place,country,price\_special,speakers,t
-         arget\_groups,attached\_files,status
+         arget\_groups,attached\_files
 
 
 .. container:: table-row

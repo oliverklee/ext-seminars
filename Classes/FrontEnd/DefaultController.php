@@ -1590,7 +1590,6 @@ class DefaultController extends TemplateHelper
         $this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
         $this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
         $this->hideFilesColumnIfUserCannotAccessFiles();
-        $this->hideStatusColumnIfNotUsed($whatToDisplay);
 
         if (!isset($this->piVars['pointer'])) {
             $this->piVars['pointer'] = 0;
@@ -1760,7 +1759,6 @@ class DefaultController extends TemplateHelper
             'status_registration',
             'registration',
             'list_registrations',
-            'status',
             'edit',
             'registrations',
         ];
@@ -1913,9 +1911,6 @@ class DefaultController extends TemplateHelper
             $this->setRegistrationLinkMarker($whatToDisplay);
 
             $this->setMarker('list_registrations', $this->getRegistrationsListLink());
-
-            $this->setVisibilityStatusMarker();
-
             $this->setMarker('registrations', $this->getCsvExportLink());
 
             $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
@@ -2906,32 +2901,6 @@ class DefaultController extends TemplateHelper
         }
 
         return $this->seminar->getOwner()->getUid() === $this->getLoggedInFrontEndUserUid();
-    }
-
-    /**
-     * Hides the status column for all views where it is not applicable.
-     *
-     * @param string $whatToDisplay the current list view, may be empty
-     */
-    private function hideStatusColumnIfNotUsed(string $whatToDisplay): void
-    {
-        if ($whatToDisplay === 'my_vip_events') {
-            return;
-        }
-
-        $this->hideColumns(['status']);
-    }
-
-    private function setVisibilityStatusMarker(): void
-    {
-        $visibilityMarker = $this->seminar->isHidden()
-            ? 'pending'
-            : 'published';
-
-        $this->setMarker(
-            'status',
-            $this->translate('visibility_status_' . $visibilityMarker)
-        );
     }
 
     /**

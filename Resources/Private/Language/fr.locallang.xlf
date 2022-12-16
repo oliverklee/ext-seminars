@@ -1608,18 +1608,6 @@ This event now has been confirmed.</source>
 				<source>View the list of registrations</source>
 				<target>Voir la liste des inscriptions</target>
 			</trans-unit>
-			<trans-unit id="label_status" xml:space="preserve">
-				<source>Status</source>
-				<target>Statut</target>
-			</trans-unit>
-			<trans-unit id="visibility_status_published" xml:space="preserve">
-				<source>published</source>
-				<target>publié</target>
-			</trans-unit>
-			<trans-unit id="visibility_status_pending" xml:space="preserve">
-				<source>pending</source>
-				<target>en attente</target>
-			</trans-unit>
 			<trans-unit id="label_list_otherdates" xml:space="preserve">
 				<source>Other dates for this topic</source>
 				<target>Autres dates pour ce sujet</target>

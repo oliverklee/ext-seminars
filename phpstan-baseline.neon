@@ -1122,7 +1122,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method isHidden\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
