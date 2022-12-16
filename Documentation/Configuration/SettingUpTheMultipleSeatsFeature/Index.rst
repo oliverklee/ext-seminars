@@ -39,12 +39,6 @@ This is what needs to be changed:
    would like the attendee to also enter the names of the other
    attendess, please also add *attendees\_names* .
 
-#. Enable the *seats* field in the online registration form by adding
-   *seats* to *plugin.tx\_seminars\_pi1.showRegistrationFields* . If you
-   would like the attendee to also enter the names of the other
-   attendees, please also add *attendees\_names* . Please note that this
-   value also specifies the *order* of the form fields on the front end.
-
 If the field *seats* is not filled in (i.e., the registration is for 0
 seats), the registration is counted as 1 seat.
 

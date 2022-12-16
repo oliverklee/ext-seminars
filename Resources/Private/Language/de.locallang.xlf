@@ -932,10 +932,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Event data that should be displayed on the registration page:</source>
 				<target>Ereignis-Daten, die auf der Anmeldeseite angezeigt werden sollen:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-				<target>Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Details anzeigen</target>

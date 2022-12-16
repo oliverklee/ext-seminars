@@ -130,44 +130,11 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldEnabledReturnsFalse(): void
+    public function hasCheckboxesForEventWithCheckboxesReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
-        $configuration = ['showRegistrationFields' => 'checkboxes'];
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-
-        $event = LegacyEvent::fromUid(1);
-        $subject->setSeminar($event);
-
-        self::assertFalse($subject->hasCheckboxes());
-    }
-
-    /**
-     * @test
-     */
-    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldDisabledReturnsFalse(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
-
-        $configuration = ['showRegistrationFields' => ''];
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-
-        $event = LegacyEvent::fromUid(2);
-        $subject->setSeminar($event);
-
-        self::assertFalse($subject->hasCheckboxes());
-    }
-
-    /**
-     * @test
-     */
-    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldEnabledReturnsTrue(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
-
-        $configuration = ['showRegistrationFields' => 'checkboxes'];
-        $subject = new RegistrationForm($configuration, $this->contentObject);
+        $subject = new RegistrationForm([], $this->contentObject);
 
         $event = LegacyEvent::fromUid(2);
         $subject->setSeminar($event);

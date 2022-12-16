@@ -28,11 +28,6 @@ happens:
    **Note:** If you need to allow the same front-end user to register for
    the same event multiple times, you can allow this in the event record.
 
-#. The user can enter some information about their attendance, e.g.,
-   special interests, previous knowledge about the seminar subject,
-   lodging or food preferences. This can be configured via
-   *plugin.tx\_seminars\_pi1.showRegistrationFields.*
-
 #. In addition, the user can select a price, food options and other
    options. The total price then is calculated from the selected price
    and the number of seats.

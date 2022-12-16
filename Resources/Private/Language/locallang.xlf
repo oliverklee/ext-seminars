@@ -711,9 +711,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.eventFieldsOnRegistrationPage" xml:space="preserve">
 				<source>Event data that should be displayed on the registration page:</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 			</trans-unit>

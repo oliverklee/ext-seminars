@@ -77,7 +77,6 @@ final class RegistrationFormTest extends TestCase
                 'thankYouAfterRegistrationPID' => $rootPageUid,
                 'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'registered_themselves,attendees_names',
                 'showFeUserFieldsInRegistrationForm' => 'name,email',
                 'showFeUserFieldsInRegistrationFormWithLabel' => 'email',
                 'form.' => [
@@ -163,258 +162,9 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    ////////////////////////////////////////
-    // Tests concerning isFormFieldEnabled
-    ////////////////////////////////////////
-
-    /**
-     * Data provider that returns the keys of all available form fields.
-     *
-     * @return array[] two-dimensional array with the inner array being:
-     *               [key] string: the form field key
-     *               [self-contained] boolean: whether the field is visible
-     *                                if no other fields are visible
-     *
-     * @see isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField
-     * @see isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields
-     */
-    public function formFieldsDataProvider(): array
-    {
-        return [
-            'price' => [
-                'key' => 'price',
-                'self-contained' => true,
-            ],
-            'method_of_payment' => [
-                'key' => 'method_of_payment',
-                'self-contained' => false,
-            ],
-            'billing_address' => [
-                'key' => 'billing_address',
-                'self-contained' => false,
-            ],
-            'company' => [
-                'key' => 'company',
-                'self-contained' => true,
-            ],
-            'gender' => [
-                'key' => 'gender',
-                'self-contained' => true,
-            ],
-            'name' => [
-                'key' => 'name',
-                'self-contained' => true,
-            ],
-            'address' => [
-                'key' => 'address',
-                'self-contained' => true,
-            ],
-            'zip' => [
-                'key' => 'zip',
-                'self-contained' => true,
-            ],
-            'city' => [
-                'key' => 'city',
-                'self-contained' => true,
-            ],
-            'country' => [
-                'key' => 'country',
-                'self-contained' => true,
-            ],
-            'telephone' => [
-                'key' => 'telephone',
-                'self-contained' => true,
-            ],
-            'email' => [
-                'key' => 'email',
-                'self-contained' => true,
-            ],
-            'interests' => [
-                'key' => 'interests',
-                'self-contained' => true,
-            ],
-            'expectations' => [
-                'key' => 'expectations',
-                'self-contained' => true,
-            ],
-            'background_knowledge' => [
-                'key' => 'background_knowledge',
-                'self-contained' => true,
-            ],
-            'accommodation' => [
-                'key' => 'accommodation',
-                'self-contained' => true,
-            ],
-            'food' => [
-                'key' => 'food',
-                'self-contained' => true,
-            ],
-            'known_from' => [
-                'key' => 'known_from',
-                'self-contained' => true,
-            ],
-            'seats' => [
-                'key' => 'seats',
-                'self-contained' => true,
-            ],
-            'registered_themselves' => [
-                'key' => 'registered_themselves',
-                'self-contained' => true,
-            ],
-            'attendees_names' => [
-                'key' => 'attendees_names',
-                'self-contained' => true,
-            ],
-            'kids' => [
-                'key' => 'kids',
-                'self-contained' => true,
-            ],
-            'lodgings' => [
-                'key' => 'lodgings',
-                'self-contained' => false,
-            ],
-            'foods' => [
-                'key' => 'foods',
-                'self-contained' => false,
-            ],
-            'checkboxes' => [
-                'key' => 'checkboxes',
-                'self-contained' => false,
-            ],
-            'notes' => [
-                'key' => 'notes',
-                'self-contained' => true,
-            ],
-            'total_price' => [
-                'key' => 'total_price',
-                'self-contained' => true,
-            ],
-            'feuser_data' => [
-                'key' => 'feuser_data',
-                'self-contained' => true,
-            ],
-            'registration_data' => [
-                'key' => 'registration_data',
-                'self-contained' => true,
-            ],
-            'terms' => [
-                'key' => 'terms',
-                'self-contained' => true,
-            ],
-            'terms_2' => [
-                'key' => 'terms_2',
-                'self-contained' => false,
-            ],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @param string $key the key of the field to check for, must not be empty
-     *
-     * @dataProvider formFieldsDataProvider
-     */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key): void
-    {
-        $subject = new RegistrationForm(
-            ['showRegistrationFields' => ''],
-            $this->getFrontEndController()->cObj
-        );
-
-        $event = $this->createMock(LegacyEvent::class);
-        $subject->setSeminar($event);
-
-        self::assertFalse(
-            $subject->isFormFieldEnabled($key)
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @param string $key the key of the field to check for, must not be empty
-     * @param bool $isSelfContained
-     *        whether the field will be visible if no other fields are enabled
-     *        and the event has no special features enabled
-     *
-     * @dataProvider formFieldsDataProvider
-     */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
-        string $key,
-        bool $isSelfContained
-    ): void {
-        $subject = new RegistrationForm(
-            ['showRegistrationFields' => $key],
-            $this->getFrontEndController()->cObj
-        );
-        $event = $this->createMock(LegacyEvent::class);
-        $subject->setSeminar($event);
-
-        self::assertEquals(
-            $isSelfContained,
-            $subject->isFormFieldEnabled($key)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats(): void
-    {
-        $subject = new RegistrationForm(
-            ['showRegistrationFields' => 'registered_themselves'],
-            $this->getFrontEndController()->cObj
-        );
-
-        self::assertFalse(
-            $subject->isFormFieldEnabled('more_seats')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress(): void
-    {
-        $subject = new RegistrationForm(
-            ['showRegistrationFields' => 'company, billing_address'],
-            $this->getFrontEndController()->cObj
-        );
-
-        self::assertTrue(
-            $subject->isFormFieldEnabled('billing_address')
-        );
-    }
-
     /////////////////////////////////////////
     // Tests concerning getRegistrationData
     /////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString(): void
-    {
-        $selectedPaymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods',
-            ['title' => 'payment foo']
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $this->seminarUid,
-            $selectedPaymentMethodUid
-        );
-        $this->subject->setFakedFormValue(
-            'method_of_payment',
-            $selectedPaymentMethodUid
-        );
-
-        self::assertEquals(
-            '',
-            $this->subject->getAllRegistrationDataForConfirmation()
-        );
-    }
 
     /**
      * @test
@@ -424,7 +174,6 @@ final class RegistrationFormTest extends TestCase
         $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'interests',
             ],
             $this->getFrontEndController()->cObj
         );
@@ -448,7 +197,6 @@ final class RegistrationFormTest extends TestCase
         $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'interests',
             ],
             $this->getFrontEndController()->cObj
         );
@@ -472,7 +220,6 @@ final class RegistrationFormTest extends TestCase
         $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'attendees_names',
             ],
             $this->getFrontEndController()->cObj
         );
@@ -501,7 +248,6 @@ final class RegistrationFormTest extends TestCase
         $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'attendees_names,registered_themselves',
             ],
             $this->getFrontEndController()->cObj
         );
@@ -531,7 +277,6 @@ final class RegistrationFormTest extends TestCase
         $subject = new RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                'showRegistrationFields' => 'attendees_names,registered_themselves',
             ],
             $this->getFrontEndController()->cObj
         );

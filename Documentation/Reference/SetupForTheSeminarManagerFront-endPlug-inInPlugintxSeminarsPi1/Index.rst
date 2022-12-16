@@ -519,38 +519,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         showRegistrationFields
-
-   Data type
-         string
-
-   Description
-         comma-separated list of tx\_seminars\_attendances DB fields to show
-         for the online registrationThe order of the values is  *not*
-         relevant.Allowed values are in:step\_counter,
-         price,method\_of\_payment, account\_number, bank\_code, bank\_name,
-         account\_owner, billing\_address, company, gender, name, address, zip,
-         city, country, telephone, email,interests, expectations,
-         background\_knowledge, accommodation, food, known\_from, seats,
-         registered\_themselves,attendees\_names, kids, lodgings, foods,
-         checkboxes, notes, total\_price, feuser\_data, billing\_address,
-         registration\_data, terms, terms\_2
-
-         **Note:**  *billing\_address* enabled the summary of all billing
-         address fields for the second registration page. To get this to work
-         correctly, you also need to enable the particular fields for a
-         separate billing addres that should be displayed on the first
-         registration page, for example: name, address, zip, city
-
-   Default
-         step\_counter,price,method\_of\_payment,lodgings,foods,checkboxes,inte
-         rests,expectations,background\_knowledge,known\_from,notes,total\_pric
-         e,feuser\_data,billing\_address,registration\_data,terms\_2
-
-
-.. container:: table-row
-
-   Property
          showFeUserFieldsInRegistrationForm
 
    Data type

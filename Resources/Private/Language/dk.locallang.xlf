@@ -890,10 +890,6 @@ This event now has been confirmed.</source>
 				<source>Event data that should be displayed on the registration page:</source>
 				<target>Arrangements info der skal vises på tilmeldingssiden:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-				<target>Vis tekst input felter på online tilmeldingssiden (komma-separeret):</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Vis detaljer om taler</target>

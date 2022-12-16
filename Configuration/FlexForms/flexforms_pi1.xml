@@ -682,16 +682,6 @@
 							</config>
 						</TCEforms>
 					</eventFieldsOnRegistrationPage>
-					<showRegistrationFields>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.showRegistrationFields</label>
-							<config>
-								<type>input</type>
-								<size>45</size>
-								<max>500</max>
-							</config>
-						</TCEforms>
-					</showRegistrationFields>
 					<showSpeakerDetails>
 						<TCEforms>
 							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.showSpeakerDetails</label>

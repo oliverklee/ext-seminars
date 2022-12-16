@@ -868,10 +868,6 @@ This event now has been confirmed.</source>
 				<source>Event data that should be displayed on the registration page:</source>
 				<target>Данные, отображаемые на странице регистрации:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-				<target>Текстовые поля для онлайн-регистрации:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Показывать информацию о докладчике</target>

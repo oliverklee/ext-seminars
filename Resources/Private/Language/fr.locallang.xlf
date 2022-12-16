@@ -900,10 +900,6 @@ This event now has been confirmed.</source>
 				<source>Event data that should be displayed on the registration page:</source>
 				<target>Données de l'événements qui doivent s'afficher sur la page d'inscription :</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-				<source>Show text input fields for online registration (comma-separated):</source>
-				<target>Afficher des champs texte pour l'inscription (liste séparée par des virgules) :</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Afficher les détails du conférencier</target>
