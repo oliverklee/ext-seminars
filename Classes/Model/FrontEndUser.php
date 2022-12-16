@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Model;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
 /**
@@ -12,34 +11,6 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
  */
 class FrontEndUser extends OelibFrontEndUser
 {
-    /**
-     * Returns the PID where to store the auxiliary records created by this
-     * front-end user.
-     *
-     * The PID is retrieved from the first user group which has a PID set.
-     *
-     * @return int the PID where to store auxiliary records created by this
-     *                 front-end user, will be 0 if no PID is set
-     */
-    public function getAuxiliaryRecordsPid(): int
-    {
-        if ($this->getUserGroups()->isEmpty()) {
-            return 0;
-        }
-
-        $auxiliaryRecordsPid = 0;
-
-        /** @var FrontEndUserGroup $userGroup */
-        foreach ($this->getUserGroups() as $userGroup) {
-            if ($userGroup->hasAuxiliaryRecordsPid()) {
-                $auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
-                break;
-            }
-        }
-
-        return $auxiliaryRecordsPid;
-    }
-
     /**
      * Returns the PID where to store the event records for this user.
      *
@@ -66,63 +37,6 @@ class FrontEndUser extends OelibFrontEndUser
         }
 
         return $eventRecordPid;
-    }
-
-    /**
-     * Returns all default categories assigned to this user's groups.
-     *
-     * @return Collection<Category> the categories assigned to this user's groups, will
-     *                       be empty if no default categories have been assigned
-     *                       to any of the user's groups
-     */
-    public function getDefaultCategoriesFromGroup(): Collection
-    {
-        /** @var Collection<Category> $categories */
-        $categories = new Collection();
-
-        /** @var FrontEndUserGroup $group */
-        foreach ($this->getUserGroups() as $group) {
-            if ($group->hasDefaultCategories()) {
-                $categories->append($group->getDefaultCategories());
-            }
-        }
-
-        return $categories;
-    }
-
-    /**
-     * Checks whether this user's groups have any default categories.
-     */
-    public function hasDefaultCategories(): bool
-    {
-        return !$this->getDefaultCategoriesFromGroup()->isEmpty();
-    }
-
-    /**
-     * Returns all default organizers assigned to this user's groups.
-     *
-     * @return Collection<Organizer> the organizers assigned to this user's groups, will
-     *                       be empty if no default organizers have been assigned
-     *                       to any of the user's groups
-     */
-    public function getDefaultOrganizers(): Collection
-    {
-        /** @var Collection<Organizer> $organizers */
-        $organizers = new Collection();
-
-        /** @var FrontEndUserGroup $group */
-        foreach ($this->getUserGroups() as $group) {
-            if ($group->hasDefaultOrganizer()) {
-                $organizers->add($group->getDefaultOrganizer());
-            }
-        }
-
-        return $organizers;
-    }
-
-    public function hasDefaultOrganizers(): bool
-    {
-        return !$this->getDefaultOrganizers()->isEmpty();
     }
 
     /**

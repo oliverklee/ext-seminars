@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the board-related prices (#2190)
 - Drop the upgrade wizards (#2187)
 - Drop unused model methods and mapper relations (#2185)
-- Drop the legacy FE editor (#2184, #2194, #2202, #2203, #2224)
+- Drop the legacy FE editor (#2184, #2194, #2202, #2203, #2224, #2227)
 - Drop the unused `CommaSeparatedTitlesViewHelper` (#2182)
 - Drop the the `charsetForCsv` setting (#2181)
 - Drop obsolete package conflicts (#2171)

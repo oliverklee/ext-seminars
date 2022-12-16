@@ -939,9 +939,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
 				<source>Sysfolder to store FE-created events in</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createAuxiliaryRecordsPID" xml:space="preserve">
-				<source>Sysfolder to store FE-created auxiliary records in</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
 				<source>Page to redirect to after saving an event in the front end</source>
 			</trans-unit>

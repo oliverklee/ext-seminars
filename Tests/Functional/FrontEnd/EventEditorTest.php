@@ -123,44 +123,6 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertStringContainsString('/afterSave', $result);
     }
 
-    // Tests concerning populateListOrganizers().
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersShowsOrganizerFromDatabase(): void
-    {
-        $this->logInUser(1);
-
-        $result = $this->subject->populateListOrganizers();
-
-        self::assertContains(['caption' => 'some organizer', 'value' => 1], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersShowsDefaultOrganizerFromUserGroup(): void
-    {
-        $this->logInUser(2);
-
-        $result = $this->subject->populateListOrganizers();
-
-        self::assertContains(['caption' => 'default organizer for FE user group', 'value' => 2], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer(): void
-    {
-        $this->logInUser(2);
-
-        $result = $this->subject->populateListOrganizers();
-
-        self::assertNotContains(['caption' => 'some organizer', 'value' => 1], $result);
-    }
-
     // Tests concerning modifyDataToInsert
 
     /**
@@ -228,43 +190,6 @@ final class EventEditorTest extends FunctionalTestCase
         $result = $this->subject->modifyDataToInsert([]);
 
         self::assertSame(21, $result['pid']);
-    }
-
-    /**
-     * @test
-     */
-    public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesNotAddsAnyCategories(): void
-    {
-        $this->logInUser(1);
-
-        $result = $this->subject->modifyDataToInsert([]);
-
-        self::assertFalse(isset($result['categories']));
-    }
-
-    /**
-     * @test
-     */
-    public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory(): void
-    {
-        $this->logInUser(4);
-
-        $result = $this->subject->modifyDataToInsert([]);
-
-        self::assertSame('1', $result['categories']);
-    }
-
-    /**
-     * @test
-     */
-    public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryNotAddsTheUsersCategory(): void
-    {
-        $this->logInUser(4);
-        $this->subject->setObjectUid(1);
-
-        $result = $this->subject->modifyDataToInsert([]);
-
-        self::assertFalse(isset($result['categories']));
     }
 
     // Tests concerning validateCheckboxes

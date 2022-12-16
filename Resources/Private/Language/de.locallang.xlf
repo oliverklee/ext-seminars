@@ -1236,10 +1236,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Sysfolder to store FE-created events in</source>
 				<target>SysFolder, in dem die Veranstaltungsdatensätze gespeichert werden</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createAuxiliaryRecordsPID" xml:space="preserve">
-				<source>Sysfolder to store FE-created auxiliary records in</source>
-				<target>SysFolder, in dem die im FE-Editor erstellten Hilfsdaten gespeichert werden</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
 				<source>Page to redirect to after saving an event in the front end</source>
 				<target>Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</target>
