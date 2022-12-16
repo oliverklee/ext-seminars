@@ -87,7 +87,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       listSpeakers {
         name = listSpeakers
         bindsto {
-          exec = eventeditor.populateListSpeakers
           params {
             10 {
               name = type
@@ -159,10 +158,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       name = categories
       label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.categories
       class = tx-seminars-pi1-event-editor-checkbox
-      data.userobj {
-        extension = this
-        method = populateListCategories
-      }
 
       validators {
         10 = validator:STANDARD
@@ -232,11 +227,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
             caption =
             value = 0
           }
-        }
-
-        userobj {
-          extension = this
-          method = populateListEventTypes
         }
       }
 
@@ -468,10 +458,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListPlaces
-      }
 
       validators {
         10 = validator:STANDARD
@@ -515,10 +501,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       name = lodgings
       label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.lodgings
       class = tx-seminars-pi1-event-editor-checkbox
-      data.userobj {
-        extension = this
-        method = populateListLodgings
-      }
 
       validators {
         10 = validator:STANDARD
@@ -541,10 +523,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       name = foods
       label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.foods
       class = tx-seminars-pi1-event-editor-checkbox
-      data.userobj {
-        extension = this
-        method = populateListFoods
-      }
 
       validators {
         10 = validator:STANDARD
@@ -599,14 +577,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListSpeakers
-        params.10 {
-          name = type
-          value = Partner
-        }
-      }
 
       validators {
         10 = validator:STANDARD
@@ -632,14 +602,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListSpeakers
-        params.10 {
-          name = type
-          value = Tutor
-        }
-      }
 
       validators {
         10 = validator:STANDARD
@@ -665,14 +627,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListSpeakers
-        params.10 {
-          name = type
-          value = Leader
-        }
-      }
 
       validators {
         10 = validator:STANDARD
@@ -803,10 +757,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListCheckboxes
-      }
 
       validators {
         10 = validator:STANDARD
@@ -829,10 +779,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       name = payment_methods
       label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.payment_methods
       class = tx-seminars-pi1-event-editor-checkbox
-      data.userobj {
-        extension = this
-        method = populateListPaymentMethods
-      }
 
       validators {
         10 = validator:STANDARD
@@ -855,17 +801,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       name = organizers
       label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.organizers
       class = tx-seminars-pi1-event-editor-checkbox
-      data {
-        userobj {
-          extension = this
-          method = populateListOrganizers
-        }
-
-        defaultvalue.userobj {
-          extension = this
-          method = getPreselectedOrganizer
-        }
-      }
 
       validators {
         10 = validator:STANDARD
@@ -970,10 +905,6 @@ plugin.tx_seminars_pi1.form.eventEditor {
       wrapitem = <tr><td>|</td></tr>
       wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
       separator =
-      data.userobj {
-        extension = this
-        method = populateListTargetGroups
-      }
 
       validators {
         10 = validator:STANDARD

@@ -17,9 +17,4 @@ class FrontEndUserGroupMapper extends AbstractDataMapper
     protected $tableName = 'fe_groups';
 
     protected $modelClassName = FrontEndUserGroup::class;
-
-    protected $relations = [
-        'tx_seminars_default_categories' => CategoryMapper::class,
-        'tx_seminars_default_organizer' => OrganizerMapper::class,
-    ];
 }

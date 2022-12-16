@@ -22,33 +22,24 @@
 
     <fe_users>
         <uid>2</uid>
-        <description>user with FE editor settings: hide new, default organizer, PID</description>
+        <description>user with FE editor settings: hide new, PID</description>
         <usergroup>2</usergroup>
     </fe_users>
     <fe_groups>
         <uid>2</uid>
         <title>FE editor settings: hide new</title>
-        <tx_seminars_default_organizer>2</tx_seminars_default_organizer>
         <tx_seminars_events_pid>21</tx_seminars_events_pid>
     </fe_groups>
 
     <fe_users>
         <uid>4</uid>
-        <description>user with FE editor settings: one default category</description>
+        <description>user with FE editor settings</description>
         <usergroup>4</usergroup>
     </fe_users>
     <fe_groups>
         <uid>4</uid>
-        <title>FE editor settings: 1 default category</title>
-        <tx_seminars_default_categories>1</tx_seminars_default_categories>
+        <title>FE editor group</title>
     </fe_groups>
-    <tx_seminars_categories>
-        <uid>1</uid>
-    </tx_seminars_categories>
-    <tx_seminars_usergroups_categories_mm>
-        <uid_local>4</uid_local>
-        <uid_foreign>1</uid_foreign>
-    </tx_seminars_usergroups_categories_mm>
 
     <tx_seminars_seminars>
         <uid>1</uid>
@@ -59,13 +50,4 @@
         <title>hidden event</title>
         <hidden>1</hidden>
     </tx_seminars_seminars>
-
-    <tx_seminars_organizers>
-        <uid>1</uid>
-        <title>some organizer</title>
-    </tx_seminars_organizers>
-    <tx_seminars_organizers>
-        <uid>2</uid>
-        <title>default organizer for FE user group</title>
-    </tx_seminars_organizers>
 </dataset>

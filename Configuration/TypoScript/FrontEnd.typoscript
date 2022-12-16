@@ -218,9 +218,6 @@ plugin.tx_seminars_pi1 {
   # PID of the folder where FE-created events will be stored
   createEventsPID =
 
-  # PID of the folder where FE-created auxiliary records will be stored
-  createAuxiliaryRecordsPID =
-
   # PID of the page that will be shown when an event has been successfully entered on the FE
   eventSuccessfullySavedPID =
 

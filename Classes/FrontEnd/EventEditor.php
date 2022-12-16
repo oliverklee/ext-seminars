@@ -6,34 +6,15 @@ namespace OliverKlee\Seminars\FrontEnd;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Interfaces\MailRole;
-use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
-use OliverKlee\Seminars\Mapper\CategoryMapper;
-use OliverKlee\Seminars\Mapper\CheckboxMapper;
-use OliverKlee\Seminars\Mapper\EventTypeMapper;
-use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\LodgingMapper;
-use OliverKlee\Seminars\Mapper\OrganizerMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
-use OliverKlee\Seminars\Mapper\PlaceMapper;
-use OliverKlee\Seminars\Mapper\SkillMapper;
-use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Mapper\TargetGroupMapper;
-use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
-use OliverKlee\Seminars\Model\Place;
-use OliverKlee\Seminars\Model\Speaker;
-use OliverKlee\Seminars\Model\TargetGroup;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -153,227 +134,10 @@ class EventEditor extends AbstractEditor
         return $template->getSubpart();
     }
 
-    /**
-     * Provides data items for the list of available categories.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListCategories(): array
-    {
-        $mapper = MapperRegistry::get(CategoryMapper::class);
-        $categories = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        return self::makeListToFormidableList($categories);
-    }
-
-    /**
-     * Provides data items for the list of available event types.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListEventTypes(): array
-    {
-        $mapper = MapperRegistry::get(EventTypeMapper::class);
-        $eventTypes = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        return self::makeListToFormidableList($eventTypes);
-    }
-
-    /**
-     * Provides data items for the list of available lodgings.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListLodgings(): array
-    {
-        $mapper = MapperRegistry::get(LodgingMapper::class);
-        $lodgings = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        return self::makeListToFormidableList($lodgings);
-    }
-
-    /**
-     * Provides data items for the list of available foods.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListFoods(): array
-    {
-        $mapper = MapperRegistry::get(FoodMapper::class);
-        $foods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        return self::makeListToFormidableList($foods);
-    }
-
-    /**
-     * Provides data items for the list of available payment methods.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListPaymentMethods(): array
-    {
-        $mapper = MapperRegistry::get(PaymentMethodMapper::class);
-        $paymentMethods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        return self::makeListToFormidableList($paymentMethods);
-    }
-
-    /**
-     * Provides data items for the list of available organizers.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListOrganizers(): array
-    {
-        $frontEndUser = self::getLoggedInUser();
-        if (!$frontEndUser instanceof FrontEndUser) {
-            return [];
-        }
-
-        if ($frontEndUser->hasDefaultOrganizers()) {
-            $organizers = $frontEndUser->getDefaultOrganizers();
-        } else {
-            $mapper = MapperRegistry::get(OrganizerMapper::class);
-            $organizers = $mapper->findByPageUid((string)$this->getPidForAuxiliaryRecords(), 'title ASC');
-        }
-
-        return self::makeListToFormidableList($organizers);
-    }
-
     protected static function getLoggedInUser(): ?FrontEndUser
     {
         $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
         return $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
-    }
-
-    /**
-     * Provides data items for the list of available places.
-     *
-     * @param array<string, string> $parameters
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListPlaces(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
-    {
-        $result = [];
-
-        $placeMapper = MapperRegistry::get(PlaceMapper::class);
-        $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        $frontEndUser = self::getLoggedInUser();
-
-        /** @var Place $place */
-        foreach ($places as $place) {
-            $result[] = [
-                'caption' => $place->getTitle(),
-                'value' => $place->getUid(),
-                'wrapitem' => '|</td><td>&nbsp;',
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Provides data items for the list of available speakers.
-     *
-     * @param array<string, string> $parameters
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListSpeakers(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
-    {
-        $result = [];
-
-        $speakerMapper = MapperRegistry::get(SpeakerMapper::class);
-        $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        $frontEndUser = self::getLoggedInUser();
-
-        $type = (string)($parameters['type'] ?? '');
-        if (empty($parameters['lister'])) {
-            $isLister = false;
-            $activeSpeakers = '';
-        } else {
-            $isLister = true;
-            $activeSpeakers = $form->getDataHandler()->getStoredData(strtolower($type) . 's');
-        }
-
-        /** @var Speaker $speaker */
-        foreach ($speakers as $speaker) {
-            // the new method to list the speakers
-            if ($isLister) {
-                $result[] = [
-                    'uid' => $speaker->getUid(),
-                    'selected' => GeneralUtility::inList($activeSpeakers, (string)$speaker->getUid()) ? 1 : 0,
-                    'name' => $speaker->getName(),
-                ];
-                continue;
-            }
-            $result[] = [
-                'caption' => $speaker->getName(),
-                'value' => $speaker->getUid(),
-                'wrapitem' => '|</td><td>&nbsp;',
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Provides data items for the list of available checkboxes.
-     *
-     * @param array<string, string> $parameters
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListCheckboxes(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
-    {
-        $result = [];
-
-        $checkboxMapper = MapperRegistry::get(CheckboxMapper::class);
-        $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        $frontEndUser = self::getLoggedInUser();
-
-        /** @var Checkbox $checkbox */
-        foreach ($checkboxes as $checkbox) {
-            $result[] = [
-                'caption' => $checkbox->getTitle(),
-                'value' => $checkbox->getUid(),
-                'wrapitem' => '|</td><td>&nbsp;',
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Provides data items for the list of available target groups.
-     *
-     * @param array<string, string> $parameters
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public function populateListTargetGroups(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
-    {
-        $result = [];
-
-        $targetGroupMapper = MapperRegistry::get(TargetGroupMapper::class);
-        $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
-
-        $frontEndUser = self::getLoggedInUser();
-
-        /** @var TargetGroup $targetGroup */
-        foreach ($targetGroups as $targetGroup) {
-            $result[] = [
-                'caption' => $targetGroup->getTitle(),
-                'value' => $targetGroup->getUid(),
-                'wrapitem' => '|</td><td>&nbsp;',
-            ];
-        }
-
-        return $result;
     }
 
     /**
@@ -591,7 +355,6 @@ class EventEditor extends AbstractEditor
         $this->purgeNonSeminarsFields($modifiedFormData);
         $this->unifyDecimalSeparators($modifiedFormData);
         $this->addAdministrativeData($modifiedFormData);
-        $this->addCategoriesOfUser($modifiedFormData);
 
         $this->savedFormData = $modifiedFormData;
 
@@ -711,7 +474,6 @@ class EventEditor extends AbstractEditor
             $this->getConfValueString('displayFrontEndEditorFields', 's_fe_editing'),
             true
         );
-        $this->removeCategoryIfNecessary($fieldsToShow);
 
         return $fieldsToShow;
     }
@@ -726,8 +488,6 @@ class EventEditor extends AbstractEditor
             ',',
             $this->getConfValueString('requiredFrontEndEditorFields', 's_fe_editing')
         );
-
-        $this->removeCategoryIfNecessary($this->requiredFormFields);
     }
 
     /**
@@ -855,142 +615,6 @@ class EventEditor extends AbstractEditor
         }
 
         return preg_match('/^\\d+([,.]\\d{1,2})?$/', $formData['value']) == 1;
-    }
-
-    /**
-     * Provides data items for the list of countries.
-     *
-     * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
-     */
-    public static function populateListCountries(): array
-    {
-        $result = [];
-
-        foreach (MapperRegistry::get(CountryMapper::class)->findAll('cn_short_local') as $country) {
-            $result[] = [
-                'caption' => $country->getLocalShortName(),
-                'value' => $country->getUid(),
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Provides data items for the list of skills.
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public static function populateListSkills(): array
-    {
-        $skills = MapperRegistry::get(SkillMapper::class)->findAll('title ASC');
-
-        return self::makeListToFormidableList($skills);
-    }
-
-    /**
-     * Returns an array of caption value pairs for formidable checkboxes.
-     *
-     * @param Collection<AbstractModel&Titled> $models models to show in the checkboxes, may be empty
-     *
-     * @return array<int, array{caption: string, value: int}>
-     */
-    public static function makeListToFormidableList(Collection $models): array
-    {
-        if ($models->isEmpty()) {
-            return [];
-        }
-
-        $result = [];
-
-        foreach ($models as $model) {
-            // @phpstan-ignore-next-line We are checking for contract violations here.
-            if (!$model instanceof Titled) {
-                throw new \InvalidArgumentException(
-                    'All elements in $models must implement the interface Titled.',
-                    1656254936
-                );
-            }
-
-            $result[] = [
-                'caption' => $model->getTitle(),
-                'value' => $model->getUid(),
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns the UID of the preselected organizer.
-     *
-     * @return int the UID of the preselected organizer; if more than one organizer is available, zero will be returned
-     */
-    public function getPreselectedOrganizer(): int
-    {
-        $availableOrganizers = $this->populateListOrganizers();
-        if (count($availableOrganizers) !== 1) {
-            return 0;
-        }
-
-        $organizerData = array_pop($availableOrganizers);
-
-        return $organizerData['value'];
-    }
-
-    /**
-     * Returns the allowed PIDs for the auxiliary records.
-     *
-     * @return int PID for the auxiliary records, may be empty
-     */
-    private function getPidForAuxiliaryRecords(): int
-    {
-        $auxiliaryRecordsPid = self::getLoggedInUser()->getAuxiliaryRecordsPid();
-        if ($auxiliaryRecordsPid === 0) {
-            $auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
-        }
-
-        return $auxiliaryRecordsPid;
-    }
-
-    /**
-     * Adds the default categories of the currently logged-in user to the event.
-     *
-     * Note: This affects only new records. Existing records (with a UID) will not be changed.
-     *
-     * @param array<string, string|int|array<int, string|int>> $formData all entered form data
-     *        with the field names as keys, will be modified, must not be empty
-     */
-    private function addCategoriesOfUser(array &$formData): void
-    {
-        $eventUid = $this->getObjectUid();
-        if ($eventUid > 0) {
-            return;
-        }
-        $frontEndUser = self::getLoggedInUser();
-        if (!$frontEndUser instanceof FrontEndUser || !$frontEndUser->hasDefaultCategories()) {
-            return;
-        }
-
-        $formData['categories'] = $frontEndUser->getDefaultCategoriesFromGroup()->getUids();
-    }
-
-    /**
-     * Removes the category field if the user has default categories set.
-     *
-     * @param string[] $formFields the fields which should be checked for category, will be modified, may be empty
-     */
-    private function removeCategoryIfNecessary(array &$formFields): void
-    {
-        if (!in_array('categories', $formFields, true)) {
-            return;
-        }
-
-        $frontEndUser = self::getLoggedInUser();
-        if ($frontEndUser instanceof FrontEndUser && $frontEndUser->hasDefaultCategories()) {
-            $categoryKey = (string)\array_search('categories', $formFields, true);
-            unset($formFields[$categoryKey]);
-        }
     }
 
     /**

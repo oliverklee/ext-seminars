@@ -1107,21 +1107,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         createAuxiliaryRecordsPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the sysfolder where FE-created auxiliary records will be stored
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
          eventSuccessfullySavedPID
 
    Data type

@@ -780,21 +780,9 @@
 				<source>Event management</source>
 				<target>Gestion des événements</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_auxiliary_records_pid" xml:space="preserve">
-				<source>Store auxiliary records for seminars in page</source>
-				<target>Enregistrer les enregistrements auxiliaires dans la page</target>
-			</trans-unit>
 			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">
 				<source>Store events created in the FE-editor in this page</source>
 				<target>Enregistrer les événements créés en front end dans cette page</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_default_categories" xml:space="preserve">
-				<source>Default categories for the FE editor</source>
-				<target>Catégories par défaut</target>
-			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_default_organizer" xml:space="preserve">
-				<source>Default organizer for the FE editor</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="owner_feuser" xml:space="preserve">
 				<source>Front-end user who has created this record</source>
