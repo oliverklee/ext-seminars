@@ -14,9 +14,6 @@ plugin.tx_seminars_pi1 {
   # activate Javascript framework from global config
   loadJsFramework =< config.loadJsFramework
 
-  # location of the front-end event editor template file
-  eventEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/EventEditor.html
-
   # location of the template file for the registration form
   registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
 
@@ -209,23 +206,8 @@ plugin.tx_seminars_pi1 {
   # PID of the page that contains the registrations list for event managers
   registrationsVipListPID =
 
-  # UID of the FE user group that is allowed to enter and edit event records in the FE
-  eventEditorFeGroupID =
-
   # UID of the FE user group for event managers
   defaultEventVipsFeGroupID =
-
-  # PID of the page that will be shown when an event has been successfully entered on the FE
-  eventSuccessfullySavedPID =
-
-  # comma-separated list of the fields to show in the FE-editor
-  displayFrontEndEditorFields = subtitle,accreditation_number,credit_points,categories,event_type,cancelled,teaser,description,additional_information,begin_date,end_date,begin_date_registration,deadline_early_bird,deadline_registration,needs_registration,allows_multiple_registrations,queue_size,offline_attendees,attendees_min,attendees_max,target_groups,price_regular,price_regular_early,price_special,price_special_early,payment_methods,place,room,lodgings,foods,speakers,leaders,partners,tutors,checkboxes,uses_terms_2,notes
-
-  # comma-separated list of the event fields which are required to be filled in the FE editor
-  requiredFrontEndEditorFields =
-
-  # comma-separated list of the place fields which are required to be filled in the FE editor
-  requiredFrontEndEditorPlaceFields = city
 
   # The target for external links in seminars.
   externalLinkTarget =

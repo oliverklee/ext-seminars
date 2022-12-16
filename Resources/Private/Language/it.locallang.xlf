@@ -900,10 +900,6 @@ This event now has been confirmed.</source>
 				<source>List of Registrations (for event managers)</source>
 				<target>Lista registrazioni (per VIP)</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.event_editor" xml:space="preserve">
-				<source>Event Editor</source>
-				<target>Editor evento</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
 				<source>Countdown to the next event</source>
 				<target>Countdown al prossimo evento</target>
@@ -1186,30 +1182,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
 				<source>FE user groups for the created FE users</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_fe_editing" xml:space="preserve">
-				<source>Front-end editing</source>
-				<target>Front-end editing</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventEditorFeGroupID" xml:space="preserve">
-				<source>FE user group that is allowed to enter and edit events</source>
-				<target>Gruppo di utenti di FE che è autorizzato a inserire e modificare gli eventi</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
-				<source>Sysfolder to store FE-created events in</source>
-				<target>Cartella di sistema in cui inserire gli eventi creati degli utenti di FE</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
-				<source>Page to redirect to after saving an event in the front end</source>
-				<target>Pagina di destinazione dopo il salvataggio di un evento da FE</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
-				<source>Fields to display in the front-end editor:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.requiredFrontEndEditorFields" xml:space="preserve">
-				<source>Fields which are required to be filled in the front-end editor:</source>
 				<target></target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
@@ -1608,14 +1580,6 @@ This event now has been confirmed.</source>
 				<source>Back to listing</source>
 				<target>Ritorna alla lista</target>
 			</trans-unit>
-			<trans-unit id="label_save" xml:space="preserve">
-				<source>Save</source>
-				<target>Salva</target>
-			</trans-unit>
-			<trans-unit id="label_save_and_back" xml:space="preserve">
-				<source>Save and back</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_step_counter" xml:space="preserve">
 				<source>Registration form: step %d of %d</source>
 				<target>Registrazione: passo %d di %d</target>
@@ -1971,178 +1935,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>Prezzo valido fino al %s</target>
-			</trans-unit>
-			<trans-unit id="message_emptyTitle" xml:space="preserve">
-				<source>Please enter a title.</source>
-				<target>Inserire un titolo per l'evento.</target>
-			</trans-unit>
-			<trans-unit id="message_emptyOrganizer" xml:space="preserve">
-				<source>Please select at least one organizer.</source>
-				<target>Selezionare almeno un organizzatore.</target>
-			</trans-unit>
-			<trans-unit id="message_emptySubtitle" xml:space="preserve">
-				<source>Please enter a subtitle.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noCategoryChosen" xml:space="preserve">
-				<source>Please select at least one category.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyTeaser" xml:space="preserve">
-				<source>Please enter a teaser.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyDescription" xml:space="preserve">
-				<source>Please enter a description.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyAddress" xml:space="preserve">
-				<source>Please enter an address.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyZip" xml:space="preserve">
-				<source>Please enter a ZIP code.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyCity" xml:space="preserve">
-				<source>Please enter a city.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyCountry" xml:space="preserve">
-				<source>Please select a country.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyHomepage" xml:space="preserve">
-				<source>Please enter a homepage URL.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyDirections" xml:space="preserve">
-				<source>Please enter some directions.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noEventTypeChosen" xml:space="preserve">
-				<source>Please select an event type.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_accreditationNumberZero" xml:space="preserve">
-				<source>Please enter an accreditation number.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_creditPointsZero" xml:space="preserve">
-				<source>Please enter the credit points.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidBeginDate" xml:space="preserve">
-				<source>Please enter a valid begin date.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidEndDate" xml:space="preserve">
-				<source>Please enter a valid end date.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidBeginDateRegistration" xml:space="preserve">
-				<source>Please enter a valid begin date for the registration.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidDeadlineRegistration" xml:space="preserve">
-				<source>Please enter a valid registration deadline.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidDeadlineEarlyBird" xml:space="preserve">
-				<source>Please enter a valid early bird deadline for the registration.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidDeadlineUnregistration" xml:space="preserve">
-				<source>Please enter a valid unregistration deadline.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noPlaceChosen" xml:space="preserve">
-				<source>Please select at least one place.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyRoom" xml:space="preserve">
-				<source>Please enter a room.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noLodgingsChosen" xml:space="preserve">
-				<source>Please select at least one lodging.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noFoodsChosen" xml:space="preserve">
-				<source>Please select at least one food.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noSpeakersChosen" xml:space="preserve">
-				<source>Please select at least one speaker.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noPartnersChosen" xml:space="preserve">
-				<source>Please select at least one partner.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noTutorsChosen" xml:space="preserve">
-				<source>Please select at least one tutor.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noLeadersChosen" xml:space="preserve">
-				<source>Please select at least one leader.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceRegular" xml:space="preserve">
-				<source>Please enter a valid regular price.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceRegularEarly" xml:space="preserve">
-				<source>Please enter a valid regular early bird price.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceSpecial" xml:space="preserve">
-				<source>Please enter a valid special price.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalidPriceSpecialEarly" xml:space="preserve">
-				<source>Please enter a valid special early bird price.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyAdditionalInformation" xml:space="preserve">
-				<source>Please enter additional information.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noCheckboxesChosen" xml:space="preserve">
-				<source>Please select at least one additional information checkbox.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noPaymentMethodsChosen" xml:space="preserve">
-				<source>Please select at leasr one payment method.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_attendeesMinZero" xml:space="preserve">
-				<source>Please enter the minimal number of attendees.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_attendeesMaxZero" xml:space="preserve">
-				<source>Please enter the maximum number of attendees.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_offlineAttendeesZero" xml:space="preserve">
-				<source>Please enter the number of offline-registered attendees.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noTargetGroupsChosen" xml:space="preserve">
-				<source>Please select at least target group.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_emptyNotes" xml:space="preserve">
-				<source>Please enter internal notes.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noAccessToEventEditor" xml:space="preserve">
-				<source>Sorry, you don't have access to the event editor.</source>
-				<target>Spiacente, non ha accesso alla modifica dell'evento.</target>
-			</trans-unit>
-			<trans-unit id="message_noAccessToEventEditor_informal" xml:space="preserve">
-				<source>Sorry, you don't have access to the event editor.</source>
-				<target>Spiacente, non hai accesso alla modifica dell'evento.</target>
 			</trans-unit>
 			<trans-unit id="message_noSeatsNumber" xml:space="preserve">
 				<source>Please enter only numbers for the number of seats.</source>
