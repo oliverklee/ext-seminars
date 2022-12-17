@@ -77,18 +77,6 @@ you only need some of these pages):
    Add a plug-in content element and set the type to "Registration form for
    events". Configure it to your needs using the settings in the FlexForms.
 
-#. **Legacy registration form that will be removed in seminar 5.0:**
-   Add a “Seminar Manager” plug-in content element. Set the type to
-   “Event Registration.” Set the content element's start pages to the
-   page or pages that contain (or will contain) the seminar records.
-
-#. **Legacy registration form that will be removed in seminar 5.0:**
-   Add another page that will be shown after a user has registered for an
-   event. Put some thank-you message on the page. If you would like the
-   single view for the event for which the user has just registered to
-   display on this page, you can also add a Seminar Manager plug-in with
-   the type “event list.” Set this page to “hide in the menu”.
-
 #. Add another page that will contain the “my events” list (if you want
    to use that feature). Set the page access to “show at any login.”
 

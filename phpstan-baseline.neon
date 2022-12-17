@@ -466,16 +466,6 @@ parameters:
 			path: Classes/Email/Salutation.php
 
 		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 1
-			path: Classes/FrontEnd/AbstractEditor.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractEditor\\:\\:getFormValue\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/AbstractEditor.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\AbstractView\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
@@ -556,13 +546,8 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot access property \\$fe_user on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot access property \\$id on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -761,11 +746,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method getSeminar\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method getSpeakersShort\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 2
 			path: Classes/FrontEnd/DefaultController.php
@@ -827,7 +807,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 6
+			count: 5
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1012,7 +992,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method isUnregistrationPossible\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1037,7 +1017,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 5
+			count: 3
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1081,16 +1061,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Only booleans are allowed in &&, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given on the left side\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Only booleans are allowed in a ternary operator condition, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Only booleans are allowed in a ternary operator condition, int\\<\\-1, 1\\> given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1121,32 +1091,22 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setSeminar\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RequirementsList\\:\\:setEvent\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
 			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canRegisterIfLoggedIn\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canRegisterIfLoggedInMessage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:registrationHasStarted\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:userFulfillsRequirements\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:canRegisterIfLoggedInMessage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:registrationHasStarted\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1157,11 +1117,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$minimumPrice of method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:limitToMinimumPrice\\(\\) expects int\\<0, max\\>, int given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setRegistration\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1186,69 +1141,9 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:\\$feuser \\(TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication\\) does not accept string\\|TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
 			count: 2
 			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot access offset 'ameos_formidable' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot access offset 'context' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot access offset 'forms' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot access offset 'tx_seminars_pi1…' on mixed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot access property \\$additionalHeaderData on TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null\\.$#"
-			count: 2
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot call method typoLink_URL\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 2
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setPage\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$templateCode of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:processTemplate\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
 			message: "#^Cannot call method getTypoLink\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
@@ -2496,21 +2391,6 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/SingleViewTest.php
 
 		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:setSeminar\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null given\\.$#"
-			count: 2
-			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\RegistrationFormTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/FrontEnd/RegistrationFormTest.php
-
-		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 4
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
@@ -3376,11 +3256,6 @@ parameters:
 			path: Tests/LegacyUnit/Fixtures/OldModel/TestingLegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\AbstractEditorTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/AbstractEditorTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\AbstractViewTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/AbstractViewTest.php
@@ -3402,7 +3277,7 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
-			count: 7
+			count: 6
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3437,7 +3312,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 10
+			count: 8
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3459,16 +3334,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationFormTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"

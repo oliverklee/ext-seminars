@@ -13,10 +13,10 @@
 .. role::   php(code)
 
 
-Setting up the default editors feature
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the default managers feature
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can assign editors (front-end users) to each single event. These
+You can assign managers (front-end users) to each single event. These
 editors are allowed to see all registrations for the events where
 he/she is manually added as an editor.
 

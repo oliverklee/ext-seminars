@@ -16,18 +16,8 @@
 Set up the plug-in
 ^^^^^^^^^^^^^^^^^^
 
-**First, include the *MKFORMS - Basics (mkforms)*
-template in your site template under
-“Include static (from extensions).”**
-
-**Below that, include the *Seminars* static template**.
-It is important that you include this
-template *below* the MKFORMS template.
-
-If your site does not use jQuery by default, also include the following
-static template::
-
-   MKFORMS JQuery-JS (mkforms)
+Include the Seminars static template in your site template under
+“Include static (from extensions).”.
 
 Then configure the plug-in in your TS template setup or the plug-in
 flexforms. The properties are listed in the reference.
@@ -70,9 +60,6 @@ values for a basic setup:
 
      # PID of the FE page that contains the login form or onetimeaccount
      loginPID =
-
-     # PID of the thank-you page that will be displayed after a FE user has registered for an event
-     thankYouAfterRegistrationPID =
    }
 
    # localizations for FE-only parts go here (the example is for German)

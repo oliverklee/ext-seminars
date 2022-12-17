@@ -59,7 +59,6 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
                 'topic_list',
                 'my_events',
                 'my_vip_events',
-                'seminar_registration',
                 'list_registrations',
                 'list_vip_registrations',
                 'category_list',

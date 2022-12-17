@@ -46,11 +46,11 @@ The onetimeaccount extension comes with two plugins:
 One-time FE account creator with autologin
 ------------------------------------------
 
-Use this version if you are using the legacy seminars registration form that
-was available until seminars 4.x and will get removed in seminars 5.0.
+Do not use this version anymore. (It was needed for the legacy seminars
+registration form that got removed in seminars 5.0.
 
 One-time FE account creator without autologin
 ---------------------------------------------
 
-Use this version if you are using the rewritten seminars registration form that
+Use this version with the the rewritten seminars registration form that
 was introduced in seminars 4.3.0.

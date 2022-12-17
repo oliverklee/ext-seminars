@@ -11,13 +11,10 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\FrontEnd\RegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
-use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
@@ -158,7 +155,6 @@ final class DefaultControllerTest extends TestCase
                     'results_at_a_time' => 999,
                     'maxPages' => 5,
                 ],
-                'eventFieldsOnRegistrationPage' => 'title,price_regular,price_special,vacancies,accreditation_number',
                 'linkToSingleView' => 'always',
             ]
         );
@@ -527,24 +523,6 @@ final class DefaultControllerTest extends TestCase
         self::assertInstanceOf(
             LegacyEvent::class,
             $this->subject->getSeminar()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationReturnsRegistrationIfSet(): void
-    {
-        $this->subject->createRegistration(
-            $this->testingFramework->createRecord(
-                'tx_seminars_attendances',
-                ['seminar' => $this->seminarUid]
-            )
-        );
-
-        self::assertInstanceOf(
-            LegacyRegistration::class,
-            $this->subject->getRegistration()
         );
     }
 
@@ -5247,226 +5225,6 @@ final class DefaultControllerTest extends TestCase
             $this->translate('label_onlineRegistration'),
             $this->subject->main('', [])
         );
-    }
-
-    ///////////////////////////////////////////
-    // Tests concerning the registration form
-    ///////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function registrationFormHtmlspecialcharsEventTitle(): void
-    {
-        $registrationFormMock = $this->createMock(RegistrationForm::class);
-        GeneralUtility::addInstance(RegistrationForm::class, $registrationFormMock);
-
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-                'title' => 'foo & bar',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'needs_registration' => 1,
-                'attendees_max' => 10,
-            ]
-        );
-
-        $this->subject->piVars['seminar'] = $eventUid;
-
-        self::assertStringContainsString(
-            'foo &amp; bar',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listOfRequirementsForEventWithOneNotFulfilledRequirementListIsShown(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $requiredTopic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $topic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $date = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'attendees_max' => 10,
-                'topic' => $topic,
-            ]
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topic,
-            $requiredTopic,
-            'requirements'
-        );
-        $this->subject->piVars['seminar'] = $date;
-        $this->subject->main('', []);
-
-        self::assertTrue(
-            $this->subject->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listOfRequirementsForEventWithOneNotFulfilledRequirementLinksHtmlspecialcharedTitleOfRequirement(): void
-    {
-        $detailPageUid = $this->testingFramework->createFrontEndPage($this->rootPageUid);
-        $this->testingFramework->changeRecord('pages', $detailPageUid, ['slug' => '/eventDetail']);
-        $this->pluginConfiguration->setAsInteger('detailPID', $detailPageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $topic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $date = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'attendees_max' => 10,
-                'topic' => $topic,
-                'needs_registration' => 1,
-            ]
-        );
-
-        $requiredTopic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-                'title' => 'required & foo',
-            ]
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topic,
-            $requiredTopic,
-            'requirements'
-        );
-        $this->subject->piVars['seminar'] = $date;
-
-        self::assertRegExp(
-            '/<a href=.*' . $requiredTopic . '.*>required &amp; foo<\\/a>/',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function listOfRequirementsForEventWithTwoNotFulfilledRequirementsShownsTitlesOfBothRequirements(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $topic = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-        $date = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'attendees_max' => 10,
-                'topic' => $topic,
-                'needs_registration' => 1,
-            ]
-        );
-
-        $requiredTopic1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-                'title' => 'required_foo',
-            ]
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topic,
-            $requiredTopic1,
-            'requirements'
-        );
-        $requiredTopic2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-                'title' => 'required_bar',
-            ]
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topic,
-            $requiredTopic2,
-            'requirements'
-        );
-
-        $this->subject->piVars['seminar'] = $date;
-
-        self::assertRegExp(
-            '/required_foo.*required_bar/s',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function registrationFormCallsRegistrationFormHooks(): void
-    {
-        $registrationFormMock = $this->createMock(RegistrationForm::class);
-        GeneralUtility::addInstance(RegistrationForm::class, $registrationFormMock);
-
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
-
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
-                'title' => 'Registration form test',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'needs_registration' => 1,
-                'attendees_max' => 10,
-            ]
-        );
-
-        $this->subject->piVars['seminar'] = (string)$eventUid;
-
-        $hook = $this->createMock(SeminarRegistrationForm::class);
-        $hook->expects(self::once())->method('modifyRegistrationHeader')->with($this->subject);
-        $hook->expects(self::once())->method('modifyRegistrationForm')->with($this->subject, $registrationFormMock);
-        $hook->expects(self::once())->method('modifyRegistrationFooter')->with($this->subject);
-
-        $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm::class][] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
     }
 
     // Tests concerning getVacanciesClasses
