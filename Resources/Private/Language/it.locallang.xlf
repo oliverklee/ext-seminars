@@ -1716,6 +1716,14 @@ This event now has been confirmed.</source>
 				<source>Early-bird special price</source>
 				<target>Prezzo speciale anticipato</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Vuole veramente cancellare la sua registrazione all'evento?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Vuoi veramente cancellare la tua registrazione all'evento?</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

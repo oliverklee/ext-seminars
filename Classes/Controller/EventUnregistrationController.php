@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\Seminars\Configuration\LegacyConfiguration;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -17,6 +20,16 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventUnregistrationController extends ActionController
 {
+    /**
+     * @var RegistrationManager
+     */
+    private $registrationManager;
+
+    public function injectRegistrationManager(RegistrationManager $registrationManager): void
+    {
+        $this->registrationManager = $registrationManager;
+    }
+
     /**
      * Checks whether the logged-in user is allowed to cancel the given registration.
      *
@@ -38,7 +51,7 @@ class EventUnregistrationController extends ActionController
             $this->forwardToDenyAction('noUnregistrationPossible');
         }
 
-        $this->forward('confirm', null, null, ['registration' => $registration]);
+        $this->redirect('confirm', null, null, ['registration' => $registration]);
     }
 
     private function belongsToLoggedInUser(Registration $registration): bool
@@ -88,5 +101,26 @@ class EventUnregistrationController extends ActionController
     public function confirmAction(Registration $registration): void
     {
         $this->view->assign('registration', $registration);
+    }
+
+    /**
+     * Removes the provided registration and forwards to the thank-you page.
+     *
+     * @Extbase\IgnoreValidation("registration")
+     */
+    public function unregisterAction(Registration $registration): void
+    {
+        $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
+        $this->registrationManager->removeRegistration((int)$registration->getUid(), $configuration);
+
+        $this->redirect('thankYou', null, null, ['event' => $registration->getEvent()]);
+    }
+
+    /**
+     * @Extbase\IgnoreValidation("event")
+     */
+    public function thankYouAction(Event $event): void
+    {
+        $this->view->assign('event', $event);
     }
 }

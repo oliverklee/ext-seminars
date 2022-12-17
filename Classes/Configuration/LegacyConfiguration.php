@@ -11,6 +11,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * Legacy configuration for the registration and unregistration forms. This class exists only as long as the new
  * registration form uses the legacy email functionality and the new unregistration form uses the registration manager
  * to remove the registration.
+ *
+ * @internal
  */
 class LegacyConfiguration extends TemplateHelper
 {

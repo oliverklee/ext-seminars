@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Rewrite the unregistration form (#2273)
+- Rewrite the unregistration form (#2273, #2277)
 - Use SimpleCSS for the email CSS (#2261, #2262)
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
 
@@ -14,8 +14,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Rename `LegacyConfiguration` to `LegacyConfiguration` (#2276)
 - Rename `denyRegistrationAction` to `denyAction` (#2270)
 - Always show the time of deadlines and of the registration start (#2265)
-- !!! Move the localized `plugin.eventRegistration.heading.eventTitleAndDateAndUid`
-  into a separate namespace (#2266)
+- !!! Move the localized label
+  `plugin.eventRegistration.heading.eventTitleAndDateAndUid`
+  to a separate namespace (#2266)
 - Switch the FAL-related fields in the DB to int (#2187)
 - Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)

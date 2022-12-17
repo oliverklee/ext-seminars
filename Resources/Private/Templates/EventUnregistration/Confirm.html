@@ -9,8 +9,29 @@
         <h2>
             <f:translate key="plugin.eventUnregistration.heading.unregistration"/>
         </h2>
-        <p>
-            <f:render partial="EventTitleAndDateAndUid" arguments="{event: event}"/>
-        </p>
+
+        <div class="alert alert-primary" role="alert">
+            <p>
+                <strong>
+                    <s:salutationAwareTranslate key="plugin.eventUnregistration.prompt.unregister"/>
+                </strong>
+            </p>
+            <p>
+                <f:render partial="EventTitleAndDateAndUid" arguments="{event: event}"/>
+            </p>
+        </div>
+
+        <f:form action="unregister">
+            <f:form.hidden name="registration" value="{registration}"/>
+
+            <div class="d-flex justify-content-end mt-3 mb-3">
+                <button type="button" class="btn btn-outline-secondary me-3"
+                        data-behavior="tx-seminars-cancel-unregistration">
+                    <f:translate key="plugin.eventUnregistration.action.cancel"/>
+                </button>
+                <f:form.submit value="{f:translate(key: 'plugin.eventUnregistration.action.unregister')}"
+                               class="btn btn-primary"/>
+            </div>
+        </f:form>
     </f:section>
 </html>

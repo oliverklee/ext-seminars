@@ -1718,6 +1718,14 @@ This event now has been confirmed.</source>
 				<source>Early-bird special price</source>
 				<target>Tidlig booking speciel pris</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Vil de virkeligt afmeldes dette arranegement?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Vil du virkeligt afmeldes dette arranegement?</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

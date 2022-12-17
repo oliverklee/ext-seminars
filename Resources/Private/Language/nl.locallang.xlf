@@ -1744,6 +1744,14 @@ This event now has been confirmed.</source>
 				<source>Sorry!</source>
 				<target>Sorry!</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Weet u zeker dat u de registratie voor dit evenement wilt annuleren?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Weet je zeker dat je de registratie voor dit evenement wil annuleren?</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

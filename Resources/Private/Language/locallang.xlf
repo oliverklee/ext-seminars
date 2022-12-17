@@ -1805,6 +1805,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventUnregistration.heading.unregistration">
 				<source>Unregister from an event</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.unregistrationSuccess">
+				<source>Unregistration sent</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
 				<source>This content is only available after a login.</source>
 			</trans-unit>
@@ -1816,6 +1819,24 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
 				<source>You cannot unregister from this event now.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.action.cancel">
+				<source>Cancel and go back</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.action.unregister">
+				<source>Unregister</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_formal">
+				<source>Your registration to this event now has been canceled.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
+				<source>Your registration to this event now has been canceled.</source>
 			</trans-unit>
 		</body>
 	</file>
