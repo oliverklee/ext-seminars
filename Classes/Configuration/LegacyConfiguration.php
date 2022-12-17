@@ -8,12 +8,11 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * Legacy configuration for the registration form. This class exists only as long as the new registration form
- * uses the legacy email functionality.
- *
- * @deprecated #1911 will be removed in seminars 5.3.0
+ * Legacy configuration for the registration and unregistration forms. This class exists only as long as the new
+ * registration form uses the legacy email functionality and the new unregistration form uses the registration manager
+ * to remove the registration.
  */
-class LegacyRegistrationConfiguration extends TemplateHelper
+class LegacyConfiguration extends TemplateHelper
 {
     public function __construct()
     {

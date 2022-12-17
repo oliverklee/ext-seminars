@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
-use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
+use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
@@ -580,8 +580,8 @@ final class RegistrationProcessorTest extends UnitTestCase
 
         $legacyRegistrationMock = $this->createMock(LegacyRegistration::class);
         GeneralUtility::addInstance(LegacyRegistration::class, $legacyRegistrationMock);
-        $configurationMock = $this->createMock(LegacyRegistrationConfiguration::class);
-        GeneralUtility::addInstance(LegacyRegistrationConfiguration::class, $configurationMock);
+        $configurationMock = $this->createMock(LegacyConfiguration::class);
+        GeneralUtility::addInstance(LegacyConfiguration::class, $configurationMock);
 
         $this->registrationManagerMock->expects(self::once())->method('setRegistration')
             ->with($legacyRegistrationMock);
