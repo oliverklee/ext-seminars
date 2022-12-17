@@ -136,14 +136,14 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForNoRegistrationPossibleAtAllForwardsToDenyRegistrationAction(): void
+    public function checkPrerequisitesActionForNoRegistrationPossibleAtAllForwardsToDenyAction(): void
     {
         $event = new SingleEvent();
         $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleAtAnyTimeAtAll')
             ->with($event)->willReturn(false);
 
         $this->subject->expects(self::once())->method('forward')
-            ->with('denyRegistration', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtAll'])
+            ->with('deny', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtAll'])
             ->willThrowException(new StopActionException('forward', 1476045801));
         $this->expectException(StopActionException::class);
 
@@ -153,7 +153,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForNoRegistrationPossibleAtTheMomentForwardsToDenyRegistrationAction(): void
+    public function checkPrerequisitesActionForNoRegistrationPossibleAtTheMomentForwardsToDenyAction(): void
     {
         $event = new SingleEvent();
         $this->registrationGuardMock->method('isRegistrationPossibleAtAnyTimeAtAll')
@@ -162,7 +162,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ->with($event)->willReturn(false);
 
         $this->subject->expects(self::once())->method('forward')
-            ->with('denyRegistration', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtTheMoment'])
+            ->with('deny', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtTheMoment'])
             ->willThrowException(new StopActionException('forward', 1476045801));
         $this->expectException(StopActionException::class);
 
@@ -172,7 +172,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForUserAlreadyRegisteredForwardsToDenyRegistrationAction(): void
+    public function checkPrerequisitesActionForUserAlreadyRegisteredForwardsToDenyAction(): void
     {
         $userUid = 17;
         $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
@@ -185,7 +185,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ->method('isFreeFromRegistrationConflicts')->with($event, $userUid)->willReturn(false);
 
         $this->subject->expects(self::once())->method('forward')
-            ->with('denyRegistration', null, null, ['warningMessageKey' => 'alreadyRegistered'])
+            ->with('deny', null, null, ['warningMessageKey' => 'alreadyRegistered'])
             ->willThrowException(new StopActionException('forward', 1476045801));
         $this->expectException(StopActionException::class);
 
@@ -195,7 +195,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkPrerequisitesActionForFullyBookedEventForwardsToDenyRegistrationAction(): void
+    public function checkPrerequisitesActionForFullyBookedEventForwardsToDenyAction(): void
     {
         $userUid = 17;
         $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn($userUid);
@@ -210,7 +210,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ->method('getVacancies')->with($event)->willReturn(0);
 
         $this->subject->expects(self::once())->method('forward')
-            ->with('denyRegistration', null, null, ['warningMessageKey' => 'fullyBooked'])
+            ->with('deny', null, null, ['warningMessageKey' => 'fullyBooked'])
             ->willThrowException(new StopActionException('forward', 1476045801));
         $this->expectException(StopActionException::class);
 
@@ -309,12 +309,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function denyRegistrationActionPassesProvidedWarningMessageKeyToView(): void
+    public function denyActionPassesProvidedWarningMessageKeyToView(): void
     {
         $warningMessageKey = 'noRegistrationPossibleAtAll';
         $this->viewMock->expects(self::once())->method('assign')->with('warningMessageKey', $warningMessageKey);
 
-        $this->subject->denyRegistrationAction($warningMessageKey);
+        $this->subject->denyAction($warningMessageKey);
     }
 
     /**

@@ -115,10 +115,10 @@ class EventRegistrationController extends ActionController
      */
     private function forwardToDenyAction(string $warningMessageKey): void
     {
-        $this->forward('denyRegistration', null, null, ['warningMessageKey' => $warningMessageKey]);
+        $this->forward('deny', null, null, ['warningMessageKey' => $warningMessageKey]);
     }
 
-    public function denyRegistrationAction(string $warningMessageKey): void
+    public function denyAction(string $warningMessageKey): void
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
     }
