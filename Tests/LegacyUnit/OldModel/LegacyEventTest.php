@@ -35,7 +35,6 @@ final class LegacyEventTest extends TestCase
     private const CONFIGURATION = [
         'dateFormatYMD' => '%d.%m.%Y',
         'timeFormat' => '%H:%M',
-        'showTimeOfUnregistrationDeadline' => false,
         'unregistrationDeadlineDaysBeforeBeginDate' => 0,
     ];
 
@@ -1869,7 +1868,7 @@ final class LegacyEventTest extends TestCase
         $this->subject->setUnregistrationDeadline(1893488400);
 
         self::assertSame(
-            '01.01.2030',
+            '01.01.2030 09:00',
             $this->subject->getUnregistrationDeadline()
         );
     }
@@ -1879,8 +1878,6 @@ final class LegacyEventTest extends TestCase
      */
     public function getNonUnregistrationDeadlineWithTimeForZero(): void
     {
-        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', true);
-
         $this->subject->setUnregistrationDeadline(1893488400);
 
         self::assertSame('01.01.2030 09:00', $this->subject->getUnregistrationDeadline());
@@ -6216,23 +6213,8 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      */
-    public function getEventDataReturnsFormattedUnregistrationDeadline(): void
+    public function getEventDataReturnsFormattedUnregistrationDeadlineWithTime(): void
     {
-        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', false);
-        $this->subject->setUnregistrationDeadline(1893488400);
-
-        self::assertSame(
-            '01.01.2030',
-            $this->subject->getEventData('deadline_unregistration')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEventDataForShowTimeOfUnregistrationDeadlineTrueReturnsFormattedUnregistrationDeadlineWithTime(): void
-    {
-        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', true);
         $this->subject->setUnregistrationDeadline(1893488400);
 
         self::assertSame('01.01.2030 09:00', $this->subject->getEventData('deadline_unregistration'));

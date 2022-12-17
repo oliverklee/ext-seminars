@@ -1751,11 +1751,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getEarlyBirdDeadline\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getEmailSender\\(\\) should return OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole but returns OliverKlee\\\\Oelib\\\\Email\\\\GeneralEmailRole\\|OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1806,11 +1801,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getRegistrationDeadline\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTimeSlotsAsArrayWithMarkers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1822,11 +1812,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTopicMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getUnregistrationDeadline\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 

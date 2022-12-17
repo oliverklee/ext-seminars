@@ -75,15 +75,6 @@ plugin.tx_seminars {
   # ISO 4217 alpha 3 code of the currency to be used, must be valid
   currency = EUR
 
-  # whether to also show the time of the registration deadline
-  showTimeOfRegistrationDeadline = 0
-
-  # whether to also show the time of the early bird deadline
-  showTimeOfEarlyBirdDeadline = 0
-
-  # whether to also show the time of the unregistration deadline
-  showTimeOfUnregistrationDeadline = 0
-
   # Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
   unregistrationDeadlineDaysBeforeBeginDate =
 

@@ -1609,8 +1609,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns the seminar registration deadline: the date and also the time
-     * (depending on the TS variable showTimeOfRegistrationDeadline).
+     * Returns the seminar registration deadline: the date and also the time.
      * The returned string is formatted using the format configured in
      * dateFormatYMD and timeFormat.
      *
@@ -1629,12 +1628,10 @@ class LegacyEvent extends AbstractTimeSpan
                 $this->getDateFormat(),
                 $this->getRecordPropertyInteger('deadline_registration')
             );
-            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfRegistrationDeadline')) {
-                $result .= \strftime(
-                    ' ' . $this->getTimeFormat(),
-                    $this->getRecordPropertyInteger('deadline_registration')
-                );
-            }
+            $result .= \strftime(
+                ' ' . $this->getTimeFormat(),
+                $this->getRecordPropertyInteger('deadline_registration')
+            );
         }
 
         return $result;
@@ -1655,9 +1652,6 @@ class LegacyEvent extends AbstractTimeSpan
      * The returned string is formatted using the format configured in
      * dateFormatYMD and timeFormat.
      *
-     * The TS parameter 'showTimeOfEarlyBirdDeadline' controls if the time
-     * should also be returned in addition to the date.
-     *
      * This function will return an empty string if this event does not have an
      * early-bird deadline.
      *
@@ -1670,20 +1664,17 @@ class LegacyEvent extends AbstractTimeSpan
 
         if ($this->hasEarlyBirdDeadline()) {
             $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
-            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfEarlyBirdDeadline')) {
-                $result .= \strftime(
-                    ' ' . $this->getTimeFormat(),
-                    $this->getRecordPropertyInteger('deadline_early_bird')
-                );
-            }
+            $result .= \strftime(
+                ' ' . $this->getTimeFormat(),
+                $this->getRecordPropertyInteger('deadline_early_bird')
+            );
         }
 
         return $result;
     }
 
     /**
-     * Returns the seminar unregistration deadline: the date and also the time
-     * (depending on the TS variable showTimeOfUnregistrationDeadline).
+     * Returns the seminar unregistration deadline: the date and also the time.
      * The returned string is formatted using the format configured in
      * dateFormatYMD and timeFormat.
      *
@@ -1699,12 +1690,10 @@ class LegacyEvent extends AbstractTimeSpan
 
         if ($this->hasUnregistrationDeadline()) {
             $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_unregistration'));
-            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfUnregistrationDeadline')) {
-                $result .= \strftime(
-                    ' ' . $this->getTimeFormat(),
-                    $this->getRecordPropertyInteger('deadline_unregistration')
-                );
-            }
+            $result .= \strftime(
+                ' ' . $this->getTimeFormat(),
+                $this->getRecordPropertyInteger('deadline_unregistration')
+            );
         }
 
         return $result;
