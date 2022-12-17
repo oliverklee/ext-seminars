@@ -1760,6 +1760,10 @@ This event now has been confirmed.</source>
 				<source>Early-bird special price</source>
 				<target>Prix spécial en précommande</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.sorry">
+				<source>Sorry!</source>
+				<target>Pardon!</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
