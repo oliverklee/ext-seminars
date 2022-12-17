@@ -88,12 +88,6 @@ plugin.tx_seminars_pi1 {
   # whether to omit the date in the list view if it is the same as the previous item's, @deprecated #1788 will be removed in seminars 5.0
   omitDateIfSameAsPrevious = 0
 
-  # whether to show the owner data in the single view, @deprecated #1811 will be removed in seminars 5.0
-  showOwnerDataInSingleView = 0
-
-  # the maximum width of the owner picture in the single view, @deprecated #1811 will be removed in seminars 5.0
-  ownerPictureMaxWidth = 250
-
   # who is allowed to view the list of registrations on the front end:
   # "attendees_and_managers", "login" or "world"
   accessToFrontEndRegistrationLists = attendees_and_managers

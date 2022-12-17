@@ -30,10 +30,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkDefaultEventVipsFeGroupID();
         $this->checkExternalLinkTarget();
         $this->checkSingleViewImageSizes();
-        $this->checkShowOwnerDataInSingleView();
-        if ($this->configuration->getAsBoolean('showOwnerDataInSingleView')) {
-            $this->checkOwnerPictureMaxWidth();
-        }
         $this->checkLimitFileDownloadToAttendees();
         $this->checkShowOnlyEventsWithVacancies();
     }
@@ -150,31 +146,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'seminarImageSingleViewHeight',
             'This value specifies the height of the image of a seminar.
             If  this value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * @deprecated #1811 will be removed in seminars 5.0
-     */
-    private function checkShowOwnerDataInSingleView(): void
-    {
-        $this->checkIfBoolean(
-            'showOwnerDataInSingleView',
-            'This value specifies whether the owner data will be displayed  on the single view page.
-            If this value is incorrect, the the data might be displayed although it should not be
-            (which is a privacy issue) or vice versa.'
-        );
-    }
-
-    /**
-     * @deprecated #1811 will be removed in seminars 5.0
-     */
-    private function checkOwnerPictureMaxWidth(): void
-    {
-        $this->checkIfPositiveInteger(
-            'ownerPictureMaxWidth',
-            'This value specifies the maximum width for the owner picture on the single view page.
-            If this value is not set correctly, the image might be too large or not get displayed at all.'
         );
     }
 }

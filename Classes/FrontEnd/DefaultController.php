@@ -668,8 +668,6 @@ class DefaultController extends TemplateHelper
         $this->setMarker('organizers', $this->getOrganizersMarkerContent());
         $this->setOrganizingPartnersMarker();
 
-        $this->setOwnerDataMarker();
-
         $this->setAttachedFilesMarkers();
 
         $this->setVacanciesMarker();
@@ -1183,35 +1181,6 @@ class DefaultController extends TemplateHelper
         }
 
         $this->setMarker('organizing_partners', $this->seminar->getOrganizingPartners($this));
-    }
-
-    /**
-     * Fills in the matching marker for the owner data or hides the subpart if
-     * the event has no owner or the owner data should not be displayed.
-     *
-     * @deprecated #1811 will be removed in seminars 5.0
-     */
-    private function setOwnerDataMarker(): void
-    {
-        if (!$this->getConfValueBoolean('showOwnerDataInSingleView', 's_singleView') || !$this->seminar->hasOwner()) {
-            $this->hideSubparts('owner_data', 'field_wrapper');
-            return;
-        }
-
-        $owner = $this->seminar->getOwner();
-        $ownerData = [];
-        // getName always returns a non-empty string for valid records.
-        $ownerData[] = \htmlspecialchars($owner->getName(), ENT_QUOTES | ENT_HTML5);
-        if ($owner->hasPhoneNumber()) {
-            $ownerData[] = \htmlspecialchars($owner->getPhoneNumber(), ENT_QUOTES | ENT_HTML5);
-        }
-        if ($owner->hasEmailAddress()) {
-            $ownerData[] = \htmlspecialchars($owner->getEmailAddress(), ENT_QUOTES | ENT_HTML5);
-        }
-        $this->setSubpart(
-            'OWNER_DATA',
-            implode($this->getSubpart('OWNER_DATA_SEPARATOR'), $ownerData)
-        );
     }
 
     /**
