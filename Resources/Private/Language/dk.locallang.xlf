@@ -914,14 +914,6 @@ This event now has been confirmed.</source>
 				<source>Send parameters to page which is displayed after registration</source>
 				<target>Send parametre til siden som vises efter tilmelding</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has unregistered for an event</source>
-				<target>Side der vises efter en bruger har afmeldt et arrangement</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after unregistration</source>
-				<target>Send parametre til siden som vises efter tilmelding</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target></target>
@@ -1501,22 +1493,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_timeslot_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Talere</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Vil de virkeligt afmeldes dette arranegement?</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message_informal" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Vil du virkeligt afmeldes dette arranegement?</target>
-			</trans-unit>
-			<trans-unit id="label_cancel" xml:space="preserve">
-				<source>Cancel</source>
-				<target>Fortryd</target>
-			</trans-unit>
-			<trans-unit id="label_unregister" xml:space="preserve">
-				<source>Unregister</source>
-				<target>Afmeld</target>
 			</trans-unit>
 			<trans-unit id="label_selector_submit" xml:space="preserve">
 				<source>Apply filter</source>

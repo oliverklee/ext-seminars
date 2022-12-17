@@ -916,14 +916,6 @@ This event now has been confirmed.</source>
 				<source>Send parameters to page which is displayed after registration</source>
 				<target>Invia i parametri alla pagina visualizzata dopo la registrazione</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has unregistered for an event</source>
-				<target>Pagina da visualizzare dopo che l'utente si è cancellato dall'evento</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after unregistration</source>
-				<target>Invia i parametri alla pagina visualizzata dopo la cancellazione</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target></target>
@@ -1503,22 +1495,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_timeslot_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Oratori</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Vuole veramente cancellare la sua registrazione all'evento?</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message_informal" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Vuoi veramente cancellare la tua registrazione all'evento?</target>
-			</trans-unit>
-			<trans-unit id="label_cancel" xml:space="preserve">
-				<source>Cancel</source>
-				<target>Cancella</target>
-			</trans-unit>
-			<trans-unit id="label_unregister" xml:space="preserve">
-				<source>Unregister</source>
-				<target>Cancellato</target>
 			</trans-unit>
 			<trans-unit id="label_selector_submit" xml:space="preserve">
 				<source>Apply filter</source>

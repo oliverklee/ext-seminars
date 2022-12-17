@@ -750,38 +750,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         pageToShowAfterUnregistrationPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the page that will be displayed after a FE user has
-         unregistered from an event
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         sendParametersToPageToShowAfterUnregistrationUrl
-
-   Data type
-         boolean
-
-   Description
-         Whether to send GET parameters to the thank-you-after-registration-
-         page-URL.
-
-   Default
-         1
-
-
-.. container:: table-row
-
-   Property
          loginPID
 
    Data type

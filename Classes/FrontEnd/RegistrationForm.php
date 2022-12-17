@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -104,24 +99,13 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Returns the current registration object.
-     */
-    private function getRegistration(): ?LegacyRegistration
-    {
-        return $this->registration;
-    }
-
-    /**
      * Sets the form configuration to use.
      *
-     * @param string $action action to perform, may be either "register" or "unregister", must not be empty
+     * @param string $action action to perform, must be "register"
      */
     protected function initializeAction(string $action = 'register'): void
     {
         switch ($action) {
-            case 'unregister':
-                $formConfiguration = (array)$this->conf['form.']['unregistration.'];
-                break;
             case 'register':
                 // The fall-through is intended.
             default:
@@ -230,22 +214,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Gets the URL of the page that should be displayed after a user has unregistered from an event.
-     *
-     * @return string complete URL of the FE page with a message
-     */
-    public function getPageToShowAfterUnregistrationUrl(): string
-    {
-        $pageUid = $this->getConfValueInteger('pageToShowAfterUnregistrationPID', 's_registration');
-        $sendParameters = $this->getConfValueBoolean(
-            'sendParametersToPageToShowAfterUnregistrationUrl',
-            's_registration'
-        );
-
-        return $this->createUrlForRedirection($pageUid, $sendParameters);
-    }
-
-    /**
      * Creates a URL for redirection.
      *
      * @param bool $sendParameters whether GET parameters should be added to the URL
@@ -287,18 +255,6 @@ class RegistrationForm extends AbstractEditor
     }
 
     /**
-     * Ensures that the parameter is an array. If it is no array yet, it will be changed to an empty array.
-     *
-     * @param mixed $data variable that should be ensured to be an array
-     */
-    protected function ensureArray(&$data): void
-    {
-        if (!is_array($data)) {
-            $data = [];
-        }
-    }
-
-    /**
      * Checks whether our current event has any option checkboxes AND the
      * checkboxes should be displayed at all.
      *
@@ -329,46 +285,5 @@ class RegistrationForm extends AbstractEditor
     public function hasFoods(): bool
     {
         return $this->getSeminar()->hasFoods();
-    }
-
-    /**
-     * @throws \BadMethodCallException if this method is called without a logged-in FE user
-     */
-    protected function getLoggedInUser(): FrontEndUser
-    {
-        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
-        $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
-        if (!$user instanceof FrontEndUser) {
-            throw new \BadMethodCallException('No user logged in.', 1633436053);
-        }
-
-        return $user;
-    }
-
-    /**
-     * Processes the registration that should be removed.
-     */
-    public function processUnregistration(): void
-    {
-        /** @var \formidable_mainrenderlet $cancelButtonRenderlet */
-        $cancelButtonRenderlet = $this->getFormCreator()->aORenderlets['button_cancel'];
-        if ($cancelButtonRenderlet->hasThrown('click')) {
-            $redirectUrl = GeneralUtility::locationHeaderUrl(
-                $this->pi_getPageLink(
-                    $this->getConfValueInteger(
-                        'myEventsPID'
-                    )
-                )
-            );
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
-            exit;
-        }
-
-        $this->getRegistrationManager()->removeRegistration($this->getRegistration()->getUid(), $this);
-    }
-
-    private function getRegistrationManager(): RegistrationManager
-    {
-        return RegistrationManager::getInstance();
     }
 }
