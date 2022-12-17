@@ -270,7 +270,12 @@ class RegistrationManager
         return $plugin->cObj->getTypoLink(
             $this->translate('label_onlineUnregistration'),
             (string)$plugin->getConfValueInteger('registerPID'),
-            ['tx_seminars_pi1[registration]' => $registration->getUid(), 'tx_seminars_pi1[action]' => 'unregister']
+            [
+                'tx_seminars_eventregistration' => [
+                    'controller' => 'EventUnregistration',
+                    'registration' => $registration->getUid(),
+                ],
+            ]
         );
     }
 

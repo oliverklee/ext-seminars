@@ -1740,6 +1740,10 @@ This event now has been confirmed.</source>
 				<source>Early-bird special price</source>
 				<target>Vroegboek speciale prijs</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.sorry">
+				<source>Sorry!</source>
+				<target>Sorry!</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

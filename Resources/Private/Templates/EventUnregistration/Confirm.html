@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:layout name="EventUnregistration"/>
+
+    <f:section name="main">
+        <f:variable name="event" value="{registration.event}"/>
+
+        <h2>
+            <f:translate key="plugin.eventUnregistration.heading.unregistration"/>
+        </h2>
+        <p>
+            <f:render partial="EventTitleAndDateAndUid" arguments="{event: event}"/>
+        </p>
+    </f:section>
+</html>

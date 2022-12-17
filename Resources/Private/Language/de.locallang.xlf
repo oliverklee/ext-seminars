@@ -2384,6 +2384,30 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Email body</source>
 				<target>Mailtext</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.sorry">
+				<source>Sorry!</source>
+				<target>Entschuldigung!</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.unregistration">
+				<source>Unregister from an event</source>
+				<target>Von einer Veranstaltung abmelden</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
+				<source>This content is only available after a login.</source>
+				<target>Dieser Inhalt ist nur nach einem Login verfügbar.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.error.registrationMissing">
+				<source>This registration does not exist.</source>
+				<target>Diese Anmeldung existiert nicht.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_formal">
+				<source>You cannot unregister from this event now.</source>
+				<target>Sie können sich von dieser Veranstaltung jetzt nicht abmelden.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
+				<source>You cannot unregister from this event now.</source>
+				<target>Du kannst dich von dieser Veranstaltung jetzt nicht abmelden.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

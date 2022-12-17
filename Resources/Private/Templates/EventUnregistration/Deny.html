@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:s="OliverKlee\Seminars\ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:layout name="EventUnregistration"/>
+
+    <f:section name="main">
+        <h2>
+            <f:translate key="plugin.eventUnregistration.heading.sorry"/>
+        </h2>
+        <p class="alert alert-warning" role="alert">
+            <s:salutationAwareTranslate key="plugin.eventUnregistration.error.{warningMessageKey}"/>
+        </p>
+    </f:section>
+</html>

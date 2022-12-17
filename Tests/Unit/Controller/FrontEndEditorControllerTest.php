@@ -98,8 +98,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        // purge FIFO buffer
-        GeneralUtility::makeInstance(SingleEvent::class);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
