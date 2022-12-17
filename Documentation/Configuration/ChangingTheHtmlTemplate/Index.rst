@@ -59,18 +59,6 @@ This extension uses a couple of different HTML templates:
 .. container:: table-row
 
    template path
-         Resources/Private/Templates/FrontEnd/RegistrationEditor.html
-
-   contents
-         event registration form
-
-   TS setup variable
-         plugin.tx\_seminars **\_pi1** .registrationEditorTemplateFile
-
-
-.. container:: table-row
-
-   template path
          Resources/Private/Templates/FrontEnd/EventEditor.html
 
    contents

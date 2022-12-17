@@ -28,8 +28,6 @@ extensions to be installed beforehand:
 
 - **oelib**
 
-- **mkforms**
-
 - **felogin** : If you want FE users to be able to log in so that they
   can register for events, you should also install a login extension
   like *felogin* .

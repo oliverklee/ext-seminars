@@ -660,10 +660,6 @@ This event now has been confirmed.</source>
 				<source>My Managed Events</source>
 				<target>I miei eventi VIP</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.seminar_registration" xml:space="preserve">
-				<source>Event Registration</source>
-				<target>Registrazione evento</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.list_registrations" xml:space="preserve">
 				<source>List of Registrations (for attendees)</source>
 				<target>Lista registrazioni (per partecipanti)</target>
@@ -880,10 +876,6 @@ This event now has been confirmed.</source>
 				<source>Omit the date in the list view if it is the same as the previous item's:</source>
 				<target>Nascondi la data nella modalità lista se è la stessa degli elementi precedenti:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventFieldsOnRegistrationPage" xml:space="preserve">
-				<source>Event data that should be displayed on the registration page:</source>
-				<target>Dati dell'evento che devono essere visualizzati nella pagina di registrazione:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Visualizza dettagli oratore</target>
@@ -903,18 +895,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
 				<source>Which registration fields to show in the list of registrations for an event:</source>
 				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_registration" xml:space="preserve">
-				<source>Registration</source>
-				<target>Registrazione</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has registered for an event</source>
-				<target>Pagina da visualizzare dopo che l'utente si è registrato all'evento</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after registration</source>
-				<target>Invia i parametri alla pagina visualizzata dopo la registrazione</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
@@ -1456,18 +1436,6 @@ This event now has been confirmed.</source>
 				<source>I accept the terms for travelling.</source>
 				<target>Accetto i termini di viaggio.</target>
 			</trans-unit>
-			<trans-unit id="label_submit_registration" xml:space="preserve">
-				<source>Submit registration</source>
-				<target>Conferma registrazione</target>
-			</trans-unit>
-			<trans-unit id="label_proceed_registration" xml:space="preserve">
-				<source>Proceed to checkout</source>
-				<target>Procedi al checkout</target>
-			</trans-unit>
-			<trans-unit id="label_back_registration" xml:space="preserve">
-				<source>Back</source>
-				<target>Indietro</target>
-			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Selected method of payment:</source>
 				<target>Selezionare il metodo di pagamento:</target>
@@ -1619,26 +1587,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>Prezzo valido fino al %s</target>
-			</trans-unit>
-			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
-				<source>You are not registered for this event.</source>
-				<target>Non è registrato per l'evento.</target>
-			</trans-unit>
-			<trans-unit id="message_notRegisteredForThisEvent_informal" xml:space="preserve">
-				<source>You are not registered for this event.</source>
-				<target>Non sei registrato per l'evento.</target>
-			</trans-unit>
-			<trans-unit id="message_unregistrationNotPossible" xml:space="preserve">
-				<source>The unregistration deadline already has passed.</source>
-				<target>La data di scadenza per cancellarsi dall'evento è passata.</target>
-			</trans-unit>
-			<trans-unit id="message_requirementsNotFulfilled" xml:space="preserve">
-				<source>You are not registered for all required events yet.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_requirementsNotFulfilled_informal" xml:space="preserve">
-				<source>You are not registered for all required events yet.</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
 				<source>starting %s</source>

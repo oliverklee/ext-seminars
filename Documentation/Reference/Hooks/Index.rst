@@ -26,12 +26,10 @@ are hooks for these parts of seminars:
 * :ref:`singleview_en`
 * :ref:`listview_en`
 * :ref:`selectorwidget_en`
-* :ref:`registrationform_en`
 * :ref:`notificationemail_en`
 * :ref:`emailsalutation_en`
 * :ref:`datatimespan_en`
 * :ref:`backendemail_en`
-* :ref:`registrationlistcsv_en`
 * :ref:`datasanitization_en`
 
 Please contact us if you need additional hooks.
@@ -277,77 +275,6 @@ Implement the methods required by the interface:
             SelectorWidget $selectorWidget,
             EventBag $seminarBag
         ): void {
-            // Your code here
-        }
-    }
-
-.. _registrationform_en:
-
-Hooks for the registration form
-"""""""""""""""""""""""""""""""
-
-There are 3 hooks into the registration form rendering:
-
-* just before the registration form header is rendered to HTML
-* just before the registration form is rendered to HTML
-* just before the registration form footer is rendered to HTML
-
-You may set custom markers or change existing values for markers in the header and footer hooks.
-See also :file:`Classes/Frontend/DefaultController.php` for available properties and methods.
-
-The registration form is rendered by the builder class in :file:`Classes/Frontend/RegistrationForm.php`.
-It handles the registration or unregistration in 1 or 2 pages according to configuraton. Depending on
-the page shown, the previously entered values and if it is an unregistration or not the values in the
-form may be set or not. If you add custom fields to the form you also need to handle storage and
-retrieval in DB for them according to the page/state of the (un)registration process as well as
-validation via `mkforms`.
-
-Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm`
-like this in :file:`ext_localconf.php` of your extension:
-
-.. code-block:: php
-
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm::class][]
-        = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
-
-Implement the methods required by the interface:
-
-.. code-block:: php
-
-    use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
-
-    class Tx_Seminarspaypal_Hooks_SeminarRegistrationForm implements SeminarRegistrationForm
-    {
-        /**
-         * Modifies the header of the seminar registration form.
-         *
-         * @param DefaultController $controller the calling controller
-         */
-        public function modifyRegistrationHeader(DefaultController $controller): void
-        {
-            // Your code here
-        }
-
-        /**
-         * Modifies the seminar registration form.
-         *
-         * @param DefaultController $controller the calling controller
-         * @param RegistrationForm $registrationEditor the registration form
-         */
-        public function modifyRegistrationForm(
-            DefaultController $controller,
-            RegistrationForm $registrationEditor
-        ): void {
-            // Your code here
-        }
-
-        /**
-         * Modifies the footer of the seminar registration form.
-         *
-         * @param DefaultController $controller the calling controller
-         */
-        public function modifyRegistrationFooter(DefaultController $controller): void
-        {
             // Your code here
         }
     }

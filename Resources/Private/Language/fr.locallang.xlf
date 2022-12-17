@@ -668,10 +668,6 @@ This event now has been confirmed.</source>
 				<source>My Managed Events</source>
 				<target>Les événements VIP géré par moi</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.seminar_registration" xml:space="preserve">
-				<source>Event Registration</source>
-				<target>Inscription aux événements</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.list_registrations" xml:space="preserve">
 				<source>List of Registrations (for attendees)</source>
 				<target>Liste des inscriptions (participants)</target>
@@ -888,10 +884,6 @@ This event now has been confirmed.</source>
 				<source>Omit the date in the list view if it is the same as the previous item's:</source>
 				<target>Ne pas afficher la date dans la vue de liste si elle est identique à celle de l'élément précédent :</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.eventFieldsOnRegistrationPage" xml:space="preserve">
-				<source>Event data that should be displayed on the registration page:</source>
-				<target>Données de l'événements qui doivent s'afficher sur la page d'inscription :</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Afficher les détails du conférencier</target>
@@ -911,18 +903,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
 				<source>Which registration fields to show in the list of registrations for an event:</source>
 				<target>Champs d'inscription à afficher dans la liste des inscriptions à un événement</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_registration" xml:space="preserve">
-				<source>Registration</source>
-				<target>Inscription</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has registered for an event</source>
-				<target>Page à afficher après inscription</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after registration</source>
-				<target>Envoyer les paramètres à la page affichée après inscription</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
@@ -1464,18 +1444,6 @@ This event now has been confirmed.</source>
 				<source>I accept the terms for travelling.</source>
 				<target>J'accepte les conditions de voyage.</target>
 			</trans-unit>
-			<trans-unit id="label_submit_registration" xml:space="preserve">
-				<source>Submit registration</source>
-				<target>Confirmer l'inscription</target>
-			</trans-unit>
-			<trans-unit id="label_proceed_registration" xml:space="preserve">
-				<source>Proceed to checkout</source>
-				<target>Commander</target>
-			</trans-unit>
-			<trans-unit id="label_back_registration" xml:space="preserve">
-				<source>Back</source>
-				<target>Retour</target>
-			</trans-unit>
 			<trans-unit id="label_method_of_payment" xml:space="preserve">
 				<source>Selected method of payment:</source>
 				<target>Méthode de paiment choisie :</target>
@@ -1627,26 +1595,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>prix valables jusqu'au %s</target>
-			</trans-unit>
-			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
-				<source>You are not registered for this event.</source>
-				<target>Vous n'êtes pas inscrit à cet événement.</target>
-			</trans-unit>
-			<trans-unit id="message_notRegisteredForThisEvent_informal" xml:space="preserve">
-				<source>You are not registered for this event.</source>
-				<target>Tu n'es pas inscrit à cet événement.</target>
-			</trans-unit>
-			<trans-unit id="message_unregistrationNotPossible" xml:space="preserve">
-				<source>The unregistration deadline already has passed.</source>
-				<target>Le délai d'annulation d'inscription est expiré.</target>
-			</trans-unit>
-			<trans-unit id="message_requirementsNotFulfilled" xml:space="preserve">
-				<source>You are not registered for all required events yet.</source>
-				<target>Vous n'êtes pas enregistré à tous les événements requis pour l'instant.</target>
-			</trans-unit>
-			<trans-unit id="message_requirementsNotFulfilled_informal" xml:space="preserve">
-				<source>You are not registered for all required events yet.</source>
-				<target>Tu n'es pas enregistré à tous les événements requis pour l'instant.</target>
 			</trans-unit>
 			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
 				<source>starting %s</source>

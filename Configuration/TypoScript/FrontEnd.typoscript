@@ -11,9 +11,6 @@ plugin.tx_seminars_pi1 {
   # activate Javascript framework from global config
   loadJsFramework =< config.loadJsFramework
 
-  # location of the template file for the registration form
-  registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
-
   # the strftime format code for the full date
   dateFormatYMD < plugin.tx_seminars.dateFormatYMD
 
@@ -92,9 +89,6 @@ plugin.tx_seminars_pi1 {
   # "attendees_and_managers", "login" or "world"
   accessToFrontEndRegistrationLists = attendees_and_managers
 
-  # list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
-  eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
-
   # whether detailed information for the speakers is shown in the single view
   showSpeakerDetails = 1
 
@@ -143,16 +137,6 @@ plugin.tx_seminars_pi1 {
   # PID of the FE page that contains the seminar registration plug-in
   registerPID =
 
-  # PID of the thank-you page that will be displayed after a FE user has registered for an event
-  thankYouAfterRegistrationPID =
-
-  # whether to send GET parameters to the thank-you-after-registration-page-URL
-  sendParametersToThankYouAfterRegistrationPageUrl = 1
-
-  # whether to create FE user records for additional attendees (in addition
-  # to storing them in a text field)
-  createAdditionalAttendeesAsFrontEndUsers = 0
-
   # PID of the FE page that contains the login form or onetimeaccount
   loginPID =
 
@@ -173,9 +157,4 @@ plugin.tx_seminars_pi1 {
 
   # the maximum height of the image of a seminar in the single view
   seminarImageSingleViewHeight = 160
-
-  # location of language file for substitution of LABEL markers
-  locallangFilename = EXT:seminars/Resources/Private/Language/locallang.xlf
-
-  form =< config.tx_mkforms
 }

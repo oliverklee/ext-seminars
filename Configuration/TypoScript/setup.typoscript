@@ -1,4 +1,3 @@
-<INCLUDE_TYPOSCRIPT: source="FILE:./Config.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./Page.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./Content.typoscript">
 
@@ -8,5 +7,4 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:./PluginShared.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./FrontEnd.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./ListView.typoscript">
-<INCLUDE_TYPOSCRIPT: source="DIR: ./Forms" extensions="typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./RegistrationDigestEmail.typoscript">

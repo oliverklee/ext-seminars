@@ -28,8 +28,6 @@
 		"php": "^7.2.0 || ~8.0.0",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"digedag/rn-base": "~1.15.0",
-		"dmk/mkforms": "^10.1.0 || ^11.0.0",
 		"doctrine/dbal": "^2.10",
 		"oliverklee/feuserextrafields": "^5.2.1",
 		"oliverklee/oelib": "^5.0.1",

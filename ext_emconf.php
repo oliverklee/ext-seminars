@@ -12,8 +12,6 @@ $EM_CONF[$_EXTKEY] = [
             'extbase' => '10.4.22-10.4.99',
             'feuserextrafields' => '5.2.1-5.99.99',
             'oelib' => '5.0.1-5.99.99',
-            'mkforms' => '10.1.0-11.99.99',
-            'rn_base' => '1.15.0-1.15.99',
             'static_info_tables' => '6.9.6-11.5.99',
         ],
         'conflicts' => [

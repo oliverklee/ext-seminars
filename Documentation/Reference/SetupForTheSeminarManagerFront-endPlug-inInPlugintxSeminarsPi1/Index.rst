@@ -100,22 +100,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         registrationEditorTemplateFile
-
-   Data type
-         string
-
-   Description
-         location of the template file for the registration form
-
-   Default
-         EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.h
-         tml
-
-
-.. container:: table-row
-
-   Property
          salutation
 
    Data type
@@ -470,23 +454,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         eventFieldsOnRegistrationPage
-
-   Data type
-         string
-
-   Description
-         list of comma-separated names of event fields that should be displayed
-         on the registration page (the order doesn't matter)Allowed values are
-         in: uid,title,price\_regular,price\_special,vacancies
-
-   Default
-         title,price\_regular,price\_special,vacancies
-
-
-.. container:: table-row
-
-   Property
          showSpeakerDetails
 
    Data type
@@ -713,38 +680,6 @@ override the corresponding value from TS Setup.**
 
    Default
          None
-
-
-.. container:: table-row
-
-   Property
-         thankYouAfterRegistrationPID
-
-   Data type
-         page\_id
-
-   Description
-         PID of the thank-you page that will be displayed after a FE user has
-         registered for an event
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
-         sendParametersToThankYouAfterRegistrationPageUrl
-
-   Data type
-         boolean
-
-   Description
-         Whether to send GET parameters to the thank-you-after-registration-
-         page-URL.
-
-   Default
-         1
 
 
 .. container:: table-row

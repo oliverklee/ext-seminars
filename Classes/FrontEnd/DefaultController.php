@@ -28,7 +28,6 @@ use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
-use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
@@ -264,9 +263,6 @@ class DefaultController extends TemplateHelper
             case 'single_view':
                 $result = $this->createSingleView();
                 break;
-            case 'seminar_registration':
-                $result = $this->createRegistrationPage();
-                break;
             case 'list_vip_registrations':
                 // The fallthrough is intended
                 // because createRegistrationsListPage() will differentiate later.
@@ -357,18 +353,6 @@ class DefaultController extends TemplateHelper
         return $this->singleViewHookProvider;
     }
 
-    protected function getRegistrationFormHookProvider(): HookProvider
-    {
-        if ($this->registrationFormHookProvider === null) {
-            $this->registrationFormHookProvider = GeneralUtility::makeInstance(
-                HookProvider::class,
-                SeminarRegistrationForm::class
-            );
-        }
-
-        return $this->registrationFormHookProvider;
-    }
-
     /**
      * Creates a seminar in $this->seminar.
      * If the seminar cannot be created, $this->seminar will be NULL, and
@@ -403,23 +387,6 @@ class DefaultController extends TemplateHelper
     protected function setSeminar(?LegacyEvent $event = null): void
     {
         $this->seminar = $event;
-    }
-
-    /**
-     * Creates a registration in $this->registration from the database record
-     * with the UID specified in the parameter $registrationUid.
-     * If the registration cannot be created, $this->registration will be NULL,
-     * and this function will return FALSE.
-     *
-     * @param int $uid a registration UID
-     *
-     * @return bool TRUE if the registration UID is valid and the object has been created, FALSE otherwise
-     */
-    public function createRegistration(int $uid): bool
-    {
-        $this->registration = LegacyRegistration::fromUid($uid);
-
-        return $this->registration instanceof LegacyRegistration;
     }
 
     public function createHelperObjects(): void
@@ -2254,200 +2221,6 @@ class DefaultController extends TemplateHelper
             true
         );
         $this->hideColumns($columns);
-    }
-
-    // Registration view functions.
-
-    /**
-     * Creates the HTML for the registration page.
-     *
-     * @return string HTML for the registration page
-     *
-     * @deprecated #1545 will be removed in seminars 5.0.
-     */
-    protected function createRegistrationPage(): string
-    {
-        $this->feuser = $this->getFrontEndController()->fe_user;
-
-        $errorMessage = '';
-        $registrationForm = '';
-        $isOkay = false;
-
-        $this->toggleEventFieldsOnRegistrationPage();
-
-        $eventUid = (int)($this->piVars['seminar'] ?? 0);
-        if ($this->createSeminar($eventUid)) {
-            if ($this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
-                if ($this->isLoggedIn()) {
-                    $isOkay = true;
-                } else {
-                    $errorMessage = $this->getLoginLink(
-                        $this->translate('message_notLoggedIn'),
-                        (int)$this->getFrontEndController()->id,
-                        $this->seminar->getUid()
-                    );
-                }
-            } else {
-                $errorMessage = $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar);
-            }
-        } elseif ($this->createRegistration((int)($this->piVars['registration'] ?? 0))) {
-            if ($this->createSeminar($this->registration->getSeminar())) {
-                if ($this->seminar->isUnregistrationPossible()) {
-                    $isOkay = true;
-                } else {
-                    $errorMessage = $this->translate('message_unregistrationNotPossible');
-                }
-            }
-        } else {
-            switch ($this->piVars['action'] ?? '') {
-                case 'unregister':
-                    $errorMessage = $this->translate('message_notRegisteredForThisEvent');
-                    break;
-                case 'register':
-                    // The fall-through is intended.
-                default:
-                    $errorMessage = $this->getRegistrationManager()->existsSeminarMessage($eventUid);
-            }
-        }
-
-        if ($isOkay) {
-            if (
-                ($this->piVars['action'] ?? '') === 'unregister'
-                || $this->getRegistrationManager()->userFulfillsRequirements($this->seminar)
-            ) {
-                $registrationForm = $this->createRegistrationForm();
-            } else {
-                $errorMessage = $this->translate('message_requirementsNotFulfilled');
-                $requirementsList = GeneralUtility::makeInstance(RequirementsList::class, $this->conf, $this->cObj);
-                $requirementsList->setEvent($this->seminar);
-                $requirementsList->limitToMissingRegistrations();
-                $registrationForm = $requirementsList->render();
-            }
-        }
-
-        $output = $this->createRegistrationHeading($errorMessage) . $registrationForm .
-            $this->createRegistrationFooter();
-
-        return $output;
-    }
-
-    /**
-     * Creates the registration page title and (if applicable) any error messages.
-     * Data from the event will only be displayed if $this->seminar is non-NULL.
-     *
-     * @param string $errorMessage error message to be displayed (may be empty if there is no error)
-     *
-     * @return string HTML including the title and error message
-     */
-    protected function createRegistrationHeading(string $errorMessage): string
-    {
-        $this->setMarker('registration', $this->translate('label_registration'));
-        $this->setMarker(
-            'title',
-            $this->seminar ? \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5) : ''
-        );
-
-        if ($this->seminar && $this->seminar->hasDate()) {
-            $this->setMarker('date', $this->seminar->getDate());
-        } else {
-            $this->hideSubparts('date', 'registration_wrapper');
-        }
-
-        $this->setMarker('uid', $this->seminar ? $this->seminar->getUid() : '');
-
-        if (empty($errorMessage)) {
-            $this->hideSubparts('error', 'wrapper');
-        } else {
-            $this->setMarker('error_text', $errorMessage);
-        }
-
-        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationHeader', $this);
-
-        return $this->getSubpart('REGISTRATION_HEAD');
-    }
-
-    /**
-     * Creates the registration form.
-     *
-     * Note that $this->seminar must be set before calling this function and if "unregister" is the action to perform,
-     * $this->registration must also be set.
-     *
-     * @return string HTML for the form
-     */
-    protected function createRegistrationForm(): string
-    {
-        $registrationEditor = GeneralUtility::makeInstance(
-            RegistrationForm::class,
-            $this->conf,
-            $this->cObj
-        );
-        $registrationEditor->setSeminar($this->seminar);
-        $action = (string)($this->piVars['action'] ?? 'register');
-        $registrationEditor->setAction($action);
-        if ($action === 'unregister') {
-            $registrationEditor->setRegistration($this->registration);
-        }
-
-        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationForm', $this, $registrationEditor);
-
-        return $registrationEditor->render();
-    }
-
-    /**
-     * Creates the registration page footer.
-     *
-     * @return string HTML including the title and error message
-     */
-    protected function createRegistrationFooter(): string
-    {
-        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationFooter', $this);
-
-        return $this->getSubpart('REGISTRATION_BOTTOM');
-    }
-
-    /**
-     * Enables/disables the display of data from event records on the registration page depending on the config variable
-     * "eventFieldsOnRegistrationPage".
-     *
-     * @deprecated #1545 will be removed in seminars 5.0.
-     */
-    protected function toggleEventFieldsOnRegistrationPage(): void
-    {
-        $fieldsToShow = [];
-        if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
-            /** @var array<int, non-empty-string> $fieldsToShow */
-            $fieldsToShow = GeneralUtility::trimExplode(
-                ',',
-                $this->getConfValueString('eventFieldsOnRegistrationPage', 's_template_special'),
-                true
-            );
-        }
-
-        // First, we have a list of all fields that are removal candidates.
-        $fieldsToRemove = [
-            'uid',
-            'title',
-            'price_regular',
-            'price_special',
-            'vacancies',
-            'message',
-        ];
-
-        // Now iterate over the fields to show and delete them from the list
-        // of items to remove.
-        foreach ($fieldsToShow as $currentField) {
-            $key = array_search($currentField, $fieldsToRemove, true);
-            // $key will be false if the item has not been found.
-            // Zero, on the other hand, is a valid key.
-            if ($key !== false) {
-                /** @var string|int $key */
-                unset($fieldsToRemove[$key]);
-            }
-        }
-
-        if (!empty($fieldsToRemove)) {
-            $this->hideSubparts(implode(',', $fieldsToRemove), 'registration_wrapper');
-        }
     }
 
     /**
