@@ -119,7 +119,7 @@
 			"@ci:static",
 			"@ci:dynamic"
 		],
-		"ci:composer:normalize": "@composer normalize --dry-run",
+		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
 		"ci:coverage": [
 			"@ci:coverage:unit",
 			"@ci:coverage:functional"
@@ -177,7 +177,7 @@
 			"@fix:composer",
 			"@fix:php"
 		],
-		"fix:composer": "@composer normalize",
+		"fix:composer": "@composer normalize --no-check-lock",
 		"fix:php": [
 			"@fix:php:cs",
 			"@fix:php:sniff"
