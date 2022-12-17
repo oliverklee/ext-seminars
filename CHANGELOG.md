@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
 
 ### Changed
+- !!! Move `plugin.eventRegistration.heading.eventTitleAndDateAndUid` into a separate namespace (#2266)
 - Switch the FAL-related fields in the DB to int (#2187)
 - Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)
