@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the changelog archive (#2284)
 - Drop the legacy unregistration form (#2278)
 - Drop the `showOwnerDataInSingleView` setting (#2267)
 - Drop the `showTimeOf*` settings (#2265)
@@ -922,5 +923,5 @@ Special thanks go to @mk-mxp for his work on the hooks.
 
 ## 1.3.0
 
-The [change log up to version 1.3.0](Documentation/changelog-archive.txt)
-has been archived.
+The change log up to version 1.3.0
+[has been archived](https://github.com/oliverklee/ext-seminars/blob/v4.4.0/Documentation/changelog-archive.txt).
