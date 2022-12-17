@@ -2012,7 +2012,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Consent to terms &amp; conditions</source>
 				<target>AGB-Zustimmung</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
+			<trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (Veranstaltung Nr. %3$u)</target>
 			</trans-unit>

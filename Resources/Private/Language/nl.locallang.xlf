@@ -1680,7 +1680,7 @@ This event now has been confirmed.</source>
 				<source>Login page (or with onetimeaccount)</source>
 				<target>Inlogpagina (or met onetimeaccount)</target>
 			</trans-unit>
-			<trans-unit id="plugin.eventRegistration.heading.eventTitleAndDateAndUid">
+			<trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 				<target>%1$s, %2$s (evenement #%3$u)</target>
 			</trans-unit>
