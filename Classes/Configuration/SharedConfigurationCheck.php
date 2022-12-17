@@ -29,8 +29,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             $this->checkAllowUnregistrationWithEmptyWaitingList();
             $this->checkAttendancesPid();
             $this->checkNotificationMail();
-            $this->checkShowTimeOfEarlyBirdDeadline();
-            $this->checkShowTimeOfRegistrationDeadline();
             $this->checkShowVacanciesThreshold();
             $this->checkSkipRegistrationCollisionCheck();
             $this->checkThankYouMail();
@@ -293,24 +291,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'This value specifies whether a notification e-mail should be sent to the organizer
             after a user has unregistered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
-        );
-    }
-
-    private function checkShowTimeOfEarlyBirdDeadline(): void
-    {
-        $this->checkIfBoolean(
-            'showTimeOfEarlyBirdDeadline',
-            'This value specifies whether to also show the time of early bird deadlines.
-            If this value is incorrect, the time might get shown although this is not intended (or vice versa).'
-        );
-    }
-
-    private function checkShowTimeOfRegistrationDeadline(): void
-    {
-        $this->checkIfBoolean(
-            'showTimeOfRegistrationDeadline',
-            'This value specifies whether to also show the time of registration deadlines.
-            If this value is incorrect, the time might get shown although this is not intended (or vice versa).'
         );
     }
 

@@ -103,8 +103,8 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(1575026911, $subject->getBeginDateAsTimestamp());
         self::assertSame(1575926911, $subject->getEndDateAsTimestamp());
         self::assertSame(1570026911, $subject->getRegistrationBeginAsUnixTimestamp());
-        self::assertSame('17.11.2019', $subject->getRegistrationDeadline());
-        self::assertSame('14.10.2019', $subject->getEarlyBirdDeadline());
+        self::assertSame('17.11.2019 21:41', $subject->getRegistrationDeadline());
+        self::assertSame('14.10.2019 04:21', $subject->getEarlyBirdDeadline());
         self::assertSame(1573026911, $subject->getUnregistrationDeadlineAsTimestamp());
         self::assertSame('11.12.2019', $subject->getExpiry());
         self::assertSame('12', $subject->getDetailsPage());

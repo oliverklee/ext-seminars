@@ -460,54 +460,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         showTimeOfRegistrationDeadline
-
-   Data type
-         boolean
-
-   Description
-         whether to also show the time of the registration deadline instead of
-         just the date
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         showTimeOfEarlyBirdDeadline
-
-   Data type
-         boolean
-
-   Description
-         whether to also show the time of the early bird deadline instead of
-         just the date
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         showTimeOfUnregistrationDeadline
-
-   Data type
-         boolean
-
-   Description
-         whether to also show the time of the unregistration deadline instead
-         of just the date
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          unregistrationDeadlineDaysBeforeBeginDate
 
    Data type

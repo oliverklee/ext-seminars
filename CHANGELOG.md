@@ -10,7 +10,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
 
 ### Changed
-- !!! Move `plugin.eventRegistration.heading.eventTitleAndDateAndUid` into a separate namespace (#2266)
+- Always show the time of deadlines and of the registration start (#2265)
+- !!! Move the localized `plugin.eventRegistration.heading.eventTitleAndDateAndUid`
+  into a separate namespace (#2266)
 - Switch the FAL-related fields in the DB to int (#2187)
 - Shrink some DB fields to save some space (#2187)
 - !!! Switch the CSV export to always use UTF-8 (#2181)
@@ -22,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the `showTimeOf*` settings (#2265)
 - Drop the event headline plugin (#2242)
 - Drop the event countdown (#2237)
 - Drop the CSV export of registrations in the FE (#2222)
