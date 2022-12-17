@@ -72,10 +72,8 @@ final class RegistrationFormTest extends TestCase
 
         $this->subject = new RegistrationForm(
             [
-                'pageToShowAfterUnregistrationPID' => $rootPageUid,
                 'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
                 'thankYouAfterRegistrationPID' => $rootPageUid,
-                'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => [
                     'unregistration.' => [],

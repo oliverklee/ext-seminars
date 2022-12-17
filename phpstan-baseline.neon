@@ -1226,11 +1226,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Cannot call method typoLink_URL\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php

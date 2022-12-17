@@ -27,7 +27,6 @@ final class RegistrationFormTest extends FunctionalTestCase
      */
     private const CONFIGURATION = [
         'thankYouAfterRegistrationPID' => 3,
-        'pageToShowAfterUnregistrationPID' => 4,
     ];
 
     protected $testExtensionsToLoad = [
@@ -209,78 +208,6 @@ final class RegistrationFormTest extends FunctionalTestCase
         $subject->setSeminar($event);
 
         $result = $subject->getThankYouAfterRegistrationUrl();
-
-        self::assertStringContainsString('%5BshowUid%5D', $result);
-        self::assertStringNotContainsString('[showUid]', $result);
-    }
-
-    // Tests concerning getPageToShowAfterUnregistrationUrl
-
-    /**
-     * @test
-     */
-    public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp(): void
-    {
-        $subject = new RegistrationForm(self::CONFIGURATION, $this->contentObject);
-
-        $result = $subject->getPageToShowAfterUnregistrationUrl();
-
-        self::assertRegExp('/^http:\\/\\/./', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPageToShowAfterUnregistrationUrlWithoutSendParametersNotContainsShowSeminarUid(): void
-    {
-        $configuration = self::CONFIGURATION;
-        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = false;
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-
-        $result = $subject->getPageToShowAfterUnregistrationUrl();
-
-        self::assertStringNotContainsString('showUid', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPageToShowAfterUnregistrationUrlWithSendParametersContainsShowSeminarUid(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
-
-        $configuration = self::CONFIGURATION;
-        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-
-        $eventUid = 1;
-        $event = LegacyEvent::fromUid($eventUid);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-        $subject->setSeminar($event);
-
-        $result = $subject->getPageToShowAfterUnregistrationUrl();
-
-        self::assertStringContainsString('showUid', $result);
-        self::assertStringContainsString('=' . $eventUid, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPageToShowAfterUnregistrationUrlWithSendParametersEncodesBracketsInUrl(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/SingleEvent.xml');
-
-        $configuration = self::CONFIGURATION;
-        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
-        $subject = new RegistrationForm($configuration, $this->contentObject);
-
-        $eventUid = 1;
-        $event = LegacyEvent::fromUid($eventUid);
-        self::assertInstanceOf(LegacyEvent::class, $event);
-        $subject->setSeminar($event);
-
-        $result = $subject->getPageToShowAfterUnregistrationUrl();
 
         self::assertStringContainsString('%5BshowUid%5D', $result);
         self::assertStringNotContainsString('[showUid]', $result);

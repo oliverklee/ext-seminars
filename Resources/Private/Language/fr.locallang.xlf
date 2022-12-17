@@ -924,14 +924,6 @@ This event now has been confirmed.</source>
 				<source>Send parameters to page which is displayed after registration</source>
 				<target>Envoyer les paramètres à la page affichée après inscription</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has unregistered for an event</source>
-				<target>Page à afficher après annulation d'inscription</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after unregistration</source>
-				<target>Envoyer les paramètres à la page affichée après annulation d'inscription</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target>Affichage des catégories :</target>
@@ -1511,22 +1503,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_timeslot_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Conférenciers</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Voulez-vous vraiment annuler votre inscription pour cet événement ?</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message_informal" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Veux-tu vraiment annuler ton inscription pour cet événement ?</target>
-			</trans-unit>
-			<trans-unit id="label_cancel" xml:space="preserve">
-				<source>Cancel</source>
-				<target>Annuler</target>
-			</trans-unit>
-			<trans-unit id="label_unregister" xml:space="preserve">
-				<source>Unregister</source>
-				<target>Annuler l'inscription</target>
 			</trans-unit>
 			<trans-unit id="label_selector_submit" xml:space="preserve">
 				<source>Apply filter</source>

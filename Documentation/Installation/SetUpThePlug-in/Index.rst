@@ -73,9 +73,6 @@ values for a basic setup:
 
      # PID of the thank-you page that will be displayed after a FE user has registered for an event
      thankYouAfterRegistrationPID =
-
-     # PID of the page that will be displayed after a FE user has unregistered from an event
-     pageToShowAfterUnregistrationPID =
    }
 
    # localizations for FE-only parts go here (the example is for German)

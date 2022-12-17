@@ -956,14 +956,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Send parameters to page which is displayed after registration</source>
 				<target>Parameter an Seite schicken, die nach erfolgreicher Anmeldung angezeigt wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
-				<source>Page that will be displayed after a user has unregistered for an event</source>
-				<target>Seite, die nach erfolgreicher Abmeldung für eine Veranstaltung angezeigt wird</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
-				<source>Send parameters to page which is displayed after unregistration</source>
-				<target>Parameter an Seite schicken, die nach erfolgreicher Abmeldung angezeigt wird</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
 				<source>Display of the categories:</source>
 				<target>Anzeige der Kategorien:</target>
@@ -1543,22 +1535,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_timeslot_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>ReferentInnen</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</target>
-			</trans-unit>
-			<trans-unit id="label_unregistration_message_informal" xml:space="preserve">
-				<source>Do you really want to unregister from this event?</source>
-				<target>Willst du dich wirklich von dieser Veranstaltung abmelden?</target>
-			</trans-unit>
-			<trans-unit id="label_cancel" xml:space="preserve">
-				<source>Cancel</source>
-				<target>Abbrechen</target>
-			</trans-unit>
-			<trans-unit id="label_unregister" xml:space="preserve">
-				<source>Unregister</source>
-				<target>Abmelden</target>
 			</trans-unit>
 			<trans-unit id="label_selector_submit" xml:space="preserve">
 				<source>Apply filter</source>

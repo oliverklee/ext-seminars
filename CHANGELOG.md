@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the legacy unregistration form (#2278)
 - Drop the `showOwnerDataInSingleView` setting (#2267)
 - Drop the `showTimeOf*` settings (#2265)
 - Drop the event headline plugin (#2242)
