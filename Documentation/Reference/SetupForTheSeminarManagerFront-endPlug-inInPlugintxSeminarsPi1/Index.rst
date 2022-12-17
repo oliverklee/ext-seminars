@@ -454,38 +454,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         showOwnerDataInSingleView
-
-   Data type
-         boolean
-
-   Description
-         whether to show the owner data in the single view,
-         @deprecated #1811, will be removed in seminars 5.0
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
-         ownerPictureMaxWidth
-
-   Data type
-         integer
-
-   Description
-         the maximum width of the owner picture in the single view,
-         @deprecated #1811, will be removed in seminars 5.0
-
-   Default
-         250
-
-
-.. container:: table-row
-
-   Property
          accessToFrontEndRegistrationLists
 
    Data type

@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the `showOwnerDataInSingleView` setting (#2267)
 - Drop the `showTimeOf*` settings (#2265)
 - Drop the event headline plugin (#2242)
 - Drop the event countdown (#2237)

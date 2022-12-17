@@ -469,24 +469,6 @@
 				</el>
 			</ROOT>
 		</s_listView>
-		<s_singleView>
-			<ROOT>
-				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.sheet_single_view</sheetTitle>
-				</TCEforms>
-				<type>array</type>
-				<el>
-					<showOwnerDataInSingleView>
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.showOwnerDataInSingleView</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</showOwnerDataInSingleView>
-				</el>
-			</ROOT>
-		</s_singleView>
 		<s_template_special>
 			<ROOT>
 				<TCEforms>

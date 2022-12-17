@@ -75,18 +75,4 @@ final class SingleViewConfigurationCheckTest extends UnitTestCase
         self::assertArrayHasKey(1, $result);
         self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
     }
-
-    /**
-     * @test
-     */
-    public function checkWithShowOwnerDataCreatesErrors(): void
-    {
-        $this->configuration->setAsString('showOwnerDataInSingleView', 's_singleView');
-
-        $this->subject->check();
-
-        $result = $this->subject->getWarningsAsHtml();
-        self::assertArrayHasKey(1, $result);
-        self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
-    }
 }

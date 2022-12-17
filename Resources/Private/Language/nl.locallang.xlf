@@ -776,14 +776,6 @@ This event now has been confirmed.</source>
 				<source>Show only events which have vacancies:</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
-				<source>Single view</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showOwnerDataInSingleView" xml:space="preserve">
-				<source>Show the owner data on the single view page:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
 				<source>Show attached files list only to attendees:</source>
 				<target></target>
@@ -1571,10 +1563,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_no_categories" xml:space="preserve">
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Op dit moment bieden we geen evenementen in de volgende categorieën:</target>
-			</trans-unit>
-			<trans-unit id="label_owner" xml:space="preserve">
-				<source>Event manager</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_registration_requirements" xml:space="preserve">
 				<source>Please register for the following events first:</source>

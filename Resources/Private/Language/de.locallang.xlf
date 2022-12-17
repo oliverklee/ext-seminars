@@ -820,14 +820,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Show only events which have vacancies:</source>
 				<target>Zeige nur Veranstaltungen mit freien Plätzen:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
-				<source>Single view</source>
-				<target>Einzelansicht</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showOwnerDataInSingleView" xml:space="preserve">
-				<source>Show the owner data on the single view page:</source>
-				<target>Daten des Veranstaltungsbesitzers in der Einzelansicht anzeigen:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
 				<source>Show attached files list only to attendees:</source>
 				<target>Zeige angehängte Dateien nur für Teilnehmer:</target>
@@ -1623,10 +1615,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="label_no_categories" xml:space="preserve">
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</target>
-			</trans-unit>
-			<trans-unit id="label_owner" xml:space="preserve">
-				<source>Event manager</source>
-				<target>Verwalter dieser Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="label_registration_requirements" xml:space="preserve">
 				<source>Please register for the following events first:</source>
