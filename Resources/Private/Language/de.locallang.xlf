@@ -2392,6 +2392,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Unregister from an event</source>
 				<target>Von einer Veranstaltung abmelden</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.heading.unregistrationSuccess">
+				<source>Unregistration sent</source>
+				<target>Abmeldung verschickt</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
 				<source>This content is only available after a login.</source>
 				<target>Dieser Inhalt ist nur nach einem Login verfügbar.</target>
@@ -2407,6 +2411,30 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			<trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
 				<source>You cannot unregister from this event now.</source>
 				<target>Du kannst dich von dieser Veranstaltung jetzt nicht abmelden.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Möchten Sie sich wirklich von dieser Veranstaltung abmelden?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Möchtest du dich wirklich von dieser Veranstaltung abmelden?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.action.cancel">
+				<source>Cancel and go back</source>
+				<target>Abbrechen und zurückgehen</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.action.unregister">
+				<source>Unregister</source>
+				<target>Abmelden</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_formal">
+				<source>Your registration to this event now has been canceled.</source>
+				<target>Ihre Anmeldung zu dieser Veranstaltung wurde nun storniert.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
+				<source>Your registration to this event now has been canceled.</source>
+				<target>Deine Anmeldung zu dieser Veranstaltung wurde nun storniert.</target>
 			</trans-unit>
 		</body>
 	</file>

@@ -1692,6 +1692,14 @@ This event now has been confirmed.</source>
 				<source>Early-bird special price</source>
 				<target>Специальная цена при раннем заказе</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Вы действително хотите отказаться от мероприятия?</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+				<source>Do you really want to unregister from this event?</source>
+				<target>Ты действително хочешь отказаться от мероприятия?</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

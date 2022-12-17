@@ -29,6 +29,7 @@
       document.addEventListener('readystatechange', () => {
         this.initializeSearchWidget();
         this.initializeRegistrationForm();
+        this.initializeUnregistrationForm();
       });
     }
 
@@ -108,6 +109,19 @@
       this.showOrHideAttendeeNames();
       this.restoreAttendeeNames();
       this.addSeatsListener();
+    }
+
+    initializeUnregistrationForm() {
+      const cancelButton = document.querySelector('button[data-behavior="tx-seminars-cancel-unregistration"]');
+      if (!(cancelButton instanceof Element)) {
+        return;
+      }
+
+      cancelButton.addEventListener('click', this.goBack);
+    }
+
+    goBack() {
+      history.back();
     }
 
     addBillingAddressCheckboxListener() {
