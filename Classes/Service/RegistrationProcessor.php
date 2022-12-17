@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
-use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
+use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Price;
@@ -230,7 +230,7 @@ class RegistrationProcessor implements SingletonInterface
         $legacyRegistration = GeneralUtility::makeInstance(LegacyRegistration::class, $registrationUid);
         $this->registrationManager->setRegistration($legacyRegistration);
 
-        $configuration = GeneralUtility::makeInstance(LegacyRegistrationConfiguration::class);
+        $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
 
         $this->registrationManager->sendEmailsForNewRegistration($configuration);
     }

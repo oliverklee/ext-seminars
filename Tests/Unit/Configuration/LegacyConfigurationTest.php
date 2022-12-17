@@ -6,14 +6,14 @@ namespace OliverKlee\Seminars\Tests\Unit\Configuration;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Templating\TemplateHelper;
-use OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration;
+use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \OliverKlee\Seminars\Configuration\LegacyRegistrationConfiguration
+ * @covers \OliverKlee\Seminars\Configuration\LegacyConfiguration
  */
-final class LegacyRegistrationConfigurationTest extends UnitTestCase
+final class LegacyConfigurationTest extends UnitTestCase
 {
     /**
      * @var ContentObjectRenderer
@@ -21,7 +21,7 @@ final class LegacyRegistrationConfigurationTest extends UnitTestCase
     private $contentObjectMock;
 
     /**
-     * @var LegacyRegistrationConfiguration
+     * @var LegacyConfiguration
      */
     private $subject;
 
@@ -36,7 +36,7 @@ final class LegacyRegistrationConfigurationTest extends UnitTestCase
         $frontEndControllerMock->cObj = $this->contentObjectMock;
         $GLOBALS['TSFE'] = $frontEndControllerMock;
 
-        $this->subject = new LegacyRegistrationConfiguration();
+        $this->subject = new LegacyConfiguration();
     }
 
     protected function tearDown(): void
@@ -64,7 +64,7 @@ final class LegacyRegistrationConfigurationTest extends UnitTestCase
         $this->expectExceptionMessage('No front end found.');
         $this->expectExceptionCode(1668938450);
 
-        $this->subject = new LegacyRegistrationConfiguration();
+        $this->subject = new LegacyConfiguration();
     }
 
     /**
