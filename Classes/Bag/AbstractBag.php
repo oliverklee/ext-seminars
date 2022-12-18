@@ -228,14 +228,10 @@ abstract class AbstractBag implements \Iterator
 
     /**
      * Advances to the next record and returns a reference to that object.
-     *
-     * @return M|null
      */
-    public function next()
+    public function next(): void
     {
         $this->key++;
-
-        return $this->current();
     }
 
     /**
@@ -243,6 +239,7 @@ abstract class AbstractBag implements \Iterator
      *
      * @return M|null
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if (!$this->valid()) {

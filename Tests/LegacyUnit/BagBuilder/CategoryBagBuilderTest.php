@@ -73,9 +73,10 @@ final class CategoryBagBuilderTest extends TestCase
             'Title 1',
             $categoryBag->current()->getTitle()
         );
+        $categoryBag->next();
         self::assertEquals(
             'Title 2',
-            $categoryBag->next()->getTitle()
+            $categoryBag->current()->getTitle()
         );
     }
 

@@ -37,6 +37,7 @@ final class TestingQueryResult implements QueryResultInterface
     /**
      * @return Model|null
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->objectStorage->current();
@@ -70,6 +71,7 @@ final class TestingQueryResult implements QueryResultInterface
     /**
      * @return Model|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         /** @var Model|null $offset */
