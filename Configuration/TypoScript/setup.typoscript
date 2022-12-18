@@ -1,5 +1,4 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:./Page.typoscript">
-<INCLUDE_TYPOSCRIPT: source="FILE:./Content.typoscript">
 
 <INCLUDE_TYPOSCRIPT: source="FILE:./PluginSettings.typoscript">
 <INCLUDE_TYPOSCRIPT: source="FILE:./View.typoscript">
