@@ -904,19 +904,14 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * Gets our regular price as a string containing amount and currency. If
-     * no regular price has been set, either "free" or "to be announced" will
-     * be returned, depending on the TypoScript variable showToBeAnnouncedForEmptyPrice.
+     * no regular price has been set, this will be "free".
      */
     public function getPriceRegular(): string
     {
         if ($this->hasPriceRegular()) {
             $result = $this->formatPrice($this->getPriceRegularAmount());
         } else {
-            $result =
-                $this->getSharedConfiguration()->getAsBoolean('showToBeAnnouncedForEmptyPrice')
-                    // @deprecated #1786 will be removed in seminars 5.0
-                    ? $this->translate('message_willBeAnnounced')
-                    : $this->translate('message_forFree');
+            $result = $this->translate('message_forFree');
         }
 
         return $result;

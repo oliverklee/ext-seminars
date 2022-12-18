@@ -88,9 +88,6 @@ plugin.tx_seminars {
   # If there are at least this many vancancies, "enough" is displayed instead of the exact number.
   showVacanciesThreshold = 10
 
-  # whether events that have no standard price set should have "to be announced" as price instead of "free"
-  showToBeAnnouncedForEmptyPrice = 0
-
   # the filename proposed for CSV export of event lists
   filenameForEventsCsv = events.csv
 
