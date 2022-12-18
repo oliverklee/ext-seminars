@@ -115,11 +115,7 @@ class RegistrationBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the bag to registrations to the front-end user $user.
-     *
-     * These registration will either be those for which $user has signed up
-     * himself, or for which they have been entered as "additional registered
-     * persons".
+     * Limits the bag to registrations to the provided front-end user.
      *
      * @param FrontEndUser|null $user the front-end user to limit the bag for,
      *        set to null to remove the limitation
@@ -132,10 +128,6 @@ class RegistrationBagBuilder extends AbstractBagBuilder
         }
 
         $whereClause = 'tx_seminars_attendances.user = ' . $user->getUid();
-        if ($user->getRegistration() !== null) {
-            $whereClause .= ' OR tx_seminars_attendances.uid = ' .
-                $user->getRegistration()->getUid();
-        }
 
         $this->whereClauseParts['attendee'] = $whereClause;
     }

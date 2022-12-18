@@ -1,0 +1,65 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OliverKlee\Seminars\Tests\Functional\Mapper;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Model\FrontEndUserGroup;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+
+/**
+ * @covers \OliverKlee\Seminars\Mapper\FrontEndUserMapper
+ */
+final class FrontEndUserMapperTest extends FunctionalTestCase
+{
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    /**
+     * @var FrontEndUserMapper
+     */
+    private $subject;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->subject = new FrontEndUserMapper();
+    }
+
+    /**
+     * @test
+     */
+    public function loadForExistingRecordLoadsScalarData(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
+
+        $model = $this->subject->find(1);
+
+        $this->subject->load($model);
+
+        self::assertSame('ben', $model->getUserName());
+    }
+
+    /**
+     * @test
+     */
+    public function loadPopulatesUserGroupsAssociation(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
+
+        $model = $this->subject->find(1);
+
+        $this->subject->load($model);
+
+        /** @var FrontEndUserGroup $firstGroup */
+        $firstGroup = $model->getUserGroups()->first();
+        self::assertInstanceOf(FrontEndUserGroup::class, $firstGroup);
+        self::assertSame(1, $firstGroup->getUid());
+        self::assertSame('Editors', $firstGroup->getTitle());
+    }
+}

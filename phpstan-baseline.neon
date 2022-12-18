@@ -2386,6 +2386,11 @@ parameters:
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\RegistrationMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/RegistrationMapperTest.php
@@ -2987,7 +2992,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 7
+			count: 6
 			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
 
 		-

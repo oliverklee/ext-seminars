@@ -531,33 +531,6 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithUserFindsRegistrationsWithUserAsAdditionalRegisteredPerson(): void
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'additional_persons' => 1]
-        );
-        $feUserUid = $this->testingFramework->createFrontEndUser(
-            '',
-            ['tx_seminars_registration' => $registrationUid]
-        );
-
-        $user = MapperRegistry::get(FrontEndUserMapper::class)->find($feUserUid);
-        $this->subject->limitToAttendee($user);
-        $bag = $this->subject->build();
-
-        self::assertEquals(
-            $registrationUid,
-            $bag->current()->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function limitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
