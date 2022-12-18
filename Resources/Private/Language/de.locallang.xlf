@@ -1480,22 +1480,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Waiting list</source>
 				<target>Warteliste</target>
 			</trans-unit>
-			<trans-unit id="message_file_too_large" xml:space="preserve">
-				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-				<target>Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</target>
-			</trans-unit>
-			<trans-unit id="message_file_too_large_informal" xml:space="preserve">
-				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-				<target>Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</target>
-			</trans-unit>
-			<trans-unit id="message_invalid_type" xml:space="preserve">
-				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-				<target>Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</target>
-			</trans-unit>
-			<trans-unit id="message_invalid_type_informal" xml:space="preserve">
-				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-				<target>Die hochzuladende Datei hat ein ungültiges Format. Bitte wähle eine andere. Erlaubte Dateiformate sind</target>
-			</trans-unit>
 			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
 				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 				<target>Die URL enthält keine Veranstaltungs-ID. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</target>
