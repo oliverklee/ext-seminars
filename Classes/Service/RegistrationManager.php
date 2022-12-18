@@ -1249,11 +1249,6 @@ class RegistrationManager
         return FrontEndLoginManager::getInstance()->getLoggedInUserUid();
     }
 
-    protected function getRegistrationMapper(): RegistrationMapper
-    {
-        return MapperRegistry::get(RegistrationMapper::class);
-    }
-
     private function getConnectionForTable(string $table): Connection
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
