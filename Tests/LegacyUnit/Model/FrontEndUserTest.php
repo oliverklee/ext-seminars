@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
-use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
@@ -16,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 final class FrontEndUserTest extends TestCase
 {
     /**
-     * @var FrontEndUser the object to test
+     * @var FrontEndUser
      */
     private $subject;
 
@@ -34,14 +33,6 @@ final class FrontEndUserTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
-    }
-
-    /**
-     * @test
-     */
-    public function isModel(): void
-    {
-        self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
 
     // Tests concerning getRegistration and setRegistration
