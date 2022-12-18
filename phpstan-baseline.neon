@@ -311,16 +311,6 @@ parameters:
 			path: Classes/Controller/FrontEndEditorController.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractBackEndAccessCheck\\:\\:getLoggedInBackEndUser\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication but returns mixed\\.$#"
-			count: 1
-			path: Classes/Csv/AbstractBackEndAccessCheck.php
-
-		-
-			message: "#^Parameter \\#1 \\$row of method TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\:\\:doesUserHaveAccess\\(\\) expects array, array\\|null given\\.$#"
-			count: 1
-			path: Classes/Csv/AbstractBackEndAccessCheck.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractListView\\:\\:getBackEndUser\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\|null but returns mixed\\.$#"
 			count: 1
 			path: Classes/Csv/AbstractListView.php
