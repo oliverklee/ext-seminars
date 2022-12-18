@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
@@ -529,15 +528,7 @@ class RegistrationManager
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
             )
             ->text($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
-
-        $emailFormat = ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
-        // @deprecated #1716 The `wantsHtmlEmail` call will be removed in seminars 5.0.
-        // Instead, HTML and plain-text emails will always be sent.
-        if (
-            $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
-        ) {
-            $emailBuilder->html($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));
-        }
+        $emailBuilder->html($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));
 
         $registration = MapperRegistry::get(RegistrationMapper::class)->find($oldRegistration->getUid());
         $this->addCalendarAttachment($emailBuilder, $registration);

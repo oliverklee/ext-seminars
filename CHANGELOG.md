@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
 
 ### Changed
+- Always send HTML and plain text emails (#2296)
 - Rename `LegacyRegistrationConfiguration` to `LegacyConfiguration` (#2276)
 - Rename `denyRegistrationAction` to `denyAction` (#2270)
 - Always show the time of deadlines and of the registration start (#2265)

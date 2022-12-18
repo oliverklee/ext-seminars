@@ -1,6 +1,2 @@
 # cat=basic/enable; type=boolean; label=Enable configuration check.        This automatic configuration check checks the FE and BE settings of this extension for common problems and inconsistencies and will be helpful in getting to a working configuration quickly.
 enableConfigCheck = 1
-
-# @deprecated #1716 will be removed in seminars 5.0
-# cat=basic/enable; type=options[send only plain text e-mail=0,always send HTML e-mail=1,use the setting from FE user record=2]; label=Format of e-mails for attendees
-eMailFormatForAttendees = 0
