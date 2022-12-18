@@ -746,21 +746,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         externalLinkTarget
-
-   Data type
-         string
-
-   Description
-         The target for external links in seminars.
-
-   Default
-         None
-
-
-.. container:: table-row
-
-   Property
          seminarImageSingleViewWidth
 
    Data type

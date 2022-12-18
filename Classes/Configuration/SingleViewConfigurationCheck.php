@@ -28,7 +28,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkRegistrationsVipListPidOptional();
         $this->checkDetailPid();
         $this->checkDefaultEventVipsFeGroupID();
-        $this->checkExternalLinkTarget();
         $this->checkSingleViewImageSizes();
         $this->checkLimitFileDownloadToAttendees();
         $this->checkShowOnlyEventsWithVacancies();
@@ -116,13 +115,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'This value specifies the page that contains the list of registrations for an event.
             If this value is not set correctly, the link to that page will not work.'
         );
-    }
-
-    /**
-     * Does nothing.
-     */
-    private function checkExternalLinkTarget(): void
-    {
     }
 
     private function checkSingleViewImageSizes(): void

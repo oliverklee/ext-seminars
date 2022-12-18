@@ -149,9 +149,6 @@ plugin.tx_seminars_pi1 {
   # UID of the FE user group for event managers
   defaultEventVipsFeGroupID =
 
-  # The target for external links in seminars.
-  externalLinkTarget =
-
   # the maximum width of the image of a seminar in the single view
   seminarImageSingleViewWidth = 260
 
