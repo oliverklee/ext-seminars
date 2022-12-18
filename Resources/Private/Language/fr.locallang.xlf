@@ -844,10 +844,6 @@ This event now has been confirmed.</source>
 				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
 				<target>Utiliser &quot;Prix&quot; comme titre pour le prix standard dans la vue de détail et sur la page d'inscription :</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
-				<source>Omit the date in the list view if it is the same as the previous item's:</source>
-				<target>Ne pas afficher la date dans la vue de liste si elle est identique à celle de l'élément précédent :</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Afficher les détails du conférencier</target>

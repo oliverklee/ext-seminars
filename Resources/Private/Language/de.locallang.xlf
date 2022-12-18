@@ -880,10 +880,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
 				<target>&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
-				<source>Omit the date in the list view if it is the same as the previous item's:</source>
-				<target>Das Datum nicht anzeigen, wenn es das gleich wie das der vorherigen Veranstaltung ist:</target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 				<target>Details anzeigen</target>

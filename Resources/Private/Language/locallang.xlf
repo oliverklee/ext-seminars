@@ -672,9 +672,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.generalPriceInSingle" xml:space="preserve">
 				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
-				<source>Omit the date in the list view if it is the same as the previous item's:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
 				<source>Show speaker details</source>
 			</trans-unit>
