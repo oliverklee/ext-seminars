@@ -35,14 +35,8 @@ class Salutation
                 $salutationParts['name'] = $user->getFirstOrFullName();
                 break;
             default:
-                // @deprecated #1320 The salutations will be made gender-neutral in seminars 5.0.
-                $gender = $user->getGender();
-                $salutationParts['dear'] = LocalizationUtility::translate('email_hello_formal_' . $gender, 'seminars');
-                $salutationParts['title'] = LocalizationUtility::translate(
-                    'email_salutation_title_' . $gender,
-                    'seminars'
-                );
-                $salutationParts['name'] = $user->getLastOrFullName();
+                $salutationParts['dear'] = LocalizationUtility::translate('email_hello_formal_99', 'seminars');
+                $salutationParts['name'] = $user->getName();
         }
 
         foreach ($this->getHooks() as $hook) {

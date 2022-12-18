@@ -12,7 +12,6 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\EventBag;
@@ -3020,90 +3019,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation(): void
-    {
-        if (OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
-        }
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->configuration->setAsString('salutation', 'formal');
-        $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com']
-        );
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        self::assertStringContainsString(
-            $this->translate('email_hello_formal_2'),
-            $this->email->getTextBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation(): void
-    {
-        if (!OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
-        }
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->configuration->setAsString('salutation', 'formal');
-        $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com', 'gender' => 0]
-        );
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        self::assertStringContainsString(
-            $this->translate('email_hello_formal_0'),
-            $this->email->getTextBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation(): void
-    {
-        if (!OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
-        }
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->configuration->setAsString('salutation', 'formal');
-        $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com', 'gender' => 1]
-        );
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        self::assertStringContainsString(
-            $this->translate('email_hello_formal_1'),
-            $this->email->getTextBody()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -3377,12 +3292,8 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderUnknownNotContainsRawTemplateMarkers(): void
+    public function notifyAttendeeForFormalSalutationNotContainsRawTemplateMarkers(): void
     {
-        if (OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
-        }
-
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -3390,56 +3301,6 @@ final class RegistrationManagerTest extends TestCase
             'fe_users',
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
-        );
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        $this->assertNotContainsRawLabelKey($this->email->getTextBody());
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers(): void
-    {
-        if (!OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
-        }
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->configuration->setAsString('salutation', 'formal');
-        $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com', 'gender' => 0]
-        );
-        $pi1 = new DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-
-        $this->assertNotContainsRawLabelKey($this->email->getTextBody());
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers(): void
-    {
-        if (!OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
-        }
-
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->configuration->setAsString('salutation', 'formal');
-        $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com', 'gender' => 1]
         );
         $pi1 = new DefaultController();
         $pi1->init();

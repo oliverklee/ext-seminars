@@ -520,37 +520,9 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 				<source>Dear</source>
 				<target>Cher</target>
 			</trans-unit>
-			<trans-unit id="email_hello_formal_0" xml:space="preserve">
-				<source>Dear</source>
-				<target>Bonjour</target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_1" xml:space="preserve">
-				<source>Dear</source>
-				<target>Bonjour</target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_2" xml:space="preserve">
-				<source>Dear</source>
-				<target>Bonjour</target>
-			</trans-unit>
 			<trans-unit id="email_hello_formal_99" xml:space="preserve">
 				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_0" xml:space="preserve">
-				<source>Mr.</source>
-				<target>monsieur</target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_1" xml:space="preserve">
-				<source>Ms.</source>
-				<target>madame</target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_2" xml:space="preserve">
-				<source></source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_99" xml:space="preserve">
-				<source></source>
-				<target></target>
+				<target>Bonjour</target>
 			</trans-unit>
 			<trans-unit id="email_eventDate" xml:space="preserve">
 				<source>on %s</source>
@@ -607,10 +579,6 @@ you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
 This event now has been confirmed.</source>
 				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_3" xml:space="preserve">
-				<source></source>
-				<target>Bonjour</target>
 			</trans-unit>
 			<trans-unit id="message_403" xml:space="preserve">
 				<source>Error 403. Sorry, you don't have access to this data.</source>
