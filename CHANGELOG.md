@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the `externalLinkTarget` setting (#2310)
 - Drop the collision check (#2308)
 - Drop currency and tax information from registrations (#2305)
 - Drop the requirements check (#2299)
