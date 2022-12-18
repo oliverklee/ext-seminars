@@ -19,7 +19,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkGeneralPriceInMail();
         $this->checkRegistrationFlag();
         $this->checkSalutationMode();
-        $this->checkShowToBeAnnouncedForEmptyPrice();
         $this->checkStaticIncluded();
         $this->checkTimeAndDate();
 
@@ -66,19 +65,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'enableRegistration',
             'This value specifies whether the extension will provide online registration.
             If this value is incorrect, the online  registration will not be enabled or disabled correctly.'
-        );
-    }
-
-    /**
-     * @deprecated #1786 will be removed in seminars 5.0
-     */
-    private function checkShowToBeAnnouncedForEmptyPrice(): void
-    {
-        $this->checkIfBoolean(
-            'showToBeAnnouncedForEmptyPrice',
-            'This value specifies whether &quot;to be announced&quot; should be displayed instead of &quot;free&quot;
-            if an event has no regular price set yet.
-            If this value is not set correctly, the wrong wording might get displayed.'
         );
     }
 
