@@ -2386,16 +2386,6 @@ parameters:
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserGroupMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/Mapper/FrontEndUserGroupMapperTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\RegistrationMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/RegistrationMapperTest.php

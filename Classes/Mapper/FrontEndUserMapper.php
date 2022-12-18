@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Oelib\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 /**
