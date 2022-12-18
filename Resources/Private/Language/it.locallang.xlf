@@ -1408,14 +1408,6 @@ This event now has been confirmed.</source>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Attualmente, non stiamo offrendo nessun evento categorizzato.</target>
 			</trans-unit>
-			<trans-unit id="label_registration_requirements" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_registration_requirements_informal" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Lista d'attesa</target>

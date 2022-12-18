@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the requirements check (#2299)
 - Remove the `Titled` interface (#2298)
 - Drop the gender field for speakers (#2289)
 - Drop the automatic gender-specific salutations (#2288)

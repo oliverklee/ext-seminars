@@ -3554,11 +3554,10 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns the required events for the current event topic, ie. topics that
+     * Returns the required events for the current event topic, i.e., topics that
      * are prerequisites for this event.
      *
-     * @return EventBag the required events, will be empty if this
-     *                               event has no required events
+     * @return EventBag the required events, will be empty if this event has no required events
      */
     public function getRequirements(): EventBag
     {
