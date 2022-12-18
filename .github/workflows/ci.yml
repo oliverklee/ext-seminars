@@ -73,7 +73,7 @@ jobs:
           - "php:stan"
           - "ts:lint"
         php-version:
-          - "7.4"
+          - "8.0"
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-22.04
