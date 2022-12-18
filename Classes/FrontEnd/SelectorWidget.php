@@ -288,7 +288,7 @@ class SelectorWidget extends AbstractView
             $this->setMarker('option_value', $optionValue);
             $this->setMarker('option_label', $optionName);
 
-            if ($this->piVars[$name] == $optionValue) {
+            if ((string)($this->piVars[$name] ?? '') === (string)$optionValue) {
                 $selected = ' selected="selected"';
             } else {
                 $selected = '';
@@ -384,7 +384,10 @@ class SelectorWidget extends AbstractView
             return;
         }
 
-        $this->setMarker('searchbox_value', \htmlspecialchars((string)$this->piVars['sword'], ENT_QUOTES | ENT_HTML5));
+        $this->setMarker(
+            'searchbox_value',
+            \htmlspecialchars((string)($this->piVars['sword'] ?? ''), ENT_QUOTES | ENT_HTML5)
+        );
     }
 
     /**
@@ -420,7 +423,7 @@ class SelectorWidget extends AbstractView
             $this->hideSubparts(self::SUBPART_PREFIX . 'AGE');
             return;
         }
-        $age = (int)$this->piVars['age'];
+        $age = (int)($this->piVars['age'] ?? 0);
 
         $this->setMarker('age_value', $age > 0 ? $age : '');
     }
@@ -435,8 +438,8 @@ class SelectorWidget extends AbstractView
             return;
         }
 
-        $priceFrom = (int)$this->piVars['price_from'];
-        $priceTo = (int)$this->piVars['price_to'];
+        $priceFrom = (int)($this->piVars['price_from'] ?? 0);
+        $priceTo = (int)($this->piVars['price_to'] ?? 0);
 
         $this->setMarker('price_from_value', $priceFrom > 0 ? $priceFrom : '');
         $this->setMarker('price_to_value', $priceTo > 0 ? $priceTo : '');

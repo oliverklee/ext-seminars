@@ -1171,11 +1171,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createDateArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
