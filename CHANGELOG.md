@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the custom FE user group model (#2318)
 - Drop the `Event::STATUS_*` constants (#2316)
 - Drop organizer-specific registration storage folders (#2311)
 - Remove the `showToBeAnnouncedForEmptyPrice` setting (#2312)
