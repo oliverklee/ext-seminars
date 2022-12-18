@@ -2041,6 +2041,11 @@ parameters:
 			path: Classes/Service/SingleViewLinkBuilder.php
 
 		-
+			message: "#^Cannot call method fetchOne\\(\\) on class\\-string\\|object\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\DateRangeViewHelper\\:\\:getAsDateFormatYmd\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/ViewHelpers/DateRangeViewHelper.php
@@ -2924,6 +2929,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\SingleViewLinkBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\UpgradeWizards\\\\SeparateBillingAddressUpgradeWizardTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/UpgradeWizards/SeparateBillingAddressUpgradeWizardTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"

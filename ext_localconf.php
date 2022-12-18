@@ -71,6 +71,9 @@ defined('TYPO3') or die('Access denied.');
 '
     );
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeparateBillingAddress']
+        = \OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard::class;
+
     // This makes the plugin available for front-end rendering.
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Seminars', // extension name, matching the PHP namespaces (but without the vendor)

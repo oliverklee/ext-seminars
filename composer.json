@@ -61,6 +61,7 @@
 		"phpunit/phpunit": "^8.5.31",
 		"saschaegerer/phpstan-typo3": "^1.8.2",
 		"squizlabs/php_codesniffer": "^3.7.1",
+		"typo3/cms-install": "^10.4.22",
 		"typo3/cms-scheduler": "^10.4.22",
 		"typo3/coding-standards": "^0.5.5"
 	},
@@ -68,7 +69,8 @@
 		"typo3-ter/seminars": "self.version"
 	},
 	"suggest": {
-		"oliverklee/onetimeaccount": "for event registration without an explicit FE login"
+		"oliverklee/onetimeaccount": "for event registration without an explicit FE login",
+		"typo3/cms-install": "for running the upgrade wizards"
 	},
 	"prefer-stable": true,
 	"autoload": {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_attendances>
+        <uid>1</uid>
+        <separate_billing_address>1</separate_billing_address>
+        <company>ACME Inc.</company>
+        <name>Unit testing master</name>
+        <city>Code Coverage City</city>
+    </tx_seminars_attendances>
+</dataset>
