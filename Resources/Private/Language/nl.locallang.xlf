@@ -1396,14 +1396,6 @@ This event now has been confirmed.</source>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Op dit moment bieden we geen evenementen in de volgende categorieën:</target>
 			</trans-unit>
-			<trans-unit id="label_registration_requirements" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_registration_requirements_informal" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Wachtlijst</target>

@@ -958,32 +958,6 @@ class EventBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the search result to topics for which there is no registration by
-     * the front-end user with the UID $uid.
-     *
-     * Registrations for dates that have a non-zero expiry date in the past will
-     * be counted as not existing.
-     *
-     * @param positive-int $uid the UID of the front-end user whose registered events should be removed from the bag
-     *
-     * @deprecated #1843 will be removed in seminars 5.0
-     */
-    public function limitToTopicsWithoutRegistrationByUser(int $uid): void
-    {
-        $this->limitToTopicRecords();
-        $this->whereClauseParts['topicsWithoutUserRegistration'] =
-            'NOT EXISTS (' .
-            'SELECT * FROM tx_seminars_attendances, ' .
-            'tx_seminars_seminars dates ' .
-            'WHERE tx_seminars_attendances.user = ' . $uid .
-            ' AND tx_seminars_attendances.seminar = dates.uid' .
-            ' AND dates.topic = tx_seminars_seminars.uid' .
-            ' AND (dates.expiry = 0 OR dates.expiry > ' .
-            $GLOBALS['SIM_EXEC_TIME'] . ')' .
-            ')';
-    }
-
-    /**
      * Limits the bag to events which start later than $earliestBeginDate or which are still running at $earliestBeginDate.
      *
      * A $earliestBeginDate of 0 will remove the filter.

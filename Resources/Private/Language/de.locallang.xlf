@@ -1468,14 +1468,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</target>
 			</trans-unit>
-			<trans-unit id="label_registration_requirements" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target>Bitte melden Sie sich zuerst für folgende Veranstaltungen an:</target>
-			</trans-unit>
-			<trans-unit id="label_registration_requirements_informal" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target>Bitte melde dich zuerst für folgende Veranstaltungen an:</target>
-			</trans-unit>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Warteliste</target>

@@ -13,8 +13,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
-use OliverKlee\Seminars\Bag\EventBag;
-use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Email\EmailBuilder;
@@ -443,43 +441,6 @@ class RegistrationManager
                 }
             }
         }
-    }
-
-    /**
-     * Checks if the logged-in user fulfills all requirements for registration for the event $event.
-     *
-     * A front-end user needs to be logged in when this function is called.
-     *
-     * @param LegacyEvent $event the event to check
-     *
-     * @return bool TRUE if the user fulfills all requirements, FALSE otherwise
-     *
-     * @deprecated #1843 will be removed in seminars 5.0
-     */
-    public function userFulfillsRequirements(LegacyEvent $event): bool
-    {
-        if (!$event->hasRequirements()) {
-            return true;
-        }
-        return $this->getMissingRequiredTopics($event)->isEmpty();
-    }
-
-    /**
-     * Returns the event topics the user still needs to register for in order to be able to register for $event.
-     *
-     * @param LegacyEvent $event the event to check
-     *
-     * @return EventBag the event topics which still need the user's registration, may be empty
-     *
-     * @deprecated #1843 will be removed in seminars 5.0
-     */
-    public function getMissingRequiredTopics(LegacyEvent $event): EventBag
-    {
-        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
-        $builder->limitToRequiredEventTopics($event->getTopicOrSelfUid());
-        $builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
-
-        return $builder->build();
     }
 
     /**

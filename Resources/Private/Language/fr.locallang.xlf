@@ -1432,14 +1432,6 @@ This event now has been confirmed.</source>
 				<source>Currently, we aren't offering any categorized events.</source>
 				<target>Pour l'instant, nous ne proposons aucun événement catégorisé.</target>
 			</trans-unit>
-			<trans-unit id="label_registration_requirements" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target>Veuillez vous inscrire d'abord pour cet événement :</target>
-			</trans-unit>
-			<trans-unit id="label_registration_requirements_informal" xml:space="preserve">
-				<source>Please register for the following events first:</source>
-				<target>Il faut t'inscrire d'abord pour cet événement :</target>
-			</trans-unit>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Liste d'attente</target>
