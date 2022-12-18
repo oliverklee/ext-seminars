@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop currency and tax information from registrations (#2305)
 - Drop the requirements check (#2299)
 - Remove the `Titled` interface (#2298)
 - Drop the gender field for speakers (#2289)

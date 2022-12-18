@@ -370,18 +370,6 @@
 			<trans-unit id="tx_seminars_attendances.total_price" xml:space="preserve">
 				<source>Total price for this attendance</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.currency" xml:space="preserve">
-				<source>Currency of total price</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax" xml:space="preserve">
-				<source>Including/excluding Tax</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.including" xml:space="preserve">
-				<source>including</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.excluding" xml:space="preserve">
-				<source>excluding</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.datepaid" xml:space="preserve">
 				<source>Date of payment</source>
 			</trans-unit>

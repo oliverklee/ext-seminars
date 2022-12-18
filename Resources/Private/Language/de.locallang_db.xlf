@@ -492,22 +492,6 @@
 				<source>Total price for this attendance</source>
 				<target>Gesamtpreis dieser Buchung</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.currency" xml:space="preserve">
-				<source>Currency of total price</source>
-				<target>Währung des Gesamtpreises</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax" xml:space="preserve">
-				<source>Including/excluding Tax</source>
-				<target>Inklusive/exklusive Steuern</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.including" xml:space="preserve">
-				<source>including</source>
-				<target>inklusive</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.excluding" xml:space="preserve">
-				<source>excluding</source>
-				<target>exklusive</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.datepaid" xml:space="preserve">
 				<source>Date of payment</source>
 				<target>Datum der Bezahlung</target>

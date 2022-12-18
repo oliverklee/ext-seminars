@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\CurrencyMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Database\Connection;
@@ -24,8 +23,6 @@ class RegistrationMapper extends AbstractDataMapper
     protected $relations = [
         'seminar' => EventMapper::class,
         'user' => FrontEndUserMapper::class,
-        // @deprecated #1990 will be removed in seminars 5.0
-        'currency' => CurrencyMapper::class,
         'method_of_payment' => PaymentMethodMapper::class,
         'lodgings' => LodgingMapper::class,
         'foods' => FoodMapper::class,

@@ -448,22 +448,6 @@
 				<source>Total price for this attendance</source>
 				<target>Totale prijs voor deelneming</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.currency" xml:space="preserve">
-				<source>Currency of total price</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax" xml:space="preserve">
-				<source>Including/excluding Tax</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.including" xml:space="preserve">
-				<source>including</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.excluding" xml:space="preserve">
-				<source>excluding</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.datepaid" xml:space="preserve">
 				<source>Date of payment</source>
 				<target>Betaaldatum</target>
