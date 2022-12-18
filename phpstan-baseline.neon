@@ -1501,11 +1501,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Cannot call method getAttendancesPid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Cannot call method getIcon\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php

@@ -2883,39 +2883,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the PID of the system folder where the registration records of this
-     * event should be stored. If no folder is set in this event's topmost
-     * organizer record (ie. the page configured in
-     * plugin.tx_seminars.attendancesPID should be used), this function will return 0.
-     *
-     * @return int the PID of the system folder where registration records
-     *                 for this event should be stored or 0 if no folder is set
-     *
-     * @deprecated #1922 will be removed in seminars 5.0
-     */
-    public function getAttendancesPid(): int
-    {
-        if (!$this->hasOrganizers()) {
-            return 0;
-        }
-
-        return $this->getFirstOrganizer()->getAttendancesPid();
-    }
-
-    /**
-     * Checks whether this event's topmost organizer has a PID set to store the registration records in.
-     *
-     * @return bool TRUE if a the system folder for registration is specified in this event's topmost organizers record,
-     *                 FALSE otherwise
-     *
-     * @deprecated #1922 will be removed in seminars 5.0
-     */
-    public function hasAttendancesPid(): bool
-    {
-        return $this->getAttendancesPid() !== 0;
-    }
-
-    /**
      * Gets this event's owner (the FE user who has created this event).
      */
     public function getOwner(): ?OelibFrontEndUser

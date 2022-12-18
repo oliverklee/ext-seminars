@@ -3670,44 +3670,6 @@ final class LegacyEventTest extends TestCase
         );
     }
 
-    // Tests concerning getAttendancesPid
-
-    /**
-     * @test
-     */
-    public function getAttendancesPidWithNoOrganizerReturnsZero(): void
-    {
-        self::assertSame(
-            0,
-            $this->subject->getAttendancesPid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAttendancesPidWithSingleOrganizerReturnsPid(): void
-    {
-        $this->addOrganizerRelation(['attendances_pid' => 99]);
-        self::assertSame(
-            99,
-            $this->subject->getAttendancesPid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAttendancesPidWithMultipleOrganizerReturnsFirstPid(): void
-    {
-        $this->addOrganizerRelation(['attendances_pid' => 99]);
-        $this->addOrganizerRelation(['attendances_pid' => 66]);
-        self::assertSame(
-            99,
-            $this->subject->getAttendancesPid()
-        );
-    }
-
     // Tests regarding getOrganizerBag().
 
     /**

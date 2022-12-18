@@ -668,10 +668,6 @@
 				<source>Footer text to be appended to all e-mails from this organizer</source>
 				<target>Text, der allen Mails dieses Veranstalters angehängt wird</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve">
-				<source>SysFolder to store the registration records in</source>
-				<target>Ordner, in dem die Anmeldungen gespeichert werden sollen</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" xml:space="preserve">
 				<source>Methods of payment</source>
 				<target>Zahlungsarten</target>

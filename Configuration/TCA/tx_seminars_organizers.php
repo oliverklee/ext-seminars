@@ -63,23 +63,9 @@ $tca = [
                 'rows' => 5,
             ],
         ],
-        // # @deprecated #1922 will be removed in seminars 5.0
-        'attendances_pid' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.attendances_pid',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'pages',
-                'default' => 0,
-                'size' => 1,
-                'maxitems' => 1,
-                'minitems' => 0,
-            ],
-        ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title, description, homepage, email, email_footer, attendances_pid'],
+        '0' => ['showitem' => 'title, description, homepage, email, email_footer'],
     ],
 ];
 
