@@ -40,7 +40,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `showTimeOf*` settings (#2265)
 - Drop the event headline plugin (#2242)
 - Drop the event countdown (#2237)
-- Drop the CSV export of registrations in the FE (#2222)
+- Drop the CSV export of registrations in the FE (#2222, #2307)
 - Drop the custom BE user and BE user group models (#2221)
 - Drop the approval workflow for the FE editor (#2214, #2220)
 - Drop the hide/unhide FE editor functionality (#2206)
