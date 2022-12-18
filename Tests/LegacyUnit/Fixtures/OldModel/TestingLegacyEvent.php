@@ -231,16 +231,6 @@ final class TestingLegacyEvent extends LegacyEvent
     }
 
     /**
-     * Sets whether the collision check should be skipped for this event.
-     *
-     * @param bool $skipIt whether the collision check should be skipped for this event
-     */
-    public function setSkipCollisionCheck(bool $skipIt): void
-    {
-        $this->setRecordPropertyBoolean('skip_collision_check', $skipIt);
-    }
-
-    /**
      * Sets the record type for this event record.
      *
      * @param EventInterface::TYPE_* $recordType

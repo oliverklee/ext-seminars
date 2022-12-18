@@ -750,16 +750,6 @@ $tca = [
                 ],
             ],
         ],
-        // @deprecated #1763 will be removed in seminars 5.0
-        'skip_collision_check' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.skip_collision_check',
-            'displayCond' => 'FIELD:needs_registration:REQ:true',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
-            ],
-        ],
         // @deprecated #1324 will be removed in seminars 5.0
         'registrations' => [
             'exclude' => 1,
@@ -948,7 +938,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, target_groups, skip_collision_check, date_of_last_registration_digest, registrations, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, target_groups, date_of_last_registration_digest, registrations, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_special, price_special_early, payment_methods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser, vips',
@@ -966,7 +956,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, skip_collision_check, date_of_last_registration_digest, registrations, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, date_of_last_registration_digest, registrations, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, vips',
         ],

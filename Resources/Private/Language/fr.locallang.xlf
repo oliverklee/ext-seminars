@@ -296,14 +296,6 @@
 				<source>You already have registered for this event.</source>
 				<target>Tu es déjà enregistré à cet événement.</target>
 			</trans-unit>
-			<trans-unit id="message_userIsBlocked" xml:space="preserve">
-				<source>You are already registered for an event that collides with this event.</source>
-				<target>Vous êtes déjà enregistré à un événement qui en conflit avec celui-ci.</target>
-			</trans-unit>
-			<trans-unit id="message_userIsBlocked_informal" xml:space="preserve">
-				<source>You are already registered for an event that collides with this event.</source>
-				<target>Tu es déjà enregistré à un événement qui en conflit avec celui-ci.</target>
-			</trans-unit>
 			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
 				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 				<target></target>

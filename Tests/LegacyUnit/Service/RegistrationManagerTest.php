@@ -752,37 +752,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInButBlockedUserReturnsUserIsBlockedMessage(): void
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-                'seminar' => $this->seminarUid,
-            ]
-        );
-
-        $this->cachedSeminar = new TestingLegacyEvent(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars',
-                [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                    'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                    'attendees_max' => 10,
-                    'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                ]
-            )
-        );
-
-        self::assertSame(
-            $this->translate('message_userIsBlocked'),
-            $this->subject->canRegisterIfLoggedInMessage($this->cachedSeminar)
-        );
-    }
-
-    /**
-     * @test
-     */
     public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedMessage(): void
     {
         $this->createBookedOutSeminar();

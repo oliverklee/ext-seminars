@@ -1477,34 +1477,6 @@ final class EventTest extends TestCase
         );
     }
 
-    ////////////////////////////////////////////////
-    // Tests regarding shouldSkipCollisionCheck().
-    ////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function shouldSkipCollectionCheckWithoutSkipCollsionCheckReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->shouldSkipCollisionCheck()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function shouldSkipCollectionCheckWithSkipCollisionCheckReturnsTrue(): void
-    {
-        $this->subject->setData(['skip_collision_check' => true]);
-
-        self::assertTrue(
-            $this->subject->shouldSkipCollisionCheck()
-        );
-    }
-
     // Tests regarding the status.
 
     /**
