@@ -294,7 +294,6 @@ CREATE TABLE tx_seminars_speakers (
     phone_home tinytext,
     phone_mobile tinytext,
     email tinytext,
-    gender tinyint(1) unsigned DEFAULT '0' NOT NULL,
     cancelation_period int(11) unsigned DEFAULT '0' NOT NULL,
 
     KEY dummy (is_dummy_record),

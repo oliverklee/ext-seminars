@@ -277,15 +277,6 @@
 			<trans-unit id="tx_seminars_speakers.title" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender" xml:space="preserve">
-				<source>Gender</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_male" xml:space="preserve">
-				<source>male</source>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_female" xml:space="preserve">
-				<source>female</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.organization" xml:space="preserve">
 				<source>Organization</source>
 			</trans-unit>

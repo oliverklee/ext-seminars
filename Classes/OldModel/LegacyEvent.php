@@ -842,15 +842,10 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Returns the language key suffix for the speaker headings.
      *
-     * @param string $speakerType
-     *        the type to determine the gender and number of, must be
-     *        'speakers', 'tutors', 'leaders' or 'partners'
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType the type to determine the gender and number of
      *
      * @return string header marker for speaker heading will be
-     *                'type_number_gender'. Number will be 'single' or
-     *                'multiple' and gender will be 'male', 'female' or 'mixed'.
-     *                The only exception is multiple speakers and mixed genders,
-     *                then the result will be the input value.
+     *                'type_number_gender'. Number will be 'single' or 'multiple'.
      *                Will be empty if no speaker of the given type exists for
      *                this seminar.
      */
@@ -860,45 +855,7 @@ class LegacyEvent extends AbstractTimeSpan
             return '';
         }
 
-        $result = $speakerType;
-        $hasMaleSpeakers = false;
-        $hasFemaleSpeakers = false;
-        $hasMultipleSpeakers = false;
-
-        $speakers = $this->getSpeakerBag($speakerType);
-        if ($speakers->count() > 1) {
-            $hasMultipleSpeakers = true;
-            $result .= '_multiple';
-        } else {
-            $result .= '_single';
-        }
-
-        /** @var LegacySpeaker $speaker */
-        foreach ($speakers as $speaker) {
-            switch ($speaker->getGender()) {
-                case LegacySpeaker::GENDER_MALE:
-                    $hasMaleSpeakers = true;
-                    break;
-                case LegacySpeaker::GENDER_FEMALE:
-                    $hasFemaleSpeakers = true;
-                    break;
-                default:
-                    $hasMaleSpeakers = true;
-                    $hasFemaleSpeakers = true;
-            }
-        }
-
-        if ($hasMaleSpeakers && !$hasFemaleSpeakers) {
-            $result .= '_male';
-        } elseif (!$hasMaleSpeakers && $hasFemaleSpeakers) {
-            $result .= '_female';
-        } elseif ($hasMultipleSpeakers) {
-            $result = $speakerType;
-        } else {
-            $result .= '_unknown';
-        }
-
-        return $result;
+        return $this->getSpeakerBag($speakerType)->count() > 1 ? $speakerType : ($speakerType . '_single_unknown');
     }
 
     public function hasLanguage(): bool

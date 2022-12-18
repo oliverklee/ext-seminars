@@ -1024,99 +1024,35 @@ This event now has been confirmed.</source>
 				<source>License expiry</source>
 				<target>Expiration de la licence</target>
 			</trans-unit>
-			<trans-unit id="label_speakers_single_male" xml:space="preserve">
+			<trans-unit id="label_speakers_single_unknown">
 				<source>Speaker</source>
 				<target>Conférencier</target>
 			</trans-unit>
-			<trans-unit id="label_speakers_single_female" xml:space="preserve">
-				<source>Speaker</source>
-				<target>Conférencière</target>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_unknown" xml:space="preserve">
-				<source>Speaker</source>
-				<target>Conférencier</target>
-			</trans-unit>
-			<trans-unit id="label_speakers_multiple_male" xml:space="preserve">
+			<trans-unit id="label_speakers">
 				<source>Speakers</source>
 				<target>Conférenciers</target>
 			</trans-unit>
-			<trans-unit id="label_speakers_multiple_female" xml:space="preserve">
-				<source>Speakers</source>
-				<target>Conférencières</target>
-			</trans-unit>
-			<trans-unit id="label_speakers" xml:space="preserve">
-				<source>Speakers</source>
-				<target>Conférenciers</target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_male" xml:space="preserve">
-				<source>Partner</source>
-				<target>Partenaires</target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_female" xml:space="preserve">
+			<trans-unit id="label_partners_single_unknown">
 				<source>Partner</source>
 				<target>Partenaire</target>
 			</trans-unit>
-			<trans-unit id="label_partners_single_unknown" xml:space="preserve">
-				<source>Partner</source>
-				<target>Partenaire</target>
-			</trans-unit>
-			<trans-unit id="label_partners_multiple_male" xml:space="preserve">
+			<trans-unit id="label_partners">
 				<source>Partners</source>
 				<target>Partenaires</target>
 			</trans-unit>
-			<trans-unit id="label_partners_multiple_female" xml:space="preserve">
-				<source>Partners</source>
-				<target>Partenaires</target>
-			</trans-unit>
-			<trans-unit id="label_partners" xml:space="preserve">
-				<source>Partners</source>
-				<target>Partenaires</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_male" xml:space="preserve">
+			<trans-unit id="label_tutors_single_unknown">
 				<source>Tutor</source>
 				<target>Enseignant</target>
 			</trans-unit>
-			<trans-unit id="label_tutors_single_female" xml:space="preserve">
-				<source>Tutor</source>
-				<target>Enseignante</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_unknown" xml:space="preserve">
-				<source>Tutor</source>
-				<target>Enseignant</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_multiple_male" xml:space="preserve">
+			<trans-unit id="label_tutors">
 				<source>Tutors</source>
 				<target>Enseignants</target>
 			</trans-unit>
-			<trans-unit id="label_tutors_multiple_female" xml:space="preserve">
-				<source>Tutors</source>
-				<target>Enseignantes</target>
-			</trans-unit>
-			<trans-unit id="label_tutors" xml:space="preserve">
-				<source>Tutors</source>
-				<target>Enseignants</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_male" xml:space="preserve">
+			<trans-unit id="label_leaders_single_unknown">
 				<source>Leader</source>
 				<target>Meneur</target>
 			</trans-unit>
-			<trans-unit id="label_leaders_single_female" xml:space="preserve">
-				<source>Leader</source>
-				<target>Meneur</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_unknown" xml:space="preserve">
-				<source>Leader</source>
-				<target>Meneur</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_multiple_male" xml:space="preserve">
-				<source>Leaders</source>
-				<target>Meneurs</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_multiple_female" xml:space="preserve">
-				<source>Leaders</source>
-				<target>Meneurs</target>
-			</trans-unit>
-			<trans-unit id="label_leaders" xml:space="preserve">
+			<trans-unit id="label_leaders">
 				<source>Leaders</source>
 				<target>Meneurs</target>
 			</trans-unit>

@@ -348,18 +348,6 @@
 				<source>Name</source>
 				<target>Nom</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender" xml:space="preserve">
-				<source>Gender</source>
-				<target>Sexe</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_male" xml:space="preserve">
-				<source>male</source>
-				<target>homme</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_female" xml:space="preserve">
-				<source>female</source>
-				<target>femme</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.organization" xml:space="preserve">
 				<source>Organization</source>
 				<target>Organisation</target>

@@ -12,21 +12,6 @@ use TYPO3\CMS\Core\Resource\FileReference;
 class LegacySpeaker extends AbstractModel
 {
     /**
-     * @var int the gender type for speakers without gender
-     */
-    public const GENDER_UNKNOWN = 0;
-
-    /**
-     * @var int the gender type male for a speaker
-     */
-    public const GENDER_MALE = 1;
-
-    /**
-     * @var int the gender type female for a speaker
-     */
-    public const GENDER_FEMALE = 2;
-
-    /**
      * @var string the name of the SQL table this class corresponds to
      */
     protected static $tableName = 'tx_seminars_speakers';
@@ -212,29 +197,6 @@ class LegacySpeaker extends AbstractModel
         );
 
         return '<a href="' . $encodedUrl . '">' . $encodedTitle . '</a>';
-    }
-
-    /**
-     * Returns the gender of this speaker.
-     *
-     * @return self::GENDER_* $gender
-     */
-    public function getGender(): int
-    {
-        $gender = $this->getRecordPropertyInteger('gender');
-        \assert(\in_array($gender, [self::GENDER_UNKNOWN, self::GENDER_MALE, self::GENDER_FEMALE], true));
-
-        return $gender;
-    }
-
-    /**
-     * Sets the gender of this speaker.
-     *
-     * @param self::GENDER_* $gender
-     */
-    public function setGender(int $gender): void
-    {
-        $this->setRecordPropertyInteger('gender', $gender);
     }
 
     /**

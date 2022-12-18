@@ -137,27 +137,6 @@ final class LegacySpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenderForNoGenderSetReturnsUnknownGenderValue(): void
-    {
-        $subject = new LegacySpeaker();
-
-        self::assertSame(LegacySpeaker::GENDER_UNKNOWN, $subject->getGender());
-    }
-
-    /**
-     * @test
-     */
-    public function getGenderForKnownGenderReturnsGender(): void
-    {
-        $subject = new LegacySpeaker();
-        $subject->setGender(LegacySpeaker::GENDER_MALE);
-
-        self::assertSame(LegacySpeaker::GENDER_MALE, $subject->getGender());
-    }
-
-    /**
-     * @test
-     */
     public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse(): void
     {
         $subject = new LegacySpeaker();
