@@ -3672,7 +3672,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getHtmlBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 12
+			count: 9
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3697,7 +3697,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 3
+			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
