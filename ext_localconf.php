@@ -2,27 +2,6 @@
 defined('TYPO3') or die('Access denied.');
 
 (static function (): void {
-    $tables = [
-        'seminars',
-        'speakers',
-        'attendances',
-        'sites',
-        'organizers',
-        'payment_method',
-        'event_types',
-        'checkboxes',
-        'lodging',
-        'foods',
-        'target_groups',
-        'categories',
-        'skills',
-    ];
-    foreach ($tables as $table) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
-            \sprintf("\noptions.saveDocNew.tx_seminars_%s=1\n", $table)
-        );
-    }
-
     // Adds our custom function to a hook in \TYPO3\CMS\Core\DataHandling\DataHandler
     // Used for post-validation of fields in back-end forms.
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['seminars']
