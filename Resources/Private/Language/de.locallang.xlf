@@ -1060,99 +1060,35 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>License expiry</source>
 				<target>Lizenzablauf</target>
 			</trans-unit>
-			<trans-unit id="label_speakers_single_male" xml:space="preserve">
-				<source>Speaker</source>
-				<target>Referent</target>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_female" xml:space="preserve">
-				<source>Speaker</source>
-				<target>Referentin</target>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_unknown" xml:space="preserve">
+			<trans-unit id="label_speakers_single_unknown">
 				<source>Speaker</source>
 				<target>ReferentIn</target>
 			</trans-unit>
-			<trans-unit id="label_speakers_multiple_male" xml:space="preserve">
-				<source>Speakers</source>
-				<target>Referenten</target>
-			</trans-unit>
-			<trans-unit id="label_speakers_multiple_female" xml:space="preserve">
-				<source>Speakers</source>
-				<target>Referentinnen</target>
-			</trans-unit>
-			<trans-unit id="label_speakers" xml:space="preserve">
+			<trans-unit id="label_speakers">
 				<source>Speakers</source>
 				<target>ReferentInnen</target>
 			</trans-unit>
-			<trans-unit id="label_partners_single_male" xml:space="preserve">
-				<source>Partner</source>
-				<target>Partner</target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_female" xml:space="preserve">
-				<source>Partner</source>
-				<target>Partnerin</target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_unknown" xml:space="preserve">
+			<trans-unit id="label_partners_single_unknown">
 				<source>Partner</source>
 				<target>PartnerIn</target>
 			</trans-unit>
-			<trans-unit id="label_partners_multiple_male" xml:space="preserve">
+			<trans-unit id="label_partners">
 				<source>Partners</source>
 				<target>Partner</target>
 			</trans-unit>
-			<trans-unit id="label_partners_multiple_female" xml:space="preserve">
-				<source>Partners</source>
-				<target>PartnerInnen</target>
-			</trans-unit>
-			<trans-unit id="label_partners" xml:space="preserve">
-				<source>Partners</source>
-				<target>Partner</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_male" xml:space="preserve">
+			<trans-unit id="label_tutors_single_unknown">
 				<source>Tutor</source>
 				<target>Kursbegleitung</target>
 			</trans-unit>
-			<trans-unit id="label_tutors_single_female" xml:space="preserve">
-				<source>Tutor</source>
-				<target>Kursbegleitung</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_unknown" xml:space="preserve">
-				<source>Tutor</source>
-				<target>Kursbegleitung</target>
-			</trans-unit>
-			<trans-unit id="label_tutors_multiple_male" xml:space="preserve">
+			<trans-unit id="label_tutors">
 				<source>Tutors</source>
 				<target>Kursbegleitung</target>
 			</trans-unit>
-			<trans-unit id="label_tutors_multiple_female" xml:space="preserve">
-				<source>Tutors</source>
-				<target>Kursbegleitung</target>
-			</trans-unit>
-			<trans-unit id="label_tutors" xml:space="preserve">
-				<source>Tutors</source>
-				<target>Kursbegleitung</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_male" xml:space="preserve">
-				<source>Leader</source>
-				<target>Kursleiter</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_female" xml:space="preserve">
-				<source>Leader</source>
-				<target>Kursleiterin</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_unknown" xml:space="preserve">
+			<trans-unit id="label_leaders_single_unknown">
 				<source>Leader</source>
 				<target>KursleiterIn</target>
 			</trans-unit>
-			<trans-unit id="label_leaders_multiple_male" xml:space="preserve">
-				<source>Leaders</source>
-				<target>Kursleiter</target>
-			</trans-unit>
-			<trans-unit id="label_leaders_multiple_female" xml:space="preserve">
-				<source>Leaders</source>
-				<target>Kursleiterinnen</target>
-			</trans-unit>
-			<trans-unit id="label_leaders" xml:space="preserve">
+			<trans-unit id="label_leaders">
 				<source>Leaders</source>
 				<target>KursleiterInnen</target>
 			</trans-unit>

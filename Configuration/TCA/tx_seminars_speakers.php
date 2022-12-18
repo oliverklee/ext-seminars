@@ -37,27 +37,6 @@ $tca = [
                 'eval' => 'required,trim',
             ],
         ],
-        'gender' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['', '0'],
-                    [
-                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male',
-                        '1',
-                    ],
-                    [
-                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female',
-                        '2',
-                    ],
-                ],
-                'size' => 1,
-                'maxitems' => 1,
-            ],
-        ],
         'organization' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization',
@@ -192,7 +171,7 @@ $tca = [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'hidden, title, gender, organization, homepage, description, image, skills, notes, ' .
+            'showitem' => 'hidden, title, organization, homepage, description, image, skills, notes, ' .
                 'address, phone_work, phone_home, phone_mobile, email, cancelation_period',
         ],
     ],

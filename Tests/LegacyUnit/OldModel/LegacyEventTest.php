@@ -14,7 +14,6 @@ use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\OldModel\LegacySpeaker;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -263,11 +262,11 @@ final class LegacyEventTest extends TestCase
      * Inserts a speaker record into the database and creates a relation to it
      * from the fixture.
      *
-     * @param array $speakerData data of the speaker to add, may be empty
+     * @param array<string, int|string> $speakerData data of the speaker to add, may be empty
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addSpeakerRelation(array $speakerData): int
+    private function addSpeakerRelation(array $speakerData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -710,7 +709,7 @@ final class LegacyEventTest extends TestCase
      */
     public function addSpeakerRelationReturnsUid(): void
     {
-        $uid = $this->addSpeakerRelation([]);
+        $uid = $this->addSpeakerRelation();
 
         self::assertTrue(
             $uid > 0
@@ -723,8 +722,8 @@ final class LegacyEventTest extends TestCase
     public function addSpeakerRelationCreatesNewUids(): void
     {
         self::assertNotSame(
-            $this->addSpeakerRelation([]),
-            $this->addSpeakerRelation([])
+            $this->addSpeakerRelation(),
+            $this->addSpeakerRelation()
         );
     }
 
@@ -740,13 +739,13 @@ final class LegacyEventTest extends TestCase
             $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
         );
 
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
         self::assertSame(
             1,
             $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
         );
 
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
         self::assertSame(
             2,
             $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
@@ -3754,7 +3753,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getNumberOfSpeakersWithSingleSpeakerReturnsOne(): void
     {
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
         self::assertSame(
             1,
             $this->subject->getNumberOfSpeakers()
@@ -3766,8 +3765,8 @@ final class LegacyEventTest extends TestCase
      */
     public function getNumberOfSpeakersWithMultipleSpeakersReturnsTwo(): void
     {
-        $this->addSpeakerRelation([]);
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
+        $this->addSpeakerRelation();
         self::assertSame(
             2,
             $this->subject->getNumberOfSpeakers()
@@ -3906,7 +3905,7 @@ final class LegacyEventTest extends TestCase
      */
     public function hasSpeakersOfTypeWithSingleSpeakerOfTypeReturnsTrue(): void
     {
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
         self::assertTrue(
             $this->subject->hasSpeakersOfType()
         );
@@ -3942,7 +3941,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canHaveOneSpeaker(): void
     {
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
         self::assertTrue(
             $this->subject->hasSpeakers()
         );
@@ -5181,41 +5180,9 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      */
-    public function getLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart(): void
+    public function getLanguageKeySuffixForTypeForSingleSpeakerReturnsUnknownMarkerPart(): void
     {
-        $this->addLeaderRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-
-        self::assertStringContainsString(
-            '_male',
-            $this->subject->getLanguageKeySuffixForType('leaders')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart(): void
-    {
-        $this->addLeaderRelation(
-            ['gender' => LegacySpeaker::GENDER_FEMALE]
-        );
-
-        self::assertStringContainsString(
-            '_female',
-            $this->subject->getLanguageKeySuffixForType('leaders')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart(): void
-    {
-        $this->addLeaderRelation(
-            ['gender' => LegacySpeaker::GENDER_UNKNOWN]
-        );
+        $this->addLeaderRelation([]);
 
         self::assertStringContainsString(
             '_unknown',
@@ -5228,7 +5195,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getLanguageKeySuffixForTypeForSingleSpeakerReturnsSingleMarkerPart(): void
     {
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
 
         self::assertStringContainsString(
             '_single_',
@@ -5239,101 +5206,14 @@ final class LegacyEventTest extends TestCase
     /**
      * @test
      */
-    public function getLanguageKeySuffixForTypeForMultipleSpeakersWithoutGenderReturnsSpeakerType(): void
+    public function getLanguageKeySuffixForTypeForMultipleSpeakersReturnsSpeakerType(): void
     {
-        $this->addSpeakerRelation([]);
-        $this->addSpeakerRelation([]);
+        $this->addSpeakerRelation();
+        $this->addSpeakerRelation();
 
         self::assertStringContainsString(
             'speakers',
             $this->subject->getLanguageKeySuffixForType('speakers')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart(): void
-    {
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-
-        self::assertStringContainsString(
-            '_multiple_male',
-            $this->subject->getLanguageKeySuffixForType('speakers')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart(): void
-    {
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_FEMALE]
-        );
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_FEMALE]
-        );
-
-        self::assertStringContainsString(
-            '_multiple_female',
-            $this->subject->getLanguageKeySuffixForType('speakers')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType(): void
-    {
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-        $this->addSpeakerRelation(
-            ['gender' => LegacySpeaker::GENDER_FEMALE]
-        );
-
-        self::assertStringContainsString(
-            'speakers',
-            $this->subject->getLanguageKeySuffixForType('speakers')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType(): void
-    {
-        $this->addLeaderRelation(
-            ['gender' => LegacySpeaker::GENDER_UNKNOWN]
-        );
-        $this->addLeaderRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-
-        self::assertStringContainsString(
-            'leaders',
-            $this->subject->getLanguageKeySuffixForType('leaders')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart(): void
-    {
-        $this->addTutorRelation(
-            ['gender' => LegacySpeaker::GENDER_MALE]
-        );
-
-        self::assertSame(
-            'tutors_single_male',
-            $this->subject->getLanguageKeySuffixForType('tutors')
         );
     }
 

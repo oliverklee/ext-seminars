@@ -1004,99 +1004,19 @@ This event now has been confirmed.</source>
 				<source>License expiry</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="label_speakers_single_male" xml:space="preserve">
-				<source>Speaker</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_female" xml:space="preserve">
-				<source>Speaker</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_speakers_single_unknown" xml:space="preserve">
-				<source>Speaker</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_speakers_multiple_male" xml:space="preserve">
-				<source>Speakers</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_speakers_multiple_female" xml:space="preserve">
-				<source>Speakers</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_speakers" xml:space="preserve">
+			<trans-unit id="label_speakers">
 				<source>Speakers</source>
 				<target>Sprekers</target>
 			</trans-unit>
-			<trans-unit id="label_partners_single_male" xml:space="preserve">
-				<source>Partner</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_female" xml:space="preserve">
-				<source>Partner</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_partners_single_unknown" xml:space="preserve">
-				<source>Partner</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_partners_multiple_male" xml:space="preserve">
-				<source>Partners</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_partners_multiple_female" xml:space="preserve">
-				<source>Partners</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_partners" xml:space="preserve">
+			<trans-unit id="label_partners">
 				<source>Partners</source>
 				<target>Partners</target>
 			</trans-unit>
-			<trans-unit id="label_tutors_single_male" xml:space="preserve">
-				<source>Tutor</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_female" xml:space="preserve">
-				<source>Tutor</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_tutors_single_unknown" xml:space="preserve">
-				<source>Tutor</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_tutors_multiple_male" xml:space="preserve">
-				<source>Tutors</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_tutors_multiple_female" xml:space="preserve">
-				<source>Tutors</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_tutors" xml:space="preserve">
+			<trans-unit id="label_tutors">
 				<source>Tutors</source>
 				<target>Docenten</target>
 			</trans-unit>
-			<trans-unit id="label_leaders_single_male" xml:space="preserve">
-				<source>Leader</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_female" xml:space="preserve">
-				<source>Leader</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_leaders_single_unknown" xml:space="preserve">
-				<source>Leader</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_leaders_multiple_male" xml:space="preserve">
-				<source>Leaders</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_leaders_multiple_female" xml:space="preserve">
-				<source>Leaders</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_leaders" xml:space="preserve">
+			<trans-unit id="label_leaders">
 				<source>Leaders</source>
 				<target>Leiders</target>
 			</trans-unit>
