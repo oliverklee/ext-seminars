@@ -32,7 +32,6 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationManager
@@ -207,13 +206,6 @@ final class RegistrationManagerTest extends TestCase
 
         RegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-    }
-
-    // Utility functions
-
-    private function getFrontEndController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 
     /**
