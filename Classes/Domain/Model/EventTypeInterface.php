@@ -9,12 +9,7 @@ namespace OliverKlee\Seminars\Domain\Model;
  */
 interface EventTypeInterface
 {
-    /**
-     * TODO: Use a native return type once we've dropped support for TYPO3 9lTS.
-     *
-     * @return int|null
-     */
-    public function getUid();
+    public function getUid(): ?int;
 
     public function getTitle(): string;
 }
