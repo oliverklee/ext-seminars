@@ -16,9 +16,6 @@
 Known problems
 --------------
 
-- Many feature ideas still are unimplemented. Feel free to provide code
-  or pay for the author's time.
-
 - The seminar hours are displayed without a unit, e.g. “17:00” instead
   of “17:00 h”.
 
@@ -32,13 +29,6 @@ Known problems
   list view (the default is current and upcoming events). Events without
   a begin date/time always appear as an upcoming event.
 
-- It doesn't work to have the seminar manager and the online
-  registration on the same page (you will get an error message in the
-  registration plug-in). Do this:
-
-  - Put them on separate pages and set plugin.tx\_seminars\_pi1.listPID
-    and plugin.tx\_seminars\_pi1.registerPID.
-
 - **All non-empty changes at the flexforms of the plug-in overwrite the
   settings of the corresponding TS setup. Empty data in the flexforms
   don't overwrite non-empty data from the TS setup.**
@@ -46,9 +36,8 @@ Known problems
 - The search in the list view covers pretty most of what is visible in
   the single view except for the payment methods (this is intended).
 
-- If the maximum upload file size in PHP is set to a lower value than
-  the one in TYPO3, the FE editor does not show an error message if one
-  tries to upload a too large file.
-
 - The inlining of CSS in HTML emails is available in Composer-mode only
   as this feature makes use of a third-party library.
+
+- Starting with seminars 5.2.0, the CSV export is available in Composer-mode
+  only as this feature makes use of a third-party library.

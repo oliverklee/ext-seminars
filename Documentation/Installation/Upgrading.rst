@@ -22,6 +22,8 @@ Upgrading in multiple steps
 As this extension follow semantic versioning, seminars 5.0 has all the breaking
 changes. So it is recommended you do the upgrade in the following order.
 
+Also, clearing all caches after each step is recommended.
+
 1. Drop removed content elements
 ================================
 
@@ -83,10 +85,19 @@ Edit your backend user or user group permissions, grant the users/groups
 permissions for the new backend module, and drop their permissions for the
 old backend module.
 
-6. Update the configuration
+7. Update the configuration
 ===========================
 
 #.  Enable the automatic configuration check in the extension settings.
 #.  Click through all your seminars-related content elements, watch for
     configuration check warnings, and fix them.
 #.  Disable the automatic configuration check in the extension settings again.
+
+8. Upgrade to seminars 5.0
+==========================
+
+#.  Upgrade to seminars 5.0.
+#.  Uninstall the mkforms and rn\_base extensions (if you are not using
+    Composer mode).
+#.  Apply all DB updates.
+#.  Run the upgrade wizards.
