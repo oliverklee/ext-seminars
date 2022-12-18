@@ -502,9 +502,6 @@
 			<trans-unit id="tx_seminars_organizers.email_footer" xml:space="preserve">
 				<source>Footer text to be appended to all e-mails from this organizer</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve">
-				<source>SysFolder to store the registration records in</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" xml:space="preserve">
 				<source>Methods of payment</source>
 			</trans-unit>

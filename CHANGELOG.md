@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop organizer-specific registration storage folders (#2311)
 - Remove the `showToBeAnnouncedForEmptyPrice` setting (#2312)
 - Drop the `externalLinkTarget` setting (#2310)
 - Drop the collision check (#2308)

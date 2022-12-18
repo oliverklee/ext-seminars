@@ -620,10 +620,6 @@
 				<source>Footer text to be appended to all e-mails from this organizer</source>
 				<target>Pied de page pour les mails de confirmation</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve">
-				<source>SysFolder to store the registration records in</source>
-				<target>SysFolder pour le stockage des inscriptions</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" xml:space="preserve">
 				<source>Methods of payment</source>
 				<target>Méthodes de paiement</target>

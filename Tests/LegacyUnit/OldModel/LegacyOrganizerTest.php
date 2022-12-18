@@ -49,7 +49,6 @@ final class LegacyOrganizerTest extends TestCase
                 'homepage' => 'https://www.test.com/',
                 'email' => 'maximal-foo@test.com',
                 'email_footer' => "line 1\nline 2",
-                'attendances_pid' => 99,
                 'description' => 'foo',
             ]
         );
@@ -155,28 +154,6 @@ final class LegacyOrganizerTest extends TestCase
         self::assertEquals(
             'foo@test.com',
             $this->subject->getEmailAddress()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAttendancesPidWithNoAttendancesPidReturnsZero(): void
-    {
-        self::assertEquals(
-            0,
-            $this->subject->getAttendancesPid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAttendancesPidWithAttendancesPidReturnsAttendancesPid(): void
-    {
-        self::assertEquals(
-            99,
-            $this->maximalFixture->getAttendancesPid()
         );
     }
 
