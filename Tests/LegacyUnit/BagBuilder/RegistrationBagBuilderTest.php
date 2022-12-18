@@ -82,9 +82,10 @@ final class RegistrationBagBuilderTest extends TestCase
             'Title 1',
             $registrationBag->current()->getTitle()
         );
+        $registrationBag->next();
         self::assertEquals(
             'Title 2',
-            $registrationBag->next()->getTitle()
+            $registrationBag->current()->getTitle()
         );
     }
 
@@ -653,8 +654,9 @@ final class RegistrationBagBuilderTest extends TestCase
             $bag->current()->getUid(),
             $registrationUid1
         );
+        $bag->next();
         self::assertEquals(
-            $bag->next()->getUid(),
+            $bag->current()->getUid(),
             $registrationUid2
         );
     }
@@ -690,8 +692,9 @@ final class RegistrationBagBuilderTest extends TestCase
             $bag->current()->getUid(),
             $registrationUid2
         );
+        $bag->next();
         self::assertEquals(
-            $bag->next()->getUid(),
+            $bag->current()->getUid(),
             $registrationUid1
         );
     }

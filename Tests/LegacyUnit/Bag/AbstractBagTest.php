@@ -105,9 +105,10 @@ final class AbstractBagTest extends TestCase
             $this->subject->current()->getUid()
         );
 
+        $this->subject->next();
         self::assertEquals(
             $this->uidOfSecondRecord,
-            $this->subject->next()->getUid()
+            $this->subject->current()->getUid()
         );
     }
 

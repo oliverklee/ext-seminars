@@ -100,9 +100,10 @@ final class AbstractBagBuilderTest extends TestCase
             $eventUid1,
             $testBag->current()->getUid()
         );
+        $testBag->next();
         self::assertEquals(
             $eventUid2,
-            $testBag->next()->getUid()
+            $testBag->current()->getUid()
         );
     }
 
@@ -784,9 +785,10 @@ final class AbstractBagBuilderTest extends TestCase
             $eventUid2,
             $testBag->current()->getUid()
         );
+        $testBag->next();
         self::assertEquals(
             $eventUid1,
-            $testBag->next()->getUid()
+            $testBag->current()->getUid()
         );
     }
 
