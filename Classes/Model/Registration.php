@@ -7,12 +7,11 @@ namespace OliverKlee\Seminars\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a registration for an event.
  */
-class Registration extends AbstractModel implements Titled
+class Registration extends AbstractModel
 {
     /**
      * @var array<int, OelibFrontEndUser::GENDER_*>
@@ -29,20 +28,6 @@ class Registration extends AbstractModel implements Titled
     public function getTitle(): string
     {
         return $this->getAsString('title');
-    }
-
-    /**
-     * @param string $title the title of this registration, must not be empty
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setTitle(string $title): void
-    {
-        if ($title === '') {
-            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
-        }
-
-        $this->setAsString('title', $title);
     }
 
     public function getFrontEndUser(): ?FrontEndUser

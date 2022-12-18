@@ -6,12 +6,11 @@ namespace OliverKlee\Seminars\Model;
 
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents an organizer.
  */
-class Organizer extends AbstractModel implements MailRole, Titled
+class Organizer extends AbstractModel implements MailRole
 {
     /**
      * @return string our name, will not be empty
