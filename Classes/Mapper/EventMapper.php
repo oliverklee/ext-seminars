@@ -135,7 +135,7 @@ class EventMapper extends AbstractDataMapper
      */
     public function findForRegistrationDigestEmail(): Collection
     {
-        $whereClause = 'registrations <> 0 AND object_type <> ' . EventInterface::TYPE_EVENT_TOPIC .
+        $whereClause = 'object_type <> ' . EventInterface::TYPE_EVENT_TOPIC .
             ' AND hidden = 0 AND deleted = 0 ' .
             ' AND EXISTS (' .
             'SELECT * FROM tx_seminars_attendances ' .
