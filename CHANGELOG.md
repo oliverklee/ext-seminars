@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add an upgrade wizard for the separate billing address checkbox (#2325)
 - Rewrite the unregistration form (#2273, #2277)
 - Use SimpleCSS for the email CSS (#2261, #2262)
 - Add dedicated tests for `GeneralEventMailForm::sendEmailToAttendees` (#2249)
