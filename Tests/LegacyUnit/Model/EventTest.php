@@ -247,26 +247,6 @@ final class EventTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function setTitleWithEmptyTitleThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->subject->setTitle('');
-    }
-
-    /**
-     * @test
-     */
-    public function setTitleSetsTitle(): void
-    {
-        $this->subject->setTitle('Superhero');
-
-        self::assertSame('Superhero', $this->subject->getTitle());
-    }
-
     //////////////////////////////////////////////
     // Tests regarding the accreditation number.
     //////////////////////////////////////////////

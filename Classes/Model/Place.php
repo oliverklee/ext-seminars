@@ -9,12 +9,11 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\Country;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a place.
  */
-class Place extends AbstractModel implements Titled
+class Place extends AbstractModel
 {
     /**
      * @return string our title, will not be empty

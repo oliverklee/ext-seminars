@@ -11,13 +11,12 @@ use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents an event.
  */
-class Event extends AbstractTimeSpan implements Titled
+class Event extends AbstractTimeSpan
 {
     use EventEmailSenderTrait;
 
@@ -141,20 +140,6 @@ class Event extends AbstractTimeSpan implements Titled
     public function getRawTitle(): string
     {
         return $this->getAsString('title');
-    }
-
-    /**
-     * @param string $title our title to set, must not be empty
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setTitle(string $title): void
-    {
-        if ($title === '') {
-            throw new \InvalidArgumentException('$title must not be empty.', 1333293446);
-        }
-
-        $this->setAsString('title', $title);
     }
 
     /**

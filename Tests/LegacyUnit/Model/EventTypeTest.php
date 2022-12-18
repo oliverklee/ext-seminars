@@ -25,34 +25,6 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $title must not be empty.'
-        );
-
-        $this->subject->setTitle('');
-    }
-
-    /**
-     * @test
-     */
-    public function setTitleSetsTitle(): void
-    {
-        $this->subject->setTitle('Workshop');
-
-        self::assertEquals(
-            'Workshop',
-            $this->subject->getTitle()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Workshop']);

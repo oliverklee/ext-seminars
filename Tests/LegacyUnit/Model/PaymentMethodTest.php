@@ -21,35 +21,6 @@ final class PaymentMethodTest extends TestCase
     {
         $this->subject = new PaymentMethod();
     }
-
-    /**
-     * @test
-     */
-    public function setTitleWithEmptyTitleThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $title must not be empty.'
-        );
-
-        $this->subject->setTitle('');
-    }
-
-    /**
-     * @test
-     */
-    public function setTitleSetsTitle(): void
-    {
-        $this->subject->setTitle('Cash');
-
-        self::assertEquals(
-            'Cash',
-            $this->subject->getTitle()
-        );
-    }
-
     /**
      * @test
      */

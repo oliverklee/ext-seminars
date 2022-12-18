@@ -8,7 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Model\Organizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -51,14 +50,6 @@ final class EventTest extends UnitTestCase
                 'organizers' => $organizers,
             ]
         );
-    }
-
-    /**
-     * @test
-     */
-    public function isTitled(): void
-    {
-        self::assertInstanceOf(Titled::class, $this->subject);
     }
 
     /**
