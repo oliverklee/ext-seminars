@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Do not show the registrations in the event TCEforms anymore (#2321)
 - Drop obsolete TypoScript related to `sb_accessiblecontent` (#2318)
 - Drop the custom FE user group model (#2318)
 - Drop the `Event::STATUS_*` constants (#2316)
