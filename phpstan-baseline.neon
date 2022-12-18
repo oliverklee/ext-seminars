@@ -191,7 +191,7 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
 			count: 3
 			path: Classes/BagBuilder/EventBagBuilder.php
 
@@ -356,7 +356,7 @@ parameters:
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
 
 		-
-			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
 
@@ -376,7 +376,7 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
-			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
@@ -401,7 +401,7 @@ parameters:
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
-			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
@@ -1106,7 +1106,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
 			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1681,12 +1681,12 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|false given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|null given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
@@ -1991,7 +1991,7 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
@@ -2031,7 +2031,7 @@ parameters:
 			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
 
 		-
-			message: "#^Parameter \\#1 \\$object of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
 
@@ -3161,7 +3161,7 @@ parameters:
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
 			count: 5
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
@@ -3246,7 +3246,7 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
 			count: 16
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
@@ -3386,7 +3386,7 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
@@ -3691,7 +3691,7 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
