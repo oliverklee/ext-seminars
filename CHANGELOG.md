@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.0.0
+
+### Added
 - Add an upgrade wizard for the separate billing address checkbox (#2325)
 - Rewrite the unregistration form (#2273, #2277)
 - Use SimpleCSS for the email CSS (#2261, #2262)
@@ -26,8 +38,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require oelib >= 5.0.2 (#2178, #2322)
 - Require feuserextrafields >= 5.2.2 (#2178, #2322)
 - Raise PHPStan to level 9 (#2160)
-
-### Deprecated
 
 ### Removed
 - Do not show the registrations in the event TCEforms anymore (#2321)
