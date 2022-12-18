@@ -8,7 +8,6 @@
     <tx_seminars_seminars>
         <uid>2</uid>
         <title>Event with one registration</title>
-        <registrations>1</registrations>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
         <uid>1</uid>

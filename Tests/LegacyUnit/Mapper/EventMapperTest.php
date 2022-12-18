@@ -678,31 +678,6 @@ final class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////
-    // Tests concerning the registrations
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getRegistrationsWithOneRegistrationReturnsOneRegistration(): void
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['registrations' => 1]
-        );
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $eventUid]
-        );
-
-        $event = $this->subject->find($eventUid);
-        self::assertEquals(
-            $registrationUid,
-            $event->getRegistrations()->getUids()
-        );
-    }
-
     // Tests concerning findAllByBeginDate
 
     /**

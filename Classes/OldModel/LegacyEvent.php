@@ -1467,16 +1467,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns the number of associated registration records (i.e., the number in the counter cache).
-     *
-     * @deprecated #1324 will be removed in seminars 5.0
-     */
-    public function getNumberOfAssociatedRegistrationRecords(): int
-    {
-        return $this->getRecordPropertyInteger('registrations');
-    }
-
-    /**
      * Returns TRUE if this seminar has at least one target group, FALSE
      * otherwise.
      *

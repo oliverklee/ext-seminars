@@ -13,7 +13,6 @@
         <title>Event with one one-seat registration and one vacancy left</title>
         <needs_registration>1</needs_registration>
         <attendees_max>2</attendees_max>
-        <registrations>1</registrations>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
         <uid>1</uid>

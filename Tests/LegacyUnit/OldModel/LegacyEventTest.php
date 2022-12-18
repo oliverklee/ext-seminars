@@ -7568,31 +7568,6 @@ final class LegacyEventTest extends TestCase
         );
     }
 
-    // Tests regarding the number of associated registration records
-
-    /**
-     * @test
-     */
-    public function getNumberOfAssociatedRegistrationRecordsByDefaultReturnsZero(): void
-    {
-        self::assertSame(0, $this->subject->getNumberOfAssociatedRegistrationRecords());
-    }
-
-    /**
-     * @test
-     */
-    public function getNumberOfAssociatedRegistrationRecordsReturnsValueFromDatabase(): void
-    {
-        $numberOfRegistrations = 3;
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['registrations' => $numberOfRegistrations]
-        );
-        $subject = new TestingLegacyEvent($uid);
-
-        self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
-    }
-
     // Tests concerning the price
 
     /**

@@ -24,7 +24,6 @@
         <pid>3</pid>
         <title>Event with one registration and one organizer</title>
         <needs_registration>1</needs_registration>
-        <registrations>1</registrations>
         <organizers>1</organizers>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
@@ -32,7 +31,6 @@
         <pid>3</pid>
         <title>Event with two registrations and two organizers</title>
         <needs_registration>1</needs_registration>
-        <registrations>2</registrations>
         <organizers>2</organizers>
     </tx_seminars_seminars>
     <tx_seminars_seminars>

@@ -37,11 +37,6 @@ class RegistrationProcessor implements SingletonInterface
     private $registrationRepository;
 
     /**
-     * @var EventRepository
-     */
-    private $eventRepository;
-
-    /**
      * @var FrontendUserRepository
      */
     private $frontendUserRepository;
@@ -59,11 +54,6 @@ class RegistrationProcessor implements SingletonInterface
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
         $this->registrationRepository = $repository;
-    }
-
-    public function injectEventRepository(EventRepository $repository): void
-    {
-        $this->eventRepository = $repository;
     }
 
     public function injectFrontendUserRepository(FrontendUserRepository $repository): void
@@ -209,12 +199,8 @@ class RegistrationProcessor implements SingletonInterface
      */
     public function persist(Registration $registration): void
     {
-        $event = $this->getEventFromRegistration($registration);
-
         $this->registrationRepository->add($registration);
         $this->registrationRepository->persistAll();
-
-        $this->eventRepository->updateRegistrationCounterCache($event);
     }
 
     /**

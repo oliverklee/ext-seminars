@@ -51,7 +51,6 @@
     <tx_seminars_seminars>
         <uid>4</uid>
         <title>event with two regular registrations with seats</title>
-        <registrations>2</registrations>
         <attendees_max>5</attendees_max>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
@@ -67,7 +66,6 @@
     <tx_seminars_seminars>
         <uid>5</uid>
         <title>event with two regular registrations without seats</title>
-        <registrations>2</registrations>
         <attendees_max>1</attendees_max>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
@@ -81,7 +79,6 @@
     <tx_seminars_seminars>
         <uid>6</uid>
         <title>event with one regular registration and one on queue</title>
-        <registrations>2</registrations>
         <attendees_max>4</attendees_max>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
@@ -98,7 +95,6 @@
     <tx_seminars_seminars>
         <uid>7</uid>
         <title>event with one paid, non-queue registration</title>
-        <registrations>1</registrations>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
         <uid>7</uid>
@@ -109,7 +105,6 @@
     <tx_seminars_seminars>
         <uid>8</uid>
         <title>event with one paid, queue registration</title>
-        <registrations>1</registrations>
     </tx_seminars_seminars>
     <tx_seminars_attendances>
         <uid>8</uid>

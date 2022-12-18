@@ -116,10 +116,6 @@
 				<source>Allows multiple registrations from the same person</source>
 				<target>Tillad flere indregistreringer fra samme person</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.registrations" xml:space="preserve">
-				<source>Registrations</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.cancelled" xml:space="preserve">
 				<source>Status</source>
 				<target>Er blevet aflyst</target>

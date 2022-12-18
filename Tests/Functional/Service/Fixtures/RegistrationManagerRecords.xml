@@ -8,7 +8,6 @@
     <tx_seminars_seminars>
         <uid>1</uid>
         <title>event with one regular registration with seats and one vacancy</title>
-        <registrations>1</registrations>
         <attendees_max>5</attendees_max>
         <organizers>1</organizers>
     </tx_seminars_seminars>

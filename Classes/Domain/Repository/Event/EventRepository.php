@@ -9,8 +9,6 @@ use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
-use TYPO3\CMS\Core\Database\Connection;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -51,56 +49,6 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $query->matching($query->logicalAnd($objectTypeMatcher, $ownerMatcher));
 
         return $query->execute()->toArray();
-    }
-
-    /**
-     * Updates the `Event.registrations` counter cache.
-     *
-     * @deprecated #1324 will be removed in seminars 5.0
-     */
-    public function updateRegistrationCounterCache(Event $event): void
-    {
-        $eventUid = $event->getUid();
-        $registrationQueryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_seminars_attendances');
-        $registrationCountQuery = $registrationQueryBuilder
-            ->count('*')
-            ->from('tx_seminars_attendances')
-            ->where(
-                $registrationQueryBuilder->expr()->eq(
-                    'seminar',
-                    $registrationQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
-                )
-            );
-        if (\method_exists($registrationCountQuery, 'executeQuery')) {
-            $registrationCountQueryResult = $registrationCountQuery->executeQuery();
-        } else {
-            $registrationCountQueryResult = $registrationCountQuery->execute();
-        }
-
-        if (\method_exists($registrationCountQueryResult, 'fetchOne')) {
-            $registrationCount = (int)$registrationCountQueryResult->fetchOne();
-        } else {
-            $registrationCount = (int)$registrationCountQueryResult->fetchColumn(0);
-        }
-
-        $eventQueryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_seminars_seminars');
-        $eventUpdateQuery = $eventQueryBuilder
-            ->update('tx_seminars_seminars')
-            ->where(
-                $eventQueryBuilder->expr()->eq(
-                    'uid',
-                    $eventQueryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
-                )
-            )
-            ->set('registrations', (string)$registrationCount);
-
-        if (\method_exists($eventUpdateQuery, 'executeStatement')) {
-            $eventUpdateQuery->executeStatement();
-        } else {
-            $eventUpdateQuery->execute();
-        }
     }
 
     /**
