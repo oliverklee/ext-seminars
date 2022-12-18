@@ -128,10 +128,6 @@
 				<source>Allows multiple registrations from the same person</source>
 				<target>Lässt mehrfache Anmeldungen derselben Person zu</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.skip_collision_check" xml:space="preserve">
-				<source>Skip the collision check for this event</source>
-				<target>Den Kollisionscheck für diese Veranstaltung ausschalten</target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.registrations" xml:space="preserve">
 				<source>Registrations</source>
 				<target>Anmeldungen</target>

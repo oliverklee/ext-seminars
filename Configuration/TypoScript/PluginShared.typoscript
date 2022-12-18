@@ -6,9 +6,6 @@ plugin.tx_seminars {
   # Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
   enableRegistration = 1
 
-  # whether the registration collision check should be skipped for all events, @deprecated #1763 will be removed in seminars 5.0
-  skipRegistrationCollisionCheck = 0
-
   # location of the template file
   templateFile = EXT:seminars/Resources/Private/Templates/Mail/e-mail.html
 

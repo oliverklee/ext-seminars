@@ -56,22 +56,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         skipRegistrationCollisionCheck
-
-   Data type
-         boolean
-
-   Description
-         whether the registration collision check should be skipped for all
-         events
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          templateFile
 
    Data type

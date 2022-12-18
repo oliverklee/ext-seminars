@@ -30,7 +30,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             $this->checkAttendancesPid();
             $this->checkNotificationMail();
             $this->checkShowVacanciesThreshold();
-            $this->checkSkipRegistrationCollisionCheck();
             $this->checkThankYouMail();
             $this->checkUnregistrationDeadlineDaysBeforeBeginDate();
         }
@@ -300,19 +299,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'showVacanciesThreshold',
             'This value specifies down from which threshold the exact number of vancancies will be displayed.
             If this value is incorrect, the number might get shown although this is not intended (or vice versa).'
-        );
-    }
-
-    /**
-     * @deprecated #1763 will be removed in seminars 5.0
-     */
-    private function checkSkipRegistrationCollisionCheck(): void
-    {
-        $this->checkIfBoolean(
-            'skipRegistrationCollisionCheck',
-            'This value specifies whether the registration collision check  should be disabled for all events.
-            If this value is incorrect, the registration collision check might be enabled
-            although it should be disabled (or vice versa).'
         );
     }
 

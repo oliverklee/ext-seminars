@@ -1049,16 +1049,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Returns whether the collision check should be skipped for this event.
-     *
-     * @deprecated #1763 will be removed in seminars 5.0
-     */
-    public function shouldSkipCollisionCheck(): bool
-    {
-        return $this->getAsBoolean('skip_collision_check');
-    }
-
-    /**
      * @return self::STATUS_*
      */
     public function getStatus(): int

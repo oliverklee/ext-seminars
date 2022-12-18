@@ -158,10 +158,7 @@ class RegistrationManager
         $message = '';
 
         $isLoggedIn = FrontEndLoginManager::getInstance()->isLoggedIn();
-
-        if ($isLoggedIn && $this->isUserBlocked($event)) {
-            $message = $this->translate('message_userIsBlocked');
-        } elseif ($isLoggedIn && !$this->couldThisUserRegister($event)) {
+        if ($isLoggedIn && !$this->couldThisUserRegister($event)) {
             $message = $this->translate('message_alreadyRegistered');
         } elseif (!$event->canSomebodyRegister()) {
             $message = $event->canSomebodyRegisterMessage();
@@ -185,8 +182,7 @@ class RegistrationManager
     {
         // A user can register either if the event allows multiple registrations
         // or the user isn't registered yet and isn't blocked either.
-        return $event->allowsMultipleRegistrations()
-            || (!$this->isUserRegistered($event) && !$this->isUserBlocked($event));
+        return $event->allowsMultipleRegistrations() || !$this->isUserRegistered($event);
     }
 
     /**
@@ -337,22 +333,6 @@ class RegistrationManager
     public function isUserRegisteredMessage(LegacyEvent $event): string
     {
         return $event->isUserRegisteredMessage($this->getLoggedInFrontEndUserUid());
-    }
-
-    /**
-     * Checks whether a front-end user is already blocked during the time for a given event by other booked events.
-     *
-     * For this, only events that forbid multiple registrations are checked.
-     *
-     * @param LegacyEvent $event a seminar for which we'll check whether the user already is blocked by another event
-     *
-     * @return bool TRUE if user is blocked by another registration, FALSE otherwise
-     *
-     * @deprecated #1763 will be removed in seminars 5.0
-     */
-    private function isUserBlocked(LegacyEvent $event): bool
-    {
-        return $event->isUserBlocked($this->getLoggedInFrontEndUserUid());
     }
 
     /**
