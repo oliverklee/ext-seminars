@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
@@ -91,34 +90,11 @@ final class SalutationTest extends TestCase
     // Utility functions
 
     /**
-     * Creates an FE-user with the given gender and the name "Foo".
-     *
-     * @param int $gender
-     *        the gender for the FE user, must be one of
-     *        FrontEndUser::GENDER_MALE,
-     *        FrontEndUser::GENDER_FEMALE or
-     *        FrontEndUser::GENDER_UNKNOWN, may be empty
-     *
-     * @return FrontEndUser the loaded testing model of a FE user
+     * Creates an FE-user with the name "Foo".
      */
-    private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): FrontEndUser
+    private function createFrontEndUser(): FrontEndUser
     {
-        return MapperRegistry::get(FrontEndUserMapper::class)
-            ->getLoadedTestingModel(['name' => 'Foo', 'gender' => $gender]);
-    }
-
-    /**
-     * Checks whether the FrontEndUser.gender fields exists and
-     * marks the test as skipped if that extension is not installed.
-     */
-    private function skipWithoutGenderField(): void
-    {
-        if (!OelibFrontEndUser::hasGenderField()) {
-            self::markTestSkipped(
-                'This test is skipped because it requires FE user to have a gender field, e.g., ' .
-                'from the sr_feuser_register extension.'
-            );
-        }
+        return MapperRegistry::get(FrontEndUserMapper::class)->getLoadedTestingModel(['name' => 'Foo']);
     }
 
     // Tests concerning the utility functions
@@ -129,19 +105,6 @@ final class SalutationTest extends TestCase
     public function createFrontEndUserReturnsFeUserModel(): void
     {
         self::assertInstanceOf(FrontEndUser::class, $this->createFrontEndUser());
-    }
-
-    /**
-     * @test
-     */
-    public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser(): void
-    {
-        $this->skipWithoutGenderField();
-
-        self::assertSame(
-            OelibFrontEndUser::GENDER_FEMALE,
-            $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE)->getGender()
-        );
     }
 
     // Tests concerning getSalutation
@@ -160,71 +123,9 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForMaleUserReturnsMaleSalutation(): void
+    public function getSalutationReturnsGenderUnspecificSalutation(): void
     {
-        $this->skipWithoutGenderField();
-
         $user = $this->createFrontEndUser();
-
-        self::assertStringContainsString(
-            $this->translate('email_hello_formal_0'),
-            $this->subject->getSalutation($user)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle(): void
-    {
-        $this->skipWithoutGenderField();
-
-        $user = $this->createFrontEndUser();
-
-        self::assertStringContainsString(
-            $this->translate('email_salutation_title_0') .
-            ' ' . $user->getLastOrFullName(),
-            $this->subject->getSalutation($user)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSalutationForFemaleUserReturnsFemaleSalutation(): void
-    {
-        $this->skipWithoutGenderField();
-
-        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
-
-        self::assertStringContainsString(
-            $this->translate('email_hello_formal_1'),
-            $this->subject->getSalutation($user)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle(): void
-    {
-        $this->skipWithoutGenderField();
-
-        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
-
-        self::assertStringContainsString(
-            $this->translate('email_salutation_title_1') .
-            ' ' . $user->getLastOrFullName(),
-            $this->subject->getSalutation($user)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSalutationForUnknownUserReturnsUnknownSalutation(): void
-    {
-        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
         self::assertStringContainsString(
             $this->translate('email_hello_formal_99'),
@@ -235,12 +136,12 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle(): void
+    public function getSalutationForUnknownUserReturnsUsersNameWithGenderUnspecificTitle(): void
     {
-        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
+        $user = $this->createFrontEndUser();
 
         self::assertStringContainsString(
-            $this->translate('email_salutation_title_99') . ' ' . $user->getLastOrFullName(),
+            $this->translate('email_salutation_title_99') . ' ' . $user->getName(),
             $this->subject->getSalutation($user)
         );
     }
@@ -274,32 +175,13 @@ final class SalutationTest extends TestCase
     }
 
     /**
-     * Returns all valid genders.
-     *
-     * @return int[][]
-     */
-    public function genderDataProvider(): array
-    {
-        return [
-            'male' => [0],
-            'female' => [1],
-            'unknown (old)' => [2],
-            'unknown' => [99],
-        ];
-    }
-
-    /**
      * @test
-     *
-     * @param int $gender
-     *
-     * @dataProvider genderDataProvider
      */
-    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(int $gender): void
+    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(): void
     {
         $this->configuration->setAsString('salutation', 'formal');
 
-        $user = $this->createFrontEndUser($gender);
+        $user = $this->createFrontEndUser();
         $salutation = $this->subject->getSalutation($user);
 
         self::assertStringNotContainsString(
@@ -322,16 +204,12 @@ final class SalutationTest extends TestCase
 
     /**
      * @test
-     *
-     * @param int $gender
-     *
-     * @dataProvider genderDataProvider
      */
-    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(int $gender): void
+    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(): void
     {
         $this->configuration->setAsString('salutation', 'informal');
 
-        $user = $this->createFrontEndUser($gender);
+        $user = $this->createFrontEndUser();
         $salutation = $this->subject->getSalutation($user);
 
         $this->assertNotContainsRawLabelKey($salutation);
@@ -339,16 +217,12 @@ final class SalutationTest extends TestCase
 
     /**
      * @test
-     *
-     * @param int $gender
-     *
-     * @dataProvider genderDataProvider
      */
-    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(int $gender): void
+    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(): void
     {
         $this->configuration->setAsString('salutation', '');
 
-        $user = $this->createFrontEndUser($gender);
+        $user = $this->createFrontEndUser();
         $salutation = $this->subject->getSalutation($user);
 
         $this->assertNotContainsRawLabelKey($salutation);

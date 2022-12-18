@@ -400,29 +400,8 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<trans-unit id="email_hello_informal" xml:space="preserve">
 				<source>Dear</source>
 			</trans-unit>
-			<trans-unit id="email_hello_formal_0" xml:space="preserve">
-				<source>Dear</source>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_1" xml:space="preserve">
-				<source>Dear</source>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_2" xml:space="preserve">
-				<source>Dear</source>
-			</trans-unit>
 			<trans-unit id="email_hello_formal_99" xml:space="preserve">
 				<source>Dear</source>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_0" xml:space="preserve">
-				<source>Mr.</source>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_1" xml:space="preserve">
-				<source>Ms.</source>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_2" xml:space="preserve">
-				<source></source>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_99" xml:space="preserve">
-				<source></source>
 			</trans-unit>
 			<trans-unit id="email_eventDate" xml:space="preserve">
 				<source>on %s</source>

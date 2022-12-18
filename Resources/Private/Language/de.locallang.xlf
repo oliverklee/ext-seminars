@@ -512,37 +512,9 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 				<source>Dear</source>
 				<target>Hallo</target>
 			</trans-unit>
-			<trans-unit id="email_hello_formal_0" xml:space="preserve">
-				<source>Dear</source>
-				<target>Sehr geehrter</target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_1" xml:space="preserve">
-				<source>Dear</source>
-				<target>Sehr geehrte</target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_2" xml:space="preserve">
+			<trans-unit id="email_hello_formal_99">
 				<source>Dear</source>
 				<target>Sehr geehrte(r)</target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_99" xml:space="preserve">
-				<source>Dear</source>
-				<target>Sehr geehrte(r)</target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_0" xml:space="preserve">
-				<source>Mr.</source>
-				<target>Herr</target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_1" xml:space="preserve">
-				<source>Ms.</source>
-				<target>Frau</target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_2" xml:space="preserve">
-				<source></source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_99" xml:space="preserve">
-				<source></source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="email_eventDate" xml:space="preserve">
 				<source>on %s</source>

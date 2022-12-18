@@ -510,42 +510,6 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="email_hello_informal" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_0" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_1" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_2" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_formal_99" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_0" xml:space="preserve">
-				<source>Mr.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_1" xml:space="preserve">
-				<source>Ms.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_2" xml:space="preserve">
-				<source></source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_salutation_title_99" xml:space="preserve">
-				<source></source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="email_eventDate" xml:space="preserve">
 				<source>on %s</source>
 				<target></target>
