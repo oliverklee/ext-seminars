@@ -932,7 +932,7 @@ parameters:
 
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 2
+			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
