@@ -1540,17 +1540,6 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setStatusWithInvalidStatusThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
-        $this->subject->setStatus(-1);
-    }
-
-    /**
-     * @test
-     */
     public function setStatusWithStatusPlannedSetsStatus(): void
     {
         $this->subject->setStatus(EventInterface::STATUS_PLANNED);

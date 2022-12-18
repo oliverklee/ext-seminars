@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
@@ -39,34 +40,6 @@ class Event extends AbstractTimeSpan
      * @var int represents the type for an event date
      */
     public const TYPE_DATE = 2;
-
-    /**
-     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
-     *
-     * @var array<int, self::STATUS_*>
-     */
-    private const VALID_STATUSES = [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED];
-
-    /**
-     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
-     *
-     * @var int the status "planned" for an event
-     */
-    public const STATUS_PLANNED = 0;
-
-    /**
-     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
-     *
-     * @var int the status "canceled" for an event
-     */
-    public const STATUS_CANCELED = 1;
-
-    /**
-     * @deprecated #1796 will be removed in seminars 5.0, use the constants from `EventInterface` instead
-     *
-     * @var int the status "confirmed" for an event
-     */
-    public const STATUS_CONFIRMED = 2;
 
     protected function getConfiguration(): Configuration
     {
@@ -1049,30 +1022,18 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return self::STATUS_*
+     * @return EventInterface::STATUS_*
      */
     public function getStatus(): int
     {
-        $status = $this->getAsInteger('cancelled');
-        \assert(\in_array($status, self::VALID_STATUSES, true));
-
-        return $status;
+        return $this->getAsInteger('cancelled');
     }
 
     /**
-     * @param self::STATUS_* $status
-     *
-     * @throws \InvalidArgumentException
+     * @param EventInterface::STATUS_* $status
      */
     public function setStatus(int $status): void
     {
-        if (!\in_array($status, self::VALID_STATUSES, true)) {
-            throw new \InvalidArgumentException(
-                '$status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED.',
-                1333296722
-            );
-        }
-
         $this->setAsInteger('cancelled', $status);
     }
 
@@ -1081,17 +1042,17 @@ class Event extends AbstractTimeSpan
      */
     public function isPlanned(): bool
     {
-        return $this->getStatus() === self::STATUS_PLANNED;
+        return $this->getStatus() === EventInterface::STATUS_PLANNED;
     }
 
     public function isCanceled(): bool
     {
-        return $this->getStatus() === self::STATUS_CANCELED;
+        return $this->getStatus() === EventInterface::STATUS_CANCELED;
     }
 
     public function isConfirmed(): bool
     {
-        return $this->getStatus() === self::STATUS_CONFIRMED;
+        return $this->getStatus() === EventInterface::STATUS_CONFIRMED;
     }
 
     /**
@@ -1101,7 +1062,7 @@ class Event extends AbstractTimeSpan
      */
     public function cancel(): void
     {
-        $this->setStatus(self::STATUS_CANCELED);
+        $this->setStatus(EventInterface::STATUS_CANCELED);
     }
 
     /**
@@ -1111,7 +1072,7 @@ class Event extends AbstractTimeSpan
      */
     public function confirm(): void
     {
-        $this->setStatus(self::STATUS_CONFIRMED);
+        $this->setStatus(EventInterface::STATUS_CONFIRMED);
     }
 
     public function getOwner(): ?OelibFrontEndUser

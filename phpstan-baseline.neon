@@ -1366,6 +1366,11 @@ parameters:
 			path: Classes/Model/Event.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getStatus\\(\\) should return 0\\|1\\|2 but returns int\\.$#"
+			count: 1
+			path: Classes/Model/Event.php
+
+		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
 			count: 2
 			path: Classes/Model/Organizer.php
