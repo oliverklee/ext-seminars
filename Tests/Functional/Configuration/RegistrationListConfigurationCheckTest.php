@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 
 /**
+ * @covers \OliverKlee\Seminars\Configuration\AbstractFrontEndConfigurationCheck
  * @covers \OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck
  */
 final class RegistrationListConfigurationCheckTest extends FunctionalTestCase
