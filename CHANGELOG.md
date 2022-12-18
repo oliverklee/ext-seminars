@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix array access warnings in `SelectorWidget` in PHP 8.1 (#2338)
 
 ## 5.0.0
 
