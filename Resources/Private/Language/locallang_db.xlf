@@ -97,9 +97,6 @@
 			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations" xml:space="preserve">
 				<source>Allows multiple registrations from the same person</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.registrations" xml:space="preserve">
-				<source>Registrations</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.cancelled" xml:space="preserve">
 				<source>Status</source>
 			</trans-unit>
