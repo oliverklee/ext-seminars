@@ -1420,22 +1420,6 @@ This event now has been confirmed.</source>
 				<source>Waiting list</source>
 				<target>Lista d'attesa</target>
 			</trans-unit>
-			<trans-unit id="message_file_too_large" xml:space="preserve">
-				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_file_too_large_informal" xml:space="preserve">
-				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalid_type" xml:space="preserve">
-				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_invalid_type_informal" xml:space="preserve">
-				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
 				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 				<target></target>
