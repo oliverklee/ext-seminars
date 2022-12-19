@@ -6,10 +6,20 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add support for PHP 8.1 and 8.2 (#2333, #2334, #2335)
-- Add support for TYPO3 11LTS (#2328, #2329, #2331)
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.1.0
+
+### Added
+- Add support for PHP 8.1 and 8.2 (#2333, #2334, #2335)
+- Add support for TYPO3 11LTS (#2328, #2329, #2331)
 
 ### Deprecated
 - Deprecate the `dateFormat` and `timeFormat` settings (#2343)
