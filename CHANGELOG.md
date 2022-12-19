@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 ### Deprecated
+- Deprecate the `dateFormat` and `timeFormat` settings (#2343)
 
 ### Removed
 - Drop unused code from the legacy model classes (#2339)

@@ -404,7 +404,8 @@ only be configured using your TypoScript setup, but not via flexforms.
          string
 
    Description
-         the time format (in  *strftime* format)
+         the time format (in  *strftime* format),
+         @deprecated #2342 will be removed in seminars 6.0
 
    Default
          %H:%M
@@ -419,8 +420,8 @@ only be configured using your TypoScript setup, but not via flexforms.
          string
 
    Description
-         the  *strftime* format code for the full date *(change this to your
-         local date format)*
+         the  *strftime* format code for the full date (change this to your
+         local date format), @deprecated #2342 will be removed in seminars 6.0
 
    Default
          %d.%m.%Y
