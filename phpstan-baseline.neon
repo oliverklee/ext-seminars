@@ -1901,17 +1901,17 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder and OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:formatDateForCalendar\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
@@ -1948,11 +1948,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:to\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
 			count: 2
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
-			count: 1
 			path: Classes/Service/RegistrationManager.php
 
 		-

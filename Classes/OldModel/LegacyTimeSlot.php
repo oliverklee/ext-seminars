@@ -89,7 +89,7 @@ class LegacyTimeSlot extends AbstractTimeSpan
         $beginDate = $this->getBeginDateAsTimestamp();
         $entryDate = $this->getRecordPropertyInteger('entry_date');
 
-        if (\strftime('%d-%m-%Y', $entryDate) !== \strftime('%d-%m-%Y', $beginDate)) {
+        if (\date('Y-m-d', $entryDate) !== \date('Y-m-d', $beginDate)) {
             $dateFormat = $this->getDateFormat() . ' ';
         } else {
             $dateFormat = '';

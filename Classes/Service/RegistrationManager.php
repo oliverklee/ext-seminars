@@ -494,7 +494,7 @@ class RegistrationManager
             "METHOD:PUBLISH\r\n" .
             "BEGIN:VEVENT\r\n" .
             'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
-            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . "\r\n" .
+            'DTSTAMP:' . \date('Ymd\\THis', (int)$GLOBALS['SIM_EXEC_TIME']) . "\r\n" .
             'SUMMARY:' . $event->getTitle() . "\r\n" .
             'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
             'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
@@ -523,7 +523,7 @@ class RegistrationManager
 
     private function formatDateForCalendar(int $dateAsUnixTimeStamp): string
     {
-        return strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
+        return \date('Ymd\\THis', $dateAsUnixTimeStamp);
     }
 
     /**
