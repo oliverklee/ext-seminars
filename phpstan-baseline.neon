@@ -2726,11 +2726,6 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
@@ -3106,27 +3101,7 @@ parameters:
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 8
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:\\$extConfBackup \\(array\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Email\\\\SalutationTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
@@ -3201,12 +3176,7 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup \\(array\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
@@ -3316,22 +3286,7 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setBeginDate\\(\\) expects int, mixed given\\.$#"
-			count: 7
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$registrationBeginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setRegistrationBeginDate\\(\\) expects int, mixed given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
@@ -3402,11 +3357,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$needle of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
@@ -3626,18 +3576,8 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function strftime expects int\\|null, mixed given\\.$#"
-			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-

@@ -271,7 +271,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     public function userDateAndTimeFieldsDataProvider(): array
     {
@@ -297,12 +297,12 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        $expected = \strftime(self::DATE_FORMAT, $value) . ' ' . \strftime(self::TIME_FORMAT, $value);
+        $expected = \date('d.m.Y', $value) . ' ' . \date('H:i', $value);
         self::assertStringContainsString($expected, $result);
     }
 
     /**
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     public function userDateFieldsDataProvider(): array
     {
@@ -327,12 +327,12 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        $expected = \strftime(self::DATE_FORMAT, $value);
+        $expected = \date('d.m.Y', $value);
         self::assertStringContainsString($expected, $result);
     }
 
     /**
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     public function dumpableUserFieldsDataProvider(): array
     {
@@ -364,9 +364,9 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @param string[] $fields
+     * @param array<int, non-empty-string> $fields
      *
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     private function expandForDataProvider(array $fields): array
     {
@@ -400,7 +400,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     public function dumpableStringUserFieldsDataProvider(): array
     {
@@ -450,7 +450,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<non-empty-string, array{0: non-empty-string}>
      */
     public function dumpableIntegerUserFieldsDataProvider(): array
     {
