@@ -143,7 +143,7 @@ abstract class AbstractTimeSpan extends AbstractModel
      */
     public function hasTime(): bool
     {
-        $beginTime = \strftime('%H:%M', $this->getBeginDateAsTimestamp());
+        $beginTime = \date('H:i', $this->getBeginDateAsTimestamp());
 
         return $this->hasDate() && $beginTime !== '00:00';
     }
@@ -155,7 +155,7 @@ abstract class AbstractTimeSpan extends AbstractModel
      */
     public function hasEndTime(): bool
     {
-        $endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
+        $endTime = \date('H:i', $this->getEndDateAsTimestamp());
 
         return $this->hasEndDate() && $endTime !== '00:00';
     }
