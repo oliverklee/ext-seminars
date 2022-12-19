@@ -57,11 +57,9 @@ class SalutationAwareTranslateViewHelper extends AbstractViewHelper
             $renderingContext
         );
 
-        $result = $labelWithSalutation !== $keyWithSalutation
+        return $labelWithSalutation !== $keyWithSalutation
             ? $labelWithSalutation
             : TranslateViewHelper::renderStatic($defaultArguments, $renderChildrenClosure, $renderingContext);
-
-        return $result;
     }
 
     /**
@@ -74,6 +72,10 @@ class SalutationAwareTranslateViewHelper extends AbstractViewHelper
         $defaultArguments = $arguments;
         $defaultArguments['extensionName'] = 'seminars';
         $defaultArguments['default'] = (string)($arguments['key'] ?? '');
+        $defaultArguments['languageKey'] = $arguments['languageKey'] ?? null;
+        $defaultArguments['key'] = (string)($arguments['key'] ?? '');
+        $defaultArguments['id'] = (string)($arguments['key'] ?? '');
+        $defaultArguments['alternativeLanguageKeys'] = $arguments['alternativeLanguageKeys'] ?? null;
 
         return $defaultArguments;
     }
@@ -109,6 +111,7 @@ class SalutationAwareTranslateViewHelper extends AbstractViewHelper
     {
         $argumentsWithSalutation = $defaultArguments;
         $argumentsWithSalutation['key'] = $keyWithSalutation;
+        $argumentsWithSalutation['id'] = $keyWithSalutation;
         $argumentsWithSalutation['default'] = $keyWithSalutation;
 
         return $argumentsWithSalutation;
