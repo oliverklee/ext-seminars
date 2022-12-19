@@ -1446,11 +1446,6 @@ parameters:
 			path: Classes/OldModel/AbstractTimeSpan.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractTimeSpan\\:\\:getBeginDate\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractTimeSpan.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractTimeSpan\\:\\:getEndDate\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractTimeSpan.php
@@ -1561,16 +1556,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getFoods\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getLodgings\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1592,16 +1577,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTimeSlotsAsArrayWithMarkers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTopicMmRecords\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTopicMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1661,11 +1636,6 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Cannot call method mailto_makelinks\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
@@ -1687,11 +1657,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyTimeSlot.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyTimeSlot.php
 
@@ -3181,11 +3146,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/AbstractViewTest.php
 
 		-
-			message: "#^Constant OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CategoryListTest\\:\\:BLANK_GIF is unused\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CategoryListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
@@ -3368,11 +3328,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$plugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getOrganizers\\(\\) expects OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper, OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\|null given\\.$#"
-			count: 4
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-

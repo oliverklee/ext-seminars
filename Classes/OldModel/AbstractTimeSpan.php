@@ -18,18 +18,6 @@ abstract class AbstractTimeSpan extends AbstractModel
      */
     protected $dateTimeSpanHookProvider;
 
-    /**
-     * Gets the begin date.
-     *
-     * @return string the begin date (or the localized string "will be announced" if no begin date is set)
-     */
-    public function getBeginDate(): string
-    {
-        return $this->hasBeginDate()
-            ? \strftime($this->getDateFormat(), $this->getBeginDateAsTimestamp())
-            : $this->translate('message_willBeAnnounced');
-    }
-
     public function hasBeginDate(): bool
     {
         return $this->getBeginDateAsTimestamp() > 0;

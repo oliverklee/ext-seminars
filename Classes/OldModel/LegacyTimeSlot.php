@@ -32,23 +32,6 @@ class LegacyTimeSlot extends AbstractTimeSpan
     }
 
     /**
-     * @return int[]
-     */
-    public function getSpeakersUids(): array
-    {
-        $table = 'tx_seminars_timeslots_speakers_mm';
-        $rows = self::getConnectionForTable($table)
-            ->select(['uid_foreign'], $table, ['uid_local' => $this->getUid()])->fetchAll();
-
-        $result = [];
-        foreach ($rows as $row) {
-            $result[] = (int)$row['uid_foreign'];
-        }
-
-        return $result;
-    }
-
-    /**
      * Gets the speakers of the time slot as a plain-text comma-separated list.
      *
      * @return string the comma-separated plain text list of speakers (or '' if there was an error)

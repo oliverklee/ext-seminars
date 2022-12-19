@@ -3287,7 +3287,7 @@ final class LegacyEventTest extends TestCase
 
         self::assertSame(
             '',
-            $this->subject->getOrganizers($this->pi1)
+            $this->subject->getOrganizers()
         );
     }
 
@@ -3301,7 +3301,7 @@ final class LegacyEventTest extends TestCase
 
         self::assertStringContainsString(
             'foo',
-            $this->subject->getOrganizers($this->pi1)
+            $this->subject->getOrganizers()
         );
     }
 
@@ -3320,7 +3320,7 @@ final class LegacyEventTest extends TestCase
 
         self::assertStringContainsString(
             '<a href="https://www.bar.com',
-            $this->subject->getOrganizers($this->pi1)
+            $this->subject->getOrganizers()
         );
     }
 
@@ -3333,7 +3333,7 @@ final class LegacyEventTest extends TestCase
         $this->addOrganizerRelation(['title' => 'foo']);
         $this->addOrganizerRelation(['title' => 'bar']);
 
-        $organizers = $this->subject->getOrganizers($this->pi1);
+        $organizers = $this->subject->getOrganizers();
 
         self::assertStringContainsString(
             'foo',

@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop unused code from the legacy model classes (#2339)
 
 ### Fixed
 - Fix array access warnings in `SelectorWidget` in PHP 8.1 (#2338)
