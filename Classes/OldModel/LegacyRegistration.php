@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents an event registration.
@@ -350,38 +349,6 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * Returns values out of the userData array, nicely formatted as safe
-     * HTML and with the e-mail address as a mailto: link.
-     * If more than one key is provided, the return values are separated
-     * by a comma and a space.
-     * Empty values will be removed from the output.
-     *
-     * @param string $keys comma-separated list of keys to retrieve
-     * @param AbstractPlugin $plugin an object for a live page
-     *
-     * @return string the values retrieved from $this->userData, may be empty
-     */
-    public function getUserDataAsHtml(string $keys, AbstractPlugin $plugin): string
-    {
-        /** @var array<int, non-empty-string> $singleKeys */
-        $singleKeys = GeneralUtility::trimExplode(',', $keys, true);
-        $singleValues = [];
-
-        foreach ($singleKeys as $key) {
-            $rawValue = $this->getUserData($key);
-            if ($rawValue === '') {
-                continue;
-            }
-
-            $singleValues[$key] = $key === 'email'
-                ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, [])
-                : \htmlspecialchars($rawValue, ENT_QUOTES | ENT_HTML5);
-        }
-
-        return \implode(', ', $singleValues);
-    }
-
-    /**
      * Gets the attendee's UID.
      *
      * @return int the attendee's FE user uid
@@ -389,27 +356,6 @@ class LegacyRegistration extends AbstractModel
     public function getUser(): int
     {
         return $this->getRecordPropertyInteger('user');
-    }
-
-    /**
-     * Gets the attendee's (real) name
-     *
-     * @return string the attendee's name
-     */
-    public function getUserName(): string
-    {
-        return $this->getUserData('name');
-    }
-
-    /**
-     * Gets the attendee's name and e-mail address in the format
-     * '"John Doe" <john.doe@example.com>'.
-     *
-     * @return string the attendee's name and e-mail address
-     */
-    public function getUserNameAndEmail(): string
-    {
-        return '"' . $this->getUserData('name') . '" <' . $this->getUserData('email') . '>';
     }
 
     public function getFrontEndUser(): ?FrontEndUser
@@ -810,14 +756,6 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @return array<int, int>
-     */
-    public function getLodgingsUids(): array
-    {
-        return $this->lodgings;
-    }
-
-    /**
      * Returns the food free-text content.
      */
     public function getFood(): string
@@ -875,14 +813,6 @@ class LegacyRegistration extends AbstractModel
     }
 
     /**
-     * @return array<int, int>
-     */
-    public function getFoodsUids(): array
-    {
-        return $this->foods;
-    }
-
-    /**
      * Checks whether any option checkboxes are referenced by this record.
      *
      * @return bool TRUE if at least one option checkbox is referenced by this record, FALSE otherwise
@@ -909,14 +839,6 @@ class LegacyRegistration extends AbstractModel
             "\n",
             $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm')
         );
-    }
-
-    /**
-     * @return array<int, int>
-     */
-    public function getCheckboxesUids(): array
-    {
-        return $this->checkboxes;
     }
 
     /**

@@ -1700,7 +1700,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return string the hyperlinked names of our organizers
      */
-    public function getOrganizers(TemplateHelper $plugin): string
+    public function getOrganizers(): string
     {
         if (!$this->hasOrganizers()) {
             return '';
@@ -2753,19 +2753,6 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * Gets the lodging options associated with this event.
-     *
-     * @return array[] lodging options, consisting each of a nested
-     *               array with the keys "caption" (for the title) and "value"
-     *               (for the UID), might be empty
-     */
-    public function getLodgings(): array
-    {
-        return $this->hasLodgings()
-            ? $this->getMmRecordsForSelection('tx_seminars_lodgings', 'tx_seminars_seminars_lodgings_mm') : [];
-    }
-
-    /**
-     * Gets the lodging options associated with this event.
      */
     protected function getLodgingTitles(): string
     {
@@ -2780,17 +2767,6 @@ class LegacyEvent extends AbstractTimeSpan
     public function hasFoods(): bool
     {
         return $this->hasRecordPropertyInteger('foods');
-    }
-
-    /**
-     * @return array[] food options, consisting each of a nested array
-     *               with the keys "caption" (for the title) and "value" (for
-     *               the UID), might be empty
-     */
-    public function getFoods(): array
-    {
-        return $this->hasFoods()
-            ? $this->getMmRecordsForSelection('tx_seminars_foods', 'tx_seminars_seminars_foods_mm') : [];
     }
 
     protected function getFoodTitles(): string
@@ -2824,39 +2800,12 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the UIDs and titles of records referenced by this record. If we are
-     * a date record and $useTopicRecord is TRUE, the referenced records of the
-     * corresponding topic record will be retrieved.
-     *
-     * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
-     * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting,
-     *        must not be empty
-     *
-     * @return array[] referenced records, consisting each of a nested
-     *               array with the keys "caption" (for the title) and "value"
-     *               (for the UID), might be empty
-     */
-    private function getTopicMmRecords(string $foreignTable, string $mmTable): array
-    {
-        return $this->getMmRecordsByUid($foreignTable, $mmTable, $this->getTopicInteger('uid'));
-    }
-
-    /**
      * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
      *                 (for the UID), might be empty
      */
     protected function getMmRecordsForSelection(string $foreignTable, string $mmTable): array
     {
         return $this->mmRecordsToSelection($this->getMmRecords($foreignTable, $mmTable));
-    }
-
-    /**
-     * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
-     *                 (for the UID), might be empty
-     */
-    protected function getTopicMmRecordsForSelection(string $foreignTable, string $mmTable): array
-    {
-        return $this->mmRecordsToSelection($this->getTopicMmRecords($foreignTable, $mmTable));
     }
 
     /**
@@ -2935,18 +2884,6 @@ class LegacyEvent extends AbstractTimeSpan
     public function getTeaser(): string
     {
         return $this->getTopicString('teaser');
-    }
-
-    /**
-     * Checks whether this event (or this event' topic record) has a teaser
-     * text.
-     *
-     * @return bool TRUE if we have a non-empty teaser text,
-     *                 FALSE otherwise
-     */
-    public function hasTeaser(): bool
-    {
-        return $this->hasTopicString('teaser');
     }
 
     /**

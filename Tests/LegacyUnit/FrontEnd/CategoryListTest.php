@@ -16,11 +16,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class CategoryListTest extends TestCase
 {
     /**
-     * @var string
-     */
-    private const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
-
-    /**
      * @var CategoryList
      */
     private $subject;
