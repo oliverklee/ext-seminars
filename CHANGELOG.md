@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unused code from the legacy model classes (#2339)
 
 ### Fixed
+- Avoid array access warnings in `SalutationAwareTranslateViewHelper` (#2349)
 - Stop using the deprecated `strftime` (#2340, #2344, #2345, #2346)
 - Fix array access warnings in `SelectorWidget` in PHP 8.1 (#2338)
 
