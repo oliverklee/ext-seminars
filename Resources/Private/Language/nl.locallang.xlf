@@ -8,6 +8,10 @@
 				<source>Y-m-d</source>
 				<target>d-m-Y</target>
 			</trans-unit>
+			<trans-unit id="timeFormat">
+				<source>H:i</source>
+				<target>H:i</target>
+			</trans-unit>
 			<trans-unit id="decimalSeparator">
 				<source>.</source>
 				<target>,</target>
