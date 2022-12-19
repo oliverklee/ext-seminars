@@ -230,7 +230,7 @@ class LegacyRegistration extends AbstractModel
                 // The fallthrough is intended.
             case 'tstamp':
                 $format = $this->getDateFormat() . ' ' . $this->getTimeFormat();
-                $result = \strftime($format, $this->getRecordPropertyInteger($trimmedKey));
+                $result = \date($format, $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'uid':
                 $result = $this->getUid();
@@ -248,7 +248,7 @@ class LegacyRegistration extends AbstractModel
                     ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'datepaid':
-                $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger($trimmedKey));
+                $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'method_of_payment':
                 $result = $this->getSeminarObject()
@@ -319,10 +319,10 @@ class LegacyRegistration extends AbstractModel
                 // The fallthrough is intended.
             case 'tstamp':
                 $format = $this->getDateFormat() . ' ' . $this->getTimeFormat();
-                $result = \strftime($format, (int)$rawData);
+                $result = \date($format, (int)$rawData);
                 break;
             case 'date_of_birth':
-                $result = \strftime($this->getDateFormat(), (int)$rawData);
+                $result = \date($this->getDateFormat(), (int)$rawData);
                 break;
             case 'name':
                 $user = $this->getFrontEndUser();

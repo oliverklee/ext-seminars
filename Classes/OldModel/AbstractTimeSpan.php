@@ -29,7 +29,7 @@ abstract class AbstractTimeSpan extends AbstractModel
     public function getEndDate(): string
     {
         return $this->hasEndDate()
-            ? \strftime($this->getDateFormat(), $this->getEndDateAsTimestamp())
+            ? \date($this->getDateFormat(), $this->getEndDateAsTimestamp())
             : $this->translate('message_willBeAnnounced');
     }
 
@@ -66,8 +66,8 @@ abstract class AbstractTimeSpan extends AbstractModel
             $endDate = $this->getEndDateAsTimestamp();
 
             $dateFormat = $this->getDateFormat();
-            $beginDateDay = \strftime($dateFormat, $beginDate);
-            $endDateDay = \strftime($dateFormat, $endDate);
+            $beginDateDay = \date($dateFormat, $beginDate);
+            $endDateDay = \date($dateFormat, $endDate);
 
             // Does the workshop span only one day (or is open-ended)?
             if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
@@ -114,8 +114,8 @@ abstract class AbstractTimeSpan extends AbstractModel
         }
 
         $timeFormat = $this->getTimeFormat();
-        $beginTime = \strftime($timeFormat, $this->getBeginDateAsTimestamp());
-        $endTime = \strftime($timeFormat, $this->getEndDateAsTimestamp());
+        $beginTime = \date($timeFormat, $this->getBeginDateAsTimestamp());
+        $endTime = \date($timeFormat, $this->getEndDateAsTimestamp());
 
         $result = $beginTime;
 

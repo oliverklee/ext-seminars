@@ -96,7 +96,7 @@ class LegacyTimeSlot extends AbstractTimeSpan
         }
         $dateFormat .= $this->getTimeFormat();
 
-        return \strftime($dateFormat, $entryDate);
+        return \date($dateFormat, $entryDate);
     }
 
     public function hasEntryDate(): bool

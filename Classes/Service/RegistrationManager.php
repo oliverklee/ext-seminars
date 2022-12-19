@@ -1152,7 +1152,7 @@ class RegistrationManager
 
         return \sprintf(
             $this->translate('email_unregistrationNotice'),
-            \strftime($this->getDateFormat(), $unregistrationDeadline)
+            \date($this->getDateFormat(), $unregistrationDeadline)
         );
     }
 

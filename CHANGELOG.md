@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unused code from the legacy model classes (#2339)
 
 ### Fixed
-- Stop using the deprecated `strftime` (#2340, #2344, #2345)
+- Stop using the deprecated `strftime` (#2340, #2344, #2345, #2346)
 - Fix array access warnings in `SelectorWidget` in PHP 8.1 (#2338)
 
 ## 5.0.0

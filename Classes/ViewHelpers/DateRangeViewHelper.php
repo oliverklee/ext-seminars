@@ -59,6 +59,6 @@ class DateRangeViewHelper
      */
     protected function getAsDateFormatYmd(int $timestamp): string
     {
-        return \strftime($this->getDateFormat(), $timestamp);
+        return \date($this->getDateFormat(), $timestamp);
     }
 }

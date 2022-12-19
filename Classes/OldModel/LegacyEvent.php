@@ -1566,14 +1566,8 @@ class LegacyEvent extends AbstractTimeSpan
         $result = '';
 
         if ($this->hasRegistrationDeadline()) {
-            $result = \strftime(
-                $this->getDateFormat(),
-                $this->getRecordPropertyInteger('deadline_registration')
-            );
-            $result .= \strftime(
-                ' ' . $this->getTimeFormat(),
-                $this->getRecordPropertyInteger('deadline_registration')
-            );
+            $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_registration'));
+            $result .= \date(' ' . $this->getTimeFormat(), $this->getRecordPropertyInteger('deadline_registration'));
         }
 
         return $result;
@@ -1605,11 +1599,8 @@ class LegacyEvent extends AbstractTimeSpan
         $result = '';
 
         if ($this->hasEarlyBirdDeadline()) {
-            $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
-            $result .= \strftime(
-                ' ' . $this->getTimeFormat(),
-                $this->getRecordPropertyInteger('deadline_early_bird')
-            );
+            $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
+            $result .= \date(' ' . $this->getTimeFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
         }
 
         return $result;
@@ -1631,11 +1622,8 @@ class LegacyEvent extends AbstractTimeSpan
         $result = '';
 
         if ($this->hasUnregistrationDeadline()) {
-            $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_unregistration'));
-            $result .= \strftime(
-                ' ' . $this->getTimeFormat(),
-                $this->getRecordPropertyInteger('deadline_unregistration')
-            );
+            $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_unregistration'));
+            $result .= \date(' ' . $this->getTimeFormat(), $this->getRecordPropertyInteger('deadline_unregistration'));
         }
 
         return $result;
@@ -2911,7 +2899,7 @@ class LegacyEvent extends AbstractTimeSpan
             case 'tstamp':
                 // The fallthrough is intended.
             case 'crdate':
-                $result = \strftime(
+                $result = \date(
                     $this->getDateFormat() . ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger($trimmedKey)
                 );
@@ -3448,7 +3436,7 @@ class LegacyEvent extends AbstractTimeSpan
             return '';
         }
 
-        return \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('expiry'));
+        return \date($this->getDateFormat(), $this->getRecordPropertyInteger('expiry'));
     }
 
     /**
@@ -3492,7 +3480,7 @@ class LegacyEvent extends AbstractTimeSpan
             return '';
         }
 
-        return \strftime(
+        return \date(
             $this->getDateFormat() . ' ' . $this->getTimeFormat(),
             $this->getRecordPropertyInteger('begin_date_registration')
         );
