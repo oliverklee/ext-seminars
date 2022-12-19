@@ -226,10 +226,7 @@ final class LegacyTimeSlotTest extends TestCase
         $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
         $this->configuration->setAsString('timeFormat', '%H:%M');
 
-        self::assertEquals(
-            strftime('%H:%M', $time),
-            $this->subject->getEntryDate()
-        );
+        self::assertSame(\date('H:i', $time), $this->subject->getEntryDate());
     }
 
     /**
@@ -244,9 +241,6 @@ final class LegacyTimeSlotTest extends TestCase
         $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
         $this->configuration->setAsString('timeFormat', '%H:%M');
 
-        self::assertEquals(
-            strftime('%d - %m - %Y %H:%M', $time),
-            $this->subject->getEntryDate()
-        );
+        self::assertSame(\date('d - m - Y H:i', $time), $this->subject->getEntryDate());
     }
 }

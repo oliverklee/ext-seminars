@@ -58,7 +58,7 @@ final class LegacyEventTest extends TestCase
     private $unregistrationDeadline = 0;
 
     /**
-     * @var int
+     * @var positive-int
      */
     private $now = 1524751343;
 
@@ -67,7 +67,9 @@ final class LegacyEventTest extends TestCase
      */
     private $pi1;
 
-    /** @var ConnectionPool */
+    /**
+     * @var ConnectionPool
+     */
     private $connectionPool;
 
     protected function setUp(): void
@@ -1035,7 +1037,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterIsTrueForEventWithFutureDate(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         self::assertTrue(
             $this->subject->canSomebodyRegister()
         );
@@ -1048,7 +1050,7 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         self::assertTrue(
             $this->subject->canSomebodyRegister()
         );
@@ -1059,8 +1061,8 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterIsFalseForPastEvent(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+        $this->subject->setBeginDate($this->now - 7200);
+        $this->subject->setEndDate($this->now - 3600);
         self::assertFalse(
             $this->subject->canSomebodyRegister()
         );
@@ -1073,8 +1075,8 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+        $this->subject->setBeginDate($this->now - 7200);
+        $this->subject->setEndDate($this->now - 3600);
         self::assertFalse(
             $this->subject->canSomebodyRegister()
         );
@@ -1085,8 +1087,8 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterIsFalseForCurrentlyRunningEvent(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now - 3600);
+        $this->subject->setEndDate($this->now + 3600);
         self::assertFalse(
             $this->subject->canSomebodyRegister()
         );
@@ -1099,8 +1101,8 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now - 3600);
+        $this->subject->setEndDate($this->now + 3600);
         self::assertFalse(
             $this->subject->canSomebodyRegister()
         );
@@ -1133,7 +1135,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithUnlimitedVacanciesReturnsTrue(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         $this->subject->setUnlimitedVacancies();
 
         self::assertTrue(
@@ -1160,7 +1162,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithoutNeedeRegistrationReturnsFalse(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setNeedsRegistration(false);
 
         self::assertFalse(
@@ -1173,7 +1175,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForFullyBookedEventReturnsFalse(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setNeedsRegistration(true);
         $this->subject->setAttendancesMax(10);
         $this->subject->setNumberOfAttendances(10);
@@ -1188,7 +1190,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithRegistrationQueueAndNoRegularVacanciesReturnsTrue(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setNeedsRegistration(true);
         $this->subject->setAttendancesMax(10);
         $this->subject->setNumberOfAttendances(10);
@@ -1204,7 +1206,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithRegistrationQueueAndRegularVacanciesReturnsTrue(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setNeedsRegistration(true);
         $this->subject->setAttendancesMax(10);
         $this->subject->setNumberOfAttendances(5);
@@ -1220,10 +1222,10 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithRegistrationBeginInFutureReturnsFalse(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] + 20
+            $this->now + 20
         );
 
         self::assertFalse(
@@ -1236,10 +1238,10 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithRegistrationBeginInPastReturnsTrue(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] - 20
+            $this->now - 20
         );
 
         self::assertTrue(
@@ -1252,7 +1254,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterForEventWithoutRegistrationBeginReturnsTrue(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(0);
 
@@ -1268,7 +1270,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithFutureDateReturnsEmptyString(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
 
         self::assertSame(
             '',
@@ -1281,8 +1283,8 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForPastEventReturnsSeminarRegistrationClosedMessage(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+        $this->subject->setBeginDate($this->now - 7200);
+        $this->subject->setEndDate($this->now - 3600);
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
@@ -1297,8 +1299,8 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+        $this->subject->setBeginDate($this->now - 7200);
+        $this->subject->setEndDate($this->now - 3600);
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
@@ -1311,8 +1313,8 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForCurrentlyRunningEventReturnsSeminarRegistrationClosesMessage(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now - 3600);
+        $this->subject->setEndDate($this->now + 3600);
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
@@ -1327,8 +1329,8 @@ final class LegacyEventTest extends TestCase
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now - 3600);
+        $this->subject->setEndDate($this->now + 3600);
 
         self::assertSame(
             $this->translate('message_seminarRegistrationIsClosed'),
@@ -1368,7 +1370,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithUnlimitedVacanviesReturnsEmptyString(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         $this->subject->setUnlimitedVacancies();
 
         self::assertSame(
@@ -1408,7 +1410,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForFullyBookedEventReturnsNoVacanciesMessage(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         $this->subject->setNeedsRegistration(true);
         $this->subject->setAttendancesMax(10);
         $this->subject->setNumberOfAttendances(10);
@@ -1424,7 +1426,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForFullyBookedEventWithRegistrationQueueReturnsEmptyString(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now + 3600);
         $this->subject->setNeedsRegistration(true);
         $this->subject->setAttendancesMax(10);
         $this->subject->setNumberOfAttendances(10);
@@ -1441,10 +1443,10 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithRegistrationBeginInFutureReturnsRegistrationOpensOnMessage(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] + 20
+            $this->now + 20
         );
 
         self::assertSame(
@@ -1461,10 +1463,10 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithRegistrationBeginInPastReturnsEmptyString(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] - 20
+            $this->now - 20
         );
 
         self::assertSame(
@@ -1478,7 +1480,7 @@ final class LegacyEventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithoutRegistrationBeginReturnsEmptyString(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $this->subject->setBeginDate($this->now + 45);
         $this->subject->setUnlimitedVacancies();
         $this->subject->setRegistrationBeginDate(0);
 
@@ -5546,7 +5548,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getCancellationDeadlineForEventWithoutSpeakerReturnsBeginDateOfEvent(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setBeginDate($this->now);
 
         self::assertSame(
             $this->subject->getBeginDateAsTimestamp(),
@@ -5559,7 +5561,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getCancellationDeadlineForEventWithSpeakerWithoutCancellationPeriodReturnsBeginDateOfEvent(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setBeginDate($this->now);
         $this->addSpeakerRelation(['cancelation_period' => 0]);
 
         self::assertSame(
@@ -5573,7 +5575,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getCancellationDeadlineForEventWithTwoSpeakersWithoutCancellationPeriodReturnsBeginDateOfEvent(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setBeginDate($this->now);
         $this->addSpeakerRelation(['cancelation_period' => 0]);
         $this->addSpeakerRelation(['cancelation_period' => 0]);
 
@@ -5588,11 +5590,11 @@ final class LegacyEventTest extends TestCase
      */
     public function getCancellationDeadlineForEventWithOneSpeakersWithCancellationPeriodReturnsBeginDateMinusCancelationPeriod(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setBeginDate($this->now);
         $this->addSpeakerRelation(['cancelation_period' => 1]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+            $this->now - Time::SECONDS_PER_DAY,
             $this->subject->getCancelationDeadline()
         );
     }
@@ -5602,12 +5604,12 @@ final class LegacyEventTest extends TestCase
      */
     public function getCancellationDeadlineForEventWithTwoSpeakersWithCancellationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setBeginDate($this->now);
         $this->addSpeakerRelation(['cancelation_period' => 21]);
         $this->addSpeakerRelation(['cancelation_period' => 42]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - (42 * Time::SECONDS_PER_DAY),
+            $this->now - (42 * Time::SECONDS_PER_DAY),
             $this->subject->getCancelationDeadline()
         );
     }
@@ -5824,8 +5826,8 @@ final class LegacyEventTest extends TestCase
      */
     public function getEventDataForEventWithDateUsesHyphenAsDateSeparator(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY);
+        $this->subject->setBeginDate($this->now);
+        $this->subject->setEndDate($this->now + Time::SECONDS_PER_DAY);
 
         self::assertStringContainsString(
             '-',
@@ -5838,8 +5840,8 @@ final class LegacyEventTest extends TestCase
      */
     public function getEventDataForEventWithTimeUsesHyphenAsTimeSeparator(): void
     {
-        $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+        $this->subject->setBeginDate($this->now);
+        $this->subject->setEndDate($this->now + 3600);
 
         self::assertStringContainsString(
             '-',
@@ -6176,12 +6178,9 @@ final class LegacyEventTest extends TestCase
      */
     public function getRegistrationBeginForEventWithRegistrationBeginReturnsFormattedRegistrationBegin(): void
     {
-        $this->subject->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setRegistrationBeginDate($this->now);
 
-        self::assertSame(
-            strftime('%d.%m.%Y %H:%M', $GLOBALS['SIM_EXEC_TIME']),
-            $this->subject->getRegistrationBegin()
-        );
+        self::assertSame(\date('d.m.Y H:i', $this->now), $this->subject->getRegistrationBegin());
     }
 
     // Tests regarding the description.

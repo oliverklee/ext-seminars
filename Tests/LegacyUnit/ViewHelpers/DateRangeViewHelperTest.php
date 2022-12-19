@@ -62,7 +62,7 @@ final class DateRangeViewHelperTest extends TestCase
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            strftime('%d.%m.%Y', self::BEGIN_DATE),
+            \date('d.m.Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -77,7 +77,7 @@ final class DateRangeViewHelperTest extends TestCase
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            strftime('%d.%m.%Y', self::BEGIN_DATE),
+            \date('d.m.Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -91,8 +91,8 @@ final class DateRangeViewHelperTest extends TestCase
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
 
-        self::assertEquals(
-            strftime('%d.%m.%Y', self::BEGIN_DATE),
+        self::assertSame(
+            \date('d.m.Y', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -107,8 +107,8 @@ final class DateRangeViewHelperTest extends TestCase
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-        self::assertEquals(
-            strftime('%d.%m.%Y', self::BEGIN_DATE) . '&#8211;' . strftime('%d.%m.%Y', $endDate),
+        self::assertSame(
+            \date('d.m.Y', self::BEGIN_DATE) . '&#8211;' . \date('d.m.Y', $endDate),
             $this->subject->render($timeSpan)
         );
     }
@@ -125,8 +125,8 @@ final class DateRangeViewHelperTest extends TestCase
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-        self::assertEquals(
-            strftime('%d.%m.%Y', self::BEGIN_DATE) . $dash . strftime('%d.%m.%Y', $endDate),
+        self::assertSame(
+            \date('d.m.Y', self::BEGIN_DATE) . $dash . \date('d.m.Y', $endDate),
             $this->subject->render($timeSpan, $dash)
         );
     }

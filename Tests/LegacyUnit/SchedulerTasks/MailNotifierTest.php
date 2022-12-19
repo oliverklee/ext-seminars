@@ -41,6 +41,11 @@ final class MailNotifierTest extends TestCase
     use MakeInstanceTrait;
 
     /**
+     * @var positive-int
+     */
+    private const NOW = 1524751343;
+
+    /**
      * @var MailNotifier
      */
     private $subject;
@@ -82,7 +87,7 @@ final class MailNotifierTest extends TestCase
 
     protected function setUp(): void
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
 
         (new CacheNullifyer())->setAllCoreCaches();
 
@@ -296,7 +301,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -321,7 +326,7 @@ final class MailNotifierTest extends TestCase
 
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -348,7 +353,7 @@ final class MailNotifierTest extends TestCase
 
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -371,13 +376,13 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -396,7 +401,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -421,7 +426,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -445,7 +450,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
                 'event_takes_place_reminder_sent' => 1,
             ]
@@ -464,7 +469,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW - Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -482,7 +487,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * Time::SECONDS_PER_DAY),
+                'begin_date' => self::NOW + (3 * Time::SECONDS_PER_DAY),
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -500,7 +505,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -519,7 +524,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CANCELED,
             ]
         );
@@ -537,7 +542,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_PLANNED,
             ]
         );
@@ -558,7 +563,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -585,7 +590,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -614,7 +619,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -638,7 +643,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -646,7 +651,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -666,7 +671,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_PLANNED,
             ]
         );
@@ -701,7 +706,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -727,7 +732,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                     'cancelation_deadline_reminder_sent' => 1,
                 ]
@@ -748,7 +753,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW - Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -768,7 +773,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * Time::SECONDS_PER_DAY),
+                    'begin_date' => self::NOW + (3 * Time::SECONDS_PER_DAY),
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -788,7 +793,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -809,7 +814,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_CANCELED,
                 ]
             )
@@ -829,7 +834,7 @@ final class MailNotifierTest extends TestCase
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_CONFIRMED,
                 ]
             )
@@ -854,7 +859,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -874,7 +879,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -899,7 +904,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -931,7 +936,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -961,7 +966,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -984,7 +989,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1018,7 +1023,7 @@ final class MailNotifierTest extends TestCase
 
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1043,7 +1048,7 @@ final class MailNotifierTest extends TestCase
 
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1076,7 +1081,7 @@ final class MailNotifierTest extends TestCase
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', false);
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1108,7 +1113,7 @@ final class MailNotifierTest extends TestCase
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1142,7 +1147,7 @@ final class MailNotifierTest extends TestCase
 
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1175,7 +1180,7 @@ final class MailNotifierTest extends TestCase
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1219,7 +1224,7 @@ final class MailNotifierTest extends TestCase
 
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1262,7 +1267,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
                 'title' => 'test event',
             ]
@@ -1286,7 +1291,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1311,7 +1316,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1331,7 +1336,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
                 'title' => 'test event',
             ]
@@ -1352,7 +1357,7 @@ final class MailNotifierTest extends TestCase
     {
         $uid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1372,7 +1377,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1388,12 +1393,12 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventsBeginDate(): void
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventBeginDate(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                     'cancelled' => EventInterface::STATUS_PLANNED,
                 ]
             )
@@ -1405,10 +1410,7 @@ final class MailNotifierTest extends TestCase
         $this->subject->sendCancellationDeadlineReminders();
 
         self::assertStringContainsString(
-            \strftime(
-                $this->configuration->getAsString('dateFormatYMD'),
-                $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY
-            ),
+            \date('d.m.Y', self::NOW + Time::SECONDS_PER_DAY),
             $this->email->getTextBody()
         );
     }
@@ -1420,7 +1422,7 @@ final class MailNotifierTest extends TestCase
     {
         $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );
@@ -1440,7 +1442,7 @@ final class MailNotifierTest extends TestCase
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
         );

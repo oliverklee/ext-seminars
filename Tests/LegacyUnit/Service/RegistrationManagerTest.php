@@ -43,6 +43,11 @@ final class RegistrationManagerTest extends TestCase
     use MakeInstanceTrait;
 
     /**
+     * @var positive-int
+     */
+    private const NOW = 1524751343;
+
+    /**
      * @var RegistrationManager
      */
     private $subject;
@@ -131,7 +136,7 @@ final class RegistrationManagerTest extends TestCase
 
     protected function setUp(): void
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
@@ -170,8 +175,8 @@ final class RegistrationManagerTest extends TestCase
             [
                 'title' => 'test event',
                 'subtitle' => 'juggling with burning chainsaws',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'begin_date' => self::NOW + 1000,
+                'end_date' => self::NOW + 2000,
                 'attendees_min' => 1,
                 'attendees_max' => 10,
                 'needs_registration' => 1,
@@ -250,10 +255,10 @@ final class RegistrationManagerTest extends TestCase
                 'tx_seminars_seminars',
                 [
                     'title' => 'test event',
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                    'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                    'begin_date' => self::NOW + 1000,
+                    'end_date' => self::NOW + 2000,
                     'attendees_max' => 10,
-                    'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                    'deadline_registration' => self::NOW + 1000,
                     'needs_registration' => 1,
                     'queue_size' => 0,
                 ]
@@ -579,10 +584,10 @@ final class RegistrationManagerTest extends TestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                    'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                    'begin_date' => self::NOW + 1000,
+                    'end_date' => self::NOW + 2000,
                     'attendees_max' => 10,
-                    'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                    'deadline_registration' => self::NOW + 1000,
                 ]
             )
         );
@@ -2226,7 +2231,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
+        $formattedDate = \date('Ymd\\THis', $this->seminar->getBeginDateAsTimestamp());
         self::assertStringContainsString('DTSTART:' . $formattedDate, $content);
     }
 
@@ -2271,7 +2276,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
+        $formattedDate = \date('Ymd\\THis', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
         self::assertStringContainsString('DTEND:' . $formattedDate, $content);
     }
 
@@ -2427,7 +2432,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        $formattedDate = strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']);
+        $formattedDate = \date('Ymd\\THis', self::NOW);
         self::assertStringContainsString('DTSTAMP:' . $formattedDate, $content);
     }
 
@@ -2960,7 +2965,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
             ]
         );
         $pi1 = new DefaultController();
@@ -2990,7 +2995,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -3022,7 +3027,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -3049,7 +3054,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );
@@ -3085,7 +3090,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );
@@ -3964,8 +3969,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
-        $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
+        $this->seminar->setBeginDate(self::NOW + 42);
+        $this->seminar->setRegistrationDeadline(self::NOW - 42);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -3977,8 +3982,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
-        $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $this->seminar->setBeginDate(self::NOW + 42);
+        $this->seminar->setRegistrationDeadline(self::NOW + 42);
 
         self::assertTrue(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -3990,8 +3995,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
-        $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
+        $this->seminar->setBeginDate(self::NOW + 42);
+        $this->seminar->setRegistrationBeginDate(self::NOW + 10);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -4003,8 +4008,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
-        $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
+        $this->seminar->setBeginDate(self::NOW + 42);
+        $this->seminar->setRegistrationBeginDate(self::NOW - 42);
 
         self::assertTrue(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -4016,7 +4021,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $this->seminar->setBeginDate(self::NOW + 42);
         $this->seminar->setRegistrationBeginDate(0);
 
         self::assertTrue(
@@ -4029,8 +4034,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse(): void
     {
-        $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
-        $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
+        $this->seminar->setBeginDate(self::NOW - 42);
+        $this->seminar->setRegistrationBeginDate(self::NOW - 50);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -4113,7 +4118,7 @@ final class RegistrationManagerTest extends TestCase
     public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] - 42
+            self::NOW - 42
         );
 
         self::assertTrue(
@@ -4127,7 +4132,7 @@ final class RegistrationManagerTest extends TestCase
     public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            $GLOBALS['SIM_EXEC_TIME'] + 42
+            self::NOW + 42
         );
 
         self::assertFalse(

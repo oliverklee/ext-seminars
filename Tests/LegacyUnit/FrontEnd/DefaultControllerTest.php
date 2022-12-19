@@ -62,24 +62,24 @@ final class DefaultControllerTest extends TestCase
     private $systemFolderPid = 0;
 
     /**
-     * @var int the number of target groups for the current event record
+     * @var positive-int|0 the number of target groups for the current event record
      */
     private $numberOfTargetGroups = 0;
 
     /**
-     * @var int the number of categories for the current event record
+     * @var positive-int|0 the number of categories for the current event record
      */
     private $numberOfCategories = 0;
 
     /**
-     * @var int the number of organizers for the current event record
+     * @var positive-int|0 the number of organizers for the current event record
      */
     private $numberOfOrganizers = 0;
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
      *
-     * @var array
+     * @var array<string, mixed>
      */
     private $extConfBackup = [];
 
@@ -104,9 +104,9 @@ final class DefaultControllerTest extends TestCase
     private $pluginConfiguration;
 
     /**
-     * @var int
+     * @var positive-int|0
      */
-    private $rootPageUid;
+    private $rootPageUid = 0;
 
     protected function setUp(): void
     {
@@ -4428,10 +4428,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertStringContainsString(
-            sprintf(
-                $this->translate('message_registrationOpensOn'),
-                strftime('%d.%m.%Y %H:%M', $registrationBegin)
-            ),
+            \sprintf($this->translate('message_registrationOpensOn'), \date('d.m.Y H:i', $registrationBegin)),
             $this->subject->main('', [])
         );
     }
@@ -5167,10 +5164,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            sprintf(
-                $this->translate('message_registrationOpensOn'),
-                strftime('%d.%m.%Y %H:%M', $registrationBegin)
-            ),
+            \sprintf($this->translate('message_registrationOpensOn'), \date('d.m.Y H:i', $registrationBegin)),
             $this->subject->main('', [])
         );
     }
