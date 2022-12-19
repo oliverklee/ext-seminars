@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Configuration\Traits;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\Service\DateFormatConverter;
 
 /**
  * This trait provides access to the TypoScript configuration for `plugin.tx_seminars`.
@@ -27,18 +28,22 @@ trait SharedPluginConfiguration
     }
 
     /**
-     * Returns the date format for a full date (with year, month and day) for `strftime`.
+     * Returns the date format for a full date (with year, month and day) for `date`.
      */
     protected function getDateFormat(): string
     {
-        return $this->getSharedConfiguration()->getAsString('dateFormatYMD') ?: '%Y-%m-%d';
+        $oldFormat = $this->getSharedConfiguration()->getAsString('dateFormatYMD') ?: '%Y-%m-%d';
+
+        return DateFormatConverter::convert($oldFormat);
     }
 
     /**
-     * Returns the time format for `strftime`.
+     * Returns the time format for `date`.
      */
     protected function getTimeFormat(): string
     {
-        return $this->getSharedConfiguration()->getAsString('timeFormat') ?: '%H:%M';
+        $oldFormat = $this->getSharedConfiguration()->getAsString('timeFormat') ?: '%H:%M';
+
+        return DateFormatConverter::convert($oldFormat);
     }
 }

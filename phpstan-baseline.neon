@@ -1446,11 +1446,6 @@ parameters:
 			path: Classes/OldModel/AbstractTimeSpan.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractTimeSpan\\:\\:getEndDate\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractTimeSpan.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractTimeSpan\\:\\:getEndDateAsTimestampEvenIfOpenEnded\\(\\) should return int but returns int\\|false\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractTimeSpan.php
@@ -1551,11 +1546,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getExpiry\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1567,11 +1557,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesWithCountry\\(\\) should return array\\<string\\> but returns array\\<int\\<0, max\\>, int\\|string\\>\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getRegistrationBegin\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1596,11 +1581,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$haystack of function strpos expects string, string\\|false given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Parameter \\#1 \\$isoCode of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCountryNameFromIsoCode\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1611,18 +1591,8 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#3 \\$subject of function preg_replace expects array\\|string, string\\|false given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, int\\|string given\\.$#"
 			count: 2
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|false given\\.$#"
-			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1646,22 +1616,12 @@ parameters:
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|false given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyRegistration.php
-
-		-
 			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|null given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyRegistration.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyTimeSlot.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyTimeSlot\\:\\:getEntryDate\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyTimeSlot.php
 
@@ -1989,11 +1949,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
 			count: 1
 			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\DateRangeViewHelper\\:\\:getAsDateFormatYmd\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/ViewHelpers/DateRangeViewHelper.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\DateRangeViewHelper\\:\\:render\\(\\) should return string but returns string\\|null\\.$#"
