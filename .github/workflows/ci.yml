@@ -302,7 +302,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           php-version: "${{ matrix.php-version }}"
-          tools: composer:v2
+          tools: composer:v2.4
           extensions: dom, json, libxml, mysqli, zip
           coverage: none
           ini-values: error_reporting=E_ALL
