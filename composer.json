@@ -48,7 +48,7 @@
 	"require-dev": {
 		"ergebnis/composer-normalize": "~2.19.0",
 		"friendsofphp/php-cs-fixer": "^3.4.0",
-		"helhum/typo3-console": "^6.7.4 || ^7.1.2",
+		"helhum/typo3-console": "^6.7.6 || ^7.1.4",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.11",
 		"nimut/testing-framework": "^6.0.1",
