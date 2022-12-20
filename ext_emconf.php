@@ -10,7 +10,7 @@ $EM_CONF[$_EXTKEY] = [
             'php' => '7.2.0-8.2.99',
             'typo3' => '10.4.22-11.5.99',
             'extbase' => '10.4.22-11.5.99',
-            'feuserextrafields' => '5.2.2-5.99.99',
+            'feuserextrafields' => '5.3.0-5.99.99',
             'oelib' => '5.1.0-5.99.99',
             'static_info_tables' => '6.9.6-11.5.99',
         ],

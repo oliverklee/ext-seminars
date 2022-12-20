@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require feuserextrafields >= 5.3.0 (#2358)
 - Require oelib >= 5.1.0 (#2353)
 
 ### Deprecated
