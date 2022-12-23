@@ -435,7 +435,6 @@ class DefaultController extends TemplateHelper
                 $this->getConfValueInteger('registrationsVipListPID'),
                 $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'),
                 $this->getConfValueString('accessToFrontEndRegistrationLists')
-
             )
         ) {
             // So a link to the VIP list is possible.
