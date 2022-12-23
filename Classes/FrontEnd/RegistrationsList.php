@@ -86,7 +86,8 @@ class RegistrationsList extends AbstractView
                     $this->getConfValueInteger(
                         'defaultEventVipsFeGroupID',
                         's_template_special'
-                    )
+                    ),
+                    $this->getConfValueString('accessToFrontEndRegistrationLists')
                 )
             ) {
                 $isOkay = true;
