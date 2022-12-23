@@ -38,7 +38,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function implementsResponse(): void
     {
-        self::assertInstanceOf(ResponseInterface::class, new CsvResponse(''));
+        self::assertInstanceOf(ResponseInterface::class, new CsvResponse('', 'things.csv'));
     }
 
     /**
@@ -46,7 +46,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function hasCsvContentTypeWithHeader(): void
     {
-        $subject = new CsvResponse('');
+        $subject = new CsvResponse('', 'things.csv');
 
         $contentTypeHeader = $subject->getHeader('Content-Type')[0];
         self::assertStringContainsString('text/csv; header=present;', $contentTypeHeader);
@@ -57,7 +57,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function hasCsvContentTypeWithHeaderForLowercasedHeaderName(): void
     {
-        $subject = new CsvResponse('');
+        $subject = new CsvResponse('', 'things.csv');
 
         $contentTypeHeader = $subject->getHeader('content-type')[0];
         self::assertStringContainsString('text/csv; header=present; ', $contentTypeHeader);
@@ -68,7 +68,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function usesUtf8ForTheContentType(): void
     {
-        $subject = new CsvResponse('');
+        $subject = new CsvResponse('', 'things.csv');
 
         $contentTypeHeader = $subject->getHeader('Content-Type')[0];
         self::assertStringContainsString('charset=utf-8', $contentTypeHeader);
@@ -79,7 +79,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function hasContentDispositionAttachment(): void
     {
-        $subject = new CsvResponse('');
+        $subject = new CsvResponse('', 'things.csv');
 
         $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
         self::assertStringContainsString('attachment', $contentDispositionHeader);
@@ -90,7 +90,7 @@ final class CsvResponseTest extends UnitTestCase
      */
     public function hasContentDispositionAttachmentWithLowercasedHeaderName(): void
     {
-        $subject = new CsvResponse('');
+        $subject = new CsvResponse('', 'things.csv');
 
         $contentDispositionHeader = $subject->getHeader('content-disposition')[0];
         self::assertStringContainsString('attachment', $contentDispositionHeader);
@@ -111,22 +111,11 @@ final class CsvResponseTest extends UnitTestCase
     /**
      * @test
      */
-    public function withoutFilenameNotUsesAnyFileNameInContentDisposition(): void
-    {
-        $subject = new CsvResponse('');
-
-        $contentDispositionHeader = $subject->getHeader('Content-Disposition')[0];
-        self::assertStringNotContainsString('filename=', $contentDispositionHeader);
-    }
-
-    /**
-     * @test
-     */
     public function bodyHasProvidedContent(): void
     {
         $bodyContent = "a;b;c\r\n1;2;3";
 
-        $subject = new CsvResponse($bodyContent);
+        $subject = new CsvResponse($bodyContent, 'things.csv');
 
         self::assertSame($bodyContent, (string)$subject->getBody());
     }

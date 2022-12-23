@@ -12,7 +12,10 @@ use TYPO3\CMS\Core\Http\Stream;
  */
 class CsvResponse extends Response
 {
-    public function __construct(string $content, ?string $filename = null)
+    /**
+     * @param non-empty-string $filename
+     */
+    public function __construct(string $content, string $filename)
     {
         $body = new Stream('php://temp', 'wb+');
         $body->write($content);
