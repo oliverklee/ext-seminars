@@ -2896,11 +2896,6 @@ parameters:
 			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
@@ -3076,11 +3071,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 10
-			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
-
-		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
@@ -3113,11 +3103,6 @@ parameters:
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:hideListRegistrationsColumnIfNecessaryDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, float\\|int\\|string\\> given\\.$#"
-			count: 8
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
