@@ -2299,7 +2299,7 @@ class DefaultController extends TemplateHelper
             if ($organizer->hasDescription()) {
                 $this->setMarker(
                     'organizer_description_content',
-                    $this->renderAsRichText($organizer->getDescription())
+                    $this->pi_RTEcssText($organizer->getDescription())
                 );
                 $description = $this->getSubpart('ORGANIZER_DESCRIPTION_ITEM');
             } else {
@@ -2585,14 +2585,5 @@ class DefaultController extends TemplateHelper
         $this->configuration = new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
 
         return $this->configuration;
-    }
-
-    private function renderAsRichText(string $rawData): string
-    {
-        $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
-        $childrenClosure = function () use ($rawData): string {
-            return \trim($rawData);
-        };
-        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
     }
 }
