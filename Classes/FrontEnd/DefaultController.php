@@ -724,7 +724,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $this->setMarker('description', $this->renderAsRichText($this->seminar->getDescription()));
+        $this->setMarker('description', $this->pi_RTEcssText($this->seminar->getDescription()));
     }
 
     /**
@@ -1037,7 +1037,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker(
             'additional_information',
-            $this->renderAsRichText($this->seminar->getAdditionalInformation())
+            $this->pi_RTEcssText($this->seminar->getAdditionalInformation())
         );
     }
 
