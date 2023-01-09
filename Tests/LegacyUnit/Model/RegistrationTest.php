@@ -652,7 +652,7 @@ final class RegistrationTest extends TestCase
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
@@ -667,7 +667,7 @@ final class RegistrationTest extends TestCase
             ['gender' => OelibFrontEndUser::GENDER_FEMALE]
         );
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
@@ -682,7 +682,7 @@ final class RegistrationTest extends TestCase
             ['gender' => OelibFrontEndUser::GENDER_UNKNOWN]
         );
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_UNKNOWN,
             $this->subject->getGender()
         );
@@ -691,13 +691,20 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
+    public function getGenderWithGenderDiverseReturnsGenderDiverse(): void
+    {
+        $this->subject->setData(['gender' => OelibFrontEndUser::GENDER_DIVERSE]);
+
+        self::assertSame(OelibFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
+    }
+
+    /**
+     * @test
+     */
     public function setGenderWithUnsupportedGenderThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(
-            'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
-            'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN'
-        );
+        $this->expectExceptionMessage('The parameter $gender must be one of the FrontEndUser::GENDER_* constants.');
 
         // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->setGender(-1);
@@ -710,7 +717,7 @@ final class RegistrationTest extends TestCase
     {
         $this->subject->setGender(OelibFrontEndUser::GENDER_MALE);
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
@@ -723,7 +730,7 @@ final class RegistrationTest extends TestCase
     {
         $this->subject->setGender(OelibFrontEndUser::GENDER_FEMALE);
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
@@ -736,10 +743,20 @@ final class RegistrationTest extends TestCase
     {
         $this->subject->setGender(OelibFrontEndUser::GENDER_UNKNOWN);
 
-        self::assertEquals(
+        self::assertSame(
             OelibFrontEndUser::GENDER_UNKNOWN,
             $this->subject->getGender()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function setGenderWithGenderDiverseSetsGender(): void
+    {
+        $this->subject->setGender(OelibFrontEndUser::GENDER_DIVERSE);
+
+        self::assertSame(OelibFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
     }
 
     /////////////////////////////////

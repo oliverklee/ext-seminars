@@ -20,6 +20,7 @@ class Registration extends AbstractModel
         OelibFrontEndUser::GENDER_MALE,
         OelibFrontEndUser::GENDER_FEMALE,
         OelibFrontEndUser::GENDER_UNKNOWN,
+        OelibFrontEndUser::GENDER_DIVERSE,
     ];
 
     /**
@@ -304,8 +305,7 @@ class Registration extends AbstractModel
     {
         if (!\in_array($gender, self::VALID_GENDERS, true)) {
             throw new \InvalidArgumentException(
-                'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
-                'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN',
+                'The parameter $gender must be one of the FrontEndUser::GENDER_* constants.',
                 1333296957
             );
         }

@@ -1332,6 +1332,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Ms.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="label_gender.I.2">
+				<source>diverse</source>
+				<target>divers</target>
+			</trans-unit>
 			<trans-unit id="label_name" xml:space="preserve">
 				<source>Name:</source>
 				<target>Name:</target>

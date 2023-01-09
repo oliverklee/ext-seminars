@@ -18,11 +18,11 @@ class Salutation
     /**
      * Creates the salutation for the given user.
      *
-     * The salutation is localized and gender-specific and contains the name of the user.
+     * The salutation is localized and contains the name of the user.
      *
      * @param FrontEndUser $user the user to create the salutation for
      *
-     * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
+     * @return string the localized salutation with a trailing comma, will not be empty
      */
     public function getSalutation(FrontEndUser $user): string
     {

@@ -842,10 +842,10 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Returns the language key suffix for the speaker headings.
      *
-     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType the type to determine the gender and number of
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      *
      * @return string header marker for speaker heading will be
-     *                'type_number_gender'. Number will be 'single' or 'multiple'.
+     *                'type_number'. Number will be 'single' or 'multiple'.
      *                Will be empty if no speaker of the given type exists for
      *                this seminar.
      */
@@ -2879,8 +2879,8 @@ class LegacyEvent extends AbstractTimeSpan
      * string if the key is not defined in $this->recordData or if it has not
      * been filled in.
      *
-     * If the data needs to be decoded to be readable (eg. the speakers
-     * payment or the gender), this function will already return the clear text
+     * If the data needs to be decoded to be readable (e.g., the speaker's payment),
+     * this function will already return the clear text
      * version.
      *
      * @param string $key the key of the data to retrieve (the key doesn't need to be trimmed)

@@ -352,11 +352,15 @@ $tca = [
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.0',
-                        '0',
+                        0,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.1',
-                        '1',
+                        1,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.2',
+                        2,
                     ],
                 ],
                 'size' => 1,
