@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a diverse gender (#2378)
 
 ### Changed
 - Require feuserextrafields >= 5.3.0 (#2358)

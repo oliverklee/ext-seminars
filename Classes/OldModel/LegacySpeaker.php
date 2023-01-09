@@ -221,7 +221,7 @@ class LegacySpeaker extends AbstractModel
     }
 
     /**
-     * Sets the gender cancelation period of this speaker
+     * Sets the cancelation period of this speaker
      *
      * @param int $cancelationPeriod the cancelation period of this speaker in days, must be > 0
      */

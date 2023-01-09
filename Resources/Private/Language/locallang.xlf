@@ -1011,6 +1011,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_gender.I.1" xml:space="preserve">
 				<source>Ms.</source>
 			</trans-unit>
+			<trans-unit id="label_gender.I.2">
+				<source>diverse</source>
+			</trans-unit>
 			<trans-unit id="label_name" xml:space="preserve">
 				<source>Name:</source>
 			</trans-unit>

@@ -388,6 +388,9 @@
 			<trans-unit id="tx_seminars_attendances.gender.I.1" xml:space="preserve">
 				<source>Ms.</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.gender.I.2">
+				<source>diverse</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.address" xml:space="preserve">
 				<source>Address</source>
 			</trans-unit>

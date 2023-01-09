@@ -613,13 +613,13 @@ class DefaultController extends TemplateHelper
 
         $this->setExpiryMarker();
 
-        $this->setGenderSpecificHeading('speakers');
+        $this->setHeading('speakers');
         $this->setSpeakersMarker();
-        $this->setGenderSpecificHeading('partners');
+        $this->setHeading('partners');
         $this->setPartnersMarker();
-        $this->setGenderSpecificHeading('tutors');
+        $this->setHeading('tutors');
         $this->setTutorsMarker();
-        $this->setGenderSpecificHeading('leaders');
+        $this->setHeading('leaders');
         $this->setLeadersMarker();
 
         $this->setLanguageMarker();
@@ -2247,12 +2247,12 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Sets a gender-specific heading for speakers, tutors, leaders or partners,
+     * Sets a heading for speakers, tutors, leaders or partners,
      * depending on the speakers, tutors, leaders or partners belonging to the current seminar.
      *
-     * @param string $speakerType type of gender specific heading, must be 'speaker', 'tutors', 'leaders' or 'partners'
+     * @param string $speakerType type of heading, must be 'speaker', 'tutors', 'leaders' or 'partners'
      */
-    private function setGenderSpecificHeading(string $speakerType): void
+    private function setHeading(string $speakerType): void
     {
         if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'])) {
             throw new \InvalidArgumentException(

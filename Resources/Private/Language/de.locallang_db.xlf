@@ -516,6 +516,10 @@
 				<source>Ms.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.gender.I.2">
+				<source>diverse</source>
+				<target>divers</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.address" xml:space="preserve">
 				<source>Address</source>
 				<target>Adresse</target>

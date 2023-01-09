@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFrontEndUser;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Model\FrontEndUser;
@@ -485,13 +486,14 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @return int[][]
+     * @return array<string, array{0: ExtraFrontEndUser::GENDER_*}>
      */
     public function genderDataProvider(): array
     {
         return [
-            'male' => [0],
-            'female' => [1],
+            'male' => [ExtraFrontEndUser::GENDER_MALE],
+            'female' => [ExtraFrontEndUser::GENDER_FEMALE],
+            'diverse' => [ExtraFrontEndUser::GENDER_DIVERSE],
         ];
     }
 
