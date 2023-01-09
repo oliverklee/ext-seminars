@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix links to pages in RTE texts (#2374)
 - Correct use of the configuration `accessToFrontEndRegistrationLists` (#2368)
 
 ## 5.1.0
