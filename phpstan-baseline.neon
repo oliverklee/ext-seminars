@@ -1281,11 +1281,6 @@ parameters:
 			path: Classes/Hooks/HookProvider.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\<string, class\\-string\\>\\|false given\\.$#"
-			count: 1
-			path: Classes/Hooks/HookProvider.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Hooks\\\\HookProvider\\:\\:\\$hookObjects \\(array\\<OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\Hook\\>\\) does not accept array\\<object\\>\\.$#"
 			count: 1
 			path: Classes/Hooks/HookProvider.php
