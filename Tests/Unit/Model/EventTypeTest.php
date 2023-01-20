@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Model\EventType;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\EventType
  */
-final class EventTypeTest extends TestCase
+final class EventTypeTest extends UnitTestCase
 {
     /**
      * @var EventType
@@ -29,7 +29,7 @@ final class EventTypeTest extends TestCase
     {
         $this->subject->setData(['title' => 'Workshop']);
 
-        self::assertEquals(
+        self::assertSame(
             'Workshop',
             $this->subject->getTitle()
         );
@@ -46,7 +46,7 @@ final class EventTypeTest extends TestCase
     {
         $this->subject->setData(['single_view_page' => 42]);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getSingleViewPageUid()
         );
