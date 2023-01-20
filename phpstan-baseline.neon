@@ -3153,11 +3153,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/Model/EventTopicTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
-			count: 1
 			path: Tests/LegacyUnit/Model/RegistrationTest.php
 
 		-
@@ -3699,6 +3694,11 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
+			count: 1
+			path: Tests/Unit/Model/EventTopicTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setBeginDateAndTime\\(\\) expects int, int\\|false given\\.$#"

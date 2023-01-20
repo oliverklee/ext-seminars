@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
-use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds all tests specific to event topics.
@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
-final class EventTopicTest extends TestCase
+final class EventTopicTest extends UnitTestCase
 {
     /**
      * @var Event
@@ -25,6 +25,7 @@ final class EventTopicTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->subject = new Event();
@@ -73,7 +74,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getSubtitle()
         );
@@ -91,7 +92,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             'sub title',
             $this->subject->getSubtitle()
         );
@@ -107,7 +108,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setSubtitle('sub title');
 
-        self::assertEquals(
+        self::assertSame(
             'sub title',
             $this->subject->getSubtitle()
         );
@@ -155,7 +156,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getTeaser()
         );
@@ -173,7 +174,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             'wow, this is teasing',
             $this->subject->getTeaser()
         );
@@ -189,7 +190,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setTeaser('wow, this is teasing');
 
-        self::assertEquals(
+        self::assertSame(
             'wow, this is teasing',
             $this->subject->getTeaser()
         );
@@ -239,7 +240,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getDescription()
         );
@@ -257,7 +258,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             'this is a great event.',
             $this->subject->getDescription()
         );
@@ -273,7 +274,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setDescription('this is a great event.');
 
-        self::assertEquals(
+        self::assertSame(
             'this is a great event.',
             $this->subject->getDescription()
         );
@@ -321,7 +322,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getCreditPoints()
         );
@@ -339,7 +340,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getCreditPoints()
         );
@@ -355,7 +356,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setCreditPoints(0);
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getCreditPoints()
         );
@@ -371,7 +372,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setCreditPoints(42);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getCreditPoints()
         );
@@ -424,7 +425,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getRegularPrice()
         );
@@ -442,7 +443,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getRegularPrice()
         );
@@ -458,7 +459,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setRegularPrice(0.00);
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getRegularPrice()
         );
@@ -474,7 +475,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setRegularPrice(42.42);
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getRegularPrice()
         );
@@ -524,7 +525,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getRegularEarlyBirdPrice()
         );
@@ -542,7 +543,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getRegularEarlyBirdPrice()
         );
@@ -573,7 +574,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setRegularEarlyBirdPrice(0.00);
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getRegularEarlyBirdPrice()
         );
@@ -589,7 +590,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setRegularEarlyBirdPrice(42.42);
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getRegularEarlyBirdPrice()
         );
@@ -639,7 +640,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getSpecialPrice()
         );
@@ -657,7 +658,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getSpecialPrice()
         );
@@ -673,7 +674,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setSpecialPrice(0.00);
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getSpecialPrice()
         );
@@ -689,7 +690,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setSpecialPrice(42.42);
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getSpecialPrice()
         );
@@ -737,7 +738,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getSpecialEarlyBirdPrice()
         );
@@ -755,7 +756,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getSpecialEarlyBirdPrice()
         );
@@ -771,7 +772,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setSpecialEarlyBirdPrice(0.00);
 
-        self::assertEquals(
+        self::assertSame(
             0.00,
             $this->subject->getSpecialEarlyBirdPrice()
         );
@@ -787,7 +788,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setSpecialEarlyBirdPrice(42.42);
 
-        self::assertEquals(
+        self::assertSame(
             42.42,
             $this->subject->getSpecialEarlyBirdPrice()
         );
@@ -837,7 +838,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getAdditionalInformation()
         );
@@ -855,7 +856,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             'this is good to know',
             $this->subject->getAdditionalInformation()
         );
@@ -871,7 +872,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setAdditionalInformation('this is good to know');
 
-        self::assertEquals(
+        self::assertSame(
             'this is good to know',
             $this->subject->getAdditionalInformation()
         );
@@ -991,7 +992,7 @@ final class EventTopicTest extends TestCase
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getNotes()
         );
@@ -1009,7 +1010,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             'Don\'t forget this.',
             $this->subject->getNotes()
         );
@@ -1025,7 +1026,7 @@ final class EventTopicTest extends TestCase
         );
         $this->subject->setNotes('Don\'t forget this.');
 
-        self::assertEquals(
+        self::assertSame(
             'Don\'t forget this.',
             $this->subject->getNotes()
         );
@@ -1315,7 +1316,7 @@ final class EventTopicTest extends TestCase
             ->willReturn(false);
         $subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             ['regular' => 0.000],
             $subject->getAvailablePrices()
         );
@@ -1334,7 +1335,7 @@ final class EventTopicTest extends TestCase
             ->willReturn(false);
         $subject->setData(['price_regular' => 12.345]);
 
-        self::assertEquals(
+        self::assertSame(
             ['regular' => 12.345],
             $subject->getAvailablePrices()
         );
@@ -1358,7 +1359,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             ['regular_early' => 23.456],
             $subject->getAvailablePrices()
         );
@@ -1382,7 +1383,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             ['regular' => 12.345],
             $subject->getAvailablePrices()
         );
@@ -1401,7 +1402,7 @@ final class EventTopicTest extends TestCase
             ->willReturn(false);
         $subject->setData(['price_special' => 12.345]);
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'regular' => 0.000,
                 'special' => 12.345,
@@ -1428,7 +1429,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'regular' => 0.000,
                 'special_early' => 23.456,
@@ -1455,7 +1456,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             ['regular' => 34.567],
             $subject->getAvailablePrices()
         );
@@ -1479,7 +1480,7 @@ final class EventTopicTest extends TestCase
             ]
         );
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'regular' => 0.000,
                 'special' => 34.567,
