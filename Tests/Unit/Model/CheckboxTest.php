@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Model\Checkbox;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\Checkbox
  */
-final class CheckboxTest extends TestCase
+final class CheckboxTest extends UnitTestCase
 {
     /**
      * @var Checkbox
@@ -19,6 +19,7 @@ final class CheckboxTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->subject = new Checkbox();
     }
 
@@ -29,7 +30,7 @@ final class CheckboxTest extends TestCase
     {
         $this->subject->setData(['title' => 'I agree with the T&C.']);
 
-        self::assertEquals(
+        self::assertSame(
             'I agree with the T&C.',
             $this->subject->getTitle()
         );
