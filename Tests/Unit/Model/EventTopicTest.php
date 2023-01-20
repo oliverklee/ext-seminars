@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
