@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  */
-final class AbstractTimeSpanTest extends TestCase
+final class AbstractTimeSpanTest extends UnitTestCase
 {
     /**
      * @var AbstractTimeSpan&MockObject
@@ -20,6 +20,7 @@ final class AbstractTimeSpanTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->subject = $this->getMockForAbstractClass(AbstractTimeSpan::class);
     }
 
@@ -32,7 +33,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getBeginDateAsUnixTimeStamp()
         );
@@ -45,7 +46,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData(['begin_date' => 42]);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getBeginDateAsUnixTimeStamp()
         );
@@ -73,7 +74,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setBeginDateAsUnixTimeStamp(0);
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getBeginDateAsUnixTimeStamp()
         );
@@ -86,7 +87,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setBeginDateAsUnixTimeStamp(42);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getBeginDateAsUnixTimeStamp()
         );
@@ -125,7 +126,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getEndDateAsUnixTimeStamp()
         );
@@ -138,7 +139,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData(['end_date' => 42]);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getEndDateAsUnixTimeStamp()
         );
@@ -166,7 +167,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setEndDateAsUnixTimeStamp(0);
 
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->subject->getEndDateAsUnixTimeStamp()
         );
@@ -179,7 +180,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setEndDateAsUnixTimeStamp(42);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getEndDateAsUnixTimeStamp()
         );
@@ -218,7 +219,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getRoom()
         );
@@ -231,7 +232,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setData(['room' => 'cuby']);
 
-        self::assertEquals(
+        self::assertSame(
             'cuby',
             $this->subject->getRoom()
         );
@@ -244,7 +245,7 @@ final class AbstractTimeSpanTest extends TestCase
     {
         $this->subject->setRoom('cuby');
 
-        self::assertEquals(
+        self::assertSame(
             'cuby',
             $this->subject->getRoom()
         );
