@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Model\Category;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\Category
  */
-final class CategoryTest extends TestCase
+final class CategoryTest extends UnitTestCase
 {
     /**
      * @var Category
@@ -19,6 +19,7 @@ final class CategoryTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->subject = new Category();
     }
 
@@ -33,7 +34,7 @@ final class CategoryTest extends TestCase
     {
         $this->subject->setData(['title' => 'Lecture']);
 
-        self::assertEquals(
+        self::assertSame(
             'Lecture',
             $this->subject->getTitle()
         );
@@ -50,7 +51,7 @@ final class CategoryTest extends TestCase
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
+        self::assertSame(
             '',
             $this->subject->getIcon()
         );
@@ -63,7 +64,7 @@ final class CategoryTest extends TestCase
     {
         $this->subject->setData(['icon' => 'icon.gif']);
 
-        self::assertEquals(
+        self::assertSame(
             'icon.gif',
             $this->subject->getIcon()
         );
@@ -76,7 +77,7 @@ final class CategoryTest extends TestCase
     {
         $this->subject->setIcon('icon.gif');
 
-        self::assertEquals(
+        self::assertSame(
             'icon.gif',
             $this->subject->getIcon()
         );
@@ -117,7 +118,7 @@ final class CategoryTest extends TestCase
     {
         $this->subject->setData(['single_view_page' => 42]);
 
-        self::assertEquals(
+        self::assertSame(
             42,
             $this->subject->getSingleViewPageUid()
         );

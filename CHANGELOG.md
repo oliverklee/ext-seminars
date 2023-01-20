@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a diverse gender (#2378)
 
 ### Changed
-- Move more tests to the new testing framework (#2387)
+- Move more tests to the new testing framework (#2387, #2388)
 - Require feuserextrafields >= 5.3.0 (#2358)
 - Require oelib >= 5.1.0 (#2353)
 
