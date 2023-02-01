@@ -678,8 +678,8 @@ class DefaultController extends TemplateHelper
             'altText' => '',
             'file' => $image->getPublicUrl(),
             'file.' => [
-                'width' => $this->getConfValueInteger('seminarImageSingleViewWidth'),
-                'height' => $this->getConfValueInteger('seminarImageSingleViewHeight'),
+                'width' => $this->getConfValueInteger('seminarImageSingleViewWidth') . 'm',
+                'height' => $this->getConfValueInteger('seminarImageSingleViewHeight') . 'm',
             ],
         ];
 
