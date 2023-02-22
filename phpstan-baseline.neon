@@ -991,11 +991,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder and OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 3
 			path: Classes/FrontEnd/DefaultController.php
@@ -1308,6 +1303,11 @@ parameters:
 		-
 			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 2
+			path: Classes/Mapper/EventMapper.php
+
+		-
+			message: "#^PHPDoc tag @var with type Doctrine\\\\DBAL\\\\Driver\\\\Connection is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Database\\\\Connection\\.$#"
+			count: 1
 			path: Classes/Mapper/EventMapper.php
 
 		-
@@ -2916,6 +2916,11 @@ parameters:
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
+			message: "#^PHPDoc tag @var with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject is not subtype of type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 14
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
@@ -3619,6 +3624,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetUnset\\(\\) expects int\\|Model, string given\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
+			message: "#^PHPDoc tag @var with type array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\EventType\\> is not subtype of native type array\\{OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\NullEventType\\}\\.$#"
+			count: 2
+			path: Tests/Unit/Controller/FrontEndEditorControllerTest.php
 
 		-
 			message: "#^Cannot call method toString\\(\\) on Symfony\\\\Component\\\\Mime\\\\Header\\\\HeaderInterface\\|null\\.$#"
