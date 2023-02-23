@@ -60,7 +60,7 @@
 		"phpstan/phpstan-strict-rules": "^1.5.0",
 		"phpunit/phpunit": "^8.5.32",
 		"saschaegerer/phpstan-typo3": "^1.8.2",
-		"squizlabs/php_codesniffer": "^3.7.1",
+		"squizlabs/php_codesniffer": "^3.7.2",
 		"typo3/cms-install": "^10.4.22 || ^11.5.4",
 		"typo3/cms-scheduler": "^10.4.22 || ^11.5.4",
 		"typo3/coding-standards": "~0.6.1"
