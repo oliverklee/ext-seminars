@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid invalid array access in the list view (#2422)
 - Use `seminarImageSingleViewWidth`/-`Height` as maximum (#2397)
 - Fix links to pages in RTE texts (#2374)
 - Correct use of the configuration `accessToFrontEndRegistrationLists` (#2368)

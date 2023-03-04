@@ -10,4 +10,8 @@ plugin.tx_seminars_pi1.listView {
 
   # the number of neighboring pages to list in the page browser
   maxPages = 5
+
+  dontLinkActivePage = 1
+
+  showRange = 0
 }
