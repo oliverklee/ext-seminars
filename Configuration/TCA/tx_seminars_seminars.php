@@ -308,7 +308,6 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.place',
             'config' => [
                 'type' => 'select',
-                
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_seminars_sites',
                 'foreign_table_where' => ' AND tx_seminars_sites.pid LIKE ###PAGE_TSCONFIG_STR###  ORDER BY title',
