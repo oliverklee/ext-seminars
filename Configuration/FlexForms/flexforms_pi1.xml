@@ -350,7 +350,7 @@
 							<config>
 								<type>select</type>
 								<foreign_table>tx_seminars_event_types</foreign_table>
-				                  <foreign_table_where>AND tx_seminars_event_types.pid LIKE 384 ORDER BY title</foreign_table_where>
+				                <foreign_table_where>AND tx_seminars_event_types.pid LIKE 384 ORDER BY title</foreign_table_where>
 								<renderType>selectCheckBox</renderType>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
