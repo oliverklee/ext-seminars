@@ -13,14 +13,10 @@
 ￼.. role::   php(code)
 ￼
 ￼
-￼Multidomain einrichten
+￼Setup Multidomain 
 ￼^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-￼
-TODO - Auf Englisch übersetzen
-￼Bei der Verwendung von Seminars für mehrere Domain in einem TYPO3 Projekt erscheinen standardmäßig alle Kategorien, Zahlungsarten, Orte, Veranstalter, etc., die irgendwo im Projekt zu finden sind. Werden nun mehrere Homepages in einem Projekt betreut, können sowohl die anzuzeigenden Einträge, sowohl in der Bearbeitung eines Seminars, als auch in der Flexform beim Anlegen eines Seiteninhaltselements eingeschränkt werden.
-￼
-￼Dazu können im Seiten-TS folgende Werte auf die jeweilige UID des Systemordners gesetzt werden, in dem die Daten zu finden sind. In folgendem Beispiel befinden sich alle Datensätze im Ordner mit der UID 384. Bei den Kategorien wird mit dem Platzhalter % nach wie vor alle im Projekt vorkommenden Kategorien aufgelistet:
-￼
+￼When using seminars for multiple domains in a TYPO3 project, all categories, payment methods, locations, organizers, etc. that can be found anywhere in the project appear by default. If several homepages are managed in one project, the entries to be displayed can be restricted.
+To do this, the following values can be set in the page TS to the respective UID of the system folder in which the data can be found. In the following example, all data records are in the folder with UID 384. If no entry is made, all entries in the project are listed:
 ￼::
 ￼
 ￼   TCEFORM.tx_seminars_seminars.categories.PAGE_TSCONFIG_STR=384

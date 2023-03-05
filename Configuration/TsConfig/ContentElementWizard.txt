@@ -12,22 +12,19 @@ mod.wizards.newContentElement.wizardItems.plugins {
     }
 }
 
-#Marker für Configuration/TCA/tx_seminars_seminars.php
+#Default-Marker für Configuration/TCA/tx_seminars_seminars.php
 TCEFORM {
     tx_seminars_seminars {
-        categories.TCA-CATEGORIES-PID = %
-        event_type.TCA-EVENTS-PID = %
-        place.TCA-SITES-PID = %
-        lodgings.TCA-LODGINGS-PID = %
-        foods.TCA-FOODS-PID = %
-        speakers.TCA-SPEAKERS-PID = %
-        partners.TCA-SPEAKERS-PID = %
-        tutors.TCA-SPEAKERS-PID = %
-        leaders.TCA-SPEAKERS-PID = %
-        organizers.TCA-ORGANIZERS-PID = %
-        target_groups.TCA-TAGRGET-GROUPS-PID = %
-        checkboxes.TCA-CHECKBOXES-PID = %
-        payment_methods.TCA-PAYMENT-METHODS-PID = %
+    ￼   categories.PAGE_TSCONFIG_STR = %
+    ￼   event_types.PAGE_TSCONFIG_STR = %
+    ￼   sites.PAGE_TSCONFIG_STR  = %
+    ￼   lodgings.PAGE_TSCONFIG_STR = %
+    ￼   foods.PAGE_TSCONFIG_STR = %
+    ￼   speakers.PAGE_TSCONFIG_STR = %
+    ￼   checkboxes.PAGE_TSCONFIG_STR = %
+    ￼   payment_methods.PAGE_TSCONFIG_STR  = %
+    ￼   organizers.PAGE_TSCONFIG_STR = %
+    ￼   target_groups.PAGE_TSCONFIG_STR = %
     }
 }
 
