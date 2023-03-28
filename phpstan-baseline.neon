@@ -1961,16 +1961,6 @@ parameters:
 			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractViewHelper\\:\\:renderStatic\\(\\)$#"
-			count: 1
-			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
-			count: 1
-			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
-
-		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
