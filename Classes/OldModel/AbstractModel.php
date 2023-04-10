@@ -551,6 +551,9 @@ abstract class AbstractModel
         return GeneralUtility::makeInstance(FileRepository::class);
     }
 
+    /**
+     * @deprecated will be removed in seminars 6.0
+     */
     protected function addMissingProtocolToUrl(string $url): string
     {
         if ($url === '') {

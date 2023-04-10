@@ -891,7 +891,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertRegExp(
-            '#<a href="https://www.foo.com".*>foo &amp; bar</a>#',
+            '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
     }
@@ -928,7 +928,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertRegExp(
-            '#<a href="https://www.foo.com".*>foo &amp; bar</a>#',
+            '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
     }
