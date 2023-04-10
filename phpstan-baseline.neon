@@ -241,11 +241,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder and OliverKlee\\\\Seminars\\\\BagBuilder\\\\RegistrationBagBuilder will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 4
 			path: Classes/FrontEnd/DefaultController.php
@@ -376,12 +371,17 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$configuration \\(array\\|tx_mkforms_forms_IForm\\|null\\) of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) should be contravariant with parameter \\$configuration \\(mixed\\) of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:init\\(\\)$#"
+			message: "#^PHPDoc tag @var with type array is not subtype of type array\\<int, array\\>\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Parameter \\#1 \\$subparts of method OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:hideSubpartsArray\\(\\) expects array\\<int\\|string, non\\-empty\\-string\\>, array\\<string\\> given\\.$#"
+			message: "#^PHPDoc tag @var with type array\\<string, string\\> is not subtype of type string\\.$#"
+			count: 7
+			path: Classes/FrontEnd/EventEditor.php
+
+		-
+			message: "#^Parameter \\#1 \\$configuration \\(array\\|tx_mkforms_forms_IForm\\|null\\) of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:init\\(\\) should be contravariant with parameter \\$configuration \\(mixed\\) of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:init\\(\\)$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -639,6 +639,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\DataSanitization\\:\\:sanitizeEventData\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/Interfaces/DataSanitization.php
+
+		-
+			message: "#^PHPDoc tag @var with type Doctrine\\\\DBAL\\\\Driver\\\\Connection is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Database\\\\Connection\\.$#"
+			count: 1
+			path: Classes/Mapper/EventMapper.php
 
 		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
@@ -989,16 +994,6 @@ parameters:
 			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
 			count: 2
 			path: Classes/ViewHelpers/DateRangeViewHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\AbstractViewHelper\\:\\:renderStatic\\(\\)$#"
-			count: 1
-			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$arguments \\(array\\<string, mixed\\>\\) of method OliverKlee\\\\Seminars\\\\ViewHelpers\\\\SalutationAwareTranslateViewHelper\\:\\:renderStatic\\(\\) should be contravariant with parameter \\$arguments \\(array\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
-			count: 1
-			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
 
 		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Backend\\\\Routing\\\\UriBuilder\\:\\:buildUriFromModule\\(\\)\\.$#"
@@ -1421,9 +1416,19 @@ parameters:
 			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
 
 		-
+			message: "#^PHPDoc tag @var with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject is not subtype of type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^PHPDoc tag @var with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject is not subtype of type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
@@ -1566,6 +1571,21 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^PHPDoc tag @var with type array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\EventType\\> is not subtype of native type array\\{OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\NullEventType\\}\\.$#"
+			count: 2
+			path: Tests/Unit/Controller/FrontEndEditorControllerTest.php
+
+		-
+			message: "#^PHPDoc tag @var with type Swift_Message is not subtype of type TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\.$#"
+			count: 12
+			path: Tests/Unit/Email/EmailBuilderTest.php
+
+		-
+			message: "#^PHPDoc tag @var with type array\\<string, string\\> is not subtype of type string\\.$#"
+			count: 2
+			path: Tests/Unit/Email/EmailBuilderTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\Fixtures\\\\TestingHookImplementorReturnsArray\\:\\:testHookMethodReturnsNestedArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/Fixtures/TestingHookImplementorReturnsArray.php
@@ -1589,4 +1609,9 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:nameUserDataDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Service\\\\RegistrationGuardTest\\:\\:registrationNotPossibleDataProvider\\(\\) should return array\\<string, array\\{start\\: DateTimeImmutable\\|null, registrationStart\\: DateTimeImmutable\\|null, registrationDeadline\\: DateTimeImmutable\\|null\\}\\> but returns array\\{no dates at all\\: array\\{start\\: null, registrationStart\\: null, registrationDeadline\\: null\\}, start in the past\\: array\\{start\\: DateTime, registrationStart\\: null, registrationDeadline\\: null\\}, start now\\: array\\{start\\: DateTime, registrationStart\\: null, registrationDeadline\\: null\\}, no start, but registration start in the past\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, no start, but registration start now\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, no start, but registration start in the future\\: array\\{start\\: null, registrationStart\\: DateTime, registrationDeadline\\: null\\}, start now and registration start in the past\\: array\\{start\\: DateTime, registrationStart\\: DateTime, registrationDeadline\\: null\\}, start and registration start in the future\\: array\\{start\\: DateTime, registrationStart\\: DateTime, registrationDeadline\\: null\\}, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: Tests/Unit/Service/RegistrationGuardTest.php
 
