@@ -29,6 +29,8 @@ use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This class represents a seminar (or similar event).
@@ -282,12 +284,9 @@ class LegacyEvent extends AbstractTimeSpan
         $result = '';
         foreach ($this->getPlacesAsArray() as $place) {
             $encodedPlaceTitle = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
-            if (!empty($place['homepage'])) {
-                $encodedUrl = \htmlspecialchars(
-                    $this->addMissingProtocolToUrl((string)$place['homepage']),
-                    ENT_QUOTES | ENT_HTML5
-                );
-                $placeTitleHtml = '<a href="' . $encodedUrl . '">' . $encodedPlaceTitle . '</a>';
+            $homepage = (string)($place['homepage'] ?? '');
+            if ($homepage !== '') {
+                $placeTitleHtml = $plugin->cObj->getTypoLink($encodedPlaceTitle, $homepage);
             } else {
                 $placeTitleHtml = $encodedPlaceTitle;
             }
@@ -744,9 +743,18 @@ class LegacyEvent extends AbstractTimeSpan
 
         $result = [];
 
+        $frontEndController = $GLOBALS['TSFE'] ?? null;
+        $contentObject = $frontEndController instanceof TypoScriptFrontendController ? $frontEndController->cObj : null;
+
         /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-            $result[] = $speaker->getLinkedTitle();
+            $encodedTitle = \htmlspecialchars($speaker->getTitle(), ENT_QUOTES | ENT_HTML5);
+
+            if ($contentObject instanceof ContentObjectRenderer && $speaker->hasHomepage()) {
+                $result[] = $contentObject->getTypoLink($encodedTitle, $speaker->getHomepage());
+            } else {
+                $result[] = $encodedTitle;
+            }
         }
 
         return implode(', ', $result);
@@ -1711,12 +1719,15 @@ class LegacyEvent extends AbstractTimeSpan
             return $encodedName;
         }
 
-        $encodedUrl = \htmlspecialchars(
-            $this->addMissingProtocolToUrl($organizer->getHomepage()),
-            ENT_QUOTES | ENT_HTML5
-        );
+        $frontEndController = $GLOBALS['TSFE'] ?? null;
+        $contentObject = $frontEndController instanceof TypoScriptFrontendController ? $frontEndController->cObj : null;
+        if ($contentObject instanceof ContentObjectRenderer && $organizer->hasHomepage()) {
+            $html = $contentObject->getTypoLink($encodedName, $organizer->getHomepage());
+        } else {
+            $html = $encodedName;
+        }
 
-        return '<a href="' . $encodedUrl . '">' . $encodedName . '</a>';
+        return $html;
     }
 
     /**
