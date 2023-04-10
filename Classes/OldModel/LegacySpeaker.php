@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\OldModel;
 
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This class represents a speaker.
@@ -187,16 +189,15 @@ class LegacySpeaker extends AbstractModel
     public function getLinkedTitle(): string
     {
         $encodedTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
-        if (!$this->hasHomepage()) {
-            return $encodedTitle;
+        $frontEndController = $GLOBALS['TSFE'] ?? null;
+        $contentObject = $frontEndController instanceof TypoScriptFrontendController ? $frontEndController->cObj : null;
+        if ($contentObject instanceof ContentObjectRenderer && $this->hasHomepage()) {
+            $result = $contentObject->getTypoLink($encodedTitle, $this->getHomepage());
+        } else {
+            $result = $encodedTitle;
         }
 
-        $encodedUrl = \htmlspecialchars(
-            $this->addMissingProtocolToUrl($this->getHomepage()),
-            ENT_QUOTES | ENT_HTML5
-        );
-
-        return '<a href="' . $encodedUrl . '">' . $encodedTitle . '</a>';
+        return $result;
     }
 
     /**
