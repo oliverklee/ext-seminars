@@ -2905,8 +2905,7 @@ class DefaultController extends TemplateHelper
         foreach ($this->seminar->getOrganizerBag() as $organizer) {
             $encodedName = \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5);
             if ($organizer->hasHomepage()) {
-                $encodedUrl = \htmlspecialchars($organizer->getHomepage(), ENT_QUOTES | ENT_HTML5);
-                $organizerHtml = '<a href="' . $encodedUrl . '">' . $encodedName . '</a>';
+                $organizerHtml = $this->cObj->getTypoLink($encodedName, $organizer->getHomepage());
             } else {
                 $organizerHtml = $encodedName;
             }

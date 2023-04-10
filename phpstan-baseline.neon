@@ -777,7 +777,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 5
+			count: 4
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -832,6 +832,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 

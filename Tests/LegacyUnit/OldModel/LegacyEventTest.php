@@ -3323,10 +3323,10 @@ final class LegacyEventTest extends TestCase
             ]
         );
 
-        self::assertStringContainsString(
-            '<a href="https://www.bar.com',
-            $this->subject->getOrganizers($this->pi1)
-        );
+        $result = $this->subject->getOrganizers($this->pi1);
+
+        self::assertStringContainsString('<a href="', $result);
+        self::assertStringContainsString('://www.bar.com"', $result);
     }
 
     /**

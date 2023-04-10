@@ -712,7 +712,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetails($plugin);
 
-        self::assertStringContainsString('href="https://www.example.com"', $result);
+        self::assertStringContainsString('href="', $result);
+        self::assertStringContainsString('://www.example.com"', $result);
     }
 
     /**

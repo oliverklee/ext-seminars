@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix internal links to speakers and organizers (#2443)
 
 ## 4.4.0
 
