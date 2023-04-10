@@ -3173,7 +3173,6 @@ class DefaultController extends TemplateHelper
     private function limitToTimeFrameSetting(EventBagBuilder $builder): void
     {
         try {
-            // @phpstan-ignore-next-line We're allowing invalid values to be passed and rely on the exception for this.
             $builder->setTimeFrame($this->getConfValueString('timeframeInList', 's_template_special'));
         } catch (\Exception $exception) {
             // Ignores the exception because the user will be warned of the

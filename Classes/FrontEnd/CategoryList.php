@@ -34,7 +34,6 @@ class CategoryList extends AbstractView
 
         $seminarBagBuilder->ignoreCanceledEvents();
         try {
-            // @phpstan-ignore-next-line We're allowing invalid values to be passed and rely on the exception for this.
             $seminarBagBuilder->setTimeFrame($this->getConfValueString('timeframeInList', 's_template_special'));
         } catch (\Exception $exception) {
             // Ignores the exception because the user will be warned of the problem by the configuration check.
