@@ -765,6 +765,9 @@ $tca = [
                     'levelLinksPosition' => 'bottom',
                     'expandSingle' => 1,
                 ],
+                'behavior' => [
+                    'disableMovingChildrenWithParent' => true,
+                ],
             ],
         ],
         'cancelled' => [

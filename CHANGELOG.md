@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Disable moving registration records with the event record (#2453)
 - Fix internal links to speakers and organizers (#2442)
 - Use `seminarImageSingleViewWidth`/-`Height` as maximum (#2397)
 - Fix links to pages in RTE texts (#2374)
