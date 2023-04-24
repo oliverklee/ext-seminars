@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove the links to the feature survey (#2454)
 
 ### Fixed
 - Disable moving registration records with the event record (#2453)
