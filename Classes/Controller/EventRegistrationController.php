@@ -94,7 +94,7 @@ class EventRegistrationController extends ActionController
             $this->forwardToDenyAction('alreadyRegistered');
         }
         $vacancies = $this->registrationGuard->getVacancies($event);
-        if ($vacancies === 0) {
+        if ($vacancies === 0 && !$event->hasWaitingList()) {
             $this->forwardToDenyAction('fullyBooked');
         }
 
@@ -175,7 +175,11 @@ class EventRegistrationController extends ActionController
         $maximumBookableSeats = (int)($this->settings['maximumBookableSeats'] ?? self::MAXIMUM_BOOKABLE_SEATS);
         $vacancies = $this->registrationGuard->getVacancies($event);
         if (\is_int($vacancies)) {
-            $maximumBookableSeats = \min($maximumBookableSeats, $vacancies);
+            if ($vacancies > 0) {
+                $maximumBookableSeats = \min($maximumBookableSeats, $vacancies);
+            } else {
+                $maximumBookableSeats = $event->hasWaitingList() ? $maximumBookableSeats : 0;
+            }
         }
         $this->view->assign('maximumBookableSeats', $maximumBookableSeats);
         $this->view->assign('applicablePrices', $applicablePrices);

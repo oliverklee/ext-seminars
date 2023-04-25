@@ -4,7 +4,7 @@
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
-        <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
+        <f:render partial="EventRegistration/Headline" arguments="{event: event, registration: registration}"/>
 
         <f:form action="create" name="registration" object="{registration}" class="tx-seminars-event-registration">
             <f:variable name="idPrefix" value="seminars-registration"/>
@@ -183,8 +183,22 @@
                                 <f:translate key="{labelPrefix}.priceCode"/>
                             </th>
                             <td>
-                                <f:translate key="{selectedPrice.labelKey}"/>
-                                <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                <f:if condition="{registration.onWaitingList} && {selectedPrice.amount} > 0}">
+                                    <f:then>
+                                        <p>
+                                            <f:translate key="{selectedPrice.labelKey}"/>
+                                            <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                        </p>
+                                        <p class="alert alert-info" role="alert">
+                                            <s:salutationAwareTranslate
+                                                key="plugin.eventRegistration.message.priceOnlyForRegularRegistration"/>
+                                        </p>
+                                    </f:then>
+                                    <f:else>
+                                        <f:translate key="{selectedPrice.labelKey}"/>
+                                        <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                    </f:else>
+                                </f:if>
                             </td>
                         </tr>
                     </f:if>

@@ -4,7 +4,7 @@
     <f:layout name="EventRegistration"/>
 
     <f:section name="main">
-        <f:render partial="EventRegistration/Headline" arguments="{event: event}"/>
+        <f:render partial="EventRegistration/Headline" arguments="{event: event, registration: registration}"/>
 
         <f:form action="confirm" name="registration" object="{registration}" class="tx-seminars-event-registration"
                 data="{behavior: 'tx-seminars-registration-form'}">
@@ -311,8 +311,21 @@
                                 </f:form.select>
                                 <f:render partial="EventRegistration/ValidationResult"
                                           arguments="{property: 'priceCode'}"/>
+
+                                <f:debug>{event.freeOfCharge}</f:debug>
                             </div>
                         </div>
+
+                        <f:if condition="{registration.onWaitingList} && !{event.freeOfCharge}">
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-info col-sm-12" role="alert">
+                                        <s:salutationAwareTranslate
+                                            key="plugin.eventRegistration.message.priceOnlyForRegularRegistration"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </f:if>
                     </f:then>
                     <f:else>
                         <f:form.hidden property="priceCode"/>

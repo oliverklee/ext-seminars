@@ -82,7 +82,8 @@ class RegistrationProcessor implements SingletonInterface
     }
 
     /**
-     * Enriches the provided registration with the event and the user associations and a PID.
+     * Enriches the provided registration with the event, the user association, a PID, and the waiting list flag
+     * (if applicable).
      *
      * Call this method before persisting the registration.
      *
@@ -90,6 +91,7 @@ class RegistrationProcessor implements SingletonInterface
      */
     public function enrichWithMetadata(Registration $registration, Event $event, array $settings): void
     {
+        \assert($event instanceof EventDateInterface);
         $registration->setEvent($event);
 
         $userUid = $this->registrationGuard->getFrontEndUserUidFromSession();
@@ -104,6 +106,10 @@ class RegistrationProcessor implements SingletonInterface
 
         $folderUid = (int)($settings['registrationRecordsStorageFolder'] ?? 0);
         $registration->setPid($folderUid);
+
+        if ($event->hasWaitingList() && $this->registrationGuard->getVacancies($event) === 0) {
+            $registration->setOnWaitingList(true);
+        }
     }
 
     public function calculateTotalPrice(Registration $registration): void
