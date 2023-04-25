@@ -439,7 +439,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionWithoutSettingForMaximumBookableSeatsAndUnlimitedVacanciesPassesTenToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsAndUnlimitedVacanciesPassesDefaultToView(): void
     {
         $event = new SingleEvent();
         $this->registrationGuardMock->expects(self::once())->method('getVacancies')->with($event)->willReturn(null);
@@ -457,7 +457,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionWithoutSettingForMaximumBookableSeatsAndMoreThanTenVacanciesPassesTenToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsAndMoreThanDefaultVacanciesPassesDefaultToView(): void
     {
         $event = new SingleEvent();
         $this->registrationGuardMock->expects(self::once())->method('getVacancies')->with($event)->willReturn(11);
@@ -475,7 +475,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionWithoutSettingForMaximumBookableSeatsAndLessThanTenVacanciesPassesVacanciesToView(): void
+    public function newActionWithoutSettingForMaximumBookableSeatsAndLessThanDefaultVacanciesPassesVacanciesToView(): void
     {
         $event = new SingleEvent();
         $vacancies = 9;
@@ -540,10 +540,33 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionPassesWithFewerVacanciesPassesActualVacanciesAsBookableSeatsToView(): void
+    public function newActionWithFewerVacanciesPassesActualVacanciesAsBookableSeatsToView(): void
     {
         $event = new SingleEvent();
         $vacancies = 9;
+        $this->registrationGuardMock->expects(self::once())->method('getVacancies')
+            ->with($event)->willReturn($vacancies);
+
+        $maximumBookableSeats = 15;
+        $this->subject->_set('settings', ['maximumBookableSeats' => (string)$maximumBookableSeats]);
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', self::anything()],
+            ['maximumBookableSeats', $vacancies],
+            ['applicablePrices', self::anything()]
+        );
+
+        $this->subject->newAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithZeroVacanciesAndNoWaitingListPassesZeroAsBookableSeatsToView(): void
+    {
+        $event = new SingleEvent();
+        $vacancies = 0;
         $this->registrationGuardMock->expects(self::once())->method('getVacancies')
             ->with($event)->willReturn($vacancies);
 
