@@ -6,17 +6,27 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.2.0
+
+### Added
 - Add a waiting list functionality to the new registration form (#2465, #2466)
 - Add a diverse gender (#2378)
 
 ### Changed
 - Mention the 12LTS crowdfunding campaign (#2456)
 - Move more tests to the new testing framework
-  (#2387, #2388, #2389, #2390, #2391, #2392)
+  (#2387, #2388, #2389, #2390, #2391, #2392) (thanks to @emilkneu)
 - Require feuserextrafields >= 5.3.0 (#2358)
 - Require oelib >= 5.1.0 (#2353)
-
-### Deprecated
 
 ### Removed
 - Drop the unused `DefaultController::registrationFormHookProvider` (#2458)
@@ -27,8 +37,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Disable moving registration records with the event record (#2453)
 - Fix internal links to speakers and organizers (#2442)
 - Use `seminarImageSingleViewWidth`/-`Height` as maximum (#2397)
-- Fix links to pages in RTE texts (#2374)
+  (thanks to @ohader)
+- Fix links to pages in RTE texts (#2374) (thanks to @djangones)
 - Correct use of the configuration `accessToFrontEndRegistrationLists` (#2368)
+  (thanks to @davidjakob)
 
 ## 5.1.0
 
