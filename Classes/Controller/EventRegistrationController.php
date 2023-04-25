@@ -24,6 +24,11 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class EventRegistrationController extends ActionController
 {
     /**
+     * @var positive-int
+     */
+    protected const MAXIMUM_BOOKABLE_SEATS = 10;
+
+    /**
      * @var RegistrationGuard
      */
     private $registrationGuard;
@@ -166,7 +171,7 @@ class EventRegistrationController extends ActionController
         }
         $this->view->assign('registration', $newRegistration);
 
-        $maximumBookableSeats = (int)($this->settings['maximumBookableSeats'] ?? 10);
+        $maximumBookableSeats = (int)($this->settings['maximumBookableSeats'] ?? self::MAXIMUM_BOOKABLE_SEATS);
         $vacancies = $this->registrationGuard->getVacancies($event);
         if (\is_int($vacancies)) {
             $maximumBookableSeats = \min($maximumBookableSeats, $vacancies);
