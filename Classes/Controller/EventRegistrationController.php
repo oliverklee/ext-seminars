@@ -169,6 +169,7 @@ class EventRegistrationController extends ActionController
             $firstPriceCode = $firstPrice instanceof Price ? $firstPrice->getPriceCode() : Price::PRICE_STANDARD;
             $newRegistration->setPriceCode($firstPriceCode);
         }
+        $this->registrationProcessor->enrichWithMetadata($newRegistration, $event, $this->settings);
         $this->view->assign('registration', $newRegistration);
 
         $maximumBookableSeats = (int)($this->settings['maximumBookableSeats'] ?? self::MAXIMUM_BOOKABLE_SEATS);

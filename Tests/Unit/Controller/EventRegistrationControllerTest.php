@@ -633,6 +633,58 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function newActionWithRegistrationEnrichesRegistrationWithMetadata(): void
+    {
+        $event = new SingleEvent();
+        $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
+        $this->subject->_set('settings', $settings);
+
+        $registration = new Registration();
+        $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
+            ->with($registration, $event, $settings);
+
+        $this->subject->newAction($event, $registration);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithNullRegistrationEnrichesNewRegistrationWithMetadata(): void
+    {
+        $event = new SingleEvent();
+        $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
+        $this->subject->_set('settings', $settings);
+
+        $registration = new Registration();
+        GeneralUtility::addInstance(Registration::class, $registration);
+
+        $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
+            ->with($registration, $event, $settings);
+
+        $this->subject->newAction($event, null);
+    }
+
+    /**
+     * @test
+     */
+    public function newActionWithoutRegistrationEnrichesNewRegistrationWithMetadata(): void
+    {
+        $event = new SingleEvent();
+        $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
+        $this->subject->_set('settings', $settings);
+
+        $registration = new Registration();
+        GeneralUtility::addInstance(Registration::class, $registration);
+
+        $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
+            ->with($registration, $event, $settings);
+
+        $this->subject->newAction($event);
+    }
+
+    /**
+     * @test
+     */
     public function newActionWithoutRegistrationAndWithoutRegisteredThemselvesSettingSetsItToTrue(): void
     {
         $registration = new Registration();
