@@ -10,7 +10,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Mention the 12LTS crowdfunding campaign (#2456)
-- Move more tests to the new testing framework (#2387, #2388, #2389, #2390, #2391, #2392)
+- Move more tests to the new testing framework
+  (#2387, #2388, #2389, #2390, #2391, #2392)
 - Require feuserextrafields >= 5.3.0 (#2358)
 - Require oelib >= 5.1.0 (#2353)
 
