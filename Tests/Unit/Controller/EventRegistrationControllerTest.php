@@ -671,7 +671,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function confirmActionActionEnrichesRegistrationWithMetadata(): void
+    public function confirmActionEnrichesRegistrationWithMetadata(): void
     {
         $registration = new Registration();
         $event = new SingleEvent();
