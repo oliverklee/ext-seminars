@@ -203,11 +203,6 @@ class DefaultController extends TemplateHelper
     protected $singleViewHookProvider;
 
     /**
-     * @var HookProvider|null
-     */
-    protected $registrationFormHookProvider;
-
-    /**
      * @var SingleViewLinkBuilder|null
      */
     private $linkBuilder;
