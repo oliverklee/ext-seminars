@@ -1377,6 +1377,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
 				<source>Event registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
+				<source>Event registration (waiting list)</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
 				<source>Your registration data</source>
 			</trans-unit>
@@ -1421,6 +1424,18 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
 				<source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
+				<source>
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal">
+				<source>
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
 				<source>For this event, registration is not possible.</source>

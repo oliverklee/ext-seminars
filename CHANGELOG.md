@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a waiting list functionality to the new registration form (#2465)
+- Add a waiting list functionality to the new registration form (#2465, #2466)
 - Add a diverse gender (#2378)
 
 ### Changed

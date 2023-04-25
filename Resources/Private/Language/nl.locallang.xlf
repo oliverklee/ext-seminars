@@ -1464,6 +1464,10 @@ This event now has been confirmed.</source>
 				<source>Event registration</source>
 				<target>Evenement registratie</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.heading.eventRegistration">
+				<source>Event registration (waiting list)</source>
+				<target>Evenement registratie (wachtlijst)</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.summary">
 				<source>Summary</source>
 				<target>Overzicht</target>

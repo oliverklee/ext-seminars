@@ -590,4 +590,110 @@ final class RegistrationProcessorTest extends UnitTestCase
 
         $this->subject->sendEmails($registration);
     }
+
+    /**
+     * @test
+     */
+    public function enrichWithForEventWithVacanciesWithoutWaitingListKeepsRegistrationRegular(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(false);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(1);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertFalse($registration->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithForEventWithUnlimitedVacanciesWithoutWaitingListKeepsRegistrationRegular(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(false);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(null);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertFalse($registration->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     *
+     * In the future, we should catch this case and redirect to the previous page (or the error page).
+     */
+    public function enrichWithForEventWithZeroVacanciesWithoutWaitingListKeepsRegistrationRegular(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(false);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(0);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertFalse($registration->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithForEventWithVacanciesWithWaitingListKeepsRegistrationRegular(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(true);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(1);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertFalse($registration->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithForEventWithUnlimitedVacanciesWithWaitingListKeepsRegistrationRegular(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(true);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(null);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertFalse($registration->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     *
+     * In the future, we should catch this case and redirect to the previous page (or the error page).
+     */
+    public function enrichWithForEventWithZeroVacanciesWithWaitingListMovesRegistrationToWaitingList(): void
+    {
+        $event = new SingleEvent();
+        $event->setWaitingList(true);
+        $registration = new Registration();
+        $this->registrationGuardMock->method('getFrontEndUserUidFromSession')->willReturn(15);
+        $this->registrationGuardMock->method('getVacancies')->with($event)->willReturn(0);
+        $this->frontendUserRepositoryMock->method('findByUid')->with(self::anything())->willReturn(new FrontendUser());
+
+        $this->subject->enrichWithMetadata($registration, $event, []);
+
+        self::assertTrue($registration->isOnWaitingList());
+    }
 }
