@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the links to the feature survey (#2454)
 
 ### Fixed
+- Drop German labels that were copied to the English labels (#2462)
 - Disable moving registration records with the event record (#2453)
 - Fix internal links to speakers and organizers (#2442)
 - Use `seminarImageSingleViewWidth`/-`Height` as maximum (#2397)
