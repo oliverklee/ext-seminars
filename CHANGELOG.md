@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the unused `DefaultController::registrationFormHookProvider` (#2458)
 - Remove the links to the feature survey (#2454)
 
 ### Fixed
