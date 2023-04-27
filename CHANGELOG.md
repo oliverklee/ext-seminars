@@ -8,11 +8,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Convert more tests to the new testing framework (#2477, #2480)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 5.2.1
+
+### Changed
+- Convert more tests to the new testing framework (#2477, #2480)
 
 ### Fixed
 - Convert linebreaks in the organizer signatures in the HTML email (#2482)
