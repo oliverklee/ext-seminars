@@ -2796,13 +2796,88 @@ parameters:
 			path: Tests/Functional/Service/EmailServiceTest.php
 
 		-
+			message: "#^Cannot access an offset on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
+			count: 3
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
+			count: 3
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot call method getHtmlBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
+			count: 9
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
+			count: 32
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:notifyOrganizers\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
 			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of static method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 24
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 6
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
@@ -3412,7 +3487,7 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
-			count: 6
+			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3422,17 +3497,17 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 9
+			count: 6
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 9
+			count: 6
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 10
+			count: 9
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3441,53 +3516,33 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method getHtmlBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 4
+			count: 2
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 58
+			count: 8
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 21
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$email of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:filterEmailAttachmentsByType\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 17
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 6
+			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 3
+			count: 2
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 11
+			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3502,17 +3557,12 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 39
+			count: 6
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 6
+			count: 3
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
