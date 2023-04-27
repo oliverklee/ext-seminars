@@ -73,7 +73,6 @@ final class EmailServiceTest extends FunctionalTestCase
             [
                 'title' => 'Brain Gourmets',
                 'email' => 'organizer@example.com',
-                'email_footer' => 'Best workshops in town!',
             ]
         );
         /** @var Collection<Organizer> $organizers */
@@ -102,7 +101,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator(): void
+    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparatorInTextBody(): void
     {
         self::assertInstanceOf(MailMessage::class, $this->email);
         self::assertInstanceOf(MockObject::class, $this->email);
@@ -121,11 +120,13 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter(): void
+    public function sendEmailToAttendeesForOrganizerWithFooterUsesFooterSeparatorInTextBody(): void
     {
         self::assertInstanceOf(MailMessage::class, $this->email);
         self::assertInstanceOf(MockObject::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->organizer->setEmailFooter('We are here for you.');
 
         $this->email->expects(self::once())->method('send');
 
@@ -133,6 +134,48 @@ final class EmailServiceTest extends FunctionalTestCase
 
         $result = $this->email->getTextBody();
         self::assertIsString($result);
-        self::assertStringContainsString("\n-- \n" . $this->organizer->getEmailFooter(), $result);
+        self::assertStringContainsString("\n-- \n", $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooterInTextBody(): void
+    {
+        self::assertInstanceOf(MailMessage::class, $this->email);
+        self::assertInstanceOf(MockObject::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $footer = 'We are here for you.';
+        $this->organizer->setEmailFooter($footer);
+
+        $this->email->expects(self::once())->method('send');
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $result = $this->email->getTextBody();
+        self::assertIsString($result);
+        self::assertStringContainsString($footer, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesForOrganizerWithFooterKeepsLinebreaksInTextBody(): void
+    {
+        self::assertInstanceOf(MailMessage::class, $this->email);
+        self::assertInstanceOf(MockObject::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $footer = "We are here for you.\nAlways.";
+        $this->organizer->setEmailFooter($footer);
+
+        $this->email->expects(self::once())->method('send');
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $result = $this->email->getTextBody();
+        self::assertIsString($result);
+        self::assertStringContainsString($footer, $result);
     }
 }
