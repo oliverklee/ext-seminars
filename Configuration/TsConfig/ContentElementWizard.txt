@@ -11,3 +11,23 @@ mod.wizards.newContentElement.wizardItems.plugins {
         }
     }
 }
+
+#Default-Marker für Configuration/TCA/tx_seminars_seminars.php
+TCEFORM {
+    tx_seminars_seminars {
+    ￼   categories.PAGE_TSCONFIG_STR = %
+    ￼   event_types.PAGE_TSCONFIG_STR = %
+    ￼   sites.PAGE_TSCONFIG_STR  = %
+    ￼   lodgings.PAGE_TSCONFIG_STR = %
+    ￼   foods.PAGE_TSCONFIG_STR = %
+    ￼   speakers.PAGE_TSCONFIG_STR = %
+    ￼   checkboxes.PAGE_TSCONFIG_STR = %
+    ￼   payment_methods.PAGE_TSCONFIG_STR  = %
+    ￼   organizers.PAGE_TSCONFIG_STR = %
+    ￼   target_groups.PAGE_TSCONFIG_STR = %
+    }
+}
+
+
+
+

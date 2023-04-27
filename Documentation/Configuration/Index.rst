@@ -30,5 +30,5 @@ Configuration
    SettingUpTheMultipleSeatsFeature/Index
    SettingUpFront-endEditing/Index
    SettingUpTheDefaultEditorsFeature/Index
+   SettingUpMultidomain/Index
    PreselectionInTheListViewUrl/Index
-
