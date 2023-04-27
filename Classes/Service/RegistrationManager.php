@@ -435,7 +435,7 @@ class RegistrationManager
      *        - confirmationOnRegistrationForQueue
      *        - confirmationOnQueueUpdate
      *        In the following the parameter is prefixed with "email_" and
-     *        postfixed with "Hello" or "Subject".
+     *        suffixed with "Hello" or "Subject".
      */
     public function notifyAttendee(
         LegacyRegistration $oldRegistration,
@@ -537,7 +537,7 @@ class RegistrationManager
      *        - notificationOnUnregistration
      *        - notificationOnRegistrationForQueue
      *        - notificationOnQueueUpdate
-     *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
+     *        In the following, the parameter is prefixed with "email_" and suffixed with "Hello" or "Subject".
      */
     public function notifyOrganizers(
         LegacyRegistration $registration,
@@ -770,7 +770,7 @@ class RegistrationManager
      *        - confirmationOnUnregistration
      *        - confirmationOnRegistrationForQueue
      *        - confirmationOnQueueUpdate
-     *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
+     *        In the following, the parameter is prefixed with "email_" and suffixed with "Hello" or "Subject".
      * @param bool $useHtml whether to create HTML instead of plain text
      *
      * @return string the e-mail body for the attendee e-mail, will not be empty
@@ -1082,7 +1082,7 @@ class RegistrationManager
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
      *          In the following the parameter is prefixed with
-     *          "email_" and postfixed with "Hello".
+     *          "email_" and suffixed with "Hello".
      * @param LegacyRegistration $registration the registration the introduction should be created for
      */
     private function setEmailIntroduction(
