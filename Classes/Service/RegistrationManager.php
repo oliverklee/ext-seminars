@@ -916,7 +916,16 @@ class RegistrationManager
         }
 
         $footers = $event->getOrganizersFooter();
-        $template->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
+        $footerCode = '';
+        if ($footers !== []) {
+            $firstFooter = $footers[0];
+            if ($useHtml) {
+                $footerCode = "\n<hr/>\n" . \nl2br(\htmlspecialchars($firstFooter, ENT_QUOTES | ENT_HTML5));
+            } else {
+                $footerCode = "\n-- \n" . $firstFooter;
+            }
+        }
+        $template->setMarker('footer', $footerCode);
 
         $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
 
