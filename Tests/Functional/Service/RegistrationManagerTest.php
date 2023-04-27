@@ -75,6 +75,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
     private $seminarUid = 0;
 
     /**
+     * @var int
+     */
+    private $organizerUid = 0;
+
+    /**
      * @var MailMessage&MockObject
      */
     private $secondEmail;
@@ -147,12 +152,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
     private function createEventWithOrganizer(): void
     {
-        $organizerUid = $this->testingFramework->createRecord(
+        $this->organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
                 'title' => 'test organizer',
                 'email' => 'mail@example.com',
-                'email_footer' => 'organizer footer',
             ]
         );
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -168,7 +172,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'organizers' => 1,
             ]
         );
-        $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $this->seminarUid,
+            $this->organizerUid
+        );
     }
 
     /**
@@ -836,7 +844,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeAppendsOrganizersFooterToMailBody(): void
+    public function notifyAttendeeAppendsOrganizersFooterToMailTextBody(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -845,9 +853,102 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString("\n-- \norganizer footer", $this->email->getTextBody());
+        $footer = 'organizer footer';
+        $this->testingFramework->changeRecord(
+            'tx_seminars_organizers',
+            $this->organizerUid,
+            ['email_footer' => $footer]
+        );
+
+        $this->subject->notifyAttendee($registration, $controller);
+        $result = $this->email->getTextBody();
+
+        self::assertIsString($result);
+        self::assertStringContainsString("\n-- \n" . $footer, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeKeepsLinebreaksInOrganizerFooterInTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $registration = $this->createRegistration();
+
+        $footer = "organizer\nfooter";
+        $this->testingFramework->changeRecord(
+            'tx_seminars_organizers',
+            $this->organizerUid,
+            ['email_footer' => $footer]
+        );
+
+        $this->subject->notifyAttendee($registration, $controller);
+        $result = $this->email->getTextBody();
+
+        self::assertIsString($result);
+        self::assertStringContainsString("\n-- \n" . $footer, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeAppendsOrganizersFooterToMailHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $registration = $this->createRegistration();
+
+        $footer = 'organizer footer';
+        $this->testingFramework->changeRecord(
+            'tx_seminars_organizers',
+            $this->organizerUid,
+            ['email_footer' => $footer]
+        );
+
+        $this->subject->notifyAttendee($registration, $controller);
+        $result = $this->email->getHtmlBody();
+
+        self::assertIsString($result);
+        self::assertStringContainsString("\n<hr/>\n" . $footer, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeConvertsLinebreaksInOrganizerFooterInTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $registration = $this->createRegistration();
+
+        $footer = "organizer\nfooter";
+        $this->testingFramework->changeRecord(
+            'tx_seminars_organizers',
+            $this->organizerUid,
+            ['email_footer' => $footer]
+        );
+
+        $this->subject->notifyAttendee($registration, $controller);
+        $result = $this->email->getHtmlBody();
+
+        self::assertIsString($result);
+        self::assertStringContainsString("\n<hr/>\norganizer<br />\nfooter", $result);
     }
 
     /**

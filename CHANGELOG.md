@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Convert linebreaks in the organizer signatures in the HTML email (#2482)
 
 ## 5.2.0
 
