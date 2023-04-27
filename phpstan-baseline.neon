@@ -2782,12 +2782,12 @@ parameters:
 
 		-
 			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
+			count: 4
 			path: Tests/Functional/Service/EmailServiceTest.php
 
 		-
 			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
+			count: 4
 			path: Tests/Functional/Service/EmailServiceTest.php
 
 		-
