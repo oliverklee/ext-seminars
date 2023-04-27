@@ -21,7 +21,6 @@ use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
@@ -87,7 +86,6 @@ final class EmailServiceTest extends TestCase
             [
                 'title' => 'Brain Gourmets',
                 'email' => 'organizer@example.com',
-                'email_footer' => 'Best workshops in town!',
             ]
         );
         $organizers = new Collection();
@@ -118,14 +116,6 @@ final class EmailServiceTest extends TestCase
     {
         $this->testingFramework->cleanUp();
         $GLOBALS['LANG'] = $this->languageBackup;
-    }
-
-    /**
-     * @test
-     */
-    public function classIsSingleton(): void
-    {
-        self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
 
     // Tests for sendEmailToAttendees
@@ -394,40 +384,6 @@ final class EmailServiceTest extends TestCase
 
         self::assertStringContainsString(
             'Date: ' . $formattedDate,
-            $this->email->getTextBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator(): void
-    {
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $this->organizer->setEmailFooter('');
-
-        $this->email->expects(self::once())->method('send');
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
-
-        self::assertStringNotContainsString(
-            '-- ',
-            $this->email->getTextBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter(): void
-    {
-        $this->email->expects(self::once())->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
-
-        self::assertStringContainsString(
-            "\n-- \n" . $this->organizer->getEmailFooter(),
             $this->email->getTextBody()
         );
     }

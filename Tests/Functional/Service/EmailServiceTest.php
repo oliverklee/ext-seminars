@@ -1,0 +1,138 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OliverKlee\Seminars\Tests\Functional\Service;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Testing\CacheNullifyer;
+use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\Organizer;
+use OliverKlee\Seminars\Model\Registration;
+use OliverKlee\Seminars\Service\EmailService;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Mail\MailMessage;
+
+/**
+ * @covers \OliverKlee\Seminars\Service\EmailService
+ */
+final class EmailServiceTest extends FunctionalTestCase
+{
+    use EmailTrait;
+    use MakeInstanceTrait;
+
+    /**
+     * @var string
+     */
+    private const DATE_FORMAT_YMD = '%d.%m.%Y';
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    /**
+     * @var EmailService
+     */
+    private $subject;
+
+    /**
+     * @var Event
+     */
+    private $event;
+
+    /**
+     * @var Organizer
+     */
+    private $organizer;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new CacheNullifyer())->setAllCoreCaches();
+
+        $languageService = LanguageService::create('default');
+        $GLOBALS['LANG'] = $languageService;
+
+        $configuration = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT_YMD]);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+
+        $this->email = $this->createEmailMock();
+
+        $this->organizer = new Organizer();
+        $this->organizer->setData(
+            [
+                'title' => 'Brain Gourmets',
+                'email' => 'organizer@example.com',
+                'email_footer' => 'Best workshops in town!',
+            ]
+        );
+        /** @var Collection<Organizer> $organizers */
+        $organizers = new Collection();
+        $organizers->add($this->organizer);
+
+        $this->event = new Event();
+        $this->event->setData(
+            [
+                'title' => 'A nice event',
+                'registrations' => new Collection(),
+                'organizers' => $organizers,
+            ]
+        );
+
+        $user = new FrontEndUser();
+        $user->setData(['name' => 'John Doe', 'email' => 'john.doe@example.com']);
+        $registration = new Registration();
+        $registration->setData([]);
+        $registration->setFrontEndUser($user);
+        $this->event->attachRegistration($registration);
+
+        $this->subject = new EmailService();
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator(): void
+    {
+        self::assertInstanceOf(MailMessage::class, $this->email);
+        self::assertInstanceOf(MockObject::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->organizer->setEmailFooter('');
+
+        $this->email->expects(self::once())->method('send');
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $result = $this->email->getTextBody();
+        self::assertIsString($result);
+        self::assertStringNotContainsString('-- ', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter(): void
+    {
+        self::assertInstanceOf(MailMessage::class, $this->email);
+        self::assertInstanceOf(MockObject::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $result = $this->email->getTextBody();
+        self::assertIsString($result);
+        self::assertStringContainsString("\n-- \n" . $this->organizer->getEmailFooter(), $result);
+    }
+}
