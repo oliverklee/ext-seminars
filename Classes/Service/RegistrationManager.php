@@ -920,7 +920,7 @@ class RegistrationManager
         if ($footers !== []) {
             $firstFooter = $footers[0];
             if ($useHtml) {
-                $footerCode = "\n<hr/>\n" . \nl2br(\htmlspecialchars($firstFooter, ENT_QUOTES | ENT_HTML5));
+                $footerCode = \nl2br(\htmlspecialchars($firstFooter, ENT_QUOTES | ENT_HTML5));
             } else {
                 $footerCode = "\n-- \n" . $firstFooter;
             }

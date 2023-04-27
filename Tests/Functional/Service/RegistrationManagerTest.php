@@ -920,7 +920,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $result = $this->email->getHtmlBody();
 
         self::assertIsString($result);
-        self::assertStringContainsString("\n<hr/>\n" . $footer, $result);
+        self::assertStringContainsString($footer, $result);
     }
 
     /**
@@ -948,7 +948,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $result = $this->email->getHtmlBody();
 
         self::assertIsString($result);
-        self::assertStringContainsString("\n<hr/>\norganizer<br />\nfooter", $result);
+        self::assertStringContainsString("organizer<br />\nfooter", $result);
     }
 
     /**
