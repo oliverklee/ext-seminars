@@ -15,6 +15,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+## 5.2.2
+
+### Fixed
+- Do not use a footer separator in the HTML emails (#2489)
+
 ## 5.2.1
 
 ### Changed
