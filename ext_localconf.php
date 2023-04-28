@@ -102,7 +102,7 @@ defined('TYPO3') or die('Access denied.');
         // non-cacheable actions
         [
             \OliverKlee\Seminars\Controller\EventRegistrationController::class
-            => 'checkPrerequisites, new, confirm, create',
+            => 'checkPrerequisites, new, confirm, create, thankYou',
             \OliverKlee\Seminars\Controller\EventUnregistrationController::class
             => 'checkPrerequisites, confirm, unregister',
         ]
