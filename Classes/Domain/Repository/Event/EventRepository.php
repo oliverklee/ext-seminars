@@ -56,7 +56,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     /**
      * Updates the `Event.registrations` counter cache.
      *
-     * @deprecated #1324 will be removed in seminars 5.0
+     * @deprecated #1324 will be removed in seminars 6.0
      */
     public function updateRegistrationCounterCache(Event $event): void
     {

@@ -57,7 +57,7 @@ class RegistrationManager
     public const SEND_USER_MAIL = 2;
 
     /**
-     * @deprecated #1904 will be removed in seminars 5.0
+     * @deprecated #1904 will be removed in seminars 6.0
      *
      * @var static|null
      */
@@ -86,7 +86,7 @@ class RegistrationManager
     /**
      * @return static the current singleton instance
      *
-     * @deprecated #1904 will be removed in seminars 5.0
+     * @deprecated #1904 will be removed in seminars 6.0
      */
     public static function getInstance(): RegistrationManager
     {
@@ -101,7 +101,7 @@ class RegistrationManager
     /**
      * Purges the current instance so that `getInstance` will create a new instance.
      *
-     * @deprecated #1904 will be removed in seminars 5.0
+     * @deprecated #1904 will be removed in seminars 6.0
      */
     public static function purgeInstance(): void
     {

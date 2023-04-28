@@ -82,7 +82,7 @@ plugin.tx_seminars_pi1 {
   # whether to use the label "Price" as heading for the standard price (instead of "Standard price") in the detailed view and on the registration page
   generalPriceInSingle = 0
 
-  # whether to omit the date in the list view if it is the same as the previous item's, @deprecated #1788 will be removed in seminars 5.0
+  # whether to omit the date in the list view if it is the same as the previous item's, @deprecated #1788 will be removed in seminars 6.0
   omitDateIfSameAsPrevious = 0
 
   # who is allowed to view the list of registrations on the front end:
