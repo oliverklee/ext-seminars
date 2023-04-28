@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Drop the legacy registration form parameters from `DefaultController::getLoginLink` (#2500)
 - Use `Connection` instead of `PDO` for the named param types (#2496)
 
 ## 5.2.2
