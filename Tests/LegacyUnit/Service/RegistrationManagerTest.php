@@ -864,9 +864,9 @@ final class RegistrationManagerTest extends TestCase
             ->count('*')
             ->from('tx_seminars_attendances')
             ->where(
-                $query->expr()->eq('user', $query->createNamedParameter($userUid, \PDO::PARAM_INT)),
-                $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, \PDO::PARAM_INT)),
-                $query->expr()->eq('hidden', $query->createNamedParameter(1, \PDO::PARAM_INT))
+                $query->expr()->eq('user', $query->createNamedParameter($userUid, Connection::PARAM_INT)),
+                $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, Connection::PARAM_INT)),
+                $query->expr()->eq('hidden', $query->createNamedParameter(1, Connection::PARAM_INT))
             )
             ->execute()
             ->fetchColumn(0);

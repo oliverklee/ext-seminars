@@ -1306,11 +1306,6 @@ parameters:
 			path: Classes/Mapper/EventMapper.php
 
 		-
-			message: "#^PHPDoc tag @var with type Doctrine\\\\DBAL\\\\Driver\\\\Connection is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Database\\\\Connection\\.$#"
-			count: 1
-			path: Classes/Mapper/EventMapper.php
-
-		-
 			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array given\\.$#"
 			count: 1
 			path: Classes/Mapper/EventMapper.php
