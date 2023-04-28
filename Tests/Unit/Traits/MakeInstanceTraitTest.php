@@ -27,7 +27,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
      */
     public function addMockedInstanceAddsClassNameToList(): void
     {
-        $mockedInstance = new \stdClass();
+        $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \stdClass::class;
 
         $this->addMockedInstance($mockedClassName, $mockedInstance);
@@ -40,7 +40,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
      */
     public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
-        $mockedInstance = new \stdClass();
+        $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \stdClass::class;
 
         $this->addMockedInstance($mockedClassName, $mockedInstance);
@@ -53,7 +53,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
      */
     public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
-        $mockedInstance = new \stdClass();
+        $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \stdClass::class;
         $this->addMockedInstance($mockedClassName, $mockedInstance);
 
@@ -69,7 +69,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
      */
     public function purgeMockedInstancesRemovesInstanceFromTypoInstanceBuffer(): void
     {
-        $mockedInstance = new \stdClass();
+        $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \stdClass::class;
         $this->addMockedInstance($mockedClassName, $mockedInstance);
 
