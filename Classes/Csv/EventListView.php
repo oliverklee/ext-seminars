@@ -103,7 +103,7 @@ class EventListView extends AbstractListView
      *
      * @param LegacyEvent $event object that will deliver the data
      *
-     * @return array<int, string> the data for the keys provided in $keys (may be empty)
+     * @return list<string> the data for the keys provided in $keys (may be empty)
      */
     protected function createCsvColumnsForEvent(LegacyEvent $event): array
     {

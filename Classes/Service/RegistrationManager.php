@@ -563,7 +563,7 @@ class RegistrationManager
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle()
             );
 
-        /** @var array<int, LegacyOrganizer> $recipients */
+        /** @var list<LegacyOrganizer> $recipients */
         $recipients = [];
         foreach ($organizers as $organizer) {
             $recipients[] = $organizer;
@@ -655,7 +655,7 @@ class RegistrationManager
                 )
             );
 
-        /** @var array<int, LegacyOrganizer> $recipients */
+        /** @var list<LegacyOrganizer> $recipients */
         $recipients = [];
         foreach ($event->getOrganizerBag() as $organizer) {
             $recipients[] = $organizer;

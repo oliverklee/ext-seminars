@@ -195,7 +195,7 @@ class MailNotifier extends AbstractTask
      * Returns events in confirmed status which are about to take place and for
      * which no reminder has been sent yet.
      *
-     * @return array<int, LegacyEvent> events for which to send the event-takes-place reminder to
+     * @return list<LegacyEvent> events for which to send the event-takes-place reminder to
      *               their organizers, will be empty if there are none
      */
     private function getEventsToSendEventTakesPlaceReminderFor(): array
@@ -211,7 +211,9 @@ class MailNotifier extends AbstractTask
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
         foreach ($builder->build() as $event) {
-            $result[] = $event;
+            if ($event instanceof LegacyEvent) {
+                $result[] = $event;
+            }
         }
 
         return $result;
@@ -221,7 +223,7 @@ class MailNotifier extends AbstractTask
      * Returns events in planned status for which the cancellation deadline has
      * just passed and for which no reminder has been sent yet.
      *
-     * @return array<int, LegacyEvent> events for which to send the cancellation reminder to their
+     * @return list<LegacyEvent> events for which to send the cancellation reminder to their
      *               organizers, will be empty if there are none
      */
     private function getEventsToSendCancellationDeadlineReminderFor(): array
@@ -237,7 +239,7 @@ class MailNotifier extends AbstractTask
         $bag = $builder->build();
 
         foreach ($bag as $event) {
-            if ($event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
+            if ($event instanceof LegacyEvent && $event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
                 $result[] = $event;
             }
         }

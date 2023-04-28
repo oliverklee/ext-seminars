@@ -53,7 +53,7 @@ class DefaultController extends TemplateHelper
     use SharedPluginConfiguration;
 
     /**
-     * @var array<int, non-empty-string>
+     * @var list<non-empty-string>
      */
     private const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
@@ -2092,7 +2092,7 @@ class DefaultController extends TemplateHelper
     /**
      * Hides the columns specified in the parameter.
      *
-     * @param array<int, non-empty-string> $columnsToHide the columns to hide, may be empty
+     * @param array<string|int, non-empty-string> $columnsToHide the columns to hide, may be empty
      */
     protected function hideColumns(array $columnsToHide): void
     {

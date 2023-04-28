@@ -22,7 +22,7 @@ class Event extends AbstractTimeSpan
     use EventEmailSenderTrait;
 
     /**
-     * @var array<int, self::TYPE_*>
+     * @var list<self::TYPE_*>
      */
     private const VALID_TYPES = [self::TYPE_COMPLETE, self::TYPE_TOPIC, self::TYPE_DATE];
 
@@ -1450,7 +1450,7 @@ class Event extends AbstractTimeSpan
     /**
      * Returns the names of all registered attendees (including additional attendees and queue registrations).
      *
-     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
+     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNames(): array
     {
@@ -1461,7 +1461,7 @@ class Event extends AbstractTimeSpan
      * Returns the names of registered attendees (including additional attendees and queue registrations),
      * but only those that have registered after the last registration digest email.
      *
-     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
+     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNamesAfterLastDigest(): array
     {
@@ -1471,7 +1471,7 @@ class Event extends AbstractTimeSpan
     /**
      * @param Collection<Registration> $registrations
      *
-     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
+     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
      */
     private function extractNamesFromRegistrations(Collection $registrations): array
     {

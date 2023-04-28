@@ -50,7 +50,7 @@ abstract class AbstractEventMailForm
     /**
      * hook objects for the list view
      *
-     * @var array<int, BackEndModule>
+     * @var list<BackEndModule>
      */
     private $hooks = [];
 
@@ -250,7 +250,7 @@ abstract class AbstractEventMailForm
     /**
      * Gets the hooks.
      *
-     * @return array<int, BackEndModule>
+     * @return list<BackEndModule>
      *
      * @throws \UnexpectedValueException if any hook classes that do not implement the `BackEndModule` interface
      */

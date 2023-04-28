@@ -30,7 +30,7 @@ class EventBagBuilder extends AbstractBagBuilder
     protected $tableName = 'tx_seminars_seminars';
 
     /**
-     * @var array<int, non-empty-string> list of the valid keys for time-frames
+     * @var list<non-empty-string> list of the valid keys for time-frames
      */
     public const VALID_TIMES_FRAMES = [
         'past',
@@ -45,7 +45,7 @@ class EventBagBuilder extends AbstractBagBuilder
     ];
 
     /**
-     * @var array<string, array<int, string>> a list of field names of m:n associations in which we can search,
+     * @var array<string, list<string>> a list of field names of m:n associations in which we can search,
      *      grouped by record type
      */
     private static $searchFieldList = [

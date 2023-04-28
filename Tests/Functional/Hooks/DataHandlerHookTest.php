@@ -502,7 +502,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array<int, int>>
+     * @return array<string, array{0: positive-int, 1: positive-int}>
      */
     public function placesToAddFromTimeSlotsDataProvider(): array
     {

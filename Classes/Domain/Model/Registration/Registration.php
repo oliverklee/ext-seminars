@@ -244,7 +244,7 @@ class Registration extends AbstractEntity implements RawDataInterface
      * This method can be used to work around that iterating over the accommodation options on the registration
      * confirmation page only provides the first selected one.
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public function getAccommodationOptionTitles(): array
     {
@@ -277,7 +277,7 @@ class Registration extends AbstractEntity implements RawDataInterface
      * This method can be used to work around that iterating over the food options on the registration
      * confirmation page only provides the first selected one.
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public function getFoodOptionTitles(): array
     {
@@ -310,7 +310,7 @@ class Registration extends AbstractEntity implements RawDataInterface
      * This method can be used to work around that iterating over the registration checkboxes on the registration
      * confirmation page only provides the first selected one.
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public function getRegistrationCheckboxTitles(): array
     {

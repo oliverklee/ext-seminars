@@ -14,7 +14,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 class Registration extends AbstractModel
 {
     /**
-     * @var array<int, OelibFrontEndUser::GENDER_*>
+     * @var list<OelibFrontEndUser::GENDER_*>
      */
     private const VALID_GENDERS = [
         OelibFrontEndUser::GENDER_MALE,

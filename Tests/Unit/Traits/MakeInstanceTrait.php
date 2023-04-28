@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 trait MakeInstanceTrait
 {
     /**
-     * @var array<int, class-string>
+     * @var list<class-string>
      */
     private $mockClassNames = [];
 

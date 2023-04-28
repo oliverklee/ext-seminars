@@ -20,7 +20,7 @@ class EventRegistrationFlexForms
     private const LABEL_KEY_PREFIX = 'plugin.eventRegistration.settings.fieldsToShow.';
 
     /**
-     * @var array<non-empty-string, array<int, non-empty-string>>
+     * @var array<non-empty-string, list<non-empty-string>>
      */
     protected const AVAILABLE_FIELDS = [
         'inputFields' => [

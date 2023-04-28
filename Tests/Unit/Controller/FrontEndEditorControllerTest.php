@@ -8,7 +8,7 @@ use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
-use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
 use OliverKlee\Seminars\Domain\Model\NullEventType;
 use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\Speaker;
@@ -153,7 +153,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        /** @var array<int, EventType> $eventTypes */
+        /** @var list<EventTypeInterface> $eventTypes */
         $eventTypes = [new NullEventType()];
         $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 
@@ -331,7 +331,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        /** @var array<int, EventType> $eventTypes */
+        /** @var list<EventTypeInterface> $eventTypes */
         $eventTypes = [new NullEventType()];
         $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 

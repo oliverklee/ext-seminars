@@ -86,7 +86,7 @@ class EmailBuilder
      */
     public function to(...$recipients): self
     {
-        /** @var array<int, Address> $preparedRecipients */
+        /** @var list<Address> $preparedRecipients */
         $preparedRecipients = [];
         foreach ($recipients as $recipient) {
             $preparedRecipients[] = $this->mailRoleToAddress($recipient);
@@ -117,7 +117,7 @@ class EmailBuilder
      */
     public function replyTo(...$recipients): self
     {
-        /** @var array<int, Address> $preparedRecipients */
+        /** @var list<Address> $preparedRecipients */
         $preparedRecipients = [];
         foreach ($recipients as $recipient) {
             $preparedRecipients[] = $this->mailRoleToAddress($recipient);
