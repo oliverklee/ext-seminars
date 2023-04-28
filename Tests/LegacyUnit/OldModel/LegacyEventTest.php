@@ -4433,7 +4433,7 @@ final class LegacyEventTest extends TestCase
             'tx_seminars_seminars',
             [
                 'title' => 'a test event',
-                'details_page' => 'www.test.com',
+                'details_page' => 'www.example.com',
             ]
         );
         $event = new TestingLegacyEvent($eventUid);
@@ -4485,7 +4485,7 @@ final class LegacyEventTest extends TestCase
      */
     public function getDetailsPageForExternalSeparateDetailsPageSetReturnsThisPage(): void
     {
-        $externalUrl = 'www.test.com';
+        $externalUrl = 'www.example.com';
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [

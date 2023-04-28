@@ -37,7 +37,7 @@ final class LegacyOrganizerTest extends TestCase
             'tx_seminars_organizers',
             [
                 'title' => 'Test organizer',
-                'email' => 'foo@test.com',
+                'email' => 'foo@example.com',
             ]
         );
         $this->subject = new LegacyOrganizer($subjectUid);
@@ -46,8 +46,8 @@ final class LegacyOrganizerTest extends TestCase
             'tx_seminars_organizers',
             [
                 'title' => 'Test organizer',
-                'homepage' => 'https://www.test.com/',
-                'email' => 'maximal-foo@test.com',
+                'homepage' => 'https://www.example.com/',
+                'email' => 'maximal-foo@example.com',
                 'email_footer' => "line 1\nline 2",
                 'description' => 'foo',
             ]
@@ -119,7 +119,7 @@ final class LegacyOrganizerTest extends TestCase
             $this->subject->getHomepage()
         );
         self::assertEquals(
-            'https://www.test.com/',
+            'https://www.example.com/',
             $this->maximalFixture->getHomepage()
         );
     }
@@ -152,7 +152,7 @@ final class LegacyOrganizerTest extends TestCase
     public function getEmailAddressWithEmailAddressReturnsEmailAddress(): void
     {
         self::assertEquals(
-            'foo@test.com',
+            'foo@example.com',
             $this->subject->getEmailAddress()
         );
     }
