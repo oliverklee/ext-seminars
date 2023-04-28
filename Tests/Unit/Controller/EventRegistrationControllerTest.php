@@ -1006,18 +1006,19 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function createActionRedirectsToThankYouActionAndPassesEvent(): void
+    public function createActionRedirectsToThankYouActionAndPassesEventAndRegistration(): void
     {
         $event = new SingleEvent();
+        $registration = new Registration();
 
         $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
-            ->with('thankYou', null, null, ['event' => $event])
+            ->with('thankYou', null, null, ['event' => $event, 'registration' => $registration])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
-        $this->subject->createAction($event, new Registration());
+        $this->subject->createAction($event, $registration);
     }
 
     /**
@@ -1027,8 +1028,26 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        $this->viewMock->expects(self::once())->method('assign')->with('event', $event);
+        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+            ['event', $event],
+            ['registration', self::anything()]
+        );
 
-        $this->subject->thankYouAction($event);
+        $this->subject->thankYouAction($event, new Registration());
+    }
+
+    /**
+     * @test
+     */
+    public function thankYouActionPassesProvidedRegistrationToView(): void
+    {
+        $registration = new Registration();
+
+        $this->viewMock->expects(self::exactly(2))->method('assign')->withConsecutive(
+            ['event', self::anything()],
+            ['registration', $registration]
+        );
+
+        $this->subject->thankYouAction(new SingleEvent(), $registration);
     }
 }

@@ -223,16 +223,18 @@ class EventRegistrationController extends ActionController
 
         $this->oneTimeAccountConnector->destroyOneTimeSession();
 
-        $this->redirect('thankYou', null, null, ['event' => $event]);
+        $this->redirect('thankYou', null, null, ['event' => $event, 'registration' => $registration]);
     }
 
     /**
      * Displays the thank-you page.
      *
      * @Extbase\IgnoreValidation("event")
+     * @Extbase\IgnoreValidation("registration")
      */
-    public function thankYouAction(Event $event): void
+    public function thankYouAction(Event $event, Registration $registration): void
     {
         $this->view->assign('event', $event);
+        $this->view->assign('registration', $registration);
     }
 }
