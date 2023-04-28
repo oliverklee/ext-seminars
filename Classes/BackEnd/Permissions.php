@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * Provides access to the BE table permissions for the currently logged-in user.
  */
-class Permissions
+class Permissions implements SingletonInterface
 {
     /**
      * @var non-empty-string
