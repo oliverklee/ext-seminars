@@ -8,12 +8,20 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.2.3
+
+### Changed
 - Show a different thank-you text for waiting list registrations (#2511)
 
 ### Deprecated
 - Update some `@deprecated` annotations (#2498)
-
-### Removed
 
 ### Fixed
 - Make the registration available in the thank-you action template (#2510)
