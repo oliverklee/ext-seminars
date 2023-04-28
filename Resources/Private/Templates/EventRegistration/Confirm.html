@@ -35,26 +35,30 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <th scope="row">
-                            <f:translate key="{labelPrefix}.attendeesNames"/>
-                        </th>
-                        <td>
-                            <f:if condition="{registration.registeredThemselves}">
-                                <f:then>
-                                    <f:translate key="{labelPrefix}.registeredThemselves"/>
-                                </f:then>
-                                <f:else>
-                                    <f:translate key="{labelPrefix}.registeredThemselves.not"/>
-                                </f:else>
-                            </f:if>
+                    <oelib:isFieldEnabled fieldName="attendeesNames|registeredThemselves">
+                        <tr>
+                            <th scope="row">
+                                <f:translate key="{labelPrefix}.attendeesNames"/>
+                            </th>
+                            <td>
+                                <oelib:isFieldEnabled fieldName="registeredThemselves">
+                                    <f:if condition="{registration.registeredThemselves}">
+                                        <f:then>
+                                            <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                        </f:then>
+                                        <f:else>
+                                            <f:translate key="{labelPrefix}.registeredThemselves.not"/>
+                                        </f:else>
+                                    </f:if>
+                                    <br/>
+                                </oelib:isFieldEnabled>
 
-                            <f:if condition="{registration.attendeesNames}">
-                                <br/>
-                                {registration.attendeesNames -> f:format.nl2br()}
-                            </f:if>
-                        </td>
-                    </tr>
+                                <f:if condition="{registration.attendeesNames}">
+                                    {registration.attendeesNames -> f:format.nl2br()}
+                                </f:if>
+                            </td>
+                        </tr>
+                    </oelib:isFieldEnabled>
 
                     <f:comment>
                         We cannot directly iterate over `registration.accommodationOptions` here, as Extbase then
