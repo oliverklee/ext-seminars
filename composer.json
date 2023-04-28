@@ -192,7 +192,9 @@
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
+			"rm -rf .git",
 			"rm -rf .github",
+			"rm -rf .idea",
 			"rm -rf .phive",
 			"rm -rf Tests",
 			"rm -rf var",
