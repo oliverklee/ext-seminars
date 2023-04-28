@@ -8,12 +8,13 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Calculates the statistics for events.
  */
-class EventStatisticsCalculator
+class EventStatisticsCalculator implements SingletonInterface
 {
     /**
      * @var RegistrationRepository

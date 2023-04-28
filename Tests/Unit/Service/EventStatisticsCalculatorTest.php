@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EventStatisticsCalculator
@@ -34,6 +35,14 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
+    }
+
+    /**
+     * @test
+     */
+    public function classIsSingleton(): void
+    {
+        self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
 
     /**

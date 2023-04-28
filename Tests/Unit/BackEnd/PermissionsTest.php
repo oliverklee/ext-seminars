@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * @covers \OliverKlee\Seminars\BackEnd\Permissions
@@ -39,6 +40,14 @@ final class PermissionsTest extends UnitTestCase
     {
         unset($GLOBALS['BE_USER']);
         parent::tearDown();
+    }
+
+    /**
+     * @test
+     */
+    public function classIsSingleton(): void
+    {
+        self::assertInstanceOf(SingletonInterface::class, new Permissions());
     }
 
     /**
