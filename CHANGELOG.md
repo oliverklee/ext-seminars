@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Improve some type annotations (#2495, #2497)
 
 ### Deprecated
+- Update some `@deprecated` annotations (#2498)
 
 ### Removed
 
