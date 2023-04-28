@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Remove a leftover debug statement from a Fluid template (#2507)
 - Apply the "register myself" default even if hidden (#2504)
 - Convert most classes that get injected into singletons (#2503)
 - Improve some type annotations (#2495, #2497)
