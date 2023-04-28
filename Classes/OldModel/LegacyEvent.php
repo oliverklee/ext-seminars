@@ -27,6 +27,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -547,7 +548,7 @@ class LegacyEvent extends AbstractTimeSpan
             ->where(
                 $queryBuilder->expr()->eq(
                     'mm.uid_local',
-                    $queryBuilder->createNamedParameter($this->getUid(), \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($this->getUid(), Connection::PARAM_INT)
                 )
             )
             ->orderBy('mm.sorting')
@@ -3657,7 +3658,7 @@ class LegacyEvent extends AbstractTimeSpan
             ->where(
                 $queryBuilder->expr()->eq(
                     'mm.uid_local',
-                    $queryBuilder->createNamedParameter($this->getTopicOrSelfUid(), \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($this->getTopicOrSelfUid(), Connection::PARAM_INT)
                 )
             )
             ->orderBy('mm.sorting')

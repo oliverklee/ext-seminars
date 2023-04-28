@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -88,10 +89,13 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
         $query = $queryBuilder->addSelectLiteral($queryBuilder->expr()->sum('seats'))
             ->from($tableName)
             ->where(
-                $queryBuilder->expr()->eq('seminar', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq(
+                    'seminar',
+                    $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)
+                ),
                 $queryBuilder->expr()->eq(
                     'registration_queue',
-                    $queryBuilder->createNamedParameter((int)$onWaitingList, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter((int)$onWaitingList, Connection::PARAM_INT)
                 )
             );
         if (\method_exists($query, 'executeQuery')) {

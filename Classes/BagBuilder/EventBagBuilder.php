@@ -1077,16 +1077,16 @@ class EventBagBuilder extends AbstractBagBuilder
             ->where(
                 $queryBuilder->expr()->lte(
                     'minimum_age',
-                    $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($age, Connection::PARAM_INT)
                 ),
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq(
                         'maximum_age',
-                        $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->gte(
                         'maximum_age',
-                        $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($age, Connection::PARAM_INT)
                     )
                 )
             )
@@ -1103,16 +1103,16 @@ class EventBagBuilder extends AbstractBagBuilder
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(EventInterface::TYPE_SINGLE_EVENT, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::TYPE_SINGLE_EVENT, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'object_type',
-                        $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::TYPE_EVENT_TOPIC, Connection::PARAM_INT)
                     )
                 ),
                 $queryBuilder->expr()->eq(
                     'target_groups',
-                    $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                 )
             )
             ->execute()

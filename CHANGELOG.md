@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Use `Connection` instead of `PDO` for the named param types (#2496)
 
 ## 5.2.2
 

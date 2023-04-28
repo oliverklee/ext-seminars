@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Mapper;
 
-use Doctrine\DBAL\Driver\Connection;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * This class represents a mapper for events.
@@ -79,11 +79,11 @@ class EventMapper extends AbstractDataMapper
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->gte(
                         'begin_date',
-                        $queryBuilder->createNamedParameter($minimum, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($minimum, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->lte(
                         'begin_date',
-                        $queryBuilder->createNamedParameter($maximum, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($maximum, Connection::PARAM_INT)
                     )
                 )
             )
@@ -109,11 +109,11 @@ class EventMapper extends AbstractDataMapper
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'cancelled',
-                        $queryBuilder->createNamedParameter(EventInterface::STATUS_PLANNED, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(EventInterface::STATUS_PLANNED, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'automatic_confirmation_cancelation',
-                        $queryBuilder->createNamedParameter(1, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter(1, Connection::PARAM_INT)
                     )
                 )
             )
