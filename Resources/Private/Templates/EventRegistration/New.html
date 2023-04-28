@@ -35,88 +35,93 @@
             </oelib:isFieldEnabled>
 
             <oelib:isFieldEnabled fieldName="attendeesNames|registeredThemselves">
-                <fieldset>
-                    <legend>
-                        <f:translate key="{fieldsetPrefix}.personsToRegister"/>
-                    </legend>
+                <f:then>
+                    <fieldset>
+                        <legend>
+                            <f:translate key="{fieldsetPrefix}.personsToRegister"/>
+                        </legend>
 
-                    <oelib:isFieldEnabled fieldName="registeredThemselves">
-                        <f:then>
-                            <div class="row mb-3">
-                                <div class="col-sm-12">
-                                    <div class="form-check">
-                                        <f:form.checkbox property="registeredThemselves"
-                                                         id="{idPrefix}-registeredThemselves"
-                                                         class="form-check-input" errorClass="is-invalid"
-                                                         value="1" checked="{registration.registeredThemselves}"
-                                                         data="{behavior: 'tx-seminars-registered-themselves'}"/>
-                                        <label for="{idPrefix}-registeredThemselves" class="form-check-label">
-                                            <f:translate key="{labelPrefix}.registeredThemselves"/>
-                                        </label>
-                                        <f:render partial="EventRegistration/ValidationResult"
-                                                  arguments="{property: 'registeredThemselves'}"/>
+                        <oelib:isFieldEnabled fieldName="registeredThemselves">
+                            <f:then>
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <div class="form-check">
+                                            <f:form.checkbox property="registeredThemselves"
+                                                             id="{idPrefix}-registeredThemselves"
+                                                             class="form-check-input" errorClass="is-invalid"
+                                                             value="1" checked="{registration.registeredThemselves}"
+                                                             data="{behavior: 'tx-seminars-registered-themselves'}"/>
+                                            <label for="{idPrefix}-registeredThemselves" class="form-check-label">
+                                                <f:translate key="{labelPrefix}.registeredThemselves"/>
+                                            </label>
+                                            <f:render partial="EventRegistration/ValidationResult"
+                                                      arguments="{property: 'registeredThemselves'}"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </f:then>
-                        <f:else>
-                            <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"
-                                           data="{behavior: 'tx-seminars-registered-themselves'}"/>
-                        </f:else>
-                    </oelib:isFieldEnabled>
-
-                    <oelib:isFieldEnabled fieldName="attendeesNames">
-                        <ul class="mb-3 list-group d-none tx-seminars-display-none"
-                            data-behavior="tx-seminars-separate-attendee-names">
-                        </ul>
-                        <f:render partial="EventRegistration/ValidationResult"
-                                  arguments="{property: 'attendeesNames'}"/>
-
-                        <f:if condition="{settings.showEmailFieldForAdditionalAttendees}">
-                            <f:then>
-                                <li class="list-group-item row d-none tx-seminars-display-none"
-                                    data-behavior="tx-seminars-attendee-template">
-                                    <div class="row">
-                                        <label for="{idPrefix}-attendee-name-xxx" class="col-sm-2 col-form-label">
-                                            <f:translate key="{labelPrefix}.fullName"/>
-                                        </label>
-                                        <div class="col-sm-4">
-                                            <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
-                                                   class="form-control" maxlength="160" autocomplete="name"/>
-                                        </div>
-
-                                        <label for="{idPrefix}-attendee-email-xxx" class="col-sm-2 col-form-label">
-                                            <f:translate key="{labelPrefix}.emailAddress"/>
-                                        </label>
-                                        <div class="col-sm-4">
-                                            <input type="email" id="{idPrefix}-attendee-email-xxx" name="attendeeEmail"
-                                                   class="form-control" maxlength="255" autocomplete="email"/>
-                                        </div>
-                                    </div>
-                                </li>
                             </f:then>
                             <f:else>
-                                <li class="list-group-item row d-none tx-seminars-display-none"
-                                    data-behavior="tx-seminars-attendee-template">
-                                    <div class="row">
-                                        <label for="{idPrefix}-attendee-name-xxx" class="col-sm-2 col-form-label">
-                                            <f:translate key="{labelPrefix}.fullName"/>
-                                        </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
-                                                   class="form-control"
-                                                   maxlength="160" autocomplete="name"/>
-                                        </div>
-                                    </div>
-                                </li>
+                                <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"
+                                               data="{behavior: 'tx-seminars-registered-themselves'}"/>
                             </f:else>
-                        </f:if>
-                    </oelib:isFieldEnabled>
-                    <f:form.hidden property="attendeesNames" id="{idPrefix}-attendeesNames"
-                                   data="{behavior: 'tx-seminars-human-readable-attendee-names'}"/>
-                    <f:form.hidden property="jsonEncodedAdditionAttendees"
-                                   data="{behavior: 'tx-seminars-machine-readable-attendee-names'}"/>
-                </fieldset>
+                        </oelib:isFieldEnabled>
+
+                        <oelib:isFieldEnabled fieldName="attendeesNames">
+                            <ul class="mb-3 list-group d-none tx-seminars-display-none"
+                                data-behavior="tx-seminars-separate-attendee-names">
+                            </ul>
+                            <f:render partial="EventRegistration/ValidationResult"
+                                      arguments="{property: 'attendeesNames'}"/>
+
+                            <f:if condition="{settings.showEmailFieldForAdditionalAttendees}">
+                                <f:then>
+                                    <li class="list-group-item row d-none tx-seminars-display-none"
+                                        data-behavior="tx-seminars-attendee-template">
+                                        <div class="row">
+                                            <label for="{idPrefix}-attendee-name-xxx" class="col-sm-2 col-form-label">
+                                                <f:translate key="{labelPrefix}.fullName"/>
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
+                                                       class="form-control" maxlength="160" autocomplete="name"/>
+                                            </div>
+
+                                            <label for="{idPrefix}-attendee-email-xxx" class="col-sm-2 col-form-label">
+                                                <f:translate key="{labelPrefix}.emailAddress"/>
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <input type="email" id="{idPrefix}-attendee-email-xxx" name="attendeeEmail"
+                                                       class="form-control" maxlength="255" autocomplete="email"/>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </f:then>
+                                <f:else>
+                                    <li class="list-group-item row d-none tx-seminars-display-none"
+                                        data-behavior="tx-seminars-attendee-template">
+                                        <div class="row">
+                                            <label for="{idPrefix}-attendee-name-xxx" class="col-sm-2 col-form-label">
+                                                <f:translate key="{labelPrefix}.fullName"/>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="{idPrefix}-attendee-name-xxx" name="attendeeName"
+                                                       class="form-control"
+                                                       maxlength="160" autocomplete="name"/>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </f:else>
+                            </f:if>
+                        </oelib:isFieldEnabled>
+                        <f:form.hidden property="attendeesNames" id="{idPrefix}-attendeesNames"
+                                       data="{behavior: 'tx-seminars-human-readable-attendee-names'}"/>
+                        <f:form.hidden property="jsonEncodedAdditionAttendees"
+                                       data="{behavior: 'tx-seminars-machine-readable-attendee-names'}"/>
+                    </fieldset>
+                </f:then>
+                <f:else>
+                    <f:form.hidden property="registeredThemselves" value="{settings.registerThemselvesDefault}"/>
+                </f:else>
             </oelib:isFieldEnabled>
 
             <f:if condition="{event.accommodationOptions} || {event.foodOptions}">
