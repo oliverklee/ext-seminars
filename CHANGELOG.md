@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Show a different thank-you text for waiting list registrations (#2511)
 
 ### Deprecated
 - Update some `@deprecated` annotations (#2498)

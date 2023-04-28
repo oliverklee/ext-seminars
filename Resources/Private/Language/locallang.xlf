@@ -1425,6 +1425,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
 				<source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_formal">
+				<source>Thank you for registering for the waiting list of our event.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_informal">
+				<source>Thank you for registering for the waiting list of our event.</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
 				<source>
 					The registration fee will only be payable once your registration has been changed from a waiting

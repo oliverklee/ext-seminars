@@ -10,7 +10,14 @@
             <s:salutationAwareTranslate key="plugin.eventRegistration.heading.registrationSent"/>
         </h3>
         <p class="alert alert-success" role="alert">
-            <s:salutationAwareTranslate key="plugin.eventRegistration.message.thankYouForYourRegistration"/>
+            <f:if condition="{registration.onWaitingList}">
+                <f:then>
+                    <s:salutationAwareTranslate key="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration"/>
+                </f:then>
+                <f:else>
+                    <s:salutationAwareTranslate key="plugin.eventRegistration.message.thankYouForYourRegistration"/>
+                </f:else>
+            </f:if>
         </p>
     </f:section>
 </html>
