@@ -476,23 +476,13 @@ class DefaultController extends TemplateHelper
         $linkConfiguration = ['parameter' => $pageId];
 
         if ($eventId > 0) {
-            $linkConfiguration['additionalParams']
-                // @deprecated These parameters can be removed in seminars 5.0
-                // when the legacy registration form is removed.
-                = GeneralUtility::implodeArrayForUrl(
-                    'tx_seminars_pi1',
-                    ['seminar' => $eventId, 'action' => 'register'],
-                    '',
-                    false,
-                    true
-                ) . '&' .
-                GeneralUtility::implodeArrayForUrl(
-                    'tx_seminars_eventregistration',
-                    ['event' => $eventId],
-                    '',
-                    false,
-                    true
-                );
+            $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(
+                'tx_seminars_eventregistration',
+                ['event' => $eventId],
+                '',
+                false,
+                true
+            );
         }
 
         $redirectUrl = GeneralUtility::locationHeaderUrl(
