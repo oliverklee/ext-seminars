@@ -1888,6 +1888,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 					Dank dir für deine Anmeldung zu dieser Veranstaltung. Wir freuen uns darauf, dich dort zu sehen!
 				</target>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_formal">
+				<source>Thank you for registering for the waiting list of our event.</source>
+				<target>Vielen Dank für Ihre Wartelisten-Anmeldung zu unserer Veranstaltung.</target>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_informal">
+				<source>Thank you for registering for the waiting list of our event.</source>
+				<target>Dank dir für deine Wartelisten-Anmeldung zu dieser Veranstaltung.</target>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
 				<source>
 					The registration fee will only be payable once your registration has been changed from a waiting
