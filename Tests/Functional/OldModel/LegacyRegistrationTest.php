@@ -365,7 +365,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     }
 
     /**
-     * @param array<int, non-empty-string> $fields
+     * @param list<non-empty-string> $fields
      *
      * @return array<non-empty-string, array{0: non-empty-string}>
      */

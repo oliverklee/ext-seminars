@@ -52,17 +52,17 @@ final class AbstractRegistrationListViewTest extends TestCase
     private $eventUid = 0;
 
     /**
-     * @var array<int, string>
+     * @var list<non-empty-string>
      */
     public $frontEndUserFieldKeys = [];
 
     /**
-     * @var array<int, string>
+     * @var list<non-empty-string>
      */
     public $registrationFieldKeys = [];
 
     /**
-     * @var array<int, class-string<MockObject>>
+     * @var list<class-string>
      */
     private $mockedClassNames = [];
 

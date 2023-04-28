@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 trait EmailTrait
 {
     /**
-     * @var (MailMessage&MockObject)|null
+     * @var MailMessage&MockObject
      */
     private $email;
 
@@ -88,11 +88,11 @@ trait EmailTrait
      * Example: a content type of `text/calendar` will also find attachments that have `text/calendar; charset="utf-8"`
      * as the content type.
      *
-     * @return array<int, DataPart>
+     * @return list<DataPart>
      */
     private function filterEmailAttachmentsByType(MailMessage $email, string $contentType): array
     {
-        /** @var array<int, DataPart> $matches */
+        /** @var list<DataPart> $matches */
         $matches = [];
 
         foreach ($email->getAttachments() as $attachment) {

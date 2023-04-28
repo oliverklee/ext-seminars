@@ -554,12 +554,12 @@ class LegacyEvent extends AbstractTimeSpan
             ->execute()
             ->fetchAll();
 
-        /** @var array<int, array<string, string|int>> $resultWithoutDuplicates */
+        /** @var list<array<string, string|int>> $resultWithoutDuplicates */
         $resultWithoutDuplicates = [];
-        /** @var array<int, bool> $usedUids */
+        /** @var array<positive-int, bool> $usedUids */
         $usedUids = [];
         foreach ($result as $row) {
-            $placeUid = $row['uid'];
+            $placeUid = (int)$row['uid'];
             if (!isset($usedUids[$placeUid])) {
                 $usedUids[$placeUid] = true;
                 $resultWithoutDuplicates[] = $row;
@@ -2562,7 +2562,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @param array<int, array<string, string|int>> $registrations
+     * @param array<array<string, string|int>> $registrations
      */
     private function sumSeatsOfRegistrations(array $registrations): int
     {
@@ -2808,7 +2808,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @return list<array<string, mixed>>
      */
     private function mmRecordsToSelection(array $records): array
     {

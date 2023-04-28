@@ -32,7 +32,7 @@ class Price
     public const PRICE_SPECIAL_EARLY_BIRD = 'price_special_early';
 
     /**
-     * @var array<int, self::PRICE_*>
+     * @var list<self::PRICE_*>
      */
     private const VALID_PRICE_CODES = [
         self::PRICE_STANDARD,

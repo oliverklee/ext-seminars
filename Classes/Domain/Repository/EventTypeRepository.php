@@ -25,7 +25,7 @@ class EventTypeRepository extends Repository
      *
      * This method is intended to provide data for selects with an empty option as the first entry.
      *
-     * @return array<int, EventTypeInterface>
+     * @return list<EventTypeInterface>
      */
     public function findAllPlusNullEventType(): array
     {

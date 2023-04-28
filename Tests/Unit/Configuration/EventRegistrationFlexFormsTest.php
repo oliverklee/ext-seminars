@@ -35,7 +35,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, non-empty-string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function inputFieldKeysDataProvider(): array
     {
@@ -77,7 +77,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, non-empty-string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function billingAddressFieldKeysDataProvider(): array
     {
@@ -119,7 +119,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, non-empty-string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function confirmationPageKeysDataProvider(): array
     {

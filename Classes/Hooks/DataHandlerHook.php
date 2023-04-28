@@ -122,7 +122,7 @@ class DataHandlerHook
         $timeSlots = $this->getConnectionForTable(self::TABLE_TIME_SLOTS)
             ->select(['*'], self::TABLE_TIME_SLOTS, ['seminar' => $uid])->fetchAll();
 
-        /** @var array<int, int> $placesUids */
+        /** @var list<positive-int> $placesUids */
         $placesUids = [];
         foreach ($timeSlots as $timeSlot) {
             $placeUid = (int)$timeSlot['place'];

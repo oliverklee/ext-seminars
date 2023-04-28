@@ -107,12 +107,12 @@ final class RegistrationManagerTest extends TestCase
     private $frontEndUserMapper;
 
     /**
-     * @var array<int, class-string<MockObject>>
+     * @var list<class-string>
      */
     private $mockedClassNames = [];
 
     /**
-     * @var (MailMessage&MockObject)|null
+     * @var MailMessage&MockObject
      */
     private $secondEmail;
 

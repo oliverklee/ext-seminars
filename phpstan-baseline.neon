@@ -1691,11 +1691,6 @@ parameters:
 			path: Classes/Rendering/NullRequest.php
 
 		-
-			message: "#^Cannot call method getCancelationDeadline\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
 			message: "#^Cannot call method getLL\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
 			count: 5
 			path: Classes/SchedulerTasks/MailNotifier.php
@@ -1717,16 +1712,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getDate\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getEventsToSendCancellationDeadlineReminderFor\\(\\) should return array\\<int, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\>\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getEventsToSendEventTakesPlaceReminderFor\\(\\) should return array\\<int, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\>\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
 
@@ -1971,43 +1956,13 @@ parameters:
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 8
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^PHPDoc type array\\<string, array\\<string, string\\>\\> of property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$configurationToUseInTestInstance is not the same as PHPDoc type array of overridden property Nimut\\\\TestingFramework\\\\TestCase\\\\AbstractFunctionalTestCase\\:\\:\\$configurationToUseInTestInstance\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 13
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
@@ -2033,16 +1988,6 @@ parameters:
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 1
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 3
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
@@ -2776,16 +2721,6 @@ parameters:
 			path: Tests/Functional/SchedulerTasks/RegistrationDigestTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 4
-			path: Tests/Functional/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 4
-			path: Tests/Functional/Service/EmailServiceTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\EmailServiceTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Service/EmailServiceTest.php
@@ -2806,47 +2741,12 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getHtmlBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 11
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 33
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
@@ -2873,11 +2773,6 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 6
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
@@ -3012,11 +2907,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$mockedClassNames \\(array\\<int, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>\\>\\) does not accept array\\<int, class\\-string\\>\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
@@ -3331,21 +3221,6 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 46
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -3361,26 +3236,6 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$email of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:filterEmailAttachmentsByType\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 7
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 9
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -3391,39 +3246,9 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 53
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$languageBackup \\(TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
 
 		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
@@ -3436,43 +3261,8 @@ parameters:
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 16
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 5
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 17
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
@@ -3501,43 +3291,13 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method expects\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method getSubject\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getTextBody\\(\\) on \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null\\.$#"
-			count: 8
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getFromOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getReplyToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$message of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:getToOfEmail\\(\\) expects TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3561,11 +3321,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$instance of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:addMockedInstance\\(\\) expects object, \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\)\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 2
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
@@ -3582,11 +3337,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$frontEndUserMapper is never read, only written\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$mockedClassNames \\(array\\<int, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>\\>\\) does not accept array\\<int, class\\-string\\>\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
@@ -3661,6 +3411,11 @@ parameters:
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:toArray\\(\\) should return list\\<Model\\> but returns array\\<Model\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
 			message: "#^Parameter \\#1 \\$object of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetSet\\(\\) expects Model, string\\|null given\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
@@ -3679,11 +3434,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetUnset\\(\\) expects int\\|Model, string given\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^PHPDoc tag @var with type array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\EventType\\> is not subtype of native type array\\{OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\NullEventType\\}\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/FrontEndEditorControllerTest.php
 
 		-
 			message: "#^Cannot call method toString\\(\\) on Symfony\\\\Component\\\\Mime\\\\Header\\\\HeaderInterface\\|null\\.$#"

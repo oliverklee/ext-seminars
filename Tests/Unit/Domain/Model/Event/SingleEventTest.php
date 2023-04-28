@@ -342,7 +342,7 @@ final class SingleEventTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, float>>
+     * @return array<string, array{0: float}>
      */
     public function validPriceDataProvider(): array
     {

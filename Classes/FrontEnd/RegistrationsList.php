@@ -186,7 +186,7 @@ class RegistrationsList extends AbstractView
      */
     private function createTableHeader(): string
     {
-        /** @var array<int, non-empty-string> $labelKeys */
+        /** @var list<non-empty-string> $labelKeys */
         $labelKeys = [];
         foreach ($this->getFrontEndUserFields() as $field) {
             $labelKeys[] = 'label_' . $field;
