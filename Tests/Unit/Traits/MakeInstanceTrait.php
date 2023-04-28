@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Helper for injecting objects into `GeneralUtility::makeInstance` and automatically cleaning them up afterwards.
+ * Helper for injecting objects into `GeneralUtility::makeInstance` and automatically cleaning them up afterward.
  *
  * @mixin TestCase
  */
@@ -30,7 +31,7 @@ trait MakeInstanceTrait
      *
      * @param class-string $className
      */
-    private function addMockedInstance(string $className, object $instance): void
+    private function addMockedInstance(string $className, MockObject $instance): void
     {
         GeneralUtility::addInstance($className, $instance);
         $this->mockClassNames[] = $className;
