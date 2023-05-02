@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Drop extraneous space in the notification email (#2516)
 
 ## 5.2.3
 
