@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Do not display single-day events as multi-day events (#2521)
 - Allow registations without payment method in the TCEforms (#2520)
 - Drop extraneous space in the notification email (#2516)
 
