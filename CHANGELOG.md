@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Document how to set up nice registration URLs (#2522)
 
 ### Changed
 
