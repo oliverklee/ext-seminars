@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Implement nice single view URLs (#2524)
 - Document how to set up nice registration URLs (#2522)
 
 ### Changed

@@ -13,7 +13,7 @@
 .. role::   php(code)
 
 ==================================
-Upgrading from seminars 4.x to 5.0
+Upgrading from seminars 4.x to 5.x
 ==================================
 
 Upgrading in multiple steps
@@ -93,10 +93,10 @@ old backend module.
     configuration check warnings, and fix them.
 #.  Disable the automatic configuration check in the extension settings again.
 
-8. Upgrade to seminars 5.0
+8. Upgrade to seminars 5.x
 ==========================
 
-#.  Upgrade to seminars 5.0.
+#.  Upgrade to seminars 5.x.
 #.  Uninstall the mkforms and rn\_base extensions (if you are not using
     Composer mode).
 #.  Apply all DB updates.

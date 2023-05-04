@@ -46,6 +46,9 @@
 			<trans-unit id="tx_seminars_seminars.title" xml:space="preserve">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.slug">
+				<source>URL segment</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.subtitle" xml:space="preserve">
 				<source>Subtitle</source>
 			</trans-unit>

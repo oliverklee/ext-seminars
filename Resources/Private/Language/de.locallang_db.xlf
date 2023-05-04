@@ -60,6 +60,10 @@
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.slug">
+				<source>URL segment</source>
+				<target>URL-Segment</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.subtitle" xml:space="preserve">
 				<source>Subtitle</source>
 				<target>Untertitel</target>

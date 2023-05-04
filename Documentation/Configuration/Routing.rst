@@ -6,6 +6,40 @@
 Routing configuration
 =====================
 
+Nice URLs for the single view
+=============================
+
+First run the upgrade wizards to generate the slugs for all event records.
+(You can change them later to suit your needs.)
+
+Then add this to your site configuration file:
+
+.. code-block:: yaml
+
+  routeEnhancers:
+    EventSingleView:
+      type: Plugin
+      limitToPages:
+        - 17
+      routePath: '/{slug}'
+      namespace: 'tx_seminars_pi1'
+      _arguments:
+        slug: showUid
+      requirements:
+        slug: '[a-z0-9/\-]+'
+      aspects:
+        slug:
+          type: PersistedAliasMapper
+          tableName: 'tx_seminars_seminars'
+          routeFieldName: 'slug'
+
+If you already have route enhancers configured, add the `EventSingleView`
+enhancer next to your other router enhancers.
+
+The `limitToPages` setting is optional, but required for better performance.
+The given page UID(s) should be the page(s) on which the seminars single view
+content element is located.
+
 Nice URLs for the registration form
 ===================================
 

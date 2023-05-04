@@ -73,6 +73,8 @@ defined('TYPO3') or die('Access denied.');
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_migrateSeparateBillingAddress']
         = \OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_generateEventSlugs']
+        = \OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard::class;
 
     // This makes the plugin available for front-end rendering.
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
