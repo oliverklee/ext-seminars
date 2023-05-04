@@ -322,6 +322,7 @@ $tca = [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'items' => [['', '0']],
             ],
         ],
         'separate_billing_address' => [
