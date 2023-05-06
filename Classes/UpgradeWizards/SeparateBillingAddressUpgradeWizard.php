@@ -14,6 +14,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Checks the "separate billing address" checkbox for all registrations that have a separate billing address.
+ *
+ * @deprecated will be removed in seminars 6.0
  */
 class SeparateBillingAddressUpgradeWizard implements UpgradeWizardInterface, LoggerAwareInterface
 {
