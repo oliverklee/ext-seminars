@@ -36,6 +36,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -561,11 +562,10 @@ class DefaultController extends TemplateHelper
      */
     protected function createSingleViewForExistingEvent(): string
     {
-        $mapper = MapperRegistry::get(EventMapper::class);
-        $event = $mapper->find($this->showUid);
-
+        $title = $this->seminar->getTitle();
         // This sets the title of the page for use in indexed search results:
-        $this->getFrontEndController()->indexedDocTitle = $this->seminar->getTitle();
+        $this->getFrontEndController()->indexedDocTitle = $title;
+        GeneralUtility::makeInstance(SingleViewPageTitleProvider::class)->setTitle($title);
 
         $this->setEventTypeMarker();
 
@@ -578,7 +578,7 @@ class DefaultController extends TemplateHelper
             $this->hideSubparts('image', 'FIELD_WRAPPER');
         }
 
-        $this->setMarker('title', \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5));
+        $this->setMarker('title', \htmlspecialchars($title, ENT_QUOTES | ENT_HTML5));
         $this->setMarker('uid', $this->seminar->getUid());
 
         $this->setSubtitleMarker();
