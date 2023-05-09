@@ -31,4 +31,4 @@ Configuration
    SettingUpFront-endEditing/Index
    SettingUpTheDefaultEditorsFeature/Index
    PreselectionInTheListViewUrl/Index
-   Routing
+   SEO

@@ -6,9 +6,11 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd\DefaultController;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -101,5 +103,21 @@ final class SingleViewTest extends FunctionalTestCase
         $result = $subject->main('', []);
 
         self::assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function singleViewProvidesPageTitleProviderWithEventTitleAsTitle(): void
+    {
+        $pageTitleProvider = new SingleViewPageTitleProvider();
+        GeneralUtility::setSingletonInstance(SingleViewPageTitleProvider::class, $pageTitleProvider);
+
+        $subject = $this->buildSubjectForSingleView('EventSingleView');
+        $subject->piVars['showUid'] = '1';
+
+        $subject->main('', []);
+
+        self::assertSame('test & event', $pageTitleProvider->getTitle());
     }
 }

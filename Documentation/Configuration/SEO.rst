@@ -1,13 +1,14 @@
-.. include:: /Includes.rst.txt
+.. _seo:
 
-.. _routing-configuration:
+===
+SEO
+===
 
-=====================
 Routing configuration
 =====================
 
 Nice URLs for the single view
-=============================
+-----------------------------
 
 First run the upgrade wizards to generate the slugs for all event records.
 (You can change them later to suit your needs.)
@@ -41,7 +42,7 @@ The given page UID(s) should be the page(s) on which the seminars single view
 content element is located.
 
 Nice URLs for the registration form
-===================================
+-----------------------------------
 
 Add this to your site configuration file:
 
@@ -80,3 +81,17 @@ enhancer next to your other router enhancers.
 The `limitToPages` setting is optional, but required for better performance.
 The given page UID(s) should be the page(s) on which the registration form
 content element is located.
+
+Automatic page titles for the single view
+=========================================
+
+Add this to your TypoScript setup:
+
+.. code-block:: typoscript
+
+  config.pageTitleProviders {
+    eventTitle {
+      provider = OliverKlee\Seminars\Seo\SingleViewPageTitleProvider
+      before = record
+    }
+  }
