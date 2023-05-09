@@ -6,15 +6,21 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add nice page titles in the single view (#2526)
-- Implement nice single view URLs (#2524)
-- Document how to set up nice registration URLs (#2522)
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 5.3.0
+
+### Added
+- Add nice page titles in the single view (#2526)
+- Implement nice single view URLs (#2524)
+- Document how to set up nice registration URLs (#2522)
 
 ### Fixed
 - Do not display single-day events as multi-day events (#2521)
