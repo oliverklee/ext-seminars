@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_seminars>
+        <uid>1</uid>
+        <title>Event date</title>
+        <object_type>2</object_type>
+        <topic>2</topic>
+        <slug>existing-date-slug</slug>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>2</uid>
+        <title>Deleted event topic</title>
+        <object_type>1</object_type>
+        <deleted>1</deleted>
+        <slug>existing-topic-slug</slug>
+    </tx_seminars_seminars>
+</dataset>

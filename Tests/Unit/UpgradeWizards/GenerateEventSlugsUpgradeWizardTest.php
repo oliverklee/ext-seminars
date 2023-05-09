@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OliverKlee\Seminars\Tests\Unit\UpgradeWizards;
+
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard;
+use Psr\Log\LoggerAwareInterface;
+use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
+
+/**
+ * @covers \OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard
+ */
+final class GenerateEventSlugsUpgradeWizardTest extends UnitTestCase
+{
+    /**
+     * @var GenerateEventSlugsUpgradeWizard
+     */
+    private $subject;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->subject = new GenerateEventSlugsUpgradeWizard();
+    }
+
+    /**
+     * @test
+     */
+    public function isUpgradeWizard(): void
+    {
+        self::assertInstanceOf(UpgradeWizardInterface::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function isLoggerAware(): void
+    {
+        self::assertInstanceOf(LoggerAwareInterface::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function identifierIsForGenerateEventSlugsMigration(): void
+    {
+        self::assertSame('seminars_generateEventSlugs', $this->subject->getIdentifier());
+    }
+
+    /**
+     * @test
+     */
+    public function titleIsForGenerateEventSlugsMigration(): void
+    {
+        self::assertSame('Generates slugs for all events that do not have a slug yet.', $this->subject->getTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function descriptionIsForGenerateEventSlugsMigration(): void
+    {
+        $expected = 'Automatically generates the slugs for all events using their titles and UIDs.';
+        self::assertSame($expected, $this->subject->getDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function requiresUpToDateDatabase(): void
+    {
+        self::assertSame([DatabaseUpdatedPrerequisite::class], $this->subject->getPrerequisites());
+    }
+}
