@@ -83,6 +83,7 @@ $tca = [
             'config' => [
                 'type' => 'slug',
                 'size' => 50,
+                'max' => 262,
                 'generatorOptions' => [
                     'fields' => ['title'],
                     'fieldSeparator' => '-',
