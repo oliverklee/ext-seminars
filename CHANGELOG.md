@@ -8,12 +8,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Drop the UID from the event record slug (#2537)
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Also create slugs for new records (#2537)
 
 ## 5.3.0
 

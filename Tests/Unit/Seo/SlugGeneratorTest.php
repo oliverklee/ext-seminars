@@ -31,39 +31,4 @@ final class SlugGeneratorTest extends UnitTestCase
     {
         self::assertSame('', $this->subject->getPrefix());
     }
-
-    /**
-     * @test
-     */
-    public function generateSlugForEmptyRecordReturnsEmptyString(): void
-    {
-        $result = $this->subject->generateSlug(['record' => []]);
-
-        self::assertSame('', $result);
-    }
-
-    /**
-     * @return array<string,array{0: string|int}>
-     */
-    public static function emptyUidDataProvider(): array
-    {
-        return [
-            'empty string' => [''],
-            'new record placeholder' => ['NEW56fe7404a3a455'],
-            'zero' => [0],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @param string|int $uid
-     * @dataProvider emptyUidDataProvider
-     */
-    public function generateSlugForEmptyUidReturnsEmptyString($uid): void
-    {
-        $result = $this->subject->generateSlug(['record' => ['uid' => $uid]]);
-
-        self::assertSame('', $result);
-    }
 }

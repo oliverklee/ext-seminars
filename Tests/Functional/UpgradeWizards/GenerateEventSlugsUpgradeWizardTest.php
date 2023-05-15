@@ -101,7 +101,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         }
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug/2', $databaseRow['slug']);
+        self::assertSame('event-without-slug', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 }

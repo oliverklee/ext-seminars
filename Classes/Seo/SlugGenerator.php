@@ -9,7 +9,6 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * Builds the slug for event records.
@@ -30,17 +29,11 @@ class SlugGenerator
     }
 
     /**
-     * @param array{record: array{uid?: string|int, title?: string, object_type?: int, topic?: int}} $parameters
+     * @param array{record: array{title?: string, object_type?: int, topic?: int}} $parameters
      */
     public function generateSlug(array $parameters): string
     {
         $record = $parameters['record'];
-        $rawUid = $record['uid'] ?? '';
-        $uid = (int)$rawUid;
-        // New, not already saved records get a uid like "NEW56fe740dd5a455"; those records can not have a URL yet
-        if (!MathUtility::canBeInterpretedAsInteger($rawUid) || $uid <= 0) {
-            return '';
-        }
 
         $title = $record['title'] ?? '';
         $recordType = $record['object_type'] ?? 0;
@@ -65,8 +58,6 @@ class SlugGenerator
             }
         }
 
-        $titleSlug = (new SlugHelper(self::TABLE_NAME, 'slug', []))->sanitize($title);
-
-        return $titleSlug !== '' ? ($titleSlug . '/' . $uid) : (string)$uid;
+        return (new SlugHelper(self::TABLE_NAME, 'slug', []))->sanitize($title);
     }
 }
