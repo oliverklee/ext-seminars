@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add a maximum length to the seminar title in the TCA (#2544)
 - Also create slugs for new records (#2537)
 
 ## 5.3.0
