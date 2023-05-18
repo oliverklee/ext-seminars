@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Update the email CSS to simple.css v2.2.1 (#2543)
 - Drop the UID from the event record slug (#2537)
 
 ### Deprecated
