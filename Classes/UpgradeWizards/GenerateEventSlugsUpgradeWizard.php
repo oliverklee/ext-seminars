@@ -8,6 +8,7 @@ use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
@@ -52,7 +53,8 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, LoggerA
         $query = $queryBuilder
             ->count('*')
             ->from(self::TABLE_NAME_EVENTS)
-            ->where('slug = :slug')->setParameter('slug', '');
+            ->where($queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)))
+            ->orWhere($queryBuilder->expr()->isNull('slug'));
 
         if (\method_exists($query, 'executeQuery')) {
             $queryResult = $query->executeQuery();
@@ -79,7 +81,9 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, LoggerA
         $query = $queryBuilder
             ->select('*')
             ->from(self::TABLE_NAME_EVENTS)
-            ->where('slug = :slug')->setParameter('slug', '');
+            ->where($queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)))
+            ->orWhere($queryBuilder->expr()->isNull('slug'));
+
         if (\method_exists($query, 'executeQuery')) {
             $queryResult = $query->executeQuery();
         } else {

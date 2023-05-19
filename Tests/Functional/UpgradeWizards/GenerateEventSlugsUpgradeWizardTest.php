@@ -52,9 +52,19 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function updateNecessaryEventWithoutSlugReturnsTrue(): void
+    public function updateNecessaryEventWithEmptySlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithoutSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryEventWithNullSlugReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -64,7 +74,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateKeepsEventWithSlugUnmodified(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithoutSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -85,15 +95,38 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function executeUpdateUpdatesSlugOfEventWithoutSlug(): void
+    public function executeUpdateUpdatesSlugOfEventWithEmptySlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithoutSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateUpdatesSlugOfEventWithNullSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         if (\method_exists($result, 'fetchAssociative')) {
             $databaseRow = $result->fetchAssociative();
         } else {
