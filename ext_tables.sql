@@ -256,7 +256,7 @@ CREATE TABLE tx_seminars_seminars (
     KEY topic (topic),
     KEY event_takes_place_reminder_sent (event_takes_place_reminder_sent),
     KEY cancelation_deadline_reminder_sent (cancelation_deadline_reminder_sent),
-    KEY slug (slug(127)),
+    KEY slug (slug(262)),
     FULLTEXT index_event_searchfields (accreditation_number),
     FULLTEXT index_topic_searchfields (title,subtitle,description)
 ) ENGINE = MyISAM;
