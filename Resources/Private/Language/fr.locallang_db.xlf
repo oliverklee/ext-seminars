@@ -41,8 +41,8 @@
 				<target>Sujet pour événements multiples</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.object_type.I.2" xml:space="preserve">
-				<source>Date</source>
-				<target>Date</target>
+				<source>Date for a topic</source>
+				<target>Date pour un sujet</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.title" xml:space="preserve">
 				<source>Title</source>

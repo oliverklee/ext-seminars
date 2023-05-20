@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Make the object type for events a drop-down (#2551)
 - Make the event slug field nullable (#2546)
 - Make the event slug field shorter (#2539)
 - Update the email CSS to simple.css v2.2.1 (#2543)
