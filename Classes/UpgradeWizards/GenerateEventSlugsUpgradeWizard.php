@@ -49,6 +49,7 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, LoggerA
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable(self::TABLE_NAME_EVENTS);
+        $queryBuilder->getRestrictions()->removeAll();
 
         $query = $queryBuilder
             ->count('*')
@@ -78,6 +79,8 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, LoggerA
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         $queryBuilder = $connectionPool->getQueryBuilderForTable(self::TABLE_NAME_EVENTS);
+        $queryBuilder->getRestrictions()->removeAll();
+
         $query = $queryBuilder
             ->select('*')
             ->from(self::TABLE_NAME_EVENTS)
