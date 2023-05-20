@@ -166,7 +166,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function generateSlugForEventDateWithDeletedTopicReturnsEmptyString(): void
+    public function generateSlugForEventDateWithDeletedTopicReturnsSlugFromTopicTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithDeletedTopic.xml');
 
@@ -181,6 +181,48 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('', $result);
+        self::assertSame('deleted-event-topic', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function generateSlugForEventDateWithHiddenTopicReturnsSlugFromTopicTitle(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithHiddenTopic.xml');
+
+        $eventDateUid = 1234;
+        $record = [
+            'uid' => $eventDateUid,
+            'object_type' => EventInterface::TYPE_EVENT_DATE,
+            'title' => 'Event date',
+            'topic' => 2,
+            'slug' => 'existing-date-slug',
+        ];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('hidden-event-topic', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function generateSlugForEventDateWithTimedTopicReturnsSlugFromTopicTitle(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTimedTopic.xml');
+
+        $eventDateUid = 1234;
+        $record = [
+            'uid' => $eventDateUid,
+            'object_type' => EventInterface::TYPE_EVENT_DATE,
+            'title' => 'Event date',
+            'topic' => 2,
+            'slug' => 'existing-date-slug',
+        ];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('timed-event-topic', $result);
     }
 }
