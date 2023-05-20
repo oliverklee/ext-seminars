@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_seminars>
+        <uid>1</uid>
+        <title>single event with slug</title>
+        <slug>unchanged-slug</slug>
+    </tx_seminars_seminars>
+</dataset>

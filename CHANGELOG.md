@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Also set/update the slug if the slug field is not shown (#2591)
 - Ensure the upgrade wizard generates unique slugs (#2565, #2566)
 - Make the slug generation upgrade wizard repeatable (#2557)
 - Fix the slug generation for event date records (#2552)

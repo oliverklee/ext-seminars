@@ -499,4 +499,88 @@ final class DataHandlerHookTest extends FunctionalTestCase
             ->selectCount('*', 'tx_seminars_seminars_place_mm', 'uid_local = ' . $uid);
         self::assertSame($expected, $associationCount);
     }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForSingleEventWithSlugKeepsSlugUnchanged(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/SingleEventWithSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('unchanged-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForTopicWithSlugKeepsSlugUnchanged(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TopicWithSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('unchanged-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForEventDateWithSlugKeepsSlugUnchanged(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/EventDateWithSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('unchanged-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForSingleEventWithoutSlugSetsSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/SingleEventWithoutSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('single-event-without-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForTopicWithoutSlugSetsSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TopicWithoutSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('topic-without-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsForEventDateWithoutSlugSetsSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/EventDateWithoutSlug.xml');
+        $uid = 1;
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame('topic-with-slug', $row['slug']);
+    }
 }
