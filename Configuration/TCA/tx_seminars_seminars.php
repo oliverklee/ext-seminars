@@ -35,7 +35,8 @@ $tca = [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type',
             'config' => [
-                'type' => 'radio',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'default' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
                 'items' => [
                     [

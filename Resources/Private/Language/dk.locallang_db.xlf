@@ -41,7 +41,7 @@
 				<target>Arrangementsemne  (Hvis arrangementet løber over flere datoer kan du her indtaste info om selve arrangementet)</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.object_type.I.2" xml:space="preserve">
-				<source>Date</source>
+				<source>Date for a topic</source>
 				<target>Arrangementssdato (Samme som ovenfor. Her vælger du blot et Arrangementsemne og indtaster så info om tid, m.m.).</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.title" xml:space="preserve">
