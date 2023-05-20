@@ -29,18 +29,16 @@ class SlugGenerator
     }
 
     /**
-     * @param array{record: array{title?: string, object_type?: int, topic?: int}} $parameters
+     * @param array{record: array{title?: string, object_type?: string|int, topic?: string|int}} $parameters
      */
     public function generateSlug(array $parameters): string
     {
         $record = $parameters['record'];
+        $recordType = (int)($record['object_type'] ?? 0);
+        $topicUid = (int)($record['topic'] ?? 0);
 
-        $title = $record['title'] ?? '';
-        $recordType = $record['object_type'] ?? 0;
+        $title = '';
         if ($recordType === EventInterface::TYPE_EVENT_DATE) {
-            $title = '';
-            $topicUid = $record['topic'] ?? 0;
-
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable(self::TABLE_NAME);
             $queryBuilder->getRestrictions()->removeAll();
@@ -59,6 +57,8 @@ class SlugGenerator
                     $title = (string)$data['title'];
                 }
             }
+        } else {
+            $title = $record['title'] ?? '';
         }
 
         return (new SlugHelper(self::TABLE_NAME, 'slug', []))->sanitize($title);

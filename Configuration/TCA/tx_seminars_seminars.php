@@ -86,7 +86,7 @@ $tca = [
                 'size' => 50,
                 'max' => 262,
                 'generatorOptions' => [
-                    'fields' => ['title'],
+                    'fields' => ['title', 'object_type', 'topic'],
                     'fieldSeparator' => '-',
                     'postModifiers' => [
                         \OliverKlee\Seminars\Seo\SlugGenerator::class . '->generateSlug',
