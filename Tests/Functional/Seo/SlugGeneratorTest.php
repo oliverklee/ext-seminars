@@ -124,6 +124,27 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function generateSlugForEventDateWithTopicWithValuesAsStringReturnsSlugFromTopicTitle(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
+
+        $eventDateUid = 1234;
+        $record = [
+            'uid' => $eventDateUid,
+            'object_type' => (string)EventInterface::TYPE_EVENT_DATE,
+            'title' => 'Event date',
+            'topic' => (string)2,
+            'slug' => 'existing-date-slug',
+        ];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('event-topic', $result);
+    }
+
+    /**
+     * @test
+     */
     public function generateSlugForEventDateWithTopicWithEmptyTitleReturnsEmptyString(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopicWithoutTitle.xml');

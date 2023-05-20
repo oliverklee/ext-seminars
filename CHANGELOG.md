@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the slug generation for event date records (#2552)
 - Also create slugs if the event or topic is hidden or timed (#2548)
 - Add a maximum length to the seminar title in the TCA (#2544)
 - Also create slugs for new records (#2537)
