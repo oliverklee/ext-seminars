@@ -41,8 +41,11 @@ class SlugGenerator
             $title = '';
             $topicUid = $record['topic'] ?? 0;
 
-            $result = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(self::TABLE_NAME)
-                ->select('title')->from(self::TABLE_NAME)->where('uid = :uid')->setParameter('uid', $topicUid)
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getQueryBuilderForTable(self::TABLE_NAME);
+            $queryBuilder->getRestrictions()->removeAll();
+            $result = $queryBuilder->select('title')->from(self::TABLE_NAME)
+                ->where('uid = :uid')->setParameter('uid', $topicUid)
                 ->execute();
             if ($result instanceof ResultStatement) {
                 if (\method_exists($result, 'fetchAssociative')) {
