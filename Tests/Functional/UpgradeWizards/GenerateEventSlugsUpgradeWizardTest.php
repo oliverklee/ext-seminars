@@ -52,7 +52,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function updateNecessaryEventWithEmptySlugReturnsTrue(): void
+    public function updateNecessaryForEventWithEmptySlugReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
 
@@ -62,9 +62,39 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function updateNecessaryEventWithNullSlugReturnsTrue(): void
+    public function updateNecessaryForEventWithNullSlugReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForHiddenEventWithNullSlugReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenEventWithNullSlug.xml');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForDeletedEventWithNullSlugReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedEventWithNullSlug.xml');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForTimedEventWithNullSlugReturnsTrue(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TimedEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -121,6 +151,75 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
     public function executeUpdateUpdatesSlugOfEventWithNullSlug(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateUpdatesSlugOfHiddenEventWithNullSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenEventWithNullSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateUpdatesSlugOfDeletedEventWithNullSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedEventWithNullSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateUpdatesSlugOfTimedEventWithNullSlug(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TimedEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
