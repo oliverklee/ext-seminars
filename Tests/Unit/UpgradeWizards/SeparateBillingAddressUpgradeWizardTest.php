@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard;
 use Psr\Log\LoggerAwareInterface;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\RepeatableInterface;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
@@ -33,6 +34,14 @@ final class SeparateBillingAddressUpgradeWizardTest extends UnitTestCase
     public function isUpgradeWizard(): void
     {
         self::assertInstanceOf(UpgradeWizardInterface::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function isRepeatable(): void
+    {
+        self::assertInstanceOf(RepeatableInterface::class, $this->subject);
     }
 
     /**
