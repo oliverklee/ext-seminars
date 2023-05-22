@@ -7,8 +7,15 @@ SEO
 Routing configuration
 =====================
 
+.. _single-view-urls:
+
 Nice URLs for the single view
 -----------------------------
+
+..  attention::
+    Please enable the seminars "URL segment" (slug) field for your editors.
+    Otherwise, you might get exceptions in the frontend if an event does
+    not have a slug.
 
 First run the upgrade wizards to generate the slugs for all event records.
 (You can change them later to suit your needs.)

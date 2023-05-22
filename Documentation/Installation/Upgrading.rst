@@ -101,3 +101,11 @@ old backend module.
     Composer mode).
 #.  Apply all DB updates.
 #.  Run the upgrade wizards.
+
+9. Enable the slug fields for your editors
+==========================================
+
+Enable the seminars "URL segment" (slug) field for your editors.
+(Otherwise, you might get exceptions in the frontend if an event does
+not have a slug and your are using
+:ref:`nice URLs for the single view <single-view-urls>`.)
