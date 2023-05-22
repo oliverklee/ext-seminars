@@ -10,6 +10,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\RepeatableInterface;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
@@ -17,7 +18,7 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  *
  * @deprecated will be removed in seminars 6.0
  */
-class SeparateBillingAddressUpgradeWizard implements UpgradeWizardInterface, LoggerAwareInterface
+class SeparateBillingAddressUpgradeWizard implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
