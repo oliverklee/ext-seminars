@@ -1751,6 +1751,11 @@ parameters:
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: Classes/Seo/SlugGenerator.php
+
+		-
 			message: "#^Cannot call method getEmailFooter\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
 			count: 1
 			path: Classes/Service/EmailService.php
@@ -1917,7 +1922,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 4
+			count: 2
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
 
 		-
