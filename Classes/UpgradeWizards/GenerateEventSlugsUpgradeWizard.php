@@ -10,6 +10,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\RepeatableInterface;
@@ -48,9 +49,7 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
 
     public function updateNecessary(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable(self::TABLE_NAME_EVENTS);
-        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder = $this->getQueryBuilder();
 
         $query = $queryBuilder
             ->count('*')
@@ -78,10 +77,7 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
 
     public function executeUpdate(): bool
     {
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $queryBuilder = $connectionPool->getQueryBuilderForTable(self::TABLE_NAME_EVENTS);
-        $queryBuilder->getRestrictions()->removeAll();
-
+        $queryBuilder = $this->getQueryBuilder();
         $query = $queryBuilder
             ->select('*')
             ->from(self::TABLE_NAME_EVENTS)
@@ -114,7 +110,7 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
             }
         }
 
-        $connection = $connectionPool->getConnectionForTable(self::TABLE_NAME_EVENTS);
+        $connection = $this->getConnectionPool()->getConnectionForTable(self::TABLE_NAME_EVENTS);
         foreach ($updateRows as $row) {
             $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $row['slug']], ['uid' => $row['uid']]);
         }
@@ -124,5 +120,18 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
         }
 
         return true;
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable(self::TABLE_NAME_EVENTS);
+        $queryBuilder->getRestrictions()->removeAll();
+
+        return $queryBuilder;
     }
 }
