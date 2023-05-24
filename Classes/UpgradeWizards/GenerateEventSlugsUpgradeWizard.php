@@ -25,6 +25,9 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
 {
     use LoggerAwareTrait;
 
+    /**
+     * @var non-empty-string
+     */
     private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
     public function getIdentifier(): string
@@ -98,14 +101,14 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
                 /** @var array<string, string> $row */
                 foreach ($queryResult->fetchAllAssociative() as $row) {
                     /** @var array{uid: int, title: string, object_type: int, topic: int} $row */
-                    $slug = $this->makeSlugUnique($slugGenerator->generateSlug(['record' => $row]));
+                    $slug = $slugGenerator->generateSlug(['record' => $row]);
                     $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
                 }
             } else {
                 /** @var array<string, string> $row */
                 foreach ($queryResult->fetchAll() as $row) {
                     /** @var array{uid: int, title: string, object_type: int, topic: int} $row */
-                    $slug = $this->makeSlugUnique($slugGenerator->generateSlug(['record' => $row]));
+                    $slug = $slugGenerator->generateSlug(['record' => $row]);
                     $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
                 }
             }
@@ -129,46 +132,5 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
         $queryBuilder->getRestrictions()->removeAll();
 
         return $queryBuilder;
-    }
-
-    private function makeSlugUnique(string $slugCandidate): string
-    {
-        $slug = $slugCandidate;
-        $suffix = 0;
-
-        while ($this->countEventsWithSlug($slug) > 0) {
-            $suffix++;
-            $slug = $slugCandidate . '-' . $suffix;
-        }
-
-        return $slug;
-    }
-
-    private function countEventsWithSlug(string $slug): int
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $query = $queryBuilder
-            ->count('*')
-            ->from(self::TABLE_NAME_EVENTS)
-            ->where(
-                $queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR))
-            );
-
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
-        if ($queryResult instanceof ResultStatement) {
-            if (\method_exists($queryResult, 'fetchOne')) {
-                $count = (int)$queryResult->fetchOne();
-            } else {
-                $count = (int)$queryResult->fetchColumn(0);
-            }
-        } else {
-            $count = 0;
-        }
-
-        return $count;
     }
 }

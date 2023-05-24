@@ -246,4 +246,34 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         self::assertSame('timed-event-topic', $result);
     }
+
+    /**
+     * @test
+     */
+    public function generateSlugAddsSuffixIfEventWithThePossibleSlugAlreadyExists(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
+
+        $uid = 1234;
+        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'some-event'];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('some-event-1', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function generateSlugAddsIncreasedSuffixIfEventWithThePossibleSuffixedSlugAlreadyExists(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithSlug.xml');
+
+        $uid = 1234;
+        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'some-event'];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('some-event-2', $result);
+    }
 }
