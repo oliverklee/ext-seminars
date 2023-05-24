@@ -236,4 +236,73 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         self::assertSame('event-without-slug', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
+
+    /**
+     * @test
+     */
+    public function executeSuffixesSlugIfSlugAlreadyExistsBeforeWizard(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithExistingSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-title-1', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeSuffixesSlugIfCollidingSlugHasJustBeenCreatedByWizard(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithNewlyCreatedSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-title-1', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
+
+    /**
+     * @test
+     */
+    public function executeSuffixesSlugWithNextAvailableSuffixIfSuffixAlreadyExists(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithSuffixedSlug.xml');
+
+        $wizardResult = $this->subject->executeUpdate();
+
+        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
+        $result = $connection
+            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 3]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $databaseRow = $result->fetchAssociative();
+        } else {
+            $databaseRow = $result->fetch();
+        }
+
+        self::assertIsArray($databaseRow);
+        self::assertSame('event-title-2', $databaseRow['slug']);
+        self::assertTrue($wizardResult);
+    }
 }

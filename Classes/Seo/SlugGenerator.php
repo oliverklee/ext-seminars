@@ -29,6 +29,10 @@ class SlugGenerator
     }
 
     /**
+     * Generates the slug for the given record.
+     *
+     * Note: This method does not check that the slug is unique.
+     *
      * @param array{record: array{title?: string, object_type?: string|int, topic?: string|int}} $parameters
      */
     public function generateSlug(array $parameters): string
