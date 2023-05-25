@@ -17,9 +17,7 @@ use TYPO3\CMS\Install\Updates\RepeatableInterface;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * Generates slugs for events
- *
- * @deprecated will be removed in seminars 7.0
+ * Generates slugs for events.
  */
 class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
 {
