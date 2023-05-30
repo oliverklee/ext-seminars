@@ -90,7 +90,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonEventDateWithNonTitleReturnsSlugifiedTitle(int $type): void
+    public function generateSlugForNonEventDateWithNonEmptyTitleReturnsSlugifiedTitle(int $type): void
     {
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => $type, 'title' => 'There will be cake!'];
