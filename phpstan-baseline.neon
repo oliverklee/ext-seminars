@@ -1982,7 +1982,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 1
+			count: 4
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
@@ -1992,12 +1992,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'backEndModule' on mixed\\.$#"
-			count: 2
+			count: 4
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
+			count: 4
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
@@ -2191,13 +2191,23 @@ parameters:
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
 
 		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 4
+			path: Tests/Functional/Hooks/DataHandlerHookTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\DataSanitization' on mixed\\.$#"
+			count: 4
+			path: Tests/Functional/Hooks/DataHandlerHookTest.php
+
+		-
 			message: "#^Cannot access offset 'SC_OPTIONS' on mixed\\.$#"
 			count: 1
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
+			count: 5
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
 
 		-
@@ -2267,6 +2277,21 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
+			count: 10
+			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 10
+			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\DateTimeSpan' on mixed\\.$#"
+			count: 10
+			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 10
 			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
 
@@ -2746,6 +2771,21 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 6
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\RegistrationEmail' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
 			count: 3
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -2753,6 +2793,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 3
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 2
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
@@ -2902,12 +2947,17 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
+			count: 4
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\RegistrationListCsv' on mixed\\.$#"
+			count: 1
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
@@ -2932,7 +2982,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
+			count: 3
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -3037,7 +3087,17 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
+			count: 5
+			path: Tests/LegacyUnit/Email/SalutationTest.php
+
+		-
+			message: "#^Cannot access offset 'modifyEmailSalutati…' on mixed\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/Email/SalutationTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 3
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
 		-
@@ -3072,12 +3132,22 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
+			count: 9
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\SeminarListView' on mixed\\.$#"
+			count: 5
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\SeminarSingleView' on mixed\\.$#"
+			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
+			count: 7
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3127,6 +3197,21 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
+
+		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\SeminarSelectorWidget' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
 
@@ -3231,6 +3316,11 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
 
 		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 10
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
 			count: 5
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -3271,6 +3361,11 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 6
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
@@ -3297,7 +3392,17 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 2
+			count: 6
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 12
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Hooks\\\\\\\\Interfaces\\\\\\\\RegistrationEmail' on mixed\\.$#"
+			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3308,6 +3413,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 6
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 4
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
@@ -3477,12 +3587,32 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 23
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Tests\\\\\\\\Unit\\\\\\\\Hooks\\\\\\\\Fixtures\\\\\\\\TestingHookInterface' on mixed\\.$#"
+			count: 6
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Tests\\\\\\\\Unit\\\\\\\\Hooks\\\\\\\\Fixtures\\\\\\\\TestingHookInterfaceReturnsArray' on mixed\\.$#"
+			count: 5
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Tests\\\\\\\\Unit\\\\\\\\Hooks\\\\\\\\Fixtures\\\\\\\\TestingHookInterfaceReturnsModifiedValue' on mixed\\.$#"
+			count: 7
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Cannot access offset 'anyIndex' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 3
+			count: 23
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-
@@ -3521,6 +3651,11 @@ parameters:
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 4
+			path: Tests/Unit/Model/EventTest.php
+
+		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
@@ -3548,6 +3683,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'LOG' on mixed\\.$#"
 			count: 1
+			path: Tests/Unit/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 4
 			path: Tests/Unit/OldModel/LegacyEventTest.php
 
 		-
