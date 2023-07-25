@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks;
 
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+use OliverKlee\Seminars\Seo\SlugGenerator;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -101,6 +102,12 @@ class DataHandlerHook
         $this->copyPlacesFromTimeSlots($uid, $updatedData);
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
+
+        $currentSlug = $updatedData['slug'] ?? '';
+        if (\preg_match('/^(-[\\d]+)?$/', $currentSlug) === 1) {
+            $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class);
+            $updatedData['slug'] = $slugGenerator->generateSlug(['record' => $updatedData]);
+        }
 
         $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
         $updatedData = array_merge(
