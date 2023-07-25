@@ -10,6 +10,9 @@ use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\Hooks\DataHandlerHook
+ */
 final class DataHandlerHookTest extends FunctionalTestCase
 {
     /**
@@ -59,9 +62,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
         self::assertSame(DataHandlerHook::class, $reference);
     }
 
-    /**
-     * @param int $uid
-     */
     private function processUpdateActionForSeminarsTable(int $uid): void
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
@@ -70,9 +70,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->subject->processDatamap_afterAllOperations($this->dataHandler);
     }
 
-    /**
-     * @param int $uid
-     */
     private function processNewActionForSeminarsTable(int $uid): void
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
@@ -191,8 +188,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     *
      * @dataProvider validRegistrationDeadlineDataProvider
      */
     public function afterDatabaseOperationsOnUpdateKeepsValidRegistrationDeadline(int $uid): void
@@ -221,8 +216,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     *
      * @dataProvider invalidRegistrationDeadlineDataProvider
      */
     public function afterDatabaseOperationsOnUpdateResetsInvalidRegistrationDeadline(int $uid): void
@@ -237,8 +230,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param int $uid
      *
      * @dataProvider invalidRegistrationDeadlineDataProvider
      */
@@ -267,8 +258,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param int $uid
      *
      * @dataProvider validEarlyBirdDeadlineDataProvider
      */
@@ -299,8 +288,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     *
      * @dataProvider invalidEarlyBirdDeadlineDataProvider
      */
     public function afterDatabaseOperationsOnUpdateResetsInvalidEarlyBirdDeadline(int $uid): void
@@ -315,8 +302,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param int $uid
      *
      * @dataProvider invalidEarlyBirdDeadlineDataProvider
      */
@@ -360,9 +345,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     * @param int $expectedDate
-     *
      * @dataProvider beginDateWithTimeSlotsDataProvider
      */
     public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate): void
@@ -394,9 +376,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     * @param int $expectedDate
-     *
      * @dataProvider beginDateWithTimeSlotsDataProvider
      */
     public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate): void
@@ -422,9 +401,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param int $uid
-     * @param int $expectedDate
      *
      * @dataProvider endDateWithTimeSlotsDataProvider
      */
@@ -457,9 +433,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param int $uid
-     * @param int $expectedDate
-     *
      * @dataProvider endDateWithTimeSlotsDataProvider
      */
     public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate): void
@@ -485,8 +458,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param int $uid
      *
      * @dataProvider noPlacesToAddFromTimeSlotsDataProvider
      */
