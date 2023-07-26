@@ -69,53 +69,37 @@ record will be marked as hidden.
 Displaying the seminar and registration statistics and details
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-**Back-end module “Events”:** The back-end module "Events" has four
-different tabs:
+In the **back-end module “Events”, you can
 
-- Events
-
-- Registrations
-
-- Speakers
-
-- Organizers
-
-By clicking on a tab, you can access the according submodule. Each
-submodule shows a list of records of the according type on the
-currently selected page or sysfolder (e.g., the submodule "Events"
-shows a list of events).
-
-It is possible to delete, to modify or to create new records within
-the back-end module if the back-end user has the rights to do this. He
-can also cancel or confirm an event and send an e-mail about this to
-the attendees.
-
-**CSV export:** In the event list, you can also export the events on
-the current page or the list of registrations of an event as CSV.
+*   list and edit events
+*   export events as CSV
+*   display the registrations for an event
+*   export the registrations for an event as CSV
+*   send an e-mail to the attendees of an event
 
 
 CSV export of events
 """"""""""""""""""""
 
-At the top in the event list in the back-end module  *Events* , you’ll
-find a button named Export as *CSV* that will save the data of all
+At the top in the event list in the back-end module *Events* , you’ll
+find a button labelled "Download as CSV file" that will save the data of all
 events on the current page as CSV.
-
 
 CSV export of registrations
 """""""""""""""""""""""""""
 
-In the event list in the back-end module  *Events* , you’ll find a
-button named *CSV* that will save the data of the registrations for
-that particular event as CSV, also including data from the registered
-FE user. Please note that the CSV files contains the columns for the
-data from the registration records first and then data from the
-corresponding FE user record. The columns used for the export of
-registrations is determined by the two following configuration
-variables *“*  *fieldsFromFeUserForCsv*  *”* and *“*
-*fieldsFromAttendanceForCsv*  *”* . If you want to export the
-registrations on the waiting queue, you have to set *“*
-*showAttendancesOnRegistrationQueueInCSV*  *”* to true.
+At the top in the registration list for an event in the back-end module
+*Events*, you’ll find a button labelled "Download as CSV file" that will save
+the data of all registrations of the selected event as CSV, also
+including data from the registered FE user. Please note that the CSV file
+contains the columns for the data from the registration records first and then
+data from the corresponding FE user record.
+
+The columns used for the export of
+registrations is determined by the two configuration
+variables `fieldsFromFeUserForCsv` and `fieldsFromAttendanceForCsv`.
+If you want to export the registrations on the waiting queue, you have to set
+`showAttendancesOnRegistrationQueueInCSV` to `true`.
 
 The CSV export can be configured via TS Setup in plugin.tx\_seminars
 for the page where the event records are located. Please see the
@@ -132,11 +116,11 @@ CSV export of registrations is only available if:
   registrations for that particular event are stored
 
 
-Changing, deleting and entering registrations
+Changing registrations
 """""""""""""""""""""""""""""""""""""""""""""
 
-You can edit, delete and enter registration records using W *eb* >
-*Lists* as well as the back-end module *Events* .
+You can edit registration records using Web >
+List as well as the back-end module *Events*.
 
 
 Unregistering from an event
