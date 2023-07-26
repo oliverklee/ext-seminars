@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Event;
 
-use OliverKlee\FeUserExtraFields\Domain\Repository\DirectPersistTrait;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -20,7 +19,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class EventRepository extends AbstractRawDataCapableRepository implements DirectPersist
 {
-    use DirectPersistTrait;
+    use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
 
     /**
      * @return non-empty-string
