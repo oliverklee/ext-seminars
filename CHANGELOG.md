@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Always provide the canonical URL for the single view (#2596)
 - Use the correct `DirectPersist` trait from oelib (#2593)
 - Also set/update the slug if the slug field is not shown (#2591)
 - Ensure the upgrade wizard generates unique slugs (#2565, #2566)

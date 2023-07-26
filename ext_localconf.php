@@ -110,3 +110,13 @@ defined('TYPO3') or die('Access denied.');
         ]
     );
 })();
+
+// Ensure human-readable URLs as canonicals even if the original page does not have them.
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('seo')) {
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] = \array_merge(
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] ?? [],
+        [
+            'tx_seminars_pi1[showUid]',
+        ]
+    );
+}
