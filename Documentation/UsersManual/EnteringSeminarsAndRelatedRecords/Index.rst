@@ -289,10 +289,6 @@ the front end:
 - the maximal number of registrations before the seminar is completely
   full
 
-- whether the collision check (i.e., that users cannot register for an
-  event if they already have registered for an event that is at the same
-  time) should be skipped for this event
-
 - lodging options that will be available for selection in the
   registration form
 
