@@ -444,8 +444,8 @@ example:
 
 .. code-block:: php
 
-   // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \MyVendor\MyExt\Hooks\ModifySalutationHook::class;
+    // register my hook objects
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \MyVendor\MyExt\Hooks\ModifySalutationHook::class;
 
 
 .. _datatimespan_en:
@@ -537,23 +537,23 @@ The hook classes need to be registered and written like this:
 
 .. code-block:: php
 
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][]
+     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][]
          = \tx_seminarspaypal_Hooks_BackEndModule::class;
 
 It's used like this:
 
 .. code-block:: php
 
-   class BackEndModuleHook implements BackEndModule {
-         /**
-        * Modifies the general e-mail sent via the back-end module.
-        *
-        * Note: This hook does not get called yet. It is just here so the interface
-        * is finalized.
-        *
-        * @param Registration $registration
-        *        the registration to which the e-mail refers
-        */
+    class BackEndModuleHook implements BackEndModule {
+        /**
+         * Modifies the general e-mail sent via the back-end module.
+         *
+         * Note: This hook does not get called yet. It is just here so the interface
+         * is finalized.
+         *
+         * @param Registration $registration
+         *        the registration to which the e-mail refers
+         */
          public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void {…}
 
 Hooks for the CSV generation of registration lists
