@@ -102,3 +102,22 @@ Add this to your TypoScript setup:
       before = record
     }
   }
+
+Exclude the single view page without an event URL from getting indexed
+======================================================================
+
+#.  Edit the page properties of your single view page(s).
+#.  Navigate to the "SEO" tab.
+#.  Disable "Index this page".
+#.  Then add this code to your TypoScript setup:
+
+..  code-block:: typoscript
+
+    # Re-enable indexing for event single view pages, but not for the (empty)
+    # detail page without any event UID parameter
+    [traverse(request.getQueryParams(), 'tx_seminars_pi1/showUid') > 0]
+      page.meta {
+        robots = index,follow
+        robots.replace = 1
+      }
+    [global]
