@@ -8,6 +8,16 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### 5.3.1
+
+### Changed
 - Document how to set up the robots configuration for single view pages (#2598)
 - Make the upgrade wizard for the separate billing address repeatable (#2558)
 - Document that the slug field should to be enabled for editors (#2556)
@@ -16,10 +26,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Make the event slug field shorter (#2539)
 - Update the email CSS to simple.css v2.2.1 (#2543)
 - Drop the UID from the event record slug (#2537)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Always provide the canonical URL for the single view (#2596)
