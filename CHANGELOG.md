@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Document how to set up the robots configuration for single view pages (#2598)
 - Make the upgrade wizard for the separate billing address repeatable (#2558)
 - Document that the slug field should to be enabled for editors (#2556)
 - Make the object type for events a drop-down (#2551)
