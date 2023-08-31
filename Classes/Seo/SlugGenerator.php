@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Seo;
 
 use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -25,6 +27,16 @@ class SlugGenerator
      */
     private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     public function getPrefix(): string
     {
         return '';
@@ -33,12 +45,13 @@ class SlugGenerator
     /**
      * Generates a unique slug for the given record.
      *
-     * @param array{record: array{title?: string, object_type?: string|int, topic?: string|int}} $parameters
+     * @param array{record: array{uid?: string|int, title?: string, object_type?: string|int, topic?: string|int}} $parameters
      */
     public function generateSlug(array $parameters): string
     {
         $record = $parameters['record'];
         $recordType = (int)($record['object_type'] ?? 0);
+        $eventUid = (int)($record['uid'] ?? 0);
         $topicUid = (int)($record['topic'] ?? 0);
 
         $title = '';
@@ -64,7 +77,12 @@ class SlugGenerator
 
         $slugCandidate = (new SlugHelper(self::TABLE_NAME_EVENTS, 'slug', []))->sanitize($title);
 
-        return $this->makeSlugUnique($slugCandidate);
+        $uniqueSlug = $this->makeSlugUnique($slugCandidate);
+        $slugContext = new SlugContext($eventUid, $title, $uniqueSlug);
+        $event = new AfterSlugGeneratedEvent($slugContext, $uniqueSlug);
+        $this->eventDispatcher->dispatch($event);
+
+        return $event->getSlug();
     }
 
     private function getConnectionPool(): ConnectionPool

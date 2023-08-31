@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Hooks;
 
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use OliverKlee\Seminars\Seo\SlugGenerator;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -105,7 +106,8 @@ class DataHandlerHook
 
         $currentSlug = $updatedData['slug'] ?? '';
         if (\preg_match('/^(-[\\d]+)?$/', $currentSlug) === 1) {
-            $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class);
+            $eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
+            $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class, $eventDispatcher);
             $updatedData['slug'] = $slugGenerator->generateSlug(['record' => $updatedData]);
         }
 

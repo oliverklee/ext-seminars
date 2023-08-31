@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Seo;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Seo\SlugGenerator;
+use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
 
 /**
  * @covers \OliverKlee\Seminars\Seo\SlugGenerator
@@ -21,7 +22,8 @@ final class SlugGeneratorTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->subject = new SlugGenerator();
+        $slugEventDispatcher = new TestingSlugEventDispatcher();
+        $this->subject = new SlugGenerator($slugEventDispatcher);
     }
 
     /**
