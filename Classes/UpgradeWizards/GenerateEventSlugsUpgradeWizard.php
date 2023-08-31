@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\UpgradeWizards;
 
 use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Seminars\Seo\SlugGenerator;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Database\Connection;
@@ -92,7 +93,8 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
             $queryResult = $query->execute();
         }
 
-        $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class);
+        $eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
+        $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class, $eventDispatcher);
         $connection = $this->getConnectionPool()->getConnectionForTable(self::TABLE_NAME_EVENTS);
         if ($queryResult instanceof ResultStatement) {
             if (\method_exists($queryResult, 'fetchAllAssociative')) {

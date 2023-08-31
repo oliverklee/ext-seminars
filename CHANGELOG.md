@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a PSR-14 event for creating/modifying event slugs (#2608)
 
 ### Changed
 

@@ -121,3 +121,10 @@ Exclude the single view page without an event URL from getting indexed
         robots.replace = 1
       }
     [global]
+
+PSR-14 event to change the generated slug for an event
+======================================================
+
+You can use the PSR-14 event
+:php:`OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent` to change the slug
+for an event before it gets written to the database.
