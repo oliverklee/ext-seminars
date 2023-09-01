@@ -77,9 +77,8 @@ class SlugGenerator
 
         $slugCandidate = (new SlugHelper(self::TABLE_NAME_EVENTS, 'slug', []))->sanitize($title);
 
-        $uniqueSlug = $this->makeSlugUnique($slugCandidate);
-        $slugContext = new SlugContext($eventUid, $title, $uniqueSlug);
-        $event = new AfterSlugGeneratedEvent($slugContext, $uniqueSlug);
+        $slugContext = new SlugContext($eventUid, $title, $slugCandidate);
+        $event = new AfterSlugGeneratedEvent($slugContext, $this->makeSlugUnique($slugCandidate));
         $this->eventDispatcher->dispatch($event);
 
         return $event->getSlug();

@@ -20,7 +20,7 @@ final class SlugContext
     private $displayTitle;
 
     /**
-     * @var string
+     * @var string the slugified title, which is not guaranteed to be unique
      */
     public $slugifiedTitle;
 

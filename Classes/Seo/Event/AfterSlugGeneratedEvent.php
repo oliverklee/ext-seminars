@@ -44,7 +44,9 @@ final class AfterSlugGeneratedEvent implements StoppableEventInterface
     }
 
     /**
-     * Sets/changes the slug and stops the propagation of the event.
+     * Changes the slug and stops the propagation of the event.
+     *
+     * Note: The caller is responsible for ensuring that the slug is unique.
      */
     public function setSlug(string $slug): void
     {

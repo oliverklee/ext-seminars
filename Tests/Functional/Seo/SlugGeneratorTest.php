@@ -406,12 +406,28 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function generateSlugReturnsSlugModifedByEvent(): void
+    public function generateSlugPassesNonUniqueSlugifiedTitleToEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
+
+        $uid = 1234;
+        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'Some event'];
+
+        $this->subject->generateSlug(['record' => $record]);
+
+        self::assertTrue($this->eventDispatcher->isDispatched());
+        self::assertSame('some-event', $this->eventDispatcher->getEvent()->getSlugContext()->getSlugifiedTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function generateSlugReturnsSlugModifiedByEvent(): void
     {
         $modifiedSlug = 'there-is-no-spoon/42';
         $this->eventDispatcher->setModifiedSlug($modifiedSlug);
         $uid = 1234;
-        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_EVENT_DATE, 'title' => ''];
+        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => ''];
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
