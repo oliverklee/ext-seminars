@@ -8,6 +8,8 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Seo\SlugGenerator
@@ -36,7 +38,31 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $this->eventDispatcher = new TestingSlugEventDispatcher();
 
-        $this->subject = new SlugGenerator($this->eventDispatcher);
+        GeneralUtility::addInstance(EventDispatcherInterface::class, $this->eventDispatcher);
+        $this->subject = new SlugGenerator();
+    }
+
+    /**
+     * @test
+     */
+    public function canBeConstructedWithMakeInstanceWithoutArguments(): void
+    {
+        $subject = GeneralUtility::makeInstance(SlugGenerator::class);
+
+        self::assertInstanceOf(SlugGenerator::class, $subject);
+    }
+
+    /**
+     * @test
+     */
+    public function instanceCreatedWithMakeInstanceCanGenerateSlug(): void
+    {
+        $subject = GeneralUtility::makeInstance(SlugGenerator::class);
+        $record = ['uid' => 1234, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'There will be cake!'];
+
+        $result = $subject->generateSlug(['record' => $record]);
+
+        self::assertSame('there-will-be-cake', $result);
     }
 
     /**

@@ -32,9 +32,11 @@ class SlugGenerator
      */
     private $eventDispatcher;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct()
     {
-        $this->eventDispatcher = $eventDispatcher;
+        // We are not using constructor injection here because the slug generator also is referenced from the TCA,
+        // which creates the instance without constructor arguments.
+        $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
     }
 
     public function getPrefix(): string
