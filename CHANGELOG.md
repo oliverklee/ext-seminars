@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Provide the non-suffixed slugified title to `AfterSlugGeneratedEvent` (#2612)
 
 ## 5.4.0
 
