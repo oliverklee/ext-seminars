@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow keeping an existing slugs when re-generating it (#2615)
 - Fix crash when editing an event in the BE (#2614)
 - Provide the non-suffixed slugified title to `AfterSlugGeneratedEvent` (#2612)
 
