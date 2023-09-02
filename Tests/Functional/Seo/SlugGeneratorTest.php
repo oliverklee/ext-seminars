@@ -299,6 +299,20 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function generateSlugKeepsCurrentSlugIfTheGeneratedSlugIsTheSame(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
+
+        $record = ['uid' => 1, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'some-event'];
+
+        $result = $this->subject->generateSlug(['record' => $record]);
+
+        self::assertSame('some-event', $result);
+    }
+
+    /**
+     * @test
+     */
     public function generateSlugAddsIncreasedSuffixIfEventWithThePossibleSuffixedSlugAlreadyExists(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithSlug.xml');

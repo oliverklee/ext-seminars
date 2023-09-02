@@ -80,7 +80,7 @@ class SlugGenerator
         $slugCandidate = (new SlugHelper(self::TABLE_NAME_EVENTS, 'slug', []))->sanitize($title);
 
         $slugContext = new SlugContext($eventUid, $title, $slugCandidate);
-        $event = new AfterSlugGeneratedEvent($slugContext, $this->makeSlugUnique($slugCandidate));
+        $event = new AfterSlugGeneratedEvent($slugContext, $this->makeSlugUnique($slugCandidate, $eventUid));
         $this->eventDispatcher->dispatch($event);
 
         return $event->getSlug();
@@ -99,12 +99,16 @@ class SlugGenerator
         return $queryBuilder;
     }
 
-    private function makeSlugUnique(string $slugCandidate): string
+    /**
+     * Makes the given slug unique by appending a suffix if necessary. The resulting slug is allowed to be the same as
+     * the slug from the event with the given UID, practically allowing events to keep their slug.
+     */
+    private function makeSlugUnique(string $slugCandidate, int $eventUid): string
     {
         $slug = $slugCandidate;
         $suffix = 0;
 
-        while ($this->countEventsWithSlug($slug) > 0) {
+        while ($this->countEventsWithSlug($slug, $eventUid) > 0) {
             $suffix++;
             $slug = $slugCandidate . '-' . $suffix;
         }
@@ -112,14 +116,19 @@ class SlugGenerator
         return $slug;
     }
 
-    private function countEventsWithSlug(string $slug): int
+    /**
+     * Counts the number of events with the given slug, exluding the event with the given UID (so that existing events
+     * can keep their slug).
+     */
+    private function countEventsWithSlug(string $slug, int $eventUid): int
     {
         $queryBuilder = $this->getQueryBuilder();
         $query = $queryBuilder
             ->count('*')
             ->from(self::TABLE_NAME_EVENTS)
-            ->where(
-                $queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR))
+            ->andWhere(
+                $queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR)),
+                $queryBuilder->expr()->neq('uid', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             );
 
         if (\method_exists($query, 'executeQuery')) {
