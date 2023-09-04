@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         env:
@@ -82,7 +82,7 @@ jobs:
     needs: php-lint
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         env:
@@ -178,7 +178,7 @@ jobs:
       DB_HOST: localhost
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         env:
@@ -295,7 +295,7 @@ jobs:
       DATABASE_NAME: typo3
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         env:
