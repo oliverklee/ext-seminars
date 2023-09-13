@@ -106,7 +106,7 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
-			message: "#^Cannot access offset string on mixed\\.$#"
+			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
