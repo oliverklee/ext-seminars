@@ -13,24 +13,26 @@
             link="{be:moduleLink(route: 'web_SeminarsEvents', arguments: '{id: pageUid}')}"
             group="0"
         />
-
-        <f:if condition="({permissions.readAccessToRegistrations} && {regularRegistrations})">
-            <be:moduleLayout.button.linkButton
-                icon="actions-document-export-csv"
-                title="{f:translate(key: 'backEndModule.action.csvDownload')}" showLabel="true"
-                link="{f:uri.action(action: 'exportCsvForEvent', arguments: {event: event})}"
-                group="1"
-            />
-        </f:if>
     </f:section>
 
     <f:section name="Content">
         <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
 
         <f:if condition="{permissions.readAccessToRegistrations}">
-            <h1>
-                <f:translate key="backEndModule.heading.registrations"/>
-            </h1>
+            <div class="row">
+                <h1 class="col-auto me-auto">
+                    <f:translate key="backEndModule.heading.registrations"/>
+                </h1>
+                <div class="col-auto">
+                    <f:if condition="{regularRegistrations}">
+                        <f:link.action action="exportCsvForEvent" arguments="{event: event}"
+                                       class="btn btn-default btn-sm">
+                            <core:icon identifier="actions-document-export-csv"/>
+                            <f:translate key="backEndModule.action.csvDownload"/>
+                        </f:link.action>
+                    </f:if>
+                </div>
+            </div>
             <h2>
                 {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
                 <f:translate key="plugin.eventShared.heading.eventTitleAndDateAndUid"
