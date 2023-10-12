@@ -10,6 +10,7 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -44,6 +45,11 @@ final class ModuleControllerTest extends UnitTestCase
     private $eventRepositoryMock;
 
     /**
+     * @var RegistrationRepository&MockObject
+     */
+    private $registrationRepositoryMock;
+
+    /**
      * @var EventStatisticsCalculator&MockObject
      */
     private $eventStatisticsCalculatorMock;
@@ -51,12 +57,13 @@ final class ModuleControllerTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
 
         /** @var ModuleController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             ModuleController::class,
             ['redirect', 'forward', 'redirectToUri'],
-            [$this->eventRepositoryMock]
+            [$this->eventRepositoryMock, $this->registrationRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -123,11 +130,12 @@ final class ModuleControllerTest extends UnitTestCase
      */
     public function overviewActionPassesPermissionsToView(): void
     {
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
-                ['events', self::anything()]
+                ['events', self::anything()],
+                ['numberOfRegistrations', self::anything()]
             );
 
         $this->subject->overviewAction();
@@ -141,11 +149,12 @@ final class ModuleControllerTest extends UnitTestCase
         $pageUid = 8;
         $GLOBALS['_GET']['id'] = (string)$pageUid;
 
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
-                ['events', self::anything()]
+                ['events', self::anything()],
+                ['numberOfRegistrations', self::anything()]
             );
 
         $this->subject->overviewAction();
@@ -191,11 +200,34 @@ final class ModuleControllerTest extends UnitTestCase
         $events = [new SingleEvent()];
         $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
             ->with($pageUid)->willReturn($events);
-        $this->viewMock->expects(self::exactly(3))->method('assign')
+        $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
-                ['events', $events]
+                ['events', $events],
+                ['numberOfRegistrations', self::anything()]
+            );
+
+        $this->subject->overviewAction();
+    }
+
+    /**
+     * @test
+     */
+    public function overviewActionPassesNumberOfRegistrationsOnPageUidToView(): void
+    {
+        $pageUid = 8;
+        $GLOBALS['_GET']['id'] = (string)$pageUid;
+
+        $numberOfRegistrations = 42;
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularRegistrationsByPageUid')
+            ->with($pageUid)->willReturn($numberOfRegistrations);
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['events', self::anything()],
+                ['numberOfRegistrations', $numberOfRegistrations]
             );
 
         $this->subject->overviewAction();

@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Show registration statistics in the BE module (#2640)
 - Add `RegistrationRepository::countRegularRegistrationsByPageUid` (#2638)
 
 ### Changed

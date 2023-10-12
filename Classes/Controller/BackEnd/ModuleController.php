@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -21,9 +22,15 @@ class ModuleController extends ActionController
      */
     private $eventRepository;
 
-    public function __construct(EventRepository $eventRepository)
+    /**
+     * @var RegistrationRepository
+     */
+    private $registrationRepository;
+
+    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
     {
         $this->eventRepository = $eventRepository;
+        $this->registrationRepository = $registrationRepository;
     }
 
     public function overviewAction(): void
@@ -39,5 +46,9 @@ class ModuleController extends ActionController
             $this->eventStatisticsCalculator->enrichWithStatistics($event);
         }
         $this->view->assign('events', $events);
+        $this->view->assign(
+            'numberOfRegistrations',
+            $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
+        );
     }
 }

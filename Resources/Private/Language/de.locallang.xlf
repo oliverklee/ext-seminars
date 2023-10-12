@@ -2118,6 +2118,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>There are no event records in the selected folder.</source>
 				<target>In ausgewählten Ordner liegen keine Veranstaltungsdatensätze.</target>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.noRegistrationsInFolder">
+				<source>There are no event registration in the selected folder.</source>
+				<target>In ausgewählten Ordner liegen keine Anmeldedatensätze.</target>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.noRegistrationsForEvent">
 				<source>This event does not have any registrations yet.</source>
 				<target>Für diese Veranstaltung gibt es noch keine Anmeldungen.</target>

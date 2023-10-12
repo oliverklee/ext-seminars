@@ -8,6 +8,8 @@
     <f:section name="Header"/>
 
     <f:section name="Content">
+        <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+
         <f:if condition="{permissions.readAccessToEvents}">
             <div class="row">
                 <h1 class="col-auto me-auto">
@@ -15,7 +17,8 @@
                 </h1>
                 <div class="col-auto">
                     <f:if condition="{events}">
-                        <f:link.action controller="BackEnd\Event" action="exportCsv" arguments="{pageUid: pageUid}" class="btn btn-default btn-sm">
+                        <f:link.action controller="BackEnd\Event" action="exportCsv" arguments="{pageUid: pageUid}"
+                                       class="btn btn-default btn-sm">
                             <core:icon identifier="actions-document-export-csv"/>
                             <f:translate key="backEndModule.action.csvDownload"/>
                         </f:link.action>
@@ -38,6 +41,37 @@
                 <f:else>
                     <f:render partial="BackEnd/FlashMessage"
                               arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
+                </f:else>
+            </f:if>
+        </f:if>
+
+        <f:if condition="{permissions.readAccessToRegistrations}">
+            <div class="row mt-5">
+                <h1 class="col-auto me-auto">
+                    <f:translate key="backEndModule.heading.registrations"/>
+                </h1>
+                <div class="col-auto">
+                </div>
+            </div>
+
+            <f:if condition="{numberOfRegistrations}">
+                <f:then>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="nowrap">
+                                    <f:translate key="{propertyLabelPrefix}.registrations"/>
+                                </th>
+                                <td class="nowrap">
+                                    {numberOfRegistrations}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </f:then>
+                <f:else>
+                    <f:render partial="BackEnd/FlashMessage"
+                              arguments="{severity: 'info', messageBodyKey: 'noRegistrationsInFolder'}"/>
                 </f:else>
             </f:if>
         </f:if>
