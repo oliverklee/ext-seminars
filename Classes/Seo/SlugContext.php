@@ -10,7 +10,8 @@ namespace OliverKlee\Seminars\Seo;
 final class SlugContext
 {
     /**
-     * @var int the UID of the event (which for event dates will be the UID of the date, not the topic)
+     * @var int<0, max> the UID of the event (which for event dates will be the UID of the date, not the topic),
+     *                  will be 0 if the event has not been saved yet
      */
     private $eventUid;
 
@@ -25,7 +26,7 @@ final class SlugContext
     public $slugifiedTitle;
 
     /**
-     * @param int $eventUid
+     * @param int<0, max> $eventUid
      */
     public function __construct(int $eventUid, string $displayTitle, string $slugifiedTitle)
     {
@@ -35,7 +36,7 @@ final class SlugContext
     }
 
     /**
-     * @return int
+     * @return int<0, max> will be 0 if the event has not been saved yet
      */
     public function getEventUid(): int
     {

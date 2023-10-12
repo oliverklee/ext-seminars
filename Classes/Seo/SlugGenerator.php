@@ -47,14 +47,24 @@ class SlugGenerator
     /**
      * Generates a unique slug for the given record.
      *
-     * @param array{record: array{uid?: string|int, title?: string, object_type?: string|int, topic?: string|int}} $parameters
+     * @param array{
+     *          record: array{
+     *            uid?: numeric-string|int<0, max>,
+     *            title?: string,
+     *            object_type?: numeric-string|int<0, max>,
+     *            topic?: numeric-string|int<0, max>
+     *          }
+     *        } $parameters
      */
     public function generateSlug(array $parameters): string
     {
         $record = $parameters['record'];
         $recordType = (int)($record['object_type'] ?? 0);
+        \assert($recordType >= 0);
         $eventUid = (int)($record['uid'] ?? 0);
+        \assert($eventUid >= 0);
         $topicUid = (int)($record['topic'] ?? 0);
+        \assert($topicUid >= 0);
 
         $title = '';
         if ($recordType === EventInterface::TYPE_EVENT_DATE) {

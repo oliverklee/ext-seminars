@@ -98,14 +98,14 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
             if (\method_exists($queryResult, 'fetchAllAssociative')) {
                 /** @var array<string, string> $row */
                 foreach ($queryResult->fetchAllAssociative() as $row) {
-                    /** @var array{uid: int, title: string, object_type: int, topic: int} $row */
+                    /** @var array{uid: int<0, max>, title: string, object_type: int<0, max>, topic: int<0, max>} $row */
                     $slug = $slugGenerator->generateSlug(['record' => $row]);
                     $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
                 }
             } else {
                 /** @var array<string, string> $row */
                 foreach ($queryResult->fetchAll() as $row) {
-                    /** @var array{uid: int, title: string, object_type: int, topic: int} $row */
+                    /** @var array{uid: int<0, max>, title: string, object_type: int<0, max>, topic: int<0, max>} $row */
                     $slug = $slugGenerator->generateSlug(['record' => $row]);
                     $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
                 }

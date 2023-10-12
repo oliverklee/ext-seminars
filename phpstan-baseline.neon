@@ -1926,7 +1926,7 @@ parameters:
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
 
 		-
-			message: "#^PHPDoc tag @var with type array\\<string, int\\|string\\> is not subtype of type array\\<string, string\\>\\.$#"
+			message: "#^PHPDoc tag @var with type array\\<string, int\\<0, max\\>\\|string\\> is not subtype of type array\\<string, string\\>\\.$#"
 			count: 2
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
 
