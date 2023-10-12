@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add `RegistrationRepository::countRegularRegistrationsByPageUid` (#2638)
 
 ### Changed
 - Move the CSV export buttons in the BE module next to the headings (#2636)
