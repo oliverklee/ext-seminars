@@ -15,7 +15,7 @@
                 </h1>
                 <div class="col-auto">
                     <f:if condition="{events}">
-                        <f:link.action action="exportCsv" arguments="{pageUid: pageUid}" class="btn btn-default btn-sm">
+                        <f:link.action controller="BackEnd\Event" action="exportCsv" arguments="{pageUid: pageUid}" class="btn btn-default btn-sm">
                             <core:icon identifier="actions-document-export-csv"/>
                             <f:translate key="backEndModule.action.csvDownload"/>
                         </f:link.action>
