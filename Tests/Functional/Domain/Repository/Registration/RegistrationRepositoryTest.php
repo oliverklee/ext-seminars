@@ -412,6 +412,64 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function countRegularRegistrationsByPageUidForNoRegistrationsInDatabaseReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countRegularRegistrationsByPageUidCountsRegularRegistrationsOnTheGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
+
+        self::assertSame(1, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countRegularRegistrationsByPageUidIgnoresRegistrationsOnOtherPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
+
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(2));
+    }
+
+    /**
+     * @test
+     */
+    public function countRegularRegistrationsByPageUidIgnoresWaitingListRegistrationsOnTheGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/WaitingListRegistrationOnPage.xml');
+
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countRegularRegistrationsByPageUidIgnoresHiddenRegistrationsOnTheGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationOnPage.xml');
+
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
+    public function countRegularRegistrationsByPageUidIgnoresDeletedRegistrationsOnTheGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.xml');
+
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
     public function countRegularSeatsByEventForNonExistentEventUidReturnsZero(): void
     {
         self::assertSame(0, $this->subject->countRegularSeatsByEvent(1));

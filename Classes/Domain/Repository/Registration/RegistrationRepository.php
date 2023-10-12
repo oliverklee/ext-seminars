@@ -45,6 +45,21 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     }
 
     /**
+     * @param positive-int $pageUid
+     *
+     * @return int<0, max>
+     */
+    public function countRegularRegistrationsByPageUid(int $pageUid): int
+    {
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->getTableName());
+
+        $count = $connection->count('*', $this->getTableName(), ['pid' => $pageUid, 'registration_queue' => 0]);
+        \assert($count >= 0);
+
+        return $count;
+    }
+
+    /**
      * Sums up the regular (i.e., non-waiting-list) seats of all registrations for the given event UID.
      *
      * Registrations with 0 seats will be ignored.
