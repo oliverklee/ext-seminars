@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Improve the code documentation concerning slug generation (#2634)
 
 ### Deprecated
 
