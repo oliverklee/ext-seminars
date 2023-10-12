@@ -226,16 +226,6 @@ parameters:
 			path: Classes/Controller/BackEnd/EventController.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\EventController\\:\\:getPageUid\\(\\) should return int\\<0, max\\> but returns int\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
 			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:\\$response\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
@@ -247,16 +237,6 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:getPageUid\\(\\) should return int\\<0, max\\> but returns int\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
 
@@ -3486,11 +3466,6 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 6
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
 			message: "#^Cannot access offset 'pid' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
@@ -3504,6 +3479,21 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\EventControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'id' on mixed\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'pid' on mixed\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'table' on mixed\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
 
 		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"

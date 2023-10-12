@@ -14,10 +14,16 @@ trait PageUidTrait
     /**
      * This method is only public for unit testing.
      *
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getPageUid(): int
     {
-        return (int)(GeneralUtility::_GP('id') ?? 0);
+        $rawUid = GeneralUtility::_GP('id') ?? 0;
+        $uid = (\is_string($rawUid) || is_int($rawUid)) ? (int)$rawUid : 0;
+        if ($uid < 0) {
+            return 0;
+        }
+
+        return $uid;
     }
 }
