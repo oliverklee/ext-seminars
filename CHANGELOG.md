@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Move the CSV export buttons in the BE module next to the headings (#2636)
 - Improve the code documentation concerning slug generation (#2634)
 
 ### Deprecated
