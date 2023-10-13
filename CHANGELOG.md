@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Allow CSV export of all registrations in a folder (#2642, #2643)
 - Show registration statistics in the BE module (#2640)
 - Add `RegistrationRepository::countRegularRegistrationsByPageUid` (#2638)
 

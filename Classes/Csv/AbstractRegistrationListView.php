@@ -81,7 +81,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
     public function render(): string
     {
         if (!$this->hasEventUid() && !$this->hasPageUid()) {
-            throw new \BadMethodCallException('No event UID set', 1390320210);
+            throw new \BadMethodCallException('No event UID or page UID set', 1390320210);
         }
 
         $allLines = array_merge([$this->createCsvHeading()], $this->createCsvBodyLines());

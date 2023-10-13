@@ -51,6 +51,11 @@
                     <f:translate key="backEndModule.heading.registrations"/>
                 </h1>
                 <div class="col-auto">
+                    <f:link.action controller="BackEnd\Registration" action="exportCsvForPageUid"
+                                   arguments="{pageUid: pageUid}" class="btn btn-default btn-sm">
+                        <core:icon identifier="actions-document-export-csv"/>
+                        <f:translate key="backEndModule.action.csvDownload"/>
+                    </f:link.action>
                 </div>
             </div>
 

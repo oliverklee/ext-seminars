@@ -1076,7 +1076,7 @@ final class CsvDownloaderTest extends TestCase
     public function createAndOutputListOfRegistrationsForNoEventUidGivenThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('No event UID set');
+        $this->expectExceptionMessage('No event UID or page UID set');
         $this->expectExceptionCode(1390320210);
 
         $this->subject->createAndOutputListOfRegistrations();
