@@ -35,12 +35,15 @@ class CsvDownloader
      */
     public function main(): string
     {
-        switch ((string)GeneralUtility::_GET('table')) {
+        $table = \is_string(GeneralUtility::_GET('table')) ? GeneralUtility::_GET('table') : '';
+        switch ($table) {
             case 'tx_seminars_seminars':
-                $result = $this->createAndOutputListOfEvents((int)GeneralUtility::_GET('pid'));
+                $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
+                $result = $this->createAndOutputListOfEvents($pageUid);
                 break;
             case 'tx_seminars_attendances':
-                $result = $this->createAndOutputListOfRegistrations((int)GeneralUtility::_GET('eventUid'));
+                $eventUid = \max(0, (int)GeneralUtility::_GET('eventUid'));
+                $result = $this->createAndOutputListOfRegistrations($eventUid);
                 break;
             default:
                 throw new \InvalidArgumentException(
@@ -59,15 +62,17 @@ class CsvDownloader
      *
      * If access is denied, an error message is returned, and an error 403 is set.
      *
-     * @param int $eventUid UID of the event for which to create the CSV list, must be >= 0
+     * @param int<0, max> $eventUid UID of the event for which to create the CSV list, must be >= 0
+     * @param int<0, max> $pageUid
      *
      * @return string CSV list of registrations for the given seminar or an error message in case of an error
      */
-    public function createAndOutputListOfRegistrations(int $eventUid = 0): string
+    public function createAndOutputListOfRegistrations(int $eventUid = 0, int $pageUid = 0): string
     {
         $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
 
         $listView->setEventUid($eventUid);
+        $listView->setPageUid($pageUid);
 
         $this->setContentTypeForRegistrationLists();
 

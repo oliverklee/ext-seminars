@@ -296,11 +296,6 @@ parameters:
 			path: Classes/Csv/CsvDownloader.php
 
 		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: Classes/Csv/CsvDownloader.php
-
-		-
 			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
 			count: 1
 			path: Classes/Csv/DownloadRegistrationListView.php
@@ -3003,6 +2998,11 @@ parameters:
 		-
 			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
 			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Csv\\\\CsvDownloader\\:\\:createAndOutputListOfRegistrations\\(\\) expects int\\<0, max\\>, int given\\.$#"
+			count: 19
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-

@@ -12,7 +12,13 @@
     </tx_seminars_seminars>
     <tx_seminars_attendances>
         <uid>1</uid>
+        <pid>1</pid>
         <seminar>2</seminar>
+        <user>1</user>
         <seats>1</seats>
+        <address>at home</address>
     </tx_seminars_attendances>
+    <fe_users>
+        <uid>1</uid>
+    </fe_users>
 </dataset>
