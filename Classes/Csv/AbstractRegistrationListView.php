@@ -80,7 +80,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
      */
     public function render(): string
     {
-        if (!$this->hasEventUid()) {
+        if (!$this->hasEventUid() && !$this->hasPageUid()) {
             throw new \BadMethodCallException('No event UID set', 1390320210);
         }
 

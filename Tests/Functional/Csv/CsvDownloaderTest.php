@@ -98,4 +98,47 @@ final class CsvDownloaderTest extends FunctionalTestCase
             $this->localizeAndRemoveColon('tx_seminars_attendances.address');
         self::assertStringContainsString($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function createListOfRegistrationsForZeroEventUidAndNoPageUidThrowsException(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
+
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionCode(1390320210);
+        $this->expectExceptionMessage('No event UID set');
+
+        $this->subject->createAndOutputListOfRegistrations(0);
+    }
+
+    /**
+     * @test
+     */
+    public function createListOfRegistrationsPageReturnsExportsRegistrationsOnTheGivenPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
+
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
+
+        $result = $this->subject->createAndOutputListOfRegistrations(0, 1);
+
+        self::assertStringContainsString('at home', $result);
+    }
+    /**
+     * @test
+     */
+    public function createListOfRegistrationsPageReturnsIgnoresRegistrationsOnOtherPage(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
+
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
+
+        $result = $this->subject->createAndOutputListOfRegistrations(0, 2);
+
+        self::assertStringNotContainsString('at home', $result);
+    }
 }
