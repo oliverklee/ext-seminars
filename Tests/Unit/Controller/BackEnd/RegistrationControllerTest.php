@@ -94,7 +94,12 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table'], $GLOBALS['_GET']['eventUid'], $GLOBALS['_POST']['id']);
+        if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
+            unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table']);
+        }
+        if (isset($GLOBALS['_POST']) && \is_array($GLOBALS['_POST'])) {
+            unset($GLOBALS['_POST']['id']);
+        }
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -335,7 +340,7 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function exportCsvForEventActionProvidesCsvDownloaderWithEventsTableName(): void
+    public function exportCsvForEventActionProvidesCsvDownloaderWithRegistrationsTableName(): void
     {
         $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
 
@@ -345,7 +350,7 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function exportCsvForEventActionProvidesCsvDownloaderWithUidOfProvidedEvent(): void
+    public function exportCsvForEventActionProvidesCsvDownloaderWithUidOfProvidedPage(): void
     {
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
@@ -399,6 +404,88 @@ final class RegistrationControllerTest extends UnitTestCase
     public function exportCsvForEventActionSetsDownloadFilename(): void
     {
         $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'attachment; filename=registrations.csv',
+                $result->getHeaders()['Content-Disposition'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Disposition: attachment; filename=registrations.csv',
+                $this->response->getHeaders()
+            );
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForPageUidActionProvidesCsvDownloaderWithRegistrationsTableName(): void
+    {
+        $this->subject->exportCsvForPageUidAction(12);
+
+        self::assertSame('tx_seminars_attendances', $GLOBALS['_GET']['table']);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForPageUidActionProvidesCsvDownloaderWithProvidedPageUid(): void
+    {
+        $pageUid = 9;
+
+        $this->subject->exportCsvForPageUidAction($pageUid);
+
+        self::assertSame($pageUid, $GLOBALS['_GET']['pid']);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForPageUidActionReturnsCsvData(): void
+    {
+        $csvContent = 'foo,bar';
+        $this->csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvContent);
+
+        $result = $this->subject->exportCsvForPageUidAction(12);
+
+        if ($result instanceof ResponseInterface) {
+            $result = $result->getBody()->getContents();
+        }
+        self::assertSame($csvContent, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForPageUidActionSetsCsvContentType(): void
+    {
+        $result = $this->subject->exportCsvForPageUidAction(12);
+
+        if ($result instanceof ResponseInterface) {
+            // 11LTS path
+            self::assertSame(
+                'text/csv; header=present; charset=utf-8',
+                $result->getHeaders()['Content-Type'][0]
+            );
+        } else {
+            // 10LTS path
+            self::assertContains(
+                'Content-Type: text/csv; header=present; charset=utf-8',
+                $this->response->getHeaders()
+            );
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function exportCsvForPageUidActionSetsDownloadFilename(): void
+    {
+        $result = $this->subject->exportCsvForPageUidAction(12);
 
         if ($result instanceof ResponseInterface) {
             // 11LTS path

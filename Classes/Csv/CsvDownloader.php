@@ -36,14 +36,14 @@ class CsvDownloader
     public function main(): string
     {
         $table = \is_string(GeneralUtility::_GET('table')) ? GeneralUtility::_GET('table') : '';
+        $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
         switch ($table) {
             case 'tx_seminars_seminars':
-                $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
                 $result = $this->createAndOutputListOfEvents($pageUid);
                 break;
             case 'tx_seminars_attendances':
                 $eventUid = \max(0, (int)GeneralUtility::_GET('eventUid'));
-                $result = $this->createAndOutputListOfRegistrations($eventUid);
+                $result = $this->createAndOutputListOfRegistrations($eventUid, $pageUid);
                 break;
             default:
                 throw new \InvalidArgumentException(

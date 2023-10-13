@@ -231,16 +231,6 @@ parameters:
 			path: Classes/Controller/BackEnd/RegistrationController.php
 
 		-
-			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
 			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findRegularRegistrationsByEvent\\(\\) expects int\\<1, max\\>, int\\|null given\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/RegistrationController.php
@@ -3497,27 +3487,27 @@ parameters:
 
 		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
-			count: 2
+			count: 4
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
 			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 5
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
+			message: "#^Cannot access offset 'id' on mixed\\.$#"
+			count: 3
+			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'pid' on mixed\\.$#"
 			count: 2
+			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'table' on mixed\\.$#"
+			count: 3
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-

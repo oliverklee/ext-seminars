@@ -108,7 +108,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionCode(1390320210);
-        $this->expectExceptionMessage('No event UID set');
+        $this->expectExceptionMessage('No event UID or page UID set');
 
         $this->subject->createAndOutputListOfRegistrations(0);
     }
