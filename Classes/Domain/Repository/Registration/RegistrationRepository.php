@@ -45,7 +45,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     }
 
     /**
-     * @param positive-int $pageUid
+     * @param int<0, max> $pageUid
      *
      * @return int<0, max>
      */

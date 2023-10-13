@@ -3482,7 +3482,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 4
+			count: 5
 			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
 
 		-

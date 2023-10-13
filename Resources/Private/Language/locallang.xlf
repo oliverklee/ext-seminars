@@ -1596,6 +1596,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.message.noEventsInFolder">
 				<source>There are no event records in the selected folder.</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.noRegistrationsInFolder">
+				<source>There are no event registration in the selected folder.</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.message.noRegistrationsForEvent">
 				<source>This event does not have any registrations yet.</source>
 			</trans-unit>
