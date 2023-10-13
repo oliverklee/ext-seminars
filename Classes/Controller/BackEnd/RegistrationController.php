@@ -38,7 +38,7 @@ class RegistrationController extends ActionController
      */
     private $registrationRepository;
 
-    public function injectRegistrationRepository(RegistrationRepository $repository): void
+    public function __construct(RegistrationRepository $repository)
     {
         $this->registrationRepository = $repository;
     }

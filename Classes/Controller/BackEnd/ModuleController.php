@@ -21,9 +21,9 @@ class ModuleController extends ActionController
      */
     private $eventRepository;
 
-    public function injectEventRepository(EventRepository $repository): void
+    public function __construct(EventRepository $eventRepository)
     {
-        $this->eventRepository = $repository;
+        $this->eventRepository = $eventRepository;
     }
 
     public function overviewAction(): void
