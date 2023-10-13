@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.5.0
+
+### Added
 - Allow CSV export of all registrations in a folder (#2642, #2643)
 - Show registration statistics in the BE module (#2640)
 - Add `RegistrationRepository::countRegularRegistrationsByPageUid` (#2638)
@@ -13,12 +25,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Move the CSV export buttons in the BE module next to the headings (#2636)
 - Improve the code documentation concerning slug generation (#2634)
-
-### Deprecated
-
-### Removed
-
-### Fixed
 
 ## 5.4.1
 
