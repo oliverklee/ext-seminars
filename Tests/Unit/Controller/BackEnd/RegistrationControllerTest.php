@@ -66,10 +66,13 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
+
         /** @var RegistrationController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
-            ['redirect', 'forward', 'redirectToUri']
+            ['redirect', 'forward', 'redirectToUri'],
+            [$this->registrationRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -82,8 +85,6 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
-        $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
-        $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
         $this->subject->injectEventStatisticsCalculator($this->eventStatisticsCalculatorMock);
 

@@ -50,10 +50,13 @@ final class ModuleControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+
         /** @var ModuleController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             ModuleController::class,
-            ['redirect', 'forward', 'redirectToUri']
+            ['redirect', 'forward', 'redirectToUri'],
+            [$this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -61,8 +64,6 @@ final class ModuleControllerTest extends UnitTestCase
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
-        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->subject->injectEventRepository($this->eventRepositoryMock);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
         $this->subject->injectEventStatisticsCalculator($this->eventStatisticsCalculatorMock);
     }
