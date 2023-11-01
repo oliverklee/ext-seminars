@@ -70,6 +70,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         $result = $this->subject->findByUid(1);
 
         self::assertInstanceOf(SingleEvent::class, $result);
+        self::assertFalse($result->isHidden());
         self::assertSame('Jousting', $result->getInternalTitle());
         self::assertSame('Jousting', $result->getDisplayTitle());
         self::assertSame('There is no glory in prevention.', $result->getDescription());
@@ -594,6 +595,43 @@ final class EventRepositoryTest extends FunctionalTestCase
         $associatedModels = $result->getPaymentMethods();
         self::assertCount(1, $associatedModels);
         self::assertInstanceOf(PaymentMethod::class, $associatedModels->toArray()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function findOneByUidForBackendCanFindVisibleEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+
+        $result = $this->subject->findOneByUidForBackend(1);
+
+        self::assertInstanceOf(SingleEvent::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findOneByUidForBackendIgnoresDeletedEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.xml');
+
+        $result = $this->subject->findOneByUidForBackend(1);
+
+        self::assertNull($result);
+    }
+
+    /**
+     * @test
+     */
+    public function findOneByUidForBackendCanFindHiddenEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+
+        $result = $this->subject->findOneByUidForBackend(1);
+
+        self::assertInstanceOf(SingleEvent::class, $result);
+        self::assertTrue($result->isHidden());
     }
 
     /**

@@ -30,6 +30,24 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
+     * Finds a single event by UID, including hidden events.
+     *
+     * This method is particularly useful in the backend.
+     *
+     * @param int<0, max> $uid
+     */
+    public function findOneByUidForBackend(int $uid): ?Event
+    {
+        $query = $this->createQuery();
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $querySettings->setIgnoreEnableFields(true);
+        $query->setQuerySettings($querySettings);
+
+        return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
+    }
+
+    /**
      * @return array<int, Event>
      */
     public function findSingleEventsByOwnerUid(int $ownerUid): array
