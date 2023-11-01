@@ -8,10 +8,10 @@ use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -38,16 +38,29 @@ class RegistrationController extends ActionController
      */
     private $registrationRepository;
 
-    public function __construct(RegistrationRepository $repository)
+    /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+
+    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
     {
-        $this->registrationRepository = $repository;
+        $this->registrationRepository = $registrationRepository;
+        $this->eventRepository = $eventRepository;
     }
 
     /**
-     * @Extbase\IgnoreValidation("event")
+     * @param int<1, max> $eventUid
+     *
+     * @throws \RuntimeException
      */
-    public function showForEventAction(Event $event): void
+    public function showForEventAction(int $eventUid): void
     {
+        $event = $this->eventRepository->findOneByUidForBackend($eventUid);
+        if (!($event instanceof Event)) {
+            throw new \RuntimeException('Event with UID ' . $eventUid . ' not found.', 1698859637);
+        }
+
         $this->view->assign('permissions', $this->permissions);
         $this->view->assign('pageUid', $this->getPageUid());
 
@@ -55,7 +68,6 @@ class RegistrationController extends ActionController
         $this->view->assign('event', $event);
 
         if ($event instanceof EventDateInterface) {
-            $eventUid = $event->getUid();
             $regularRegistrations = $this->registrationRepository->findRegularRegistrationsByEvent($eventUid);
             $this->registrationRepository->enrichWithRawData($regularRegistrations);
             $this->view->assign('regularRegistrations', $regularRegistrations);
@@ -70,12 +82,14 @@ class RegistrationController extends ActionController
     }
 
     /**
+     * @param int<1, max> $eventUid
+     *
      * @return string|ResponseInterface
      */
-    public function exportCsvForEventAction(Event $event)
+    public function exportCsvForEventAction(int $eventUid)
     {
         if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
-            $GLOBALS['_GET']['eventUid'] = $event->getUid();
+            $GLOBALS['_GET']['eventUid'] = $eventUid;
         }
 
         return $this->exportCsvAction();

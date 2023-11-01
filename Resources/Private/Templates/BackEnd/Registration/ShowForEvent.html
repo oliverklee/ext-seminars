@@ -25,7 +25,7 @@
                 </h1>
                 <div class="col-auto">
                     <f:if condition="{regularRegistrations}">
-                        <f:link.action action="exportCsvForEvent" arguments="{event: event}"
+                        <f:link.action action="exportCsvForEvent" arguments="{eventUid: event.uid}"
                                        class="btn btn-default btn-sm">
                             <core:icon identifier="actions-document-export-csv"/>
                             <f:translate key="backEndModule.action.csvDownload"/>

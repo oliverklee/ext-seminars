@@ -231,16 +231,6 @@ parameters:
 			path: Classes/Controller/BackEnd/RegistrationController.php
 
 		-
-			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findRegularRegistrationsByEvent\\(\\) expects int\\<1, max\\>, int\\|null given\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findWaitingListRegistrationsByEvent\\(\\) expects int\\<1, max\\>, int\\|null given\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
 			message: "#^Parameter \\#2 \\$storageFolderUid of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationProcessor\\:\\:createAdditionalPersons\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/Controller/EventRegistrationController.php
