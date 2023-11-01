@@ -14,6 +14,11 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 trait EventTrait
 {
     /**
+     * @var bool
+     */
+    protected $hidden = false;
+
+    /**
      * The title of this event as visible in the backend.
      * In the frontend, the title might be different, e.g., event dates will use the title of their
      * corresponding topic.
@@ -30,6 +35,16 @@ trait EventTrait
      * @var int
      */
     protected $ownerUid = 0;
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
+    }
 
     public function getInternalTitle(): string
     {

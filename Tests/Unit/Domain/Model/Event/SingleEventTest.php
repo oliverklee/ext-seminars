@@ -97,6 +97,24 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function isHiddenInitiallyReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isHidden());
+    }
+
+    /**
+     * @test
+     */
+    public function setHiddenSetsHidden(): void
+    {
+        $this->subject->setHidden(true);
+
+        self::assertTrue($this->subject->isHidden());
+    }
+
+    /**
+     * @test
+     */
     public function getInternalTitleInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getInternalTitle());
