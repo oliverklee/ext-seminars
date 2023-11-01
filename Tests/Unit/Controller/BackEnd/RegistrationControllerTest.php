@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
@@ -50,6 +51,11 @@ final class RegistrationControllerTest extends UnitTestCase
     private $registrationRepositoryMock;
 
     /**
+     * @var EventRepository&MockObject
+     */
+    private $eventRepositoryMock;
+
+    /**
      * @var EventStatisticsCalculator&MockObject
      */
     private $eventStatisticsCalculatorMock;
@@ -67,12 +73,13 @@ final class RegistrationControllerTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
 
         /** @var RegistrationController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             ['redirect', 'forward', 'redirectToUri'],
-            [$this->registrationRepositoryMock]
+            [$this->registrationRepositoryMock, $this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -161,15 +168,18 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionWithTopicDoesNotQueryForRegistrations(): void
     {
+        $eventUid = 5;
         $event = $this->createMock(EventTopic::class);
-        $event->method('getUid')->willReturn(5);
+        $event->method('getUid')->willReturn($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->registrationRepositoryMock->expects(self::never())->method('findRegularRegistrationsByEvent')
             ->with(self::anything());
         $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
             ->with(self::anything());
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -177,11 +187,14 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionEnrichesProvidedEventWithStatistics(): void
     {
-        $event = $this->buildSingleEventMockWithUid(5);
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')->with($event);
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -189,7 +202,10 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionPassesPermissionsToView(): void
     {
-        $event = $this->buildSingleEventMockWithUid(5);
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
@@ -199,7 +215,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['regularRegistrations', self::anything()]
             );
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -209,7 +225,10 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $pageUid = 8;
         $GLOBALS['_GET']['id'] = (string)$pageUid;
-        $event = $this->buildSingleEventMockWithUid(5);
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
@@ -219,7 +238,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['regularRegistrations', self::anything()]
             );
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -227,7 +246,10 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionPassesProvidedEventToView(): void
     {
-        $event = $this->buildSingleEventMockWithUid(5);
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
         $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
@@ -237,7 +259,23 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['regularRegistrations', self::anything()]
             );
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionForEventNotFoundThrowsException(): void
+    {
+        $eventUid = 5;
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn(null);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1698859637);
+        $this->expectExceptionMessage('Event with UID 5 not found.');
+
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -247,6 +285,8 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $regularRegistrations = [new Registration()];
 
         $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
@@ -260,7 +300,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['regularRegistrations', $regularRegistrations]
             );
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -270,6 +310,8 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $regularRegistrations = [new Registration()];
 
         $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
@@ -277,7 +319,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock->expects(self::once())->method('enrichWithRawData')
             ->with($regularRegistrations);
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -287,6 +329,8 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(true);
         $waitingListRegistrations = [new Registration()];
 
@@ -302,7 +346,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 ['waitingListRegistrations', $waitingListRegistrations]
             );
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -312,6 +356,8 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(true);
         $waitingListRegistrations = [new Registration()];
 
@@ -320,7 +366,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([self::anything()], [$waitingListRegistrations]);
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -328,13 +374,16 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionForEventWithoutWaitingListDoesNotQueryForWaitingList(): void
     {
-        $event = $this->buildSingleEventMockWithUid(5);
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(false);
 
         $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
             ->with(self::anything());
 
-        $this->subject->showForEventAction($event);
+        $this->subject->showForEventAction($eventUid);
     }
 
     /**
@@ -342,7 +391,7 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function exportCsvForEventActionProvidesCsvDownloaderWithRegistrationsTableName(): void
     {
-        $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+        $this->subject->exportCsvForEventAction(5);
 
         self::assertSame('tx_seminars_attendances', $GLOBALS['_GET']['table']);
     }
@@ -353,9 +402,8 @@ final class RegistrationControllerTest extends UnitTestCase
     public function exportCsvForEventActionProvidesCsvDownloaderWithUidOfProvidedPage(): void
     {
         $eventUid = 9;
-        $event = $this->buildSingleEventMockWithUid($eventUid);
 
-        $this->subject->exportCsvForEventAction($event);
+        $this->subject->exportCsvForEventAction($eventUid);
 
         self::assertSame($eventUid, $GLOBALS['_GET']['eventUid']);
     }
@@ -368,7 +416,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $csvContent = 'foo,bar';
         $this->csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvContent);
 
-        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+        $result = $this->subject->exportCsvForEventAction(5);
 
         if ($result instanceof ResponseInterface) {
             $result = $result->getBody()->getContents();
@@ -381,7 +429,7 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function exportCsvForEventActionSetsCsvContentType(): void
     {
-        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+        $result = $this->subject->exportCsvForEventAction(5);
 
         if ($result instanceof ResponseInterface) {
             // 11LTS path
@@ -403,7 +451,7 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function exportCsvForEventActionSetsDownloadFilename(): void
     {
-        $result = $this->subject->exportCsvForEventAction($this->buildSingleEventMockWithUid(5));
+        $result = $this->subject->exportCsvForEventAction(5);
 
         if ($result instanceof ResponseInterface) {
             // 11LTS path
