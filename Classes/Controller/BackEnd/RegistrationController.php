@@ -82,7 +82,7 @@ class RegistrationController extends ActionController
     }
 
     /**
-     * @param int<0, max> $pageUid
+     * @param int<1, max> $pageUid
      *
      * @return string|ResponseInterface
      */
