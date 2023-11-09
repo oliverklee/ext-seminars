@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow feuserextrafields 6.x (#2668)
 
 ### Deprecated
 
