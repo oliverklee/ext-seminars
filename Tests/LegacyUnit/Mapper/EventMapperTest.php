@@ -104,8 +104,8 @@ final class EventMapperTest extends TestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $timeSlotUid,
+        self::assertSame(
+            (string)$timeSlotUid,
             $model->getTimeSlots()->getUids()
         );
     }
@@ -128,12 +128,12 @@ final class EventMapperTest extends TestCase
     public function getPlacesWithOnePlaceReturnsListOfPlaces(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $place = MapperRegistry::get(PlaceMapper::class)
-            ->getNewGhost();
+        $placeUid = MapperRegistry::get(PlaceMapper::class)->getNewGhost()->getUid();
+        \assert($placeUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $place->getUid(),
+            $placeUid,
             'place'
         );
 
@@ -147,18 +147,18 @@ final class EventMapperTest extends TestCase
     public function getPlacesWithOnePlaceReturnsOnePlace(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $place = MapperRegistry::get(PlaceMapper::class)
-            ->getNewGhost();
+        $placeUid = MapperRegistry::get(PlaceMapper::class)->getNewGhost()->getUid();
+        \assert($placeUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $place->getUid(),
+            $placeUid,
             'place'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $place->getUid(),
+        self::assertSame(
+            (string)$placeUid,
             $model->getPlaces()->getUids()
         );
     }
@@ -181,12 +181,12 @@ final class EventMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodging = MapperRegistry::get(LodgingMapper::class)
-            ->getNewGhost();
+        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
+        \assert($lodgingUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $lodging->getUid(),
+            $lodgingUid,
             'lodgings'
         );
 
@@ -200,18 +200,18 @@ final class EventMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodging = MapperRegistry::get(LodgingMapper::class)
-            ->getNewGhost();
+        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
+        \assert($lodgingUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $lodging->getUid(),
+            $lodgingUid,
             'lodgings'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $lodging->getUid(),
+        self::assertSame(
+            (string)$lodgingUid,
             $model->getLodgings()->getUids()
         );
     }
@@ -234,12 +234,12 @@ final class EventMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $food = MapperRegistry::get(FoodMapper::class)
-            ->getNewGhost();
+        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
+        \assert($foodUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $food->getUid(),
+            $foodUid,
             'foods'
         );
 
@@ -253,18 +253,18 @@ final class EventMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsOneFood(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $food = MapperRegistry::get(FoodMapper::class)
-            ->getNewGhost();
+        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
+        \assert($foodUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $food->getUid(),
+            $foodUid,
             'foods'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $food->getUid(),
+        self::assertSame(
+            (string)$foodUid,
             $model->getFoods()->getUids()
         );
     }
@@ -287,12 +287,12 @@ final class EventMapperTest extends TestCase
     public function getSpeakersWithOneSpeakerReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'speakers'
         );
 
@@ -309,18 +309,18 @@ final class EventMapperTest extends TestCase
     public function getSpeakersWithOneSpeakerReturnsOneSpeaker(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'speakers'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $speaker->getUid(),
+        self::assertSame(
+            (string)$speakerUid,
             $model->getSpeakers()->getUids()
         );
     }
@@ -343,12 +343,12 @@ final class EventMapperTest extends TestCase
     public function getPartnersWithOnePartnerReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'partners'
         );
 
@@ -365,18 +365,18 @@ final class EventMapperTest extends TestCase
     public function getPartnersWithOnePartnerReturnsOnePartner(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'partners'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $speaker->getUid(),
+        self::assertSame(
+            (string)$speakerUid,
             $model->getPartners()->getUids()
         );
     }
@@ -399,12 +399,12 @@ final class EventMapperTest extends TestCase
     public function getTutorsWithOneTutorReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'tutors'
         );
 
@@ -421,18 +421,18 @@ final class EventMapperTest extends TestCase
     public function getTutorsWithOneTutorReturnsOneTutor(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'tutors'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $speaker->getUid(),
+        self::assertSame(
+            (string)$speakerUid,
             $model->getTutors()->getUids()
         );
     }
@@ -455,12 +455,12 @@ final class EventMapperTest extends TestCase
     public function getLeadersWithOneLeaderReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'leaders'
         );
 
@@ -477,18 +477,18 @@ final class EventMapperTest extends TestCase
     public function getLeadersWithOneLeaderReturnsOneLeader(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $speaker->getUid(),
+            $speakerUid,
             'leaders'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $speaker->getUid(),
+        self::assertSame(
+            (string)$speakerUid,
             $model->getLeaders()->getUids()
         );
     }
@@ -514,12 +514,12 @@ final class EventMapperTest extends TestCase
             'tx_seminars_seminars',
             ['organizers' => 1]
         );
-        $organizer = MapperRegistry::get(OrganizerMapper::class)
-            ->getNewGhost();
+        $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
+        \assert($organizerUid > 0);
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $uid,
-            $organizer->getUid()
+            $organizerUid
         );
 
         $model = $this->subject->find($uid);
@@ -535,17 +535,17 @@ final class EventMapperTest extends TestCase
             'tx_seminars_seminars',
             ['organizers' => 1]
         );
-        $organizer = MapperRegistry::get(OrganizerMapper::class)
-            ->getNewGhost();
+        $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
+        \assert($organizerUid > 0);
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
             $uid,
-            $organizer->getUid()
+            $organizerUid
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $organizer->getUid(),
+        self::assertSame(
+            (string)$organizerUid,
             $model->getOrganizers()->getUids()
         );
     }
@@ -568,12 +568,12 @@ final class EventMapperTest extends TestCase
     public function getOrganizingPartnersWithOneOrganizingReturnsListOfOrganizers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $organizer = MapperRegistry::get(OrganizerMapper::class)
-            ->getNewGhost();
+        $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
+        \assert($organizerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $organizer->getUid(),
+            $organizerUid,
             'organizing_partners'
         );
 
@@ -587,18 +587,18 @@ final class EventMapperTest extends TestCase
     public function getOrganizingPartnersWithOneOrganizingPartnersReturnsOneOrganizingPartner(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $organizer = MapperRegistry::get(OrganizerMapper::class)
-            ->getNewGhost();
+        $organizerUid = MapperRegistry::get(OrganizerMapper::class)->getNewGhost()->getUid();
+        \assert($organizerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $organizer->getUid(),
+            $organizerUid,
             'organizing_partners'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $organizer->getUid(),
+        self::assertSame(
+            (string)$organizerUid,
             $model->getOrganizingPartners()->getUids()
         );
     }
@@ -620,9 +620,9 @@ final class EventMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
-        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)
-            ->getLoadedTestingModel([]);
-        $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
+        $frontEndUserUid = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost()->getUid();
+        \assert($frontEndUserUid > 0);
+        $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUserUid]);
 
         self::assertInstanceOf(OelibFrontEndUser::class, $testingModel->getOwner());
     }
@@ -645,11 +645,12 @@ final class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost();
+        $frontEndUserUid = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost()->getUid();
+        \assert($frontEndUserUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $frontEndUser->getUid(),
+            $frontEndUserUid,
             'vips'
         );
 
@@ -663,17 +664,18 @@ final class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsOneEventManager(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost();
+        $frontEndUserUid = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost()->getUid();
+        \assert($frontEndUserUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $frontEndUser->getUid(),
+            $frontEndUserUid,
             'vips'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $frontEndUser->getUid(),
+        self::assertSame(
+            (string)$frontEndUserUid,
             $model->getEventManagers()->getUids()
         );
     }

@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -70,14 +71,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
     private $configuration;
 
     /**
-     * @var int
+     * @var positive-int
      */
-    private $seminarUid = 0;
+    private $seminarUid;
 
     /**
-     * @var int
+     * @var positive-int
      */
-    private $organizerUid = 0;
+    private $organizerUid;
 
     /**
      * @var MailMessage&MockObject
@@ -469,8 +470,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
@@ -506,8 +508,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
@@ -806,9 +809,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->createEventWithOrganizer();
         $registration = $this->createRegistration();
+        $user = $registration->getFrontEndUser();
+        self::assertInstanceOf(FrontEndUser::class, $user);
+        $userUid = $user->getUid();
+        \assert($userUid > 0);
         $this->testingFramework->changeRecord(
             'fe_users',
-            $registration->getFrontEndUser()->getUid(),
+            $userUid,
             ['email' => 'foo@bar.com']
         );
         $controller = new DefaultController();

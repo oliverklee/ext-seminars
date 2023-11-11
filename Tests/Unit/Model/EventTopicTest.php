@@ -1215,9 +1215,9 @@ final class EventTopicTest extends UnitTestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue(): void
     {
-        $this->subject->setData(
-            ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME']]
-        );
+        $now = $GLOBALS['SIM_EXEC_TIME'];
+        self::assertIsInt($now);
+        $this->subject->setData(['deadline_early_bird' => $now]);
 
         self::assertTrue(
             $this->subject->isEarlyBirdDeadlineOver()

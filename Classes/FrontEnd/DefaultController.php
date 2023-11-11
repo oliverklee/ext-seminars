@@ -1112,7 +1112,9 @@ class DefaultController extends TemplateHelper
         $eventMapper = MapperRegistry::get(EventMapper::class);
 
         foreach ($this->seminar->getDependencies() as $dependency) {
-            $event = $eventMapper->find($dependency->getUid());
+            $dependencyUid = $dependency->getUid();
+            \assert($dependencyUid > 0);
+            $event = $eventMapper->find($dependencyUid);
             $this->setMarker(
                 'dependency_title',
                 $this->createSingleViewLink($event, $event->getTitle())
@@ -1682,8 +1684,9 @@ class DefaultController extends TemplateHelper
         $result = '';
 
         if ($this->seminar->comesFromDatabase()) {
-            $mapper = MapperRegistry::get(EventMapper::class);
-            $event = $mapper->find($this->getSeminar()->getUid());
+            $eventUid = $this->seminar->getUid();
+            \assert($eventUid > 0);
+            $event = MapperRegistry::get(EventMapper::class)->find($eventUid);
 
             $cssClasses = [];
 

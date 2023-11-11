@@ -140,6 +140,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addTargetGroupRelation(array $targetGroupData = []): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
             $targetGroupData
@@ -147,7 +150,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_target_groups_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfTargetGroups(
@@ -168,13 +171,16 @@ final class LegacyEventTest extends TestCase
     private function addPaymentMethodRelation(
         array $paymentMethodData = []
     ): int {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
             $paymentMethodData
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfPaymentMethods(
@@ -195,6 +201,9 @@ final class LegacyEventTest extends TestCase
     private function addOrganizingPartnerRelation(
         array $organizerData = []
     ): int {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             $organizerData
@@ -202,7 +211,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizing_partners_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfOrganizingPartners(
@@ -222,12 +231,15 @@ final class LegacyEventTest extends TestCase
      */
     private function addCategoryRelation(array $categoryData = []): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             $categoryData
         );
 
-        $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $this->subject->getUid(), $uid);
+        $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $uid);
         $this->subject->setNumberOfCategories($this->subject->getNumberOfCategories() + 1);
 
         return $uid;
@@ -243,6 +255,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addOrganizerRelation(array $organizerData = []): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             $organizerData
@@ -250,7 +265,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfOrganizers(
@@ -270,6 +285,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addSpeakerRelation(array $speakerData = []): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             $speakerData
@@ -277,7 +295,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfSpeakers(
@@ -297,6 +315,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addPartnerRelation(array $speakerData): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             $speakerData
@@ -304,7 +325,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_partners',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfPartners(
@@ -324,6 +345,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addTutorRelation(array $speakerData): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             $speakerData
@@ -331,7 +355,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_tutors',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfTutors(
@@ -351,6 +375,9 @@ final class LegacyEventTest extends TestCase
      */
     private function addLeaderRelation(array $speakerData): int
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             $speakerData
@@ -358,7 +385,7 @@ final class LegacyEventTest extends TestCase
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm_leaders',
-            $this->subject->getUid(),
+            $eventUid,
             $uid
         );
         $this->subject->setNumberOfLeaders(
@@ -465,23 +492,25 @@ final class LegacyEventTest extends TestCase
      */
     public function addCategoryRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $eventUid])
         );
     }
 
@@ -534,23 +563,25 @@ final class LegacyEventTest extends TestCase
      */
     public function addTargetGroupRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_target_groups_mm');
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
         );
     }
 
@@ -628,6 +659,8 @@ final class LegacyEventTest extends TestCase
      */
     public function addOrganizingPartnerRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_organizing_partners_mm');
 
         self::assertSame(
@@ -635,7 +668,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -645,7 +678,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -655,7 +688,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_organizing_partners_mm',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
     }
@@ -734,23 +767,25 @@ final class LegacyEventTest extends TestCase
      */
     public function addSpeakerRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm');
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
         );
 
         $this->addSpeakerRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
         );
 
         $this->addSpeakerRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $eventUid])
         );
     }
 
@@ -782,6 +817,8 @@ final class LegacyEventTest extends TestCase
      */
     public function addPartnerRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_partners');
 
         self::assertSame(
@@ -789,7 +826,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -799,7 +836,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -809,7 +846,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_partners',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
     }
@@ -842,6 +879,8 @@ final class LegacyEventTest extends TestCase
      */
     public function addTutorRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_tutors');
 
         self::assertSame(
@@ -849,7 +888,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -859,7 +898,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -869,7 +908,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_tutors',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
     }
@@ -902,6 +941,8 @@ final class LegacyEventTest extends TestCase
      */
     public function addLeaderRelationCreatesRelations(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_leaders');
 
         self::assertSame(
@@ -909,7 +950,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -919,7 +960,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
 
@@ -929,7 +970,7 @@ final class LegacyEventTest extends TestCase
             $connection->count(
                 '*',
                 'tx_seminars_seminars_speakers_mm_leaders',
-                ['uid_local' => $this->subject->getUid()]
+                ['uid_local' => $eventUid]
             )
         );
     }
@@ -3190,10 +3231,13 @@ final class LegacyEventTest extends TestCase
      */
     public function getTimeSlotsAsArrayWithMarkersReturnsArraySortedByDate(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
-                'seminar' => $this->subject->getUid(),
+                'seminar' => $eventUid,
                 'begin_date' => 200,
                 'room' => 'Room1',
             ]
@@ -3201,7 +3245,7 @@ final class LegacyEventTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
-                'seminar' => $this->subject->getUid(),
+                'seminar' => $eventUid,
                 'begin_date' => 100,
                 'room' => 'Room2',
             ]
@@ -5708,13 +5752,16 @@ final class LegacyEventTest extends TestCase
      */
     public function getEventDataForEventWithMultipleLodgingsSeparatesLodgingsWithLineFeeds(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $lodgingUid1 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
             ['title' => 'foo']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $lodgingUid1
         );
 
@@ -5724,7 +5771,7 @@ final class LegacyEventTest extends TestCase
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $lodgingUid2
         );
 
@@ -5741,13 +5788,16 @@ final class LegacyEventTest extends TestCase
      */
     public function getEventDataForEventWithMultipleLodgingsDoesNotSeparateLodgingsWithCarriageReturnsAndLineFeeds(): void
     {
+        $eventUid = $this->subject->getUid();
+        \assert($eventUid > 0);
+
         $lodgingUid1 = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
             ['title' => 'foo']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $lodgingUid1
         );
 
@@ -5757,7 +5807,7 @@ final class LegacyEventTest extends TestCase
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_lodgings_mm',
-            $this->subject->getUid(),
+            $eventUid,
             $lodgingUid2
         );
 

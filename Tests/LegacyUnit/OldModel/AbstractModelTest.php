@@ -24,9 +24,9 @@ final class AbstractModelTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var int UID of the minimal fixture's data in the DB
+     * @var positive-int UID of the minimal fixture's data in the DB
      */
-    private $subjectUid = 0;
+    private $subjectUid;
 
     protected function setUp(): void
     {

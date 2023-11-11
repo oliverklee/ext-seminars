@@ -155,12 +155,12 @@ final class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = MapperRegistry::get(LodgingMapper::class)
-            ->getNewGhost();
+        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
+        \assert($lodgingUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $lodging->getUid(),
+            $lodgingUid,
             'lodgings'
         );
 
@@ -174,18 +174,18 @@ final class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = MapperRegistry::get(LodgingMapper::class)
-            ->getNewGhost();
+        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
+        \assert($lodgingUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $lodging->getUid(),
+            $lodgingUid,
             'lodgings'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $lodging->getUid(),
+        self::assertSame(
+            $lodgingUid,
             $model->getLodgings()->first()->getUid()
         );
     }
@@ -208,11 +208,12 @@ final class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = MapperRegistry::get(FoodMapper::class)->getNewGhost();
+        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
+        \assert($foodUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $food->getUid(),
+            $foodUid,
             'foods'
         );
 
@@ -226,18 +227,18 @@ final class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsOneFood(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = MapperRegistry::get(FoodMapper::class)
-            ->getNewGhost();
+        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
+        \assert($foodUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $food->getUid(),
+            $foodUid,
             'foods'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $food->getUid(),
+        self::assertSame(
+            $foodUid,
             $model->getFoods()->first()->getUid()
         );
     }
@@ -260,18 +261,18 @@ final class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = MapperRegistry::get(CheckboxMapper::class)
-            ->getNewGhost();
+        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
+        \assert($checkboxUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $checkbox->getUid(),
+            $checkboxUid,
             'checkboxes'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $checkbox->getUid(),
+        self::assertSame(
+            $checkboxUid,
             $model->getCheckboxes()->first()->getUid()
         );
     }
@@ -282,18 +283,18 @@ final class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = MapperRegistry::get(CheckboxMapper::class)
-            ->getNewGhost();
+        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
+        \assert($checkboxUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
-            $checkbox->getUid(),
+            $checkboxUid,
             'checkboxes'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $checkbox->getUid(),
+        self::assertSame(
+            $checkboxUid,
             $model->getCheckboxes()->first()->getUid()
         );
     }

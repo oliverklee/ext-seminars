@@ -155,7 +155,7 @@ final class MailNotifierTest extends TestCase
      *
      * @param array $additionalSeminarData additional data for the seminar record, may be empty
      *
-     * @return int UID of the added event, will be > 0
+     * @return positive-int UID of the added event, will be > 0
      */
     private function createSeminarWithOrganizer(array $additionalSeminarData = []): int
     {
@@ -179,7 +179,7 @@ final class MailNotifierTest extends TestCase
      *
      * Note: This function must only be called once per test.
      *
-     * @param int $eventUid event UID, must be > 0
+     * @param positive-int $eventUid event UID, must be > 0
      */
     private function addSpeaker(int $eventUid): void
     {
@@ -318,6 +318,7 @@ final class MailNotifierTest extends TestCase
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject(): void
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
         $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -345,6 +346,7 @@ final class MailNotifierTest extends TestCase
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage(): void
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
         $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -581,6 +583,7 @@ final class MailNotifierTest extends TestCase
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject(): void
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
         $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -610,6 +613,7 @@ final class MailNotifierTest extends TestCase
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage(): void
     {
         $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
         $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');

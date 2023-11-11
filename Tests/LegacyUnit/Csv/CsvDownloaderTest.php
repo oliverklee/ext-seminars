@@ -31,16 +31,16 @@ final class CsvDownloaderTest extends TestCase
     /**
      * PID of the system folder in which we store our test data
      *
-     * @var int
+     * @var positive-int
      */
-    private $pid = 0;
+    private $pid;
 
     /**
      * UID of a test event record
      *
-     * @var int
+     * @var positive-int
      */
-    private $eventUid = 0;
+    private $eventUid;
 
     protected function setUp(): void
     {

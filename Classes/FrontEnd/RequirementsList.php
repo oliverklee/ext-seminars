@@ -60,7 +60,9 @@ class RequirementsList extends AbstractView
         $eventMapper = MapperRegistry::get(EventMapper::class);
         /** @var LegacyEvent $requirement */
         foreach ($this->getRequirements() as $requirement) {
-            $event = $eventMapper->find($requirement->getUid());
+            $requirementUid = $requirement->getUid();
+            \assert($requirementUid > 0);
+            $event = $eventMapper->find($requirementUid);
 
             $singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);
             $this->setMarker(

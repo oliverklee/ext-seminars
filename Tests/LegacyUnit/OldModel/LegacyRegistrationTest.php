@@ -605,9 +605,12 @@ final class LegacyRegistrationTest extends TestCase
      */
     public function hasExistingFrontEndUserWithInexistentFrontEndUserReturnsFalse(): void
     {
+        $userUid = $this->subject->getUser();
+        \assert($userUid > 0);
+
         $this->testingFramework->changeRecord(
             'fe_users',
-            $this->subject->getUser(),
+            $userUid,
             ['deleted' => 1]
         );
 
