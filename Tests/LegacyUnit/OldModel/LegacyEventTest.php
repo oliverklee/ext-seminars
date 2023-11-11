@@ -7654,7 +7654,7 @@ final class LegacyEventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceRegular();
 
-        self::assertSame('123.45', $result);
+        self::assertSame('€ 123,45', $result);
     }
 
     /**
@@ -7680,7 +7680,7 @@ final class LegacyEventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceSpecial();
 
-        self::assertSame('123.45', $result);
+        self::assertSame('€ 123,45', $result);
     }
 
     /**
