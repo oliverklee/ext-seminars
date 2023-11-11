@@ -941,9 +941,13 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function formatPrice(string $value): string
     {
+        $currency = ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency');
+        if ($currency === '') {
+            $currency = 'EUR';
+        }
+
         $priceViewHelper = GeneralUtility::makeInstance(PriceViewHelper::class);
-        $priceViewHelper
-            ->setCurrencyFromIsoAlpha3Code(ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency'));
+        $priceViewHelper->setCurrencyFromIsoAlpha3Code($currency);
         $priceViewHelper->setValue((float)$value);
 
         return $priceViewHelper->render();
