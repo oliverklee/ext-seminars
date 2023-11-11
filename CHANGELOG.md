@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add support for PHP 8.3 (#2676)
 
 ### Changed
 -  Migrate to the TYPO3 testing framework (#2702)
