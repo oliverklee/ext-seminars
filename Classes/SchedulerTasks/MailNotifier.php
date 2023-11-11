@@ -30,7 +30,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifier extends AbstractTask
 {
     /**
-     * @var int
+     * @var int<0, max>
      */
     protected $configurationPageUid = 0;
 
@@ -111,12 +111,17 @@ class MailNotifier extends AbstractTask
 
     /**
      * Sets the UID of the page with the TS configuration for this task.
+     *
+     * @param int<0, max> $pageUid
      */
     public function setConfigurationPageUid(int $pageUid): void
     {
         $this->configurationPageUid = $pageUid;
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function getConfigurationPageUid(): int
     {
         return $this->configurationPageUid;
@@ -400,7 +405,10 @@ class MailNotifier extends AbstractTask
 
     protected function getConfiguration(): Configuration
     {
-        PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
+        $pageUid = $this->getConfigurationPageUid();
+        if ($pageUid > 0) {
+            PageFinder::getInstance()->setPageUid($pageUid);
+        }
 
         return ConfigurationRegistry::get('plugin.tx_seminars');
     }

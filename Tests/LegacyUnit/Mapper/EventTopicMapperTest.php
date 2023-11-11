@@ -96,12 +96,12 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $category = MapperRegistry::get(CategoryMapper::class)
-            ->getNewGhost();
+        $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
+        \assert($categoryUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $category->getUid(),
+            $categoryUid,
             'categories'
         );
 
@@ -118,18 +118,18 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $category = MapperRegistry::get(CategoryMapper::class)
-            ->getNewGhost();
+        $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
+        \assert($categoryUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $category->getUid(),
+            $categoryUid,
             'categories'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $category->getUid(),
+        self::assertSame(
+            (string)$categoryUid,
             $model->getCategories()->getUids()
         );
     }
@@ -184,7 +184,8 @@ final class EventTopicMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
+        \assert($paymentMethodUid > 0);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -195,7 +196,7 @@ final class EventTopicMapperTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $uid,
-            $paymentMethod->getUid()
+            $paymentMethodUid
         );
 
         $model = $this->subject->find($uid);
@@ -207,7 +208,8 @@ final class EventTopicMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
+        $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
+        \assert($paymentMethodUid > 0);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -218,12 +220,12 @@ final class EventTopicMapperTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $uid,
-            $paymentMethod->getUid()
+            $paymentMethodUid
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $paymentMethod->getUid(),
+        self::assertSame(
+            (string)$paymentMethodUid,
             $model->getPaymentMethods()->getUids()
         );
     }
@@ -251,11 +253,12 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
+        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
+        \assert($targetGroupUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $targetGroup->getUid(),
+            $targetGroupUid,
             'target_groups'
         );
 
@@ -275,17 +278,18 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $targetGroup = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost();
+        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
+        \assert($targetGroupUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $targetGroup->getUid(),
+            $targetGroupUid,
             'target_groups'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $targetGroup->getUid(),
+        self::assertSame(
+            (string)$targetGroupUid,
             $model->getTargetGroups()->getUids()
         );
     }
@@ -313,12 +317,12 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $checkbox = MapperRegistry::get(CheckboxMapper::class)
-            ->getNewGhost();
+        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
+        \assert($checkboxUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $checkbox->getUid(),
+            $checkboxUid,
             'checkboxes'
         );
 
@@ -335,18 +339,18 @@ final class EventTopicMapperTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
-        $checkbox = MapperRegistry::get(CheckboxMapper::class)
-            ->getNewGhost();
+        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
+        \assert($checkboxUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
-            $checkbox->getUid(),
+            $checkboxUid,
             'checkboxes'
         );
 
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            $checkbox->getUid(),
+        self::assertSame(
+            (string)$checkboxUid,
             $model->getCheckboxes()->getUids()
         );
     }

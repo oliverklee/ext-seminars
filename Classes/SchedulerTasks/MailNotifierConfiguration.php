@@ -88,8 +88,8 @@ class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
     public function saveAdditionalFields(array $submittedData, AbstractTask $task): void
     {
         $pageUid = (int)($submittedData['seminars_configurationPageUid'] ?? 0);
-
-        /** @var MailNotifier $task */
-        $task->setConfigurationPageUid($pageUid);
+        if ($pageUid > 0 && $task instanceof MailNotifier) {
+            $task->setConfigurationPageUid($pageUid);
+        }
     }
 }

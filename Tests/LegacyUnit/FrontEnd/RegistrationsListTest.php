@@ -33,19 +33,19 @@ final class RegistrationsListTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var int the UID of a seminar to which the fixture relates
+     * @var positive-int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid = 0;
+    private $seminarUid;
 
     /**
-     * @var int the UID of a front end user for testing purposes
+     * @var positive-int the UID of a front end user for testing purposes
      */
-    private $feUserUid = 0;
+    private $feUserUid;
 
     /**
-     * @var int the UID of a registration for testing purposes
+     * @var positive-int the UID of a registration for testing purposes
      */
-    private $registrationUid = 0;
+    private $registrationUid;
 
     protected function setUp(): void
     {

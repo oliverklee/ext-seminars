@@ -90,11 +90,12 @@ final class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = MapperRegistry::get(SpeakerMapper::class)->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
             $timeSlotUid,
-            $speaker->getUid(),
+            $speakerUid,
             'speakers'
         );
 
@@ -113,18 +114,18 @@ final class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = MapperRegistry::get(SpeakerMapper::class)
-            ->getNewGhost();
+        $speakerUid = MapperRegistry::get(SpeakerMapper::class)->getNewGhost()->getUid();
+        \assert($speakerUid > 0);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
             $timeSlotUid,
-            $speaker->getUid(),
+            $speakerUid,
             'speakers'
         );
 
         $model = $this->subject->find($timeSlotUid);
-        self::assertEquals(
-            $speaker->getUid(),
+        self::assertSame(
+            (string)$speakerUid,
             $model->getSpeakers()->getUids()
         );
     }

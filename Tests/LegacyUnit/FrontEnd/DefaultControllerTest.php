@@ -52,27 +52,27 @@ final class DefaultControllerTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var int the UID of a seminar to which the fixture relates
+     * @var positive-int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid = 0;
+    private $seminarUid;
 
     /**
-     * @var int PID of a dummy system folder
+     * @var positive-int PID of a dummy system folder
      */
-    private $systemFolderPid = 0;
+    private $systemFolderPid;
 
     /**
-     * @var positive-int|0 the number of target groups for the current event record
+     * @var int<0, max> the number of target groups for the current event record
      */
     private $numberOfTargetGroups = 0;
 
     /**
-     * @var positive-int|0 the number of categories for the current event record
+     * @var int<0, max> the number of categories for the current event record
      */
     private $numberOfCategories = 0;
 
     /**
-     * @var positive-int|0 the number of organizers for the current event record
+     * @var int<0, max> the number of organizers for the current event record
      */
     private $numberOfOrganizers = 0;
 
@@ -104,9 +104,9 @@ final class DefaultControllerTest extends TestCase
     private $pluginConfiguration;
 
     /**
-     * @var positive-int|0
+     * @var positive-int
      */
-    private $rootPageUid = 0;
+    private $rootPageUid;
 
     protected function setUp(): void
     {

@@ -258,10 +258,12 @@ final class EventTest extends TestCase
         $this->subject->setRegistrations($registrations);
 
         $registration = MapperRegistry::get(RegistrationMapper::class)->getLoadedTestingModel([]);
+        $registrationUid = $registration->getUid();
+        \assert($registrationUid > 0);
         $this->subject->attachRegistration($registration);
 
         self::assertTrue(
-            $this->subject->getRegistrations()->hasUid($registration->getUid())
+            $this->subject->getRegistrations()->hasUid($registrationUid)
         );
     }
 
@@ -273,6 +275,8 @@ final class EventTest extends TestCase
         /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $oldRegistration = MapperRegistry::get(RegistrationMapper::class)->getNewGhost();
+        $oldRegistrationUid = $oldRegistration->getUid();
+        \assert($oldRegistrationUid > 0);
         $registrations->add($oldRegistration);
         $this->subject->setRegistrations($registrations);
 
@@ -280,7 +284,7 @@ final class EventTest extends TestCase
         $this->subject->attachRegistration($newRegistration);
 
         self::assertTrue(
-            $this->subject->getRegistrations()->hasUid($oldRegistration->getUid())
+            $this->subject->getRegistrations()->hasUid($oldRegistrationUid)
         );
     }
 

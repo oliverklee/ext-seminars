@@ -351,11 +351,14 @@ class LegacyRegistration extends AbstractModel
     /**
      * Gets the attendee's UID.
      *
-     * @return int the attendee's FE user uid
+     * @return int<0, max> the attendee's FE user uid
      */
     public function getUser(): int
     {
-        return $this->getRecordPropertyInteger('user');
+        $userUid = $this->getRecordPropertyInteger('user');
+        \assert($userUid >= 0);
+
+        return $userUid;
     }
 
     public function getFrontEndUser(): ?FrontEndUser
@@ -364,12 +367,11 @@ class LegacyRegistration extends AbstractModel
             return $this->user;
         }
         $uid = $this->getUser();
-        if ($uid === 0) {
+        if ($uid <= 0) {
             return null;
         }
 
-        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
-        $this->user = $mapper->find($uid);
+        $this->user = MapperRegistry::get(FrontEndUserMapper::class)->find($uid);
 
         return $this->user;
     }

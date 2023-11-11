@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Make some type annotations more specific (#2673)
 - Set EUR as a fallback currency (#2674)
 - Only show the registrations CSV export button if there are any records (#2660)
 

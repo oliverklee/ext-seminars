@@ -382,7 +382,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param string $fieldName
+     * @param non-empty-string $fieldName
      *
      * @dataProvider dumpableUserFieldsDataProvider
      */
@@ -431,7 +431,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param string $fieldName
+     * @param non-empty-string $fieldName
      *
      * @dataProvider dumpableStringUserFieldsDataProvider
      */
@@ -466,7 +466,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param string $fieldName
+     * @param non-empty-string $fieldName
      *
      * @dataProvider dumpableIntegerUserFieldsDataProvider
      */

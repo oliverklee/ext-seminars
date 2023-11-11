@@ -25,9 +25,9 @@ final class RequirementsListTest extends TestCase
     private $subject;
 
     /**
-     * @var int the UID of a seminar to which the plugin relates
+     * @var positive-int the UID of a seminar to which the plugin relates
      */
-    private $seminarUid = 0;
+    private $seminarUid;
 
     /**
      * @var TestingFramework

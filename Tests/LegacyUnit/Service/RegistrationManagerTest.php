@@ -16,6 +16,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -55,9 +56,9 @@ final class RegistrationManagerTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var int
+     * @var positive-int
      */
-    private $seminarUid = 0;
+    private $seminarUid;
 
     /**
      * @var TestingLegacyEvent
@@ -985,11 +986,11 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registration = $this->createRegistration();
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $registration->getFrontEndUser()->getUid(),
-            ['email' => 'foo@bar.com']
-        );
+        $user = $registration->getFrontEndUser();
+        self::assertInstanceOf(FrontEndUser::class, $user);
+        $userUid = $user->getUid();
+        \assert($userUid > 0);
+        $this->testingFramework->changeRecord('fe_users', $userUid, ['email' => 'foo@bar.com']);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1016,7 +1017,9 @@ final class RegistrationManagerTest extends TestCase
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
         $registration = $this->createRegistration();
-        $this->createRegistration();
+        $registrationUid = $registration->getUid();
+        \assert($registrationUid > 0);
+
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1027,7 +1030,7 @@ final class RegistrationManagerTest extends TestCase
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
-            $registration->getUid(),
+            $registrationUid,
             ['registration_queue' => 1]
         );
 
@@ -1053,6 +1056,9 @@ final class RegistrationManagerTest extends TestCase
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
         $registration = $this->createRegistration();
+        $registrationUid = $registration->getUid();
+        \assert($registrationUid > 0);
+
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1063,7 +1069,7 @@ final class RegistrationManagerTest extends TestCase
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
-            $registration->getUid(),
+            $registrationUid,
             ['registration_queue' => 1]
         );
 
@@ -1084,8 +1090,9 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', false);
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
@@ -1308,8 +1315,9 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendNotification', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
@@ -1337,8 +1345,9 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendNotification', false);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
@@ -1880,8 +1889,9 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(RegistrationMapper::class);
-        $registration = $mapper->find($registrationOld->getUid());
+        $registrationUid = $registrationOld->getUid();
+        \assert($registrationUid > 0);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
@@ -2124,9 +2134,10 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarForInexistentUidReturnsFalse(): void
     {
-        self::assertFalse(
-            $this->subject->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
-        );
+        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
+        self::assertIsInt($autoIncrement);
+
+        self::assertFalse($this->subject->existsSeminar($autoIncrement));
     }
 
     /**
@@ -2200,9 +2211,12 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage(): void
     {
+        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
+        self::assertIsInt($autoIncrement);
+
         self::assertStringContainsString(
             $this->translate('message_wrongSeminarNumber'),
-            $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
+            $this->subject->existsSeminarMessage($autoIncrement)
         );
     }
 
@@ -2211,7 +2225,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForInexistentUidSendsNotFoundHeader(): void
     {
-        $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
+        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
+        self::assertIsInt($autoIncrement);
+        $this->subject->existsSeminarMessage($autoIncrement);
 
         self::assertSame(
             'Status: 404 Not Found',

@@ -2756,11 +2756,6 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -2792,6 +2787,16 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$organizerUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$seminarUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
@@ -2981,13 +2986,13 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Csv\\\\CsvDownloader\\:\\:createAndOutputListOfRegistrations\\(\\) expects int\\<0, max\\>, int given\\.$#"
-			count: 19
+			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 14
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 14
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$eventUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -2997,6 +3002,11 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$pid \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
@@ -3146,12 +3156,42 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$seminarUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$systemFolderPid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:\\$feUserUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:\\$registrationUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:\\$seminarUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RequirementsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RequirementsListTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RequirementsListTest\\:\\:\\$seminarUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/RequirementsListTest.php
 
@@ -3196,9 +3236,9 @@ parameters:
 			path: Tests/LegacyUnit/Mapper/RegistrationMapperTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\AbstractModelTest\\:\\:\\$subjectUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/Model/RegistrationTest.php
+			path: Tests/LegacyUnit/OldModel/AbstractModelTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
@@ -3301,6 +3341,11 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) should return int\\<1, max\\> but returns int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
 			message: "#^Only numeric types are allowed in \\-, int\\<0, max\\>\\|false given on the left side\\.$#"
 			count: 2
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -3386,21 +3431,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:existsSeminar\\(\\) expects int, int\\|null given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:existsSeminarMessage\\(\\) expects int, int\\|null given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
@@ -3427,6 +3457,11 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$frontEndUserMapper is never read, only written\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$seminarUid \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
@@ -3634,11 +3669,6 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
-			count: 1
-			path: Tests/Unit/Model/EventTopicTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setBeginDateAndTime\\(\\) expects int, int\\|false given\\.$#"

@@ -471,7 +471,9 @@ class RegistrationManager
             ->text($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
         $emailBuilder->html($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));
 
-        $registration = MapperRegistry::get(RegistrationMapper::class)->find($oldRegistration->getUid());
+        $registrationUid = $oldRegistration->getUid();
+        \assert($registrationUid > 0);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
         $this->addCalendarAttachment($emailBuilder, $registration);
         $email = $emailBuilder->build();
 
@@ -607,6 +609,8 @@ class RegistrationManager
 
         $emailBuilder->text($template->getSubpart('MAIL_NOTIFICATION'));
 
+        $registrationUid = $registration->getUid();
+        \assert($registration->getUid() > 0);
         $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
 
         $email = $emailBuilder->build();
@@ -662,7 +666,9 @@ class RegistrationManager
         }
         $emailBuilder->to(...$recipients);
 
-        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
+        $registrationUid = $registration->getUid();
+        \assert($registrationUid > 0);
+        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $email = $emailBuilder->build();
         $this->getRegistrationEmailHookProvider()
@@ -902,7 +908,9 @@ class RegistrationManager
             $template->hideSubparts('interests', $wrapperPrefix);
         }
 
-        $newEvent = MapperRegistry::get(EventMapper::class)->find($event->getUid());
+        $eventUid = $event->getUid();
+        \assert($eventUid > 0);
+        $newEvent = MapperRegistry::get(EventMapper::class)->find($eventUid);
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $template->setMarker(
             'url',
@@ -927,7 +935,9 @@ class RegistrationManager
         }
         $template->setMarker('footer', $footerCode);
 
-        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
+        $registrationUid = $registration->getUid();
+        \assert($registrationUid > 0);
+        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $this->getRegistrationEmailHookProvider()->executeHook(
             $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',

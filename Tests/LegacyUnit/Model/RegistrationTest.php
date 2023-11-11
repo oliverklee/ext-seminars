@@ -459,7 +459,9 @@ final class RegistrationTest extends TestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue(): void
     {
-        $this->subject->setData(['datepaid' => $GLOBALS['SIM_EXEC_TIME']]);
+        $now = $GLOBALS['SIM_EXEC_TIME'];
+        self::assertIsInt($now);
+        $this->subject->setData(['datepaid' => $now]);
 
         self::assertTrue(
             $this->subject->isPaid()

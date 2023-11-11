@@ -177,7 +177,9 @@ abstract class AbstractEventMailForm
             $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
             /** @var LegacyRegistration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
-                $registration = $registrationMapper->find($oldRegistration->getUid());
+                $registrationUid = $oldRegistration->getUid();
+                \assert($registrationUid > 0);
+                $registration = $registrationMapper->find($registrationUid);
                 $user = $registration->getFrontEndUser();
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
