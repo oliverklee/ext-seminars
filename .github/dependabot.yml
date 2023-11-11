@@ -15,6 +15,7 @@ updates:
     allow:
       - dependency-type: "development"
     ignore:
+      - dependency-name: "doctrine/dbal"
       - dependency-name: "ergebnis/composer-normalize"
         versions: [ ">= 2.20.0" ]
       - dependency-name: "friendsofphp/php-cs-fixer"
