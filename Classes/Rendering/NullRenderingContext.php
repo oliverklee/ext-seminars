@@ -205,4 +205,20 @@ final class NullRenderingContext implements RenderingContextInterface
     {
         return new NullRequest();
     }
+
+    /**
+     * @return never
+     */
+    public function getAttribute(string $name): ?object
+    {
+        throw new \BadMethodCallException('Not implemented.', 1701345822);
+    }
+
+    /**
+     * @return never
+     */
+    public function withAttribute(string $name, object $value): RenderingContextInterface
+    {
+        throw new \BadMethodCallException('Not implemented.', 1701345830);
+    }
 }
