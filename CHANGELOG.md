@@ -6,15 +6,23 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.5.1
+
+### Added
 - Add the Crowdin configuration (#2693)
 - Add compatibility with Symfony 7 (#2690)
 
 ### Changed
 - Allow feuserextrafields 6.x (#2668)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Allow listing waiting-list-only registrations in the BE module (#2695)
