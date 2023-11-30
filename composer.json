@@ -208,6 +208,7 @@
 			"rm Configuration/TypoScriptLint.yaml",
 			"rm Configuration/UnitTests.xml",
 			"rm composer.lock",
+			"rm crowdin.yml",
 			"rm docker-compose.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
