@@ -100,7 +100,7 @@
                         <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
                     </td>
                     <td class="nowrap">
-                        <f:if condition="({statistics} && {visible})">
+                        <f:if condition="{statistics}">
                             <f:if condition="{statistics.regularSeatsCount}">
                                 <f:link.action
                                     controller="BackEnd\Registration" action="showForEvent" arguments="{eventUid: event.uid}"

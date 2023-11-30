@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow showing and exporting registrations for hidden events in the BE module (#2694)
 - Fix compatibility with `typo3fluid/fluid` 2.10.0 (#2689)
 - Make some type annotations more specific (#2673)
 - Set EUR as a fallback currency (#2674)
