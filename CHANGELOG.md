@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow listing waiting-list-only registrations in the BE module (#2695)
 - Allow showing and exporting registrations for hidden events in the BE module (#2694)
 - Fix compatibility with `typo3fluid/fluid` 2.10.0 (#2689)
 - Make some type annotations more specific (#2673)
