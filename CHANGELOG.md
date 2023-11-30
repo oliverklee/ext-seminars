@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add compatibility with Symfony 7 (#2690)
 
 ### Changed
 - Allow feuserextrafields 6.x (#2668)
