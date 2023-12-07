@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationProcessor

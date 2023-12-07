@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This test case holds all tests specific to event dates.

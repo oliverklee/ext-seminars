@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd\DefaultController;
 
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @coversNothing

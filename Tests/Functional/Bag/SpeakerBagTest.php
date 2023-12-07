@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Bag;
 
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Bag\SpeakerBag;
 use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Bag\SpeakerBag
