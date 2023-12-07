@@ -19,8 +19,11 @@ use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
@@ -71,7 +74,11 @@ final class EmailServiceTest extends TestCase
 
         Bootstrap::initializeBackendAuthentication();
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        $languageService = LanguageService::create('default');
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        } else {
+            $languageService = LanguageService::create('default');
+        }
         $GLOBALS['LANG'] = $languageService;
 
         $this->testingFramework = new TestingFramework('tx_seminars');

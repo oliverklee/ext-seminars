@@ -27,7 +27,9 @@ use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -94,7 +96,11 @@ final class MailNotifierTest extends TestCase
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
         Bootstrap::initializeBackendAuthentication();
 
-        $this->languageService = LanguageService::create('default');
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            $this->languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        } else {
+            $this->languageService = LanguageService::create('default');
+        }
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $GLOBALS['LANG'] = $this->languageService;
 
