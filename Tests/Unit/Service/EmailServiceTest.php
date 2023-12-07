@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Service\EmailService;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService

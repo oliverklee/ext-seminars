@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
@@ -14,6 +12,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\EmailController
@@ -22,7 +22,7 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class EmailControllerTest extends UnitTestCase
 {
     /**
-     * @var EmailController&MockObject&AccessibleMockObjectInterface
+     * @var EmailController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -45,7 +45,7 @@ final class EmailControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        /** @var EmailController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EmailController::class,
             ['redirect', 'forward', 'redirectToUri']

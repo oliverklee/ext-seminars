@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Seo;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Seo\SlugGenerator

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\UpgradeWizards;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard;
 use Psr\Log\LoggerAwareInterface;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\RepeatableInterface;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard

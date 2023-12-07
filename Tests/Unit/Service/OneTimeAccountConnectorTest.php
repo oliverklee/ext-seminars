@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\OneTimeAccountConnector

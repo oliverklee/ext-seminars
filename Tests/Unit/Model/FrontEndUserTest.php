@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\FrontEndUser;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\FrontEndUser

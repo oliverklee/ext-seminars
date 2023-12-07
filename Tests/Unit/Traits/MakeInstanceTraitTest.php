@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait

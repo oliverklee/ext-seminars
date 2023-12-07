@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
@@ -13,6 +12,7 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EventStatisticsCalculator

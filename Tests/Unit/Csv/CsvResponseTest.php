@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Csv;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\CsvResponse

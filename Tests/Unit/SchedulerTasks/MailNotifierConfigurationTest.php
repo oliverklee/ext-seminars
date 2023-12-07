@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class MailNotifierConfigurationTest extends UnitTestCase
 {

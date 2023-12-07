@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
@@ -15,6 +13,8 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\ModuleController
@@ -25,7 +25,7 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class ModuleControllerTest extends UnitTestCase
 {
     /**
-     * @var ModuleController&MockObject&AccessibleMockObjectInterface
+     * @var ModuleController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -61,7 +61,7 @@ final class ModuleControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
 
-        /** @var ModuleController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var ModuleController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             ModuleController::class,
             ['redirect', 'forward', 'redirectToUri'],
