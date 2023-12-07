@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
-use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\AbstractModel
@@ -323,7 +324,8 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test', 'title = "' . $title . '"')
+            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
+                ->count('*', 'tx_seminars_test', ['title' => $title])
         );
     }
 
@@ -364,8 +366,14 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $model->commitToDatabase();
 
-        $recordInDatabase = $this->getDatabaseConnection()
-            ->selectSingleRow('*', 'tx_seminars_test', 'uid = ' . $model->getUid());
+        $result = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test')
+            ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $recordInDatabase = $result->fetchAssociative();
+        } else {
+            $recordInDatabase = $result->fetch();
+        }
         self::assertSame(self::NOW, (int)$recordInDatabase['crdate']);
     }
 
@@ -379,8 +387,15 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $model->commitToDatabase();
 
-        $recordInDatabase = $this->getDatabaseConnection()
-            ->selectSingleRow('*', 'tx_seminars_test', 'uid = ' . $model->getUid());
+        $result = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test')
+            ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $recordInDatabase = $result->fetchAssociative();
+        } else {
+            $recordInDatabase = $result->fetch();
+        }
+
         self::assertSame(self::NOW, (int)$recordInDatabase['tstamp']);
     }
 
@@ -406,7 +421,11 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $model->commitToDatabase();
 
-        self::assertSame(0, $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test'));
+        self::assertSame(
+            0,
+            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
+                ->count('*', 'tx_seminars_test', [])
+        );
     }
 
     /**
@@ -436,7 +455,8 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test', 'title = "' . $newTitle . '"')
+            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_test')
+                ->count('*', 'tx_seminars_test', ['title' => $newTitle])
         );
     }
 
@@ -464,12 +484,20 @@ final class AbstractModelTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
+        self::assertInstanceOf(TestingModel::class, $model);
         $newTitle = 'new title';
         $model->setTitle($newTitle);
 
         $model->commitToDatabase();
 
-        $recordInDatabase = $this->getDatabaseConnection()->selectSingleRow('*', 'tx_seminars_test', 'uid = 1');
+        $result = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test')
+            ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $recordInDatabase = $result->fetchAssociative();
+        } else {
+            $recordInDatabase = $result->fetch();
+        }
         self::assertSame(1574714377, (int)$recordInDatabase['crdate']);
     }
 
@@ -483,7 +511,14 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $model->commitToDatabase();
 
-        $recordInDatabase = $this->getDatabaseConnection()->selectSingleRow('*', 'tx_seminars_test', 'uid = 1');
+        $result = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test')
+            ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
+        if (\method_exists($result, 'fetchAssociative')) {
+            $recordInDatabase = $result->fetchAssociative();
+        } else {
+            $recordInDatabase = $result->fetch();
+        }
         self::assertSame(self::NOW, (int)$recordInDatabase['tstamp']);
     }
 
@@ -549,8 +584,9 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [42]);
 
-        $recordCount = $this->getDatabaseConnection()
-            ->selectCount('*', 'tx_seminars_test_test_mm', 'uid_local = 1 AND uid_foreign = 42');
+        $recordCount = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test_test_mm')
+            ->count('*', 'tx_seminars_test_test_mm', ['uid_local' => 1, 'uid_foreign' => 42]);
         self::assertSame(1, $recordCount);
     }
 
@@ -564,7 +600,9 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [0]);
 
-        $recordCount = $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test_test_mm', 'uid_local = 1');
+        $recordCount = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test_test_mm')
+            ->count('*', 'tx_seminars_test_test_mm', ['uid_local' => 1]);
         self::assertSame(0, $recordCount);
     }
 
@@ -578,8 +616,14 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [42, 31]);
 
-        /** @var Statement $statement */
-        $statement = $this->getDatabaseConnection()->select('sorting', 'tx_seminars_test_test_mm', 'uid_local = 1');
-        self::assertSame([['sorting' => 1], ['sorting' => 2]], $statement->fetchAll());
+        $statement = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_seminars_test_test_mm')
+            ->select(['sorting'], 'tx_seminars_test_test_mm', ['uid_local' => 1]);
+        if (\method_exists($statement, 'fetchAllAssociative')) {
+            $recordInDatabase = $statement->fetchAllAssociative();
+        } else {
+            $recordInDatabase = $statement->fetchAll();
+        }
+        self::assertSame([['sorting' => 1], ['sorting' => 2]], $recordInDatabase);
     }
 }
