@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -13,6 +11,8 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\EventController
@@ -20,7 +20,7 @@ use TYPO3\CMS\Extbase\Mvc\Response;
 final class EventControllerTest extends UnitTestCase
 {
     /**
-     * @var EventController&MockObject&AccessibleMockObjectInterface
+     * @var EventController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -38,7 +38,7 @@ final class EventControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        /** @var EventController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
             ['redirect', 'forward', 'redirectToUri']

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
@@ -24,6 +22,8 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\FrontEndEditorController
@@ -31,7 +31,7 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class FrontEndEditorControllerTest extends UnitTestCase
 {
     /**
-     * @var FrontEndEditorController&MockObject&AccessibleMockObjectInterface
+     * @var FrontEndEditorController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -74,7 +74,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        /** @var FrontEndEditorController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var FrontEndEditorController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(FrontEndEditorController::class, ['redirect', 'forward', 'redirectToUri']);
         $this->subject = $subject;
 

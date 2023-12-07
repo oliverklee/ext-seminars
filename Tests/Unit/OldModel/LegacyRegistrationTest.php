@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class RegistrationDigestTest extends UnitTestCase
 {

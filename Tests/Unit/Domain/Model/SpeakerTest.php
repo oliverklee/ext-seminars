@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\Speaker

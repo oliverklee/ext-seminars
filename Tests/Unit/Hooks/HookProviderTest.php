@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor;
@@ -18,6 +17,7 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceNotExtendsHook;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArray;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsModifiedValue;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class HookProviderTest extends UnitTestCase
 {

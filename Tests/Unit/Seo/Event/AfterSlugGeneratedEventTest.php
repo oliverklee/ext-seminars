@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Seo\Event;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent;
 use OliverKlee\Seminars\Seo\SlugContext;
 use Psr\EventDispatcher\StoppableEventInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent

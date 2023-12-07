@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Model\Registration;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
@@ -19,6 +18,7 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Model\RawDataTrait

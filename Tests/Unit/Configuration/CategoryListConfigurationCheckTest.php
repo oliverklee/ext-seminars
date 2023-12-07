@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Configuration;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck

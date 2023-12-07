@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Configuration;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Configuration\LegacyConfiguration
  */
 final class LegacyConfigurationTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var ContentObjectRenderer
      */

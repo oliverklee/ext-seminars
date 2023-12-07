@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Seo;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Seo\SingleViewPageTitleProvider

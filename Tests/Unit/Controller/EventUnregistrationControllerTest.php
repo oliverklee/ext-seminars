@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use OliverKlee\Seminars\Controller\EventUnregistrationController;
@@ -20,6 +18,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\EventUnregistrationController
@@ -27,7 +27,7 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class EventUnregistrationControllerTest extends UnitTestCase
 {
     /**
-     * @var EventUnregistrationController&MockObject&AccessibleMockObjectInterface
+     * @var EventUnregistrationController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -60,7 +60,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        /** @var EventUnregistrationController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var EventUnregistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventUnregistrationController::class,
             ['redirect', 'forward', 'redirectToUri']
