@@ -59,6 +59,8 @@ final class SingleViewLinkBuilderTest extends FunctionalTestCase
     {
         MapperRegistry::purgeInstance();
         $this->testingFramework->cleanUpWithoutDatabase();
+
+        parent::tearDown();
     }
 
     /**
