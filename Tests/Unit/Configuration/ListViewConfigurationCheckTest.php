@@ -26,6 +26,8 @@ final class ListViewConfigurationCheckTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->configuration = new DummyConfiguration();
 
         $this->subject = new ListViewConfigurationCheck($this->configuration, 'plugin.tx_seminars_pi1');

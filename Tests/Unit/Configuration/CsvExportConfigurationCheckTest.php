@@ -21,6 +21,8 @@ final class CsvExportConfigurationCheckTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $configuration = new DummyConfiguration();
 
         $this->subject = new CsvExportConfigurationCheck($configuration, 'plugin.tx_seminars');

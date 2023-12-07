@@ -21,6 +21,8 @@ final class SharedConfigurationCheckTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $configuration = new DummyConfiguration();
 
         $this->subject = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');

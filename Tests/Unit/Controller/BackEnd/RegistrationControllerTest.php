@@ -72,6 +72,8 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
 
