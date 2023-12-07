@@ -88,8 +88,8 @@ final class RegistrationControllerTest extends UnitTestCase
         if (\class_exists(Response::class)) {
             // 10LTS only
             $this->response = new Response();
+            $this->subject->_set('response', $this->response);
         }
-        $this->subject->_set('response', $this->response);
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);

@@ -48,8 +48,8 @@ final class EventControllerTest extends UnitTestCase
         if (\class_exists(Response::class)) {
             // 10LTS only
             $this->response = new Response();
+            $this->subject->_set('response', $this->response);
         }
-        $this->subject->_set('response', $this->response);
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);
