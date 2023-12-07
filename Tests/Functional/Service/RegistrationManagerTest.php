@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
-use Nimut\TestingFramework\Exception\Exception as NimutException;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
@@ -25,6 +24,7 @@ use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -213,12 +213,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
     /**
      * Imports static records - but only if they aren't already available as static data.
-     *
-     * @throws NimutException
      */
     private function importStaticData(): void
     {
-        if ($this->getDatabaseConnection()->selectCount('*', 'static_countries') === 0) {
+        if (
+            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_countries')
+                ->count('*', 'static_countries', []) === 0
+        ) {
             $this->importDataSet(__DIR__ . '/Fixtures/Countries.xml');
         }
     }
