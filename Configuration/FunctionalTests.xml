@@ -7,7 +7,7 @@
          bootstrap="../.Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTestsBootstrap.php"
          cacheResult="false"
          colors="true"
-         convertDeprecationsToExceptions="false"
+         convertDeprecationsToExceptions="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -30,7 +30,7 @@
                          Will always be done with next major version.
                          To still suppress warnings, notices and deprecations, do NOT define the constant at all.
          -->
-        <!--        <const name="TYPO3_TESTING_FUNCTIONAL_REMOVE_ERROR_HANDLER" value="true"/>-->
+        <const name="TYPO3_TESTING_FUNCTIONAL_REMOVE_ERROR_HANDLER" value="true"/>
         <ini name="display_errors" value="1"/>
         <env name="TYPO3_CONTEXT" value="Testing"/>
     </php>
