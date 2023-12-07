@@ -17,8 +17,11 @@ use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
@@ -60,7 +63,11 @@ final class EmailServiceTest extends FunctionalTestCase
 
         (new CacheNullifyer())->setAllCoreCaches();
 
-        $languageService = LanguageService::create('default');
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        } else {
+            $languageService = LanguageService::create('default');
+        }
         $GLOBALS['LANG'] = $languageService;
 
         $configuration = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT_YMD]);
