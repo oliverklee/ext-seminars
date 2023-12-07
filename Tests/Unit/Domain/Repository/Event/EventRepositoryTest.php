@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Domain\Repository\Event;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Domain\Repository\Event\EventRepository

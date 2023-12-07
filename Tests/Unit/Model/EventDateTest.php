@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * This test case holds all tests specific to event dates.

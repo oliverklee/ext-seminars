@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Traits;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait

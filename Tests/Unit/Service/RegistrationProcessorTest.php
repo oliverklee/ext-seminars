@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationProcessor

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -13,12 +12,15 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
 final class LegacyEventTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var TestingLegacyEvent
      */

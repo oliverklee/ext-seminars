@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\AbstractTimeSpan

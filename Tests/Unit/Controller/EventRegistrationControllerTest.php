@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller;
 
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
@@ -21,6 +19,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Fluid\View\TemplateView;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\EventRegistrationController
@@ -28,7 +28,7 @@ use TYPO3\CMS\Fluid\View\TemplateView;
 final class EventRegistrationControllerTest extends UnitTestCase
 {
     /**
-     * @var EventRegistrationController&MockObject&AccessibleMockObjectInterface
+     * @var EventRegistrationController&MockObject&AccessibleObjectInterface
      */
     private $subject;
 
@@ -66,7 +66,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        /** @var EventRegistrationController&AccessibleMockObjectInterface&MockObject $subject */
+        /** @var EventRegistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventRegistrationController::class,
             ['redirect', 'forward', 'redirectToUri']

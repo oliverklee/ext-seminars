@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Email;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Tests\Unit\Email\Fixtures\TestingMailRole;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Email\EmailBuilder
