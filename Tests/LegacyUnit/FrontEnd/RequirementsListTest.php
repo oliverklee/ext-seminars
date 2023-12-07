@@ -76,6 +76,8 @@ final class RequirementsListTest extends TestCase
 
         ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

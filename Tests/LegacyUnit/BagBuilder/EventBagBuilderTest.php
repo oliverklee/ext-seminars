@@ -57,6 +57,8 @@ final class EventBagBuilderTest extends TestCase
         $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     // Tests for the basic builder functions.

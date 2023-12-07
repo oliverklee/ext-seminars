@@ -107,6 +107,8 @@ final class LegacyEventTest extends TestCase
 
         ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     // Utility functions

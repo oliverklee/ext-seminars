@@ -62,6 +62,8 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
+
+        parent::tearDown();
     }
 
     // Test for getting the time.

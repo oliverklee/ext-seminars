@@ -116,6 +116,8 @@ final class EmailServiceTest extends TestCase
     {
         $this->testingFramework->cleanUp();
         $GLOBALS['LANG'] = $this->languageBackup;
+
+        parent::tearDown();
     }
 
     // Tests for sendEmailToAttendees

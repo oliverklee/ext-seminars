@@ -60,6 +60,8 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->testingFramework->cleanUpWithoutDatabase();
         ConfigurationRegistry::purgeInstance();
+
+        parent::tearDown();
     }
 
     /**

@@ -63,6 +63,8 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
+
+        parent::tearDown();
     }
 
     /**

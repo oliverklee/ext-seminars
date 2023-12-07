@@ -98,6 +98,8 @@ final class RegistrationDigestTest extends TestCase
         // Manually purge the TYPO3 FIFO queue
         GeneralUtility::makeInstance(MailMessage::class);
         GeneralUtility::makeInstance(MailMessage::class);
+
+        parent::tearDown();
     }
 
     /**
