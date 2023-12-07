@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+-  Migrate to the TYPO3 testing framework (#2702)
 
 ### Deprecated
 
