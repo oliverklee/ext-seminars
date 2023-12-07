@@ -21,6 +21,8 @@ final class RegistrationListConfigurationCheckTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new RegistrationListConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
     }
 
