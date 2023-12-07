@@ -14,6 +14,12 @@ final class MakeInstanceTraitTest extends UnitTestCase
 {
     use MakeInstanceTrait;
 
+    protected function tearDown(): void
+    {
+        $this->purgeMockedInstances();
+        parent::tearDown();
+    }
+
     /**
      * @test
      */
