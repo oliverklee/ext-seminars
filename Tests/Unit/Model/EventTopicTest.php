@@ -26,6 +26,7 @@ final class EventTopicTest extends UnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->subject = new Event();

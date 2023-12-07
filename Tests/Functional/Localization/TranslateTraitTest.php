@@ -24,6 +24,7 @@ final class TranslateTraitTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->setUpLanguageService();
     }
 

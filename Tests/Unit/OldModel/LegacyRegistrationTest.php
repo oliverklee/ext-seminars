@@ -21,6 +21,8 @@ final class LegacyRegistrationTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = LegacyRegistration::fromData([]);
     }
 
