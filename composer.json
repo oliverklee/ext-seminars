@@ -53,7 +53,6 @@
 		"helhum/typo3-console": "^6.7.6 || ^7.1.4",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.11",
-		"oliverklee/phpunit": "^8.5.1",
 		"php-coveralls/php-coveralls": "^2.7.0",
 		"phpstan/extension-installer": "^1.3.1",
 		"phpstan/phpstan": "^1.10.48",
@@ -132,7 +131,7 @@
 		],
 		"ci:coverage:legacy": [
 			"@coverage:create-directories",
-			".Build/vendor/bin/typo3 phpunit:run --options=\"--whitelist Classes --coverage-php=.Build/coverage/legacy.cov\" Tests/LegacyUnit"
+			"find 'Tests/Legay' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
 		"ci:coverage:merge": [
 			"@coverage:create-directories",
@@ -166,15 +165,14 @@
 		],
 		"ci:tests": [
 			"@ci:tests:unit",
-			"@ci:tests:unit-legacy",
-			"@ci:tests:functional"
+			"@ci:tests:functional",
+			"@ci:tests:legacy"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
+		"ci:tests:legacy": "find 'Tests/Legacy' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
-		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
-		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
 		"fix": [
 			"@fix:composer",
 			"@fix:php"
