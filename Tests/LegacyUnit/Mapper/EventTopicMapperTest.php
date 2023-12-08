@@ -48,6 +48,8 @@ final class EventTopicMapperTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     /////////////////////////////////

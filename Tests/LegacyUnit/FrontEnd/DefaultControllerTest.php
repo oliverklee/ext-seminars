@@ -179,6 +179,8 @@ final class DefaultControllerTest extends TestCase
         RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+
+        parent::tearDown();
     }
 
     ///////////////////////

@@ -60,6 +60,8 @@ final class AbstractModelTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     //////////////////////////////////

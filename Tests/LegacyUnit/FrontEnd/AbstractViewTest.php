@@ -39,6 +39,8 @@ final class AbstractViewTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

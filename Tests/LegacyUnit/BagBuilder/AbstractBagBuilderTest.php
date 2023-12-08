@@ -45,6 +45,8 @@ final class AbstractBagBuilderTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     ///////////////////////////////////////////

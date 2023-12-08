@@ -99,6 +99,8 @@ final class SalutationTest extends TestCase
         ConfigurationRegistry::purgeInstance();
         $this->testingFramework->cleanUp();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+
+        parent::tearDown();
     }
 
     // Utility functions

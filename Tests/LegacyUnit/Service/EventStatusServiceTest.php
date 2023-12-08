@@ -65,6 +65,8 @@ final class EventStatusServiceTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     /**
