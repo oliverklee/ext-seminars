@@ -84,6 +84,8 @@ final class RegistrationsListTest extends TestCase
         $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     ///////////////////////

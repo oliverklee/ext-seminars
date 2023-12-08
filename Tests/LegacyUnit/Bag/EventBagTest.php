@@ -41,6 +41,8 @@ final class EventBagTest extends TestCase
         $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     ///////////////////////////////////////////

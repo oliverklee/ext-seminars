@@ -115,6 +115,8 @@ final class LegacyRegistrationTest extends TestCase
         $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     // Utility functions.

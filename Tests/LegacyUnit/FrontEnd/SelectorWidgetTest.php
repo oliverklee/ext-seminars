@@ -57,6 +57,8 @@ final class SelectorWidgetTest extends TestCase
         $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
+
+        parent::tearDown();
     }
 
     //////////////////////

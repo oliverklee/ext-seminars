@@ -60,6 +60,8 @@ final class CategoryListTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     private function getFrontEndController(): TypoScriptFrontendController

@@ -126,6 +126,8 @@ final class AbstractRegistrationListViewTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     // Utility functions
