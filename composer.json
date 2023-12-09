@@ -117,10 +117,6 @@
 		"post-autoload-dump": [
 			"@link-extension"
 		],
-		"ci": [
-			"@ci:static",
-			"@ci:dynamic"
-		],
 		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
 		"ci:coverage": [
 			"@ci:coverage:unit",
@@ -142,9 +138,6 @@
 			"@coverage:create-directories",
 			".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
-		"ci:dynamic": [
-			"@ci:tests"
-		],
 		"ci:php": [
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
@@ -163,11 +156,6 @@
 			"@ci:php:sniff",
 			"@ci:php:stan",
 			"@ci:ts:lint"
-		],
-		"ci:tests": [
-			"@ci:tests:unit",
-			"@ci:tests:legacy-unit",
-			"@ci:tests:functional"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:legacy-unit": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
@@ -224,7 +212,6 @@
 		]
 	},
 	"scripts-descriptions": {
-		"ci": "Runs all dynamic and static code checks.",
 		"ci:composer:normalize": "Checks the composer.json.",
 		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
 		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
@@ -238,7 +225,10 @@
 		"ci:php:sniff": "Checks the code style with PHP_CodeSniffer (PHPCS).",
 		"ci:php:stan": "Checks the PHP types using PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
+		"ci:tests:functional": "Runs the functional unit tests.",
 		"ci:tests:legacy-unit": "Runs the legacy unit tests.",
+		"ci:tests:unit": "Runs the unit tests.",
+		"ci:ts:lint": "Lints all TypoScript files.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
 		"fix:composer": "Runs all fixers for the PHP code.",
