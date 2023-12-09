@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder;
 
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
