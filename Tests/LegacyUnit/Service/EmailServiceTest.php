@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -14,22 +12,19 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EmailService;
+use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Core\Bootstrap;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
  */
 final class EmailServiceTest extends TestCase
 {
+    use BackEndTestsTrait;
     use EmailTrait;
     use MakeInstanceTrait;
 
@@ -63,28 +58,15 @@ final class EmailServiceTest extends TestCase
      */
     private $organizer;
 
-    /**
-     * @var LanguageService
-     */
-    private $languageBackup;
-
     protected function setUp(): void
     {
         (new CacheNullifyer())->setAllCoreCaches();
 
-        Bootstrap::initializeBackendAuthentication();
-        $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-        } else {
-            $languageService = LanguageService::create('default');
-        }
-        $GLOBALS['LANG'] = $languageService;
+        $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT_YMD]);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
 
         $this->email = $this->createEmailMock();
 
@@ -121,8 +103,9 @@ final class EmailServiceTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->restoreOriginalEnvironment();
+
         $this->testingFramework->cleanUp();
-        $GLOBALS['LANG'] = $this->languageBackup;
 
         parent::tearDown();
     }
