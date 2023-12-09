@@ -19,6 +19,7 @@ final class TranslateTraitTest extends FunctionalTestCase
     use TranslateTrait;
 
     protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
         'typo3conf/ext/oelib',
         'typo3conf/ext/seminars',
