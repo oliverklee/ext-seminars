@@ -76,7 +76,7 @@ jobs:
         run: composer ci:coverage:unit
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
-      - name: "Run legacy tests with coverage"
+      - name: "Run legacy unit tests with coverage"
         run: composer ci:coverage:legacy-unit
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
@@ -87,6 +87,15 @@ jobs:
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
           composer ci:coverage:functional
+      - name: "Show coverage files"
+        run: "ls -la .Build/coverage/"
+      - name: "Run legacy functional tests with coverage"
+        run: |
+          export typo3DatabaseName="typo3";
+          export typo3DatabaseHost="127.0.0.1";
+          export typo3DatabaseUsername="root";
+          export typo3DatabasePassword="root";
+          composer ci:coverage:legacy-functional
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
       - name: "Merge coverage results"
