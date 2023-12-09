@@ -8,14 +8,16 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 trait BackEndTestsTrait
 {
+    use LanguageHelper;
+
     /**
      * @var array<string, mixed>
      */
@@ -160,11 +162,6 @@ trait BackEndTestsTrait
         $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
             ->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->getAllMessagesAndFlush();
-    }
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
     }
 
     /**

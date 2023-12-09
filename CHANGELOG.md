@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stabilize the legacy tests (#2746)
 - Avoid using the deprecated `LanguageService::create()` (#2712)
 
 ## 5.5.1
