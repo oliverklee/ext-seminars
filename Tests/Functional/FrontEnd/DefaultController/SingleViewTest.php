@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd\DefaultController;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -36,6 +38,10 @@ final class SingleViewTest extends FunctionalTestCase
         parent::setUp();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+
+        $extensionConfiguration = new DummyConfiguration();
+        $extensionConfiguration->setAsBoolean('enableConfigCheck', false);
+        ConfigurationProxy::setInstance('seminars', $extensionConfiguration);
 
         $this->initializeBackEndLanguage();
     }

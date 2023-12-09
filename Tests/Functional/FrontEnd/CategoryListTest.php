@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -40,6 +42,10 @@ final class CategoryListTest extends FunctionalTestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
+
+        $extensionConfiguration = new DummyConfiguration();
+        $extensionConfiguration->setAsBoolean('enableConfigCheck', false);
+        ConfigurationProxy::setInstance('seminars', $extensionConfiguration);
 
         $this->subject = new CategoryList(
             [
