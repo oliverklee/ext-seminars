@@ -8,17 +8,11 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-final class EmailRegistrationListViewTest extends FunctionalTestCase
+final class EmailRegistrationListViewTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var EmailRegistrationListView
      */
@@ -72,7 +66,7 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

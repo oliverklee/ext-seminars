@@ -19,21 +19,15 @@ use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\TargetGroup;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds all tests specific to event topics.
  *
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
-final class EventTopicMapperTest extends FunctionalTestCase
+final class EventTopicMapperTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var TestingFramework
      */
@@ -55,7 +49,7 @@ final class EventTopicMapperTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

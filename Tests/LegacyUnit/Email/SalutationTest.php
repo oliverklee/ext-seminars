@@ -15,22 +15,16 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Email\Salutation
  */
-final class SalutationTest extends FunctionalTestCase
+final class SalutationTest extends TestCase
 {
     use LanguageHelper;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var non-empty-string
@@ -105,7 +99,7 @@ final class SalutationTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
         parent::tearDown();

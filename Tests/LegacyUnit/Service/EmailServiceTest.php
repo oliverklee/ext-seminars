@@ -17,27 +17,21 @@ use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
  */
-final class EmailServiceTest extends FunctionalTestCase
+final class EmailServiceTest extends TestCase
 {
     use EmailTrait;
     use MakeInstanceTrait;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var string
@@ -129,7 +123,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
         $GLOBALS['LANG'] = $this->languageBackup;
 
         parent::tearDown();

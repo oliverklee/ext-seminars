@@ -115,7 +115,51 @@ Also set the following environment variables in your runner configuration:
 
 ### Running the legacy tests
 
-Running the legacy tests works exactly the same as running the functional tests,
-except that you run the tests in `Tests/Legacy/` instead of `Tests/Functional/`.
-You'll still need to use the configuration file
-`Configuration/FunctionalTests.xml`, though.
+It is only possible to run the legacy tests on the command line, but not
+in PhpStorm.
+
+As with the functional tests, you will need a local MySQL user that
+has the permissions to create new databases.
+
+First, you will need to create a TYPO3 instance within the extension directory:
+
+```bash
+.Build/vendor/bin/typo3cms install:setup
+```
+
+You need to create a new database in this step. Using an existing database
+from an existing TYPO3 instance with content will lead to all sorts of
+problems.
+
+Use `site` as the site setup type as some tests require that a root page
+exists. You do not need to create a web server configuration.
+
+The admin user credentials do not matter here. Hence, you can provide any
+random credentials (as long as the password is complex enough for the
+installer to accept it).
+
+For all tests, you will need to provide the following environment variables:
+- `DATABASE_USER`
+- `DATABASE_PASSWORD`
+- `DATABASE_NAME`
+
+To run all legacy tests, you can use the composer script:
+
+```bash
+DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy composer ci:tests:unit-legacy
+```
+
+Running all tests from a directory or file looks like this
+(using the directory `Tests/LegacyUnit/Email/` as an example):
+
+```bash
+DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy .Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit/Email/
+```
+
+For running a single test and for running all tests from a particular group,
+you can provide additional options:
+
+```bash
+DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy .Build/vendor/bin/typo3 phpunit:run --options="--filter testCreateLogInAndAddFeUserAsOwnerCreatesFeUser" Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy .Build/vendor/bin/typo3 phpunit:run --options="--group sendEMailToReviewer" Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+```

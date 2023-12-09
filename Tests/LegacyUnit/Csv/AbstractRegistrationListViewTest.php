@@ -11,22 +11,16 @@ use OliverKlee\Seminars\Csv\AbstractRegistrationListView;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\AbstractRegistrationListView
  */
-final class AbstractRegistrationListViewTest extends FunctionalTestCase
+final class AbstractRegistrationListViewTest extends TestCase
 {
     use LanguageHelper;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var AbstractRegistrationListView&MockObject
@@ -133,7 +127,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->purgeMockedInstances();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }
