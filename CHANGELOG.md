@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Migrate to the TYPO3 testing framework
-  (#2701, #2702, #2713, #2717, #2731, #2732, #2733)
+  (#2701, #2702, #2713, #2717, #2731, #2732, #2733, #2734)
 
 ### Deprecated
 
