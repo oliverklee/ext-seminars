@@ -2656,11 +2656,6 @@ parameters:
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
-
-		-
 			message: "#^PHPDoc tag @var with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject is not subtype of type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
@@ -2711,11 +2706,6 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
@@ -2746,19 +2736,9 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\DownloadRegistrationListViewTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/DownloadRegistrationListViewTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 7
 			path: Tests/LegacyUnit/Csv/DownloadRegistrationListViewTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EmailRegistrationListViewTest\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/EmailRegistrationListViewTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"

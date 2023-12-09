@@ -8,11 +8,13 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Localization\LanguageService;
 
 final class EmailRegistrationListViewTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var EmailRegistrationListView
      */
@@ -69,11 +71,6 @@ final class EmailRegistrationListViewTest extends TestCase
         $this->testingFramework->cleanUp();
 
         parent::tearDown();
-    }
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
     }
 
     /**
