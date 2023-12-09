@@ -129,7 +129,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
         $GLOBALS['LANG'] = $this->languageBackup;
 
         parent::tearDown();

@@ -52,7 +52,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
