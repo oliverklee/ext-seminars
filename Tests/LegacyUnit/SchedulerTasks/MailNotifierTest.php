@@ -89,6 +89,8 @@ final class MailNotifierTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
 
         (new CacheNullifyer())->setAllCoreCaches();

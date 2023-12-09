@@ -82,6 +82,8 @@ final class SalutationTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;

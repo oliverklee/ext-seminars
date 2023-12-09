@@ -33,6 +33,8 @@ final class RegistrationTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new TestingFramework('tx_seminars');

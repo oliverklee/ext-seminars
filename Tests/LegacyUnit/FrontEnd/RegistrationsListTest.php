@@ -49,6 +49,8 @@ final class RegistrationsListTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         HeaderProxyFactory::getInstance()->enableTestMode();

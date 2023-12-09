@@ -70,6 +70,8 @@ final class EmailServiceTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         (new CacheNullifyer())->setAllCoreCaches();
 
         Bootstrap::initializeBackendAuthentication();

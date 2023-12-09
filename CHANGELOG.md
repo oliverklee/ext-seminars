@@ -9,7 +9,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
-- Migrate to the TYPO3 testing framework (#2701, #2702, #2713, #2717)
+- Migrate to the TYPO3 testing framework
+  (#2701, #2702, #2713, #2717, #2731, #2732)
 
 ### Deprecated
 

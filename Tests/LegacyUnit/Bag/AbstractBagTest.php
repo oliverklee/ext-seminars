@@ -35,6 +35,8 @@ final class AbstractBagTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->uidOfFirstRecord = $this->testingFramework->createRecord(

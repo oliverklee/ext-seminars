@@ -25,6 +25,8 @@ final class OrganizerBagTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->testingFramework->createRecord('tx_seminars_organizers');

@@ -63,6 +63,8 @@ final class RegistrationDigestTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         (new CacheNullifyer())->setAllCoreCaches();
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;

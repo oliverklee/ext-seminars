@@ -19,6 +19,8 @@ final class LodgingTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new Lodging();
     }
 

@@ -26,6 +26,8 @@ final class FrontEndUserTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new FrontEndUser();
         $this->testingFramework = new TestingFramework('tx_seminars');
     }
