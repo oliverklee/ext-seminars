@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\Service;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
@@ -14,7 +14,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
-use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -25,20 +24,26 @@ use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\Connection;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationManager
  */
-final class RegistrationManagerTest extends TestCase
+final class RegistrationManagerTest extends FunctionalTestCase
 {
     use LanguageHelper;
     use EmailTrait;
     use MakeInstanceTrait;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var positive-int
@@ -103,19 +108,9 @@ final class RegistrationManagerTest extends TestCase
     private $headerCollector;
 
     /**
-     * @var FrontEndUserMapper
-     */
-    private $frontEndUserMapper;
-
-    /**
      * @var list<class-string>
      */
     private $mockedClassNames = [];
-
-    /**
-     * @var MailMessage&MockObject
-     */
-    private $secondEmail;
 
     /**
      * @var DummyConfiguration
@@ -139,11 +134,12 @@ final class RegistrationManagerTest extends TestCase
         $this->rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
+        $this->getLanguageService();
 
         $this->email = $this->createEmailMock();
-        $this->secondEmail = $this->createEmailMock();
+        $secondEmail = $this->createEmailMock();
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $this->addMockedInstance(MailMessage::class, $this->secondEmail);
+        $this->addMockedInstance(MailMessage::class, $secondEmail);
 
         LegacyRegistration::purgeCachedSeminars();
         $configurationRegistry = ConfigurationRegistry::getInstance();
@@ -186,14 +182,11 @@ final class RegistrationManagerTest extends TestCase
 
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
         $this->subject = RegistrationManager::getInstance();
-
-        $frontEndUserMapper = MapperRegistry::get(FrontEndUserMapper::class);
-        $this->frontEndUserMapper = $frontEndUserMapper;
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         $this->purgeMockedInstances();
 
@@ -2138,10 +2131,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarForInexistentUidReturnsFalse(): void
     {
-        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
-        self::assertIsInt($autoIncrement);
-
-        self::assertFalse($this->subject->existsSeminar($autoIncrement));
+        self::assertFalse($this->subject->existsSeminar(9999));
     }
 
     /**
@@ -2215,12 +2205,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage(): void
     {
-        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
-        self::assertIsInt($autoIncrement);
-
         self::assertStringContainsString(
             $this->translate('message_wrongSeminarNumber'),
-            $this->subject->existsSeminarMessage($autoIncrement)
+            $this->subject->existsSeminarMessage(9999)
         );
     }
 
@@ -2229,9 +2216,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForInexistentUidSendsNotFoundHeader(): void
     {
-        $autoIncrement = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
-        self::assertIsInt($autoIncrement);
-        $this->subject->existsSeminarMessage($autoIncrement);
+        $this->subject->existsSeminarMessage(9999);
 
         self::assertSame(
             'Status: 404 Not Found',
@@ -2295,11 +2280,6 @@ final class RegistrationManagerTest extends TestCase
             [],
             $this->headerCollector->getAllAddedHeaders()
         );
-    }
-
-    private function getConnectionPool(): ConnectionPool
-    {
-        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     private function getConnectionForTable(string $table): Connection
