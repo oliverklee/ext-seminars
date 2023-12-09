@@ -460,7 +460,7 @@ jobs:
         run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
       - name: "Create the tests directory"
         run: "mkdir -p .Build/public/typo3temp/var/tests"
-      - name: "Run functional tests"
+      - name: "Run legacy functional tests"
         run: |
           export typo3DatabaseName="$DB_DATABASE";
           export typo3DatabaseHost="$DB_HOST";
