@@ -12,7 +12,7 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EmailService;
-use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
