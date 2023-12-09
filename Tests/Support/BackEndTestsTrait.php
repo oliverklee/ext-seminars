@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
+namespace OliverKlee\Seminars\Tests\Support;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;

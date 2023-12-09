@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 

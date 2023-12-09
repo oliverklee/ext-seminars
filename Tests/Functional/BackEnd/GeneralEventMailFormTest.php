@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use TYPO3\CMS\Core\Mail\MailMessage;

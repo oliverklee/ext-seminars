@@ -11,7 +11,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

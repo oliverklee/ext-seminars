@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\AbstractRegistrationListView;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

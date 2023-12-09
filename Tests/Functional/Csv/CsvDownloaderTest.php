@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**

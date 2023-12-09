@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

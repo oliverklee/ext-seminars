@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional;
 
-use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**

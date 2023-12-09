@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
