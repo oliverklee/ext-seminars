@@ -118,7 +118,14 @@ Also set the following environment variables in your runner configuration:
 - `typo3DatabasePassword`
 - `typo3DatabaseName`
 
-### Running the legacy tests
+### Running the legacy functional tests
+
+Running the legacy tests works exactly the same as running the functional tests,
+except that you run the tests in `Tests/LegacyFunctional/` instead
+of `Tests/Functional/`. You'll still need to use the configuration file
+`Configuration/FunctionalTests.xml`, though.
+
+### Running the legacy unit tests
 
 It is only possible to run the legacy tests on the command line, but not
 in PhpStorm.
