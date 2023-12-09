@@ -19,6 +19,8 @@ final class FoodTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new Food();
     }
 

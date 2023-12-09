@@ -32,6 +32,8 @@ final class EventTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configuration = new DummyConfiguration();

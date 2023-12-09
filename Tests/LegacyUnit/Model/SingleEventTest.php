@@ -22,6 +22,8 @@ final class SingleEventTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new Event();
     }
 

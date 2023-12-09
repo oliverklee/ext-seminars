@@ -47,6 +47,8 @@ final class EventStatusServiceTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;

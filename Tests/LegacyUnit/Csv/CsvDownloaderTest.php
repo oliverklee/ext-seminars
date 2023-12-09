@@ -44,6 +44,8 @@ final class CsvDownloaderTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');

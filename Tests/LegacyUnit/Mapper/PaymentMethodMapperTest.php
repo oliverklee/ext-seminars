@@ -26,6 +26,8 @@ final class PaymentMethodMapperTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new PaymentMethodMapper();

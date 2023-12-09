@@ -32,6 +32,8 @@ final class LegacyOrganizerTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
         $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',

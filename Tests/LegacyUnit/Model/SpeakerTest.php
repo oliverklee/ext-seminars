@@ -19,6 +19,8 @@ final class SpeakerTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new Speaker();
     }
 

@@ -37,6 +37,8 @@ final class EmailRegistrationListViewTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->getLanguageService()->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');

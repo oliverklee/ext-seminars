@@ -129,6 +129,8 @@ final class RegistrationManagerTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];

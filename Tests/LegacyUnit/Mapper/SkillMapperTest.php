@@ -26,6 +26,8 @@ final class SkillMapperTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new SkillMapper();

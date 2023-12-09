@@ -30,6 +30,8 @@ final class DateRangeViewHelperTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
 

@@ -41,6 +41,8 @@ final class EventMapperTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
