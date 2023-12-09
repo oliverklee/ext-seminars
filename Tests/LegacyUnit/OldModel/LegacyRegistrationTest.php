@@ -12,22 +12,16 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration
  */
-final class LegacyRegistrationTest extends FunctionalTestCase
+final class LegacyRegistrationTest extends TestCase
 {
     use LanguageHelper;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var LegacyRegistration
@@ -120,7 +114,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
 

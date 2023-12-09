@@ -8,19 +8,13 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Seminars\Model\Place;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\Place
  */
-final class PlaceTest extends FunctionalTestCase
+final class PlaceTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var Place
      */

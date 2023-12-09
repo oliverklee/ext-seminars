@@ -8,21 +8,15 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\CsvDownloader
  */
-final class CsvDownloaderTest extends FunctionalTestCase
+final class CsvDownloaderTest extends TestCase
 {
     use BackEndTestsTrait;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var CsvDownloader
@@ -71,7 +65,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         RegistrationManager::purgeInstance();
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
 
         parent::tearDown();

@@ -22,19 +22,13 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TimeSlot;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
-final class EventMapperTest extends FunctionalTestCase
+final class EventMapperTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var TestingFramework
      */
@@ -57,7 +51,7 @@ final class EventMapperTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

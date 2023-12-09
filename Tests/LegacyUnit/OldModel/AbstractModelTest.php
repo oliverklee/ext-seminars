@@ -6,19 +6,13 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\AbstractModel
  */
-final class AbstractModelTest extends FunctionalTestCase
+final class AbstractModelTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var TestingModel
      */
@@ -67,7 +61,7 @@ final class AbstractModelTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

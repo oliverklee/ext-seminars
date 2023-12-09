@@ -23,6 +23,7 @@ use OliverKlee\Seminars\Service\EventStatusService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -32,21 +33,14 @@ use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifier
  */
-final class MailNotifierTest extends FunctionalTestCase
+final class MailNotifierTest extends TestCase
 {
     use EmailTrait;
     use MakeInstanceTrait;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var positive-int
@@ -150,7 +144,7 @@ final class MailNotifierTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         if ($this->testingFramework instanceof TestingFramework) {
-            $this->testingFramework->cleanUpWithoutDatabase();
+            $this->testingFramework->cleanUp();
         }
 
         $GLOBALS['LANG'] = $this->languageBackup;

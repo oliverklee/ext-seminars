@@ -12,19 +12,13 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder
  */
-final class RegistrationBagBuilderTest extends FunctionalTestCase
+final class RegistrationBagBuilderTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var RegistrationBagBuilder
      */
@@ -49,7 +43,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
 

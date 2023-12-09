@@ -7,19 +7,13 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Model\Checkbox;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\CheckboxMapper
  */
-final class CheckboxMapperTest extends FunctionalTestCase
+final class CheckboxMapperTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var TestingFramework
      */
@@ -41,7 +35,7 @@ final class CheckboxMapperTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

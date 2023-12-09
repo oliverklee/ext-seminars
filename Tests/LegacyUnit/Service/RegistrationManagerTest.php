@@ -25,25 +25,20 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationManager
  */
-final class RegistrationManagerTest extends FunctionalTestCase
+final class RegistrationManagerTest extends TestCase
 {
     use LanguageHelper;
     use EmailTrait;
     use MakeInstanceTrait;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var positive-int
@@ -198,7 +193,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         $this->purgeMockedInstances();
 
@@ -2300,6 +2295,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [],
             $this->headerCollector->getAllAddedHeaders()
         );
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     private function getConnectionForTable(string $table): Connection

@@ -12,20 +12,14 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
-final class EventTest extends FunctionalTestCase
+final class EventTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var Event
      */

@@ -5,19 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Seminars\Model\TargetGroup;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\TargetGroup
  */
-final class TargetGroupTest extends FunctionalTestCase
+final class TargetGroupTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var TargetGroup
      */

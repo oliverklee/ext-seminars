@@ -7,20 +7,14 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\CategoryList
  */
-final class CategoryListTest extends FunctionalTestCase
+final class CategoryListTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var CategoryList
      */
@@ -67,7 +61,7 @@ final class CategoryListTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

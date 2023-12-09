@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test case holds all tests specific to event dates.
@@ -16,14 +16,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
-final class EventDateTest extends FunctionalTestCase
+final class EventDateTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var Event
      */

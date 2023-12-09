@@ -7,19 +7,13 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\FrontEndUser
  */
-final class FrontEndUserTest extends FunctionalTestCase
+final class FrontEndUserTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var FrontEndUser
      */
@@ -40,7 +34,7 @@ final class FrontEndUserTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         parent::tearDown();
     }

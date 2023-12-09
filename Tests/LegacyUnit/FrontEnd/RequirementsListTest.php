@@ -11,20 +11,14 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\RequirementsList
  */
-final class RequirementsListTest extends FunctionalTestCase
+final class RequirementsListTest extends TestCase
 {
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
-
     /**
      * @var RequirementsList
      */
@@ -80,7 +74,7 @@ final class RequirementsListTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();

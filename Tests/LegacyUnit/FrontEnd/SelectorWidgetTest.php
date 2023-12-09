@@ -9,23 +9,17 @@ use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
+use PHPUnit\Framework\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\SelectorWidget
  */
-final class SelectorWidgetTest extends FunctionalTestCase
+final class SelectorWidgetTest extends TestCase
 {
     use LanguageHelper;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var SelectorWidget
@@ -62,7 +56,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         RegistrationManager::purgeInstance();
 

@@ -17,22 +17,16 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
+use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
-final class LegacyEventTest extends FunctionalTestCase
+final class LegacyEventTest extends TestCase
 {
     use LanguageHelper;
-
-    protected $testExtensionsToLoad = [
-        'typo3conf/ext/feuserextrafields',
-        'typo3conf/ext/oelib',
-        'typo3conf/ext/seminars',
-    ];
 
     /**
      * @var array<string, non-empty-string|int|bool>
@@ -111,7 +105,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        $this->testingFramework->cleanUp();
 
         ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();
