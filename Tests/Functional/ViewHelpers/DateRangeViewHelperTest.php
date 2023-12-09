@@ -2,24 +2,31 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
+namespace OliverKlee\Seminars\Tests\Functional\ViewHelpers;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper
  */
-final class DateRangeViewHelperTest extends TestCase
+final class DateRangeViewHelperTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
-     * @var int some random date (2001-01-01 00:00:00 UTC)
+     * @var positive-int some random date (2001-01-01 00:00:00 UTC)
      */
     private const BEGIN_DATE = 978307200;
 
