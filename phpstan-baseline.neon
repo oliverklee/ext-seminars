@@ -2706,11 +2706,6 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 14
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
@@ -3031,6 +3026,11 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
@@ -3046,12 +3046,42 @@ parameters:
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
+			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access property \\$lang on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 5
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$languageBackup \\(TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\) does not accept mixed\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
