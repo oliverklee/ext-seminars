@@ -2581,6 +2581,11 @@ parameters:
 			path: Tests/Functional/Service/RegistrationProcessorTest.php
 
 		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/Bag/AbstractBagTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\|null\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
@@ -2879,11 +2884,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Bag/AbstractBagTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"

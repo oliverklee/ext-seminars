@@ -10,16 +10,22 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\EventBagBuilder
  */
-final class EventBagBuilderTest extends TestCase
+final class EventBagBuilderTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var EventBagBuilder
      */
@@ -56,7 +62,7 @@ final class EventBagBuilderTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         RegistrationManager::purgeInstance();
 
