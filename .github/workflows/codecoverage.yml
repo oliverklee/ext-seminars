@@ -9,15 +9,6 @@ jobs:
   code-coverage:
     name: "Calculate code coverage"
     runs-on: ubuntu-22.04
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: legacy_tests
-        ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     env:
       DATABASE_HOST: 127.0.0.1
       DATABASE_USER: root
@@ -64,12 +55,6 @@ jobs:
         run: phive --no-progress install --trust-gpg-keys D8406D0D82947747293778314AA394086372C20A
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
-      - name: "Set up TYPO3"
-        run: >
-          .Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type="site"
-          --database-user-name="${DATABASE_USER}" --database-host-name="${DATABASE_HOST}"
-          --database-port="${{ job.services.mysql.ports[3306] }}" --database-name="${DATABASE_NAME}"
-          --admin-user-name="admin" --admin-password="password" --site-name="Test installation";
       - name: "Create the tests directory"
         run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run unit tests with coverage"
@@ -77,7 +62,12 @@ jobs:
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
       - name: "Run legacy tests with coverage"
-        run: composer ci:coverage:legacy
+        run: |
+          export typo3DatabaseName="typo3";
+          export typo3DatabaseHost="127.0.0.1";
+          export typo3DatabaseUsername="root";
+          export typo3DatabasePassword="root";
+          composer ci:coverage:legacy
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
       - name: "Run functional tests with coverage"

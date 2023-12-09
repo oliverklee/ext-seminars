@@ -19,13 +19,19 @@ use OliverKlee\Seminars\Model\Food;
 use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\RegistrationMapper
  */
-final class RegistrationMapperTest extends TestCase
+final class RegistrationMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */

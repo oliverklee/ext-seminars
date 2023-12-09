@@ -7,13 +7,19 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\Place;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\PlaceMapper
  */
-final class PlaceMapperTest extends TestCase
+final class PlaceMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */

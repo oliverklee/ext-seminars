@@ -292,20 +292,11 @@ jobs:
     name: "Legacy tests"
     runs-on: ubuntu-22.04
     needs: php-lint
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: legacy_tests
-        ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     env:
-      DATABASE_HOST: 127.0.0.1
-      DATABASE_USER: root
-      DATABASE_PASSWORD: root
-      DATABASE_NAME: typo3
+      DB_DATABASE: typo3
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: localhost
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -345,14 +336,20 @@ jobs:
         run: |
           composer update --no-ansi --no-interaction --no-progress --with-dependencies
           composer show
-      - name: "Set up TYPO3"
-        run: >
-          .Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type="site"
-          --database-user-name="${DATABASE_USER}" --database-host-name="${DATABASE_HOST}"
-          --database-port="${{ job.services.mysql.ports[3306] }}" --database-name="${DATABASE_NAME}"
-          --admin-user-name="admin" --admin-password="password" --site-name="Test installation";
+      - name: "Start MySQL"
+        run: "sudo /etc/init.d/mysql start"
+      # This workaround for MySQL 8 can be removed once we drop support for PHP 7.2/7.3.
+      - name: "Configure the MySQL user to work with PHP 7.2/7.3"
+        run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
+      - name: "Create the tests directory"
+        run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run legacy tests"
-        run: "composer ci:tests:unit-legacy"
+        run: |
+          export typo3DatabaseName="$DB_DATABASE";
+          export typo3DatabaseHost="$DB_HOST";
+          export typo3DatabaseUsername="$DB_USER";
+          export typo3DatabasePassword="$DB_PASSWORD";
+          composer ci:tests:legacy
     strategy:
       fail-fast: false
       matrix:

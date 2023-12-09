@@ -19,15 +19,21 @@ use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\TargetGroup;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This test case holds tests which are specific to single events.
  *
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
-final class SingleEventMapperTest extends TestCase
+final class SingleEventMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */

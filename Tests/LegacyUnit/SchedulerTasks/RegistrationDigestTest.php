@@ -12,19 +12,25 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\SchedulerTasks\RegistrationDigest
  */
-final class RegistrationDigestTest extends TestCase
+final class RegistrationDigestTest extends FunctionalTestCase
 {
     use EmailTrait;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var RegistrationDigest

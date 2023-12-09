@@ -22,13 +22,19 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
 use OliverKlee\Seminars\Model\TimeSlot;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
-final class EventMapperTest extends TestCase
+final class EventMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */

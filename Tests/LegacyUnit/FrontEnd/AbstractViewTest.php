@@ -6,14 +6,20 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd\TestingView;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\AbstractView
  */
-final class AbstractViewTest extends TestCase
+final class AbstractViewTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingView
      */
