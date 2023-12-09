@@ -83,15 +83,15 @@ trait BackEndTestsTrait
     {
         GeneralUtility::flushInternalRuntimeCaches();
         unset($GLOBALS['TYPO3_REQUEST']);
-        $this->getBackup = $GLOBALS['_GET'];
+        $this->getBackup = $GLOBALS['_GET'] ?? [];
         $GLOBALS['_GET'] = [];
-        $this->postBackup = $GLOBALS['_POST'];
+        $this->postBackup = $GLOBALS['_POST'] ?? [];
         $GLOBALS['_POST'] = [];
     }
 
     private function replaceBackEndUserWithMock(): void
     {
-        $currentBackEndUser = $GLOBALS['BE_USER'];
+        $currentBackEndUser = $GLOBALS['BE_USER'] ?? null;
         if ($currentBackEndUser instanceof BackendUserAuthentication) {
             $this->backEndUserBackup = $currentBackEndUser;
         }
@@ -107,7 +107,7 @@ trait BackEndTestsTrait
 
     private function unifyBackEndLanguage(): void
     {
-        $currentLanguageService = $GLOBALS['LANG'];
+        $currentLanguageService = $GLOBALS['LANG'] ?? null;
         if ($currentLanguageService instanceof LanguageService) {
             $this->languageBackup = $GLOBALS['LANG']->lang;
         }
@@ -118,12 +118,14 @@ trait BackEndTestsTrait
         $languageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+
+        $GLOBALS['LANG'] = $languageService;
     }
 
     private function unifyExtensionSettings(): void
     {
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
+        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] ?? [];
+        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'] ?? [];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
     }
 
