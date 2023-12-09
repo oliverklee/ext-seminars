@@ -29,6 +29,7 @@ trait LanguageHelper
             }
             $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
             $this->languageService = $languageService;
+            $GLOBALS['LANG'] = $languageService;
         }
 
         return $this->languageService;
