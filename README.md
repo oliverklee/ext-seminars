@@ -59,7 +59,8 @@ Languages & Frameworks > PHP > Test Frameworks
 In this section, configure PhpStorm to use the Composer autoload and
 the script path `.Build/vendor/autoload.php` within your project.
 
-In the Run/Debug configurations for PHPUnit, use an alternative configuration file:
+In the Run/Debug configurations for PHPUnit, use an alternative configuration
+file:
 
 `Configuration/UnitTests.xml`
 
@@ -69,6 +70,7 @@ You will need a local MySQL user that has the permissions to create new
 databases.
 
 In the examples, the following credentials are used:
+
 - user name: `typo3`
 - password: `typo3pass`
 - DB name prefix: `typo3_test` (optional)
@@ -76,6 +78,7 @@ In the examples, the following credentials are used:
 
 You will need to provide those credentials as environment variables when
 running the functional tests:
+
 - `typo3DatabaseUsername`
 - `typo3DatabasePassword`
 - `typo3DatabaseName`
@@ -104,11 +107,13 @@ Languages & Frameworks > PHP > Test Frameworks
 In this section, configure PhpStorm to use the Composer autoload and
 the script path `.Build/vendor/autoload.php` within your project.
 
-In the Run/Debug configurations for PHPUnit, use an alternative configuration file:
+In the Run/Debug configurations for PHPUnit, use an alternative configuration
+file:
 
 `Configuration/FunctionalTests.xml`
 
 Also set the following environment variables in your runner configuration:
+
 - `typo3DatabaseUsername`
 - `typo3DatabasePassword`
 - `typo3DatabaseName`
@@ -139,6 +144,7 @@ random credentials (as long as the password is complex enough for the
 installer to accept it).
 
 For all tests, you will need to provide the following environment variables:
+
 - `DATABASE_USER`
 - `DATABASE_PASSWORD`
 - `DATABASE_NAME`
