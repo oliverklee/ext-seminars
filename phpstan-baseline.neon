@@ -2966,7 +2966,7 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Offset 'uid' might not exist on array\\|null\\.$#"
+			message: "#^Cannot access property \\$user on mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
