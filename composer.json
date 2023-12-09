@@ -131,7 +131,7 @@
 		],
 		"ci:coverage:legacy": [
 			"@coverage:create-directories",
-			"find 'Tests/Legay' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
+			"find 'Tests/LegacyUnit' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
 		"ci:coverage:merge": [
 			"@coverage:create-directories",
@@ -169,7 +169,7 @@
 			"@ci:tests:legacy"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests:legacy": "find 'Tests/Legacy' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
+		"ci:tests:legacy": "find 'Tests/LegacyUnit' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
