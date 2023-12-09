@@ -146,7 +146,7 @@ For all tests, you will need to provide the following environment variables:
 To run all legacy tests, you can use the composer script:
 
 ```bash
-DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy composer ci:tests:unit-legacy
+DATABASE_USER=typo3 DATABASE_PASSWORD=typo3test DATABASE_NAME=typo3_seminars_legacy composer ci:tests:legacy-unit
 ```
 
 Running all tests from a directory or file looks like this

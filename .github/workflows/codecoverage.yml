@@ -77,7 +77,7 @@ jobs:
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
       - name: "Run legacy tests with coverage"
-        run: composer ci:coverage:legacy
+        run: composer ci:coverage:legacy-unit
       - name: "Show coverage files"
         run: "ls -la .Build/coverage/"
       - name: "Run functional tests with coverage"
