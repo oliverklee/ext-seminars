@@ -150,7 +150,7 @@ final class MailNotifierTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         if ($this->testingFramework instanceof TestingFramework) {
-            $this->testingFramework->cleanUp();
+            $this->testingFramework->cleanUpWithoutDatabase();
         }
 
         $GLOBALS['LANG'] = $this->languageBackup;

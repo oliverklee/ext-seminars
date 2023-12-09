@@ -71,7 +71,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         RegistrationManager::purgeInstance();
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
         $this->restoreOriginalEnvironment();
 
         parent::tearDown();

@@ -105,7 +105,7 @@ final class SalutationTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
         parent::tearDown();

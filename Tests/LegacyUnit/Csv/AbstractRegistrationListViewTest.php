@@ -133,7 +133,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->purgeMockedInstances();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
