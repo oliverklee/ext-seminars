@@ -130,7 +130,7 @@
 			"@coverage:create-directories",
 			"find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
-		"ci:coverage:legacy": [
+		"ci:coverage:legacy-unit": [
 			"@coverage:create-directories",
 			".Build/vendor/bin/typo3 phpunit:run --options=\"--whitelist Classes --coverage-php=.Build/coverage/legacy.cov\" Tests/LegacyUnit"
 		],
@@ -166,12 +166,12 @@
 		],
 		"ci:tests": [
 			"@ci:tests:unit",
-			"@ci:tests:unit-legacy",
+			"@ci:tests:legacy-unit",
 			"@ci:tests:functional"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
+		"ci:tests:legacy-unit": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
-		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
@@ -228,7 +228,7 @@
 		"ci:composer:normalize": "Checks the composer.json.",
 		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
 		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
-		"ci:coverage:legacy": "Generates the code coverage report for legacy tests.",
+		"ci:coverage:legacy-unit": "Generates the code coverage report for legacy tests.",
 		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
 		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
 		"ci:php": "Runs all static checks for the PHP files.",
@@ -238,6 +238,7 @@
 		"ci:php:sniff": "Checks the code style with PHP_CodeSniffer (PHPCS).",
 		"ci:php:stan": "Checks the PHP types using PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
+		"ci:tests:legacy-unit": "Runs the legacy unit tests.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
 		"fix:composer": "Runs all fixers for the PHP code.",
