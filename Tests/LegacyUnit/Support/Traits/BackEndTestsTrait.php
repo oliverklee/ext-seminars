@@ -19,12 +19,12 @@ trait BackEndTestsTrait
     use LanguageHelper;
 
     /**
-     * @var array<string, mixed>
+     * @var array
      */
     private $getBackup = [];
 
     /**
-     * @var array<string, mixed>
+     * @var array
      */
     private $postBackup = [];
 
@@ -39,12 +39,12 @@ trait BackEndTestsTrait
     private $languageBackup = '';
 
     /**
-     * @var array<string, mixed>
+     * @var array
      */
     private $extConfBackup = [];
 
     /**
-     * @var array<string, mixed>
+     * @var array
      */
     private $t3VarBackup = [];
 
@@ -59,6 +59,11 @@ trait BackEndTestsTrait
     private $headerProxy;
 
     /**
+     * @var positive-int
+     */
+    private $now;
+
+    /**
      * Replaces the current BE user with a mocked user, sets "default" as the current BE language, clears the
      * seminars extension settings, disables the automatic configuration check, sets the header proxy to test mode,
      * and sets a fixed `SIM_EXEC_TIME`.
@@ -67,8 +72,8 @@ trait BackEndTestsTrait
      */
     private function unifyTestingEnvironment(): void
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-        $this->replaceBackEndUserWithMock();
+        $this->now = 1524751343;
+        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $this->cleanRequestVariables();
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
@@ -83,9 +88,11 @@ trait BackEndTestsTrait
     {
         GeneralUtility::flushInternalRuntimeCaches();
         unset($GLOBALS['TYPO3_REQUEST']);
-        $this->getBackup = $GLOBALS['_GET'] ?? [];
+        $get = $GLOBALS['_GET'] ?? null;
+        $this->getBackup = \is_array($get) ? $get : [];
         $GLOBALS['_GET'] = [];
-        $this->postBackup = $GLOBALS['_POST'] ?? [];
+        $post = $GLOBALS['_POST'] ?? null;
+        $this->postBackup = \is_array($post) ? $post : [];
         $GLOBALS['_POST'] = [];
     }
 
@@ -109,23 +116,25 @@ trait BackEndTestsTrait
     {
         $currentLanguageService = $GLOBALS['LANG'] ?? null;
         if ($currentLanguageService instanceof LanguageService) {
-            $this->languageBackup = $GLOBALS['LANG']->lang;
+            $this->languageBackup = $currentLanguageService->lang;
         }
 
-        $languageService = $this->getLanguageService();
-        $languageService->lang = 'default';
+        $newLanguageService = $this->getLanguageService();
+        $newLanguageService->lang = 'default';
 
-        $languageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $newLanguageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
+        $newLanguageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $newLanguageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
 
-        $GLOBALS['LANG'] = $languageService;
+        $GLOBALS['LANG'] = $newLanguageService;
     }
 
     private function unifyExtensionSettings(): void
     {
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] ?? [];
-        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'] ?? [];
+        $extConf = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] ?? null;
+        $this->extConfBackup = \is_array($extConf) ? $extConf : [];
+        $t3var = $GLOBALS['T3_VAR']['getUserObj'] ?? null;
+        $this->t3VarBackup = \is_array($t3var) ? $t3var : [];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
     }
 
