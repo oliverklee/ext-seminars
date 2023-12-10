@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel\Fixtures;
+namespace OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures;
 
 use OliverKlee\Seminars\OldModel\LegacyTimeSlot;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures;
 
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
-use OliverKlee\Seminars\Tests\LegacyUnit\Bag\Fixtures\TestingBag;
+use OliverKlee\Seminars\Tests\Unit\Bag\Fixtures\TestingBag;
 
 /**
  * This builder class creates customized test bag objects.
