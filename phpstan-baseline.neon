@@ -2586,6 +2586,61 @@ parameters:
 			path: Tests/Functional/Service/RegistrationProcessorTest.php
 
 		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 6
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 5
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
@@ -3104,61 +3159,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$languageBackup \\(TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 6
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
