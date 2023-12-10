@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\Model;
 
 use OliverKlee\Seminars\Model\Speaker;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
