@@ -60,6 +60,8 @@ final class RegistrationsListTest extends TestCase
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
+        $this->getLanguageService();
+
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
