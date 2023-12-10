@@ -68,6 +68,8 @@ final class LegacyRegistrationTest extends TestCase
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
+        $this->getLanguageService();
+
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
