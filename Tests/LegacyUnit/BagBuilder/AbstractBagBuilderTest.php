@@ -8,13 +8,20 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures\TestingBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder\Fixtures\BrokenBagBuilder;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder
  */
-final class AbstractBagBuilderTest extends TestCase
+final class AbstractBagBuilderTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingBagBuilder
      */
@@ -46,7 +53,7 @@ final class AbstractBagBuilderTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
