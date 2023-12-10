@@ -100,16 +100,15 @@ final class EventDateMapperTest extends TestCase
      */
     public function getCategoriesForEventDateReturnsListInstance(): void
     {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-
-        $testingModel = $this->subject->getLoadedTestingModel(
+        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
+        $date = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
+                'topic' => $topic->getUid(),
             ]
         );
 
-        self::assertInstanceOf(Collection::class, $testingModel->getCategories());
+        self::assertInstanceOf(Collection::class, $date->getCategories());
     }
 
     /**
@@ -212,15 +211,15 @@ final class EventDateMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventDateReturnsListInstance(): void
     {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $testingModel = $this->subject->getLoadedTestingModel(
+        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
+        $date = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
+                'topic' => $topic->getUid(),
             ]
         );
 
-        self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
+        self::assertInstanceOf(Collection::class, $date->getPaymentMethods());
     }
 
     /**
@@ -291,15 +290,15 @@ final class EventDateMapperTest extends TestCase
      */
     public function getTargetGroupsForEventDateReturnsListInstance(): void
     {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $testingModel = $this->subject->getLoadedTestingModel(
+        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
+        $date = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
+                'topic' => $topic->getUid(),
             ]
         );
 
-        self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
+        self::assertInstanceOf(Collection::class, $date->getTargetGroups());
     }
 
     /**
@@ -369,15 +368,15 @@ final class EventDateMapperTest extends TestCase
      */
     public function getCheckboxesForEventDateReturnsListInstance(): void
     {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $testingModel = $this->subject->getLoadedTestingModel(
+        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
+        $date = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
+                'topic' => $topic->getUid(),
             ]
         );
 
-        self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
+        self::assertInstanceOf(Collection::class, $date->getCheckboxes());
     }
 
     /**
