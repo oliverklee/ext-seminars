@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
+use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,6 +26,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 final class RegistrationDigestTest extends TestCase
 {
     use EmailTrait;
+    use LanguageHelper;
 
     /**
      * @var RegistrationDigest
@@ -93,6 +95,8 @@ final class RegistrationDigestTest extends TestCase
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);
+
+        $this->getLanguageService();
     }
 
     protected function tearDown(): void
