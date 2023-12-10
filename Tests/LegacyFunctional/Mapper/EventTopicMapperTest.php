@@ -19,15 +19,22 @@ use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\TargetGroup;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
- * This test case holds tests which are specific to single events.
+ * This test case holds all tests specific to event topics.
  *
  * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
-final class SingleEventMapperTest extends TestCase
+final class EventTopicMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */
@@ -49,7 +56,7 @@ final class SingleEventMapperTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
@@ -61,7 +68,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTopicForSingleRecordThrowsException(): void
+    public function getTopicForTopicRecordThrowsException(): void
     {
         $this->expectException(
             \BadMethodCallException::class
@@ -71,7 +78,7 @@ final class SingleEventMapperTest extends TestCase
         );
 
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         $testingModel->getTopic();
@@ -82,10 +89,10 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventReturnsListInstance(): void
+    public function getCategoriesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCategories());
@@ -94,11 +101,11 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventWithOneCategoryReturnsListOfCategories(): void
+    public function getCategoriesForEventTopicWithOneCategoryReturnsListOfCategories(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -116,11 +123,11 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventWithOneCategoryReturnsOneCategory(): void
+    public function getCategoriesForEventTopicWithOneCategoryReturnsOneCategory(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $categoryUid = MapperRegistry::get(CategoryMapper::class)->getNewGhost()->getUid();
         \assert($categoryUid > 0);
@@ -143,10 +150,10 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForSingleEventWithoutEventTypeReturnsNull(): void
+    public function getEventTypeForEventTopicWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertNull($testingModel->getEventType());
@@ -155,13 +162,13 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForSingleEventWithEventTypeReturnsEventTypeInstance(): void
+    public function getEventTypeForEventTopicWithEventTypeReturnsEventTypeInstance(): void
     {
         $eventType = MapperRegistry::get(EventTypeMapper::class)
             ->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'event_type' => $eventType->getUid(),
             ]
         );
@@ -174,10 +181,10 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventReturnsListInstance(): void
+    public function getPaymentMethodsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
@@ -186,14 +193,14 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsListOfPaymentMethods(): void
+    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
         $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
         \assert($paymentMethodUid > 0);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'payment_methods' => 1,
             ]
         );
@@ -210,14 +217,14 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsOnePaymentMethod(): void
+    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
         $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
         \assert($paymentMethodUid > 0);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => EventInterface::TYPE_SINGLE_EVENT,
+                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
                 'payment_methods' => 1,
             ]
         );
@@ -234,71 +241,7 @@ final class SingleEventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////
     // Tests regarding getTargetGroups().
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForSingleEventReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
-        );
-
-        self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsListOfTargetGroups(): void
-    {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
-        );
-        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
-        \assert($targetGroupUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $targetGroupUid,
-            'target_groups'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(
-            TargetGroup::class,
-            $model->getTargetGroups()->first()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsOneTargetGroup(): void
-    {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
-        );
-        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
-        \assert($targetGroupUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $targetGroupUid,
-            'target_groups'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$targetGroupUid,
-            $model->getTargetGroups()->getUids()
-        );
-    }
 
     /**
      * @test
@@ -367,10 +310,10 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventReturnsListInstance(): void
+    public function getCheckboxesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
 
         self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
@@ -379,11 +322,11 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventWithOneCheckboxReturnsListOfCheckboxes(): void
+    public function getCheckboxesForEventTopicWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
         \assert($checkboxUid > 0);
@@ -401,11 +344,11 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventWithOneCheckboxReturnsOneCheckbox(): void
+    public function getCheckboxesForEventTopicWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
+            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
         );
         $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
         \assert($checkboxUid > 0);

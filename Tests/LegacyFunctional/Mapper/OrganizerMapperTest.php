@@ -5,22 +5,29 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Model\Speaker;
-use PHPUnit\Framework\TestCase;
+use OliverKlee\Seminars\Mapper\OrganizerMapper;
+use OliverKlee\Seminars\Model\Organizer;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
- * @covers \OliverKlee\Seminars\Mapper\SpeakerMapper
+ * @covers \OliverKlee\Seminars\Mapper\OrganizerMapper
  */
-final class SpeakerMapperTest extends TestCase
+final class OrganizerMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var SpeakerMapper
+     * @var OrganizerMapper
      */
     private $subject;
 
@@ -30,12 +37,12 @@ final class SpeakerMapperTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new SpeakerMapper();
+        $this->subject = new OrganizerMapper();
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
@@ -45,14 +52,9 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsOrganizerInstance(): void
+    public function findWithUidReturnsOrganizerInstance(): void
     {
-        $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
-
-        self::assertInstanceOf(
-            Speaker::class,
-            $this->subject->find($uid)
-        );
+        self::assertInstanceOf(Organizer::class, $this->subject->find(1));
     }
 
     /**
@@ -61,13 +63,13 @@ final class SpeakerMapperTest extends TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers',
-            ['title' => 'John Doe']
+            'tx_seminars_organizers',
+            ['title' => 'Fabulous organizer']
         );
 
         $model = $this->subject->find($uid);
         self::assertEquals(
-            'John Doe',
+            'Fabulous organizer',
             $model->getName()
         );
     }
