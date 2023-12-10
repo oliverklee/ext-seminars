@@ -35,7 +35,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class SingleEventTest extends UnitTestCase
 {
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\Event\SingleEvent
+     * @var SingleEvent
      */
     private $subject;
 

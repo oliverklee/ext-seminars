@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyTimeSlot;
+use OliverKlee\Seminars\Tests\LegacyUnit\OldModel\Fixtures\TestingLegacyTimeSlot;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;

@@ -2111,242 +2111,242 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyCategoryTest.php
 
 		-
-			message: "#^Cannot call method allowsMultipleRegistrations\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method allowsMultipleRegistrations\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method calculateStatistics\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method calculateStatistics\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 2
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAccreditationNumber\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAccreditationNumber\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAdditionalInformation\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAdditionalInformation\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendances\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendances\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 9
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesMax\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendancesMax\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesMin\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendancesMin\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesNotPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendancesNotPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesOnRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendancesOnRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getAttendancesPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getBeginDateAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getBeginDateAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getCheckboxes\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getCheckboxes\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 5
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getCreditPoints\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getCreditPoints\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getDescription\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getDescription\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getDetailsPage\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getDetailsPage\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getEarlyBirdDeadline\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getEarlyBirdDeadline\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getEarlyBirdPriceRegular\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getEarlyBirdPriceRegular\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getEarlyBirdPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getEarlyBirdPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getEndDateAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getEndDateAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getExpiry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getExpiry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getOfflineRegistrations\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getOfflineRegistrations\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPlaceShort\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPlaceShort\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPlaceWithDetails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPlaceWithDetails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 9
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPlaceWithDetailsRaw\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPlaceWithDetailsRaw\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 9
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPlaces\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPlaces\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 2
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPlacesWithCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPlacesWithCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 6
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPriceOnRequest\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPriceOnRequest\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPriceRegular\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPriceRegular\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getPriceSpecial\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getRegistrationBeginAsUnixTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getRegistrationBeginAsUnixTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getRegistrationDeadline\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getRegistrationDeadline\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getRoom\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getRoom\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getSubtitle\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getSubtitle\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getTargetGroupsAsArray\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getTargetGroupsAsArray\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getTeaser\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getTeaser\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getUnregistrationDeadlineAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getUnregistrationDeadlineAsTimestamp\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getVacancies\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method getVacancies\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 6
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method hasCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method hasCountry\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method hasRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method hasRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method hasTerms2\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method hasTerms2\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method haveOrganizersBeenNotifiedAboutEnoughAttendees\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method haveOrganizersBeenNotifiedAboutEnoughAttendees\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method isCanceled\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method isCanceled\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method needsRegistration\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method needsRegistration\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method setOfflineRegistrationNumber\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method setOfflineRegistrationNumber\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method shouldAutomaticallyConfirmOrCancel\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method shouldAutomaticallyConfirmOrCancel\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method shouldMuteNotificationEmails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\|null\\.$#"
+			message: "#^Cannot call method shouldMuteNotificationEmails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
@@ -2911,11 +2911,6 @@ parameters:
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setEventData\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Fixtures/OldModel/TestingLegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\AbstractViewTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/AbstractViewTest.php
@@ -3096,7 +3091,7 @@ parameters:
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Fixtures\\\\OldModel\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
@@ -3414,6 +3409,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$endDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setEndDateAndTime\\(\\) expects int, int\\|false given\\.$#"
 			count: 5
 			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setEventData\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/Fixtures/TestingLegacyEvent.php
 
 		-
 			message: "#^Cannot access offset 'LOG' on mixed\\.$#"
