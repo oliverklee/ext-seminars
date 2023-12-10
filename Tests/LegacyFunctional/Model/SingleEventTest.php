@@ -6,15 +6,24 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This test case holds all tests specific to single events.
  * @covers \OliverKlee\Seminars\Model\AbstractTimeSpan
  * @covers \OliverKlee\Seminars\Model\Event
  */
-final class SingleEventTest extends TestCase
+final class SingleEventTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    protected $initializeDatabase = false;
+
     /**
      * @var Event
      */

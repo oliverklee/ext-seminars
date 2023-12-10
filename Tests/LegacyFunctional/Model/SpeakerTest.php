@@ -5,13 +5,22 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Seminars\Model\Speaker;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Model\Speaker
  */
-final class SpeakerTest extends TestCase
+final class SpeakerTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    protected $initializeDatabase = false;
+
     /**
      * @var Speaker
      */
