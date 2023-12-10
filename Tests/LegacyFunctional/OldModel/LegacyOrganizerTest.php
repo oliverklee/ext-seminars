@@ -2,17 +2,24 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyOrganizer
  */
-final class LegacyOrganizerTest extends TestCase
+final class LegacyOrganizerTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var LegacyOrganizer
      */
@@ -59,7 +66,7 @@ final class LegacyOrganizerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
