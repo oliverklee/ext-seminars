@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -14,9 +13,8 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Tests\LegacyUnit\Email\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -24,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 final class SalutationTest extends TestCase
 {
-    use LanguageHelper;
+    use BackEndTestsTrait;
 
     /**
      * @var non-empty-string
@@ -47,20 +45,6 @@ final class SalutationTest extends TestCase
     private const TIME_FORMAT = 'H:i';
 
     /**
-     * @var positive-int
-     */
-    private const NOW = 1524751343;
-
-    /**
-     * @var array<non-empty-string, non-empty-string>
-     */
-    private const CONFIGURATION = [
-        'salutation' => 'formal',
-        'dateFormatYMD' => self::STRFTIME_DATE_FORMAT,
-        'timeFormat' => self::STRFTIME_TIME_FORMAT,
-    ];
-
-    /**
      * @var TestingFramework
      */
     private $testingFramework;
@@ -70,37 +54,26 @@ final class SalutationTest extends TestCase
      */
     private $subject;
 
-    /**
-     * @var array<string, mixed> backed-up extension configuration of the TYPO3 configuration variables
-     */
-    private $extConfBackup = [];
-
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-
-        $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
-        Bootstrap::initializeBackendAuthentication();
+        $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+        $this->configuration->setAsString('salutation', 'formal');
+        $this->configuration->setAsString('dateFormatYMD', self::STRFTIME_DATE_FORMAT);
+        $this->configuration->setAsString('timeFormat', self::STRFTIME_TIME_FORMAT);
 
         $this->subject = new Salutation();
     }
 
     protected function tearDown(): void
     {
+        $this->restoreOriginalEnvironment();
+
         ConfigurationRegistry::purgeInstance();
         $this->testingFramework->cleanUp();
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
         parent::tearDown();
     }
@@ -331,13 +304,13 @@ final class SalutationTest extends TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => self::NOW]
+            ['begin_date' => $this->now]
         );
 
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
-            \date(self::DATE_FORMAT, self::NOW),
+            \date(self::DATE_FORMAT, $this->now),
             $this->subject->createIntroduction('%s', $event)
         );
     }
@@ -350,14 +323,14 @@ final class SalutationTest extends TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => self::NOW,
-                'end_date' => self::NOW + Time::SECONDS_PER_DAY,
+                'begin_date' => $this->now,
+                'end_date' => $this->now + Time::SECONDS_PER_DAY,
             ]
         );
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
-            \date(self::DATE_FORMAT, self::NOW) . '-' . \date(self::DATE_FORMAT, self::NOW + Time::SECONDS_PER_DAY),
+            \date(self::DATE_FORMAT, $this->now) . '-' . \date(self::DATE_FORMAT, $this->now + Time::SECONDS_PER_DAY),
             $this->subject->createIntroduction('%s', $event)
         );
     }
@@ -370,14 +343,14 @@ final class SalutationTest extends TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => self::NOW,
+                'begin_date' => $this->now,
             ]
         );
 
         $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
-            \date(self::TIME_FORMAT, self::NOW),
+            \date(self::TIME_FORMAT, $this->now),
             $this->subject->createIntroduction('%s', $event)
         );
     }
@@ -387,17 +360,17 @@ final class SalutationTest extends TestCase
      */
     public function createIntroductionForEventWithStartAndEndOnOneDayReturnsTimeFromTo(): void
     {
-        $endDate = self::NOW + 3600;
+        $endDate = $this->now + 3600;
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => self::NOW,
+                'begin_date' => $this->now,
                 'end_date' => $endDate,
             ]
         );
 
         $event = new TestingLegacyEvent($eventUid);
-        $timeInsert = \date(self::TIME_FORMAT, self::NOW) . ' ' .
+        $timeInsert = \date(self::TIME_FORMAT, $this->now) . ' ' .
             $this->translate('email_timeTo') . ' ' .
             \date(self::TIME_FORMAT, $endDate);
 
@@ -412,17 +385,17 @@ final class SalutationTest extends TestCase
      */
     public function createIntroductionForEventWithStartAndEndOnOneDayContainsDate(): void
     {
-        $endDate = self::NOW + 3600;
+        $endDate = $this->now + 3600;
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => self::NOW,
+                'begin_date' => $this->now,
                 'end_date' => $endDate,
             ]
         );
 
         $event = new TestingLegacyEvent($eventUid);
-        $formattedDate = \date(self::DATE_FORMAT, self::NOW);
+        $formattedDate = \date(self::DATE_FORMAT, $this->now);
 
         self::assertStringContainsString(
             $formattedDate,
@@ -440,7 +413,7 @@ final class SalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => self::NOW]
+            ['begin_date' => $this->now]
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -460,7 +433,7 @@ final class SalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => self::NOW]
+            ['begin_date' => $this->now]
         );
 
         $event = new TestingLegacyEvent($eventUid);
@@ -480,7 +453,7 @@ final class SalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => self::NOW]
+            ['begin_date' => $this->now]
         );
 
         $event = new TestingLegacyEvent($eventUid);
