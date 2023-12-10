@@ -2586,6 +2586,51 @@ parameters:
 			path: Tests/LegacyFunctional/Bag/AbstractBagTest.php
 
 		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/BagBuilder/CategoryBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/BagBuilder/CategoryBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
+			count: 42
+			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/BagBuilder/OrganizerBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
+			count: 7
+			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\|null\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
@@ -2884,51 +2929,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/BagBuilder/AbstractBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BagBuilder/CategoryBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/BagBuilder/CategoryBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 42
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BagBuilder/OrganizerBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 7
-			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
