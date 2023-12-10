@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
@@ -23,21 +23,30 @@ use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifier
  */
-final class MailNotifierTest extends TestCase
+final class MailNotifierTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
     use EmailTrait;
     use MakeInstanceTrait;
+
+    protected $coreExtensionsToLoad = ['scheduler'];
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var MailNotifier
@@ -109,7 +118,7 @@ final class MailNotifierTest extends TestCase
         $this->restoreOriginalEnvironment();
 
         if ($this->testingFramework instanceof TestingFramework) {
-            $this->testingFramework->cleanUp();
+            $this->testingFramework->cleanUpWithoutDatabase();
         }
 
         MapperRegistry::purgeInstance();

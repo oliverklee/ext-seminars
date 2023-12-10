@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unused Composer scripts and add script descriptions (#2740)
 - Migrate the tests to the TYPO3 testing framework
   (#2701, #2702, #2713, #2717, #2731, #2732, #2733, #2734, #2735, #2737, #2739,
-  #2742, #2754, #2756, #2757, #2760, #2764)
+  #2742, #2754, #2756, #2757, #2760, #2764, #2767)
 
 ### Deprecated
 

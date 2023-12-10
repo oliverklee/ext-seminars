@@ -2583,6 +2583,96 @@ parameters:
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 3
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 10
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
+			count: 5
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
+			count: 5
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access property \\$lang on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot call method getLL\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
+			count: 8
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot call method includeLLFile\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Only numeric types are allowed in \\-, int\\<0, max\\>\\|false given on the left side\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 9
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 3
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
 
 		-
@@ -3104,96 +3194,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$paymentDate of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setPaymentDateAsUnixTimestamp\\(\\) expects int, mixed given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
-
-		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 3
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 10
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot access property \\$lang on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method getLL\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 8
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method includeLLFile\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:createSeminarWithOrganizer\\(\\) has parameter \\$additionalSeminarData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Only numeric types are allowed in \\-, int\\<0, max\\>\\|false given on the left side\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 9
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
