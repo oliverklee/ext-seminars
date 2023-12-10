@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\Service;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
@@ -16,17 +16,24 @@ use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\EmailService
  */
-final class EmailServiceTest extends TestCase
+final class EmailServiceTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
     use EmailTrait;
     use MakeInstanceTrait;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var string
@@ -107,7 +114,7 @@ final class EmailServiceTest extends TestCase
     {
         $this->restoreOriginalEnvironment();
 
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
