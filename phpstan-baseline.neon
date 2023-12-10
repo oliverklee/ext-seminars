@@ -2596,6 +2596,71 @@ parameters:
 			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
 
 		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addEventTypeRelation\\(\\) has parameter \\$eventTypeData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addLeaderRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizingPartnerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addPartnerRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addTargetGroupRelation\\(\\) has parameter \\$targetGroupData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:addTutorRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
@@ -3129,71 +3194,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\SelectorWidgetTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addEventTypeRelation\\(\\) has parameter \\$eventTypeData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addLeaderRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addOrganizingPartnerRelation\\(\\) has parameter \\$organizerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPartnerRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTargetGroupRelation\\(\\) has parameter \\$targetGroupData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyEventTest\\:\\:addTutorRelation\\(\\) has parameter \\$speakerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"

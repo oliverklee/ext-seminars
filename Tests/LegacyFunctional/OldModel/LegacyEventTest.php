@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\OldModel;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
@@ -17,16 +17,23 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
-final class LegacyEventTest extends TestCase
+final class LegacyEventTest extends FunctionalTestCase
 {
     use LanguageHelper;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var array<string, non-empty-string|int|bool>
@@ -85,6 +92,58 @@ final class LegacyEventTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
+        $languagesConnection = $this->connectionPool->getConnectionForTable('static_languages');
+        if ($languagesConnection->count('*', 'static_languages', []) === 0) {
+            $languagesConnection->insert(
+                'static_languages',
+                [
+                    'uid' => 30,
+                    'lg_iso_2' => 'EN',
+                    'lg_name_local' => 'English',
+                    'lg_name_en' => 'English',
+                    'lg_typo3' => 'en',
+                ]
+            );
+            $languagesConnection->insert(
+                'static_languages',
+                [
+                    'uid' => 43,
+                    'lg_iso_2' => 'DE',
+                    'lg_name_local' => 'Deutsch',
+                    'lg_name_en' => 'German',
+                    'lg_typo3' => 'de',
+                ]
+            );
+            $languagesConnection->insert(
+                'static_languages',
+                [
+                    'uid' => 59,
+                    'lg_iso_2' => 'IT',
+                    'lg_name_local' => 'Italiano',
+                    'lg_name_en' => 'Italian',
+                    'lg_typo3' => 'it',
+                ]
+            );
+        }
+
+        $currenciesConnection = $this->connectionPool->getConnectionForTable('static_currencies');
+        if ($currenciesConnection->count('*', 'static_currencies', []) === 0) {
+            $currenciesConnection->insert(
+                'static_currencies',
+                [
+                    'uid' => 49,
+                    'cu_iso_3' => 'EUR',
+                    'cu_iso_nr' => 978,
+                    'cu_name_en' => 'Euro',
+                    'cu_symbol_left' => '€',
+                    'cu_thousands_point' => '.',
+                    'cu_decimal_point' => ',',
+                    'cu_decimal_digits' => 2,
+                    'cu_sub_divisor' => 100,
+                ]
+            );
+        }
+
         $this->configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
@@ -107,7 +166,7 @@ final class LegacyEventTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         ConfigurationRegistry::purgeInstance();
         RegistrationManager::purgeInstance();
