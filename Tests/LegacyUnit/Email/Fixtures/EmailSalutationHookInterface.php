@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Email\Fixtures;
 
 use OliverKlee\Seminars\Model\FrontEndUser;
 
