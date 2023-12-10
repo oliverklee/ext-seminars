@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -44,6 +45,37 @@ final class SelectorWidgetTest extends TestCase
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
+
+        $countriesConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('static_countries');
+        if ($countriesConnection->count('*', 'static_countries', []) === 0) {
+            $countriesConnection->insert(
+                'static_countries',
+                [
+                    'uid' => 54,
+                    'cn_iso_2' => 'DE',
+                    'cn_iso_3' => 'DEU',
+                    'cn_iso_nr' => 276,
+                    'cn_official_name_local' => 'Bundesrepublik Deutschland',
+                    'cn_official_name_en' => 'Federal Republic of Germany',
+                    'cn_short_local' => 'Deutschland',
+                    'cn_short_en' => 'Germany',
+                ]
+            );
+            $countriesConnection->insert(
+                'static_countries',
+                [
+                    'uid' => 74,
+                    'cn_iso_2' => 'GB',
+                    'cn_iso_3' => 'GBR',
+                    'cn_iso_nr' => 826,
+                    'cn_official_name_local' => 'United Kingdom of Great Britain and Northern Ireland',
+                    'cn_official_name_en' => 'United Kingdom of Great Britain and Northern Ireland',
+                    'cn_short_local' => 'United Kingdom',
+                    'cn_short_en' => 'United Kingdom',
+                ]
+            );
+        }
 
         $this->subject = new SelectorWidget(
             [
