@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\OldModel;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
@@ -12,16 +12,23 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration
  */
-final class LegacyRegistrationTest extends TestCase
+final class LegacyRegistrationTest extends FunctionalTestCase
 {
     use LanguageHelper;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var LegacyRegistration
@@ -39,11 +46,8 @@ final class LegacyRegistrationTest extends TestCase
     private $seminarUid = 0;
 
     /**
-     * @var int the UID of the user the registration relates to
+     * @var ConnectionPool
      */
-    private $feUserUid = 0;
-
-    /** @var ConnectionPool */
     private $connectionPool;
 
     /**
@@ -63,6 +67,25 @@ final class LegacyRegistrationTest extends TestCase
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
+
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $currenciesConnection = $this->connectionPool->getConnectionForTable('static_currencies');
+        if ($currenciesConnection->count('*', 'static_currencies', []) === 0) {
+            $currenciesConnection->insert(
+                'static_currencies',
+                [
+                    'uid' => 49,
+                    'cu_iso_3' => 'EUR',
+                    'cu_iso_nr' => 978,
+                    'cu_name_en' => 'Euro',
+                    'cu_symbol_left' => '€',
+                    'cu_thousands_point' => '.',
+                    'cu_decimal_point' => ',',
+                    'cu_decimal_digits' => 2,
+                    'cu_sub_divisor' => 100,
+                ]
+            );
+        }
 
         $this->configuration = new DummyConfiguration();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
@@ -89,7 +112,7 @@ final class LegacyRegistrationTest extends TestCase
             $organizerUid
         );
 
-        $this->feUserUid = $this->testingFramework->createFrontEndUser(
+        $feUserUid = $this->testingFramework->createFrontEndUser(
             '',
             [
                 'name' => 'foo_user',
@@ -105,18 +128,16 @@ final class LegacyRegistrationTest extends TestCase
                 'expectations' => '',
                 'background_knowledge' => "foo\nbar",
                 'known_from' => "foo\rbar",
-                'user' => $this->feUserUid,
+                'user' => $feUserUid,
             ]
         );
 
         $this->subject = new LegacyRegistration($registrationUid);
-
-        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         RegistrationManager::purgeInstance();
 
