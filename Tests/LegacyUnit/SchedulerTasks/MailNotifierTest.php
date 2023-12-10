@@ -72,6 +72,7 @@ final class MailNotifierTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->testingFramework->createBackEndUser();
 
         $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 2);
         $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', true);
