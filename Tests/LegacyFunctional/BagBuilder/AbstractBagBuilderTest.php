@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures\TestingBagBuilder;
-use OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder\Fixtures\BrokenBagBuilder;
+use OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder\Fixtures\BrokenBagBuilder;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**

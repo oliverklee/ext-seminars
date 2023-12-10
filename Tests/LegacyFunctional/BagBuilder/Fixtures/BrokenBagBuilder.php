@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder\Fixtures;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder\Fixtures;
 
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 use OliverKlee\Seminars\Tests\Unit\Bag\Fixtures\TestingBag;
