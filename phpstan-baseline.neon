@@ -1956,11 +1956,6 @@ parameters:
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Configuration\\\\TypoScriptSetupTest\\:\\:extractClassNameFromUserFunction\\(\\) should return class\\-string but returns string\\.$#"
-			count: 1
-			path: Tests/Functional/Configuration/TypoScriptSetupTest.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 4
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
