@@ -88,6 +88,8 @@ final class LegacyEventTest extends TestCase
         $this->configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
+        $this->getLanguageService();
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
