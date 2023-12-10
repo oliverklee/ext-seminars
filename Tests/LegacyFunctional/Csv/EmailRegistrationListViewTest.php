@@ -7,16 +7,23 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Csv\DownloadRegistrationListView;
+use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-final class DownloadRegistrationListViewTest extends TestCase
+final class EmailRegistrationListViewTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
-     * @var DownloadRegistrationListView
+     * @var EmailRegistrationListView
      */
     private $subject;
 
@@ -62,13 +69,13 @@ final class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        $this->subject = new DownloadRegistrationListView();
+        $this->subject = new EmailRegistrationListView();
         $this->subject->setEventUid($this->eventUid);
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
@@ -79,7 +86,9 @@ final class DownloadRegistrationListViewTest extends TestCase
     public function renderCanContainOneRegistrationUid(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
+        $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
+        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -99,7 +108,7 @@ final class DownloadRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsFrontEndUserFieldsForDownload(): void
+    public function renderNotContainsFrontEndUserFieldsForDownload(): void
     {
         $firstName = 'John';
         $lastName = 'Doe';
@@ -119,7 +128,7 @@ final class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertStringContainsString(
+        self::assertStringNotContainsString(
             $firstName,
             $this->subject->render()
         );
@@ -128,7 +137,7 @@ final class DownloadRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotContainsFrontEndUserFieldsForEmail(): void
+    public function renderContainsFrontEndUserFieldsForEmail(): void
     {
         $firstName = 'John';
         $lastName = 'Doe';
@@ -148,7 +157,7 @@ final class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertStringNotContainsString(
+        self::assertStringContainsString(
             $lastName,
             $this->subject->render()
         );
@@ -157,7 +166,35 @@ final class DownloadRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsRegistrationFieldsForDownload(): void
+    public function renderNotContainsRegistrationFieldsForDownload(): void
+    {
+        $knownFrom = 'Google';
+        $notes = 'Looking forward to the event!';
+
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'known_from');
+        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'notes');
+
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'seminar' => $this->eventUid,
+                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'user' => $this->testingFramework->createFrontEndUser(),
+                'known_from' => $knownFrom,
+                'notes' => $notes,
+            ]
+        );
+
+        self::assertStringNotContainsString(
+            $knownFrom,
+            $this->subject->render()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function renderContainsRegistrationFieldsForEmail(): void
     {
         $knownFrom = 'Google';
         $notes = 'Looking forward to the event!';
@@ -177,34 +214,6 @@ final class DownloadRegistrationListViewTest extends TestCase
         );
 
         self::assertStringContainsString(
-            $knownFrom,
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderNotContainsRegistrationFieldsForEmail(): void
-    {
-        $knownFrom = 'Google';
-        $notes = 'Looking forward to the event!';
-
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'known_from');
-        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'notes');
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'known_from' => $knownFrom,
-                'notes' => $notes,
-            ]
-        );
-
-        self::assertStringNotContainsString(
             $notes,
             $this->subject->render()
         );
@@ -213,10 +222,10 @@ final class DownloadRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForQueueRegistrationsNotAllowedForDownloadNotContainsRegistrationOnQueue(): void
+    public function renderForQueueRegistrationsNotAllowedForEmailNotContainsRegistrationOnQueue(): void
     {
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', false);
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
+        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
+        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', true);
 
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
@@ -240,10 +249,10 @@ final class DownloadRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForQueueRegistrationsAllowedForDownloadNotContainsRegistrationOnQueue(): void
+    public function renderForQueueRegistrationsAllowedForEmailNotContainsRegistrationOnQueue(): void
     {
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', true);
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
+        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
+        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', false);
 
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
