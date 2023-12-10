@@ -2581,6 +2581,21 @@ parameters:
 			path: Tests/Functional/Service/RegistrationProcessorTest.php
 
 		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\|null\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Food\\|null\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
+
+		-
+			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Lodging\\|null\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
+
+		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 3
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
@@ -3104,21 +3119,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\SelectorWidgetTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/SelectorWidgetTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Checkbox\\|null\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Mapper/RegistrationMapperTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Food\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/RegistrationMapperTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Lodging\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/RegistrationMapperTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"

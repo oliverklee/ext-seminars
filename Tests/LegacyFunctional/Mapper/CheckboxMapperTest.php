@@ -5,22 +5,29 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Mapper\PlaceMapper;
-use OliverKlee\Seminars\Model\Place;
-use PHPUnit\Framework\TestCase;
+use OliverKlee\Seminars\Mapper\CheckboxMapper;
+use OliverKlee\Seminars\Model\Checkbox;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
- * @covers \OliverKlee\Seminars\Mapper\PlaceMapper
+ * @covers \OliverKlee\Seminars\Mapper\CheckboxMapper
  */
-final class PlaceMapperTest extends TestCase
+final class CheckboxMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var PlaceMapper
+     * @var CheckboxMapper
      */
     private $subject;
 
@@ -30,12 +37,12 @@ final class PlaceMapperTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new PlaceMapper();
+        $this->subject = new CheckboxMapper();
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
@@ -45,9 +52,9 @@ final class PlaceMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsPlaceInstance(): void
+    public function findWithUidReturnsCheckboxInstance(): void
     {
-        self::assertInstanceOf(Place::class, $this->subject->find(1));
+        self::assertInstanceOf(Checkbox::class, $this->subject->find(1));
     }
 
     /**
@@ -56,13 +63,13 @@ final class PlaceMapperTest extends TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['title' => 'Nice place']
+            'tx_seminars_checkboxes',
+            ['title' => 'I agree with the T&C.']
         );
-
         $model = $this->subject->find($uid);
+
         self::assertEquals(
-            'Nice place',
+            'I agree with the T&C.',
             $model->getTitle()
         );
     }

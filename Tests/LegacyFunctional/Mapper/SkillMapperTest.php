@@ -5,22 +5,29 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Mapper\TargetGroupMapper;
-use OliverKlee\Seminars\Model\TargetGroup;
-use PHPUnit\Framework\TestCase;
+use OliverKlee\Seminars\Mapper\SkillMapper;
+use OliverKlee\Seminars\Model\Skill;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
- * @covers \OliverKlee\Seminars\Mapper\TargetGroupMapper
+ * @covers \OliverKlee\Seminars\Mapper\SkillMapper
  */
-final class TargetGroupMapperTest extends TestCase
+final class SkillMapperTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var TargetGroupMapper
+     * @var SkillMapper
      */
     private $subject;
 
@@ -30,12 +37,12 @@ final class TargetGroupMapperTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new TargetGroupMapper();
+        $this->subject = new SkillMapper();
     }
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
@@ -45,10 +52,10 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsTargetGroupInstance(): void
+    public function findWithUidReturnsSkillInstance(): void
     {
         self::assertInstanceOf(
-            TargetGroup::class,
+            Skill::class,
             $this->subject->find(1)
         );
     }
@@ -59,13 +66,13 @@ final class TargetGroupMapperTest extends TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups',
-            ['title' => 'Housewives']
+            'tx_seminars_skills',
+            ['title' => 'Superhero']
         );
 
         $model = $this->subject->find($uid);
         self::assertEquals(
-            'Housewives',
+            'Superhero',
             $model->getTitle()
         );
     }
