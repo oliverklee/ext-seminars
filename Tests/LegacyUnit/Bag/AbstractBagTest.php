@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
+use OliverKlee\Seminars\Tests\LegacyUnit\Bag\Fixtures\TestingBag;
 use PHPUnit\Framework\TestCase;
 
 /**

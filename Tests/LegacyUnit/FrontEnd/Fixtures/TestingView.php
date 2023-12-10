@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd;
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures;
 
 use OliverKlee\Seminars\FrontEnd\AbstractView;
 

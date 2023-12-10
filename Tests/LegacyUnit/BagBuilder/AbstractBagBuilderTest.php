@@ -6,8 +6,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\AbstractBag;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
+use OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures\TestingBagBuilder;
+use OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder\Fixtures\BrokenBagBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**

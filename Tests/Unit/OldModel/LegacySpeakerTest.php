@@ -14,7 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class LegacySpeakerTest extends UnitTestCase
 {
     /**
-     * @var \OliverKlee\Seminars\OldModel\LegacySpeaker
+     * @var LegacySpeaker
      */
     private $subject;
 

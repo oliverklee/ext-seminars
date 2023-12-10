@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\BagBuilder;
 
+use OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures\TestingBagBuilder;
 use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
