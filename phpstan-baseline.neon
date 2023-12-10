@@ -2596,6 +2596,16 @@ parameters:
 			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$paymentDate of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setPaymentDateAsUnixTimestamp\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
+
+		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 3
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
@@ -3184,16 +3194,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$expiry of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\:\\:setExpiry\\(\\) expects int, int\\|false given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$paymentDate of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setPaymentDateAsUnixTimestamp\\(\\) expects int, mixed given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/OldModel/LegacyRegistrationTest.php
 
 		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
