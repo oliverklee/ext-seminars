@@ -122,6 +122,8 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
 
+        $this->getLanguageService();
+
         $this->extensionConfiguration = new DummyConfiguration();
         $this->extensionConfiguration->setAsBoolean('enableConfigCheck', false);
         ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
