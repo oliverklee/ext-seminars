@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Email;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -11,18 +11,25 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Tests\LegacyUnit\Email\Fixtures\EmailSalutationHookInterface;
+use OliverKlee\Seminars\Tests\LegacyFunctional\Email\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Email\Salutation
  */
-final class SalutationTest extends TestCase
+final class SalutationTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var non-empty-string
@@ -73,7 +80,7 @@ final class SalutationTest extends TestCase
         $this->restoreOriginalEnvironment();
 
         ConfigurationRegistry::purgeInstance();
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
