@@ -2831,7 +2831,7 @@ parameters:
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
 		-
-			message: "#^Cannot access offset class\\-string\\<OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\Fixtures\\\\EmailSalutationHookInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\> on mixed\\.$#"
+			message: "#^Cannot access offset class\\-string\\<OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Email\\\\Fixtures\\\\EmailSalutationHookInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\> on mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
