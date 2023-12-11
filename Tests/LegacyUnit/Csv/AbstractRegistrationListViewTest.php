@@ -390,7 +390,7 @@ final class AbstractRegistrationListViewTest extends TestCase
             [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
-                'user' => $this->testingFramework->getAutoIncrement('fe_users'),
+                'user' => 9999,
             ]
         );
 
