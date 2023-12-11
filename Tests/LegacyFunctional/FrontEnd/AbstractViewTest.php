@@ -2,18 +2,25 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingView;
-use PHPUnit\Framework\TestCase;
+use OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd\Fixtures\TestingView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\AbstractView
  */
-final class AbstractViewTest extends TestCase
+final class AbstractViewTest extends FunctionalTestCase
 {
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
     /**
      * @var TestingView
      */
@@ -40,7 +47,7 @@ final class AbstractViewTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
     }
