@@ -613,7 +613,7 @@ final class RegistrationsListTest extends TestCase
         );
 
         self::assertStringNotContainsString(
-            (string)$this->registrationUid,
+            '<td>' . $this->registrationUid . '</td>',
             $this->subject->render()
         );
     }
