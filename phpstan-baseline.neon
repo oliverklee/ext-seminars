@@ -2801,6 +2801,11 @@ parameters:
 			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/RegistrationsListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\RequirementsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/RequirementsListTest.php
@@ -3189,11 +3194,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
 
 		-
 			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
