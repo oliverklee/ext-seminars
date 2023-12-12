@@ -141,6 +141,7 @@ final class DefaultControllerTest extends TestCase
                 'subtitle' => 'Something for you & me',
                 'accreditation_number' => '1 & 1',
                 'room' => 'Rooms 2 & 3',
+                'expiry' => mktime(0, 0, 0, 1, 1, 2008),
             ]
         );
 
@@ -4525,11 +4526,6 @@ final class DefaultControllerTest extends TestCase
     public function myEventsContainsExpiryOfEventWithExpiryAndRegistrationForLoggedInUser(): void
     {
         $this->createLogInAndRegisterFeUser();
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['expiry' => mktime(0, 0, 0, 1, 1, 2008)]
-        );
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
         self::assertStringContainsString(
