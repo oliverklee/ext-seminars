@@ -53,7 +53,6 @@
 		"helhum/typo3-console": "^6.7.6 || ^7.1.4",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"mikey179/vfsstream": "^1.6.11",
-		"oliverklee/phpunit": "^8.5.1",
 		"php-coveralls/php-coveralls": "^2.7.0",
 		"phpstan/extension-installer": "^1.3.1",
 		"phpstan/phpstan": "^1.10.49",
@@ -130,10 +129,6 @@
 			"@coverage:create-directories",
 			"find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
-		"ci:coverage:legacy-unit": [
-			"@coverage:create-directories",
-			".Build/vendor/bin/typo3 phpunit:run --options=\"--whitelist Classes --coverage-php=.Build/coverage/legacy.cov\" Tests/LegacyUnit"
-		],
 		"ci:coverage:merge": [
 			"@coverage:create-directories",
 			"tools/phpcov merge --clover=./build/logs/clover.xml ./.Build/coverage/"
@@ -163,11 +158,9 @@
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:legacy-functional": "find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests:legacy-unit": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
-		"create-legacy-test-setup": ".Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type=\"site\" --database-user-name=\"root\" --database-user-password=\"root\" --database-host-name=\"192.168.101.2\" --database-name=\"seminars_test\" --admin-user-name=\"admin\" --admin-password=\"password\" --site-name=\"Test installation\"",
 		"fix": [
 			"@fix:composer",
 			"@fix:php"
@@ -221,7 +214,6 @@
 		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
 		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
 		"ci:coverage:legacy-functional": "Generates the code coverage report for legacy functional tests.",
-		"ci:coverage:legacy-unit": "Generates the code coverage report for legacy unit tests.",
 		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
 		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
 		"ci:php": "Runs all static checks for the PHP files.",
@@ -233,7 +225,6 @@
 		"ci:static": "Runs all static code analysis checks for the code.",
 		"ci:tests:functional": "Runs the functional tests.",
 		"ci:tests:legacy-functional": "Runs the legacy functional tests.",
-		"ci:tests:legacy-unit": "Runs the legacy unit tests.",
 		"ci:tests:unit": "Runs the unit tests.",
 		"ci:ts:lint": "Lints all TypoScript files.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
