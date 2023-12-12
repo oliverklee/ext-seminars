@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Stabilize the legacy tests (#2746)
+- Stabilize the legacy tests (#2746, #2794
 - Avoid using the deprecated `LanguageService::create()` (#2712)
 - Avoid crash with Fluid 2.12.0 due to signature change (#3059)
 
