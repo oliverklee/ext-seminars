@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
 
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
@@ -19,18 +19,25 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
-use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
  */
-final class DefaultControllerTest extends TestCase
+final class DefaultControllerTest extends FunctionalTestCase
 {
     use LanguageHelper;
+
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var array<string, non-empty-string>
@@ -178,7 +185,7 @@ final class DefaultControllerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
 
         ConfigurationRegistry::purgeInstance();
         ConfigurationProxy::purgeInstances();
