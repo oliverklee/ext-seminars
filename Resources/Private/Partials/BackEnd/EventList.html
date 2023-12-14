@@ -62,10 +62,6 @@
                     <f:if condition="{permissions.writeAccessToEvents}">
                         <td class="col-control nowrap">
                             <div class="btn-group" role="group">
-                                <span class="btn btn-default disabled">
-                                    <core:icon identifier="empty-empty"/>
-                                </span>
-
                                 <be:link.editRecord uid="{event.uid}" table="{tableName}" class="btn btn-default"
                                                     title="{f:translate(key: '{actionLabelPrefix}.edit')}">
                                     <core:icon identifier="actions-open"/>
