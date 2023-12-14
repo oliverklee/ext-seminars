@@ -103,7 +103,8 @@
                         <f:if condition="{statistics}">
                             <f:if condition="({statistics.regularSeatsCount} || {statistics.waitingListSeatsCount})">
                                 <f:link.action
-                                    controller="BackEnd\Registration" action="showForEvent" arguments="{eventUid: event.uid}"
+                                    controller="BackEnd\Registration" action="showForEvent"
+                                    arguments="{eventUid: event.uid}"
                                     title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}"
                                     class="btn btn-default" additionalAttributes="{role: 'button'}">
                                     <core:icon identifier="actions-list"/>
