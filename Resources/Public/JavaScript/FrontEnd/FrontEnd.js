@@ -3,7 +3,7 @@
  * editor and the registration form.
  */
 
-;((root, exports, $) => {
+;((root, exports) => {
   'use strict'
 
   class Seminars {
@@ -66,13 +66,13 @@
      * Initializes the search widget.
      */
     initializeSearchWidget() {
-      if ($('.tx-seminars-pi1-selectorwidget').length === 0) {
+      const searchWidget = document.querySelector('.tx-seminars-pi1-selectorwidget');
+      const clearSearchWidgetButton = document.querySelector('#tx-seminars-pi1-clear-search-widget');
+      if (!(searchWidget instanceof Element) || !(clearSearchWidgetButton instanceof Element)) {
         return;
       }
 
-      $('#tx-seminars-pi1-clear-search-widget').click(() => {
-        this.clearSearchWidgetFields();
-      });
+      clearSearchWidgetButton.addEventListener('click', this.clearSearchWidgetFields);
     }
 
     findRegistrationFormElements() {
