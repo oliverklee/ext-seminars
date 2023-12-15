@@ -25,8 +25,6 @@
         <tbody>
             <f:for each="{registrations}" as="registration">
                 <tr>
-                    <f:variable name="visible"
-                                value="{f:if(condition: '{registrations.rawData.hidden}', then: 0, else: 1)}"/>
                     <td class="text-end text-right nowrap">
                         {registration.uid}
                     </td>
@@ -56,23 +54,9 @@
                                     <core:icon identifier="actions-open"/>
                                 </be:link.editRecord>
 
-                                <f:if condition="{visible}">
-                                    <f:then>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{registration.uid}][hidden]=1', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.hide')}">
-                                            <core:icon identifier="actions-edit-hide"/>
-                                        </a>
-                                    </f:then>
-                                    <f:else>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{registration.uid}][hidden]=0', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
-                                            <core:icon identifier="actions-edit-unhide"/>
-                                        </a>
-                                    </f:else>
-                                </f:if>
-
+                                <span class="btn btn-default disabled">
+                                    <core:icon identifier="empty-empty"/>
+                                </span>
                                 <span class="btn btn-default disabled">
                                     <core:icon identifier="empty-empty"/>
                                 </span>
