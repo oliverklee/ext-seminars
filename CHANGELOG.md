@@ -6,7 +6,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a button for (un)hiding registrations in the BE module (#2805)
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
