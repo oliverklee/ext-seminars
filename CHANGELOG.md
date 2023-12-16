@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Replace deprecated `setUpBackendUserFromFixture` calls in tests (#2820)
 - Avoid the deprecated `cruser_id` (#2821)
 - Avoid using the deprecated `ObjectManager` (##2819)
 - Stop using the deprecated `Mock::setMethods()` (#2815)

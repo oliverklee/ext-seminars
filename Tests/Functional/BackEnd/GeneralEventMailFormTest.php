@@ -35,7 +35,8 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         parent::setUp();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'] = [];
-        $this->setUpBackendUserFromFixture(1);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
         $this->initializeBackEndLanguage();
 
         $this->email = $this->createEmailMock();

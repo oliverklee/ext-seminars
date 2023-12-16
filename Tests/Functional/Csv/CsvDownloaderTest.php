@@ -38,7 +38,8 @@ final class CsvDownloaderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->setUpBackendUserFromFixture(1);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
         $this->setUpExtensionConfiguration();
         $this->initializeBackEndLanguage();
 
