@@ -44,11 +44,6 @@ class RegistrationDigest
      */
     private $eventMapper;
 
-    public function injectObjectManager(ObjectManagerInterface $objectManager): void
-    {
-        $this->objectManager = $objectManager;
-    }
-
     /**
      * Initializes the dependencies that cannot be injected using dependency injection.
      *
@@ -155,12 +150,10 @@ class RegistrationDigest
     /**
      * @param non-empty-string $templatePath in the EXT:... syntax
      * @param Collection<Event> $events
-     *
-     * @return string
      */
     private function createContent(string $templatePath, Collection $events): string
     {
-        $view = $this->objectManager->get(StandaloneView::class);
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
         $view->assign('events', $events);
 

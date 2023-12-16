@@ -93,16 +93,8 @@ final class RegistrationDigestTest extends FunctionalTestCase
         $this->configuration = new DummyConfiguration($configuration);
         $this->subject->setConfiguration($this->configuration);
 
-        $this->objectManagerMock = $this->createMock(ObjectManager::class);
-        $this->subject->injectObjectManager($this->objectManagerMock);
-
         $this->eventMapperMock = $this->createMock(EventMapper::class);
         $this->subject->setEventMapper($this->eventMapperMock);
-
-        $this->plaintextViewMock = $this->createMock(StandaloneView::class);
-        $this->htmlViewMock = $this->createMock(StandaloneView::class);
-        $this->objectManagerMock->method('get')->with(StandaloneView::class)
-            ->willReturnOnConsecutiveCalls($this->plaintextViewMock, $this->htmlViewMock);
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);
