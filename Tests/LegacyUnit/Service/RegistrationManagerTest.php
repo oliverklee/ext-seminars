@@ -926,7 +926,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice(): void
     {
         $subject = $this->getMockBuilder(RegistrationManager::class)
-            ->setMethods(['getUnregistrationNotice'])->getMock();
+            ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
@@ -956,7 +956,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
 
         $subject = $this->getMockBuilder(RegistrationManager::class)
-            ->setMethods(['getUnregistrationNotice'])->getMock();
+            ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
@@ -983,7 +983,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $subject = $this->getMockBuilder(RegistrationManager::class)
-            ->setMethods(['getUnregistrationNotice'])->getMock();
+            ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
@@ -1015,7 +1015,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
         $subject = $this->getMockBuilder(RegistrationManager::class)
-            ->setMethods(['getUnregistrationNotice'])->getMock();
+            ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
         $registration = $this->createRegistration();
@@ -1054,7 +1054,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 
         $subject = $this->getMockBuilder(RegistrationManager::class)
-            ->setMethods(['getUnregistrationNotice'])->getMock();
+            ->onlyMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::atLeast(1))->method('getUnregistrationNotice');
 
         $registration = $this->createRegistration();
