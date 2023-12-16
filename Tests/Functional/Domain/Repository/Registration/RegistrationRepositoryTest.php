@@ -16,9 +16,6 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -60,16 +57,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $this->subject = GeneralUtility::makeInstance(RegistrationRepository::class);
-            $this->eventRepository = GeneralUtility::makeInstance(EventRepository::class);
-            $this->persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        } else {
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-            $this->subject = $objectManager->get(RegistrationRepository::class);
-            $this->eventRepository = $objectManager->get(EventRepository::class);
-            $this->persistenceManager = $objectManager->get(PersistenceManager::class);
-        }
+        $this->subject = $this->get(RegistrationRepository::class);
+        $this->eventRepository = $this->get(EventRepository::class);
+        $this->persistenceManager = $this->get(PersistenceManager::class);
     }
 
     /**

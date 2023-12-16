@@ -23,8 +23,12 @@ final class RegistrationCheckboxRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new RegistrationCheckboxRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new RegistrationCheckboxRepository($objectManagerStub);
+        } else {
+            $this->subject = new RegistrationCheckboxRepository();
+        }
     }
 
     /**

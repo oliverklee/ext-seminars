@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid using the deprecated `ObjectManager` (##2819)
 - Stop using the deprecated `Mock::setMethods()` (#2815)
 - Avoid usage of the deprecated `strftime` (#2814)
 - Avoid warnings in the tests with PHP 8.3 (#2812)

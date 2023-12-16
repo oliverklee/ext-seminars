@@ -23,8 +23,12 @@ final class OrganizerRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new OrganizerRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new OrganizerRepository($objectManagerStub);
+        } else {
+            $this->subject = new OrganizerRepository();
+        }
     }
 
     /**
