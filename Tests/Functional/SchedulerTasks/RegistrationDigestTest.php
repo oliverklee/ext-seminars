@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\SchedulerTasks;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class RegistrationDigestTest extends FunctionalTestCase
@@ -31,10 +29,11 @@ final class RegistrationDigestTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function objectManagerInitializesObject(): void
+    public function canBeBuildViaTheDependencyInjectionContainer(): void
     {
-        $subject = GeneralUtility::makeInstance(ObjectManager::class)->get(RegistrationDigest::class);
+        $subject = $this->get(RegistrationDigest::class);
 
+        self::assertInstanceOf(RegistrationDigest::class, $subject);
         self::assertTrue($subject->isInitialized());
     }
 }
