@@ -512,7 +512,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     public function itemsInSearchBoxAreSortedAlphabetically(): void
     {
         $subject = $this->getMockBuilder(SelectorWidget::class)
-            ->setMethods(
+            ->onlyMethods(
                 [
                     'hasSearchField',
                     'getEventTypeData',
