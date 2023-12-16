@@ -8,7 +8,6 @@ $tca = [
         'label' => 'begin_date',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'hideTable' => true,
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/TimeSlot.gif',

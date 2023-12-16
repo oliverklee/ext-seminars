@@ -11,7 +11,6 @@ $tca = [
         'type' => 'object_type',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY begin_date DESC',
         'delete' => 'deleted',
         'enablecolumns' => [
