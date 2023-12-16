@@ -50,7 +50,8 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->setUpBackendUserFromFixture(1);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
         $this->initializeBackEndLanguage();
 
         $moduleController = $this->createMock(SchedulerModuleController::class);

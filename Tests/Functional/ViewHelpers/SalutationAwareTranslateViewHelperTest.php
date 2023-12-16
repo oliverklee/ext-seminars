@@ -58,7 +58,8 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
 
     private function renderViewHelper(string $html): string
     {
-        $this->setUpBackendUserFromFixture(1);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
 
         $view = new StandaloneView();
 
