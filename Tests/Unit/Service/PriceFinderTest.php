@@ -53,7 +53,7 @@ final class PriceFinderTest extends UnitTestCase
     }
 
     /**
-     * @deprecated #1960 will be removed in seminars 6.0, use `DateTIme::createFromImmutable()` instead (PHP >= 7.3)
+     * @deprecated #1960 will be removed in seminars 6.0, use `DateTime::createFromImmutable()` instead (PHP >= 7.3)
      */
     private function createFromImmutable(\DateTimeInterface $dateTime): \DateTime
     {
