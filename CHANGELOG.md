@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   #2771, #2772, #2773, #2774, #2776, #2778, #2782, #2783, #2786, #2792, #2795)
 
 ### Deprecated
+- De-deprecate the singleton-related `RegistrationManager` methods (#2816)
 
 ### Removed
 
