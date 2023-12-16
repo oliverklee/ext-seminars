@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Reduce usage of `AbstractPlugin` (#2811)
 - Do not require jQuery anymore (#2807)
 - Drop the additional icon placeholders from the BE module (#2804)
 - Drop unused Composer scripts and add script descriptions (#2740)
