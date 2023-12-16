@@ -49,7 +49,6 @@ final class AbstractModelTest extends FunctionalTestCase
                 'tstamp' => $GLOBALS['SIM_EXEC_TIME'],
                 'sorting' => 256,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
-                'cruser_id' => 1,
                 'title' => 'TEST',
                 'root' => 1,
                 'clear' => 3,

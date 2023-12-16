@@ -8,7 +8,6 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Category.gif',
