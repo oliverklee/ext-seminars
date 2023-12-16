@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
+use OliverKlee\Seminars\Service\DateFormatConverter;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -336,7 +337,10 @@ class MailNotifier extends AbstractTask
      */
     private function getDate(int $timestamp): string
     {
-        return strftime($this->getConfiguration()->getAsString('dateFormatYMD'), $timestamp);
+        $format = $this->getConfiguration()->getAsString('dateFormatYMD');
+        $newFormat = DateFormatConverter::convert($format);
+
+        return \date($newFormat, $timestamp);
     }
 
     /**
