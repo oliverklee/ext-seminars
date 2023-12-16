@@ -1816,11 +1816,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\$contentObject of class OliverKlee\\\\Oelib\\\\Configuration\\\\FlexformsConfiguration constructor expects TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer, TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null given\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Parameter \\#1 \\$css of method Pelago\\\\Emogrifier\\\\CssInliner\\:\\:inlineCss\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php

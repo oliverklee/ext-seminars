@@ -33,6 +33,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This service checks and creates registrations for seminars.
@@ -461,6 +462,11 @@ class RegistrationManager
             return;
         }
 
+        $contentObject = $plugin->cObj;
+        if (!$contentObject instanceof ContentObjectRenderer) {
+            throw new \RuntimeException('Content object renderer not available.', 1702722677);
+        }
+
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
         $emailBuilder->to($user)
             ->from($event->getEmailSender())
@@ -468,8 +474,8 @@ class RegistrationManager
             ->subject(
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
             )
-            ->text($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
-        $emailBuilder->html($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));
+            ->text($this->buildEmailContent($oldRegistration, $contentObject, $helloSubjectPrefix));
+        $emailBuilder->html($this->buildEmailContent($oldRegistration, $contentObject, $helloSubjectPrefix, true));
 
         $registrationUid = $oldRegistration->getUid();
         \assert($registrationUid > 0);
@@ -783,12 +789,12 @@ class RegistrationManager
      */
     private function buildEmailContent(
         LegacyRegistration $registration,
-        TemplateHelper $plugin,
+        ContentObjectRenderer $contentObjectRenderer,
         string $helloSubjectPrefix,
         bool $useHtml = false
     ): string {
         if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
-            $configuration = $this->buildConfigurationWithFlexforms($plugin);
+            $configuration = $this->buildConfigurationWithFlexForms($contentObjectRenderer);
             $this->setLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
         }
 
@@ -955,10 +961,11 @@ class RegistrationManager
         return $emailBody;
     }
 
-    private function buildConfigurationWithFlexforms(TemplateHelper $plugin): FallbackConfiguration
-    {
+    private function buildConfigurationWithFlexForms(
+        ContentObjectRenderer $contentObjectRenderer
+    ): FallbackConfiguration {
         $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
-        $flexFormsConfiguration = new FlexformsConfiguration($plugin->cObj);
+        $flexFormsConfiguration = new FlexformsConfiguration($contentObjectRenderer);
         return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
     }
 
