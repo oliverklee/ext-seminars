@@ -3291,6 +3291,56 @@ parameters:
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
 
 		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\AccommodationOptionRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/AccommodationOptionRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/Event/EventRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\EventTypeRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/EventTypeRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\FoodOptionRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/FoodOptionRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\OrganizerRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/OrganizerRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\PaymentMethodRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/PaymentMethodRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\RegistrationCheckboxRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/RegistrationCheckboxRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\SpeakerRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/SpeakerRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\VenueRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/VenueRepositoryTest.php
+
+		-
 			message: "#^Cannot call method toString\\(\\) on Symfony\\\\Component\\\\Mime\\\\Header\\\\HeaderInterface\\|null\\.$#"
 			count: 1
 			path: Tests/Unit/Email/EmailBuilderTest.php

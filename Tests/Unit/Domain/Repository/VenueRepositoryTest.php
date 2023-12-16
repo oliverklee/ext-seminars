@@ -23,8 +23,12 @@ final class VenueRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new VenueRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new VenueRepository($objectManagerStub);
+        } else {
+            $this->subject = new VenueRepository();
+        }
     }
 
     /**

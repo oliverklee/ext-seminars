@@ -23,8 +23,12 @@ final class AccommodationOptionRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new AccommodationOptionRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new AccommodationOptionRepository($objectManagerStub);
+        } else {
+            $this->subject = new AccommodationOptionRepository();
+        }
     }
 
     /**

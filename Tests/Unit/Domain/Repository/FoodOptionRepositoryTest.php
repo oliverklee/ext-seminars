@@ -23,8 +23,12 @@ final class FoodOptionRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new FoodOptionRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new FoodOptionRepository($objectManagerStub);
+        } else {
+            $this->subject = new FoodOptionRepository();
+        }
     }
 
     /**
