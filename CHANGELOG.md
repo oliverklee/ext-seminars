@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Allow installations with static_info_tables V12 (#2824)
 - Reduce usage of `AbstractPlugin` (#2811)
 - Do not require jQuery anymore (#2807)
 - Drop the additional icon placeholders from the BE module (#2804)
