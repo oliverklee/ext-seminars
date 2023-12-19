@@ -106,9 +106,6 @@ final class RegistrationControllerTest extends UnitTestCase
         if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
             unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table']);
         }
-        if (isset($GLOBALS['_POST']) && \is_array($GLOBALS['_POST'])) {
-            unset($GLOBALS['_POST']['id']);
-        }
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -152,7 +149,7 @@ final class RegistrationControllerTest extends UnitTestCase
     public function pageUidIsTakenFromPostId(): void
     {
         $pageUid = 15;
-        $GLOBALS['_POST']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         self::assertSame($pageUid, $this->subject->getPageUid());
     }
