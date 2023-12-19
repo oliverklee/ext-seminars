@@ -3006,21 +3006,6 @@ parameters:
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Cannot access property \\$lang on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method getLL\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 8
-			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Cannot call method includeLLFile\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 4
-			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Instanceof between OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework and OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
