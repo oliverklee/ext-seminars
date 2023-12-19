@@ -18,16 +18,13 @@ use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -37,6 +34,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 final class MailNotifierTest extends TestCase
 {
+    use BackEndTestsTrait;
     use EmailTrait;
     use MakeInstanceTrait;
 
@@ -75,32 +73,12 @@ final class MailNotifierTest extends TestCase
      */
     private $eventMapper;
 
-    /**
-     * @var LanguageService|null
-     */
-    private $languageBackup;
-
-    /**
-     * @var LanguageService
-     */
-    private $languageService;
-
     protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
 
         (new CacheNullifyer())->setAllCoreCaches();
-
-        $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        Bootstrap::initializeBackendAuthentication();
-
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $this->languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-        } else {
-            $this->languageService = LanguageService::create('default');
-        }
-        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $GLOBALS['LANG'] = $this->languageService;
+        $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -139,13 +117,13 @@ final class MailNotifierTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->restoreOriginalEnvironment();
+
         if ($this->testingFramework instanceof TestingFramework) {
             $this->testingFramework->cleanUp();
         }
 
-        $GLOBALS['LANG'] = $this->languageBackup;
-        $this->languageBackup = null;
-
+        GeneralUtility::makeInstance(RegistrationDigest::class);
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
@@ -1460,7 +1438,7 @@ final class MailNotifierTest extends TestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailSubject = $this->languageService->getLL('email-event-confirmed-subject');
+        $emailSubject = $this->getLanguageService()->getLL('email-event-confirmed-subject');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), $emailSubject, self::anything());
 
@@ -1482,7 +1460,7 @@ final class MailNotifierTest extends TestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailBody = $this->languageService->getLL('email-event-confirmed-body');
+        $emailBody = $this->getLanguageService()->getLL('email-event-confirmed-body');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), self::anything(), $emailBody);
 
@@ -1548,7 +1526,7 @@ final class MailNotifierTest extends TestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailSubject = $this->languageService->getLL('email-event-canceled-subject');
+        $emailSubject = $this->getLanguageService()->getLL('email-event-canceled-subject');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), $emailSubject, self::anything());
 
@@ -1570,7 +1548,7 @@ final class MailNotifierTest extends TestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailBody = $this->languageService->getLL('email-event-canceled-body');
+        $emailBody = $this->getLanguageService()->getLL('email-event-canceled-body');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), self::anything(), $emailBody);
 

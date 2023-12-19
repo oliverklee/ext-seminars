@@ -27,7 +27,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Avoid usage of the deprecated `strftime` (#2814)
 - Avoid warnings in the tests with PHP 8.3 (#2812)
 - Drop obsolete option from the plugin registration (#2801)
-- Stabilize the legacy tests (#2746, #2748, #2749, #2794)
+- Stabilize the legacy tests (#2746, #2748, #2749, #2794, #2829)
 - Avoid using the deprecated `LanguageService::create()` (#2712)
 - Avoid crash with Fluid 2.12.0 due to signature change (#3059)
 
