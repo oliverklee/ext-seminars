@@ -16,6 +16,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\RequirementsList
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class RequirementsListTest extends FunctionalTestCase
 {

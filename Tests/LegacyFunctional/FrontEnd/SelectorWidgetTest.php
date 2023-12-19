@@ -17,6 +17,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\SelectorWidget
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class SelectorWidgetTest extends FunctionalTestCase
 {

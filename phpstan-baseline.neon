@@ -396,7 +396,7 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
-			message: "#^Parameter \\#2 \\$frontendController of method TYPO3\\\\CMS\\\\Frontend\\\\Plugin\\\\AbstractPlugin\\:\\:__construct\\(\\) expects TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$frontendController of method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:__construct\\(\\) expects TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null, mixed given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
 
@@ -1864,6 +1864,211 @@ parameters:
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: Classes/Service/SingleViewLinkBuilder.php
+
+		-
+			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Cannot call method getLanguage\\(\\) on mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 4
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 6
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Constructor of class OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper has an unused parameter \\$_\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
+			count: 2
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_autoCache\\(\\) has parameter \\$inArray with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_getFFvalue\\(\\) has parameter \\$T3FlexForm_array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_getFFvalueFromSheetArray\\(\\) has parameter \\$fieldNameArr with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_getFFvalueFromSheetArray\\(\\) has parameter \\$sheetArray with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_linkTP\\(\\) has parameter \\$urlParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_linkTP_keepPIvars\\(\\) has parameter \\$overrulePIvars with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_list_browseresults\\(\\) has parameter \\$wrapArr with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:translateInFrontEnd\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, int\\<\\-1, 1\\> given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, string given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Only booleans are allowed in an elseif condition, int\\<0, max\\> given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Only booleans are allowed in an elseif condition, string given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Core\\\\Service\\\\MarkerBasedTemplateService\\:\\:substituteMarkerArray\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:wrap\\(\\) expects string, int given\\.$#"
+			count: 3
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:wrap\\(\\) expects string, string\\|null given\\.$#"
+			count: 4
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_linkTP_keepPIvars\\(\\) expects string, string\\|null given\\.$#"
+			count: 4
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, string\\|null given\\.$#"
+			count: 9
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$string1 of function strcmp expects string, mixed given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|null given\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LLtestPrefix \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LLtestPrefixAlt \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG_UNSET type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$conf type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$frontendController \\(TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\) does not accept mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$piVars type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$pi_autoCacheFields type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Result of && is always true\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 6
+			path: Classes/Templating/TemplateHelper.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"

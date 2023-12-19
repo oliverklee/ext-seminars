@@ -16,6 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class LegacyEventTest extends UnitTestCase
 {

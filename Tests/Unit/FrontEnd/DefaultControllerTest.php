@@ -9,6 +9,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class DefaultControllerTest extends UnitTestCase
 {
