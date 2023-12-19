@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\SchedulerTasks;
 
-use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Mapper\BackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -298,13 +296,9 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject(): void
     {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        \assert($userUid > 0);
-        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $this->languageService->lang = $user->getLanguage();
-        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $subject = $this->languageService->getLL('email_eventTakesPlaceReminderSubject');
-        $subject = str_replace(['%event', '%days'], ['', 2], $subject);
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $emailSubject = $this->getLanguageService()->getLL('email_eventTakesPlaceReminderSubject');
+        $emailSubject = str_replace(['%event', '%days'], ['', 2], $emailSubject);
 
         $this->createSeminarWithOrganizer(
             [
@@ -318,7 +312,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertStringContainsString($subject, $this->email->getSubject());
+        self::assertStringContainsString($emailSubject, $this->email->getSubject());
     }
 
     /**
@@ -326,12 +320,8 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage(): void
     {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        \assert($userUid > 0);
-        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $this->languageService->lang = $user->getLanguage();
-        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $message = $this->languageService->getLL('email_eventTakesPlaceReminder');
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $message = $this->getLanguageService()->getLL('email_eventTakesPlaceReminder');
         $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
 
         $this->createSeminarWithOrganizer(
@@ -563,13 +553,9 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject(): void
     {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        \assert($userUid > 0);
-        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $this->languageService->lang = $user->getLanguage();
-        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $subject = $this->languageService->getLL('email_cancelationDeadlineReminderSubject');
-        $subject = str_replace('%event', '', $subject);
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $emailSubject = $this->getLanguageService()->getLL('email_cancelationDeadlineReminderSubject');
+        $emailSubject = str_replace('%event', '', $emailSubject);
 
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -585,7 +571,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->subject->sendCancellationDeadlineReminders();
 
-        self::assertStringContainsString($subject, $this->email->getSubject());
+        self::assertStringContainsString($emailSubject, $this->email->getSubject());
     }
 
     /**
@@ -593,12 +579,8 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage(): void
     {
-        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
-        \assert($userUid > 0);
-        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
-        $this->languageService->lang = $user->getLanguage();
-        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $message = $this->languageService->getLL('email_cancelationDeadlineReminder');
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $message = $this->getLanguageService()->getLL('email_cancelationDeadlineReminder');
         $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
 
         $this->addSpeaker(
@@ -1556,7 +1538,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailSubject = $this->languageService->getLL('email-event-confirmed-subject');
+        $emailSubject = $this->getLanguageService()->getLL('email-event-confirmed-subject');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), $emailSubject, self::anything());
 
@@ -1578,7 +1560,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailBody = $this->languageService->getLL('email-event-confirmed-body');
+        $emailBody = $this->getLanguageService()->getLL('email-event-confirmed-body');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), self::anything(), $emailBody);
 
@@ -1644,7 +1626,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailSubject = $this->languageService->getLL('email-event-canceled-subject');
+        $emailSubject = $this->getLanguageService()->getLL('email-event-canceled-subject');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), $emailSubject, self::anything());
 
@@ -1666,7 +1648,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
-        $emailBody = $this->languageService->getLL('email-event-canceled-body');
+        $emailBody = $this->getLanguageService()->getLL('email-event-canceled-body');
         $this->emailService->expects(self::once())->method('sendEmailToAttendees')
             ->with(self::anything(), self::anything(), $emailBody);
 

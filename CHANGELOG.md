@@ -25,7 +25,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- [BUGFIX] Avoid using the deprecated `GeneralUtility::_GP` (#2827)
+- Remove dependency on the CLI BE user from a test (#2829)
+- Avoid using the deprecated `GeneralUtility::_GP` (#2827)
 - Replace deprecated `setUpBackendUserFromFixture` calls in tests (#2820)
 - Avoid the deprecated `cruser_id` (#2821)
 - Avoid using the deprecated `ObjectManager` (##2819)
