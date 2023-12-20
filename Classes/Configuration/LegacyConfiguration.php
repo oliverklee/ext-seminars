@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Configuration;
 
-use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**

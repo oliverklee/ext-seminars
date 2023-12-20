@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Configuration;
 
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
+use OliverKlee\Seminars\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Configuration\LegacyConfiguration
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class LegacyConfigurationTest extends UnitTestCase
 {

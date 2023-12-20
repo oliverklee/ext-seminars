@@ -15,6 +15,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class ListViewTest extends FunctionalTestCase
 {

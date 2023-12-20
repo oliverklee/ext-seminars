@@ -31,6 +31,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationManager
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class RegistrationManagerTest extends FunctionalTestCase
 {

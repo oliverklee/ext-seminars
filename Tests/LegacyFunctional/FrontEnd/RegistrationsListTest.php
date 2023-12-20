@@ -17,6 +17,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\FrontEnd\RegistrationsList
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class RegistrationsListTest extends FunctionalTestCase
 {

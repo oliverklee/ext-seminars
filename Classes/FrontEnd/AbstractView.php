@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\Interfaces\Configuration;
-use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**

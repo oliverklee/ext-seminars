@@ -10,6 +10,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Service\RegistrationManager
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class RegistrationManagerTest extends UnitTestCase
 {
