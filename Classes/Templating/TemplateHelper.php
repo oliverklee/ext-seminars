@@ -154,11 +154,6 @@ class TemplateHelper
     public $pi_moreParams = '';
 
     /**
-     * @var string
-     */
-    public $pi_listFields = '*';
-
-    /**
      * @var array
      */
     public $pi_autoCacheFields = [];
@@ -177,14 +172,6 @@ class TemplateHelper
      * @var array
      */
     public $conf = [];
-
-    /**
-     * internal, don't mess with...
-     *
-     * @var ContentObjectRenderer
-     * @deprecated since v11, will be removed with 12. Drop together with EDITPANEL cObj removal.
-     */
-    public $pi_EPtemp_cObj;
 
     /**
      * @var int
@@ -309,9 +296,6 @@ class TemplateHelper
         $this->isInitialized = true;
     }
 
-    /**
-     * @deprecated will be removed in oelib 6.0
-     */
     protected function isConfigurationCheckEnabled(): bool
     {
         if ($this->extKey === '') {
@@ -1111,8 +1095,6 @@ class TemplateHelper
      * @param non-empty-string $key the local language key for which to return the value
      *
      * @return string the requested local language key, might be empty
-     *
-     * @deprecated will be removed in oelib 6.0
      */
     public function translate(string $key): string
     {
