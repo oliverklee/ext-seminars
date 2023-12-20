@@ -47,7 +47,7 @@ class TemplateHelper
     public $cObj;
 
     /**
-     * This is the incoming array by name $this->prefixId merged between POST and GET, POST taking precedence.
+     * This is the incoming array by name `$this->prefixId` merged between POST and GET, POST taking precedence.
      * Eg. if the class name is 'tx_myext'
      * then the content of this array will be whatever comes into &tx_myext[...]=...
      *
@@ -193,17 +193,19 @@ class TemplateHelper
     /**
      * @var string the prefix used for CSS classes
      */
-    public $prefixId = '';
+    public $prefixId = 'tx_seminars_pi1';
 
     /**
-     * @var string the path of this file relative to the extension directory
+     * faking `$this->scriptRelPath` so the `locallang.xlf` file is found
+     *
+     * @var string
      */
-    public $scriptRelPath = '';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the extension key
      */
-    public $extKey = '';
+    public $extKey = 'seminars';
 
     /**
      * @var bool whether `init()` already has been called (in order to avoid duplicate calls)
