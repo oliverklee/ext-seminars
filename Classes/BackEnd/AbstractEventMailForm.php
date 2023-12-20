@@ -18,8 +18,6 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -87,26 +85,6 @@ abstract class AbstractEventMailForm
     protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
-    }
-
-    /**
-     * Returns the logged-in back-end user.
-     *
-     * @return BackendUserAuthentication
-     */
-    protected function getBackEndUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
-    }
-
-    /**
-     * Returns the event object.
-     *
-     * @return LegacyEvent the event object
-     */
-    protected function getOldEvent(): LegacyEvent
-    {
-        return $this->oldEvent;
     }
 
     /**
@@ -278,10 +256,5 @@ abstract class AbstractEventMailForm
         }
 
         return $this->hooks;
-    }
-
-    protected function getUriBuilder(): UriBuilder
-    {
-        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 }
