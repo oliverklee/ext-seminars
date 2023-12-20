@@ -26,7 +26,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @internal
  */
-class TemplateHelper
+abstract class TemplateHelper
 {
     /**
      * @var non-empty-string the regular expression used to find subparts
