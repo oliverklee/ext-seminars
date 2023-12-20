@@ -17,23 +17,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractView extends TemplateHelper
 {
     /**
-     * @var string same as plugin name
-     */
-    public $prefixId = 'tx_seminars_pi1';
-
-    /**
-     * faking $this->scriptRelPath so the locallang.xlf file is found
-     *
-     * @var string
-     */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'seminars';
-
-    /**
      * @var string
      */
     protected $whatToDisplay = '';

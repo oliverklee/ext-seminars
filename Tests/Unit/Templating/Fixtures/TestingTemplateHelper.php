@@ -13,16 +13,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 final class TestingTemplateHelper extends TemplateHelper
 {
     /**
-     * @var string
-     */
-    public $scriptRelPath = 'Tests/Functional/Language/Fixtures/locallang.xlf';
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'oelib';
-
-    /**
      * The constructor.
      *
      * @param array<string, mixed> $configuration TypoScript setup configuration, may be empty
