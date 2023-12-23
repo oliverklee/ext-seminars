@@ -97,12 +97,14 @@
     </fe_users>
     <fe_users>
         <uid>2</uid>
-        <username>Joe Johnson</username>
+        <username>joe-johnson</username>
+        <name>Joe Johnson</name>
         <usergroup>1</usergroup>
         <email>joe@example.com</email>
     </fe_users>
     <fe_users>
         <uid>3</uid>
+        <name>Jane</name>
         <username>jane</username>
         <usergroup>1</usergroup>
         <email>jane@example.com</email>
