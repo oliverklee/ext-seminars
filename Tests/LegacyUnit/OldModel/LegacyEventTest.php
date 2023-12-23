@@ -5911,6 +5911,7 @@ final class LegacyEventTest extends TestCase
             'homepage' => '',
             'address' => 'Kaiser-Karl-Ring 91',
             'city' => 'Bonn',
+            'zip' => '',
             'country' => '',
             'directions' => '',
         ];
@@ -5967,6 +5968,9 @@ final class LegacyEventTest extends TestCase
             'address' => 'Kaiser-Karl-Ring 91',
             'zip' => '',
             'city' => 'Bonn',
+            'country' => '',
+            'homepage' => '',
+            'directions' => '',
         ];
 
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
@@ -5989,6 +5993,9 @@ final class LegacyEventTest extends TestCase
             'address' => 'Kaiser-Karl-Ring 91',
             'zip' => '53111',
             'city' => 'Bonn',
+            'country' => '',
+            'homepage' => '',
+            'directions' => '',
         ];
 
         $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
