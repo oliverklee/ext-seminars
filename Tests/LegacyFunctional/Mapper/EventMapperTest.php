@@ -51,7 +51,6 @@ final class EventMapperTest extends FunctionalTestCase
         parent::setUp();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $this->subject = MapperRegistry::get(EventMapper::class);
     }
