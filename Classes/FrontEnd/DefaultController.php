@@ -35,6 +35,7 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use OliverKlee\Seminars\Rendering\NullRenderingContext;
 use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
@@ -42,6 +43,7 @@ use OliverKlee\Seminars\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -690,7 +692,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $this->setMarker('description', $this->pi_RTEcssText($this->seminar->getDescription()));
+        $this->setMarker('description', $this->renderAsRichText($this->seminar->getDescription()));
     }
 
     /**
@@ -1003,7 +1005,7 @@ class DefaultController extends TemplateHelper
 
         $this->setMarker(
             'additional_information',
-            $this->pi_RTEcssText($this->seminar->getAdditionalInformation())
+            $this->renderAsRichText($this->seminar->getAdditionalInformation())
         );
     }
 
@@ -2267,7 +2269,7 @@ class DefaultController extends TemplateHelper
             if ($organizer->hasDescription()) {
                 $this->setMarker(
                     'organizer_description_content',
-                    $this->pi_RTEcssText($organizer->getDescription())
+                    $this->renderAsRichText($organizer->getDescription())
                 );
                 $description = $this->getSubpart('ORGANIZER_DESCRIPTION_ITEM');
             } else {
@@ -2553,5 +2555,14 @@ class DefaultController extends TemplateHelper
         $this->configuration = new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
 
         return $this->configuration;
+    }
+
+    protected function renderAsRichText(string $rawData): string
+    {
+        $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
+        $childrenClosure = static function () use ($rawData): string {
+            return \trim($rawData);
+        };
+        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
     }
 }

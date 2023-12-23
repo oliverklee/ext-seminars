@@ -552,7 +552,7 @@ abstract class AbstractModel
     protected function renderAsRichText(string $rawData): string
     {
         $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
-        $childrenClosure = function () use ($rawData): string {
+        $childrenClosure = static function () use ($rawData): string {
             return \trim($rawData);
         };
         return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
