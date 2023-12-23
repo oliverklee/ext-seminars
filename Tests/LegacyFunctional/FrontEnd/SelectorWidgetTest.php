@@ -54,6 +54,8 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
+        $this->getLanguageService();
+
         $countriesConnection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('static_countries');
         if ($countriesConnection->count('*', 'static_countries', []) === 0) {
