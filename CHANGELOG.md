@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop using the deprecated oelib gender constants (#2859)
 - Avoid undefined array access in `DefaultController` (#2852)
 - Upgrade the XLIFF files to XLIFF 1.2 (#2890)
 - Avoid the deprecated `cruser_id` (#2821)
