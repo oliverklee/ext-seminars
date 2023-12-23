@@ -39,11 +39,11 @@
 		"symfony/console": "^4.4 || ^5.4 || ^6.2 || ^7.0",
 		"symfony/mailer": "^4.4 || ^5.4 || ^6.2 || ^7.0",
 		"symfony/mime": "^4.4 || ^5.4 || ^6.2 || ^7.0",
-		"typo3/cms-backend": "^10.4.22 || ^11.5.4",
-		"typo3/cms-core": "^10.4.22 || ^11.5.4",
-		"typo3/cms-extbase": "^10.4.22 || ^11.5.4",
-		"typo3/cms-fluid": "^10.4.22 || ^11.5.4",
-		"typo3/cms-frontend": "^10.4.22 || ^11.5.4",
+		"typo3/cms-backend": "^10.4.33 || ^11.5.17",
+		"typo3/cms-core": "^10.4.33 || ^11.5.17",
+		"typo3/cms-extbase": "^10.4.33 || ^11.5.17",
+		"typo3/cms-fluid": "^10.4.33 || ^11.5.17",
+		"typo3/cms-frontend": "^10.4.33 || ^11.5.17",
 		"typo3fluid/fluid": "^2.6.10"
 	},
 	"require-dev": {
@@ -61,8 +61,8 @@
 		"phpunit/phpunit": "^8.5.36",
 		"saschaegerer/phpstan-typo3": "^1.8.4",
 		"squizlabs/php_codesniffer": "^3.8.0",
-		"typo3/cms-install": "^10.4.22 || ^11.5.4",
-		"typo3/cms-scheduler": "^10.4.22 || ^11.5.4",
+		"typo3/cms-install": "^10.4.33 || ^11.5.17",
+		"typo3/cms-scheduler": "^10.4.33 || ^11.5.17",
 		"typo3/coding-standards": "~0.6.1",
 		"typo3/testing-framework": "^6.16.9",
 		"webmozart/assert": "^1.11.0"
