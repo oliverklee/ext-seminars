@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\Model;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFrontEndUser;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
@@ -668,7 +668,7 @@ final class RegistrationTest extends FunctionalTestCase
         $this->subject->setData([]);
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_MALE,
+            ExtraFrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -679,11 +679,11 @@ final class RegistrationTest extends FunctionalTestCase
     public function getGenderWithGenderFemaleReturnsGenderFemale(): void
     {
         $this->subject->setData(
-            ['gender' => OelibFrontEndUser::GENDER_FEMALE]
+            ['gender' => ExtraFrontEndUser::GENDER_FEMALE]
         );
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_FEMALE,
+            ExtraFrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
     }
@@ -691,14 +691,14 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getGenderWithGenderUnknownReturnsGenderUnknown(): void
+    public function getGenderWithGenderNotProvidedReturnsGenderNotProvided(): void
     {
         $this->subject->setData(
-            ['gender' => OelibFrontEndUser::GENDER_UNKNOWN]
+            ['gender' => ExtraFrontEndUser::GENDER_NOT_PROVIDED]
         );
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
+            ExtraFrontEndUser::GENDER_NOT_PROVIDED,
             $this->subject->getGender()
         );
     }
@@ -708,9 +708,9 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function getGenderWithGenderDiverseReturnsGenderDiverse(): void
     {
-        $this->subject->setData(['gender' => OelibFrontEndUser::GENDER_DIVERSE]);
+        $this->subject->setData(['gender' => ExtraFrontEndUser::GENDER_DIVERSE]);
 
-        self::assertSame(OelibFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
+        self::assertSame(ExtraFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
     }
 
     /**
@@ -719,7 +719,7 @@ final class RegistrationTest extends FunctionalTestCase
     public function setGenderWithUnsupportedGenderThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The parameter $gender must be one of the FrontEndUser::GENDER_* constants.');
+        $this->expectExceptionMessage('The parameter $gender must be one of the FrontendUser::GENDER_* constants.');
 
         // @phpstan-ignore-next-line We are explicitly testing with a contract violation here.
         $this->subject->setGender(-1);
@@ -730,10 +730,10 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function setGenderWithGenderMaleSetsGender(): void
     {
-        $this->subject->setGender(OelibFrontEndUser::GENDER_MALE);
+        $this->subject->setGender(ExtraFrontEndUser::GENDER_MALE);
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_MALE,
+            ExtraFrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -743,10 +743,10 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function setGenderWithGenderFemaleSetsGender(): void
     {
-        $this->subject->setGender(OelibFrontEndUser::GENDER_FEMALE);
+        $this->subject->setGender(ExtraFrontEndUser::GENDER_FEMALE);
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_FEMALE,
+            ExtraFrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
     }
@@ -754,12 +754,12 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function setGenderWithGenderUnknownSetsGender(): void
+    public function setGenderWithGenderNotProvidedSetsGender(): void
     {
-        $this->subject->setGender(OelibFrontEndUser::GENDER_UNKNOWN);
+        $this->subject->setGender(ExtraFrontEndUser::GENDER_NOT_PROVIDED);
 
         self::assertSame(
-            OelibFrontEndUser::GENDER_UNKNOWN,
+            ExtraFrontEndUser::GENDER_NOT_PROVIDED,
             $this->subject->getGender()
         );
     }
@@ -769,9 +769,9 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function setGenderWithGenderDiverseSetsGender(): void
     {
-        $this->subject->setGender(OelibFrontEndUser::GENDER_DIVERSE);
+        $this->subject->setGender(ExtraFrontEndUser::GENDER_DIVERSE);
 
-        self::assertSame(OelibFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
+        self::assertSame(ExtraFrontEndUser::GENDER_DIVERSE, $this->subject->getGender());
     }
 
     /////////////////////////////////

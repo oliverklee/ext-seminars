@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Model;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFrontEndUser;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
 /**
  * This class represents a registration for an event.
@@ -14,13 +14,13 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 class Registration extends AbstractModel
 {
     /**
-     * @var list<OelibFrontEndUser::GENDER_*>
+     * @var list<ExtraFrontEndUser::GENDER_*>
      */
     private const VALID_GENDERS = [
-        OelibFrontEndUser::GENDER_MALE,
-        OelibFrontEndUser::GENDER_FEMALE,
-        OelibFrontEndUser::GENDER_UNKNOWN,
-        OelibFrontEndUser::GENDER_DIVERSE,
+        ExtraFrontEndUser::GENDER_MALE,
+        ExtraFrontEndUser::GENDER_FEMALE,
+        ExtraFrontEndUser::GENDER_NOT_PROVIDED,
+        ExtraFrontEndUser::GENDER_DIVERSE,
     ];
 
     /**
@@ -284,7 +284,7 @@ class Registration extends AbstractModel
     /**
      * Returns the gender of the billing address of this registration.
      *
-     * @return FrontEndUser::GENDER_*
+     * @return ExtraFrontEndUser::GENDER_*
      */
     public function getGender(): int
     {
@@ -297,7 +297,7 @@ class Registration extends AbstractModel
     /**
      * Sets the gender of the billing address of this registration.
      *
-     * @param FrontEndUser::GENDER_* $gender
+     * @param ExtraFrontEndUser::GENDER_* $gender
      *
      * @throws \InvalidArgumentException
      */
@@ -305,7 +305,7 @@ class Registration extends AbstractModel
     {
         if (!\in_array($gender, self::VALID_GENDERS, true)) {
             throw new \InvalidArgumentException(
-                'The parameter $gender must be one of the FrontEndUser::GENDER_* constants.',
+                'The parameter $gender must be one of the FrontendUser::GENDER_* constants.',
                 1333296957
             );
         }
