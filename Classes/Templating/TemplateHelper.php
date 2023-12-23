@@ -68,7 +68,14 @@ abstract class TemplateHelper
      * Holds pointer information for the MVC like approach Kasper
      * initially proposed.
      *
-     * @var array
+     * @var array{
+     *        res_count: int,
+     *        results_at_a_time: int,
+     *        maxPages: int,
+     *        currentRow: array,
+     *        currentTable: string,
+     *        descFlag: bool
+     *      }
      */
     public $internal = [
         'res_count' => 0,
@@ -76,6 +83,7 @@ abstract class TemplateHelper
         'maxPages' => 10,
         'currentRow' => [],
         'currentTable' => '',
+        'descFlag' => false,
     ];
 
     /**
