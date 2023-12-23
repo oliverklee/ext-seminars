@@ -184,10 +184,7 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser();
         $this->configuration->setAsString('salutation', 'informal');
 
-        self::assertStringContainsString(
-            $user->getLastOrFullName(),
-            $this->subject->getSalutation($user)
-        );
+        self::assertStringContainsString('Foo', $this->subject->getSalutation($user));
     }
 
     /**
