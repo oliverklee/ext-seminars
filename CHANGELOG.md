@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid undefined array access in `DefaultController` (#2852)
 - Remove dependency on the CLI BE user from a test (#2829)
 - Avoid using the deprecated `GeneralUtility::_GP` (#2827)
 - Replace deprecated `setUpBackendUserFromFixture` calls in tests (#2820)
