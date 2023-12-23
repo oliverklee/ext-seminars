@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Require higher TYPO3 Core bugfix versions (#2852)
 - Switch to our own copy of `TemplateHelper` (#2833, #2836, #2838, #2840)
 - Allow installations with static_info_tables V12 (#2824)
 - Reduce usage of `AbstractPlugin` (#2811)
