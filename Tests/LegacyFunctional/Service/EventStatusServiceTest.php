@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\Service;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -35,11 +34,6 @@ final class EventStatusServiceTest extends FunctionalTestCase
     private $subject;
 
     /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
-
-    /**
      * @var EventMapper&MockObject
      */
     private $eventMapper;
@@ -62,11 +56,6 @@ final class EventStatusServiceTest extends FunctionalTestCase
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
 
-        $this->testingFramework = new TestingFramework('tx_seminars');
-
-        MapperRegistry::denyDatabaseAccess();
-        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
-
         $this->eventMapper = $this->createMock(EventMapper::class);
         MapperRegistry::set(EventMapper::class, $this->eventMapper);
 
@@ -75,7 +64,7 @@ final class EventStatusServiceTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        $this->testingFramework->cleanUpWithoutDatabase();
+        MapperRegistry::purgeInstance();
 
         parent::tearDown();
     }
