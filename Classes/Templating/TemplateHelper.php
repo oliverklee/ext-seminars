@@ -1456,24 +1456,6 @@ abstract class TemplateHelper
     }
 
     /**
-     * Will process the input string with the parseFunc function from ContentObjectRenderer based on configuration
-     * set in "lib.parseFunc_RTE" in the current TypoScript template.
-     *
-     * @param string $str The input text string to process
-     * @return string The processed string
-     * @see ContentObjectRenderer::parseFunc()
-     */
-    // phpcs:disable
-    public function pi_RTEcssText(string $str): string
-    {
-        if (!$this->cObj instanceof ContentObjectRenderer) {
-            throw new \RuntimeException('No cObj.', 1703017453);
-        }
-
-        return $this->cObj->parseFunc($str, [], '< lib.parseFunc_RTE');
-    }
-
-    /**
      * Link string to the current page.
      * Returns the $str wrapped in <a>-tags with a link to the CURRENT page, but with $urlParameters set as extra parameters for the page.
      *
