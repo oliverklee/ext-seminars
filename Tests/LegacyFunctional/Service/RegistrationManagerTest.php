@@ -24,6 +24,7 @@ use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -375,9 +376,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function createAndLogInFrontEndUserLogsInFrontEndUser(): void
     {
         $this->createAndLogInFrontEndUser();
-        self::assertTrue(
-            $this->testingFramework->isLoggedIn()
-        );
+
+        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn());
     }
 
     /**

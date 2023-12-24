@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -141,9 +142,7 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertTrue(
-            $this->testingFramework->isLoggedIn()
-        );
+        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn());
     }
 
     /**

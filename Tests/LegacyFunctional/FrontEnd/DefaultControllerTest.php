@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultControl
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
 use Psr\Log\NullLogger;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -423,9 +424,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $this->createLogInAndAddFeUserAsVip();
 
-        self::assertTrue(
-            $this->testingFramework->isLoggedIn()
-        );
+        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn());
     }
 
     /**
