@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -27,6 +26,7 @@ use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Templating\TemplateHelper;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -2056,7 +2056,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
-        $loggedInUserUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $loggedInUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         $loggedInUser = $loggedInUserUid > 0
             ? MapperRegistry::get(FrontEndUserMapper::class)->find($loggedInUserUid) : null;
         $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
@@ -2178,14 +2178,13 @@ class LegacyEvent extends AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        if ($currentUserUid <= 0) {
             return false;
         }
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-
-        $currentUserUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
 
         switch ($whichPlugin) {
             case 'seminar_list':
@@ -2251,12 +2250,11 @@ class LegacyEvent extends AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        $loginManager = FrontEndLoginManager::getInstance();
-        if (!$loginManager->isLoggedIn()) {
+        $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        if ($currentUserUid <= 0) {
             return false;
         }
 
-        $currentUserUid = $loginManager->getLoggedInUserUid();
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
@@ -2311,12 +2309,11 @@ class LegacyEvent extends AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        $loginManager = FrontEndLoginManager::getInstance();
-        $isLoggedIn = $loginManager->isLoggedIn();
+        $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        $isLoggedIn = $currentUserUid > 0;
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-        $currentUserUid = $loginManager->getLoggedInUserUid();
 
         switch ($whichPlugin) {
             case 'csv_export':
@@ -2365,7 +2362,7 @@ class LegacyEvent extends AbstractTimeSpan
         if ($accessLevel === 'world') {
             return '';
         }
-        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn()) {
             return $this->translate('message_notLoggedIn');
         }
         if (
@@ -2854,17 +2851,13 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether the logged-in FE user is the owner of this event.
      *
-     * @return bool TRUE if a FE user is logged in and the user is
-     *                 the owner of this event, FALSE otherwise
+     * @return bool TRUE if a FE user is logged in and the user is the owner of this event, FALSE otherwise
      */
     public function isOwnerFeUser(): bool
     {
-        $loginManager = FrontEndLoginManager::getInstance();
-        if (!$loginManager->isLoggedIn()) {
-            return false;
-        }
+        $loggedInUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
 
-        return $this->getRecordPropertyInteger('owner_feuser') === $loginManager->getLoggedInUserUid();
+        return $loggedInUserUid > 0 && ($this->getRecordPropertyInteger('owner_feuser') === $loggedInUserUid);
     }
 
     /**

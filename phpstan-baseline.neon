@@ -971,6 +971,11 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:getLoggedInFrontEndUserUid\\(\\) should return int but returns mixed\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController\\:\\:getToDate\\(\\) should return int but returns int\\|false\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1043,6 +1048,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$minimumPrice of method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:limitToMinimumPrice\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1546,6 +1556,21 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
+			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserRegistered\\(\\) expects int, mixed given\\.$#"
+			count: 2
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Parameter \\#1 \\$userUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int, mixed given\\.$#"
+			count: 9
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
 			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1672,6 +1697,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
+			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\BackEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
 
@@ -1817,6 +1847,11 @@ parameters:
 
 		-
 			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder and OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLoggedInFrontEndUserUid\\(\\) should return int but returns mixed\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
