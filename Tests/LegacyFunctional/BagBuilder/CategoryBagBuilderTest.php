@@ -38,7 +38,6 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new CategoryBagBuilder();
-        $this->subject->setTestMode();
     }
 
     protected function tearDown(): void

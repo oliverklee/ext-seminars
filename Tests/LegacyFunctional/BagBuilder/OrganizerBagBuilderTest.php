@@ -38,7 +38,6 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new OrganizerBagBuilder();
-        $this->subject->setTestMode();
     }
 
     protected function tearDown(): void

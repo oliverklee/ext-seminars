@@ -45,7 +45,6 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new RegistrationBagBuilder();
-        $this->subject->setTestMode();
     }
 
     protected function tearDown(): void

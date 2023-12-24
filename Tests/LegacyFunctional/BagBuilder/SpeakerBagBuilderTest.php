@@ -38,7 +38,6 @@ final class SpeakerBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new SpeakerBagBuilder();
-        $this->subject->setTestMode();
     }
 
     protected function tearDown(): void

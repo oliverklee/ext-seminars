@@ -46,7 +46,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new TestingBagBuilder();
-        $this->subject->setTestMode();
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
     }
@@ -565,7 +564,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
 
         // We're using assertContains here because the WHERE clause always
         // contains a test-specific prefix
-        self::assertStringContainsString(' AND testpart IN (1,2,3)', $this->subject->getWhereClause());
+        self::assertStringContainsString('testpart IN (1,2,3)', $this->subject->getWhereClause());
     }
 
     /////////////////////////////////

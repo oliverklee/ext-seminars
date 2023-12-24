@@ -57,7 +57,6 @@ final class EventBagBuilderTest extends FunctionalTestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new EventBagBuilder();
-        $this->subject->setTestMode();
     }
 
     protected function tearDown(): void
