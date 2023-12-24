@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\SchedulerTasks;
 
-use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
@@ -59,10 +57,6 @@ final class MailNotifierTest extends FunctionalTestCase
         ConfigurationRegistry::getInstance()->set('plugin', new DummyConfiguration());
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
-        $user = new BackEndUser();
-        $user->setData([]);
-        BackEndLoginManager::getInstance()->setLoggedInUser($user);
-
         $objectManagerMock = $this->createMock(ObjectManager::class);
         GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
 
@@ -75,7 +69,6 @@ final class MailNotifierTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         MapperRegistry::purgeInstance();
-        BackEndLoginManager::purgeInstance();
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
 
