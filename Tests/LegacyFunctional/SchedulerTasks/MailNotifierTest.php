@@ -75,11 +75,10 @@ final class MailNotifierTest extends FunctionalTestCase
     {
         parent::setUp();
 
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+
         (new CacheNullifyer())->setAllCoreCaches();
         $this->unifyTestingEnvironment();
-
-        $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createBackEndUser();
 
         $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 2);
         $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', true);
@@ -107,6 +106,7 @@ final class MailNotifierTest extends FunctionalTestCase
 
         $this->subject = new MailNotifier();
 
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $configurationPageUid = $this->testingFramework->createFrontEndPage();
         $this->subject->setConfigurationPageUid($configurationPageUid);
     }
