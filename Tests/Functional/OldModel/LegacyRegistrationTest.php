@@ -267,11 +267,11 @@ final class LegacyRegistrationTest extends FunctionalTestCase
      */
     public function dumpUserValuesCanContainNonRegisteredField(): void
     {
-        $this->subject->setUserData(['is_dummy_record' => true]);
+        $this->subject->setUserData(['pid' => 1]);
 
-        $result = $this->subject->dumpUserValues('is_dummy_record');
+        $result = $this->subject->dumpUserValues('pid');
 
-        self::assertStringContainsString('Is_dummy_record: 1', $result);
+        self::assertStringContainsString('Pid: 1', $result);
     }
 
     /**

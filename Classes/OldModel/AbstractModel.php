@@ -417,14 +417,6 @@ abstract class AbstractModel
     }
 
     /**
-     * Marks this object as a dummy record (when it is written to the DB).
-     */
-    public function enableTestMode(): void
-    {
-        $this->setRecordPropertyBoolean('is_dummy_record', true);
-    }
-
-    /**
      * Returns this record's page UID.
      *
      * @return int the page UID for this record, will be >= 0

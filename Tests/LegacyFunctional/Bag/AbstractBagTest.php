@@ -55,7 +55,7 @@ final class AbstractBagTest extends FunctionalTestCase
             ['title' => 'test 2']
         );
 
-        $this->subject = new TestingBag('is_dummy_record=1');
+        $this->subject = new TestingBag();
     }
 
     protected function tearDown(): void
@@ -183,12 +183,9 @@ final class AbstractBagTest extends FunctionalTestCase
      */
     public function countForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne(): void
     {
-        $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
+        $bag = new TestingBag('1=1', '', '', '', '1');
 
-        self::assertEquals(
-            1,
-            $bag->count()
-        );
+        self::assertSame(1, $bag->count());
     }
 
     ///////////////////////////////////////
@@ -251,7 +248,7 @@ final class AbstractBagTest extends FunctionalTestCase
      */
     public function countWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo(): void
     {
-        $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
+        $bag = new TestingBag('', '', '', '', '1');
 
         self::assertEquals(
             2,

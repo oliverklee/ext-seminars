@@ -443,8 +443,8 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     public function dumpAttendanceValuesCanContainNonRegisteredField(): void
     {
         self::assertStringContainsString(
-            'label_is_dummy_record: 1',
-            $this->subject->dumpAttendanceValues('is_dummy_record')
+            'label_pid: 0',
+            $this->subject->dumpAttendanceValues('pid')
         );
     }
 
@@ -514,8 +514,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     public function commitToDbCanCreateNewRecord(): void
     {
         $registration = new LegacyRegistration();
-        $registration->enableTestMode();
-        $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
 
         self::assertTrue(
