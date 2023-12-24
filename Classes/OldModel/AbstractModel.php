@@ -358,9 +358,6 @@ abstract class AbstractModel
         }
 
         $dataTemplate = ['uid_local' => $this->getUid()];
-        if ($this->getRecordPropertyBoolean('is_dummy_record')) {
-            $dataTemplate['is_dummy_record'] = 1;
-        }
 
         $connection = self::getConnectionForTable($mmTable);
         $recordCount = 0;

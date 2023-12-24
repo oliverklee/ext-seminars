@@ -151,15 +151,6 @@ abstract class AbstractBagBuilder
     }
 
     /**
-     * Sets the created bag to only take records into account that have been
-     * created with the oelib testing framework.
-     */
-    public function setTestMode(): void
-    {
-        $this->whereClauseParts['tests'] = $this->tableName . '.is_dummy_record = 1';
-    }
-
-    /**
      * Returns the WHERE clause for the bag to create.
      *
      * The WHERE clause will be complete except for the enableFields additions.
