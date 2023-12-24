@@ -38,7 +38,7 @@ final class CategoryBagTest extends FunctionalTestCase
 
         $this->testingFramework->createRecord('tx_seminars_categories');
 
-        $this->subject = new CategoryBag('is_dummy_record=1');
+        $this->subject = new CategoryBag();
     }
 
     protected function tearDown(): void

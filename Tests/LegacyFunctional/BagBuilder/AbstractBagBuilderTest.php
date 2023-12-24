@@ -848,19 +848,4 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
             $bag->count()
         );
     }
-
-    ///////////////////////////////////
-    // Tests concerning setTestMode()
-    ///////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function setTestModeAddsTheTableNameBeforeIsDummy(): void
-    {
-        self::assertStringContainsString(
-            'tx_seminars_test.is_dummy_record = 1',
-            $this->subject->getWhereClause()
-        );
-    }
 }

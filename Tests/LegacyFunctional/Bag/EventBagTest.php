@@ -42,7 +42,7 @@ final class EventBagTest extends FunctionalTestCase
             ['title' => 'test event']
         );
 
-        $this->subject = new EventBag('is_dummy_record=1');
+        $this->subject = new EventBag();
     }
 
     protected function tearDown(): void

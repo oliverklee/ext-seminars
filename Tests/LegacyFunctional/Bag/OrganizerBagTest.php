@@ -38,7 +38,7 @@ final class OrganizerBagTest extends FunctionalTestCase
 
         $this->testingFramework->createRecord('tx_seminars_organizers');
 
-        $this->subject = new OrganizerBag('is_dummy_record=1');
+        $this->subject = new OrganizerBag();
     }
 
     protected function tearDown(): void
