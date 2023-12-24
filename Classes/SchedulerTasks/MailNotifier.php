@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
-use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Interfaces\Configuration;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Service\DateFormatConverter;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -398,7 +398,7 @@ class MailNotifier extends AbstractTask
      */
     private function useUserConfiguredLanguage(): void
     {
-        $uid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        $uid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('backend.user', 'id');
         if ($uid <= 0) {
             return;
         }

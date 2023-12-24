@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
@@ -40,6 +39,7 @@ use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Templating\TemplateHelper;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -1164,7 +1164,7 @@ class DefaultController extends TemplateHelper
      */
     public function isLoggedIn(): bool
     {
-        return FrontEndLoginManager::getInstance()->isLoggedIn();
+        return GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn();
     }
 
     /**
@@ -1172,7 +1172,7 @@ class DefaultController extends TemplateHelper
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
     }
 
     /**
@@ -1496,7 +1496,7 @@ class DefaultController extends TemplateHelper
             $this->limitToTimeFrameSetting($builder);
         }
 
-        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $userUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
 
         switch ($whatToDisplay) {
@@ -1819,7 +1819,7 @@ class DefaultController extends TemplateHelper
     {
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
-        $userUid = FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        $userUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
         $user = $userUid > 0 ? MapperRegistry::get(FrontEndUserMapper::class)->find($userUid) : null;
         $registrationBagBuilder->limitToAttendee($user);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
@@ -29,6 +28,7 @@ use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Templating\TemplateHelper;
 use Pelago\Emogrifier\CssInliner;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -125,7 +125,7 @@ class RegistrationManager
         if ($event->getPriceOnRequest() || !$event->canSomebodyRegister()) {
             return false;
         }
-        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn()) {
             return true;
         }
 
@@ -152,7 +152,7 @@ class RegistrationManager
     {
         $message = '';
 
-        $isLoggedIn = FrontEndLoginManager::getInstance()->isLoggedIn();
+        $isLoggedIn = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user')->isLoggedIn();
         if ($isLoggedIn && !$this->couldThisUserRegister($event)) {
             $message = $this->translate('message_alreadyRegistered');
         } elseif (!$event->canSomebodyRegister()) {
@@ -1207,7 +1207,7 @@ class RegistrationManager
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUserUid();
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
     }
 
     private function getConnectionForTable(string $table): Connection

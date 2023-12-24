@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Use the TYPO3 `Context` to check for logins (#2864)
 - Stop using the deprecated oelib gender constants (#2859)
 - Avoid undefined array access in `DefaultController` (#2852)
 - Remove dependency on the CLI BE user from a test (#2829)
