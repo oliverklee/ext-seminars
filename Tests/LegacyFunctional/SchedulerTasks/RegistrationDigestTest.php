@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\SchedulerTasks;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -76,8 +78,6 @@ final class RegistrationDigestTest extends FunctionalTestCase
         $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
         $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
 
-        $this->subject = new RegistrationDigest();
-
         $configuration = [
             'fromEmail' => 'from@example.com',
             'fromName' => 'the sender',
@@ -85,10 +85,12 @@ final class RegistrationDigestTest extends FunctionalTestCase
             'toName' => 'the recipient',
         ];
         $this->configuration = new DummyConfiguration($configuration);
-        $this->subject->setConfiguration($this->configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars.registrationDigestEmail', $this->configuration);
 
         $this->eventMapperMock = $this->createMock(EventMapper::class);
-        $this->subject->setEventMapper($this->eventMapperMock);
+        MapperRegistry::set(EventMapper::class, $this->eventMapperMock);
+
+        $this->subject = new RegistrationDigest();
 
         $this->plaintextViewMock = $this->createMock(StandaloneView::class);
         GeneralUtility::addInstance(StandaloneView::class, $this->plaintextViewMock);
@@ -109,23 +111,10 @@ final class RegistrationDigestTest extends FunctionalTestCase
         GeneralUtility::makeInstance(StandaloneView::class);
         GeneralUtility::makeInstance(StandaloneView::class);
 
+        ConfigurationRegistry::purgeInstance();
+        MapperRegistry::purgeInstance();
+
         parent::tearDown();
-    }
-
-    /**
-     * @test
-     */
-    public function setConfigurationSetsConfiguration(): void
-    {
-        self::assertSame($this->configuration, $this->subject->getConfiguration());
-    }
-
-    /**
-     * @test
-     */
-    public function setEventMapperSetsEventMapper(): void
-    {
-        self::assertSame($this->eventMapperMock, $this->subject->getEventMapper());
     }
 
     /**

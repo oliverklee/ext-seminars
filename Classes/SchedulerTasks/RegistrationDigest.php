@@ -24,11 +24,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 class RegistrationDigest
 {
     /**
-     * @var bool
-     */
-    private $initialized = false;
-
-    /**
      * @var Configuration
      */
     private $configuration;
@@ -38,60 +33,10 @@ class RegistrationDigest
      */
     private $eventMapper;
 
-    /**
-     * Initializes the dependencies that cannot be injected using dependency injection.
-     *
-     * This method is idempotent, i.e., calling it multiple times will do no harm.
-     *
-     * @see isInitialized
-     */
-    public function initializeObject(): void
+    public function __construct()
     {
-        if ($this->isInitialized()) {
-            return;
-        }
-
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars.registrationDigestEmail');
         $this->eventMapper = MapperRegistry::get(EventMapper::class);
-
-        $this->initialized = true;
-    }
-
-    public function isInitialized(): bool
-    {
-        return $this->initialized;
-    }
-
-    /**
-     * This method is intended to be used for automated tests only.
-     */
-    public function getConfiguration(): Configuration
-    {
-        return $this->configuration;
-    }
-
-    /**
-     * This method is intended to be used for automated tests only.
-     */
-    public function setConfiguration(Configuration $configuration): void
-    {
-        $this->configuration = $configuration;
-    }
-
-    /**
-     * This method is intended to be used for automated tests only.
-     */
-    public function getEventMapper(): EventMapper
-    {
-        return $this->eventMapper;
-    }
-
-    /**
-     * This method is intended to be used for automated tests only.
-     */
-    public function setEventMapper(EventMapper $mapper): void
-    {
-        $this->eventMapper = $mapper;
     }
 
     /**
@@ -129,12 +74,12 @@ class RegistrationDigest
             ->subject(LocalizationUtility::translate('registrationDigestEmail_Subject', 'seminars'));
 
         /** @var non-empty-string $plaintextTemplatePath */
-        $plaintextTemplatePath = $this->getConfiguration()->getAsString('plaintextTemplate');
+        $plaintextTemplatePath = $this->configuration->getAsString('plaintextTemplate');
         $plaintextBody = $this->createContent($plaintextTemplatePath, $events);
         $emailBuilder->text($plaintextBody);
 
         /** @var non-empty-string $htmlTemplatePath */
-        $htmlTemplatePath = $this->getConfiguration()->getAsString('htmlTemplate');
+        $htmlTemplatePath = $this->configuration->getAsString('htmlTemplate');
         $htmlBody = $this->createContent($htmlTemplatePath, $events);
         $emailBuilder->html($htmlBody);
 
@@ -144,8 +89,6 @@ class RegistrationDigest
     /**
      * @param non-empty-string $templatePath in the EXT:... syntax
      * @param Collection<Event> $events
-     *
-     * @return string
      */
     private function createContent(string $templatePath, Collection $events): string
     {
