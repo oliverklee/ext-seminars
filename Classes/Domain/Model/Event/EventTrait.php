@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * This trait provides methods that are useful for all event classes (`SingleEvent`, `EventDate` and `EventTopic`).
@@ -25,8 +25,8 @@ trait EventTrait
      * corresponding topic.
      *
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
-     * @Extbase\Validate("NotEmpty")
+     * @Validate("StringLength", options={"maximum": 255})
+     * @Validate("NotEmpty")
      */
     protected $internalTitle = '';
 

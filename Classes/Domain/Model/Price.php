@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
+
 /**
  * This class represents a single price for an event, e.g., "early-bird price".
  *
@@ -43,7 +45,7 @@ class Price
 
     /**
      * @var float
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      */
     private $amount;
 
@@ -51,13 +53,13 @@ class Price
      * the full localization key in the seminars extension
      *
      * @var non-empty-string
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      */
     private $labelKey;
 
     /**
      * @var self::PRICE_*
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      */
     private $priceCode;
 

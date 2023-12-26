@@ -10,7 +10,9 @@ use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -69,20 +71,20 @@ trait EventDateTrait
     protected $maximumNumberOfRegistrations = 0;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Venue>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<Venue>
+     * @Lazy
      */
     protected $venues;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Speaker>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<Speaker>
+     * @Lazy
      */
     protected $speakers;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\Organizer>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<Organizer>
+     * @Lazy
      */
     protected $organizers;
 
@@ -98,26 +100,26 @@ trait EventDateTrait
     protected $status = EventInterface::STATUS_PLANNED;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\AccommodationOption>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<AccommodationOption>
+     * @Lazy
      */
     protected $accommodationOptions;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\FoodOption>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<FoodOption>
+     * @Lazy
      */
     protected $foodOptions;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\RegistrationCheckbox>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<RegistrationCheckbox>
+     * @Lazy
      */
     protected $registrationCheckboxes;
 
     /**
      * @var EventStatistics|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      */
     protected $statistics;
 
@@ -129,13 +131,13 @@ trait EventDateTrait
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $webinarUrl = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 2048})
+     * @Validate("StringLength", options={"maximum": 2048})
      */
     protected $additionalEmailText = '';
 

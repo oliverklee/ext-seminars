@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * Billing address fields for the `Registration` model.
@@ -20,49 +20,49 @@ trait BillingAddressTrait
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingCompany = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingFullName = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingStreetAddress = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 16})
+     * @Validate("StringLength", options={"maximum": 16})
      */
     protected $billingZipCode = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingCity = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingCountry = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 32})
+     * @Validate("StringLength", options={"maximum": 32})
      */
     protected $billingPhoneNumber = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $billingEmailAddress = '';
 
