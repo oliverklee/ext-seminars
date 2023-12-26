@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
+
 /**
  * Adds raw data methods (particularly helpful for creating icons in the backend).
  *
@@ -15,7 +17,7 @@ trait RawDataTrait
 {
     /**
      * @var array<string, string|int|float|null>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      * @internal
      */
     protected $rawData;

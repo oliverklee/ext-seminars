@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -17,9 +19,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 trait AttendeesTrait
 {
     /**
-     * @var \OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser|null
+     * @var FrontendUser|null
      * @phpstan-var FrontendUser|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $user;
 
@@ -43,13 +45,13 @@ trait AttendeesTrait
     /**
      * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 1024})
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      */
     protected $jsonEncodedAdditionAttendees = '{}';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<FrontendUser>
+     * @Lazy
      */
     protected $additionalPersons;
 
