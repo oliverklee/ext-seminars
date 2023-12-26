@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Domain\Model\Registration;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 /**
@@ -35,9 +36,9 @@ trait PaymentTrait
     protected $totalPrice = 0.0;
 
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\PaymentMethod|null
+     * @var PaymentMethod|null
      * @phpstan-var PaymentMethod|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $paymentMethod;
 
