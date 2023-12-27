@@ -13,6 +13,8 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents an event.
@@ -782,7 +784,7 @@ class Event extends AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver(): bool
     {
-        return $GLOBALS['SIM_EXEC_TIME']
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
             >= $this->getEarlyBirdDeadlineAsUnixTimeStamp();
     }
 

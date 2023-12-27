@@ -16,6 +16,8 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -25,6 +27,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var Event
      */
@@ -49,7 +53,9 @@ final class EventTest extends UnitTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $this->configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
@@ -96,6 +102,7 @@ final class EventTest extends UnitTestCase
             $this->subject->getEmailSender()
         );
     }
+
     /**
      * @test
      */

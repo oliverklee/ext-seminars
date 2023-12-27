@@ -41,8 +41,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new TestingBagBuilder();

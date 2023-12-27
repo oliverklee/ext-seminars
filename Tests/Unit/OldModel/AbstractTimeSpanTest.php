@@ -6,6 +6,9 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -13,6 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractTimeSpanTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var TestingTimeSpan
      */
@@ -22,7 +27,8 @@ final class AbstractTimeSpanTest extends UnitTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->subject = new TestingTimeSpan();
     }
@@ -300,7 +306,12 @@ final class AbstractTimeSpanTest extends UnitTestCase
      */
     public function hasStartedForStartedEventReturnsTrue(): void
     {
-        $this->subject->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] - 42);
+        $this->subject->setBeginDateAndTime(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) - 42
+        );
 
         self::assertTrue($this->subject->hasStarted());
     }
@@ -310,7 +321,12 @@ final class AbstractTimeSpanTest extends UnitTestCase
      */
     public function hasStartedForUpcomingEventReturnsFalse(): void
     {
-        $this->subject->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $this->subject->setBeginDateAndTime(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertFalse($this->subject->hasStarted());
     }

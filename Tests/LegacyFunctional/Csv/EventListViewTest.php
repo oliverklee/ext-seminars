@@ -9,6 +9,9 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\EventListView;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class EventListViewTest extends FunctionalTestCase
@@ -48,7 +51,8 @@ final class EventListViewTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->getLanguageService()->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
@@ -98,7 +102,10 @@ final class EventListViewTest extends FunctionalTestCase
         $this->subject->setPageUid($this->pageUid);
 
         $eventData['pid'] = $this->pageUid;
-        $eventData['begin_date'] = $GLOBALS['SIM_EXEC_TIME'];
+        $eventData['begin_date'] = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+            'date',
+            'timestamp'
+        );
 
         return $this->testingFramework->createRecord('tx_seminars_seminars', $eventData);
     }
@@ -228,7 +235,13 @@ final class EventListViewTest extends FunctionalTestCase
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            [
+                'pid' => $this->pageUid,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 3600,
+            ]
         );
 
         $eventList = $this->subject->render();
@@ -253,7 +266,13 @@ final class EventListViewTest extends FunctionalTestCase
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            [
+                'pid' => $this->pageUid,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 3600,
+            ]
         );
 
         self::assertStringContainsString(
@@ -274,7 +293,13 @@ final class EventListViewTest extends FunctionalTestCase
         $this->createEventInFolderAndSetPageUid();
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            [
+                'pid' => $this->pageUid,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 3600,
+            ]
         );
 
         self::assertRegExp(

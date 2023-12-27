@@ -17,6 +17,8 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -87,7 +89,10 @@ final class LegacyEventTest extends FunctionalTestCase
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
 
-        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
+
         $this->unregistrationDeadline = ($this->now + Time::SECONDS_PER_WEEK);
 
         $this->testingFramework = new TestingFramework('tx_seminars');

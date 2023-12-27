@@ -2364,7 +2364,10 @@ class DefaultController extends TemplateHelper
         $day = (int)($this->piVars['from_day'] ?? 0) > 0 ? (int)($this->piVars['from_day'] ?? 0) : 1;
         $month = (int)($this->piVars['from_month'] ?? 0) > 0 ? (int)($this->piVars['from_month'] ?? 0) : 1;
         $year = (int)($this->piVars['from_year'] ?? 0) > 0
-            ? (int)($this->piVars['from_year'] ?? 0) : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+            ? (int)($this->piVars['from_year'] ?? 0) : (int)date(
+                'Y',
+                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            );
 
         return mktime(0, 0, 0, $month, $day, $year);
     }
@@ -2384,7 +2387,11 @@ class DefaultController extends TemplateHelper
 
         $month = (int)($this->piVars['to_month'] ?? 0) > 0 ? (int)($this->piVars['to_month'] ?? 0) : 12;
         $year = (int)($this->piVars['to_year'] ?? 0) > 0
-            ? (int)($this->piVars['to_year'] ?? 0) : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+            ? (int)($this->piVars['to_year'] ?? 0)
+            : (int)date(
+                'Y',
+                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            );
 
         $day = (int)($this->piVars['to_day'] ?? 0);
 

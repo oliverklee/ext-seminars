@@ -25,6 +25,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -50,7 +51,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var positive-int
      */
-    private const NOW = 1524751343;
+    private $now;
 
     /**
      * @var RegistrationManager
@@ -128,7 +129,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
@@ -168,8 +171,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test event',
                 'subtitle' => 'juggling with burning chainsaws',
-                'begin_date' => self::NOW + 1000,
-                'end_date' => self::NOW + 2000,
+                'begin_date' => $this->now + 1000,
+                'end_date' => $this->now + 2000,
                 'attendees_min' => 1,
                 'attendees_max' => 10,
                 'needs_registration' => 1,
@@ -240,10 +243,10 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'tx_seminars_seminars',
                 [
                     'title' => 'test event',
-                    'begin_date' => self::NOW + 1000,
-                    'end_date' => self::NOW + 2000,
+                    'begin_date' => $this->now + 1000,
+                    'end_date' => $this->now + 2000,
                     'attendees_max' => 10,
-                    'deadline_registration' => self::NOW + 1000,
+                    'deadline_registration' => $this->now + 1000,
                     'needs_registration' => 1,
                     'queue_size' => 0,
                 ]
@@ -568,10 +571,10 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'begin_date' => self::NOW + 1000,
-                    'end_date' => self::NOW + 2000,
+                    'begin_date' => $this->now + 1000,
+                    'end_date' => $this->now + 2000,
                     'attendees_max' => 10,
-                    'deadline_registration' => self::NOW + 1000,
+                    'deadline_registration' => $this->now + 1000,
                 ]
             )
         );
@@ -931,7 +934,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
             ]
         );
         $pi1 = new DefaultController();
@@ -961,7 +964,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -993,7 +996,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1022,7 +1025,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );
@@ -1061,7 +1064,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => self::NOW + Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $this->now + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );
@@ -1944,8 +1947,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse(): void
     {
-        $this->seminar->setBeginDate(self::NOW + 42);
-        $this->seminar->setRegistrationDeadline(self::NOW - 42);
+        $this->seminar->setBeginDate($this->now + 42);
+        $this->seminar->setRegistrationDeadline($this->now - 42);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -1957,8 +1960,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue(): void
     {
-        $this->seminar->setBeginDate(self::NOW + 42);
-        $this->seminar->setRegistrationDeadline(self::NOW + 42);
+        $this->seminar->setBeginDate($this->now + 42);
+        $this->seminar->setRegistrationDeadline($this->now + 42);
 
         self::assertTrue(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -1970,8 +1973,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse(): void
     {
-        $this->seminar->setBeginDate(self::NOW + 42);
-        $this->seminar->setRegistrationBeginDate(self::NOW + 10);
+        $this->seminar->setBeginDate($this->now + 42);
+        $this->seminar->setRegistrationBeginDate($this->now + 10);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -1983,8 +1986,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue(): void
     {
-        $this->seminar->setBeginDate(self::NOW + 42);
-        $this->seminar->setRegistrationBeginDate(self::NOW - 42);
+        $this->seminar->setBeginDate($this->now + 42);
+        $this->seminar->setRegistrationBeginDate($this->now - 42);
 
         self::assertTrue(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -1996,7 +1999,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue(): void
     {
-        $this->seminar->setBeginDate(self::NOW + 42);
+        $this->seminar->setBeginDate($this->now + 42);
         $this->seminar->setRegistrationBeginDate(0);
 
         self::assertTrue(
@@ -2009,8 +2012,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse(): void
     {
-        $this->seminar->setBeginDate(self::NOW - 42);
-        $this->seminar->setRegistrationBeginDate(self::NOW - 50);
+        $this->seminar->setBeginDate($this->now - 42);
+        $this->seminar->setRegistrationBeginDate($this->now - 50);
 
         self::assertFalse(
             $this->subject->allowsRegistrationByDate($this->seminar)
@@ -2093,7 +2096,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            self::NOW - 42
+            $this->now - 42
         );
 
         self::assertTrue(
@@ -2107,7 +2110,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse(): void
     {
         $this->seminar->setRegistrationBeginDate(
-            self::NOW + 42
+            $this->now + 42
         );
 
         self::assertFalse(

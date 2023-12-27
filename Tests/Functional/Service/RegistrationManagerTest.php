@@ -23,6 +23,8 @@ use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -47,7 +49,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var positive-int
      */
-    private const NOW = 1524751343;
+    private $now;
 
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
@@ -89,6 +91,10 @@ final class RegistrationManagerTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
 
         $this->initializeBackEndLanguage();
 
@@ -166,8 +172,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
             [
                 'title' => 'test event',
                 'subtitle' => 'juggling with burning chainsaws',
-                'begin_date' => self::NOW + 1000,
-                'end_date' => self::NOW + 2000,
+                'begin_date' => $this->now + 1000,
+                'end_date' => $this->now + 2000,
                 'attendees_min' => 1,
                 'attendees_max' => 10,
                 'needs_registration' => 1,

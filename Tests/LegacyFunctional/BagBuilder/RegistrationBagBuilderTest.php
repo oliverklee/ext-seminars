@@ -12,6 +12,9 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -40,7 +43,8 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -75,11 +79,20 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Title 2', 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY]
+            [
+                'title' => 'Title 2',
+                'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_DAY,
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME']]
+            [
+                'title' => 'Title 1',
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ]
         );
 
         $registrationBag = $this->subject->build();
@@ -212,7 +225,10 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME']]
+            [
+                'title' => 'Attendance 2',
+                'datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ]
         );
         $this->subject->limitToPaid();
         /** @var LegacyRegistration $currentModel */
@@ -265,7 +281,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
+            ['datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
         );
         $this->subject->limitToUnpaid();
         $registrationBag = $this->subject->build();
@@ -303,7 +319,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
+            ['datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
         );
         $this->subject->limitToUnpaid();
         $this->subject->removePaymentLimitation();

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -15,9 +17,9 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class AbstractModelTest extends FunctionalTestCase
 {
     /**
-     * @var int
+     * @var positive-int
      */
-    private const NOW = 1574714414;
+    private $now;
 
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
@@ -30,7 +32,9 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = self::NOW;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
     }
 
     /**
@@ -375,7 +379,7 @@ final class AbstractModelTest extends FunctionalTestCase
         } else {
             $recordInDatabase = $result->fetch();
         }
-        self::assertSame(self::NOW, (int)$recordInDatabase['crdate']);
+        self::assertSame($this->now, (int)$recordInDatabase['crdate']);
     }
 
     /**
@@ -397,7 +401,7 @@ final class AbstractModelTest extends FunctionalTestCase
             $recordInDatabase = $result->fetch();
         }
 
-        self::assertSame(self::NOW, (int)$recordInDatabase['tstamp']);
+        self::assertSame($this->now, (int)$recordInDatabase['tstamp']);
     }
 
     /**
@@ -520,7 +524,7 @@ final class AbstractModelTest extends FunctionalTestCase
         } else {
             $recordInDatabase = $result->fetch();
         }
-        self::assertSame(self::NOW, (int)$recordInDatabase['tstamp']);
+        self::assertSame($this->now, (int)$recordInDatabase['tstamp']);
     }
 
     /**

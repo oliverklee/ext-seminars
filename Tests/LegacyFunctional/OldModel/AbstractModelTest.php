@@ -6,6 +6,9 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\OldModel;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -39,16 +42,17 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $systemFolderUid = $this->testingFramework->createSystemFolder();
         $this->testingFramework->createTemplate(
             $systemFolderUid,
             [
-                'tstamp' => $GLOBALS['SIM_EXEC_TIME'],
+                'tstamp' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'sorting' => 256,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'title' => 'TEST',
                 'root' => 1,
                 'clear' => 3,

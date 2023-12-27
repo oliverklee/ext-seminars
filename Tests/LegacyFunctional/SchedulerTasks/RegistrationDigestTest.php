@@ -13,6 +13,8 @@ use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -66,9 +68,9 @@ final class RegistrationDigestTest extends FunctionalTestCase
     private $htmlViewMock;
 
     /**
-     * @var int
+     * @var positive-int
      */
-    private $now = 1509028643;
+    private $now;
 
     protected function setUp(): void
     {
@@ -76,7 +78,9 @@ final class RegistrationDigestTest extends FunctionalTestCase
 
         (new CacheNullifyer())->setAllCoreCaches();
 
-        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
 
         $this->subject = new RegistrationDigest();
 

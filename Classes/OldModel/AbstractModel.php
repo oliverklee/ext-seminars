@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\OldModel;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\Rendering\NullRenderingContext;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -316,7 +317,7 @@ abstract class AbstractModel
             return false;
         }
 
-        $now = (int)$GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $this->setRecordPropertyInteger('tstamp', $now);
 
         $connection = self::getConnectionForOwnTable();

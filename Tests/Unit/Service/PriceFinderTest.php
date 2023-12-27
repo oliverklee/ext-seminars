@@ -7,8 +7,8 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Price;
 use OliverKlee\Seminars\Service\PriceFinder;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -18,11 +18,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PriceFinderTest extends UnitTestCase
 {
-    /**
-     * @var Context&MockObject
-     */
-    private $context;
-
     /**
      * @var PriceFinder
      */
@@ -37,10 +32,9 @@ final class PriceFinderTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->context = $this->createMock(Context::class);
         $this->now = new \DateTimeImmutable('2022-04-01 10:00:00');
-        $this->context->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now);
-        GeneralUtility::setSingletonInstance(Context::class, $this->context);
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect($this->now));
 
         $this->subject = new PriceFinder();
     }

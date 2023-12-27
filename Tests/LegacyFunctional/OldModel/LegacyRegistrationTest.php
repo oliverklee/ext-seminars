@@ -12,6 +12,8 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -59,7 +61,8 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         LegacyRegistration::purgeCachedSeminars();
 
@@ -594,7 +597,9 @@ final class LegacyRegistrationTest extends FunctionalTestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue(): void
     {
-        $this->subject->setPaymentDateAsUnixTimestamp($GLOBALS['SIM_EXEC_TIME']);
+        $this->subject->setPaymentDateAsUnixTimestamp(
+            (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+        );
 
         self::assertTrue(
             $this->subject->isPaid()

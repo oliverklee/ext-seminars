@@ -11,6 +11,8 @@ use OliverKlee\Seminars\Csv\AbstractRegistrationListView;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -83,7 +85,8 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
@@ -103,7 +106,10 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->pageUid,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ),
             ]
         );
 
@@ -293,7 +299,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -315,7 +321,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -323,7 +329,10 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'] + 1,
+                'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -351,7 +360,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
             ]
         );
@@ -374,7 +383,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $frontEndUserUid,
             ]
         );
@@ -396,7 +405,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => 9999,
             ]
         );
@@ -449,7 +458,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -457,7 +466,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -479,7 +488,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
             ]
@@ -502,7 +511,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
             ]
@@ -525,7 +534,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo ; bar',
             ]
@@ -548,7 +557,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => "foo\nbar",
             ]
@@ -571,7 +580,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
             ]
@@ -594,7 +603,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'],
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'title' => 'test',

@@ -245,7 +245,10 @@ class MailNotifier extends AbstractTask
         $bag = $builder->build();
 
         foreach ($bag as $event) {
-            if ($event instanceof LegacyEvent && $event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
+            if (
+                $event instanceof LegacyEvent && $event->getCancelationDeadline(
+                ) < (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            ) {
                 $result[] = $event;
             }
         }

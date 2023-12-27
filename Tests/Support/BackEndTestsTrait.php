@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -71,8 +73,10 @@ trait BackEndTestsTrait
      */
     private function unifyTestingEnvironment(): void
     {
-        $this->now = 1524751343;
-        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->now = (int)$context->getPropertyFromAspect('date', 'timestamp');
+
         $this->cleanRequestVariables();
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();

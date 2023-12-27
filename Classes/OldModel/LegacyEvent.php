@@ -2455,7 +2455,8 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isRegistrationDeadlineOver(): bool
     {
-        return $GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleRegistrationTime();
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            >= $this->getLatestPossibleRegistrationTime();
     }
 
     /**
@@ -2465,7 +2466,8 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver(): bool
     {
-        return $GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleEarlyBirdRegistrationTime();
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            >= $this->getLatestPossibleEarlyBirdRegistrationTime();
     }
 
     /**
@@ -3079,7 +3081,9 @@ class LegacyEvent extends AbstractTimeSpan
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
         if ($deadline !== 0 || $this->hasBeginDate()) {
-            $canUnregisterByDate = (int)$GLOBALS['SIM_EXEC_TIME'] < $deadline;
+            $canUnregisterByDate = (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp')
+                < $deadline;
         } else {
             $canUnregisterByDate = $this->getUnregistrationDeadlineFromConfiguration() !== 0;
         }

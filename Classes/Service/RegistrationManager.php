@@ -367,7 +367,13 @@ class RegistrationManager
 
         $this->getConnectionForTable('tx_seminars_attendances')->update(
             'tx_seminars_attendances',
-            ['hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']],
+            [
+                'hidden' => 1,
+                'tstamp' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ),
+            ],
             ['uid' => $uid]
         );
 
@@ -496,7 +502,12 @@ class RegistrationManager
             "METHOD:PUBLISH\r\n" .
             "BEGIN:VEVENT\r\n" .
             'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
-            'DTSTAMP:' . \date('Ymd\\THis', (int)$GLOBALS['SIM_EXEC_TIME']) . "\r\n" .
+            'DTSTAMP:'
+            . \date(
+                'Ymd\\THis',
+                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            )
+            . "\r\n" .
             'SUMMARY:' . $event->getTitle() . "\r\n" .
             'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
             'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
@@ -1028,7 +1039,8 @@ class RegistrationManager
             return true;
         }
 
-        return $GLOBALS['SIM_EXEC_TIME'] >= $event->getRegistrationBeginAsUnixTimestamp();
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            >= $event->getRegistrationBeginAsUnixTimestamp();
     }
 
     /**

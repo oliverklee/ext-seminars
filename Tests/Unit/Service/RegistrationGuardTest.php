@@ -27,7 +27,7 @@ final class RegistrationGuardTest extends UnitTestCase
     /**
      * @var non-empty-string
      */
-    private const NOW = '2022-04-01 10:00:00';
+    private $now = '2022-04-01 10:00:00';
 
     /**
      * @var Context&MockObject
@@ -91,7 +91,7 @@ final class RegistrationGuardTest extends UnitTestCase
      */
     public function createFromImmutableKeepsDatesComparable(): void
     {
-        $dateTimeImmutable = new \DateTimeImmutable(self::NOW);
+        $dateTimeImmutable = new \DateTimeImmutable($this->now);
         $dateTime = $this->createFromImmutable($dateTimeImmutable);
 
         self::assertFalse($dateTimeImmutable < $dateTime);
@@ -100,7 +100,7 @@ final class RegistrationGuardTest extends UnitTestCase
 
     private function now(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable(self::NOW);
+        return new \DateTimeImmutable($this->now);
     }
 
     /**
