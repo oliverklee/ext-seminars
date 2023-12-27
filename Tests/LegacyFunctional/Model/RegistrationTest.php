@@ -14,6 +14,9 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -44,7 +47,8 @@ final class RegistrationTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->subject = new Registration();
@@ -472,7 +476,7 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue(): void
     {
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         self::assertIsInt($now);
         $this->subject->setData(['datepaid' => $now]);
 

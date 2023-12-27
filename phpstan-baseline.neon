@@ -171,6 +171,11 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 3
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: Classes/BagBuilder/EventBagBuilder.php
@@ -188,11 +193,6 @@ parameters:
 		-
 			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:\\$tableName is not the same as PHPDoc type string of overridden property OliverKlee\\\\Seminars\\\\BagBuilder\\\\AbstractBagBuilder\\<OliverKlee\\\\Seminars\\\\Bag\\\\EventBag\\>\\:\\:\\$tableName\\.$#"
 			count: 1
-			path: Classes/BagBuilder/EventBagBuilder.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
-			count: 3
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
@@ -936,6 +936,11 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1068,11 +1073,6 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLinkToUnregistrationPage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
 			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
-			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1287,6 +1287,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			count: 1
+			path: Classes/Model/Event.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
 
@@ -1691,6 +1696,11 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
 			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
@@ -1726,12 +1736,12 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
-			message: "#^Parameter \\#1 \\$date of method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:setDateOfLastRegistrationDigestEmailAsUnixTimeStamp\\(\\) expects int, mixed given\\.$#"
+			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
@@ -1774,6 +1784,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:countWaitingListSeatsByEvent\\(\\) expects int\\<1, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/Service/EventStatisticsCalculator.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/Service/EventStatusService.php
 
 		-
 			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
@@ -1842,7 +1857,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Service/RegistrationManager.php
 
 		-
@@ -2371,6 +2386,16 @@ parameters:
 			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/AbstractModelTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\OldModel\\\\AbstractModelTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/AbstractModelTest.php
+
+		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 10
 			path: Tests/Functional/OldModel/AbstractTimeSpanTest.php
@@ -2841,6 +2866,11 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:notifyOrganizers\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -2867,6 +2897,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 1
+			path: Tests/Functional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
@@ -2901,8 +2936,8 @@ parameters:
 			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 3
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 90
 			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
 
 		-
@@ -2921,7 +2956,7 @@ parameters:
 			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
 
@@ -2946,13 +2981,18 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/AbstractRegistrationListViewTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 13
+			path: Tests/LegacyFunctional/Csv/AbstractRegistrationListViewTest.php
+
+		-
 			message: "#^PHPDoc tag @var with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject is not subtype of type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/Csv/AbstractRegistrationListViewTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 14
+			count: 1
 			path: Tests/LegacyFunctional/Csv/AbstractRegistrationListViewTest.php
 
 		-
@@ -2991,8 +3031,8 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 14
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 22
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
@@ -3002,6 +3042,11 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
@@ -3016,13 +3061,23 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 7
 			path: Tests/LegacyFunctional/Csv/DownloadRegistrationListViewTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Csv/DownloadRegistrationListViewTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 7
+			path: Tests/LegacyFunctional/Csv/EmailRegistrationListViewTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 1
 			path: Tests/LegacyFunctional/Csv/EmailRegistrationListViewTest.php
 
 		-
@@ -3066,12 +3121,22 @@ parameters:
 			path: Tests/LegacyFunctional/Email/SalutationTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Email/SalutationTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Email/SalutationTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Email/SalutationTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Email/SalutationTest.php
 
@@ -3121,6 +3186,11 @@ parameters:
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 16
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\DefaultControllerTest\\:\\:addCategoryRelation\\(\\) has parameter \\$categoryData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
@@ -3138,16 +3208,6 @@ parameters:
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\DefaultControllerTest\\:\\:hideListRegistrationsColumnIfNecessaryDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
-			count: 15
-			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, mixed given\\.$#"
-			count: 16
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3206,6 +3266,16 @@ parameters:
 			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Model/RegistrationTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/OldModel/AbstractModelTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
@@ -3218,6 +3288,11 @@ parameters:
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
 			count: 2
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
@@ -3271,12 +3346,17 @@ parameters:
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$paymentDate of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\:\\:setPaymentDateAsUnixTimestamp\\(\\) expects int, mixed given\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
 
@@ -3307,6 +3387,11 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
@@ -3346,6 +3431,11 @@ parameters:
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
@@ -3354,6 +3444,16 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/SchedulerTasks/RegistrationDigestTest.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
@@ -3386,6 +3486,11 @@ parameters:
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 5
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
@@ -3401,6 +3506,11 @@ parameters:
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
@@ -3409,6 +3519,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/Service/EventStatusServiceTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
@@ -3451,6 +3566,11 @@ parameters:
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 6
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
@@ -3472,6 +3592,11 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
@@ -3729,6 +3854,11 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 3
+			path: Tests/Unit/Model/EventTopicTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setBeginDateAndTime\\(\\) expects int, int\\|false given\\.$#"

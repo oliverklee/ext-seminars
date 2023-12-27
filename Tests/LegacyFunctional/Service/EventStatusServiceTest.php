@@ -11,7 +11,10 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -52,9 +55,10 @@ final class EventStatusServiceTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-        $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
-        $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+        $this->past = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - 1;
+        $this->future = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') + 1;
 
         $this->eventMapper = $this->createMock(EventMapper::class);
         MapperRegistry::set(EventMapper::class, $this->eventMapper);

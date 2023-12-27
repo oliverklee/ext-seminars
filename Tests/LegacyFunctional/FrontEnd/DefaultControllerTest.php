@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -121,7 +122,8 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
@@ -577,8 +579,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $this->testingFramework->createRecord(
@@ -588,8 +596,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -629,8 +643,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $singleEventUid = $this->testingFramework->createRecord(
@@ -640,8 +660,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_SINGLE_EVENT,
                 'topic' => $topicUid,
                 'title' => 'Test single 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -679,8 +705,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $this->testingFramework->createRecord(
@@ -690,8 +722,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
@@ -732,8 +770,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $dateUid2 = $this->testingFramework->createRecord(
@@ -743,8 +787,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
@@ -2466,7 +2516,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateShowsEventWithBeginDateAfterFromDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2492,7 +2542,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateDoesNotShowEventWithBeginDateBeforeFromDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2519,7 +2569,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingDayShowsEventWithBeginDateOnFirstDayOfMonth(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2544,7 +2594,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingYearShowsEventWithBeginDateInCurrentYearAfterFromDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(
@@ -2570,7 +2620,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingMonthShowsEventWithBeginDateOnFirstMonthOfYear(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2595,7 +2645,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingMonthAndDayShowsEventWithBeginDateOnFirstDayOfGivenYear(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2619,7 +2669,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateShowsEventWithBeginDateBeforeToDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2646,7 +2696,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateHidesEventWithBeginDateAfterToDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(
@@ -2673,7 +2723,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingDayShowsEventWithBeginDateOnEndOfGivenMonth(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2698,7 +2748,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingYearShowsEventWithBeginDateOnThisYearBeforeToDate(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2724,7 +2774,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingMonthShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -2748,7 +2798,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingMonthAndDayShowsEventWithBeginDateOnEndOfGivenYear(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -2771,7 +2821,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesShowsEventWithBeginDateWithinTimespan(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $toTime = $simTime + 86400;
 
@@ -2802,7 +2852,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesCanShowTwoEventsWithBeginDateWithinTimespan(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $toTime = $simTime + 86400;
 
@@ -2847,7 +2897,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateBeforeTimespan(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2877,7 +2927,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateAfterTimespan(): void
     {
-        $simTime = $GLOBALS['SIM_EXEC_TIME'];
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(
@@ -2946,7 +2996,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 50,
             ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -2978,7 +3031,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 50,
             ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -4302,7 +4358,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
 
@@ -4325,7 +4384,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 1,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
         $this->testingFramework->createRecord(
@@ -4358,7 +4420,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
         $this->testingFramework->createRecord(
@@ -4412,8 +4477,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 20,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
+                'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 20,
             ]
         );
 
@@ -4428,7 +4499,10 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForEventWithRegistrationBeginInFutureShowsRegistrationOpenOnMessage(): void
     {
-        $registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 20;
+        $registrationBegin = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+            'date',
+            'timestamp'
+        ) + 20;
         $this->subject->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -4437,7 +4511,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
                 'begin_date_registration' => $registrationBegin,
             ]
         );
@@ -4461,8 +4538,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
+                'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 42,
             ]
         );
 
@@ -4484,7 +4567,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
                 'begin_date_registration' => 0,
             ]
         );
@@ -4601,8 +4687,14 @@ final class DefaultControllerTest extends FunctionalTestCase
             $this->seminarUid,
             [
                 'title' => 'currentEvent',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 20,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 20,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 20,
             ]
         );
 
@@ -4625,8 +4717,14 @@ final class DefaultControllerTest extends FunctionalTestCase
             $this->seminarUid,
             [
                 'title' => 'futureEvent',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 21,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 21,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
 
@@ -5017,7 +5115,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
 
@@ -5043,7 +5144,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 1,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
         $this->testingFramework->createRecord(
@@ -5079,7 +5183,10 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
             ]
         );
         $this->testingFramework->createRecord(
@@ -5138,8 +5245,14 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 40,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
+                'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 40,
             ]
         );
 
@@ -5157,7 +5270,10 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function singleViewForEventWithRegistrationBeginInFutureShowsRegistrationOpensOnMessage(): void
     {
-        $registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 40;
+        $registrationBegin = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+            'date',
+            'timestamp'
+        ) + 40;
         $this->subject->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5165,7 +5281,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
                 'begin_date_registration' => $registrationBegin,
             ]
         );
@@ -5191,8 +5310,14 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
+                'begin_date_registration' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 42,
             ]
         );
 
@@ -5217,7 +5342,10 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 42,
                 'begin_date_registration' => 0,
             ]
         );
@@ -5242,7 +5370,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(0);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
@@ -5259,7 +5392,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(9);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-1',
@@ -5276,7 +5414,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(8);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-2',
@@ -5293,7 +5436,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-0',
@@ -5308,7 +5456,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
@@ -5323,7 +5476,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringNotContainsString(
             'tx-seminars-pi1-vacancies-0',
@@ -5338,7 +5496,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-unlimited',
@@ -5353,8 +5516,18 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
-        $event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+        $event->setRegistrationDeadline(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) - 45
+        );
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 45
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-registration-deadline-over',
@@ -5369,7 +5542,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) - 45
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-event-begin-date-over',
@@ -5384,7 +5562,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) - 45
+        );
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForStartedEvents', true);
 
         self::assertStringContainsString(
@@ -5403,7 +5586,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
         $event->setRegistrationQueue(true);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringContainsString(
             'tx-seminars-pi1-has-registration-queue',
@@ -5421,7 +5609,12 @@ final class DefaultControllerTest extends FunctionalTestCase
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
         $event->setRegistrationQueue(false);
-        $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+        $event->setBeginDate(
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                'date',
+                'timestamp'
+            ) + 42
+        );
 
         self::assertStringNotContainsString(
             'tx-seminars-pi1-has-registration-queue',
@@ -5851,8 +6044,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topic,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 2000,
             ]
         );
         $this->subject->setConfigurationValue('what_to_display', 'topic_list');
@@ -5914,8 +6113,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUId,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 2000,
             ]
         );
         $this->testingFramework->createRecord(
@@ -5924,8 +6129,14 @@ final class DefaultControllerTest extends FunctionalTestCase
                 'pid' => $this->systemFolderPid,
                 'object_type' => EventInterface::TYPE_EVENT_DATE,
                 'topic' => $topicUId,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 11000, // > 1 day after first date
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 12000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 11000, // > 1 day after first date
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 12000,
             ]
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');

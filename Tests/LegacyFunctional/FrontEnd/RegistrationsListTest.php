@@ -11,6 +11,7 @@ use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -60,7 +61,8 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         HeaderProxyFactory::getInstance()->enableTestMode();
 
@@ -642,7 +644,10 @@ final class RegistrationsListTest extends FunctionalTestCase
             [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
-                'crdate' => $GLOBALS['SIM_EXEC_TIME'] + 500,
+                'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 500,
             ]
         );
 

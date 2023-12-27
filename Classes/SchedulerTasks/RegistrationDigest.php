@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -171,7 +172,7 @@ class RegistrationDigest
      */
     private function updateDateOfLastDigest(Collection $events): void
     {
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         /** @var Event $event */
         foreach ($events as $event) {

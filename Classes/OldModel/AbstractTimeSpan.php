@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -46,7 +47,9 @@ abstract class AbstractTimeSpan extends AbstractModel
      */
     public function hasStarted(): bool
     {
-        return $this->hasBeginDate() && (int)$GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp();
+        return $this->hasBeginDate() && (int)GeneralUtility::makeInstance(Context::class)
+                ->getPropertyFromAspect('date', 'timestamp')
+            >= $this->getBeginDateAsTimestamp();
     }
 
     /**

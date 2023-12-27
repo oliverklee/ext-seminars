@@ -7,7 +7,9 @@ namespace OliverKlee\Seminars\Service;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class takes care of managing the status of events.
@@ -44,7 +46,8 @@ class EventStatusService implements SingletonInterface
             $eventWasUpdated = true;
         } elseif (
             $event->hasRegistrationDeadline()
-            && $event->getRegistrationDeadlineAsUnixTimeStamp() < $GLOBALS['SIM_EXEC_TIME']
+            && $event->getRegistrationDeadlineAsUnixTimeStamp()
+            < (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
         ) {
             $this->cancelAndSave($event);
             $eventWasUpdated = true;

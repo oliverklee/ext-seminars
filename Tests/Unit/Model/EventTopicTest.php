@@ -8,6 +8,9 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\PaymentMethod;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -18,6 +21,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventTopicTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var Event
      */
@@ -27,7 +32,8 @@ final class EventTopicTest extends UnitTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->subject = new Event();
     }
@@ -1203,7 +1209,7 @@ final class EventTopicTest extends UnitTestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue(): void
     {
         $this->subject->setData(
-            ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 1]
+            ['deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - 1]
         );
 
         self::assertTrue(
@@ -1216,7 +1222,7 @@ final class EventTopicTest extends UnitTestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue(): void
     {
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         self::assertIsInt($now);
         $this->subject->setData(['deadline_early_bird' => $now]);
 
@@ -1231,7 +1237,7 @@ final class EventTopicTest extends UnitTestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse(): void
     {
         $this->subject->setData(
-            ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 1]
+            ['deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') + 1]
         );
 
         self::assertFalse(

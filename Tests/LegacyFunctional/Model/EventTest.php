@@ -12,6 +12,9 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -32,16 +35,13 @@ final class EventTest extends FunctionalTestCase
      */
     private $subject;
 
-    /**
-     * @var int
-     */
-    private $now = 1424751343;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
+
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $configuration);

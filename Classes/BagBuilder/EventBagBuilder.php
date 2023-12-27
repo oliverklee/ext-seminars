@@ -9,6 +9,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -184,7 +185,7 @@ class EventBagBuilder extends AbstractBagBuilder
             throw new \InvalidArgumentException('The time-frame key "' . $timeFrameKey . '" is not valid.', 1333292705);
         }
 
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         // Works out from which time-frame we'll find event records.
         // We also need to deal with the case that an event has no end date set
@@ -625,10 +626,10 @@ class EventBagBuilder extends AbstractBagBuilder
      */
     public function limitToDaysBeforeBeginDate(int $days): void
     {
-        $nowPlusDays = $GLOBALS['SIM_EXEC_TIME'] + $days * Time::SECONDS_PER_DAY;
+        $nowPlusDays = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
+            + $days * Time::SECONDS_PER_DAY;
 
-        $this->whereClauseParts['days_before_begin_date'] =
-            'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
+        $this->whereClauseParts['days_before_begin_date'] = 'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
     }
 
     /**
@@ -1165,7 +1166,7 @@ class EventBagBuilder extends AbstractBagBuilder
         }
 
         $notZeroAndInRange = '(%1$s > 0 AND %1$s <= %2$u)';
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
 
         $whereClause = '(object_type = ' . EventInterface::TYPE_EVENT_TOPIC . ' OR ' .
             'object_type = ' . EventInterface::TYPE_SINGLE_EVENT . ') AND (' .
@@ -1219,7 +1220,7 @@ class EventBagBuilder extends AbstractBagBuilder
             return;
         }
 
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $whereClause = '(object_type = ' . EventInterface::TYPE_EVENT_TOPIC . ' OR ' .
             'object_type = ' . EventInterface::TYPE_SINGLE_EVENT . ') AND (' .
             '(deadline_early_bird < ' . $now . ' ' .

@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\CategoryList;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -47,7 +50,8 @@ final class CategoryListTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->rootPageUid = $this->testingFramework->createFrontEndPage();
@@ -99,7 +103,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 2,
             ]
         );
@@ -143,7 +150,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 2,
             ]
         );
@@ -181,7 +191,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $systemSubFolderUid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
             ]
         );
@@ -212,7 +225,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $otherSystemFolderUid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
             ]
         );
@@ -245,7 +261,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $otherSystemFolderUid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
             ]
         );
@@ -275,7 +294,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
                 'cancelled' => 1,
             ]
@@ -306,7 +328,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my_title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
                 'cancelled' => EventInterface::STATUS_CONFIRMED,
             ]
@@ -342,8 +367,14 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 2000,
                 'categories' => 1,
             ]
         );
@@ -378,8 +409,14 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 2000,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 2000,
+                'end_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) - 1000,
                 'categories' => 1,
             ]
         );
@@ -413,7 +450,10 @@ final class CategoryListTest extends FunctionalTestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'begin_date' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
+                    'date',
+                    'timestamp'
+                ) + 1000,
                 'categories' => 1,
             ]
         );
