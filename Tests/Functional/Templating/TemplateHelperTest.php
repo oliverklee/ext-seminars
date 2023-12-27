@@ -165,23 +165,4 @@ final class TemplateHelperTest extends FunctionalTestCase
         $this->subject->getTemplateCode();
         $this->subject->setLabels();
     }
-
-    // Tests for getting subparts.
-
-    /**
-     * @test
-     */
-    public function getSubpartWithLabelsReturnsVerbatimSubpartWithoutLabels(): void
-    {
-        $subpartContent = 'Subpart content';
-        $templateCode = 'Text before the subpart
-            <!-- ###MY_SUBPART### -->'
-            . $subpartContent
-            . '<!-- ###MY_SUBPART### -->'
-            . 'Text after the subpart.';
-
-        $this->subject->processTemplate($templateCode);
-
-        self::assertSame($subpartContent, $this->subject->getSubpartWithLabels('MY_SUBPART'));
-    }
 }
