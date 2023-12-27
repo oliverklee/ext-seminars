@@ -16,11 +16,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getBackEndUser\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication but returns mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
