@@ -201,27 +201,7 @@ parameters:
 			path: Classes/Configuration/SharedConfigurationCheck.php
 
 		-
-			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EmailController.php
-
-		-
-			message: "#^Cannot access offset 'subject' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EmailController.php
-
-		-
 			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\EventController\\:\\:\\$response\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/EventController.php
 
@@ -3006,28 +2986,13 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 1
-			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 4
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
@@ -3041,17 +3006,7 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Csv/CsvDownloaderTest.php
 
@@ -3131,17 +3086,7 @@ parameters:
 			path: Tests/LegacyFunctional/Email/SalutationTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Email/SalutationTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Email/SalutationTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Email\\\\SalutationTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Email/SalutationTest.php
 
@@ -3426,17 +3371,7 @@ parameters:
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
@@ -3501,17 +3436,7 @@ parameters:
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$getBackup type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
 
@@ -3601,27 +3526,7 @@ parameters:
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/EmailControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'subject' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/EmailControllerTest.php
-
-		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
 
@@ -3631,43 +3536,8 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
 			count: 4
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 3
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-

@@ -64,7 +64,7 @@ final class EmailControllerTest extends UnitTestCase
     public function tearDown(): void
     {
         GeneralUtility::purgeInstances();
-        unset($GLOBALS['_POST']['subject'], $GLOBALS['_POST']['emailBody']);
+        unset($_POST['subject'], $_POST['emailBody']);
         parent::tearDown();
     }
 
