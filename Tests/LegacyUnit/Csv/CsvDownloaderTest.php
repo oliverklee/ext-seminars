@@ -161,8 +161,8 @@ final class CsvDownloaderTest extends TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
-        $GLOBALS['_GET']['pid'] = $this->pid;
+        $_GET['table'] = 'tx_seminars_seminars';
+        $_GET['pid'] = $this->pid;
 
         self::assertStringContainsString(
             (string)$this->eventUid,
@@ -581,8 +581,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
-        $GLOBALS['_GET']['eventUid'] = $this->eventUid;
+        $_GET['table'] = 'tx_seminars_attendances';
+        $_GET['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             (string)$registrationUid,
@@ -642,8 +642,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $GLOBALS['_GET']['table'] = 'tx_seminars_seminars';
-        $GLOBALS['_GET']['pid'] = $this->pid;
+        $_GET['table'] = 'tx_seminars_seminars';
+        $_GET['pid'] = $this->pid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',
@@ -669,8 +669,8 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $GLOBALS['_GET']['table'] = 'tx_seminars_attendances';
-        $GLOBALS['_GET']['eventUid'] = $this->eventUid;
+        $_GET['table'] = 'tx_seminars_attendances';
+        $_GET['eventUid'] = $this->eventUid;
 
         self::assertStringContainsString(
             'Schöne Bären führen',

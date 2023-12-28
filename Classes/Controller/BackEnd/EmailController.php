@@ -46,8 +46,8 @@ class EmailController extends ActionController
         $this->checkPermissions();
 
         $eventUid = $event->getUid();
-        $GLOBALS['_POST']['subject'] = $subject;
-        $GLOBALS['_POST']['emailBody'] = $body;
+        $_POST['subject'] = $subject;
+        $_POST['emailBody'] = $body;
 
         $emailService = GeneralUtility::makeInstance(GeneralEventMailForm::class, $eventUid);
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);

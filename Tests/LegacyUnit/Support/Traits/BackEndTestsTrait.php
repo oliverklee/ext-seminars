@@ -19,12 +19,12 @@ trait BackEndTestsTrait
     use LanguageHelper;
 
     /**
-     * @var array<string, mixed>
+     * @var array<mixed>
      */
     private $getBackup = [];
 
     /**
-     * @var array<string, mixed>
+     * @var array<mixed>
      */
     private $postBackup = [];
 
@@ -83,10 +83,10 @@ trait BackEndTestsTrait
     {
         GeneralUtility::flushInternalRuntimeCaches();
         unset($GLOBALS['TYPO3_REQUEST']);
-        $this->getBackup = $GLOBALS['_GET'] ?? [];
-        $GLOBALS['_GET'] = [];
-        $this->postBackup = $GLOBALS['_POST'] ?? [];
-        $GLOBALS['_POST'] = [];
+        $this->getBackup = $_GET;
+        $_GET = [];
+        $this->postBackup = $_POST;
+        $_POST = [];
     }
 
     private function replaceBackEndUserWithMock(): void
@@ -152,10 +152,8 @@ trait BackEndTestsTrait
         if ($this->t3VarBackup !== []) {
             $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
         }
-        if ($this->getBackup !== [] || $this->postBackup !== []) {
-            $GLOBALS['_GET'] = $this->getBackup;
-            $GLOBALS['_POST'] = $this->postBackup;
-        }
+        $_GET = $this->getBackup;
+        $_POST = $this->postBackup;
         unset($GLOBALS['TYPO3_REQUEST']);
         GeneralUtility::flushInternalRuntimeCaches();
     }
