@@ -103,9 +103,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
-            unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table']);
-        }
+        unset($_GET['id'], $_GET['pid'], $_GET['table']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -138,7 +136,7 @@ final class RegistrationControllerTest extends UnitTestCase
     public function pageUidIsTakenFromGetId(): void
     {
         $pageUid = 15;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         self::assertSame($pageUid, $this->subject->getPageUid());
     }
@@ -223,7 +221,7 @@ final class RegistrationControllerTest extends UnitTestCase
     public function showForEventActionPassesPageUidToView(): void
     {
         $pageUid = 8;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
         $this->eventRepositoryMock->expects(self::once())
@@ -392,7 +390,7 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $this->subject->exportCsvForEventAction(5);
 
-        self::assertSame('tx_seminars_attendances', $GLOBALS['_GET']['table']);
+        self::assertSame('tx_seminars_attendances', $_GET['table'] ?? null);
     }
 
     /**
@@ -404,7 +402,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->subject->exportCsvForEventAction($eventUid);
 
-        self::assertSame($eventUid, $GLOBALS['_GET']['eventUid']);
+        self::assertSame($eventUid, $_GET['eventUid'] ?? null);
     }
 
     /**
@@ -474,7 +472,7 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $this->subject->exportCsvForPageUidAction(12);
 
-        self::assertSame('tx_seminars_attendances', $GLOBALS['_GET']['table']);
+        self::assertSame('tx_seminars_attendances', $_GET['table'] ?? null);
     }
 
     /**
@@ -486,7 +484,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->subject->exportCsvForPageUidAction($pageUid);
 
-        self::assertSame($pageUid, $GLOBALS['_GET']['pid']);
+        self::assertSame($pageUid, $_GET['pid'] ?? null);
     }
 
     /**

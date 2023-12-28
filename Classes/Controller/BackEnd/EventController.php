@@ -32,8 +32,8 @@ class EventController extends ActionController
      */
     public function exportCsvAction(int $pageUid)
     {
-        $GLOBALS['_GET']['table'] = self::TABLE_NAME;
-        $GLOBALS['_GET']['pid'] = $pageUid;
+        $_GET['table'] = self::TABLE_NAME;
+        $_GET['pid'] = $pageUid;
 
         $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
 

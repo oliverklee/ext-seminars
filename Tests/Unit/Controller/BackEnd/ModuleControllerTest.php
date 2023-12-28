@@ -79,9 +79,7 @@ final class ModuleControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
-            unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table']);
-        }
+        unset($_GET['id'], $_GET['pid'], $_GET['table']);
 
         parent::tearDown();
     }
@@ -100,7 +98,7 @@ final class ModuleControllerTest extends UnitTestCase
     public function pageUidIsTakenFromGetId(): void
     {
         $pageUid = 15;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         self::assertSame($pageUid, $this->subject->getPageUid());
     }
@@ -146,7 +144,7 @@ final class ModuleControllerTest extends UnitTestCase
     public function overviewActionPassesPageUidToView(): void
     {
         $pageUid = 8;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         $this->viewMock->expects(self::exactly(4))->method('assign')
             ->withConsecutive(
@@ -194,7 +192,7 @@ final class ModuleControllerTest extends UnitTestCase
     public function overviewActionPassesEventsOnPageUidToView(): void
     {
         $pageUid = 8;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         $events = [new SingleEvent()];
         $this->eventRepositoryMock->expects(self::once())->method('findByPageUidInBackEndMode')
@@ -216,7 +214,7 @@ final class ModuleControllerTest extends UnitTestCase
     public function overviewActionPassesNumberOfRegistrationsOnPageUidToView(): void
     {
         $pageUid = 8;
-        $GLOBALS['_GET']['id'] = (string)$pageUid;
+        $_GET['id'] = (string)$pageUid;
 
         $numberOfRegistrations = 42;
         $this->registrationRepositoryMock->expects(self::once())->method('countRegularRegistrationsByPageUid')

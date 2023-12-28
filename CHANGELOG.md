@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Access superglobals directly (#2878)
 - Replace `SIM_EXEC_TIME` with `Context` (#2877)
 - Use the TYPO3 `Context` to check for logins (#2864, #2868)
 - Stop using the deprecated oelib gender constants (#2859)

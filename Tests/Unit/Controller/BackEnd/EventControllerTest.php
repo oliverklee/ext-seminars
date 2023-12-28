@@ -57,9 +57,7 @@ final class EventControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        if (isset($GLOBALS['_GET']) && \is_array($GLOBALS['_GET'])) {
-            unset($GLOBALS['_GET']['id'], $GLOBALS['_GET']['pid'], $GLOBALS['_GET']['table']);
-        }
+        unset($_GET['id'], $_GET['pid'], $_GET['table']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -80,7 +78,7 @@ final class EventControllerTest extends UnitTestCase
     {
         $this->subject->exportCsvAction(5);
 
-        self::assertSame('tx_seminars_seminars', $GLOBALS['_GET']['table']);
+        self::assertSame('tx_seminars_seminars', $_GET['table']);
     }
 
     /**
@@ -92,7 +90,7 @@ final class EventControllerTest extends UnitTestCase
 
         $this->subject->exportCsvAction($pageUid);
 
-        self::assertSame($pageUid, $GLOBALS['_GET']['pid']);
+        self::assertSame($pageUid, $_GET['pid']);
     }
 
     /**
