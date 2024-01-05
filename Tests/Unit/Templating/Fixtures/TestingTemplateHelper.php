@@ -16,8 +16,6 @@ final class TestingTemplateHelper extends TemplateHelper
      * The constructor.
      *
      * @param array<string, mixed> $configuration TypoScript setup configuration, may be empty
-     *
-     * @phpstan-ignore-next-line Yes, we explicitly do not want to call the parent constructor.
      */
     public function __construct(array $configuration = [])
     {
