@@ -23,16 +23,6 @@ final class TestingTemplateHelper extends TemplateHelper
     }
 
     /**
-     * Sets the salutation mode.
-     *
-     * @param string $salutation the salutation mode to use ("formal" or "informal")
-     */
-    public function setSalutationMode(string $salutation): void
-    {
-        $this->setConfigurationValue('salutation', $salutation);
-    }
-
-    /**
      * Intvals all piVars that are supposed to be integers:
      * showUid, pointer, mode
      *
