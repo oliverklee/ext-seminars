@@ -3800,3 +3800,8 @@ parameters:
 			count: 15
 			path: Tests/Unit/Service/RegistrationProcessorTest.php
 
+		-
+			message: "#^OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Templating\\\\Fixtures\\\\TestingTemplateHelper\\:\\:__construct\\(\\) does not call parent constructor from OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\.$#"
+			count: 1
+			path: Tests/Unit/Templating/Fixtures/TestingTemplateHelper.php
+
