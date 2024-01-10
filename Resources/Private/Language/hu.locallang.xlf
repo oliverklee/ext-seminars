@@ -1,0 +1,1955 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z" product-name="seminars" target-language="hu">
+    <header/>
+    <body>
+      <trans-unit id="test-label">
+        <source>This is a test label.</source>
+        <target state="needs-translation">This is a test label.</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-arguments">
+        <source>Hello %s!</source>
+        <target state="needs-translation">Hello %s!</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation_formal">
+        <source>This is a test label with a formal salutation.</source>
+        <target state="needs-translation">This is a test label with a formal salutation.</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation_informal">
+        <source>This is a test label with an informal salutation.</source>
+        <target state="needs-translation">This is a test label with an informal salutation.</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback">
+        <source>This is a test label with a fallback.</source>
+        <target state="needs-translation">This is a test label with a fallback.</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback_informal">
+        <source>This is a test label with a fallback and an informal salutation.</source>
+        <target state="needs-translation">This is a test label with a fallback and an informal salutation.</target>
+      </trans-unit>
+      <trans-unit id="test-label-with-salutation-and-fallback_formal">
+        <source>This is a test label with a fallback and a formal salutation.</source>
+        <target state="needs-translation">This is a test label with a fallback and a formal salutation.</target>
+      </trans-unit>
+      <trans-unit id="pi1_title" xml:space="preserve">
+				<source>Seminar Manager</source>
+			<target state="needs-translation">Seminar Manager</target></trans-unit>
+      <trans-unit id="pi1_description" xml:space="preserve">
+				<source>Displays seminars in the FE</source>
+			<target state="needs-translation">Displays seminars in the FE</target></trans-unit>
+      <trans-unit id="label_title" xml:space="preserve">
+				<source>Title</source>
+			<target state="needs-translation">Title</target></trans-unit>
+      <trans-unit id="label_description">
+        <source>Description</source>
+        <target state="needs-translation">Description</target>
+      </trans-unit>
+      <trans-unit id="label_uid" xml:space="preserve">
+				<source>Number</source>
+			<target state="needs-translation">Number</target></trans-unit>
+      <trans-unit id="label_registration_uid" xml:space="preserve">
+				<source>Ticket ID</source>
+			<target state="needs-translation">Ticket ID</target></trans-unit>
+      <trans-unit id="label_event_type" xml:space="preserve">
+				<source>Event type</source>
+			<target state="needs-translation">Event type</target></trans-unit>
+      <trans-unit id="label_accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			<target state="needs-translation">Accreditation number</target></trans-unit>
+      <trans-unit id="label_credit_points" xml:space="preserve">
+				<source>Credit points</source>
+			<target state="needs-translation">Credit points</target></trans-unit>
+      <trans-unit id="label_date" xml:space="preserve">
+				<source>Date</source>
+			<target state="needs-translation">Date</target></trans-unit>
+      <trans-unit id="label_time" xml:space="preserve">
+				<source>Time</source>
+			<target state="needs-translation">Time</target></trans-unit>
+      <trans-unit id="label_place" xml:space="preserve">
+				<source>Place</source>
+			<target state="needs-translation">Place</target></trans-unit>
+      <trans-unit id="label_room" xml:space="preserve">
+				<source>Room</source>
+			<target state="needs-translation">Room</target></trans-unit>
+      <trans-unit id="label_seats" xml:space="preserve">
+				<source>Seats</source>
+			<target state="needs-translation">Seats</target></trans-unit>
+      <trans-unit id="label_total_price" xml:space="preserve">
+				<source>Total price</source>
+			<target state="needs-translation">Total price</target></trans-unit>
+      <trans-unit id="label_attendees_names" xml:space="preserve">
+				<source>Registered persons</source>
+			<target state="needs-translation">Registered persons</target></trans-unit>
+      <trans-unit id="label_lodgings" xml:space="preserve">
+				<source>Selected lodging options</source>
+			<target state="needs-translation">Selected lodging options</target></trans-unit>
+      <trans-unit id="label_accommodation" xml:space="preserve">
+				<source>Accommodation</source>
+			<target state="needs-translation">Accommodation</target></trans-unit>
+      <trans-unit id="label_foods" xml:space="preserve">
+				<source>Selected food options</source>
+			<target state="needs-translation">Selected food options</target></trans-unit>
+      <trans-unit id="label_food" xml:space="preserve">
+				<source>Food</source>
+			<target state="needs-translation">Food</target></trans-unit>
+      <trans-unit id="label_kids" xml:space="preserve">
+				<source>Number of kids</source>
+			<target state="needs-translation">Number of kids</target></trans-unit>
+      <trans-unit id="label_price" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_price_general" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_price_regular" xml:space="preserve">
+				<source>Regular price</source>
+			<target state="needs-translation">Regular price</target></trans-unit>
+      <trans-unit id="label_price_regular_early" xml:space="preserve">
+				<source>Early-bird price</source>
+			<target state="needs-translation">Early-bird price</target></trans-unit>
+      <trans-unit id="label_price_earlybird_regular" xml:space="preserve">
+				<source>Early-bird price</source>
+			<target state="needs-translation">Early-bird price</target></trans-unit>
+      <trans-unit id="label_price_special" xml:space="preserve">
+				<source>Special price</source>
+			<target state="needs-translation">Special price</target></trans-unit>
+      <trans-unit id="label_price_special_early" xml:space="preserve">
+				<source>Early-bird special price</source>
+			<target state="needs-translation">Early-bird special price</target></trans-unit>
+      <trans-unit id="label_price_earlybird_special" xml:space="preserve">
+				<source>Early-bird special price</source>
+			<target state="needs-translation">Early-bird special price</target></trans-unit>
+      <trans-unit id="label_method_of_payment" xml:space="preserve">
+				<source>Method of payment</source>
+			<target state="needs-translation">Method of payment</target></trans-unit>
+      <trans-unit id="label_gender" xml:space="preserve">
+				<source>Gender</source>
+			<target state="needs-translation">Gender</target></trans-unit>
+      <trans-unit id="label_username" xml:space="preserve">
+				<source>User name</source>
+			<target state="needs-translation">User name</target></trans-unit>
+      <trans-unit id="label_name" xml:space="preserve">
+				<source>Name</source>
+			<target state="needs-translation">Name</target></trans-unit>
+      <trans-unit id="label_address" xml:space="preserve">
+				<source>Address</source>
+			<target state="needs-translation">Address</target></trans-unit>
+      <trans-unit id="label_zip" xml:space="preserve">
+				<source>ZIP code</source>
+			<target state="needs-translation">ZIP code</target></trans-unit>
+      <trans-unit id="label_city" xml:space="preserve">
+				<source>City</source>
+			<target state="needs-translation">City</target></trans-unit>
+      <trans-unit id="label_country" xml:space="preserve">
+				<source>Country</source>
+			<target state="needs-translation">Country</target></trans-unit>
+      <trans-unit id="label_attendees" xml:space="preserve">
+				<source>Attendees</source>
+			<target state="needs-translation">Attendees</target></trans-unit>
+      <trans-unit id="label_vacancies" xml:space="preserve">
+				<source>Vacancies</source>
+			<target state="needs-translation">Vacancies</target></trans-unit>
+      <trans-unit id="label_unlimited" xml:space="preserve">
+				<source>unlimited</source>
+			<target state="needs-translation">unlimited</target></trans-unit>
+      <trans-unit id="label_enough_attendees" xml:space="preserve">
+				<source>Enough attendees</source>
+			<target state="needs-translation">Enough attendees</target></trans-unit>
+      <trans-unit id="label_is_full" xml:space="preserve">
+				<source>Is full</source>
+			<target state="needs-translation">Is full</target></trans-unit>
+      <trans-unit id="label_paymentmethod" xml:space="preserve">
+				<source>Selected method of payment</source>
+			<target state="needs-translation">Selected method of payment</target></trans-unit>
+      <trans-unit id="label_billing_address" xml:space="preserve">
+				<source>Billing address</source>
+			<target state="needs-translation">Billing address</target></trans-unit>
+      <trans-unit id="label_telephone" xml:space="preserve">
+				<source>Phone</source>
+			<target state="needs-translation">Phone</target></trans-unit>
+      <trans-unit id="label_email" xml:space="preserve">
+				<source>E-mail address</source>
+			<target state="needs-translation">E-mail address</target></trans-unit>
+      <trans-unit id="label_interests" xml:space="preserve">
+				<source>Special interests</source>
+			<target state="needs-translation">Special interests</target></trans-unit>
+      <trans-unit id="label_expectations" xml:space="preserve">
+				<source>Expectations</source>
+			<target state="needs-translation">Expectations</target></trans-unit>
+      <trans-unit id="label_background_knowledge" xml:space="preserve">
+				<source>Background knowledge</source>
+			<target state="needs-translation">Background knowledge</target></trans-unit>
+      <trans-unit id="label_known_from" xml:space="preserve">
+				<source>Known from</source>
+			<target state="needs-translation">Known from</target></trans-unit>
+      <trans-unit id="label_notes" xml:space="preserve">
+				<source>Notes</source>
+			<target state="needs-translation">Notes</target></trans-unit>
+      <trans-unit id="label_url" xml:space="preserve">
+				<source>More information</source>
+			<target state="needs-translation">More information</target></trans-unit>
+      <trans-unit id="label_seminardata" xml:space="preserve">
+				<source>Seminar data</source>
+			<target state="needs-translation">Seminar data</target></trans-unit>
+      <trans-unit id="label_feuserdata" xml:space="preserve">
+				<source>Account data</source>
+			<target state="needs-translation">Account data</target></trans-unit>
+      <trans-unit id="label_attendancedata" xml:space="preserve">
+				<source>Data that has been entered on registration</source>
+			<target state="needs-translation">Data that has been entered on registration</target></trans-unit>
+      <trans-unit id="label_gender.I.0" xml:space="preserve">
+				<source>Mr.</source>
+			<target state="needs-translation">Mr.</target></trans-unit>
+      <trans-unit id="label_gender.I.1" xml:space="preserve">
+				<source>Ms.</source>
+			<target state="needs-translation">Ms.</target></trans-unit>
+      <trans-unit id="label_status.I.1" xml:space="preserve">
+				<source>Student</source>
+			<target state="needs-translation">Student</target></trans-unit>
+      <trans-unit id="label_status.I.2" xml:space="preserve">
+				<source>Job seeking</source>
+			<target state="needs-translation">Job seeking</target></trans-unit>
+      <trans-unit id="label_status.I.3" xml:space="preserve">
+				<source>Working</source>
+			<target state="needs-translation">Working</target></trans-unit>
+      <trans-unit id="label_status.I.4" xml:space="preserve">
+				<source>Retired</source>
+			<target state="needs-translation">Retired</target></trans-unit>
+      <trans-unit id="status_regular" xml:space="preserve">
+				<source>regular</source>
+			<target state="needs-translation">regular</target></trans-unit>
+      <trans-unit id="status_waiting_list" xml:space="preserve">
+				<source>waiting list</source>
+			<target state="needs-translation">waiting list</target></trans-unit>
+      <trans-unit id="label_yes" xml:space="preserve">
+				<source>yes</source>
+			<target state="needs-translation">yes</target></trans-unit>
+      <trans-unit id="label_no" xml:space="preserve">
+				<source>no</source>
+			<target state="needs-translation">no</target></trans-unit>
+      <trans-unit id="label_hours" xml:space="preserve">
+				<source>h</source>
+			<target state="needs-translation">h</target></trans-unit>
+      <trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Selected options</source>
+			<target state="needs-translation">Selected options</target></trans-unit>
+      <trans-unit id="message_notLoggedIn" xml:space="preserve">
+				<source>Please log in first.</source>
+			<target state="needs-translation">Please log in first.</target></trans-unit>
+      <trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
+				<source>Please log in first.</source>
+			<target state="needs-translation">Please log in first.</target></trans-unit>
+      <trans-unit id="message_alreadyRegistered" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			<target state="needs-translation">You already have registered for this event.</target></trans-unit>
+      <trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			<target state="needs-translation">You already have registered for this event.</target></trans-unit>
+      <trans-unit id="message_missingSeminarNumber" xml:space="preserve">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_noRegistrationNecessary" xml:space="preserve">
+				<source>For this event, no registration is necessary.</source>
+			<target state="needs-translation">For this event, no registration is necessary.</target></trans-unit>
+      <trans-unit id="message_seminarCancelled" xml:space="preserve">
+				<source>Alas, this event has been canceled.</source>
+			<target state="needs-translation">Alas, this event has been canceled.</target></trans-unit>
+      <trans-unit id="message_noDate" xml:space="preserve">
+				<source>This event has no date yet.</source>
+			<target state="needs-translation">This event has no date yet.</target></trans-unit>
+      <trans-unit id="message_seminarRegistrationIsClosed" xml:space="preserve">
+				<source>Sorry, the registration period for this event is over.</source>
+			<target state="needs-translation">Sorry, the registration period for this event is over.</target></trans-unit>
+      <trans-unit id="message_noVacancies" xml:space="preserve">
+				<source>Sorry, there are no more vacancies.</source>
+			<target state="needs-translation">Sorry, there are no more vacancies.</target></trans-unit>
+      <trans-unit id="message_willBeAnnounced" xml:space="preserve">
+				<source>will be announced</source>
+			<target state="needs-translation">will be announced</target></trans-unit>
+      <trans-unit id="message_forFree" xml:space="preserve">
+				<source>free</source>
+			<target state="needs-translation">free</target></trans-unit>
+      <trans-unit id="message_enough" xml:space="preserve">
+				<source>enough</source>
+			<target state="needs-translation">enough</target></trans-unit>
+      <trans-unit id="message_fullyBooked" xml:space="preserve">
+				<source>fully booked</source>
+			<target state="needs-translation">fully booked</target></trans-unit>
+      <trans-unit id="message_registrationOpensOn" xml:space="preserve">
+				<source>starting %s</source>
+			<target state="needs-translation">starting %s</target></trans-unit>
+      <trans-unit id="message_accessDenied" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			<target state="needs-translation">Sorry, you don't have access to this part of the site.</target></trans-unit>
+      <trans-unit id="message_accessDenied_informal" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			<target state="needs-translation">Sorry, you don't have access to this part of the site.</target></trans-unit>
+      <trans-unit id="email_confirmationSubject" xml:space="preserve">
+				<source>Registration confirmation</source>
+			<target state="needs-translation">Registration confirmation</target></trans-unit>
+      <trans-unit id="email_confirmationHello" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			<target state="needs-translation">thank you for registering for the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationHello_informal" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			<target state="needs-translation">thank you for registering for the event "%s"</target></trans-unit>
+      <trans-unit id="email_price" xml:space="preserve">
+				<source>at the total price of %s</source>
+			<target state="needs-translation">at the total price of %s</target></trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration confirmation</source>
+			<target state="needs-translation">Unregistration confirmation</target></trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			<target state="needs-translation">hereby, we confirm your unregistration from the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			<target state="needs-translation">hereby, we confirm your unregistration from the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for the waiting list confirmation</source>
+			<target state="needs-translation">Registration for the waiting list confirmation</target></trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			<target state="needs-translation">thank you for registering for the waiting list of the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			<target state="needs-translation">thank you for registering for the waiting list of the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration confirmation</source>
+			<target state="needs-translation">Registration became a regular registration confirmation</target></trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			<target state="needs-translation">your registration just has become a regular registration for the event "%s"</target></trans-unit>
+      <trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			<target state="needs-translation">your registration just has become a regular registration for the event "%s"</target></trans-unit>
+      <trans-unit id="email_unregistrationNotice" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			<target state="needs-translation">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</target></trans-unit>
+      <trans-unit id="email_unregistrationNotice_informal" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			<target state="needs-translation">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</target></trans-unit>
+      <trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve">
+				<source>Your event has now enough registrations to be held.</source>
+			<target state="needs-translation">Your event has now enough registrations to be held.</target></trans-unit>
+      <trans-unit id="email_additionalNotificationEnoughRegistrationsSubject" xml:space="preserve">
+				<source>Event has enough registrations: %d - %s</source>
+			<target state="needs-translation">Event has enough registrations: %d - %s</target></trans-unit>
+      <trans-unit id="email_additionalNotificationIsFull" xml:space="preserve">
+				<source>Your event is full, there are no empty seats left.</source>
+			<target state="needs-translation">Your event is full, there are no empty seats left.</target></trans-unit>
+      <trans-unit id="email_additionalNotificationIsFullSubject" xml:space="preserve">
+				<source>Event is full: %d - %s</source>
+			<target state="needs-translation">Event is full: %d - %s</target></trans-unit>
+      <trans-unit id="email_notificationSubject" xml:space="preserve">
+				<source>Registration notification</source>
+			<target state="needs-translation">Registration notification</target></trans-unit>
+      <trans-unit id="email_notificationHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has registered for an event:</source>
+			<target state="needs-translation">Hello,
+
+someone just has registered for an event:</target></trans-unit>
+      <trans-unit id="email_notificationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration notification</source>
+			<target state="needs-translation">Unregistration notification</target></trans-unit>
+      <trans-unit id="email_notificationOnUnregistrationHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has unregistered from an event:</source>
+			<target state="needs-translation">Hello,
+
+someone just has unregistered from an event:</target></trans-unit>
+      <trans-unit id="email_notificationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for waiting list notification</source>
+			<target state="needs-translation">Registration for waiting list notification</target></trans-unit>
+      <trans-unit id="email_notificationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has registered for the waiting list of an event:</source>
+			<target state="needs-translation">Hello,
+
+someone just has registered for the waiting list of an event:</target></trans-unit>
+      <trans-unit id="email_notificationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration notification</source>
+			<target state="needs-translation">Registration became a regular registration notification</target></trans-unit>
+      <trans-unit id="email_notificationOnQueueUpdateHello" xml:space="preserve">
+				<source>Hello,
+
+someone's registration just has become a regular registration of an event:</source>
+			<target state="needs-translation">Hello,
+
+someone's registration just has become a regular registration of an event:</target></trans-unit>
+      <trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve">
+				<source>&quot;%event&quot; begins in %days days</source>
+			<target state="needs-translation">"%event" begins in %days days</target></trans-unit>
+      <trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve">
+				<source>Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
+			<target state="needs-translation">Hello %organizer,
+
+the event "%event" (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</target></trans-unit>
+      <trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve">
+				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
+			<target state="needs-translation">Cancelation deadline for "%event" has just passed</target></trans-unit>
+      <trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve">
+				<source>Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
+			<target state="needs-translation">Hello %organizer,
+
+the speakers' cancelation deadline for the event "%event" has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</target></trans-unit>
+      <trans-unit id="label_planned_disclaimer" xml:space="preserve">
+				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
+			<target state="needs-translation">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</target></trans-unit>
+      <trans-unit id="email_hello_informal" xml:space="preserve">
+				<source>Dear</source>
+			<target state="needs-translation">Dear</target></trans-unit>
+      <trans-unit id="email_hello_formal_99" xml:space="preserve">
+				<source>Dear</source>
+			<target state="needs-translation">Dear</target></trans-unit>
+      <trans-unit id="email_eventDate" xml:space="preserve">
+				<source>on %s</source>
+			<target state="needs-translation">on %s</target></trans-unit>
+      <trans-unit id="email_timeFrom" xml:space="preserve">
+				<source>from %s</source>
+			<target state="needs-translation">from %s</target></trans-unit>
+      <trans-unit id="email_timeAt" xml:space="preserve">
+				<source>at %s</source>
+			<target state="needs-translation">at %s</target></trans-unit>
+      <trans-unit id="email_timeTo" xml:space="preserve">
+				<source>to</source>
+			<target state="needs-translation">to</target></trans-unit>
+      <trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
+				<source>E-mail notifications</source>
+			<target state="needs-translation">E-mail notifications</target></trans-unit>
+      <trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
+				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+			<target state="needs-translation">This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</target></trans-unit>
+      <trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
+				<source>UID of the page with the TypoScript configuration</source>
+			<target state="needs-translation">UID of the page with the TypoScript configuration</target></trans-unit>
+      <trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
+				<source>Please enter the UID of an existing page.</source>
+			<target state="needs-translation">Please enter the UID of an existing page.</target></trans-unit>
+      <trans-unit id="email-event-canceled-subject" xml:space="preserve">
+				<source>Event canceled: %eventTitle %eventDate</source>
+			<target state="needs-translation">Event canceled: %eventTitle %eventDate</target></trans-unit>
+      <trans-unit id="email-event-confirmed-subject" xml:space="preserve">
+				<source>Event confirmed: %eventTitle %eventDate</source>
+			<target state="needs-translation">Event confirmed: %eventTitle %eventDate</target></trans-unit>
+      <trans-unit id="email-event-canceled-body" xml:space="preserve">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+Unfortunately, we had to cancel this event.</source>
+			<target state="needs-translation">%salutation
+
+you registered for the event "%eventTitle" (%eventDate).
+
+Unfortunately, we had to cancel this event.</target></trans-unit>
+      <trans-unit id="email-event-confirmed-body" xml:space="preserve">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+This event now has been confirmed.</source>
+			<target state="needs-translation">%salutation
+
+you registered for the event "%eventTitle" (%eventDate).
+
+This event now has been confirmed.</target></trans-unit>
+      <trans-unit id="message_onRequest" xml:space="preserve">
+				<source>on request</source>
+			<target state="needs-translation">on request</target></trans-unit>
+      <trans-unit id="registrationDigestEmail_Subject" xml:space="preserve">
+				<source>New registrations</source>
+			<target state="needs-translation">New registrations</target></trans-unit>
+      <trans-unit id="dateFormat">
+        <source>Y-m-d</source>
+        <target state="needs-translation">Y-m-d</target>
+      </trans-unit>
+      <trans-unit id="timeFormat">
+        <source>H:i</source>
+        <target state="needs-translation">H:i</target>
+      </trans-unit>
+      <trans-unit id="decimalSeparator">
+        <source>.</source>
+        <target state="needs-translation">.</target>
+      </trans-unit>
+      <trans-unit id="thousandsSeparator">
+        <source>,</source>
+        <target state="needs-translation">,</target>
+      </trans-unit>
+      <trans-unit id="registrationTitleFormat">
+        <source>%1s / %2s, %3s</source>
+        <target state="needs-translation">%1s / %2s, %3s</target>
+      </trans-unit>
+      <trans-unit id="message_403" xml:space="preserve">
+				<source>Error 403. Sorry, you don't have access to this data.</source>
+			<target state="needs-translation">Error 403. Sorry, you don't have access to this data.</target></trans-unit>
+      <trans-unit id="message_404" xml:space="preserve">
+				<source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_404_registrations" xml:space="preserve">
+				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
+				<source>The e-mail to the attendees has been sent.</source>
+			<target state="needs-translation">The e-mail to the attendees has been sent.</target></trans-unit>
+      <trans-unit id="mlang_tabs_tab" xml:space="preserve">
+				<source>Events</source>
+			<target state="needs-translation">Events</target></trans-unit>
+      <trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
+				<source>This module allows you to manage events and registrations.</source>
+			<target state="needs-translation">This module allows you to manage events and registrations.</target></trans-unit>
+      <trans-unit id="mlang_labels_tablabel" xml:space="preserve">
+				<source>This module allows you to manage events and registrations.</source>
+			<target state="needs-translation">This module allows you to manage events and registrations.</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_general" xml:space="preserve">
+				<source>General</source>
+			<target state="needs-translation">General</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.what_to_display" xml:space="preserve">
+				<source>What should be displayed:</source>
+			<target state="needs-translation">What should be displayed:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_template_and_special" xml:space="preserve">
+				<source>Templates and special properties</source>
+			<target state="needs-translation">Templates and special properties</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.seminar_list" xml:space="preserve">
+				<source>Event List</source>
+			<target state="needs-translation">Event List</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.single_view" xml:space="preserve">
+				<source>Event Single View</source>
+			<target state="needs-translation">Event Single View</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.topic_list" xml:space="preserve">
+				<source>Topic List</source>
+			<target state="needs-translation">Topic List</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.my_events" xml:space="preserve">
+				<source>My Events</source>
+			<target state="needs-translation">My Events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.my_vip_events" xml:space="preserve">
+				<source>My Managed Events</source>
+			<target state="needs-translation">My Managed Events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.list_registrations" xml:space="preserve">
+				<source>List of Registrations (for attendees)</source>
+			<target state="needs-translation">List of Registrations (for attendees)</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.list_vip_registrations" xml:space="preserve">
+				<source>List of Registrations (for event managers)</source>
+			<target state="needs-translation">List of Registrations (for event managers)</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.category_list" xml:space="preserve">
+				<source>Category List</source>
+			<target state="needs-translation">Category List</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.listPID" xml:space="preserve">
+				<source>Page that contains the seminar list:</source>
+			<target state="needs-translation">Page that contains the seminar list:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.detailPID" xml:space="preserve">
+				<source>Page that contains the detailed view:</source>
+			<target state="needs-translation">Page that contains the detailed view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.myEventsPID" xml:space="preserve">
+				<source>Page that contains the &quot;my events&quot; list:</source>
+			<target state="needs-translation">Page that contains the "my events" list:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.registerPID" xml:space="preserve">
+				<source>Page that contains the event registration form:</source>
+			<target state="needs-translation">Page that contains the event registration form:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.loginPID" xml:space="preserve">
+				<source>Page that contains the login form:</source>
+			<target state="needs-translation">Page that contains the login form:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.registrationsListPID" xml:space="preserve">
+				<source>Page that contains the list of registrations (for attendees):</source>
+			<target state="needs-translation">Page that contains the list of registrations (for attendees):</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.registrationsVipListPID" xml:space="preserve">
+				<source>Page that contains the list of registrations (for event managers):</source>
+			<target state="needs-translation">Page that contains the list of registrations (for event managers):</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.salutation" xml:space="preserve">
+				<source>Salutation mode on the page:</source>
+			<target state="needs-translation">Salutation mode on the page:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.formal" xml:space="preserve">
+				<source>formal</source>
+			<target state="needs-translation">formal</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.informal" xml:space="preserve">
+				<source>informal</source>
+			<target state="needs-translation">informal</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_list_view" xml:space="preserve">
+				<source>List view</source>
+			<target state="needs-translation">List view</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.displaySearchFormFields" xml:space="preserve">
+				<source>Display search widget options:</source>
+			<target state="needs-translation">Display search widget options:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.type" xml:space="preserve">
+				<source>Event type</source>
+			<target state="needs-translation">Event type</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.language" xml:space="preserve">
+				<source>Language</source>
+			<target state="needs-translation">Language</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.country" xml:space="preserve">
+				<source>Country</source>
+			<target state="needs-translation">Country</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.city" xml:space="preserve">
+				<source>City</source>
+			<target state="needs-translation">City</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.place" xml:space="preserve">
+				<source>Place</source>
+			<target state="needs-translation">Place</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.organizer" xml:space="preserve">
+				<source>Organizer</source>
+			<target state="needs-translation">Organizer</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.categories" xml:space="preserve">
+				<source>Categories</source>
+			<target state="needs-translation">Categories</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.date" xml:space="preserve">
+				<source>Date</source>
+			<target state="needs-translation">Date</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.age" xml:space="preserve">
+				<source>Age</source>
+			<target state="needs-translation">Age</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.price" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.searchForm.textField" xml:space="preserve">
+				<source>Full-text search</source>
+			<target state="needs-translation">Full-text search</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToEventTypes" xml:space="preserve">
+				<source>List events only of these types:</source>
+			<target state="needs-translation">List events only of these types:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToCategories" xml:space="preserve">
+				<source>List events only from these categories:</source>
+			<target state="needs-translation">List events only from these categories:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToPlaces" xml:space="preserve">
+				<source>List events only at these places:</source>
+			<target state="needs-translation">List events only at these places:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitListViewToOrganizers" xml:space="preserve">
+				<source>List events only of these organizers:</source>
+			<target state="needs-translation">List events only of these organizers:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies" xml:space="preserve">
+				<source>Show only events which have vacancies:</source>
+			<target state="needs-translation">Show only events which have vacancies:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
+				<source>Show attached files list only to attendees:</source>
+			<target state="needs-translation">Show attached files list only to attendees:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.startingpoint">
+        <source>Data source:</source>
+        <target state="needs-translation">Data source:</target>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive">
+        <source>Recursion:</source>
+        <target state="needs-translation">Recursion:</target>
+      </trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
+				<source>Which event should be shown in a detailed view?</source>
+			<target state="needs-translation">Which event should be shown in a detailed view?</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList" xml:space="preserve">
+				<source>Only show events from this time-frame:</source>
+			<target state="needs-translation">Only show events from this time-frame:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList1" xml:space="preserve">
+				<source>all events</source>
+			<target state="needs-translation">all events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList2" xml:space="preserve">
+				<source>past events</source>
+			<target state="needs-translation">past events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList3" xml:space="preserve">
+				<source>past and current events</source>
+			<target state="needs-translation">past and current events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList4" xml:space="preserve">
+				<source>current events</source>
+			<target state="needs-translation">current events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList5" xml:space="preserve">
+				<source>current and upcoming events</source>
+			<target state="needs-translation">current and upcoming events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList6" xml:space="preserve">
+				<source>upcoming events</source>
+			<target state="needs-translation">upcoming events</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList7" xml:space="preserve">
+				<source>events with the deadline in the future</source>
+			<target state="needs-translation">events with the deadline in the future</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.timeframeInList8" xml:space="preserve">
+				<source>today</source>
+			<target state="needs-translation">today</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideFields" xml:space="preserve">
+				<source>Hide fields in detailed view (comma-separated):</source>
+			<target state="needs-translation">Hide fields in detailed view (comma-separated):</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists" xml:space="preserve">
+				<source>Show empty option in selector widget:</source>
+			<target state="needs-translation">Show empty option in selector widget:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter" xml:space="preserve">
+				<source>Number of years a user can search into the future:</source>
+			<target state="needs-translation">Number of years a user can search into the future:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideSearchForm" xml:space="preserve">
+				<source>Hide the search form in list view:</source>
+			<target state="needs-translation">Hide the search form in list view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.hidePageBrowser" xml:space="preserve">
+				<source>Hide the page browser in list view:</source>
+			<target state="needs-translation">Hide the page browser in list view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideCanceledEvents" xml:space="preserve">
+				<source>Hide canceled events in list view:</source>
+			<target state="needs-translation">Hide canceled events in list view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.sortListViewByCategory" xml:space="preserve">
+				<source>Sort the list view by category:</source>
+			<target state="needs-translation">Sort the list view by category:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID" xml:space="preserve">
+				<source>FE user group for event managers:</source>
+			<target state="needs-translation">FE user group for event managers:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.hideColumns" xml:space="preserve">
+				<source>Hide column names in list view (comma-separated):</source>
+			<target state="needs-translation">Hide column names in list view (comma-separated):</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.generalPriceInList" xml:space="preserve">
+				<source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
+			<target state="needs-translation">Use "Price" as column title for the standard price in the list view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.generalPriceInSingle" xml:space="preserve">
+				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
+			<target state="needs-translation">Use "Price" as heading for the standard price in the single view and the registration page:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
+				<source>Omit the date in the list view if it is the same as the previous item's:</source>
+			<target state="needs-translation">Omit the date in the list view if it is the same as the previous item's:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
+				<source>Show speaker details</source>
+			<target state="needs-translation">Show speaker details</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showSiteDetails" xml:space="preserve">
+				<source>Show site details</source>
+			<target state="needs-translation">Show site details</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.sheet_registrationsListView" xml:space="preserve">
+				<source>Registrations list view</source>
+			<target state="needs-translation">Registrations list view</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve">
+				<source>Which FEuser fields to show in the list of registrations for an event</source>
+			<target state="needs-translation">Which FEuser fields to show in the list of registrations for an event</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
+				<source>Which registration fields to show in the list of registrations for an event:</source>
+			<target state="needs-translation">Which registration fields to show in the list of registrations for an event:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
+				<source>Display of the categories:</source>
+			<target state="needs-translation">Display of the categories:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.iconAndText" xml:space="preserve">
+				<source>Icons and text</source>
+			<target state="needs-translation">Icons and text</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.iconOnly" xml:space="preserve">
+				<source>Icons only</source>
+			<target state="needs-translation">Icons only</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.textOnly" xml:space="preserve">
+				<source>Text only</source>
+			<target state="needs-translation">Text only</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.linkToSingleView" xml:space="preserve">
+				<source>Link the single view from the list view:</source>
+			<target state="needs-translation">Link the single view from the list view:</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.always" xml:space="preserve">
+				<source>always</source>
+			<target state="needs-translation">always</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.never" xml:space="preserve">
+				<source>never</source>
+			<target state="needs-translation">never</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription" xml:space="preserve">
+				<source>if the event has a description</source>
+			<target state="needs-translation">if the event has a description</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
+				<source>(from TS setup)</source>
+			<target state="needs-translation">(from TS setup)</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
+				<source>0 levels (only selected page)</source>
+			<target state="needs-translation">0 levels (only selected page)</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.1" xml:space="preserve">
+				<source>1 level</source>
+			<target state="needs-translation">1 level</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.2" xml:space="preserve">
+				<source>2 levels</source>
+			<target state="needs-translation">2 levels</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.3" xml:space="preserve">
+				<source>3 levels</source>
+			<target state="needs-translation">3 levels</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.4" xml:space="preserve">
+				<source>4 levels</source>
+			<target state="needs-translation">4 levels</target></trans-unit>
+      <trans-unit id="seminars.pi_flexform.recursive.I.5" xml:space="preserve">
+				<source>Infinite</source>
+			<target state="needs-translation">Infinite</target></trans-unit>
+      <trans-unit id="pi_list_browseresults_prev" xml:space="preserve">
+				<source>&lt; Previous</source>
+			<target state="needs-translation">&lt; Previous</target></trans-unit>
+      <trans-unit id="pi_list_browseresults_page" xml:space="preserve">
+				<source>Page</source>
+			<target state="needs-translation">Page</target></trans-unit>
+      <trans-unit id="pi_list_browseresults_next" xml:space="preserve">
+				<source>Next &gt;</source>
+			<target state="needs-translation">Next &gt;</target></trans-unit>
+      <trans-unit id="pi_list_browseresults_displays" xml:space="preserve">
+				<source>Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</source>
+			<target state="needs-translation">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</target></trans-unit>
+      <trans-unit id="pi_list_browseresults_noResults" xml:space="preserve">
+				<source>Sorry, no events were found.</source>
+			<target state="needs-translation">Sorry, no events were found.</target></trans-unit>
+      <trans-unit id="pi_list_searchBox_search" xml:space="preserve">
+				<source>Search</source>
+			<target state="needs-translation">Search</target></trans-unit>
+      <trans-unit id="label_myevents" xml:space="preserve">
+				<source>You are registered for the following events:</source>
+			<target state="needs-translation">You are registered for the following events:</target></trans-unit>
+      <trans-unit id="label_myevents_informal" xml:space="preserve">
+				<source>You are registered for the following events:</source>
+			<target state="needs-translation">You are registered for the following events:</target></trans-unit>
+      <trans-unit id="label_myvipevents" xml:space="preserve">
+				<source>You are an editor for the following events:</source>
+			<target state="needs-translation">You are an editor for the following events:</target></trans-unit>
+      <trans-unit id="label_myvipevents_informal" xml:space="preserve">
+				<source>You are an editor for the following events:</source>
+			<target state="needs-translation">You are an editor for the following events:</target></trans-unit>
+      <trans-unit id="label_category" xml:space="preserve">
+				<source>Category</source>
+			<target state="needs-translation">Category</target></trans-unit>
+      <trans-unit id="label_title" xml:space="preserve">
+				<source>Title</source>
+			<target state="needs-translation">Title</target></trans-unit>
+      <trans-unit id="label_subtitle" xml:space="preserve">
+				<source>Subtitle</source>
+			<target state="needs-translation">Subtitle</target></trans-unit>
+      <trans-unit id="label_uid" xml:space="preserve">
+				<source>Number</source>
+			<target state="needs-translation">Number</target></trans-unit>
+      <trans-unit id="label_registration_uid" xml:space="preserve">
+				<source>Ticket ID</source>
+			<target state="needs-translation">Ticket ID</target></trans-unit>
+      <trans-unit id="label_accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			<target state="needs-translation">Accreditation number</target></trans-unit>
+      <trans-unit id="label_credit_points" xml:space="preserve">
+				<source>Credit points</source>
+			<target state="needs-translation">Credit points</target></trans-unit>
+      <trans-unit id="label_date" xml:space="preserve">
+				<source>Date</source>
+			<target state="needs-translation">Date</target></trans-unit>
+      <trans-unit id="label_time" xml:space="preserve">
+				<source>Time</source>
+			<target state="needs-translation">Time</target></trans-unit>
+      <trans-unit id="label_place" xml:space="preserve">
+				<source>Place</source>
+			<target state="needs-translation">Place</target></trans-unit>
+      <trans-unit id="label_room" xml:space="preserve">
+				<source>Room</source>
+			<target state="needs-translation">Room</target></trans-unit>
+      <trans-unit id="label_timeslots" xml:space="preserve">
+				<source>Time slots</source>
+			<target state="needs-translation">Time slots</target></trans-unit>
+      <trans-unit id="label_expiry" xml:space="preserve">
+				<source>License expiry</source>
+			<target state="needs-translation">License expiry</target></trans-unit>
+      <trans-unit id="label_speakers_single_unknown">
+        <source>Speaker</source>
+        <target state="needs-translation">Speaker</target>
+      </trans-unit>
+      <trans-unit id="label_speakers">
+        <source>Speakers</source>
+        <target state="needs-translation">Speakers</target>
+      </trans-unit>
+      <trans-unit id="label_partners_single_unknown">
+        <source>Partner</source>
+        <target state="needs-translation">Partner</target>
+      </trans-unit>
+      <trans-unit id="label_partners">
+        <source>Partners</source>
+        <target state="needs-translation">Partners</target>
+      </trans-unit>
+      <trans-unit id="label_tutors_single_unknown">
+        <source>Tutor</source>
+        <target state="needs-translation">Tutor</target>
+      </trans-unit>
+      <trans-unit id="label_tutors">
+        <source>Tutors</source>
+        <target state="needs-translation">Tutors</target>
+      </trans-unit>
+      <trans-unit id="label_leaders_single_unknown">
+        <source>Leader</source>
+        <target state="needs-translation">Leader</target>
+      </trans-unit>
+      <trans-unit id="label_leaders">
+        <source>Leaders</source>
+        <target state="needs-translation">Leaders</target>
+      </trans-unit>
+      <trans-unit id="label_language" xml:space="preserve">
+				<source>Language</source>
+			<target state="needs-translation">Language</target></trans-unit>
+      <trans-unit id="label_price_general" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_select_price" xml:space="preserve">
+				<source>Price:</source>
+			<target state="needs-translation">Price:</target></trans-unit>
+      <trans-unit id="label_price" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_price_range" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_price_regular" xml:space="preserve">
+				<source>Regular price</source>
+			<target state="needs-translation">Regular price</target></trans-unit>
+      <trans-unit id="label_price_earlybird_regular" xml:space="preserve">
+				<source>Early-bird price</source>
+			<target state="needs-translation">Early-bird price</target></trans-unit>
+      <trans-unit id="label_price_special" xml:space="preserve">
+				<source>Special price</source>
+			<target state="needs-translation">Special price</target></trans-unit>
+      <trans-unit id="label_price_earlybird_special" xml:space="preserve">
+				<source>Early-bird special price</source>
+			<target state="needs-translation">Early-bird special price</target></trans-unit>
+      <trans-unit id="label_total_price" xml:space="preserve">
+				<source>Total price</source>
+			<target state="needs-translation">Total price</target></trans-unit>
+      <trans-unit id="label_paymentmethods" xml:space="preserve">
+				<source>Available methods of payment</source>
+			<target state="needs-translation">Available methods of payment</target></trans-unit>
+      <trans-unit id="label_select_paymentmethod" xml:space="preserve">
+				<source>Payment method:</source>
+			<target state="needs-translation">Payment method:</target></trans-unit>
+      <trans-unit id="label_event_type" xml:space="preserve">
+				<source>Event type</source>
+			<target state="needs-translation">Event type</target></trans-unit>
+      <trans-unit id="label_target_groups" xml:space="preserve">
+				<source>Target Groups</source>
+			<target state="needs-translation">Target Groups</target></trans-unit>
+      <trans-unit id="label_attached_files_short" xml:space="preserve">
+				<source>Files</source>
+			<target state="needs-translation">Files</target></trans-unit>
+      <trans-unit id="label_requirements" xml:space="preserve">
+				<source>Requirements</source>
+			<target state="needs-translation">Requirements</target></trans-unit>
+      <trans-unit id="label_dependencies" xml:space="preserve">
+				<source>Required for</source>
+			<target state="needs-translation">Required for</target></trans-unit>
+      <trans-unit id="label_organizers" xml:space="preserve">
+				<source>Organizers</source>
+			<target state="needs-translation">Organizers</target></trans-unit>
+      <trans-unit id="label_organizing_partners" xml:space="preserve">
+				<source>Organizing partners</source>
+			<target state="needs-translation">Organizing partners</target></trans-unit>
+      <trans-unit id="label_categories" xml:space="preserve">
+				<source>Categories</source>
+			<target state="needs-translation">Categories</target></trans-unit>
+      <trans-unit id="label_vacancies" xml:space="preserve">
+				<source>Vacancies</source>
+			<target state="needs-translation">Vacancies</target></trans-unit>
+      <trans-unit id="label_deadline_registration" xml:space="preserve">
+				<source>Deadline for registration</source>
+			<target state="needs-translation">Deadline for registration</target></trans-unit>
+      <trans-unit id="label_status_registration" xml:space="preserve">
+				<source>Status</source>
+			<target state="needs-translation">Status</target></trans-unit>
+      <trans-unit id="label_registration" xml:space="preserve">
+				<source>Registration</source>
+			<target state="needs-translation">Registration</target></trans-unit>
+      <trans-unit id="label_attached_files" xml:space="preserve">
+				<source>Attached files</source>
+			<target state="needs-translation">Attached files</target></trans-unit>
+      <trans-unit id="label_onlineRegistration" xml:space="preserve">
+				<source>Register now</source>
+			<target state="needs-translation">Register now</target></trans-unit>
+      <trans-unit id="label_onlineRegistrationOnQueue" xml:space="preserve">
+				<source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
+			<target state="needs-translation">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</target></trans-unit>
+      <trans-unit id="label_onlinePrebooking" xml:space="preserve">
+				<source>Prebook now</source>
+			<target state="needs-translation">Prebook now</target></trans-unit>
+      <trans-unit id="label_onlineUnregistration" xml:space="preserve">
+				<source>Unregister now</source>
+			<target state="needs-translation">Unregister now</target></trans-unit>
+      <trans-unit id="label_list_registrations" xml:space="preserve">
+				<source>List of registrations</source>
+			<target state="needs-translation">List of registrations</target></trans-unit>
+      <trans-unit id="label_listRegistrationsLink" xml:space="preserve">
+				<source>View the list of registrations</source>
+			<target state="needs-translation">View the list of registrations</target></trans-unit>
+      <trans-unit id="label_list_otherdates" xml:space="preserve">
+				<source>Other dates for this topic</source>
+			<target state="needs-translation">Other dates for this topic</target></trans-unit>
+      <trans-unit id="label_list_dates" xml:space="preserve">
+				<source>Dates for this topic</source>
+			<target state="needs-translation">Dates for this topic</target></trans-unit>
+      <trans-unit id="label_eventsnextday" xml:space="preserve">
+				<source>Subsequent events</source>
+			<target state="needs-translation">Subsequent events</target></trans-unit>
+      <trans-unit id="label_edit" xml:space="preserve">
+				<source>Edit</source>
+			<target state="needs-translation">Edit</target></trans-unit>
+      <trans-unit id="label_back" xml:space="preserve">
+				<source>Back to listing</source>
+			<target state="needs-translation">Back to listing</target></trans-unit>
+      <trans-unit id="label_register_additional_information" xml:space="preserve">
+				<source>Additional information</source>
+			<target state="needs-translation">Additional information</target></trans-unit>
+      <trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Additional information:</source>
+			<target state="needs-translation">Selected options</target></trans-unit>
+      <trans-unit id="label_interests" xml:space="preserve">
+				<source>Special interests:</source>
+			<target state="needs-translation">Special interests</target></trans-unit>
+      <trans-unit id="label_expectations" xml:space="preserve">
+				<source>Expectations for the event:</source>
+			<target state="needs-translation">Expectations</target></trans-unit>
+      <trans-unit id="label_background_knowledge" xml:space="preserve">
+				<source>Background knowledge:</source>
+			<target state="needs-translation">Background knowledge</target></trans-unit>
+      <trans-unit id="label_register_lodging_and_food" xml:space="preserve">
+				<source>Lodging and food</source>
+			<target state="needs-translation">Lodging and food</target></trans-unit>
+      <trans-unit id="label_accommodation" xml:space="preserve">
+				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
+			<target state="needs-translation">Accommodation</target></trans-unit>
+      <trans-unit id="label_food" xml:space="preserve">
+				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
+			<target state="needs-translation">Food</target></trans-unit>
+      <trans-unit id="label_known_from" xml:space="preserve">
+				<source>How have you heard of this event?</source>
+			<target state="needs-translation">Known from</target></trans-unit>
+      <trans-unit id="label_known_from_informal" xml:space="preserve">
+				<source>How have you heard of this event?</source>
+			<target state="needs-translation">How have you heard of this event?</target></trans-unit>
+      <trans-unit id="label_notes" xml:space="preserve">
+				<source>Additional notes:</source>
+			<target state="needs-translation">Notes</target></trans-unit>
+      <trans-unit id="label_register_additional_attendees" xml:space="preserve">
+				<source>Persons to register:</source>
+			<target state="needs-translation">Persons to register:</target></trans-unit>
+      <trans-unit id="label_seats" xml:space="preserve">
+				<source>Seats</source>
+			<target state="needs-translation">Seats</target></trans-unit>
+      <trans-unit id="label_registered_themselves" xml:space="preserve">
+				<source>myself</source>
+			<target state="needs-translation">myself</target></trans-unit>
+      <trans-unit id="label_firstname" xml:space="preserve">
+				<source>First name:</source>
+			<target state="needs-translation">First name:</target></trans-unit>
+      <trans-unit id="label_lastname" xml:space="preserve">
+				<source>Last name:</source>
+			<target state="needs-translation">Last name:</target></trans-unit>
+      <trans-unit id="label_register_seats" xml:space="preserve">
+				<source>Seats to book:</source>
+			<target state="needs-translation">Seats to book:</target></trans-unit>
+      <trans-unit id="label_attendees_names" xml:space="preserve">
+				<source>Registered persons:</source>
+			<target state="needs-translation">Registered persons</target></trans-unit>
+      <trans-unit id="label_kids" xml:space="preserve">
+				<source>Number of kids:</source>
+			<target state="needs-translation">Number of kids</target></trans-unit>
+      <trans-unit id="label_legend_payment" xml:space="preserve">
+				<source>Payment</source>
+			<target state="needs-translation">Payment</target></trans-unit>
+      <trans-unit id="label_billing_address" xml:space="preserve">
+				<source>Billing address</source>
+			<target state="needs-translation">Billing address</target></trans-unit>
+      <trans-unit id="label_company" xml:space="preserve">
+				<source>Company:</source>
+			<target state="needs-translation">Company:</target></trans-unit>
+      <trans-unit id="label_gender" xml:space="preserve">
+				<source>Mr./Mrs.:</source>
+			<target state="needs-translation">Gender</target></trans-unit>
+      <trans-unit id="label_gender.I.0" xml:space="preserve">
+				<source>Mr.</source>
+			<target state="needs-translation">Mr.</target></trans-unit>
+      <trans-unit id="label_gender.I.1" xml:space="preserve">
+				<source>Ms.</source>
+			<target state="needs-translation">Ms.</target></trans-unit>
+      <trans-unit id="label_gender.I.2">
+        <source>diverse</source>
+        <target state="needs-translation">diverse</target>
+      </trans-unit>
+      <trans-unit id="label_name" xml:space="preserve">
+				<source>Name:</source>
+			<target state="needs-translation">Name</target></trans-unit>
+      <trans-unit id="label_address" xml:space="preserve">
+				<source>Street:</source>
+			<target state="needs-translation">Address</target></trans-unit>
+      <trans-unit id="label_zip" xml:space="preserve">
+				<source>ZIP:</source>
+			<target state="needs-translation">ZIP code</target></trans-unit>
+      <trans-unit id="label_city" xml:space="preserve">
+				<source>City:</source>
+			<target state="needs-translation">City</target></trans-unit>
+      <trans-unit id="label_country" xml:space="preserve">
+				<source>Country:</source>
+			<target state="needs-translation">Country</target></trans-unit>
+      <trans-unit id="label_telephone" xml:space="preserve">
+				<source>Phone number:</source>
+			<target state="needs-translation">Phone</target></trans-unit>
+      <trans-unit id="label_email" xml:space="preserve">
+				<source>E-mail address:</source>
+			<target state="needs-translation">E-mail address</target></trans-unit>
+      <trans-unit id="label_lodgings" xml:space="preserve">
+				<source>Lodging:</source>
+			<target state="needs-translation">Selected lodging options</target></trans-unit>
+      <trans-unit id="label_foods" xml:space="preserve">
+				<source>Food:</source>
+			<target state="needs-translation">Selected food options</target></trans-unit>
+      <trans-unit id="label_register_all_terms" xml:space="preserve">
+				<source>Registration terms</source>
+			<target state="needs-translation">Registration terms</target></trans-unit>
+      <trans-unit id="label_terms" xml:space="preserve">
+				<source>I accept the terms and conditions.</source>
+			<target state="needs-translation">I accept the terms and conditions.</target></trans-unit>
+      <trans-unit id="label_terms_2" xml:space="preserve">
+				<source>I accept the terms for travelling.</source>
+			<target state="needs-translation">I accept the terms for travelling.</target></trans-unit>
+      <trans-unit id="label_method_of_payment" xml:space="preserve">
+				<source>Selected method of payment:</source>
+			<target state="needs-translation">Method of payment</target></trans-unit>
+      <trans-unit id="label_timeslot_date" xml:space="preserve">
+				<source>Date</source>
+			<target state="needs-translation">Date</target></trans-unit>
+      <trans-unit id="label_timeslot_time" xml:space="preserve">
+				<source>Time</source>
+			<target state="needs-translation">Time</target></trans-unit>
+      <trans-unit id="label_timeslot_entry_date" xml:space="preserve">
+				<source>Entry date</source>
+			<target state="needs-translation">Entry date</target></trans-unit>
+      <trans-unit id="label_timeslot_room" xml:space="preserve">
+				<source>Room</source>
+			<target state="needs-translation">Room</target></trans-unit>
+      <trans-unit id="label_timeslot_place" xml:space="preserve">
+				<source>Place</source>
+			<target state="needs-translation">Place</target></trans-unit>
+      <trans-unit id="label_timeslot_speakers" xml:space="preserve">
+				<source>Speakers</source>
+			<target state="needs-translation">Speakers</target></trans-unit>
+      <trans-unit id="label_selector_submit" xml:space="preserve">
+				<source>Apply filter</source>
+			<target state="needs-translation">Apply filter</target></trans-unit>
+      <trans-unit id="label_selector_pleaseChoose" xml:space="preserve">
+				<source>please choose...</source>
+			<target state="needs-translation">please choose...</target></trans-unit>
+      <trans-unit id="label_selector_reset" xml:space="preserve">
+				<source>Reset</source>
+			<target state="needs-translation">Reset</target></trans-unit>
+      <trans-unit id="label_selector_searchbox" xml:space="preserve">
+				<source>Search term</source>
+			<target state="needs-translation">Search term</target></trans-unit>
+      <trans-unit id="label_to" xml:space="preserve">
+				<source>to</source>
+			<target state="needs-translation">to</target></trans-unit>
+      <trans-unit id="label_organizer" xml:space="preserve">
+				<source>Organizer</source>
+			<target state="needs-translation">Organizer</target></trans-unit>
+      <trans-unit id="label_date_search" xml:space="preserve">
+				<source>Period from</source>
+			<target state="needs-translation">Period from</target></trans-unit>
+      <trans-unit id="label_age_search" xml:space="preserve">
+				<source>Age:</source>
+			<target state="needs-translation">Age:</target></trans-unit>
+      <trans-unit id="label_price_search" xml:space="preserve">
+				<source>Price</source>
+			<target state="needs-translation">Price</target></trans-unit>
+      <trans-unit id="label_searching_hints" xml:space="preserve">
+				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+			<target state="needs-translation">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</target></trans-unit>
+      <trans-unit id="label_searching_hints_informal" xml:space="preserve">
+				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+			<target state="needs-translation">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</target></trans-unit>
+      <trans-unit id="label_we_offer_events_in_categories" xml:space="preserve">
+				<source>Currently, we offer you events in the following categories:</source>
+			<target state="needs-translation">Currently, we offer you events in the following categories:</target></trans-unit>
+      <trans-unit id="label_we_offer_events_in_categories_informal" xml:space="preserve">
+				<source>Currently, we offer you events in the following categories:</source>
+			<target state="needs-translation">Currently, we offer you events in the following categories:</target></trans-unit>
+      <trans-unit id="label_no_categories" xml:space="preserve">
+				<source>Currently, we aren't offering any categorized events.</source>
+			<target state="needs-translation">Currently, we aren't offering any categorized events.</target></trans-unit>
+      <trans-unit id="label_waiting_list" xml:space="preserve">
+				<source>Waiting list</source>
+			<target state="needs-translation">Waiting list</target></trans-unit>
+      <trans-unit id="message_missingSeminarNumber" xml:space="preserve">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			<target state="needs-translation">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</target></trans-unit>
+      <trans-unit id="message_noResults" xml:space="preserve">
+				<source>Sorry, currently no events could be found.</source>
+			<target state="needs-translation">Sorry, currently no events could be found.</target></trans-unit>
+      <trans-unit id="message_notLoggedIn" xml:space="preserve">
+				<source>Sorry, you are not logged in.</source>
+			<target state="needs-translation">Please log in first.</target></trans-unit>
+      <trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
+				<source>Sorry, you are not logged in.</source>
+			<target state="needs-translation">Please log in first.</target></trans-unit>
+      <trans-unit id="message_pleaseLogIn" xml:space="preserve">
+				<source>Please log in to view this page.</source>
+			<target state="needs-translation">Please log in to view this page.</target></trans-unit>
+      <trans-unit id="message_pleaseLogIn_informal" xml:space="preserve">
+				<source>Please log in to view this page.</source>
+			<target state="needs-translation">Please log in to view this page.</target></trans-unit>
+      <trans-unit id="message_noRegistrations" xml:space="preserve">
+				<source>For this event, there are no registrations yet.</source>
+			<target state="needs-translation">For this event, there are no registrations yet.</target></trans-unit>
+      <trans-unit id="message_earlybird_price" xml:space="preserve">
+				<source>price valid and bookable until %s</source>
+			<target state="needs-translation">price valid and bookable until %s</target></trans-unit>
+      <trans-unit id="message_registrationOpensOn" xml:space="preserve">
+				<source>starting %s</source>
+			<target state="needs-translation">starting %s</target></trans-unit>
+      <trans-unit id="message_noTargetGroupAgeNumber" xml:space="preserve">
+				<source>Please enter only positive numbers as minimum and maximum age.</source>
+			<target state="needs-translation">Please enter only positive numbers as minimum and maximum age.</target></trans-unit>
+      <trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
+				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
+			<target state="needs-translation">Please enter a maximum age that is at equal to or greater than the minimum age.</target></trans-unit>
+      <trans-unit id="speakerImage.alt">
+        <source>portrait image</source>
+        <target state="needs-translation">portrait image</target>
+      </trans-unit>
+      <trans-unit id="label_date_of_birth">
+        <source>Date of birth</source>
+        <target state="needs-translation">Date of birth</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor">
+        <source>Front-end editor for events</source>
+        <target state="needs-translation">Front-end editor for events</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+        <source>Folder for the created events</source>
+        <target state="needs-translation">Folder for the created events</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.index.headline">
+        <source>Events I have created</source>
+        <target state="needs-translation">Events I have created</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.edit.headline">
+        <source>Edit event</source>
+        <target state="needs-translation">Edit event</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.new.headline">
+        <source>Create new event</source>
+        <target state="needs-translation">Create new event</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.uid">
+        <source>UID</source>
+        <target state="needs-translation">UID</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.internalTitle">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.date">
+        <source>Date</source>
+        <target state="needs-translation">Date</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.description">
+        <source>Description</source>
+        <target state="needs-translation">Description</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.standardPrice">
+        <source>Standard price</source>
+        <target state="needs-translation">Standard price</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
+        <source>Early-bird price</source>
+        <target state="needs-translation">Early-bird price</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.eventType">
+        <source>Event type</source>
+        <target state="needs-translation">Event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.start">
+        <source>Start</source>
+        <target state="needs-translation">Start</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.end">
+        <source>End</source>
+        <target state="needs-translation">End</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
+        <source>Early-bird deadline</source>
+        <target state="needs-translation">Early-bird deadline</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
+        <source>Registration deadline</source>
+        <target state="needs-translation">Registration deadline</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.registrationRequired">
+        <source>Registration is required</source>
+        <target state="needs-translation">Registration is required</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.waitingList">
+        <source>Has a waiting list</source>
+        <target state="needs-translation">Has a waiting list</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+        <source>Required registrations</source>
+        <target state="needs-translation">Required registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+        <source>Maximum registrations</source>
+        <target state="needs-translation">Maximum registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.venues">
+        <source>Venues</source>
+        <target state="needs-translation">Venues</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.speakers">
+        <source>Speakers</source>
+        <target state="needs-translation">Speakers</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.property.organizers">
+        <source>Organizers</source>
+        <target state="needs-translation">Organizers</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.new">
+        <source>Create a new event</source>
+        <target state="needs-translation">Create a new event</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.edit">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.cancel">
+        <source>Cancel</source>
+        <target state="needs-translation">Cancel</target>
+      </trans-unit>
+      <trans-unit id="plugin.frontEndEditor.action.save">
+        <source>Save</source>
+        <target state="needs-translation">Save</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration">
+        <source>Registration form for events</source>
+        <target state="needs-translation">Registration form for events</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.pageForMissingEvent">
+        <source>Page to display if this plugin is called with no event</source>
+        <target state="needs-translation">Page to display if this plugin is called with no event</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.loginPage">
+        <source>Login page (or with onetimeaccount)</source>
+        <target state="needs-translation">Login page (or with onetimeaccount)</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage">
+        <source>Page with the terms &amp; conditions</source>
+        <target state="needs-translation">Page with the terms &amp; conditions</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsPage.description">
+        <source>Activates the term &amp; conditions checkbox for all events.</source>
+        <target state="needs-translation">Activates the term &amp; conditions checkbox for all events.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.termsAndConditionsLinkTitle">
+        <source>Link title for the link to the page with the terms &amp; conditions</source>
+        <target state="needs-translation">Link title for the link to the page with the terms &amp; conditions</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsPage">
+        <source>Page with the additional registration terms</source>
+        <target state="needs-translation">Page with the additional registration terms</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsPage.description">
+        <source>Activates the additional conditions checkbox only for those events that use it.</source>
+        <target state="needs-translation">Activates the additional conditions checkbox only for those events that use it.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalTermsLinkTitle">
+        <source>Link title for the link to the page with the additional registration terms</source>
+        <target state="needs-translation">Link title for the link to the page with the additional registration terms</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.registrationRecordsStorageFolder">
+        <source>Folder in which to store the registrations</source>
+        <target state="needs-translation">Folder in which to store the registrations</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder">
+        <source>Create additional registered persons as FE user in this folder</source>
+        <target state="needs-translation">Create additional registered persons as FE user in this folder</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.additionalPersonsStorageFolder.description">
+        <source>Activates that additional attendees will be saved as FE users.</source>
+        <target state="needs-translation">Activates that additional attendees will be saved as FE users.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.personsToRegister">
+        <source>Persons to register</source>
+        <target state="needs-translation">Persons to register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.maximumBookableSeats">
+        <source>Maximum bookable seats per registration</source>
+        <target state="needs-translation">Maximum bookable seats per registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
+        <source>People register themselves by default</source>
+        <target state="needs-translation">People register themselves by default</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
+        <source>Show an email field for additional attendees</source>
+        <target state="needs-translation">Show an email field for additional attendees</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.tab.formFields">
+        <source>Form fields</source>
+        <target state="needs-translation">Form fields</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow">
+        <source>Fields and data to show in the form</source>
+        <target state="needs-translation">Fields and data to show in the form</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
+        <source>Input fields</source>
+        <target state="needs-translation">Input fields</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
+        <source>Seats</source>
+        <target state="needs-translation">Seats</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+        <source>Is registering themselves</source>
+        <target state="needs-translation">Is registering themselves</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
+        <source>Persons to register</source>
+        <target state="needs-translation">Persons to register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
+        <source>Interests</source>
+        <target state="needs-translation">Interests</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
+        <source>Expectations</source>
+        <target state="needs-translation">Expectations</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
+        <source>Background knowledge</source>
+        <target state="needs-translation">Background knowledge</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
+        <source>Known from where?</source>
+        <target state="needs-translation">Known from where?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
+        <source>Comments</source>
+        <target state="needs-translation">Comments</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
+        <source>Price</source>
+        <target state="needs-translation">Price</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
+        <source>Billing address</source>
+        <target state="needs-translation">Billing address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
+        <source>Separate billing address</source>
+        <target state="needs-translation">Separate billing address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
+        <source>Full name</source>
+        <target state="needs-translation">Full name</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
+        <source>Street address</source>
+        <target state="needs-translation">Street address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
+        <source>ZIP code</source>
+        <target state="needs-translation">ZIP code</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
+        <source>Country</source>
+        <target state="needs-translation">Country</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
+        <source>Phone number</source>
+        <target state="needs-translation">Phone number</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
+        <source>Email address</source>
+        <target state="needs-translation">Email address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
+        <source>Confirmation page</source>
+        <target state="needs-translation">Confirmation page</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
+        <source>Personal data</source>
+        <target state="needs-translation">Personal data</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
+        <source>Consent to terms &amp; conditions</source>
+        <target state="needs-translation">Consent to terms &amp; conditions</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
+        <source>%1$s, %2$s (event #%3$u)</source>
+        <target state="needs-translation">%1$s, %2$s (event #%3$u)</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.sorry">
+        <source>Sorry!</source>
+        <target state="needs-translation">Sorry!</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistration">
+        <source>Event registration</source>
+        <target state="needs-translation">Event registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
+        <source>Event registration (waiting list)</source>
+        <target state="needs-translation">Event registration (waiting list)</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
+        <source>Your registration data</source>
+        <target state="needs-translation">Your registration data</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationData_informal">
+        <source>Your registration data</source>
+        <target state="needs-translation">Your registration data</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationSent_formal">
+        <source>Your registration has been sent.</source>
+        <target state="needs-translation">Your registration has been sent.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.registrationSent_informal">
+        <source>Your registration has been sent.</source>
+        <target state="needs-translation">Your registration has been sent.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.termsAndConditions">
+        <source>Terms and conditions</source>
+        <target state="needs-translation">Terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.personalData_formal">
+        <source>Your personal data</source>
+        <target state="needs-translation">Your personal data</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.personalData_informal">
+        <source>Your personal data</source>
+        <target state="needs-translation">Your personal data</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.heading.summary">
+        <source>Summary</source>
+        <target state="needs-translation">Summary</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.payment">
+        <source>Payment</source>
+        <target state="needs-translation">Payment</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.billingAddress">
+        <source>Billing address</source>
+        <target state="needs-translation">Billing address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.personsToRegister">
+        <source>Persons to register</source>
+        <target state="needs-translation">Persons to register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.foodAndAccommodation">
+        <source>Food and accommodation</source>
+        <target state="needs-translation">Food and accommodation</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.fieldset.additionalInformation">
+        <source>Additional information</source>
+        <target state="needs-translation">Additional information</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_formal">
+        <source>Thank you for registering for our event. We are looking forward to seeing you there!</source>
+        <target state="needs-translation">Thank you for registering for our event. We are looking forward to seeing you there!</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourRegistration_informal">
+        <source>Thank you for registering for our event. We're looking forward to seeing you there!</source>
+        <target state="needs-translation">Thank you for registering for our event. We're looking forward to seeing you there!</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_formal">
+        <source>Thank you for registering for the waiting list of our event.</source>
+        <target state="needs-translation">Thank you for registering for the waiting list of our event.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.thankYouForYourWaitingListRegistration_informal">
+        <source>Thank you for registering for the waiting list of our event.</source>
+        <target state="needs-translation">Thank you for registering for the waiting list of our event.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_formal">
+        <source>
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</source>
+        <target state="needs-translation">
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.message.priceOnlyForRegularRegistration_informal">
+        <source>
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</source>
+        <target state="needs-translation">
+					The registration fee will only be payable once your registration has been changed from a waiting
+					list registration to a regular registration.
+				</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtAll">
+        <source>For this event, registration is not possible.</source>
+        <target state="needs-translation">For this event, registration is not possible.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.noRegistrationPossibleAtTheMoment">
+        <source>For this event, registration is not possible at the moment.</source>
+        <target state="needs-translation">For this event, registration is not possible at the moment.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.alreadyRegistered_formal">
+        <source>You are already registered for this event.</source>
+        <target state="needs-translation">You are already registered for this event.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.alreadyRegistered_informal">
+        <source>You are already registered for this event.</source>
+        <target state="needs-translation">You are already registered for this event.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.error.fullyBooked">
+        <source>Unfortunately, there are no more vacancies.</source>
+        <target state="needs-translation">Unfortunately, there are no more vacancies.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.back">
+        <source>Back</source>
+        <target state="needs-translation">Back</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.continue">
+        <source>Continue</source>
+        <target state="needs-translation">Continue</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.registerForFree">
+        <source>Confirm registration (for free)</source>
+        <target state="needs-translation">Confirm registration (for free)</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.action.registerWithCosts">
+        <source>Confirm registration</source>
+        <target state="needs-translation">Confirm registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.event">
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.interests_formal">
+        <source>What are your interests concerning this event?</source>
+        <target state="needs-translation">What are your interests concerning this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.interests_informal">
+        <source>What are your interests concerning this event?</source>
+        <target state="needs-translation">What are your interests concerning this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.expectations_formal">
+        <source>What are your expectations?</source>
+        <target state="needs-translation">What are your expectations?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.expectations_informal">
+        <source>What are your expectations?</source>
+        <target state="needs-translation">What are your expectations?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_formal">
+        <source>What are is your background knowledge?</source>
+        <target state="needs-translation">What are is your background knowledge?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_informal">
+        <source>What are is your background knowledge?</source>
+        <target state="needs-translation">What are is your background knowledge?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_formal">
+        <source>How did you hear about this event?</source>
+        <target state="needs-translation">How did you hear about this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
+        <source>What are is your background knowledge on the topic of this event?</source>
+        <target state="needs-translation">What are is your background knowledge on the topic of this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.comments">
+        <source>Other comments</source>
+        <target state="needs-translation">Other comments</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.seats">
+        <source>Seats to book</source>
+        <target state="needs-translation">Seats to book</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registeredThemselves">
+        <source>I am registering myself.</source>
+        <target state="needs-translation">I am registering myself.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
+        <source>I am not registering myself.</source>
+        <target state="needs-translation">I am not registering myself.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.separateBillingAddress">
+        <source>Separate billing address</source>
+        <target state="needs-translation">Separate billing address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.company">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.fullName">
+        <source>Full name</source>
+        <target state="needs-translation">Full name</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.streetAddress">
+        <source>Street address</source>
+        <target state="needs-translation">Street address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.zipCode">
+        <source>ZIP code</source>
+        <target state="needs-translation">ZIP code</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.city">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.country">
+        <source>Country</source>
+        <target state="needs-translation">Country</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.phoneNumber">
+        <source>Phone number</source>
+        <target state="needs-translation">Phone number</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.emailAddress">
+        <source>Email address</source>
+        <target state="needs-translation">Email address</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.registrationCheckboxes">
+        <source>Registration options</source>
+        <target state="needs-translation">Registration options</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.foodOptions">
+        <source>Food</source>
+        <target state="needs-translation">Food</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.accommodationOptions">
+        <source>Accommodation</source>
+        <target state="needs-translation">Accommodation</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendeesNames">
+        <source>Persons to register</source>
+        <target state="needs-translation">Persons to register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.paymentMethod">
+        <source>Method of payment</source>
+        <target state="needs-translation">Method of payment</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.priceCode">
+        <source>Price</source>
+        <target state="needs-translation">Price</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.totalPrice">
+        <source>Total price (incl. VAT)</source>
+        <target state="needs-translation">Total price (incl. VAT)</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.consentedToTermsAndConditions">
+        <source>I consent to the %1$s.</source>
+        <target state="needs-translation">I consent to the %1$s.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.consentedToAdditionalTerms">
+        <source>I consent to the %1$s.</source>
+        <target state="needs-translation">I consent to the %1$s.</target>
+      </trans-unit>
+      <trans-unit id="price.standard">
+        <source>Regular price</source>
+        <target state="needs-translation">Regular price</target>
+      </trans-unit>
+      <trans-unit id="price.earlyBird">
+        <source>Early-bird price</source>
+        <target state="needs-translation">Early-bird price</target>
+      </trans-unit>
+      <trans-unit id="price.special">
+        <source>Special price</source>
+        <target state="needs-translation">Special price</target>
+      </trans-unit>
+      <trans-unit id="price.specialEarlyBird">
+        <source>Early-bird special price</source>
+        <target state="needs-translation">Early-bird special price</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.events">
+        <source>Events</source>
+        <target state="needs-translation">Events</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.registrations">
+        <source>Registrations</source>
+        <target state="needs-translation">Registrations</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.regularRegistrations">
+        <source>Regular registrations (%u)</source>
+        <target state="needs-translation">Regular registrations (%u)</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.waitingListRegistrations">
+        <source>Registrations on the waiting list (%u)</source>
+        <target state="needs-translation">Registrations on the waiting list (%u)</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.heading.email">
+        <source>Send an email to all registered persons</source>
+        <target state="needs-translation">Send an email to all registered persons</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.selectFolder">
+        <source>Please select a folder in the page tree.</source>
+        <target state="needs-translation">Please select a folder in the page tree.</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noEventsInFolder">
+        <source>There are no event records in the selected folder.</source>
+        <target state="needs-translation">There are no event records in the selected folder.</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noRegistrationsInFolder">
+        <source>There are no event registration in the selected folder.</source>
+        <target state="needs-translation">There are no event registration in the selected folder.</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.message.noRegistrationsForEvent">
+        <source>This event does not have any registrations yet.</source>
+        <target state="needs-translation">This event does not have any registrations yet.</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.uid">
+        <source>UID</source>
+        <target state="needs-translation">UID</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.internalTitle">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.date">
+        <source>Date</source>
+        <target state="needs-translation">Date</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats">
+        <source>Seats</source>
+        <target state="needs-translation">Seats</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.minimum">
+        <source>required registrations for the event to take place</source>
+        <target state="needs-translation">required registrations for the event to take place</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.maximum">
+        <source>maximum available seats at the event</source>
+        <target state="needs-translation">maximum available seats at the event</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.seats.noLimit">
+        <source>This event allows an unlimited registrations.</source>
+        <target state="needs-translation">This event allows an unlimited registrations.</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations">
+        <source>Registrations</source>
+        <target state="needs-translation">Registrations</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.regular">
+        <source>Regular registrations</source>
+        <target state="needs-translation">Regular registrations</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.waitingList">
+        <source>Registrations on the waiting list</source>
+        <target state="needs-translation">Registrations on the waiting list</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.enough">
+        <source>has enough registration to take place</source>
+        <target state="needs-translation">has enough registration to take place</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.registrations.fullyBooked">
+        <source>is fully booked</source>
+        <target state="needs-translation">is fully booked</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.events.property.name">
+        <source>Name</source>
+        <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.edit">
+        <source>Edit record</source>
+        <target state="needs-translation">Edit record</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.hide">
+        <source>Hide record</source>
+        <target state="needs-translation">Hide record</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.unhide">
+        <source>Un-hide record</source>
+        <target state="needs-translation">Un-hide record</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.csvDownload">
+        <source>Download as CSV file</source>
+        <target state="needs-translation">Download as CSV file</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.showRegistrations">
+        <source>show</source>
+        <target state="needs-translation">show</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.showRegistrations.long">
+        <source>show registrations</source>
+        <target state="needs-translation">show registrations</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.backToEventList">
+        <source>Back to the event list</source>
+        <target state="needs-translation">Back to the event list</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.email">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.email.long">
+        <source>Send an email to all registered persons</source>
+        <target state="needs-translation">Send an email to all registered persons</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.sendEmail">
+        <source>Send email</source>
+        <target state="needs-translation">Send email</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.email.subject">
+        <source>Subject</source>
+        <target state="needs-translation">Subject</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.email.body">
+        <source>Email body</source>
+        <target state="needs-translation">Email body</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.sorry">
+        <source>Sorry!</source>
+        <target state="needs-translation">Sorry!</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.unregistration">
+        <source>Unregister from an event</source>
+        <target state="needs-translation">Unregister from an event</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.heading.unregistrationSuccess">
+        <source>Unregistration sent</source>
+        <target state="needs-translation">Unregistration sent</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.notLoggedIn">
+        <source>This content is only available after a login.</source>
+        <target state="needs-translation">This content is only available after a login.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.registrationMissing">
+        <source>This registration does not exist.</source>
+        <target state="needs-translation">This registration does not exist.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_formal">
+        <source>You cannot unregister from this event now.</source>
+        <target state="needs-translation">You cannot unregister from this event now.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.error.noUnregistrationPossible_informal">
+        <source>You cannot unregister from this event now.</source>
+        <target state="needs-translation">You cannot unregister from this event now.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.prompt.unregister_formal">
+        <source>Do you really want to unregister from this event?</source>
+        <target state="needs-translation">Do you really want to unregister from this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.prompt.unregister_informal">
+        <source>Do you really want to unregister from this event?</source>
+        <target state="needs-translation">Do you really want to unregister from this event?</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.action.cancel">
+        <source>Cancel and go back</source>
+        <target state="needs-translation">Cancel and go back</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.action.unregister">
+        <source>Unregister</source>
+        <target state="needs-translation">Unregister</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.message.unregistrationDone_formal">
+        <source>Your registration to this event now has been canceled.</source>
+        <target state="needs-translation">Your registration to this event now has been canceled.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
+        <source>Your registration to this event now has been canceled.</source>
+        <target state="needs-translation">Your registration to this event now has been canceled.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
