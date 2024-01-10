@@ -37,9 +37,9 @@
       <trans-unit id="pi1_description" xml:space="preserve">
 				<source>Displays seminars in the FE</source>
 			<target state="translated">Darstellung von Seminaren im FE</target></trans-unit>
-      <trans-unit id="label_title" xml:space="preserve">
+      <trans-unit id="label_title" xml:space="preserve" approved="yes">
 				<source>Title</source>
-			<target state="translated">Titel</target></trans-unit>
+			<target state="final">Titel</target></trans-unit>
       <trans-unit id="label_description">
         <source>Description</source>
         <target state="translated">Beschreibung</target>
@@ -157,7 +157,7 @@
 			<target state="translated">Genug Teilnehmer</target></trans-unit>
       <trans-unit id="label_is_full" xml:space="preserve">
 				<source>Is full</source>
-			<target state="translated">Ist ausgebucht</target></trans-unit>
+			<target state="translated">Ist voll</target></trans-unit>
       <trans-unit id="label_paymentmethod" xml:space="preserve">
 				<source>Selected method of payment</source>
 			<target state="translated">Gewählte Zahlungsart</target></trans-unit>
@@ -802,9 +802,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target></trans-unit>
       <trans-unit id="label_category" xml:space="preserve">
 				<source>Category</source>
 			<target state="translated">Kategorie</target></trans-unit>
-      <trans-unit id="label_title" xml:space="preserve">
+      <trans-unit id="label_title" xml:space="preserve" approved="yes">
 				<source>Title</source>
-			<target state="translated">Titel</target></trans-unit>
+			<target state="final">Titel</target></trans-unit>
       <trans-unit id="label_subtitle" xml:space="preserve">
 				<source>Subtitle</source>
 			<target state="translated">Untertitel</target></trans-unit>
