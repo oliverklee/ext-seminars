@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Upgrade the XLIFF files to XLIFF 1.2 (#2890)
 - Access superglobals directly (#2878)
 - Replace `SIM_EXEC_TIME` with `Context` (#2877)
 - Use the TYPO3 `Context` to check for logins (#2864, #2868)
