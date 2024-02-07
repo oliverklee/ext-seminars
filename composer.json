@@ -92,6 +92,7 @@
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
 		},
+		"lock": false,
 		"preferred-install": {
 			"*": "dist"
 		},

@@ -63,7 +63,7 @@ jobs:
           path: ~/.cache/composer
           restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
-        run: "composer install --no-ansi --no-progress"
+        run: "composer update --no-ansi --no-progress"
       - name: "Run command"
         run: "composer ci:${{ matrix.command }}"
     strategy:
