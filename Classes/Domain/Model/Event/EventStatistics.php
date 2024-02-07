@@ -11,40 +11,40 @@ class EventStatistics
 {
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     private $regularSeatsCountFromRegistrations;
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     private $offlineRegistrationsCount;
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     private $waitingListSeatsCount;
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     private $minimumRequiredSeats;
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     private $seatsLimit;
 
     /**
-     * @param 0|positive-int $regularSeatsCountFromRegistrations
-     * @param 0|positive-int $offlineRegistrationsCount
-     * @param 0|positive-int $waitingListSeatsCount
-     * @param 0|positive-int $minimumRequiredSeats
-     * @param 0|positive-int $seatsLimit
+     * @param int<0, max> $regularSeatsCountFromRegistrations
+     * @param int<0, max> $offlineRegistrationsCount
+     * @param int<0, max> $waitingListSeatsCount
+     * @param int<0, max> $minimumRequiredSeats
+     * @param int<0, max> $seatsLimit
      */
     public function __construct(
         int $regularSeatsCountFromRegistrations,
@@ -63,7 +63,7 @@ class EventStatistics
     /**
      * Returns the number of regular seats from registrations and offline registrations.
      *
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getRegularSeatsCount(): int
     {
@@ -74,7 +74,7 @@ class EventStatistics
      * Returns the number of seats on the waiting list (not counting offline registrations, we are expected to always be
      * regular registrations).
      *
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getWaitingListSeatsCount(): int
     {
@@ -84,7 +84,7 @@ class EventStatistics
     /**
      * Returns how many seats need to be registered so that the event can take place.
      *
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getMinimumRequiredSeats(): int
     {
@@ -94,7 +94,7 @@ class EventStatistics
     /**
      * Returns the number of maximum bookable regular seats.
      *
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getSeatsLimit(): int
     {
@@ -115,7 +115,7 @@ class EventStatistics
     }
 
     /**
-     * @return 0|positive-int|null the number of available seats, will be `null` if there is no seats limit
+     * @return int<0, max>|null the number of available seats, will be `null` if there is no seats limit
      */
     public function getVacancies(): ?int
     {

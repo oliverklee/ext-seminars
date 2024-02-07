@@ -125,7 +125,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * This method works in back-end mode, i.e., it will ignore deleted records, but will find hidden or timed records.
      *
-     * @param 0|positive-int $pageUid
+     * @param int<0, max> $pageUid
      *
      * @return array<int, Event>
      */

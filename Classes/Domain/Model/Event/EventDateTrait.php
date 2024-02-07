@@ -57,13 +57,13 @@ trait EventDateTrait
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     protected $minimumNumberOfRegistrations = 0;
 
     /**
      * @var int
-     * @phpstan-var 0|positive-int
+     * @phpstan-var int<0, max>
      */
     protected $maximumNumberOfRegistrations = 0;
 
@@ -201,7 +201,7 @@ trait EventDateTrait
     }
 
     /**
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getMinimumNumberOfRegistrations(): int
     {
@@ -209,7 +209,7 @@ trait EventDateTrait
     }
 
     /**
-     * @param 0|positive-int $minimumNumberOfRegistrations
+     * @param int<0, max> $minimumNumberOfRegistrations
      */
     public function setMinimumNumberOfRegistrations(int $minimumNumberOfRegistrations): void
     {
@@ -217,7 +217,7 @@ trait EventDateTrait
     }
 
     /**
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getMaximumNumberOfRegistrations(): int
     {
@@ -225,7 +225,7 @@ trait EventDateTrait
     }
 
     /**
-     * @param 0|positive-int $maximumNumberOfRegistrations
+     * @param int<0, max> $maximumNumberOfRegistrations
      */
     public function setMaximumNumberOfRegistrations(int $maximumNumberOfRegistrations): void
     {

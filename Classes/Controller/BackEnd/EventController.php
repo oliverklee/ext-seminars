@@ -26,7 +26,7 @@ class EventController extends ActionController
     private const TABLE_NAME = 'tx_seminars_seminars';
 
     /**
-     * @param 0|positive-int $pageUid
+     * @param int<0, max> $pageUid
      *
      * @return string|ResponseInterface
      */

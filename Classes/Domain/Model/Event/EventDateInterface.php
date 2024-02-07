@@ -33,12 +33,12 @@ interface EventDateInterface
     public function hasWaitingList(): bool;
 
     /**
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getMinimumNumberOfRegistrations(): int;
 
     /**
-     * @return 0|positive-int
+     * @return int<0, max>
      */
     public function getMaximumNumberOfRegistrations(): int;
 
