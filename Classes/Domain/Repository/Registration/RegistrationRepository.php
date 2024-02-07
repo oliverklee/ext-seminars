@@ -66,7 +66,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
      *
      * @param positive-int $eventUid
      *
-     * @return positive-int|0
+     * @return int<0, max>
      */
     public function countRegularSeatsByEvent(int $eventUid): int
     {
@@ -80,7 +80,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
      *
      * @param positive-int $eventUid
      *
-     * @return positive-int|0
+     * @return int<0, max>
      */
     public function countWaitingListSeatsByEvent(int $eventUid): int
     {
@@ -95,7 +95,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
      * @param positive-int $eventUid
      * @param bool $onWaitingList whether to count waiting list or regular registrations
      *
-     * @return positive-int|0
+     * @return int<0, max>
      */
     private function countSeatsByEvent(int $eventUid, bool $onWaitingList): int
     {
