@@ -204,12 +204,13 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', $this->permissionsMock],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
-                ['regularRegistrations', self::anything()]
+                ['regularRegistrations', self::anything()],
+                ['waitingListRegistrations', self::anything()]
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -227,12 +228,13 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', $pageUid],
                 ['event', self::anything()],
-                ['regularRegistrations', self::anything()]
+                ['regularRegistrations', self::anything()],
+                ['waitingListRegistrations', self::anything()]
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -248,12 +250,13 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', $event],
-                ['regularRegistrations', self::anything()]
+                ['regularRegistrations', self::anything()],
+                ['waitingListRegistrations', self::anything()]
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -289,12 +292,13 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
             ->with($eventUid)->willReturn($regularRegistrations);
 
-        $this->viewMock->expects(self::exactly(4))->method('assign')
+        $this->viewMock->expects(self::exactly(5))->method('assign')
             ->withConsecutive(
                 ['permissions', self::anything()],
                 ['pageUid', self::anything()],
                 ['event', self::anything()],
-                ['regularRegistrations', $regularRegistrations]
+                ['regularRegistrations', $regularRegistrations],
+                ['waitingListRegistrations', self::anything()]
             );
 
         $this->subject->showForEventAction($eventUid);
@@ -313,8 +317,8 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->registrationRepositoryMock->expects(self::once())->method('findRegularRegistrationsByEvent')
             ->with($eventUid)->willReturn($regularRegistrations);
-        $this->registrationRepositoryMock->expects(self::once())->method('enrichWithRawData')
-            ->with($regularRegistrations);
+        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+            ->withConsecutive([$regularRegistrations], [self::anything()]);
 
         $this->subject->showForEventAction($eventUid);
     }
@@ -329,6 +333,33 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(true);
+        $waitingListRegistrations = [new Registration()];
+
+        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+            ->with($eventUid)->willReturn($waitingListRegistrations);
+
+        $this->viewMock->expects(self::exactly(5))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['event', self::anything()],
+                ['regularRegistrations', self::anything()],
+                ['waitingListRegistrations', $waitingListRegistrations]
+            );
+
+        $this->subject->showForEventAction($eventUid);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionForEventWithoutWaitingListPassesWaitingRegistrationsForProvidedEventToView(): void
+    {
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
+        $event->method('hasWaitingList')->willReturn(false);
         $waitingListRegistrations = [new Registration()];
 
         $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
@@ -369,16 +400,19 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function showForEventActionForEventWithoutWaitingListDoesNotQueryForWaitingList(): void
+    public function showForEventActionForEventWithoutWaitingListEnrichesWaitingListRegistrationsWithRawData(): void
     {
         $eventUid = 5;
         $event = $this->buildSingleEventMockWithUid($eventUid);
         $this->eventRepositoryMock->expects(self::once())
             ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
         $event->method('hasWaitingList')->willReturn(false);
+        $waitingListRegistrations = [new Registration()];
 
-        $this->registrationRepositoryMock->expects(self::never())->method('findWaitingListRegistrationsByEvent')
-            ->with(self::anything());
+        $this->registrationRepositoryMock->expects(self::once())->method('findWaitingListRegistrationsByEvent')
+            ->with($eventUid)->willReturn($waitingListRegistrations);
+        $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
+            ->withConsecutive([self::anything()], [$waitingListRegistrations]);
 
         $this->subject->showForEventAction($eventUid);
     }

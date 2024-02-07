@@ -62,25 +62,25 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @test
      */
-    public function enrichWithStatisticsForEventDateWithoutRegistrationSetsNoStatistics(): void
+    public function enrichWithStatisticsForEventDateWithoutRegistrationStatistics(): void
     {
         $event = new EventDate();
 
         $this->subject->enrichWithStatistics($event);
 
-        self::assertNull($event->getStatistics());
+        self::assertInstanceOf(EventStatistics::class, $event->getStatistics());
     }
 
     /**
      * @test
      */
-    public function enrichWithStatisticsForSingleEventWithoutRegistrationSetsNoStatistics(): void
+    public function enrichWithStatisticsForSingleEventWithoutRegistrationStatistics(): void
     {
         $event = new SingleEvent();
 
         $this->subject->enrichWithStatistics($event);
 
-        self::assertNull($event->getStatistics());
+        self::assertInstanceOf(EventStatistics::class, $event->getStatistics());
     }
 
     /**
@@ -184,6 +184,27 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @test
      */
+    public function enrichWithStatisticsRetrievesRegularSeatsFromRegistrationsEvenWithDisabledRegistration(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(false);
+
+        $seatsFromRegistrations = 15;
+        $this->registrationRepositoryMock->expects(self::once())->method('countRegularSeatsByEvent')
+            ->with($eventUid)->willReturn($seatsFromRegistrations);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertSame($seatsFromRegistrations, $statistics->getRegularSeatsCount());
+    }
+
+    /**
+     * @test
+     */
     public function enrichWithStatisticsRetrievesWaitingListSeatsFromRegistrations(): void
     {
         $eventUid = 9;
@@ -206,7 +227,7 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @test
      */
-    public function enrichWithStatisticsForNoWaitingListDoesNotRetrieveWaitingListSeats(): void
+    public function enrichWithStatisticsRetrievesWaitingListSeatsFromRegistrationsEvenWithDisabledWaitingList(): void
     {
         $eventUid = 9;
         $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
@@ -214,9 +235,14 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $event->setRegistrationRequired(true);
         $event->setWaitingList(false);
 
-        $this->registrationRepositoryMock->expects(self::never())->method('countWaitingListSeatsByEvent')
-            ->with(self::anything());
+        $waitingListSeats = 15;
+        $this->registrationRepositoryMock->expects(self::once())->method('countWaitingListSeatsByEvent')
+            ->with($eventUid)->willReturn($waitingListSeats);
 
         $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertSame($waitingListSeats, $statistics->getWaitingListSeatsCount());
     }
 }
