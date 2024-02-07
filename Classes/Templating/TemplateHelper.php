@@ -526,7 +526,7 @@ abstract class TemplateHelper
         // configuration array is not initialized properly.
         // As flexforms can be used in FE mode only, `$ignoreFlexform` is set true if we are in the BE mode.
         // By this, `$this->cObj->fileResource` can be sheltered from being called.
-        if (TYPO3_MODE === 'BE') {
+        if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
             $ignoreFlexform = true;
         }
 
