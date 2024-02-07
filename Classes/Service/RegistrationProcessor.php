@@ -168,7 +168,7 @@ class RegistrationProcessor implements SingletonInterface
      *
      * If no storage folder UID is given, no users will be created.
      *
-     * @param 0|positive-int $storageFolderUid
+     * @param int<0, max> $storageFolderUid
      */
     public function createAdditionalPersons(Registration $registration, int $storageFolderUid): void
     {

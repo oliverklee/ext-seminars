@@ -39,7 +39,7 @@ class RegistrationGuard implements SingletonInterface
     /**
      * key: event UID, value: vacancies as returned by `getVacancies`
      *
-     * @var array<positive-int, 0|positive-int|null>
+     * @var array<positive-int, int<0, max>|null>
      */
     private $vacanciesCache = [];
 
@@ -161,7 +161,7 @@ class RegistrationGuard implements SingletonInterface
     }
 
     /**
-     * @return 0|positive-int|null 0 for a fully-booked event, null for an event with no registration limit
+     * @return int<0, max>|null 0 for a fully-booked event, null for an event with no registration limit
      */
     public function getVacancies(Event $event): ?int
     {
