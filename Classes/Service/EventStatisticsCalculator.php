@@ -31,7 +31,7 @@ class EventStatisticsCalculator implements SingletonInterface
      */
     public function enrichWithStatistics(Event $event): void
     {
-        if (!$event instanceof EventDateInterface || !$event->isRegistrationRequired()) {
+        if (!$event instanceof EventDateInterface) {
             return;
         }
 
@@ -39,11 +39,7 @@ class EventStatisticsCalculator implements SingletonInterface
         // This mostly is for making unit tests less of a hassle.
         if (\is_int($eventUid)) {
             $regularSeatsFromRegistrations = $this->registrationRepository->countRegularSeatsByEvent($eventUid);
-            if ($event->hasWaitingList()) {
-                $waitingListSeats = $this->registrationRepository->countWaitingListSeatsByEvent($eventUid);
-            } else {
-                $waitingListSeats = 0;
-            }
+            $waitingListSeats = $this->registrationRepository->countWaitingListSeatsByEvent($eventUid);
         } else {
             $regularSeatsFromRegistrations = 0;
             $waitingListSeats = 0;
