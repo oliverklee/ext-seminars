@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid accessing the deprecated `TYPO3_MODE` constant (#2906)
 - Upgrade the XLIFF files to XLIFF 1.2 (#2890)
 - Access superglobals directly (#2878)
 - Replace `SIM_EXEC_TIME` with `Context` (#2877)
