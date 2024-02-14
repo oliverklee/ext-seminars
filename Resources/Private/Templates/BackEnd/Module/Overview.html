@@ -10,6 +10,10 @@
     <f:section name="Content">
         <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
 
+        <f:if condition="{pageUid} <= 0">
+            <f:render partial="BackEnd/FlashMessage" arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
+        </f:if>
+
         <f:if condition="{permissions.readAccessToEvents}">
             <div class="row">
                 <h1 class="col-auto me-auto">
@@ -26,21 +30,14 @@
                 </div>
             </div>
 
-            <f:if condition="{pageUid} > 0">
+            <f:if condition="{events}">
                 <f:then>
-                    <f:if condition="{events}">
-                        <f:then>
-                            <f:render partial="BackEnd/EventList" arguments="{_all}"/>
-                        </f:then>
-                        <f:else>
-                            <f:render partial="BackEnd/FlashMessage"
-                                      arguments="{severity: 'info', messageBodyKey: 'noEventsInFolder'}"/>
-                        </f:else>
-                    </f:if>
+                    <f:render partial="BackEnd/EventList" arguments="{_all}"/>
                 </f:then>
                 <f:else>
-                    <f:render partial="BackEnd/FlashMessage"
-                              arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
+                    <p>
+                        <f:translate key="backEndModule.message.noEventsInFolder"/>
+                    </p>
                 </f:else>
             </f:if>
         </f:if>
@@ -77,8 +74,9 @@
                     </table>
                 </f:then>
                 <f:else>
-                    <f:render partial="BackEnd/FlashMessage"
-                              arguments="{severity: 'info', messageBodyKey: 'noRegistrationsInFolder'}"/>
+                    <p>
+                        <f:translate key="backEndModule.message.noRegistrationsInFolder"/>
+                    </p>
                 </f:else>
             </f:if>
         </f:if>
