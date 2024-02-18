@@ -10,11 +10,9 @@
 			</trans-unit>
 			<trans-unit id="LGL.telephone" xml:space="preserve">
 				<source>Phone</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="LGL.gender" xml:space="preserve">
 				<source>Gender</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars" xml:space="preserve">
 				<source>Seminars</source>
@@ -134,7 +132,6 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation" xml:space="preserve">
 				<source>Set the status automatically</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.notes" xml:space="preserve">
 				<source>Internal Notes</source>
@@ -262,11 +259,9 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" xml:space="preserve">
 				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.mute_notification_emails" xml:space="preserve">
 				<source>Mute the notification emails to the organizers</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.target_groups" xml:space="preserve">
 				<source>Target groups</source>
@@ -414,7 +409,6 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.crdate" xml:space="preserve">
 				<source>Registration date</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.title" xml:space="preserve">
 				<source>Title</source>
@@ -550,7 +544,6 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.additional_persons" xml:space="preserve">
 				<source>Additional registered persons</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.kids" xml:space="preserve">
 				<source>Number of kids</source>
@@ -638,7 +631,6 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types.single_view_page" xml:space="preserve">
 				<source>Single view page for events of this type</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_checkboxes" xml:space="preserve">
 				<source>Registration options with checkbox</source>
@@ -722,7 +714,6 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_categories.single_view_page" xml:space="preserve">
 				<source>Single view page for events in this category</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_skills" xml:space="preserve">
 				<source>Skills</source>
