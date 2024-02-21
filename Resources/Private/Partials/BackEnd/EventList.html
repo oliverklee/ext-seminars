@@ -6,124 +6,173 @@
     <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
     <f:variable name="actionLabelPrefix" value="backEndModule.action"/>
 
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th scope="col" colspan="2" class="nowrap">
-                    <f:translate key="{propertyLabelPrefix}.uid"/>
-                </th>
-                <th scope="col" class="col-title col-responsive">
-                    <f:translate key="{propertyLabelPrefix}.internalTitle"/>
-                </th>
-                <th scope="col" class="nowrap">
-                    <f:translate key="{propertyLabelPrefix}.date"/>
-                </th>
-                <f:if condition="{permissions.writeAccessToEvents}">
-                    <th scope="col" class="col-control nowrap">&nbsp;</th>
-                </f:if>
-                <th scope="col" class="nowrap">
-                    <f:translate key="{propertyLabelPrefix}.seats"/>
-                </th>
-                <th scope="col" colspan="2" class="nowrap">
-                    <f:translate key="{propertyLabelPrefix}.registrations"/>
-                </th>
-                <f:if condition="{permissions.readAccessToRegistrations}">
-                    <th scope="col" class="col-control nowrap">&nbsp;</th>
-                </f:if>
-            </tr>
-        </thead>
-        <tbody>
-            <f:for each="{events}" as="event">
-                <tr>
-                    <f:variable name="visible"
-                                value="{f:if(condition: '{event.rawData.hidden}', then: 0, else: 1)}"/>
-                    <f:variable name="statistics" value="{event.statistics}"/>
-                    <td class="text-end text-right nowrap">
-                        {event.uid}
-                    </td>
-                    <td class="col-icon nowrap">
-                        <core:iconForRecord table="{tableName}" row="{event.rawData}"/>
-                    </td>
-                    <td class="col-title col-responsive">
-                        <f:if condition="{permissions.writeAccessToEvents}">
-                            <f:then>
-                                <be:link.editRecord uid="{event.uid}" table="{tableName}">
-                                    {event.internalTitle}
-                                </be:link.editRecord>
-                            </f:then>
-                            <f:else>
-                                {event.internalTitle}
-                            </f:else>
-                        </f:if>
-                    </td>
-                    <td class="nowrap">
-                        <f:render partial="EventDate" arguments="{event: event}"/>
-                    </td>
-                    <f:if condition="{permissions.writeAccessToEvents}">
-                        <td class="col-control nowrap">
-                            <div class="btn-group" role="group">
-                                <be:link.editRecord uid="{event.uid}" table="{tableName}" class="btn btn-default"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.edit')}">
-                                    <core:icon identifier="actions-open"/>
-                                </be:link.editRecord>
-                                <f:if condition="{visible}">
-                                    <f:then>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=1', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.hide')}">
-                                            <core:icon identifier="actions-edit-hide"/>
-                                        </a>
-                                    </f:then>
-                                    <f:else>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=0', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
-                                            <core:icon identifier="actions-edit-unhide"/>
-                                        </a>
-                                    </f:else>
-                                </f:if>
+    // 1. Original-Buttons zum Verstecken und Anzeigen von Events kopieren
+    // 2. Original-Formular kopieren
+    // 3. JavaScript-Sourcen checken
 
-                                <span class="btn btn-default disabled">
-                                    <core:icon identifier="empty-empty"/>
-                                </span>
-                            </div>
-                        </td>
+    <f:be.tableList tableName="{tableName}" fieldList="{0: 'uid', 1: 'title'}" enableControlPanels="true" filter="mit"/>
+
+    <form
+        action="/typo3/module/web/list?token=a737dc1d2656689ebeda56d495524a1c20768f7d&amp;id=30&amp;table=&amp;pointer=1#t3-table-tx_seminars_seminars"
+        method="post" name="list-table-form-tx_seminars_seminars" data-bitwarden-watching="1">
+        <input type="hidden" name="cmd_table" value="tx_seminars_seminars"/>
+        <input type="hidden" name="cmd"/>
+
+        <p>
+            ID 8 verbergen
+            <button type="button" class="btn btn-default t3js-record-hide" data-state="hidden"
+                    data-params="data[tx_seminars_seminars][8][hidden]=0" data-toggle-title="Datensatz verbergen"
+                    aria-label="Datensatz sichtbar machen">
+            <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-hide"
+                  data-identifier="actions-edit-hide">
+                <span class="icon-markup">
+                    <svg class="icon-color">
+                        <use
+                            xlink:href="/_assets/1ee1d3e909b58d32e30dcea666dd3224/Icons/T3Icons/sprites/actions.svg#actions-toggle-on">
+                        </use>
+                    </svg>
+                </span>
+            </span>
+            </button>
+        </p>
+        <p>
+            ID 8 einblenden
+            <button type="button" class="btn btn-default t3js-record-hide" data-state="hidden"
+                    data-params="data[tx_seminars_seminars][8][hidden]=0" data-toggle-title="Datensatz verbergen"
+                    title="Datensatz sichtbar machen">
+            <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-edit-unhide"
+                  data-identifier="actions-edit-unhide">
+                <span class="icon-markup">
+                    <svg class="icon-color">
+                        <use
+                            xlink:href="/_assets/1ee1d3e909b58d32e30dcea666dd3224/Icons/T3Icons/sprites/actions.svg#actions-toggle-off">
+                        </use>
+                    </svg>
+                </span>
+            </span>
+            </button>
+        </p>
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="2" class="nowrap">
+                        <f:translate key="{propertyLabelPrefix}.uid"/>
+                    </th>
+                    <th scope="col" class="col-title col-responsive">
+                        <f:translate key="{propertyLabelPrefix}.internalTitle"/>
+                    </th>
+                    <th scope="col" class="nowrap">
+                        <f:translate key="{propertyLabelPrefix}.date"/>
+                    </th>
+                    <f:if condition="{permissions.writeAccessToEvents}">
+                        <th scope="col" class="col-control nowrap">&nbsp;</th>
                     </f:if>
-                    <td class="nowrap">
-                        <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
-                    </td>
-                    <td class="nowrap">
-                        <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
-                    </td>
-                    <td class="nowrap">
-                        <f:if condition="{statistics}">
-                            <f:if condition="({statistics.regularSeatsCount} || {statistics.waitingListSeatsCount})">
-                                <f:link.action
-                                    controller="BackEnd\Registration" action="showForEvent"
-                                    arguments="{eventUid: event.uid}"
-                                    title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}"
-                                    class="btn btn-default" additionalAttributes="{role: 'button'}">
-                                    <core:icon identifier="actions-list"/>
-                                    <f:translate key="{actionLabelPrefix}.showRegistrations"/>
-                                </f:link.action>
-                            </f:if>
-                        </f:if>
-                    </td>
+                    <th scope="col" class="nowrap">
+                        <f:translate key="{propertyLabelPrefix}.seats"/>
+                    </th>
+                    <th scope="col" colspan="2" class="nowrap">
+                        <f:translate key="{propertyLabelPrefix}.registrations"/>
+                    </th>
                     <f:if condition="{permissions.readAccessToRegistrations}">
-                        <td class="col-icon nowrap">
-                            <f:if condition="({visible} && {statistics} && {statistics.regularSeatsCount})">
-                                <f:link.action controller="BackEnd\Email" action="compose"
-                                               title="{f:translate(key: '{actionLabelPrefix}.email.long')}"
-                                               arguments="{event: event, pageUid: pageUid}"
-                                               class="btn btn-default" additionalAttributes="{role: 'button'}">
-                                    <core:icon identifier="content-elements-mailform"/>
-                                    <f:translate key="{actionLabelPrefix}.email"/>
-                                </f:link.action>
-                            </f:if>
-                        </td>
+                        <th scope="col" class="col-control nowrap">&nbsp;</th>
                     </f:if>
                 </tr>
-            </f:for>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <f:for each="{events}" as="event">
+                    <tr>
+                        <f:variable name="visible"
+                                    value="{f:if(condition: '{event.rawData.hidden}', then: 0, else: 1)}"/>
+                        <f:variable name="statistics" value="{event.statistics}"/>
+                        <td class="text-end text-right nowrap">
+                            {event.uid}
+                        </td>
+                        <td class="col-icon nowrap">
+                            <core:iconForRecord table="{tableName}" row="{event.rawData}"/>
+                        </td>
+                        <td class="col-title col-responsive">
+                            <f:if condition="{permissions.writeAccessToEvents}">
+                                <f:then>
+                                    <be:link.editRecord uid="{event.uid}" table="{tableName}">
+                                        {event.internalTitle}
+                                    </be:link.editRecord>
+                                </f:then>
+                                <f:else>
+                                    {event.internalTitle}
+                                </f:else>
+                            </f:if>
+                        </td>
+                        <td class="nowrap">
+                            <f:render partial="EventDate" arguments="{event: event}"/>
+                        </td>
+                        <f:if condition="{permissions.writeAccessToEvents}">
+                            <td class="col-control nowrap">
+                                <div class="btn-group" role="group">
+                                    <be:link.editRecord uid="{event.uid}" table="{tableName}" class="btn btn-default"
+                                                        title="{f:translate(key: '{actionLabelPrefix}.edit')}">
+                                        <core:icon identifier="actions-open"/>
+                                    </be:link.editRecord>
+                                    <f:if condition="{visible}">
+                                        <f:then>
+                                            <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=1', currentUrlParameterName:'redirect')}"
+                                               class="btn btn-default"
+                                               title="{f:translate(key: '{actionLabelPrefix}.hide')}">
+                                                <core:icon identifier="actions-edit-hide"/>
+                                            </a>
+                                        </f:then>
+                                        <f:else>
+                                            <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=0', currentUrlParameterName:'redirect')}"
+                                               class="btn btn-default"
+                                               title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
+                                                <core:icon identifier="actions-edit-unhide"/>
+                                            </a>
+                                        </f:else>
+                                    </f:if>
+
+                                    <span class="btn btn-default disabled">
+                                    <core:icon identifier="empty-empty"/>
+                                </span>
+                                </div>
+                            </td>
+                        </f:if>
+                        <td class="nowrap">
+                            <f:render partial="BackEnd/SeatStatistics" arguments="{event: event}"/>
+                        </td>
+                        <td class="nowrap">
+                            <f:render partial="BackEnd/RegistrationStatistics" arguments="{event: event}"/>
+                        </td>
+                        <td class="nowrap">
+                            <f:if condition="{statistics}">
+                                <f:if
+                                    condition="({statistics.regularSeatsCount} || {statistics.waitingListSeatsCount})">
+                                    <f:link.action
+                                        controller="BackEnd\Registration" action="showForEvent"
+                                        arguments="{eventUid: event.uid}"
+                                        title="{f:translate(key: '{actionLabelPrefix}.showRegistrations.long')}"
+                                        class="btn btn-default" additionalAttributes="{role: 'button'}">
+                                        <core:icon identifier="actions-list"/>
+                                        <f:translate key="{actionLabelPrefix}.showRegistrations"/>
+                                    </f:link.action>
+                                </f:if>
+                            </f:if>
+                        </td>
+                        <f:if condition="{permissions.readAccessToRegistrations}">
+                            <td class="col-icon nowrap">
+                                <f:if condition="({visible} && {statistics} && {statistics.regularSeatsCount})">
+                                    <f:link.action controller="BackEnd\Email" action="compose"
+                                                   title="{f:translate(key: '{actionLabelPrefix}.email.long')}"
+                                                   arguments="{event: event, pageUid: pageUid}"
+                                                   class="btn btn-default" additionalAttributes="{role: 'button'}">
+                                        <core:icon identifier="content-elements-mailform"/>
+                                        <f:translate key="{actionLabelPrefix}.email"/>
+                                    </f:link.action>
+                                </f:if>
+                            </td>
+                        </f:if>
+                    </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </form>
 </html>
