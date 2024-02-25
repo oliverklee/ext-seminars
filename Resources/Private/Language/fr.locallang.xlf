@@ -88,15 +88,9 @@
 				<source>Selected lodging options</source>
 				<target>Options d'hébergement choisies</target>
 			</trans-unit>
-			<trans-unit id="label_accommodation" xml:space="preserve">
-				<source>Accommodation</source>
-			</trans-unit>
 			<trans-unit id="label_foods" xml:space="preserve">
 				<source>Selected food options</source>
 				<target>Options de nourriture choisies</target>
-			</trans-unit>
-			<trans-unit id="label_food" xml:space="preserve">
-				<source>Food</source>
 			</trans-unit>
 			<trans-unit id="label_kids" xml:space="preserve">
 				<source>Number of kids</source>
@@ -278,9 +272,6 @@
 				<source>no</source>
 				<target>Non</target>
 			</trans-unit>
-			<trans-unit id="label_hours" xml:space="preserve">
-				<source>h</source>
-			</trans-unit>
 			<trans-unit id="message_notLoggedIn" xml:space="preserve">
 				<source>Please log in first.</source>
 				<target>Veuillez vous identifier d'abord.</target>
@@ -296,9 +287,6 @@
 			<trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
 				<source>You already have registered for this event.</source>
 				<target>Tu es déjà enregistré à cet événement.</target>
-			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
 				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
@@ -532,38 +520,6 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 				<source>to</source>
 				<target>jusqu'au</target>
 			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
-				<source>E-mail notifications</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
-				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
-				<source>UID of the page with the TypoScript configuration</source>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
-				<source>Please enter the UID of an existing page.</source>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-subject" xml:space="preserve">
-				<source>Event canceled: %eventTitle %eventDate</source>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-subject" xml:space="preserve">
-				<source>Event confirmed: %eventTitle %eventDate</source>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-body" xml:space="preserve">
-				<source>%salutation
-
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
-
-Unfortunately, we had to cancel this event.</source>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-body" xml:space="preserve">
-				<source>%salutation
-
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
-
-This event now has been confirmed.</source>
-			</trans-unit>
 			<trans-unit id="message_403" xml:space="preserve">
 				<source>Error 403. Sorry, you don't have access to this data.</source>
 				<target>Erreur 403. Désolé, vous n'avez pas accès à ces données.</target>
@@ -603,9 +559,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.seminar_list" xml:space="preserve">
 				<source>Event List</source>
 				<target>Liste d'événements</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.single_view" xml:space="preserve">
-				<source>Event Single View</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.topic_list" xml:space="preserve">
 				<source>Topic List</source>
@@ -702,9 +655,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.searchForm.organizer" xml:space="preserve">
 				<source>Organizer</source>
 				<target>Organisateur</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.categories" xml:space="preserve">
-				<source>Categories</source>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.searchForm.date" xml:space="preserve">
 				<source>Date</source>
@@ -870,39 +820,9 @@ This event now has been confirmed.</source>
 				<source>Text only</source>
 				<target>Texte uniquement</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.linkToSingleView" xml:space="preserve">
-				<source>Link the single view from the list view:</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.always" xml:space="preserve">
-				<source>always</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.never" xml:space="preserve">
-				<source>never</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription" xml:space="preserve">
-				<source>if the event has a description</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
 				<source>(from TS setup)</source>
 				<target>(du TS-setup)</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
-				<source>0 levels (only selected page)</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.1" xml:space="preserve">
-				<source>1 level</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.2" xml:space="preserve">
-				<source>2 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.3" xml:space="preserve">
-				<source>3 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.4" xml:space="preserve">
-				<source>4 levels</source>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.5" xml:space="preserve">
-				<source>Infinite</source>
 			</trans-unit>
 			<trans-unit id="pi_list_browseresults_prev" xml:space="preserve">
 				<source>&lt; Previous</source>
@@ -1103,9 +1023,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_organizing_partners" xml:space="preserve">
 				<source>Organizing partners</source>
 				<target>Partenaires de l'organisation</target>
-			</trans-unit>
-			<trans-unit id="label_categories" xml:space="preserve">
-				<source>Categories</source>
 			</trans-unit>
 			<trans-unit id="label_vacancies" xml:space="preserve">
 				<source>Vacancies</source>
@@ -1406,9 +1323,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Liste d'attente</target>
-			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
 				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
