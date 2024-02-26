@@ -80,25 +80,13 @@
 				<source>Total price</source>
 				<target>Totaal prijs</target>
 			</trans-unit>
-			<trans-unit id="label_attendees_names" xml:space="preserve">
-				<source>Registered persons</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_lodgings" xml:space="preserve">
 				<source>Selected lodging options</source>
 				<target>Gekozen verblijf opties</target>
 			</trans-unit>
-			<trans-unit id="label_accommodation" xml:space="preserve">
-				<source>Accommodation</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_foods" xml:space="preserve">
 				<source>Selected food options</source>
 				<target>Gekozen voeding opties</target>
-			</trans-unit>
-			<trans-unit id="label_food" xml:space="preserve">
-				<source>Food</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_kids" xml:space="preserve">
 				<source>Number of kids</source>
@@ -175,10 +163,6 @@
 			<trans-unit id="label_vacancies" xml:space="preserve">
 				<source>Vacancies</source>
 				<target>Vrije plaatsten</target>
-			</trans-unit>
-			<trans-unit id="label_unlimited" xml:space="preserve">
-				<source>unlimited</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_enough_attendees" xml:space="preserve">
 				<source>Enough attendees</source>
@@ -280,10 +264,6 @@
 				<source>no</source>
 				<target>nee</target>
 			</trans-unit>
-			<trans-unit id="label_hours" xml:space="preserve">
-				<source>h</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_notLoggedIn" xml:space="preserve">
 				<source>Please log in first.</source>
 				<target>U dient eerst in te loggen voordat u zich kunt registreren voor een evenement.</target>
@@ -299,10 +279,6 @@
 			<trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
 				<source>You already have registered for this event.</source>
 				<target>Je bent al voor dit evenement bijeenkomst aangemeld.</target>
-			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
 				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
@@ -344,14 +320,6 @@
 				<source>enough</source>
 				<target>genoeg</target>
 			</trans-unit>
-			<trans-unit id="message_fullyBooked" xml:space="preserve">
-				<source>fully booked</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
-				<source>starting %s</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="message_accessDenied" xml:space="preserve">
 				<source>Sorry, you don't have access to this part of the site.</source>
 				<target>Sorry, U heeft geen toegang tot dit deel van de website.</target>
@@ -364,61 +332,17 @@
 				<source>Registration confirmation</source>
 				<target>Bevestiging van de registratie</target>
 			</trans-unit>
-			<trans-unit id="email_confirmationHello" xml:space="preserve">
-				<source>thank you for registering for the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_confirmationHello_informal" xml:space="preserve">
-				<source>thank you for registering for the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_price" xml:space="preserve">
-				<source>at the total price of %s</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve">
 				<source>Unregistration confirmation</source>
 				<target>Bevestiging van annuleren registratie</target>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve">
-				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve">
-				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve">
 				<source>Registration for the waiting list confirmation</source>
 				<target>Bevestiging van registratie op de wachtlijst</target>
 			</trans-unit>
-			<trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve">
-				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve">
-				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve">
 				<source>Registration became a regular registration confirmation</source>
 				<target>De registratie is een bevestiging van een standaard registratie geworden</target>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve">
-				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve">
-				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_unregistrationNotice" xml:space="preserve">
-				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_unregistrationNotice_informal" xml:space="preserve">
-				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve">
 				<source>Your event has now enough registrations to be held.</source>
@@ -484,90 +408,6 @@ someone's registration just has become a regular registration of an event:</sour
 
 een registratie is zojuist een standaard registratie geworden voor een evenement:</target>
 			</trans-unit>
-			<trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve">
-				<source>&quot;%event&quot; begins in %days days</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve">
-				<source>Hello %organizer,
-
-the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve">
-				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve">
-				<source>Hello %organizer,
-
-the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_planned_disclaimer" xml:space="preserve">
-				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_hello_informal" xml:space="preserve">
-				<source>Dear</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_eventDate" xml:space="preserve">
-				<source>on %s</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_timeFrom" xml:space="preserve">
-				<source>from %s</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_timeAt" xml:space="preserve">
-				<source>at %s</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email_timeTo" xml:space="preserve">
-				<source>to</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
-				<source>E-mail notifications</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
-				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
-				<source>UID of the page with the TypoScript configuration</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
-				<source>Please enter the UID of an existing page.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-subject" xml:space="preserve">
-				<source>Event canceled: %eventTitle %eventDate</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-subject" xml:space="preserve">
-				<source>Event confirmed: %eventTitle %eventDate</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email-event-canceled-body" xml:space="preserve">
-				<source>%salutation
-
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
-
-Unfortunately, we had to cancel this event.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="email-event-confirmed-body" xml:space="preserve">
-				<source>%salutation
-
-you registered for the event &quot;%eventTitle&quot; (%eventDate).
-
-This event now has been confirmed.</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" xml:space="preserve">
 				<source>Events</source>
 				<target>Bijeenkomsten</target>
@@ -595,10 +435,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.seminar_list" xml:space="preserve">
 				<source>Event List</source>
 				<target>Lijst van Evenementen</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.single_view" xml:space="preserve">
-				<source>Event Single View</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.topic_list" xml:space="preserve">
 				<source>Topic List</source>
@@ -664,82 +500,6 @@ This event now has been confirmed.</source>
 				<source>informal</source>
 				<target>informeel</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_list_view" xml:space="preserve">
-				<source>List view</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.displaySearchFormFields" xml:space="preserve">
-				<source>Display search widget options:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.type" xml:space="preserve">
-				<source>Event type</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.language" xml:space="preserve">
-				<source>Language</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.country" xml:space="preserve">
-				<source>Country</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.city" xml:space="preserve">
-				<source>City</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.place" xml:space="preserve">
-				<source>Place</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.organizer" xml:space="preserve">
-				<source>Organizer</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.categories" xml:space="preserve">
-				<source>Categories</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.date" xml:space="preserve">
-				<source>Date</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.age" xml:space="preserve">
-				<source>Age</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.price" xml:space="preserve">
-				<source>Price</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.textField" xml:space="preserve">
-				<source>Full-text search</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToEventTypes" xml:space="preserve">
-				<source>List events only of these types:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToCategories" xml:space="preserve">
-				<source>List events only from these categories:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToPlaces" xml:space="preserve">
-				<source>List events only at these places:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitListViewToOrganizers" xml:space="preserve">
-				<source>List events only of these organizers:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies" xml:space="preserve">
-				<source>Show only events which have vacancies:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
-				<source>Show attached files list only to attendees:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
 				<source>Which event should be shown in a detailed view?</source>
 				<target>Welke evenement moet in de detailweergave getoond worden</target>
@@ -776,10 +536,6 @@ This event now has been confirmed.</source>
 				<source>events with the deadline in the future</source>
 				<target>Evenementen met sluitingsdatum in de toekomst</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.timeframeInList8" xml:space="preserve">
-				<source>today</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.hideFields" xml:space="preserve">
 				<source>Hide fields in detailed view (comma-separated):</source>
 				<target>Verberg velden in detailaanzicht (comma-separated):</target>
@@ -787,10 +543,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists" xml:space="preserve">
 				<source>Show empty option in selector widget:</source>
 				<target>Toon lege keuze opties in selector widget:</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter" xml:space="preserve">
-				<source>Number of years a user can search into the future:</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.hideSearchForm" xml:space="preserve">
 				<source>Hide the search form in list view:</source>
@@ -836,77 +588,9 @@ This event now has been confirmed.</source>
 				<source>Show site details</source>
 				<target>Toon locatie details</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sheet_registrationsListView" xml:space="preserve">
-				<source>Registrations list view</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve">
 				<source>Which FEuser fields to show in the list of registrations for an event</source>
 				<target>Welke FE user velden wil je tonen in het overzicht van registratie voor een seminar</target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
-				<source>Which registration fields to show in the list of registrations for an event:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
-				<source>Display of the categories:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.iconAndText" xml:space="preserve">
-				<source>Icons and text</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.iconOnly" xml:space="preserve">
-				<source>Icons only</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.textOnly" xml:space="preserve">
-				<source>Text only</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.linkToSingleView" xml:space="preserve">
-				<source>Link the single view from the list view:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.always" xml:space="preserve">
-				<source>always</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.never" xml:space="preserve">
-				<source>never</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription" xml:space="preserve">
-				<source>if the event has a description</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
-				<source>(from TS setup)</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
-				<source>0 levels (only selected page)</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.1" xml:space="preserve">
-				<source>1 level</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.2" xml:space="preserve">
-				<source>2 levels</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.3" xml:space="preserve">
-				<source>3 levels</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.4" xml:space="preserve">
-				<source>4 levels</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.recursive.I.5" xml:space="preserve">
-				<source>Infinite</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="pi_list_browseresults_prev" xml:space="preserve">
 				<source>&lt; Previous</source>
@@ -996,10 +680,6 @@ This event now has been confirmed.</source>
 				<source>Time slots</source>
 				<target>Bloktijden</target>
 			</trans-unit>
-			<trans-unit id="label_expiry" xml:space="preserve">
-				<source>License expiry</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_speakers">
 				<source>Speakers</source>
 				<target>Sprekers</target>
@@ -1072,18 +752,6 @@ This event now has been confirmed.</source>
 				<source>Target Groups</source>
 				<target>Doelgroepen</target>
 			</trans-unit>
-			<trans-unit id="label_attached_files_short" xml:space="preserve">
-				<source>Files</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_requirements" xml:space="preserve">
-				<source>Requirements</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_dependencies" xml:space="preserve">
-				<source>Required for</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_organizers" xml:space="preserve">
 				<source>Organizers</source>
 				<target>Organiseerders</target>
@@ -1091,10 +759,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_organizing_partners" xml:space="preserve">
 				<source>Organizing partners</source>
 				<target>Organiserende partners</target>
-			</trans-unit>
-			<trans-unit id="label_categories" xml:space="preserve">
-				<source>Categories</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_vacancies" xml:space="preserve">
 				<source>Vacancies</source>
@@ -1112,10 +776,6 @@ This event now has been confirmed.</source>
 				<source>Registration</source>
 				<target>Registratie</target>
 			</trans-unit>
-			<trans-unit id="label_attached_files" xml:space="preserve">
-				<source>Attached files</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_onlineRegistration" xml:space="preserve">
 				<source>Register now</source>
 				<target>Registreer nu</target>
@@ -1123,10 +783,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_onlineRegistrationOnQueue" xml:space="preserve">
 				<source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
 				<target>Registeren voor de wachtlijst&lt;br /&gt;(%d registraties op de wachtlijst)</target>
-			</trans-unit>
-			<trans-unit id="label_onlinePrebooking" xml:space="preserve">
-				<source>Prebook now</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_onlineUnregistration" xml:space="preserve">
 				<source>Unregister now</source>
@@ -1204,33 +860,9 @@ This event now has been confirmed.</source>
 				<source>Additional notes:</source>
 				<target>extra notities</target>
 			</trans-unit>
-			<trans-unit id="label_register_additional_attendees" xml:space="preserve">
-				<source>Persons to register:</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_seats" xml:space="preserve">
 				<source>Seats</source>
 				<target>Stoelen</target>
-			</trans-unit>
-			<trans-unit id="label_registered_themselves" xml:space="preserve">
-				<source>myself</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_firstname" xml:space="preserve">
-				<source>First name:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_lastname" xml:space="preserve">
-				<source>Last name:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_register_seats" xml:space="preserve">
-				<source>Seats to book:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_attendees_names" xml:space="preserve">
-				<source>Registered persons:</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_kids" xml:space="preserve">
 				<source>Number of kids:</source>
@@ -1243,10 +875,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_billing_address" xml:space="preserve">
 				<source>Billing address</source>
 				<target>Factuur adres</target>
-			</trans-unit>
-			<trans-unit id="label_company" xml:space="preserve">
-				<source>Company:</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="label_gender" xml:space="preserve">
 				<source>Mr./Mrs.:</source>
@@ -1352,26 +980,6 @@ This event now has been confirmed.</source>
 				<source>Search term</source>
 				<target>Zoek gegeven</target>
 			</trans-unit>
-			<trans-unit id="label_to" xml:space="preserve">
-				<source>to</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_organizer" xml:space="preserve">
-				<source>Organizer</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_date_search" xml:space="preserve">
-				<source>Period from</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_age_search" xml:space="preserve">
-				<source>Age:</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="label_price_search" xml:space="preserve">
-				<source>Price</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="label_searching_hints" xml:space="preserve">
 				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
 				<target>Je kunt de lijst van evenementen korter maken door een filter te gebruiken. Om de volledig lijst te zien, reset het filter.</target>
@@ -1395,10 +1003,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_waiting_list" xml:space="preserve">
 				<source>Waiting list</source>
 				<target>Wachtlijst</target>
-			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
 				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
@@ -1435,18 +1039,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="message_earlybird_price" xml:space="preserve">
 				<source>price valid and bookable until %s</source>
 				<target>Prijs is geldig en er kan geboekt worden tot %s</target>
-			</trans-unit>
-			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
-				<source>starting %s</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_noTargetGroupAgeNumber" xml:space="preserve">
-				<source>Please enter only positive numbers as minimum and maximum age.</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
-				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.loginPage">
 				<source>Login page (or with onetimeaccount)</source>

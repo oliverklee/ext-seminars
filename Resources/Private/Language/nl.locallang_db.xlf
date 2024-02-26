@@ -8,14 +8,6 @@
 				<source>Seminars</source>
 				<target>Seminars</target>
 			</trans-unit>
-			<trans-unit id="LGL.telephone" xml:space="preserve">
-				<source>Phone</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="LGL.gender" xml:space="preserve">
-				<source>Gender</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars" xml:space="preserve">
 				<source>Seminars</source>
 				<target>Seminars</target>
@@ -72,14 +64,6 @@
 				<source>Event type</source>
 				<target>Evenement type</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date" xml:space="preserve">
-				<source>Date</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time" xml:space="preserve">
-				<source>Time</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.language" xml:space="preserve">
 				<source>Language</source>
 				<target>Taal</target>
@@ -91,10 +75,6 @@
 			<trans-unit id="tx_seminars_seminars.credit_points" xml:space="preserve">
 				<source>Credit points</source>
 				<target>Kredietpunten</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.details_page" xml:space="preserve">
-				<source>Page with the details view</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.additional_information" xml:space="preserve">
 				<source>Additional information</source>
@@ -108,10 +88,6 @@
 				<source>Display the travelling terms checkbox in the registration form</source>
 				<target>Toon de reisvoorwaarden checkbox</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.needs_registration" xml:space="preserve">
-				<source>Needs registration</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations" xml:space="preserve">
 				<source>Allows multiple registrations from the same person</source>
 				<target>Staat meerdere registraties van dezelfde persoon toe</target>
@@ -120,29 +96,9 @@
 				<source>Status</source>
 				<target>Is geannuleerd</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_planned" xml:space="preserve">
-				<source>planned</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_canceled" xml:space="preserve">
-				<source>canceled</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_confirmed" xml:space="preserve">
-				<source>confirmed</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation" xml:space="preserve">
-				<source>Set the status automatically</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.notes" xml:space="preserve">
 				<source>Internal Notes</source>
 				<target>Interne Notities</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attached_files" xml:space="preserve">
-				<source>Attached files</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelSpeakers" xml:space="preserve">
 				<source>Speakers</source>
@@ -176,14 +132,6 @@
 				<source>Organizing Partners</source>
 				<target>Organisatoren partners</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent" xml:space="preserve">
-				<source>Organizers have been reminded about this event being about to take place</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent" xml:space="preserve">
-				<source>Organizers have been notified that the cancelation deadline has just passed</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime" xml:space="preserve">
 				<source>Place/Time</source>
 				<target>plaats/tijd</target>
@@ -200,10 +148,6 @@
 				<source>Time slots</source>
 				<target>Bloktijden</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date_registration" xml:space="preserve">
-				<source>Begin date for registration</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.deadline_registration" xml:space="preserve">
 				<source>Registration deadline</source>
 				<target>Sluitingsdatum voor registratie</target>
@@ -215,10 +159,6 @@
 			<trans-unit id="tx_seminars_seminars.deadline_unregistration" xml:space="preserve">
 				<source>Unregistration deadline</source>
 				<target>Annuleren deadline</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.expiry" xml:space="preserve">
-				<source>License expiry</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.place" xml:space="preserve">
 				<source>Place</source>
@@ -251,22 +191,6 @@
 			<trans-unit id="tx_seminars_seminars.attendees_max" xml:space="preserve">
 				<source>Maximal number of attendees</source>
 				<target>Maximum aantal deelnemers</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.queue_size" xml:space="preserve">
-				<source>Registration queue</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.offline_attendees" xml:space="preserve">
-				<source>Number of offline-registered attendees</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" xml:space="preserve">
-				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.mute_notification_emails" xml:space="preserve">
-				<source>Mute the notification emails to the organizers</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.target_groups" xml:space="preserve">
 				<source>Target groups</source>
@@ -312,25 +236,9 @@
 				<source>Allowed methods of payment</source>
 				<target>Toegestane Betaalwijzen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAccess" xml:space="preserve">
-				<source>Access</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.vips" xml:space="preserve">
 				<source>Managers of this event</source>
 				<target>FE gebruikers welke toestemming hebben om de lijst van registraties te zien</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.image" xml:space="preserve">
-				<source>Image</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.requirements" xml:space="preserve">
-				<source>Requirements</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.dependencies" xml:space="preserve">
-				<source>Requirement for</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve">
 				<source>Speakers</source>
@@ -380,41 +288,13 @@
 				<source>E-mail address</source>
 				<target>E-mail adres</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.cancelation_period" xml:space="preserve">
-				<source>Cancelation period (in days)</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances" xml:space="preserve">
 				<source>Attendances</source>
 				<target>Inschrijvingen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelOverview" xml:space="preserve">
-				<source>Overview</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation" xml:space="preserve">
-				<source>Booking Information</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments" xml:space="preserve">
-				<source>Registration Comments</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation" xml:space="preserve">
-				<source>Payment Information</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress" xml:space="preserve">
-				<source>Billing Address</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.uid" xml:space="preserve">
 				<source>Ticket ID</source>
 				<target>Kaart nummer</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.crdate" xml:space="preserve">
-				<source>Registration date</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.title" xml:space="preserve">
 				<source>Title</source>
@@ -448,14 +328,6 @@
 				<source>Method of payment</source>
 				<target>Betaalwijze</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve">
-				<source>Company</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.name" xml:space="preserve">
-				<source>Name</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.gender" xml:space="preserve">
 				<source>Gender</source>
 				<target>Geslacht</target>
@@ -467,30 +339,6 @@
 			<trans-unit id="tx_seminars_attendances.gender.I.1" xml:space="preserve">
 				<source>Ms.</source>
 				<target>Mv.</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.address" xml:space="preserve">
-				<source>Address</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.zip" xml:space="preserve">
-				<source>ZIP</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.city" xml:space="preserve">
-				<source>City</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.country" xml:space="preserve">
-				<source>Country</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.telephone" xml:space="preserve">
-				<source>Telephone</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.email" xml:space="preserve">
-				<source>E-mail</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.been_there" xml:space="preserve">
 				<source>Has attended</source>
@@ -536,10 +384,6 @@
 				<source>Additional notes</source>
 				<target>Aanvullende opmerkingen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registered_themselves" xml:space="preserve">
-				<source>Has signed up themselves</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.seats" xml:space="preserve">
 				<source>Number of seats</source>
 				<target>Aantal plaatsen</target>
@@ -547,10 +391,6 @@
 			<trans-unit id="tx_seminars_attendances.attendees_names" xml:space="preserve">
 				<source>Additional registered persons</source>
 				<target>Extra deelnemers</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.additional_persons" xml:space="preserve">
-				<source>Additional registered persons</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.kids" xml:space="preserve">
 				<source>Number of kids</source>
@@ -567,10 +407,6 @@
 			<trans-unit id="tx_seminars_sites.address" xml:space="preserve">
 				<source>Address</source>
 				<target>Adres</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_sites.zip" xml:space="preserve">
-				<source>ZIP code</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_sites.city" xml:space="preserve">
 				<source>City</source>
@@ -599,10 +435,6 @@
 			<trans-unit id="tx_seminars_organizers.title" xml:space="preserve">
 				<source>Name</source>
 				<target>Naam</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.description" xml:space="preserve">
-				<source>Description</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.homepage" xml:space="preserve">
 				<source>Homepage</source>
@@ -635,10 +467,6 @@
 			<trans-unit id="tx_seminars_event_types.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.single_view_page" xml:space="preserve">
-				<source>Single view page for events of this type</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_checkboxes" xml:space="preserve">
 				<source>Registration options with checkbox</source>
@@ -700,14 +528,6 @@
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.minimum_age" xml:space="preserve">
-				<source>Minimum age</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.maximum_age" xml:space="preserve">
-				<source>Maximum age</source>
-				<target></target>
-			</trans-unit>
 			<trans-unit id="tx_seminars_categories" xml:space="preserve">
 				<source>Categories</source>
 				<target>Categorieen</target>
@@ -715,14 +535,6 @@
 			<trans-unit id="tx_seminars_categories.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_categories.icon" xml:space="preserve">
-				<source>Icon</source>
-				<target></target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_categories.single_view_page" xml:space="preserve">
-				<source>Single view page for events in this category</source>
-				<target></target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_skills" xml:space="preserve">
 				<source>Skills</source>
