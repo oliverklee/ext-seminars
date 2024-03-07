@@ -196,6 +196,11 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Parameter &\\$configuration by\\-ref type of method OliverKlee\\\\Seminars\\\\Configuration\\\\EventRegistrationFlexForms\\:\\:buildFields\\(\\) expects array\\<string, array\\<string, string\\>\\>, array\\<string, array\\<int\\|string, array\\<int, string\\>\\|string\\>\\> given\\.$#"
+			count: 1
+			path: Classes/Configuration/EventRegistrationFlexForms.php
+
+		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: Classes/Configuration/SharedConfigurationCheck.php
@@ -1713,6 +1718,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$taskInfo \\(array\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:getAdditionalFields\\(\\) should be contravariant with parameter \\$taskInfo \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:getAdditionalFields\\(\\)$#"
 			count: 2
+			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
+
+		-
+			message: "#^Parameter &\\$submittedData by\\-ref type of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:validateAdditionalFields\\(\\) expects array\\<string, string\\>, array\\<string, int\\|string\\> given\\.$#"
+			count: 1
 			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
 
 		-
