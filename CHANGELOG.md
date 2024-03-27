@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Add `isHidden` and `setHidden` to `EventInterface` (#2937)
 - Use fewer flash messages in the backend module (#2913)
 - Require higher TYPO3 Core bugfix versions (#2852)
 - Switch to our own copy of `TemplateHelper` (#2833, #2836, #2838, #2840, #2855)
