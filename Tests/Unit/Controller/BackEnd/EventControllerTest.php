@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,6 +26,11 @@ final class EventControllerTest extends UnitTestCase
     private $subject;
 
     /**
+     * @var EventRepository&MockObject
+     */
+    private $eventRepositoryMock;
+
+    /**
      * @var CsvDownloader&MockObject
      */
     private $csvDownloaderMock;
@@ -38,10 +44,13 @@ final class EventControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'redirectToUri']
+            ['redirect', 'forward', 'redirectToUri'],
+            [$this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -151,5 +160,47 @@ final class EventControllerTest extends UnitTestCase
                 $this->response->getHeaders()
             );
         }
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionHidesEvent(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('hide')->with($uid);
+
+        $this->subject->hideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionRedirectsToModuleOverviewAction(): void
+    {
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+
+        $this->subject->hideAction(15);
+    }
+
+    /**
+     * @test
+     */
+    public function unhideActionUnhidesEvent(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('unhide')->with($uid);
+
+        $this->subject->unhideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function unhideActionRedirectsToModuleOverviewAction(): void
+    {
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+
+        $this->subject->unhideAction(15);
     }
 }
