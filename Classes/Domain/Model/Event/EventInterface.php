@@ -44,6 +44,10 @@ interface EventInterface
      */
     public const STATUS_CONFIRMED = 2;
 
+    public function isHidden(): bool;
+
+    public function setHidden(bool $hidden): void;
+
     public function getInternalTitle(): string;
 
     public function getDisplayTitle(): string;
