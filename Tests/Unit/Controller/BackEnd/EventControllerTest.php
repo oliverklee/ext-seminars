@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,6 +27,11 @@ final class EventControllerTest extends UnitTestCase
     private $subject;
 
     /**
+     * @var EventRepository&MockObject
+     */
+    private $eventRepositoryMock;
+
+    /**
      * @var CsvDownloader&MockObject
      */
     private $csvDownloaderMock;
@@ -38,10 +45,13 @@ final class EventControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'redirectToUri']
+            ['redirect', 'forward', 'redirectToUri'],
+            [$this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -151,5 +161,119 @@ final class EventControllerTest extends UnitTestCase
                 $this->response->getHeaders()
             );
         }
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfVisibleEventMarksEventAsHidden(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->subject->hideAction($uid);
+
+        self::assertTrue($event->isHidden());
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfVisibleEventUpdatesEvent(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->eventRepositoryMock->expects(self::once())->method('update')->with($event);
+
+        $this->subject->hideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfVisibleEventRedirectsToModuleOverviewAction(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'Module');
+
+        $this->subject->hideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfAlreadyHiddenEventKeepsEventAsHidden(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $event->setHidden(true);
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->subject->hideAction($uid);
+
+        self::assertTrue($event->isHidden());
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfAlreadyHiddenEventDoesNotUpdateEvent(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $event->setHidden(true);
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->eventRepositoryMock->expects(self::never())->method('update');
+
+        $this->subject->hideAction($uid);
+
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfAlreadyHiddenEventRedirectsToModuleOverviewAction(): void
+    {
+        $uid = 15;
+        $event = new SingleEvent();
+        $event->setHidden(true);
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn($event);
+
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'Module');
+
+        $this->subject->hideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfInexistentEventUpdatesNothing(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn(null);
+
+        $this->eventRepositoryMock->expects(self::never())->method('update');
+
+        $this->subject->hideAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hideActionWithUidOfExistentEventRedirectsToModuleOverviewAction(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('findOneByUidForBackend')->with($uid)->willReturn(null);
+
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'Module');
+
+        $this->subject->hideAction($uid);
     }
 }
