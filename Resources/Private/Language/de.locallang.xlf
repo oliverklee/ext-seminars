@@ -212,7 +212,7 @@
         <target state="final">Telefon:</target>
       </trans-unit>
       <trans-unit id="label_email" resname="label_email" approved="yes">
-        <source>E-mail address</source>
+        <source>Email address</source>
         <target state="final">E-Mail-Adresse:</target>
       </trans-unit>
       <trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -552,11 +552,11 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung "%event" wurde
         <target state="final">bis</target>
       </trans-unit>
       <trans-unit id="schedulerTasks.mailNotifier.name" resname="schedulerTasks.mailNotifier.name" approved="yes">
-        <source>E-mail notifications</source>
+        <source>Email notifications</source>
         <target state="final">E-Mail-Benachrichtigungen</target>
       </trans-unit>
       <trans-unit id="schedulerTasks.mailNotifier.description" resname="schedulerTasks.mailNotifier.description" approved="yes">
-        <source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+        <source>This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
         <target state="final">Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft.</target>
       </trans-unit>
       <trans-unit id="schedulerTasks.fields.page-uid" resname="schedulerTasks.fields.page-uid" approved="yes">
@@ -640,7 +640,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <target state="final">Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</target>
       </trans-unit>
       <trans-unit id="message_emailToAttendeesSent" resname="message_emailToAttendeesSent" approved="yes">
-        <source>The e-mail to the attendees has been sent.</source>
+        <source>The email to the attendees has been sent.</source>
         <target state="final">Die E-Mail an die TeilnehmerInnen wurde verschickt.</target>
       </trans-unit>
       <trans-unit id="mlang_tabs_tab" resname="mlang_tabs_tab" approved="yes">
@@ -1388,7 +1388,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <target state="final">Telefon:</target>
       </trans-unit>
       <trans-unit id="label_email" resname="label_email" approved="yes">
-        <source>E-mail address:</source>
+        <source>Email address:</source>
         <target state="final">E-Mail-Adresse:</target>
       </trans-unit>
       <trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">
@@ -1733,7 +1733,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees" resname="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees" approved="yes">
         <source>Show an email field for additional attendees</source>
-        <target state="final">Email-Feld für zusätzliche Personen anzeigen</target>
+        <target state="final">E-Mail-Feld für zusätzliche Personen anzeigen</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.tab.formFields" resname="plugin.eventRegistration.settings.tab.formFields" approved="yes">
         <source>Form fields</source>
@@ -2135,7 +2135,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="backEndModule.heading.email" resname="backEndModule.heading.email" approved="yes">
         <source>Send an email to all registered persons</source>
-        <target state="final">Email an alle angemeldeten Personen schicken</target>
+        <target state="final">E-Mail an alle angemeldeten Personen schicken</target>
       </trans-unit>
       <trans-unit id="backEndModule.message.selectFolder" resname="backEndModule.message.selectFolder" approved="yes">
         <source>Please select a folder in the page tree.</source>
@@ -2233,17 +2233,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Back to the event list</source>
         <target state="final">Zurück zur Veranstaltungsliste</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.email" resname="backEndModule.action.email">
+      <trans-unit id="backEndModule.action.email" resname="backEndModule.action.email" approved="yes">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="final">E-Mail</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.email.long" resname="backEndModule.action.email.long" approved="yes">
         <source>Send an email to all registered persons</source>
-        <target state="final">Email an alle angemeldeten Personen schicken</target>
+        <target state="final">E-Mail an alle angemeldeten Personen schicken</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.sendEmail" resname="backEndModule.action.sendEmail" approved="yes">
         <source>Send email</source>
-        <target state="final">Email verschicken</target>
+        <target state="final">E-Mail verschicken</target>
       </trans-unit>
       <trans-unit id="backEndModule.email.subject" resname="backEndModule.email.subject" approved="yes">
         <source>Subject</source>
@@ -2251,7 +2251,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="backEndModule.email.body" resname="backEndModule.email.body" approved="yes">
         <source>Email body</source>
-        <target state="final">Mailtext</target>
+        <target state="final">E-Mail-Text</target>
       </trans-unit>
       <trans-unit id="plugin.eventUnregistration.heading.sorry" resname="plugin.eventUnregistration.heading.sorry" approved="yes">
         <source>Sorry!</source>
