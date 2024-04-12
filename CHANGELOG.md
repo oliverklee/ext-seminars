@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add `resname` to all language labels (#2952)
 - Display registration statistics in the BE in all cases (#2909)
 - Avoid accessing the deprecated `TYPO3_MODE` constant (#2906)
 - Upgrade the XLIFF files to XLIFF 1.2 (#2890)
