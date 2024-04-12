@@ -406,7 +406,7 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email" approved="yes">
 				<source>Email address</source>
-				<target>Email-Adresse</target>
+				<target>E-Mail-Adresse</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.cancelation_period" resname="tx_seminars_speakers.cancelation_period" approved="yes">
 				<source>Cancelation period (in days)</source>
@@ -546,7 +546,7 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.email" resname="tx_seminars_attendances.email" approved="yes">
 				<source>Email</source>
-				<target>Email</target>
+				<target>E-Mail</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.been_there" resname="tx_seminars_attendances.been_there" approved="yes">
 				<source>Has attended</source>
@@ -666,7 +666,7 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email" approved="yes">
 				<source>Email address</source>
-				<target>Email-Adresse</target>
+				<target>E-Mail-Adresse</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer" approved="yes">
 				<source>Footer text to be appended to all emails from this organizer</source>
@@ -682,7 +682,7 @@
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description" approved="yes">
 				<source>Detailed description for emails</source>
-				<target>Detaillierte Beschreibung für Emails</target>
+				<target>Detaillierte Beschreibung für E-Mails</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types" approved="yes">
 				<source>Event types</source>
