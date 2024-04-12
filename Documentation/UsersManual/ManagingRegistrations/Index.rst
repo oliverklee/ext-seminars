@@ -40,20 +40,20 @@ happens:
    seminar are immediately updated in the back end and front end,
    preventing overbooked seminars.
 
-#. A thank-you e-mail is sent to the front-end user using the first
+#. A thank-you email is sent to the front-end user using the first
    organizer of that seminar record as From: address and that organizer's
-   e-mail footer. The thank-you e-mail also has a disclaimer if the event
+   email footer. The thank-you email also has a disclaimer if the event
    is planned and not confirmed yet. The disclaimer, says that the user
    will be informed if this event will be confirmed.
 
-#. A notification e-mail is sent to that seminar's organizers (all of
-   them, not just the first), using the attendee's e-mail address as
+#. A notification email is sent to that seminar's organizers (all of
+   them, not just the first), using the attendee's email address as
    From: address.
 
-#. Additional notification e-mails are sent if the event reaches the
+#. Additional notification emails are sent if the event reaches the
    minimum limit of registrations to be held, or if the event gets fully
    booked. These notifications go to all organizers of this event, the
-   first organizer's e-mail address is used as sender.These mails will
+   first organizer's email address is used as sender.These mails will
    only be sent, if they are activated in the TypoScript setup. By
    default, the mails will be sent.
 
@@ -75,7 +75,7 @@ In the **back-end module “Events”, you can
 *   export events as CSV
 *   display the registrations for an event
 *   export the registrations for an event as CSV
-*   send an e-mail to the attendees of an event
+*   send an email to the attendees of an event
 
 
 CSV export of events

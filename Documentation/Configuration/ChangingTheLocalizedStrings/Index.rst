@@ -26,7 +26,7 @@ Changing the localized strings
 ==============================
 
 You can change most of the localized strings that are used on the
-front end and for the e-mails. (The localized strings for the back end
+front end and for the emails. (The localized strings for the back end
 cannot be changed.)
 
 When you want to change some strings, please don't change

@@ -24,4 +24,4 @@ Live examples
    <https://r-stahl.com/de/global/services-und-seminare/seminare/offene-seminare>`__
 
 If you would like your site to be listed here, please drop the
-extension author a short e-mail.
+extension author a short email.

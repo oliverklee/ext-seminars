@@ -305,7 +305,7 @@
 				<source>Phone number (mobile)</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.cancelation_period" resname="tx_seminars_speakers.cancelation_period" approved="yes">
 				<source>Cancelation period (in days)</source>
@@ -410,7 +410,7 @@
 				<source>Telephone</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.email" resname="tx_seminars_attendances.email" approved="yes">
-				<source>E-mail</source>
+				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.been_there" resname="tx_seminars_attendances.been_there" approved="yes">
 				<source>Has attended</source>
@@ -500,10 +500,10 @@
 				<source>Homepage</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer" approved="yes">
-				<source>Footer text to be appended to all e-mails from this organizer</source>
+				<source>Footer text to be appended to all emails from this organizer</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" resname="tx_seminars_payment_methods" approved="yes">
 				<source>Methods of payment</source>
@@ -512,7 +512,7 @@
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description" approved="yes">
-				<source>Detailed description for e-mails</source>
+				<source>Detailed description for emails</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types" approved="yes">
 				<source>Event types</source>

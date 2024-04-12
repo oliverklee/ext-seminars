@@ -33,7 +33,7 @@ This is what needs to be changed:
    attendee to also enter the names of the other attendees, please also
    add *Names of the attendees.*
 
-#. Enable the seats field for the notification e-mail to the organizers
+#. Enable the seats field for the notification email to the organizers
    by adding *seats* to
    *plugin.tx\_seminars.showAttendanceFieldsInNotificationMail* . If you
    would like the attendee to also enter the names of the other
@@ -43,5 +43,5 @@ If the field *seats* is not filled in (i.e., the registration is for 0
 seats), the registration is counted as 1 seat.
 
 Please note the the number of seats currently is not included in the
-automated e-mail to the user. This will be implemented in a later
+automated email to the user. This will be implemented in a later
 version of this extension.

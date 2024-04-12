@@ -38,7 +38,7 @@ values for a basic setup:
      attendancesPID =
    }
 
-   # localizations for strings in e-mails and some FE parts go here (the example is for German)
+   # localizations for strings in emails and some FE parts go here (the example is for German)
    plugin.tx_seminars._LOCAL_LANG.de {
    }
 
@@ -70,7 +70,7 @@ values for a basic setup:
    plugin.tx_seminars_pi1.listView {
    }
 
-Note that the notification e-mail to the organizer and the list view
+Note that the notification email to the organizer and the list view
 show the headings even for empty fields, while the single view and the
-notification e-mail to the participant remove the headings for some
+notification email to the participant remove the headings for some
 seminar properties (not all, just where it makes sense).

@@ -84,9 +84,9 @@ List of available record types
          organizer
 
    c
-         These records contain the sender for the thank-you e-mail sent to the
+         These records contain the sender for the thank-you email sent to the
          attendees upon registration. In addition, registration notifications
-         are sent to this e-mail address.
+         are sent to this email address.
 
 
 .. container:: table-row
@@ -111,7 +111,7 @@ List of available record types
 
    c
          Speakers get listed in the list view and the single view, but they
-         don’t receive any e-mails.
+         don’t receive any emails.
 
 
 .. container:: table-row

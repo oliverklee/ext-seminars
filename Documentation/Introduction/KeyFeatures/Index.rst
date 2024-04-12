@@ -24,7 +24,7 @@ Key features
 - selector widget to filter the list of events in the list view
 
 - online registration and unregistration for front-end users, including
-  automatic confirmation e-mail and live update of available seats
+  automatic confirmation email and live update of available seats
 
 - early bird prices are possible
 

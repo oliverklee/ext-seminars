@@ -54,7 +54,7 @@ class Organizer extends AbstractModel implements MailRole
     }
 
     /**
-     * @return string our e-mail address, will not be empty
+     * @return string our email address, will not be empty
      */
     public function getEmailAddress(): string
     {
@@ -62,19 +62,19 @@ class Organizer extends AbstractModel implements MailRole
     }
 
     /**
-     * @param string $eMailAddress our e-mail address, must not be empty
+     * @param string $emailAddress our email address, must not be empty
      */
-    public function setEmailAddress(string $eMailAddress): void
+    public function setEmailAddress(string $emailAddress): void
     {
-        if ($eMailAddress == '') {
-            throw new \InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
+        if ($emailAddress == '') {
+            throw new \InvalidArgumentException('The parameter $emailAddress must not be empty.', 1333296861);
         }
 
-        $this->setAsString('email', $eMailAddress);
+        $this->setAsString('email', $emailAddress);
     }
 
     /**
-     * @return string our e-mail footer, may be empty
+     * @return string our email footer, may be empty
      */
     public function getEmailFooter(): string
     {
@@ -82,11 +82,11 @@ class Organizer extends AbstractModel implements MailRole
     }
 
     /**
-     * @param string $eMailFooter our e-mail footer, may be empty
+     * @param string $emailFooter our email footer, may be empty
      */
-    public function setEmailFooter(string $eMailFooter): void
+    public function setEmailFooter(string $emailFooter): void
     {
-        $this->setAsString('email_footer', $eMailFooter);
+        $this->setAsString('email_footer', $emailFooter);
     }
 
     public function hasEmailFooter(): bool

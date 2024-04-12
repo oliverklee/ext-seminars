@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Unify the spelling of "email" (#2953)
 - Add `isHidden` and `setHidden` to `EventInterface` (#2937)
 - Use fewer flash messages in the backend module (#2913)
 - Require higher TYPO3 Core bugfix versions (#2852)

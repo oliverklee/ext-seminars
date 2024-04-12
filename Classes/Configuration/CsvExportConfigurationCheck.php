@@ -114,7 +114,7 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInTableColumnsOrEmpty(
             'fieldsFromFeUserForCliCsv',
-            'These values specify the FE user fields to export via CSV in e-mail mode.
+            'These values specify the FE user fields to export via CSV in email mode.
             A mistyped field name will cause the field to not get included.',
             'fe_users'
         );
@@ -124,7 +124,7 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInTableColumnsOrEmpty(
             'fieldsFromAttendanceForEmailCsv',
-            'These values specify the registration fields to export via CSV in e-mail mode.
+            'These values specify the registration fields to export via CSV in email mode.
             A mistyped field name will cause the field to not get included.',
             'tx_seminars_attendances'
         );
@@ -135,7 +135,7 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
         $this->checkIfBoolean(
             'showAttendancesOnRegistrationQueueInEmailCsv',
             'This value specifies if attendances on the registration queue should also be exported in the CSV file
-            in the e-mail mode.
+            in the email mode.
             If this is not set correctly, the attendances on the registration queue might not get exported.'
         );
     }

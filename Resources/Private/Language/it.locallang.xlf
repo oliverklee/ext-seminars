@@ -185,7 +185,7 @@
 				<target>Telefono</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>Indirizzo email</target>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -925,7 +925,7 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 				<target>Telefono:</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 				<target>E-mail:</target>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">

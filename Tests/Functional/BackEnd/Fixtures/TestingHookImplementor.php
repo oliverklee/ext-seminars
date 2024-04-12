@@ -19,7 +19,7 @@ final class TestingHookImplementor implements BackEndModule, SingletonInterface
      */
     private $countCallForGeneralEmail = 0;
 
-    public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void
+    public function modifyGeneralEmail(Registration $registration, MailMessage $email): void
     {
         $this->countCallForGeneralEmail++;
     }

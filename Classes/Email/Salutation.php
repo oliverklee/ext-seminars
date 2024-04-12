@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * This class creates a salutation for e-mails.
+ * This class creates a salutation for emails.
  */
 class Salutation
 {
@@ -69,7 +69,7 @@ class Salutation
     }
 
     /**
-     * Creates an e-mail introduction with the given event's title, date and
+     * Creates an email introduction with the given event's title, date and
      * time prepended with the given introduction string.
      *
      * @param string $introductionBegin

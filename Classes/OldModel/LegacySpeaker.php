@@ -170,9 +170,9 @@ class LegacySpeaker extends AbstractModel
     }
 
     /**
-     * Gets our e-mail address.
+     * Gets our email address.
      *
-     * @return string our e-mail address (or '' if there is an error)
+     * @return string our email address (or '' if there is an error)
      */
     public function getEmail(): string
     {

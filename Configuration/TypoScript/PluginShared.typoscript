@@ -12,28 +12,28 @@ plugin.tx_seminars {
   # whether to use formal or informal language
   salutation = formal
 
-  # comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
+  # comma-separated list of section names that shouldn't be displayed in the thank-you email to the user
   hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
 
-  # the CSS file for the HTML e-mail to the attendees
+  # the CSS file for the HTML email to the attendees
   cssFileForAttendeeMail = EXT:seminars/Resources/Private/CSS/thankYouMail.css
 
-  # whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
+  # whether to use the label "Price" for the standard price (instead of "standard price") in email to the participant
   generalPriceInMail = 0
 
-  # Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
+  # Comma-separated list of section names from the registration that shouldn't be displayed in the notification email to the organizers. These fields are the big blocks in that email, and some are further divided.
   hideFieldsInNotificationMail =
 
-  # comma-separated list of field names from seminars that should be mentioned in the notification e-mail to the organizers (in the "seminardata" section)
+  # comma-separated list of field names from seminars that should be mentioned in the notification email to the organizers (in the "seminardata" section)
   showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_regular_early,price_special,price_special_early,attendees,vacancies,enough_attendees,is_full
 
-  # comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
+  # comma-separated list of field names from fe_users that should be mentioned in the notification email to the organizers  (in the "feuserdata" section)
   showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone
 
-  # comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
+  # comma-separated list of field names from attendances that should be mentioned in the notification email to the organizers  (in the "attendancedata" section)
   showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
-  # Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
+  # Whether to send the additional notification emails to the organizers or not. Additional notification mails are sent if for example an event gets full.
   sendAdditionalNotificationEmails = 1
 
   # Whether to send a notification to the organizers if a user has registered.
@@ -60,7 +60,7 @@ plugin.tx_seminars {
   # Whether to send a confirmation to the user if the queue has been updated.
   sendConfirmationOnQueueUpdate = 1
 
-  # Whether to add the CSV file of the registrations when sending the reminder e-mails to the organizers.
+  # Whether to add the CSV file of the registrations when sending the reminder emails to the organizers.
   addRegistrationCsvToOrganizerReminderMail = 0
 
   # the time format (in strftime format), @deprecated #2342 will be removed in seminars 6.0
@@ -121,7 +121,7 @@ plugin.tx_seminars {
   # whether to send a cancelation deadline reminder to the organizers
   sendCancelationDeadlineReminder = 0
 
-  # how many days before an events' begin date the organizers should be reminded about this event via e-mail, zero disables the reminder
+  # how many days before an events' begin date the organizers should be reminded about this event via email, zero disables the reminder
   sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
 
   # The following variables don't have any default values provided.

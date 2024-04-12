@@ -8,17 +8,17 @@ use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
- * This class represents an e-mail form that does not change the event's status.
+ * This class represents an email form that does not change the event's status.
  */
 class GeneralEventMailForm extends AbstractEventMailForm
 {
     /**
-     * Calls all registered hooks for modifying the e-mail.
+     * Calls all registered hooks for modifying the email.
      */
-    protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void
+    protected function modifyEmailWithHook(Registration $registration, MailMessage $email): void
     {
         foreach ($this->getHooks() as $hook) {
-            $hook->modifyGeneralEmail($registration, $eMail);
+            $hook->modifyGeneralEmail($registration, $email);
         }
     }
 }

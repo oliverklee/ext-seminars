@@ -47,12 +47,12 @@ An organizer record contains the following fields:
 
 - homepage URL including the http://, will be shown on the front end
 
-- **e-mail address** (required, must be valid), notifications of new
+- **email address** (required, must be valid), notifications of new
   registrations will be sent to this address, this address will be used
-  as From: address for the confirmation e-mails when someone registers
+  as From: address for the confirmation emails when someone registers
   for a workshop, will not be shown on the front end
 
-- footer text that will be put at the end of all e-mails sent by this
+- footer text that will be put at the end of all emails sent by this
   organizer
 
 - a sys folder where registration records for events should be stored
@@ -65,7 +65,7 @@ include the following fields:
 
 - **title** (required)
 
-- detailed description (will be included in the confirmation e-mail on
+- detailed description (will be included in the confirmation email on
   registration)
 
 
@@ -99,7 +99,7 @@ displayed on the front end:
 
 - mobile phone number
 
-- e-mail address
+- email address
 
 Speakers can be listed in event record in four different roles: As
 speakers, partners, tutors or leaders. Only the first role will be
@@ -273,9 +273,9 @@ the front end:
   displayed in the registration form
 
 - **allowed payment methods** for this seminar (they will be listed in
-  the details page and in the confirmation e-mail to the attendee, so
+  the details page and in the confirmation email to the attendee, so
   **you must set at least the allowed payment methods if you want to
-  have them to be mentioned via e-mail to the attendees** )
+  have them to be mentioned via email to the attendees** )
 
 - **organizer(s)** , select one or more organizers from the database
   (required).
@@ -385,7 +385,7 @@ module that assist the organizer.**
 
   - telephone
 
-  - e-mail
+  - email
 
 - been\_there
 
@@ -446,6 +446,6 @@ There are two common ways for assigning numbers to your event:
 
 #. If you would like to assign the numbers yourself or you need to have
    non-numeric event IDs, you can use the “accreditation number” field
-   and change the front-end and e-mail labels accordingly (see the
+   and change the front-end and email labels accordingly (see the
    corresponding section in this manual about how to do this). In this
    case, you need to make sure yourself that the IDs are unique.

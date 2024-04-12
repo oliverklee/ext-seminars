@@ -185,7 +185,7 @@
 				<target>Телефон</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>E-mail</target>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -901,7 +901,7 @@ someone's registration just has become a regular registration of an event:</sour
 				<target>Телефон</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 				<target>E-mail</target>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">

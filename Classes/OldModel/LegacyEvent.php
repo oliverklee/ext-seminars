@@ -1757,11 +1757,11 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets our organizers' names and e-mail addresses in the format '"John Doe" <john.doe@example.com>'.
+     * Gets our organizers' names and email addresses in the format '"John Doe" <john.doe@example.com>'.
      *
      * The name is not encoded yet.
      *
-     * @return string[] the organizers' names and e-mail addresses
+     * @return string[] the organizers' names and email addresses
      */
     public function getOrganizersNameAndEmail(): array
     {
@@ -1780,10 +1780,10 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets our organizers' e-mail addresses in the format
+     * Gets our organizers' email addresses in the format
      * "john.doe@example.com".
      *
-     * @return string[] the organizers' e-mail addresses
+     * @return string[] the organizers' email addresses
      */
     public function getOrganizersEmail(): array
     {
@@ -1802,10 +1802,10 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets our organizers' e-mail footers.
+     * Gets our organizers' email footers.
      *
-     * @return string[] the organizers' e-mail footers, will be empty if no
-     *               organizer was set, or all organizers have no e-mail footer
+     * @return string[] the organizers' email footers, will be empty if no
+     *               organizer was set, or all organizers have no email footer
      */
     public function getOrganizersFooter(): array
     {
@@ -3556,7 +3556,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether notification e-mail to the organizers are muted.
+     * Checks whether notification email to the organizers are muted.
      */
     public function shouldMuteNotificationEmails(): bool
     {
@@ -3564,7 +3564,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Makes sure that notification e-mail to the organizers are muted.
+     * Makes sure that notification email to the organizers are muted.
      */
     public function muteNotificationEmails(): void
     {

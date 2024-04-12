@@ -552,7 +552,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailSubjectContainsConfirmationSubject(): void
+    public function notifyAttendeemailSubjectContainsConfirmationSubject(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -572,7 +572,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsEventTitle(): void
+    public function notifyAttendeeEmailBodyContainsEventTitle(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -589,7 +589,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers(): void
+    public function notifyAttendeeEmailBodyNotContainsRawTemplateMarkers(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -606,7 +606,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma(): void
+    public function notifyAttendeeEmailBodyNotContainsSpaceBeforeComma(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -623,7 +623,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationFood(): void
+    public function notifyAttendeeEmailBodyContainsRegistrationFood(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -640,7 +640,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationAccommodation(): void
+    public function notifyAttendeeEmailBodyContainsRegistrationAccommodation(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -657,7 +657,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationInterests(): void
+    public function notifyAttendeeEmailBodyContainsRegistrationInterests(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -674,7 +674,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailSubjectContainsEventTitle(): void
+    public function notifyAttendeemailSubjectContainsEventTitle(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1088,7 +1088,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyCanContainAttendeesNames(): void
+    public function notifyAttendeeEmailBodyCanContainAttendeesNames(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);

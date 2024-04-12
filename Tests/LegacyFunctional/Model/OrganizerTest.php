@@ -159,7 +159,7 @@ final class OrganizerTest extends FunctionalTestCase
     }
 
     ////////////////////////////////////////
-    // Tests regarding the e-mail address.
+    // Tests regarding the email address.
     ////////////////////////////////////////
 
     /**
@@ -171,7 +171,7 @@ final class OrganizerTest extends FunctionalTestCase
             \InvalidArgumentException::class
         );
         $this->expectExceptionMessage(
-            'The parameter $eMailAddress must not be empty.'
+            'The parameter $emailAddress must not be empty.'
         );
 
         $this->subject->setEmailAddress('');
@@ -204,7 +204,7 @@ final class OrganizerTest extends FunctionalTestCase
     }
 
     ///////////////////////////////////////
-    // Tests regarding the e-mail footer.
+    // Tests regarding the email footer.
     ///////////////////////////////////////
 
     /**

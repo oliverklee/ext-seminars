@@ -185,7 +185,7 @@
 				<target>Telefoon</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>E-mail adres</target>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -913,7 +913,7 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 				<target>Telefoon:</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 				<target>E-mail adres:</target>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">

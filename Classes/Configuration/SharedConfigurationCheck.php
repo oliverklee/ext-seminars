@@ -54,7 +54,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'generalPriceInMail',
-            'This value specifies which wording to use for the standard price in e-mails.
+            'This value specifies which wording to use for the standard price in emails.
             If this value is incorrect, the wrong wording might get used.'
         );
     }
@@ -123,7 +123,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     }
 
     /**
-     * Checks the configuration related to notification e-mails.
+     * Checks the configuration related to notification emails.
      */
     private function checkNotificationMail(): void
     {
@@ -142,7 +142,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInSetOrEmpty(
             'hideFieldsInNotificationMail',
-            'These values specify the sections to hide in e-mails to organizers.
+            'These values specify the sections to hide in emails to organizers.
             A mistyped field name will cause the field to be included nonetheless.',
             ['summary', 'seminardata', 'feuserdata', 'attendancedata']
         );
@@ -152,7 +152,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInSetOrEmpty(
             'showSeminarFieldsInNotificationMail',
-            'These values specify the event fields to show in e-mails to  organizers.
+            'These values specify the event fields to show in emails to  organizers.
             A mistyped field name will cause the field to not get included.',
             [
                 'uid',
@@ -187,7 +187,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInTableColumnsOrEmpty(
             'showFeUserFieldsInNotificationMail',
-            'These values specify the FE user fields to show in e-mails to organizers.
+            'These values specify the FE user fields to show in emails to organizers.
             A mistyped field name will cause the field to not get included.',
             'fe_users'
         );
@@ -197,7 +197,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInSetOrEmpty(
             'showAttendanceFieldsInNotificationMail',
-            'These values specify the registration fields to show in e-mails to organizers.
+            'These values specify the registration fields to show in emails to organizers.
             A mistyped field name will cause the field to not get included.',
             [
                 'uid',
@@ -234,8 +234,8 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendAdditionalNotificationEmails',
-            'This value specifies whether organizers receive additional notification e-mails.
-            If this value is incorrect, e-mails might get sent when this is not intended (or vice versa).'
+            'This value specifies whether organizers receive additional notification emails.
+            If this value is incorrect, emails might get sent when this is not intended (or vice versa).'
         );
     }
 
@@ -243,7 +243,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendNotification',
-            'This value specifies whether a notification e-mail should be sent to the organizer
+            'This value specifies whether a notification email should be sent to the organizer
             after a user has registered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
@@ -253,7 +253,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendNotificationOnQueueUpdate',
-            'This value specifies whether a notification e-mail should be sent to the organizer
+            'This value specifies whether a notification email should be sent to the organizer
             after the queue has been updated.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
@@ -263,7 +263,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendNotificationOnRegistrationForQueue',
-            'This value specifies whether a notification e-mail should be sent to the organizer
+            'This value specifies whether a notification email should be sent to the organizer
             after someone registered for the queue.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
@@ -273,7 +273,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendNotificationOnUnregistration',
-            'This value specifies whether a notification e-mail should be sent to the organizer
+            'This value specifies whether a notification email should be sent to the organizer
             after a user has unregistered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
@@ -289,7 +289,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     }
 
     /**
-     * Checks the configuration related to thank-you e-mails.
+     * Checks the configuration related to thank-you emails.
      */
     private function checkThankYouMail(): void
     {
@@ -304,7 +304,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfMultiInSetOrEmpty(
             'hideFieldsInThankYouMail',
-            'These values specify the sections to hide in e-mails to  participants.
+            'These values specify the sections to hide in emails to  participants.
             A mistyped field name will cause the field to be included nonetheless.',
             [
                 'hello',
@@ -344,7 +344,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendConfirmation',
-            'This value specifies whether a confirmation e-mail should be sent to the user they have registered.
+            'This value specifies whether a confirmation email should be sent to the user they have registered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
     }
@@ -353,7 +353,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendConfirmationOnQueueUpdate',
-            'This value specifies whether a confirmation e-mail should be sent to the user
+            'This value specifies whether a confirmation email should be sent to the user
             after the queue has been updated.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
@@ -363,7 +363,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendConfirmationOnRegistrationForQueue',
-            'This value specifies whether a confirmation e-mail should be sent
+            'This value specifies whether a confirmation email should be sent
             to the user after the user has registered for the queue. If
             this value is not set correctly, the sending of notifications
             probably will not work as expected.'
@@ -374,7 +374,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'sendConfirmationOnUnregistration',
-            'This value specifies whether a confirmation e-mail should be sent to the user after they have unregistered.
+            'This value specifies whether a confirmation email should be sent to the user after they have unregistered.
             If this value is not set correctly, the sending of notifications probably will not work as expected.'
         );
     }

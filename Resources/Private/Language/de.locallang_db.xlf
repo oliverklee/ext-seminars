@@ -405,8 +405,8 @@
 				<target>Handynummer</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email" approved="yes">
-				<source>E-mail address</source>
-				<target>E-Mail-Adresse</target>
+				<source>Email address</source>
+				<target>Email-Adresse</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.cancelation_period" resname="tx_seminars_speakers.cancelation_period" approved="yes">
 				<source>Cancelation period (in days)</source>
@@ -545,8 +545,8 @@
 				<target>Telefon</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.email" resname="tx_seminars_attendances.email" approved="yes">
-				<source>E-mail</source>
-				<target>E-Mail</target>
+				<source>Email</source>
+				<target>Email</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.been_there" resname="tx_seminars_attendances.been_there" approved="yes">
 				<source>Has attended</source>
@@ -665,11 +665,11 @@
 				<target>Homepage</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email" approved="yes">
-				<source>E-mail address</source>
-				<target>E-Mail-Adresse</target>
+				<source>Email address</source>
+				<target>Email-Adresse</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer" approved="yes">
-				<source>Footer text to be appended to all e-mails from this organizer</source>
+				<source>Footer text to be appended to all emails from this organizer</source>
 				<target>Text, der allen Mails dieses Veranstalters angehängt wird</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" resname="tx_seminars_payment_methods" approved="yes">
@@ -681,8 +681,8 @@
 				<target>Titel</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description" approved="yes">
-				<source>Detailed description for e-mails</source>
-				<target>Detaillierte Beschreibung für E-Mails</target>
+				<source>Detailed description for emails</source>
+				<target>Detaillierte Beschreibung für Emails</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types" approved="yes">
 				<source>Event types</source>

@@ -21,7 +21,7 @@ class Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * @return string our e-mail address, will not be empty
+     * @return string our email address, will not be empty
      */
     public function getEmailAddress(): string
     {
