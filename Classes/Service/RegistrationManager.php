@@ -43,17 +43,17 @@ class RegistrationManager
     use SharedPluginConfiguration;
 
     /**
-     * @var int use text format for e-mails to attendees
+     * @var int use text format for emails to attendees
      */
     public const SEND_TEXT_MAIL = 0;
 
     /**
-     * @var int use HTML format for e-mails to attendees
+     * @var int use HTML format for emails to attendees
      */
     public const SEND_HTML_MAIL = 1;
 
     /**
-     * @var int use user-specific format for e-mails to attendees
+     * @var int use user-specific format for emails to attendees
      */
     public const SEND_USER_MAIL = 2;
 
@@ -331,7 +331,7 @@ class RegistrationManager
     }
 
     /**
-     * Sends the e-mails for a new registration.
+     * Sends the emails for a new registration.
      */
     public function sendEmailsForNewRegistration(TemplateHelper $plugin): void
     {
@@ -425,7 +425,7 @@ class RegistrationManager
     }
 
     /**
-     * Sends an e-mail to the attendee with a message concerning his/her registration or unregistration.
+     * Sends an email to the attendee with a message concerning his/her registration or unregistration.
      *
      * @param LegacyRegistration $oldRegistration the registration for which the notification should be sent
      * @param string $helloSubjectPrefix
@@ -540,7 +540,7 @@ class RegistrationManager
     }
 
     /**
-     * Sends an e-mail to all organizers with a message about a registration or unregistration.
+     * Sends an email to all organizers with a message about a registration or unregistration.
      *
      * @param LegacyRegistration $registration
      *        the registration for which the notification should be sent
@@ -633,7 +633,7 @@ class RegistrationManager
 
     /**
      * Checks if additional notifications to the organizers are necessary.
-     * In that case, the notification e-mails will be sent to all organizers.
+     * In that case, the notification emails will be sent to all organizers.
      *
      * Additional notifications mails will be sent out upon the following events:
      * - an event now has enough registrations
@@ -694,7 +694,7 @@ class RegistrationManager
     }
 
     /**
-     * Returns the topic for the additional notification e-mail.
+     * Returns the topic for the additional notification email.
      *
      * @param LegacyRegistration $registration the registration for which the notification
      *        should be sent
@@ -724,7 +724,7 @@ class RegistrationManager
     }
 
     /**
-     * Returns the message for an e-mail according to the reason
+     * Returns the message for an email according to the reason
      * $reasonForNotification provided.
      *
      * @param LegacyRegistration $registration the registration for which the notification should be sent
@@ -776,7 +776,7 @@ class RegistrationManager
     }
 
     /**
-     * Builds the e-mail body for an e-mail to the attendee.
+     * Builds the email body for an email to the attendee.
      *
      * @param LegacyRegistration $registration
      *        the registration for which the notification should be sent
@@ -790,7 +790,7 @@ class RegistrationManager
      *        In the following, the parameter is prefixed with "email_" and suffixed with "Hello" or "Subject".
      * @param bool $useHtml whether to create HTML instead of plain text
      *
-     * @return string the e-mail body for the attendee e-mail, will not be empty
+     * @return string the email body for the attendee email, will not be empty
      */
     private function buildEmailContent(
         LegacyRegistration $registration,
@@ -1086,7 +1086,7 @@ class RegistrationManager
     }
 
     /**
-     * Formats a place for the thank-you e-mail.
+     * Formats a place for the thank-you email.
      *
      * @param Place $place the place to format
      * @param string $newline the newline to use in formatting, must be either LF or '<br />'
@@ -1104,7 +1104,7 @@ class RegistrationManager
     }
 
     /**
-     * Sets the introductory part of the e-mail to the attendees.
+     * Sets the introductory part of the email to the attendees.
      *
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
@@ -1144,7 +1144,7 @@ class RegistrationManager
 
     /**
      * Fills or hides the unregistration notice depending on the notification
-     * e-mail type.
+     * email type.
      *
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
@@ -1154,7 +1154,7 @@ class RegistrationManager
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
      * @param LegacyRegistration $registration the registration the introduction should be created for
-     * @param bool $useHtml whether to send HTML instead of plain text e-mail
+     * @param bool $useHtml whether to send HTML instead of plain text email
      */
     private function fillOrHideUnregistrationNotice(
         string $helloSubjectPrefix,

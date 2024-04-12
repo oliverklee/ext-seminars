@@ -161,10 +161,10 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Sends an e-mail to the organizers of the provided event.
+     * Sends an email to the organizers of the provided event.
      *
      * @param LegacyEvent $event event for which to send the reminder to its organizers
-     * @param non-empty-string $messageKey locallang key for the message content and the subject for the e-mail to send
+     * @param non-empty-string $messageKey locallang key for the message content and the subject for the email to send
      */
     private function sendRemindersToOrganizers(LegacyEvent $event, string $messageKey): void
     {
@@ -299,7 +299,7 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Returns localized e-mail content customized for the provided event and
+     * Returns localized email content customized for the provided event and
      * the provided organizer.
      *
      * @param non-empty-string $locallangKey locallang key for the text in which to replace keywords beginning
@@ -309,7 +309,7 @@ class MailNotifier extends AbstractTask
      * @param string $organizerName name of the organizer, may be empty if no organizer name needs to be inserted
      *        in the text
      *
-     * @return string the localized e-mail content, will not be empty
+     * @return string the localized email content, will not be empty
      */
     private function customizeMessage(string $locallangKey, LegacyEvent $event, string $organizerName = ''): string
     {
@@ -347,9 +347,9 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Checks whether the CSV file should be added to the e-mail.
+     * Checks whether the CSV file should be added to the email.
      *
-     * @param LegacyEvent $event the event to send the e-mail for
+     * @param LegacyEvent $event the event to send the email for
      */
     private function shouldCsvFileBeAdded(LegacyEvent $event): bool
     {

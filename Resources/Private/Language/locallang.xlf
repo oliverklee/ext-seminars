@@ -161,7 +161,7 @@
 				<source>Phone</source>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
 				<source>Special interests</source>
@@ -410,10 +410,10 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 				<source>to</source>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.mailNotifier.name" resname="schedulerTasks.mailNotifier.name" approved="yes">
-				<source>E-mail notifications</source>
+				<source>Email notifications</source>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.mailNotifier.description" resname="schedulerTasks.mailNotifier.description" approved="yes">
-				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+				<source>This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.fields.page-uid" resname="schedulerTasks.fields.page-uid" approved="yes">
 				<source>UID of the page with the TypoScript configuration</source>
@@ -472,7 +472,7 @@ This event now has been confirmed.</source>
 				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" resname="message_emailToAttendeesSent" approved="yes">
-				<source>The e-mail to the attendees has been sent.</source>
+				<source>The email to the attendees has been sent.</source>
 			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" resname="mlang_tabs_tab" approved="yes">
 				<source>Events</source>
@@ -1033,7 +1033,7 @@ This event now has been confirmed.</source>
 				<source>Phone number:</source>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">
 				<source>Lodging:</source>

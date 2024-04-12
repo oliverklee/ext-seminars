@@ -13,7 +13,7 @@ use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
- * This is the configuration for the e-mail notifier task.
+ * This is the configuration for the email notifier task.
  */
 class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
 {

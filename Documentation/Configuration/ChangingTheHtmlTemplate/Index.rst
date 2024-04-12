@@ -38,7 +38,7 @@ This extension uses a couple of different HTML templates:
          Resources/Private/Templates/Mail/e-mail.html
 
    contents
-         automatic e-mails
+         automatic emails
 
    TS setup variable
          plugin.tx\_seminars.templateFile ( *not* in flexforms)

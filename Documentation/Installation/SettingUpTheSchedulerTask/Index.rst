@@ -24,7 +24,7 @@ send reminders to the events' organizers
 - if the speakers' cancelation deadline of a neither confirmed nor
   canceled event has just passed.
 
-The reminders are e-mails with a localized text and the list of
+The reminders are emails with a localized text and the list of
 registrations appended as CSV.
 
 To setup the CLI, do the following:

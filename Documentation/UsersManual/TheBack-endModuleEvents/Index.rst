@@ -230,8 +230,8 @@ Tab: Events
          Button “cancel”
 
    Meaning
-         cancels the event and send and e-mail to all registered participants
-         (using an e-mail form)
+         cancels the event and send and email to all registered participants
+         (using an email form)
 
 
 .. container:: table-row
@@ -240,8 +240,8 @@ Tab: Events
          Button “confirm”
 
    Meaning
-         marks the event as confirmed and send and e-mail to all registered
-         participants (using an e-mail form)
+         marks the event as confirmed and send and email to all registered
+         participants (using an email form)
 
 
 .. ###### END~OF~TABLE ######
@@ -251,13 +251,13 @@ Canceling an event
 """"""""""""""""""
 
 If an event needs to be canceled, you can cancel it by clicking on the
-“Cancel” button. This also sends an e-mail to all registered
+“Cancel” button. This also sends an email to all registered
 participants:
 
 |img-36|  *Abbildung 14: canceling an event*
 
-In the e-mail form, there already is a default text which you can edit
-before sending the e-mail. The placeholder **%s** will automatically
+In the email form, there already is a default text which you can edit
+before sending the email. The placeholder **%s** will automatically
 be replaced with the participant’s name.
 
 A canceled event still will be visible in front end, but is clearly
@@ -272,12 +272,12 @@ Marking an event as confirmed
 When you feel sure that an event is certain to take place (if enough
 participants have signed up and you’ve got the speakers’ okay), you
 can mark an event as confirmed by using the “Confirm” button. This
-also sends an e-mail to the registered participants:
+also sends an email to the registered participants:
 
 |img-37|  *Abbildung 15: marking an event as confirmed*
 
 Signing up for a confirmed event still is possible (as long as there
-are any vacancies); only the text in the confirmation e-mail is a bit
+are any vacancies); only the text in the confirmation email is a bit
 different.
 
 

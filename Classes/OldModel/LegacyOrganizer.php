@@ -48,9 +48,9 @@ class LegacyOrganizer extends AbstractModel implements MailRole
     }
 
     /**
-     * Gets the organizer's e-mail address.
+     * Gets the organizer's email address.
      *
-     * @return string the organizer's e-mail address, will only be empty if
+     * @return string the organizer's email address, will only be empty if
      *                there is an error
      */
     public function getEmailAddress(): string
@@ -59,9 +59,9 @@ class LegacyOrganizer extends AbstractModel implements MailRole
     }
 
     /**
-     * Gets our e-mail footer.
+     * Gets our email footer.
      *
-     * @return string our e-mail footer (or '' if there is an error)
+     * @return string our email footer (or '' if there is an error)
      */
     public function getEmailFooter(): string
     {

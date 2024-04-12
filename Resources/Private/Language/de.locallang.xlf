@@ -185,7 +185,7 @@
 				<target>Telefon</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>E-Mail-Adresse</target>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -525,11 +525,11 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 				<target>bis</target>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.mailNotifier.name" resname="schedulerTasks.mailNotifier.name" approved="yes">
-				<source>E-mail notifications</source>
+				<source>Email notifications</source>
 				<target>E-Mail-Benachrichtigungen</target>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.mailNotifier.description" resname="schedulerTasks.mailNotifier.description" approved="yes">
-				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+				<source>This tasks sends email notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
 				<target>Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft.</target>
 			</trans-unit>
 			<trans-unit id="schedulerTasks.fields.page-uid" resname="schedulerTasks.fields.page-uid" approved="yes">
@@ -613,7 +613,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<target>Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</target>
 			</trans-unit>
 			<trans-unit id="message_emailToAttendeesSent" resname="message_emailToAttendeesSent" approved="yes">
-				<source>The e-mail to the attendees has been sent.</source>
+				<source>The email to the attendees has been sent.</source>
 				<target>Die E-Mail an die TeilnehmerInnen wurde verschickt.</target>
 			</trans-unit>
 			<trans-unit id="mlang_tabs_tab" resname="mlang_tabs_tab" approved="yes">
@@ -1361,7 +1361,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<target>Telefon:</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 				<target>E-Mail-Adresse:</target>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">
@@ -1706,7 +1706,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees" resname="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees" approved="yes">
 				<source>Show an email field for additional attendees</source>
-				<target>Email-Feld für zusätzliche Personen anzeigen</target>
+				<target>E-Mail-Feld für zusätzliche Personen anzeigen</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.tab.formFields" resname="plugin.eventRegistration.settings.tab.formFields" approved="yes">
 				<source>Form fields</source>
@@ -2108,7 +2108,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.heading.email" resname="backEndModule.heading.email" approved="yes">
 				<source>Send an email to all registered persons</source>
-				<target>Email an alle angemeldeten Personen schicken</target>
+				<target>E-Mail an alle angemeldeten Personen schicken</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.message.selectFolder" resname="backEndModule.message.selectFolder" approved="yes">
 				<source>Please select a folder in the page tree.</source>
@@ -2208,15 +2208,15 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.email" resname="backEndModule.action.email" approved="yes">
 				<source>Email</source>
-				<target>Email</target>
+				<target>E-Mail</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.email.long" resname="backEndModule.action.email.long" approved="yes">
 				<source>Send an email to all registered persons</source>
-				<target>Email an alle angemeldeten Personen schicken</target>
+				<target>E-Mail an alle angemeldeten Personen schicken</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.sendEmail" resname="backEndModule.action.sendEmail" approved="yes">
 				<source>Send email</source>
-				<target>Email verschicken</target>
+				<target>E-Mail verschicken</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.email.subject" resname="backEndModule.email.subject" approved="yes">
 				<source>Subject</source>
@@ -2224,7 +2224,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="backEndModule.email.body" resname="backEndModule.email.body" approved="yes">
 				<source>Email body</source>
-				<target>Mailtext</target>
+				<target>E-Mail-Text</target>
 			</trans-unit>
 			<trans-unit id="plugin.eventUnregistration.heading.sorry" resname="plugin.eventUnregistration.heading.sorry" approved="yes">
 				<source>Sorry!</source>

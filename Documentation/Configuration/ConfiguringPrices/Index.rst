@@ -55,7 +55,7 @@ options to just display “price” instead of “standard price”:
 
   - plugin.tx\_seminars\_pi1.generalPriceInSingle
 
-- For the e-mails to the attendees:
+- For the emails to the attendees:
 
   - plugin.tx\_seminars.generalPriceInMail
 
@@ -69,7 +69,7 @@ and “Children.” You can change them using these variables:
     .label\_price\_regular / price\_regular\_early /
     / price\_special / price\_special\_early
 
-- For the e-mails to the attendees and the drop-down box in the
+- For the emails to the attendees and the drop-down box in the
   registration form:
 
   - plugin.tx\_seminars.\_LOCAL\_LANG. *language* .label\_price\_regular /

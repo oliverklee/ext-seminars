@@ -980,7 +980,7 @@ final class RegistrationTest extends FunctionalTestCase
     }
 
     ////////////////////////////////////////
-    // Tests regarding the e-mail address.
+    // Tests regarding the email address.
     ////////////////////////////////////////
 
     /**

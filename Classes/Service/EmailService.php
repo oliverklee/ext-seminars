@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class takes care of sending emails.
  *
- * The following markers will get replaced in the e-mail body:
+ * The following markers will get replaced in the email body:
  *
  * %salutation
  * %userName

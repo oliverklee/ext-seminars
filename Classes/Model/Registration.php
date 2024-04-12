@@ -414,9 +414,9 @@ class Registration extends AbstractModel
     }
 
     /**
-     * Returns the e-mail address of the billing address of this registration.
+     * Returns the email address of the billing address of this registration.
      *
-     * @return string the e-mail address of this registration, might be empty
+     * @return string the email address of this registration, might be empty
      */
     public function getEmailAddress(): string
     {
@@ -424,9 +424,9 @@ class Registration extends AbstractModel
     }
 
     /**
-     * Sets the e-mail address of the billing address of this registration.
+     * Sets the email address of the billing address of this registration.
      *
-     * @param string $email the e-mail address of this registration, may be empty
+     * @param string $email the email address of this registration, may be empty
      */
     public function setEmailAddress(string $email): void
     {

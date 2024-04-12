@@ -62,7 +62,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          string
 
    Description
-         File name of the HTML template for e-mail
+         File name of the HTML template for email
 
    Default
          EXT:seminars/Resources/Private/Templates/Mail/e-mail.html
@@ -78,7 +78,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          switch whether to use formal/informal language for some shared code
-         (in e-mails, some labels and some error messages).Allowed values
+         (in emails, some labels and some error messages).Allowed values
          are:formal \| informal
 
    Default
@@ -95,7 +95,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          comma-separated list of section names that shouldn't be displayed in
-         the thank-you e-mail to the user
+         the thank-you email to the user
 
          allowed values are in: hello, title, uid, ticket\_id, price, seats, to
          tal\_price,attendees\_names,lodgings,accommodation,foods,food,checkbox
@@ -118,7 +118,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          string
 
    Description
-         the CSS file for the HTML e-mail to the attendees
+         the CSS file for the HTML email to the attendees
 
    Default
          EXT:seminars/Resources/Private/CSS/thankYouMail.css
@@ -134,7 +134,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          whether to use the label “Price” for the standard price (instead of
-         “standard price”) in e-mail to the participant
+         “standard price”) in email to the participant
 
    Default
 
@@ -149,8 +149,8 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          Comma-separated list of section names from the registration that
-         shouldn't be displayed in the notification e-mail to the organizers.
-         These fields are the big blocks in that e-mail, and some are further
+         shouldn't be displayed in the notification email to the organizers.
+         These fields are the big blocks in that email, and some are further
          divided.
 
          Allowed values are in:
@@ -179,7 +179,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          comma-separated list of field names from seminars that should be
-         mentioned in the notification e-mail to the organizers (in the
+         mentioned in the notification email to the organizers (in the
          “seminardata” section)allowed values are in: uid, event\_type, title,
          subtitle, titleanddate, date, time, accreditation\_number,
          credit\_points, room, place, speakers, price\_regular,
@@ -203,7 +203,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          comma-separated list of field names from fe\_users that should be
-         mentioned in the notification e-mail to the organizers (in the
+         mentioned in the notification email to the organizers (in the
          “feuserdata” section)allowed values are all column names from
          fe\_users.
 
@@ -221,7 +221,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          comma-separated list of field names from attendances that should be
-         mentioned in the notification e-mail to the organizers (in the
+         mentioned in the notification email to the organizers (in the
          “attendancedata” section)allowed values are in: uid, interests,
          expectations, background\_knowledge, lodgings, accommodation, foods,
          food, known\_from, notes, checkboxes, price, seats, total\_price,
@@ -243,7 +243,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          boolean
 
    Description
-         Whether to send the additional notification e-mails to the organizers
+         Whether to send the additional notification emails to the organizers
          or not. Additional notification mails are sent if for example an event
          gets full.
 
@@ -389,7 +389,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          Whether to add the CSV file of the registrations when sending the
-         reminder e-mail to the organizers.
+         reminder email to the organizers.
 
    Default
          0 (=inactive)
@@ -702,7 +702,7 @@ only be configured using your TypoScript setup, but not via flexforms.
 
    Description
          how many days before an events' begin date the organizers should be
-         reminded about this event via e-mail, zero disables the reminder
+         reminded about this event via email, zero disables the reminder
 
    Default
          0

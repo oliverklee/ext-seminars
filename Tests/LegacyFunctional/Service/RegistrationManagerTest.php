@@ -1009,7 +1009,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
+    public function notifyAttendeeForRegistrationOnQueuemailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
@@ -1048,7 +1048,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
+    public function notifyAttendeeForQueueUpdatemailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 

@@ -421,10 +421,10 @@ Implement the methods required by the interface:
 
 .. _emailsalutation_en:
 
-Hooks for the salutation in all e-mails to the attendees
+Hooks for the salutation in all emails to the attendees
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-It is also possible to extend the salutation used in the e-mails with
+It is also possible to extend the salutation used in the emails with
 the following hook:
 
 - modifySalutation for tx\_seminars\_EmailSaluation which is called just
@@ -530,7 +530,7 @@ Implement the methods required by the interface:
 
 .. _backendemail_en:
 
-Hooks for the e-mails sent from the back-end module
+Hooks for the emails sent from the back-end module
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
 The hook classes need to be registered and written like this:
@@ -546,15 +546,15 @@ It's used like this:
 
     class BackEndModuleHook implements BackEndModule {
         /**
-         * Modifies the general e-mail sent via the back-end module.
+         * Modifies the general email sent via the back-end module.
          *
          * Note: This hook does not get called yet. It is just here so the interface
          * is finalized.
          *
          * @param Registration $registration
-         *        the registration to which the e-mail refers
+         *        the registration to which the email refers
          */
-         public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void {…}
+         public function modifyGeneralEmail(Registration $registration, MailMessage $email): void {…}
 
 Hooks for the CSV generation of registration lists
 """"""""""""""""""""""""""""""""""""""""""""""""""

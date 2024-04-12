@@ -13,9 +13,9 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 interface BackEndModule
 {
     /**
-     * Modifies the general e-mail sent via the back-end module.
+     * Modifies the general email sent via the back-end module.
      *
      * Note: This hook does not get called yet. It is just here so the interface is finalized.
      */
-    public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void;
+    public function modifyGeneralEmail(Registration $registration, MailMessage $email): void;
 }

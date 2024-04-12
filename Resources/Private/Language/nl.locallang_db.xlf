@@ -285,7 +285,7 @@
 				<target>Mobiel</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>E-mail adres</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances" resname="tx_seminars_attendances" approved="yes">
@@ -441,11 +441,11 @@
 				<target>Homepage</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>E-mail adres</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer" approved="yes">
-				<source>Footer text to be appended to all e-mails from this organizer</source>
+				<source>Footer text to be appended to all emails from this organizer</source>
 				<target>Voettekst voor de bevestigingse-mails die naar de deelnemers wordt gezonden</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" resname="tx_seminars_payment_methods" approved="yes">
@@ -457,7 +457,7 @@
 				<target>Titel</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description" approved="yes">
-				<source>Detailed description for e-mails</source>
+				<source>Detailed description for emails</source>
 				<target>Gedetailleerde beschrijving (voor automatische e-mails)</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types" approved="yes">

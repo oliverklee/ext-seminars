@@ -357,7 +357,7 @@
 				<target>Numéro de téléphone (portable)</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>Adresse mail</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.cancelation_period" resname="tx_seminars_speakers.cancelation_period" approved="yes">
@@ -465,7 +465,7 @@
 				<target>Téléphone</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.email" resname="tx_seminars_attendances.email" approved="yes">
-				<source>E-mail</source>
+				<source>Email</source>
 				<target>E-mail</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.been_there" resname="tx_seminars_attendances.been_there" approved="yes">
@@ -581,11 +581,11 @@
 				<target>Site internet</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>Adresse mail</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer" approved="yes">
-				<source>Footer text to be appended to all e-mails from this organizer</source>
+				<source>Footer text to be appended to all emails from this organizer</source>
 				<target>Pied de page pour les mails de confirmation</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods" resname="tx_seminars_payment_methods" approved="yes">
@@ -597,7 +597,7 @@
 				<target>Titre</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description" approved="yes">
-				<source>Detailed description for e-mails</source>
+				<source>Detailed description for emails</source>
 				<target>Description détaillée pour les mails</target>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types" approved="yes">

@@ -1238,7 +1238,7 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether notification e-mail to the organizers are muted.
+     * Checks whether notification email to the organizers are muted.
      */
     public function shouldMuteNotificationEmails(): bool
     {
@@ -1246,7 +1246,7 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Makes sure that notification e-mail to the organizers are muted.
+     * Makes sure that notification email to the organizers are muted.
      */
     public function muteNotificationEmails(): void
     {

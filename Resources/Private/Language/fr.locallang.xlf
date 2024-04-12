@@ -193,7 +193,7 @@
 				<target>Téléphone</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address</source>
+				<source>Email address</source>
 				<target>Adresse mail</target>
 			</trans-unit>
 			<trans-unit id="label_interests" resname="label_interests" approved="yes">
@@ -1213,7 +1213,7 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 				<target>Numéro de téléphone :</target>
 			</trans-unit>
 			<trans-unit id="label_email" resname="label_email" approved="yes">
-				<source>E-mail address:</source>
+				<source>Email address:</source>
 				<target>Adresse mail :</target>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings" approved="yes">

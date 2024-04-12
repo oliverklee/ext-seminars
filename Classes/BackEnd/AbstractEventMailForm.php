@@ -28,17 +28,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * This is the base class for e-mail forms in the back end.
+ * This is the base class for email forms in the back end.
  */
 abstract class AbstractEventMailForm
 {
     /**
-     * @var LegacyEvent the event which this e-mail form refers to
+     * @var LegacyEvent the event which this email form refers to
      */
     private $oldEvent;
 
     /**
-     * @var Event the event which this e-mail form refers to
+     * @var Event the event which this email form refers to
      */
     private $event;
 
@@ -110,7 +110,7 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Returns the event this e-mail form refers to.
+     * Returns the event this email form refers to.
      *
      * @return Event the event
      */
@@ -161,7 +161,7 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Sends an e-mail to the attendees to inform about the changed event status.
+     * Sends an email to the attendees to inform about the changed event status.
      */
     public function sendEmailToAttendees(): void
     {
@@ -220,16 +220,16 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Calls all registered hooks for modifying the e-mail.
+     * Calls all registered hooks for modifying the email.
      */
-    protected function modifyEmailWithHook(Registration $registration, MailMessage $eMail): void
+    protected function modifyEmailWithHook(Registration $registration, MailMessage $email): void
     {
     }
 
     /**
-     * Creates the message body for the e-mail.
+     * Creates the message body for the email.
      *
-     * @param FrontEndUser $user the recipient of the e-mail
+     * @param FrontEndUser $user the recipient of the email
      * @param Organizer $organizer the organizer which is selected as sender
      *
      * @return string the message with the salutation replaced by the user's
