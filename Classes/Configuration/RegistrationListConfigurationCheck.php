@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * Configuration check for the front-end registration list.
+ *
+ * @internal
  */
 class RegistrationListConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {

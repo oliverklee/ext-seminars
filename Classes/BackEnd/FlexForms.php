@@ -10,6 +10,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class is needed to dynamically create the list of selectable database
  * columns for the pi1 flex forms.
+ *
+ * @internal
  */
 class FlexForms
 {

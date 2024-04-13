@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * Configuration check for the single view.
+ *
+ * @internal
  */
 class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {

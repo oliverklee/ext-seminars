@@ -18,6 +18,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Generates slugs for events.
+ *
+ * @internal
  */
 class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
 {

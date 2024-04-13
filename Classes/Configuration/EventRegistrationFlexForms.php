@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * This class provides functions for building FlexForms.
+ *
+ * @internal
  */
 class EventRegistrationFlexForms
 {

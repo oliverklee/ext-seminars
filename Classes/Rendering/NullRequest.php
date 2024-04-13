@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Http\Uri;
 
 /**
  * Dummy request to be used with `HtmlViewHelper`.
+ *
+ * @internal
  */
 final class NullRequest implements ServerRequestInterface
 {

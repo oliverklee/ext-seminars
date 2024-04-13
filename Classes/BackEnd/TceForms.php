@@ -10,6 +10,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This provides some helper functions to create parts of the TCA/TCE dynamically.
+ *
+ * @internal
  */
 class TceForms
 {

@@ -10,6 +10,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Configuration check for all settings in `plugin.tx_seminars`.
+ *
+ * @internal
  */
 class SharedConfigurationCheck extends AbstractConfigurationCheck
 {

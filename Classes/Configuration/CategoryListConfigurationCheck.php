@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * Configuration check for the category list.
+ *
+ * @internal
  */
 class CategoryListConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {

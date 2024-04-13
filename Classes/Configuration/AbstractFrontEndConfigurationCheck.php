@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 
 /**
  * Base class for configuration checks for front-end views.
+ *
+ * @internal
  */
 abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationCheck
 {

@@ -20,6 +20,8 @@ use TYPO3Fluid\Fluid\View\TemplatePaths;
  * Dummy rendering context to pass into the `HtmlViewHelper`.
  *
  * Its methods are not intended to get called.
+ *
+ * @internal
  */
 final class NullRenderingContext implements RenderingContextInterface
 {

@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 
 /**
  * Configuration check for the CSV export.
+ *
+ * @internal
  */
 class CsvExportConfigurationCheck extends AbstractConfigurationCheck
 {

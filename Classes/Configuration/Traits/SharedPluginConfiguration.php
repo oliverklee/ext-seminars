@@ -10,6 +10,8 @@ use OliverKlee\Seminars\Service\DateFormatConverter;
 
 /**
  * This trait provides access to the TypoScript configuration for `plugin.tx_seminars`.
+ *
+ * @internal
  */
 trait SharedPluginConfiguration
 {
