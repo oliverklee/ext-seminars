@@ -621,8 +621,8 @@ class RegistrationManager
         $emailBuilder->text($template->getSubpart('MAIL_NOTIFICATION'));
 
         $registrationUid = $registration->getUid();
-        \assert($registration->getUid() > 0);
-        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registration->getUid());
+        \assert($registrationUid > 0);
+        $registrationNew = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
 
         $email = $emailBuilder->build();
         $this->getRegistrationEmailHookProvider()

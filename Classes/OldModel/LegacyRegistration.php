@@ -40,13 +40,6 @@ class LegacyRegistration extends AbstractModel
     protected static $tableName = 'tx_seminars_attendances';
 
     /**
-     * the same as the class name
-     *
-     * @var string
-     */
-    public $prefixId = LegacyRegistration::class;
-
-    /**
      * @var LegacyEvent|null the event to which this registration relates
      */
     private $seminar;

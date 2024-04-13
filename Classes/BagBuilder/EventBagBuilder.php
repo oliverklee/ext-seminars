@@ -500,14 +500,6 @@ class EventBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Removes the limitation to events on the next day.
-     */
-    public function removeLimitToEventsNextDay(): void
-    {
-        unset($this->whereClauseParts['next_day']);
-    }
-
-    /**
      * Limits the bag to date event records of the same topic as the event
      * given in the first parameter $event.
      *

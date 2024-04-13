@@ -243,7 +243,7 @@ final class EmailControllerTest extends UnitTestCase
         $this->expectExceptionCode(1671020157);
         $this->expectExceptionMessage('Missing read permissions for events.');
 
-        $this->subject->sendAction(new SingleEvent(), 1, '', '');
+        $this->subject->sendAction(new SingleEvent(), '', '');
     }
 
     /**
@@ -258,7 +258,7 @@ final class EmailControllerTest extends UnitTestCase
         $this->expectExceptionCode(1671020198);
         $this->expectExceptionMessage('Missing read permissions for registrations.');
 
-        $this->subject->sendAction(new SingleEvent(), 1, '', '');
+        $this->subject->sendAction(new SingleEvent(), '', '');
     }
 
     /**
@@ -277,7 +277,7 @@ final class EmailControllerTest extends UnitTestCase
         $this->emailServiceMock->expects(self::once())->method('setPostData')
             ->with(['subject' => $subject, 'messageBody' => $body]);
 
-        $this->subject->sendAction($event, 1, $subject, $body);
+        $this->subject->sendAction($event, $subject, $body);
     }
 
     /**
@@ -292,7 +292,7 @@ final class EmailControllerTest extends UnitTestCase
         $event = $this->buildSingleEventMockWithUid($eventUid);
         $this->emailServiceMock->expects(self::once())->method('sendEmailToAttendees');
 
-        $this->subject->sendAction($event, 1, 'email subject', 'email body');
+        $this->subject->sendAction($event, 'email subject', 'email body');
     }
 
     /**
@@ -308,6 +308,6 @@ final class EmailControllerTest extends UnitTestCase
 
         $this->subject->expects(self::once())->method('redirect')->with('index', 'BackEnd\\Event');
 
-        $this->subject->sendAction($event, 1, '', '');
+        $this->subject->sendAction($event, '', '');
     }
 }

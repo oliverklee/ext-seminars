@@ -10,7 +10,6 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -100,13 +99,5 @@ class EmailService implements SingletonInterface
         ];
 
         return str_replace(array_keys($markers), $markers, $textWithMarkers);
-    }
-
-    /**
-     * Returns `$GLOBALS['LANG']`.
-     */
-    protected function getLanguageService(): ?LanguageService
-    {
-        return $GLOBALS['LANG'] ?? null;
     }
 }
