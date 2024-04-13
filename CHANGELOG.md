@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Redirect to the events list after sending an email in the BE module (#2971)
 - Avoid crash with `typo3fluid/fluid` 2.14.0 due to signature change (#3158)
 
 ## 5.5.2
