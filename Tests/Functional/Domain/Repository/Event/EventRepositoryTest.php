@@ -957,7 +957,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
         $events = $this->subject->findByPageUidInBackEndMode(1);
-        $event = $this->subject->findByUid(1);
+        $this->subject->findByUid(1);
         self::assertCount(1, $events);
         $event = $events[0];
         self::assertInstanceOf(SingleEvent::class, $event);
