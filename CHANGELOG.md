@@ -32,6 +32,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop dead code (#2967)
 
 ### Fixed
+- Redirect to the events list after sending an email in the BE module (#2971)
 - Add `resname` to all language labels (#2952)
 - Display registration statistics in the BE in all cases (#2909)
 - Avoid accessing the deprecated `TYPO3_MODE` constant (#2906)

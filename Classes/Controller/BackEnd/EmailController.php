@@ -51,7 +51,7 @@ class EmailController extends ActionController
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);
         $emailService->sendEmailToAttendees();
 
-        $this->redirect('index', 'BackEnd\\Event');
+        $this->redirect('overview', 'BackEnd\\Module');
     }
 
     /**

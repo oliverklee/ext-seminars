@@ -298,7 +298,7 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function sendActionRedirectsToEventsList(): void
+    public function sendActionRedirectsToOverview(): void
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
@@ -306,7 +306,7 @@ final class EmailControllerTest extends UnitTestCase
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
 
-        $this->subject->expects(self::once())->method('redirect')->with('index', 'BackEnd\\Event');
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->sendAction($event, '', '');
     }
