@@ -334,5 +334,4 @@
 })(
   typeof self !== 'undefined' ? self : this,
   self.TYPO3 = self.TYPO3 || {},
-  self.jQuery || null,
 )
