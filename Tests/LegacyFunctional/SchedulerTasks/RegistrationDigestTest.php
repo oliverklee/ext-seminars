@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -51,11 +50,6 @@ final class RegistrationDigestTest extends FunctionalTestCase
      * @var EventMapper&MockObject
      */
     private $eventMapperMock;
-
-    /**
-     * @var ObjectManager&MockObject
-     */
-    private $objectManagerMock;
 
     /**
      * @var StandaloneView&MockObject
@@ -93,16 +87,13 @@ final class RegistrationDigestTest extends FunctionalTestCase
         $this->configuration = new DummyConfiguration($configuration);
         $this->subject->setConfiguration($this->configuration);
 
-        $this->objectManagerMock = $this->createMock(ObjectManager::class);
-        $this->subject->injectObjectManager($this->objectManagerMock);
-
         $this->eventMapperMock = $this->createMock(EventMapper::class);
         $this->subject->setEventMapper($this->eventMapperMock);
 
         $this->plaintextViewMock = $this->createMock(StandaloneView::class);
+        GeneralUtility::addInstance(StandaloneView::class, $this->plaintextViewMock);
         $this->htmlViewMock = $this->createMock(StandaloneView::class);
-        $this->objectManagerMock->method('get')->with(StandaloneView::class)
-            ->willReturnOnConsecutiveCalls($this->plaintextViewMock, $this->htmlViewMock);
+        GeneralUtility::addInstance(StandaloneView::class, $this->htmlViewMock);
 
         $this->email = $this->createEmailMock();
         GeneralUtility::addInstance(MailMessage::class, $this->email);
@@ -115,6 +106,8 @@ final class RegistrationDigestTest extends FunctionalTestCase
         // Manually purge the TYPO3 FIFO queue
         GeneralUtility::makeInstance(MailMessage::class);
         GeneralUtility::makeInstance(MailMessage::class);
+        GeneralUtility::makeInstance(StandaloneView::class);
+        GeneralUtility::makeInstance(StandaloneView::class);
 
         parent::tearDown();
     }
