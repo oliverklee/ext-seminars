@@ -12,7 +12,6 @@ use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * This class represents an event registration.
@@ -108,8 +107,7 @@ class LegacyRegistration extends AbstractModel
     protected function getFrontEndUserGroupRepository(): FrontendUserGroupRepository
     {
         if (!$this->frontEndUserGroupRepository instanceof FrontendUserGroupRepository) {
-            $repository = GeneralUtility::makeInstance(ObjectManager::class)->get(FrontendUserGroupRepository::class);
-            $this->frontEndUserGroupRepository = $repository;
+            $this->frontEndUserGroupRepository = GeneralUtility::makeInstance(FrontendUserGroupRepository::class);
         }
 
         return $this->frontEndUserGroupRepository;
