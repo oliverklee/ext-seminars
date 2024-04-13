@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - De-deprecate the singleton-related `RegistrationManager` methods (#2816)
 
 ### Removed
+- Drop dead code (#2967)
 
 ### Fixed
 - Add `resname` to all language labels (#2952)

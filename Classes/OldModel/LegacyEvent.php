@@ -41,13 +41,6 @@ class LegacyEvent extends AbstractTimeSpan
     use EventEmailSenderTrait;
 
     /**
-     * the same as the class name
-     *
-     * @var string
-     */
-    public $prefixId = LegacyEvent::class;
-
-    /**
      * @var string the name of the SQL table this class corresponds to
      */
     protected static $tableName = 'tx_seminars_seminars';
@@ -144,18 +137,6 @@ class LegacyEvent extends AbstractTimeSpan
     public function getTitle(): string
     {
         return $this->getTopicString('title');
-    }
-
-    /**
-     * Gets our direct title. Even for date records, this will return our
-     * direct title (which is visible in the back end) instead of the
-     * corresponding topic record's title.
-     *
-     * @return string our direct title (or '' if there is an error)
-     */
-    public function getRealTitle(): string
-    {
-        return parent::getTitle();
     }
 
     /**
@@ -1856,7 +1837,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * @return string the hyperlinked names of our organizing partners, or an empty string
      */
-    public function getOrganizingPartners(TemplateHelper $plugin): string
+    public function getOrganizingPartners(): string
     {
         if (!$this->hasOrganizingPartners()) {
             return '';

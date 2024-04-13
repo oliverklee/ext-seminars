@@ -352,7 +352,6 @@ abstract class TemplateHelper
      *
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
-     * @param bool $isFileName whether this is a filename, which has to be combined with a path
      * @param bool $ignoreFlexform whether to ignore the flexform values and just get the settings from TypoScript,
      *        may be empty
      *
@@ -361,7 +360,6 @@ abstract class TemplateHelper
     private function getConfValue(
         string $fieldName,
         string $sheet = 'sDEF',
-        bool $isFileName = false,
         bool $ignoreFlexform = false
     ): string {
         $configurationValueFromTypoScript = (string)($this->conf[$fieldName] ?? '');
@@ -406,7 +404,6 @@ abstract class TemplateHelper
             $this->getConfValue(
                 $fieldName,
                 $sheet,
-                $isFileName,
                 $ignoreFlexform
             )
         );
@@ -966,14 +963,6 @@ abstract class TemplateHelper
         foreach ($template->getLabelMarkerNames() as $label) {
             $template->setMarker($label, $this->translate($label));
         }
-    }
-
-    /**
-     * Resets the list of subparts to hide.
-     */
-    public function resetSubpartsHiding(): void
-    {
-        $this->getTemplate()->resetSubpartsHiding();
     }
 
     /**

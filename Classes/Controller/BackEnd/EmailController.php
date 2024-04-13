@@ -37,11 +37,9 @@ class EmailController extends ActionController
     /**
      * Action for the sending the email.
      *
-     * @param positive-int $pageUid
-     *
      * @Extbase\IgnoreValidation("event")
      */
-    public function sendAction(Event $event, int $pageUid, string $subject, string $body): void
+    public function sendAction(Event $event, string $subject, string $body): void
     {
         $this->checkPermissions();
 

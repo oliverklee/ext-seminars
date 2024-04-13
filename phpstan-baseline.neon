@@ -16,16 +16,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getBackEndUser\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication but returns mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService but returns mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setPostData\\(\\) has parameter \\$postData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
@@ -1752,11 +1742,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method hasEmailFooter\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
-			count: 1
-			path: Classes/Service/EmailService.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\EmailService\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
 			count: 1
 			path: Classes/Service/EmailService.php
 

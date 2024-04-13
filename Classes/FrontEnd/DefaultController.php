@@ -29,7 +29,6 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\TimeSlotMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
@@ -44,7 +43,6 @@ use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -192,11 +190,6 @@ class DefaultController extends TemplateHelper
      * @var SingleViewLinkBuilder|null
      */
     private $linkBuilder;
-
-    /**
-     * @var FrontendUserAuthentication
-     */
-    protected $feuser;
 
     /**
      * @var int
@@ -378,14 +371,6 @@ class DefaultController extends TemplateHelper
     public function getSeminar(): ?LegacyEvent
     {
         return $this->seminar;
-    }
-
-    /**
-     * Returns the current registration.
-     */
-    public function getRegistration(): ?LegacyRegistration
-    {
-        return $this->registration;
     }
 
     public function getRegistrationManager(): RegistrationManager
@@ -781,8 +766,6 @@ class DefaultController extends TemplateHelper
 
         $this->hideSubparts('date,time', 'field_wrapper');
 
-        $timeSlotMapper = MapperRegistry::get(TimeSlotMapper::class);
-
         $timeSlotsOutput = '';
         foreach ($this->seminar->getTimeSlotsAsArrayWithMarkers() as $timeSlotData) {
             $this->setMarker('timeslot_date', $timeSlotData['date']);
@@ -1121,7 +1104,7 @@ class DefaultController extends TemplateHelper
             return;
         }
 
-        $this->setMarker('organizing_partners', $this->seminar->getOrganizingPartners($this));
+        $this->setMarker('organizing_partners', $this->seminar->getOrganizingPartners());
     }
 
     /**
