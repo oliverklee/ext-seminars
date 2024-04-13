@@ -15,7 +15,6 @@ use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -30,11 +29,6 @@ class RegistrationDigest
     private $initialized = false;
 
     /**
-     * @var ObjectManagerInterface
-     */
-    private $objectManager;
-
-    /**
      * @var Configuration
      */
     private $configuration;
@@ -43,11 +37,6 @@ class RegistrationDigest
      * @var EventMapper
      */
     private $eventMapper;
-
-    public function injectObjectManager(ObjectManagerInterface $objectManager): void
-    {
-        $this->objectManager = $objectManager;
-    }
 
     /**
      * Initializes the dependencies that cannot be injected using dependency injection.
@@ -160,7 +149,7 @@ class RegistrationDigest
      */
     private function createContent(string $templatePath, Collection $events): string
     {
-        $view = $this->objectManager->get(StandaloneView::class);
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
         $view->assign('events', $events);
 
