@@ -11,13 +11,4 @@ use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
  */
 final class TestingEventMailForm extends AbstractEventMailForm
 {
-    /**
-     * Returns the label for the submit button.
-     *
-     * @return string label for the submit button, will not be empty
-     */
-    protected function getSubmitButtonLabel(): string
-    {
-        return $this->getLanguageService()->getLL('eventMailForm_confirmButton');
-    }
 }

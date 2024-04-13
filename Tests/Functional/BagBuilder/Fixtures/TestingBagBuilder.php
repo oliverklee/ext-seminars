@@ -63,14 +63,4 @@ final class TestingBagBuilder extends AbstractBagBuilder
     {
         return $this->limit;
     }
-
-    /**
-     * Sets $this->tableName with the value in the parameter $tableName.
-     *
-     * @param string $tableName the table name to set, may be empty for testing
-     */
-    public function setTableName(string $tableName): void
-    {
-        $this->tableName = $tableName;
-    }
 }
