@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * Configuration check for the list view.
+ *
+ * @internal
  */
 class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {

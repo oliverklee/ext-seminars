@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * This class is an abstraction for the email classes in TYPO3 V9 and V10.
  *
  * You will need to create a new instance of this class for each new email instance you would like to build.
+ *
+ * @internal
  */
 class EmailBuilder
 {

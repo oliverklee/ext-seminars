@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Http\Stream;
 
 /**
  * HTTP response for CSV data.
+ *
+ * @internal
  */
 class CsvResponse extends Response
 {

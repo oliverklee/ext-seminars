@@ -13,6 +13,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a basic view.
+ *
+ * @internal
  */
 abstract class AbstractView extends TemplateHelper
 {

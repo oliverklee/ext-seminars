@@ -26,6 +26,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This is the base class for email forms in the back end.
+ *
+ * @internal
  */
 abstract class AbstractEventMailForm
 {

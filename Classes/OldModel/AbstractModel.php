@@ -22,6 +22,8 @@ use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
  * This class represents an object that is created from a DB record or can be written to a DB record.
  *
  * It will hold the corresponding data and can commit that data to the DB.
+ *
+ * @internal
  */
 abstract class AbstractModel
 {

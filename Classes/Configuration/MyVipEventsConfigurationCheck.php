@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Configuration;
 
 /**
  * Configuration check for the "my events" list.
+ *
+ * @internal
  */
 class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {

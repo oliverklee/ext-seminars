@@ -16,6 +16,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * This builder class creates customized bag objects.
  *
  * @template M of AbstractBag
+ *
+ * @internal
  */
 abstract class AbstractBagBuilder
 {

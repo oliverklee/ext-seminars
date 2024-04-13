@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a CSV export of registrations.
+ *
+ * @internal
  */
 abstract class AbstractRegistrationListView extends AbstractListView
 {

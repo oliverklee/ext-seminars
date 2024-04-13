@@ -8,6 +8,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This trait provides a `translate` method for classes that need to translate labels.
+ *
+ * @internal
  */
 trait TranslateTrait
 {

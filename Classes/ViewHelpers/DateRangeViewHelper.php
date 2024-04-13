@@ -10,6 +10,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering date ranges.
+ *
+ * @internal
  */
 class DateRangeViewHelper
 {

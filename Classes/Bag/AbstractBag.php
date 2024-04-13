@@ -18,6 +18,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * the result of an SQL query and allows iterating over them.
  *
  * @template M of AbstractModel
+ *
+ * @internal
  */
 abstract class AbstractBag implements \Iterator
 {

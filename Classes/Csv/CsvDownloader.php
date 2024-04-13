@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This controller creates CSV data for registrations or events.
+ *
+ * @internal
  */
 class CsvDownloader
 {
