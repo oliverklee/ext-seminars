@@ -25,7 +25,6 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -87,20 +86,17 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'title');
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
 
+        $this->eventMapper = $this->createMock(EventMapper::class);
+        MapperRegistry::set(EventMapper::class, $this->eventMapper);
+
         $this->eventStatusService = $this->createMock(EventStatusService::class);
         GeneralUtility::setSingletonInstance(EventStatusService::class, $this->eventStatusService);
 
         $this->emailService = $this->createMock(EmailService::class);
         GeneralUtility::setSingletonInstance(EmailService::class, $this->emailService);
 
-        $this->eventMapper = $this->createMock(EventMapper::class);
-        MapperRegistry::set(EventMapper::class, $this->eventMapper);
-
-        $objectManagerMock = $this->createMock(ObjectManager::class);
-        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
-
         $registrationDigestMock = $this->createMock(RegistrationDigest::class);
-        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($registrationDigestMock);
+        GeneralUtility::addInstance(RegistrationDigest::class, $registrationDigestMock);
 
         $this->email = $this->createEmailMock();
 
@@ -119,6 +115,7 @@ final class MailNotifierTest extends FunctionalTestCase
             $this->testingFramework->cleanUpWithoutDatabase();
         }
 
+        GeneralUtility::makeInstance(RegistrationDigest::class);
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);

@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -57,19 +56,17 @@ final class MailNotifierTest extends FunctionalTestCase
         ConfigurationRegistry::getInstance()->set('plugin', new DummyConfiguration());
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
-        $objectManagerMock = $this->createMock(ObjectManager::class);
-        GeneralUtility::setSingletonInstance(ObjectManager::class, $objectManagerMock);
-
         $this->registrationDigestMock = $this->createMock(RegistrationDigest::class);
-        $objectManagerMock->method('get')->with(RegistrationDigest::class)->willReturn($this->registrationDigestMock);
+        GeneralUtility::addInstance(RegistrationDigest::class, $this->registrationDigestMock);
 
         $this->subject = new MailNotifier();
     }
 
     protected function tearDown(): void
     {
-        MapperRegistry::purgeInstance();
+        GeneralUtility::makeInstance(RegistrationDigest::class);
         ConfigurationRegistry::purgeInstance();
+        MapperRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
 
         parent::tearDown();

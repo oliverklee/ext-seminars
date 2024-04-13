@@ -22,7 +22,6 @@ use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
@@ -74,7 +73,7 @@ class MailNotifier extends AbstractTask
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $this->emailService = GeneralUtility::makeInstance(EmailService::class);
         $this->eventMapper = MapperRegistry::get(EventMapper::class);
-        $this->registrationDigest = GeneralUtility::makeInstance(ObjectManager::class)->get(RegistrationDigest::class);
+        $this->registrationDigest = GeneralUtility::makeInstance(RegistrationDigest::class);
 
         $this->useUserConfiguredLanguage();
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
