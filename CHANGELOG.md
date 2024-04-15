@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - De-deprecate the singleton-related `RegistrationManager` methods (#2816)
 
 ### Removed
+- Delete localizations that are now on Crowdin (#2984)
 - Drop dead code (#2967)
 
 ### Fixed
