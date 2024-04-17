@@ -7,7 +7,9 @@ namespace OliverKlee\Seminars\Tests\Functional\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -34,6 +36,11 @@ final class CsvDownloaderTest extends FunctionalTestCase
      */
     private $configuration;
 
+    /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -42,6 +49,9 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->setUpBackendUser(1);
         $this->setUpExtensionConfiguration();
         $this->initializeBackEndLanguage();
+
+        $this->responseHeadersModifier = new ResponseHeadersModifier();
+        GeneralUtility::setSingletonInstance(ResponseHeadersModifier::class, $this->responseHeadersModifier);
 
         $this->subject = new CsvDownloader();
     }
@@ -64,6 +74,83 @@ final class CsvDownloaderTest extends FunctionalTestCase
     private function localizeAndRemoveColon(string $key): string
     {
         return \rtrim($this->translate($key), ':');
+    }
+
+    /**
+     * @test
+     */
+    public function createAndOutputListOfEventsForExistentEventSetsResponseHeaderContentType(): void
+    {
+        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
+        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
+
+        $this->subject->createAndOutputListOfEvents(1);
+
+        $headers = $this->responseHeadersModifier->getOverrideHeaders();
+        self::assertSame('text/csv; header=present; charset=utf-8', $headers['Content-type']);
+    }
+
+    /**
+     * @test
+     */
+    public function createAndOutputListOfEventsForExistentEventSetsResponseHeaderContentDisposition(): void
+    {
+        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
+        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
+
+        $this->subject->createAndOutputListOfEvents(1);
+
+        $headers = $this->responseHeadersModifier->getOverrideHeaders();
+        self::assertSame('attachment; filename=events.csv', $headers['Content-disposition']);
+    }
+
+    /**
+     * @test
+     */
+    public function createAndOutputListOfEventsForExistentEventWithoutEventsHasHeaderOnly(): void
+    {
+        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
+        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
+
+        $result = $this->subject->createAndOutputListOfEvents(1);
+
+        $expected = $this->localizeAndRemoveColon('tx_seminars_seminars.title') . "\r\n";
+
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createAndOutputListOfRegistrationsForExistentEventSetsResponseHeaderContentType(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
+
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
+        $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
+
+        $this->subject->createAndOutputListOfRegistrations(1);
+
+        $headers = $this->responseHeadersModifier->getOverrideHeaders();
+        self::assertSame('text/csv; header=present; charset=utf-8', $headers['Content-type']);
+    }
+
+    /**
+     * @test
+     */
+    public function createAndOutputListOfRegistrationsForExistentEventSetsResponseHeaderContentDisposition(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
+
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
+        $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
+
+        $this->subject->createAndOutputListOfRegistrations(1);
+
+        $headers = $this->responseHeadersModifier->getOverrideHeaders();
+        self::assertSame('attachment; filename=registrations.csv', $headers['Content-disposition']);
     }
 
     /**
@@ -129,6 +216,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         self::assertStringContainsString('at home', $result);
     }
+
     /**
      * @test
      */
