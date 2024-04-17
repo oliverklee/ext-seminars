@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -168,8 +168,8 @@ class CsvDownloader
      */
     private function setPageTypeAndDisposition(string $csvFileName): void
     {
-        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
-        $headerProxy->addHeader('Content-type: text/csv; header=present; charset=utf-8');
-        $headerProxy->addHeader('Content-disposition: attachment; filename=' . $csvFileName);
+        $responseHeaderModifier = GeneralUtility::makeInstance(ResponseHeadersModifier::class);
+        $responseHeaderModifier->addOverrideHeader('Content-type', 'text/csv; header=present; charset=utf-8');
+        $responseHeaderModifier->addOverrideHeader('Content-disposition', 'attachment; filename=' . $csvFileName);
     }
 }
