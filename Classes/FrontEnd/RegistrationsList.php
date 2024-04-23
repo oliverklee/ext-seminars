@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,6 +22,11 @@ class RegistrationsList extends AbstractView
      *                          registrations
      */
     private $seminar;
+
+    /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
 
     /**
      * The constructor.
@@ -40,6 +45,8 @@ class RegistrationsList extends AbstractView
         ContentObjectRenderer $contentObjectRenderer
     ) {
         parent::__construct($configuration, $contentObjectRenderer);
+
+        $this->responseHeadersModifier = GeneralUtility::makeInstance(ResponseHeadersModifier::class);
 
         if (!\in_array($whatToDisplay, ['list_registrations', 'list_vip_registrations'], true)) {
             throw new \InvalidArgumentException(
@@ -90,11 +97,11 @@ class RegistrationsList extends AbstractView
                 $isOkay = true;
             } else {
                 $errorMessage = $this->seminar->canViewRegistrationsListMessage($this->whatToDisplay);
-                HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
+                $this->responseHeadersModifier->setOverrideStatusCode(403);
             }
         } else {
             $errorMessage = $this->translate('message_wrongSeminarNumber');
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            $this->responseHeadersModifier->setOverrideStatusCode(404);
             $this->setMarker('title', '');
         }
 
