@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\FrontEnd;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\AbstractBag;
@@ -29,6 +28,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
@@ -207,6 +207,11 @@ class DefaultController extends TemplateHelper
     private $configuration;
 
     /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
+
+    /**
      * Displays the seminar manager HTML.
      *
      * @param array $conf TypoScript configuration for the plugin
@@ -217,6 +222,8 @@ class DefaultController extends TemplateHelper
     {
         $this->init($conf);
         $this->pi_initPIflexForm();
+
+        $this->responseHeadersModifier = GeneralUtility::makeInstance(ResponseHeadersModifier::class);
 
         $this->getTemplateCode();
         $this->setLabels();
@@ -498,13 +505,13 @@ class DefaultController extends TemplateHelper
         if ($this->showUid <= 0) {
             $this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            $this->responseHeadersModifier->setOverrideStatusCode(404);
         } elseif ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
             $result = $this->createSingleViewForExistingEvent();
         } else {
             $this->setMarker('error_text', $this->translate('message_wrongSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            $this->responseHeadersModifier->setOverrideStatusCode(404);
         }
 
         $this->setMarker(
