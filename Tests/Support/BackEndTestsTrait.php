@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\Support;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Http\HeaderCollector;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -55,11 +53,6 @@ trait BackEndTestsTrait
     private $configuration;
 
     /**
-     * @var HeaderCollector
-     */
-    private $headerProxy;
-
-    /**
      * @var positive-int
      */
     private $now;
@@ -82,9 +75,6 @@ trait BackEndTestsTrait
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
         $this->setUpExtensionConfiguration();
-        $headerProxyFactory = HeaderProxyFactory::getInstance();
-        $headerProxyFactory->enableTestMode();
-        $this->headerProxy = $headerProxyFactory->getHeaderCollector();
     }
 
     private function cleanRequestVariables(): void
