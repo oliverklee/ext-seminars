@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
 
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Core\Context\Context;
@@ -57,6 +57,11 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     private $registrationUid;
 
+    /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -64,14 +69,15 @@ final class RegistrationsListTest extends FunctionalTestCase
         GeneralUtility::makeInstance(Context::class)
             ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
-        HeaderProxyFactory::getInstance()->enableTestMode();
-
         $this->testingFramework = new TestingFramework('tx_seminars');
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
         $this->getLanguageService();
+
+        $this->responseHeadersModifier = new ResponseHeadersModifier();
+        GeneralUtility::setSingletonInstance(ResponseHeadersModifier::class, $this->responseHeadersModifier);
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -236,10 +242,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertEquals(
-            'Status: 404 Not Found',
-            HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
-        );
+        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -255,10 +258,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertEquals(
-            'Status: 404 Not Found',
-            HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
-        );
+        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -268,10 +268,7 @@ final class RegistrationsListTest extends FunctionalTestCase
     {
         $this->subject->render();
 
-        self::assertEquals(
-            'Status: 403 Forbidden',
-            HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
-        );
+        self::assertSame(403, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -282,10 +279,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->testingFramework->createFrontEndUser();
         $this->subject->render();
 
-        self::assertEquals(
-            'Status: 403 Forbidden',
-            HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
-        );
+        self::assertSame(403, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -296,10 +290,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->render();
 
-        self::assertStringNotContainsString(
-            '403',
-            HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
-        );
+        self::assertNull($this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
