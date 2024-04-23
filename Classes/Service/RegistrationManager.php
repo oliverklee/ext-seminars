@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Service;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
 use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
@@ -20,6 +19,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Registration;
@@ -81,6 +81,16 @@ class RegistrationManager
      * @var SingleViewLinkBuilder
      */
     private $linkBuilder;
+
+    /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
+
+    public function __construct()
+    {
+        $this->responseHeadersModifier = GeneralUtility::makeInstance(ResponseHeadersModifier::class);
+    }
 
     /**
      * @return static the current singleton instance
@@ -291,11 +301,11 @@ class RegistrationManager
     public function existsSeminarMessage(int $uid): string
     {
         if ($uid <= 0) {
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            $this->responseHeadersModifier->setOverrideStatusCode(404);
             return $this->translate('message_missingSeminarNumber');
         }
         if (!$this->existsSeminar($uid)) {
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            $this->responseHeadersModifier->setOverrideStatusCode(404);
             return $this->translate('message_wrongSeminarNumber');
         }
 
