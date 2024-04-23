@@ -171,13 +171,8 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function createFixtureWithInvalidWhatToDisplayThrowsException(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The value "foo" of the first parameter $whatToDisplay is not valid.'
-        );
-
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The value "foo" of the first parameter $whatToDisplay is not valid.');
         new RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo',
@@ -225,10 +220,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderContainsHtmlspecialcharedEventTitle(): void
     {
-        self::assertStringContainsString(
-            'Test event &amp; more',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('Test event &amp; more', $this->subject->render());
     }
 
     /**
@@ -315,16 +307,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<th scope="col">Number</th>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<th scope="col">Number</th>', $this->subject->render());
     }
 
     /**
@@ -332,16 +318,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<td>' . $this->feUserUid . '</td>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<td>' . $this->feUserUid . '</td>', $this->subject->render());
     }
 
     /**
@@ -349,16 +329,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'name'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'name');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<th scope="col">Name:</th>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<th scope="col">Name:</th>', $this->subject->render());
     }
 
     /**
@@ -366,16 +340,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'name'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'name');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<td>Tom &amp; Jerry</td>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<td>Tom &amp; Jerry</td>', $this->subject->render());
     }
 
     /**
@@ -383,21 +351,12 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'uid,name'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'uid,name');
         $this->createLogInAndRegisterFrontEndUser();
         $result = $this->subject->render();
 
-        self::assertStringContainsString(
-            '<th scope="col">Number</th>',
-            $result
-        );
-        self::assertStringContainsString(
-            '<th scope="col">Name:</th>',
-            $result
-        );
+        self::assertStringContainsString('<th scope="col">Number</th>', $result);
+        self::assertStringContainsString('<th scope="col">Name:</th>', $result);
     }
 
     /**
@@ -405,10 +364,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName(): void
     {
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            'uid,name'
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'uid,name');
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -417,14 +373,8 @@ final class RegistrationsListTest extends FunctionalTestCase
         );
         $result = $this->subject->render();
 
-        self::assertStringContainsString(
-            '<td>' . $this->feUserUid . '</td>',
-            $result
-        );
-        self::assertStringContainsString(
-            '<td>Tom &amp; Jerry</td>',
-            $result
-        );
+        self::assertStringContainsString('<td>' . $this->feUserUid . '</td>', $result);
+        self::assertStringContainsString('<td>Tom &amp; Jerry</td>', $result);
     }
 
     /**
@@ -432,16 +382,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<th scope="col">Ticket ID</th>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<th scope="col">Ticket ID</th>', $this->subject->render());
     }
 
     /**
@@ -449,16 +393,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<td>' . $this->registrationUid . '</td>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<td>' . $this->registrationUid . '</td>', $this->subject->render());
     }
 
     /**
@@ -466,16 +404,10 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'seats'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'seats');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<th scope="col">Seats</th>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<th scope="col">Seats</th>', $this->subject->render());
     }
 
     /**
@@ -483,10 +415,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'seats'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'seats');
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
@@ -494,10 +423,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['seats' => 42]
         );
 
-        self::assertStringContainsString(
-            '<td>42</td>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<td>42</td>', $this->subject->render());
     }
 
     /**
@@ -505,10 +431,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderCanContainTheRegistrationInterests(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'interests'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'interests');
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
@@ -527,20 +450,11 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid,seats'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid,seats');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString(
-            '<th scope="col">Ticket ID</th>',
-            $this->subject->render()
-        );
-        self::assertStringContainsString(
-            '<th scope="col">Seats</th>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<th scope="col">Ticket ID</th>', $this->subject->render());
+        self::assertStringContainsString('<th scope="col">Seats</th>', $this->subject->render());
     }
 
     /**
@@ -548,10 +462,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid,seats'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid,seats');
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
@@ -559,14 +470,8 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['seats' => 42]
         );
 
-        self::assertStringContainsString(
-            '<td>' . $this->registrationUid . '</td>',
-            $this->subject->render()
-        );
-        self::assertStringContainsString(
-            '<td>42</td>',
-            $this->subject->render()
-        );
+        self::assertStringContainsString('<td>' . $this->registrationUid . '</td>', $this->subject->render());
+        self::assertStringContainsString('<td>42</td>', $this->subject->render());
     }
 
     /**
@@ -575,15 +480,9 @@ final class RegistrationsListTest extends FunctionalTestCase
     public function renderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
-        $this->subject->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList',
-            ''
-        );
+        $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', '');
 
-        self::assertStringNotContainsString(
-            'label_',
-            $this->subject->render()
-        );
+        self::assertStringNotContainsString('label_', $this->subject->render());
     }
 
     /**
@@ -592,15 +491,9 @@ final class RegistrationsListTest extends FunctionalTestCase
     public function renderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            ''
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', '');
 
-        self::assertStringNotContainsString(
-            'label_',
-            $this->subject->render()
-        );
+        self::assertStringNotContainsString('label_', $this->subject->render());
     }
 
     /**
@@ -608,10 +501,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderWithDeletedUserForRegistrationHidesUsersRegistration(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid');
 
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -621,10 +511,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ['deleted' => 1]
         );
 
-        self::assertStringNotContainsString(
-            '<td>' . $this->registrationUid . '</td>',
-            $this->subject->render()
-        );
+        self::assertStringNotContainsString('<td>' . $this->registrationUid . '</td>', $this->subject->render());
     }
 
     /**
@@ -632,22 +519,17 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderSeparatesMultipleRegistrationsWithTableRows(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
         $feUserUid = $this->testingFramework->createFrontEndUser();
+        $now = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $secondRegistration = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
-                'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
-                    'date',
-                    'timestamp'
-                ) + 500,
+                'crdate' => $now + 500,
             ]
         );
 
@@ -678,10 +560,7 @@ final class RegistrationsListTest extends FunctionalTestCase
      */
     public function renderForWaitingListRegistrationsContainsWaitingListLabel(): void
     {
-        $this->subject->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList',
-            'uid'
-        );
+        $this->subject->setConfigurationValue('showRegistrationFieldsInRegistrationList', 'uid');
         $this->createLogInAndRegisterFrontEndUser();
 
         $feUserUid = $this->testingFramework->createFrontEndUser();
@@ -694,10 +573,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ]
         );
 
-        self::assertStringContainsString(
-            $this->translate('label_waiting_list'),
-            $this->subject->render()
-        );
+        self::assertStringContainsString($this->translate('label_waiting_list'), $this->subject->render());
     }
 
     /**
@@ -721,9 +597,6 @@ final class RegistrationsListTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
-            '/<td>' . $secondRegistration . '/s',
-            $this->subject->render()
-        );
+        self::assertRegExp('/<td>' . $secondRegistration . '/s', $this->subject->render());
     }
 }

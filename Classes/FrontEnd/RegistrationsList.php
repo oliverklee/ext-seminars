@@ -83,18 +83,13 @@ class RegistrationsList extends AbstractView
                     $this->whatToDisplay,
                     0,
                     0,
-                    $this->getConfValueInteger(
-                        'defaultEventVipsFeGroupID',
-                        's_template_special'
-                    ),
+                    $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'),
                     $this->getConfValueString('accessToFrontEndRegistrationLists')
                 )
             ) {
                 $isOkay = true;
             } else {
-                $errorMessage = $this->seminar->canViewRegistrationsListMessage(
-                    $this->whatToDisplay
-                );
+                $errorMessage = $this->seminar->canViewRegistrationsListMessage($this->whatToDisplay);
                 HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
             }
         } else {
@@ -134,17 +129,10 @@ class RegistrationsList extends AbstractView
 
         $regularRegistrations = $builder->build();
         if ($regularRegistrations->isEmpty()) {
-            $this->setMarker(
-                'message_no_registrations',
-                $this->translate('message_noRegistrations')
-            );
+            $this->setMarker('message_no_registrations', $this->translate('message_noRegistrations'));
             $content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_MESSAGE');
         } else {
-            $this->setSubpart(
-                'registrations_list_table_head',
-                $this->createTableHeader(),
-                'wrapper'
-            );
+            $this->setSubpart('registrations_list_table_head', $this->createTableHeader(), 'wrapper');
 
             $this->createTableBody($regularRegistrations);
             $content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_TABLE');
@@ -155,9 +143,7 @@ class RegistrationsList extends AbstractView
             $waitingListRegistrations = $builder->build();
             if (!$waitingListRegistrations->isEmpty()) {
                 $this->createTableBody($waitingListRegistrations);
-                $content .= $this->getSubpart(
-                    'WRAPPER_REGISTRATIONS_LIST_WAITING_LIST'
-                );
+                $content .= $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_WAITING_LIST');
             }
         }
 
@@ -192,7 +178,7 @@ class RegistrationsList extends AbstractView
             $labelKeys[] = 'label_' . $field;
         }
         foreach ($this->getRegistrationFields() as $field) {
-            if ($field == 'uid') {
+            if ($field === 'uid') {
                 $field = 'registration_' . $field;
             }
             $labelKeys[] = 'label_' . $field;
@@ -229,18 +215,11 @@ class RegistrationsList extends AbstractView
 
             $tableCells = '';
             foreach ($cellContents as $cellContent) {
-                $this->setMarker(
-                    'registrations_list_cell',
-                    \htmlspecialchars($cellContent, ENT_QUOTES | ENT_HTML5)
-                );
-                $tableCells .= $this->getSubpart(
-                    'WRAPPER_REGISTRATIONS_LIST_CELL'
-                );
+                $this->setMarker('registrations_list_cell', \htmlspecialchars($cellContent, ENT_QUOTES | ENT_HTML5));
+                $tableCells .= $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_CELL');
             }
             $this->setMarker('registrations_list_cells', $tableCells);
-            $tableBody .= $this->getSubpart(
-                'WRAPPER_REGISTRATIONS_LIST_ROW'
-            );
+            $tableBody .= $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_ROW');
         }
 
         $this->setMarker('registrations_list_rows', $tableBody);
