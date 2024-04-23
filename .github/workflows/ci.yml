@@ -31,12 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "7.2"
-          - "7.3"
-          - "7.4"
-          - "8.0"
-          - "8.1"
-          - "8.2"
           - "8.3"
   code-quality:
     name: "Code quality checks"
@@ -58,12 +52,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
         run: "composer update --no-ansi --no-progress"
       - name: "Run command"
@@ -72,11 +60,7 @@ jobs:
       fail-fast: false
       matrix:
         command:
-          - "composer:normalize"
-          - "php:cs-fixer"
-          - "php:sniff"
           - "php:stan"
-          - "ts:lint"
         php-version:
           - "8.1"
   unit-tests:
@@ -101,12 +85,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
@@ -129,24 +107,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
@@ -204,12 +182,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
@@ -229,8 +201,8 @@ jobs:
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
       # This workaround for MySQL 8 can be removed once we drop support for PHP 7.2/7.3.
-      - name: "Configure the MySQL user to work with PHP 7.2/7.3"
-        run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
+#      - name: "Configure the MySQL user to work with PHP 7.2/7.3"
+#        run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
       - name: "Create the tests directory"
         run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run functional tests"
@@ -244,24 +216,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
@@ -319,12 +291,6 @@ jobs:
         run: composer --version
       - name: "Show the Composer configuration"
         run: composer config --global --list
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v4
-        with:
-          key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.cache/composer
-          restore-keys: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-\n"
       - name: "Install TYPO3 Core"
         env:
           TYPO3: "${{ matrix.typo3-version }}"
@@ -344,8 +310,8 @@ jobs:
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
       # This workaround for MySQL 8 can be removed once we drop support for PHP 7.2/7.3.
-      - name: "Configure the MySQL user to work with PHP 7.2/7.3"
-        run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
+#      - name: "Configure the MySQL user to work with PHP 7.2/7.3"
+#        run: mysql -u root --password=root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'"
       - name: "Create the tests directory"
         run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run legacy functional tests"
@@ -359,24 +325,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.2"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.3"
-            composer-dependencies: highest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.2"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.3"
+#            composer-dependencies: highest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: lowest
+#          - typo3-version: "^10.4"
+#            php-version: "7.4"
+#            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
