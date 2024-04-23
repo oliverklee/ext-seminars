@@ -1066,11 +1066,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationsList.php
 
 		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationsList.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationsList\\:\\:__construct\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationsList.php
