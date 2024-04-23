@@ -13,6 +13,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class DefaultControllerTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     // Tests concerning the single view
 
     /**

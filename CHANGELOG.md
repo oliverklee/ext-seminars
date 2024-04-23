@@ -34,7 +34,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop dead code (#2967)
 
 ### Fixed
-- Stop using deprecated HTTP functions (#2991, #3006, #3007)
+- Stop using deprecated HTTP functions (#2991, #3006, #3007, #3008)
 - Redirect to the events list after sending an email in the BE module (#2971)
 - Add `resname` to all language labels (#2952)
 - Display registration statistics in the BE in all cases (#2909)
