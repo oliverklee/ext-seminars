@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\Service;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Http\HeaderCollector;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -15,6 +13,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -106,11 +105,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
     private $extConfBackup = [];
 
     /**
-     * @var HeaderCollector
-     */
-    private $headerCollector;
-
-    /**
      * @var list<class-string>
      */
     private $mockedClassNames = [];
@@ -124,6 +118,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
      * @var int
      */
     private $rootPageUid;
+
+    /**
+     * @var ResponseHeadersModifier
+     */
+    private $responseHeadersModifier;
 
     protected function setUp(): void
     {
@@ -140,6 +139,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
         $this->getLanguageService();
+
+        $this->responseHeadersModifier = new ResponseHeadersModifier();
+        GeneralUtility::setSingletonInstance(ResponseHeadersModifier::class, $this->responseHeadersModifier);
 
         $this->email = $this->createEmailMock();
         $secondEmail = $this->createEmailMock();
@@ -180,10 +182,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ]
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
-
-        $headerProxyFactory = HeaderProxyFactory::getInstance();
-        $headerProxyFactory->enableTestMode();
-        $this->headerCollector = $headerProxyFactory->getHeaderCollector();
 
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
         $this->subject = RegistrationManager::getInstance();
@@ -2198,10 +2196,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         $this->subject->existsSeminarMessage(0);
 
-        self::assertSame(
-            'Status: 404 Not Found',
-            $this->headerCollector->getLastAddedHeader()
-        );
+        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -2222,10 +2217,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         $this->subject->existsSeminarMessage(9999);
 
-        self::assertSame(
-            'Status: 404 Not Found',
-            $this->headerCollector->getLastAddedHeader()
-        );
+        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     /**
@@ -2276,14 +2268,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForExistingUidNotSendsHttpHeader(): void
+    public function existsSeminarMessageForExistingUidDoesNotModifyHttpStatusCode(): void
     {
         $this->subject->existsSeminarMessage($this->seminarUid);
 
-        self::assertSame(
-            [],
-            $this->headerCollector->getAllAddedHeaders()
-        );
+        self::assertNull($this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     private function getConnectionForTable(string $table): Connection
