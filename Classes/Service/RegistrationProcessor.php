@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -31,6 +32,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class RegistrationProcessor implements SingletonInterface
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
     /**
      * @var RegistrationRepository
      */
@@ -55,6 +61,11 @@ class RegistrationProcessor implements SingletonInterface
      * @var RegistrationManager
      */
     private $registrationManager;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     public function injectRegistrationRepository(RegistrationRepository $repository): void
     {
@@ -221,6 +232,36 @@ class RegistrationProcessor implements SingletonInterface
         $this->registrationRepository->persistAll();
 
         $this->eventRepository->updateRegistrationCounterCache($event);
+    }
+
+    /**
+     * Logs a newly created registration.
+     *
+     * Call `persist` first before calling this method.
+     *
+     * @internal
+     */
+    public function logNewRegistration(Registration $registration): void
+    {
+        $registrationUid = $registration->getUid();
+        $event = $registration->getEvent();
+        $eventUid = $event instanceof Event ? $event->getUid() : null;
+        $user = $registration->getUser();
+        $userUid = $user instanceof FrontendUser ? $user->getUid() : null;
+
+        $registrationDescription = $registration->isOnWaitingList() ? 'waiting list' : 'regular';
+        $message = "[seminars] New {$registrationDescription} registration #{registrationUid} created "
+            . 'for event #{eventUid} and user #{userUid} with {seats} seat(s).';
+
+        $this->logger->info(
+            $message,
+            [
+                'registrationUid' => $registrationUid,
+                'eventUid' => $eventUid,
+                'userUid' => $userUid,
+                'seats' => $registration->getSeats(),
+            ]
+        );
     }
 
     /**

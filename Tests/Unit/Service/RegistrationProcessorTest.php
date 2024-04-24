@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -26,6 +27,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationProcessorTest extends UnitTestCase
 {
+    /**
+     * @var LoggerInterface&MockObject
+     */
+    private $loggerMock;
+
     /**
      * @var RegistrationRepository&MockObject
      */
@@ -60,7 +66,8 @@ final class RegistrationProcessorTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->subject = new RegistrationProcessor();
+        $this->loggerMock = $this->createMock(LoggerInterface::class);
+        $this->subject = new RegistrationProcessor($this->loggerMock);
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
@@ -540,6 +547,77 @@ final class RegistrationProcessorTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())->method('updateRegistrationCounterCache')->with($event);
 
         $this->subject->persist($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function logNewRegistrationWithRegularRegistrationLogsRegistrationWithUidsAndSeats(): void
+    {
+        $registration = new Registration();
+        $registrationUid = 15;
+        $registration->_setProperty('uid', $registrationUid);
+
+        $event = new SingleEvent();
+        $eventUid = 5;
+        $event->_setProperty('uid', $eventUid);
+        $registration->setEvent($event);
+
+        $user = new FrontendUser();
+        $userUid = 9;
+        $user->_setProperty('uid', $userUid);
+        $registration->setUser($user);
+
+        $seats = 2;
+        $registration->setSeats($seats);
+
+        $expectedMessage = '[seminars] New regular registration #{registrationUid} created for event #{eventUid} '
+            . 'and user #{userUid} with {seats} seat(s).';
+        $expectedContext = [
+            'registrationUid' => $registrationUid,
+            'eventUid' => $eventUid,
+            'userUid' => $userUid,
+            'seats' => $seats,
+        ];
+        $this->loggerMock->expects(self::once())->method('info')->with($expectedMessage, $expectedContext);
+
+        $this->subject->logNewRegistration($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function logNewRegistrationWithWaitingListRegistrationLogsRegistrationWithUidsAndSeats(): void
+    {
+        $registration = new Registration();
+        $registrationUid = 15;
+        $registration->_setProperty('uid', $registrationUid);
+
+        $event = new SingleEvent();
+        $eventUid = 5;
+        $event->_setProperty('uid', $eventUid);
+        $registration->setEvent($event);
+
+        $user = new FrontendUser();
+        $userUid = 9;
+        $user->_setProperty('uid', $userUid);
+        $registration->setUser($user);
+
+        $seats = 2;
+        $registration->setSeats($seats);
+        $registration->setOnWaitingList(true);
+
+        $expectedMessage = '[seminars] New waiting list registration #{registrationUid} created for event #{eventUid} '
+            . 'and user #{userUid} with {seats} seat(s).';
+        $expectedContext = [
+            'registrationUid' => $registrationUid,
+            'eventUid' => $eventUid,
+            'userUid' => $userUid,
+            'seats' => $seats,
+        ];
+        $this->loggerMock->expects(self::once())->method('info')->with($expectedMessage, $expectedContext);
+
+        $this->subject->logNewRegistration($registration);
     }
 
     /**

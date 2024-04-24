@@ -219,6 +219,7 @@ class EventRegistrationController extends ActionController
         $userStorageFolderUid = (int)($this->settings['additionalPersonsStorageFolder'] ?? 0);
         $this->registrationProcessor->createAdditionalPersons($registration, $userStorageFolderUid);
         $this->registrationProcessor->persist($registration);
+        $this->registrationProcessor->logNewRegistration($registration);
         $this->registrationProcessor->sendEmails($registration);
 
         $this->oneTimeAccountConnector->destroyOneTimeSession();
