@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\System\Typo3Version;
+use Psr\Log\LoggerAwareTrait;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -24,8 +25,10 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
+class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor implements \Psr\Log\LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * the same as the class name
      *
@@ -360,6 +363,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $registrationManager->sendEmailsForNewRegistration($this);
+
+        $registrationType = $newRegistration->isOnRegistrationQueue() ? 'queue' : 'regular';
+        $registrationUid = $newRegistration->getUid();
+        $eventUid = $this->getSeminar()->getUid();
+        $userUid = $newRegistration->getFrontEndUser()->getUid();
+        $message = "New {$registrationType} registration created with UID {$registrationUid} for event {$eventUid} and user {$userUid}.";
+        $this->logger->info($message);
     }
 
     /**
@@ -1733,7 +1743,15 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             exit;
         }
 
-        $this->getRegistrationManager()->removeRegistration($this->getRegistration()->getUid(), $this);
+        $registration = $this->getRegistration();
+        $registrationUid = $registration->getUid();
+        $this->getRegistrationManager()->removeRegistration($registrationUid, $this);
+
+        $registrationType = $registration->isOnRegistrationQueue() ? 'Queue' : 'Regular';
+        $eventUid = $this->getSeminar()->getUid();
+        $userUid = $registration->getFrontEndUser()->getUid();
+        $message = "{$registrationType} registration with UID {$registrationUid} canceled for event {$eventUid} and user {$userUid}.";
+        $this->logger->info($message);
     }
 
     /**

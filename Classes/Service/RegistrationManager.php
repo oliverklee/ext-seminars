@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use Psr\Log\LoggerAwareTrait;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -29,8 +30,10 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
+class Tx_Seminars_Service_RegistrationManager extends TemplateHelper implements \Psr\Log\LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * faking $this->scriptRelPath so the locallang.xlf file is found
      *
@@ -749,6 +752,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
                 if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
                     $this->sendAdditionalNotification($registration);
                 }
+
+                $registrationUid = $registration->getUid();
+                $eventUid = $seminar->getUid();
+                $userUid = $user->getUid();
+                $message = "Registration with UID {$registrationUid} moved from the waiting list to a regular registration for event {$eventUid} and user {$userUid}.";
+                $this->logger->info($message);
             }
         }
     }
