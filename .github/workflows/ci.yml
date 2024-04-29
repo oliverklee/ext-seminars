@@ -26,8 +26,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - 7.0
-          - 7.1
           - 7.2
           - 7.3
           - 7.4
@@ -72,12 +70,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: ^8.7
-            php-version: 7.0
-          - typo3-version: ^8.7
-            php-version: 7.1
-          - typo3-version: ^8.7
-            php-version: 7.2
           - typo3-version: ^9.5
             php-version: 7.2
           - typo3-version: ^9.5
@@ -131,12 +123,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: ^8.7
-            php-version: 7.0
-          - typo3-version: ^8.7
-            php-version: 7.1
-          - typo3-version: ^8.7
-            php-version: 7.2
           - typo3-version: ^9.5
             php-version: 7.2
           - typo3-version: ^9.5
@@ -199,12 +185,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: ^8.7
-            php-version: 7.0
-          - typo3-version: ^8.7
-            php-version: 7.1
-          - typo3-version: ^8.7
-            php-version: 7.2
           - typo3-version: ^9.5
             php-version: 7.2
           - typo3-version: ^9.5
