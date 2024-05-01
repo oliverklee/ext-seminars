@@ -30,7 +30,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkHideCanceledEvents();
         $this->checkSortListViewByCategory();
         $this->checkGeneralPriceInList();
-        $this->checkOmitDateIfSameAsPrevious();
         $this->checkListPid();
         $this->checkDetailPid();
         if ($this->isRegistrationEnabled()) {
@@ -141,18 +140,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             price in the list view will be just <em>Price</em> instead
             of <em>Standard price</em>.
             If this value is incorrect, the wrong label might be used.'
-        );
-    }
-
-    /**
-     * @deprecated #1788 will be removed in seminars 6.0
-     */
-    private function checkOmitDateIfSameAsPrevious(): void
-    {
-        $this->checkIfBoolean(
-            'omitDateIfSameAsPrevious',
-            'This value specifies whether to omit the date in the list view if it is the same as the previous item\'s.
-            If this value is incorrect, the date might be omitted although this is not intended (or vice versa).'
         );
     }
 
