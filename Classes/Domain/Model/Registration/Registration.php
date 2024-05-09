@@ -14,6 +14,8 @@ use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use OliverKlee\Seminars\Domain\Model\RawDataTrait;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -35,9 +37,9 @@ class Registration extends AbstractEntity implements RawDataInterface
     protected $title = '';
 
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\Event\Event|null
+     * @var Event|null
      * @phpstan-var Event|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $event;
 
@@ -77,33 +79,33 @@ class Registration extends AbstractEntity implements RawDataInterface
     protected $knownFrom = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\AccommodationOption>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<AccommodationOption>
+     * @Lazy
      */
     protected $accommodationOptions;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\FoodOption>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<FoodOption>
+     * @Lazy
      */
     protected $foodOptions;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\RegistrationCheckbox>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<RegistrationCheckbox>
+     * @Lazy
      */
     protected $registrationCheckboxes;
 
     /**
      * @var bool
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      * @Extbase\Validate(validator="Boolean", options={"is": "1"})
      */
     protected $consentedToTermsAndConditions = false;
 
     /**
      * @var bool
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      * @Extbase\Validate(validator="Boolean", options={"is": "1"})
      */
     protected $consentedToAdditionalTerms = false;

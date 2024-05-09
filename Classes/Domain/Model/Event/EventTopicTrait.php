@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Domain\Model\EventType;
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -45,9 +46,9 @@ trait EventTopicTrait
     protected $specialEarlyBirdPrice = 0.0;
 
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\EventType|null
+     * @var EventType|null
      * @phpstan-var EventType|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $eventType;
 
@@ -62,8 +63,8 @@ trait EventTopicTrait
     protected $multipleRegistrationPossible = false;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Seminars\Domain\Model\PaymentMethod>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<PaymentMethod>
+     * @Lazy
      */
     protected $paymentMethods;
 

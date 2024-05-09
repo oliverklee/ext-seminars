@@ -18,7 +18,7 @@ class EventDate extends Event implements EventDateInterface
     use EventDateTrait;
 
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\Event\EventTopic|null
+     * @var EventTopic|null
      */
     protected $topic;
 
