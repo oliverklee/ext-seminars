@@ -3,33 +3,33 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z" product-name="seminars" target-language="de">
     <header/>
     <body>
-      <trans-unit id="test-label" resname="test-label">
+      <trans-unit id="test-label" resname="test-label" approved="yes">
         <source>This is a test label.</source>
-        <target state="needs-translation">This is a test label.</target>
+        <target state="final">Dies ist ein Testlabel.</target>
       </trans-unit>
-      <trans-unit id="test-label-with-arguments" resname="test-label-with-arguments">
+      <trans-unit id="test-label-with-arguments" resname="test-label-with-arguments" approved="yes">
         <source>Hello %s!</source>
-        <target state="needs-translation">Hello %s!</target>
+        <target state="final">Hallo %s!</target>
       </trans-unit>
-      <trans-unit id="test-label-with-salutation_formal" resname="test-label-with-salutation_formal">
+      <trans-unit id="test-label-with-salutation_formal" resname="test-label-with-salutation_formal" approved="yes">
         <source>This is a test label with a formal salutation.</source>
-        <target state="needs-translation">This is a test label with a formal salutation.</target>
+        <target state="final">Dies ist ein Testlabel mit formeller Anrede.</target>
       </trans-unit>
-      <trans-unit id="test-label-with-salutation_informal" resname="test-label-with-salutation_informal">
+      <trans-unit id="test-label-with-salutation_informal" resname="test-label-with-salutation_informal" approved="yes">
         <source>This is a test label with an informal salutation.</source>
-        <target state="needs-translation">This is a test label with an informal salutation.</target>
+        <target state="final">Dies ist ein Testlabel mit informeller Anrede.</target>
       </trans-unit>
-      <trans-unit id="test-label-with-salutation-and-fallback" resname="test-label-with-salutation-and-fallback">
+      <trans-unit id="test-label-with-salutation-and-fallback" resname="test-label-with-salutation-and-fallback" approved="yes">
         <source>This is a test label with a fallback.</source>
-        <target state="needs-translation">This is a test label with a fallback.</target>
+        <target state="final">Dies ist ein Testlabel mit Fallback.</target>
       </trans-unit>
-      <trans-unit id="test-label-with-salutation-and-fallback_informal" resname="test-label-with-salutation-and-fallback_informal">
+      <trans-unit id="test-label-with-salutation-and-fallback_informal" resname="test-label-with-salutation-and-fallback_informal" approved="yes">
         <source>This is a test label with a fallback and an informal salutation.</source>
-        <target state="needs-translation">This is a test label with a fallback and an informal salutation.</target>
+        <target state="final">Dies ist ein Testlabel mit Fallback und informeller Anrede.</target>
       </trans-unit>
-      <trans-unit id="test-label-with-salutation-and-fallback_formal" resname="test-label-with-salutation-and-fallback_formal">
+      <trans-unit id="test-label-with-salutation-and-fallback_formal" resname="test-label-with-salutation-and-fallback_formal" approved="yes">
         <source>This is a test label with a fallback and a formal salutation.</source>
-        <target state="needs-translation">This is a test label with a fallback and a formal salutation.</target>
+        <target state="final">Dies ist ein Testlabel mit Fallback und informeller Anrede.</target>
       </trans-unit>
       <trans-unit id="pi1_title" resname="pi1_title" approved="yes">
         <source>Seminar Manager</source>
@@ -259,9 +259,9 @@
         <source>Ms.</source>
         <target state="final">Frau</target>
       </trans-unit>
-      <trans-unit id="label_status.I.1" resname="label_status.I.1">
+      <trans-unit id="label_status.I.1" resname="label_status.I.1" approved="yes">
         <source>Student</source>
-        <target state="needs-translation">Student</target>
+        <target state="final">Student_in</target>
       </trans-unit>
       <trans-unit id="label_status.I.2" resname="label_status.I.2" approved="yes">
         <source>Job seeking</source>
@@ -611,9 +611,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Y-m-d</source>
         <target state="final">d.m.Y</target>
       </trans-unit>
-      <trans-unit id="timeFormat" resname="timeFormat">
+      <trans-unit id="timeFormat" resname="timeFormat" approved="yes">
         <source>H:i</source>
-        <target state="needs-translation">H:i</target>
+        <target state="final">H:i</target>
       </trans-unit>
       <trans-unit id="decimalSeparator" resname="decimalSeparator" approved="yes">
         <source>.</source>
@@ -623,9 +623,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>,</source>
         <target state="final">.</target>
       </trans-unit>
-      <trans-unit id="registrationTitleFormat" resname="registrationTitleFormat">
+      <trans-unit id="registrationTitleFormat" resname="registrationTitleFormat" approved="yes">
         <source>%1s / %2s, %3s</source>
-        <target state="needs-translation">%1s / %2s, %3s</target>
+        <target state="final">%1s / %2s, %3s</target>
       </trans-unit>
       <trans-unit id="message_403" resname="message_403" approved="yes">
         <source>Error 403. Sorry, you don't have access to this data.</source>
@@ -1203,9 +1203,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Deadline for registration</source>
         <target state="final">Anmeldeschluss</target>
       </trans-unit>
-      <trans-unit id="label_status_registration" resname="label_status_registration">
+      <trans-unit id="label_status_registration" resname="label_status_registration" approved="yes">
         <source>Status</source>
-        <target state="needs-translation">Status</target>
+        <target state="final">Status</target>
       </trans-unit>
       <trans-unit id="label_registration" resname="label_registration" approved="yes">
         <source>Registration</source>
@@ -1579,9 +1579,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Create new event</source>
         <target state="final">Neue Veranstaltung anlegen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.uid" resname="plugin.frontEndEditor.property.uid">
+      <trans-unit id="plugin.frontEndEditor.property.uid" resname="plugin.frontEndEditor.property.uid" approved="yes">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="final">UID</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.internalTitle" resname="plugin.frontEndEditor.property.internalTitle" approved="yes">
         <source>Title</source>
@@ -2153,9 +2153,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>This event does not have any registrations yet.</source>
         <target state="final">Für diese Veranstaltung gibt es noch keine Anmeldungen.</target>
       </trans-unit>
-      <trans-unit id="backEndModule.events.property.uid" resname="backEndModule.events.property.uid">
+      <trans-unit id="backEndModule.events.property.uid" resname="backEndModule.events.property.uid" approved="yes">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="final">UID</target>
       </trans-unit>
       <trans-unit id="backEndModule.events.property.internalTitle" resname="backEndModule.events.property.internalTitle" approved="yes">
         <source>Title</source>
@@ -2201,9 +2201,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>is fully booked</source>
         <target state="final">ist ausgebucht</target>
       </trans-unit>
-      <trans-unit id="backEndModule.events.property.name" resname="backEndModule.events.property.name">
+      <trans-unit id="backEndModule.events.property.name" resname="backEndModule.events.property.name" approved="yes">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="final">Name</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.edit" resname="backEndModule.action.edit" approved="yes">
         <source>Edit record</source>
