@@ -29,11 +29,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 abstract class TemplateHelper
 {
     /**
-     * @var non-empty-string the regular expression used to find subparts
-     */
-    private const LABEL_PATTERN = '/###(LABEL_([A-Z\\d_]+))###/';
-
-    /**
      * @var list<false|''|0|'0'|null>
      */
     private const FALSEY_VALUES = [null, false, '', 0, '0'];
@@ -167,17 +162,12 @@ abstract class TemplateHelper
     public $pi_autoCacheFields = [];
 
     /**
-     * @var bool
-     */
-    public $pi_autoCacheEn = false;
-
-    /**
      * Should normally be set in the main function with the TypoScript content passed to the method.
      *
      * $conf[LOCAL_LANG][_key_] is reserved for Local Language overrides.
      * $conf[userFunc] reserved for setting up the USER / USER_INT object. See TSref
      *
-     * @var array
+     * @var array<string, mixed>
      */
     public $conf = [];
 
@@ -290,9 +280,9 @@ abstract class TemplateHelper
      * If the parameter is omitted, the configuration for `plugin.tx_[extkey]` is
      * used instead, e.g., `plugin.tx_seminars`.
      *
-     * @param array<string, mixed>|mixed $configuration TypoScript configuration for the plugin (usually an array)
+     * @param array<string, mixed>|null $configuration TypoScript configuration for the plugin (usually an array)
      */
-    public function init($configuration = null): void
+    public function init(?array $configuration = null): void
     {
         if ($this->isInitialized) {
             return;
@@ -357,11 +347,8 @@ abstract class TemplateHelper
      *
      * @return string the value of the corresponding flexforms or TypoScript setup entry (may be empty)
      */
-    private function getConfValue(
-        string $fieldName,
-        string $sheet = 'sDEF',
-        bool $ignoreFlexform = false
-    ): string {
+    private function getConfValue(string $fieldName, string $sheet, bool $ignoreFlexform = false): string
+    {
         $configurationValueFromTypoScript = (string)($this->conf[$fieldName] ?? '');
         $contentObject = $this->cObj;
         if (!$contentObject instanceof ContentObjectRenderer) {
@@ -387,7 +374,6 @@ abstract class TemplateHelper
      *
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
-     * @param bool $isFileName whether this is a filename, which has to be combined with a path
      * @param bool $ignoreFlexform
      *        whether to ignore the flexform values and just get the settings from TypoScript, may be empty
      *
@@ -397,16 +383,9 @@ abstract class TemplateHelper
     public function getConfValueString(
         string $fieldName,
         string $sheet = 'sDEF',
-        bool $isFileName = false,
         bool $ignoreFlexform = false
     ): string {
-        return trim(
-            $this->getConfValue(
-                $fieldName,
-                $sheet,
-                $ignoreFlexform
-            )
-        );
+        return trim($this->getConfValue($fieldName, $sheet, $ignoreFlexform));
     }
 
     /**
@@ -417,18 +396,14 @@ abstract class TemplateHelper
      *
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
-     * @param bool $ignoreFlexform
      *        whether to ignore the flexform values and just get the settings from TypoScript, may be empty
      *
      * @return bool whether there is a non-empty value in the
      *                 corresponding flexforms or TypoScript setup entry
      */
-    public function hasConfValueString(
-        string $fieldName,
-        string $sheet = 'sDEF',
-        bool $ignoreFlexform = false
-    ): bool {
-        return $this->getConfValueString($fieldName, $sheet, false, $ignoreFlexform) !== '';
+    public function hasConfValueString(string $fieldName, string $sheet): bool
+    {
+        return $this->getConfValueString($fieldName, $sheet) !== '';
     }
 
     /**
@@ -487,7 +462,7 @@ abstract class TemplateHelper
      * This function is intended to be used for testing purposes only.
      *
      * @param non-empty-string $key key of the configuration property to set
-     * @param mixed $value value of the configuration property, may be empty or zero
+     * @param int|string|bool|array<mixed> $value value of the configuration property, may be empty or zero
      */
     public function setConfigurationValue(string $key, $value): void
     {
@@ -513,10 +488,8 @@ abstract class TemplateHelper
      * Retrieves the plugin template file set in `$this->conf['templateFile']`
      * (or also via flexforms if TYPO3 mode is FE) and writes it to `$this->templateCode`.
      * The subparts will be written to $this->templateCache.
-     *
-     * @param bool $ignoreFlexform whether the settings in the Flexform should be ignored
      */
-    public function getTemplateCode(bool $ignoreFlexform = false): void
+    public function getTemplateCode(): void
     {
         // Trying to fetch the template code via `$this->cObj` in BE mode leads to
         // a non-catchable error in the `ContentObjectRenderer` class because the `cObj`
@@ -530,7 +503,6 @@ abstract class TemplateHelper
         $templateFileName = $this->getConfValueString(
             'templateFile',
             's_template_special',
-            true,
             $ignoreFlexform
         );
 
@@ -543,9 +515,7 @@ abstract class TemplateHelper
 
     /**
      * Returns the template object from the template registry for the file name
-     * in $this->templateFileName.
-     *
-     * @return Template the template object for the template file name in `$this->templateFileName`
+     * in `$this->templateFileName`.
      */
     protected function getTemplate(): Template
     {
@@ -558,7 +528,7 @@ abstract class TemplateHelper
 
     /**
      * Stores the given HTML template and retrieves all subparts, writing them
-     * to $this->templateCache.
+     * to `$this->templateCache`.
      *
      * The subpart names are automatically retrieved from $templateCode and
      * are used as array keys. For this, the ### are removed, but the names stay
@@ -647,26 +617,6 @@ abstract class TemplateHelper
     }
 
     /**
-     * Sets a marker based on whether the (string) content is non-empty.
-     * If $content is non-empty, this function sets the marker's content,
-     * working exactly like setMarker($markerName, $content, $markerPrefix).
-     *
-     * @param non-empty-string $markerName the marker's name without the ### signs, case-insensitive,
-     *        will get uppercased
-     * @param mixed $content content with which the marker will be filled, may be empty
-     * @param string $markerPrefix prefix to the marker name for setting
-     *        (may be empty, case-insensitive, will get uppercased)
-     *
-     * @return bool TRUE if the marker content has been set, FALSE otherwise
-     *
-     * @see setMarkerIfNotZero
-     */
-    public function setMarkerIfNotEmpty(string $markerName, $content, string $markerPrefix = ''): bool
-    {
-        return $this->getTemplate()->setMarkerIfNotEmpty($markerName, $content, $markerPrefix);
-    }
-
-    /**
      * Checks whether a subpart is visible.
      *
      * Note: If the subpart to check does not exist, this function will return false.
@@ -741,11 +691,8 @@ abstract class TemplateHelper
      * @param string $permanentlyHiddenSubparts comma-separated list of subpart names that shouldn't get unhidden
      * @param string $prefix prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
      */
-    public function unhideSubparts(
-        string $subparts,
-        string $permanentlyHiddenSubparts = '',
-        string $prefix = ''
-    ): void {
+    public function unhideSubparts(string $subparts, string $permanentlyHiddenSubparts = '', string $prefix = ''): void
+    {
         $this->getTemplate()->unhideSubparts(
             $subparts,
             $permanentlyHiddenSubparts,
@@ -784,119 +731,6 @@ abstract class TemplateHelper
     }
 
     /**
-     * Sets or hides a marker based on $condition.
-     * If $condition is TRUE, this function sets the marker's content, working
-     * exactly like setMarker($markerName, $content, $markerPrefix).
-     * If $condition is FALSE, this function removes the wrapping subpart,
-     * working exactly like hideSubparts($markerName, $wrapperPrefix).
-     *
-     * @param non-empty-string $markerName the marker's name without the ### signs,
-     *        case-insensitive, will get uppercased
-     * @param bool $condition if this is TRUE, the marker will be filled, otherwise the wrapped marker will be hidden
-     * @param mixed $content content with which the marker will be filled, may be empty
-     * @param string $markerPrefix prefix to the marker name for setting
-     *        (may be empty, case-insensitive, will get uppercased)
-     * @param string $wrapperPrefix prefix to the subpart name for hiding
-     *       (may be empty, case-insensitive, will get uppercased)
-     *
-     * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setMarkerContent
-     * @see hideSubparts
-     */
-    public function setOrDeleteMarker(
-        string $markerName,
-        bool $condition,
-        $content,
-        string $markerPrefix = '',
-        string $wrapperPrefix = ''
-    ): bool {
-        return $this->getTemplate()->setOrDeleteMarker(
-            $markerName,
-            $condition,
-            $content,
-            $markerPrefix,
-            $wrapperPrefix
-        );
-    }
-
-    /**
-     * Sets or hides a marker based on whether the int content is non-zero.
-     *
-     * If (int)$content is non-zero, this function sets the marker's content,
-     * working exactly like setMarker($markerName, $content,
-     * $markerPrefix).
-     * If (int)$condition is zero, this function removes the wrapping
-     * subpart, working exactly like hideSubparts($markerName, $wrapperPrefix).
-     *
-     * @param non-empty-string $markerName the marker's name without the ### signs, case-insensitive,
-     *        will get uppercased
-     * @param mixed $content content with which the marker will be filled, may be empty
-     * @param string $markerPrefix prefix to the marker name for setting
-     *        (may be empty, case-insensitive, will get uppercased)
-     * @param string $wrapperPrefix prefix to the subpart name for hiding
-     *        (may be empty, case-insensitive, will get uppercased)
-     *
-     * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setOrDeleteMarker
-     * @see setOrDeleteMarkerIfNotEmpty
-     * @see setMarkerContent
-     * @see hideSubparts
-     */
-    public function setOrDeleteMarkerIfNotZero(
-        string $markerName,
-        $content,
-        string $markerPrefix = '',
-        string $wrapperPrefix = ''
-    ): bool {
-        return $this->getTemplate()->setOrDeleteMarkerIfNotZero(
-            $markerName,
-            $content,
-            $markerPrefix,
-            $wrapperPrefix
-        );
-    }
-
-    /**
-     * Sets or hides a marker based on whether the (string) content is
-     * non-empty.
-     * If $content is non-empty, this function sets the marker's content,
-     * working exactly like setMarker($markerName, $content,
-     * $markerPrefix).
-     * If $condition is empty, this function removes the wrapping subpart,
-     * working exactly like hideSubparts($markerName, $wrapperPrefix).
-     *
-     * @param non-empty-string $markerName the marker's name without the ### signs, case-insensitive,
-     *        will get uppercased
-     * @param mixed $content content with which the marker will be filled, may be empty
-     * @param string $markerPrefix prefix to the marker name for setting
-     *        (may be empty, case-insensitive, will get uppercased)
-     * @param string $wrapperPrefix prefix to the subpart name for hiding
-     *        (may be empty, case-insensitive, will get uppercased)
-     *
-     * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setOrDeleteMarker
-     * @see setOrDeleteMarkerIfNotZero
-     * @see setMarkerContent
-     * @see hideSubparts
-     */
-    public function setOrDeleteMarkerIfNotEmpty(
-        string $markerName,
-        $content,
-        string $markerPrefix = '',
-        string $wrapperPrefix = ''
-    ): bool {
-        return $this->getTemplate()->setOrDeleteMarkerIfNotEmpty(
-            $markerName,
-            $content,
-            $markerPrefix,
-            $wrapperPrefix
-        );
-    }
-
-    /**
      * Retrieves a named subpart, recursively filling in its inner subparts
      * and markers. Inner subparts that are marked to be hidden will be
      * substituted with empty strings.
@@ -904,49 +738,13 @@ abstract class TemplateHelper
      * This function either works on the subpart with the name $key or the
      * complete HTML template if $key is an empty string.
      *
-     * @param string $key
-     *        key of an existing subpart, for example 'LIST_ITEM' (without the ###),
-     *        or an empty string to use the complete HTML template
+     * @param string $key key of an existing subpart, for example 'LIST_ITEM' (without the ###)
      *
-     * @return string the subpart content or an empty string if the
-     *                subpart is hidden or the subpart name is missing
+     * @return string the subpart content or an empty string if the subpart is hidden or the subpart name is missing
      */
     public function getSubpart(string $key = ''): string
     {
         return $this->getTemplate()->getSubpart($key);
-    }
-
-    /**
-     * Retrieves a named subpart, recursively filling in its inner subparts
-     * and markers. Inner subparts that are marked to be hidden will be
-     * substituted with empty strings.
-     *
-     * This function either works on the subpart with the name $key or the
-     * complete HTML template if $key is an empty string.
-     *
-     * All label markers in the rendered subpart are automatically replaced with their corresponding localized labels,
-     * removing the need use the very expensive setLabels method.
-     *
-     * @param string $subpartKey
-     *        key of an existing subpart, for example 'LIST_ITEM' (without the ###),
-     *        or an empty string to use the complete HTML template
-     *
-     * @return string the subpart content or an empty string if the subpart is hidden or the subpart name is missing
-     */
-    public function getSubpartWithLabels(string $subpartKey = ''): string
-    {
-        $renderedSubpart = $this->getSubpart($subpartKey);
-
-        $translator = $this;
-        return (string)\preg_replace_callback(
-            self::LABEL_PATTERN,
-            static function (array $matches) use ($translator): string {
-                /** @var non-empty-string $key */
-                $key = \strtolower($matches[1]);
-                return $translator->translate($key);
-            },
-            $renderedSubpart
-        );
     }
 
     /**
@@ -1269,8 +1067,7 @@ abstract class TemplateHelper
         ) {
             $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
         } elseif ($this->altLLkey) {
-            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
-            $alternativeLanguageKeys = array_reverse($alternativeLanguageKeys);
+            $alternativeLanguageKeys = array_reverse(GeneralUtility::trimExplode(',', $this->altLLkey, true));
             foreach ($alternativeLanguageKeys as $languageKey) {
                 if (
                     !empty($this->LOCAL_LANG[$languageKey][$key][0]['target'])
@@ -1329,7 +1126,7 @@ abstract class TemplateHelper
                 }
             }
             // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
-            if (isset($this->conf['_LOCAL_LANG.'])) {
+            if (isset($this->conf['_LOCAL_LANG.']) && is_array($this->conf['_LOCAL_LANG.'])) {
                 // Clear the "unset memory"
                 $this->LOCAL_LANG_UNSET = [];
                 foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
@@ -1358,18 +1155,16 @@ abstract class TemplateHelper
      * @param array $T3FlexForm_array FlexForm data
      * @param string $fieldName Field name to extract. Can be given like "test/el/2/test/el/field_templateObject" where each part will dig a level deeper in the FlexForm data.
      * @param string $sheet Sheet pointer, eg. "sDEF
-     * @param string $lang Language pointer, eg. "lDEF
-     * @param string $value Value pointer, eg. "vDEF
      * @return string|null The content.
      */
     // phpcs:disable
     public function pi_getFFvalue(
         array $T3FlexForm_array,
         string $fieldName,
-        string $sheet = 'sDEF',
-        string $lang = 'lDEF',
-        string $value = 'vDEF'
+        string $sheet = 'sDEF'
     ): ?string {
+        $lang = 'lDEF';
+        $value = 'vDEF';
         $sheetArray = $T3FlexForm_array['data'][$sheet][$lang] ?? '';
         if (is_array($sheetArray)) {
             return $this->pi_getFFvalueFromSheetArray($sheetArray, explode('/', $fieldName), $value);
@@ -1412,16 +1207,15 @@ abstract class TemplateHelper
 
     /**
      * Converts $this->cObj->data['pi_flexform'] from XML string to flexForm array.
-     *
-     * @param string $field Field name to convert
      */
     // phpcs:disable
-    public function pi_initPIflexForm(string $field = 'pi_flexform'): void
+    public function pi_initPIflexForm(): void
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017462);
         }
 
+        $field = 'pi_flexform';
         // Converting flexform data into array
         $fieldData = $this->cObj->data[$field] ?? null;
         if (!is_array($fieldData) && $fieldData) {
@@ -1489,26 +1283,18 @@ abstract class TemplateHelper
      * If $wrapArr['showResultsNumbersWrap'] is set, the formatting string is expected to hold template markers (###FROM###, ###TO###, ###OUT_OF###, ###FROM_TO###, ###CURRENT_PAGE###, ###TOTAL_PAGES###)
      * otherwise the formatting string is expected to hold sprintf-markers (%s) for from, to, outof (in that sequence)
      *
-     * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
-     * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
-     * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
-     * @param string $pointerName varname for the pointer.
-     * @param bool $hscText Enable htmlspecialchars() on language labels
-     * @param bool $forceOutput Forces the output of the page browser if you set this option to "TRUE" (otherwise it's only drawn if enough entries are available)
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
     // phpcs:disable
-    public function pi_list_browseresults(
-        int $showResultCount = 1,
-        string $tableParams = '',
-        array $wrapArr = [],
-        string $pointerName = 'pointer',
-        bool $hscText = true,
-        bool $forceOutput = false
-    ): string {
+    public function pi_list_browseresults(): string
+    {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
         }
+
+        $tableParams = '';
+        $wrapArr = [];
+        $pointerName = 'pointer';
 
         $wrapper = [];
         $markerArray = [];
@@ -1529,14 +1315,9 @@ abstract class TemplateHelper
         $totalPages = (int)ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
         $pi_isOnlyFields = (bool)$this->pi_isOnlyFields($this->pi_isOnlyFields);
-        if (!$forceOutput && $count <= $results_at_a_time) {
+        if ($count <= $results_at_a_time) {
             return '';
         }
-        // $showResultCount determines how the results of the pagerowser will be shown.
-        // If set to 0: only the result-browser will be shown
-        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
-        //	 		 2: only the text "Displaying results..." will be shown
-        $showResultCount = (int)$showResultCount;
         // If this is set, two links named "<< First" and "LAST >>" will be shown and point to the very first or last page.
         $showFirstLast = !empty($this->internal['showFirstLast']);
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
@@ -1568,37 +1349,29 @@ abstract class TemplateHelper
         // Now overwrite all entries in $wrapper which are also in $wrapArr
         $wrapper = array_merge($wrapper, $wrapArr);
         // Show pagebrowser
-        if ($showResultCount != 2) {
-            if ($pagefloat > -1) {
-                $lastPage = min($totalPages, max($pointer + 1 + $pagefloat, $maxPages));
-                $firstPage = max(0, $lastPage - $maxPages);
+        if ($pagefloat > -1) {
+            $lastPage = min($totalPages, max($pointer + 1 + $pagefloat, $maxPages));
+            $firstPage = max(0, $lastPage - $maxPages);
+        } else {
+            $firstPage = 0;
+            $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
+        }
+        $links = [];
+        // Make browse-table/links:
+        // Link to first page
+        if ($showFirstLast) {
+            if ($pointer > 0) {
+                $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(htmlspecialchars($label), [$pointerName => null], $pi_isOnlyFields),
+                    $wrapper['inactiveLinkWrap']
+                );
             } else {
-                $firstPage = 0;
-                $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
-            }
-            $links = [];
-            // Make browse-table/links:
-            // Link to first page
-            if ($showFirstLast) {
-                if ($pointer > 0) {
-                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
-                            [$pointerName => null],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
-                        $wrapper['disabledLinkWrap']
-                    );
-                }
+                $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
+                $links[] = $this->cObj->wrap(
+                    htmlspecialchars($label),
+                    $wrapper['disabledLinkWrap']
+                );
             }
             // Link to previous page
             if ($alwaysPrev >= 0) {
@@ -1606,9 +1379,7 @@ abstract class TemplateHelper
                     $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            htmlspecialchars($label),
                             [$pointerName => ($pointer - 1) ?: ''],
                             $pi_isOnlyFields
                         ),
@@ -1616,10 +1387,7 @@ abstract class TemplateHelper
                     );
                 } elseif ($alwaysPrev) {
                     $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
-                        $wrapper['disabledLinkWrap']
-                    );
+                    $links[] = $this->cObj->wrap(htmlspecialchars($label), $wrapper['disabledLinkWrap']);
                 }
             }
             // Links to pages
@@ -1628,7 +1396,7 @@ abstract class TemplateHelper
                     $pageText = ($a * $results_at_a_time + 1) . '-' . min($count, ($a + 1) * $results_at_a_time);
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-                    $pageText = trim(($hscText ? htmlspecialchars($label) : $label) . ' ' . ($a + 1));
+                    $pageText = trim((htmlspecialchars($label)) . ' ' . ($a + 1));
                 }
                 // Current page
                 if ($pointer == $a) {
@@ -1659,17 +1427,12 @@ abstract class TemplateHelper
                 // Link to next page
                 if ($pointer >= $totalPages - 1) {
                     $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
-                        $wrapper['disabledLinkWrap']
-                    );
+                    $links[] = $this->cObj->wrap(htmlspecialchars($label), $wrapper['disabledLinkWrap']);
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            htmlspecialchars($label),
                             [$pointerName => $pointer + 1],
                             $pi_isOnlyFields
                         ),
@@ -1678,89 +1441,78 @@ abstract class TemplateHelper
                 }
             }
             // Link to last page
-            if ($showFirstLast) {
-                if ($pointer < $totalPages - 1) {
-                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
-                            [$pointerName => $totalPages - 1],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
-                        $wrapper['disabledLinkWrap']
-                    );
-                }
-            }
-            $theLinks = $this->cObj->wrap(implode(LF, $links), $wrapper['browseLinksWrap']);
-        } else {
-            $theLinks = '';
-        }
-        $pR1 = $pointer * $results_at_a_time + 1;
-        $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
-        if ($showResultCount) {
-            if ($wrapper['showResultsNumbersWrap'] ?? false) {
-                // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
-                // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
-                $markerArray['###FROM###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0,
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###TO###'] = $this->cObj->wrap(
-                    min(($this->internal['res_count'] ?? 0), $pR2),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###OUT_OF###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] ?? 0),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###FROM_TO###'] = $this->cObj->wrap(
-                    (($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
-                        'pi_list_browseresults_to',
-                        'to'
-                    ) . ' ' . min($this->internal['res_count'] ?? 0, $pR2),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
-                    $pointer + 1,
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###TOTAL_PAGES###'] = $this->cObj->wrap($totalPages, $wrapper['showResultsNumbersWrap']);
-                // Substitute markers
-                $resultCountMsg = $this->templateService->substituteMarkerArray(
-                    $this->pi_getLL(
-                        'pi_list_browseresults_displays',
-                        'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+            if ($pointer < $totalPages - 1) {
+                $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(
+                        htmlspecialchars($label),
+                        [$pointerName => $totalPages - 1],
+                        $pi_isOnlyFields
                     ),
-                    $markerArray
+                    $wrapper['inactiveLinkWrap']
                 );
             } else {
-                // Render the resultcount in the "traditional" way using sprintf
-                $resultCountMsg = sprintf(
-                    str_replace(
-                        '###SPAN_BEGIN###',
-                        '<span' . $this->pi_classParam('browsebox-strong') . '>',
-                        $this->pi_getLL(
-                            'pi_list_browseresults_displays',
-                            'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
-                        )
-                    ),
-                    $count > 0 ? $pR1 : 0,
-                    min($count, $pR2),
-                    $count
-                );
+                $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
+                $links[] = $this->cObj->wrap(htmlspecialchars($label), $wrapper['disabledLinkWrap']);
             }
-            $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
-        } else {
-            $resultCountMsg = '';
         }
+        $theLinks = $this->cObj->wrap(implode(LF, $links), $wrapper['browseLinksWrap']);
+
+        $pR1 = $pointer * $results_at_a_time + 1;
+        $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
+        if ($wrapper['showResultsNumbersWrap'] ?? false) {
+            // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
+            // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+            $markerArray['###FROM###'] = $this->cObj->wrap(
+                ($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0,
+                $wrapper['showResultsNumbersWrap']
+            );
+            $markerArray['###TO###'] = $this->cObj->wrap(
+                min(($this->internal['res_count'] ?? 0), $pR2),
+                $wrapper['showResultsNumbersWrap']
+            );
+            $markerArray['###OUT_OF###'] = $this->cObj->wrap(
+                ($this->internal['res_count'] ?? 0),
+                $wrapper['showResultsNumbersWrap']
+            );
+            $markerArray['###FROM_TO###'] = $this->cObj->wrap(
+                (($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
+                    'pi_list_browseresults_to',
+                    'to'
+                ) . ' ' . min($this->internal['res_count'] ?? 0, $pR2),
+                $wrapper['showResultsNumbersWrap']
+            );
+            $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
+                $pointer + 1,
+                $wrapper['showResultsNumbersWrap']
+            );
+            $markerArray['###TOTAL_PAGES###'] = $this->cObj->wrap($totalPages, $wrapper['showResultsNumbersWrap']);
+            // Substitute markers
+            $resultCountMsg = $this->templateService->substituteMarkerArray(
+                $this->pi_getLL(
+                    'pi_list_browseresults_displays',
+                    'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+                ),
+                $markerArray
+            );
+        } else {
+            // Render the resultcount in the "traditional" way using sprintf
+            $resultCountMsg = sprintf(
+                str_replace(
+                    '###SPAN_BEGIN###',
+                    '<span' . $this->pi_classParam('browsebox-strong') . '>',
+                    $this->pi_getLL(
+                        'pi_list_browseresults_displays',
+                        'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
+                    )
+                ),
+                $count > 0 ? $pR1 : 0,
+                min($count, $pR2),
+                $count
+            );
+        }
+        $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
+
         $sTables = $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
         return $sTables;
     }
@@ -1801,19 +1553,17 @@ abstract class TemplateHelper
      * Notice that this function will only work as long as values are integers.
      *
      * @param string $fList List of fields (keys from piVars) to evaluate on
-     * @param int $lowerThan Limit for the values.
      * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    public function pi_isOnlyFields(string $fList, int $lowerThan = -1)
+    public function pi_isOnlyFields(string $fList)
     {
-        $lowerThan = $lowerThan == -1 ? $this->pi_lowerThan : $lowerThan;
         $fList = GeneralUtility::trimExplode(',', $fList, true);
         $tempPiVars = $this->piVars;
         foreach ($fList as $k) {
-            if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger(
-                $tempPiVars[$k]
-            ) || $tempPiVars[$k] < $lowerThan)) {
+            if (isset($tempPiVars[$k])
+                && (!MathUtility::canBeInterpretedAsInteger($tempPiVars[$k]) || $tempPiVars[$k] < $this->pi_lowerThan)
+            ) {
                 unset($tempPiVars[$k]);
             }
         }
@@ -1829,20 +1579,18 @@ abstract class TemplateHelper
      * Using pi_getClassName()
      *
      * @param string $class The class name(s) (suffix) - separate multiple classes with commas
-     * @param string $addClasses Additional class names which should not be prefixed - separate multiple classes with commas
      * @return string A "class" attribute with value and a single space char before it.
      * @see pi_getClassName()
      */
     // phpcs:disable
-    public function pi_classParam(string $class, string $addClasses = ''): string
+    public function pi_classParam(string $class): string
     {
+        $addClasses = '';
         $output = '';
-        $classNames = GeneralUtility::trimExplode(',', $class);
-        foreach ($classNames as $className) {
+        foreach (GeneralUtility::trimExplode(',', $class) as $className) {
             $output .= ' ' . $this->pi_getClassName($className);
         }
-        $additionalClassNames = GeneralUtility::trimExplode(',', $addClasses);
-        foreach ($additionalClassNames as $additionalClassName) {
+        foreach (GeneralUtility::trimExplode(',', $addClasses) as $additionalClassName) {
             $output .= ' ' . $additionalClassName;
         }
         return ' class="' . trim($output) . '"';
@@ -1856,66 +1604,18 @@ abstract class TemplateHelper
      * @param string $str The content string to wrap in <a> tags
      * @param array $overrulePIvars Array of values to override in the current piVars. Contrary to pi_linkTP the keys in this array must correspond to the real piVars array and therefore NOT be prefixed with the $this->prefixId string. Further, if a value is a blank string it means the piVar key will not be a part of the link (unset)
      * @param bool $cache If $cache is set, the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
-     * @param bool $clearAnyway If set, then the current values of piVars will NOT be preserved anyways... Practical if you want an easy way to set piVars without having to worry about the prefix, "tx_xxxxx[]
-     * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
      * @see pi_linkTP()
      */
     // phpcs:disable
-    public function pi_linkTP_keepPIvars(
-        string $str,
-        array $overrulePIvars = [],
-        bool $cache = false,
-        bool $clearAnyway = false,
-        int $altPageId = 0
-    ): string {
-        if (is_array($this->piVars) && is_array($overrulePIvars) && !$clearAnyway) {
-            $piVars = $this->piVars;
-            unset($piVars['DATA']);
-            ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
-            $overrulePIvars = $piVars;
-            if ($this->pi_autoCacheEn) {
-                $cache = (bool)$this->pi_autoCache($overrulePIvars);
-            }
-        }
-        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache, $altPageId);
-    }
-
-    /**
-     * Returns TRUE if the array $inArray contains only values allowed to be cached based on the configuration in $this->pi_autoCacheFields
-     * Used by ->pi_linkTP_keepPIvars
-     * This is an advanced form of evaluation of whether a URL should be cached or not.
-     *
-     * @param array $inArray An array with piVars values to evaluate
-     * @return int|null Returns TRUE (1) if conditions are met.
-     * @see pi_linkTP_keepPIvars()
-     */
-    // phpcs:disable
-    public function pi_autoCache(array $inArray)
+    public function pi_linkTP_keepPIvars(string $str, array $overrulePIvars = [], bool $cache = false): string
     {
-        if (is_array($inArray)) {
-            foreach ($inArray as $fN => $fV) {
-                if (!strcmp($inArray[$fN], '')) {
-                    unset($inArray[$fN]);
-                } elseif (is_array($this->pi_autoCacheFields[$fN])) {
-                    if (is_array(
-                        $this->pi_autoCacheFields[$fN]['range']
-                    ) && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0] && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]) {
-                        unset($inArray[$fN]);
-                    }
-                    if (is_array($this->pi_autoCacheFields[$fN]['list']) && in_array(
-                        $inArray[$fN],
-                        $this->pi_autoCacheFields[$fN]['list']
-                    )) {
-                        unset($inArray[$fN]);
-                    }
-                }
-            }
-        }
-        if (empty($inArray)) {
-            // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
-            return 1;
-        }
-        return null;
+        $altPageId = 0;
+        $piVars = $this->piVars;
+        unset($piVars['DATA']);
+        ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+        $overrulePIvars = $piVars;
+
+        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache, $altPageId);
     }
 }
