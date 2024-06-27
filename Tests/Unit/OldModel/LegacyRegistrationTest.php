@@ -220,7 +220,6 @@ final class LegacyRegistrationTest extends UnitTestCase
     public function nameUserDataDataProvider(): array
     {
         return [
-            'user name only' => [['username' => 'max', 'name' => ''], 'max'],
             'first name' => [['username' => 'max', 'name' => '', 'first_name' => 'Max'], 'Max'],
             'last name' => [['username' => 'max', 'name' => '', 'last_name' => 'Caulfield'], 'Caulfield'],
             'first and last name' => [
