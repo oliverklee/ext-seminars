@@ -343,4 +343,12 @@ final class NullRenderingContextTest extends UnitTestCase
     {
         self::assertInstanceOf(NullRequest::class, $this->subject->getRequest());
     }
+
+    /**
+     * @test
+     */
+    public function hasAttributeReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasAttribute(self::class));
+    }
 }
