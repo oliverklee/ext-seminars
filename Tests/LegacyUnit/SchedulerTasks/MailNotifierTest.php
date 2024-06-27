@@ -145,6 +145,8 @@ final class MailNotifierTest extends TestCase
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
+
+        parent::tearDown();
     }
 
     // Utility functions

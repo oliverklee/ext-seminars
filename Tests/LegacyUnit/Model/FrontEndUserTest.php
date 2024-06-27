@@ -33,6 +33,8 @@ final class FrontEndUserTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     // Tests concerning getRegistration and setRegistration

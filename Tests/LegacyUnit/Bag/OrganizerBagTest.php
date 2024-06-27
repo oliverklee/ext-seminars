@@ -35,6 +35,8 @@ final class OrganizerBagTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     ///////////////////////////////////////////

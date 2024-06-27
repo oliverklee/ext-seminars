@@ -65,6 +65,8 @@ final class CsvDownloaderTest extends TestCase
         RegistrationManager::purgeInstance();
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
+
+        parent::tearDown();
     }
 
     // Utility functions

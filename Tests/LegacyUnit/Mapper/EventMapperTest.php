@@ -50,6 +50,8 @@ final class EventMapperTest extends TestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
+
+        parent::tearDown();
     }
 
     // Tests regarding getTimeSlots().

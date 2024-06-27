@@ -43,6 +43,8 @@ final class EventTest extends TestCase
     protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
+
+        parent::tearDown();
     }
 
     /////////////////////////////////////
