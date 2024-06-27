@@ -56,6 +56,8 @@ final class ModuleControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
 

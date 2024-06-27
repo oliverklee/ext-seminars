@@ -22,6 +22,8 @@ final class CsvResponseTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->configuration = new DummyConfiguration();
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
     }

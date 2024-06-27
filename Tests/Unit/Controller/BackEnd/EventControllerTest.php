@@ -36,6 +36,8 @@ final class EventControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         /** @var EventController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,

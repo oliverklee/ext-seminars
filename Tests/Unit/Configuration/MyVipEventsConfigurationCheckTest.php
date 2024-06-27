@@ -26,6 +26,8 @@ final class MyVipEventsConfigurationCheckTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->configuration = new DummyConfiguration();
 
         $this->subject = new MyVipEventsConfigurationCheck($this->configuration, 'plugin.tx_seminars_pi1');

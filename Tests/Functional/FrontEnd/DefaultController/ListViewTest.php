@@ -32,6 +32,7 @@ final class ListViewTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->initializeBackEndLanguage();

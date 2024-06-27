@@ -32,6 +32,8 @@ final class PermissionsTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->backendUserMock = $this->createMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backendUserMock;
     }

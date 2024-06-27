@@ -43,6 +43,8 @@ final class EmailControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         /** @var EmailController&AccessibleMockObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EmailController::class,

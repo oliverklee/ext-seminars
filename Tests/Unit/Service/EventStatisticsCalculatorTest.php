@@ -31,6 +31,8 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->subject = new EventStatisticsCalculator();
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);

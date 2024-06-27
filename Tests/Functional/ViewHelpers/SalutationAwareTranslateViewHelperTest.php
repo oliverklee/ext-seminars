@@ -29,6 +29,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->setUpLanguageService();
         $this->variableProvider = new StandardVariableProvider();
     }
