@@ -196,6 +196,11 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Parameter &\\$configuration by\\-ref type of method OliverKlee\\\\Seminars\\\\Configuration\\\\EventRegistrationFlexForms\\:\\:buildFields\\(\\) expects array\\<string, array\\<string, string\\>\\>, array\\<string, array\\<int\\|string, array\\<int, string\\>\\|string\\>\\> given\\.$#"
+			count: 1
+			path: Classes/Configuration/EventRegistrationFlexForms.php
+
+		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: Classes/Configuration/SharedConfigurationCheck.php
@@ -396,7 +401,7 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
-			message: "#^Parameter \\#2 \\$frontendController of method TYPO3\\\\CMS\\\\Frontend\\\\Plugin\\\\AbstractPlugin\\:\\:__construct\\(\\) expects TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null, mixed given\\.$#"
+			message: "#^Parameter \\#2 \\$frontendController of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:__construct\\(\\) expects TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null, mixed given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/AbstractView.php
 
@@ -1536,7 +1541,7 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: bool\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1688,6 +1693,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$taskInfo \\(array\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:getAdditionalFields\\(\\) should be contravariant with parameter \\$taskInfo \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:getAdditionalFields\\(\\)$#"
 			count: 2
+			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
+
+		-
+			message: "#^Parameter &\\$submittedData by\\-ref type of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:validateAdditionalFields\\(\\) expects array\\<string, string\\>, array\\<string, int\\|string\\> given\\.$#"
+			count: 1
 			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
 
 		-
