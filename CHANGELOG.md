@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid crash with Fluid 2.12.0 due to signature change (#3059)
 
 ## 5.5.1
 

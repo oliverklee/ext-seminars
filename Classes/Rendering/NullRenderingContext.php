@@ -209,7 +209,7 @@ final class NullRenderingContext implements RenderingContextInterface
     /**
      * @return never
      */
-    public function getAttribute(string $name): ?object
+    public function getAttribute(string $name): object
     {
         throw new \BadMethodCallException('Not implemented.', 1701345822);
     }
@@ -220,5 +220,10 @@ final class NullRenderingContext implements RenderingContextInterface
     public function withAttribute(string $name, object $value): RenderingContextInterface
     {
         throw new \BadMethodCallException('Not implemented.', 1701345830);
+    }
+
+    public function hasAttribute(string $className): bool
+    {
+        return false;
     }
 }
