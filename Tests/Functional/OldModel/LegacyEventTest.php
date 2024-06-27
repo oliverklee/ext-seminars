@@ -16,7 +16,9 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
@@ -71,7 +73,10 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     private function importStaticData(): void
     {
-        if ($this->getDatabaseConnection()->selectCount('*', 'static_countries') === 0) {
+        if (
+            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_countries')
+                ->count('*', 'static_countries', []) === 0
+        ) {
             $this->importDataSet(__DIR__ . '/Fixtures/Events/Countries.xml');
         }
     }
@@ -326,7 +331,8 @@ final class LegacyEventTest extends FunctionalTestCase
         $subject = TestingLegacyEvent::fromUid($eventUid);
         self::assertSame(3, $subject->getAttendances());
 
-        $this->getDatabaseConnection()->insertArray('tx_seminars_attendances', ['seminar' => $eventUid, 'seats' => 2]);
+        GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
+            ->insert('tx_seminars_attendances', ['seminar' => $eventUid, 'seats' => 2]);
         $subject->calculateStatistics();
 
         self::assertSame(5, $subject->getAttendances());
