@@ -37,6 +37,7 @@ final class EmailServiceTest extends FunctionalTestCase
     private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
     protected $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
         'typo3conf/ext/oelib',
         'typo3conf/ext/seminars',
