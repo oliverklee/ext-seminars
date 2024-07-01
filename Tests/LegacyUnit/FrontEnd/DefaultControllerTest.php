@@ -121,6 +121,7 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
 
         $this->extensionConfiguration = new DummyConfiguration();
+        $this->extensionConfiguration->setAsBoolean('enableConfigCheck', false);
         ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
         $this->sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->sharedConfiguration);
