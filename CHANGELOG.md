@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid using the deprecated `GeneralUtility::_GP` (#2827)
 - Stop using the deprecated `Mock::setMethods()` (#2815)
 - Avoid usage of the deprecated `strftime` (#2814)
 - Avoid warnings in the tests with PHP 8.3 (#2812)
