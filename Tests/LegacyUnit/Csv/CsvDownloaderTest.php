@@ -9,7 +9,6 @@ use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Localization\LanguageService;
 
 /**
  * @covers \OliverKlee\Seminars\Csv\CsvDownloader
@@ -70,11 +69,6 @@ final class CsvDownloaderTest extends TestCase
     }
 
     // Utility functions
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
 
     /**
      * Retrieves the localization for the given locallang key and then strips the trailing colon from it.

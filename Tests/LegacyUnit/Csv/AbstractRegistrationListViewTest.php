@@ -12,7 +12,6 @@ use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -131,11 +130,6 @@ final class AbstractRegistrationListViewTest extends TestCase
     }
 
     // Utility functions
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
 
     /**
      * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
