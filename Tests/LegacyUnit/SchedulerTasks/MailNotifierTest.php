@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Mapper\BackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\CacheNullifyer;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -321,6 +323,65 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
+    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject(): void
+    {
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
+        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
+        $this->languageService->lang = $user->getLanguage();
+        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $subject = $this->languageService->getLL('email_eventTakesPlaceReminderSubject');
+        $subject = str_replace(['%event', '%days'], ['', 2], $subject);
+
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
+            ]
+        );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertStringContainsString($subject, $this->email->getSubject());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage(): void
+    {
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
+        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
+        $this->languageService->lang = $user->getLanguage();
+        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $message = $this->languageService->getLL('email_eventTakesPlaceReminder');
+        $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
+
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
+                'cancelled' => EventInterface::STATUS_CONFIRMED,
+            ]
+        );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertStringContainsString(
+            \substr($message, 0, \strpos($message, '%') - 1),
+            $this->email->getTextBody()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function sendEventTakesPlaceRemindersForTwoConfirmedEventsWithinConfiguredTimeFrameSendsTwoReminders(): void
     {
         $this->createSeminarWithOrganizer(
@@ -522,6 +583,68 @@ final class MailNotifierTest extends TestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendCancellationDeadlineReminders();
+    }
+
+    /**
+     * @test
+     */
+    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject(): void
+    {
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
+        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
+        $this->languageService->lang = $user->getLanguage();
+        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $subject = $this->languageService->getLL('email_cancelationDeadlineReminderSubject');
+        $subject = str_replace('%event', '', $subject);
+
+        $this->addSpeaker(
+            $this->createSeminarWithOrganizer(
+                [
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
+                    'cancelled' => EventInterface::STATUS_PLANNED,
+                ]
+            )
+        );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->subject->sendCancellationDeadlineReminders();
+
+        self::assertStringContainsString($subject, $this->email->getSubject());
+    }
+
+    /**
+     * @test
+     */
+    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage(): void
+    {
+        $userUid = BackEndLoginManager::getInstance()->getLoggedInUserUid();
+        \assert($userUid > 0);
+        $user = MapperRegistry::get(BackEndUserMapper::class)->find($userUid);
+        $this->languageService->lang = $user->getLanguage();
+        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $message = $this->languageService->getLL('email_cancelationDeadlineReminder');
+        $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
+
+        $this->addSpeaker(
+            $this->createSeminarWithOrganizer(
+                [
+                    'begin_date' => self::NOW + Time::SECONDS_PER_DAY,
+                    'cancelled' => EventInterface::STATUS_PLANNED,
+                ]
+            )
+        );
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->subject->sendCancellationDeadlineReminders();
+
+        self::assertStringContainsString(
+            \substr($message, 0, \strpos($message, '%') - 1),
+            $this->email->getTextBody()
+        );
     }
 
     /**
