@@ -1932,7 +1932,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 1
+			count: 2
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
 
 		-
