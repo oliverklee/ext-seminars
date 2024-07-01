@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use fewer flash messages in the backend module (#2913)
 - Require higher TYPO3 Core bugfix versions (#2852)
 - Switch to our own copy of `TemplateHelper` (#2833, #2836, #2838, #2840, #2855)
-- Allow installations with static_info_tables V12 (#2824)
+- Allow installations with static_info_tables V12 (#2824, #3088)
 - Reduce usage of `AbstractPlugin` (#2811)
 - Do not require jQuery anymore (#2807)
 - Drop the additional icon placeholders from the BE module (#2804)
