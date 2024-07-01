@@ -35,7 +35,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop dead code (#2967)
 
 ### Fixed
-- Avoid crash with Fluid 2.12.0 due to signature change (#3059)
+- Avoid crash with Fluid 2.12.0 due to signature change (#3060)
 - Stop using deprecated HTTP functions (#2991, #3006, #3007, #3008)
 - Redirect to the events list after sending an email in the BE module (#2971)
 - Add `resname` to all language labels (#2952)
