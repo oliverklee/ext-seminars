@@ -43,6 +43,8 @@ final class SelectorWidgetTest extends TestCase
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($rootPageUid);
 
+        $this->getLanguageService();
+
         $this->subject = new SelectorWidget(
             [
                 'isStaticTemplateLoaded' => 1,
