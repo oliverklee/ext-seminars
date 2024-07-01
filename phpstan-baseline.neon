@@ -206,27 +206,7 @@ parameters:
 			path: Classes/Configuration/SharedConfigurationCheck.php
 
 		-
-			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EmailController.php
-
-		-
-			message: "#^Cannot access offset 'subject' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EmailController.php
-
-		-
 			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\EventController\\:\\:\\$response\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 1
 			path: Classes/Controller/BackEnd/EventController.php
 
@@ -2931,28 +2911,13 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
 			count: 2
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 4
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
@@ -2967,16 +2932,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
@@ -3296,16 +3251,6 @@ parameters:
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\SchedulerTasks\\\\MailNotifierTest\\:\\:\\$t3VarBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
@@ -3352,16 +3297,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$getBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EmailServiceTest\\:\\:\\$postBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
@@ -3441,27 +3376,7 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot access offset 'emailBody' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/EmailControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'subject' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/EmailControllerTest.php
-
-		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
 
@@ -3471,43 +3386,8 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/ModuleControllerTest.php
-
-		-
 			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
 			count: 4
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'eventUid' on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'pid' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Cannot access offset 'table' on mixed\\.$#"
-			count: 3
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
