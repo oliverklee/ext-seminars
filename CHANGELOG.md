@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Upgrade the XLIFF files to XLIFF 1.2 (#2890)
 - Avoid the deprecated `cruser_id` (#2821)
 - Avoid using the deprecated `GeneralUtility::_GP` (#2827)
 - Stop using the deprecated `Mock::setMethods()` (#2815)
