@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid warnings in the tests with PHP 8.3 (#2812)
 - Drop obsolete option from the plugin registration (#2801)
 - Stabilize the legacy tests (#2746, #2749, #2794)
 - Avoid using the deprecated `LanguageService::create()` (#2712)
