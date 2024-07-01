@@ -58,7 +58,7 @@
 		"phpstan/phpstan-phpunit": "^1.4.0",
 		"phpstan/phpstan-strict-rules": "^1.6.0",
 		"phpunit/phpunit": "^8.5.38",
-		"saschaegerer/phpstan-typo3": "^1.8.4",
+		"saschaegerer/phpstan-typo3": "^1.10.1",
 		"squizlabs/php_codesniffer": "^3.10.1",
 		"typo3/cms-install": "^10.4.33 || ^11.5.17",
 		"typo3/cms-scheduler": "^10.4.33 || ^11.5.17",
