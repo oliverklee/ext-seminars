@@ -5554,6 +5554,7 @@ final class DefaultControllerTest extends TestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
+        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
         $subject->expects(self::once())->method('limitForAdditionalParameters');
 
         $subject->initListView();
@@ -5568,6 +5569,7 @@ final class DefaultControllerTest extends TestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
+        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
         $subject->expects(self::once())->method('limitForAdditionalParameters');
 
         $subject->initListView('topic_list');
@@ -5582,6 +5584,7 @@ final class DefaultControllerTest extends TestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
+        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
         $subject->expects(self::never())->method('limitForAdditionalParameters');
 
         $subject->initListView('my_events');
