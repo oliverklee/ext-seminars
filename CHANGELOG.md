@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.5.2
+
+### Added
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
@@ -15,8 +27,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 - De-deprecate the singleton-related `RegistrationManager` methods (#2816)
-
-### Removed
 
 ### Fixed
 - Access superglobals directly (#2878)
