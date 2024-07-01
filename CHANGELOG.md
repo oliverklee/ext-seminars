@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Do not require jQuery anymore (#2807)
 
 ### Deprecated
+- De-deprecate the singleton-related `RegistrationManager` methods (#2816)
 
 ### Removed
 
