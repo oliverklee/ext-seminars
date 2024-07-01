@@ -2111,6 +2111,11 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
 		-
+			message: "#^Offset 1 might not exist on array\\{0\\?\\: string, 1\\?\\: string\\}\\.$#"
+			count: 2
+			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\DefaultController\\\\PluginDefinitionTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
