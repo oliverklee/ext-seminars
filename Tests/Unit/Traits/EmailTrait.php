@@ -31,7 +31,7 @@ trait EmailTrait
             ->disableOriginalClone()
             ->disableArgumentCloning()
             ->disallowMockingUnknownTypes()
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
     }
 
