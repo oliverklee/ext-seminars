@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Do not require jQuery anymore (#2807)
 
 ### Deprecated
 
