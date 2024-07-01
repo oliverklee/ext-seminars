@@ -14,8 +14,7 @@ defined('TYPO3') or die('Access denied.');
         'seminars'
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_pi1']
-        = 'layout,select_key,pages,recursive';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_pi1'] = 'recursive,pages';
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_pi1'] = 'pi_flexform';
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
@@ -40,8 +39,7 @@ defined('TYPO3') or die('Access denied.');
 
     // This removes the default controls from the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_frontendeditor']
-        = 'recursive,select_key,pages';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_frontendeditor'] = 'recursive,pages';
 
     // These two commands add the flexform configuration for the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
@@ -69,7 +67,7 @@ defined('TYPO3') or die('Access denied.');
     // This removes the default controls from the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventregistration']
-        = 'recursive,select_key,pages';
+        = 'recursive,pages';
 
     // These two commands add the flexform configuration for the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
