@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Require higher TYPO3 Core bugfix versions (#2852)
 - Do not require jQuery anymore (#2807)
 
 ### Deprecated
