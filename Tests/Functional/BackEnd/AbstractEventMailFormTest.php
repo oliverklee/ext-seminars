@@ -74,6 +74,32 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function sendEmailToAttendeesSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $subject = new TestingEventMailForm(1);
+
+        $messageBody = '%salutation';
+        $subject->setPostData(
+            [
+                'action' => 'sendEmail',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => $messageBody,
+            ]
+        );
+        $subject->sendEmailToAttendees();
+
+        self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
+    }
+
+    /**
+     * @test
+     */
     public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
