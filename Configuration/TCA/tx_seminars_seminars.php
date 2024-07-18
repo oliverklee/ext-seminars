@@ -841,7 +841,7 @@ $tca = [
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'attached_files',
                 [
-                    'maxitems' => 5,
+                    'maxitems' => 50,
                     'appearance' => [
                         'collapseAll' => true,
                         'expandSingle' => true,
