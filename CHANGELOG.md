@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Convert the "hide event" button-links in the BE module to real buttons (#3136)
 - Allow up to 50 attached files per event (#3125)
 - Allow installations with oelib 6.x (#3009)
 - Mark some classes as `@internal` (#2975)
