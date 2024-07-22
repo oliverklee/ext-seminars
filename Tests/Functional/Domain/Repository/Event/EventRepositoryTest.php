@@ -908,6 +908,21 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function findByPageUidInBackEndModeCanFindTimedEvent(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/TimedSingleEventOnPage.xml');
+
+        $result = $this->subject->findByPageUidInBackEndMode(1);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
     public function findByPageUidInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.xml');
