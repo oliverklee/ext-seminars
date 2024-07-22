@@ -106,6 +106,11 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
@@ -1256,6 +1261,26 @@ parameters:
 			path: Classes/Mapper/EventMapper.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/EventMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\RegistrationMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/RegistrationMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\TimeSlotMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/TimeSlotMapper.php
+
+		-
 			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
@@ -2231,9 +2256,44 @@ parameters:
 			path: Tests/Functional/Bag/SpeakerBagTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
@@ -2334,6 +2394,36 @@ parameters:
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
@@ -3539,6 +3629,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\RegistrationControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult implements generic interface TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface but does not specify its types\\: ModelType$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:key\\(\\) should return string but returns string\\|null\\.$#"
