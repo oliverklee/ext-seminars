@@ -146,4 +146,15 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
 
         return $query->execute()->toArray();
     }
+
+    /**
+     * @param positive-int $uid
+     */
+    public function hide(int $uid): void
+    {
+        $tableName = $this->getTableName();
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableName);
+
+        $connection->update($tableName, ['hidden' => 1], ['uid' => $uid, 'deleted' => 0, 'hidden' => 0]);
+    }
 }

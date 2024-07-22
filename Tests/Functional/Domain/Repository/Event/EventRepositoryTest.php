@@ -984,4 +984,52 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(1, $rawData['uid']);
         self::assertSame('Hidden single event on page', $rawData['title']);
     }
+
+    /**
+     * @test
+     */
+    public function hideWithUidOfExistingVisibleEventMarksEventAsHidden(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $this->subject->hide(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function hideWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $this->subject->hide(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function hideWithUidOfExistingHiddenEventKeepsEventHidden(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+
+        $this->subject->hide(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function hideWithUidOfDeletedVisibleEventKeepsDeletedEventVisible(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+
+        $this->subject->hide(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+    }
 }
