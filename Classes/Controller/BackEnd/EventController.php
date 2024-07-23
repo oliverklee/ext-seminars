@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -24,6 +25,16 @@ class EventController extends ActionController
      * @var non-empty-string
      */
     private const TABLE_NAME = 'tx_seminars_seminars';
+
+    /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+
+    public function __construct(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
 
     /**
      * @param int<0, max> $pageUid
@@ -48,5 +59,25 @@ class EventController extends ActionController
 
         // 11LTS path
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
+    }
+
+    /**
+     * @param positive-int $eventUid
+     */
+    public function hideAction(int $eventUid): void
+    {
+        $this->eventRepository->hide($eventUid);
+
+        $this->redirect('overview', 'BackEnd\\Module');
+    }
+
+    /**
+     * @param positive-int $eventUid
+     */
+    public function unhideAction(int $eventUid): void
+    {
+        $this->eventRepository->unhide($eventUid);
+
+        $this->redirect('overview', 'BackEnd\\Module');
     }
 }

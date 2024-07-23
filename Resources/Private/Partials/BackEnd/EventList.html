@@ -68,18 +68,22 @@
                                 </be:link.editRecord>
                                 <f:if condition="{visible}">
                                     <f:then>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=1', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.hide')}">
-                                            <core:icon identifier="actions-edit-hide"/>
-                                        </a>
+                                        <f:form controller="BackEnd\Event" action="hide"
+                                                arguments="{eventUid: event.uid}">
+                                            <button type="submit" class="btn btn-default"
+                                                    title="{f:translate(key: '{actionLabelPrefix}.hide')}">
+                                                <core:icon identifier="actions-edit-hide"/>
+                                            </button>
+                                        </f:form>
                                     </f:then>
                                     <f:else>
-                                        <a href="{be:moduleLink(route: 'tce_db', query: 'data[{tableName}][{event.uid}][hidden]=0', currentUrlParameterName:'redirect')}"
-                                           class="btn btn-default"
-                                           title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
-                                            <core:icon identifier="actions-edit-unhide"/>
-                                        </a>
+                                        <f:form controller="BackEnd\Event" action="unhide"
+                                                arguments="{eventUid: event.uid}">
+                                            <button type="submit" class="btn btn-default"
+                                                    title="{f:translate(key: '{actionLabelPrefix}.unhide')}">
+                                                <core:icon identifier="actions-edit-unhide"/>
+                                            </button>
+                                        </f:form>
                                     </f:else>
                                 </f:if>
 
