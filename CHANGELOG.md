@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Convert the "hide event" button-links in the BE module to real buttons
-  (#3136, #3137, #3148)
+  (#3136, #3137, #3148, #3149, #3150)
 - Allow up to 50 attached files per event (#3125)
 - Allow installations with oelib 6.x (#3009)
 - Mark some classes as `@internal` (#2975)
