@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -34,6 +35,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class EventRepositoryTest extends FunctionalTestCase
 {
+    use BackEndTestsTrait;
+
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -51,6 +54,13 @@ final class EventRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = $this->get(EventRepository::class);
+    }
+
+    private function initializeBackEndUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
+        $this->unifyBackEndLanguage();
     }
 
     /**
@@ -990,6 +1000,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function hideWithUidOfExistingVisibleEventMarksEventAsHidden(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $this->subject->hide(1);
@@ -1002,6 +1013,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function hideWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $this->subject->hide(2);
@@ -1014,6 +1026,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function hideWithUidOfExistingHiddenEventKeepsEventHidden(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
         $this->subject->hide(1);
@@ -1026,6 +1039,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function hideWithUidOfDeletedVisibleEventKeepsDeletedEventVisible(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
 
         $this->subject->hide(1);
@@ -1038,6 +1052,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function unhideWithUidOfExistingHiddenEventMarksEventAsVisible(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
         $this->subject->unhide(1);
@@ -1050,6 +1065,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function unhideWithUidOfInexistentEventKeepsOtherHiddenEventsUnchanged(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
         $this->subject->unhide(2);
@@ -1062,6 +1078,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function unhideWithUidOfExistingVisibleEventKeepsEventVisible(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $this->subject->unhide(1);
@@ -1074,6 +1091,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function unhideWithUidOfDeletedHiddenEventKeepsDeletedEventHidden(): void
     {
+        $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
 
         $this->subject->unhide(1);

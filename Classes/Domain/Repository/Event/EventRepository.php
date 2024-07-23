@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -148,24 +149,42 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
+     * Hides the event with the given UID.
+     *
+     * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
      * @param positive-int $uid
      */
     public function hide(int $uid): void
     {
-        $tableName = $this->getTableName();
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableName);
-
-        $connection->update($tableName, ['hidden' => 1], ['uid' => $uid, 'deleted' => 0, 'hidden' => 0]);
+        $this->updateEventWithDataHandler($uid, ['hidden' => 1]);
     }
 
     /**
+     * Unhides the event with the given UID.
+     *
+     * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
      * @param positive-int $uid
      */
     public function unhide(int $uid): void
     {
-        $tableName = $this->getTableName();
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableName);
+        $this->updateEventWithDataHandler($uid, ['hidden' => 0]);
+    }
 
-        $connection->update($tableName, ['hidden' => 0], ['uid' => $uid, 'deleted' => 0, 'hidden' => 1]);
+    /**
+     * @param positive-int $uid
+     * @param array<string, int> $eventData
+     */
+    private function updateEventWithDataHandler(int $uid, array $eventData): void
+    {
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $data = [
+            $this->getTableName() => [
+                $uid => $eventData,
+            ],
+        ];
+        $dataHandler->start($data, []);
+        $dataHandler->process_datamap();
     }
 }
