@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
@@ -32,11 +31,6 @@ final class EventControllerTest extends UnitTestCase
     private $eventRepositoryMock;
 
     /**
-     * @var Permissions&MockObject
-     */
-    private $permissionsMock;
-
-    /**
      * @var CsvDownloader&MockObject
      */
     private $csvDownloaderMock;
@@ -51,13 +45,12 @@ final class EventControllerTest extends UnitTestCase
         parent::setUp();
 
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->permissionsMock = $this->createMock(Permissions::class);
 
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
             ['redirect', 'forward', 'redirectToUri'],
-            [$this->eventRepositoryMock, $this->permissionsMock]
+            [$this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -172,10 +165,9 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hideActionWithEventWritePermissionGrantedHidesEvent(): void
+    public function hideActionHidesEvent(): void
     {
         $uid = 15;
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(true);
         $this->eventRepositoryMock->expects(self::once())->method('hide')->with($uid);
 
         $this->subject->hideAction($uid);
@@ -184,21 +176,8 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hideActionWithEventWritePermissionDeniedDoesNotHideEvent(): void
+    public function hideActionRedirectsToModuleOverviewAction(): void
     {
-        $uid = 15;
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(false);
-        $this->eventRepositoryMock->expects(self::never())->method('hide');
-
-        $this->subject->hideAction($uid);
-    }
-
-    /**
-     * @test
-     */
-    public function hideActionWithEventWritePermissionGrantedRedirectsToModuleOverviewAction(): void
-    {
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(true);
         $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->hideAction(15);
@@ -207,21 +186,9 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hideActionWithEventWritePermissionDeniedRedirectsToModuleOverviewAction(): void
-    {
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(false);
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
-
-        $this->subject->hideAction(15);
-    }
-
-    /**
-     * @test
-     */
-    public function unhideWithEventWritePermissionGrantedActionUnhidesEvent(): void
+    public function unhideActionUnhidesEvent(): void
     {
         $uid = 15;
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(true);
         $this->eventRepositoryMock->expects(self::once())->method('unhide')->with($uid);
 
         $this->subject->unhideAction($uid);
@@ -230,32 +197,8 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function unhideWithEventWritePermissionDeniedActionDoesNotUnhideEvent(): void
+    public function unhideActionRedirectsToModuleOverviewAction(): void
     {
-        $uid = 15;
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(false);
-        $this->eventRepositoryMock->expects(self::never())->method('unhide');
-
-        $this->subject->unhideAction($uid);
-    }
-
-    /**
-     * @test
-     */
-    public function unhideActionWithEventWritePermissionGrantedRedirectsToModuleOverviewAction(): void
-    {
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(true);
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
-
-        $this->subject->unhideAction(15);
-    }
-
-    /**
-     * @test
-     */
-    public function unhideActionWithEventWritePermissionDeniedRedirectsToModuleOverviewAction(): void
-    {
-        $this->permissionsMock->method('hasWriteAccessToEvents')->willReturn(false);
         $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->unhideAction(15);

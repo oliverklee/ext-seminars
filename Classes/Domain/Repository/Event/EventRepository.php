@@ -153,6 +153,8 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
      *
+     * The `DataHandler` will also take care of checking the permissions of the logged-in BE user.
+     *
      * @param positive-int $uid
      */
     public function hide(int $uid): void
@@ -164,6 +166,8 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      * Unhides the event with the given UID.
      *
      * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
+     * The `DataHandler` will also take care of checking the permissions of the logged-in BE user.
      *
      * @param positive-int $uid
      */

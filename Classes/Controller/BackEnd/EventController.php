@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
@@ -32,15 +31,9 @@ class EventController extends ActionController
      */
     private $eventRepository;
 
-    /**
-     * @var Permissions
-     */
-    private $permissions;
-
-    public function __construct(EventRepository $eventRepository, Permissions $permissions)
+    public function __construct(EventRepository $eventRepository)
     {
         $this->eventRepository = $eventRepository;
-        $this->permissions = $permissions;
     }
 
     /**
@@ -73,9 +66,7 @@ class EventController extends ActionController
      */
     public function hideAction(int $eventUid): void
     {
-        if ($this->permissions->hasWriteAccessToEvents()) {
-            $this->eventRepository->hide($eventUid);
-        }
+        $this->eventRepository->hide($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }
@@ -85,9 +76,7 @@ class EventController extends ActionController
      */
     public function unhideAction(int $eventUid): void
     {
-        if ($this->permissions->hasWriteAccessToEvents()) {
-            $this->eventRepository->unhide($eventUid);
-        }
+        $this->eventRepository->unhide($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }
