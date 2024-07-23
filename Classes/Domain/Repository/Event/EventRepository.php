@@ -191,4 +191,21 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
     }
+
+    /**
+     * Deletes the event with the given UID.
+     *
+     * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
+     * The `DataHandler` will also take care of checking the permissions of the logged-in BE user.
+     *
+     * @param positive-int $uid
+     */
+    public function delete(int $uid): void
+    {
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $tableName = $this->getTableName();
+        $dataHandler->start([], [$tableName => [$uid => ['delete' => 1]]]);
+        $dataHandler->process_cmdmap();
+    }
 }

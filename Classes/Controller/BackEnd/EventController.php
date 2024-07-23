@@ -80,4 +80,14 @@ class EventController extends ActionController
 
         $this->redirect('overview', 'BackEnd\\Module');
     }
+
+    /**
+     * @param positive-int $eventUid
+     */
+    public function deleteAction(int $eventUid): void
+    {
+        $this->eventRepository->delete($eventUid);
+
+        $this->redirect('overview', 'BackEnd\\Module');
+    }
 }
