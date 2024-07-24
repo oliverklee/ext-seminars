@@ -68,7 +68,7 @@
             <f:if condition="{regularRegistrations}">
                 <f:then>
                     <f:render partial="BackEnd/RegistrationList"
-                              arguments="{registrations: regularRegistrations, permissions: permissions}"/>
+                              arguments="{eventUid: event.uid, registrations: regularRegistrations, permissions: permissions}"/>
                 </f:then>
                 <f:else>
                     <f:render partial="BackEnd/FlashMessage"
@@ -83,7 +83,7 @@
                                  arguments="{0: '{f:count(subject: waitingListRegistrations)}'}"/>
                 </h2>
                 <f:render partial="BackEnd/RegistrationList"
-                          arguments="{registrations: waitingListRegistrations, permissions: permissions}"/>
+                          arguments="{eventUid: event.uid, registrations: waitingListRegistrations, permissions: permissions}"/>
             </f:if>
         </f:if>
     </f:section>

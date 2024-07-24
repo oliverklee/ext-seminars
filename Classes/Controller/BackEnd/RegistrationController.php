@@ -125,11 +125,12 @@ class RegistrationController extends ActionController
 
     /**
      * @param positive-int $registrationUid
+     * @param positive-int $eventUid
      */
-    public function deleteAction(int $registrationUid): void
+    public function deleteAction(int $registrationUid, int $eventUid): void
     {
         $this->registrationRepository->deleteViaDataHandler($registrationUid);
 
-        $this->redirect('overview', 'BackEnd\\Module');
+        $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
     }
 }
