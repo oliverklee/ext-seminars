@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 8.3 (#2676)
 
 ### Changed
+- Increase the height of the content area in the BE module email form (#3174)
 - Convert the "hide event" button-links in the BE module to real buttons
   (#3136, #3137, #3148, #3149, #3150)
 - Allow up to 50 attached files per event (#3125)
