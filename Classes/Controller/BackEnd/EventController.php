@@ -66,7 +66,7 @@ class EventController extends ActionController
      */
     public function hideAction(int $eventUid): void
     {
-        $this->eventRepository->hide($eventUid);
+        $this->eventRepository->hideViaDataHandler($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }
@@ -76,7 +76,7 @@ class EventController extends ActionController
      */
     public function unhideAction(int $eventUid): void
     {
-        $this->eventRepository->unhide($eventUid);
+        $this->eventRepository->unhideViaDataHandler($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }
@@ -86,7 +86,7 @@ class EventController extends ActionController
      */
     public function deleteAction(int $eventUid): void
     {
-        $this->eventRepository->delete($eventUid);
+        $this->eventRepository->deleteViaDataHandler($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }

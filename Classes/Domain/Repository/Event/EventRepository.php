@@ -157,9 +157,9 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * @param positive-int $uid
      */
-    public function hide(int $uid): void
+    public function hideViaDataHandler(int $uid): void
     {
-        $this->updateEventWithDataHandler($uid, ['hidden' => 1]);
+        $this->updateEventViaDataHandler($uid, ['hidden' => 1]);
     }
 
     /**
@@ -171,16 +171,16 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * @param positive-int $uid
      */
-    public function unhide(int $uid): void
+    public function unhideViaDataHandler(int $uid): void
     {
-        $this->updateEventWithDataHandler($uid, ['hidden' => 0]);
+        $this->updateEventViaDataHandler($uid, ['hidden' => 0]);
     }
 
     /**
      * @param positive-int $uid
      * @param array<string, int> $eventData
      */
-    private function updateEventWithDataHandler(int $uid, array $eventData): void
+    private function updateEventViaDataHandler(int $uid, array $eventData): void
     {
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $data = [
@@ -201,7 +201,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * @param positive-int $uid
      */
-    public function delete(int $uid): void
+    public function deleteViaDataHandler(int $uid): void
     {
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $tableName = $this->getTableName();
