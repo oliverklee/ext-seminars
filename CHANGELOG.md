@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a button for deleting registrations in the BE module (#3166)
+- Add a button for deleting registrations in the BE module (#3166, #3173)
 - Add a button for deleting events in the BE module (#3151)
 - Add support for PHP 8.3 (#2676)
 
