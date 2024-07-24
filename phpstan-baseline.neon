@@ -116,6 +116,11 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
@@ -163,6 +168,31 @@ parameters:
 		-
 			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
 			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and int results in an error\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Binary operation \"\\.\" between '\\(object_type \\= 1 OR…' and mixed results in an error\\.$#"
+			count: 2
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Binary operation \"\\.\" between '\\(tx_seminars…' and mixed results in an error\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'tx_seminars…' and mixed results in an error\\.$#"
+			count: 6
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
+			message: "#^Binary operation \"\\.\" between non\\-falsy\\-string and mixed results in an error\\.$#"
+			count: 6
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
@@ -1251,6 +1281,26 @@ parameters:
 			path: Classes/Mapper/EventMapper.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\EventMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/EventMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\RegistrationMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/RegistrationMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Mapper\\\\TimeSlotMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/TimeSlotMapper.php
+
+		-
 			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
@@ -1349,6 +1399,11 @@ parameters:
 			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
 			count: 2
 			path: Classes/OldModel/AbstractModel.php
+
+		-
+			message: "#^Binary operation \"\\.\\=\" between mixed and non\\-falsy\\-string results in an error\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractTimeSpan.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
@@ -1951,6 +2006,21 @@ parameters:
 			path: Tests/Functional/Bag/SpeakerBagTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Bag/SpeakerBagTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Bag\\\\SpeakerBagTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Bag/SpeakerBagTest.php
@@ -1961,9 +2031,29 @@ parameters:
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:assertBagNotHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:bagHasUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\AbstractBagBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:assertBagContainsUid\\(\\) has parameter \\$bag with generic class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BagBuilder\\\\EventBagBuilderTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
@@ -2111,7 +2201,7 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
 		-
-			message: "#^Offset 1 might not exist on array\\{0\\?\\: string, 1\\?\\: string\\}\\.$#"
+			message: "#^Offset 1 might not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string\\}\\.$#"
 			count: 2
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
@@ -2181,14 +2271,44 @@ parameters:
 			path: Tests/Functional/Localization/TranslateTraitTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventDateMapperTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventDateMapperTest.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$testExtensionsToLoad type has no value type specified in iterable type array\\.$#"
@@ -2846,6 +2966,41 @@ parameters:
 			path: Tests/LegacyUnit/BagBuilder/CategoryBagBuilderTest.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and 172800 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 604800 results in an error\\.$#"
+			count: 11
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 86400 results in an error\\.$#"
+			count: 31
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 1000 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 172800 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 604800 results in an error\\.$#"
+			count: 17
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 86400 results in an error\\.$#"
+			count: 21
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 42
 			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
@@ -2861,6 +3016,11 @@ parameters:
 			path: Tests/LegacyUnit/BagBuilder/OrganizerBagBuilderTest.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and 86400 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
 			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
 			count: 3
 			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
@@ -2874,6 +3034,11 @@ parameters:
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 4
 			path: Tests/LegacyUnit/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
@@ -2909,6 +3074,21 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 1000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 3600 results in an error\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
@@ -2954,6 +3134,11 @@ parameters:
 			message: "#^Parameter \\#2 \\$recordData of method OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:createRecord\\(\\) expects array\\<string, bool\\|int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 7
 			path: Tests/LegacyUnit/Csv/EmailRegistrationListViewTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 3600 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/Csv/EventListViewTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
@@ -3006,9 +3191,114 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/AbstractViewTest.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and 1000 results in an error\\.$#"
+			count: 9
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 2000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 1000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 2000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CategoryListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1000 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 11000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 12000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 20 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 2000 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 21 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 40 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
+			count: 24
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 45 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 50 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 604800 results in an error\\.$#"
+			count: 8
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 86400 results in an error\\.$#"
+			count: 7
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 20 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 42 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 45 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 86000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 86400 results in an error\\.$#"
+			count: 6
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
@@ -3069,6 +3359,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 500 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
@@ -3401,6 +3696,11 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
+			message: "#^Class OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult implements generic interface TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface but does not specify its types\\: ModelType$#"
+			count: 1
+			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:key\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
@@ -3529,6 +3829,26 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/Model/EventTopicTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 1 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/Model/EventTopicTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 42 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setBeginDateAndTime\\(\\) expects int, int\\|false given\\.$#"
