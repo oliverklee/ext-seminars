@@ -347,6 +347,42 @@ final class NullRenderingContextTest extends UnitTestCase
     /**
      * @test
      */
+    public function getAttributeMustNotBeCalled(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Not implemented.');
+        $this->expectExceptionCode(1701345822);
+
+        $this->subject->getAttribute(\stdClass::class);
+    }
+
+    /**
+     * @test
+     */
+    public function withAttributeMustNotBeCalled(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Not implemented.');
+        $this->expectExceptionCode(1701345830);
+
+        $this->subject->withAttribute(\stdClass::class, new \stdClass());
+    }
+
+    /**
+     * @test
+     */
+    public function setAttributeMustNotBeCalled(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Not implemented.');
+        $this->expectExceptionCode(1721808769);
+
+        $this->subject->setAttribute(\stdClass::class, new \stdClass());
+    }
+
+    /**
+     * @test
+     */
     public function hasAttributeReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasAttribute(self::class));
