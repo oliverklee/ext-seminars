@@ -28,6 +28,12 @@ If you would like to test the extension yourself, there is a
 [DDEV-based TYPO3 distribution](https://github.com/oliverklee/TYPO3-testing-distribution)
 with this extension installed and some test records ready to go.
 
+## Staying informed about the extension
+
+If you would like to stay informed about this extension (including compatibility
+with newer TYPO3 versions), you can subscribe to the
+[author's newsletter](https://www.oliverklee.de/newsletter/).
+
 ## Running the tests locally
 
 You will need to have a Git clone of the extension for this
