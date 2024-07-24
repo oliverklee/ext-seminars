@@ -580,4 +580,25 @@ final class RegistrationControllerTest extends UnitTestCase
             );
         }
     }
+
+    /**
+     * @test
+     */
+    public function deleteActionDeletesEvent(): void
+    {
+        $uid = 15;
+        $this->registrationRepositoryMock->expects(self::once())->method('deleteViaDataHandler')->with($uid);
+
+        $this->subject->deleteAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteActionRedirectsToModuleOverviewAction(): void
+    {
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+
+        $this->subject->deleteAction(15);
+    }
 }

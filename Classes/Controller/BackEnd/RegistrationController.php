@@ -122,4 +122,14 @@ class RegistrationController extends ActionController
         // 11LTS path
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
+
+    /**
+     * @param positive-int $registrationUid
+     */
+    public function deleteAction(int $registrationUid): void
+    {
+        $this->registrationRepository->deleteViaDataHandler($registrationUid);
+
+        $this->redirect('overview', 'BackEnd\\Module');
+    }
 }
