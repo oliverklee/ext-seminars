@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -169,5 +170,22 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
         );
 
         return $query->execute()->toArray();
+    }
+
+    /**
+     * Deletes the event with the given UID.
+     *
+     * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
+     * The `DataHandler` will also take care of checking the permissions of the logged-in BE user.
+     *
+     * @param positive-int $uid
+     */
+    public function deleteViaDataHandler(int $uid): void
+    {
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $tableName = $this->getTableName();
+        $dataHandler->start([], [$tableName => [$uid => ['delete' => 1]]]);
+        $dataHandler->process_cmdmap();
     }
 }

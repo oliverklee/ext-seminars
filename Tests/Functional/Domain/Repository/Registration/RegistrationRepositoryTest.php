@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -31,6 +32,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class RegistrationRepositoryTest extends FunctionalTestCase
 {
+    use BackEndTestsTrait;
+
     protected $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -60,6 +63,13 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         $this->subject = $this->get(RegistrationRepository::class);
         $this->eventRepository = $this->get(EventRepository::class);
         $this->persistenceManager = $this->get(PersistenceManager::class);
+    }
+
+    private function initializeBackEndUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
+        $this->unifyBackEndLanguage();
     }
 
     /**
@@ -842,5 +852,57 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertIsArray($rawData);
         self::assertSame(1, $rawData['uid']);
         self::assertSame('some new registration', $rawData['title']);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteViaDataHandlerWithUidOfExistingVisibleRegistrationMarksRegistrationAsDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
+
+        $this->subject->deleteViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteViaDataHandlerWithUidOfExistingHiddenRegistrationMarksRegistrationAsDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenRegistrationOnPage.csv');
+
+        $this->subject->deleteViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenRegistrationOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteViaDataHandlerWithUidOfInexistentRegistrationKeepsOtherVisibleRegistrationsUnchanged(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
+
+        $this->subject->deleteViaDataHandler(2);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteViaDataHandlerWithUidOfExistingDeletedRegistrationKeepsRegistrationDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.csv');
+
+        $this->subject->deleteViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.csv');
     }
 }

@@ -2346,8 +2346,43 @@ parameters:
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
 
 		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 3
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Cannot access offset 'getUserObj' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:existsRegistrationForEventAndUser\\(\\) expects OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventInterface, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\|null given\\.$#"
 			count: 7
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepositoryTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepositoryTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepositoryTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
+			count: 1
 			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
 
 		-

@@ -4,6 +4,7 @@
       data-namespace-typo3-fluid="true">
     <f:variable name="tableName" value="tx_seminars_attendances"/>
     <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+    <f:variable name="actionLabelPrefix" value="backEndModule.action"/>
 
     <table class="table table-hover table-striped">
         <thead>
@@ -57,9 +58,13 @@
                                 <span class="btn btn-default disabled">
                                     <core:icon identifier="empty-empty"/>
                                 </span>
-                                <span class="btn btn-default disabled">
-                                    <core:icon identifier="empty-empty"/>
-                                </span>
+                                <f:form controller="BackEnd\Registration" action="delete"
+                                        arguments="{registrationUid: registration.uid}">
+                                    <button type="submit" class="btn btn-default"
+                                            title="{f:translate(key: '{actionLabelPrefix}.delete')}">
+                                        <core:icon identifier="actions-delete"/>
+                                    </button>
+                                </f:form>
                             </div>
                         </td>
                     </f:if>
