@@ -161,6 +161,11 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and int results in an error\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
 			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 10
 			path: Classes/BagBuilder/EventBagBuilder.php
@@ -1386,6 +1391,11 @@ parameters:
 			path: Classes/OldModel/AbstractModel.php
 
 		-
+			message: "#^Binary operation \"\\.\\=\" between mixed and non\\-falsy\\-string results in an error\\.$#"
+			count: 1
+			path: Classes/OldModel/AbstractTimeSpan.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractTimeSpan.php
@@ -2376,7 +2386,7 @@ parameters:
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
 		-
-			message: "#^Offset 1 might not exist on array\\{0\\?\\: string, 1\\?\\: string\\}\\.$#"
+			message: "#^Offset 1 might not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string\\}\\.$#"
 			count: 2
 			path: Tests/Functional/FrontEnd/DefaultController/PluginDefinitionTest.php
 
@@ -3041,6 +3051,11 @@ parameters:
 			path: Tests/LegacyFunctional/BagBuilder/OrganizerBagBuilderTest.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and 86400 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
 			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
 			count: 3
 			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
@@ -3054,6 +3069,11 @@ parameters:
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Csv/AbstractRegistrationListViewTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
@@ -3151,6 +3171,11 @@ parameters:
 			path: Tests/LegacyFunctional/Csv/EmailRegistrationListViewTest.php
 
 		-
+			message: "#^Binary operation \"\\-\" between mixed and 3600 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/Csv/EventListViewTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\EventListViewTest\\:\\:createEventInFolderAndSetPageUid\\(\\) has parameter \\$eventData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Csv/EventListViewTest.php
@@ -3216,9 +3241,99 @@ parameters:
 			path: Tests/LegacyFunctional/FrontEnd/AbstractViewTest.php
 
 		-
+			message: "#^Binary operation \"\\+\" between mixed and 1000 results in an error\\.$#"
+			count: 9
+			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 2000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 1000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 2000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\CategoryListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 1000 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 11000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 12000 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 20 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 2000 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 21 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 40 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
+			count: 24
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 45 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 50 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 604800 results in an error\\.$#"
+			count: 8
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 20 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 42 results in an error\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 45 results in an error\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"
@@ -3274,6 +3389,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\DefaultControllerTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 500 results in an error\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/FrontEnd/RegistrationsListTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\RegistrationsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
@@ -3849,6 +3969,16 @@ parameters:
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 3
 			path: Tests/Unit/Model/EventTopicTest.php
+
+		-
+			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
+
+		-
+			message: "#^Binary operation \"\\-\" between mixed and 42 results in an error\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$beginDate of method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingTimeSpan\\:\\:setBeginDateAndTime\\(\\) expects int, int\\|false given\\.$#"
