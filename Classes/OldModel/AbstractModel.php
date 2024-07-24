@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
-use OliverKlee\Seminars\Rendering\NullRenderingContext;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -16,7 +15,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\ViewHelpers\Format\HtmlViewHelper;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -543,10 +542,9 @@ abstract class AbstractModel
 
     protected function renderAsRichText(string $rawData): string
     {
-        $arguments = ['parseFuncTSPath' => 'lib.parseFunc_RTE'];
-        $childrenClosure = static function () use ($rawData): string {
-            return \trim($rawData);
-        };
-        return HtmlViewHelper::renderStatic($arguments, $childrenClosure, new NullRenderingContext());
+        $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+        $contentObject->start([]);
+
+        return $contentObject->parseFunc($rawData, [], '< lib.parseFunc_RTE');
     }
 }
