@@ -203,4 +203,25 @@ final class EventControllerTest extends UnitTestCase
 
         $this->subject->unhideAction(15);
     }
+
+    /**
+     * @test
+     */
+    public function deleteActionUnhidesEvent(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('delete')->with($uid);
+
+        $this->subject->deleteAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteActionRedirectsToModuleOverviewAction(): void
+    {
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+
+        $this->subject->deleteAction(15);
+    }
 }

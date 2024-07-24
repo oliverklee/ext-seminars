@@ -1098,4 +1098,56 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
     }
+
+    /**
+     * @test
+     */
+    public function deleteWithUidOfExistingVisibleEventMarksEventAsDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $this->subject->delete(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteWithUidOfExistingHiddenEventMarksEventAsDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+
+        $this->subject->delete(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $this->subject->delete(2);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function deleteWithUidOfExistingDeletedEventKeepsEventDeleted(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+
+        $this->subject->delete(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+    }
 }
