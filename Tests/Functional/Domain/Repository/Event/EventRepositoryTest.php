@@ -998,12 +998,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hideWithUidOfExistingVisibleEventMarksEventAsHidden(): void
+    public function hideViaDataHandlerWithUidOfExistingVisibleEventMarksEventAsHidden(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
-        $this->subject->hide(1);
+        $this->subject->hideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
     }
@@ -1011,12 +1011,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hideWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
+    public function hideViaDataHandlerWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
-        $this->subject->hide(2);
+        $this->subject->hideViaDataHandler(2);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
     }
@@ -1024,12 +1024,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hideWithUidOfExistingHiddenEventKeepsEventHidden(): void
+    public function hideViaDataHandlerWithUidOfExistingHiddenEventKeepsEventHidden(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
-        $this->subject->hide(1);
+        $this->subject->hideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
     }
@@ -1037,12 +1037,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hideWithUidOfDeletedVisibleEventKeepsDeletedEventVisible(): void
+    public function hideViaDataHandlerWithUidOfDeletedVisibleEventKeepsDeletedEventVisible(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
 
-        $this->subject->hide(1);
+        $this->subject->hideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
     }
@@ -1050,12 +1050,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function unhideWithUidOfExistingHiddenEventMarksEventAsVisible(): void
+    public function unhideViaDataHandlerWithUidOfExistingHiddenEventMarksEventAsVisible(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
-        $this->subject->unhide(1);
+        $this->subject->unhideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
     }
@@ -1063,12 +1063,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function unhideWithUidOfInexistentEventKeepsOtherHiddenEventsUnchanged(): void
+    public function unhideViaDataHandlerWithUidOfInexistentEventKeepsOtherHiddenEventsUnchanged(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
-        $this->subject->unhide(2);
+        $this->subject->unhideViaDataHandler(2);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
     }
@@ -1076,12 +1076,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function unhideWithUidOfExistingVisibleEventKeepsEventVisible(): void
+    public function unhideViaDataHandlerWithUidOfExistingVisibleEventKeepsEventVisible(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
-        $this->subject->unhide(1);
+        $this->subject->unhideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
     }
@@ -1089,12 +1089,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function unhideWithUidOfDeletedHiddenEventKeepsDeletedEventHidden(): void
+    public function unhideViaDataHandlerWithUidOfDeletedHiddenEventKeepsDeletedEventHidden(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
 
-        $this->subject->unhide(1);
+        $this->subject->unhideViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
     }
@@ -1102,12 +1102,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function deleteWithUidOfExistingVisibleEventMarksEventAsDeleted(): void
+    public function deleteViaDataHandlerWithUidOfExistingVisibleEventMarksEventAsDeleted(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
-        $this->subject->delete(1);
+        $this->subject->deleteViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
     }
@@ -1115,12 +1115,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function deleteWithUidOfExistingHiddenEventMarksEventAsDeleted(): void
+    public function deleteViaDataHandlerWithUidOfExistingHiddenEventMarksEventAsDeleted(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
-        $this->subject->delete(1);
+        $this->subject->deleteViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedHiddenSingleEventOnPage.csv');
     }
@@ -1128,12 +1128,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function deleteWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
+    public function deleteViaDataHandlerWithUidOfInexistentEventKeepsOtherVisibleEventsUnchanged(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
-        $this->subject->delete(2);
+        $this->subject->deleteViaDataHandler(2);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
     }
@@ -1141,12 +1141,12 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function deleteWithUidOfExistingDeletedEventKeepsEventDeleted(): void
+    public function deleteViaDataHandlerWithUidOfExistingDeletedEventKeepsEventDeleted(): void
     {
         $this->initializeBackEndUser();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
 
-        $this->subject->delete(1);
+        $this->subject->deleteViaDataHandler(1);
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
     }

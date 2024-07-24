@@ -168,7 +168,7 @@ final class EventControllerTest extends UnitTestCase
     public function hideActionHidesEvent(): void
     {
         $uid = 15;
-        $this->eventRepositoryMock->expects(self::once())->method('hide')->with($uid);
+        $this->eventRepositoryMock->expects(self::once())->method('hideViaDataHandler')->with($uid);
 
         $this->subject->hideAction($uid);
     }
@@ -189,7 +189,7 @@ final class EventControllerTest extends UnitTestCase
     public function unhideActionUnhidesEvent(): void
     {
         $uid = 15;
-        $this->eventRepositoryMock->expects(self::once())->method('unhide')->with($uid);
+        $this->eventRepositoryMock->expects(self::once())->method('unhideViaDataHandler')->with($uid);
 
         $this->subject->unhideAction($uid);
     }
@@ -210,7 +210,7 @@ final class EventControllerTest extends UnitTestCase
     public function deleteActionDeletesEvent(): void
     {
         $uid = 15;
-        $this->eventRepositoryMock->expects(self::once())->method('delete')->with($uid);
+        $this->eventRepositoryMock->expects(self::once())->method('deleteViaDataHandler')->with($uid);
 
         $this->subject->deleteAction($uid);
     }
