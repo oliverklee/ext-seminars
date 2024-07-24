@@ -353,7 +353,7 @@ final class NullRenderingContextTest extends UnitTestCase
         $this->expectExceptionMessage('Not implemented.');
         $this->expectExceptionCode(1701345822);
 
-        $this->subject->getAttribute('foo');
+        $this->subject->getAttribute(\stdClass::class);
     }
 
     /**
@@ -365,7 +365,7 @@ final class NullRenderingContextTest extends UnitTestCase
         $this->expectExceptionMessage('Not implemented.');
         $this->expectExceptionCode(1701345830);
 
-        $this->subject->withAttribute('foo', new \stdClass());
+        $this->subject->withAttribute(\stdClass::class, new \stdClass());
     }
 
     /**
@@ -377,7 +377,7 @@ final class NullRenderingContextTest extends UnitTestCase
         $this->expectExceptionMessage('Not implemented.');
         $this->expectExceptionCode(1721808769);
 
-        $this->subject->setAttribute('foo', new \stdClass());
+        $this->subject->setAttribute(\stdClass::class, new \stdClass());
     }
 
     /**
