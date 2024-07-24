@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid crash with `typo3fluid/fluid` 2.14.0 due to signature change (#3158)
 
 ## 5.5.2
 
