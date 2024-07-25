@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dataset>
-    <tx_seminars_seminars>
-        <uid>1</uid>
-        <pid>1</pid>
-        <object_type>0</object_type>
-        <deleted>1</deleted>
-    </tx_seminars_seminars>
-</dataset>

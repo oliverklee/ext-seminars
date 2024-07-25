@@ -605,7 +605,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findOneByUidForBackendCanFindVisibleEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $result = $this->subject->findOneByUidForBackend(1);
 
@@ -617,7 +617,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findOneByUidForBackendIgnoresDeletedEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
 
         $result = $this->subject->findOneByUidForBackend(1);
 
@@ -629,7 +629,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findOneByUidForBackendCanFindHiddenEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
         $result = $this->subject->findOneByUidForBackend(1);
 
@@ -836,7 +836,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeFindsSingleEventOnGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -881,7 +881,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeIgnoresSingleEventOnOtherPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(2);
 
@@ -893,7 +893,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeIgnoresDeletedEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -905,7 +905,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeCanFindHiddenEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -980,7 +980,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function enrichWithRawDataCanEnrichHiddenEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventWithTitleOnPage.csv');
         $events = $this->subject->findByPageUidInBackEndMode(1);
         $this->subject->findByUid(1);
         self::assertCount(1, $events);
