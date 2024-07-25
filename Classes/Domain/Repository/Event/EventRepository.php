@@ -40,12 +40,19 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     public function findOneByUidForBackend(int $uid): ?Event
     {
         $query = $this->createQuery();
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $querySettings->setIgnoreEnableFields(true);
-        $query->setQuerySettings($querySettings);
+        $this->setQuerySettingsForBackEnd($query);
 
         return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
+    }
+
+    /**
+     * @param QueryInterface<Event> $query
+     */
+    private function setQuerySettingsForBackEnd(QueryInterface $query): void
+    {
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false)->setIgnoreEnableFields(true);
+        $query->setQuerySettings($querySettings);
     }
 
     /**
@@ -137,10 +144,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         }
 
         $query = $this->createQuery();
-
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false)->setIgnoreEnableFields(true);
-        $query->setQuerySettings($querySettings);
+        $this->setQuerySettingsForBackEnd($query);
         $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
 
         $query->matching($query->equals('pid', $pageUid));
