@@ -851,7 +851,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeFindsEventDateOnGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventDateOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -866,7 +866,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeFindsEventTopicOnGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -920,7 +920,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeCanFindTimedEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/TimedSingleEventOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TimedSingleEventOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
@@ -935,7 +935,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function findByPageUidInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.csv');
 
         $result = $this->subject->findByPageUidInBackEndMode(1);
 
