@@ -49,7 +49,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
-     * @return array<int, Event>
+     * @return list<Event>
      */
     public function findSingleEventsByOwnerUid(int $ownerUid): array
     {
@@ -128,7 +128,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      *
      * @param int<0, max> $pageUid
      *
-     * @return array<int, Event>
+     * @return list<Event>
      */
     public function findByPageUidInBackEndMode(int $pageUid): array
     {

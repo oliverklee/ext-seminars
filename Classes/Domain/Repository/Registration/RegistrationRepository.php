@@ -131,7 +131,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     /**
      * @param positive-int $eventUid
      *
-     * @return array<int, Registration>
+     * @return list<Registration>
      */
     public function findRegularRegistrationsByEvent(int $eventUid): array
     {
@@ -141,7 +141,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     /**
      * @param positive-int $eventUid
      *
-     * @return array<int, Registration>
+     * @return list<Registration>
      */
     public function findWaitingListRegistrationsByEvent(int $eventUid): array
     {
@@ -151,7 +151,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     /**
      * @param positive-int $eventUid
      *
-     * @return array<int, Registration>
+     * @return list<Registration>
      */
     private function findByEventAndWaitingListStatus(int $eventUid, bool $onWaitingList): array
     {
