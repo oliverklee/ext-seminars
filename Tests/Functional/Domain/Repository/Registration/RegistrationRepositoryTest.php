@@ -150,7 +150,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findsRecordOnPages(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
 
         $result = $this->subject->findAll();
 
@@ -423,7 +423,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function countRegularRegistrationsByPageUidCountsRegularRegistrationsOnTheGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
 
         self::assertSame(1, $this->subject->countRegularRegistrationsByPageUid(1));
     }
@@ -433,7 +433,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function countRegularRegistrationsByPageUidIgnoresRegistrationsOnOtherPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationOnPage.csv');
 
         self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(2));
     }
@@ -453,7 +453,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function countRegularRegistrationsByPageUidIgnoresHiddenRegistrationsOnTheGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenRegistrationOnPage.csv');
 
         self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
     }
@@ -463,7 +463,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function countRegularRegistrationsByPageUidIgnoresDeletedRegistrationsOnTheGivenPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedRegistrationOnPage.csv');
 
         self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
     }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dataset>
-    <tx_seminars_attendances>
-        <uid>1</uid>
-        <pid>1</pid>
-        <hidden>1</hidden>
-    </tx_seminars_attendances>
-</dataset>
