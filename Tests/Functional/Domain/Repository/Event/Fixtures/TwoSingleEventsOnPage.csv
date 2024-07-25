@@ -3,6 +3,6 @@
 ,1,0,254,"Record for pages"
 
 "tx_seminars_seminars"
-,"uid","pid","object_type","deleted","hidden","begin_date"
-,1,1,0,0,0,1
-,2,1,0,0,0,2
+,"uid","pid","object_type","deleted","hidden","begin_date","title"
+,1,1,0,0,0,1,"single event"
+,2,1,0,0,0,2,"single event"

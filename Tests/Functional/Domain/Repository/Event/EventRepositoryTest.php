@@ -946,6 +946,569 @@ final class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * @return array<non-empty-string, array{0: string}>
+     */
+    public static function emptySearchTermDataProvider(): array
+    {
+        return [
+            'empty string' => [''],
+            'whitespace only' => [" \t\n\r"],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermForNoEventsReturnsEmptyArray(
+        string $searchTerm
+    ): void {
+        $result = $this->subject->findBySearchTermInBackEndMode(0, $searchTerm);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermFindsSingleEventOnGivenPage(
+        string $searchTerm
+    ): void {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermFindsEventDateOnGivenPage(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventDateOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermFindsEventTopicOnGivenPage(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermIgnoresSingleEventOnOtherPage(
+        string $searchTerm
+    ): void {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(2, $searchTerm);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermIgnoresDeletedEvent(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermCanFindHiddenEvent(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermCanFindTimedEvent(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TimedSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider emptySearchTermDataProvider
+     */
+    public function findBySearchTermInBackEndModeWithEmptySearchTermSortsEventByBeginDateInDescendingOrder(
+        string $searchTerm
+    ): void {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventDateWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventDateOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventTopicWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventTopicOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventWithMatchingUidMinusWhitespaceOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, ' 1 ');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsHiddenEventWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsTimedEventWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TimedSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresDeletedEventWithMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '1');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithMatchingUidOnOtherPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(2, '1');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithNonMatchingUidOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '15');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithUidOnlyInTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithIntegerTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '9');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithSubstringUidOnlyInTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithWhitespaceIntegerTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, '9');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithExactlyMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'single event');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithLeftSubstringMatch(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'sing');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithRightSubstringMatch(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'vent');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithMiddleStringMatch(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'gle ev');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithSingleCharacterSubstringMatch(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'e');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @return array<non-empty-string, array{0: non-empty-string}>
+     */
+    public static function sqlCharactersDataProvider(): array
+    {
+        return [
+            ';' => [';'],
+            ',' => [','],
+            '(' => ['('],
+            ')' => [')'],
+            'double quote' => ['"'],
+            'single quote' => ["'"],
+            '%' => ['%'],
+            '-' => ['-'],
+            '_' => ['_'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param non-empty-string $searchTerm
+     *
+     * @dataProvider sqlCharactersDataProvider
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleSingleEventWithSqlCharacterMatch(string $searchTerm): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithSqlCharactersTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, $searchTerm);
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeSortsEventByBeginDateInDescendingOrder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TwoSingleEventsOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'single event');
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventDateWithMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventDateWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'event date');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventTopicWithMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventTopicWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'event topic');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventTopic::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsVisibleEventWithTitleMatchMinusWhitespaceOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, ' single event ');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsHiddenEventWithMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/HiddenSingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'Hidden single event on page');
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeFindsTimedEventWithMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/TimedSingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(
+            1,
+            'Timed single event with title on page'
+        );
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresDeletedEventWithMatchingTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(
+            1,
+            'Deleted single event with title on page'
+        );
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithMatchingTitleOnOtherPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(2, 'single event');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithCompletelyDifferentTitleOnPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'no dice');
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findBySearchTermInBackEndModeIgnoresVisibleEventWithTwoSearchWordsInReverseOrder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithTitleOnPage.csv');
+
+        $result = $this->subject->findBySearchTermInBackEndMode(1, 'event single');
+
+        self::assertSame([], $result);
+    }
+
+    /**
      * @test
      */
     public function enrichWithRawDataCanBeCalledWithEmptyArray(): void

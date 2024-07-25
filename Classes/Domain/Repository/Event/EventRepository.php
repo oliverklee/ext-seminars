@@ -163,6 +163,79 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
+     * Finds events on the given page that either have the given search term as a substring, or that have the search
+     * term as UID (if the search term is an integer-like string).
+     *
+     * If the search term is empty, all events on the given page are returned.
+     *
+     * This method works in back-end mode, i.e., it will ignore deleted records, but will find hidden or timed records.
+     *
+     * @param int<0, max> $pageUid
+     *
+     * @return list<Event>
+     */
+    public function findBySearchTermInBackEndMode(int $pageUid, string $searchTerm): array
+    {
+        if ($pageUid <= 0) {
+            return [];
+        }
+
+        $trimmedSearchTerm = \trim($searchTerm);
+        if ($trimmedSearchTerm === '') {
+            return $this->findByPageUidInBackEndMode($pageUid);
+        }
+
+        if (\ctype_digit($trimmedSearchTerm)) {
+            $eventUid = (int)$trimmedSearchTerm;
+            \assert($eventUid >= 0);
+            return $this->findByEventUidAndPageUidInBackEndMode($eventUid, $pageUid);
+        }
+
+        return $this->findBySearchTermAndPageUidInBackEndMode($trimmedSearchTerm, $pageUid);
+    }
+
+    /**
+     * Finds the event with the given UID (if it exists) on the given page.
+     *
+     * This method works in back-end mode, i.e., it will ignore deleted records, but will find hidden or timed records.
+     *
+     * @param int<0, max> $eventUid
+     * @param int<1, max> $pageUid
+     *
+     * @return list<Event>
+     */
+    private function findByEventUidAndPageUidInBackEndMode(int $eventUid, int $pageUid): array
+    {
+        $query = $this->createQuery();
+        $this->setQuerySettingsForBackEndWithStoragePageUid($query, $pageUid);
+
+        $query->matching($query->equals('uid', $eventUid));
+
+        return $query->execute()->toArray();
+    }
+
+    /**
+     * Finds events on the given page that have the given search term as a substring.
+     *
+     * This method works in back-end mode, i.e., it will ignore deleted records, but will find hidden or timed records.
+     *
+     * @param non-empty-string $searchTerm
+     * @param int<1, max> $pageUid
+     *
+     * @return list<Event>
+     */
+    private function findBySearchTermAndPageUidInBackEndMode(string $searchTerm, int $pageUid): array
+    {
+        $query = $this->createQuery();
+        $this->setQuerySettingsForBackEndWithStoragePageUid($query, $pageUid);
+
+        $query->matching($query->like('title', '%' . \addcslashes($searchTerm, '_%') . '%'));
+        $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
+
+        return $query->execute()->toArray();
+    }
+
+    /**
      * Hides the event with the given UID.
      *
      * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
