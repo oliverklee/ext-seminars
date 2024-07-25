@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -40,7 +41,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     public function findOneByUidForBackend(int $uid): ?Event
     {
         $query = $this->createQuery();
-        $this->setQuerySettingsForBackEnd($query);
+        $this->setQuerySettingsForBackEndWithoutStoragePageUid($query);
 
         return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
     }
@@ -48,11 +49,23 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     /**
      * @param QueryInterface<Event> $query
      */
-    private function setQuerySettingsForBackEnd(QueryInterface $query): void
+    private function setQuerySettingsForBackEndWithoutStoragePageUid(QueryInterface $query): void
     {
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false)->setIgnoreEnableFields(true);
-        $query->setQuerySettings($querySettings);
+        $query->setQuerySettings($this->buildQuerySettingsForBackEnd()->setRespectStoragePage(false));
+    }
+
+    /**
+     * @param QueryInterface<Event> $query
+     * @param positive-int $storagePageUid
+     */
+    private function setQuerySettingsForBackEndWithStoragePageUid(QueryInterface $query, int $storagePageUid): void
+    {
+        $query->setQuerySettings($this->buildQuerySettingsForBackEnd()->setStoragePageIds([$storagePageUid]));
+    }
+
+    private function buildQuerySettingsForBackEnd(): QuerySettingsInterface
+    {
+        return GeneralUtility::makeInstance(Typo3QuerySettings::class)->setIgnoreEnableFields(true);
     }
 
     /**
@@ -68,8 +81,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
 
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $query->setQuerySettings($querySettings);
+        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
 
         $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
         $ownerMatcher = $query->equals('ownerUid', $ownerUid);
@@ -144,10 +156,8 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         }
 
         $query = $this->createQuery();
-        $this->setQuerySettingsForBackEnd($query);
+        $this->setQuerySettingsForBackEndWithStoragePageUid($query, $pageUid);
         $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
-
-        $query->matching($query->equals('pid', $pageUid));
 
         return $query->execute()->toArray();
     }
