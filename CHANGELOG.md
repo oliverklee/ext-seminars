@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop support for PHP 7.2/7.3 (#3189)
+
 ### Fixed
 
 ## 5.7.0: New fields, BE usability features, and deprecations
