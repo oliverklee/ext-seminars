@@ -112,9 +112,6 @@
 		}
 	},
 	"scripts": {
-		"post-autoload-dump": [
-			"@link-extension"
-		],
 		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
 		"ci:coverage": [
 			"@ci:coverage:unit",
@@ -173,10 +170,6 @@
 		],
 		"fix:php:cs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix",
 		"fix:php:sniff": "phpcbf Classes Configuration Tests",
-		"link-extension": [
-			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
-			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
-		],
 		"php:rector": ".Build/vendor/bin/rector",
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
