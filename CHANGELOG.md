@@ -42,7 +42,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Drop `approved="yes"` from the English locallang files (#3172)
-- Avoid deprecation warnings when rendering RTE content (#3171)
+- Avoid using the `HtmlViewHelper` in a non-Extbase context (#3171)
 - Avoid crash with `typo3fluid/fluid` 2.12.0 and 2.14.0 due to signature change
   (#3060, #3158)
 - Stop using deprecated HTTP functions (#2991, #3006, #3007, #3008)
