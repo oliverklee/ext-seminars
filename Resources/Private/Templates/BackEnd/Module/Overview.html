@@ -30,6 +30,8 @@
                 </div>
             </div>
 
+            <f:render partial="BackEnd/SearchForm" arguments="{_all}"/>
+
             <f:if condition="{events}">
                 <f:then>
                     <f:render partial="BackEnd/EventList" arguments="{_all}"/>

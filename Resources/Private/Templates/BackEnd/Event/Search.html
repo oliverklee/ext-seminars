@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:layout name="BackEndModule"/>
+
+    <f:section name="Header"/>
+
+    <f:section name="Content">
+        <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+
+        <f:if condition="{pageUid} <= 0">
+            <f:render partial="BackEnd/FlashMessage" arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
+        </f:if>
+
+        <f:if condition="{permissions.readAccessToEvents}">
+            <div class="row">
+                <h1 class="col-auto me-auto">
+                    <f:translate key="backEndModule.heading.events"/>
+                </h1>
+            </div>
+
+            <f:render partial="BackEnd/SearchForm" arguments="{_all}"/>
+
+            <f:if condition="{searchTerm}">
+                <p class="mb-3 ml-3">
+                    <f:variable name="numberOfEvents">{events -> f:count()}</f:variable>
+                    <f:translate key="backEndModule.message.numberOfEventsFound" arguments="{0: numberOfEvents}"/>
+
+                    <f:link.action controller="BackEnd\\Module" action="overview" arguments="{pageUid: pageUid}">
+                        <f:translate key="backEndModule.action.showAllEvents"/>
+                    </f:link.action>
+                </p>
+            </f:if>
+
+            <f:if condition="{events}">
+                <f:render partial="BackEnd/EventList" arguments="{_all}"/>
+            </f:if>
+        </f:if>
+    </f:section>
+</html>

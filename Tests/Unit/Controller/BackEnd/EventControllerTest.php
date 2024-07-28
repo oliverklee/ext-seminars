@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
+use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
 use OliverKlee\Seminars\Csv\CsvDownloader;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
+use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -26,9 +30,24 @@ final class EventControllerTest extends UnitTestCase
     private $subject;
 
     /**
+     * @var TemplateView&MockObject
+     */
+    private $viewMock;
+
+    /**
      * @var EventRepository&MockObject
      */
     private $eventRepositoryMock;
+
+    /**
+     * @var Permissions&MockObject
+     */
+    private $permissionsMock;
+
+    /**
+     * @var EventStatisticsCalculator&MockObject
+     */
+    private $eventStatisticsCalculatorMock;
 
     /**
      * @var CsvDownloader&MockObject
@@ -45,14 +64,19 @@ final class EventControllerTest extends UnitTestCase
         parent::setUp();
 
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->permissionsMock = $this->createMock(Permissions::class);
+        $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
 
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
             ['redirect', 'forward', 'redirectToUri'],
-            [$this->eventRepositoryMock]
+            [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
         );
         $this->subject = $subject;
+
+        $this->viewMock = $this->createMock(TemplateView::class);
+        $this->subject->_set('view', $this->viewMock);
 
         if (\class_exists(Response::class)) {
             // 10LTS only
@@ -223,5 +247,108 @@ final class EventControllerTest extends UnitTestCase
         $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->deleteAction(15);
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionPassesPermissionsToView(): void
+    {
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', $this->permissionsMock],
+                ['pageUid', self::anything()],
+                ['events', self::anything()],
+                ['searchTerm', self::anything()]
+            );
+
+        $this->subject->searchAction(1, '');
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionPassesPageUidToView(): void
+    {
+        $pageUid = 8;
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', $pageUid],
+                ['events', self::anything()],
+                ['searchTerm', self::anything()]
+            );
+
+        $this->subject->searchAction($pageUid, '');
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionPassesEventsOnPageUidWithSearchTermToView(): void
+    {
+        $pageUid = 8;
+        $searchTerm = 'no dice';
+
+        $events = [new SingleEvent()];
+        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+            ->with($pageUid, $searchTerm)->willReturn($events);
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['events', $events],
+                ['searchTerm', self::anything()]
+            );
+
+        $this->subject->searchAction($pageUid, $searchTerm);
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionEnrichesEventsWithRawData(): void
+    {
+        $events = [new SingleEvent()];
+        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+            ->with(self::anything(), self::anything())->willReturn($events);
+        $this->eventRepositoryMock->expects(self::once())->method('enrichWithRawData')
+            ->with($events);
+
+        $this->subject->searchAction(1, '');
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionEnrichesEventsWithStatistics(): void
+    {
+        $event = new SingleEvent();
+        $events = [$event];
+        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+            ->with(self::anything(), self::anything())->willReturn($events);
+        $this->eventStatisticsCalculatorMock->expects(self::once())->method('enrichWithStatistics')
+            ->with($event);
+
+        $this->subject->searchAction(1, '');
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionPassesTrimmerSearchTermToView(): void
+    {
+        $searchTerm = ' no dice ';
+
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['events', self::anything()],
+                ['searchTerm', \trim($searchTerm)]
+            );
+
+        $this->subject->searchAction(1, $searchTerm);
     }
 }
