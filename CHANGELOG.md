@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.6.0
+
+### Added
 - Add a search form for events to the BE module (#3179, #3191)
 - Add a button for deleting registrations in the BE module (#3166, #3173)
 - Add a button for deleting events in the BE module (#3151)
