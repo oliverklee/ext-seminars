@@ -1602,6 +1602,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.message.noRegistrationsForEvent" resname="backEndModule.message.noRegistrationsForEvent">
 				<source>This event does not have any registrations yet.</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.numberOfEventsFound" resname="backEndModule.message.numberOfEventsFound">
+				<source>%u event(s) found.</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.events.property.uid" resname="backEndModule.events.property.uid">
 				<source>UID</source>
 			</trans-unit>
@@ -1673,6 +1676,18 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.sendEmail" resname="backEndModule.action.sendEmail">
 				<source>Send email</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.showAllEvents" resname="backEndModule.action.showAllEvents">
+				<source>Show all events</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.action.search" resname="backEndModule.action.search">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.search.label" resname="backEndModule.search.label">
+				<source>Search events</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.search.placeholder" resname="backEndModule.search.placeholder">
+				<source>UID or search term</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.email.subject" resname="backEndModule.email.subject">
 				<source>Subject</source>

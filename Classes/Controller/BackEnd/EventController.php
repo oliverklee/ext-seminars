@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -31,9 +33,24 @@ class EventController extends ActionController
      */
     private $eventRepository;
 
-    public function __construct(EventRepository $eventRepository)
-    {
+    /**
+     * @var Permissions
+     */
+    private $permissions;
+
+    /**
+     * @var EventStatisticsCalculator
+     */
+    private $eventStatisticsCalculator;
+
+    public function __construct(
+        EventRepository $eventRepository,
+        Permissions $permissions,
+        EventStatisticsCalculator $eventStatisticsCalculator
+    ) {
         $this->eventRepository = $eventRepository;
+        $this->permissions = $permissions;
+        $this->eventStatisticsCalculator = $eventStatisticsCalculator;
     }
 
     /**
@@ -89,5 +106,24 @@ class EventController extends ActionController
         $this->eventRepository->deleteViaDataHandler($eventUid);
 
         $this->redirect('overview', 'BackEnd\\Module');
+    }
+
+    /**
+     * @param int<0, max> $pageUid
+     * @param string $searchTerm
+     */
+    public function searchAction(int $pageUid, string $searchTerm): void
+    {
+        $this->view->assign('permissions', $this->permissions);
+        $this->view->assign('pageUid', $pageUid);
+
+        $events = $this->eventRepository->findBySearchTermInBackEndMode($pageUid, $searchTerm);
+        $this->eventRepository->enrichWithRawData($events);
+        foreach ($events as $event) {
+            $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        }
+        $this->view->assign('events', $events);
+
+        $this->view->assign('searchTerm', \trim($searchTerm));
     }
 }

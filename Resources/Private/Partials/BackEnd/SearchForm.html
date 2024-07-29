@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="searchLabelPrefix" value="backEndModule.search"/>
+    <f:variable name="actionLabelPrefix" value="backEndModule.action"/>
+
+    <f:form controller="BackEnd\Event" action="search" arguments="{pageUid: pageUid}"
+            class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="row mb-3 mt-1 gx-0">
+            <label for="searchTerm" class="col-form-label">
+                <f:translate key="{searchLabelPrefix}.label"/>
+            </label>
+            <div class="col-sm-11">
+                <f:form.textfield type="search" id="searchTerm" name="searchTerm" class="form-control"
+                                  placeholder="{f:translate(key: '{searchLabelPrefix}.placeholder')}"
+                                  size="100" value="{searchTerm}"/>
+            </div>
+            <div class="col-sm-1 gx-3">
+                <f:form.submit value="{f:translate(key: '{actionLabelPrefix}.search')}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </f:form>
+</html>
