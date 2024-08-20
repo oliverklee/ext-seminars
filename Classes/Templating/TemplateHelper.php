@@ -275,7 +275,7 @@ abstract class TemplateHelper
             foreach ($locales->getLocaleDependencies($this->LLkey) as $language) {
                 $this->altLLkey .= $language . ',';
             }
-            $this->altLLkey = rtrim($this->altLLkey, ',');
+            $this->altLLkey = \rtrim($this->altLLkey, ',');
         }
     }
 
@@ -400,7 +400,7 @@ abstract class TemplateHelper
         bool $isFileName = false,
         bool $ignoreFlexform = false
     ): string {
-        return trim(
+        return \trim(
             $this->getConfValue(
                 $fieldName,
                 $sheet,
@@ -1013,7 +1013,7 @@ abstract class TemplateHelper
      */
     public function getListViewConfValueString(string $fieldName): string
     {
-        return trim($this->getListViewConfigurationValue($fieldName));
+        return \trim($this->getListViewConfigurationValue($fieldName));
     }
 
     /**
@@ -1266,7 +1266,7 @@ abstract class TemplateHelper
             $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
         } elseif ($this->altLLkey) {
             $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
-            $alternativeLanguageKeys = array_reverse($alternativeLanguageKeys);
+            $alternativeLanguageKeys = \array_reverse($alternativeLanguageKeys);
             foreach ($alternativeLanguageKeys as $languageKey) {
                 if (
                     \is_string($this->LOCAL_LANG[$languageKey][$key][0]['target'] ?? null)
@@ -1330,11 +1330,11 @@ abstract class TemplateHelper
                 $this->LOCAL_LANG_UNSET = [];
                 foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
                     // Remove the dot after the language key
-                    $languageKey = substr($languageKey, 0, -1);
+                    $languageKey = \substr($languageKey, 0, -1);
                     // Don't process label if the language is not loaded
-                    if (is_array($languageArray) && isset($this->LOCAL_LANG[$languageKey])) {
+                    if (\is_array($languageArray) && isset($this->LOCAL_LANG[$languageKey])) {
                         foreach ($languageArray as $labelKey => $labelValue) {
-                            if (!is_array($labelValue)) {
+                            if (!\is_array($labelValue)) {
                                 $this->LOCAL_LANG[$languageKey][$labelKey][0]['target'] = $labelValue;
                                 if ($labelValue === '') {
                                     $this->LOCAL_LANG_UNSET[$languageKey][$labelKey] = '';
@@ -1368,8 +1368,8 @@ abstract class TemplateHelper
         string $value = 'vDEF'
     ): ?string {
         $sheetArray = $T3FlexForm_array['data'][$sheet][$lang] ?? '';
-        if (is_array($sheetArray)) {
-            return $this->pi_getFFvalueFromSheetArray($sheetArray, explode('/', $fieldName), $value);
+        if (\is_array($sheetArray)) {
+            return $this->pi_getFFvalueFromSheetArray($sheetArray, \explode('/', $fieldName), $value);
         }
         return null;
     }
@@ -1390,7 +1390,7 @@ abstract class TemplateHelper
         foreach ($fieldNameArr as $v) {
             if (MathUtility::canBeInterpretedAsInteger($v)) {
                 $integerValue = (int)$v;
-                if (is_array($tempArr)) {
+                if (\is_array($tempArr)) {
                     $c = 0;
                     foreach ($tempArr as $values) {
                         if ($c === $integerValue) {
@@ -1421,9 +1421,9 @@ abstract class TemplateHelper
 
         // Converting flexform data into array
         $fieldData = $this->cObj->data[$field] ?? null;
-        if (!is_array($fieldData) && $fieldData) {
+        if (!\is_array($fieldData) && $fieldData) {
             $this->cObj->data[$field] = GeneralUtility::xml2array((string)$fieldData);
-            if (!is_array($this->cObj->data[$field])) {
+            if (!\is_array($this->cObj->data[$field])) {
                 $this->cObj->data[$field] = [];
             }
         }
@@ -1438,7 +1438,7 @@ abstract class TemplateHelper
     // phpcs:disable
     public function pi_getClassName(string $class): string
     {
-        return str_replace('_', '-', $this->prefixId) . ($this->prefixId ? '-' : '') . $class;
+        return \str_replace('_', '-', $this->prefixId) . ($this->prefixId ? '-' : '') . $class;
     }
 
     /**
@@ -1523,7 +1523,7 @@ abstract class TemplateHelper
         $pointer = (int)($this->piVars[$pointerName] ?? 0);
         $count = (int)($this->internal['res_count'] ?? 0);
         $results_at_a_time = MathUtility::forceIntegerInRange(($this->internal['results_at_a_time'] ?? 1), 1, 1000);
-        $totalPages = (int)ceil($count / $results_at_a_time);
+        $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
         $pi_isOnlyFields = (bool)$this->pi_isOnlyFields($this->pi_isOnlyFields);
         if (!$forceOutput && $count <= $results_at_a_time) {
@@ -1539,8 +1539,8 @@ abstract class TemplateHelper
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $showFirstLast ? 1 : $this->pi_alwaysPrev;
         if (isset($this->internal['pagefloat'])) {
-            if (strtoupper($this->internal['pagefloat']) === 'CENTER') {
-                $pagefloat = ceil(($maxPages - 1) / 2);
+            if (\strtoupper($this->internal['pagefloat']) === 'CENTER') {
+                $pagefloat = \ceil(($maxPages - 1) / 2);
             } else {
                 // pagefloat set as integer. 0 = left, value >= $this->internal['maxPages'] = right
                 $pagefloat = MathUtility::forceIntegerInRange($this->internal['pagefloat'], -1, $maxPages - 1);
@@ -1553,7 +1553,7 @@ abstract class TemplateHelper
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
-        $wrapper['browseLinksWrap'] = rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
+        $wrapper['browseLinksWrap'] = \rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
         $wrapper['showResultsWrap'] = '<p>|</p>';
         $wrapper['browseBoxWrap'] = '
 		<!--
@@ -1563,12 +1563,12 @@ abstract class TemplateHelper
 			|
 		</div>';
         // Now overwrite all entries in $wrapper which are also in $wrapArr
-        $wrapper = array_merge($wrapper, $wrapArr);
+        $wrapper = \array_merge($wrapper, $wrapArr);
         // Show pagebrowser
         if ($showResultCount != 2) {
             if ($pagefloat > -1) {
-                $lastPage = min($totalPages, max($pointer + 1 + $pagefloat, $maxPages));
-                $firstPage = max(0, $lastPage - $maxPages);
+                $lastPage = \min($totalPages, \max($pointer + 1 + $pagefloat, $maxPages));
+                $firstPage = \max(0, $lastPage - $maxPages);
             } else {
                 $firstPage = 0;
                 $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
@@ -1618,10 +1618,10 @@ abstract class TemplateHelper
             // Links to pages
             for ($a = $firstPage; $a < $lastPage; $a++) {
                 if ($this->internal['showRange'] ?? false) {
-                    $pageText = ($a * $results_at_a_time + 1) . '-' . min($count, ($a + 1) * $results_at_a_time);
+                    $pageText = ($a * $results_at_a_time + 1) . '-' . \min($count, ($a + 1) * $results_at_a_time);
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-                    $pageText = trim(
+                    $pageText = \trim(
                         ($hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label)
                         . ' ' . ($a + 1)
                     );
@@ -1691,7 +1691,7 @@ abstract class TemplateHelper
                     );
                 }
             }
-            $theLinks = $this->cObj->wrap(implode(LF, $links), $wrapper['browseLinksWrap']);
+            $theLinks = $this->cObj->wrap(\implode(LF, $links), $wrapper['browseLinksWrap']);
         } else {
             $theLinks = '';
         }
@@ -1707,7 +1707,7 @@ abstract class TemplateHelper
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###TO###'] = $this->cObj->wrap(
-                    min(($this->internal['res_count'] ?? 0), $pR2),
+                    \min(($this->internal['res_count'] ?? 0), $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###OUT_OF###'] = $this->cObj->wrap(
@@ -1718,7 +1718,7 @@ abstract class TemplateHelper
                     (($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
                         'pi_list_browseresults_to',
                         'to'
-                    ) . ' ' . min($this->internal['res_count'] ?? 0, $pR2),
+                    ) . ' ' . \min($this->internal['res_count'] ?? 0, $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
@@ -1736,8 +1736,8 @@ abstract class TemplateHelper
                 );
             } else {
                 // Render the resultcount in the "traditional" way using sprintf
-                $resultCountMsg = sprintf(
-                    str_replace(
+                $resultCountMsg = \sprintf(
+                    \str_replace(
                         '###SPAN_BEGIN###',
                         '<span' . $this->pi_classParam('browsebox-strong') . '>',
                         $this->pi_getLL(
@@ -1746,7 +1746,7 @@ abstract class TemplateHelper
                         )
                     ),
                     $count > 0 ? $pR1 : 0,
-                    min($count, $pR2),
+                    \min($count, $pR2),
                     $count
                 );
             }
@@ -1769,7 +1769,7 @@ abstract class TemplateHelper
     // phpcs:disable
     public function pi_wrapInBaseClass(string $str): string
     {
-        $content = '<div class="' . str_replace('_', '-', $this->prefixId) . '">
+        $content = '<div class="' . \str_replace('_', '-', $this->prefixId) . '">
 		' . $str . '
 	</div>
 	';
@@ -1841,7 +1841,7 @@ abstract class TemplateHelper
         foreach ($additionalClassNames as $additionalClassName) {
             $output .= ' ' . $additionalClassName;
         }
-        return ' class="' . trim($output) . '"';
+        return ' class="' . \trim($output) . '"';
     }
 
     /**
@@ -1890,16 +1890,16 @@ abstract class TemplateHelper
     public function pi_autoCache(array $inArray)
     {
         foreach ($inArray as $fN => $fV) {
-            if (!strcmp($inArray[$fN], '')) {
+            if (!\strcmp($inArray[$fN], '')) {
                 unset($inArray[$fN]);
-            } elseif (is_array($this->pi_autoCacheFields[$fN])) {
-                if (is_array($this->pi_autoCacheFields[$fN]['range'])
+            } elseif (\is_array($this->pi_autoCacheFields[$fN])) {
+                if (\is_array($this->pi_autoCacheFields[$fN]['range'])
                     && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0]
                     && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]
                 ) {
                     unset($inArray[$fN]);
                 }
-                if (is_array($this->pi_autoCacheFields[$fN]['list'])
+                if (\is_array($this->pi_autoCacheFields[$fN]['list'])
                     && \in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'], true)
                 ) {
                     unset($inArray[$fN]);
