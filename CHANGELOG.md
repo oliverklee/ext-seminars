@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop `$isFileName` parameter in `::getConfValueString()` (#2835)
 - Remove the `omitDateIfSameAsPrevious` setting (#2314)
 - Drop `SeparateBillingAddressUpgradeWizard` (#3496)
 - Drop support for TYPO3 10LTS (#3312, #3372)
