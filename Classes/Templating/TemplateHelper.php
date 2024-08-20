@@ -977,10 +977,6 @@ abstract class TemplateHelper
      */
     protected function ensureIntegerPiVars(array $additionalPiVars = []): void
     {
-        if (!\is_array($this->piVars)) {
-            $this->piVars = [];
-        }
-
         foreach (\array_merge(['showUid', 'pointer', 'mode'], $additionalPiVars) as $key) {
             if (isset($this->piVars[$key])) {
                 $this->piVars[$key] = (int)$this->piVars[$key];
@@ -1109,9 +1105,9 @@ abstract class TemplateHelper
         }
 
         $this->pi_loadLL();
-        if (\is_array($this->LOCAL_LANG) && $this->getFrontEndController() !== null) {
+        if ($this->getFrontEndController() instanceof TypoScriptFrontendController) {
             $result = $this->translateInFrontEnd($key);
-        } elseif ($this->getLanguageService() !== null) {
+        } elseif ($this->getLanguageService() instanceof LanguageService) {
             $result = $this->translateInBackEnd($key);
         } else {
             $result = $key;
@@ -1864,7 +1860,7 @@ abstract class TemplateHelper
         bool $clearAnyway = false,
         int $altPageId = 0
     ): string {
-        if (is_array($this->piVars) && is_array($overrulePIvars) && !$clearAnyway) {
+        if (!$clearAnyway) {
             $piVars = $this->piVars;
             unset($piVars['DATA']);
             ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
@@ -1888,22 +1884,20 @@ abstract class TemplateHelper
     // phpcs:disable
     public function pi_autoCache(array $inArray)
     {
-        if (is_array($inArray)) {
-            foreach ($inArray as $fN => $fV) {
-                if (!strcmp($inArray[$fN], '')) {
+        foreach ($inArray as $fN => $fV) {
+            if (!strcmp($inArray[$fN], '')) {
+                unset($inArray[$fN]);
+            } elseif (is_array($this->pi_autoCacheFields[$fN])) {
+                if (is_array($this->pi_autoCacheFields[$fN]['range'])
+                    && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0]
+                    && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]
+                ) {
                     unset($inArray[$fN]);
-                } elseif (is_array($this->pi_autoCacheFields[$fN])) {
-                    if (is_array($this->pi_autoCacheFields[$fN]['range'])
-                        && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0]
-                        && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]
-                    ) {
-                        unset($inArray[$fN]);
-                    }
-                    if (is_array($this->pi_autoCacheFields[$fN]['list'])
-                        && in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'])
-                    ) {
-                        unset($inArray[$fN]);
-                    }
+                }
+                if (is_array($this->pi_autoCacheFields[$fN]['list'])
+                    && in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'])
+                ) {
+                    unset($inArray[$fN]);
                 }
             }
         }
