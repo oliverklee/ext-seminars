@@ -941,7 +941,7 @@ abstract class TemplateHelper
         return (string)\preg_replace_callback(
             self::LABEL_PATTERN,
             static function (array $matches) use ($translator): string {
-                /** @var non-empty-string $key */
+                /** @var non-falsy-string $key */
                 $key = \strtolower($matches[1]);
                 return $translator->translate($key);
             },
