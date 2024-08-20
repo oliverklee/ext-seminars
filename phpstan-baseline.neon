@@ -1916,6 +1916,11 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
+			message: "#^Casting to bool something that's already false\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
 			message: "#^Casting to int something that's already int\\.$#"
 			count: 2
 			path: Classes/Templating/TemplateHelper.php
@@ -1923,11 +1928,6 @@ parameters:
 		-
 			message: "#^Comparison operation \"\\>\" between \\-1 and \\-1 is always false\\.$#"
 			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 6
 			path: Classes/Templating/TemplateHelper.php
 
 		-
@@ -2021,7 +2021,7 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'showFirstLast' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in empty\\(\\) does not exist\\.$#"
+			message: "#^Offset 'showFirstLast' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
