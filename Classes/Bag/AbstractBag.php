@@ -71,7 +71,7 @@ abstract class AbstractBag implements \Iterator
     /**
      * @var bool
      */
-    private $showHiddenRecords = false;
+    private $showHiddenRecords;
 
     /**
      * @var bool
@@ -79,17 +79,17 @@ abstract class AbstractBag implements \Iterator
     private $queryHasBeenExecuted = false;
 
     /**
-     * @var array[]
+     * @var array<int, array<string, string|int|float|null>>
      */
     private $queryResult = [];
 
     /**
-     * @var int
+     * @var int<0, max>
      */
     private $key = 0;
 
     /**
-     * @var int how many objects this bag would hold without the LIMIT
+     * @var int<0, max> how many objects this bag would hold without the LIMIT
      */
     private $countWithoutLimit = 0;
 
@@ -221,9 +221,8 @@ abstract class AbstractBag implements \Iterator
         $sql .= $this->orderBy !== '' ? ' ORDER BY ' . $this->orderBy : '';
         $sql .= $this->limit !== '' ? ' LIMIT ' . $this->limit : '';
 
-        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)->query(
-            $sql
-        )->fetchAll();
+        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)
+            ->query($sql)->fetchAll();
 
         $this->queryHasBeenExecuted = true;
     }
@@ -265,8 +264,10 @@ abstract class AbstractBag implements \Iterator
 
     /**
      * Returns the key of the current item (not the UID).
+     *
+     * @return int<0, max>
      */
-    public function key(): ?int
+    public function key(): int
     {
         return $this->key;
     }
@@ -274,7 +275,7 @@ abstract class AbstractBag implements \Iterator
     /**
      * Retrieves the number of objects this bag contains.
      *
-     * @return int the total number of objects in this bag, may be zero
+     * @return int<0, max> the total number of objects in this bag
      */
     public function count(): int
     {
@@ -287,7 +288,7 @@ abstract class AbstractBag implements \Iterator
      * Retrieves the number of objects this bag would hold if the LIMIT part of
      * the query would not have been used.
      *
-     * @return int the total number of objects in this bag without any limit, may be zero
+     * @return int<0, max> the total number of objects in this bag without any limit
      */
     public function countWithoutLimit(): int
     {

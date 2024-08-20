@@ -116,12 +116,7 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:\\$queryResult type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Bag/AbstractBag.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\<M of OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\>\\:\\:\\$queryResult \\(array\\<array\\>\\) does not accept array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\<M of OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\>\\:\\:\\$queryResult \\(array\\<int, array\\<string, float\\|int\\|string\\|null\\>\\>\\) does not accept array\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
