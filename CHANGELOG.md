@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Always call `htmlspecialchars` with flags (#3209)
 - Improve some type annotations (#3205, #3206)
 
 ## 5.6.0

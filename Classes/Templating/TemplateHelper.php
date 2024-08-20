@@ -1493,7 +1493,7 @@ abstract class TemplateHelper
      * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
      * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
      * @param string $pointerName varname for the pointer.
-     * @param bool $hscText Enable htmlspecialchars() on language labels
+     * @param bool $hscText Enable `htmlspecialchars()` on language labels
      * @param bool $forceOutput Forces the output of the page browser if you set this option to "TRUE" (otherwise it's only drawn if enough entries are available)
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
@@ -1584,9 +1584,7 @@ abstract class TemplateHelper
                     $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                             [$pointerName => null],
                             $pi_isOnlyFields
                         ),
@@ -1595,7 +1593,7 @@ abstract class TemplateHelper
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
                     $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                         $wrapper['disabledLinkWrap']
                     );
                 }
@@ -1606,9 +1604,7 @@ abstract class TemplateHelper
                     $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                             [$pointerName => ($pointer - 1) ?: ''],
                             $pi_isOnlyFields
                         ),
@@ -1617,7 +1613,7 @@ abstract class TemplateHelper
                 } elseif ($alwaysPrev) {
                     $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
                     $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                         $wrapper['disabledLinkWrap']
                     );
                 }
@@ -1629,7 +1625,7 @@ abstract class TemplateHelper
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
                     $pageText = trim(
-                        ($hscText ? htmlspecialchars($label) : $label)
+                        ($hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label)
                         . ' ' . ($a + 1)
                     );
                 }
@@ -1663,16 +1659,14 @@ abstract class TemplateHelper
                 if ($pointer >= $totalPages - 1) {
                     $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
                     $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                         $wrapper['disabledLinkWrap']
                     );
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                             [$pointerName => $pointer + 1],
                             $pi_isOnlyFields
                         ),
@@ -1686,9 +1680,7 @@ abstract class TemplateHelper
                     $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
-                            $hscText ? htmlspecialchars(
-                                $label
-                            ) : $label,
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                             [$pointerName => $totalPages - 1],
                             $pi_isOnlyFields
                         ),
@@ -1697,7 +1689,7 @@ abstract class TemplateHelper
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
                     $links[] = $this->cObj->wrap(
-                        $hscText ? htmlspecialchars($label) : $label,
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
                         $wrapper['disabledLinkWrap']
                     );
                 }
