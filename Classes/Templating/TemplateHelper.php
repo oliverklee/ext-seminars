@@ -1260,7 +1260,7 @@ abstract class TemplateHelper
     {
         $word = null;
         if (
-            !empty($this->LOCAL_LANG[$this->LLkey][$key][0]['target'])
+            \is_string($this->LOCAL_LANG[$this->LLkey][$key][0]['target'] ?? null)
             || isset($this->LOCAL_LANG_UNSET[$this->LLkey][$key])
         ) {
             $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
@@ -1269,7 +1269,7 @@ abstract class TemplateHelper
             $alternativeLanguageKeys = array_reverse($alternativeLanguageKeys);
             foreach ($alternativeLanguageKeys as $languageKey) {
                 if (
-                    !empty($this->LOCAL_LANG[$languageKey][$key][0]['target'])
+                    \is_string($this->LOCAL_LANG[$languageKey][$key][0]['target'] ?? null)
                     || isset($this->LOCAL_LANG_UNSET[$languageKey][$key])
                 ) {
                     // Alternative language translation for key exists
@@ -1280,7 +1280,7 @@ abstract class TemplateHelper
         }
         if ($word === null) {
             if (
-                !empty($this->LOCAL_LANG['default'][$key][0]['target'])
+                \is_string($this->LOCAL_LANG['default'][$key][0]['target'] ?? null)
                 || isset($this->LOCAL_LANG_UNSET['default'][$key])
             ) {
                 // Get default translation (without charset conversion, english)
@@ -1535,7 +1535,7 @@ abstract class TemplateHelper
         //	 		 2: only the text "Displaying results..." will be shown
         $showResultCount = (int)$showResultCount;
         // If this is set, two links named "<< First" and "LAST >>" will be shown and point to the very first or last page.
-        $showFirstLast = !empty($this->internal['showFirstLast']);
+        $showFirstLast = (bool)($this->internal['showFirstLast'] ?? false);
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $showFirstLast ? 1 : $this->pi_alwaysPrev;
         if (isset($this->internal['pagefloat'])) {
@@ -1813,7 +1813,7 @@ abstract class TemplateHelper
             }
         }
 
-        if (empty($tempPiVars)) {
+        if ($tempPiVars === []) {
             // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
             return 1;
         }
@@ -1907,7 +1907,7 @@ abstract class TemplateHelper
             }
         }
 
-        if (empty($inArray)) {
+        if ($inArray === []) {
             // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
             return 1;
         }
