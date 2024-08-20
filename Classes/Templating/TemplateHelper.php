@@ -36,7 +36,7 @@ abstract class TemplateHelper
     /**
      * @var list<false|''|0|'0'|null>
      */
-    private const FALSEY_VALUES = [null, false, '', 0, '0'];
+    private const FALSY_VALUES = [null, false, '', 0, '0'];
 
     /**
      * The back-reference to the mother cObj object set at call time
@@ -375,7 +375,7 @@ abstract class TemplateHelper
             $flexFormsValue = null;
         }
 
-        return !\in_array($flexFormsValue, self::FALSEY_VALUES, true)
+        return !\in_array($flexFormsValue, self::FALSY_VALUES, true)
             ? $flexFormsValue : $configurationValueFromTypoScript;
     }
 
