@@ -271,7 +271,7 @@ abstract class TemplateHelper
         $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
 
         $locales = GeneralUtility::makeInstance(Locales::class);
-        if (in_array($this->LLkey, $locales->getLocales(), true)) {
+        if (\in_array($this->LLkey, $locales->getLocales(), true)) {
             foreach ($locales->getLocaleDependencies($this->LLkey) as $language) {
                 $this->altLLkey .= $language . ',';
             }
@@ -1627,7 +1627,7 @@ abstract class TemplateHelper
                     );
                 }
                 // Current page
-                if ($pointer == $a) {
+                if ($pointer === $a) {
                     if ($this->internal['dontLinkActivePage'] ?? false) {
                         $links[] = $this->cObj->wrap($pageText, $wrapper['activeLinkWrap']);
                     } else {
@@ -1802,7 +1802,7 @@ abstract class TemplateHelper
     // phpcs:disable
     public function pi_isOnlyFields(string $fList, int $lowerThan = -1)
     {
-        $lowerThan = $lowerThan == -1 ? $this->pi_lowerThan : $lowerThan;
+        $lowerThan = $lowerThan === -1 ? $this->pi_lowerThan : $lowerThan;
         $fList = GeneralUtility::trimExplode(',', $fList, true);
         $tempPiVars = $this->piVars;
         foreach ($fList as $k) {
@@ -1900,7 +1900,7 @@ abstract class TemplateHelper
                     unset($inArray[$fN]);
                 }
                 if (is_array($this->pi_autoCacheFields[$fN]['list'])
-                    && in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'])
+                    && \in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'], true)
                 ) {
                     unset($inArray[$fN]);
                 }
