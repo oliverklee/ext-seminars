@@ -1345,6 +1345,7 @@ abstract class TemplateHelper
                 }
             }
         }
+
         $this->LOCAL_LANG_loaded = true;
     }
 
@@ -1694,6 +1695,7 @@ abstract class TemplateHelper
         } else {
             $theLinks = '';
         }
+
         $pR1 = $pointer * $results_at_a_time + 1;
         $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
         if ($showResultCount) {
@@ -1752,6 +1754,7 @@ abstract class TemplateHelper
         } else {
             $resultCountMsg = '';
         }
+
         $sTables = $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
         return $sTables;
     }
@@ -1784,6 +1787,7 @@ abstract class TemplateHelper
 
 	';
         }
+
         return $content;
     }
 
@@ -1808,6 +1812,7 @@ abstract class TemplateHelper
                 unset($tempPiVars[$k]);
             }
         }
+
         if (empty($tempPiVars)) {
             // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
             return 1;
@@ -1901,6 +1906,7 @@ abstract class TemplateHelper
                 }
             }
         }
+
         if (empty($inArray)) {
             // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
             return 1;
