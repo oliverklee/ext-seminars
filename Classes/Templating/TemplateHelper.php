@@ -1628,7 +1628,10 @@ abstract class TemplateHelper
                     $pageText = ($a * $results_at_a_time + 1) . '-' . min($count, ($a + 1) * $results_at_a_time);
                 } else {
                     $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-                    $pageText = trim(($hscText ? htmlspecialchars($label) : $label) . ' ' . ($a + 1));
+                    $pageText = trim(
+                        ($hscText ? htmlspecialchars($label) : $label)
+                        . ' ' . ($a + 1)
+                    );
                 }
                 // Current page
                 if ($pointer == $a) {
@@ -1811,9 +1814,9 @@ abstract class TemplateHelper
         $fList = GeneralUtility::trimExplode(',', $fList, true);
         $tempPiVars = $this->piVars;
         foreach ($fList as $k) {
-            if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger(
-                $tempPiVars[$k]
-            ) || $tempPiVars[$k] < $lowerThan)) {
+            if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger($tempPiVars[$k])
+                    || $tempPiVars[$k] < $lowerThan)
+            ) {
                 unset($tempPiVars[$k]);
             }
         }
@@ -1898,15 +1901,15 @@ abstract class TemplateHelper
                 if (!strcmp($inArray[$fN], '')) {
                     unset($inArray[$fN]);
                 } elseif (is_array($this->pi_autoCacheFields[$fN])) {
-                    if (is_array(
-                        $this->pi_autoCacheFields[$fN]['range']
-                    ) && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0] && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]) {
+                    if (is_array($this->pi_autoCacheFields[$fN]['range'])
+                        && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0]
+                        && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]
+                    ) {
                         unset($inArray[$fN]);
                     }
-                    if (is_array($this->pi_autoCacheFields[$fN]['list']) && in_array(
-                        $inArray[$fN],
-                        $this->pi_autoCacheFields[$fN]['list']
-                    )) {
+                    if (is_array($this->pi_autoCacheFields[$fN]['list'])
+                        && in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'])
+                    ) {
                         unset($inArray[$fN]);
                     }
                 }
