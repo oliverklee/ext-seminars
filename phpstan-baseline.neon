@@ -1901,11 +1901,6 @@ parameters:
 			path: Classes/Service/SingleViewLinkBuilder.php
 
 		-
-			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Cannot call method getLanguage\\(\\) on mixed\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1943,11 +1938,6 @@ parameters:
 		-
 			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
 			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
-			count: 2
 			path: Classes/Templating/TemplateHelper.php
 
 		-
