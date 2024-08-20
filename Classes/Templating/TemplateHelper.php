@@ -65,16 +65,16 @@ abstract class TemplateHelper
 
     /**
      * Local pointer variable array.
-     * Holds pointer information for the MVC like approach Kasper
-     * initially proposed.
+     *
+     * Holds pointer information for the MVC-like approach Kasper initially proposed.
      *
      * @var array{
-     *        res_count: int,
-     *        results_at_a_time: int,
-     *        maxPages: int,
      *        currentRow: array,
      *        currentTable: string,
-     *        descFlag: bool
+     *        descFlag: bool,
+     *        maxPages: int,
+     *        res_count: int,
+     *        results_at_a_time: int
      *      }
      */
     public $internal = [
