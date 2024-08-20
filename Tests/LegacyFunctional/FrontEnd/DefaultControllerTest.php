@@ -5641,10 +5641,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringContainsString(
-            $this->subject->pi_getClassName('vacancies-available'),
-            $output
-        );
+        self::assertStringContainsString('tx-seminars-pi1-vacancies-available', $output);
     }
 
     /**
@@ -5661,10 +5658,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringContainsString(
-            $this->subject->pi_getClassName('vacancies-1'),
-            $output
-        );
+        self::assertStringContainsString('tx-seminars-pi1-vacancies-1', $output);
     }
 
     /**
@@ -5681,10 +5675,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringContainsString(
-            $this->subject->pi_getClassName('vacancies-2'),
-            $output
-        );
+        self::assertStringContainsString('tx-seminars-pi1-vacancies-2', $output);
     }
 
     /**
@@ -5701,10 +5692,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringContainsString(
-            $this->subject->pi_getClassName('vacancies-0'),
-            $output
-        );
+        self::assertStringContainsString('tx-seminars-pi1-vacancies-0', $output);
     }
 
     /**
@@ -5720,10 +5708,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringContainsString(
-            $this->subject->pi_getClassName('vacancies-available'),
-            $output
-        );
+        self::assertStringContainsString('tx-seminars-pi1-vacancies-available', $output);
     }
 
     /**
@@ -5739,10 +5724,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertStringNotContainsString(
-            $this->subject->pi_getClassName('registration-deadline-over'),
-            $output
-        );
+        self::assertStringNotContainsString('tx-seminars-pi1-registration-deadline-over', $output);
     }
 
     //////////////////////////////////
