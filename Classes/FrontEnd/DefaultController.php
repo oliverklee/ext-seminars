@@ -2020,6 +2020,7 @@ class DefaultController extends TemplateHelper
             return '';
         }
 
+        /** @var list<non-empty-string> $classes */
         $classes = [];
 
         if ($event->hasDate() && $event->hasStarted()) {
