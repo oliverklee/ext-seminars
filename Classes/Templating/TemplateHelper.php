@@ -1435,8 +1435,8 @@ abstract class TemplateHelper
     /**
      * Returns a class-name prefixed with $this->prefixId and with all underscores substituted to dashes (-)
      *
-     * @param string $class The class name (or the END of it since it will be prefixed by $this->prefixId.'-')
-     * @return string The combined class name (with the correct prefix)
+     * @param non-empty-string $class The class name (or the END of it since it will be prefixed by $this->prefixId.'-')
+     * @return non-empty-string The combined class name (with the correct prefix)
      */
     // phpcs:disable
     public function pi_getClassName(string $class): string
@@ -1840,11 +1840,11 @@ abstract class TemplateHelper
     public function pi_classParam(string $class, string $addClasses = ''): string
     {
         $output = '';
-        $classNames = GeneralUtility::trimExplode(',', $class);
+        $classNames = GeneralUtility::trimExplode(',', $class, true);
         foreach ($classNames as $className) {
             $output .= ' ' . $this->pi_getClassName($className);
         }
-        $additionalClassNames = GeneralUtility::trimExplode(',', $addClasses);
+        $additionalClassNames = GeneralUtility::trimExplode(',', $addClasses, true);
         foreach ($additionalClassNames as $additionalClassName) {
             $output .= ' ' . $additionalClassName;
         }

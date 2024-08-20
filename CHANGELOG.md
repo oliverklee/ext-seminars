@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Improve some type annotations (#3205)
+- Improve some type annotations (#3205, #3206)
 
 ## 5.6.0
 
