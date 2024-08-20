@@ -1912,7 +1912,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 4
+			count: 2
 			path: Classes/Templating/TemplateHelper.php
 
 		-
@@ -2081,11 +2081,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$string1 of function strcmp expects string, mixed given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Parameter \\#2 \\.\\.\\.\\$arg1 of function max expects non\\-empty\\-array, int given\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -2137,11 +2132,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$pi_autoCacheFields type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Result of && is always true\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
