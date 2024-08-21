@@ -122,22 +122,6 @@ abstract class TemplateHelper
     public $altLLkey = '';
 
     /**
-     * You can set this during development to some value that makes it
-     * easy for you to spot all labels that ARe delivered by the getLL function.
-     *
-     * @var string
-     */
-    public $LLtestPrefix = '';
-
-    /**
-     * Save as LLtestPrefix, but additional prefix for the alternative value
-     * in getLL() function calls
-     *
-     * @var string
-     */
-    public $LLtestPrefixAlt = '';
-
-    /**
      * @var string
      */
     public $pi_isOnlyFields = 'mode,pointer';
@@ -1243,8 +1227,6 @@ abstract class TemplateHelper
 
     /**
      * Returns the localized label of the LOCAL_LANG key, $key
-     * Notice that for debugging purposes prefixes for the output values can be set with the internal vars
-     * ->LLtestPrefixAlt and ->LLtestPrefix
      *
      * @param string $key The key from the LOCAL_LANG array for which to return the value.
      * @param string $alternativeLabel Alternative string to return IF no value is found set for the key,
@@ -1273,12 +1255,11 @@ abstract class TemplateHelper
                 // Get default translation (without charset conversion, english)
                 $word = $this->LOCAL_LANG['default'][$key][0]['target'];
             } else {
-                // Return alternative string or empty
-                $word = $this->LLtestPrefixAlt . $alternativeLabel;
+                $word = $alternativeLabel;
             }
         }
 
-        return $this->LLtestPrefix . $word;
+        return $word;
     }
 
     /**
