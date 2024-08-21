@@ -197,9 +197,9 @@ abstract class AbstractTimeSpan extends AbstractModel
                     0,
                     0,
                     0,
-                    (int)$splitBeginDate['mon'],
-                    (int)$splitBeginDate['mday'] + 1,
-                    (int)$splitBeginDate['year']
+                    $splitBeginDate['mon'],
+                    $splitBeginDate['mday'] + 1,
+                    $splitBeginDate['year']
                 );
             } else {
                 $result = $this->getEndDateAsTimestamp();

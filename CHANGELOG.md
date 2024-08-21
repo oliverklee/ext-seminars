@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop redundant type casts (#3229)
 - Drop redundant null coalescing operators (#3228)
 - Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223, #3224)
 

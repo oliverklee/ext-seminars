@@ -96,6 +96,7 @@ class RegistrationDigest
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
         $view->assign('events', $events);
 
+        // @phpstan-ignore-next-line `TYPO3\CMS\Fluid\View\StandaloneView::render()` returns `?string`, not `string`.
         return (string)$view->render();
     }
 

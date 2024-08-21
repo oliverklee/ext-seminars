@@ -171,11 +171,6 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: Classes/BagBuilder/EventBagBuilder.php
-
-		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 11
 			path: Classes/BagBuilder/EventBagBuilder.php
@@ -946,11 +941,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 3
 			path: Classes/FrontEnd/DefaultController.php
@@ -1181,11 +1171,6 @@ parameters:
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
-			message: "#^Casting to array\\<int\\|string, array\\> something that's already array\\<int\\|string, array\\>\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:copyBeginDateFromTimeSlots\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
@@ -1207,11 +1192,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Hooks\\\\DataHandlerHook\\:\\:sanitizeEventDates\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$map has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Hooks/DataHandlerHook.php
 
@@ -1361,11 +1341,6 @@ parameters:
 			path: Classes/OldModel/AbstractModel.php
 
 		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 2
-			path: Classes/OldModel/AbstractModel.php
-
-		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 2
 			path: Classes/OldModel/AbstractModel.php
@@ -1417,21 +1392,6 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractTimeSpan.php
-
-		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractTimeSpan.php
-
-		-
-			message: "#^Casting to int something that's already int\\<1, 12\\>\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractTimeSpan.php
-
-		-
-			message: "#^Casting to int something that's already int\\<1, 31\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractTimeSpan.php
 
@@ -1711,11 +1671,6 @@ parameters:
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
 			message: "#^Parameter \\#1 \\$subject of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:subject\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
@@ -1886,11 +1841,6 @@ parameters:
 			path: Classes/Service/RegistrationProcessor.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: Classes/Service/SingleViewLinkBuilder.php
-
-		-
 			message: "#^Cannot call method getLanguage\\(\\) on mixed\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1898,11 +1848,6 @@ parameters:
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-

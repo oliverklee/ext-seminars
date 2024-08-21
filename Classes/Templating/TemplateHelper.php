@@ -1520,11 +1520,6 @@ abstract class TemplateHelper
         if (!$forceOutput && $count <= $results_at_a_time) {
             return '';
         }
-        // $showResultCount determines how the results of the pagerowser will be shown.
-        // If set to 0: only the result-browser will be shown
-        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
-        //	 		 2: only the text "Displaying results..." will be shown
-        $showResultCount = (int)$showResultCount;
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $this->pi_alwaysPrev;
         // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
@@ -1542,7 +1537,11 @@ abstract class TemplateHelper
 		</div>';
         // Now overwrite all entries in $wrapper which are also in $wrapArr
         $wrapper = \array_merge($wrapper, $wrapArr);
-        // Show pagebrowser
+        // $showResultCount determines how the results of the page browser will be shown.
+        // If set to 0: only the result-browser will be shown
+        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
+        //	 		 2: only the text "Displaying results..." will be shown
+        // Show page browser
         if ($showResultCount !== 2) {
             $firstPage = 0;
             $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
