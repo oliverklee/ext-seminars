@@ -90,16 +90,6 @@ abstract class TemplateHelper
     private $LOCAL_LANG = [];
 
     /**
-     * Contains those LL keys, which have been set to (empty) in TypoScript.
-     * This is necessary, as we cannot distinguish between a nonexisting
-     * translation and a label that has been cleared by TS.
-     * In both cases ['key'][0]['target'] is "".
-     *
-     * @var array
-     */
-    private $LOCAL_LANG_UNSET = [];
-
-    /**
      * Flag that tells if the locallang file has been fetch (or tried to
      * be fetched) already.
      *
@@ -1281,8 +1271,6 @@ abstract class TemplateHelper
 
         // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
         if (isset($this->conf['_LOCAL_LANG.'])) {
-            // Clear the "unset memory"
-            $this->LOCAL_LANG_UNSET = [];
             foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
                 // Remove the dot after the language key
                 $languageKey = \substr($languageKey, 0, -1);
@@ -1291,9 +1279,6 @@ abstract class TemplateHelper
                     foreach ($languageArray as $labelKey => $labelValue) {
                         if (!\is_array($labelValue)) {
                             $this->LOCAL_LANG[$languageKey][$labelKey][0]['target'] = $labelValue;
-                            if ($labelValue === '') {
-                                $this->LOCAL_LANG_UNSET[$languageKey][$labelKey] = '';
-                            }
                         }
                     }
                 }
