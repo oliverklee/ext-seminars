@@ -1836,6 +1836,11 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
+			message: "#^If condition is always false\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_autoCache\\(\\) has parameter \\$inArray with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1866,7 +1871,7 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_list_browseresults\\(\\) has parameter \\$wrapArr with no value type specified in iterable type array\\.$#"
+			message: "#^Offset 'showResultsNumbersW…' on array\\{disabledLinkWrap\\: '\\<td class\\=\"nowrap\"\\>…', inactiveLinkWrap\\: '\\<td class\\=\"nowrap\"\\>…', activeLinkWrap\\: non\\-falsy\\-string, browseLinksWrap\\: '\\<table\\>\\<tr\\>\\|\\</tr\\>\\<…', showResultsWrap\\: '\\<p\\>\\|\\</p\\>', browseBoxWrap\\: non\\-falsy\\-string\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
@@ -1877,11 +1882,6 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in an elseif condition, int\\<0, max\\> given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Only booleans are allowed in an if condition, int given\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
