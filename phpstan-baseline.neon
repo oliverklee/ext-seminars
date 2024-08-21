@@ -1916,11 +1916,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Comparison operation \"\\>\" between \\-1 and \\-1 is always false\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Constructor of class OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper has an unused parameter \\$_\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1987,11 +1982,6 @@ parameters:
 
 		-
 			message: "#^Offset 'dontLinkActivePage' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Offset 'pagefloat' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
@@ -2063,11 +2053,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, string\\|null given\\.$#"
 			count: 9
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$arg1 of function max expects non\\-empty\\-array, int given\\.$#"
-			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
