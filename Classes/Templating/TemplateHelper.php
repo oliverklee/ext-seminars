@@ -68,8 +68,6 @@ abstract class TemplateHelper
      *
      * Holds pointer information for the MVC-like approach Kasper initially proposed.
      *
-     * - currentRow: unused
-     * - currentTable: unused
      * - descFlag: written + read
      * - dontLinkActivePage: read, but not written
      * - maxPages: written, but not read
@@ -81,8 +79,6 @@ abstract class TemplateHelper
      * - showRange: read, but not written
      *
      * @var array{
-     *        currentRow: array,
-     *        currentTable: string,
      *        descFlag: bool,
      *        maxPages: int,
      *        res_count: int,
