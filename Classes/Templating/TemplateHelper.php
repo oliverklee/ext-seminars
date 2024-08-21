@@ -87,7 +87,7 @@ abstract class TemplateHelper
      *
      * @var array
      */
-    public $LOCAL_LANG = [];
+    private $LOCAL_LANG = [];
 
     /**
      * Contains those LL keys, which have been set to (empty) in TypoScript.
@@ -97,7 +97,7 @@ abstract class TemplateHelper
      *
      * @var array
      */
-    protected $LOCAL_LANG_UNSET = [];
+    private $LOCAL_LANG_UNSET = [];
 
     /**
      * Flag that tells if the locallang file has been fetch (or tried to
@@ -105,46 +105,46 @@ abstract class TemplateHelper
      *
      * @var bool
      */
-    public $LOCAL_LANG_loaded = false;
+    private $LOCAL_LANG_loaded = false;
 
     /**
      * Pointer to the language to use.
      *
      * @var string
      */
-    public $LLkey = 'default';
+    private $LLkey = 'default';
 
     /**
      * Pointer to alternative fall-back language to use.
      *
      * @var string
      */
-    public $altLLkey = '';
+    private $altLLkey = '';
 
     /**
      * @var int
      */
-    public $pi_alwaysPrev = 0;
+    private $pi_alwaysPrev = 0;
 
     /**
      * @var int
      */
-    public $pi_lowerThan = 5;
+    private $pi_lowerThan = 5;
 
     /**
      * @var string
      */
-    public $pi_moreParams = '';
+    private $pi_moreParams = '';
 
     /**
      * @var array
      */
-    public $pi_autoCacheFields = [];
+    private $pi_autoCacheFields = [];
 
     /**
      * @var bool
      */
-    public $pi_autoCacheEn = false;
+    private $pi_autoCacheEn = false;
 
     /**
      * Should normally be set in the main function with the TypoScript content passed to the method.
@@ -171,24 +171,24 @@ abstract class TemplateHelper
     /**
      * @var non-empty-string the prefix used for CSS classes
      */
-    public $prefixId = 'tx_seminars_pi1';
+    protected $prefixId = 'tx_seminars_pi1';
 
     /**
      * faking `$this->scriptRelPath` so the `locallang.xlf` file is found
      *
      * @var non-empty-string
      */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
+    private $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var non-empty-string the extension key
      */
-    public $extKey = 'seminars';
+    private $extKey = 'seminars';
 
     /**
      * @var bool whether `init()` already has been called (in order to avoid duplicate calls)
      */
-    protected $isInitialized = false;
+    private $isInitialized = false;
 
     /**
      * @var string the file name of the template set via TypoScript or FlexForms
@@ -220,7 +220,7 @@ abstract class TemplateHelper
     /**
      * @var array<non-empty-string, string>
      */
-    protected $translationCache = [];
+    private $translationCache = [];
 
     /**
      * Class Constructor (true constructor)
@@ -1223,7 +1223,7 @@ abstract class TemplateHelper
      *        neither for the local language nor the default.
      */
     // phpcs:disable
-    public function pi_getLL(string $key, string $alternativeLabel = ''): string
+    private function pi_getLL(string $key, string $alternativeLabel = ''): string
     {
         $word = null;
         if (\is_string($this->LOCAL_LANG[$this->LLkey][$key][0]['target'] ?? null)) {
@@ -1261,7 +1261,7 @@ abstract class TemplateHelper
      * Supported file extensions xlf
      */
     // phpcs:disable
-    public function pi_loadLL(): void
+    private function pi_loadLL(): void
     {
         if ($this->LOCAL_LANG_loaded) {
             return;
@@ -1311,10 +1311,9 @@ abstract class TemplateHelper
      * @param string $sheet Sheet pointer, eg. "sDEF
      * @param string $lang Language pointer, eg. "lDEF
      * @param string $value Value pointer, eg. "vDEF
-     * @return string|null The content.
      */
     // phpcs:disable
-    public function pi_getFFvalue(
+    private function pi_getFFvalue(
         array $T3FlexForm_array,
         string $fieldName,
         string $sheet = 'sDEF',
@@ -1339,7 +1338,7 @@ abstract class TemplateHelper
      * @see pi_getFFvalue()
      */
     // phpcs:disable
-    public function pi_getFFvalueFromSheetArray(array $sheetArray, array $fieldNameArr, string $value): string
+    private function pi_getFFvalueFromSheetArray(array $sheetArray, array $fieldNameArr, string $value): string
     {
         $tempArr = $sheetArray;
         foreach ($fieldNameArr as $v) {
@@ -1368,7 +1367,7 @@ abstract class TemplateHelper
      * @param string $field Field name to convert
      */
     // phpcs:disable
-    public function pi_initPIflexForm(string $field = 'pi_flexform'): void
+    protected function pi_initPIflexForm(string $field = 'pi_flexform'): void
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017462);
@@ -1391,7 +1390,7 @@ abstract class TemplateHelper
      * @return non-empty-string The combined class name (with the correct prefix)
      */
     // phpcs:disable
-    public function pi_getClassName(string $class): string
+    protected function pi_getClassName(string $class): string
     {
         return \str_replace('_', '-', $this->prefixId) . ($this->prefixId ? '-' : '') . $class;
     }
@@ -1409,8 +1408,12 @@ abstract class TemplateHelper
      * @see ContentObjectRenderer::typoLink()
      */
     // phpcs:disable
-    public function pi_linkTP(string $str, array $urlParameters = [], bool $cache = false, int $altPageId = 0): string
-    {
+    protected function pi_linkTP(
+        string $str,
+        array $urlParameters = [],
+        bool $cache = false,
+        int $altPageId = 0
+    ): string {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017453);
         }
@@ -1447,7 +1450,7 @@ abstract class TemplateHelper
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
     // phpcs:disable
-    public function pi_list_browseresults(
+    protected function pi_list_browseresults(
         int $showResultCount = 1,
         string $tableParams = '',
         array $wrapArr = [],
@@ -1652,7 +1655,7 @@ abstract class TemplateHelper
      * @return string HTML content wrapped, ready to return to the parent object.
      */
     // phpcs:disable
-    public function pi_wrapInBaseClass(string $str): string
+    protected function pi_wrapInBaseClass(string $str): string
     {
         $content = '<div class="' . \str_replace('_', '-', $this->prefixId) . '">
 		' . $str . '
@@ -1685,7 +1688,7 @@ abstract class TemplateHelper
      * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    public function pi_isOnlyFields(string $fList, int $lowerThan = -1)
+    private function pi_isOnlyFields(string $fList, int $lowerThan = -1)
     {
         $lowerThan = $lowerThan === -1 ? $this->pi_lowerThan : $lowerThan;
         $fList = GeneralUtility::trimExplode(',', $fList, true);
@@ -1715,7 +1718,7 @@ abstract class TemplateHelper
      * @see pi_getClassName()
      */
     // phpcs:disable
-    public function pi_classParam(string $class, string $addClasses = ''): string
+    private function pi_classParam(string $class, string $addClasses = ''): string
     {
         $output = '';
         $classNames = GeneralUtility::trimExplode(',', $class, true);
@@ -1743,7 +1746,7 @@ abstract class TemplateHelper
      * @see pi_linkTP()
      */
     // phpcs:disable
-    public function pi_linkTP_keepPIvars(
+    protected function pi_linkTP_keepPIvars(
         string $str,
         array $overrulePIvars = [],
         bool $cache = false,
