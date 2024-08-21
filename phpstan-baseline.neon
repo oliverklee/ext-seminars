@@ -1961,11 +1961,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:translateInFrontEnd\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Offset 'res_count' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 6
 			path: Classes/Templating/TemplateHelper.php
@@ -1991,53 +1986,13 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Only booleans are allowed in an elseif condition, string given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Only booleans are allowed in an if condition, int given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Core\\\\Service\\\\MarkerBasedTemplateService\\:\\:substituteMarkerArray\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
 			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:wrap\\(\\) expects string, int given\\.$#"
 			count: 5
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:wrap\\(\\) expects string, string\\|null given\\.$#"
-			count: 2
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_linkTP_keepPIvars\\(\\) expects string, string\\|null given\\.$#"
-			count: 2
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, string\\|null given\\.$#"
-			count: 5
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|null given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LLtestPrefix \\(string\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LLtestPrefixAlt \\(string\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-

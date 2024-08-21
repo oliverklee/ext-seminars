@@ -1255,44 +1255,36 @@ abstract class TemplateHelper
      * @param string $key The key from the LOCAL_LANG array for which to return the value.
      * @param string $alternativeLabel Alternative string to return IF no value is found set for the key,
      *        neither for the local language nor the default.
-     * @return string|null The value from LOCAL_LANG.
      */
     // phpcs:disable
-    public function pi_getLL(string $key, string $alternativeLabel = ''): ?string
+    public function pi_getLL(string $key, string $alternativeLabel = ''): string
     {
         $word = null;
-        if (
-            \is_string($this->LOCAL_LANG[$this->LLkey][$key][0]['target'] ?? null)
-            || isset($this->LOCAL_LANG_UNSET[$this->LLkey][$key])
-        ) {
+        if (\is_string($this->LOCAL_LANG[$this->LLkey][$key][0]['target'] ?? null)) {
             $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
-        } elseif ($this->altLLkey) {
+        } elseif ($this->altLLkey !== '') {
             $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
             $alternativeLanguageKeys = \array_reverse($alternativeLanguageKeys);
             foreach ($alternativeLanguageKeys as $languageKey) {
-                if (
-                    \is_string($this->LOCAL_LANG[$languageKey][$key][0]['target'] ?? null)
-                    || isset($this->LOCAL_LANG_UNSET[$languageKey][$key])
-                ) {
+                if (\is_string($this->LOCAL_LANG[$languageKey][$key][0]['target'] ?? null)) {
                     // Alternative language translation for key exists
                     $word = $this->LOCAL_LANG[$languageKey][$key][0]['target'];
                     break;
                 }
             }
         }
-        if ($word === null) {
-            if (
-                \is_string($this->LOCAL_LANG['default'][$key][0]['target'] ?? null)
-                || isset($this->LOCAL_LANG_UNSET['default'][$key])
-            ) {
+
+        if (!\is_string($word)) {
+            if (\is_string($this->LOCAL_LANG['default'][$key][0]['target'] ?? null)) {
                 // Get default translation (without charset conversion, english)
                 $word = $this->LOCAL_LANG['default'][$key][0]['target'];
             } else {
                 // Return alternative string or empty
-                $word = isset($this->LLtestPrefixAlt) ? $this->LLtestPrefixAlt . $alternativeLabel : $alternativeLabel;
+                $word = $this->LLtestPrefixAlt . $alternativeLabel;
             }
         }
-        return isset($this->LLtestPrefix) ? $this->LLtestPrefix . $word : $word;
+
+        return $this->LLtestPrefix . $word;
     }
 
     /**
