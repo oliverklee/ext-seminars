@@ -1902,21 +1902,11 @@ parameters:
 
 		-
 			message: "#^Casting to int something that's already int\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
 			message: "#^Constructor of class OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper has an unused parameter \\$_\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null but returns mixed\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
@@ -1952,16 +1942,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_list_browseresults\\(\\) has parameter \\$wrapArr with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Offset 'res_count' on array\\{descFlag\\: bool, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 6
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Offset 'results_at_a_time' on array\\{descFlag\\: bool, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
