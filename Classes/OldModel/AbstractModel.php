@@ -364,13 +364,13 @@ abstract class AbstractModel
         $connection = self::getConnectionForTable($mmTable);
         $recordCount = 0;
         foreach ($references as $foreignUid) {
-            if ((int)$foreignUid <= 0) {
+            if ($foreignUid <= 0) {
                 continue;
             }
 
             $data = \array_merge(
                 $dataTemplate,
-                ['uid_foreign' => (int)$foreignUid, 'sorting' => $recordCount + 1]
+                ['uid_foreign' => $foreignUid, 'sorting' => $recordCount + 1]
             );
             $connection->insert($mmTable, $data);
             $recordCount++;

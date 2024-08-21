@@ -58,10 +58,8 @@ class DataHandlerHook
      */
     private function processEvents(): void
     {
-        /** @var array[] $map */
-        $map = (array)($this->dataHandler->datamap[self::TABLE_EVENTS] ?? []);
+        $map = ($this->dataHandler->datamap[self::TABLE_EVENTS] ?? []);
 
-        /** @var int|string $possibleUid */
         foreach ($map as $possibleUid => $data) {
             $uid = $this->createRealUid($possibleUid);
             $this->processSingleEvent($uid);

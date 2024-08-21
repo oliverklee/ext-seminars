@@ -408,7 +408,7 @@ class EventBagBuilder extends AbstractBagBuilder
         $quoted = [];
 
         foreach ($array as $value) {
-            $quoted[] = $connection->quote((string)$value);
+            $quoted[] = $connection->quote($value);
         }
 
         return \implode(',', $quoted);

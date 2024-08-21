@@ -53,7 +53,7 @@ class SingleViewLinkBuilder
             ),
         ];
 
-        return (string)$this->getContentObject()->typoLink_URL($linkConfiguration);
+        return $this->getContentObject()->typoLink_URL($linkConfiguration);
     }
 
     /**
