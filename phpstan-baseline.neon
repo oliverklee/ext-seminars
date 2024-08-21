@@ -26,16 +26,6 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:replyTo\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Parameter \\#2 \\$organizer of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:createMessageBody\\(\\) expects OliverKlee\\\\Seminars\\\\Model\\\\Organizer, OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:\\$postData type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
@@ -1301,11 +1291,6 @@ parameters:
 			path: Classes/Model/Event.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getEmailSender\\(\\) should return OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole but returns OliverKlee\\\\Oelib\\\\Email\\\\GeneralEmailRole\\|OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
-			count: 1
-			path: Classes/Model/Event.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getStatus\\(\\) should return 0\\|1\\|2 but returns int\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
@@ -1477,11 +1462,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCitiesFromPlaces\\(\\) should return array\\<string\\> but returns array\\<int, int\\|string\\>\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getEmailSender\\(\\) should return OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole but returns OliverKlee\\\\Oelib\\\\Email\\\\GeneralEmailRole\\|OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1671,21 +1651,6 @@ parameters:
 			path: Classes/Seo/SlugGenerator.php
 
 		-
-			message: "#^Cannot call method getEmailFooter\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
-			count: 1
-			path: Classes/Service/EmailService.php
-
-		-
-			message: "#^Cannot call method hasEmailFooter\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
-			count: 1
-			path: Classes/Service/EmailService.php
-
-		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:replyTo\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null given\\.$#"
-			count: 1
-			path: Classes/Service/EmailService.php
-
-		-
 			message: "#^Parameter \\#1 \\$eventUid of method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:countRegularSeatsByEvent\\(\\) expects int\\<1, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/Service/EventStatisticsCalculator.php
@@ -1726,11 +1691,6 @@ parameters:
 			path: Classes/Service/RegistrationGuard.php
 
 		-
-			message: "#^Cannot call method getEmailAddress\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Cannot call method getLocalShortName\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
@@ -1742,11 +1702,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method getSeminarObject\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Cannot call method getTitle\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Organizer\\|null\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
@@ -1798,11 +1753,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:sendAdditionalNotification\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
 			count: 2
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:replyTo\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
-			count: 3
 			path: Classes/Service/RegistrationManager.php
 
 		-
@@ -3208,11 +3158,6 @@ parameters:
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 4
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null\\.$#"
-			count: 2
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-

@@ -3753,11 +3753,13 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getFirstOrganizerWithNoOrganizersReturnsNull(): void
+    public function getFirstOrganizerWithNoOrganizersThrowsException(): void
     {
-        self::assertNull(
-            $this->subject->getFirstOrganizer()
-        );
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1724278146);
+        $this->expectExceptionMessage('This event does not have any organizers.');
+
+        $this->subject->getFirstOrganizer();
     }
 
     /**
@@ -3792,16 +3794,11 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getOrganizerBagWithoutOrganizersThrowsException(): void
+    public function getOrganizerBagWithoutOrganizersReturnsOrganizerBag(): void
     {
-        $this->expectException(
-            \BadMethodCallException::class
-        );
-        $this->expectExceptionMessage(
-            'There are no organizers related to this event.'
-        );
+        $bag = $this->subject->getOrganizerBag();
 
-        $this->subject->getOrganizerBag();
+        self::assertInstanceOf(OrganizerBag::class, $bag);
     }
 
     /**

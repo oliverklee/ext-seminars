@@ -904,10 +904,15 @@ class Event extends AbstractTimeSpan
         return $organizers;
     }
 
-    public function getFirstOrganizer(): ?Organizer
+    /**
+     * @throws \UnexpectedValueException if there are no organizers
+     */
+    public function getFirstOrganizer(): Organizer
     {
-        /** @var Organizer|null $organizer */
         $organizer = $this->getOrganizers()->first();
+        if ($organizer === null) {
+            throw new \UnexpectedValueException('This event does not have any organizers.', 1724277806);
+        }
 
         return $organizer;
     }
