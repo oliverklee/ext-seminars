@@ -1620,7 +1620,7 @@ abstract class TemplateHelper
      * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.
      *
      * @param string $str HTML content to wrap in the div-tags with the "main class" of the plugin
-     * @return string HTML content wrapped, ready to return to the parent object.
+     * @return non-empty-string HTML content wrapped, ready to return to the parent object.
      */
     // phpcs:disable
     protected function pi_wrapInBaseClass(string $str): string
