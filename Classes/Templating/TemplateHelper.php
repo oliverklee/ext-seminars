@@ -1423,7 +1423,6 @@ abstract class TemplateHelper
      * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
      * @param string $pointerName varname for the pointer.
      * @param bool $hscText Enable `htmlspecialchars()` on language labels
-     * @param bool $forceOutput Forces the output of the page browser if you set this option to "TRUE" (otherwise it's only drawn if enough entries are available)
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
     // phpcs:disable
@@ -1432,8 +1431,7 @@ abstract class TemplateHelper
         string $tableParams = '',
         array $wrapArr = [],
         string $pointerName = 'pointer',
-        bool $hscText = true,
-        bool $forceOutput = false
+        bool $hscText = true
     ): string {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
@@ -1449,7 +1447,7 @@ abstract class TemplateHelper
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
         $pi_isOnlyFields = (bool)$this->pi_isOnlyFields('mode,pointer');
-        if (!$forceOutput && $count <= $results_at_a_time) {
+        if ($count <= $results_at_a_time) {
             return '';
         }
 
