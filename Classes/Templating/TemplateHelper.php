@@ -1308,21 +1308,14 @@ abstract class TemplateHelper
      *
      * @param array $T3FlexForm_array FlexForm data
      * @param string $fieldName Field name to extract. Can be given like "test/el/2/test/el/field_templateObject" where each part will dig a level deeper in the FlexForm data.
-     * @param string $sheet Sheet pointer, eg. "sDEF
-     * @param string $lang Language pointer, eg. "lDEF
-     * @param string $value Value pointer, eg. "vDEF
+     * @param string $sheet Sheet pointer, eg. "sDEF"
      */
     // phpcs:disable
-    private function pi_getFFvalue(
-        array $T3FlexForm_array,
-        string $fieldName,
-        string $sheet = 'sDEF',
-        string $lang = 'lDEF',
-        string $value = 'vDEF'
-    ): ?string {
-        $sheetArray = $T3FlexForm_array['data'][$sheet][$lang] ?? '';
+    private function pi_getFFvalue(array $T3FlexForm_array, string $fieldName, string $sheet = 'sDEF'): ?string
+    {
+        $sheetArray = $T3FlexForm_array['data'][$sheet]['lDEF'] ?? null;
         if (\is_array($sheetArray)) {
-            return $this->pi_getFFvalueFromSheetArray($sheetArray, \explode('/', $fieldName), $value);
+            return $this->pi_getFFvalueFromSheetArray($sheetArray, \explode('/', $fieldName), 'vDEF');
         }
 
         return null;
