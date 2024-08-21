@@ -1239,7 +1239,7 @@ class DefaultController extends TemplateHelper
 
         $seminarBag = $this->initListView('events_next_day');
 
-        if ($this->internal['res_count']) {
+        if ($this->internal['res_count'] > 0) {
             $tableEventsNextDay = $this->createListTable($seminarBag, 'events_next_day');
 
             $this->setMarker('table_eventsnextday', $tableEventsNextDay);
@@ -1285,7 +1285,7 @@ class DefaultController extends TemplateHelper
 
         $seminarBag = $this->initListView('other_dates');
 
-        if ($this->internal['res_count']) {
+        if ($this->internal['res_count'] > 0) {
             // If we are on a topic record, overwrite the label with an alternative text.
             if (
                 \in_array(
@@ -1406,7 +1406,7 @@ class DefaultController extends TemplateHelper
             // all the filtering applied).
             $seminarOrRegistrationBag = $this->initListView($whatToDisplay);
 
-            if ($this->internal['res_count']) {
+            if ($this->internal['res_count'] > 0) {
                 $result .= $this->createListTable($seminarOrRegistrationBag, $whatToDisplay);
             } else {
                 $this->setMarker(

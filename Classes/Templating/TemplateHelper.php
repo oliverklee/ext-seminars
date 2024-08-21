@@ -71,7 +71,7 @@ abstract class TemplateHelper
      *        descFlag: bool,
      *        maxPages: int,
      *        orderBy?: string,
-     *        res_count: int,
+     *        res_count: int<0, max>,
      *        results_at_a_time: int
      *      }
      */
