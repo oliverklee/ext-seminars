@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 - Drop unused `AbstractPlugin` code from `TemplateHelper`
-  (#3237, #3238, #3240, #3241, #3242, #3243, #3245, #3246)
+  (#3237, #3238, #3240, #3241, #3242, #3243, #3245, #3246, #3250, 3251)
 - Drop redundant type casts (#3229)
 - Drop redundant null coalescing operators (#3228)
 - Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223, #3224)
