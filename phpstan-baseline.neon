@@ -1876,11 +1876,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Only booleans are allowed in a ternary operator condition, string given\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Only booleans are allowed in an elseif condition, int\\<0, max\\> given\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
