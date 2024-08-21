@@ -122,11 +122,6 @@ abstract class TemplateHelper
     public $altLLkey = '';
 
     /**
-     * @var string
-     */
-    public $pi_isOnlyFields = 'mode,pointer';
-
-    /**
      * @var int
      */
     public $pi_alwaysPrev = 0;
@@ -1439,7 +1434,6 @@ abstract class TemplateHelper
      * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
-     * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
      *
      * The third parameter is an array with several wraps for the parts of the pagebrowser. The following elements will be recognized:
      * disabledLinkWrap, inactiveLinkWrap, activeLinkWrap, browseLinksWrap, showResultsWrap, showResultsNumbersWrap, browseBoxWrap.
@@ -1486,7 +1480,7 @@ abstract class TemplateHelper
         $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
-        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields($this->pi_isOnlyFields);
+        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields('mode,pointer');
         if (!$forceOutput && $count <= $results_at_a_time) {
             return '';
         }
