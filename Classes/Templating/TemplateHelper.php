@@ -1370,7 +1370,7 @@ abstract class TemplateHelper
     // phpcs:disable
     protected function pi_getClassName(string $class): string
     {
-        return \str_replace('_', '-', $this->prefixId) . ($this->prefixId ? '-' : '') . $class;
+        return 'tx-seminars-pi1-' . $class;
     }
 
     /**
