@@ -157,11 +157,6 @@ abstract class TemplateHelper
     public $conf = [];
 
     /**
-     * @var int
-     */
-    public $pi_tmpPageId = 0;
-
-    /**
      * Property for accessing TypoScriptFrontendController centrally
      *
      * @var TypoScriptFrontendController
@@ -1424,7 +1419,7 @@ abstract class TemplateHelper
         if (!$cache) {
             $conf['no_cache'] = true;
         }
-        $conf['parameter'] = $altPageId > 0 ? $altPageId : ($this->pi_tmpPageId > 0 ? $this->pi_tmpPageId : 'current');
+        $conf['parameter'] = $altPageId > 0 ? $altPageId : 'current';
         $conf['additionalParams'] = ($this->conf['parent.']['addParams'] ?? '')
             . HttpUtility::buildQueryString($urlParameters, '&', true) . $this->pi_moreParams;
         return $this->cObj->typoLink($str, $conf);
