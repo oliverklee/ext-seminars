@@ -195,19 +195,19 @@ abstract class TemplateHelper
     protected $templateService;
 
     /**
-     * @var string the prefix used for CSS classes
+     * @var non-empty-string the prefix used for CSS classes
      */
     public $prefixId = 'tx_seminars_pi1';
 
     /**
      * faking `$this->scriptRelPath` so the `locallang.xlf` file is found
      *
-     * @var string
+     * @var non-empty-string
      */
     public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
-     * @var string the extension key
+     * @var non-empty-string the extension key
      */
     public $extKey = 'seminars';
 
@@ -230,7 +230,7 @@ abstract class TemplateHelper
      * A list of language keys for which the localizations have been loaded
      * (or NULL if the list has not been compiled yet).
      *
-     * @var array<string>|null
+     * @var array<int<0, max>, string>|null
      */
     private $availableLanguages;
 
@@ -1185,7 +1185,7 @@ abstract class TemplateHelper
     /**
      * Compiles a list of language keys for which localizations have been loaded.
      *
-     * @return array<string> a list of language keys (might be empty)
+     * @return array<int<0, max>, string> a list of language keys (might be empty)
      */
     private function getAvailableLanguages(): array
     {
