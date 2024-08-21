@@ -1341,17 +1341,16 @@ abstract class TemplateHelper
 
     /**
      * Converts $this->cObj->data['pi_flexform'] from XML string to flexForm array.
-     *
-     * @param string $field Field name to convert
      */
     // phpcs:disable
-    protected function pi_initPIflexForm(string $field = 'pi_flexform'): void
+    protected function pi_initPIflexForm(): void
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017462);
         }
 
         // Converting flexform data into array
+        $field = 'pi_flexform';
         $fieldData = $this->cObj->data[$field] ?? null;
         if (!\is_array($fieldData) && $fieldData) {
             $this->cObj->data[$field] = GeneralUtility::xml2array((string)$fieldData);
