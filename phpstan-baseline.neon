@@ -1922,7 +1922,7 @@ parameters:
 
 		-
 			message: "#^If condition is always false\\.$#"
-			count: 4
+			count: 3
 			path: Classes/Templating/TemplateHelper.php
 
 		-
@@ -1977,11 +1977,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:translateInFrontEnd\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Offset 'dontLinkActivePage' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
