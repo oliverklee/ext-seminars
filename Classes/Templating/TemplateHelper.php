@@ -73,7 +73,6 @@ abstract class TemplateHelper
      * - orderBy: written + read
      * - res_count: written + read
      * - results_at_a_time: written + read
-     * - showFirstLast: read, but not written
      * - showRange: read, but not written
      *
      * @var array{
@@ -1480,7 +1479,6 @@ abstract class TemplateHelper
      * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
-     * Using $this->internal['showFirstLast'] as switch if the two links named "<< First" and "LAST >>" will be shown and point to the first or last page.
      * Using $this->internal['showRange']: this var switches the display of the pagelinks from pagenumbers to ranges f.e.: 1-5 6-10 11-15... instead of 1 2 3...
      * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
      *
@@ -1538,10 +1536,8 @@ abstract class TemplateHelper
         //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
         //	 		 2: only the text "Displaying results..." will be shown
         $showResultCount = (int)$showResultCount;
-        // If this is set, two links named "<< First" and "LAST >>" will be shown and point to the very first or last page.
-        $showFirstLast = (bool)($this->internal['showFirstLast'] ?? false);
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
-        $alwaysPrev = $showFirstLast ? 1 : $this->pi_alwaysPrev;
+        $alwaysPrev = $this->pi_alwaysPrev;
         // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
@@ -1563,26 +1559,6 @@ abstract class TemplateHelper
             $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
             $links = [];
             // Make browse-table/links:
-            // Link to first page
-            if ($showFirstLast) {
-                if ($pointer > 0) {
-                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
-                            [$pointerName => null],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
-                        $wrapper['disabledLinkWrap']
-                    );
-                }
-            }
             // Link to previous page
             if ($alwaysPrev >= 0) {
                 if ($pointer > 0) {
@@ -1635,7 +1611,7 @@ abstract class TemplateHelper
                     );
                 }
             }
-            if ($pointer < $totalPages - 1 || $showFirstLast) {
+            if ($pointer < $totalPages - 1) {
                 // Link to next page
                 if ($pointer >= $totalPages - 1) {
                     $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
@@ -1652,26 +1628,6 @@ abstract class TemplateHelper
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']
-                    );
-                }
-            }
-            // Link to last page
-            if ($showFirstLast) {
-                if ($pointer < $totalPages - 1) {
-                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
-                            [$pointerName => $totalPages - 1],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
-                    $links[] = $this->cObj->wrap(
-                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
-                        $wrapper['disabledLinkWrap']
                     );
                 }
             }
