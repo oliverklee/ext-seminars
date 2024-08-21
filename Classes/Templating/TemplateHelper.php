@@ -255,11 +255,17 @@ abstract class TemplateHelper
      * Will also set $this->LLkey based on the config.language setting.
      *
      * @param null $_ unused,
-     * @param TypoScriptFrontendController $frontendController
      */
     public function __construct($_ = null, TypoScriptFrontendController $frontendController = null)
     {
-        $this->frontendController = $frontendController ?: $GLOBALS['TSFE'];
+        if ($frontendController instanceof TypoScriptFrontendController) {
+            $this->frontendController = $frontendController;
+        } else {
+            $realFrontEndController = $this->getFrontEndController();
+            if ($realFrontEndController instanceof TypoScriptFrontendController) {
+                $this->frontendController = $realFrontEndController;
+            }
+        }
         $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
         // Setting piVars:
         if ($this->prefixId !== '') {
@@ -1457,7 +1463,7 @@ abstract class TemplateHelper
         if (!$cache) {
             $conf['no_cache'] = true;
         }
-        $conf['parameter'] = $altPageId ?: ($this->pi_tmpPageId ?: 'current');
+        $conf['parameter'] = $altPageId > 0 ? $altPageId : ($this->pi_tmpPageId > 0 ? $this->pi_tmpPageId : 'current');
         $conf['additionalParams'] = ($this->conf['parent.']['addParams'] ?? '')
             . HttpUtility::buildQueryString($urlParameters, '&', true) . $this->pi_moreParams;
         return $this->cObj->typoLink($str, $conf);
@@ -1554,7 +1560,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
-                            [$pointerName => ($pointer - 1) ?: ''],
+                            [$pointerName => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']
@@ -1579,7 +1585,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             $pageText,
-                            [$pointerName => $a ?: ''],
+                            [$pointerName => $a > 0 ? $a : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['activeLinkWrap']
@@ -1588,7 +1594,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             $pageText,
-                            [$pointerName => $a ?: ''],
+                            [$pointerName => $a > 0 ? $a : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']

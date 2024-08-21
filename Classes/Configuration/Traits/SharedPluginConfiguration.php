@@ -34,7 +34,10 @@ trait SharedPluginConfiguration
      */
     protected function getDateFormat(): string
     {
-        $oldFormat = $this->getSharedConfiguration()->getAsString('dateFormatYMD') ?: '%Y-%m-%d';
+        $oldFormat = $this->getSharedConfiguration()->getAsString('dateFormatYMD');
+        if ($oldFormat === '') {
+            $oldFormat = '%Y-%m-%d';
+        }
 
         return DateFormatConverter::convert($oldFormat);
     }
@@ -44,7 +47,10 @@ trait SharedPluginConfiguration
      */
     protected function getTimeFormat(): string
     {
-        $oldFormat = $this->getSharedConfiguration()->getAsString('timeFormat') ?: '%H:%M';
+        $oldFormat = $this->getSharedConfiguration()->getAsString('timeFormat');
+        if ($oldFormat === '') {
+            $oldFormat = '%H:%M';
+        }
 
         return DateFormatConverter::convert($oldFormat);
     }
