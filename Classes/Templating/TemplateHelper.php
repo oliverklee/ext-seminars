@@ -68,15 +68,10 @@ abstract class TemplateHelper
      *
      * Holds pointer information for the MVC-like approach Kasper initially proposed.
      *
-     * - descFlag: written + read
-     * - maxPages: written + read
-     * - orderBy: written + read
-     * - res_count: written + read
-     * - results_at_a_time: written + read
-     *
      * @var array{
      *        descFlag: bool,
      *        maxPages: int,
+     *        orderBy?: string,
      *        res_count: int,
      *        results_at_a_time: int
      *      }

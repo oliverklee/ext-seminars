@@ -996,11 +996,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Offset 'orderBy' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Only booleans are allowed in a ternary operator condition, int\\<\\-1, 1\\> given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -1081,7 +1076,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal \\(array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\) does not accept array\\{descFlag\\: string, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal \\(array\\{descFlag\\: bool, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\}\\) does not accept array\\{descFlag\\: string, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\}\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1961,12 +1956,12 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'res_count' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			message: "#^Offset 'res_count' on array\\{descFlag\\: bool, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 6
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'results_at_a_time' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			message: "#^Offset 'results_at_a_time' on array\\{descFlag\\: bool, maxPages\\: int, orderBy\\?\\: string, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
