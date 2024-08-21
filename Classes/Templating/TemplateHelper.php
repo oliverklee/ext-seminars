@@ -1452,6 +1452,7 @@ abstract class TemplateHelper
         if (!$forceOutput && $count <= $results_at_a_time) {
             return '';
         }
+
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $this->pi_alwaysPrev;
         // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
@@ -1461,12 +1462,12 @@ abstract class TemplateHelper
         $wrapper['browseLinksWrap'] = \rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
         $wrapper['showResultsWrap'] = '<p>|</p>';
         $wrapper['browseBoxWrap'] = '
-		<!--
-			List browsing box:
-		-->
-		<div ' . $this->pi_classParam('browsebox') . '>
-			|
-		</div>';
+            <!--
+                List browsing box:
+            -->
+            <div ' . $this->pi_classParam('browsebox') . '>
+                |
+            </div>';
         // Now overwrite all entries in $wrapper which are also in $wrapArr
         $wrapper = \array_merge($wrapper, $wrapArr);
         // $showResultCount determines how the results of the page browser will be shown.
