@@ -1283,6 +1283,7 @@ abstract class TemplateHelper
                 $this->LOCAL_LANG[$languageKey] = $tempLL[$languageKey];
             }
         }
+
         // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
         if (isset($this->conf['_LOCAL_LANG.'])) {
             // Clear the "unset memory"
@@ -1329,6 +1330,7 @@ abstract class TemplateHelper
         if (\is_array($sheetArray)) {
             return $this->pi_getFFvalueFromSheetArray($sheetArray, \explode('/', $fieldName), $value);
         }
+
         return null;
     }
 
