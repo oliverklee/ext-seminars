@@ -520,7 +520,7 @@ abstract class TemplateHelper
         // configuration array is not initialized properly.
         // As flexforms can be used in FE mode only, `$ignoreFlexform` is set true if we are in the BE mode.
         // By this, `$this->cObj->fileResource` can be sheltered from being called.
-        if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
+        if (!$this->getFrontEndController() instanceof TypoScriptFrontendController) {
             $ignoreFlexform = true;
         }
 
@@ -1231,7 +1231,9 @@ abstract class TemplateHelper
 
     protected function getFrontEndController(): ?TypoScriptFrontendController
     {
-        return $GLOBALS['TSFE'] ?? null;
+        $controller = $GLOBALS['TSFE'] ?? null;
+
+        return $controller instanceof TypoScriptFrontendController ? $controller : null;
     }
 
     /**
@@ -1239,7 +1241,9 @@ abstract class TemplateHelper
      */
     protected function getLanguageService(): ?LanguageService
     {
-        return $GLOBALS['LANG'] ?? null;
+        $languageService = $GLOBALS['LANG'] ?? null;
+
+        return $languageService instanceof LanguageService ? $languageService : null;
     }
 
     /**
@@ -1508,8 +1512,8 @@ abstract class TemplateHelper
         );*/
         // Initializing variables:
         $pointer = (int)($this->piVars[$pointerName] ?? 0);
-        $count = (int)($this->internal['res_count'] ?? 0);
-        $results_at_a_time = MathUtility::forceIntegerInRange(($this->internal['results_at_a_time'] ?? 1), 1, 1000);
+        $count = $this->internal['res_count'];
+        $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
         $pi_isOnlyFields = (bool)$this->pi_isOnlyFields($this->pi_isOnlyFields);
@@ -1624,22 +1628,22 @@ abstract class TemplateHelper
                 // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
                 // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
                 $markerArray['###FROM###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0,
+                    $this->internal['res_count'] > 0 ? $pR1 : 0,
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###TO###'] = $this->cObj->wrap(
-                    \min(($this->internal['res_count'] ?? 0), $pR2),
+                    \min($this->internal['res_count'], $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###OUT_OF###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] ?? 0),
+                    $this->internal['res_count'],
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###FROM_TO###'] = $this->cObj->wrap(
-                    (($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
+                    ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
                         'pi_list_browseresults_to',
                         'to'
-                    ) . ' ' . \min($this->internal['res_count'] ?? 0, $pR2),
+                    ) . ' ' . \min($this->internal['res_count'], $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
