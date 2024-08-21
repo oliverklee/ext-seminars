@@ -266,10 +266,7 @@ abstract class TemplateHelper
             }
         }
         $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
-        // Setting piVars:
-        if ($this->prefixId !== '') {
-            $this->piVars = GeneralUtility::_GPmerged($this->prefixId);
-        }
+        $this->piVars = GeneralUtility::_GPmerged($this->prefixId);
         $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
 
         $locales = GeneralUtility::makeInstance(Locales::class);
@@ -310,10 +307,6 @@ abstract class TemplateHelper
 
     protected function isConfigurationCheckEnabled(): bool
     {
-        if ($this->extKey === '') {
-            return false;
-        }
-
         return ConfigurationProxy::getInstance($this->extKey)->getAsBoolean('enableConfigCheck');
     }
 
@@ -1099,9 +1092,6 @@ abstract class TemplateHelper
         if ($key === '') {
             throw new \InvalidArgumentException('$key must not be empty.', 1331489025);
         }
-        if ($this->extKey === '') {
-            return $key;
-        }
         if (isset($this->translationCache[$key])) {
             return $this->translationCache[$key];
         }
@@ -1306,37 +1296,31 @@ abstract class TemplateHelper
             return;
         }
 
-        if ($this->scriptRelPath !== '') {
-            $languageFilePath = 'EXT:' . $this->extKey . '/'
-                . PathUtility::dirname($this->scriptRelPath) . '/locallang.xlf';
-        } else {
-            $languageFilePath = '';
-        }
-        if ($languageFilePath !== '') {
-            $languageFactory = GeneralUtility::makeInstance(LocalizationFactory::class);
-            $this->LOCAL_LANG = $languageFactory->getParsedData($languageFilePath, $this->LLkey);
-            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
-            foreach ($alternativeLanguageKeys as $languageKey) {
-                $tempLL = $languageFactory->getParsedData($languageFilePath, $languageKey);
-                if ($this->LLkey !== 'default' && isset($tempLL[$languageKey])) {
-                    $this->LOCAL_LANG[$languageKey] = $tempLL[$languageKey];
-                }
+        $languageFilePath = 'EXT:' . $this->extKey . '/'
+            . PathUtility::dirname($this->scriptRelPath) . '/locallang.xlf';
+        $languageFactory = GeneralUtility::makeInstance(LocalizationFactory::class);
+        $this->LOCAL_LANG = $languageFactory->getParsedData($languageFilePath, $this->LLkey);
+        $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
+        foreach ($alternativeLanguageKeys as $languageKey) {
+            $tempLL = $languageFactory->getParsedData($languageFilePath, $languageKey);
+            if ($this->LLkey !== 'default' && isset($tempLL[$languageKey])) {
+                $this->LOCAL_LANG[$languageKey] = $tempLL[$languageKey];
             }
-            // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
-            if (isset($this->conf['_LOCAL_LANG.'])) {
-                // Clear the "unset memory"
-                $this->LOCAL_LANG_UNSET = [];
-                foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
-                    // Remove the dot after the language key
-                    $languageKey = \substr($languageKey, 0, -1);
-                    // Don't process label if the language is not loaded
-                    if (\is_array($languageArray) && isset($this->LOCAL_LANG[$languageKey])) {
-                        foreach ($languageArray as $labelKey => $labelValue) {
-                            if (!\is_array($labelValue)) {
-                                $this->LOCAL_LANG[$languageKey][$labelKey][0]['target'] = $labelValue;
-                                if ($labelValue === '') {
-                                    $this->LOCAL_LANG_UNSET[$languageKey][$labelKey] = '';
-                                }
+        }
+        // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
+        if (isset($this->conf['_LOCAL_LANG.'])) {
+            // Clear the "unset memory"
+            $this->LOCAL_LANG_UNSET = [];
+            foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
+                // Remove the dot after the language key
+                $languageKey = \substr($languageKey, 0, -1);
+                // Don't process label if the language is not loaded
+                if (\is_array($languageArray) && isset($this->LOCAL_LANG[$languageKey])) {
+                    foreach ($languageArray as $labelKey => $labelValue) {
+                        if (!\is_array($labelValue)) {
+                            $this->LOCAL_LANG[$languageKey][$labelKey][0]['target'] = $labelValue;
+                            if ($labelValue === '') {
+                                $this->LOCAL_LANG_UNSET[$languageKey][$labelKey] = '';
                             }
                         }
                     }
