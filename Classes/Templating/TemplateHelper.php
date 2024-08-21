@@ -1407,7 +1407,7 @@ abstract class TemplateHelper
 
     /**
      * Returns a results browser. This means a bar of page numbers plus a "previous" and "next" link. For each entry in the bar the piVars "pointer" will be pointing to the "result page" to show.
-     * Using $this->piVars['pointer'] as pointer to the page to display. Can be overwritten with another string ($pointerName) to make it possible to have more than one pagebrowser on a page)
+     * Using $this->piVars['pointer'] as pointer to the page to display.
      * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
@@ -1421,15 +1421,13 @@ abstract class TemplateHelper
      * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
      * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
      * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
-     * @param string $pointerName varname for the pointer.
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
     // phpcs:disable
     protected function pi_list_browseresults(
         int $showResultCount = 1,
         string $tableParams = '',
-        array $wrapArr = [],
-        string $pointerName = 'pointer'
+        array $wrapArr = []
     ): string {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
@@ -1439,7 +1437,7 @@ abstract class TemplateHelper
         $markerArray = [];
 
         // Initializing variables:
-        $pointer = (int)($this->piVars[$pointerName] ?? 0);
+        $pointer = (int)($this->piVars['pointer'] ?? 0);
         $count = $this->internal['res_count'];
         $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
@@ -1483,7 +1481,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                            [$pointerName => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
+                            ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']
@@ -1505,7 +1503,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             $pageText,
-                            [$pointerName => $a > 0 ? $a : ''],
+                            ['pointer' => $a > 0 ? $a : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['activeLinkWrap']
@@ -1514,7 +1512,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             $pageText,
-                            [$pointerName => $a > 0 ? $a : ''],
+                            ['pointer' => $a > 0 ? $a : ''],
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']
@@ -1534,7 +1532,7 @@ abstract class TemplateHelper
                     $links[] = $this->cObj->wrap(
                         $this->pi_linkTP_keepPIvars(
                             \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                            [$pointerName => $pointer + 1],
+                            ['pointer' => $pointer + 1],
                             $pi_isOnlyFields
                         ),
                         $wrapper['inactiveLinkWrap']
