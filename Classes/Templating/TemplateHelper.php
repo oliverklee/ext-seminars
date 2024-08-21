@@ -70,11 +70,10 @@ abstract class TemplateHelper
      *
      * - descFlag: written + read
      * - dontLinkActivePage: read, but not written
-     * - maxPages: written, but not read
-     * - orderBy: read + written
-     * - pagefloat: read, but not written
+     * - maxPages: written + read
+     * - orderBy: written + read
      * - res_count: written + read
-     * - results_at_a_time: written and read
+     * - results_at_a_time: written + read
      * - showFirstLast: read, but not written
      * - showRange: read, but not written
      *
@@ -1484,7 +1483,6 @@ abstract class TemplateHelper
      * Using $this->internal['res_count'], $this->internal['results_at_a_time'] and $this->internal['maxPages'] for count number, how many results to show and the max number of pages to include in the browse bar.
      * Using $this->internal['dontLinkActivePage'] as switch if the active (current) page should be displayed as pure text or as a link to itself
      * Using $this->internal['showFirstLast'] as switch if the two links named "<< First" and "LAST >>" will be shown and point to the first or last page.
-     * Using $this->internal['pagefloat']: this defines were the current page is shown in the list of pages in the Pagebrowser. If this var is an integer it will be interpreted as position in the list of pages. If its value is the keyword "center" the current page will be shown in the middle of the pagelist.
      * Using $this->internal['showRange']: this var switches the display of the pagelinks from pagenumbers to ranges f.e.: 1-5 6-10 11-15... instead of 1 2 3...
      * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
      *
@@ -1546,17 +1544,6 @@ abstract class TemplateHelper
         $showFirstLast = (bool)($this->internal['showFirstLast'] ?? false);
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $showFirstLast ? 1 : $this->pi_alwaysPrev;
-        if (isset($this->internal['pagefloat'])) {
-            if (\strtoupper($this->internal['pagefloat']) === 'CENTER') {
-                $pagefloat = \ceil(($maxPages - 1) / 2);
-            } else {
-                // pagefloat set as integer. 0 = left, value >= $this->internal['maxPages'] = right
-                $pagefloat = MathUtility::forceIntegerInRange($this->internal['pagefloat'], -1, $maxPages - 1);
-            }
-        } else {
-            // pagefloat disabled
-            $pagefloat = -1;
-        }
         // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
@@ -1574,13 +1561,8 @@ abstract class TemplateHelper
         $wrapper = \array_merge($wrapper, $wrapArr);
         // Show pagebrowser
         if ($showResultCount != 2) {
-            if ($pagefloat > -1) {
-                $lastPage = \min($totalPages, \max($pointer + 1 + $pagefloat, $maxPages));
-                $firstPage = \max(0, $lastPage - $maxPages);
-            } else {
-                $firstPage = 0;
-                $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
-            }
+            $firstPage = 0;
+            $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
             $links = [];
             // Make browse-table/links:
             // Link to first page
