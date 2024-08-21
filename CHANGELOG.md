@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
-- Remove dead code from `TemplateHelper` (#3220, #3221, #3222)
+- Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223)
 
 ### Fixed
 - Always use strict comparisons in `TemplateHelper` (#3215)
