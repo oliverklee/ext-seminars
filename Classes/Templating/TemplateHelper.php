@@ -1552,7 +1552,7 @@ abstract class TemplateHelper
         // Now overwrite all entries in $wrapper which are also in $wrapArr
         $wrapper = \array_merge($wrapper, $wrapArr);
         // Show pagebrowser
-        if ($showResultCount != 2) {
+        if ($showResultCount !== 2) {
             $firstPage = 0;
             $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
             $links = [];
