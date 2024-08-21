@@ -1896,6 +1896,11 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG_UNSET is never read, only written\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG_UNSET type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
