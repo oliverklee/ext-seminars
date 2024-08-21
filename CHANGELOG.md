@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Always use strict comparisons in `TemplateHelper` (#3215)
 - Avoid usage of `empty` in `TemplateHelper` (#3214)
 - Always call `htmlspecialchars` with flags (#3209)
-- Improve some type annotations (#3205, #3206, #3211, #3217, #3218)
+- Improve some type annotations (#3205, #3206, #3211, #3217, #3218, #3219)
 
 ## 5.6.0
 

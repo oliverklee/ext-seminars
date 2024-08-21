@@ -996,7 +996,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Offset 'orderBy' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
+			message: "#^Offset 'orderBy' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1081,7 +1081,7 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal \\(array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\) does not accept array\\{currentRow\\: array, currentTable\\: string, descFlag\\: string, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal \\(array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\) does not accept array\\{descFlag\\: string, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\}\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -1986,32 +1986,32 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'dontLinkActivePage' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
+			message: "#^Offset 'dontLinkActivePage' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'pagefloat' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
+			message: "#^Offset 'pagefloat' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} in isset\\(\\) does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'res_count' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			message: "#^Offset 'res_count' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 6
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'results_at_a_time' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			message: "#^Offset 'results_at_a_time' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'showFirstLast' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
+			message: "#^Offset 'showFirstLast' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Offset 'showRange' on array\\{currentRow\\: array, currentTable\\: string, descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
+			message: "#^Offset 'showRange' on array\\{descFlag\\: bool, maxPages\\: int, res_count\\: int, results_at_a_time\\: int\\} on left side of \\?\\? does not exist\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
@@ -2102,11 +2102,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$frontendController \\(TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\) does not accept mixed\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$internal type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
