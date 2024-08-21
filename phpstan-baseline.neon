@@ -1891,11 +1891,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$content of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:wrap\\(\\) expects string, int given\\.$#"
-			count: 5
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php

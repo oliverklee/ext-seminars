@@ -1632,29 +1632,29 @@ abstract class TemplateHelper
                 // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
                 // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
                 $markerArray['###FROM###'] = $this->cObj->wrap(
-                    $this->internal['res_count'] > 0 ? $pR1 : 0,
+                    (string)($this->internal['res_count'] > 0 ? $pR1 : 0),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###TO###'] = $this->cObj->wrap(
-                    \min($this->internal['res_count'], $pR2),
+                    (string)\min($this->internal['res_count'], $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###OUT_OF###'] = $this->cObj->wrap(
-                    $this->internal['res_count'],
+                    (string)$this->internal['res_count'],
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###FROM_TO###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
-                        'pi_list_browseresults_to',
-                        'to'
-                    ) . ' ' . \min($this->internal['res_count'], $pR2),
+                    ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' '
+                    . $this->pi_getLL('pi_list_browseresults_to', 'to') . ' '
+                    . \min($this->internal['res_count'], $pR2),
                     $wrapper['showResultsNumbersWrap']
                 );
                 $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
-                    $pointer + 1,
+                    (string)($pointer + 1),
                     $wrapper['showResultsNumbersWrap']
                 );
-                $markerArray['###TOTAL_PAGES###'] = $this->cObj->wrap($totalPages, $wrapper['showResultsNumbersWrap']);
+                $markerArray['###TOTAL_PAGES###']
+                    = $this->cObj->wrap((string)$totalPages, $wrapper['showResultsNumbersWrap']);
                 // Substitute markers
                 $resultCountMsg = $this->templateService->substituteMarkerArray(
                     $this->pi_getLL(
