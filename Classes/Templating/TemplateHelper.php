@@ -1442,16 +1442,7 @@ abstract class TemplateHelper
 
         $wrapper = [];
         $markerArray = [];
-        // example $wrapArr-array how it could be traversed from an extension
-        /* $wrapArr = array(
-        'browseBoxWrap' => '<div class="browseBoxWrap">|</div>',
-        'showResultsWrap' => '<div class="showResultsWrap">|</div>',
-        'browseLinksWrap' => '<div class="browseLinksWrap">|</div>',
-        'showResultsNumbersWrap' => '<span class="showResultsNumbersWrap">|</span>',
-        'disabledLinkWrap' => '<span class="disabledLinkWrap">|</span>',
-        'inactiveLinkWrap' => '<span class="inactiveLinkWrap">|</span>',
-        'activeLinkWrap' => '<span class="activeLinkWrap">|</span>'
-        );*/
+
         // Initializing variables:
         $pointer = (int)($this->piVars[$pointerName] ?? 0);
         $count = $this->internal['res_count'];
