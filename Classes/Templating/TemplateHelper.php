@@ -1407,7 +1407,7 @@ abstract class TemplateHelper
 
     /**
      * Returns a results browser. This means a bar of page numbers plus a "previous" and "next" link. For each entry in the bar the piVars "pointer" will be pointing to the "result page" to show.
-     * Using $this->piVars['pointer'] as pointer to the page to display.
+     * Using $this->piVars['pointer'] as pointer to the page to display. Can be overwritten with another string ($pointerName) to make it possible to have more than one pagebrowser on a page)
      * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
@@ -1415,11 +1415,26 @@ abstract class TemplateHelper
      * The third parameter is an array with several wraps for the parts of the pagebrowser. The following elements will be recognized:
      * disabledLinkWrap, inactiveLinkWrap, activeLinkWrap, browseLinksWrap, showResultsWrap, showResultsNumbersWrap, browseBoxWrap.
      *
+     * If $wrapArr['showResultsNumbersWrap'] is set, the formatting string is expected to hold template markers (###FROM###, ###TO###, ###OUT_OF###, ###FROM_TO###, ###CURRENT_PAGE###, ###TOTAL_PAGES###)
+     * otherwise the formatting string is expected to hold sprintf-markers (%s) for from, to, outof (in that sequence)
+     *
+     * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
+     * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
+     * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
+     * @param string $pointerName varname for the pointer.
+     * @param bool $hscText Enable `htmlspecialchars()` on language labels
+     * @param bool $forceOutput Forces the output of the page browser if you set this option to "TRUE" (otherwise it's only drawn if enough entries are available)
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
      */
     // phpcs:disable
-    protected function pi_list_browseresults(): string
-    {
+    protected function pi_list_browseresults(
+        int $showResultCount = 1,
+        string $tableParams = '',
+        array $wrapArr = [],
+        string $pointerName = 'pointer',
+        bool $hscText = true,
+        bool $forceOutput = false
+    ): string {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
         }
@@ -1428,140 +1443,169 @@ abstract class TemplateHelper
         $markerArray = [];
 
         // Initializing variables:
-        $pointer = (int)($this->piVars['pointer'] ?? 0);
+        $pointer = (int)($this->piVars[$pointerName] ?? 0);
         $count = $this->internal['res_count'];
         $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
         $pi_isOnlyFields = (bool)$this->pi_isOnlyFields('mode,pointer');
-        if ($count <= $results_at_a_time) {
+        if (!$forceOutput && $count <= $results_at_a_time) {
             return '';
         }
-        // If this has a value the "previous" button is always visible
+        // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $this->pi_alwaysPrev;
-        // Default values for "traditional" wrapping with a table.
+        // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
-        $wrapper['browseLinksWrap'] = '<table><tr>|</tr></table>';
+        $wrapper['browseLinksWrap'] = \rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
         $wrapper['showResultsWrap'] = '<p>|</p>';
         $wrapper['browseBoxWrap'] = '
-            <!--
-                List browsing box:
-            -->
-            <div ' . $this->pi_classParam('browsebox') . '>
-                |
-            </div>';
+		<!--
+			List browsing box:
+		-->
+		<div ' . $this->pi_classParam('browsebox') . '>
+			|
+		</div>';
+        // Now overwrite all entries in $wrapper which are also in $wrapArr
+        $wrapper = \array_merge($wrapper, $wrapArr);
+        // $showResultCount determines how the results of the page browser will be shown.
+        // If set to 0: only the result-browser will be shown
+        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
+        //	 		 2: only the text "Displaying results..." will be shown
         // Show page browser
-        $firstPage = 0;
-        $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
-        $links = [];
-        // Make browse-table/links:
-        // Link to previous page
-        if ($alwaysPrev >= 0) {
-            if ($pointer > 0) {
-                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                $links[] = $this->cObj->wrap(
-                    $this->pi_linkTP_keepPIvars(
-                        \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                        ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
-                        $pi_isOnlyFields
-                    ),
-                    $wrapper['inactiveLinkWrap']
-                );
-            } elseif ($alwaysPrev) {
-                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                $links[] = $this->cObj->wrap(
-                    \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                    $wrapper['disabledLinkWrap']
-                );
+        if ($showResultCount !== 2) {
+            $firstPage = 0;
+            $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
+            $links = [];
+            // Make browse-table/links:
+            // Link to previous page
+            if ($alwaysPrev >= 0) {
+                if ($pointer > 0) {
+                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
+                            [$pointerName => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                } elseif ($alwaysPrev) {
+                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                }
             }
-        }
-        // Links to pages
-        for ($a = $firstPage; $a < $lastPage; $a++) {
-            $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-            $pageText = \trim(\htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) . ' ' . ($a + 1));
-            // Current page
-            if ($pointer === $a) {
-                $links[] = $this->cObj->wrap(
-                    $this->pi_linkTP_keepPIvars(
-                        $pageText,
-                        ['pointer' => $a > 0 ? $a : ''],
-                        $pi_isOnlyFields
-                    ),
-                    $wrapper['activeLinkWrap']
+            // Links to pages
+            for ($a = $firstPage; $a < $lastPage; $a++) {
+                $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
+                $pageText = \trim(
+                    ($hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label)
+                    . ' ' . ($a + 1)
                 );
-            } else {
-                $links[] = $this->cObj->wrap(
-                    $this->pi_linkTP_keepPIvars(
-                        $pageText,
-                        ['pointer' => $a > 0 ? $a : ''],
-                        $pi_isOnlyFields
-                    ),
-                    $wrapper['inactiveLinkWrap']
-                );
+                // Current page
+                if ($pointer === $a) {
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $pageText,
+                            [$pointerName => $a > 0 ? $a : ''],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['activeLinkWrap']
+                    );
+                } else {
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $pageText,
+                            [$pointerName => $a > 0 ? $a : ''],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                }
             }
-        }
-        if ($pointer < $totalPages - 1) {
-            // Link to next page
-            if ($pointer >= $totalPages - 1) {
-                $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
-                $links[] = $this->cObj->wrap(
-                    \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                    $wrapper['disabledLinkWrap']
-                );
-            } else {
-                $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
-                $links[] = $this->cObj->wrap(
-                    $this->pi_linkTP_keepPIvars(
-                        \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                        ['pointer' => $pointer + 1],
-                        $pi_isOnlyFields
-                    ),
-                    $wrapper['inactiveLinkWrap']
-                );
+            if ($pointer < $totalPages - 1) {
+                // Link to next page
+                if ($pointer >= $totalPages - 1) {
+                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                } else {
+                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label,
+                            [$pointerName => $pointer + 1],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                }
             }
+            $theLinks = $this->cObj->wrap(\implode(LF, $links), $wrapper['browseLinksWrap']);
+        } else {
+            $theLinks = '';
         }
-        $theLinks = $this->cObj->wrap(\implode(LF, $links), $wrapper['browseLinksWrap']);
 
         $pR1 = $pointer * $results_at_a_time + 1;
         $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
-        if ($wrapper['showResultsNumbersWrap'] ?? false) {
-            // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
-            // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
-            $markerArray['###FROM###'] = $this->cObj->wrap(
-                (string)($this->internal['res_count'] > 0 ? $pR1 : 0),
-                $wrapper['showResultsNumbersWrap']
-            );
-            $markerArray['###TO###'] = $this->cObj->wrap(
-                (string)\min($this->internal['res_count'], $pR2),
-                $wrapper['showResultsNumbersWrap']
-            );
-            $markerArray['###OUT_OF###'] = $this->cObj->wrap(
-                (string)$this->internal['res_count'],
-                $wrapper['showResultsNumbersWrap']
-            );
-            $markerArray['###FROM_TO###'] = $this->cObj->wrap(
-                ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' '
-                . $this->pi_getLL('pi_list_browseresults_to', 'to') . ' '
-                . \min($this->internal['res_count'], $pR2),
-                $wrapper['showResultsNumbersWrap']
-            );
-            $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
-                (string)($pointer + 1),
-                $wrapper['showResultsNumbersWrap']
-            );
-            $markerArray['###TOTAL_PAGES###']
-                = $this->cObj->wrap((string)$totalPages, $wrapper['showResultsNumbersWrap']);
-            // Substitute markers
-            $resultCountMsg = $this->templateService->substituteMarkerArray(
-                $this->pi_getLL(
-                    'pi_list_browseresults_displays',
-                    'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
-                ),
-                $markerArray
-            );
-
+        if ($showResultCount) {
+            if ($wrapper['showResultsNumbersWrap'] ?? false) {
+                // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
+                // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+                $markerArray['###FROM###'] = $this->cObj->wrap(
+                    (string)($this->internal['res_count'] > 0 ? $pR1 : 0),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###TO###'] = $this->cObj->wrap(
+                    (string)\min($this->internal['res_count'], $pR2),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###OUT_OF###'] = $this->cObj->wrap(
+                    (string)$this->internal['res_count'],
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###FROM_TO###'] = $this->cObj->wrap(
+                    ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' '
+                    . $this->pi_getLL('pi_list_browseresults_to', 'to') . ' '
+                    . \min($this->internal['res_count'], $pR2),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
+                    (string)($pointer + 1),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###TOTAL_PAGES###']
+                    = $this->cObj->wrap((string)$totalPages, $wrapper['showResultsNumbersWrap']);
+                // Substitute markers
+                $resultCountMsg = $this->templateService->substituteMarkerArray(
+                    $this->pi_getLL(
+                        'pi_list_browseresults_displays',
+                        'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+                    ),
+                    $markerArray
+                );
+            } else {
+                // Render the resultcount in the "traditional" way using sprintf
+                $resultCountMsg = \sprintf(
+                    \str_replace(
+                        '###SPAN_BEGIN###',
+                        '<span' . $this->pi_classParam('browsebox-strong') . '>',
+                        $this->pi_getLL(
+                            'pi_list_browseresults_displays',
+                            'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
+                        )
+                    ),
+                    $count > 0 ? $pR1 : 0,
+                    \min($count, $pR2),
+                    $count
+                );
+            }
             $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
         } else {
             $resultCountMsg = '';
