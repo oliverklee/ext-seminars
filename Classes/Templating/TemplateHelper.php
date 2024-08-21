@@ -85,12 +85,10 @@ abstract class TemplateHelper
      *      }
      */
     public $internal = [
+        'descFlag' => false,
+        'maxPages' => 10,
         'res_count' => 0,
         'results_at_a_time' => 20,
-        'maxPages' => 10,
-        'currentRow' => [],
-        'currentTable' => '',
-        'descFlag' => false,
     ];
 
     /**
@@ -1480,8 +1478,10 @@ abstract class TemplateHelper
     /**
      * Returns a results browser. This means a bar of page numbers plus a "previous" and "next" link. For each entry in the bar the piVars "pointer" will be pointing to the "result page" to show.
      * Using $this->piVars['pointer'] as pointer to the page to display. Can be overwritten with another string ($pointerName) to make it possible to have more than one pagebrowser on a page)
-     * Using $this->internal['res_count'], $this->internal['results_at_a_time'] and $this->internal['maxPages'] for count number, how many results to show and the max number of pages to include in the browse bar.
      * Using $this->internal['dontLinkActivePage'] as switch if the active (current) page should be displayed as pure text or as a link to itself
+     * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
+     * Using $this->internal['res_count'] for count number
+     * Using $this->internal['results_at_a_time'] for how many results to show
      * Using $this->internal['showFirstLast'] as switch if the two links named "<< First" and "LAST >>" will be shown and point to the first or last page.
      * Using $this->internal['showRange']: this var switches the display of the pagelinks from pagenumbers to ranges f.e.: 1-5 6-10 11-15... instead of 1 2 3...
      * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
