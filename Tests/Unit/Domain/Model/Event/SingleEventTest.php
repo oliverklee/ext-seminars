@@ -525,9 +525,13 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstOrganizerWithNoOrganizersReturnsNull(): void
+    public function getFirstOrganizerWithNoOrganizersThrowsException(): void
     {
-        self::assertNull($this->subject->getFirstOrganizer());
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1724277439);
+        $this->expectExceptionMessage('This event does not have any organizers.');
+
+        $this->subject->getFirstOrganizer();
     }
 
     /**

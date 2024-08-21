@@ -2520,14 +2520,16 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstOrganizerForNoOrganizersReturnsNull(): void
+    public function getFirstOrganizerForNoOrganizersThrowsException(): void
     {
         $organizers = new Collection();
         $this->subject->setData(['organizers' => $organizers]);
 
-        $result = $this->subject->getFirstOrganizer();
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1724277806);
+        $this->expectExceptionMessage('This event does not have any organizers.');
 
-        self::assertNull($result);
+        $this->subject->getFirstOrganizer();
     }
 
     /**

@@ -1646,35 +1646,29 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * Creates an organizer bag and returns it.
-     *
-     * Throws an exception if there are no organizers related to this event.
-     *
-     * @throws \BadMethodCallException
      */
     public function getOrganizerBag(): OrganizerBag
     {
-        if (!$this->hasOrganizers()) {
-            throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
-        }
-
         $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
         $builder->limitToEvent($this->getUid());
 
         return $builder->build();
     }
 
-    public function getFirstOrganizer(): ?LegacyOrganizer
+    /**
+     * @throws \UnexpectedValueException if there are no organizers
+     */
+    public function getFirstOrganizer(): LegacyOrganizer
     {
-        if (!$this->hasOrganizers()) {
-            return null;
-        }
-
         $organizers = $this->getOrganizerBag();
         $organizers->rewind();
-        /** @var LegacyOrganizer|null $current */
-        $current = $organizers->current();
+        $firstOrganizer = $organizers->current();
 
-        return $current;
+        if (!$firstOrganizer instanceof LegacyOrganizer) {
+            throw new \UnexpectedValueException('This event does not have any organizers.', 1724278146);
+        }
+
+        return $firstOrganizer;
     }
 
     /**

@@ -183,10 +183,7 @@ class MailNotifier extends AbstractTask
                 ->to($organizer)
                 ->subject($subject)
                 ->text($this->customizeMessage($messageKey, $event, $organizer->getName()));
-
-            if ($replyTo instanceof LegacyOrganizer) {
-                $emailBuilder->replyTo($replyTo);
-            }
+            $emailBuilder->replyTo($replyTo);
             if (\is_string($attachmentBody)) {
                 $fileName = $this->getConfiguration()->getAsString('filenameForRegistrationsCsv');
                 $emailBuilder->attach($attachmentBody, 'text/csv', $fileName);

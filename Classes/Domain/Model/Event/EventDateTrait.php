@@ -280,12 +280,18 @@ trait EventDateTrait
         $this->organizers = $organizers;
     }
 
-    public function getFirstOrganizer(): ?Organizer
+    /**
+     * @throws \UnexpectedValueException if there are no organizers
+     */
+    public function getFirstOrganizer(): Organizer
     {
         $organizers = $this->getOrganizers();
-        $organizers->rewind();
+        if (\count($organizers) === 0) {
+            throw new \UnexpectedValueException('This event does not have any organizers.', 1724277439);
+        }
 
-        return \count($organizers) > 0 ? $organizers->current() : null;
+        $organizers->rewind();
+        return $organizers->current();
     }
 
     public function getNumberOfOfflineRegistrations(): int

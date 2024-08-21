@@ -57,7 +57,10 @@ interface EventDateInterface
      */
     public function getOrganizers(): ObjectStorage;
 
-    public function getFirstOrganizer(): ?Organizer;
+    /**
+     * @throws \UnexpectedValueException if there are no organizers
+     */
+    public function getFirstOrganizer(): Organizer;
 
     public function getNumberOfOfflineRegistrations(): int;
 
