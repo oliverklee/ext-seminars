@@ -73,7 +73,6 @@ abstract class TemplateHelper
      * - orderBy: written + read
      * - res_count: written + read
      * - results_at_a_time: written + read
-     * - showRange: read, but not written
      *
      * @var array{
      *        descFlag: bool,
@@ -1479,7 +1478,6 @@ abstract class TemplateHelper
      * Using $this->internal['maxPages'] for the max number of pages to include in the browse bar.
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
-     * Using $this->internal['showRange']: this var switches the display of the pagelinks from pagenumbers to ranges f.e.: 1-5 6-10 11-15... instead of 1 2 3...
      * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
      *
      * The third parameter is an array with several wraps for the parts of the pagebrowser. The following elements will be recognized:
@@ -1581,15 +1579,11 @@ abstract class TemplateHelper
             }
             // Links to pages
             for ($a = $firstPage; $a < $lastPage; $a++) {
-                if ($this->internal['showRange'] ?? false) {
-                    $pageText = ($a * $results_at_a_time + 1) . '-' . \min($count, ($a + 1) * $results_at_a_time);
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-                    $pageText = \trim(
-                        ($hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label)
-                        . ' ' . ($a + 1)
-                    );
-                }
+                $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
+                $pageText = \trim(
+                    ($hscText ? \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) : $label)
+                    . ' ' . ($a + 1)
+                );
                 // Current page
                 if ($pointer === $a) {
                     $links[] = $this->cObj->wrap(
