@@ -597,8 +597,6 @@ abstract class TemplateHelper
      * @param string $markerPrefix to the marker name for setting (may be empty, case-insensitive, will get uppercased)
      *
      * @return bool TRUE if the marker content has been set, FALSE otherwise
-     *
-     * @see setMarkerIfNotEmpty
      */
     public function setMarkerIfNotZero(string $markerName, $content, string $markerPrefix = ''): bool
     {
@@ -617,8 +615,6 @@ abstract class TemplateHelper
      *        (may be empty, case-insensitive, will get uppercased)
      *
      * @return bool TRUE if the marker content has been set, FALSE otherwise
-     *
-     * @see setMarkerIfNotZero
      */
     public function setMarkerIfNotEmpty(string $markerName, $content, string $markerPrefix = ''): bool
     {
@@ -759,9 +755,6 @@ abstract class TemplateHelper
      *       (may be empty, case-insensitive, will get uppercased)
      *
      * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setMarkerContent
-     * @see hideSubparts
      */
     public function setOrDeleteMarker(
         string $markerName,
@@ -797,11 +790,6 @@ abstract class TemplateHelper
      *        (may be empty, case-insensitive, will get uppercased)
      *
      * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setOrDeleteMarker
-     * @see setOrDeleteMarkerIfNotEmpty
-     * @see setMarkerContent
-     * @see hideSubparts
      */
     public function setOrDeleteMarkerIfNotZero(
         string $markerName,
@@ -835,11 +823,6 @@ abstract class TemplateHelper
      *        (may be empty, case-insensitive, will get uppercased)
      *
      * @return bool TRUE if the marker content has been set, FALSE if the subpart has been hidden
-     *
-     * @see setOrDeleteMarker
-     * @see setOrDeleteMarkerIfNotZero
-     * @see setMarkerContent
-     * @see hideSubparts
      */
     public function setOrDeleteMarkerIfNotEmpty(
         string $markerName,
@@ -1313,7 +1296,6 @@ abstract class TemplateHelper
      * @param array $fieldNameArr Array where each value points to a key in the FlexForms content - the input array will have the value returned pointed to by these keys. All integer keys will not take their integer counterparts, but rather traverse the current position in the array and return element number X (whether this is right behavior is not settled yet...)
      * @param string $value Value for outermost key, typ. "vDEF" depending on language.
      * @internal
-     * @see pi_getFFvalue()
      */
     // phpcs:disable
     private function pi_getFFvalueFromSheetArray(array $sheetArray, array $fieldNameArr, string $value): string
@@ -1381,8 +1363,6 @@ abstract class TemplateHelper
      * @param bool $cache If $cache is set (0/1), the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
      * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
-     * @see pi_linkTP_keepPIvars()
-     * @see ContentObjectRenderer::typoLink()
      */
     // phpcs:disable
     protected function pi_linkTP(
@@ -1672,7 +1652,6 @@ abstract class TemplateHelper
      *
      * @param non-empty-string $class The class name(s) (suffix)
      * @return non-empty-string A "class" attribute with value and a single space char before it.
-     * @see pi_getClassName()
      */
     // phpcs:disable
     private function pi_classParam(string $class): string
@@ -1691,7 +1670,6 @@ abstract class TemplateHelper
      * @param bool $clearAnyway If set, then the current values of piVars will NOT be preserved anyways... Practical if you want an easy way to set piVars without having to worry about the prefix, "tx_xxxxx[]
      * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
-     * @see pi_linkTP()
      */
     // phpcs:disable
     protected function pi_linkTP_keepPIvars(
@@ -1720,7 +1698,6 @@ abstract class TemplateHelper
      *
      * @param array $inArray An array with piVars values to evaluate
      * @return int|null Returns TRUE (1) if conditions are met.
-     * @see pi_linkTP_keepPIvars()
      */
     // phpcs:disable
     public function pi_autoCache(array $inArray)
