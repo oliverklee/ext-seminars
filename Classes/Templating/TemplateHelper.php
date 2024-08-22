@@ -112,11 +112,6 @@ abstract class TemplateHelper
     private $altLLkey = '';
 
     /**
-     * @var int
-     */
-    private $pi_lowerThan = 5;
-
-    /**
      * @var string
      */
     private $pi_moreParams = '';
@@ -1550,7 +1545,7 @@ abstract class TemplateHelper
         $tempPiVars = $this->piVars;
         foreach ($explodedList as $k) {
             if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger($tempPiVars[$k])
-                    || $tempPiVars[$k] < $this->pi_lowerThan)
+                    || $tempPiVars[$k] < 5)
             ) {
                 unset($tempPiVars[$k]);
             }
