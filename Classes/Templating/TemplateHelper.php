@@ -114,11 +114,6 @@ abstract class TemplateHelper
     /**
      * @var int
      */
-    private $pi_alwaysPrev = 0;
-
-    /**
-     * @var int
-     */
     private $pi_lowerThan = 5;
 
     /**
@@ -1412,8 +1407,6 @@ abstract class TemplateHelper
             return '';
         }
 
-        // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
-        $alwaysPrev = $this->pi_alwaysPrev;
         // Default values for "traditional" wrapping with a table.
         $wrapper = [];
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
@@ -1435,24 +1428,16 @@ abstract class TemplateHelper
         $links = [];
         // Make browse-table/links:
         // Link to previous page
-        if ($alwaysPrev >= 0) {
-            if ($pointer > 0) {
-                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                $links[] = $this->cObj->wrap(
-                    $this->pi_linkTP_keepPIvars(
-                        \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                        ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
-                        $pi_isOnlyFields
-                    ),
-                    $wrapper['inactiveLinkWrap']
-                );
-            } elseif ($alwaysPrev) {
-                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                $links[] = $this->cObj->wrap(
+        if ($pointer > 0) {
+            $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+            $links[] = $this->cObj->wrap(
+                $this->pi_linkTP_keepPIvars(
                     \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                    $wrapper['disabledLinkWrap']
-                );
-            }
+                    ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
+                    $pi_isOnlyFields
+                ),
+                $wrapper['inactiveLinkWrap']
+            );
         }
         // Links to pages
         for ($a = $firstPage; $a < $lastPage; $a++) {
