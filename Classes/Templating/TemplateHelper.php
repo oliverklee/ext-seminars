@@ -1407,7 +1407,7 @@ abstract class TemplateHelper
         $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
-        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields('mode,pointer');
+        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields();
         if ($count <= $results_at_a_time) {
             return '';
         }
@@ -1558,13 +1558,12 @@ abstract class TemplateHelper
      * Returns TRUE if the piVars array has ONLY those fields entered that is set in the $fList (commalist) AND if none of those fields value is greater than $lowerThan field if they are integers.
      * Notice that this function will only work as long as values are integers.
      *
-     * @param string $fList List of fields (keys from piVars) to evaluate on
      * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    private function pi_isOnlyFields(string $fList)
+    private function pi_isOnlyFields()
     {
-        $explodedList = GeneralUtility::trimExplode(',', $fList, true);
+        $explodedList = ['mode', 'pointer'];
         $tempPiVars = $this->piVars;
         foreach ($explodedList as $k) {
             if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger($tempPiVars[$k])
