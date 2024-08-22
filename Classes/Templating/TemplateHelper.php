@@ -1407,7 +1407,7 @@ abstract class TemplateHelper
         $results_at_a_time = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $totalPages = (int)\ceil($count / $results_at_a_time);
         $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
-        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields();
+        $pi_isOnlyFields = $this->pi_isOnlyFields();
         if ($count <= $results_at_a_time) {
             return '';
         }
@@ -1557,11 +1557,9 @@ abstract class TemplateHelper
     /**
      * Returns TRUE if the piVars array has ONLY those fields entered that is set in the $fList (commalist) AND if none of those fields value is greater than $lowerThan field if they are integers.
      * Notice that this function will only work as long as values are integers.
-     *
-     * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    private function pi_isOnlyFields()
+    private function pi_isOnlyFields(): bool
     {
         $explodedList = ['mode', 'pointer'];
         $tempPiVars = $this->piVars;
@@ -1573,11 +1571,7 @@ abstract class TemplateHelper
             }
         }
 
-        if ($tempPiVars === []) {
-            // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
-            return 1;
-        }
-        return null;
+        return $tempPiVars === [];
     }
 
     /**
@@ -1611,7 +1605,7 @@ abstract class TemplateHelper
         ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
         $overrulePIvars = $piVars;
         if ($this->pi_autoCacheEn) {
-            $cache = (bool)$this->pi_autoCache($overrulePIvars);
+            $cache = $this->pi_autoCache($overrulePIvars);
         }
 
         return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache);
@@ -1623,10 +1617,9 @@ abstract class TemplateHelper
      * This is an advanced form of evaluation of whether a URL should be cached or not.
      *
      * @param array $inArray An array with piVars values to evaluate
-     * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    public function pi_autoCache(array $inArray)
+    public function pi_autoCache(array $inArray): bool
     {
         foreach ($inArray as $fN => $fV) {
             if (!\strcmp($inArray[$fN], '')) {
@@ -1646,10 +1639,6 @@ abstract class TemplateHelper
             }
         }
 
-        if ($inArray === []) {
-            // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
-            return 1;
-        }
-        return null;
+        return $inArray === [];
     }
 }
