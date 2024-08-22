@@ -1598,22 +1598,22 @@ abstract class TemplateHelper
     protected function pi_wrapInBaseClass(string $str): string
     {
         $content = '<div class="' . \str_replace('_', '-', $this->prefixId) . '">
-		' . $str . '
-	</div>
-	';
+            ' . $str . '
+                </div>
+            ';
         if (!($this->frontendController->config['config']['disablePrefixComment'] ?? false)) {
             $content = '
 
 
-	<!--
+            <!--
 
-		BEGIN: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '"
+                BEGIN: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '"
 
-	-->
-	' . $content . '
-	<!-- END: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '" -->
+            -->
+            ' . $content . '
+                <!-- END: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '" -->
 
-	';
+            ';
         }
 
         return $content;
