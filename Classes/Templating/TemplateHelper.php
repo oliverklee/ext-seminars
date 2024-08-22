@@ -1393,11 +1393,10 @@ abstract class TemplateHelper
      * Using $this->internal['results_at_a_time'] for how many results to show
      *
      * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
-     * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute
      */
     // phpcs:disable
-    protected function pi_list_browseresults(int $showResultCount = 1, string $tableParams = ''): string
+    protected function pi_list_browseresults(int $showResultCount = 1): string
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
@@ -1423,7 +1422,7 @@ abstract class TemplateHelper
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
-        $wrapper['browseLinksWrap'] = \rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
+        $wrapper['browseLinksWrap'] = '<table><tr>|</tr></table>';
         $wrapper['showResultsWrap'] = '<p>|</p>';
         $wrapper['browseBoxWrap'] = '
             <!--
