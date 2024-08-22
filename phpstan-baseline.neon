@@ -1781,11 +1781,6 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_autoCache\\(\\) has parameter \\$inArray with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_getFFvalue\\(\\) has parameter \\$T3FlexForm_array with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1807,11 +1802,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:pi_linkTP_keepPIvars\\(\\) has parameter \\$overrulePIvars with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Only booleans are allowed in a negated boolean, int\\<\\-1, 1\\> given\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
