@@ -112,11 +112,6 @@ abstract class TemplateHelper
     private $altLLkey = '';
 
     /**
-     * @var string
-     */
-    private $pi_moreParams = '';
-
-    /**
      * @var array
      */
     private $pi_autoCacheFields = [];
@@ -1349,7 +1344,7 @@ abstract class TemplateHelper
      * Returns the $str wrapped in <a>-tags with a link to the CURRENT page, but with $urlParameters set as extra parameters for the page.
      *
      * @param string $str The content string to wrap in <a> tags
-     * @param array $urlParameters Array with URL parameters as key/value pairs. They will be "imploded" and added to the list of parameters defined in the plugins TypoScript property "parent.addParams" plus $this->pi_moreParams.
+     * @param array $urlParameters Array with URL parameters as key/value pairs. They will be "imploded" and added to the list of parameters defined in the plugins TypoScript property "parent.addParams".
      * @param bool $cache If $cache is set (0/1), the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
      * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
@@ -1371,7 +1366,8 @@ abstract class TemplateHelper
         }
         $conf['parameter'] = $altPageId > 0 ? $altPageId : 'current';
         $conf['additionalParams'] = ($this->conf['parent.']['addParams'] ?? '')
-            . HttpUtility::buildQueryString($urlParameters, '&', true) . $this->pi_moreParams;
+            . HttpUtility::buildQueryString($urlParameters, '&', true);
+
         return $this->cObj->typoLink($str, $conf);
     }
 
