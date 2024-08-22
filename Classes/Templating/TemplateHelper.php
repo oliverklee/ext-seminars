@@ -1392,18 +1392,14 @@ abstract class TemplateHelper
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
      *
-     * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute
      */
     // phpcs:disable
-    protected function pi_list_browseresults(int $showResultCount = 1): string
+    protected function pi_list_browseresults(): string
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
         }
-
-        $wrapper = [];
-        $markerArray = [];
 
         // Initializing variables:
         $pointer = (int)($this->piVars['pointer'] ?? 0);
@@ -1419,6 +1415,7 @@ abstract class TemplateHelper
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $this->pi_alwaysPrev;
         // Default values for "traditional" wrapping with a table.
+        $wrapper = [];
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
@@ -1431,107 +1428,96 @@ abstract class TemplateHelper
             <div ' . $this->pi_classParam('browsebox') . '>
                 |
             </div>';
-        // $showResultCount determines how the results of the page browser will be shown.
-        // If set to 0: only the result-browser will be shown
-        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
-        //	 		 2: only the text "Displaying results..." will be shown
+
         // Show page browser
-        if ($showResultCount !== 2) {
-            $firstPage = 0;
-            $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
-            $links = [];
-            // Make browse-table/links:
-            // Link to previous page
-            if ($alwaysPrev >= 0) {
-                if ($pointer > 0) {
-                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                            ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                } elseif ($alwaysPrev) {
-                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
-                    $links[] = $this->cObj->wrap(
+        $firstPage = 0;
+        $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
+        $links = [];
+        // Make browse-table/links:
+        // Link to previous page
+        if ($alwaysPrev >= 0) {
+            if ($pointer > 0) {
+                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(
                         \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                        $wrapper['disabledLinkWrap']
-                    );
-                }
+                        ['pointer' => ($pointer - 1) > 0 ? ($pointer - 1) : ''],
+                        $pi_isOnlyFields
+                    ),
+                    $wrapper['inactiveLinkWrap']
+                );
+            } elseif ($alwaysPrev) {
+                $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                $links[] = $this->cObj->wrap(
+                    \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
+                    $wrapper['disabledLinkWrap']
+                );
             }
-            // Links to pages
-            for ($a = $firstPage; $a < $lastPage; $a++) {
-                $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
-                $pageText = \trim(\htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) . ' ' . ($a + 1));
-                // Current page
-                if ($pointer === $a) {
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $pageText,
-                            ['pointer' => $a > 0 ? $a : ''],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['activeLinkWrap']
-                    );
-                } else {
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            $pageText,
-                            ['pointer' => $a > 0 ? $a : ''],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                }
-            }
-            if ($pointer < $totalPages - 1) {
-                // Link to next page
-                if ($pointer >= $totalPages - 1) {
-                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
-                    $links[] = $this->cObj->wrap(
-                        \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                        $wrapper['disabledLinkWrap']
-                    );
-                } else {
-                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
-                    $links[] = $this->cObj->wrap(
-                        $this->pi_linkTP_keepPIvars(
-                            \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
-                            ['pointer' => $pointer + 1],
-                            $pi_isOnlyFields
-                        ),
-                        $wrapper['inactiveLinkWrap']
-                    );
-                }
-            }
-            $theLinks = $this->cObj->wrap(\implode(LF, $links), $wrapper['browseLinksWrap']);
-        } else {
-            $theLinks = '';
         }
+        // Links to pages
+        for ($a = $firstPage; $a < $lastPage; $a++) {
+            $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
+            $pageText = \trim(\htmlspecialchars($label, ENT_QUOTES | ENT_HTML5) . ' ' . ($a + 1));
+            // Current page
+            if ($pointer === $a) {
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(
+                        $pageText,
+                        ['pointer' => $a > 0 ? $a : ''],
+                        $pi_isOnlyFields
+                    ),
+                    $wrapper['activeLinkWrap']
+                );
+            } else {
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(
+                        $pageText,
+                        ['pointer' => $a > 0 ? $a : ''],
+                        $pi_isOnlyFields
+                    ),
+                    $wrapper['inactiveLinkWrap']
+                );
+            }
+        }
+        if ($pointer < $totalPages - 1) {
+            // Link to next page
+            if ($pointer >= $totalPages - 1) {
+                $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                $links[] = $this->cObj->wrap(
+                    \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
+                    $wrapper['disabledLinkWrap']
+                );
+            } else {
+                $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                $links[] = $this->cObj->wrap(
+                    $this->pi_linkTP_keepPIvars(
+                        \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5),
+                        ['pointer' => $pointer + 1],
+                        $pi_isOnlyFields
+                    ),
+                    $wrapper['inactiveLinkWrap']
+                );
+            }
+        }
+        $theLinks = $this->cObj->wrap(\implode(LF, $links), $wrapper['browseLinksWrap']);
 
         $pR1 = $pointer * $results_at_a_time + 1;
         $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
-        if ($showResultCount) {
-            // Render the resultcount in the "traditional" way using sprintf
-            $resultCountMsg = \sprintf(
-                \str_replace(
-                    '###SPAN_BEGIN###',
-                    '<span' . $this->pi_classParam('browsebox-strong') . '>',
-                    $this->pi_getLL(
-                        'pi_list_browseresults_displays',
-                        'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
-                    )
-                ),
-                $count > 0 ? $pR1 : 0,
-                \min($count, $pR2),
-                $count
-            );
-            $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
-        } else {
-            $resultCountMsg = '';
-        }
+        // Render the result count in the "traditional" way using sprintf
+        $resultCountMsg = \sprintf(
+            \str_replace(
+                '###SPAN_BEGIN###',
+                '<span' . $this->pi_classParam('browsebox-strong') . '>',
+                $this->pi_getLL(
+                    'pi_list_browseresults_displays',
+                    'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
+                )
+            ),
+            $count > 0 ? $pR1 : 0,
+            \min($count, $pR2),
+            $count
+        );
+        $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
 
         return $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
     }
