@@ -1600,7 +1600,7 @@ abstract class TemplateHelper
      * Returns the class-attribute with the correctly prefixed classname
      * Using pi_getClassName()
      *
-     * @param non-empty-string $class The class name(s) (suffix)
+     * @param non-empty-string $class The class name (suffix)
      * @return non-empty-string A "class" attribute with value and a single space char before it.
      */
     // phpcs:disable
