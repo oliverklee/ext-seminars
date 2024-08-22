@@ -37,6 +37,7 @@ use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Templating\TemplateHelper;
+use OliverKlee\Seminars\ViewHelpers\RichTextViewHelper;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -2555,9 +2556,6 @@ class DefaultController extends TemplateHelper
 
     protected function renderAsRichText(string $rawData): string
     {
-        $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-        $contentObject->start([]);
-
-        return $contentObject->parseFunc($rawData, [], '< lib.parseFunc_RTE');
+        return GeneralUtility::makeInstance(RichTextViewHelper::class)->render($rawData);
     }
 }

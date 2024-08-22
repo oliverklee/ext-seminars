@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223, #3224)
 
 ### Fixed
+- Fix deprecation warning when rendering rich text (#3275)
 - Fix type errors in `TemplateHelper` (#3232)
 - Avoid using the short ternary operator (#3230)
 - Always use strict comparisons in `TemplateHelper` (#3215, #3225)
