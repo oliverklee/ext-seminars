@@ -1672,24 +1672,14 @@ abstract class TemplateHelper
      * Returns the class-attribute with the correctly prefixed classname
      * Using pi_getClassName()
      *
-     * @param non-empty-string $class The class name(s) (suffix) - separate multiple classes with commas
-     * @param string $addClasses Additional class names which should not be prefixed - separate multiple classes with commas
+     * @param non-empty-string $class The class name(s) (suffix)
      * @return non-empty-string A "class" attribute with value and a single space char before it.
      * @see pi_getClassName()
      */
     // phpcs:disable
-    private function pi_classParam(string $class, string $addClasses = ''): string
+    private function pi_classParam(string $class): string
     {
-        $output = '';
-        $classNames = GeneralUtility::trimExplode(',', $class, true);
-        foreach ($classNames as $className) {
-            $output .= ' ' . $this->pi_getClassName($className);
-        }
-        $additionalClassNames = GeneralUtility::trimExplode(',', $addClasses, true);
-        foreach ($additionalClassNames as $additionalClassName) {
-            $output .= ' ' . $additionalClassName;
-        }
-        return ' class="' . \trim($output) . '"';
+        return ' class="' . $this->pi_getClassName($class) . '"';
     }
 
     /**
