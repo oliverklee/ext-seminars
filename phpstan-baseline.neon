@@ -1776,11 +1776,6 @@ parameters:
 			path: Classes/Service/RegistrationProcessor.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
-			path: Classes/Templating/TemplateHelper.php
-
-		-
 			message: "#^Constructor of class OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper has an unused parameter \\$_\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
@@ -1832,11 +1827,6 @@ parameters:
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$piVars type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$pi_autoCacheFields type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 

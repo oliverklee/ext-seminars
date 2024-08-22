@@ -112,11 +112,6 @@ abstract class TemplateHelper
     private $altLLkey = '';
 
     /**
-     * @var array
-     */
-    private $pi_autoCacheFields = [];
-
-    /**
      * @var bool
      */
     private $pi_autoCacheEn = false;
@@ -1588,7 +1583,7 @@ abstract class TemplateHelper
     }
 
     /**
-     * Returns TRUE if the array $inArray contains only values allowed to be cached based on the configuration in $this->pi_autoCacheFields
+     * Returns TRUE if the array $inArray contains only values allowed to be cached.
      * Used by ->pi_linkTP_keepPIvars
      * This is an advanced form of evaluation of whether a URL should be cached or not.
      *
@@ -1600,18 +1595,6 @@ abstract class TemplateHelper
         foreach ($inArray as $fN => $fV) {
             if (!\strcmp($inArray[$fN], '')) {
                 unset($inArray[$fN]);
-            } elseif (\is_array($this->pi_autoCacheFields[$fN])) {
-                if (\is_array($this->pi_autoCacheFields[$fN]['range'])
-                    && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0]
-                    && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]
-                ) {
-                    unset($inArray[$fN]);
-                }
-                if (\is_array($this->pi_autoCacheFields[$fN]['list'])
-                    && \in_array($inArray[$fN], $this->pi_autoCacheFields[$fN]['list'], true)
-                ) {
-                    unset($inArray[$fN]);
-                }
             }
         }
 
