@@ -1515,64 +1515,26 @@ abstract class TemplateHelper
         $pR1 = $pointer * $results_at_a_time + 1;
         $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
         if ($showResultCount) {
-            if ($wrapper['showResultsNumbersWrap'] ?? false) {
-                // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
-                // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
-                $markerArray['###FROM###'] = $this->cObj->wrap(
-                    (string)($this->internal['res_count'] > 0 ? $pR1 : 0),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###TO###'] = $this->cObj->wrap(
-                    (string)\min($this->internal['res_count'], $pR2),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###OUT_OF###'] = $this->cObj->wrap(
-                    (string)$this->internal['res_count'],
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###FROM_TO###'] = $this->cObj->wrap(
-                    ($this->internal['res_count'] > 0 ? $pR1 : 0) . ' '
-                    . $this->pi_getLL('pi_list_browseresults_to', 'to') . ' '
-                    . \min($this->internal['res_count'], $pR2),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
-                    (string)($pointer + 1),
-                    $wrapper['showResultsNumbersWrap']
-                );
-                $markerArray['###TOTAL_PAGES###']
-                    = $this->cObj->wrap((string)$totalPages, $wrapper['showResultsNumbersWrap']);
-                // Substitute markers
-                $resultCountMsg = $this->templateService->substituteMarkerArray(
+            // Render the resultcount in the "traditional" way using sprintf
+            $resultCountMsg = \sprintf(
+                \str_replace(
+                    '###SPAN_BEGIN###',
+                    '<span' . $this->pi_classParam('browsebox-strong') . '>',
                     $this->pi_getLL(
                         'pi_list_browseresults_displays',
-                        'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
-                    ),
-                    $markerArray
-                );
-            } else {
-                // Render the resultcount in the "traditional" way using sprintf
-                $resultCountMsg = \sprintf(
-                    \str_replace(
-                        '###SPAN_BEGIN###',
-                        '<span' . $this->pi_classParam('browsebox-strong') . '>',
-                        $this->pi_getLL(
-                            'pi_list_browseresults_displays',
-                            'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
-                        )
-                    ),
-                    $count > 0 ? $pR1 : 0,
-                    \min($count, $pR2),
-                    $count
-                );
-            }
+                        'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
+                    )
+                ),
+                $count > 0 ? $pR1 : 0,
+                \min($count, $pR2),
+                $count
+            );
             $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
         } else {
             $resultCountMsg = '';
         }
 
-        $sTables = $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
-        return $sTables;
+        return $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
     }
 
     /**
