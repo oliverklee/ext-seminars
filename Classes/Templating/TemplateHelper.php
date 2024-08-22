@@ -1644,18 +1644,16 @@ abstract class TemplateHelper
      * Notice that this function will only work as long as values are integers.
      *
      * @param string $fList List of fields (keys from piVars) to evaluate on
-     * @param int $lowerThan Limit for the values.
      * @return int|null Returns TRUE (1) if conditions are met.
      */
     // phpcs:disable
-    private function pi_isOnlyFields(string $fList, int $lowerThan = -1)
+    private function pi_isOnlyFields(string $fList)
     {
-        $lowerThan = $lowerThan === -1 ? $this->pi_lowerThan : $lowerThan;
-        $fList = GeneralUtility::trimExplode(',', $fList, true);
+        $explodedList = GeneralUtility::trimExplode(',', $fList, true);
         $tempPiVars = $this->piVars;
-        foreach ($fList as $k) {
+        foreach ($explodedList as $k) {
             if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger($tempPiVars[$k])
-                    || $tempPiVars[$k] < $lowerThan)
+                    || $tempPiVars[$k] < $this->pi_lowerThan)
             ) {
                 unset($tempPiVars[$k]);
             }
