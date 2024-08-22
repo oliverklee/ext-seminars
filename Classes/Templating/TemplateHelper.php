@@ -112,11 +112,6 @@ abstract class TemplateHelper
     private $altLLkey = '';
 
     /**
-     * @var bool
-     */
-    private $pi_autoCacheEn = false;
-
-    /**
      * Should normally be set in the main function with the TypoScript content passed to the method.
      *
      * $conf[LOCAL_LANG][_key_] is reserved for Local Language overrides.
@@ -1575,29 +1570,7 @@ abstract class TemplateHelper
         unset($piVars['DATA']);
         ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
         $overrulePIvars = $piVars;
-        if ($this->pi_autoCacheEn) {
-            $cache = $this->pi_autoCache($overrulePIvars);
-        }
 
         return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache);
-    }
-
-    /**
-     * Returns TRUE if the array $inArray contains only values allowed to be cached.
-     * Used by ->pi_linkTP_keepPIvars
-     * This is an advanced form of evaluation of whether a URL should be cached or not.
-     *
-     * @param array $inArray An array with piVars values to evaluate
-     */
-    // phpcs:disable
-    public function pi_autoCache(array $inArray): bool
-    {
-        foreach ($inArray as $fN => $fV) {
-            if (!\strcmp($inArray[$fN], '')) {
-                unset($inArray[$fN]);
-            }
-        }
-
-        return $inArray === [];
     }
 }
