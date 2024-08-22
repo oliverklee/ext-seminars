@@ -1668,7 +1668,6 @@ abstract class TemplateHelper
      * @param array $overrulePIvars Array of values to override in the current piVars. Contrary to pi_linkTP the keys in this array must correspond to the real piVars array and therefore NOT be prefixed with the $this->prefixId string. Further, if a value is a blank string it means the piVar key will not be a part of the link (unset)
      * @param bool $cache If $cache is set, the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
      * @param bool $clearAnyway If set, then the current values of piVars will NOT be preserved anyways... Practical if you want an easy way to set piVars without having to worry about the prefix, "tx_xxxxx[]
-     * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
      */
     // phpcs:disable
@@ -1676,8 +1675,7 @@ abstract class TemplateHelper
         string $str,
         array $overrulePIvars = [],
         bool $cache = false,
-        bool $clearAnyway = false,
-        int $altPageId = 0
+        bool $clearAnyway = false
     ): string {
         if (!$clearAnyway) {
             $piVars = $this->piVars;
@@ -1688,7 +1686,8 @@ abstract class TemplateHelper
                 $cache = (bool)$this->pi_autoCache($overrulePIvars);
             }
         }
-        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache, $altPageId);
+
+        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache);
     }
 
     /**
