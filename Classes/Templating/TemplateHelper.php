@@ -1392,23 +1392,13 @@ abstract class TemplateHelper
      * Using $this->internal['res_count'] for count number
      * Using $this->internal['results_at_a_time'] for how many results to show
      *
-     * The third parameter is an array with several wraps for the parts of the pagebrowser. The following elements will be recognized:
-     * disabledLinkWrap, inactiveLinkWrap, activeLinkWrap, browseLinksWrap, showResultsWrap, showResultsNumbersWrap, browseBoxWrap.
-     *
-     * If $wrapArr['showResultsNumbersWrap'] is set, the formatting string is expected to hold template markers (###FROM###, ###TO###, ###OUT_OF###, ###FROM_TO###, ###CURRENT_PAGE###, ###TOTAL_PAGES###)
-     * otherwise the formatting string is expected to hold sprintf-markers (%s) for from, to, outof (in that sequence)
-     *
      * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
      * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
-     * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
-     * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
+     * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute
      */
     // phpcs:disable
-    protected function pi_list_browseresults(
-        int $showResultCount = 1,
-        string $tableParams = '',
-        array $wrapArr = []
-    ): string {
+    protected function pi_list_browseresults(int $showResultCount = 1, string $tableParams = ''): string
+    {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017658);
         }
@@ -1429,7 +1419,7 @@ abstract class TemplateHelper
 
         // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
         $alwaysPrev = $this->pi_alwaysPrev;
-        // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
+        // Default values for "traditional" wrapping with a table.
         $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
         $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
@@ -1442,8 +1432,6 @@ abstract class TemplateHelper
             <div ' . $this->pi_classParam('browsebox') . '>
                 |
             </div>';
-        // Now overwrite all entries in $wrapper which are also in $wrapArr
-        $wrapper = \array_merge($wrapper, $wrapArr);
         // $showResultCount determines how the results of the page browser will be shown.
         // If set to 0: only the result-browser will be shown
         //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
