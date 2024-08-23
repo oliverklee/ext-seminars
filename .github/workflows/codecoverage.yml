@@ -83,9 +83,10 @@ jobs:
       - name: "Merge coverage results"
         run: composer ci:coverage:merge
       - name: "Upload coverage results to Coveralls"
+        uses: coverallsapp/github-action@v2
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./.Build/vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/logs/clover.xml
     strategy:
       fail-fast: false
       matrix:
