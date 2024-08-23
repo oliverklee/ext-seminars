@@ -14,7 +14,9 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractView
  * @covers \OliverKlee\Seminars\FrontEnd\CategoryList
+ * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
 final class CategoryListTest extends FunctionalTestCase
 {
