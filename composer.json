@@ -59,6 +59,8 @@
 		"phpunit/phpunit": "^8.5.39",
 		"saschaegerer/phpstan-typo3": "^1.8.4",
 		"squizlabs/php_codesniffer": "^3.10.2",
+		"symfony/translation": "^5.4 || ^6.4 || ^7.0",
+		"symfony/yaml": "^5.4 || ^6.4 || ^7.0",
 		"typo3/cms-install": "^10.4.33 || ^11.5.17",
 		"typo3/cms-scheduler": "^10.4.33 || ^11.5.17",
 		"typo3/coding-standards": "~0.6.1",
@@ -154,12 +156,14 @@
 			"@ci:php:lint",
 			"@ci:php:sniff",
 			"@ci:php:stan",
-			"@ci:ts:lint"
+			"@ci:ts:lint",
+			"@ci:xliff:lint"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:legacy-functional": "find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
+		"ci:xliff:lint": "php Build/xliff/xliff-lint lint:xliff Resources/Private/Language",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
 			"@fix:composer",
@@ -227,6 +231,7 @@
 		"ci:tests:legacy-functional": "Runs the legacy functional tests.",
 		"ci:tests:unit": "Runs the unit tests.",
 		"ci:ts:lint": "Lints all TypoScript files.",
+		"ci:xliff:lint": "Lints the XLIFF files.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
 		"fix:composer": "Runs all fixers for the PHP code.",
