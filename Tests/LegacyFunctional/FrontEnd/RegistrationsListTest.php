@@ -324,7 +324,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('showFeUserFieldsInRegistrationsList', 'name');
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertStringContainsString('<th scope="col">Name:</th>', $this->subject->render());
+        self::assertStringContainsString('<th scope="col">Name</th>', $this->subject->render());
     }
 
     /**
@@ -348,7 +348,7 @@ final class RegistrationsListTest extends FunctionalTestCase
         $result = $this->subject->render();
 
         self::assertStringContainsString('<th scope="col">Number</th>', $result);
-        self::assertStringContainsString('<th scope="col">Name:</th>', $result);
+        self::assertStringContainsString('<th scope="col">Name</th>', $result);
     }
 
     /**
