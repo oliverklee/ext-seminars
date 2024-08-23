@@ -16,6 +16,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
+ * @covers \OliverKlee\Seminars\FrontEnd\AbstractView
  * @covers \OliverKlee\Seminars\FrontEnd\SelectorWidget
  * @covers \OliverKlee\Seminars\Templating\TemplateHelper
  */
