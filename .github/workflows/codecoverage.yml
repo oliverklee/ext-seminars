@@ -23,9 +23,8 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           ini-file: development
-          coverage: pcov
+          coverage: xdebug
           extensions: mysqli
-          ini-values: pcov.directory=Classes
           tools: composer:v2, phive
       - name: "Show Composer version"
         run: composer --version
