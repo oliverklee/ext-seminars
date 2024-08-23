@@ -74,16 +74,7 @@
 				<source>Registered persons</source>
 			</trans-unit>
 			<trans-unit id="label_lodgings" resname="label_lodgings">
-				<source>Selected lodging options</source>
-			</trans-unit>
-			<trans-unit id="label_accommodation" resname="label_accommodation">
-				<source>Accommodation</source>
-			</trans-unit>
-			<trans-unit id="label_foods" resname="label_foods">
-				<source>Selected food options</source>
-			</trans-unit>
-			<trans-unit id="label_food" resname="label_food">
-				<source>Food</source>
+				<source>Lodging options</source>
 			</trans-unit>
 			<trans-unit id="label_kids" resname="label_kids">
 				<source>Number of kids</source>
@@ -172,11 +163,8 @@
 			<trans-unit id="label_background_knowledge" resname="label_background_knowledge">
 				<source>Background knowledge</source>
 			</trans-unit>
-			<trans-unit id="label_known_from" resname="label_known_from">
-				<source>Known from</source>
-			</trans-unit>
 			<trans-unit id="label_notes" resname="label_notes">
-				<source>Notes</source>
+				<source>Additional Notes</source>
 			</trans-unit>
 			<trans-unit id="label_url" resname="label_url">
 				<source>More information</source>
@@ -768,35 +756,8 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_category" resname="label_category">
 				<source>Category</source>
 			</trans-unit>
-			<trans-unit id="label_title" resname="label_title">
-				<source>Title</source>
-			</trans-unit>
 			<trans-unit id="label_subtitle" resname="label_subtitle">
 				<source>Subtitle</source>
-			</trans-unit>
-			<trans-unit id="label_uid" resname="label_uid">
-				<source>Number</source>
-			</trans-unit>
-			<trans-unit id="label_registration_uid" resname="label_registration_uid">
-				<source>Ticket ID</source>
-			</trans-unit>
-			<trans-unit id="label_accreditation_number" resname="label_accreditation_number">
-				<source>Accreditation number</source>
-			</trans-unit>
-			<trans-unit id="label_credit_points" resname="label_credit_points">
-				<source>Credit points</source>
-			</trans-unit>
-			<trans-unit id="label_date" resname="label_date">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="label_time" resname="label_time">
-				<source>Time</source>
-			</trans-unit>
-			<trans-unit id="label_place" resname="label_place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="label_room" resname="label_room">
-				<source>Room</source>
 			</trans-unit>
 			<trans-unit id="label_timeslots" resname="label_timeslots">
 				<source>Time slots</source>
@@ -831,41 +792,14 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_language" resname="label_language">
 				<source>Language</source>
 			</trans-unit>
-			<trans-unit id="label_price_general" resname="label_price_general">
-				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_select_price" resname="label_select_price">
-				<source>Price:</source>
-			</trans-unit>
-			<trans-unit id="label_price" resname="label_price">
-				<source>Price</source>
-			</trans-unit>
 			<trans-unit id="label_price_range" resname="label_price_range">
 				<source>Price</source>
-			</trans-unit>
-			<trans-unit id="label_price_regular" resname="label_price_regular">
-				<source>Regular price</source>
-			</trans-unit>
-			<trans-unit id="label_price_earlybird_regular" resname="label_price_earlybird_regular">
-				<source>Early-bird price</source>
-			</trans-unit>
-			<trans-unit id="label_price_special" resname="label_price_special">
-				<source>Special price</source>
-			</trans-unit>
-			<trans-unit id="label_price_earlybird_special" resname="label_price_earlybird_special">
-				<source>Early-bird special price</source>
-			</trans-unit>
-			<trans-unit id="label_total_price" resname="label_total_price">
-				<source>Total price</source>
 			</trans-unit>
 			<trans-unit id="label_paymentmethods" resname="label_paymentmethods">
 				<source>Available methods of payment</source>
 			</trans-unit>
 			<trans-unit id="label_select_paymentmethod" resname="label_select_paymentmethod">
 				<source>Payment method:</source>
-			</trans-unit>
-			<trans-unit id="label_event_type" resname="label_event_type">
-				<source>Event type</source>
 			</trans-unit>
 			<trans-unit id="label_target_groups" resname="label_target_groups">
 				<source>Target Groups</source>
@@ -887,9 +821,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="label_categories" resname="label_categories">
 				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="label_vacancies" resname="label_vacancies">
-				<source>Vacancies</source>
 			</trans-unit>
 			<trans-unit id="label_deadline_registration" resname="label_deadline_registration">
 				<source>Deadline for registration</source>
@@ -939,18 +870,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_register_additional_information" resname="label_register_additional_information">
 				<source>Additional information</source>
 			</trans-unit>
-			<trans-unit id="label_checkboxes" resname="label_checkboxes">
-				<source>Additional information:</source>
-			</trans-unit>
-			<trans-unit id="label_interests" resname="label_interests">
-				<source>Special interests:</source>
-			</trans-unit>
-			<trans-unit id="label_expectations" resname="label_expectations">
-				<source>Expectations for the event:</source>
-			</trans-unit>
-			<trans-unit id="label_background_knowledge" resname="label_background_knowledge">
-				<source>Background knowledge:</source>
-			</trans-unit>
 			<trans-unit id="label_register_lodging_and_food" resname="label_register_lodging_and_food">
 				<source>Lodging and food</source>
 			</trans-unit>
@@ -966,14 +885,8 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_known_from_informal" resname="label_known_from_informal">
 				<source>How have you heard of this event?</source>
 			</trans-unit>
-			<trans-unit id="label_notes" resname="label_notes">
-				<source>Additional notes:</source>
-			</trans-unit>
 			<trans-unit id="label_register_additional_attendees" resname="label_register_additional_attendees">
 				<source>Persons to register:</source>
-			</trans-unit>
-			<trans-unit id="label_seats" resname="label_seats">
-				<source>Seats</source>
 			</trans-unit>
 			<trans-unit id="label_registered_themselves" resname="label_registered_themselves">
 				<source>myself</source>
@@ -987,59 +900,17 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_register_seats" resname="label_register_seats">
 				<source>Seats to book:</source>
 			</trans-unit>
-			<trans-unit id="label_attendees_names" resname="label_attendees_names">
-				<source>Registered persons:</source>
-			</trans-unit>
-			<trans-unit id="label_kids" resname="label_kids">
-				<source>Number of kids:</source>
-			</trans-unit>
 			<trans-unit id="label_legend_payment" resname="label_legend_payment">
 				<source>Payment</source>
-			</trans-unit>
-			<trans-unit id="label_billing_address" resname="label_billing_address">
-				<source>Billing address</source>
 			</trans-unit>
 			<trans-unit id="label_company" resname="label_company">
 				<source>Company:</source>
 			</trans-unit>
-			<trans-unit id="label_gender" resname="label_gender">
-				<source>Mr./Mrs.:</source>
-			</trans-unit>
-			<trans-unit id="label_gender.I.0" resname="label_gender.I.0">
-				<source>Mr.</source>
-			</trans-unit>
-			<trans-unit id="label_gender.I.1" resname="label_gender.I.1">
-				<source>Ms.</source>
-			</trans-unit>
 			<trans-unit id="label_gender.I.2" resname="label_gender.I.2">
 				<source>diverse</source>
 			</trans-unit>
-			<trans-unit id="label_name" resname="label_name">
-				<source>Name:</source>
-			</trans-unit>
-			<trans-unit id="label_address" resname="label_address">
-				<source>Street:</source>
-			</trans-unit>
-			<trans-unit id="label_zip" resname="label_zip">
-				<source>ZIP:</source>
-			</trans-unit>
-			<trans-unit id="label_city" resname="label_city">
-				<source>City:</source>
-			</trans-unit>
-			<trans-unit id="label_country" resname="label_country">
-				<source>Country:</source>
-			</trans-unit>
-			<trans-unit id="label_telephone" resname="label_telephone">
-				<source>Phone number:</source>
-			</trans-unit>
-			<trans-unit id="label_email" resname="label_email">
-				<source>Email address:</source>
-			</trans-unit>
-			<trans-unit id="label_lodgings" resname="label_lodgings">
-				<source>Lodging:</source>
-			</trans-unit>
 			<trans-unit id="label_foods" resname="label_foods">
-				<source>Food:</source>
+				<source>Food options</source>
 			</trans-unit>
 			<trans-unit id="label_register_all_terms" resname="label_register_all_terms">
 				<source>Registration terms</source>
@@ -1049,9 +920,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="label_terms_2" resname="label_terms_2">
 				<source>I accept the terms for travelling.</source>
-			</trans-unit>
-			<trans-unit id="label_method_of_payment" resname="label_method_of_payment">
-				<source>Selected method of payment:</source>
 			</trans-unit>
 			<trans-unit id="label_timeslot_date" resname="label_timeslot_date">
 				<source>Date</source>
@@ -1116,23 +984,8 @@ This event now has been confirmed.</source>
 			<trans-unit id="label_waiting_list" resname="label_waiting_list">
 				<source>Waiting list</source>
 			</trans-unit>
-			<trans-unit id="message_missingSeminarNumber" resname="message_missingSeminarNumber">
-				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-			</trans-unit>
-			<trans-unit id="message_wrongSeminarNumber" resname="message_wrongSeminarNumber">
-				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-			</trans-unit>
-			<trans-unit id="message_wrongSeminarNumber_informal" resname="message_wrongSeminarNumber_informal">
-				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-			</trans-unit>
 			<trans-unit id="message_noResults" resname="message_noResults">
 				<source>Sorry, currently no events could be found.</source>
-			</trans-unit>
-			<trans-unit id="message_notLoggedIn" resname="message_notLoggedIn">
-				<source>Sorry, you are not logged in.</source>
-			</trans-unit>
-			<trans-unit id="message_notLoggedIn_informal" resname="message_notLoggedIn_informal">
-				<source>Sorry, you are not logged in.</source>
 			</trans-unit>
 			<trans-unit id="message_pleaseLogIn" resname="message_pleaseLogIn">
 				<source>Please log in to view this page.</source>
@@ -1145,9 +998,6 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="message_earlybird_price" resname="message_earlybird_price">
 				<source>price valid and bookable until %s</source>
-			</trans-unit>
-			<trans-unit id="message_registrationOpensOn" resname="message_registrationOpensOn">
-				<source>starting %s</source>
 			</trans-unit>
 			<trans-unit id="message_noTargetGroupAgeNumber" resname="message_noTargetGroupAgeNumber">
 				<source>Please enter only positive numbers as minimum and maximum age.</source>
