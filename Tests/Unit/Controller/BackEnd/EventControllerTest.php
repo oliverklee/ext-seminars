@@ -308,6 +308,27 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function searchActionForMissingSearchTermPassesEventsOnPageUidWithEmptySearchTermToView(): void
+    {
+        $pageUid = 8;
+
+        $events = [new SingleEvent()];
+        $this->eventRepositoryMock->expects(self::once())->method('findBySearchTermInBackEndMode')
+            ->with($pageUid, '')->willReturn($events);
+        $this->viewMock->expects(self::exactly(4))->method('assign')
+            ->withConsecutive(
+                ['permissions', self::anything()],
+                ['pageUid', self::anything()],
+                ['events', $events],
+                ['searchTerm', self::anything()]
+            );
+
+        $this->subject->searchAction($pageUid);
+    }
+
+    /**
+     * @test
+     */
     public function searchActionEnrichesEventsWithRawData(): void
     {
         $events = [new SingleEvent()];
@@ -337,7 +358,7 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function searchActionPassesTrimmerSearchTermToView(): void
+    public function searchActionPassesTrimmedSearchTermToView(): void
     {
         $searchTerm = ' no dice ';
 
