@@ -3441,36 +3441,6 @@ parameters:
 			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:key\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult\\:\\:toArray\\(\\) should return list\\<Model\\> but returns array\\<Model\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^Parameter \\#1 \\$object of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetSet\\(\\) expects Model, string\\|null given\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetExists\\(\\) expects int\\|Model, string given\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetGet\\(\\) expects int\\|Model, string given\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<Model\\>\\:\\:offsetUnset\\(\\) expects int\\|Model, string given\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
 			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\AccommodationOptionRepository constructor invoked with 0 parameters, 1 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/AccommodationOptionRepositoryTest.php
