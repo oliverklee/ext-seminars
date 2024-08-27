@@ -31,22 +31,22 @@ class EventRegistrationController extends ActionController
     /**
      * @var RegistrationGuard
      */
-    private $registrationGuard;
+    protected $registrationGuard;
 
     /**
      * @var RegistrationProcessor
      */
-    private $registrationProcessor;
+    protected $registrationProcessor;
 
     /**
      * @var OneTimeAccountConnector
      */
-    private $oneTimeAccountConnector;
+    protected $oneTimeAccountConnector;
 
     /**
      * @var PriceFinder
      */
-    private $priceFinder;
+    protected $priceFinder;
 
     public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
     {
