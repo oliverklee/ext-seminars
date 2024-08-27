@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Make injected services in `EventRegistrationController` `protected` (#3297)
 - Make `getFirstOrganizer()` non-nullable (#3254)
 
 ### Deprecated
