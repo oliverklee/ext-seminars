@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223, #3224)
 
 ### Fixed
+- Use the correct queue for flash messages in the BE module (#3305)
 - Work around problems with the back button in the BE module search (#3293)
 - Drop duplicate labels (#3285)
 - Fix deprecation warning when rendering rich text (#3275)
