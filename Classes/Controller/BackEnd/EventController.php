@@ -112,7 +112,7 @@ class EventController extends ActionController
      * @param int<0, max> $pageUid
      * @param string $searchTerm
      */
-    public function searchAction(int $pageUid, string $searchTerm): void
+    public function searchAction(int $pageUid, string $searchTerm = ''): void
     {
         $this->view->assign('permissions', $this->permissions);
         $this->view->assign('pageUid', $pageUid);
