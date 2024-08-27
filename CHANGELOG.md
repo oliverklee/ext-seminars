@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop obsolete TypoScript option (#3294)
 - Drop unused `AbstractPlugin` code from `TemplateHelper`
   (#3237, #3238, #3240, #3241, #3242, #3243, #3245, #3246, #3250, #3251, #3253,
   #3255, #3256, #3258, #3260, #3261, #3263, #3264, #3265, #3266, #3268, #3269,
