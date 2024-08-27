@@ -60,8 +60,8 @@ jobs:
         run: "mkdir -p .Build/public/typo3temp/var/tests"
       - name: "Run unit tests with coverage"
         run: composer ci:coverage:unit
-      - name: "Show coverage files"
-        run: "ls -la .Build/coverage/"
+      - name: "Show generated coverage files"
+        run: "ls -lahR .Build/coverage/"
       - name: "Run functional tests with coverage"
         run: |
           export typo3DatabaseName="typo3";
@@ -69,8 +69,8 @@ jobs:
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
           composer ci:coverage:functional
-      - name: "Show coverage files"
-        run: "ls -la .Build/coverage/"
+      - name: "Show generated coverage files"
+        run: "ls -lahR .Build/coverage/"
       - name: "Run legacy functional tests with coverage"
         run: |
           export typo3DatabaseName="typo3";
@@ -78,10 +78,12 @@ jobs:
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
           composer ci:coverage:legacy-functional
-      - name: "Show coverage files"
-        run: "ls -la .Build/coverage/"
+      - name: "Show generated coverage files"
+        run: "ls -lahR .Build/coverage/"
       - name: "Merge coverage results"
         run: composer ci:coverage:merge
+      - name: "Show merged coverage files"
+        run: "ls -lahR build/logs/"
       - name: "Upload coverage results to Coveralls"
         uses: coverallsapp/github-action@v2
         env:
