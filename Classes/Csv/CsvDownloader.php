@@ -41,6 +41,7 @@ class CsvDownloader
         $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
         switch ($table) {
             case 'tx_seminars_seminars':
+                // @deprecated will be removed in version 6.0.0 in #3134
                 $result = $this->createAndOutputListOfEvents($pageUid);
                 break;
             case 'tx_seminars_attendances':
@@ -49,6 +50,7 @@ class CsvDownloader
                 break;
             default:
                 throw new \InvalidArgumentException(
+                    // @deprecated "tx_seminars_seminars" will be removed in version 6.0.0 in #3134
                     'The parameter "table" must be set to either "tx_seminars_seminars" or "tx_seminars_attendances".',
                     1671155057
                 );
@@ -114,6 +116,8 @@ class CsvDownloader
      * @param int $pageUid PID of the page with events for which to create the CSV list, must be > 0
      *
      * @return string CSV list of events for the given page or an error message in case of an error
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     public function createAndOutputListOfEvents(int $pageUid): string
     {
@@ -134,6 +138,8 @@ class CsvDownloader
      * @param int $pageUid PID of the system folder from which the event records should be exported, must be > 0
      *
      * @return string CSV export of the event records on that page
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     public function createListOfEvents(int $pageUid): string
     {
@@ -153,6 +159,8 @@ class CsvDownloader
 
     /**
      * Sets the HTTP header: the content type and filename (content disposition) for event lists.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     private function setContentTypeForEventLists(): void
     {

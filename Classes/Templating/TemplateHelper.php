@@ -321,7 +321,7 @@ abstract class TemplateHelper
      *
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
-     * @param bool $isFileName whether this is a filename, which has to be combined with a path
+     * @param bool $isFileName @deprecated $isFileName will be removed in v6.0.0 in #3272
      * @param bool $ignoreFlexform
      *        whether to ignore the flexform values and just get the settings from TypoScript, may be empty
      *
@@ -331,6 +331,7 @@ abstract class TemplateHelper
     public function getConfValueString(
         string $fieldName,
         string $sheet = 'sDEF',
+        // @deprecated $isFileName will be removed in v6.0.0 in #3272
         bool $isFileName = false,
         bool $ignoreFlexform = false
     ): string {

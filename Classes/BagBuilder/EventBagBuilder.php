@@ -69,6 +69,8 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * Configures the seminar bag to work like a BE list: It will use the
      * default sorting in the BE, and hidden records will be shown.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     public function setBackEndMode(): void
     {
@@ -78,6 +80,8 @@ class EventBagBuilder extends AbstractBagBuilder
 
     /**
      * Sets the sorting to be the same as in the BE.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     private function useBackEndSorting(): void
     {
