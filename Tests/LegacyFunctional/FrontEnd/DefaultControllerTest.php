@@ -4778,6 +4778,19 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function getFieldHeaderForSortableFieldAndSortingEnabledContainsLinkWithNoFollow(): void
+    {
+        $this->subject->setConfigurationValue('enableSortingLinksInListView', true);
+
+        self::assertStringContainsString(
+            'rel="nofollow"',
+            $this->subject->getFieldHeader('date')
+        );
+    }
+
+    /**
+     * @test
+     */
     public function getFieldHeaderForSortableFieldAndSortingDisabledNotContainsLink(): void
     {
         $this->subject->setConfigurationValue('enableSortingLinksInListView', false);

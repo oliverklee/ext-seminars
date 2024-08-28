@@ -1861,7 +1861,9 @@ class DefaultController extends TemplateHelper
         if (isset($this->orderByList[$fieldName]) && $this->getConfValueBoolean('enableSortingLinksInListView')) {
             $result = $this->pi_linkTP_keepPIvars(
                 $label,
-                ['sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1)]
+                ['sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1)],
+                false,
+                true
             );
         } else {
             $result = \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5);
