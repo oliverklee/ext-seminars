@@ -13,6 +13,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate `AbstractTimeSpam::getEndDate()` (#3310)
+- Deprecate `LegacySpeaker::isHidden()` (#3310)
+- Deprecate the `RegistrationManager::SEND_*_EMAIL` constants (#3310)
+- Deprecate the `EmailBuilder` class (#3310)
+- Deprecate `RegistrationManager::isUserRegisteredMessage()` (#3310)
+- Deprecate CSV-exporting the user group for registrations (#3310)
+- Deprecate the `SingleViewLinkBuilder` class (#3310)
+- Deprecate the CSV export of events (#3310)
+- Deprecate `$isFileName` parameter in `TemplateHelper::getConfValueString()`(#3310)
+  (#3310)
+
 ### Removed
 - Drop obsolete TypoScript option (#3294)
 - Drop unused `AbstractPlugin` code from `TemplateHelper`

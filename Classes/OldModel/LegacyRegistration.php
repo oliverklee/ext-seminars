@@ -91,6 +91,8 @@ class LegacyRegistration extends AbstractModel
 
     /**
      * @var FrontendUserGroupRepository|null
+     *
+     * @deprecated will be removed in version 6.0.0 in #2977
      */
     private $frontEndUserGroupRepository;
 
@@ -104,6 +106,9 @@ class LegacyRegistration extends AbstractModel
         self::$cachedSeminars = [];
     }
 
+    /**
+     * @deprecated will be removed in version 6.0.0 in #2977
+     */
     protected function getFrontEndUserGroupRepository(): FrontendUserGroupRepository
     {
         if (!$this->frontEndUserGroupRepository instanceof FrontendUserGroupRepository) {
@@ -320,6 +325,7 @@ class LegacyRegistration extends AbstractModel
                 $result = $user instanceof FrontEndUser ? $user->getName() : '';
                 break;
             case 'usergroup':
+                // @deprecated will be removed in version 6.0.0 in #2977
                 $repository = $this->getFrontEndUserGroupRepository();
                 $titles = [];
                 /** @var int[] $uids */

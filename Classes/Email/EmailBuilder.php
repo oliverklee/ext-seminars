@@ -14,6 +14,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * You will need to create a new instance of this class for each new email instance you would like to build.
  *
+ * @deprecated will be removed in version 6.0.0 in #2973
+ *
  * @internal
  */
 class EmailBuilder

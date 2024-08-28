@@ -235,6 +235,8 @@ class LegacySpeaker extends AbstractModel
      * Returns TRUE if the speaker is hidden, otherwise FALSE.
      *
      * @return bool TRUE if the speaker is hidden, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #2961
      */
     public function isHidden(): bool
     {

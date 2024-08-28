@@ -26,6 +26,8 @@ abstract class AbstractTimeSpan extends AbstractModel
 
     /**
      * @return string the end date (or the localized string "will be announced" if no end date is set)
+     *
+     * @deprecated will be removed in version 6.0 in #2959
      */
     public function getEndDate(): string
     {

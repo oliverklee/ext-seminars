@@ -57,6 +57,8 @@ class EventController extends ActionController
      * @param int<0, max> $pageUid
      *
      * @return string|ResponseInterface
+     *
+     * @deprecated will be removed in version 6.0.0 in #3134
      */
     public function exportCsvAction(int $pageUid)
     {
