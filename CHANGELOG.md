@@ -8,11 +8,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Add `rel="nofollow"` to the sorting links in the list view (#3311)
 - Make injected services in `EventRegistrationController` `protected` (#3297)
 - Make `getFirstOrganizer()` non-nullable (#3254)
 
 ### Deprecated
-
 - Deprecate `AbstractTimeSpam::getEndDate()` (#3310)
 - Deprecate `LegacySpeaker::isHidden()` (#3310)
 - Deprecate the `RegistrationManager::SEND_*_EMAIL` constants (#3310)

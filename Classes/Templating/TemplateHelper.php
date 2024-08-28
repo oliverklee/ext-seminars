@@ -1345,7 +1345,8 @@ abstract class TemplateHelper
         string $str,
         array $urlParameters = [],
         bool $cache = false,
-        int $altPageId = 0
+        int $altPageId = 0,
+        bool $addNoFollow = false
     ): string {
         if (!$this->cObj instanceof ContentObjectRenderer) {
             throw new \RuntimeException('No cObj.', 1703017453);
@@ -1358,6 +1359,9 @@ abstract class TemplateHelper
         $conf['parameter'] = $altPageId > 0 ? $altPageId : 'current';
         $conf['additionalParams'] = ($this->conf['parent.']['addParams'] ?? '')
             . HttpUtility::buildQueryString($urlParameters, '&', true);
+        if ($addNoFollow) {
+            $conf['ATagParams'] = 'rel="nofollow"';
+        }
 
         return $this->cObj->typoLink($str, $conf);
     }
@@ -1565,13 +1569,17 @@ abstract class TemplateHelper
      * @return string The input string wrapped in <a> tags
      */
     // phpcs:disable
-    protected function pi_linkTP_keepPIvars(string $str, array $overrulePIvars = [], bool $cache = false): string
-    {
+    protected function pi_linkTP_keepPIvars(
+        string $str,
+        array $overrulePIvars = [],
+        bool $cache = false,
+        bool $addNoFollow = false
+    ): string {
         $piVars = $this->piVars;
         unset($piVars['DATA']);
         ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
         $overrulePIvars = $piVars;
 
-        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache);
+        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache, 0, $addNoFollow);
     }
 }
