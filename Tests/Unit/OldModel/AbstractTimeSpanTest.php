@@ -16,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractTimeSpanTest extends UnitTestCase
 {
-    protected $resetSingletonInstances = true;
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var TestingTimeSpan

@@ -12,7 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RichTextViewHelperTest extends UnitTestCase
 {
-    protected $resetSingletonInstances = true;
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var RichTextViewHelper
