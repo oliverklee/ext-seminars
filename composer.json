@@ -50,7 +50,6 @@
 		"egulias/email-validator": "^2.1.0 || ^3.2.1",
 		"ergebnis/composer-normalize": "~2.19.0",
 		"friendsofphp/php-cs-fixer": "^3.4.0",
-		"helhum/typo3-console": "^6.7.6 || ^7.1.4",
 		"helmich/typo3-typoscript-lint": "^2.5.2",
 		"phpstan/extension-installer": "^1.4.2",
 		"phpstan/phpstan": "^1.12.0",
