@@ -9,6 +9,9 @@ use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration
+ */
 final class MailNotifierConfigurationTest extends UnitTestCase
 {
     /**

@@ -19,6 +19,9 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArr
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsModifiedValue;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
+/**
+ * @covers \OliverKlee\Seminars\Hooks\HookProvider
+ */
 final class HookProviderTest extends UnitTestCase
 {
     /**
