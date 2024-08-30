@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -77,10 +78,14 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var RegistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
-            ['redirect', 'forward', 'redirectToUri'],
+            $methodsToMock,
             [$this->registrationRepositoryMock, $this->eventRepositoryMock]
         );
         $this->subject = $subject;

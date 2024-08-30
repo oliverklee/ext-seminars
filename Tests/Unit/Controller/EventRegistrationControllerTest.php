@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
@@ -66,11 +67,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var EventRegistrationController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(
-            EventRegistrationController::class,
-            ['redirect', 'forward', 'redirectToUri']
-        );
+        $subject = $this->getAccessibleMock(EventRegistrationController::class, $methodsToMock);
         $this->subject = $subject;
 
         $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);

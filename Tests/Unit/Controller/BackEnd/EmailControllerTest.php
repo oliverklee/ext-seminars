@@ -9,6 +9,7 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -45,11 +46,12 @@ final class EmailControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(
-            EmailController::class,
-            ['redirect', 'forward', 'redirectToUri']
-        );
+        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock);
         $this->subject = $subject;
 
         $this->viewMock = $this->createMock(TemplateView::class);

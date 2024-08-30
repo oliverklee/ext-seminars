@@ -14,6 +14,7 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
@@ -60,11 +61,12 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var EventUnregistrationController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(
-            EventUnregistrationController::class,
-            ['redirect', 'forward', 'redirectToUri']
-        );
+        $subject = $this->getAccessibleMock(EventUnregistrationController::class, $methodsToMock);
         $this->subject = $subject;
 
         $this->viewMock = $this->createMock(TemplateView::class);
