@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -61,10 +62,14 @@ final class ModuleControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var ModuleController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             ModuleController::class,
-            ['redirect', 'forward', 'redirectToUri'],
+            $methodsToMock,
             [$this->eventRepositoryMock, $this->registrationRepositoryMock]
         );
         $this->subject = $subject;

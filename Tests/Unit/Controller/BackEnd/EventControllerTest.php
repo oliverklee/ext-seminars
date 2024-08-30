@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -67,10 +68,14 @@ final class EventControllerTest extends UnitTestCase
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
 
+        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $methodsToMock[] = 'forward';
+        }
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'redirectToUri'],
+            $methodsToMock,
             [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
         );
         $this->subject = $subject;
