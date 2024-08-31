@@ -35,6 +35,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove dead code from `TemplateHelper` (#3220, #3221, #3222, #3223, #3224)
 
 ### Fixed
+- Avoid using the deprecated Extbase models (#3322)
 - Mock controller methods in a TYPO3-version-specific way (#3321)
 - Use the correct queue for flash messages in the BE module (#3305)
 - Work around problems with the back button in the BE module search (#3293)
