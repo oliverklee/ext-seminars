@@ -20,7 +20,7 @@ updates:
       - dependency-name: "helmich/typo3-typoscript-lint"
       - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
-        versions: [ ">= 9" ]
+        versions: [ ">= 10" ]
       - dependency-name: "sjbr/static-info-tables"
       - dependency-name: "symfony/*"
       - dependency-name: "typo3/cms-*"

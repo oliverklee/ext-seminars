@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Upgrade to PHPUnit 9.x (#3325)
 - Require Fluid >= 2.7.4 (#3554)
 - Require TYPO3 >= 11.5.37 (#3510)
 - Allow `psr/http-message` 2.x (#3507)

@@ -4150,7 +4150,7 @@ final class LegacyEventTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/test organization.*test homepage/',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4180,7 +4180,7 @@ final class LegacyEventTest extends FunctionalTestCase
                 'description' => 'bar',
             ]
         );
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/foo.*bar/s',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4198,7 +4198,7 @@ final class LegacyEventTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/test homepage.*test description/s',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4337,7 +4337,7 @@ final class LegacyEventTest extends FunctionalTestCase
             ]
         );
 
-        self::assertNotRegExp(
+        self::assertDoesNotMatchRegularExpression(
             "/foo\r\nbar/",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4355,7 +4355,7 @@ final class LegacyEventTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             "/foo\nbar/",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4471,7 +4471,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->addSpeakerRelation($speakerWithLink);
         $this->createPi1();
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/href="https:\\/\\/www.foo.com".*>test speaker/',
             $this->subject->getSpeakersShort()
         );
@@ -6103,7 +6103,7 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     public function dumpSeminarValuesForTitleGivenReturnsTitleWithLineFeedAtEndOfLine(): void
     {
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/\\n$/',
             $this->subject->dumpSeminarValues('title')
         );
@@ -6116,7 +6116,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setDescription('foo bar');
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/.*' . $this->subject->getTitle() . '.*\\n.*' .
             $this->subject->getRecordPropertyString('description') . '/',
             $this->subject->dumpSeminarValues('title,description')

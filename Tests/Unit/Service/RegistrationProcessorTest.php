@@ -498,7 +498,7 @@ final class RegistrationProcessorTest extends UnitTestCase
         self::assertCount(1, $result);
         foreach ($result as $attendee) {
             self::assertInstanceOf(FrontendUser::class, $attendee);
-            self::assertRegExp('/^additional-attendee-[\\da-f]{32}$/', $attendee->getUsername());
+            self::assertMatchesRegularExpression('/^additional-attendee-[\\da-f]{32}$/', $attendee->getUsername());
         }
     }
 

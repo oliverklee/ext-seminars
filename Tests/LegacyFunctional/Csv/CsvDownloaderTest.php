@@ -271,7 +271,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/\\r\\n$/',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -856,7 +856,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/\\r\\n$/',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );

@@ -172,7 +172,7 @@ final class RequirementsListTest extends FunctionalTestCase
         );
         $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
             $this->subject->render()
         );
@@ -216,7 +216,7 @@ final class RequirementsListTest extends FunctionalTestCase
         );
         $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/required_foo.*required_bar/s',
             $this->subject->render()
         );

@@ -1225,7 +1225,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyOrganizers($registration);
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
             $this->email->getTextBody()
         );
@@ -1841,7 +1841,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/' . $this->translate('label_vacancies') . ': 1\\n*$/',
             $this->email->getTextBody()
         );
