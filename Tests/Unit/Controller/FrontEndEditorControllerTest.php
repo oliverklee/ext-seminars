@@ -8,20 +8,17 @@ use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\EventTypeInterface;
 use OliverKlee\Seminars\Domain\Model\NullEventType;
-use OliverKlee\Seminars\Domain\Model\Organizer;
-use OliverKlee\Seminars\Domain\Model\Speaker;
-use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
-use OliverKlee\Seminars\Tests\Unit\Controller\Fixtures\TestingQueryResult;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -162,16 +159,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $eventTypes = [new NullEventType()];
         $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 
-        /** @var TestingQueryResult<Organizer> $organizers */
-        $organizers = new TestingQueryResult();
+        $organizers = $this->createStub(QueryResultInterface::class);
         $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
 
-        /** @var TestingQueryResult<Speaker> $speakers */
-        $speakers = new TestingQueryResult();
+        $speakers = $this->createStub(QueryResultInterface::class);
         $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
 
-        /** @var TestingQueryResult<Venue> $venues */
-        $venues = new TestingQueryResult();
+        $venues = $this->createStub(QueryResultInterface::class);
         $this->venueRepositoryMock->method('findAll')->willReturn($venues);
 
         $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
@@ -340,16 +334,13 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         $eventTypes = [new NullEventType()];
         $this->eventTypeRepositoryMock->method('findAllPlusNullEventType')->willReturn($eventTypes);
 
-        /** @var TestingQueryResult<Organizer> $organizers */
-        $organizers = new TestingQueryResult();
+        $organizers = $this->createStub(QueryResultInterface::class);
         $this->organizerRepositoryMock->method('findAll')->willReturn($organizers);
 
-        /** @var TestingQueryResult<Speaker> $speakers */
-        $speakers = new TestingQueryResult();
+        $speakers = $this->createStub(QueryResultInterface::class);
         $this->speakerRepositoryMock->method('findAll')->willReturn($speakers);
 
-        /** @var TestingQueryResult<Venue> $venues */
-        $venues = new TestingQueryResult();
+        $venues = $this->createStub(QueryResultInterface::class);
         $this->venueRepositoryMock->method('findAll')->willReturn($venues);
 
         $this->viewMock->expects(self::atLeast(5))->method('assign')->withConsecutive(
