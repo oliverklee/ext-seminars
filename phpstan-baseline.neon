@@ -3436,11 +3436,6 @@ parameters:
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-
-			message: "#^Class OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\Fixtures\\\\TestingQueryResult implements generic interface TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface but does not specify its types\\: ModelType$#"
-			count: 1
-			path: Tests/Unit/Controller/Fixtures/TestingQueryResult.php
-
-		-
 			message: "#^Class OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\AccommodationOptionRepository constructor invoked with 0 parameters, 1 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/AccommodationOptionRepositoryTest.php
@@ -3674,4 +3669,3 @@ parameters:
 			message: "#^OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Templating\\\\Fixtures\\\\TestingTemplateHelper\\:\\:__construct\\(\\) does not call parent constructor from OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\.$#"
 			count: 1
 			path: Tests/Unit/Templating/Fixtures/TestingTemplateHelper.php
-
