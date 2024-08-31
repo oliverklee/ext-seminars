@@ -32,10 +32,8 @@ final class LegacyConfigurationTest extends UnitTestCase
     {
         parent::setUp();
 
-        $frontEndControllerMock = $this->getMockBuilder(TypoScriptFrontendController::class)
-            ->disableOriginalConstructor()->getMock();
-        $this->contentObjectMock = $this->getMockBuilder(ContentObjectRenderer::class)
-            ->disableOriginalConstructor()->getMock();
+        $frontEndControllerMock = $this->createMock(TypoScriptFrontendController::class);
+        $this->contentObjectMock = $this->createMock(ContentObjectRenderer::class);
         $frontEndControllerMock->cObj = $this->contentObjectMock;
         $GLOBALS['TSFE'] = $frontEndControllerMock;
 

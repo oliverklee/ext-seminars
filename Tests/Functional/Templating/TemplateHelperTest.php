@@ -35,8 +35,7 @@ final class TemplateHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $frontEndControllerMock = $this->getMockBuilder(TypoScriptFrontendController::class)
-            ->disableOriginalConstructor()->getMock();
+        $frontEndControllerMock = $this->createMock(TypoScriptFrontendController::class);
         $frontEndControllerMock->cObj = $this->createMock(ContentObjectRenderer::class);
         $GLOBALS['TSFE'] = $frontEndControllerMock;
 

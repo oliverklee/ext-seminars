@@ -30,8 +30,7 @@ final class TemplateHelperTest extends UnitTestCase
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cacheManager->setCacheConfigurations(['l10n' => ['backend' => NullBackend::class]]);
 
-        $frontEndControllerMock = $this->getMockBuilder(TypoScriptFrontendController::class)
-            ->disableOriginalConstructor()->getMock();
+        $frontEndControllerMock = $this->createMock(TypoScriptFrontendController::class);
         $frontEndControllerMock->cObj = $this->createMock(ContentObjectRenderer::class);
         $GLOBALS['TSFE'] = $frontEndControllerMock;
 
