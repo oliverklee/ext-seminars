@@ -44,7 +44,7 @@
 		"typo3/cms-extbase": "^10.4.33 || ^11.5.17",
 		"typo3/cms-fluid": "^10.4.33 || ^11.5.17",
 		"typo3/cms-frontend": "^10.4.33 || ^11.5.17",
-		"typo3fluid/fluid": "^2.6.10"
+		"typo3fluid/fluid": "2.15.0"
 	},
 	"require-dev": {
 		"egulias/email-validator": "^2.1.0 || ^3.2.1",
