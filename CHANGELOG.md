@@ -8,6 +8,16 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.6.1: Bug fixes, cleanup and deprecations
+
+### Changed
 - Add `rel="nofollow"` to the sorting links in the list view (#3311)
 - Make injected services in `EventRegistrationController` `protected` (#3297)
 - Make `getFirstOrganizer()` non-nullable (#3254)
