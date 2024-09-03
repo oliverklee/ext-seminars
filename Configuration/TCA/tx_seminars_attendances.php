@@ -30,6 +30,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.uid',
             'config' => [
                 'type' => 'none',
+                'readOnly' => 1,
             ],
         ],
         'seminar' => [
