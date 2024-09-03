@@ -120,6 +120,28 @@ trait EventDateTrait
      */
     protected $statistics;
 
+    /**
+     * @var int
+     * @phpstan-var EventDateInterface::EVENT_FORMAT_*
+     */
+    protected $eventFormat = EventDateInterface::EVENT_FORMAT_ON_SITE;
+
+    /**
+     * @var list<EventDateInterface::EVENT_FORMAT_*>
+     */
+    private static $partiallyOnSiteEventFormats = [
+        EventDateInterface::EVENT_FORMAT_ON_SITE,
+        EventDateInterface::EVENT_FORMAT_HYBRID,
+    ];
+
+    /**
+     * @var list<EventDateInterface::EVENT_FORMAT_*>
+     */
+    private static $partiallyOnlineEventFormats = [
+        EventDateInterface::EVENT_FORMAT_HYBRID,
+        EventDateInterface::EVENT_FORMAT_ONLINE,
+    ];
+
     private function initializeEventDate(): void
     {
         $this->venues = new ObjectStorage();
@@ -386,5 +408,31 @@ trait EventDateTrait
     public function setStatistics(EventStatistics $statistics): void
     {
         $this->statistics = $statistics;
+    }
+
+    /**
+     * @return EventDateInterface::EVENT_FORMAT_*
+     */
+    public function getEventFormat(): int
+    {
+        return $this->eventFormat;
+    }
+
+    /**
+     * @param EventDateInterface::EVENT_FORMAT_* $eventFormat
+     */
+    public function setEventFormat(int $eventFormat): void
+    {
+        $this->eventFormat = $eventFormat;
+    }
+
+    public function isAtLeastPartiallyOnSite(): bool
+    {
+        return \in_array($this->getEventFormat(), self::$partiallyOnSiteEventFormats, true);
+    }
+
+    public function isAtLeastPartiallyOnline(): bool
+    {
+        return \in_array($this->getEventFormat(), self::$partiallyOnlineEventFormats, true);
     }
 }

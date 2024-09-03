@@ -18,6 +18,21 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 interface EventDateInterface
 {
+    /**
+     * @var int<0, 2>
+     */
+    public const EVENT_FORMAT_ON_SITE = 0;
+
+    /**
+     * @var int<0, 2>
+     */
+    public const EVENT_FORMAT_HYBRID = 1;
+
+    /**
+     * @var int<0, 2>
+     */
+    public const EVENT_FORMAT_ONLINE = 2;
+
     public function getStart(): ?\DateTime;
 
     public function getEnd(): ?\DateTime;
@@ -99,4 +114,18 @@ interface EventDateInterface
     public function allowsUnlimitedRegistrations(): bool;
 
     public function setStatistics(EventStatistics $statistics): void;
+
+    /**
+     * @return EventDateInterface::EVENT_FORMAT_*
+     */
+    public function getEventFormat(): int;
+
+    /**
+     * @param EventDateInterface::EVENT_FORMAT_* $eventFormat
+     */
+    public function setEventFormat(int $eventFormat): void;
+
+    public function isAtLeastPartiallyOnSite(): bool;
+
+    public function isAtLeastPartiallyOnline(): bool;
 }

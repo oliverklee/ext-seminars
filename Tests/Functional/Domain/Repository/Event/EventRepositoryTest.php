@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Event\EventStatistics;
 use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
@@ -96,6 +97,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(EventInterface::STATUS_CONFIRMED, $result->getStatus());
         self::assertEqualsWithDelta(100.0, $result->getSpecialPrice(), 0.0001);
         self::assertEqualsWithDelta(75.0, $result->getSpecialEarlyBirdPrice(), 0.0001);
+        self::assertSame(EventDateInterface::EVENT_FORMAT_ONLINE, $result->getEventFormat());
     }
 
     /**

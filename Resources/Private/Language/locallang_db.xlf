@@ -154,6 +154,18 @@
 			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime" resname="tx_seminars_seminars.divLabelPlaceTime">
 				<source>Place/Time</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.event_format" resname="tx_seminars_seminars.event_format">
+				<source>Event format</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.event_format.on-site" resname="tx_seminars_seminars.format.event_on-site">
+				<source>on-site</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.event_format.hybrid" resname="tx_seminars_seminars.format.event_hybrid">
+				<source>hybrid</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.format.event_online" resname="tx_seminars_seminars.format.event_online">
+				<source>online</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.begin_date" resname="tx_seminars_seminars.begin_date">
 				<source>Begin time and date</source>
 			</trans-unit>

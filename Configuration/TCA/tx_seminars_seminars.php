@@ -227,6 +227,29 @@ $tca = [
                 'default' => 0,
             ],
         ],
+        'event_format' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'default' => \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ON_SITE,
+                'items' => [
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.on-site',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ON_SITE,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.hybrid',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_HYBRID,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.online',
+                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ONLINE,
+                    ],
+                ],
+            ],
+        ],
         'begin_date' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date',
@@ -969,7 +992,7 @@ $tca = [
         \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT => [
             'showitem' =>
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title, uid, slug, subtitle, image, categories, teaser, description, event_type, language, accreditation_number, credit_points, details_page, additional_information, checkboxes, uses_terms_2, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, event_format, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, target_groups, date_of_last_registration_digest, ' .
@@ -987,7 +1010,7 @@ $tca = [
         \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE => [
             'showitem' =>
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title, uid, topic, slug, language, accreditation_number, details_page, cancelled, automatic_confirmation_cancelation, checkboxes, notes, attached_files, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, event_format, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, date_of_last_registration_digest, ' .

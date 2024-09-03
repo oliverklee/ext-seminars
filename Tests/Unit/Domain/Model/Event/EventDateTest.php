@@ -1011,4 +1011,97 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($model, $this->subject->getStatistics());
     }
+
+    /**
+     * @test
+     */
+    public function eventFormatsAreDistinct(): void
+    {
+        $eventFormats = [
+            EventDateInterface::EVENT_FORMAT_ON_SITE,
+            EventDateInterface::EVENT_FORMAT_HYBRID,
+            EventDateInterface::EVENT_FORMAT_ONLINE,
+        ];
+
+        self::assertSame(\array_unique($eventFormats), $eventFormats);
+    }
+
+    /**
+     * @test
+     */
+    public function getEventFormatInitiallyReturnsOnSite(): void
+    {
+        self::assertSame(EventDateInterface::EVENT_FORMAT_ON_SITE, $this->subject->getEventFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function setEventFormatSetsEventFormat(): void
+    {
+        $value = EventDateInterface::EVENT_FORMAT_HYBRID;
+        $this->subject->setEventFormat($value);
+
+        self::assertSame($value, $this->subject->getEventFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnSiteForOnSiteEventReturnsTrue(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ON_SITE);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnSite());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnSiteForHybridEventReturnsTrue(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_HYBRID);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnSite());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnSiteForOnlineEventReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ONLINE);
+
+        self::assertFalse($this->subject->isAtLeastPartiallyOnSite());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnlineForOnSiteEventReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ON_SITE);
+
+        self::assertFalse($this->subject->isAtLeastPartiallyOnline());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnlineForHybridEventReturnsTrue(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_HYBRID);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnline());
+    }
+
+    /**
+     * @test
+     */
+    public function isAtLeastPartiallyOnlineForOnlineEventReturnsTrue(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ONLINE);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnline());
+    }
 }
