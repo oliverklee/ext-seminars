@@ -25,7 +25,7 @@ class Organizer extends AbstractModel implements MailRole
      */
     public function setName(string $name): void
     {
-        if ($name == '') {
+        if ($name === '') {
             throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333296852);
         }
 
@@ -66,7 +66,7 @@ class Organizer extends AbstractModel implements MailRole
      */
     public function setEmailAddress(string $emailAddress): void
     {
-        if ($emailAddress == '') {
+        if ($emailAddress === '') {
             throw new \InvalidArgumentException('The parameter $emailAddress must not be empty.', 1333296861);
         }
 

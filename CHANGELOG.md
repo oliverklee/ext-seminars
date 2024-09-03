@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Always use strict comparisons (#3336)
 
 ## 5.6.1: Bug fixes, cleanup and deprecations
 

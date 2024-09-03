@@ -464,25 +464,23 @@ class LegacyEvent extends AbstractTimeSpan
         $placeTexts = [];
 
         foreach ($this->getPlacesAsArray() as $place) {
-            $placeText = $place['title'];
-            if ($place['homepage'] != '') {
+            $placeText = (string)($place['title'] ?? '');
+            if ((string)($place['homepage'] ?? '') !== '') {
                 $placeText .= "\n" . $place['homepage'];
             }
 
             $descriptionParts = [];
-            if ($place['address'] != '') {
+            if ((string)($place['address'] ?? '') !== '') {
                 $descriptionParts[] = str_replace("\r", ',', $place['address']);
             }
-            if ($place['city'] != '') {
+            if ((string)($place['city'] ?? '') !== '') {
                 $descriptionParts[] = trim(
                     $place['zip'] . ' ' . $place['city']
                 );
             }
-            if ($place['country'] != '') {
-                $countryName = $this->getCountryNameFromIsoCode(
-                    $place['country']
-                );
-                if ($countryName != '') {
+            if ((string)($place['country'] ?? '') !== '') {
+                $countryName = $this->getCountryNameFromIsoCode($place['country']);
+                if ($countryName !== '') {
                     $descriptionParts[] = $countryName;
                 }
             }
@@ -490,7 +488,7 @@ class LegacyEvent extends AbstractTimeSpan
             if (!empty($descriptionParts)) {
                 $placeText .= ', ' . implode(', ', $descriptionParts);
             }
-            if ($place['directions'] != '') {
+            if ((string)($place['directions'] ?? '') !== '') {
                 $placeText .= "\n" . str_replace("\r", ', ', $place['directions']);
             }
 
@@ -3316,7 +3314,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isConfirmed(): bool
     {
-        return $this->getStatus() == EventInterface::STATUS_CONFIRMED;
+        return $this->getStatus() === EventInterface::STATUS_CONFIRMED;
     }
 
     /**
@@ -3326,7 +3324,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function isPlanned(): bool
     {
-        return $this->getStatus() == EventInterface::STATUS_PLANNED;
+        return $this->getStatus() === EventInterface::STATUS_PLANNED;
     }
 
     /**

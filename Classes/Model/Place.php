@@ -50,7 +50,7 @@ class Place extends AbstractModel
     public function getCountry(): ?Country
     {
         $countryCode = $this->getAsString('country');
-        if ($countryCode == '') {
+        if ($countryCode === '') {
             return null;
         }
 

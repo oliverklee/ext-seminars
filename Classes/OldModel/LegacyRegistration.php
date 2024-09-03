@@ -564,7 +564,7 @@ class LegacyRegistration extends AbstractModel
     {
         $result = '';
         $totalPrice = $this->getRecordPropertyDecimal('total_price');
-        if ($totalPrice != '0.00') {
+        if ($totalPrice !== '0.00') {
             $result = $this->getSeminarObject()->formatPrice($totalPrice);
         }
 
