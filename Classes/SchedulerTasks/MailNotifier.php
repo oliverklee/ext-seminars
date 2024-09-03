@@ -203,7 +203,7 @@ class MailNotifier extends AbstractTask
     private function getEventsToSendEventTakesPlaceReminderFor(): array
     {
         $days = $this->getDaysBeforeBeginDate();
-        if ($days == 0) {
+        if ($days === 0) {
             return [];
         }
 

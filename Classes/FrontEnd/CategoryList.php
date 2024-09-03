@@ -47,7 +47,7 @@ class CategoryList extends AbstractView
         $categoryBag = $categoryBagBuilder->build();
 
         // Only lists categories for which there are events.
-        if (($eventUids != '') && !$categoryBag->isEmpty()) {
+        if (($eventUids !== '') && !$categoryBag->isEmpty()) {
             $allCategories = '';
 
             /** @var LegacyCategory $category */
@@ -85,7 +85,7 @@ class CategoryList extends AbstractView
         if ($categoryUid <= 0) {
             throw new \InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
         }
-        if ($title == '') {
+        if ($title === '') {
             throw new \InvalidArgumentException('$title must not be empty.', 1333293044);
         }
 

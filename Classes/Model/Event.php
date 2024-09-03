@@ -55,7 +55,7 @@ class Event extends AbstractTimeSpan
      */
     public function isSingleEvent(): bool
     {
-        return $this->getAsInteger('object_type') == self::TYPE_COMPLETE;
+        return $this->getAsInteger('object_type') === self::TYPE_COMPLETE;
     }
 
     /**
@@ -465,7 +465,7 @@ class Event extends AbstractTimeSpan
 
     public function hasCombinedSingleViewPage(): bool
     {
-        return $this->getCombinedSingleViewPage() != '';
+        return $this->getCombinedSingleViewPage() !== '';
     }
 
     /**

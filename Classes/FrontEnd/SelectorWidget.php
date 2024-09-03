@@ -464,7 +464,7 @@ class SelectorWidget extends AbstractView
         /** @var LegacyEvent $event */
         foreach ($this->seminarBag as $event) {
             $eventTypeUid = $event->getEventTypeUid();
-            if ($eventTypeUid != 0) {
+            if ($eventTypeUid !== 0) {
                 $eventTypeName = $event->getEventType();
                 if (!isset($result[$eventTypeUid])) {
                     $result[$eventTypeUid] = $eventTypeName;

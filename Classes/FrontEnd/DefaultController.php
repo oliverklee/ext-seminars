@@ -1211,7 +1211,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideUnneededSubpartsForTopicRecords(): void
     {
-        if ($this->seminar->getRecordType() != EventInterface::TYPE_EVENT_TOPIC) {
+        if ($this->seminar->getRecordType() !== EventInterface::TYPE_EVENT_TOPIC) {
             return;
         }
 
@@ -1677,7 +1677,7 @@ class DefaultController extends TemplateHelper
 
             // Retrieves the data for the columns "number of seats", "total
             // price" and "status", but only if we are on the "my_events" list.
-            if ($whatToDisplay == 'my_events') {
+            if ($whatToDisplay === 'my_events') {
                 $attendanceData = [
                     'seats' => $this->registration->getSeats(),
                     'total_price' => $this->registration->getTotalPrice(),
@@ -1733,7 +1733,7 @@ class DefaultController extends TemplateHelper
             $currentDate = $this->seminar->getDate();
             if (
                 // @deprecated #1788 will be removed in seminars 6.0
-                $currentDate == $this->previousDate
+                $currentDate === $this->previousDate
                 && $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')
             ) {
                 $dateToShow = '';
@@ -1882,7 +1882,7 @@ class DefaultController extends TemplateHelper
      */
     private function getSelectorWidgetIfNecessary(string $whatToDisplay): string
     {
-        if ($whatToDisplay != 'seminar_list') {
+        if ($whatToDisplay !== 'seminar_list') {
             return '';
         }
 
@@ -2171,7 +2171,7 @@ class DefaultController extends TemplateHelper
      */
     private function hideColumnsForAllViewsExceptMyEvents(string $whatToDisplay): void
     {
-        if ($whatToDisplay != 'my_events') {
+        if ($whatToDisplay !== 'my_events') {
             $this->hideColumns(
                 ['expiry', 'seats', 'total_price', 'status_registration']
             );
