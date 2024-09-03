@@ -77,9 +77,6 @@ class DefaultController extends TemplateHelper
     /** @var string the previous event's category (used for the list view) */
     private $previousCategory = '';
 
-    /** @var string the previous event's date (used for the list view) */
-    private $previousDate = '';
-
     /**
      * @var string[] field names (as keys) by which we can sort plus the corresponding SQL sort criteria (as value).
      *
@@ -1540,7 +1537,6 @@ class DefaultController extends TemplateHelper
 
         $this->internal['res_count'] = $seminarOrRegistrationBag->countWithoutLimit();
 
-        $this->previousDate = '';
         $this->previousCategory = '';
 
         return $seminarOrRegistrationBag;
@@ -1731,20 +1727,10 @@ class DefaultController extends TemplateHelper
             $this->setMarker('speakers', $this->seminar->getSpeakersShort());
             $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
 
-            $currentDate = $this->seminar->getDate();
-            if (
-                // @deprecated #1788 will be removed in seminars 6.0
-                $currentDate === $this->previousDate
-                && $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')
-            ) {
-                $dateToShow = '';
+            if ($whatToDisplay === 'other_dates') {
+                $dateToShow = $this->createSingleViewLink($event, $this->seminar->getDate(), false);
             } else {
-                if ($whatToDisplay === 'other_dates') {
-                    $dateToShow = $this->createSingleViewLink($event, $this->seminar->getDate(), false);
-                } else {
-                    $dateToShow = $currentDate;
-                }
-                $this->previousDate = $currentDate;
+                $dateToShow = $this->seminar->getDate();
             }
             $this->setMarker('date', $dateToShow);
 
