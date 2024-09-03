@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -67,6 +68,11 @@ final class RegistrationControllerTest extends UnitTestCase
     private $csvDownloaderMock;
 
     /**
+     * @var LanguageService&MockObject
+     */
+    private $languageServiceMock;
+
+    /**
      * @var Response
      */
     private $response;
@@ -77,8 +83,9 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->languageServiceMock = $this->createMock(LanguageService::class);
 
-        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
             $methodsToMock[] = 'forward';
         }
@@ -86,7 +93,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$this->registrationRepositoryMock, $this->eventRepositoryMock]
+            [$this->registrationRepositoryMock, $this->eventRepositoryMock, $this->languageServiceMock]
         );
         $this->subject = $subject;
 
@@ -596,6 +603,20 @@ final class RegistrationControllerTest extends UnitTestCase
             ->with($registrationUid);
 
         $this->subject->deleteAction($registrationUid, 1);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteActionAddsFlashMessage(): void
+    {
+        $localizedMessage = 'Registration deleted!';
+        $this->languageServiceMock->expects(self::once())->method('sL')
+            ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted')
+            ->willReturn($localizedMessage);
+        $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);
+
+        $this->subject->deleteAction(7, 1);
     }
 
     /**
