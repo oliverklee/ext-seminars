@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Allow viewing event UIDs in the TCEforms (#3337)
 
 ### Changed
 
