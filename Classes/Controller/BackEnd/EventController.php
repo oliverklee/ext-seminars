@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -43,14 +44,21 @@ class EventController extends ActionController
      */
     private $eventStatisticsCalculator;
 
+    /**
+     * @var LanguageService
+     */
+    private $languageService;
+
     public function __construct(
         EventRepository $eventRepository,
         Permissions $permissions,
-        EventStatisticsCalculator $eventStatisticsCalculator
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        LanguageService $languageService
     ) {
         $this->eventRepository = $eventRepository;
         $this->permissions = $permissions;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -106,6 +114,10 @@ class EventController extends ActionController
     public function deleteAction(int $eventUid): void
     {
         $this->eventRepository->deleteViaDataHandler($eventUid);
+
+        $message = $this->languageService
+            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted');
+        $this->addFlashMessage($message);
 
         $this->redirect('overview', 'BackEnd\\Module');
     }

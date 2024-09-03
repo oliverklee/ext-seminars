@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -56,6 +57,11 @@ final class EventControllerTest extends UnitTestCase
     private $csvDownloaderMock;
 
     /**
+     * @var LanguageService&MockObject
+     */
+    private $languageServiceMock;
+
+    /**
      * @var Response
      */
     private $response;
@@ -67,8 +73,9 @@ final class EventControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->languageServiceMock = $this->createMock(LanguageService::class);
 
-        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
+        $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
             $methodsToMock[] = 'forward';
         }
@@ -76,7 +83,12 @@ final class EventControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EventController::class,
             $methodsToMock,
-            [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
+            [
+                $this->eventRepositoryMock,
+                $this->permissionsMock,
+                $this->eventStatisticsCalculatorMock,
+                $this->languageServiceMock,
+            ]
         );
         $this->subject = $subject;
 
@@ -242,6 +254,20 @@ final class EventControllerTest extends UnitTestCase
         $this->eventRepositoryMock->expects(self::once())->method('deleteViaDataHandler')->with($uid);
 
         $this->subject->deleteAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteActionAddsFlashMessage(): void
+    {
+        $localizedMessage = 'Event deleted!';
+        $this->languageServiceMock->expects(self::once())->method('sL')
+            ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted')
+            ->willReturn($localizedMessage);
+        $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);
+
+        $this->subject->deleteAction(15);
     }
 
     /**

@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -43,10 +44,19 @@ class RegistrationController extends ActionController
      */
     private $eventRepository;
 
-    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
-    {
+    /**
+     * @var LanguageService
+     */
+    private $languageService;
+
+    public function __construct(
+        RegistrationRepository $registrationRepository,
+        EventRepository $eventRepository,
+        LanguageService $languageService
+    ) {
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -130,6 +140,10 @@ class RegistrationController extends ActionController
     public function deleteAction(int $registrationUid, int $eventUid): void
     {
         $this->registrationRepository->deleteViaDataHandler($registrationUid);
+
+        $message = $this->languageService
+            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted');
+        $this->addFlashMessage($message);
 
         $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
     }

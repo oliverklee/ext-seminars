@@ -1545,6 +1545,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.email.body" resname="backEndModule.email.body">
 				<source>Email body</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.message.eventDeleted" resname="backEndModule.message.eventDeleted">
+				<source>The event has been deleted.</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.message.registrationDeleted" resname="backEndModule.message.registrationDeleted">
+				<source>The registration has been deleted.</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventUnregistration.heading.sorry" resname="plugin.eventUnregistration.heading.sorry">
 				<source>Sorry!</source>
 			</trans-unit>
