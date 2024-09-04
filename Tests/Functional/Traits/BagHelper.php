@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
 use OliverKlee\Seminars\Bag\AbstractBag;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This trait provides methods useful when testing bags and bag builders.
+ *
+ * @phpstan-require-extends FunctionalTestCase
  */
 trait BagHelper
 {

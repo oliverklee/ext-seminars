@@ -8,9 +8,12 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This trait provides methods useful for initializing languages.
+ *
+ * @phpstan-require-extends FunctionalTestCase
  */
 trait LanguageHelper
 {

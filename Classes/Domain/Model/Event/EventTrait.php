@@ -9,7 +9,8 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 /**
  * This trait provides methods that are useful for all event classes (`SingleEvent`, `EventDate` and `EventTopic`).
  *
- * @mixin Event
+ * @phpstan-require-extends Event
+ * @phpstan-require-implements EventInterface
  */
 trait EventTrait
 {

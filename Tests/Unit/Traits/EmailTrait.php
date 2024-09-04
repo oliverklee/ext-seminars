@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 /**
  * Helper for writing tests for sending emails.
  *
- * @mixin TestCase
+ * @phpstan-require-extends TestCase
  */
 trait EmailTrait
 {

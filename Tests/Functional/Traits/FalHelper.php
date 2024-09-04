@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * This trait provides methods useful when testing FAL output.
  *
- * @mixin TestCase
+ * @phpstan-require-extends FunctionalTestCase
  */
 trait FalHelper
 {

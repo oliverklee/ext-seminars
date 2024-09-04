@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Helper for injecting objects into `GeneralUtility::makeInstance` and automatically cleaning them up afterward.
  *
- * @mixin TestCase
+ * @phpstan-require-extends TestCase
  */
 trait MakeInstanceTrait
 {
