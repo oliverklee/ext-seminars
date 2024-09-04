@@ -9,7 +9,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 /**
  * Billing address fields for the `Registration` model.
  *
- * @mixin Registration
+ * @phpstan-require-extends Registration
  */
 trait BillingAddressTrait
 {

@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Provides attendees-related fields to `Registration`.
  *
- * @mixin Registration
+ * @phpstan-require-extends Registration
  */
 trait AttendeesTrait
 {

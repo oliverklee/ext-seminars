@@ -14,7 +14,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * This trait provides methods that are useful for `EventTopic`s, and usually also `SingleEvent`s.
  *
- * @mixin Event
+ * @phpstan-require-extends Event
+ * @phpstan-require-implements EventTopicInterface
  */
 trait EventTopicTrait
 {

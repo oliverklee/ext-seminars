@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Adds raw data methods (particularly helpful for creating icons in the backend).
  *
- * This is the default implementation of the `RawDataInterface`.
+ * @phpstan-require-extends AbstractEntity
+ * @phpstan-require-implements RawDataInterface
  *
  * @internal
  */

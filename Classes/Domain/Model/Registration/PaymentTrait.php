@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 /**
  * Payment-related for the `Registration` model.
  *
- * @mixin Registration
+ * @phpstan-require-extends Registration
  */
 trait PaymentTrait
 {
