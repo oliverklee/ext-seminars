@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add event formats (on-site, hybrid, online) (#3343)
 - Show a flash message after deleting an event or a registration (#3340)
 - Allow viewing event UIDs in the TCEforms (#3337)
 
