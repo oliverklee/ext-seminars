@@ -51,4 +51,61 @@ final class VenueTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getTitle());
     }
+
+    /**
+     * @test
+     */
+    public function getContactPersonInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getContactPerson());
+    }
+
+    /**
+     * @test
+     */
+    public function setContactPersonSetsContactPerson(): void
+    {
+        $value = 'Riso';
+        $this->subject->setContactPerson($value);
+
+        self::assertSame($value, $this->subject->getContactPerson());
+    }
+
+    /**
+     * @test
+     */
+    public function getEmailAddressInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getEmailAddress());
+    }
+
+    /**
+     * @test
+     */
+    public function setEmailAddressSetsEmailAddress(): void
+    {
+        $value = 'riso@example.com';
+        $this->subject->setEmailAddress($value);
+
+        self::assertSame($value, $this->subject->getEmailAddress());
+    }
+
+    /**
+     * @test
+     */
+    public function getPhoneNumberInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getPhoneNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function setPhoneNumberSetsPhoneNumber(): void
+    {
+        $value = '+49 123 456789';
+        $this->subject->setPhoneNumber($value);
+
+        self::assertSame($value, $this->subject->getPhoneNumber());
+    }
 }

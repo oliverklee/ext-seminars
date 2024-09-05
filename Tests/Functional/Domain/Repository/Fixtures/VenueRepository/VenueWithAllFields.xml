@@ -3,5 +3,8 @@
     <tx_seminars_sites>
         <uid>1</uid>
         <title>JH Köln-Deutz</title>
+        <contact_person>Alex</contact_person>
+        <email_address>alex@example.com</email_address>
+        <phone_number>+49 1234 56789</phone_number>
     </tx_seminars_sites>
 </dataset>
