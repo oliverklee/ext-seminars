@@ -11,6 +11,8 @@ jobs:
 
     runs-on: ubuntu-24.04
 
+    timeout-minutes: 1
+
     if: ${{ github.actor == 'dependabot[bot]' }}
 
     steps:
