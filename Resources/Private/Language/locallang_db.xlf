@@ -499,6 +499,15 @@
 			<trans-unit id="tx_seminars_sites.notes" resname="tx_seminars_sites.notes">
 				<source>Internal Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_sites.contact_person" resname="tx_seminars_sites.contact_person">
+				<source>Contact person</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_sites.email_address" resname="tx_seminars_sites.email_address">
+				<source>Email address</source>
+			</trans-unit>
+			<trans-unit id="tx_seminars_sites.phone_number" resname="tx_seminars_sites.phone_number">
+				<source>Phone number</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_organizers" resname="tx_seminars_organizers">
 				<source>Organizers</source>
 			</trans-unit>
