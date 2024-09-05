@@ -81,7 +81,7 @@ jobs:
           - "ts:lint"
           - "xliff:lint"
         php-version:
-          - "8.1"
+          - "8.3"
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-24.04
