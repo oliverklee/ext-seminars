@@ -377,6 +377,9 @@ CREATE TABLE tx_seminars_sites (
     homepage tinytext,
     directions text,
     notes text,
+    contact_person tinytext,
+    email_address tinytext,
+    phone_number tinytext,
 
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title,city)

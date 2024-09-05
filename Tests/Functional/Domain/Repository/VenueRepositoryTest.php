@@ -44,6 +44,9 @@ final class VenueRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(Venue::class, $result);
         self::assertSame('JH Köln-Deutz', $result->getTitle());
+        self::assertSame('Alex', $result->getContactPerson());
+        self::assertSame('alex@example.com', $result->getEmailAddress());
+        self::assertSame('+49 1234 56789', $result->getPhoneNumber());
     }
 
     /**
