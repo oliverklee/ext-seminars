@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Support;
 
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,11 +24,7 @@ trait LanguageHelper
     private function getLanguageService(): LanguageService
     {
         if (!$this->languageService instanceof LanguageService) {
-            if ((new Typo3Version())->getMajorVersion() >= 11) {
-                $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-            } else {
-                $languageService = LanguageService::create('default');
-            }
+            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
             $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
             $this->languageService = $languageService;
             $GLOBALS['LANG'] = $languageService;

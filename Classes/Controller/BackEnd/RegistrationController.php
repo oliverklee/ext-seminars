@@ -89,10 +89,8 @@ class RegistrationController extends ActionController
 
     /**
      * @param int<1, max> $eventUid
-     *
-     * @return string|ResponseInterface
      */
-    public function exportCsvForEventAction(int $eventUid)
+    public function exportCsvForEventAction(int $eventUid): ResponseInterface
     {
         $_GET['eventUid'] = $eventUid;
 
@@ -101,34 +99,19 @@ class RegistrationController extends ActionController
 
     /**
      * @param int<1, max> $pageUid
-     *
-     * @return string|ResponseInterface
      */
-    public function exportCsvForPageUidAction(int $pageUid)
+    public function exportCsvForPageUidAction(int $pageUid): ResponseInterface
     {
         $_GET['pid'] = $pageUid;
 
         return $this->exportCsvAction();
     }
 
-    /**
-     * @return string|ResponseInterface
-     */
-    private function exportCsvAction()
+    private function exportCsvAction(): ResponseInterface
     {
         $_GET['table'] = self::TABLE_NAME;
         $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
 
-        if (isset($this->response)) {
-            // 10LTS path
-            $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
-            $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
-            $this->response->setHeader('Content-Disposition', $contentDisposition);
-
-            return $csvContent;
-        }
-
-        // 11LTS path
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 

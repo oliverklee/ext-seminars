@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -83,18 +82,10 @@ abstract class AbstractListView
         } else {
             $backEndUser = $this->getBackEndUser();
             if ($backEndUser instanceof BackendUserAuthentication) {
-                if ((new Typo3Version())->getMajorVersion() >= 11) {
-                    $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)
-                        ->createFromUserPreferences($backEndUser);
-                } else {
-                    $languageService = LanguageService::createFromUserPreferences($backEndUser);
-                }
+                $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+                    ->createFromUserPreferences($backEndUser);
             } else {
-                if ((new Typo3Version())->getMajorVersion() >= 11) {
-                    $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-                } else {
-                    $languageService = LanguageService::create('default');
-                }
+                $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
             }
         }
 
