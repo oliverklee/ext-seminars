@@ -166,6 +166,9 @@
 			<trans-unit id="tx_seminars_seminars.event_format.online" resname="tx_seminars_seminars.event_format.online">
 				<source>online</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.webinar_url" resname="tx_seminars_seminars.webinar_url">
+				<source>Webinar URL</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.begin_date" resname="tx_seminars_seminars.begin_date">
 				<source>Begin time and date</source>
 			</trans-unit>
