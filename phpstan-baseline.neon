@@ -1521,6 +1521,11 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
+			message: "#^Cannot call method getUid\\(\\) on mixed\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
 			message: "#^Cannot call method includeLLFile\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
@@ -1531,12 +1536,32 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
+			message: "#^Cannot call method isCanceled\\(\\) on mixed\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
+			message: "#^Cannot call method isConfirmed\\(\\) on mixed\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\EmailService\\:\\:sendEmailToAttendees\\(\\) expects OliverKlee\\\\Seminars\\\\Model\\\\Event, mixed given\\.$#"
+			count: 1
+			path: Classes/SchedulerTasks/MailNotifier.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method OliverKlee\\\\Seminars\\\\Service\\\\EventStatusService\\:\\:updateStatusAndSave\\(\\) expects OliverKlee\\\\Seminars\\\\Model\\\\Event, mixed given\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
 
