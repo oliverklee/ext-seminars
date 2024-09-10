@@ -1104,4 +1104,23 @@ final class EventDateTest extends UnitTestCase
 
         self::assertTrue($this->subject->isAtLeastPartiallyOnline());
     }
+
+    /**
+     * @test
+     */
+    public function getWebinarUrlInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getWebinarUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function setWebinarUrlSetsWebinarUrl(): void
+    {
+        $value = 'https://example.com/webinar';
+        $this->subject->setWebinarUrl($value);
+
+        self::assertSame($value, $this->subject->getWebinarUrl());
+    }
 }

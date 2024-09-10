@@ -128,4 +128,8 @@ interface EventDateInterface
     public function isAtLeastPartiallyOnSite(): bool;
 
     public function isAtLeastPartiallyOnline(): bool;
+
+    public function getWebinarUrl(): string;
+
+    public function setWebinarUrl(string $webinarUrl): void;
 }
