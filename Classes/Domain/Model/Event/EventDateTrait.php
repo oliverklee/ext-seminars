@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Organizer;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -125,6 +126,12 @@ trait EventDateTrait
      * @phpstan-var EventDateInterface::EVENT_FORMAT_*
      */
     protected $eventFormat = EventDateInterface::EVENT_FORMAT_ON_SITE;
+
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     */
+    protected $webinarUrl = '';
 
     /**
      * @var list<EventDateInterface::EVENT_FORMAT_*>
@@ -434,5 +441,15 @@ trait EventDateTrait
     public function isAtLeastPartiallyOnline(): bool
     {
         return \in_array($this->getEventFormat(), self::$partiallyOnlineEventFormats, true);
+    }
+
+    public function getWebinarUrl(): string
+    {
+        return $this->webinarUrl;
+    }
+
+    public function setWebinarUrl(string $webinarUrl): void
+    {
+        $this->webinarUrl = $webinarUrl;
     }
 }
