@@ -21,7 +21,6 @@ updates:
         versions: [ ">= 2.20.0" ]
       - dependency-name: "friendsofphp/php-cs-fixer"
         versions: [ ">= 3.4.0" ]
-      - dependency-name: "helhum/typo3-console"
       - dependency-name: "helmich/typo3-typoscript-lint"
         versions: [ ">= 3.0.0" ]
       - dependency-name: "pelago/emogrifier"

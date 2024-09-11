@@ -89,7 +89,6 @@
 	"config": {
 		"allow-plugins": {
 			"ergebnis/composer-normalize": true,
-			"helhum/typo3-console-plugin": true,
 			"phpstan/extension-installer": true,
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
@@ -105,9 +104,6 @@
 	"extra": {
 		"branch-alias": {
 			"dev-main": "5.7.x-dev"
-		},
-		"helhum/typo3-console": {
-			"install-extension-dummy": "0"
 		},
 		"typo3/cms": {
 			"app-dir": ".Build",
