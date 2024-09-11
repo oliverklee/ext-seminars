@@ -12,6 +12,9 @@ use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Venue;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
@@ -459,13 +462,8 @@ class RegistrationManager
             return;
         }
 
-        /** @var LegacyEvent $event */
         $event = $oldRegistration->getSeminarObject();
         if (!$event->hasOrganizers()) {
-            return;
-        }
-
-        if (!$oldRegistration->hasExistingFrontEndUser()) {
             return;
         }
 
@@ -492,7 +490,7 @@ class RegistrationManager
         $registrationUid = $oldRegistration->getUid();
         \assert($registrationUid > 0);
         $registration = MapperRegistry::get(RegistrationMapper::class)->find($registrationUid);
-        $this->addCalendarAttachment($emailBuilder, $registration);
+        $this->addCalendarAttachment($emailBuilder, $event->getUid());
         $email = $emailBuilder->build();
 
         $this->getRegistrationEmailHookProvider()
@@ -504,9 +502,12 @@ class RegistrationManager
     /**
      * Adds an iCalendar attachment with the event's most important data.
      */
-    private function addCalendarAttachment(EmailBuilder $emailBuilder, Registration $registration): void
+    private function addCalendarAttachment(EmailBuilder $emailBuilder, int $eventUid): void
     {
-        $event = $registration->getEvent();
+        $event = $this->getEventRepository()->findByUid($eventUid);
+        if (!$event instanceof EventDateInterface) {
+            return;
+        }
 
         $content = "BEGIN:VCALENDAR\r\n" .
             "VERSION:2.0\r\n" .
@@ -515,31 +516,39 @@ class RegistrationManager
             "BEGIN:VEVENT\r\n" .
             'UID:' . \uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
             'DTSTAMP:' . $this->formatDateForCalendar($this->nowAsTimestamp()) . "\r\n" .
-            'SUMMARY:' . $event->getTitle() . "\r\n";
+            'SUMMARY:' . $event->getDisplayTitle() . "\r\n";
 
-        if ($event->hasBeginDate()) {
-            $content .= 'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
+        $begin = $event->getStart();
+        if ($begin instanceof \DateTimeInterface) {
+            $content .= 'DTSTART:' . $this->formatDateForCalendar($begin->getTimestamp()) . "\r\n";
         }
-        if ($event->hasEndDate()) {
-            $content .= 'DTEND:' . $this->formatDateForCalendar($event->getEndDateAsUnixTimeStamp()) . "\r\n";
+        $end = $event->getEnd();
+        if ($end instanceof \DateTimeInterface) {
+            $content .= 'DTEND:' . $this->formatDateForCalendar($end->getTimestamp()) . "\r\n";
         }
-        $venues = $event->getPlaces();
-        $firstVenue = $venues->first();
-        if ($firstVenue instanceof Place && \count($venues) === 1) {
+
+        $venues = $event->getVenues()->getArray();
+        $firstVenue = $venues[0] ?? 0;
+        if ($firstVenue instanceof Venue && (\count($venues) === 1)) {
             $normalizedVenueTitle = \str_replace(
                 ["\r\n", "\n"],
                 ', ',
-                trim($firstVenue->getTitle() . ', ' . $firstVenue->getAddress())
+                \trim($firstVenue->getTitle() . ', ' . $firstVenue->getFullAddress())
             );
             $content .= 'LOCATION:' . $normalizedVenueTitle . "\r\n";
         }
 
         $organizer = $event->getFirstOrganizer();
-        $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getTitle(), '"') .
+        $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getName(), '"') .
             '":mailto:' . $organizer->getEmailAddress() . "\r\n";
         $content .= "END:VEVENT\r\nEND:VCALENDAR";
 
         $emailBuilder->attach($content, 'text/calendar; charset="utf-8"; component="vevent"; method="publish"');
+    }
+
+    private function getEventRepository(): EventRepository
+    {
+        return GeneralUtility::makeInstance(EventRepository::class);
     }
 
     /**
