@@ -1869,6 +1869,48 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function notifyAttendeeForOnSiteEventWithTwoVenuesHasNoLocationInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer();
+        $venueUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => 'Hotel California', 'address' => 'Born in the USA']
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid1,
+            'place'
+        );
+        $venueUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => 'JH Bonn', 'address' => 'Bonn']
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid2,
+            'place'
+        );
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('LOCATION:', $body);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForHybridEventWithoutVenuesAndWithoutWebinarUrlHasNoLocationInCalendarInvite(): void
     {
         $this->setUpFakeFrontEnd();
