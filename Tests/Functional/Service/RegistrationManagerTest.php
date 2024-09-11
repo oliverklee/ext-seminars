@@ -236,6 +236,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
     }
 
     /**
+     * @return non-empty-string
+     */
+    private function formatDateForCalendar(int $dateAsUnixTimeStamp): string
+    {
+        return \date('Ymd\\THis', $dateAsUnixTimeStamp);
+    }
+
+    /**
      * @test
      */
     public function canBeCreatedWithMakeInstance(): void
@@ -1806,6 +1814,100 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $body = $firstIcsAttachment->getBody();
         self::assertStringContainsString('SUMMARY:test event', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithBeginDateHasStartDateInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $beginDate = $this->now + 1000;
+        $this->createEventWithOrganizer(['begin_date' => $beginDate]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('DTSTART:' . $this->formatDateForCalendar($beginDate), $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithoutBeginDateHasNoStartDateInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['begin_date' => 0]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('DTSTART:', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithEndDateHasEndDateInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $endDate = $this->now + 2000;
+        $this->createEventWithOrganizer(['end_date' => $endDate]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('DTEND:' . $this->formatDateForCalendar($endDate), $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithoutEndDateHasNoEndDateInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['end_date' => 0]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('DTEND:', $body);
     }
 
     /**
