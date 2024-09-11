@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add `Venue.fullAddress` (#3399)
 - Add a field for the webinar URL to events (#3380, #3384)
 - Add more venue fields: contact person, email, phone number (#3362, #3363)
 - Add event formats (on-site, hybrid, online) (#3343, #3361)

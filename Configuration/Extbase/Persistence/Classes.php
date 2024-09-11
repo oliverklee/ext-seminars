@@ -137,5 +137,8 @@ return [
     ],
     \OliverKlee\Seminars\Domain\Model\Venue::class => [
         'tableName' => 'tx_seminars_sites',
+        'properties' => [
+            'fullAddress' => ['fieldName' => 'address'],
+        ],
     ],
 ];

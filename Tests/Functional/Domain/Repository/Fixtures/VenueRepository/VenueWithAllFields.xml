@@ -6,5 +6,6 @@
         <contact_person>Alex</contact_person>
         <email_address>alex@example.com</email_address>
         <phone_number>+49 1234 56789</phone_number>
+        <address>Markplatz 1, 12345 Bonn</address>
     </tx_seminars_sites>
 </dataset>

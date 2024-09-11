@@ -108,4 +108,23 @@ final class VenueTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getPhoneNumber());
     }
+
+    /**
+     * @test
+     */
+    public function getFullAddressInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getFullAddress());
+    }
+
+    /**
+     * @test
+     */
+    public function setFullAddressSetsFullAddress(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setFullAddress($value);
+
+        self::assertSame($value, $this->subject->getFullAddress());
+    }
 }
