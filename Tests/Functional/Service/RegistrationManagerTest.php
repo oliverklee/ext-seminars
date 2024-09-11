@@ -1811,29 +1811,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeIncludesEventSubtitleAsDescriptionInCalendarInvite(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->createEventWithOrganizer();
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
-        $firstIcsAttachment = $icsAttachments[0] ?? null;
-        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
-
-        $body = $firstIcsAttachment->getBody();
-        self::assertStringContainsString('DESCRIPTION:juggling with burning chainsaws', $body);
-    }
-
-    /**
-     * @test
-     */
     public function notifyAttendeeForOnSiteEventWithoutVenuesHasNoLocationInCalendarInvite(): void
     {
         $this->setUpFakeFrontEnd();

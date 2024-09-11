@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow viewing event UIDs in the TCEforms (#3337)
 
 ### Changed
+- Do not use the event subtitle as calendar invite description anymore (#3398)
 
 ### Deprecated
 
