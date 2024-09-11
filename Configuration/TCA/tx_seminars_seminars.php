@@ -826,22 +826,9 @@ $tca = [
         ],
         // @deprecated #1324 will be removed in seminars 6.0
         'registrations' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.registrations',
-            'displayCond' => 'FIELD:needs_registration:REQ:true',
+            'exclude' => true,
             'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_seminars_attendances',
-                'foreign_field' => 'seminar',
-                'foreign_default_sortby' => 'tx_seminars_attendances.crdate',
-                'maxitems' => 999,
-                'appearance' => [
-                    'levelLinksPosition' => 'bottom',
-                    'expandSingle' => 1,
-                ],
-                'behavior' => [
-                    'disableMovingChildrenWithParent' => true,
-                ],
+                'type' => 'passthrough',
             ],
         ],
         'cancelled' => [
