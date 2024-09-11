@@ -521,15 +521,15 @@ class RegistrationManager
         if ($event->hasEndDate()) {
             $content .= 'DTEND:' . $this->formatDateForCalendar($event->getEndDateAsUnixTimeStamp()) . "\r\n";
         }
-        if (!$event->getPlaces()->isEmpty()) {
-            /** @var Place $firstPlace */
-            $firstPlace = $event->getPlaces()->first();
-            $normalizedPlaceTitle = str_replace(
+        $venues = $event->getPlaces();
+        $firstVenue = $venues->first();
+        if ($firstVenue instanceof Place && \count($venues) === 1) {
+            $normalizedVenueTitle = \str_replace(
                 ["\r\n", "\n"],
                 ', ',
-                trim($firstPlace->getTitle() . ', ' . $firstPlace->getAddress())
+                trim($firstVenue->getTitle() . ', ' . $firstVenue->getAddress())
             );
-            $content .= 'LOCATION:' . $normalizedPlaceTitle . "\r\n";
+            $content .= 'LOCATION:' . $normalizedVenueTitle . "\r\n";
         }
 
         $organizer = $event->getFirstOrganizer();

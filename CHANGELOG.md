@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid calendar invite location for multi-venue events (#3400)
 - Improve some type annotations (#3347)
 - Always use strict comparisons (#3336)
 
