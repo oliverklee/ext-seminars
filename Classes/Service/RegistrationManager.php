@@ -502,7 +502,7 @@ class RegistrationManager
     }
 
     /**
-     * Adds an iCalendar attachment with the event's most important data to $email.
+     * Adds an iCalendar attachment with the event's most important data.
      */
     private function addCalendarAttachment(EmailBuilder $emailBuilder, Registration $registration): void
     {
@@ -513,11 +513,13 @@ class RegistrationManager
             "PRODID:TYPO3 CMS\r\n" .
             "METHOD:PUBLISH\r\n" .
             "BEGIN:VEVENT\r\n" .
-            'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
+            'UID:' . \uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
             'DTSTAMP:' . $this->formatDateForCalendar($this->nowAsTimestamp()) . "\r\n" .
-            'SUMMARY:' . $event->getTitle() . "\r\n" .
-            'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
+            'SUMMARY:' . $event->getTitle() . "\r\n";
 
+        if ($event->hasBeginDate()) {
+            $content .= 'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
+        }
         if ($event->hasEndDate()) {
             $content .= 'DTEND:' . $this->formatDateForCalendar($event->getEndDateAsUnixTimeStamp()) . "\r\n";
         }
