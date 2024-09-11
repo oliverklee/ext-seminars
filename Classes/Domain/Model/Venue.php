@@ -36,6 +36,12 @@ class Venue extends AbstractEntity
      */
     protected $phoneNumber = '';
 
+    /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 1024})
+     */
+    protected $fullAddress = '';
+
     public function getTitle(): string
     {
         return $this->title;
@@ -74,5 +80,15 @@ class Venue extends AbstractEntity
     public function setPhoneNumber(string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
+    }
+
+    public function getFullAddress(): string
+    {
+        return $this->fullAddress;
+    }
+
+    public function setFullAddress(string $fullAddress): void
+    {
+        $this->fullAddress = $fullAddress;
     }
 }
