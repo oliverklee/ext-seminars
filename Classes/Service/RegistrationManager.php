@@ -516,7 +516,6 @@ class RegistrationManager
             'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
             'DTSTAMP:' . $this->formatDateForCalendar($this->nowAsTimestamp()) . "\r\n" .
             'SUMMARY:' . $event->getTitle() . "\r\n" .
-            'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
             'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
 
         if ($event->hasEndDate()) {
