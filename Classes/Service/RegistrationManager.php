@@ -385,13 +385,7 @@ class RegistrationManager
 
         $this->getConnectionForTable('tx_seminars_attendances')->update(
             'tx_seminars_attendances',
-            [
-                'hidden' => 1,
-                'tstamp' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect(
-                    'date',
-                    'timestamp'
-                ),
-            ],
+            ['hidden' => 1, 'tstamp' => $this->nowAsTimestamp()],
             ['uid' => $uid]
         );
 
@@ -520,12 +514,7 @@ class RegistrationManager
             "METHOD:PUBLISH\r\n" .
             "BEGIN:VEVENT\r\n" .
             'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
-            'DTSTAMP:'
-            . \date(
-                'Ymd\\THis',
-                (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-            )
-            . "\r\n" .
+            'DTSTAMP:' . $this->formatDateForCalendar($this->nowAsTimestamp()) . "\r\n" .
             'SUMMARY:' . $event->getTitle() . "\r\n" .
             'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
             'DTSTART:' . $this->formatDateForCalendar($event->getBeginDateAsUnixTimeStamp()) . "\r\n";
@@ -552,6 +541,9 @@ class RegistrationManager
         $emailBuilder->attach($content, 'text/calendar; charset="utf-8"; component="vevent"; method="publish"');
     }
 
+    /**
+     * @return non-empty-string
+     */
     private function formatDateForCalendar(int $dateAsUnixTimeStamp): string
     {
         return \date('Ymd\\THis', $dateAsUnixTimeStamp);
@@ -659,8 +651,7 @@ class RegistrationManager
      * If both things happen at the same time (minimum and maximum count of
      * attendees are the same), only the "event is full" message will be sent.
      *
-     * @param LegacyRegistration $registration the registration
-     *        for which the notification should be sent
+     * @param LegacyRegistration $registration the registration for which the notification should be sent
      */
     public function sendAdditionalNotification(LegacyRegistration $registration): void
     {
@@ -714,8 +705,7 @@ class RegistrationManager
     /**
      * Returns the topic for the additional notification email.
      *
-     * @param LegacyRegistration $registration the registration for which the notification
-     *        should be sent
+     * @param LegacyRegistration $registration the registration for which the notification should be sent
      *
      * @return string "EnoughRegistrations" if the event has enough attendances,
      *                "IsFull" if the event is fully booked, otherwise an empty string
@@ -1057,8 +1047,7 @@ class RegistrationManager
             return true;
         }
 
-        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-            >= $event->getRegistrationBeginAsUnixTimestamp();
+        return $this->nowAsTimestamp() >= $event->getRegistrationBeginAsUnixTimestamp();
     }
 
     /**
@@ -1135,10 +1124,8 @@ class RegistrationManager
      *          "email_" and suffixed with "Hello".
      * @param LegacyRegistration $registration the registration the introduction should be created for
      */
-    private function setEmailIntroduction(
-        string $helloSubjectPrefix,
-        LegacyRegistration $registration
-    ): void {
+    private function setEmailIntroduction(string $helloSubjectPrefix, LegacyRegistration $registration): void
+    {
         $template = $this->getInitializedEmailTemplate();
         $salutation = GeneralUtility::makeInstance(Salutation::class);
         $user = $registration->getFrontEndUser();
@@ -1237,7 +1224,7 @@ class RegistrationManager
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
     }
 
     private function getConnectionForTable(string $table): Connection
@@ -1250,6 +1237,8 @@ class RegistrationManager
      *
      * This method takes the salutation mode (formal/informal) with its suffixes into account.
      *
+     * @param non-empty-string $key
+     *
      * @return string the localized label, or the given key if there is no label with that key
      */
     private function translate(string $key): string
@@ -1261,5 +1250,10 @@ class RegistrationManager
         $label = \is_string($labelWithSalutation) ? $labelWithSalutation : $labelWithoutSalutation;
 
         return \is_string($label) ? $label : $key;
+    }
+
+    private function nowAsTimestamp(): int
+    {
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
     }
 }
