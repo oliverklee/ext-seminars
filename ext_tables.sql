@@ -10,10 +10,7 @@ CREATE TABLE fe_users (
 # Table structure for table 'tx_seminars_test'
 #
 CREATE TABLE tx_seminars_test (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    title tinytext,
-
-    KEY dummy (is_dummy_record)
+    title tinytext
 );
 
 
@@ -23,12 +20,10 @@ CREATE TABLE tx_seminars_test (
 CREATE TABLE tx_seminars_test_test_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -38,12 +33,10 @@ CREATE TABLE tx_seminars_test_test_mm (
 CREATE TABLE tx_seminars_seminars_place_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -53,12 +46,10 @@ CREATE TABLE tx_seminars_seminars_place_mm (
 CREATE TABLE tx_seminars_seminars_speakers_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -68,12 +59,10 @@ CREATE TABLE tx_seminars_seminars_speakers_mm (
 CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -83,12 +72,10 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
 CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -98,12 +85,10 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
 CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -113,12 +98,10 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
 CREATE TABLE tx_seminars_seminars_target_groups_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -128,12 +111,10 @@ CREATE TABLE tx_seminars_seminars_target_groups_mm (
 CREATE TABLE tx_seminars_seminars_categories_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -143,12 +124,10 @@ CREATE TABLE tx_seminars_seminars_categories_mm (
 CREATE TABLE tx_seminars_seminars_organizers_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -158,12 +137,10 @@ CREATE TABLE tx_seminars_seminars_organizers_mm (
 CREATE TABLE tx_seminars_seminars_organizing_partners_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -173,12 +150,10 @@ CREATE TABLE tx_seminars_seminars_organizing_partners_mm (
 CREATE TABLE tx_seminars_seminars_payment_methods_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -186,7 +161,6 @@ CREATE TABLE tx_seminars_seminars_payment_methods_mm (
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     object_type int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     topic int(11) unsigned DEFAULT '0' NOT NULL,
@@ -254,7 +228,6 @@ CREATE TABLE tx_seminars_seminars (
     webinar_url tinytext,
     additional_email_text text,
 
-    KEY dummy (is_dummy_record),
     KEY object_type (object_type),
     KEY topic (topic),
     KEY event_takes_place_reminder_sent (event_takes_place_reminder_sent),
@@ -271,12 +244,10 @@ CREATE TABLE tx_seminars_seminars (
 CREATE TABLE tx_seminars_seminars_feusers_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -284,7 +255,6 @@ CREATE TABLE tx_seminars_seminars_feusers_mm (
 # Table structure for table 'tx_seminars_speakers'
 #
 CREATE TABLE tx_seminars_speakers (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     organization tinytext,
     homepage tinytext,
@@ -299,7 +269,6 @@ CREATE TABLE tx_seminars_speakers (
     email tinytext,
     cancelation_period int(11) unsigned DEFAULT '0' NOT NULL,
 
-    KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
 
@@ -310,12 +279,10 @@ CREATE TABLE tx_seminars_speakers (
 CREATE TABLE tx_seminars_speakers_skills_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -323,7 +290,6 @@ CREATE TABLE tx_seminars_speakers_skills_mm (
 # Table structure for table 'tx_seminars_attendances'
 #
 CREATE TABLE tx_seminars_attendances (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     user int(11) unsigned DEFAULT '0' NOT NULL,
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
@@ -360,7 +326,6 @@ CREATE TABLE tx_seminars_attendances (
     kids int(11) unsigned DEFAULT '0' NOT NULL,
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
 
-    KEY dummy (is_dummy_record),
     KEY seminar (seminar),
     KEY user (user)
 );
@@ -370,7 +335,6 @@ CREATE TABLE tx_seminars_attendances (
 # Table structure for table 'tx_seminars_sites'
 #
 CREATE TABLE tx_seminars_sites (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     address text,
     zip tinytext,
@@ -383,7 +347,6 @@ CREATE TABLE tx_seminars_sites (
     email_address tinytext,
     phone_number tinytext,
 
-    KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title,city)
 ) ENGINE = MyISAM;
 
@@ -392,14 +355,11 @@ CREATE TABLE tx_seminars_sites (
 # Table structure for table 'tx_seminars_organizers'
 #
 CREATE TABLE tx_seminars_organizers (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     homepage tinytext,
     email tinytext,
     email_footer text,
-    description text,
-
-    KEY dummy (is_dummy_record)
+    description text
 );
 
 
@@ -407,11 +367,8 @@ CREATE TABLE tx_seminars_organizers (
 # Table structure for table 'tx_seminars_payment_methods'
 #
 CREATE TABLE tx_seminars_payment_methods (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
-    description text,
-
-    KEY dummy (is_dummy_record)
+    description text
 );
 
 
@@ -419,11 +376,9 @@ CREATE TABLE tx_seminars_payment_methods (
 # Table structure for table 'tx_seminars_event_types'
 #
 CREATE TABLE tx_seminars_event_types (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
-    KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
 
@@ -432,11 +387,8 @@ CREATE TABLE tx_seminars_event_types (
 # Table structure for table 'tx_seminars_checkboxes'
 #
 CREATE TABLE tx_seminars_checkboxes (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
-    description text,
-
-    KEY dummy (is_dummy_record)
+    description text
 );
 
 
@@ -446,12 +398,10 @@ CREATE TABLE tx_seminars_checkboxes (
 CREATE TABLE tx_seminars_seminars_checkboxes_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -461,12 +411,10 @@ CREATE TABLE tx_seminars_seminars_checkboxes_mm (
 CREATE TABLE tx_seminars_attendances_checkboxes_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -474,10 +422,7 @@ CREATE TABLE tx_seminars_attendances_checkboxes_mm (
 # Table structure for table 'tx_seminars_lodgings'
 #
 CREATE TABLE tx_seminars_lodgings (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    title tinytext,
-
-    KEY dummy (is_dummy_record)
+    title tinytext
 );
 
 
@@ -487,12 +432,10 @@ CREATE TABLE tx_seminars_lodgings (
 CREATE TABLE tx_seminars_seminars_lodgings_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -502,12 +445,10 @@ CREATE TABLE tx_seminars_seminars_lodgings_mm (
 CREATE TABLE tx_seminars_attendances_lodgings_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -515,10 +456,7 @@ CREATE TABLE tx_seminars_attendances_lodgings_mm (
 # Table structure for table 'tx_seminars_foods'
 #
 CREATE TABLE tx_seminars_foods (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    title tinytext,
-
-    KEY dummy (is_dummy_record)
+    title tinytext
 );
 
 
@@ -528,12 +466,10 @@ CREATE TABLE tx_seminars_foods (
 CREATE TABLE tx_seminars_seminars_foods_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -543,12 +479,10 @@ CREATE TABLE tx_seminars_seminars_foods_mm (
 CREATE TABLE tx_seminars_attendances_foods_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -556,7 +490,6 @@ CREATE TABLE tx_seminars_attendances_foods_mm (
 # Table structure for table 'tx_seminars_timeslots'
 #
 CREATE TABLE tx_seminars_timeslots (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
@@ -565,7 +498,6 @@ CREATE TABLE tx_seminars_timeslots (
     place int(11) unsigned DEFAULT '0' NOT NULL,
     room text,
 
-    KEY dummy (is_dummy_record),
     KEY seminar (seminar)
 );
 
@@ -576,12 +508,10 @@ CREATE TABLE tx_seminars_timeslots (
 CREATE TABLE tx_seminars_timeslots_speakers_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -589,12 +519,10 @@ CREATE TABLE tx_seminars_timeslots_speakers_mm (
 # Table structure for table 'tx_seminars_target_groups'
 #
 CREATE TABLE tx_seminars_target_groups (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     minimum_age tinyint(3) unsigned DEFAULT '0' NOT NULL,
     maximum_age tinyint(3) unsigned DEFAULT '0' NOT NULL,
 
-    KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
 
@@ -603,13 +531,11 @@ CREATE TABLE tx_seminars_target_groups (
 # Table structure for table 'tx_seminars_categories'
 #
 CREATE TABLE tx_seminars_categories (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     # @deprecated will be removed in version 6.0.0 in #3370
     icon int(11) unsigned DEFAULT '0' NOT NULL,
     single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
-    KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
 
@@ -618,10 +544,7 @@ CREATE TABLE tx_seminars_categories (
 # Table structure for table 'tx_seminars_skills'
 #
 CREATE TABLE tx_seminars_skills (
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    title tinytext,
-
-    KEY dummy (is_dummy_record)
+    title tinytext
 );
 
 
@@ -631,14 +554,12 @@ CREATE TABLE tx_seminars_skills (
 CREATE TABLE tx_seminars_seminars_requirements_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
 
 
@@ -648,10 +569,8 @@ CREATE TABLE tx_seminars_seminars_requirements_mm (
 CREATE TABLE tx_seminars_usergroups_categories_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     tablenames varchar(30) DEFAULT '' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
     KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign),
-    KEY dummy (is_dummy_record)
+    KEY uid_foreign (uid_foreign)
 );
