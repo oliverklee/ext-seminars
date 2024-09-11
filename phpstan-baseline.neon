@@ -1691,11 +1691,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLoggedInFrontEndUserUid\\(\\) should return int but returns mixed\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Parameter \\#1 \\$css of method Pelago\\\\Emogrifier\\\\CssInliner\\:\\:inlineCss\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
