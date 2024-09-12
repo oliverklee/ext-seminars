@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Do not create calendar invites without a defined start and end (#3427)
 - Avoid calendar invite location for multi-venue events (#3400)
 - Improve some type annotations (#3347)
 - Always use strict comparisons (#3336)

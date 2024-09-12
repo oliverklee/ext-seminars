@@ -1843,7 +1843,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithoutBeginDateHasNoStartDateInCalendarInvite(): void
+    public function notifyAttendeeForEventWithoutBeginDateHasNoCalendarInvite(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1856,11 +1856,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyAttendee($registration, $controller);
 
         $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
-        $firstIcsAttachment = $icsAttachments[0] ?? null;
-        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
-
-        $body = $firstIcsAttachment->getBody();
-        self::assertStringNotContainsString('DTSTART:', $body);
+        self::assertSame([], $icsAttachments);
     }
 
     /**
@@ -1890,7 +1886,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithoutEndDateHasNoEndDateInCalendarInvite(): void
+    public function notifyAttendeeForEventWithoutEndDateHasNoCalendarInvite(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1903,11 +1899,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyAttendee($registration, $controller);
 
         $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
-        $firstIcsAttachment = $icsAttachments[0] ?? null;
-        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
-
-        $body = $firstIcsAttachment->getBody();
-        self::assertStringNotContainsString('DTEND:', $body);
+        self::assertSame([], $icsAttachments);
     }
 
     /**

@@ -508,6 +508,11 @@ class RegistrationManager
         if (!$event instanceof EventDateInterface) {
             return;
         }
+        $begin = $event->getStart();
+        $end = $event->getEnd();
+        if (!($begin instanceof \DateTimeInterface) || !($end instanceof \DateTimeInterface)) {
+            return;
+        }
 
         $content = "BEGIN:VCALENDAR\r\n" .
             "VERSION:2.0\r\n" .
@@ -516,16 +521,9 @@ class RegistrationManager
             "BEGIN:VEVENT\r\n" .
             'UID:' . \uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
             'DTSTAMP:' . $this->formatDateForCalendar($this->nowAsTimestamp()) . "\r\n" .
-            'SUMMARY:' . $event->getDisplayTitle() . "\r\n";
-
-        $begin = $event->getStart();
-        if ($begin instanceof \DateTimeInterface) {
-            $content .= 'DTSTART:' . $this->formatDateForCalendar($begin->getTimestamp()) . "\r\n";
-        }
-        $end = $event->getEnd();
-        if ($end instanceof \DateTimeInterface) {
-            $content .= 'DTEND:' . $this->formatDateForCalendar($end->getTimestamp()) . "\r\n";
-        }
+            'SUMMARY:' . $event->getDisplayTitle() . "\r\n" .
+            'DTSTART:' . $this->formatDateForCalendar($begin->getTimestamp()) . "\r\n" .
+            'DTEND:' . $this->formatDateForCalendar($end->getTimestamp()) . "\r\n";
 
         $venues = $event->getVenues()->getArray();
         $firstVenue = $venues[0] ?? 0;
