@@ -1388,6 +1388,8 @@ class Event extends AbstractTimeSpan
      * offline registrations.
      *
      * @return int the number of registered seats for this event, will be >= 0
+     *
+     * @deprecated will be removed in seminars 6.0 #3441
      */
     public function getRegisteredSeats(): int
     {
@@ -1406,6 +1408,8 @@ class Event extends AbstractTimeSpan
      *
      * If this event has zero as the minimum number of registrations, this
      * function will always return TRUE.
+     *
+     * @deprecated will be removed in seminars 6.0 #3441
      */
     public function hasEnoughRegistrations(): bool
     {

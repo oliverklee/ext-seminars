@@ -17,6 +17,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Do not use the event subtitle as calendar invite description anymore (#3398)
 
 ### Deprecated
+- Deprecate `Event.getRegisteredSeats()` and `Event.hasEnoughRegistrations()`
+  (#3443)
 
 ### Removed
 
