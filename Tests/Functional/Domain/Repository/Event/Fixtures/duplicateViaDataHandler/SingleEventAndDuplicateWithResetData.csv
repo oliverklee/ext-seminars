@@ -1,0 +1,8 @@
+"pages"
+,"uid","pid","doktype","title"
+,1,0,254,"Record for pages"
+
+"tx_seminars_seminars"
+,"uid","pid","object_type","slug","cancelled","event_takes_place_reminder_sent","cancelation_deadline_reminder_sent","offline_attendees","organizers_notified_about_minimum_reached","date_of_last_registration_digest"
+,1,1,0,"some slug",1,1,1,5,1,1234567890
+,2,1,0,"",0,0,0,0,0,0

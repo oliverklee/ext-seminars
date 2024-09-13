@@ -1717,4 +1717,112 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/DeletedSingleEventOnPage.csv');
     }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerCreatesCopyOnSamePage(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventOnPage.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventAndDuplicateOnPage.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerMakesCopyHidden(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/VisibleSingleEvent.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/VisibleSingleEventAndDuplicate.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerCanCreateCopyOfHiddenEvent(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/HiddenSingleEvent.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/HiddenSingleEventAndDuplicate.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerCopiesScalarData(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithScalarData.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithScalarDataAndDuplicate.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerCopiesToOneRelations(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithToOneRelations.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithToOneRelationsAndDuplicate.csv'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerKeepsTopicForDate(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/EventDate.csv');
+
+        $this->subject->duplicateViaDataHandler(2);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/EventDateAndDuplicate.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerCopiesToManyRelations(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOrganizer.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOrganizerAndDuplicate.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateViaDataHandlerSetsSomeFieldsToDefaultValues(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithDataToReset.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventAndDuplicateWithResetData.csv');
+    }
 }
