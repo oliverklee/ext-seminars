@@ -526,13 +526,22 @@ class RegistrationManager
 
         $venues = $event->getVenues()->getArray();
         $firstVenue = $venues[0] ?? 0;
-        if ($firstVenue instanceof Venue && (\count($venues) === 1)) {
+        $webinarUrl = $event->getWebinarUrl();
+        $shouldHaveVenueAsLocation = ($firstVenue instanceof Venue)
+            && (\count($venues) === 1) && $event->isAtLeastPartiallyOnSite();
+        $shouldHaveWebinarUrlAsLocation = $webinarUrl !== '' && $event->isAtLeastPartiallyOnline();
+        if ($shouldHaveVenueAsLocation) {
             $normalizedVenueTitle = \str_replace(
                 ["\r\n", "\n"],
                 ', ',
                 \trim($firstVenue->getTitle() . ', ' . $firstVenue->getFullAddress())
             );
             $content .= 'LOCATION:' . $normalizedVenueTitle . "\r\n";
+        } elseif ($shouldHaveWebinarUrlAsLocation) {
+            $content .= 'LOCATION:' . $webinarUrl . "\r\n";
+        }
+        if ($webinarUrl !== '' && $event->isAtLeastPartiallyOnline()) {
+            $content .= 'DESCRIPTION:' . $webinarUrl . "\r\n";
         }
 
         $organizer = $event->getFirstOrganizer();

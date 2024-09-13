@@ -1928,11 +1928,69 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function notifyAttendeeForOnSiteEventWithoutVenuesAndWithWebinarUrlHasNoLocationInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['webinar_url' => 'https://example.com']);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('LOCATION:', $body);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForOnSiteEventWithOneVenueHasVenueLocationInCalendarInvite(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->createEventWithOrganizer();
+        $venueTitle = 'Hotel California';
+        $venueAddress = 'Born in the USA';
+        $venueUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => $venueTitle, 'address' => $venueAddress]
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid,
+            'place'
+        );
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('LOCATION:' . $venueTitle . ', ' . $venueAddress, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteEventWithOneVenueAndWebinarUrlHasVenueLocationInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['webinar_url' => 'https://example.com']);
         $venueTitle = 'Hotel California';
         $venueAddress = 'Born in the USA';
         $venueUid = $this->testingFramework->createRecord(
@@ -2057,5 +2115,341 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $body = $firstIcsAttachment->getBody();
         self::assertStringContainsString('LOCATION:' . $venueTitle . ', ' . $venueAddress, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithoutVenuesAndWithWebinarUrlHasWebinarUrlAsLocation(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => $webinarUrl,
+        ]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('LOCATION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithOneVenueAndWithWebinarUrlHasVenueLocationInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => 'https://example.com',
+        ]);
+        $venueTitle = 'Hotel California';
+        $venueAddress = 'Born in the USA';
+        $venueUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => $venueTitle, 'address' => $venueAddress]
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid,
+            'place'
+        );
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('LOCATION:' . $venueTitle . ', ' . $venueAddress, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithoutVenuesAndWithWebinarUrlHasWebinarUrlAsLocation(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ONLINE,
+            'webinar_url' => $webinarUrl,
+        ]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('LOCATION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithoutVenuesAndWithoutWebinarUrlHasNoLocation(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['event_format' => EventDateInterface::EVENT_FORMAT_ONLINE]);
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('LOCATION:', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithOneVenueAndWithWebinarUrlHasWebinarUrlAsLocation(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ONLINE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $venueTitle = 'Hotel California';
+        $venueAddress = 'Born in the USA';
+        $venueUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => $venueTitle, 'address' => $venueAddress]
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid,
+            'place'
+        );
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('LOCATION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteEventWithWithWebinarUrlHasNoWebinarUrlInCalendarInvite(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ON_SITE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString($webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteEventWithWithWebinarUrlHasNoDescriptionInCalendarInvite(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ON_SITE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('DESCRIPTION:', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithWithWebinarUrlHasWebinarUrlInCalendarInviteDescription(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('DESCRIPTION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithWithWebinarUrlWithOneVenuHasWebinarUrlInCalendarInviteDescription(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $venueUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => 'Hotel California', 'address' => 'Born in the USA']
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            $venueUid,
+            'place'
+        );
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('DESCRIPTION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithWithoutWebinarUrlHasNoDescriptionInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['event_format' => EventDateInterface::EVENT_FORMAT_HYBRID]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('DESCRIPTION:', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithWithWebinarUrlHasWebinarUrlInCalendarInviteDescription(): void
+    {
+        $webinarUrl = 'https://example.com';
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ONLINE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringContainsString('DESCRIPTION:' . $webinarUrl, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithWithoutWebinarUrlHasNoDescriptionInCalendarInvite(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer(['event_format' => EventDateInterface::EVENT_FORMAT_ONLINE]);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+        $firstIcsAttachment = $icsAttachments[0] ?? null;
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+
+        $body = $firstIcsAttachment->getBody();
+        self::assertStringNotContainsString('DESCRIPTION:', $body);
     }
 }
