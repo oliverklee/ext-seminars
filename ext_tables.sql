@@ -252,6 +252,7 @@ CREATE TABLE tx_seminars_seminars (
     date_of_last_registration_digest int(11) unsigned DEFAULT '0' NOT NULL,
     event_format int(1) unsigned DEFAULT '0' NOT NULL,
     webinar_url tinytext,
+    additional_email_text text,
 
     KEY dummy (is_dummy_record),
     KEY object_type (object_type),

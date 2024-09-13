@@ -25,5 +25,6 @@
         <price_special_early>75.0</price_special_early>
         <event_format>2</event_format>
         <webinar_url>https://webinar.example.com/</webinar_url>
+        <additional_email_text>Some more text for the attendees</additional_email_text>
     </tx_seminars_seminars>
 </dataset>

@@ -99,6 +99,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertEqualsWithDelta(75.0, $result->getSpecialEarlyBirdPrice(), 0.0001);
         self::assertSame(EventDateInterface::EVENT_FORMAT_ONLINE, $result->getEventFormat());
         self::assertSame('https://webinar.example.com/', $result->getWebinarUrl());
+        self::assertSame('Some more text for the attendees', $result->getAdditionalEmailText());
     }
 
     /**

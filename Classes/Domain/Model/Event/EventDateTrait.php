@@ -134,6 +134,12 @@ trait EventDateTrait
     protected $webinarUrl = '';
 
     /**
+     * @var string
+     * @Extbase\Validate("StringLength", options={"maximum": 2048})
+     */
+    protected $additionalEmailText = '';
+
+    /**
      * @var list<EventDateInterface::EVENT_FORMAT_*>
      */
     private static $partiallyOnSiteEventFormats = [
@@ -478,5 +484,15 @@ trait EventDateTrait
     public function hasUsableWebinarUrl(): bool
     {
         return $this->isAtLeastPartiallyOnline() && $this->getWebinarUrl() !== '';
+    }
+
+    public function getAdditionalEmailText(): string
+    {
+        return $this->additionalEmailText;
+    }
+
+    public function setAdditionalEmailText(string $additionalEmailText): void
+    {
+        $this->additionalEmailText = $additionalEmailText;
     }
 }
