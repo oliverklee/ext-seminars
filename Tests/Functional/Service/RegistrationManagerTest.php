@@ -997,6 +997,27 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function notifyAttendeeForOrganizersWithoutFooterDoesNotAddEmptyParagraphToHtml(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $registration = $this->createRegistration();
+
+        $this->testingFramework->changeRecord('tx_seminars_organizers', $this->organizerUid, ['email_footer' => '']);
+
+        $this->subject->notifyAttendee($registration, $controller);
+        $result = $this->extractHtmlBodyFromEmail($this->email);
+
+        self::assertStringNotContainsString('<p></p>', $result);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForConfirmedEventNotHasPlannedDisclaimer(): void
     {
         $this->setUpFakeFrontEnd();
