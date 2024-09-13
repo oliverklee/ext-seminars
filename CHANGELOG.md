@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `Venue.fullAddress` (#3399)
 - Include the webinar URL in the thank-you email (#3446)
 - Include the webinar URL in the calendar invite (#3445)
-- Add a field for the webinar URL to events (#3380, #3384)
+- Add a field for the webinar URL to events (#3380, #3384, #3451)
 - Add more venue fields: contact person, email, phone number (#3362, #3363)
 - Add event formats (on-site, hybrid, online) (#3343, #3361)
 - Show a flash message after deleting an event or a registration (#3340)
