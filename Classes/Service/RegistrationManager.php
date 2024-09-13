@@ -971,7 +971,12 @@ class RegistrationManager
                 $footerCode = "\n-- \n" . $firstFooter;
             }
         }
-        $template->setMarker('footer', $footerCode);
+        if ($footerCode !== '') {
+            $template->unhideSubparts('footer', $wrapperPrefix);
+            $template->setMarker('footer', $footerCode);
+        } else {
+            $template->hideSubparts('footer', $wrapperPrefix);
+        }
 
         $registrationUid = $registration->getUid();
         \assert($registrationUid > 0);

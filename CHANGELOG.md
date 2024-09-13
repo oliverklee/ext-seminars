@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid empty paragraphs in thank-you email HTML (#3461)
 - Do not create calendar invites without a defined start and end (#3427)
 - Avoid calendar invite location for multi-venue events (#3400)
 - Improve some type annotations (#3347)
