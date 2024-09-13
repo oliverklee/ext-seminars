@@ -13,7 +13,6 @@ use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
-use OliverKlee\Seminars\Domain\Model\Venue;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
@@ -524,28 +523,23 @@ class RegistrationManager
             'DTSTART:' . $this->formatDateForCalendar($begin->getTimestamp()) . "\r\n" .
             'DTEND:' . $this->formatDateForCalendar($end->getTimestamp()) . "\r\n";
 
-        $venues = $event->getVenues()->getArray();
-        $firstVenue = $venues[0] ?? 0;
-        $webinarUrl = $event->getWebinarUrl();
-        $shouldHaveVenueAsLocation = ($firstVenue instanceof Venue)
-            && (\count($venues) === 1) && $event->isAtLeastPartiallyOnSite();
-        $shouldHaveWebinarUrlAsLocation = $webinarUrl !== '' && $event->isAtLeastPartiallyOnline();
-        if ($shouldHaveVenueAsLocation) {
+        if ($event->isAtLeastPartiallyOnSite() && $event->hasExactlyOneVenue()) {
+            $firstVenue = $event->getFirstVenue();
             $normalizedVenueTitle = \str_replace(
                 ["\r\n", "\n"],
                 ', ',
                 \trim($firstVenue->getTitle() . ', ' . $firstVenue->getFullAddress())
             );
             $content .= 'LOCATION:' . $normalizedVenueTitle . "\r\n";
-        } elseif ($shouldHaveWebinarUrlAsLocation) {
-            $content .= 'LOCATION:' . $webinarUrl . "\r\n";
+        } elseif ($event->hasUsableWebinarUrl()) {
+            $content .= 'LOCATION:' . $event->getWebinarUrl() . "\r\n";
         }
-        if ($webinarUrl !== '' && $event->isAtLeastPartiallyOnline()) {
-            $content .= 'DESCRIPTION:' . $webinarUrl . "\r\n";
+        if ($event->hasUsableWebinarUrl()) {
+            $content .= 'DESCRIPTION:' . $event->getWebinarUrl() . "\r\n";
         }
 
         $organizer = $event->getFirstOrganizer();
-        $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getName(), '"') .
+        $content .= 'ORGANIZER;CN="' . \addcslashes($organizer->getName(), '"') .
             '":mailto:' . $organizer->getEmailAddress() . "\r\n";
         $content .= "END:VEVENT\r\nEND:VCALENDAR";
 
@@ -954,10 +948,9 @@ class RegistrationManager
 
         $newEvent = $this->getEventRepository()->findByUid($eventUid);
         \assert($newEvent instanceof EventDateInterface);
-        $webinarUrl = $newEvent->getWebinarUrl();
-        if ($webinarUrl !== '' && $newEvent->isAtLeastPartiallyOnline()) {
+        if ($newEvent->hasUsableWebinarUrl()) {
             $template->unhideSubparts('webinar_url', $wrapperPrefix);
-            $template->setMarker('webinar_url', $webinarUrl);
+            $template->setMarker('webinar_url', $newEvent->getWebinarUrl());
         } else {
             $template->hideSubparts('webinar_url', $wrapperPrefix);
         }
