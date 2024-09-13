@@ -74,6 +74,7 @@ final class EventControllerTest extends UnitTestCase
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
+        $GLOBALS['LANG'] = $this->languageServiceMock;
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
@@ -83,12 +84,7 @@ final class EventControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EventController::class,
             $methodsToMock,
-            [
-                $this->eventRepositoryMock,
-                $this->permissionsMock,
-                $this->eventStatisticsCalculatorMock,
-                $this->languageServiceMock,
-            ]
+            [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
         );
         $this->subject = $subject;
 
@@ -107,7 +103,7 @@ final class EventControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $_GET['table']);
+        unset($_GET['id'], $_GET['pid'], $_GET['table'], $GLOBALS['LANG']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();

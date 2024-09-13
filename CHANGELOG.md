@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Do not provide the `LanguageService` via DI anymore (#3467)
 - Avoid empty paragraphs in thank-you email HTML (#3461)
 - Do not create calendar invites without a defined start and end (#3427)
 - Avoid calendar invite location for multi-venue events (#3400)

@@ -52,12 +52,13 @@ class EventController extends ActionController
     public function __construct(
         EventRepository $eventRepository,
         Permissions $permissions,
-        EventStatisticsCalculator $eventStatisticsCalculator,
-        LanguageService $languageService
+        EventStatisticsCalculator $eventStatisticsCalculator
     ) {
         $this->eventRepository = $eventRepository;
         $this->permissions = $permissions;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $languageService = $GLOBALS['LANG'] ?? null;
+        \assert($languageService instanceof LanguageService);
         $this->languageService = $languageService;
     }
 

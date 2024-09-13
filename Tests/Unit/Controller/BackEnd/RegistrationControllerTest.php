@@ -84,6 +84,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
+        $GLOBALS['LANG'] = $this->languageServiceMock;
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
@@ -93,7 +94,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$this->registrationRepositoryMock, $this->eventRepositoryMock, $this->languageServiceMock]
+            [$this->registrationRepositoryMock, $this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
@@ -115,7 +116,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $_GET['table']);
+        unset($_GET['id'], $_GET['pid'], $_GET['table'], $GLOBALS['LANG']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -612,7 +613,9 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         $localizedMessage = 'Registration deleted!';
         $this->languageServiceMock->expects(self::once())->method('sL')
-            ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted')
+            ->with(
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted'
+            )
             ->willReturn($localizedMessage);
         $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);
 
