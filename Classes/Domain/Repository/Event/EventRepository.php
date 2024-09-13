@@ -24,6 +24,19 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
 
     /**
+     * @var list<non-empty-string>
+     */
+    private const FIELDS_NOT_TO_COPY = [
+        'cancelation_deadline_reminder_sent',
+        'cancelled',
+        'date_of_last_registration_digest',
+        'event_takes_place_reminder_sent',
+        'offline_attendees',
+        'organizers_notified_about_minimum_reached',
+        'slug',
+    ];
+
+    /**
      * @return non-empty-string
      */
     protected function getTableName(): string
@@ -291,8 +304,33 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     public function deleteViaDataHandler(int $uid): void
     {
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-        $tableName = $this->getTableName();
-        $dataHandler->start([], [$tableName => [$uid => ['delete' => 1]]]);
+        $dataHandler->start(
+            [],
+            [
+                $this->getTableName() => [
+                    $uid => ['delete' => 1],
+                ],
+            ]
+        );
         $dataHandler->process_cmdmap();
+    }
+
+    /**
+     * Duplicates the event with the given UID.
+     *
+     * Note: As this method uses the `DataHandler`, it can only be used within a backend context.
+     *
+     * The `DataHandler` will also take care of checking the permissions of the logged-in BE user.
+     *
+     * @param positive-int $uid
+     */
+    public function duplicateViaDataHandler(int $uid): void
+    {
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], []);
+        $excludeFields = \implode(',', self::FIELDS_NOT_TO_COPY);
+        // Note: We're not calling `$dataHandler->process_cmdmap();` here
+        // because that would not allow us to provide the exclude fields.
+        $dataHandler->copyRecord($this->getTableName(), $uid, -$uid, true, [], $excludeFields);
     }
 }

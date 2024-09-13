@@ -1,0 +1,15 @@
+"pages"
+,"uid","pid","doktype","title"
+,1,0,254,"Record for pages"
+
+"tx_seminars_organizers"
+,"uid","pid"
+,1,1
+
+"tx_seminars_seminars"
+,"uid","pid","object_type","organizers"
+,1,1,0,1
+
+"tx_seminars_seminars_organizers_mm"
+,"uid_local","uid_foreign"
+,1,1
