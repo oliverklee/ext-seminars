@@ -141,4 +141,6 @@ interface EventDateInterface
     public function setWebinarUrl(string $webinarUrl): void;
 
     public function hasUsableWebinarUrl(): bool;
+
+    public function getAdditionalEmailText(): string;
 }

@@ -1379,4 +1379,23 @@ final class SingleEventTest extends UnitTestCase
 
         self::assertFalse($this->subject->hasUsableWebinarUrl());
     }
+
+    /**
+     * @test
+     */
+    public function getAdditionalEmailTextInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getAdditionalEmailText());
+    }
+
+    /**
+     * @test
+     */
+    public function setAdditionalEmailTextSetsAdditionalEmailText(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setAdditionalEmailText($value);
+
+        self::assertSame($value, $this->subject->getAdditionalEmailText());
+    }
 }
