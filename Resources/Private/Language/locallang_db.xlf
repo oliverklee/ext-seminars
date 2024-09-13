@@ -283,6 +283,9 @@
 			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest" resname="tx_seminars_seminars.date_of_last_registration_digest">
 				<source>Date of last registration digest email</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.additional_email_text" resname="tx_seminars_seminars.additional_email_text">
+				<source>Additional text for the thank-you email to the attendees</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" resname="tx_seminars_speakers">
 				<source>Speakers</source>
 			</trans-unit>
