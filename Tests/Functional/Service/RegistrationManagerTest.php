@@ -2370,7 +2370,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHybridEventWithWithWebinarUrlWithOneVenuHasWebinarUrlInCalendarInviteDescription(): void
+    public function notifyAttendeeForHybridEventWithWithWebinarUrlWithOneVenuHasUrlInCalendarInviteDescription(): void
     {
         $webinarUrl = 'https://example.com';
         $this->setUpFakeFrontEnd();
@@ -2471,5 +2471,137 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $body = $firstIcsAttachment->getBody();
         self::assertStringNotContainsString('DESCRIPTION:', $body);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteEventWithWebinarUrlNotHasWebinarUrlInPlainTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ON_SITE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringNotContainsString($webinarUrl, $this->extractTextBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteEventWithWebinarUrlNotHasWebinarUrlInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ON_SITE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringNotContainsString($webinarUrl, $this->extractHtmlBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithWebinarUrlHasWebinarUrlInPlainTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString($webinarUrl, $this->extractTextBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForHybridEventWithWebinarUrlHasWebinarUrlInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_HYBRID,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString(
+            '<a href="' . $webinarUrl . '">' . $webinarUrl . '</a>',
+            $this->extractHtmlBodyFromEmail($this->email)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithWebinarUrlHasWebinarUrlInPlainTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ONLINE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString($webinarUrl, $this->extractTextBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineEventWithWebinarUrlHasWebinarUrlInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $webinarUrl = 'https://example.com';
+        $this->createEventWithOrganizer([
+            'event_format' => EventDateInterface::EVENT_FORMAT_ONLINE,
+            'webinar_url' => $webinarUrl,
+        ]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString(
+            '<a href="' . $webinarUrl . '">' . $webinarUrl . '</a>',
+            $this->extractHtmlBodyFromEmail($this->email)
+        );
     }
 }

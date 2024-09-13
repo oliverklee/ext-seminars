@@ -952,6 +952,16 @@ class RegistrationManager
             $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl
         );
 
+        $newEvent = $this->getEventRepository()->findByUid($eventUid);
+        \assert($newEvent instanceof EventDateInterface);
+        $webinarUrl = $newEvent->getWebinarUrl();
+        if ($webinarUrl !== '' && $newEvent->isAtLeastPartiallyOnline()) {
+            $template->unhideSubparts('webinar_url', $wrapperPrefix);
+            $template->setMarker('webinar_url', $webinarUrl);
+        } else {
+            $template->hideSubparts('webinar_url', $wrapperPrefix);
+        }
+
         if ($event->isPlanned()) {
             $template->unhideSubparts('planned_disclaimer', $wrapperPrefix);
         } else {

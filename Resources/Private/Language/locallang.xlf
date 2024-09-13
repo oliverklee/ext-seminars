@@ -169,6 +169,9 @@
 			<trans-unit id="label_url" resname="label_url">
 				<source>More information</source>
 			</trans-unit>
+			<trans-unit id="label_webinar_url" resname="label_webinar_url">
+				<source>Webinar URL</source>
+			</trans-unit>
 			<trans-unit id="label_seminardata" resname="label_seminardata">
 				<source>Seminar data</source>
 			</trans-unit>
