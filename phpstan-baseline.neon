@@ -2596,13 +2596,8 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of static method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:assertNotContainsRawLabelKey\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 23
+			count: 4
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
@@ -2612,12 +2607,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 6
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 1
+			count: 3
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
