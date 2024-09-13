@@ -2596,18 +2596,8 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 4
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
 			count: 2
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 3
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-

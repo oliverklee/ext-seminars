@@ -909,9 +909,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
 
         $this->subject->notifyAttendee($registration, $controller);
-        $result = $this->email->getTextBody();
+        $result = $this->extractTextBodyFromEmail($this->email);
 
-        self::assertIsString($result);
         self::assertStringContainsString("\n-- \n" . $footer, $result);
     }
 
@@ -937,9 +936,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
 
         $this->subject->notifyAttendee($registration, $controller);
-        $result = $this->email->getTextBody();
+        $result = $this->extractTextBodyFromEmail($this->email);
 
-        self::assertIsString($result);
         self::assertStringContainsString("\n-- \n" . $footer, $result);
     }
 
@@ -964,9 +962,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
 
         $this->subject->notifyAttendee($registration, $controller);
-        $result = $this->email->getHtmlBody();
+        $result = $this->extractHtmlBodyFromEmail($this->email);
 
-        self::assertIsString($result);
         self::assertStringContainsString($footer, $result);
     }
 
@@ -992,9 +989,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
 
         $this->subject->notifyAttendee($registration, $controller);
-        $result = $this->email->getHtmlBody();
+        $result = $this->extractHtmlBodyFromEmail($this->email);
 
-        self::assertIsString($result);
         self::assertStringContainsString("organizer<br />\nfooter", $result);
     }
 
@@ -1018,7 +1014,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
@@ -1042,7 +1038,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
@@ -1066,7 +1062,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
@@ -1091,7 +1087,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString(
             $this->translate('label_planned_disclaimer'),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
@@ -1253,7 +1249,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_willBeAnnounced'),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
@@ -1282,10 +1278,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString(
-            "place_title\nplace_address",
-            $this->email->getTextBody()
-        );
+        self::assertStringContainsString("place_title\nplace_address", $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1745,7 +1738,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             'footown, ' . $country->getLocalShortName(),
-            $this->email->getTextBody()
+            $this->extractTextBodyFromEmail($this->email)
         );
     }
 
