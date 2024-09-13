@@ -277,6 +277,25 @@ trait EventDateTrait
         $this->venues = $venues;
     }
 
+    public function hasExactlyOneVenue(): bool
+    {
+        return \count($this->getVenues()) === 1;
+    }
+
+    /**
+     * @throws \RuntimeException if there are no venues
+     */
+    public function getFirstVenue(): Venue
+    {
+        $venues = $this->getVenues()->getArray();
+        $firstVenue = $venues[0] ?? null;
+        if (!$firstVenue instanceof Venue) {
+            throw new \RuntimeException('This event does not have any venues.', 1726226635);
+        }
+
+        return $firstVenue;
+    }
+
     /**
      * @return ObjectStorage<Speaker>
      */
@@ -451,5 +470,13 @@ trait EventDateTrait
     public function setWebinarUrl(string $webinarUrl): void
     {
         $this->webinarUrl = $webinarUrl;
+    }
+
+    /**
+     * Checks if this event is at least partially online and has a non-empty webinar URL.
+     */
+    public function hasUsableWebinarUrl(): bool
+    {
+        return $this->isAtLeastPartiallyOnline() && $this->getWebinarUrl() !== '';
     }
 }

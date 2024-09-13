@@ -62,6 +62,13 @@ interface EventDateInterface
      */
     public function getVenues(): ObjectStorage;
 
+    public function hasExactlyOneVenue(): bool;
+
+    /**
+     * @throws \RuntimeException if there are no venues
+     */
+    public function getFirstVenue(): Venue;
+
     /**
      * @return ObjectStorage<Speaker>
      */
@@ -132,4 +139,6 @@ interface EventDateInterface
     public function getWebinarUrl(): string;
 
     public function setWebinarUrl(string $webinarUrl): void;
+
+    public function hasUsableWebinarUrl(): bool;
 }

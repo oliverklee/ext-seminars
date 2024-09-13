@@ -458,10 +458,10 @@ final class SingleEventTest extends UnitTestCase
      */
     public function getVenuesInitiallyReturnsEmptyStorage(): void
     {
-        $associatedModels = $this->subject->getVenues();
+        $venues = $this->subject->getVenues();
 
-        self::assertInstanceOf(ObjectStorage::class, $associatedModels);
-        self::assertCount(0, $associatedModels);
+        self::assertInstanceOf(ObjectStorage::class, $venues);
+        self::assertCount(0, $venues);
     }
 
     /**
@@ -469,11 +469,87 @@ final class SingleEventTest extends UnitTestCase
      */
     public function setVenuesSetsVenues(): void
     {
-        /** @var ObjectStorage<Venue> $associatedModels */
-        $associatedModels = new ObjectStorage();
-        $this->subject->setVenues($associatedModels);
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $this->subject->setVenues($venues);
 
-        self::assertSame($associatedModels, $this->subject->getVenues());
+        self::assertSame($venues, $this->subject->getVenues());
+    }
+
+    /**
+     * @test
+     */
+    public function hasExactlyOneVenueForNoVenuesReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->hasExactlyOneVenue());
+    }
+
+    /**
+     * @test
+     */
+    public function hasExactlyOneVenueForOneVenueReturnsTrue(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $venues->attach(new Venue());
+        $this->subject->setVenues($venues);
+
+        self::assertTrue($this->subject->hasExactlyOneVenue());
+    }
+
+    /**
+     * @test
+     */
+    public function hasExactlyOneVenueForTwoVenuesReturnsFalse(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $venues->attach(new Venue());
+        $venues->attach(new Venue());
+        $this->subject->setVenues($venues);
+
+        self::assertFalse($this->subject->hasExactlyOneVenue());
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstVenueForNoVenuesThrowsException(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(1726226635);
+        $this->expectExceptionMessage('This event does not have any venues.');
+
+        $this->subject->getFirstVenue();
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstVenueForOneVenueReturnsVenue(): void
+    {
+        $venue = new Venue();
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $venues->attach($venue);
+        $this->subject->setVenues($venues);
+
+        self::assertSame($venue, $this->subject->getFirstVenue());
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstVenueForTwoVenuesReturnsFirstVenue(): void
+    {
+        $venue = new Venue();
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $venues->attach($venue);
+        $venues->attach(new Venue());
+        $this->subject->setVenues($venues);
+
+        self::assertSame($venue, $this->subject->getFirstVenue());
     }
 
     /**
@@ -1243,5 +1319,64 @@ final class SingleEventTest extends UnitTestCase
         $this->subject->setWebinarUrl($value);
 
         self::assertSame($value, $this->subject->getWebinarUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function hasUsableWebinarUrlForOnSiteEventWithoutWebinarUrlReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ON_SITE);
+        $this->subject->setWebinarUrl('');
+
+        self::assertFalse($this->subject->hasUsableWebinarUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function hasUsableWebinarUrlForOnSiteEventWithWebinarUrlReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ON_SITE);
+        $this->subject->setWebinarUrl('https://example.com/webinar');
+
+        self::assertFalse($this->subject->hasUsableWebinarUrl());
+    }
+
+    /**
+     * @return array<string, array{0: EventDateInterface::EVENT_FORMAT_*}>
+     */
+    public function atLeastPartiallyOnlineEventFormatsDataProvider(): array
+    {
+        return [
+            'hybrid' => [EventDateInterface::EVENT_FORMAT_HYBRID],
+            'online' => [EventDateInterface::EVENT_FORMAT_ONLINE],
+        ];
+    }
+
+    /**
+     * @test
+     * @param EventDateInterface::EVENT_FORMAT_* $eventFormat
+     * @dataProvider atLeastPartiallyOnlineEventFormatsDataProvider
+     */
+    public function hasUsableWebinarUrlForPartiallyOnlineEventWithWebinarUrlReturnsTrue(int $eventFormat): void
+    {
+        $this->subject->setEventFormat($eventFormat);
+        $this->subject->setWebinarUrl('https://example.com/webinar');
+
+        self::assertTrue($this->subject->hasUsableWebinarUrl());
+    }
+
+    /**
+     * @test
+     * @param EventDateInterface::EVENT_FORMAT_* $eventFormat
+     * @dataProvider atLeastPartiallyOnlineEventFormatsDataProvider
+     */
+    public function hasUsableWebinarUrlForPartiallyOnlineEventWithoutWebinarUrlReturnsFalse(int $eventFormat): void
+    {
+        $this->subject->setEventFormat($eventFormat);
+        $this->subject->setWebinarUrl('');
+
+        self::assertFalse($this->subject->hasUsableWebinarUrl());
     }
 }
