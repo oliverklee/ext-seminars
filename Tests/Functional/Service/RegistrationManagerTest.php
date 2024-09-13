@@ -271,7 +271,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyOrganizers($registration);
 
         $expectedExpression = '/' . $this->translate('label_vacancies') . ': 1\\n*$/';
-        self::assertRegExp($expectedExpression, $this->email->getTextBody());
+        self::assertRegExp($expectedExpression, $this->extractTextBodyFromEmail($this->email));
     }
 
     // Tests concerning getRegistrationLink
@@ -595,7 +595,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('test event', $this->email->getTextBody());
+        self::assertStringContainsString('test event', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -612,7 +612,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertNotContainsRawLabelKey($this->email->getTextBody());
+        self::assertNotContainsRawLabelKey($this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -629,7 +629,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringNotContainsString(' ,', $this->email->getTextBody());
+        self::assertStringNotContainsString(' ,', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -646,7 +646,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('something nice to eat', $this->email->getTextBody());
+        self::assertStringContainsString('something nice to eat', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -663,7 +663,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('a nice, dry place', $this->email->getTextBody());
+        self::assertStringContainsString('a nice, dry place', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -680,7 +680,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('learning Ruby on Rails', $this->email->getTextBody());
+        self::assertStringContainsString('learning Ruby on Rails', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -782,7 +782,27 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('<html', (string)$this->email->getHtmlBody());
+        self::assertStringContainsString('<html', $this->extractHtmlBodyFromEmail($this->email));
+    }
+
+    private function extractTextBodyFromEmail(MailMessage $email): string
+    {
+        $textBody = $email->getTextBody();
+        if (!\is_string($textBody)) {
+            throw new \UnexpectedValueException('No HTML body found.', 1726224208);
+        }
+
+        return $textBody;
+    }
+
+    private function extractHtmlBodyFromEmail(MailMessage $email): string
+    {
+        $htmlBody = $email->getHtmlBody();
+        if (!\is_string($htmlBody)) {
+            throw new \UnexpectedValueException('No HTML body found.', 1726224447);
+        }
+
+        return $htmlBody;
     }
 
     /**
@@ -799,7 +819,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringNotContainsString('###', $this->email->getTextBody());
+        self::assertStringNotContainsString('###', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -816,7 +836,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringNotContainsString('###', (string)$this->email->getHtmlBody());
+        self::assertStringNotContainsString('###', $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**
@@ -843,7 +863,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('Harry Callagan', (string)$this->email->getHtmlBody());
+        self::assertStringContainsString('Harry Callagan', $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**
@@ -865,7 +885,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyAttendee($registration, $controller);
         $seminarLink = 'https://singleview.example.com/';
 
-        self::assertStringContainsString('<a href="' . $seminarLink, (string)$this->email->getHtmlBody());
+        self::assertStringContainsString('<a href="' . $seminarLink, $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**
@@ -1094,7 +1114,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('style=', (string)$this->email->getHtmlBody());
+        self::assertStringContainsString('style=', $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**
@@ -1112,7 +1132,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration->setAttendeesNames('foo1 foo2');
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('foo1 foo2', $this->email->getTextBody());
+        self::assertStringContainsString('foo1 foo2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1130,7 +1150,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString("1. foo1\n2. foo2", $this->email->getTextBody());
+        self::assertStringContainsString("1. foo1\n2. foo2", $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1153,7 +1173,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $controller);
 
-        $emailBody = (string)$this->email->getHtmlBody();
+        $emailBody = $this->extractHtmlBodyFromEmail($this->email);
 
         self::assertStringContainsString('foo1', $emailBody);
         self::assertStringContainsString('foo2', $emailBody);
@@ -1185,7 +1205,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('foo_place', $this->email->getTextBody());
+        self::assertStringContainsString('foo_place', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1214,7 +1234,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('foo_street', $this->email->getTextBody());
+        self::assertStringContainsString('foo_street', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1298,7 +1318,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        $emailBody = (string)$this->email->getHtmlBody();
+        $emailBody = $this->extractHtmlBodyFromEmail($this->email);
 
         self::assertStringContainsString('place_title', $emailBody);
         self::assertStringContainsString('place_address', $emailBody);
@@ -1329,7 +1349,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString("place_title\nplace_address", $this->email->getTextBody());
+        self::assertStringContainsString("place_title\nplace_address", $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1357,7 +1377,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1385,7 +1405,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1413,7 +1433,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1441,7 +1461,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1469,7 +1489,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1502,7 +1522,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2', (string)$this->email->getHtmlBody());
+        self::assertStringContainsString('address1 address2', $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**
@@ -1535,7 +1555,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('address1 address2 address3', $this->email->getTextBody());
+        self::assertStringContainsString('address1 address2 address3', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1563,7 +1583,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('footown', $this->email->getTextBody());
+        self::assertStringContainsString('footown', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1591,7 +1611,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('12345 footown', $this->email->getTextBody());
+        self::assertStringContainsString('12345 footown', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1623,7 +1643,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString($country->getLocalShortName(), $this->email->getTextBody());
+        self::assertStringContainsString($country->getLocalShortName(), $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1651,7 +1671,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString("address\nfootown", $this->email->getTextBody());
+        self::assertStringContainsString("address\nfootown", $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
@@ -1684,7 +1704,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        $emailBody = (string)$this->email->getHtmlBody();
+        $emailBody = $this->extractHtmlBodyFromEmail($this->email);
 
         self::assertStringContainsString('address', $emailBody);
         self::assertStringContainsString('footown', $emailBody);
@@ -1754,7 +1774,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringNotContainsString('footown,', $this->email->getTextBody());
+        self::assertStringNotContainsString('footown,', $this->extractTextBodyFromEmail($this->email));
     }
 
     /**
