@@ -955,6 +955,19 @@ class RegistrationManager
             $template->hideSubparts('webinar_url', $wrapperPrefix);
         }
 
+        $additionalEmailText = $newEvent->getAdditionalEmailText();
+        if ($additionalEmailText !== '') {
+            $template->unhideSubparts('additional_email_text', $wrapperPrefix);
+            if ($useHtml) {
+                $processedText = $this->convertFromPlainTextToHtml($additionalEmailText);
+                $template->setMarker('additional_email_text', $processedText);
+            } else {
+                $template->setMarker('additional_email_text', $additionalEmailText);
+            }
+        } else {
+            $template->hideSubparts('additional_email_text', $wrapperPrefix);
+        }
+
         if ($event->isPlanned()) {
             $template->unhideSubparts('planned_disclaimer', $wrapperPrefix);
         } else {
@@ -966,7 +979,7 @@ class RegistrationManager
         if ($footers !== []) {
             $firstFooter = $footers[0];
             if ($useHtml) {
-                $footerCode = \nl2br(\htmlspecialchars($firstFooter, ENT_QUOTES | ENT_HTML5));
+                $footerCode = $this->convertFromPlainTextToHtml($firstFooter);
             } else {
                 $footerCode = "\n-- \n" . $firstFooter;
             }
@@ -996,6 +1009,11 @@ class RegistrationManager
         }
 
         return $emailBody;
+    }
+
+    private function convertFromPlainTextToHtml(string $plainText): string
+    {
+        return \nl2br(\htmlspecialchars($plainText, ENT_QUOTES | ENT_HTML5));
     }
 
     private function buildConfigurationWithFlexForms(
