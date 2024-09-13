@@ -49,13 +49,12 @@ class RegistrationController extends ActionController
      */
     private $languageService;
 
-    public function __construct(
-        RegistrationRepository $registrationRepository,
-        EventRepository $eventRepository,
-        LanguageService $languageService
-    ) {
+    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
+    {
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
+        $languageService = $GLOBALS['LANG'] ?? null;
+        \assert($languageService instanceof LanguageService);
         $this->languageService = $languageService;
     }
 
