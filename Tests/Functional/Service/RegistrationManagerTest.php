@@ -2618,4 +2618,117 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $this->extractHtmlBodyFromEmail($this->email)
         );
     }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithAdditionalEmailTextHasTextInPlainTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $additionalEmailText = 'Welcome!';
+        $this->createEventWithOrganizer(['additional_email_text' => $additionalEmailText]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString($additionalEmailText, $this->extractTextBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithAdditionalEmailTextHasTextInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $additionalEmailText = 'Welcome!';
+        $this->createEventWithOrganizer(['additional_email_text' => $additionalEmailText]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString($additionalEmailText, $this->extractHtmlBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithAdditionalEmailTextWrapsTextInParagraph(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $additionalEmailText = 'Welcome!';
+        $this->createEventWithOrganizer(['additional_email_text' => $additionalEmailText]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString(
+            '<p>' . $additionalEmailText . '</p>',
+            $this->extractHtmlBodyFromEmail($this->email)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithAdditionalEmailTextEncodesEmailText(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $additionalEmailText = 'a & b < c';
+        $this->createEventWithOrganizer(['additional_email_text' => $additionalEmailText]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString(
+            \htmlspecialchars($additionalEmailText, ENT_QUOTES | ENT_HTML5),
+            $this->extractHtmlBodyFromEmail($this->email)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithAdditionalEmailTextConvertsNewlinesToBreaks(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $additionalEmailText = "a\nb";
+        $this->createEventWithOrganizer(['additional_email_text' => $additionalEmailText]);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringContainsString(\nl2br($additionalEmailText), $this->extractHtmlBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithoutAdditionalEmailTextHasNoEmptyParagraphs(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer(['additional_email_text' => '']);
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller);
+
+        self::assertStringNotContainsString('<p></p>', $this->extractHtmlBodyFromEmail($this->email));
+    }
 }
