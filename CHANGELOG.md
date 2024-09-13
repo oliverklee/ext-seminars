@@ -6,7 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a field for additional text for the thank-you emails (#3453, #3456, #3459)
+- Add a field for additional text for the thank-you emails
+  (#3453, #3456, #3459, #3465)
 - Add `Venue.fullAddress` (#3399)
 - Include the webinar URL in the thank-you email (#3446, #3452, #3462)
 - Include the webinar URL in the calendar invite (#3445, #3452)
