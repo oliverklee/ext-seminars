@@ -17,8 +17,6 @@ updates:
     ignore:
       - dependency-name: "doctrine/dbal"
       - dependency-name: "egulias/email-validator"
-      - dependency-name: "ergebnis/composer-normalize"
-        versions: [ ">= 2.20.0" ]
       - dependency-name: "helmich/typo3-typoscript-lint"
       - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
