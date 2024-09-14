@@ -186,16 +186,6 @@ parameters:
 			path: Classes/Configuration/SharedConfigurationCheck.php
 
 		-
-			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\EventController\\:\\:\\$response\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/EventController.php
-
-		-
-			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Controller\\\\BackEnd\\\\RegistrationController\\:\\:\\$response\\.$#"
-			count: 1
-			path: Classes/Controller/BackEnd/RegistrationController.php
-
-		-
 			message: "#^Parameter \\#2 \\$storageFolderUid of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationProcessor\\:\\:createAdditionalPersons\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/Controller/EventRegistrationController.php
@@ -3401,23 +3391,13 @@ parameters:
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
+			message: "#^Instanceof between Psr\\\\Http\\\\Message\\\\ResponseInterface and Psr\\\\Http\\\\Message\\\\ResponseInterface will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
+
+		-
+			message: "#^Instanceof between Psr\\\\Http\\\\Message\\\\ResponseInterface and Psr\\\\Http\\\\Message\\\\ResponseInterface will always evaluate to true\\.$#"
 			count: 2
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\EventControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/BackEnd/EventControllerTest.php
-
-		-
-			message: "#^Call to method getHeaders\\(\\) on an unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Controller\\\\BackEnd\\\\RegistrationControllerTest\\:\\:\\$response has unknown class TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Response as its type\\.$#"
-			count: 1
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
 
 		-

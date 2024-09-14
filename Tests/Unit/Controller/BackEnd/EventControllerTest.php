@@ -16,7 +16,6 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Response;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -61,11 +60,6 @@ final class EventControllerTest extends UnitTestCase
      */
     private $languageServiceMock;
 
-    /**
-     * @var Response
-     */
-    private $response;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -90,12 +84,6 @@ final class EventControllerTest extends UnitTestCase
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
-
-        if (\class_exists(Response::class)) {
-            // 10LTS only
-            $this->response = new Response();
-            $this->subject->_set('response', $this->response);
-        }
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);
@@ -162,19 +150,10 @@ final class EventControllerTest extends UnitTestCase
     {
         $result = $this->subject->exportCsvAction(9);
 
-        if ($result instanceof ResponseInterface) {
-            // 11LTS path
-            self::assertSame(
-                'text/csv; header=present; charset=utf-8',
-                $result->getHeaders()['Content-Type'][0]
-            );
-        } else {
-            // 10LTS path
-            self::assertContains(
-                'Content-Type: text/csv; header=present; charset=utf-8',
-                $this->response->getHeaders()
-            );
-        }
+        self::assertSame(
+            'text/csv; header=present; charset=utf-8',
+            $result->getHeaders()['Content-Type'][0]
+        );
     }
 
     /**
@@ -184,19 +163,10 @@ final class EventControllerTest extends UnitTestCase
     {
         $result = $this->subject->exportCsvAction(9);
 
-        if ($result instanceof ResponseInterface) {
-            // 11LTS path
-            self::assertSame(
-                'attachment; filename=events.csv',
-                $result->getHeaders()['Content-Disposition'][0]
-            );
-        } else {
-            // 10LTS path
-            self::assertContains(
-                'Content-Disposition: attachment; filename=events.csv',
-                $this->response->getHeaders()
-            );
-        }
+        self::assertSame(
+            'attachment; filename=events.csv',
+            $result->getHeaders()['Content-Disposition'][0]
+        );
     }
 
     /**

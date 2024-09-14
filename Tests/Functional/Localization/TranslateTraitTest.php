@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Localization;
 
 use OliverKlee\Seminars\Localization\TranslateTrait;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -34,11 +32,7 @@ final class TranslateTraitTest extends FunctionalTestCase
 
     public function setUpLanguageService(): void
     {
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-        } else {
-            $languageService = LanguageService::create('default');
-        }
+        $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
 
         $GLOBALS['LANG'] = $languageService;

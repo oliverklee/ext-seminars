@@ -65,27 +65,15 @@ class EventController extends ActionController
     /**
      * @param int<0, max> $pageUid
      *
-     * @return string|ResponseInterface
-     *
      * @deprecated will be removed in version 6.0.0 in #3134
      */
-    public function exportCsvAction(int $pageUid)
+    public function exportCsvAction(int $pageUid): ResponseInterface
     {
         $_GET['table'] = self::TABLE_NAME;
         $_GET['pid'] = $pageUid;
 
         $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
 
-        if (isset($this->response)) {
-            // 10LTS path
-            $this->response->setHeader('Content-Type', 'text/csv; header=present; charset=utf-8');
-            $contentDisposition = 'attachment; filename=' . self::CSV_FILENAME;
-            $this->response->setHeader('Content-Disposition', $contentDisposition);
-
-            return $csvContent;
-        }
-
-        // 11LTS path
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 
