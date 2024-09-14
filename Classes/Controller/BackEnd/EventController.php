@@ -89,6 +89,11 @@ class EventController extends ActionController
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 
+    private function redirectToOverviewAction(): void
+    {
+        $this->redirect('overview', 'BackEnd\\Module');
+    }
+
     /**
      * @param positive-int $eventUid
      */
@@ -96,7 +101,7 @@ class EventController extends ActionController
     {
         $this->eventRepository->hideViaDataHandler($eventUid);
 
-        $this->redirect('overview', 'BackEnd\\Module');
+        $this->redirectToOverviewAction();
     }
 
     /**
@@ -106,7 +111,7 @@ class EventController extends ActionController
     {
         $this->eventRepository->unhideViaDataHandler($eventUid);
 
-        $this->redirect('overview', 'BackEnd\\Module');
+        $this->redirectToOverviewAction();
     }
 
     /**
@@ -120,7 +125,7 @@ class EventController extends ActionController
             ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted');
         $this->addFlashMessage($message);
 
-        $this->redirect('overview', 'BackEnd\\Module');
+        $this->redirectToOverviewAction();
     }
 
     /**
