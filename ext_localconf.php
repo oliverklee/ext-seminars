@@ -6,6 +6,10 @@ defined('TYPO3') or die('Access denied.');
     // Used for post-validation of fields in back-end forms.
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['seminars']
         = \OliverKlee\Seminars\Hooks\DataHandlerHook::class;
+    // Used for keeping registrations from getting duplicated when copying event records.
+    // @deprecated #1324 will be removed in seminars 6.0
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass']['seminars']
+        = \OliverKlee\Seminars\Hooks\DataHandlerHook::class;
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
         'seminars',
