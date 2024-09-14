@@ -46,7 +46,6 @@
 		"typo3fluid/fluid": "^2.6.10"
 	},
 	"require-dev": {
-		"egulias/email-validator": "^2.1.0 || ^3.2.1",
 		"ergebnis/composer-normalize": "2.43.0",
 		"friendsofphp/php-cs-fixer": "3.9.5",
 		"helmich/typo3-typoscript-lint": "2.5.2 || 3.2.1",
