@@ -124,7 +124,6 @@
 		],
 		"ci:php:cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --dry-run --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
 		"ci:static": [
@@ -156,7 +155,6 @@
 			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
 			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
 		],
-		"php:rector": ".Build/vendor/bin/rector",
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
@@ -179,8 +177,7 @@
 			"rm docker-compose.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
-			"rm phpstan.neon",
-			"rm rector.php"
+			"rm phpstan.neon"
 		],
 		"typo3:docs:render": [
 			"docker-compose run --rm t3docmake"
@@ -194,7 +191,6 @@
 		"ci:php": "Runs all static checks for the PHP files.",
 		"ci:php:cs-fixer": "Checks the code style with the PHP Coding Standards Fixer (PHP-CS-Fixer).",
 		"ci:php:lint": "Lints the PHP files for syntax errors.",
-		"ci:php:rector": "Checks for code for changes by Rector.",
 		"ci:php:sniff": "Checks the code style with PHP_CodeSniffer (PHPCS).",
 		"ci:php:stan": "Checks the PHP types using PHPStan.",
 		"ci:static": "Runs all static code analysis checks for the code.",
@@ -208,7 +204,6 @@
 		"fix:php": "Runs all fixers for the PHP code.",
 		"fix:php:cs": "Fixes the code style with PHP-CS-Fixer.",
 		"fix:php:sniff": "Fixes the code style with PHP_CodeSniffer.",
-		"php:rector": "Updates the code with Rector.",
 		"phpstan:baseline": "Updates the PHPStan baseline file to match the code.",
 		"prepare-release": "Removes development-only files in preparation of a TER release."
 	}
