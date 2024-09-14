@@ -116,26 +116,6 @@
 			"@link-extension"
 		],
 		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
-		"ci:coverage": [
-			"@ci:coverage:unit",
-			"@ci:coverage:functional"
-		],
-		"ci:coverage:functional": [
-			"@coverage:create-directories",
-			"find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
-		],
-		"ci:coverage:legacy-functional": [
-			"@coverage:create-directories",
-			"find 'Tests/LegacyFunctional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running legacy functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
-		],
-		"ci:coverage:merge": [
-			"@coverage:create-directories",
-			"tools/phpcov merge --clover=./build/logs/clover.xml ./.Build/coverage/"
-		],
-		"ci:coverage:unit": [
-			"@coverage:create-directories",
-			".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
-		],
 		"ci:php": [
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
@@ -161,7 +141,6 @@
 		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
 		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TypoScriptLint.yaml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
 		"ci:xliff:lint": "php Build/xliff/xliff-lint lint:xliff Resources/Private/Language",
-		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
 			"@fix:composer",
 			"@fix:php"
@@ -212,11 +191,6 @@
 	},
 	"scripts-descriptions": {
 		"ci:composer:normalize": "Checks the composer.json.",
-		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
-		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
-		"ci:coverage:legacy-functional": "Generates the code coverage report for legacy functional tests.",
-		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
-		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
 		"ci:php": "Runs all static checks for the PHP files.",
 		"ci:php:cs-fixer": "Checks the code style with the PHP Coding Standards Fixer (PHP-CS-Fixer).",
 		"ci:php:lint": "Lints the PHP files for syntax errors.",
@@ -229,7 +203,6 @@
 		"ci:tests:unit": "Runs the unit tests.",
 		"ci:ts:lint": "Lints all TypoScript files.",
 		"ci:xliff:lint": "Lints the XLIFF files.",
-		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
 		"fix:composer": "Runs all fixers for the PHP code.",
 		"fix:php": "Runs all fixers for the PHP code.",
