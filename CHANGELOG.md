@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Allow `psr/http-message` 2.x (#3507)
 - Require Emogrifier >= 7.2.0 (#3506)
 - Require feuserextrafields >= 6.3.0 (#3505)
 - Drop the `ext-pdo` dependency (#3504)
