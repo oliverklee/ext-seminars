@@ -20,7 +20,6 @@ updates:
       - dependency-name: "ergebnis/composer-normalize"
         versions: [ ">= 2.20.0" ]
       - dependency-name: "helmich/typo3-typoscript-lint"
-        versions: [ ">= 3.0.0" ]
       - dependency-name: "pelago/emogrifier"
       - dependency-name: "phpunit/phpunit"
         versions: [ ">= 9" ]
