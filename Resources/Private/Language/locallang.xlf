@@ -1533,6 +1533,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.action.showAllEvents" resname="backEndModule.action.showAllEvents">
 				<source>Show all events</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.duplicate" resname="backEndModule.action.duplicate">
+				<source>Duplicate</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.search" resname="backEndModule.action.search">
 				<source>Search</source>
 			</trans-unit>
