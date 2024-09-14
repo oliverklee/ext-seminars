@@ -146,4 +146,14 @@ class EventController extends ActionController
 
         $this->view->assign('searchTerm', \trim($searchTerm));
     }
+
+    /**
+     * @param positive-int $eventUid
+     */
+    public function duplicateAction(int $eventUid): void
+    {
+        $this->eventRepository->duplicateViaDataHandler($eventUid);
+
+        $this->redirectToOverviewAction();
+    }
 }
