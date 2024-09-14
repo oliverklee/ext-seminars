@@ -7,6 +7,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.7.0: New fields, BE usability features, and deprecations
+
+### Added
+
 - Add a "duplicate event" button to the BE module (#3469, #3482, #3485, #3487)
 - Add a field for additional text for the thank-you emails
   (#3453, #3456, #3459, #3465)
@@ -31,8 +43,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Deprecate icons for categories (#3488)
 - Deprecate `Event.getRegisteredSeats()` and `Event.hasEnoughRegistrations()`
   (#3443)
-
-### Removed
 
 ### Fixed
 
