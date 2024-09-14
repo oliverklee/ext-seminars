@@ -23,6 +23,7 @@ return [
                 'eval' => 'required,trim',
             ],
         ],
+        // @deprecated will be removed in version 6.0.0 in #3370
         'icon' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.icon',

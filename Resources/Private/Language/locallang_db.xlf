@@ -607,6 +607,7 @@
 			<trans-unit id="tx_seminars_categories.title" resname="tx_seminars_categories.title">
 				<source>Title</source>
 			</trans-unit>
+			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
 			<trans-unit id="tx_seminars_categories.icon" resname="tx_seminars_categories.icon">
 				<source>Icon</source>
 			</trans-unit>

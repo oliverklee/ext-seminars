@@ -16,11 +16,17 @@ class LegacyCategory extends AbstractModel
      */
     protected static $tableName = 'tx_seminars_categories';
 
+    /**
+     * @deprecated will be removed in version 6.0.0 in #3370
+     */
     public function hasIcon(): bool
     {
         return $this->hasRecordPropertyInteger('icon');
     }
 
+    /**
+     * @deprecated will be removed in version 6.0.0 in #3370
+     */
     public function getIcon(): ?FileReference
     {
         if (!$this->hasIcon()) {

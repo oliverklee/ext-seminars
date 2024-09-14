@@ -221,6 +221,9 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         );
     }
 
+    /**
+     * @deprecated will be removed in version 6.0.0 in #3370
+     */
     private function checkCategoryIconDisplay(): void
     {
         $this->checkIfSingleInSetNotEmpty(
