@@ -200,6 +200,26 @@ class DataHandlerHook
         }
     }
 
+    /**
+     * @deprecated #1324 will be removed in seminars 6.0
+     */
+    public function processCmdmap_preProcess(string $command, string $table): void
+    {
+        if (\in_array($command, ['copy', 'localize'], true) && $table === self::TABLE_EVENTS) {
+            $GLOBALS['TCA'][self::TABLE_EVENTS]['columns']['registrations']['config']['type'] = 'none';
+        }
+    }
+
+    /**
+     * @deprecated #1324 will be removed in seminars 6.0
+     */
+    public function processCmdmap_postProcess(string $command, string $table): void
+    {
+        if (\in_array($command, ['copy', 'localize'], true) && $table === self::TABLE_EVENTS) {
+            $GLOBALS['TCA'][self::TABLE_EVENTS]['columns']['registrations']['config']['type'] = 'inline';
+        }
+    }
+
     protected function getQueryBuilderForTable(string $table): QueryBuilder
     {
         return $this->getConnectionPool()->getQueryBuilderForTable($table);

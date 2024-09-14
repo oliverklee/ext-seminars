@@ -1825,4 +1825,38 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         $this->assertCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventAndDuplicateWithResetData.csv');
     }
+
+    /**
+     * @test
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
+     */
+    public function duplicateViaDataHandlerForEventWithRegistrationsResetsRegistrationsCounterToZero(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistration.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithoutRegistrations.csv'
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @deprecated #1324 will be removed in seminars 5.0
+     */
+    public function duplicateViaDataHandlerForEventWithRegistrationsDoesNotDuplicateRegistrations(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistration.csv');
+
+        $this->subject->duplicateViaDataHandler(1);
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
+        );
+    }
 }

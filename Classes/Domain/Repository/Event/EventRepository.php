@@ -33,6 +33,8 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         'event_takes_place_reminder_sent',
         'offline_attendees',
         'organizers_notified_about_minimum_reached',
+        // @deprecated #1324 will be removed in seminars 6.0
+        'registrations',
         'slug',
     ];
 

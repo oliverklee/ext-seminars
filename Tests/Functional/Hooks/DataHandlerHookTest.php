@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Hooks;
 
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -16,6 +17,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class DataHandlerHookTest extends FunctionalTestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var string
      */
@@ -47,7 +50,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->subject = new DataHandlerHook();
     }
 
-    private function getDataMapperConfigurationForSeminars(): string
+    private function initializeBackEndUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/BackEndUser.csv');
+        $this->setUpBackendUser(1);
+        $this->unifyBackEndLanguage();
+    }
+
+    private function getProcessDataMapConfigurationForSeminars(): string
     {
         $dataMapperConfiguration = (array)$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php'];
 
@@ -57,9 +67,26 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function tceMainHookReferencesExistingClass(): void
+    public function tceMainProcessDataMapHookReferencesExistingClass(): void
     {
-        $reference = $this->getDataMapperConfigurationForSeminars();
+        $reference = $this->getProcessDataMapConfigurationForSeminars();
+
+        self::assertSame(DataHandlerHook::class, $reference);
+    }
+
+    private function getProcessCommandMapConfigurationForSeminars(): string
+    {
+        $dataMapperConfiguration = (array)$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php'];
+
+        return (string)$dataMapperConfiguration['processCmdmapClass']['seminars'];
+    }
+
+    /**
+     * @test
+     */
+    public function tceMainProcessCommandMapHookReferencesExistingClass(): void
+    {
+        $reference = $this->getProcessCommandMapConfigurationForSeminars();
 
         self::assertSame(DataHandlerHook::class, $reference);
     }
@@ -778,5 +805,37 @@ final class DataHandlerHookTest extends FunctionalTestCase
             $row = $result->fetch();
         }
         self::assertSame('topic-with-slug', $row['slug']);
+    }
+
+    /**
+     * @test
+     */
+    public function eventCanBeCopied(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventOnPage.csv');
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], ['tx_seminars_seminars' => [1 => ['copy' => -1]]]);
+        $dataHandler->process_cmdmap();
+
+        $this->assertCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventOnPageAndDuplicate.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function doesNotDuplicateRegistrationsWhenCopyingEvent(): void
+    {
+        $this->initializeBackEndUser();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventWithOneRegistration.csv');
+
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], ['tx_seminars_seminars' => [1 => ['copy' => -1]]]);
+        $dataHandler->process_cmdmap();
+
+        $this->assertCSVDataSet(
+            __DIR__ . '/Fixtures/DataHandlerHook/copy/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
+        );
     }
 }
