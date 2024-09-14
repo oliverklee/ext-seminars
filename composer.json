@@ -25,7 +25,7 @@
 		"source": "https://github.com/oliverklee/ext-seminars"
 	},
 	"require": {
-		"php": "^7.4.0 || ~8.0.0 || ~8.1.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
+		"php": "^7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"doctrine/dbal": "^2.10 || ^3.7.1",
@@ -48,7 +48,7 @@
 	},
 	"require-dev": {
 		"egulias/email-validator": "^2.1.0 || ^3.2.1",
-		"ergebnis/composer-normalize": "2.19.0",
+		"ergebnis/composer-normalize": "2.43.0",
 		"friendsofphp/php-cs-fixer": "3.9.5",
 		"helmich/typo3-typoscript-lint": "2.5.2 || 3.2.1",
 		"phpstan/extension-installer": "1.4.3",
