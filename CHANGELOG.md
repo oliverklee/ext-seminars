@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Drop the `ext-pdo` dependency (#3504)
 - Use short class names in type annotations (#2876)
 - Require oelib >= 6.0.0 (#3500)
 
