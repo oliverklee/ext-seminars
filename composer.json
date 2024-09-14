@@ -174,16 +174,9 @@
 			"rm Configuration/UnitTests.xml",
 			"rm composer.lock",
 			"rm crowdin.yml",
-			"rm docker-compose.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
 			"rm phpstan.neon"
-		],
-		"typo3:docs:render": [
-			"docker-compose run --rm t3docmake"
-		],
-		"typo3:docs:serve": [
-			"php -S 127.0.0.1:4000 -t Documentation-GENERATED-temp/Result/project/0.0.0"
 		]
 	},
 	"scripts-descriptions": {
