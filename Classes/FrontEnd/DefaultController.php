@@ -728,6 +728,7 @@ class DefaultController extends TemplateHelper
         $categoryMarker = '';
         foreach ($this->seminar->getCategories() as $category) {
             $this->setMarker('category_title', \htmlspecialchars($category['title'], ENT_QUOTES | ENT_HTML5));
+            // @deprecated will be removed in version 6.0.0 in #3370
             $this->setMarker('category_icon', $this->createCategoryIconImage($category));
             $categoryMarker .= $this->getSubpart('SINGLE_CATEGORY');
         }
@@ -2198,6 +2199,8 @@ class DefaultController extends TemplateHelper
      * @param array{title: string, icon: FileReference|null} $iconData
      *
      * @return string the icon IMG tag with the given icon, will be empty if the category has no icon
+     *
+     * @deprecated will be removed in version 6.0.0 in #3370
      */
     private function createCategoryIconImage(array $iconData): string
     {

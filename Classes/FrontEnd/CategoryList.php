@@ -121,12 +121,14 @@ class CategoryList extends AbstractView
             $linkValue = '';
             switch ($categoryUidsFromConfiguration) {
                 case 'both':
+                    // @deprecated will be removed in version 6.0.0 in #3370
                     if ($categoryData['icon'] instanceof FileReference) {
                         $linkValue = $this->createCategoryIconImage($categoryData) . '&nbsp;';
                     }
                     $linkValue .= \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
                     break;
                 case 'icon':
+                    // @deprecated will be removed in version 6.0.0 in #3370
                     $linkValue = $this->createCategoryIconImage($categoryData);
                     if ($linkValue === '') {
                         $linkValue = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
@@ -148,6 +150,8 @@ class CategoryList extends AbstractView
      * @param array{title: string, icon: FileReference|null} $iconData
      *
      * @return string the icon tag with the given icon, will be empty if no icon was given
+     *
+     * @deprecated will be removed in version 6.0.0 in #3370
      */
     private function createCategoryIconImage(array $iconData): string
     {

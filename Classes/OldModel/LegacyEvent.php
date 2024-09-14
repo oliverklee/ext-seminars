@@ -3195,6 +3195,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         $result = [];
         foreach ($builder->build() as $category) {
+            // @deprecated icons will be removed in version 6.0.0 in #3370
             $result[$category->getUid()] = ['title' => $category->getTitle(), 'icon' => $category->getIcon()];
         }
 
