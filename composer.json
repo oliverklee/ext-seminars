@@ -51,6 +51,7 @@
 		"ergebnis/composer-normalize": "2.43.0",
 		"friendsofphp/php-cs-fixer": "3.9.5",
 		"helmich/typo3-typoscript-lint": "2.5.2 || 3.2.1",
+		"icanhazstring/composer-unused": "0.8.11",
 		"phpstan/extension-installer": "1.4.3",
 		"phpstan/phpstan": "1.12.3",
 		"phpstan/phpstan-phpunit": "1.4.0",
@@ -112,6 +113,7 @@
 	},
 	"scripts": {
 		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
+		"ci:composer:unused": "composer-unused",
 		"ci:coverage": [
 			"@ci:coverage:unit",
 			"@ci:coverage:functional"
@@ -145,6 +147,7 @@
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
 		"ci:static": [
 			"@ci:composer:normalize",
+			"@ci:composer:unused",
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
 			"@ci:php:sniff",
@@ -187,6 +190,7 @@
 			"rm Configuration/FunctionalTests.xml",
 			"rm Configuration/TypoScriptLint.yaml",
 			"rm Configuration/UnitTests.xml",
+			"rm composer-unused.php",
 			"rm composer.lock",
 			"rm crowdin.yml",
 			"rm docker-compose.yml",
@@ -204,6 +208,7 @@
 	},
 	"scripts-descriptions": {
 		"ci:composer:normalize": "Checks the composer.json.",
+		"ci:composer:unused": "Finds unused Composer packages required in composer.json.",
 		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
 		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
 		"ci:coverage:legacy-functional": "Generates the code coverage report for legacy functional tests.",

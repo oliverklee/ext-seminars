@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `composer-unused` for CI (#3309)
+
 ### Changed
 
 - Use short class names in type annotations (#2876)
