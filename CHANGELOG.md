@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop `SeparateBillingAddressUpgradeWizard` (#3496)
 - Drop support for TYPO3 10LTS (#3312, #3372)
 - Drop support for PHP 7.2/7.3 (#3189)
 
