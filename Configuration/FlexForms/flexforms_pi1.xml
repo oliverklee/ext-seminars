@@ -618,14 +618,6 @@
 							</config>
 						</TCEforms>
 					</generalPriceInSingle>
-					<omitDateIfSameAsPrevious><!--@deprecated #1788 will be removed in seminars 6.0 -->
-						<TCEforms>
-							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.omitDateIfSameAsPrevious</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</omitDateIfSameAsPrevious>
 					<showSpeakerDetails>
 						<TCEforms>
 							<label>LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:seminars.pi_flexform.showSpeakerDetails</label>
