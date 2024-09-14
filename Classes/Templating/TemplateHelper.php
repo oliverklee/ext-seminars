@@ -321,27 +321,14 @@ abstract class TemplateHelper
      *
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
-     * @param bool $isFileName @deprecated $isFileName will be removed in v6.0.0 in #3272
      * @param bool $ignoreFlexform
      *        whether to ignore the flexform values and just get the settings from TypoScript, may be empty
      *
-     * @return string the trimmed value of the corresponding flexforms or
-     *                TypoScript setup entry (may be empty)
+     * @return string the trimmed value of the corresponding flexforms or TypoScript setup entry (may be empty)
      */
-    public function getConfValueString(
-        string $fieldName,
-        string $sheet = 'sDEF',
-        // @deprecated $isFileName will be removed in v6.0.0 in #3272
-        bool $isFileName = false,
-        bool $ignoreFlexform = false
-    ): string {
-        return \trim(
-            $this->getConfValue(
-                $fieldName,
-                $sheet,
-                $ignoreFlexform
-            )
-        );
+    public function getConfValueString(string $fieldName, string $sheet = 'sDEF', bool $ignoreFlexform = false): string
+    {
+        return \trim($this->getConfValue($fieldName, $sheet, $ignoreFlexform));
     }
 
     /**
@@ -363,7 +350,7 @@ abstract class TemplateHelper
         string $sheet = 'sDEF',
         bool $ignoreFlexform = false
     ): bool {
-        return $this->getConfValueString($fieldName, $sheet, false, $ignoreFlexform) !== '';
+        return $this->getConfValueString($fieldName, $sheet, $ignoreFlexform) !== '';
     }
 
     /**
@@ -462,12 +449,7 @@ abstract class TemplateHelper
             $ignoreFlexform = true;
         }
 
-        $templateFileName = $this->getConfValueString(
-            'templateFile',
-            's_template_special',
-            true,
-            $ignoreFlexform
-        );
+        $templateFileName = $this->getConfValueString('templateFile', 's_template_special', $ignoreFlexform);
 
         if (!$ignoreFlexform) {
             $templateFileName = GeneralUtility::getFileAbsFileName($templateFileName);
