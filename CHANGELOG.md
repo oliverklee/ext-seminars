@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Require higher TYPO3 bugfix versions (#3511)
+
 ### Deprecated
 
 ### Removed
