@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate some `RegistrationManager` methods (#3491)
 - Deprecate some functions from the old `Event` model (#3490)
 - Deprecate some functions from `LegacyEvent` (#3489)
 - Deprecate icons for categories (#3488)
