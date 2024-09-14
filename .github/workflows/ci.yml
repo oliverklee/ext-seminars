@@ -131,12 +131,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
@@ -232,12 +226,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
@@ -333,12 +321,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: lowest
-          - typo3-version: "^10.4"
-            php-version: "7.4"
-            composer-dependencies: highest
           - typo3-version: "^11.5"
             php-version: "7.4"
             composer-dependencies: lowest
