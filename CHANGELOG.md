@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Require oelib >= 6.0.0 (#3500)
+
 ### Deprecated
 
 ### Removed
