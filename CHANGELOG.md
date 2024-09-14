@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate some functions from `LegacyEvent` (#3489)
 - Deprecate icons for categories (#3488)
 - Deprecate `Event.getRegisteredSeats()` and `Event.hasEnoughRegistrations()`
   (#3443)

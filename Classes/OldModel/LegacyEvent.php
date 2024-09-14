@@ -2363,6 +2363,8 @@ class LegacyEvent extends AbstractTimeSpan
      *     and there are still vacancies.
      *
      * @return bool TRUE if registration is possible, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #3397
      */
     public function canSomebodyRegister(): bool
     {
@@ -2386,8 +2388,9 @@ class LegacyEvent extends AbstractTimeSpan
      *     and there are still vacancies,
      * and returns a localized error message if registration is not possible.
      *
-     * @return string empty string if everything is OK, else a localized
-     *                error message
+     * @return string empty string if everything is OK, else a localized error message
+     *
+     * @deprecated will be removed in version 6.0.0 in #3397
      */
     public function canSomebodyRegisterMessage(): string
     {
@@ -2425,6 +2428,8 @@ class LegacyEvent extends AbstractTimeSpan
      * Checks whether the latest possibility to register for this event is over.
      *
      * The latest moment is either the time the event starts, or a set registration deadline.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3397
      */
     public function isRegistrationDeadlineOver(): bool
     {
