@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\ViewHelpers;
 
 use OliverKlee\Seminars\ViewHelpers\RichTextViewHelper;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -24,16 +23,7 @@ final class RichTextViewHelperTest extends UnitTestCase
     {
         parent::setUp();
 
-        $GLOBALS['TSFE'] = $this->createMock(TypoScriptFrontendController::class);
-
         $this->subject = new RichTextViewHelper();
-    }
-
-    protected function tearDown(): void
-    {
-        unset($GLOBALS['TSFE']);
-
-        parent::tearDown();
     }
 
     /**
