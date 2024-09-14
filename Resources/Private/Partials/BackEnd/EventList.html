@@ -94,6 +94,14 @@
                                     </button>
                                 </f:form>
                             </div>
+                            <div class="btn-group" role="group">
+                                <f:form controller="BackEnd\Event" action="duplicate" arguments="{eventUid: event.uid}">
+                                    <button type="submit" class="btn btn-default"
+                                            title="{f:translate(key: '{actionLabelPrefix}.duplicate')}">
+                                        <core:icon identifier="actions-duplicates"/>
+                                    </button>
+                                </f:form>
+                            </div>
                         </td>
                     </f:if>
                     <td class="nowrap">

@@ -399,4 +399,25 @@ final class EventControllerTest extends UnitTestCase
 
         $this->subject->searchAction(1, $searchTerm);
     }
+
+    /**
+     * @test
+     */
+    public function duplicateActionDuplicatesEvent(): void
+    {
+        $uid = 15;
+        $this->eventRepositoryMock->expects(self::once())->method('duplicateViaDataHandler')->with($uid);
+
+        $this->subject->duplicateAction($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function duplicateActionRedirectsToModuleOverviewAction(): void
+    {
+        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+
+        $this->subject->duplicateAction(15);
+    }
 }

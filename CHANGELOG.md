@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Add a "duplicate event" button to the BE module (#3469, #3482, #3484)
+- Add a "duplicate event" button to the BE module (#3469, #3482, #3485, #3487)
 - Add a field for additional text for the thank-you emails
   (#3453, #3456, #3459, #3465)
 - Add `Venue.fullAddress` (#3399)
