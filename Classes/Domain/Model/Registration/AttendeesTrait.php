@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -17,15 +19,15 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 trait AttendeesTrait
 {
     /**
-     * @var \OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser|null
+     * @var FrontendUser|null
      * @phpstan-var FrontendUser|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $user;
 
     /**
      * @var int
-     * @Extbase\Validate("NumberRange", options={"minimum": 1, "maximum": 999})
+     * @Validate("NumberRange", options={"minimum": 1, "maximum": 999})
      */
     protected $seats = 1;
 
@@ -36,20 +38,20 @@ trait AttendeesTrait
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 16383})
+     * @Validate("StringLength", options={"maximum": 16383})
      */
     protected $attendeesNames = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 1024})
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Validate("StringLength", options={"maximum": 1024})
+     * @Transient
      */
     protected $jsonEncodedAdditionAttendees = '{}';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<FrontendUser>
+     * @Lazy
      */
     protected $additionalPersons;
 

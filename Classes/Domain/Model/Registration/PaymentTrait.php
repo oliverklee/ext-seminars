@@ -6,7 +6,8 @@ namespace OliverKlee\Seminars\Domain\Model\Registration;
 
 use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\Price;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 /**
@@ -19,13 +20,13 @@ trait PaymentTrait
     /**
      * @var string
      * @phpstan-var Price::PRICE_*
-     * @Extbase\Validate("StringLength", options={"maximum": 32})
+     * @Validate("StringLength", options={"maximum": 32})
      */
     protected $priceCode = Price::PRICE_STANDARD;
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $humanReadablePrice = '';
 
@@ -35,9 +36,9 @@ trait PaymentTrait
     protected $totalPrice = 0.0;
 
     /**
-     * @var \OliverKlee\Seminars\Domain\Model\PaymentMethod|null
+     * @var PaymentMethod|null
      * @phpstan-var PaymentMethod|LazyLoadingProxy|null
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Lazy
      */
     protected $paymentMethod;
 

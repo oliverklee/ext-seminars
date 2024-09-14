@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model;
 
 use OliverKlee\Oelib\Interfaces\MailRole;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -15,13 +15,13 @@ class Organizer extends AbstractEntity implements MailRole
 {
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $name = '';
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 255})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected $emailAddress = '';
 

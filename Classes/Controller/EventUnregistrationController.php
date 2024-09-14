@@ -12,7 +12,7 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -33,7 +33,7 @@ class EventUnregistrationController extends ActionController
     /**
      * Checks whether the logged-in user is allowed to cancel the given registration.
      *
-     * @Extbase\IgnoreValidation("registration")
+     * @IgnoreValidation("registration")
      */
     public function checkPrerequisitesAction(?Registration $registration = null): void
     {
@@ -96,7 +96,7 @@ class EventUnregistrationController extends ActionController
     /**
      * Displays the unregistration form.
      *
-     * @Extbase\IgnoreValidation("registration")
+     * @IgnoreValidation("registration")
      */
     public function confirmAction(Registration $registration): void
     {
@@ -106,7 +106,7 @@ class EventUnregistrationController extends ActionController
     /**
      * Removes the provided registration and forwards to the thank-you page.
      *
-     * @Extbase\IgnoreValidation("registration")
+     * @IgnoreValidation("registration")
      */
     public function unregisterAction(Registration $registration): void
     {
@@ -117,7 +117,7 @@ class EventUnregistrationController extends ActionController
     }
 
     /**
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function thankYouAction(Event $event): void
     {

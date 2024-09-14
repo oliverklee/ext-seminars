@@ -15,7 +15,7 @@ use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -72,7 +72,7 @@ class EventRegistrationController extends ActionController
      * Checks that the user can register for the provided event, and redirects or forwards to the corresponding next
      * action.
      *
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function checkPrerequisitesAction(?Event $event = null): void
     {
@@ -149,8 +149,8 @@ class EventRegistrationController extends ActionController
     /**
      * Displays the event registration form.
      *
-     * @Extbase\IgnoreValidation("event")
-     * @Extbase\IgnoreValidation("registration")
+     * @IgnoreValidation("event")
+     * @IgnoreValidation("registration")
      */
     public function newAction(Event $event, ?Registration $registration = null): void
     {
@@ -188,7 +188,7 @@ class EventRegistrationController extends ActionController
     /**
      * Displays the confirmation page of the event registration form.
      *
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function confirmAction(Event $event, Registration $registration): void
     {
@@ -206,7 +206,7 @@ class EventRegistrationController extends ActionController
     /**
      * Creates the registration and redirects to the thank-you action.
      *
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function createAction(Event $event, Registration $registration): void
     {
@@ -229,8 +229,8 @@ class EventRegistrationController extends ActionController
     /**
      * Displays the thank-you page.
      *
-     * @Extbase\IgnoreValidation("event")
-     * @Extbase\IgnoreValidation("registration")
+     * @IgnoreValidation("event")
+     * @IgnoreValidation("registration")
      */
     public function thankYouAction(Event $event, Registration $registration): void
     {

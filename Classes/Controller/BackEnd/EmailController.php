@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -22,7 +22,7 @@ class EmailController extends ActionController
      *
      * @param positive-int $pageUid
      *
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function composeAction(Event $event, int $pageUid, string $subject = '', string $body = ''): void
     {
@@ -37,7 +37,7 @@ class EmailController extends ActionController
     /**
      * Action for the sending the email.
      *
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function sendAction(Event $event, string $subject, string $body): void
     {

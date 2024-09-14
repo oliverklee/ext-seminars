@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -18,7 +19,7 @@ trait RawDataTrait
 {
     /**
      * @var array<string, string|int|float|null>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @Transient
      * @internal
      */
     protected $rawData;

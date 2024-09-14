@@ -12,7 +12,7 @@ use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -98,7 +98,7 @@ class FrontEndEditorController extends ActionController
     }
 
     /**
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function editAction(SingleEvent $event): void
     {
@@ -127,7 +127,7 @@ class FrontEndEditorController extends ActionController
     }
 
     /**
-     * @Extbase\IgnoreValidation("event")
+     * @IgnoreValidation("event")
      */
     public function newAction(?SingleEvent $event = null): void
     {
