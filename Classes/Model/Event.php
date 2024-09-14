@@ -1363,6 +1363,8 @@ class Event extends AbstractTimeSpan
 
     /**
      * @return Collection<Registration>
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function getRegistrationsAfterLastDigest(): Collection
     {
@@ -1423,6 +1425,8 @@ class Event extends AbstractTimeSpan
      * function will always return zero.
      *
      * @return int the number of vacancies for this event, will be >= 0
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function getVacancies(): int
     {
@@ -1437,6 +1441,8 @@ class Event extends AbstractTimeSpan
      *
      * If this event has an unlimited number of possible registrations, this
      * function will always return TRUE.
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function hasVacancies(): bool
     {
@@ -1452,6 +1458,8 @@ class Event extends AbstractTimeSpan
      *
      * If this event has an unlimited number of possible registrations, this
      * function will always return FALSE.
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function isFull(): bool
     {
@@ -1462,6 +1470,8 @@ class Event extends AbstractTimeSpan
      * Returns the names of all registered attendees (including additional attendees and queue registrations).
      *
      * @return list<string> attendee names: ['Jane Doe', 'John Doe']
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function getAttendeeNames(): array
     {
@@ -1473,6 +1483,8 @@ class Event extends AbstractTimeSpan
      * but only those that have registered after the last registration digest email.
      *
      * @return list<string> attendee names: ['Jane Doe', 'John Doe']
+     *
+     * @deprecated will be removed in version 6.0 in #3422
      */
     public function getAttendeeNamesAfterLastDigest(): array
     {
