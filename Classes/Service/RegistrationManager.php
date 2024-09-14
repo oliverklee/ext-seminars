@@ -136,6 +136,8 @@ class RegistrationManager
      * This function works even if no user is logged in.
      *
      * @param LegacyEvent $event an event for which we'll check if it is possible to register
+     *
+     * @deprecated will be removed in version 6.0.0 in #3430
      */
     public function canRegisterIfLoggedIn(LegacyEvent $event): bool
     {
@@ -164,6 +166,8 @@ class RegistrationManager
      * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return string error message or empty string
+     *
+     * @deprecated will be removed in version 6.0.0 in #3424
      */
     public function canRegisterIfLoggedInMessage(LegacyEvent $event): string
     {
@@ -189,6 +193,8 @@ class RegistrationManager
      * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return bool TRUE if the user could register for the given event, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #3430
      */
     private function couldThisUserRegister(LegacyEvent $event): bool
     {
@@ -288,6 +294,8 @@ class RegistrationManager
      * Checks whether a seminar UID is valid, i.e., a non-deleted and non-hidden seminar with the given number exists.
      *
      * This function can be called even even if no seminar object exists.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3433
      */
     public function existsSeminar(int $uid): bool
     {
@@ -304,6 +312,8 @@ class RegistrationManager
      * @param int $uid a given seminar UID
      *
      * @return string an empty string if the UID is valid, otherwise a localized error message
+     *
+     * @deprecated will be removed in version 6.0.0 in #3433
      */
     public function existsSeminarMessage(int $uid): string
     {
@@ -327,6 +337,8 @@ class RegistrationManager
      * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return bool TRUE if user is already registered, FALSE otherwise.
+     *
+     * @deprecated will be removed in version 6.0.0 in #3436
      */
     public function isUserRegistered(LegacyEvent $event): bool
     {
@@ -1052,6 +1064,8 @@ class RegistrationManager
      * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if the event allows registration by date, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #3439
      */
     public function allowsRegistrationByDate(LegacyEvent $event): bool
     {
@@ -1070,6 +1084,8 @@ class RegistrationManager
      * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if the event has enough seats for registration, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #3439
      */
     public function allowsRegistrationBySeats(LegacyEvent $event): bool
     {
@@ -1082,6 +1098,8 @@ class RegistrationManager
      * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if registration for this event already has started, FALSE otherwise
+     *
+     * @deprecated will be removed in version 6.0.0 in #3439
      */
     public function registrationHasStarted(LegacyEvent $event): bool
     {
