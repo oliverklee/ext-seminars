@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use TYPO3\CMS\Core\Database\Connection;
@@ -162,8 +161,8 @@ class DataHandlerHook
         $queryResult = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
-            ->execute();
-        $queryResultData = $queryResult instanceof Result ? $queryResult->fetchAssociative() : false;
+            ->executeQuery();
+        $queryResultData = $queryResult->fetchAssociative();
 
         if (\is_array($queryResultData)) {
             $data['begin_date'] = (int)$queryResultData['begin_date'];
@@ -176,8 +175,8 @@ class DataHandlerHook
         $queryResult = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
             ->from(self::TABLE_TIME_SLOTS)
             ->where($query->expr()->eq('seminar', $uid))
-            ->execute();
-        $queryResultData = $queryResult instanceof Result ? $queryResult->fetchAssociative() : false;
+            ->executeQuery();
+        $queryResultData = $queryResult->fetchAssociative();
 
         if (\is_array($queryResultData)) {
             $data['end_date'] = (int)$queryResultData['end_date'];

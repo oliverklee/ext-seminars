@@ -110,8 +110,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid_local')
             ->from('tx_seminars_seminars_categories_mm')
             ->where($queryBuilder->expr()->in('uid_foreign', $categoryUidsParameter))
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         $directMatchUids = \array_column($result, 'uid_local');
         if (empty($directMatchUids)) {
@@ -721,8 +721,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid')
             ->from('tx_seminars_seminars')
             ->where('MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)')
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         $matchingUids = \array_column($result, 'uid');
         if (empty($matchingUids)) {
@@ -845,8 +845,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid')
             ->from($foreignTable)
             ->where($matchQueryPart)
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         $foreignUids = \array_column($result, 'uid');
         if (empty($foreignUids)) {
@@ -859,8 +859,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid_local')
             ->from($mmTable)
             ->where($queryBuilder->expr()->in('uid_foreign', $foreignUidsParameter))
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
         $localUids = array_column($result, 'uid_local');
 
         if (empty($localUids)) {
@@ -1036,8 +1036,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid_local')
             ->from($table)
             ->where($queryBuilder->expr()->in('uid_foreign', $organizersParameter))
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         $eventUids = \implode(',', \array_column($result, 'uid_local'));
         if ($eventUids === '') {
@@ -1087,9 +1087,8 @@ class EventBagBuilder extends AbstractBagBuilder
                     )
                 )
             )
-            ->execute();
-        $resultWithTargetGroups = $queryResultWithTargetGroups instanceof Result
-            ? $queryResultWithTargetGroups->fetchAllAssociative() : [];
+            ->executeQuery();
+        $resultWithTargetGroups = $queryResultWithTargetGroups->fetchAllAssociative();
         $matchingTargetGroups = \array_column($resultWithTargetGroups, 'uid');
 
         $table = 'tx_seminars_seminars';
@@ -1113,9 +1112,8 @@ class EventBagBuilder extends AbstractBagBuilder
                     $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                 )
             )
-            ->execute();
-        $resultWithoutTargetGroups = $queryResultWithoutTargetGroups instanceof Result
-            ? $queryResultWithoutTargetGroups->fetchAllAssociative() : [];
+            ->executeQuery();
+        $resultWithoutTargetGroups = $queryResultWithoutTargetGroups->fetchAllAssociative();
         $eventsWithoutTargetGroup = \array_column($resultWithoutTargetGroups, 'uid');
 
         if ($matchingTargetGroups !== []) {
@@ -1128,8 +1126,8 @@ class EventBagBuilder extends AbstractBagBuilder
                 ->from($table)
                 ->where($queryBuilder->expr()->in('uid_foreign', $targetGroupsParameter))
                 ->groupBy('uid_local')
-                ->execute();
-            $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+                ->executeQuery();
+            $result = $queryResult->fetchAllAssociative();
 
             $eventsWithMatchingTargetGroup = \array_column($result, 'uid_local');
             $matchingEventsUids = \array_merge($eventsWithMatchingTargetGroup, $eventsWithoutTargetGroup);
@@ -1190,8 +1188,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid')
             ->from($table)
             ->where($whereClause)
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
         $foundUids = \implode(',', \array_column($result, 'uid'));
 
         if ($foundUids === '') {
@@ -1241,8 +1239,8 @@ class EventBagBuilder extends AbstractBagBuilder
             ->select('uid')
             ->from($table)
             ->where($whereClause)
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         $foundUids = \implode(',', \array_column($result, 'uid'));
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Registration;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -115,13 +114,9 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
                     $queryBuilder->createNamedParameter((int)$onWaitingList, Connection::PARAM_INT)
                 )
             );
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
+        $queryResult = $query->executeQuery();
 
-        return $queryResult instanceof Result ? (int)$queryResult->fetchOne() : 0;
+        return (int)$queryResult->fetchOne();
     }
 
     /**

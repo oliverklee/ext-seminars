@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Seo;
 
-use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -70,13 +69,11 @@ class SlugGenerator
         if ($recordType === EventInterface::TYPE_EVENT_DATE) {
             $result = $this->getQueryBuilder()->select('title')->from(self::TABLE_NAME_EVENTS)
                 ->where('uid = :uid')->setParameter('uid', $topicUid)
-                ->execute();
-            if ($result instanceof ResultStatement) {
-                /** @var DatabaseRow|false $data */
-                $data = $result->fetchAssociative();
-                if (\is_array($data)) {
-                    $title = (string)$data['title'];
-                }
+                ->executeQuery();
+            /** @var DatabaseRow|false $data */
+            $data = $result->fetchAssociative();
+            if (\is_array($data)) {
+                $title = (string)$data['title'];
             }
         } else {
             $title = $record['title'] ?? '';
@@ -136,16 +133,8 @@ class SlugGenerator
                 $queryBuilder->expr()->neq('uid', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             );
 
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
-        if ($queryResult instanceof ResultStatement) {
-            $count = (int)$queryResult->fetchOne();
-        } else {
-            $count = 0;
-        }
+        $queryResult = $query->executeQuery();
+        $count = (int)$queryResult->fetchOne();
 
         return $count;
     }

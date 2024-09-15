@@ -96,12 +96,27 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
 			message: "#^Class OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\:\\:countWithoutLimit\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/Bag/AbstractBag.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Bag\\\\AbstractBag\\<M of OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\>\\:\\:\\$countWithoutLimit \\(int\\<0, max\\>\\) does not accept int\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
@@ -1727,7 +1742,7 @@ parameters:
 
 		-
 			message: "#^PHPDoc tag @var with type array\\<string, int\\<0, max\\>\\|string\\> is not subtype of type array\\<string, string\\>\\.$#"
-			count: 2
+			count: 1
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
 
 		-
@@ -3297,7 +3312,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
+			count: 1
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-

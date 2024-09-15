@@ -312,9 +312,8 @@ abstract class AbstractBag implements \Iterator
         $result = $queryBuilder
             ->count('*')
             ->where($this->queryParameters)
-            ->execute();
-        $count = $result instanceof Result ? $result->fetchOne() : 0;
-        \assert(\is_int($count) && $count >= 0);
+            ->executeQuery();
+        $count = (int)$result->fetchOne();
 
         $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;
