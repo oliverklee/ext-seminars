@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Event;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -129,12 +130,8 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         } else {
             $registrationCountQueryResult = $registrationCountQuery->execute();
         }
-
-        if (\method_exists($registrationCountQueryResult, 'fetchOne')) {
-            $registrationCount = (int)$registrationCountQueryResult->fetchOne();
-        } else {
-            $registrationCount = (int)$registrationCountQueryResult->fetchColumn(0);
-        }
+        $registrationCount = $registrationCountQueryResult instanceof Result
+            ? (int)$registrationCountQueryResult->fetchOne() : 0;
 
         $eventQueryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_seminars_seminars');

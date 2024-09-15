@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
-- Stop calling outdated DBAL methods (#2159)
+- Stop calling outdated DBAL methods (#2159, #3527)
 
 ## 5.7.0: New fields, BE usability features, and deprecations
 

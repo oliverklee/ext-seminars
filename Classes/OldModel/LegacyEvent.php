@@ -441,7 +441,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $table = 'static_countries';
         $title = self::getConnectionForTable($table)
-            ->select(['cn_short_local'], $table, ['cn_iso_2' => $isoCode])->fetchColumn();
+            ->select(['cn_short_local'], $table, ['cn_iso_2' => $isoCode])->fetchOne();
 
         return \is_string($title) ? $title : '';
     }
