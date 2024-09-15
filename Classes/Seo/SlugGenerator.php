@@ -142,11 +142,7 @@ class SlugGenerator
             $queryResult = $query->execute();
         }
         if ($queryResult instanceof ResultStatement) {
-            if (\method_exists($queryResult, 'fetchOne')) {
-                $count = (int)$queryResult->fetchOne();
-            } else {
-                $count = (int)$queryResult->fetchColumn(0);
-            }
+            $count = (int)$queryResult->fetchOne();
         } else {
             $count = 0;
         }

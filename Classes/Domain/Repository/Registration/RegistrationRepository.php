@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Registration;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
@@ -119,13 +120,8 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
         } else {
             $queryResult = $query->execute();
         }
-        if (\method_exists($queryResult, 'fetchOne')) {
-            $registrationCount = (int)$queryResult->fetchOne();
-        } else {
-            $registrationCount = (int)$queryResult->fetchColumn(0);
-        }
 
-        return $registrationCount;
+        return $queryResult instanceof Result ? (int)$queryResult->fetchOne() : 0;
     }
 
     /**
