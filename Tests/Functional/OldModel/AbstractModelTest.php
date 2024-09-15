@@ -374,11 +374,7 @@ final class AbstractModelTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_seminars_test')
             ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $recordInDatabase = $result->fetchAssociative();
-        } else {
-            $recordInDatabase = $result->fetch();
-        }
+        $recordInDatabase = $result->fetchAssociative();
         self::assertSame($this->now, (int)$recordInDatabase['crdate']);
     }
 
@@ -395,11 +391,7 @@ final class AbstractModelTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_seminars_test')
             ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $recordInDatabase = $result->fetchAssociative();
-        } else {
-            $recordInDatabase = $result->fetch();
-        }
+        $recordInDatabase = $result->fetchAssociative();
 
         self::assertSame($this->now, (int)$recordInDatabase['tstamp']);
     }
@@ -498,11 +490,7 @@ final class AbstractModelTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_seminars_test')
             ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $recordInDatabase = $result->fetchAssociative();
-        } else {
-            $recordInDatabase = $result->fetch();
-        }
+        $recordInDatabase = $result->fetchAssociative();
         self::assertSame(1574714377, (int)$recordInDatabase['crdate']);
     }
 
@@ -519,11 +507,7 @@ final class AbstractModelTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_seminars_test')
             ->select(['*'], 'tx_seminars_test', ['uid' => $model->getUid()]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $recordInDatabase = $result->fetchAssociative();
-        } else {
-            $recordInDatabase = $result->fetch();
-        }
+        $recordInDatabase = $result->fetchAssociative();
         self::assertSame($this->now, (int)$recordInDatabase['tstamp']);
     }
 

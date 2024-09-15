@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\ViewHelpers\RichTextViewHelper;
@@ -102,7 +103,9 @@ abstract class AbstractModel
         $query->select('*')->from(static::$tableName);
         $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
 
-        return $query->execute()->fetch();
+        $result = $query->execute();
+
+        return $result instanceof Result ? $result->fetchAssociative() : false;
     }
 
     /**

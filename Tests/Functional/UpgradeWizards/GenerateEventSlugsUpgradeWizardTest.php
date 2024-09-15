@@ -112,11 +112,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('existing-slug', $databaseRow['slug']);
@@ -135,11 +131,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-without-slug', $databaseRow['slug']);
@@ -158,11 +150,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-without-slug', $databaseRow['slug']);
@@ -181,11 +169,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-without-slug', $databaseRow['slug']);
@@ -204,11 +188,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-without-slug', $databaseRow['slug']);
@@ -227,11 +207,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-without-slug', $databaseRow['slug']);
@@ -250,11 +226,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-title-1', $databaseRow['slug']);
@@ -273,11 +245,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-title-1', $databaseRow['slug']);
@@ -296,11 +264,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
         $result = $connection
             ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 3]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            $databaseRow = $result->fetchAssociative();
-        } else {
-            $databaseRow = $result->fetch();
-        }
+        $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
         self::assertSame('event-title-2', $databaseRow['slug']);
