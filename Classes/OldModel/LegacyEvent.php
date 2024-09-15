@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -532,8 +531,8 @@ class LegacyEvent extends AbstractTimeSpan
                 )
             )
             ->orderBy('mm.sorting')
-            ->execute();
-        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $result = $queryResult->fetchAllAssociative();
 
         /** @var list<array<string, string|int>> $resultWithoutDuplicates */
         $resultWithoutDuplicates = [];
@@ -3645,8 +3644,9 @@ class LegacyEvent extends AbstractTimeSpan
                 )
             )
             ->orderBy('mm.sorting')
-            ->execute();
+            ->orderBy('mm.sorting')
+            ->executeQuery();
 
-        return $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+        return $queryResult->fetchAllAssociative();
     }
 }

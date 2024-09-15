@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\UpgradeWizards;
 
-use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -60,16 +59,8 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
             ->where($queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)))
             ->orWhere($queryBuilder->expr()->isNull('slug'));
 
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
-        if ($queryResult instanceof ResultStatement) {
-            $count = (int)$queryResult->fetchOne();
-        } else {
-            $count = 0;
-        }
+        $queryResult = $query->executeQuery();
+        $count = (int)$queryResult->fetchOne();
 
         return $count > 0;
     }
@@ -83,31 +74,15 @@ class GenerateEventSlugsUpgradeWizard implements UpgradeWizardInterface, Repeata
             ->where($queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter('', Connection::PARAM_STR)))
             ->orWhere($queryBuilder->expr()->isNull('slug'))
             ->orderBy('uid');
-
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
+        $queryResult = $query->executeQuery();
 
         $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class);
         $connection = $this->getConnectionPool()->getConnectionForTable(self::TABLE_NAME_EVENTS);
-        if ($queryResult instanceof ResultStatement) {
-            if (\method_exists($queryResult, 'fetchAllAssociative')) {
-                /** @var array<string, string> $row */
-                foreach ($queryResult->fetchAllAssociative() as $row) {
-                    /** @var array{uid: int<0, max>, title: string, object_type: int<0, max>, topic: int<0, max>} $row */
-                    $slug = $slugGenerator->generateSlug(['record' => $row]);
-                    $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
-                }
-            } else {
-                /** @var array<string, string> $row */
-                foreach ($queryResult->fetchAll() as $row) {
-                    /** @var array{uid: int<0, max>, title: string, object_type: int<0, max>, topic: int<0, max>} $row */
-                    $slug = $slugGenerator->generateSlug(['record' => $row]);
-                    $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
-                }
-            }
+        /** @var array<string, string> $row */
+        foreach ($queryResult->fetchAllAssociative() as $row) {
+            /** @var array{uid: int<0, max>, title: string, object_type: int<0, max>, topic: int<0, max>} $row */
+            $slug = $slugGenerator->generateSlug(['record' => $row]);
+            $connection->update(self::TABLE_NAME_EVENTS, ['slug' => $slug], ['uid' => $row['uid']]);
         }
 
         if ($this->logger instanceof LoggerAwareInterface) {

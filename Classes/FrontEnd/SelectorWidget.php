@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
@@ -232,9 +231,8 @@ class SelectorWidget extends AbstractView
             )
             ->where($queryBuilder->expr()->in('mm.uid_local', $eventUidsParameter))
             ->orderBy('mm.sorting')
-            ->execute();
-        $dataOfPlaces = $dataOfPlacesQueryResult instanceof Result
-            ? $dataOfPlacesQueryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $dataOfPlaces = $dataOfPlacesQueryResult->fetchAllAssociative();
 
         $mapper = MapperRegistry::get(PlaceMapper::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);

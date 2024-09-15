@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\Domain\Model\RawDataInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -55,12 +54,8 @@ abstract class AbstractRawDataCapableRepository extends Repository
                     $queryBuilder->createNamedParameter(\array_keys($modelsByUid), Connection::PARAM_INT_ARRAY)
                 )
             );
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-        } else {
-            $queryResult = $query->execute();
-        }
-        $rows = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+        $queryResult = $query->executeQuery();
+        $rows = $queryResult->fetchAllAssociative();
 
         foreach ($rows as $row) {
             $uid = (int)$row['uid'];

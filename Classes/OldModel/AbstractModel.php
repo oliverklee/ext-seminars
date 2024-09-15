@@ -103,9 +103,9 @@ abstract class AbstractModel
         $query->select('*')->from(static::$tableName);
         $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
 
-        $result = $query->execute();
+        $result = $query->executeQuery();
 
-        return $result instanceof Result ? $result->fetchAssociative() : false;
+        return $result->fetchAssociative();
     }
 
     /**
@@ -496,9 +496,9 @@ abstract class AbstractModel
             )
             ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($uid)))
             ->orderBy('mm.sorting')
-            ->execute();
+            ->executeQuery();
 
-        return $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+        return $queryResult->fetchAllAssociative();
     }
 
     protected static function getQueryBuilderForOwnTable(): QueryBuilder

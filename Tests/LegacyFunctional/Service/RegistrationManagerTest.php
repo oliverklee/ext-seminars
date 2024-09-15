@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\Service;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -869,8 +868,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, Connection::PARAM_INT)),
                 $query->expr()->eq('hidden', $query->createNamedParameter(1, Connection::PARAM_INT))
             )
-            ->execute();
-        $numberOfRows = $queryResult instanceof Result ? (int)$queryResult->fetchOne() : false;
+            ->executeQuery();
+        $numberOfRows = $queryResult->fetchOne();
 
         self::assertSame(1, $numberOfRows);
     }

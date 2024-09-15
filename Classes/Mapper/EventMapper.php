@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Mapper;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
@@ -89,8 +88,8 @@ class EventMapper extends AbstractDataMapper
                 )
             )
             ->orderBy('begin_date')
-            ->execute();
-        $rows = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $rows = $queryResult->fetchAllAssociative();
 
         return $this->getListOfModels($rows);
     }
@@ -119,8 +118,8 @@ class EventMapper extends AbstractDataMapper
                 )
             )
             ->orderBy('uid')
-            ->execute();
-        $rows = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
+            ->executeQuery();
+        $rows = $queryResult->fetchAllAssociative();
 
         return $this->getListOfModels($rows);
     }
@@ -147,11 +146,9 @@ class EventMapper extends AbstractDataMapper
 
         $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $whereClause . ' ORDER BY begin_date ASC';
 
-        /** @var Connection $connection */
         $connection = $this->getConnectionForTable($this->getTableName());
         $statement = $connection->prepare($sql);
-        $statement->execute();
-        $rows = $statement->fetchAllAssociative();
+        $rows = $statement->executeQuery()->fetchAllAssociative();
 
         return $this->getListOfModels($rows);
     }
