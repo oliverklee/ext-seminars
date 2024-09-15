@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Mapper;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
@@ -72,7 +73,7 @@ class EventMapper extends AbstractDataMapper
         }
 
         $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
-        $rows = $queryBuilder
+        $queryResult = $queryBuilder
             ->select('*')
             ->from($this->getTableName())
             ->where(
@@ -88,8 +89,8 @@ class EventMapper extends AbstractDataMapper
                 )
             )
             ->orderBy('begin_date')
-            ->execute()
-            ->fetchAll();
+            ->execute();
+        $rows = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
 
         return $this->getListOfModels($rows);
     }
@@ -102,7 +103,7 @@ class EventMapper extends AbstractDataMapper
     public function findForAutomaticStatusChange(): Collection
     {
         $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
-        $rows = $queryBuilder
+        $queryResult = $queryBuilder
             ->select('*')
             ->from($this->getTableName())
             ->where(
@@ -118,8 +119,8 @@ class EventMapper extends AbstractDataMapper
                 )
             )
             ->orderBy('uid')
-            ->execute()
-            ->fetchAll();
+            ->execute();
+        $rows = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
 
         return $this->getListOfModels($rows);
     }
@@ -150,7 +151,7 @@ class EventMapper extends AbstractDataMapper
         $connection = $this->getConnectionForTable($this->getTableName());
         $statement = $connection->prepare($sql);
         $statement->execute();
-        $rows = $statement->fetchAll();
+        $rows = $statement->fetchAllAssociative();
 
         return $this->getListOfModels($rows);
     }

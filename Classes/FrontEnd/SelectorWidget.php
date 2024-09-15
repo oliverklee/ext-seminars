@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Bag\EventBag;
@@ -220,7 +221,7 @@ class SelectorWidget extends AbstractView
             ->getQueryBuilderForTable('tx_seminars_sites');
         $eventUids = GeneralUtility::intExplode(',', $this->seminarBag->getUids());
         $eventUidsParameter = $queryBuilder->createNamedParameter($eventUids, Connection::PARAM_INT_ARRAY);
-        $dataOfPlaces = $queryBuilder
+        $dataOfPlacesQueryResult = $queryBuilder
             ->select('tx_seminars_sites.*')
             ->from('tx_seminars_sites')
             ->join(
@@ -231,8 +232,9 @@ class SelectorWidget extends AbstractView
             )
             ->where($queryBuilder->expr()->in('mm.uid_local', $eventUidsParameter))
             ->orderBy('mm.sorting')
-            ->execute()
-            ->fetchAll();
+            ->execute();
+        $dataOfPlaces = $dataOfPlacesQueryResult instanceof Result
+            ? $dataOfPlacesQueryResult->fetchAllAssociative() : [];
 
         $mapper = MapperRegistry::get(PlaceMapper::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);

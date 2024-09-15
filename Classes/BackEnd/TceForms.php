@@ -57,7 +57,7 @@ class TceForms
         $table = 'static_languages';
 
         return self::getConnectionForTable($table)
-            ->select(['*'], $table, [], [], ['lg_name_local' => 'ASC'])->fetchAll();
+            ->select(['*'], $table, [], [], ['lg_name_local' => 'ASC'])->fetchAllAssociative();
     }
 
     /**
@@ -68,7 +68,7 @@ class TceForms
         $table = 'static_countries';
 
         return self::getConnectionForTable($table)
-            ->select(['*'], $table, [], [], ['cn_short_local' => 'ASC'])->fetchAll();
+            ->select(['*'], $table, [], [], ['cn_short_local' => 'ASC'])->fetchAllAssociative();
     }
 
     private static function getConnectionForTable(string $table): Connection

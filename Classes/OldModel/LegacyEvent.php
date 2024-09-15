@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -512,7 +513,7 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
-        $result = $queryBuilder
+        $queryResult = $queryBuilder
             ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
@@ -531,8 +532,8 @@ class LegacyEvent extends AbstractTimeSpan
                 )
             )
             ->orderBy('mm.sorting')
-            ->execute()
-            ->fetchAll();
+            ->execute();
+        $result = $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
 
         /** @var list<array<string, string|int>> $resultWithoutDuplicates */
         $resultWithoutDuplicates = [];
@@ -2565,7 +2566,7 @@ class LegacyEvent extends AbstractTimeSpan
         $table = 'tx_seminars_attendances';
         $this->registrations = self::getConnectionForTable($table)
             ->select(['*'], $table, ['seminar' => $this->getUid()])
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $this->registrationsHaveBeenRetrieved = true;
     }
@@ -3626,7 +3627,7 @@ class LegacyEvent extends AbstractTimeSpan
             $queryBuilder->addSelect($foreignField);
         }
 
-        return $queryBuilder
+        $queryResult = $queryBuilder
             ->from($foreignTableName)
             ->join(
                 $foreignTableName,
@@ -3644,7 +3645,8 @@ class LegacyEvent extends AbstractTimeSpan
                 )
             )
             ->orderBy('mm.sorting')
-            ->execute()
-            ->fetchAll();
+            ->execute();
+
+        return $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
     }
 }
