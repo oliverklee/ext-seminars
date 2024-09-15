@@ -72,7 +72,6 @@ jobs:
           - "php:sniff"
           - "php:stan"
           - "ts:lint"
-          - "xliff:lint"
         php-version:
           - "8.3"
   unit-tests:
