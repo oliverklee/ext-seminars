@@ -608,11 +608,8 @@ final class AbstractModelTest extends FunctionalTestCase
         $statement = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_seminars_test_test_mm')
             ->select(['sorting'], 'tx_seminars_test_test_mm', ['uid_local' => 1]);
-        if (\method_exists($statement, 'fetchAllAssociative')) {
-            $recordInDatabase = $statement->fetchAllAssociative();
-        } else {
-            $recordInDatabase = $statement->fetchAll();
-        }
+        $recordInDatabase = $statement->fetchAllAssociative();
+
         self::assertSame([['sorting' => 1], ['sorting' => 2]], $recordInDatabase);
     }
 }

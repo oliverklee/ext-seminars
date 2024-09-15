@@ -66,11 +66,6 @@ parameters:
 			path: Classes/BackEnd/FlexForms.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
-			count: 2
-			path: Classes/BackEnd/TceForms.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/TceForms.php
@@ -81,17 +76,22 @@ parameters:
 			path: Classes/BackEnd/TceForms.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllCountries\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:findAllLanguages\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
+			count: 1
+			path: Classes/BackEnd/TceForms.php
+
+		-
 			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
-			count: 1
-			path: Classes/Bag/AbstractBag.php
-
-		-
-			message: "#^Cannot call method fetch\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/Bag/AbstractBag.php
 
@@ -151,11 +151,6 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
-			count: 10
-			path: Classes/BagBuilder/EventBagBuilder.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 3
 			path: Classes/BagBuilder/EventBagBuilder.php
@@ -176,12 +171,17 @@ parameters:
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
+			message: "#^Parameter \\#1 \\$array of method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:cleanIntegers\\(\\) expects array\\<int, int\\|string\\>, array\\<int, mixed\\> given\\.$#"
+			count: 1
+			path: Classes/BagBuilder/EventBagBuilder.php
+
+		-
 			message: "#^Parameter &\\$configuration by\\-ref type of method OliverKlee\\\\Seminars\\\\Configuration\\\\EventRegistrationFlexForms\\:\\:buildFields\\(\\) expects array\\<string, array\\<string, string\\>\\>, array\\<string, array\\<int\\|string, array\\<int, string\\>\\|string\\>\\> given\\.$#"
 			count: 1
 			path: Classes/Configuration/EventRegistrationFlexForms.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			message: "#^Parameter \\#3 \\$allowedValues of method OliverKlee\\\\Oelib\\\\Configuration\\\\AbstractConfigurationCheck\\:\\:checkIfSingleInSetNotEmpty\\(\\) expects array\\<string\\>, array\\<int, mixed\\> given\\.$#"
 			count: 1
 			path: Classes/Configuration/SharedConfigurationCheck.php
 
@@ -261,12 +261,12 @@ parameters:
 			path: Classes/Domain/Model/Event/EventDate.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
 
 		-
-			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			message: "#^Parameter \\#1 \\$rawData of method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\RawDataInterface\\:\\:setRawData\\(\\) expects array\\<string, float\\|int\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
 
@@ -1041,11 +1041,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Cannot call method getIsoAlpha2Code\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -1076,14 +1071,14 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'country'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'country'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
+			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array\\<int, array\\<string, mixed\\>\\> given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
+			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'country'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'country'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
 			count: 1
-			path: Classes/Hooks/DataHandlerHook.php
+			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
 			message: "#^Cannot access offset 'columns' on mixed\\.$#"
@@ -1112,7 +1107,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
+			count: 3
 			path: Classes/Hooks/DataHandlerHook.php
 
 		-
@@ -1191,13 +1186,8 @@ parameters:
 			path: Classes/Hooks/Interfaces/DataSanitization.php
 
 		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
-			count: 2
-			path: Classes/Mapper/EventMapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array given\\.$#"
-			count: 1
+			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\Event\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array\\<int, array\\<string, mixed\\>\\> given\\.$#"
+			count: 3
 			path: Classes/Mapper/EventMapper.php
 
 		-
@@ -1239,11 +1229,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getStatus\\(\\) should return 0\\|1\\|2 but returns int\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
-
-		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
@@ -1306,18 +1291,8 @@ parameters:
 			path: Classes/OldModel/AbstractTimeSpan.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Cannot call method cObjGetSingle\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
 			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
-			count: 2
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1347,7 +1322,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
+			count: 2
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1362,6 +1337,11 @@ parameters:
 
 		-
 			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAssociationAsArray\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1387,6 +1367,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPaymentMethods\\(\\) should return array\\<int, string\\> but returns array\\<int, int\\|string\\>\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1443,6 +1428,11 @@ parameters:
 		-
 			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, int\\|string given\\.$#"
 			count: 2
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:\\$registrations \\(array\\<int, array\\<string, int\\|string\\>\\>\\) does not accept array\\<int, array\\<string, mixed\\>\\>\\.$#"
+			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -2074,11 +2064,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventTopicMapperTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/AbstractModelTest.php
 
 		-
 			message: "#^Cannot access offset 'crdate' on array\\<string, mixed\\>\\|false\\.$#"

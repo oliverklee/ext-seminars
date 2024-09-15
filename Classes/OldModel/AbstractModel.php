@@ -485,7 +485,7 @@ abstract class AbstractModel
     protected function getMmRecordsByUid(string $foreignTable, string $mmTable, int $uid): array
     {
         $query = self::getQueryBuilderForTable($foreignTable);
-        return $query
+        $queryResult = $query
             ->select($foreignTable . '.*')
             ->from($foreignTable)
             ->join(
@@ -496,7 +496,9 @@ abstract class AbstractModel
             )
             ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($uid)))
             ->orderBy('mm.sorting')
-            ->execute()->fetchAll();
+            ->execute();
+
+        return $queryResult instanceof Result ? $queryResult->fetchAllAssociative() : [];
     }
 
     protected static function getQueryBuilderForOwnTable(): QueryBuilder

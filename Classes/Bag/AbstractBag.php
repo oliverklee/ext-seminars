@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Bag;
 
-use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
@@ -309,11 +309,12 @@ abstract class AbstractBag implements \Iterator
             $queryBuilder->from($tableName);
         }
 
-        $count = $queryBuilder
+        $result = $queryBuilder
             ->count('*')
             ->where($this->queryParameters)
-            ->execute()
-            ->fetch(FetchMode::COLUMN);
+            ->execute();
+        $count = $result instanceof Result ? $result->fetchOne() : 0;
+        \assert(\is_int($count) && $count >= 0);
 
         $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;
