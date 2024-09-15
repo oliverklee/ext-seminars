@@ -48,7 +48,6 @@
 	},
 	"require-dev": {
 		"egulias/email-validator": "^2.1.0 || ^3.2.1",
-		"ergebnis/composer-normalize": "2.19.0",
 		"friendsofphp/php-cs-fixer": "3.4.0",
 		"helmich/typo3-typoscript-lint": "2.5.2",
 		"phpstan/extension-installer": "1.4.3",
@@ -88,7 +87,6 @@
 	},
 	"config": {
 		"allow-plugins": {
-			"ergebnis/composer-normalize": true,
 			"phpstan/extension-installer": true,
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
@@ -115,7 +113,6 @@
 		"post-autoload-dump": [
 			"@link-extension"
 		],
-		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
 		"ci:php": [
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
@@ -127,7 +124,6 @@
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
 		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
 		"ci:static": [
-			"@ci:composer:normalize",
 			"@ci:php:cs-fixer",
 			"@ci:php:lint",
 			"@ci:php:sniff",
@@ -144,7 +140,6 @@
 			"@fix:composer",
 			"@fix:php"
 		],
-		"fix:composer": "@composer normalize --no-check-lock",
 		"fix:php": [
 			"@fix:php:cs",
 			"@fix:php:sniff"
@@ -180,7 +175,6 @@
 		]
 	},
 	"scripts-descriptions": {
-		"ci:composer:normalize": "Checks the composer.json.",
 		"ci:php": "Runs all static checks for the PHP files.",
 		"ci:php:cs-fixer": "Checks the code style with the PHP Coding Standards Fixer (PHP-CS-Fixer).",
 		"ci:php:lint": "Lints the PHP files for syntax errors.",
