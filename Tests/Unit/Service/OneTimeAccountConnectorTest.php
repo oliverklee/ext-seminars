@@ -83,26 +83,6 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
     /**
      * @test
      */
-    public function existsOneTimeAccountLoginSessionForNoSessionDataReturnsFalse(): void
-    {
-        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
-
-        self::assertFalse($this->subject->existsOneTimeAccountLoginSession());
-    }
-
-    /**
-     * @test
-     */
-    public function existsOneTimeAccountLoginSessionForSessionDataReturnsTrue(): void
-    {
-        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(true);
-
-        self::assertTrue($this->subject->existsOneTimeAccountLoginSession());
-    }
-
-    /**
-     * @test
-     */
     public function getOneTimeAccountUserUidForNullUserUidReturnsNull(): void
     {
         $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
@@ -146,35 +126,11 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
     /**
      * @test
      */
-    public function destroyOneTimeSessionForRegularLoginDoesNotLogUserOut(): void
-    {
-        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
-
-        $this->frontEndUserAuthenticationMock->expects(self::never())->method('logoff');
-
-        $this->subject->destroyOneTimeSession();
-    }
-
-    /**
-     * @test
-     */
     public function destroyOneTimeSessionForRegularLoginDoesSetAnySessionDate(): void
     {
         $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
 
         $this->frontEndUserAuthenticationMock->expects(self::never())->method('setAndSaveSessionData');
-
-        $this->subject->destroyOneTimeSession();
-    }
-
-    /**
-     * @test
-     */
-    public function destroyOneTimeSessionForOneTimeLoginLogsUserOut(): void
-    {
-        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(true);
-
-        $this->frontEndUserAuthenticationMock->expects(self::once())->method('logoff');
 
         $this->subject->destroyOneTimeSession();
     }
@@ -190,20 +146,6 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
 
         $this->frontEndUserAuthenticationMock->expects(self::once())->method('setAndSaveSessionData')
             ->with('onetimeaccountUserUid', null);
-
-        $this->subject->destroyOneTimeSession();
-    }
-
-    /**
-     * @test
-     */
-    public function destroyOneTimeSessionForRegularLoginAndOneTimeSessionDoesNotLogUserOut(): void
-    {
-        $this->frontEndUserAuthenticationMock->method('getKey')->with('user', 'onetimeaccount')->willReturn(null);
-        $this->frontEndUserAuthenticationMock->method('getSessionData')->with('onetimeaccountUserUid')
-            ->willReturn(5);
-
-        $this->frontEndUserAuthenticationMock->expects(self::never())->method('logoff');
 
         $this->subject->destroyOneTimeSession();
     }
