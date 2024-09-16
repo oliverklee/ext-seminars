@@ -166,7 +166,7 @@ jobs:
   functional-tests:
     name: "Functional tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 5
     needs: php-lint
     env:
       DB_DATABASE: typo3
