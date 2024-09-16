@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the autologout for no-longer-supported onetimeaccount logins (#3556)
 - Drop `$isFileName` parameter in `::getConfValueString()` (#2835)
 - Remove the `omitDateIfSameAsPrevious` setting (#2314)
 - Drop `SeparateBillingAddressUpgradeWizard` (#3496)

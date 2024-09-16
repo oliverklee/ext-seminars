@@ -36,14 +36,6 @@ class OneTimeAccountConnector implements SingletonInterface
     }
 
     /**
-     * Checks whether a login session is active, and that is has been created by the "onetimeaccount" extension.
-     */
-    public function existsOneTimeAccountLoginSession(): bool
-    {
-        return $this->frontEndUserAuthentication->getKey('user', 'onetimeaccount') === true;
-    }
-
-    /**
      * Returns the user UID of a FE user created by the "onetimeaccount" extension (without a FE login session).
      *
      * @return positive-int|null
@@ -59,19 +51,12 @@ class OneTimeAccountConnector implements SingletonInterface
     }
 
     /**
-     * Destroys any onetimeaccount sessions (with or without login).
+     * Destroys any onetimeaccount sessions (without login).
      *
-     * If a onetimeaccount login session is active, the user will be logged out.
-     *
-     * If no user is logged in, but a onetimeaccount user UID is available in the session, it will be deleted.
-     *
-     * If regular FE user is logged in, nothing happens.
+     * If a onetimeaccount user UID is available in the session, it will be deleted.
      */
     public function destroyOneTimeSession(): void
     {
-        if ($this->existsOneTimeAccountLoginSession()) {
-            $this->frontEndUserAuthentication->logoff();
-        }
         if (\is_int($this->getOneTimeAccountUserUid())) {
             $this->frontEndUserAuthentication->setAndSaveSessionData('onetimeaccountUserUid', null);
         }
