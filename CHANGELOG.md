@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Require Fluid >= 2.7.4 (#3554)
 - Require TYPO3 >= 11.5.37 (#3510)
 - Allow `psr/http-message` 2.x (#3507)
 - Require Emogrifier >= 7.2.0 (#3506)
