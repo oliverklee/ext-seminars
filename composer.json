@@ -38,6 +38,7 @@
 		"symfony/console": "^5.4 || ^6.4 || ^7.0",
 		"symfony/mailer": "^5.4 || ^6.4 || ^7.0",
 		"symfony/mime": "^5.4 || ^6.4 || ^7.0",
+		"symfony/polyfill-php80": "^1.31.0",
 		"typo3/cms-backend": "^11.5.37",
 		"typo3/cms-core": "^11.5.37",
 		"typo3/cms-extbase": "^11.5.37",

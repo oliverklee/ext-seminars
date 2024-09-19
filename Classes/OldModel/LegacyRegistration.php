@@ -684,7 +684,7 @@ class LegacyRegistration extends AbstractModel
                 continue;
             }
 
-            if (\strpos($value, "\n") !== false) {
+            if (\str_contains($value, "\n")) {
                 $result .= $currentLabel . ": \n";
             } else {
                 $padding = \str_pad('', $maximumLabelLength - \mb_strlen($currentLabel, 'utf-8'));

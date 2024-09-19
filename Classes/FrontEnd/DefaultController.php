@@ -1436,7 +1436,7 @@ class DefaultController extends TemplateHelper
      */
     public function initListView(string $whatToDisplay = ''): AbstractBag
     {
-        if (\strpos($this->cObj->currentRecord, 'tt_content') !== false) {
+        if (\str_contains($this->cObj->currentRecord, 'tt_content')) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
             $this->conf['recursive'] = $this->getConfValueInteger('recursive');
         }

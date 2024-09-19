@@ -2998,7 +2998,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $result = '';
         }
 
-        $carriageReturnRemoved = (strpos($result, "\r") === false)
+        $carriageReturnRemoved = !str_contains($result, "\r")
             ? $result
             : str_replace("\r", "\n", $result);
 
