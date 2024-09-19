@@ -51,7 +51,7 @@
 		"helmich/typo3-typoscript-lint": "2.5.2 || 3.2.1",
 		"icanhazstring/composer-unused": "0.8.11",
 		"phpstan/extension-installer": "1.4.3",
-		"phpstan/phpstan": "1.12.3",
+		"phpstan/phpstan": "1.12.4",
 		"phpstan/phpstan-phpunit": "1.4.0",
 		"phpstan/phpstan-strict-rules": "1.6.0",
 		"phpunit/phpunit": "8.5.39",
