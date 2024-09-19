@@ -16,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacyConfigurationTest extends UnitTestCase
 {
-    protected $resetSingletonInstances = true;
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var ContentObjectRenderer

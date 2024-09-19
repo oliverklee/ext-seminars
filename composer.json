@@ -62,7 +62,7 @@
 		"typo3/cms-install": "^11.5.37",
 		"typo3/cms-scheduler": "^11.5.37",
 		"typo3/coding-standards": "0.6.1",
-		"typo3/testing-framework": "6.16.9",
+		"typo3/testing-framework": "7.1.0",
 		"webmozart/assert": "^1.11.0"
 	},
 	"replace": {

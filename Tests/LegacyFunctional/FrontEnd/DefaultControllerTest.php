@@ -35,7 +35,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
         'typo3conf/ext/oelib',

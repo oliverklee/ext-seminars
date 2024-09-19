@@ -14,7 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationManagerTest extends UnitTestCase
 {
-    protected $resetSingletonInstances = true;
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var RegistrationManager
