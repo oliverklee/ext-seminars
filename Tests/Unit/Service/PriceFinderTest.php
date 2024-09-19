@@ -260,6 +260,7 @@ final class PriceFinderTest extends UnitTestCase
 
         self::assertEquals($expected, $result);
     }
+
     /**
      * @test
      */

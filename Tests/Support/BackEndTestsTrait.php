@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
-* @phpstan-require-extends FunctionalTestCase
+ * @phpstan-require-extends FunctionalTestCase
  */
 trait BackEndTestsTrait
 {

@@ -156,6 +156,7 @@ final class LegacySpeakerTest extends UnitTestCase
 
         self::assertTrue($subject->hasCancelationPeriod());
     }
+
     /**
      * @test
      */
