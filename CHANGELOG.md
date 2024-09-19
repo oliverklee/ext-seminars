@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid using the deprecated `$GLOBALS['TSFE']->fe_user` (#3568)
 - Stop calling outdated DBAL methods (#2159, #3527, #3533, #3542)
 
 ## 5.7.0: New fields, BE usability features, and deprecations

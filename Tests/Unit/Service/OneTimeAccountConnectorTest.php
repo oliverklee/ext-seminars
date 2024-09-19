@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -33,43 +34,18 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
         $mockFrontEndController = $this->createMock(TypoScriptFrontendController::class);
         $this->frontEndUserAuthenticationMock = $this->createMock(FrontendUserAuthentication::class);
         $mockFrontEndController->fe_user = $this->frontEndUserAuthenticationMock;
-        $GLOBALS['TSFE'] = $mockFrontEndController;
+
+        $requestMock = $this->createMock(ServerRequestInterface::class);
+        $requestMock->method('getAttribute')->with('frontend.user')->willReturn($this->frontEndUserAuthenticationMock);
+        $GLOBALS['TYPO3_REQUEST'] = $requestMock;
 
         $this->subject = new OneTimeAccountConnector();
     }
 
     protected function tearDown(): void
     {
-        unset($GLOBALS['TSFE']);
+        unset($GLOBALS['TYPO3_REQUEST']);
         parent::tearDown();
-    }
-
-    /**
-     * @test
-     */
-    public function constructionWithoutFrontEndThrowsException(): void
-    {
-        unset($GLOBALS['TSFE']);
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1668702167);
-        $this->expectDeprecationMessage('No frontend found.');
-
-        new OneTimeAccountConnector();
-    }
-
-    /**
-     * @test
-     */
-    public function constructionWithFrontEndWithoutFrontEndUserAuthenticationThrowsException(): void
-    {
-        $GLOBALS['TSFE']->fe_user = '';
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionCode(1668702517);
-        $this->expectDeprecationMessage('Frontend found, but without a FE user authentication.');
-
-        new OneTimeAccountConnector();
     }
 
     /**

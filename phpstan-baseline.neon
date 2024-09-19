@@ -1561,11 +1561,6 @@ parameters:
 			path: Classes/Service/EventStatusService.php
 
 		-
-			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/Service/OneTimeAccountConnector.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationGuard.php
@@ -3534,11 +3529,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\LegacyRegistrationTest\\:\\:nameUserDataDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Unit/OldModel/LegacyRegistrationTest.php
-
-		-
-			message: "#^Cannot access property \\$fe_user on mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Service/OneTimeAccountConnectorTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Service\\\\PriceFinderTest\\:\\:createFromImmutable\\(\\) should return DateTime but returns DateTime\\|false\\.$#"
