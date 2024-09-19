@@ -302,7 +302,7 @@ final class EventListViewTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/\\r\\n$/',
             $this->subject->render()
         );

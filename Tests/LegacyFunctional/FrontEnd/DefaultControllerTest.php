@@ -912,7 +912,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             ['speakers' => '1']
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
@@ -949,7 +949,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             ['speakers' => '1']
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '#<a href="[a-z]+://www.foo.com".*>foo &amp; bar</a>#',
             $this->subject->main('', [])
         );
@@ -1499,7 +1499,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
             $this->subject->main('', [])
         );
@@ -1710,7 +1710,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotRegExp(
+        self::assertDoesNotMatchRegularExpression(
             '/: *Test &amp; event/',
             $this->subject->main('', [])
         );
@@ -2013,7 +2013,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/organizer 1.*organizer 2/s',
             $this->subject->main('', [])
         );

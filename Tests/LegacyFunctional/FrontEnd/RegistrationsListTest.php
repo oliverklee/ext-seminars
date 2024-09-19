@@ -525,7 +525,7 @@ final class RegistrationsListTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/' . $this->registrationUid . '<\\/td>.*<\\/tr>' .
             '.*<tr>.*<td>' . $secondRegistration . '/s',
             $this->subject->render()
@@ -589,6 +589,6 @@ final class RegistrationsListTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp('/<td>' . $secondRegistration . '/s', $this->subject->render());
+        self::assertMatchesRegularExpression('/<td>' . $secondRegistration . '/s', $this->subject->render());
     }
 }

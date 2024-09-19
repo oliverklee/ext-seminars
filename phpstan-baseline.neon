@@ -3296,7 +3296,7 @@ parameters:
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertRegExp\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			message: "#^Parameter \\#2 \\$string of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertMatchesRegularExpression\\(\\) expects string, resource\\|string\\|null given\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 

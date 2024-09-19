@@ -471,7 +471,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
             ]
         );
 
-        self::assertRegExp(
+        self::assertMatchesRegularExpression(
             '/\\r\\n$/',
             $this->subject->render()
         );
