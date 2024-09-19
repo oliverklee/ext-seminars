@@ -1395,8 +1395,8 @@ class DefaultController extends TemplateHelper
 
                 break;
             default:
-            // nothing to do
-            }
+                // nothing to do
+        }
 
         if ($isOkay) {
             $result .= $this->getSelectorWidgetIfNecessary($whatToDisplay);
@@ -1512,8 +1512,8 @@ class DefaultController extends TemplateHelper
                 $builder->limitToOtherDatesForTopic($this->seminar);
                 break;
             default:
-            // nothing to do
-            }
+                // nothing to do
+        }
 
         if (($whatToDisplay === 'other_dates') || ($whatToDisplay === 'seminar_list')) {
             $hideBookedOutEvents = $this->getConfValueBoolean('showOnlyEventsWithVacancies', 's_listView');
