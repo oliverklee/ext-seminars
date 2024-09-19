@@ -96,7 +96,7 @@ trait EmailTrait
         $matches = [];
 
         foreach ($email->getAttachments() as $attachment) {
-            if (\strpos($this->getContentTypeForDataPart($attachment), $contentType) !== false) {
+            if (\str_contains($this->getContentTypeForDataPart($attachment), $contentType)) {
                 $matches[] = $attachment;
             }
         }

@@ -540,7 +540,7 @@ abstract class AbstractModel
             return '';
         }
 
-        $hasProtocol = \strpos($url, '://') !== false;
+        $hasProtocol = \str_contains($url, '://');
 
         return $hasProtocol ? $url : ('https://' . $url);
     }

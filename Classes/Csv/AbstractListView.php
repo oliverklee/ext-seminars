@@ -185,9 +185,9 @@ abstract class AbstractListView
      */
     protected function escapeFieldForCsv(string $fieldContent): string
     {
-        if (strpos($fieldContent, '"') !== false) {
+        if (str_contains($fieldContent, '"')) {
             $escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';
-        } elseif ((strpos($fieldContent, ';') !== false) || (strpos($fieldContent, "\n") !== false)) {
+        } elseif (str_contains($fieldContent, ';') || str_contains($fieldContent, "\n")) {
             $escapedFieldValue = '"' . $fieldContent . '"';
         } else {
             $escapedFieldValue = $fieldContent;
