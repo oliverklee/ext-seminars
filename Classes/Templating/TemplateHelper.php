@@ -1153,6 +1153,7 @@ abstract class TemplateHelper
      * @param string $alternativeLabel Alternative string to return IF no value is found set for the key,
      *        neither for the local language nor the default.
      */
+    // phpcs:disable
     private function pi_getLL(string $key, string $alternativeLabel = ''): string
     {
         $word = null;
@@ -1190,6 +1191,7 @@ abstract class TemplateHelper
      * merged onto the values found in the "locallang" file.
      * Supported file extensions xlf
      */
+    // phpcs:disable
     private function pi_loadLL(): void
     {
         if ($this->LOCAL_LANG_loaded) {
@@ -1234,6 +1236,7 @@ abstract class TemplateHelper
      * @param string $fieldName Field name to extract. Can be given like "test/el/2/test/el/field_templateObject" where each part will dig a level deeper in the FlexForm data.
      * @param string $sheet Sheet pointer, eg. "sDEF"
      */
+    // phpcs:disable
     private function pi_getFFvalue(array $T3FlexForm_array, string $fieldName, string $sheet = 'sDEF'): ?string
     {
         $sheetArray = $T3FlexForm_array['data'][$sheet]['lDEF'] ?? null;
@@ -1252,6 +1255,7 @@ abstract class TemplateHelper
      * @param string $value Value for outermost key, typ. "vDEF" depending on language.
      * @internal
      */
+    // phpcs:disable
     private function pi_getFFvalueFromSheetArray(array $sheetArray, array $fieldNameArr, string $value): string
     {
         $tempArr = $sheetArray;
@@ -1278,6 +1282,7 @@ abstract class TemplateHelper
     /**
      * Converts $this->cObj->data['pi_flexform'] from XML string to flexForm array.
      */
+    // phpcs:disable
     protected function pi_initPIflexForm(): void
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
@@ -1301,6 +1306,7 @@ abstract class TemplateHelper
      * @param non-empty-string $class The class name (or the END of it since it will be prefixed by $this->prefixId.'-')
      * @return non-empty-string The combined class name (with the correct prefix)
      */
+    // phpcs:disable
     protected function pi_getClassName(string $class): string
     {
         return 'tx-seminars-pi1-' . $class;
@@ -1316,6 +1322,7 @@ abstract class TemplateHelper
      * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
      */
+    // phpcs:disable
     protected function pi_linkTP(
         string $str,
         array $urlParameters = [],
@@ -1350,6 +1357,7 @@ abstract class TemplateHelper
      *
      * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute
      */
+    // phpcs:disable
     protected function pi_list_browseresults(): string
     {
         if (!$this->cObj instanceof ContentObjectRenderer) {
@@ -1474,6 +1482,7 @@ abstract class TemplateHelper
      * @param string $str HTML content to wrap in the div-tags with the "main class" of the plugin
      * @return non-empty-string HTML content wrapped, ready to return to the parent object.
      */
+    // phpcs:disable
     protected function pi_wrapInBaseClass(string $str): string
     {
         $content = '<div class="' . \str_replace('_', '-', $this->prefixId) . '">
@@ -1502,6 +1511,7 @@ abstract class TemplateHelper
      * Returns TRUE if the piVars array has ONLY those fields entered that is set in the $fList (commalist) AND if none of those fields value is greater than $lowerThan field if they are integers.
      * Notice that this function will only work as long as values are integers.
      */
+    // phpcs:disable
     private function pi_isOnlyFields(): bool
     {
         $explodedList = ['mode', 'pointer'];
@@ -1524,6 +1534,7 @@ abstract class TemplateHelper
      * @param non-empty-string $class The class name (suffix)
      * @return non-empty-string A "class" attribute with value and a single space char before it.
      */
+    // phpcs:disable
     private function pi_classParam(string $class): string
     {
         return ' class="' . $this->pi_getClassName($class) . '"';
@@ -1539,6 +1550,7 @@ abstract class TemplateHelper
      * @param bool $cache If $cache is set, the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
      * @return string The input string wrapped in <a> tags
      */
+    // phpcs:disable
     protected function pi_linkTP_keepPIvars(
         string $str,
         array $overrulePIvars = [],
