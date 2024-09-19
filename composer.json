@@ -137,7 +137,7 @@
 			"@ci:php:sniff",
 			"@ci:php:stan"
 		],
-		"ci:php:cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --dry-run --diff",
+		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --diff",
 		"ci:php:lint": "find .*.php *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
 		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
@@ -167,7 +167,7 @@
 			"@fix:php:cs",
 			"@fix:php:sniff"
 		],
-		"fix:php:cs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix",
+		"fix:php:cs": "php-cs-fixer fix",
 		"fix:php:sniff": "phpcbf Classes Configuration Tests",
 		"php:rector": ".Build/vendor/bin/rector",
 		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
