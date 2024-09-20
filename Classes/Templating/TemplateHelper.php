@@ -198,7 +198,7 @@ abstract class TemplateHelper
                 $this->frontendController = $realFrontEndController;
             }
         }
-        $this->piVars = GeneralUtility::_GPmerged($this->prefixId);
+        $this->extractPiVars();
         $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
 
         $locales = GeneralUtility::makeInstance(Locales::class);
@@ -208,6 +208,21 @@ abstract class TemplateHelper
             }
             $this->altLLkey = \rtrim($this->altLLkey, ',');
         }
+    }
+
+    /**
+     * Sets `$this->piVars` from `$_POST` and `$_GET`.
+     */
+    private function extractPiVars(): void
+    {
+        $prefixId = $this->prefixId;
+
+        $postParameter = isset($_POST[$prefixId]) && \is_array($_POST[$prefixId]) ? $_POST[$prefixId] : [];
+        $getParameter = isset($_GET[$prefixId]) && \is_array($_GET[$prefixId]) ? $_GET[$prefixId] : [];
+        $mergedParameters = $getParameter;
+        ArrayUtility::mergeRecursiveWithOverrule($mergedParameters, $postParameter);
+
+        $this->piVars = $mergedParameters;
     }
 
     /**
