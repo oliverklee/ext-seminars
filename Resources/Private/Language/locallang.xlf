@@ -528,9 +528,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.registrationsVipListPID" resname="seminars.pi_flexform.registrationsVipListPID">
 				<source>Page that contains the list of registrations (for event managers):</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.salutation" resname="seminars.pi_flexform.salutation">
-				<source>Salutation mode on the page:</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.formal" resname="seminars.pi_flexform.formal">
 				<source>formal</source>
 			</trans-unit>
