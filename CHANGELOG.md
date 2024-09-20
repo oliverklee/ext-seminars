@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Remove the salutation mode setting from the flexforms (#3591)
 - Drop the autologout for no-longer-supported onetimeaccount logins (#3556)
 - Drop `$isFileName` parameter in `::getConfValueString()` (#2835)
 - Remove the `omitDateIfSameAsPrevious` setting (#2314)
