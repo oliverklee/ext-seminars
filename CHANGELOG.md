@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid using the deprecated `GeneralUtility::_GPmerged()` (#3595)
 - Drop unused dependency on `MarkerBasedTemplateService` (#3594)
 - Provide PSR-7 request when testing `RichTextViewHelper` (#3592)
 - Avoid using the deprecated `$GLOBALS['TSFE']->fe_user` (#3568)
