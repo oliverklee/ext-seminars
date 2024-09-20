@@ -12,7 +12,6 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -71,9 +70,6 @@ final class EventControllerTest extends UnitTestCase
         $GLOBALS['LANG'] = $this->languageServiceMock;
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $methodsToMock[] = 'forward';
-        }
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventController::class,
