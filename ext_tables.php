@@ -1,10 +1,10 @@
 <?php
 
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
-use OliverKlee\Seminars\Controller\BackEnd\EventController;
-use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
+use OliverKlee\Seminars\Controller\BackEnd\EventController;
+use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
+use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die('Access denied.');
 
