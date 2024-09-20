@@ -261,7 +261,7 @@ jobs:
   legacy-functional-tests:
     name: "Legacy functional tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 6
     needs: php-lint
     env:
       DB_DATABASE: typo3
