@@ -15,7 +15,6 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -81,9 +80,6 @@ final class RegistrationControllerTest extends UnitTestCase
         $GLOBALS['LANG'] = $this->languageServiceMock;
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $methodsToMock[] = 'forward';
-        }
         /** @var RegistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             RegistrationController::class,

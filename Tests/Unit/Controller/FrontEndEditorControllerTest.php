@@ -15,7 +15,6 @@ use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -73,9 +72,6 @@ final class FrontEndEditorControllerTest extends UnitTestCase
         parent::setUp();
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $methodsToMock[] = 'forward';
-        }
         /** @var FrontEndEditorController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(FrontEndEditorController::class, $methodsToMock);
         $this->subject = $subject;
