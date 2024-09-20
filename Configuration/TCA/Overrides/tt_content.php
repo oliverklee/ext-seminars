@@ -1,10 +1,13 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die('Access denied.');
 
 (static function (): void {
     // This is the `AbstractPlugin`-based legacy plugin.
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
+    ExtensionManagementUtility::addPlugin(
         [
             'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1',
             'seminars_pi1',
@@ -17,7 +20,7 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_pi1'] = 'recursive,pages';
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_pi1'] = 'pi_flexform';
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_pi1',
         'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi1.xml'
     );
@@ -27,7 +30,7 @@ defined('TYPO3') or die('Access denied.');
     //
 
     // This makes the plugin selectable in the BE.
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    ExtensionUtility::registerPlugin(
         'Seminars',
         // arbitrary, but unique plugin name (not visible in the BE)
         'FrontEndEditor',
@@ -44,7 +47,7 @@ defined('TYPO3') or die('Access denied.');
     // These two commands add the flexform configuration for the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_frontendeditor'] = 'pi_flexform';
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_frontendeditor',
         'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
     );
@@ -54,7 +57,7 @@ defined('TYPO3') or die('Access denied.');
     //
 
     // This makes the plugin selectable in the BE.
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    ExtensionUtility::registerPlugin(
         'Seminars',
         // arbitrary, but unique plugin name (not visible in the BE)
         'EventRegistration',
@@ -73,7 +76,7 @@ defined('TYPO3') or die('Access denied.');
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventregistration']
         = 'pi_flexform';
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventregistration',
         'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml'
     );

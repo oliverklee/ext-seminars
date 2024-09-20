@@ -1,9 +1,11 @@
 <?php
 
+use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
+
 return [
     'backend' => [
         'oliverklee/seminars/response-headers-modifier' => [
-            'target' => \OliverKlee\Seminars\Middleware\ResponseHeadersModifier::class,
+            'target' => ResponseHeadersModifier::class,
             'after' => [
                 'typo3/cms-backend/output-compression',
             ],
@@ -14,7 +16,7 @@ return [
     ],
     'frontend' => [
         'oliverklee/seminars/response-headers-modifier' => [
-            'target' => \OliverKlee\Seminars\Middleware\ResponseHeadersModifier::class,
+            'target' => ResponseHeadersModifier::class,
             'after' => [
                 'typo3/cms-frontend/output-compression',
             ],

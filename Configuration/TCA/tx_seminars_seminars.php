@@ -1,8 +1,14 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\TceForms;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Seo\SlugGenerator;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 defined('TYPO3') or die();
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_seminars');
+ExtensionManagementUtility::addToInsertRecords('tx_seminars_seminars');
 
 $tca = [
     'ctrl' => [
@@ -22,9 +28,9 @@ $tca = [
         'typeicon_column' => 'object_type',
         'typeicon_classes' => [
             'default' => 'tx-seminars-event-complete',
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT => 'tx-seminars-event-complete',
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC => 'tx-seminars-event-topic',
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE => 'tx-seminars-event-date',
+            EventInterface::TYPE_SINGLE_EVENT => 'tx-seminars-event-complete',
+            EventInterface::TYPE_EVENT_TOPIC => 'tx-seminars-event-topic',
+            EventInterface::TYPE_EVENT_DATE => 'tx-seminars-event-date',
         ],
         'hideAtCopy' => true,
         'searchFields' => 'title,accreditation_number',
@@ -36,19 +42,19 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'default' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
+                'default' => EventInterface::TYPE_SINGLE_EVENT,
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type.I.0',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
+                        EventInterface::TYPE_SINGLE_EVENT,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type.I.1',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC,
+                        EventInterface::TYPE_EVENT_TOPIC,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type.I.2',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE,
+                        EventInterface::TYPE_EVENT_DATE,
                     ],
                 ],
             ],
@@ -96,11 +102,11 @@ $tca = [
                     'fields' => ['title', 'object_type', 'topic'],
                     'fieldSeparator' => '-',
                     'postModifiers' => [
-                        \OliverKlee\Seminars\Seo\SlugGenerator::class . '->generateSlug',
+                        SlugGenerator::class . '->generateSlug',
                     ],
                 ],
                 'appearance' => [
-                    'prefix' => \OliverKlee\Seminars\Seo\SlugGenerator::class . '->getPrefix',
+                    'prefix' => SlugGenerator::class . '->getPrefix',
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => 'unique',
@@ -234,19 +240,19 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'default' => \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ON_SITE,
+                'default' => EventDateInterface::EVENT_FORMAT_ON_SITE,
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.on-site',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ON_SITE,
+                        EventDateInterface::EVENT_FORMAT_ON_SITE,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.hybrid',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_HYBRID,
+                        EventDateInterface::EVENT_FORMAT_HYBRID,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.event_format.online',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventDateInterface::EVENT_FORMAT_ONLINE,
+                        EventDateInterface::EVENT_FORMAT_ONLINE,
                     ],
                 ],
             ],
@@ -525,7 +531,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'itemsProcFunc' => \OliverKlee\Seminars\BackEnd\TceForms::class . '->createLanguageSelector',
+                'itemsProcFunc' => TceForms::class . '->createLanguageSelector',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -865,15 +871,15 @@ $tca = [
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_planned',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_PLANNED,
+                        EventInterface::STATUS_PLANNED,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_canceled',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_CANCELED,
+                        EventInterface::STATUS_CANCELED,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_confirmed',
-                        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::STATUS_CONFIRMED,
+                        EventInterface::STATUS_CONFIRMED,
                     ],
                 ],
 
@@ -900,7 +906,7 @@ $tca = [
         'attached_files' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attached_files',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'attached_files',
                 [
                     'maxitems' => 50,
@@ -980,7 +986,7 @@ $tca = [
         'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',
                 [
                     'maxitems' => 1,
@@ -1020,7 +1026,7 @@ $tca = [
         ],
     ],
     'types' => [
-        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT => [
+        EventInterface::TYPE_SINGLE_EVENT => [
             'showitem' =>
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title, uid, slug, subtitle, image, categories, teaser, description, event_type, language, accreditation_number, credit_points, details_page, additional_information, checkboxes, uses_terms_2, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, event_format, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, webinar_url, ' .
@@ -1031,14 +1037,14 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_special, price_special_early, payment_methods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser, vips',
         ],
-        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC => [
+        EventInterface::TYPE_EVENT_TOPIC => [
             'showitem' =>
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelGeneral, object_type, title, uid, slug, subtitle, image, categories, requirements, dependencies, teaser, description, event_type, credit_points, additional_information, uses_terms_2, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_special, price_special_early, payment_methods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime',
         ],
-        \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE => [
+        EventInterface::TYPE_EVENT_DATE => [
             'showitem' =>
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title, uid, topic, slug, language, accreditation_number, details_page, cancelled, automatic_confirmation_cancelation, checkboxes, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, event_format, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, webinar_url, ' .

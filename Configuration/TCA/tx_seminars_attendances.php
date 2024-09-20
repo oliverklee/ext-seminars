@@ -1,5 +1,7 @@
 <?php
 
+use OliverKlee\Seminars\Domain\Model\Price;
+
 defined('TYPO3') or die();
 
 $tca = [
@@ -123,19 +125,19 @@ $tca = [
                     ['', ''],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.price_code.standard',
-                        \OliverKlee\Seminars\Domain\Model\Price::PRICE_STANDARD,
+                        Price::PRICE_STANDARD,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.price_code.special',
-                        \OliverKlee\Seminars\Domain\Model\Price::PRICE_SPECIAL,
+                        Price::PRICE_SPECIAL,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.price_code.earlyBird',
-                        \OliverKlee\Seminars\Domain\Model\Price::PRICE_EARLY_BIRD,
+                        Price::PRICE_EARLY_BIRD,
                     ],
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.price_code.specialEarlyBird',
-                        \OliverKlee\Seminars\Domain\Model\Price::PRICE_SPECIAL_EARLY_BIRD,
+                        Price::PRICE_SPECIAL_EARLY_BIRD,
                     ],
                 ],
             ],

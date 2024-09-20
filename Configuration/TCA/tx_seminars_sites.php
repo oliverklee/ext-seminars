@@ -1,5 +1,7 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\TceForms;
+
 defined('TYPO3') or die();
 
 $tca = [
@@ -58,7 +60,7 @@ $tca = [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['', '0']],
-                'itemsProcFunc' => \OliverKlee\Seminars\BackEnd\TceForms::class . '->createCountrySelector',
+                'itemsProcFunc' => TceForms::class . '->createCountrySelector',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
