@@ -1,23 +1,29 @@
 <?php
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
+use OliverKlee\Seminars\Controller\BackEnd\EventController;
+use OliverKlee\Seminars\Controller\BackEnd\RegistrationController;
+use OliverKlee\Seminars\Controller\BackEnd\EmailController;
+
 defined('TYPO3') or die('Access denied.');
 
 $boot = static function (): void {
     /**
      * BE module
      */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+    ExtensionUtility::registerModule(
         'Seminars',
         'web',
         'events',
         '',
         [
-            \OliverKlee\Seminars\Controller\BackEnd\ModuleController::class => 'overview',
+            ModuleController::class => 'overview',
             // @deprecated `exportCsv` will be removed in version 6.0.0 in #3134
-            \OliverKlee\Seminars\Controller\BackEnd\EventController::class
+            EventController::class
             => 'exportCsv, hide, unhide, delete, search, duplicate',
-            \OliverKlee\Seminars\Controller\BackEnd\RegistrationController::class
+            RegistrationController::class
             => 'showForEvent, exportCsvForEvent, exportCsvForPageUid, delete',
-            \OliverKlee\Seminars\Controller\BackEnd\EmailController::class => 'compose, send',
+            EmailController::class => 'compose, send',
         ],
         [
             'access' => 'user,group',

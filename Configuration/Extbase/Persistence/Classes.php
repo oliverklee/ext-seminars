@@ -2,28 +2,40 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Domain\Model\AccommodationOption;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Model\EventType;
+use OliverKlee\Seminars\Domain\Model\FoodOption;
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Model\PaymentMethod;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
+use OliverKlee\Seminars\Domain\Model\Speaker;
+use OliverKlee\Seminars\Domain\Model\Venue;
+
 return [
-    \OliverKlee\Seminars\Domain\Model\AccommodationOption::class => [
+    AccommodationOption::class => [
         'tableName' => 'tx_seminars_lodgings',
     ],
-    \OliverKlee\Seminars\Domain\Model\Event\Event::class => [
+    Event::class => [
         'tableName' => 'tx_seminars_seminars',
         'recordType' => 'object_type',
         'subclasses' => [
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT
-            => \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class,
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC
-            => \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class,
-            \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE
-            => \OliverKlee\Seminars\Domain\Model\Event\EventDate::class,
+            EventInterface::TYPE_SINGLE_EVENT => SingleEvent::class,
+            EventInterface::TYPE_EVENT_TOPIC => EventTopic::class,
+            EventInterface::TYPE_EVENT_DATE => EventDate::class,
         ],
         'properties' => [
             'ownerUid' => ['fieldName' => 'owner_feuser'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\Event\SingleEvent::class => [
+    SingleEvent::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_SINGLE_EVENT,
+        'recordType' => EventInterface::TYPE_SINGLE_EVENT,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
             'start' => ['fieldName' => 'begin_date'],
@@ -50,9 +62,9 @@ return [
             'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\Event\EventTopic::class => [
+    EventTopic::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_TOPIC,
+        'recordType' => EventInterface::TYPE_EVENT_TOPIC,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
             'standardPrice' => ['fieldName' => 'price_regular'],
@@ -64,9 +76,9 @@ return [
             'specialEarlyBirdPrice' => ['fieldName' => 'price_special_early'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\Event\EventDate::class => [
+    EventDate::class => [
         'tableName' => 'tx_seminars_seminars',
-        'recordType' => \OliverKlee\Seminars\Domain\Model\Event\EventInterface::TYPE_EVENT_DATE,
+        'recordType' => EventInterface::TYPE_EVENT_DATE,
         'properties' => [
             'internalTitle' => ['fieldName' => 'title'],
             'topic' => ['fieldName' => 'topic'],
@@ -88,23 +100,23 @@ return [
             'registrationCheckboxes' => ['fieldName' => 'checkboxes'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\EventType::class => [
+    EventType::class => [
         'tableName' => 'tx_seminars_event_types',
     ],
-    \OliverKlee\Seminars\Domain\Model\FoodOption::class => [
+    FoodOption::class => [
         'tableName' => 'tx_seminars_foods',
     ],
-    \OliverKlee\Seminars\Domain\Model\Organizer::class => [
+    Organizer::class => [
         'tableName' => 'tx_seminars_organizers',
         'properties' => [
             'name' => ['fieldName' => 'title'],
             'emailAddress' => ['fieldName' => 'email'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\PaymentMethod::class => [
+    PaymentMethod::class => [
         'tableName' => 'tx_seminars_payment_methods',
     ],
-    \OliverKlee\Seminars\Domain\Model\Registration\Registration::class => [
+    Registration::class => [
         'tableName' => 'tx_seminars_attendances',
         'properties' => [
             'event' => ['fieldName' => 'seminar'],
@@ -125,17 +137,17 @@ return [
             'humanReadablePrice' => ['fieldName' => 'price'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\RegistrationCheckbox::class => [
+    RegistrationCheckbox::class => [
         'tableName' => 'tx_seminars_checkboxes',
     ],
-    \OliverKlee\Seminars\Domain\Model\Speaker::class => [
+    Speaker::class => [
         'tableName' => 'tx_seminars_speakers',
         'properties' => [
             'name' => ['fieldName' => 'title'],
             'emailAddress' => ['fieldName' => 'email'],
         ],
     ],
-    \OliverKlee\Seminars\Domain\Model\Venue::class => [
+    Venue::class => [
         'tableName' => 'tx_seminars_sites',
         'properties' => [
             'fullAddress' => ['fieldName' => 'address'],

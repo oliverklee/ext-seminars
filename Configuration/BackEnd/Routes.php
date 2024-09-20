@@ -1,8 +1,10 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\Controller;
+
 return [
     'web_seminars' => [
         'path' => '/seminars',
-        'target' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
+        'target' => Controller::class . '::mainAction',
     ],
 ];
