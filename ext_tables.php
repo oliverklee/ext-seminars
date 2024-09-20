@@ -1,4 +1,5 @@
 <?php
+
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use OliverKlee\Seminars\Controller\BackEnd\ModuleController;
 use OliverKlee\Seminars\Controller\BackEnd\EventController;
