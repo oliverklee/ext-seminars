@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\ViewHelpers;
 
 use OliverKlee\Seminars\ViewHelpers\RichTextViewHelper;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -23,7 +24,16 @@ final class RichTextViewHelperTest extends UnitTestCase
     {
         parent::setUp();
 
+        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest();
+
         $this->subject = new RichTextViewHelper();
+    }
+
+    protected function tearDown(): void
+    {
+        unset($GLOBALS['TYPO3_REQUEST']);
+
+        parent::tearDown();
     }
 
     /**
