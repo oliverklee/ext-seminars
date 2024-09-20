@@ -11,7 +11,6 @@ use OliverKlee\Oelib\Templating\TemplateRegistry;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
-use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -129,11 +128,6 @@ abstract class TemplateHelper
     protected $frontendController;
 
     /**
-     * @var MarkerBasedTemplateService
-     */
-    protected $templateService;
-
-    /**
      * @var non-empty-string the prefix used for CSS classes
      */
     protected $prefixId = 'tx_seminars_pi1';
@@ -204,7 +198,6 @@ abstract class TemplateHelper
                 $this->frontendController = $realFrontEndController;
             }
         }
-        $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
         $this->piVars = GeneralUtility::_GPmerged($this->prefixId);
         $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
 
