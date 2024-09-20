@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Drop unused dependency on `MarkerBasedTemplateService` (#3594)
 - Provide PSR-7 request when testing `RichTextViewHelper` (#3592)
 - Avoid using the deprecated `$GLOBALS['TSFE']->fe_user` (#3568)
 - Stop calling outdated DBAL methods (#2159, #3527, #3533, #3542)
