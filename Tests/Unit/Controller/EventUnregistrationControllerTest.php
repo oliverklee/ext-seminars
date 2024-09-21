@@ -61,18 +61,22 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->registrationManagerMock = $this->createMock(RegistrationManager::class);
+
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
             $methodsToMock[] = 'forward';
         }
         /** @var EventUnregistrationController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(EventUnregistrationController::class, $methodsToMock);
+        $subject = $this->getAccessibleMock(
+            EventUnregistrationController::class,
+            $methodsToMock,
+            [$this->registrationManagerMock]
+        );
         $this->subject = $subject;
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
-        $this->registrationManagerMock = $this->createMock(RegistrationManager::class);
-        $this->subject->injectRegistrationManager($this->registrationManagerMock);
 
         $this->context = $this->createMock(Context::class);
         GeneralUtility::setSingletonInstance(Context::class, $this->context);
