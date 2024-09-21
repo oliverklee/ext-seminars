@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -19,7 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @phpstan-type DatabaseColumn string|int|float|bool|null
  * @phpstan-type DatabaseRow array<string, DatabaseColumn>
  */
-class SlugGenerator
+class SlugGenerator implements SingletonInterface
 {
     /**
      * @var non-empty-string
@@ -31,11 +32,9 @@ class SlugGenerator
      */
     private $eventDispatcher;
 
-    public function __construct()
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
-        // We are not using constructor injection here because the slug generator also is referenced from the TCA,
-        // which creates the instance without constructor arguments.
-        $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function getPrefix(): string

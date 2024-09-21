@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Seo;
 
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -24,16 +22,7 @@ final class SlugGeneratorTest extends UnitTestCase
     {
         parent::setUp();
 
-        GeneralUtility::addInstance(EventDispatcherInterface::class, new TestingSlugEventDispatcher());
-
-        $this->subject = new SlugGenerator();
-    }
-
-    protected function tearDown(): void
-    {
-        GeneralUtility::purgeInstances();
-
-        parent::tearDown();
+        $this->subject = new SlugGenerator(new TestingSlugEventDispatcher());
     }
 
     /**

@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Use constructor injection (#3603)
 - Use short class names in configuration files (#3598)
 - Use modern string functions (#3579)
 - Upgrade to PHPUnit 9.x (#3325)

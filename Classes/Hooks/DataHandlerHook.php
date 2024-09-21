@@ -10,6 +10,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
@@ -20,7 +21,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  *
  * phpcs:disable PSR1.Methods.CamelCapsMethodName
  */
-class DataHandlerHook
+class DataHandlerHook implements SingletonInterface
 {
     /**
      * @var string
@@ -41,6 +42,16 @@ class DataHandlerHook
      * @var DataHandler
      */
     private $dataHandler;
+
+    /**
+     * @var SlugGenerator
+     */
+    private $slugGenerator;
+
+    public function __construct(SlugGenerator $slugGenerator)
+    {
+        $this->slugGenerator = $slugGenerator;
+    }
 
     /**
      * Handles data after everything had been written to the database.
@@ -102,8 +113,7 @@ class DataHandlerHook
 
         $currentSlug = $updatedData['slug'] ?? '';
         if (\preg_match('/^(-[\\d]+)?$/', $currentSlug) === 1) {
-            $slugGenerator = GeneralUtility::makeInstance(SlugGenerator::class);
-            $updatedData['slug'] = $slugGenerator->generateSlug(['record' => $updatedData]);
+            $updatedData['slug'] = $this->slugGenerator->generateSlug(['record' => $updatedData]);
         }
 
         $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
