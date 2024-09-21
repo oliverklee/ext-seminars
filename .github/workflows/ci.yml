@@ -76,6 +76,7 @@ jobs:
           - "composer:normalize"
           - "composer:unused"
           - "php:cs-fixer"
+          - "php:rector"
           - "php:sniff"
           - "php:stan"
           - "ts:lint"
