@@ -37,26 +37,9 @@ class CsvDownloader
      */
     public function main(): string
     {
-        $table = \is_string(GeneralUtility::_GET('table')) ? GeneralUtility::_GET('table') : '';
         $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
-        switch ($table) {
-            case 'tx_seminars_seminars':
-                // @deprecated will be removed in version 6.0.0 in #3134
-                $result = $this->createAndOutputListOfEvents($pageUid);
-                break;
-            case 'tx_seminars_attendances':
-                $eventUid = \max(0, (int)GeneralUtility::_GET('eventUid'));
-                $result = $this->createAndOutputListOfRegistrations($eventUid, $pageUid);
-                break;
-            default:
-                throw new \InvalidArgumentException(
-                    // @deprecated "tx_seminars_seminars" will be removed in version 6.0.0 in #3134
-                    'The parameter "table" must be set to either "tx_seminars_seminars" or "tx_seminars_attendances".',
-                    1671155057
-                );
-        }
-
-        return $result;
+        $eventUid = \max(0, (int)GeneralUtility::_GET('eventUid'));
+        return $this->createAndOutputListOfRegistrations($eventUid, $pageUid);
     }
 
     /**
@@ -107,64 +90,11 @@ class CsvDownloader
     }
 
     /**
-     * Creates a CSV list of events for the page given in $pid.
-     *
-     * If the page does not exist, an error message is returned, and an error 404 is set.
-     *
-     * If access is denied, an error message is returned, and an error 403 is set.
-     *
-     * @param int $pageUid PID of the page with events for which to create the CSV list, must be > 0
-     *
-     * @return string CSV list of events for the given page or an error message in case of an error
-     *
-     * @deprecated will be removed in version 6.0.0 in #3134
-     */
-    public function createAndOutputListOfEvents(int $pageUid): string
-    {
-        if ($pageUid <= 0) {
-            throw new \InvalidArgumentException('The parameter $pageUid must be > 0.', 1671155090);
-        }
-
-        $this->setContentTypeForEventLists();
-
-        return $this->createListOfEvents($pageUid);
-    }
-
-    /**
-     * Retrieves a list of events as CSV, including the header line.
-     *
-     * This function does not do any access checks.
-     *
-     * @param int $pageUid PID of the system folder from which the event records should be exported, must be > 0
-     *
-     * @return string CSV export of the event records on that page
-     *
-     * @deprecated will be removed in version 6.0.0 in #3134
-     */
-    public function createListOfEvents(int $pageUid): string
-    {
-        $eventListView = GeneralUtility::makeInstance(EventListView::class);
-        $eventListView->setPageUid($pageUid);
-
-        return $eventListView->render();
-    }
-
-    /**
      * Sets the HTTP header: the content type and filename (content disposition) for registration lists.
      */
     private function setContentTypeForRegistrationLists(): void
     {
         $this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForRegistrationsCsv'));
-    }
-
-    /**
-     * Sets the HTTP header: the content type and filename (content disposition) for event lists.
-     *
-     * @deprecated will be removed in version 6.0.0 in #3134
-     */
-    private function setContentTypeForEventLists(): void
-    {
-        $this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForEventsCsv'));
     }
 
     /**

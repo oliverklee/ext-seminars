@@ -17,7 +17,6 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkFilenameForEventsCsv();
         $this->checkFilenameForRegistrationsCsv();
-        $this->checkFieldsFromEventsForCsv();
         $this->checkFieldsFromFeUserForCsv();
         $this->checkFieldsFromAttendanceForCsv();
         $this->checkFieldsFromFeUserForEmailCsv();
@@ -40,54 +39,6 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
             'filenameForRegistrationsCsv',
             'This value specifies the file name to suggest for the CSV export of registration records.
             If this value is not set, an empty filename will be used for saving the CSV file which will cause problems.'
-        );
-    }
-
-    private function checkFieldsFromEventsForCsv(): void
-    {
-        $this->checkIfMultiInSetNotEmpty(
-            'fieldsFromEventsForCsv',
-            'These values specify the event fields to export via CSV.
-            A mistyped field name will cause the field to not get included.',
-            [
-                'uid',
-                'tstamp',
-                'crdate',
-                'title',
-                'subtitle',
-                'teaser',
-                'description',
-                'event_type',
-                'accreditation_number',
-                'credit_points',
-                'date',
-                'time',
-                'deadline_registration',
-                'deadline_early_bird',
-                'deadline_unregistration',
-                'place',
-                'room',
-                'lodgings',
-                'foods',
-                'speakers',
-                'partners',
-                'tutors',
-                'leaders',
-                'price_regular',
-                'price_regular_early',
-                'price_special',
-                'price_special_early',
-                'additional_information',
-                'payment_methods',
-                'organizers',
-                'attendees_min',
-                'attendees_max',
-                'attendees',
-                'vacancies',
-                'enough_attendees',
-                'is_full',
-                'cancelled',
-            ]
         );
     }
 

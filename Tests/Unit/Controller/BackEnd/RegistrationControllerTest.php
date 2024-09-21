@@ -101,7 +101,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $_GET['table'], $GLOBALS['LANG']);
+        unset($_GET['id'], $_GET['pid'], $GLOBALS['LANG']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -418,16 +418,6 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function exportCsvForEventActionProvidesCsvDownloaderWithRegistrationsTableName(): void
-    {
-        $this->subject->exportCsvForEventAction(5);
-
-        self::assertSame('tx_seminars_attendances', $_GET['table'] ?? null);
-    }
-
-    /**
-     * @test
-     */
     public function exportCsvForEventActionProvidesCsvDownloaderWithUidOfProvidedPage(): void
     {
         $eventUid = 9;
@@ -477,16 +467,6 @@ final class RegistrationControllerTest extends UnitTestCase
             'attachment; filename=registrations.csv',
             $result->getHeaders()['Content-Disposition'][0]
         );
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvForPageUidActionProvidesCsvDownloaderWithRegistrationsTableName(): void
-    {
-        $this->subject->exportCsvForPageUidAction(12);
-
-        self::assertSame('tx_seminars_attendances', $_GET['table'] ?? null);
     }
 
     /**

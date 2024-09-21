@@ -80,7 +80,7 @@ final class ModuleControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $_GET['table']);
+        unset($_GET['id'], $_GET['pid']);
 
         parent::tearDown();
     }
