@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Seo;
 
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -23,6 +24,14 @@ final class SlugGeneratorTest extends UnitTestCase
         parent::setUp();
 
         $this->subject = new SlugGenerator(new TestingSlugEventDispatcher());
+    }
+
+    /**
+     * @test
+     */
+    public function isSingleton(): void
+    {
+        self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
 
     /**
