@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop obsolete TCA options (#1612)
 - Drop the CSV export of events (#3606)
 - Drop obsolete entries from `ext_emconf.php` (#3597)
 - Remove the salutation mode setting from the flexforms (#3591)

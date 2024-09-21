@@ -12,7 +12,6 @@ ExtensionManagementUtility::addTCAcolumns(
             'label' => 'registration (not visible in the BE)',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_seminars_event_types',
                 'default' => 0,
                 'size' => 1,
