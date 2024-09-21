@@ -79,49 +79,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsForExistentEventSetsResponseHeaderContentType(): void
-    {
-        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
-        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
-
-        $this->subject->createAndOutputListOfEvents(1);
-
-        $headers = $this->responseHeadersModifier->getOverrideHeaders();
-        self::assertSame('text/csv; header=present; charset=utf-8', $headers['Content-type']);
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfEventsForExistentEventSetsResponseHeaderContentDisposition(): void
-    {
-        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
-        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
-
-        $this->subject->createAndOutputListOfEvents(1);
-
-        $headers = $this->responseHeadersModifier->getOverrideHeaders();
-        self::assertSame('attachment; filename=events.csv', $headers['Content-disposition']);
-    }
-
-    /**
-     * @test
-     */
-    public function createAndOutputListOfEventsForExistentEventWithoutEventsHasHeaderOnly(): void
-    {
-        $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
-        $this->configuration->setAsString('filenameForEventsCsv', 'events.csv');
-
-        $result = $this->subject->createAndOutputListOfEvents(1);
-
-        $expected = $this->localizeAndRemoveColon('tx_seminars_seminars.title') . "\r\n";
-
-        self::assertSame($expected, $result);
-    }
-
-    /**
-     * @test
-     */
     public function createAndOutputListOfRegistrationsForExistentEventSetsResponseHeaderContentType(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');

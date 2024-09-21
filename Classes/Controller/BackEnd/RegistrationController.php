@@ -30,11 +30,6 @@ class RegistrationController extends ActionController
     private const CSV_FILENAME = 'registrations.csv';
 
     /**
-     * @var non-empty-string
-     */
-    private const TABLE_NAME = 'tx_seminars_attendances';
-
-    /**
      * @var RegistrationRepository
      */
     private $registrationRepository;
@@ -109,7 +104,6 @@ class RegistrationController extends ActionController
 
     private function exportCsvAction(): ResponseInterface
     {
-        $_GET['table'] = self::TABLE_NAME;
         $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
 
         return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);

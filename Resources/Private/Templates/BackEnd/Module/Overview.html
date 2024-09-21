@@ -19,18 +19,6 @@
                 <h1 class="col-auto me-auto">
                     <f:translate key="backEndModule.heading.events"/>
                 </h1>
-                <div class="col-auto">
-                    <f:comment>
-                        @deprecated will be removed in version 6.0.0 in #3134
-                    </f:comment>
-                    <f:if condition="{events}">
-                        <f:link.action controller="BackEnd\Event" action="exportCsv" arguments="{pageUid: pageUid}"
-                                       class="btn btn-default btn-sm">
-                            <core:icon identifier="actions-document-export-csv"/>
-                            <f:translate key="backEndModule.action.csvDownload"/>
-                        </f:link.action>
-                    </f:if>
-                </div>
             </div>
 
             <f:render partial="BackEnd/SearchForm" arguments="{_all}"/>

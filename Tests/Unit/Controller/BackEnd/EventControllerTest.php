@@ -11,7 +11,6 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -87,7 +86,7 @@ final class EventControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $_GET['table'], $GLOBALS['LANG']);
+        unset($_GET['id'], $GLOBALS['LANG']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -99,70 +98,6 @@ final class EventControllerTest extends UnitTestCase
     public function isActionController(): void
     {
         self::assertInstanceOf(ActionController::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvActionProvidesCsvDownloaderWithEventsTableName(): void
-    {
-        $this->subject->exportCsvAction(5);
-
-        self::assertSame('tx_seminars_seminars', $_GET['table']);
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvActionProvidesCsvDownloaderWithProvidedPageUid(): void
-    {
-        $pageUid = 9;
-
-        $this->subject->exportCsvAction($pageUid);
-
-        self::assertSame($pageUid, $_GET['pid']);
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvActionReturnsCsvData(): void
-    {
-        $csvContent = 'foo,bar';
-        $this->csvDownloaderMock->expects(self::once())->method('main')->willReturn($csvContent);
-
-        $result = $this->subject->exportCsvAction(5);
-
-        if ($result instanceof ResponseInterface) {
-            $result = $result->getBody()->getContents();
-        }
-        self::assertSame($csvContent, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvActionSetsCsvContentType(): void
-    {
-        $result = $this->subject->exportCsvAction(9);
-
-        self::assertSame(
-            'text/csv; header=present; charset=utf-8',
-            $result->getHeaders()['Content-Type'][0]
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function exportCsvActionSetsDownloadFilename(): void
-    {
-        $result = $this->subject->exportCsvAction(9);
-
-        self::assertSame(
-            'attachment; filename=events.csv',
-            $result->getHeaders()['Content-Disposition'][0]
-        );
     }
 
     /**

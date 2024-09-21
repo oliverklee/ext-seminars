@@ -542,31 +542,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         fieldsFromEventsForCsv
-
-   Data type
-         string
-
-   Description
-         comma-separated list of field names from tx\_seminars\_seminars that
-         will be used for CSV exportAllowed values are in:uid, tstamp, crdate,
-         title, subtitle, teaser, description, event\_type,
-         accreditation\_number, credit\_points, date, time,
-         deadline\_registration, deadline\_early\_bird, place, room, lodgings,
-         foods, speakers, partners, tutors, leaders, price\_regular,
-         price\_regular\_early, price\_special,
-         price\_special\_early, additional\_information,
-         payment\_methods, organizers, attendees\_min, attendees\_max,
-         attendees, vacancies, enough\_attendees, is\_full, cancelled
-
-   Default
-         uid,title,subtitle,description,event\_type,date,time,place,room,speake
-         rs,price\_regular,attendees,attendees\_max,vacancies,is\_full
-
-
-.. container:: table-row
-
-   Property
          fieldsFromFeUserForCsv
 
    Data type

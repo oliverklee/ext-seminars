@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\Permissions;
-use OliverKlee\Seminars\Csv\CsvDownloader;
-use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
-use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -19,16 +15,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventController extends ActionController
 {
-    /**
-     * @var non-empty-string
-     */
-    private const CSV_FILENAME = 'events.csv';
-
-    /**
-     * @var non-empty-string
-     */
-    private const TABLE_NAME = 'tx_seminars_seminars';
-
     /**
      * @var EventRepository
      */
@@ -60,21 +46,6 @@ class EventController extends ActionController
         $languageService = $GLOBALS['LANG'] ?? null;
         \assert($languageService instanceof LanguageService);
         $this->languageService = $languageService;
-    }
-
-    /**
-     * @param int<0, max> $pageUid
-     *
-     * @deprecated will be removed in version 6.0.0 in #3134
-     */
-    public function exportCsvAction(int $pageUid): ResponseInterface
-    {
-        $_GET['table'] = self::TABLE_NAME;
-        $_GET['pid'] = $pageUid;
-
-        $csvContent = GeneralUtility::makeInstance(CsvDownloader::class)->main();
-
-        return GeneralUtility::makeInstance(CsvResponse::class, $csvContent, self::CSV_FILENAME);
     }
 
     private function redirectToOverviewAction(): void

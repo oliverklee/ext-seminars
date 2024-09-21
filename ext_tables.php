@@ -19,11 +19,8 @@ $boot = static function (): void {
         '',
         [
             ModuleController::class => 'overview',
-            // @deprecated `exportCsv` will be removed in version 6.0.0 in #3134
-            EventController::class
-            => 'exportCsv, hide, unhide, delete, search, duplicate',
-            RegistrationController::class
-            => 'showForEvent, exportCsvForEvent, exportCsvForPageUid, delete',
+            EventController::class => 'hide, unhide, delete, search, duplicate',
+            RegistrationController::class => 'showForEvent, exportCsvForEvent, exportCsvForPageUid, delete',
             EmailController::class => 'compose, send',
         ],
         [
