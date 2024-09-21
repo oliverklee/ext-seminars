@@ -71,24 +71,29 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->eventTypeRepositoryMock = $this->createMock(EventTypeRepository::class);
+        $this->organizerRepositoryMock = $this->createMock(OrganizerRepository::class);
+        $this->speakerRepositoryMock = $this->createMock(SpeakerRepository::class);
+        $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
+
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var FrontEndEditorController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(FrontEndEditorController::class, $methodsToMock);
+        $subject = $this->getAccessibleMock(
+            FrontEndEditorController::class,
+            $methodsToMock,
+            [
+                $this->eventRepositoryMock,
+                $this->eventTypeRepositoryMock,
+                $this->organizerRepositoryMock,
+                $this->speakerRepositoryMock,
+                $this->venueRepositoryMock,
+            ]
+        );
         $this->subject = $subject;
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
-
-        $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->subject->injectEventRepository($this->eventRepositoryMock);
-        $this->eventTypeRepositoryMock = $this->createMock(EventTypeRepository::class);
-        $this->subject->injectEventTypeRepository($this->eventTypeRepositoryMock);
-        $this->organizerRepositoryMock = $this->createMock(OrganizerRepository::class);
-        $this->subject->injectOrganizerRepository($this->organizerRepositoryMock);
-        $this->speakerRepositoryMock = $this->createMock(SpeakerRepository::class);
-        $this->subject->injectSpeakerRepository($this->speakerRepositoryMock);
-        $this->venueRepositoryMock = $this->createMock(VenueRepository::class);
-        $this->subject->injectVenueRepository($this->venueRepositoryMock);
 
         $this->context = $this->createMock(Context::class);
         GeneralUtility::setSingletonInstance(Context::class, $this->context);

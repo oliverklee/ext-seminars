@@ -45,29 +45,18 @@ class FrontEndEditorController extends ActionController
      */
     private $venueRepository;
 
-    public function injectEventRepository(EventRepository $repository): void
-    {
-        $this->eventRepository = $repository;
-    }
-
-    public function injectEventTypeRepository(EventTypeRepository $repository): void
-    {
-        $this->eventTypeRepository = $repository;
-    }
-
-    public function injectOrganizerRepository(OrganizerRepository $repository): void
-    {
-        $this->organizerRepository = $repository;
-    }
-
-    public function injectSpeakerRepository(SpeakerRepository $repository): void
-    {
-        $this->speakerRepository = $repository;
-    }
-
-    public function injectVenueRepository(VenueRepository $repository): void
-    {
-        $this->venueRepository = $repository;
+    public function __construct(
+        EventRepository $eventRepository,
+        EventTypeRepository $eventTypeRepository,
+        OrganizerRepository $organizerRepository,
+        SpeakerRepository $speakerRepository,
+        VenueRepository $venueRepository
+    ) {
+        $this->eventRepository = $eventRepository;
+        $this->eventTypeRepository = $eventTypeRepository;
+        $this->organizerRepository = $organizerRepository;
+        $this->speakerRepository = $speakerRepository;
+        $this->venueRepository = $venueRepository;
     }
 
     private function getLoggedInUserUid(): int

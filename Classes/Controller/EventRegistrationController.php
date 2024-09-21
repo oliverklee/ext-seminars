@@ -48,23 +48,15 @@ class EventRegistrationController extends ActionController
      */
     protected $priceFinder;
 
-    public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
-    {
+    public function __construct(
+        RegistrationGuard $registrationGuard,
+        RegistrationProcessor $registrationProcessor,
+        OneTimeAccountConnector $oneTimeAccountConnector,
+        PriceFinder $priceFinder
+    ) {
         $this->registrationGuard = $registrationGuard;
-    }
-
-    public function injectRegistrationProcessor(RegistrationProcessor $processor): void
-    {
-        $this->registrationProcessor = $processor;
-    }
-
-    public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
-    {
-        $this->oneTimeAccountConnector = $connector;
-    }
-
-    public function injectPriceFinder(PriceFinder $priceFinder): void
-    {
+        $this->registrationProcessor = $registrationProcessor;
+        $this->oneTimeAccountConnector = $oneTimeAccountConnector;
         $this->priceFinder = $priceFinder;
     }
 

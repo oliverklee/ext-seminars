@@ -67,22 +67,27 @@ final class EventRegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
+        $this->registrationProcesserMock = $this->createMock(RegistrationProcessor::class);
+        $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
+        $this->priceFinderMock = $this->createMock(PriceFinder::class);
+
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
             $methodsToMock[] = 'forward';
         }
         /** @var EventRegistrationController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(EventRegistrationController::class, $methodsToMock);
+        $subject = $this->getAccessibleMock(
+            EventRegistrationController::class,
+            $methodsToMock,
+            [
+                $this->registrationGuardMock,
+                $this->registrationProcesserMock,
+                $this->oneTimeAccountConnectorMock,
+                $this->priceFinderMock,
+            ]
+        );
         $this->subject = $subject;
-
-        $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
-        $this->subject->injectRegistrationGuard($this->registrationGuardMock);
-        $this->registrationProcesserMock = $this->createMock(RegistrationProcessor::class);
-        $this->subject->injectRegistrationProcessor($this->registrationProcesserMock);
-        $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
-        $this->subject->injectOneTimeAccountConnector($this->oneTimeAccountConnectorMock);
-        $this->priceFinderMock = $this->createMock(PriceFinder::class);
-        $this->subject->injectPriceFinder($this->priceFinderMock);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);

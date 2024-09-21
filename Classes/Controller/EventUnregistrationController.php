@@ -25,7 +25,7 @@ class EventUnregistrationController extends ActionController
      */
     private $registrationManager;
 
-    public function injectRegistrationManager(RegistrationManager $registrationManager): void
+    public function __construct(RegistrationManager $registrationManager)
     {
         $this->registrationManager = $registrationManager;
     }
