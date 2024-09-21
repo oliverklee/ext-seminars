@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -33,7 +34,7 @@ class ModuleController extends ActionController
         $this->registrationRepository = $registrationRepository;
     }
 
-    public function overviewAction(): void
+    public function overviewAction(): ResponseInterface
     {
         $pageUid = $this->getPageUid();
 
@@ -50,5 +51,7 @@ class ModuleController extends ActionController
             'numberOfRegistrations',
             $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
         );
+
+        return $this->htmlResponse();
     }
 }

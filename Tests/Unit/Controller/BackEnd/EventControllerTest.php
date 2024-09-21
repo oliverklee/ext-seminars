@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -76,6 +77,9 @@ final class EventControllerTest extends UnitTestCase
             [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
         );
         $this->subject = $subject;
+
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -175,6 +179,16 @@ final class EventControllerTest extends UnitTestCase
         $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->deleteAction(15);
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionReturnsHtmlResponse(): void
+    {
+        $result = $this->subject->searchAction(1, '');
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
     }
 
     /**

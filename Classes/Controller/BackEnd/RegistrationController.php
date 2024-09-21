@@ -58,7 +58,7 @@ class RegistrationController extends ActionController
      *
      * @throws \RuntimeException
      */
-    public function showForEventAction(int $eventUid): void
+    public function showForEventAction(int $eventUid): ResponseInterface
     {
         $event = $this->eventRepository->findOneByUidForBackend($eventUid);
         if (!($event instanceof Event)) {
@@ -80,6 +80,8 @@ class RegistrationController extends ActionController
             $this->registrationRepository->enrichWithRawData($waitingListRegistrations);
             $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
         }
+
+        return $this->htmlResponse();
     }
 
     /**

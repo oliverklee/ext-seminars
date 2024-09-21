@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -70,6 +71,9 @@ final class ModuleControllerTest extends UnitTestCase
         );
         $this->subject = $subject;
 
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->willReturn($responseStub);
+
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
@@ -121,6 +125,16 @@ final class ModuleControllerTest extends UnitTestCase
     public function pageUidForNoIdInRequestIsZero(): void
     {
         self::assertSame(0, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
+    public function overviewActionReturnsHtmlResponse(): void
+    {
+        $result = $this->subject->overviewAction();
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
     }
 
     /**

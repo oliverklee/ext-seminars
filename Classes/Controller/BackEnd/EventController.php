@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -56,27 +57,31 @@ class EventController extends ActionController
     /**
      * @param positive-int $eventUid
      */
-    public function hideAction(int $eventUid): void
+    public function hideAction(int $eventUid): ResponseInterface
     {
         $this->eventRepository->hideViaDataHandler($eventUid);
 
         $this->redirectToOverviewAction();
+
+        return $this->htmlResponse();
     }
 
     /**
      * @param positive-int $eventUid
      */
-    public function unhideAction(int $eventUid): void
+    public function unhideAction(int $eventUid): ResponseInterface
     {
         $this->eventRepository->unhideViaDataHandler($eventUid);
 
         $this->redirectToOverviewAction();
+
+        return $this->htmlResponse();
     }
 
     /**
      * @param positive-int $eventUid
      */
-    public function deleteAction(int $eventUid): void
+    public function deleteAction(int $eventUid): ResponseInterface
     {
         $this->eventRepository->deleteViaDataHandler($eventUid);
 
@@ -85,13 +90,15 @@ class EventController extends ActionController
         $this->addFlashMessage($message);
 
         $this->redirectToOverviewAction();
+
+        return $this->htmlResponse();
     }
 
     /**
      * @param int<0, max> $pageUid
      * @param string $searchTerm
      */
-    public function searchAction(int $pageUid, string $searchTerm = ''): void
+    public function searchAction(int $pageUid, string $searchTerm = ''): ResponseInterface
     {
         $this->view->assign('permissions', $this->permissions);
         $this->view->assign('pageUid', $pageUid);
@@ -104,15 +111,19 @@ class EventController extends ActionController
         $this->view->assign('events', $events);
 
         $this->view->assign('searchTerm', \trim($searchTerm));
+
+        return $this->htmlResponse();
     }
 
     /**
      * @param positive-int $eventUid
      */
-    public function duplicateAction(int $eventUid): void
+    public function duplicateAction(int $eventUid): ResponseInterface
     {
         $this->eventRepository->duplicateViaDataHandler($eventUid);
 
         $this->redirectToOverviewAction();
+
+        return $this->htmlResponse();
     }
 }

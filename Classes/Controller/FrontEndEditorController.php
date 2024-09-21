@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Repository\EventTypeRepository;
 use OliverKlee\Seminars\Domain\Repository\OrganizerRepository;
 use OliverKlee\Seminars\Domain\Repository\SpeakerRepository;
 use OliverKlee\Seminars\Domain\Repository\VenueRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -64,10 +65,12 @@ class FrontEndEditorController extends ActionController
         return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
     }
 
-    public function indexAction(): void
+    public function indexAction(): ResponseInterface
     {
         $events = $this->eventRepository->findSingleEventsByOwnerUid($this->getLoggedInUserUid());
         $this->view->assign('events', $events);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -89,12 +92,14 @@ class FrontEndEditorController extends ActionController
     /**
      * @IgnoreValidation("event")
      */
-    public function editAction(SingleEvent $event): void
+    public function editAction(SingleEvent $event): ResponseInterface
     {
         $this->checkEventOwner($event);
 
         $this->view->assign('event', $event);
         $this->assignAuxiliaryRecordsToView();
+
+        return $this->htmlResponse();
     }
 
     private function assignAuxiliaryRecordsToView(): void
@@ -118,11 +123,13 @@ class FrontEndEditorController extends ActionController
     /**
      * @IgnoreValidation("event")
      */
-    public function newAction(?SingleEvent $event = null): void
+    public function newAction(?SingleEvent $event = null): ResponseInterface
     {
         $eventToCreate = $event instanceof SingleEvent ? $event : GeneralUtility::makeInstance(SingleEvent::class);
         $this->view->assign('event', $eventToCreate);
         $this->assignAuxiliaryRecordsToView();
+
+        return $this->htmlResponse();
     }
 
     public function createAction(SingleEvent $event): void

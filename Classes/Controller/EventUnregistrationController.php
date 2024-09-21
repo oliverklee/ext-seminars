@@ -88,11 +88,11 @@ class EventUnregistrationController extends ActionController
         return (new ForwardResponse('deny'))->withArguments(['warningMessageKey' => $warningMessageKey]);
     }
 
-    public function denyAction(string $warningMessageKey): ?ResponseInterface
+    public function denyAction(string $warningMessageKey): ResponseInterface
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
 
-        return null;
+        return $this->htmlResponse();
     }
 
     /**
@@ -100,11 +100,11 @@ class EventUnregistrationController extends ActionController
      *
      * @IgnoreValidation("registration")
      */
-    public function confirmAction(Registration $registration): ?ResponseInterface
+    public function confirmAction(Registration $registration): ResponseInterface
     {
         $this->view->assign('registration', $registration);
 
-        return null;
+        return $this->htmlResponse();
     }
 
     /**
@@ -123,10 +123,10 @@ class EventUnregistrationController extends ActionController
     /**
      * @IgnoreValidation("event")
      */
-    public function thankYouAction(Event $event): ?ResponseInterface
+    public function thankYouAction(Event $event): ResponseInterface
     {
         $this->view->assign('event', $event);
 
-        return null;
+        return $this->htmlResponse();
     }
 }
