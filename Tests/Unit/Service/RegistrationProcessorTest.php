@@ -60,18 +60,19 @@ final class RegistrationProcessorTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->subject = new RegistrationProcessor();
-
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
-        $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
-        $this->subject->injectEventRepository($this->eventRepositoryMock);
         $this->frontendUserRepositoryMock = $this->createMock(FrontendUserRepository::class);
-        $this->subject->injectFrontendUserRepository($this->frontendUserRepositoryMock);
         $this->registrationGuardMock = $this->createMock(RegistrationGuard::class);
-        $this->subject->injectRegistrationGuard($this->registrationGuardMock);
         $this->registrationManagerMock = $this->createMock(RegistrationManager::class);
-        $this->subject->injectRegistrationManager($this->registrationManagerMock);
+
+        $this->subject = new RegistrationProcessor(
+            $this->registrationRepositoryMock,
+            $this->eventRepositoryMock,
+            $this->frontendUserRepositoryMock,
+            $this->registrationGuardMock,
+            $this->registrationManagerMock
+        );
     }
 
     protected function tearDown(): void
