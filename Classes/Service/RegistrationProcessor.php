@@ -56,28 +56,17 @@ class RegistrationProcessor implements SingletonInterface
      */
     private $registrationManager;
 
-    public function injectRegistrationRepository(RegistrationRepository $repository): void
-    {
-        $this->registrationRepository = $repository;
-    }
-
-    public function injectEventRepository(EventRepository $repository): void
-    {
-        $this->eventRepository = $repository;
-    }
-
-    public function injectFrontendUserRepository(FrontendUserRepository $repository): void
-    {
-        $this->frontendUserRepository = $repository;
-    }
-
-    public function injectRegistrationGuard(RegistrationGuard $registrationGuard): void
-    {
+    public function __construct(
+        RegistrationRepository $registrationRepository,
+        EventRepository $eventRepository,
+        FrontendUserRepository $frontendUserRepository,
+        RegistrationGuard $registrationGuard,
+        RegistrationManager $registrationManager
+    ) {
+        $this->registrationRepository = $registrationRepository;
+        $this->eventRepository = $eventRepository;
+        $this->frontendUserRepository = $frontendUserRepository;
         $this->registrationGuard = $registrationGuard;
-    }
-
-    public function injectRegistrationManager(RegistrationManager $registrationManager): void
-    {
         $this->registrationManager = $registrationManager;
     }
 

@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
+use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserRepository;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\Service\RegistrationGuard;
+use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -37,7 +42,13 @@ final class RegistrationProcessorTest extends FunctionalTestCase
 
         $this->initializeBackEndLanguage();
 
-        $this->subject = new RegistrationProcessor();
+        $this->subject = new RegistrationProcessor(
+            $this->createStub(RegistrationRepository::class),
+            $this->createStub(EventRepository::class),
+            $this->createStub(FrontendUserRepository::class),
+            $this->createStub(RegistrationGuard::class),
+            $this->createStub(RegistrationManager::class)
+        );
     }
 
     /**
