@@ -66,7 +66,7 @@ final class ListViewTest extends FunctionalTestCase
 
         $frontEndController = $this->getFrontEndController();
         $subject = new TestingDefaultController();
-        $subject->cObj = $frontEndController->cObj;
+        $subject->setContentObjectRenderer($frontEndController->cObj);
         $subject->init(
             [
                 'isStaticTemplateLoaded' => 1,

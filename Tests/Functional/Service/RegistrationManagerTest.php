@@ -20,6 +20,7 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
+use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -149,12 +150,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
         return $controller;
     }
 
-    private function setUpFakeFrontEnd(): DefaultController
+    private function setUpFakeFrontEnd(): TestingDefaultController
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationPage.xml');
         $this->testingFramework->createFakeFrontEnd(1);
-        $controller = new DefaultController();
-        $controller->cObj = $this->getFrontEndController()->cObj;
+        $controller = new TestingDefaultController();
+        $controller->setContentObjectRenderer($this->getFrontEndController()->cObj);
         $controller->conf = ['registerPID' => '3'];
 
         return $controller;

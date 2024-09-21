@@ -73,6 +73,6 @@ final class LegacyConfigurationTest extends UnitTestCase
      */
     public function hasContentObjectFromFrontEnd(): void
     {
-        self::assertSame($this->contentObjectMock, $this->subject->cObj);
+        self::assertSame($this->contentObjectMock, $this->subject->getContentObjectRenderer());
     }
 }

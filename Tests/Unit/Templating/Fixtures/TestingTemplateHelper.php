@@ -53,11 +53,6 @@ final class TestingTemplateHelper extends TemplateHelper
         parent::ensureContentObject();
     }
 
-    public function getContentObjectRenderer(): ?ContentObjectRenderer
-    {
-        return $this->cObj;
-    }
-
     public function setContentObjectRenderer(ContentObjectRenderer $contentObjectRenderer): void
     {
         $this->cObj = $contentObjectRenderer;

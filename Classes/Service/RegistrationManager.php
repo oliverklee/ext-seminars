@@ -234,7 +234,7 @@ class RegistrationManager
      */
     public function getLinkToRegistrationPage(DefaultController $plugin, LegacyEvent $event): string
     {
-        return $plugin->cObj->getTypoLink(
+        return $plugin->getContentObjectRenderer()->getTypoLink(
             $this->getRegistrationLabel($event),
             (string)$plugin->getConfValueInteger('registerPID'),
             ['tx_seminars_eventregistration[event]' => $event->getUid()]
@@ -278,7 +278,7 @@ class RegistrationManager
      */
     public function getLinkToUnregistrationPage(TemplateHelper $plugin, LegacyRegistration $registration): string
     {
-        return $plugin->cObj->getTypoLink(
+        return $plugin->getContentObjectRenderer()->getTypoLink(
             $this->translate('label_onlineUnregistration'),
             (string)$plugin->getConfValueInteger('registerPID'),
             [
@@ -482,7 +482,7 @@ class RegistrationManager
             return;
         }
 
-        $contentObject = $plugin->cObj;
+        $contentObject = $plugin->getContentObjectRenderer();
         if (!$contentObject instanceof ContentObjectRenderer) {
             throw new \RuntimeException('Content object renderer not available.', 1702722677);
         }
