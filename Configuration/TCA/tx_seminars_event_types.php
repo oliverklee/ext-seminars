@@ -28,7 +28,6 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_event_types.single_view_page',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'pages',
                 'default' => 0,
                 'size' => 1,
