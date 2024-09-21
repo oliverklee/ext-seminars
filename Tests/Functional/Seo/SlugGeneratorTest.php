@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Seo;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Seo\SlugGenerator;
 use OliverKlee\Seminars\Tests\Unit\Seo\Fixtures\TestingSlugEventDispatcher;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -39,8 +38,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $this->eventDispatcher = new TestingSlugEventDispatcher();
 
-        GeneralUtility::addInstance(EventDispatcherInterface::class, $this->eventDispatcher);
-        $this->subject = new SlugGenerator();
+        $this->subject = new SlugGenerator($this->eventDispatcher);
     }
 
     /**
@@ -49,6 +47,16 @@ final class SlugGeneratorTest extends FunctionalTestCase
     public function canBeConstructedWithMakeInstanceWithoutArguments(): void
     {
         $subject = GeneralUtility::makeInstance(SlugGenerator::class);
+
+        self::assertInstanceOf(SlugGenerator::class, $subject);
+    }
+
+    /**
+     * @test
+     */
+    public function canBeConstructedUsingTheContainer(): void
+    {
+        $subject = $this->get(SlugGenerator::class);
 
         self::assertInstanceOf(SlugGenerator::class, $subject);
     }

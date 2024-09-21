@@ -47,7 +47,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $this->dataHandler = new DataHandler();
 
-        $this->subject = new DataHandlerHook();
+        $this->subject = $this->get(DataHandlerHook::class);
     }
 
     private function initializeBackEndUser(): void
