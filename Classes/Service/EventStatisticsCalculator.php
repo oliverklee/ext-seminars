@@ -21,9 +21,9 @@ class EventStatisticsCalculator implements SingletonInterface
      */
     private $registrationRepository;
 
-    public function injectRegistrationRepository(RegistrationRepository $repository): void
+    public function __construct(RegistrationRepository $registrationRepository)
     {
-        $this->registrationRepository = $repository;
+        $this->registrationRepository = $registrationRepository;
     }
 
     /**

@@ -43,19 +43,14 @@ class RegistrationGuard implements SingletonInterface
      */
     private $vacanciesCache = [];
 
-    public function injectRegistrationRepository(RegistrationRepository $repository): void
-    {
-        $this->registrationRepository = $repository;
-    }
-
-    public function injectEventStatisticsCalculator(EventStatisticsCalculator $calculator): void
-    {
-        $this->eventStatisticsCalculator = $calculator;
-    }
-
-    public function injectOneTimeAccountConnector(OneTimeAccountConnector $connector): void
-    {
-        $this->oneTimeAccountConnector = $connector;
+    public function __construct(
+        RegistrationRepository $registrationRepository,
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        OneTimeAccountConnector $oneTimeAccountConnector
+    ) {
+        $this->registrationRepository = $registrationRepository;
+        $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->oneTimeAccountConnector = $oneTimeAccountConnector;
     }
 
     private function getContext(): Context
