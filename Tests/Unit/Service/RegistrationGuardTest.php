@@ -61,14 +61,15 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock = $this->createMock(Context::class);
         GeneralUtility::setSingletonInstance(Context::class, $this->contextMock);
 
-        $this->subject = new RegistrationGuard();
-
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
-        $this->subject->injectRegistrationRepository($this->registrationRepositoryMock);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
-        $this->subject->injectEventStatisticsCalculator($this->eventStatisticsCalculatorMock);
         $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
-        $this->subject->injectOneTimeAccountConnector($this->oneTimeAccountConnectorMock);
+
+        $this->subject = new RegistrationGuard(
+            $this->registrationRepositoryMock,
+            $this->eventStatisticsCalculatorMock,
+            $this->oneTimeAccountConnectorMock
+        );
     }
 
     protected function tearDown(): void
