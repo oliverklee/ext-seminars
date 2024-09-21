@@ -182,7 +182,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $contentObject = $this->createPartialMock(ContentObjectRenderer::class, ['cObjGetSingle']);
         $contentObject->setLogger(new NullLogger());
         $contentObject->method('cObjGetSingle')->willReturn('<img src="foo.jpg" alt="bar"/>');
-        $this->subject->cObj = $contentObject;
+        $this->subject->setContentObjectRenderer($contentObject);
 
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
@@ -5597,7 +5597,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
-        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
+        $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::once())->method('limitForAdditionalParameters');
 
         $subject->initListView();
@@ -5612,7 +5612,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
-        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
+        $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::once())->method('limitForAdditionalParameters');
 
         $subject->initListView('topic_list');
@@ -5627,7 +5627,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             TestingDefaultController::class,
             ['limitForAdditionalParameters']
         );
-        $subject->cObj = $this->createMock(ContentObjectRenderer::class);
+        $subject->setContentObjectRenderer($this->createMock(ContentObjectRenderer::class));
         $subject->expects(self::never())->method('limitForAdditionalParameters');
 
         $subject->initListView('my_events');

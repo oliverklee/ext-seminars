@@ -268,7 +268,7 @@ class LegacyEvent extends AbstractTimeSpan
             $encodedPlaceTitle = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
             $homepage = (string)($place['homepage'] ?? '');
             if ($homepage !== '') {
-                $placeTitleHtml = $plugin->cObj->getTypoLink($encodedPlaceTitle, $homepage);
+                $placeTitleHtml = $plugin->getContentObjectRenderer()->getTypoLink($encodedPlaceTitle, $homepage);
             } else {
                 $placeTitleHtml = $encodedPlaceTitle;
             }
@@ -658,7 +658,7 @@ class LegacyEvent extends AbstractTimeSpan
             ],
         ];
 
-        return $plugin->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
+        return $plugin->getContentObjectRenderer()->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
     /**

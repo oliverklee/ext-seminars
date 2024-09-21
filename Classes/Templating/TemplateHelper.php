@@ -40,9 +40,8 @@ abstract class TemplateHelper
      * The back-reference to the mother cObj object set at call time
      *
      * @var ContentObjectRenderer|null
-     * @todo: Signature in v12: protected ?ContentObjectRenderer $cObj = null;
      */
-    public $cObj;
+    protected $cObj;
 
     /**
      * This is the incoming array by name `$this->prefixId` merged between POST and GET, POST taking precedence.
@@ -250,6 +249,14 @@ abstract class TemplateHelper
         $this->ensureContentObject();
 
         $this->isInitialized = true;
+    }
+
+    /**
+     * @internal
+     */
+    public function getContentObjectRenderer(): ?ContentObjectRenderer
+    {
+        return $this->cObj;
     }
 
     protected function isConfigurationCheckEnabled(): bool
