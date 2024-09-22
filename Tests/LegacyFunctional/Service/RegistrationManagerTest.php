@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
-use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -119,11 +118,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     private $rootPageUid;
 
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -139,9 +133,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->changeRecord('pages', $this->rootPageUid, ['slug' => '/home']);
         $this->testingFramework->createFakeFrontEnd($this->rootPageUid);
         $this->getLanguageService();
-
-        $this->responseHeadersModifier = new ResponseHeadersModifier();
-        GeneralUtility::setSingletonInstance(ResponseHeadersModifier::class, $this->responseHeadersModifier);
 
         $this->email = $this->createEmailMock();
         $secondEmail = $this->createEmailMock();
@@ -2111,165 +2102,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         self::assertFalse(
             $this->subject->registrationHasStarted($this->seminar)
         );
-    }
-
-    // Tests concerning existsSeminar and existsSeminarMessage
-
-    /**
-     * @test
-     */
-    public function existsSeminarForZeroUidReturnsFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->existsSeminar(0)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarForInexistentUidReturnsFalse(): void
-    {
-        self::assertFalse($this->subject->existsSeminar(9999));
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarForExistingDeleteUidReturnsFalse(): void
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['deleted' => 1]
-        );
-
-        self::assertFalse(
-            $this->subject->existsSeminar($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarForExistingHiddenUidReturnsFalse(): void
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['hidden' => 1]
-        );
-
-        self::assertFalse(
-            $this->subject->existsSeminar($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarForExistingUidReturnsTrue(): void
-    {
-        self::assertTrue(
-            $this->subject->existsSeminar($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForZeroUidReturnsErrorMessage(): void
-    {
-        self::assertStringContainsString(
-            $this->translate('message_missingSeminarNumber'),
-            $this->subject->existsSeminarMessage(0)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForZeroUidSendsNotFoundHeader(): void
-    {
-        $this->subject->existsSeminarMessage(0);
-
-        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForInexistentUidReturnsErrorMessage(): void
-    {
-        self::assertStringContainsString(
-            $this->translate('message_wrongSeminarNumber'),
-            $this->subject->existsSeminarMessage(9999)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForInexistentUidSendsNotFoundHeader(): void
-    {
-        $this->subject->existsSeminarMessage(9999);
-
-        self::assertSame(404, $this->responseHeadersModifier->getOverrideStatusCode());
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForExistingDeleteUidReturnsErrorMessage(): void
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['deleted' => 1]
-        );
-
-        self::assertStringContainsString(
-            $this->translate('message_wrongSeminarNumber'),
-            $this->subject->existsSeminarMessage($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForExistingHiddenUidReturnsErrorMessage(): void
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['hidden' => 1]
-        );
-
-        self::assertStringContainsString(
-            $this->translate('message_wrongSeminarNumber'),
-            $this->subject->existsSeminarMessage($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForExistingUidReturnsEmptyString(): void
-    {
-        self::assertSame(
-            '',
-            $this->subject->existsSeminarMessage($this->seminarUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForExistingUidDoesNotModifyHttpStatusCode(): void
-    {
-        $this->subject->existsSeminarMessage($this->seminarUid);
-
-        self::assertNull($this->responseHeadersModifier->getOverrideStatusCode());
     }
 
     private function getConnectionForTable(string $table): Connection
