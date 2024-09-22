@@ -343,9 +343,7 @@ class LegacyEvent extends AbstractTimeSpan
         $countries = array_column($this->getPlacesAsArray(), 'country');
         return array_filter(
             $countries,
-            static function (string $country): bool {
-                return $country !== '';
-            }
+            static fn (string $country): bool => $country !== ''
         );
     }
 
@@ -2507,9 +2505,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         return \array_filter(
             $this->registrations,
-            static function (array $registration): bool {
-                return !(bool)$registration['registration_queue'];
-            }
+            static fn (array $registration): bool => !(bool)$registration['registration_queue']
         );
     }
 
@@ -2522,9 +2518,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         return \array_filter(
             $this->registrations,
-            static function (array $registration): bool {
-                return (bool)$registration['registration_queue'];
-            }
+            static fn (array $registration): bool => (bool)$registration['registration_queue']
         );
     }
 
@@ -2537,9 +2531,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         return \array_filter(
             $this->getNonQueueRegistrations(),
-            static function (array $registration): bool {
-                return (int)$registration['datepaid'] > 0;
-            }
+            static fn (array $registration): bool => (int)$registration['datepaid'] > 0
         );
     }
 

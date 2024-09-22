@@ -119,15 +119,11 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $testCase = $this;
         $subject->method('getFrontEndUserFieldKeys')
             ->willReturnCallback(
-                static function () use ($testCase): array {
-                    return $testCase->frontEndUserFieldKeys;
-                }
+                static fn (): array => $testCase->frontEndUserFieldKeys
             );
         $subject->method('getRegistrationFieldKeys')
             ->willReturnCallback(
-                static function () use ($testCase): array {
-                    return $testCase->registrationFieldKeys;
-                }
+                static fn (): array => $testCase->registrationFieldKeys
             );
 
         $subject->setEventUid($this->eventUid);
