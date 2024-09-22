@@ -24,18 +24,6 @@ abstract class AbstractTimeSpan extends AbstractModel
         return $this->getBeginDateAsTimestamp() > 0;
     }
 
-    /**
-     * @return string the end date (or the localized string "will be announced" if no end date is set)
-     *
-     * @deprecated will be removed in version 6.0 in #2959
-     */
-    public function getEndDate(): string
-    {
-        return $this->hasEndDate()
-            ? \date($this->getDateFormat(), $this->getEndDateAsTimestamp())
-            : $this->translate('message_willBeAnnounced');
-    }
-
     public function hasEndDate(): bool
     {
         return $this->getEndDateAsTimestamp() > 0;
