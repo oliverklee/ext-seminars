@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -210,7 +211,9 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $legacyEvent->expects(self::once())->method('isUnregistrationPossible')->willReturn(true);
 
         $this->subject->expects(self::once())->method('redirect')
-            ->with('confirm', null, null, ['registration' => $registration]);
+            ->with('confirm', null, null, ['registration' => $registration])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
 
         $this->subject->checkPrerequisitesAction($registration);
     }
@@ -262,8 +265,9 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $registration->setEvent($event);
 
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('thankYou', null, null, ['event' => $event]);
+        $this->subject->expects(self::once())->method('redirect')->with('thankYou', null, null, ['event' => $event])
+            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->expectException(StopActionException::class);
 
         $this->subject->unregisterAction($registration);
     }

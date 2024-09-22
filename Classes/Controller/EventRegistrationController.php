@@ -68,7 +68,7 @@ class EventRegistrationController extends ActionController
      *
      * @IgnoreValidation("event")
      */
-    public function checkPrerequisitesAction(?Event $event = null): ?ResponseInterface
+    public function checkPrerequisitesAction(?Event $event = null): ResponseInterface
     {
         if (!$event instanceof Event) {
             $this->redirectToPageForNoEvent();
@@ -93,7 +93,6 @@ class EventRegistrationController extends ActionController
         }
 
         $this->redirect('new', null, null, ['event' => $event]);
-        return null;
     }
 
     /**
