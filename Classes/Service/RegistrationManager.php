@@ -21,7 +21,6 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
-use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -67,16 +66,6 @@ class RegistrationManager
      * @var SingleViewLinkBuilder
      */
     private $linkBuilder;
-
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
-
-    public function __construct()
-    {
-        $this->responseHeadersModifier = GeneralUtility::makeInstance(ResponseHeadersModifier::class);
-    }
 
     /**
      * @return static the current singleton instance
@@ -267,45 +256,6 @@ class RegistrationManager
                 ],
             ]
         );
-    }
-
-    /**
-     * Checks whether a seminar UID is valid, i.e., a non-deleted and non-hidden seminar with the given number exists.
-     *
-     * This function can be called even even if no seminar object exists.
-     *
-     * @deprecated will be removed in version 6.0.0 in #3433
-     */
-    public function existsSeminar(int $uid): bool
-    {
-        return LegacyEvent::fromUid($uid) instanceof LegacyEvent;
-    }
-
-    /**
-     * Checks whether a seminar UID is valid, ie., a non-deleted and non-hidden seminar with the given number exists.
-     *
-     * This method can be called even if no seminar object exists.
-     *
-     * For invalid or inexistent UIDs, this method also send a 404 HTTP header.
-     *
-     * @param int $uid a given seminar UID
-     *
-     * @return string an empty string if the UID is valid, otherwise a localized error message
-     *
-     * @deprecated will be removed in version 6.0.0 in #3433
-     */
-    public function existsSeminarMessage(int $uid): string
-    {
-        if ($uid <= 0) {
-            $this->responseHeadersModifier->setOverrideStatusCode(404);
-            return $this->translate('message_missingSeminarNumber');
-        }
-        if (!$this->existsSeminar($uid)) {
-            $this->responseHeadersModifier->setOverrideStatusCode(404);
-            return $this->translate('message_wrongSeminarNumber');
-        }
-
-        return '';
     }
 
     /**

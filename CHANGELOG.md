@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop `RegistrationManager::existsSeminar()`/`::existsSeminarMessage()` (#3629)
 - Drop `RegistrationManager::isUserRegisteredMessage()` (#3628)
 - Drop `LegacyAbstractTimeSpam::getEndDate()` (#3627)
 - Drop `LegacySpeaker::isHidden()` (#3626)
