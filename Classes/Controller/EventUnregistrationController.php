@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -88,9 +89,11 @@ class EventUnregistrationController extends ActionController
         $this->forward('deny', null, null, ['warningMessageKey' => $warningMessageKey]);
     }
 
-    public function denyAction(string $warningMessageKey): void
+    public function denyAction(string $warningMessageKey): ?ResponseInterface
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
+
+        return null;
     }
 
     /**
@@ -98,9 +101,11 @@ class EventUnregistrationController extends ActionController
      *
      * @IgnoreValidation("registration")
      */
-    public function confirmAction(Registration $registration): void
+    public function confirmAction(Registration $registration): ?ResponseInterface
     {
         $this->view->assign('registration', $registration);
+
+        return null;
     }
 
     /**
@@ -119,8 +124,10 @@ class EventUnregistrationController extends ActionController
     /**
      * @IgnoreValidation("event")
      */
-    public function thankYouAction(Event $event): void
+    public function thankYouAction(Event $event): ?ResponseInterface
     {
         $this->view->assign('event', $event);
+
+        return null;
     }
 }
