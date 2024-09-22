@@ -29,10 +29,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationTest extends UnitTestCase
 {
-    /**
-     * @var Registration
-     */
-    private $subject;
+    private Registration $subject;
 
     protected function setUp(): void
     {

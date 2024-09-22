@@ -14,15 +14,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SingleViewConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var SingleViewConfigurationCheck
-     */
-    private $subject;
+    private SingleViewConfigurationCheck $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

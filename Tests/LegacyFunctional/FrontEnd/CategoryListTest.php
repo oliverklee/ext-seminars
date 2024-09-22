@@ -27,25 +27,13 @@ final class CategoryListTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var CategoryList
-     */
-    private $subject;
+    private CategoryList $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var int PID of a dummy system folder
-     */
-    private $systemFolderPid = 0;
+    private int $systemFolderPid = 0;
 
-    /**
-     * @var int
-     */
-    private $rootPageUid;
+    private int $rootPageUid;
 
     protected function setUp(): void
     {

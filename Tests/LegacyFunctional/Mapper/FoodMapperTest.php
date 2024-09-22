@@ -21,15 +21,9 @@ final class FoodMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var FoodMapper
-     */
-    private $subject;
+    private FoodMapper $subject;
 
     protected function setUp(): void
     {

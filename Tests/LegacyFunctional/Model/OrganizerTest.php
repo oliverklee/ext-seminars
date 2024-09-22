@@ -21,10 +21,7 @@ final class OrganizerTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Organizer
-     */
-    private $subject;
+    private Organizer $subject;
 
     protected function setUp(): void
     {

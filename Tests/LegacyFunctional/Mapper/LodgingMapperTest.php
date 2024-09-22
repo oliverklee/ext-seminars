@@ -21,15 +21,9 @@ final class LodgingMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var LodgingMapper
-     */
-    private $subject;
+    private LodgingMapper $subject;
 
     protected function setUp(): void
     {

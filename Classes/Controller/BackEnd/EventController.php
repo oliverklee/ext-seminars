@@ -16,25 +16,13 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventController extends ActionController
 {
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var Permissions
-     */
-    private $permissions;
+    private Permissions $permissions;
 
-    /**
-     * @var EventStatisticsCalculator
-     */
-    private $eventStatisticsCalculator;
+    private EventStatisticsCalculator $eventStatisticsCalculator;
 
-    /**
-     * @var LanguageService
-     */
-    private $languageService;
+    private LanguageService $languageService;
 
     public function __construct(
         EventRepository $eventRepository,

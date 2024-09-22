@@ -21,10 +21,7 @@ final class RegistrationListConfigurationCheckTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationListConfigurationCheck
-     */
-    private $subject;
+    private RegistrationListConfigurationCheck $subject;
 
     protected function setUp(): void
     {

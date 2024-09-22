@@ -21,15 +21,9 @@ final class SkillMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var SkillMapper
-     */
-    private $subject;
+    private SkillMapper $subject;
 
     protected function setUp(): void
     {

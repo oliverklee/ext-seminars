@@ -28,20 +28,11 @@ final class SingleViewLinkBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
-    /**
-     * @var SingleViewLinkBuilder
-     */
-    private $subject;
+    private SingleViewLinkBuilder $subject;
 
     protected function setUp(): void
     {

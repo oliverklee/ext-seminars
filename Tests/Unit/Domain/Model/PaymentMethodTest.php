@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PaymentMethodTest extends UnitTestCase
 {
-    /**
-     * @var PaymentMethod
-     */
-    private $subject;
+    private PaymentMethod $subject;
 
     protected function setUp(): void
     {

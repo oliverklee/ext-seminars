@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SkillTest extends UnitTestCase
 {
-    /**
-     * @var Skill
-     */
-    private $subject;
+    private Skill $subject;
 
     protected function setUp(): void
     {

@@ -35,17 +35,17 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var Permissions&MockObject
      */
-    private $permissionsMock;
+    private Permissions $permissionsMock;
 
     /**
      * @var GeneralEventMailForm&MockObject
      */
-    private $emailServiceMock;
+    private GeneralEventMailForm $emailServiceMock;
 
     protected function setUp(): void
     {

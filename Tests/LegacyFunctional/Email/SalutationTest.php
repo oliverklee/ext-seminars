@@ -51,15 +51,9 @@ final class SalutationTest extends FunctionalTestCase
      */
     private const TIME_FORMAT = 'H:i';
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var Salutation
-     */
-    private $subject;
+    private Salutation $subject;
 
     protected function setUp(): void
     {

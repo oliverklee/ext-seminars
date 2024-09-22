@@ -38,35 +38,29 @@ final class RegistrationDigestTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationDigest
-     */
-    private $subject;
+    private RegistrationDigest $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * @var EventMapper&MockObject
      */
-    private $eventMapperMock;
+    private EventMapper $eventMapperMock;
 
     /**
      * @var StandaloneView&MockObject
      */
-    private $plaintextViewMock;
+    private StandaloneView $plaintextViewMock;
 
     /**
      * @var StandaloneView&MockObject
      */
-    private $htmlViewMock;
+    private StandaloneView $htmlViewMock;
 
     /**
      * @var positive-int
      */
-    private $now;
+    private int $now;
 
     protected function setUp(): void
     {

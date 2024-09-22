@@ -22,10 +22,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
      */
     private const LABEL_KEY_PREFIX = 'plugin.eventRegistration.settings.fieldsToShow.';
 
-    /**
-     * @var EventRegistrationFlexForms
-     */
-    private $subject;
+    private EventRegistrationFlexForms $subject;
 
     protected function setUp(): void
     {

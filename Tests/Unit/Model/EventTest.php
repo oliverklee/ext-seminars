@@ -29,25 +29,16 @@ final class EventTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * @var int
      */
     protected $now = 1424751343;
 
-    /**
-     * @var Organizer
-     */
-    private $organizer;
+    private Organizer $organizer;
 
     protected function setUp(): void
     {

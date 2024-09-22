@@ -22,20 +22,11 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingBagBuilder
-     */
-    private $subject;
+    private TestingBagBuilder $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var int PID of a dummy system folder
-     */
-    private $dummySysFolderPid = 0;
+    private int $dummySysFolderPid = 0;
 
     protected function setUp(): void
     {

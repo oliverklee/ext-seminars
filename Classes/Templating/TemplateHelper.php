@@ -90,24 +90,18 @@ abstract class TemplateHelper
     /**
      * Flag that tells if the locallang file has been fetch (or tried to
      * be fetched) already.
-     *
-     * @var bool
      */
-    private $LOCAL_LANG_loaded = false;
+    private bool $LOCAL_LANG_loaded = false;
 
     /**
      * Pointer to the language to use.
-     *
-     * @var string
      */
-    private $LLkey = 'default';
+    private string $LLkey;
 
     /**
      * Pointer to alternative fall-back language to use.
-     *
-     * @var string
      */
-    private $altLLkey = '';
+    private string $altLLkey = '';
 
     /**
      * Should normally be set in the main function with the TypoScript content passed to the method.
@@ -121,10 +115,8 @@ abstract class TemplateHelper
 
     /**
      * Property for accessing TypoScriptFrontendController centrally
-     *
-     * @var TypoScriptFrontendController
      */
-    protected $frontendController;
+    protected TypoScriptFrontendController $frontendController;
 
     /**
      * @var non-empty-string the prefix used for CSS classes
@@ -136,27 +128,27 @@ abstract class TemplateHelper
      *
      * @var non-empty-string
      */
-    private $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
+    private string $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var non-empty-string the extension key
      */
-    private $extKey = 'seminars';
+    private string $extKey = 'seminars';
 
     /**
      * @var bool whether `init()` already has been called (in order to avoid duplicate calls)
      */
-    private $isInitialized = false;
+    private bool $isInitialized = false;
 
     /**
      * @var string the file name of the template set via TypoScript or FlexForms
      */
-    private $templateFileName = '';
+    private string $templateFileName = '';
 
     /**
      * @var Template|null this object's (only) template
      */
-    private $template;
+    private ?Template $template = null;
 
     /**
      * A list of language keys for which the localizations have been loaded
@@ -173,12 +165,12 @@ abstract class TemplateHelper
      *
      * @var list<'_formal'|'_informal'|''>|null
      */
-    private $suffixesToTry;
+    private ?array $suffixesToTry = null;
 
     /**
      * @var array<non-empty-string, string>
      */
-    private $translationCache = [];
+    private array $translationCache = [];
 
     /**
      * Class Constructor (true constructor)

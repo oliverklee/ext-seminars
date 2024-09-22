@@ -20,25 +20,13 @@ final class AbstractBagTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingBag
-     */
-    private $subject;
+    private TestingBag $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var int the UID of the first test record in the DB
-     */
-    private $uidOfFirstRecord = 0;
+    private int $uidOfFirstRecord = 0;
 
-    /**
-     * @var int the UID of the second test record in the DB
-     */
-    private $uidOfSecondRecord = 0;
+    private int $uidOfSecondRecord = 0;
 
     protected function setUp(): void
     {

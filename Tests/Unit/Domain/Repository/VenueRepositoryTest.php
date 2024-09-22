@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class VenueRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var VenueRepository
-     */
-    private $subject;
+    private VenueRepository $subject;
 
     protected function setUp(): void
     {

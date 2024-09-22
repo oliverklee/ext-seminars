@@ -8,15 +8,9 @@ use OliverKlee\Oelib\Interfaces\MailRole;
 
 final class TestingMailRole implements MailRole
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var string
-     */
-    private $emailAddress;
+    private string $emailAddress;
 
     public function __construct(string $name, string $emailAddress)
     {

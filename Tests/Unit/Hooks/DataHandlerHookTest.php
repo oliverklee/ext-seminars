@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class DataHandlerHookTest extends UnitTestCase
 {
-    /**
-     * @var DataHandlerHook
-     */
-    private $subject;
+    private DataHandlerHook $subject;
 
     protected function setUp(): void
     {

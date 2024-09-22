@@ -22,15 +22,9 @@ final class SlugGeneratorTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var SlugGenerator
-     */
-    private $subject;
+    private SlugGenerator $subject;
 
-    /**
-     * @var TestingSlugEventDispatcher
-     */
-    private $eventDispatcher;
+    private TestingSlugEventDispatcher $eventDispatcher;
 
     protected function setUp(): void
     {

@@ -21,15 +21,9 @@ final class CheckboxMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var CheckboxMapper
-     */
-    private $subject;
+    private CheckboxMapper $subject;
 
     protected function setUp(): void
     {

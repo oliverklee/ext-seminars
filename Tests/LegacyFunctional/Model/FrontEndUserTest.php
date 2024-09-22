@@ -23,15 +23,9 @@ final class FrontEndUserTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var FrontEndUser
-     */
-    private $subject;
+    private FrontEndUser $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

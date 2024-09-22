@@ -21,10 +21,7 @@ final class SpeakerTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Speaker
-     */
-    private $subject;
+    private Speaker $subject;
 
     protected function setUp(): void
     {

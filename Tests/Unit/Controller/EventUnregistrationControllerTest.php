@@ -39,27 +39,27 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var RegistrationManager&MockObject
      */
-    private $registrationManagerMock;
+    private RegistrationManager $registrationManagerMock;
 
     /**
      * @var Context&MockObject
      */
-    private $context;
+    private Context $context;
 
     /**
      * @var LegacyRegistration&MockObject
      */
-    private $legacyRegistrationMock;
+    private LegacyRegistration $legacyRegistrationMock;
 
     /**
      * @var LegacyConfiguration&MockObject
      */
-    private $legacyConfigurationMock;
+    private LegacyConfiguration $legacyConfigurationMock;
 
     protected function setUp(): void
     {

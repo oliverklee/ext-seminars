@@ -21,15 +21,9 @@ final class OrganizerMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var OrganizerMapper
-     */
-    private $subject;
+    private OrganizerMapper $subject;
 
     protected function setUp(): void
     {

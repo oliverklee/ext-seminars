@@ -12,20 +12,11 @@ use Psr\EventDispatcher\StoppableEventInterface;
  */
 final class AfterSlugGeneratedEvent implements StoppableEventInterface
 {
-    /**
-     * @var SlugContext
-     */
-    private $slugContext;
+    private SlugContext $slugContext;
 
-    /**
-     * @var string
-     */
-    private $slug;
+    private string $slug;
 
-    /**
-     * @var bool
-     */
-    private $isPropagationStopped = false;
+    private bool $isPropagationStopped = false;
 
     public function __construct(SlugContext $slugContext, string $slug)
     {

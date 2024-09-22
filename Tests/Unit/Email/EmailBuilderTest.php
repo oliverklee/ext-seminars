@@ -15,10 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EmailBuilderTest extends UnitTestCase
 {
-    /**
-     * @var EmailBuilder
-     */
-    private $subject;
+    private EmailBuilder $subject;
 
     protected function setUp(): void
     {

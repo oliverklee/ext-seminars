@@ -32,10 +32,7 @@ final class MailNotifierTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var MailNotifier
-     */
-    private $subject;
+    private MailNotifier $subject;
 
     /**
      * @var LanguageService
@@ -45,7 +42,7 @@ final class MailNotifierTest extends FunctionalTestCase
     /**
      * @var RegistrationDigest&MockObject
      */
-    private $registrationDigestMock;
+    private RegistrationDigest $registrationDigestMock;
 
     protected function setUp(): void
     {

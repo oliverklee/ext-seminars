@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AccommodationOptionRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var AccommodationOptionRepository
-     */
-    private $subject;
+    private AccommodationOptionRepository $subject;
 
     protected function setUp(): void
     {

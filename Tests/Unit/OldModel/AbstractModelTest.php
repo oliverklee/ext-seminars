@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractModelTest extends UnitTestCase
 {
-    /**
-     * @var TestingModel
-     */
-    private $subject;
+    private TestingModel $subject;
 
     protected function setUp(): void
     {

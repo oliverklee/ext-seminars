@@ -9,7 +9,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3Fluid\Fluid\Core\Variables\StandardVariableProvider;
-use TYPO3Fluid\Fluid\Core\Variables\VariableProviderInterface;
 
 /**
  * @covers \OliverKlee\Seminars\ViewHelpers\SalutationAwareTranslateViewHelper
@@ -23,10 +22,7 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var VariableProviderInterface
-     */
-    private $variableProvider;
+    private StandardVariableProvider $variableProvider;
 
     protected function setUp(): void
     {

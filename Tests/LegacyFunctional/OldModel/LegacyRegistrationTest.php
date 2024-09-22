@@ -32,30 +32,18 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var LegacyRegistration
-     */
-    private $subject;
+    private LegacyRegistration $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var int the UID of a seminar to which the fixture relates
-     */
-    private $seminarUid = 0;
+    private int $seminarUid = 0;
 
     /**
      * @var ConnectionPool
      */
     private $connectionPool;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

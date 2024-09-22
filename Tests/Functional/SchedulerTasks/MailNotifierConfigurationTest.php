@@ -36,15 +36,12 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var MailNotifierConfiguration
-     */
-    private $subject;
+    private MailNotifierConfiguration $subject;
 
     /**
      * @var SchedulerModuleController&MockObject
      */
-    private $moduleController;
+    private SchedulerModuleController $moduleController;
 
     protected function setUp(): void
     {

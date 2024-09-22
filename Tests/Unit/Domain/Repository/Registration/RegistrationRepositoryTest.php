@@ -16,10 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var RegistrationRepository
-     */
-    private $subject;
+    private RegistrationRepository $subject;
 
     protected function setUp(): void
     {

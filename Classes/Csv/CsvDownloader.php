@@ -20,10 +20,7 @@ class CsvDownloader
 {
     use TranslateTrait;
 
-    /**
-     * @var Configuration
-     */
-    protected $configuration;
+    protected Configuration $configuration;
 
     public function __construct()
     {

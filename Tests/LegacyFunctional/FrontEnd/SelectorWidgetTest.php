@@ -31,15 +31,9 @@ final class SelectorWidgetTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var SelectorWidget
-     */
-    private $subject;
+    private SelectorWidget $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var PiBaseApi

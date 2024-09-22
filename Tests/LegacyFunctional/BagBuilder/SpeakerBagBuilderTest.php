@@ -21,15 +21,9 @@ final class SpeakerBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var SpeakerBagBuilder
-     */
-    private $subject;
+    private SpeakerBagBuilder $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

@@ -45,30 +45,24 @@ final class MailNotifierTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var MailNotifier
-     */
-    private $subject;
+    private MailNotifier $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var EventStatusService&MockObject
      */
-    private $eventStatusService;
+    private EventStatusService $eventStatusService;
 
     /**
      * @var EmailService&MockObject
      */
-    private $emailService;
+    private EmailService $emailService;
 
     /**
      * @var EventMapper&MockObject
      */
-    private $eventMapper;
+    private EventMapper $eventMapper;
 
     protected function setUp(): void
     {

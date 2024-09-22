@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CsvExportConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var CsvExportConfigurationCheck
-     */
-    private $subject;
+    private CsvExportConfigurationCheck $subject;
 
     protected function setUp(): void
     {

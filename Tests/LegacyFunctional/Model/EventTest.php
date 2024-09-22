@@ -30,10 +30,7 @@ final class EventTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
     protected function setUp(): void
     {

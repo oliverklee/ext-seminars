@@ -49,52 +49,28 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var positive-int
      */
-    private $now;
+    private int $now;
 
-    /**
-     * @var RegistrationManager
-     */
-    private $subject;
+    private RegistrationManager $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var positive-int
      */
-    private $seminarUid;
+    private int $seminarUid;
 
-    /**
-     * @var TestingLegacyEvent
-     */
-    private $seminar;
+    private TestingLegacyEvent $seminar;
 
-    /**
-     * @var int the UID of a fake front-end user
-     */
-    private $frontEndUserUid = 0;
+    private int $frontEndUserUid = 0;
 
-    /**
-     * @var int UID of a fake login page
-     */
-    private $loginPageUid = 0;
+    private int $loginPageUid = 0;
 
-    /**
-     * @var int UID of a fake registration page
-     */
-    private $registrationPageUid = 0;
+    private int $registrationPageUid = 0;
 
-    /**
-     * @var DefaultController a front-end plugin
-     */
-    private $pi1;
+    private DefaultController $pi1;
 
-    /**
-     * @var TestingLegacyEvent
-     */
-    private $fullyBookedSeminar;
+    private TestingLegacyEvent $fullyBookedSeminar;
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
@@ -106,17 +82,11 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var list<class-string>
      */
-    private $mockedClassNames = [];
+    private array $mockedClassNames = [];
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
-    /**
-     * @var int
-     */
-    private $rootPageUid;
+    private int $rootPageUid;
 
     protected function setUp(): void
     {

@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CategoryTest extends UnitTestCase
 {
-    /**
-     * @var Category
-     */
-    private $subject;
+    private Category $subject;
 
     protected function setUp(): void
     {

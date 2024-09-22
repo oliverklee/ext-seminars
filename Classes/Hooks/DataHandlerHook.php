@@ -38,15 +38,9 @@ class DataHandlerHook implements SingletonInterface
      */
     private const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
 
-    /**
-     * @var DataHandler
-     */
-    private $dataHandler;
+    private DataHandler $dataHandler;
 
-    /**
-     * @var SlugGenerator
-     */
-    private $slugGenerator;
+    private SlugGenerator $slugGenerator;
 
     public function __construct(SlugGenerator $slugGenerator)
     {

@@ -21,10 +21,7 @@ final class FoodTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Food
-     */
-    private $subject;
+    private Food $subject;
 
     protected function setUp(): void
     {

@@ -21,15 +21,9 @@ final class TargetGroupMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var TargetGroupMapper
-     */
-    private $subject;
+    private TargetGroupMapper $subject;
 
     protected function setUp(): void
     {

@@ -18,25 +18,19 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ResponseHeadersModifierTest extends UnitTestCase
 {
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $subject;
+    private ResponseHeadersModifier $subject;
 
     /**
      * @var ServerRequestInterface&MockObject
      */
-    private $serverRequestMock;
+    private ServerRequestInterface $serverRequestMock;
 
     /**
      * @var RequestHandlerInterface&MockObject
      */
-    private $requestHandlerMock;
+    private RequestHandlerInterface $requestHandlerMock;
 
-    /**
-     * @var Response
-     */
-    private $response;
+    private Response $response;
 
     protected function setUp(): void
     {

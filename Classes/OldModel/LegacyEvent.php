@@ -45,10 +45,7 @@ class LegacyEvent extends AbstractTimeSpan
      */
     protected static $tableName = 'tx_seminars_seminars';
 
-    /**
-     * @var bool
-     */
-    private $registrationsHaveBeenRetrieved = false;
+    private bool $registrationsHaveBeenRetrieved = false;
 
     /**
      * @var array<int, array<string, string|int>>
@@ -83,16 +80,11 @@ class LegacyEvent extends AbstractTimeSpan
      */
     protected $statisticsHaveBeenCalculated = false;
 
-    /**
-     * will be null if this is not a date record
-     *
-     * @var LegacyEvent|null
-     */
-    private $topic;
+    private ?LegacyEvent $topic = null;
 
     public function getTopic(): ?LegacyEvent
     {
-        if ($this->topic instanceof self) {
+        if ($this->topic instanceof LegacyEvent) {
             return $this->topic;
         }
         if (!$this->isEventDate()) {

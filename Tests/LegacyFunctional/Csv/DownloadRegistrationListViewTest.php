@@ -25,27 +25,16 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var DownloadRegistrationListView
-     */
-    private $subject;
+    private DownloadRegistrationListView $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * UID of a test event record
-     *
-     * @var int
      */
-    private $eventUid = 0;
+    private int $eventUid = 0;
 
     protected function setUp(): void
     {

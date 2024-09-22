@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationCheckboxTest extends UnitTestCase
 {
-    /**
-     * @var RegistrationCheckbox
-     */
-    private $subject;
+    private RegistrationCheckbox $subject;
 
     protected function setUp(): void
     {

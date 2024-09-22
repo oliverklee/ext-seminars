@@ -18,15 +18,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PriceFinderTest extends UnitTestCase
 {
-    /**
-     * @var PriceFinder
-     */
-    private $subject;
+    private PriceFinder $subject;
 
-    /**
-     * @var \DateTimeImmutable
-     */
-    private $now;
+    private \DateTimeImmutable $now;
 
     protected function setUp(): void
     {

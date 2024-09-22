@@ -21,10 +21,7 @@ final class PaymentMethodTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var PaymentMethod
-     */
-    private $subject;
+    private PaymentMethod $subject;
 
     protected function setUp(): void
     {

@@ -29,15 +29,9 @@ final class TimeSlotMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var TimeSlotMapper
-     */
-    private $subject;
+    private TimeSlotMapper $subject;
 
     protected function setUp(): void
     {

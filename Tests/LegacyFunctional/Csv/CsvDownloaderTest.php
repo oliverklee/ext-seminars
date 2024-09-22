@@ -26,29 +26,23 @@ final class CsvDownloaderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var CsvDownloader
-     */
-    private $subject;
+    private CsvDownloader $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * PID of the system folder in which we store our test data
      *
      * @var positive-int
      */
-    private $pid;
+    private int $pid;
 
     /**
      * UID of a test event record
      *
      * @var positive-int
      */
-    private $eventUid;
+    private int $eventUid;
 
     protected function setUp(): void
     {

@@ -36,27 +36,27 @@ final class ModuleControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var Permissions&MockObject
      */
-    private $permissionsMock;
+    private Permissions $permissionsMock;
 
     /**
      * @var EventRepository&MockObject
      */
-    private $eventRepositoryMock;
+    private EventRepository $eventRepositoryMock;
 
     /**
      * @var RegistrationRepository&MockObject
      */
-    private $registrationRepositoryMock;
+    private RegistrationRepository $registrationRepositoryMock;
 
     /**
      * @var EventStatisticsCalculator&MockObject
      */
-    private $eventStatisticsCalculatorMock;
+    private EventStatisticsCalculator $eventStatisticsCalculatorMock;
 
     protected function setUp(): void
     {

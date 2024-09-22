@@ -20,10 +20,7 @@ final class CsvExportConfigurationCheckTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var CsvExportConfigurationCheck
-     */
-    private $subject;
+    private CsvExportConfigurationCheck $subject;
 
     protected function setUp(): void
     {

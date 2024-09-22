@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SpeakerTest extends UnitTestCase
 {
-    /**
-     * @var Speaker
-     */
-    private $subject;
+    private Speaker $subject;
 
     protected function setUp(): void
     {

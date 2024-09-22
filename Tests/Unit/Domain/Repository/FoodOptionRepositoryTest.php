@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FoodOptionRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var FoodOptionRepository
-     */
-    private $subject;
+    private FoodOptionRepository $subject;
 
     protected function setUp(): void
     {

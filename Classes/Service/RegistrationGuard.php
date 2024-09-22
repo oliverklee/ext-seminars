@@ -21,27 +21,18 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class RegistrationGuard implements SingletonInterface
 {
-    /**
-     * @var RegistrationRepository
-     */
-    private $registrationRepository;
+    private RegistrationRepository $registrationRepository;
 
-    /**
-     * @var EventStatisticsCalculator
-     */
-    private $eventStatisticsCalculator;
+    private EventStatisticsCalculator $eventStatisticsCalculator;
 
-    /**
-     * @var OneTimeAccountConnector
-     */
-    private $oneTimeAccountConnector;
+    private OneTimeAccountConnector $oneTimeAccountConnector;
 
     /**
      * key: event UID, value: vacancies as returned by `getVacancies`
      *
      * @var array<positive-int, int<0, max>|null>
      */
-    private $vacanciesCache = [];
+    private array $vacanciesCache = [];
 
     public function __construct(
         RegistrationRepository $registrationRepository,

@@ -25,10 +25,7 @@ class PriceFinder implements SingletonInterface
         Price::PRICE_SPECIAL => Price::PRICE_SPECIAL_EARLY_BIRD,
     ];
 
-    /**
-     * @var \DateTimeImmutable
-     */
-    private $now;
+    private \DateTimeImmutable $now;
 
     public function __construct()
     {

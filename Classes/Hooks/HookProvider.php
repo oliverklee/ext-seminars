@@ -36,17 +36,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class HookProvider
 {
-    /**
-     * @var string
-     */
-    protected $interfaceName = '';
+    protected string $interfaceName;
 
     /**
      * Index in `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']` of hooked-in classes
-     *
-     * @var string
      */
-    protected $index = '';
+    protected string $index;
 
     /**
      * @var Hook[]

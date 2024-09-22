@@ -21,15 +21,9 @@ final class CategoryMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var CategoryMapper
-     */
-    private $subject;
+    private CategoryMapper $subject;
 
     protected function setUp(): void
     {

@@ -50,7 +50,7 @@ class EventBagBuilder extends AbstractBagBuilder
      * @var array<string, list<string>> a list of field names of m:n associations in which we can search,
      *      grouped by record type
      */
-    private static $searchFieldList = [
+    private static array $searchFieldList = [
         'speakers' => ['title'],
         'places' => ['title', 'city'],
         'categories' => ['title'],

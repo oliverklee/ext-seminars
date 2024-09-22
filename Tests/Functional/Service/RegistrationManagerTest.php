@@ -52,7 +52,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var positive-int
      */
-    private $now;
+    private int $now;
 
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
@@ -61,35 +61,26 @@ final class RegistrationManagerTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var RegistrationManager
-     */
-    private $subject;
+    private RegistrationManager $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * @var positive-int
      */
-    private $seminarUid;
+    private int $seminarUid;
 
     /**
      * @var positive-int
      */
-    private $organizerUid;
+    private int $organizerUid;
 
     /**
      * @var MailMessage&MockObject
      */
-    private $secondEmail;
+    private MailMessage $secondEmail;
 
     protected function setUp(): void
     {

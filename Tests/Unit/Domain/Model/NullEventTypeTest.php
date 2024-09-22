@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class NullEventTypeTest extends UnitTestCase
 {
-    /**
-     * @var NullEventType
-     */
-    private $subject;
+    private NullEventType $subject;
 
     protected function setUp(): void
     {
