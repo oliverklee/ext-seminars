@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -66,7 +67,7 @@ class EventRegistrationController extends ActionController
      *
      * @IgnoreValidation("event")
      */
-    public function checkPrerequisitesAction(?Event $event = null): void
+    public function checkPrerequisitesAction(?Event $event = null): ?ResponseInterface
     {
         if (!$event instanceof Event) {
             $this->redirectToPageForNoEvent();
@@ -115,9 +116,11 @@ class EventRegistrationController extends ActionController
         $this->forward('deny', null, null, ['warningMessageKey' => $warningMessageKey]);
     }
 
-    public function denyAction(string $warningMessageKey): void
+    public function denyAction(string $warningMessageKey): ?ResponseInterface
     {
         $this->view->assign('warningMessageKey', $warningMessageKey);
+
+        return null;
     }
 
     /**
@@ -144,7 +147,7 @@ class EventRegistrationController extends ActionController
      * @IgnoreValidation("event")
      * @IgnoreValidation("registration")
      */
-    public function newAction(Event $event, ?Registration $registration = null): void
+    public function newAction(Event $event, ?Registration $registration = null): ?ResponseInterface
     {
         $this->registrationGuard->assertBookableEventType($event);
         \assert($event instanceof EventDateInterface);
@@ -175,6 +178,8 @@ class EventRegistrationController extends ActionController
         }
         $this->view->assign('maximumBookableSeats', $maximumBookableSeats);
         $this->view->assign('applicablePrices', $applicablePrices);
+
+        return null;
     }
 
     /**
@@ -182,7 +187,7 @@ class EventRegistrationController extends ActionController
      *
      * @IgnoreValidation("event")
      */
-    public function confirmAction(Event $event, Registration $registration): void
+    public function confirmAction(Event $event, Registration $registration): ?ResponseInterface
     {
         $this->registrationGuard->assertBookableEventType($event);
         \assert($event instanceof EventDateInterface);
@@ -193,6 +198,8 @@ class EventRegistrationController extends ActionController
         $this->view->assign('event', $event);
         $this->view->assign('registration', $registration);
         $this->view->assign('applicablePrices', $this->priceFinder->findApplicablePrices($event));
+
+        return null;
     }
 
     /**
@@ -224,9 +231,11 @@ class EventRegistrationController extends ActionController
      * @IgnoreValidation("event")
      * @IgnoreValidation("registration")
      */
-    public function thankYouAction(Event $event, Registration $registration): void
+    public function thankYouAction(Event $event, Registration $registration): ?ResponseInterface
     {
         $this->view->assign('event', $event);
         $this->view->assign('registration', $registration);
+
+        return null;
     }
 }

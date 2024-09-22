@@ -41,6 +41,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Always return a response from controller actions (#3619)
 - Stop setting `TemplateHelper::cObj` (#3613)
 - Avoid using the deprecated `GeneralUtility::_GPmerged()` (#3595)
 - Drop unused dependency on `MarkerBasedTemplateService` (#3594)
