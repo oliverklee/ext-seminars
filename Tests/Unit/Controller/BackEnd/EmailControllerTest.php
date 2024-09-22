@@ -9,6 +9,7 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -49,6 +50,9 @@ final class EmailControllerTest extends UnitTestCase
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock);
         $this->subject = $subject;
+
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -120,7 +124,21 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function composeActioPassesProvidedEventToView(): void
+    public function composeActionReturnsHtmlResponse(): void
+    {
+        $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
+        $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
+
+        $event = new SingleEvent();
+        $result = $this->subject->composeAction($event, 1);
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function composeActionPassesProvidedEventToView(): void
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
@@ -139,7 +157,7 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function composeActioPassesProvidedPageUidToView(): void
+    public function composeActionPassesProvidedPageUidToView(): void
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);

@@ -14,6 +14,7 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -70,6 +71,9 @@ final class EventUnregistrationControllerTest extends UnitTestCase
             [$this->registrationManagerMock]
         );
         $this->subject = $subject;
+
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
@@ -221,12 +225,32 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function denyActionReturnsHtmlResponse(): void
+    {
+        $result = $this->subject->denyAction('registrationMissing');
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function denyActionPassesProvidedWarningMessageKeyToView(): void
     {
         $warningMessageKey = 'registrationMissing';
         $this->viewMock->expects(self::once())->method('assign')->with('warningMessageKey', $warningMessageKey);
 
         $this->subject->denyAction($warningMessageKey);
+    }
+
+    /**
+     * @test
+     */
+    public function confirmActionReturnsHtmlResponse(): void
+    {
+        $result = $this->subject->confirmAction(new Registration());
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
     }
 
     /**
@@ -270,6 +294,16 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $this->expectException(StopActionException::class);
 
         $this->subject->unregisterAction($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function thankYouActionReturnsHtmlResponse(): void
+    {
+        $result = $this->subject->thankYouAction(new SingleEvent());
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
     }
 
     /**

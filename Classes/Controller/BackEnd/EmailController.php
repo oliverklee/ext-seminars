@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -24,14 +25,20 @@ class EmailController extends ActionController
      *
      * @IgnoreValidation("event")
      */
-    public function composeAction(Event $event, int $pageUid, string $subject = '', string $body = ''): void
-    {
+    public function composeAction(
+        Event $event,
+        int $pageUid,
+        string $subject = '',
+        string $body = ''
+    ): ResponseInterface {
         $this->checkPermissions();
 
         $this->view->assign('event', $event);
         $this->view->assign('pageUid', $pageUid);
         $this->view->assign('subject', $subject);
         $this->view->assign('body', $body);
+
+        return $this->htmlResponse();
     }
 
     /**

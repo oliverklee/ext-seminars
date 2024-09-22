@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -88,6 +89,9 @@ final class RegistrationControllerTest extends UnitTestCase
         );
         $this->subject = $subject;
 
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->willReturn($responseStub);
+
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
@@ -156,6 +160,22 @@ final class RegistrationControllerTest extends UnitTestCase
     public function pageUidForNoIdInRequestIsZero(): void
     {
         self::assertSame(0, $this->subject->getPageUid());
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionReturnsHtmlResponse(): void
+    {
+        $eventUid = 5;
+        $event = $this->createMock(EventTopic::class);
+        $event->method('getUid')->willReturn($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
+
+        $result = $this->subject->showForEventAction($eventUid);
+
+        self::assertInstanceOf(HtmlResponse::class, $result);
     }
 
     /**
