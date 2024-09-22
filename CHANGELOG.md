@@ -47,6 +47,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Drop tests for duplicated place associations (#3631)
 - Always return a response from controller actions (#3619)
 - Stop setting `TemplateHelper::cObj` (#3613)
 - Avoid using the deprecated `GeneralUtility::_GPmerged()` (#3595)

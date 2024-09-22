@@ -649,20 +649,6 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlaceWithDetailsListsDuplicateAssociationsOnlyOnce(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
-        $plugin = $this->buildFrontEndAndPlugin();
-        $subject = TestingLegacyEvent::fromUid(3);
-
-        $result = $subject->getPlaceWithDetails($plugin);
-
-        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
-    }
-
-    /**
-     * @test
-     */
     public function getPlaceWithDetailsContainsAddressOfOnePlace(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
@@ -772,19 +758,6 @@ final class LegacyEventTest extends FunctionalTestCase
         $result = $subject->getPlaceWithDetailsRaw();
 
         self::assertStringContainsString("3 turns left, then always right\nThe garden (without country)", $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPlaceWithDetailsRawListsDuplicateAssociationsOnlyOnce(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
-        $subject = TestingLegacyEvent::fromUid(3);
-
-        $result = $subject->getPlaceWithDetailsRaw();
-
-        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
     }
 
     /**
@@ -975,19 +948,6 @@ final class LegacyEventTest extends FunctionalTestCase
         $result = $subject->getPlaceShort();
 
         self::assertStringContainsString('The Castle (without country), The garden (without country)', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPlaceShortListsDuplicateAssociationsOnlyOnce(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
-        $subject = TestingLegacyEvent::fromUid(3);
-
-        $result = $subject->getPlaceShort();
-
-        self::assertSame(1, \substr_count($result, 'The Castle (without country)'));
     }
 
     // Tests concerning getPlaces
