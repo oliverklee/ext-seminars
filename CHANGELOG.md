@@ -47,6 +47,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Always return a response in the controller actions (#3638)
 - Avoid the deprecated `ActionController::forward()` method (#3637)
 - Drop tests for duplicated place associations (#3631)
 - Always return a response from controller actions (#3619)

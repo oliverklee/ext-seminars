@@ -37,7 +37,7 @@ class EventUnregistrationController extends ActionController
      *
      * @IgnoreValidation("registration")
      */
-    public function checkPrerequisitesAction(?Registration $registration = null): ?ResponseInterface
+    public function checkPrerequisitesAction(?Registration $registration = null): ResponseInterface
     {
         if (!$registration instanceof Registration) {
             return $this->forwardToDenyAction('registrationMissing');
@@ -54,7 +54,6 @@ class EventUnregistrationController extends ActionController
         }
 
         $this->redirect('confirm', null, null, ['registration' => $registration]);
-        return null;
     }
 
     private function belongsToLoggedInUser(Registration $registration): bool
