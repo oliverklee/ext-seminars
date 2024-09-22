@@ -325,22 +325,6 @@ class RegistrationManager
     }
 
     /**
-     * Checks whether a certain user already is registered for this seminar.
-     *
-     * This method must not be called when no front-end user is logged in!
-     *
-     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
-     *
-     * @return string empty string if everything is OK, else a localized error message
-     *
-     * @deprecated will be removed in version 6.0.0 in #2965
-     */
-    public function isUserRegisteredMessage(LegacyEvent $event): string
-    {
-        return $event->isUserRegisteredMessage($this->getLoggedInFrontEndUserUid());
-    }
-
-    /**
      * Sends the emails for a new registration.
      */
     public function sendEmailsForNewRegistration(TemplateHelper $plugin): void
