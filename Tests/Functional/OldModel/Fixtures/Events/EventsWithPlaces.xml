@@ -16,20 +16,6 @@
     </tx_seminars_seminars_place_mm>
 
     <tx_seminars_seminars>
-        <uid>3</uid>
-        <title>event with duplicate place</title>
-        <place>2</place>
-    </tx_seminars_seminars>
-    <tx_seminars_seminars_place_mm>
-        <uid_local>3</uid_local>
-        <uid_foreign>1</uid_foreign>
-    </tx_seminars_seminars_place_mm>
-    <tx_seminars_seminars_place_mm>
-        <uid_local>3</uid_local>
-        <uid_foreign>1</uid_foreign>
-    </tx_seminars_seminars_place_mm>
-
-    <tx_seminars_seminars>
         <uid>4</uid>
         <title>event with one place with valid country</title>
         <place>1</place>

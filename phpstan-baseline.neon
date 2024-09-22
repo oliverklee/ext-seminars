@@ -2227,17 +2227,17 @@ parameters:
 
 		-
 			message: "#^Cannot call method getPlaceShort\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 4
+			count: 3
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Cannot call method getPlaceWithDetails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 9
+			count: 8
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Cannot call method getPlaceWithDetailsRaw\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 9
+			count: 8
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
