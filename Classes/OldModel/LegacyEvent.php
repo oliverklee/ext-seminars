@@ -3101,16 +3101,6 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->getAttendancesOnRegistrationQueue() > 0;
     }
 
-    /**
-     * Checks whether there's a (begin) date set or any time slots exist.
-     * If there's an end date but no begin date, this function still will return
-     * FALSE.
-     */
-    public function hasDate(): bool
-    {
-        return $this->hasBeginDate() || $this->hasTimeslots();
-    }
-
     public function hasTimeslots(): bool
     {
         return $this->hasRecordPropertyInteger('timeslots');
