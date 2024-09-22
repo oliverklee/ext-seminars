@@ -44,27 +44,6 @@ class RegistrationManager
     use SharedPluginConfiguration;
 
     /**
-     * @var int use text format for emails to attendees
-     *
-     * @deprecated will be removed in version 6.0.0 in #2963
-     */
-    public const SEND_TEXT_MAIL = 0;
-
-    /**
-     * @var int use HTML format for emails to attendees
-     *
-     * @deprecated will be removed in version 6.0.0 in #2963
-     */
-    public const SEND_HTML_MAIL = 1;
-
-    /**
-     * @var int use user-specific format for emails to attendees
-     *
-     * @deprecated will be removed in version 6.0.0 in #2963
-     */
-    public const SEND_USER_MAIL = 2;
-
-    /**
      * @var static|null
      */
     private static $instance;
