@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop `LegacyAbstractTimeSpam::getEndDate()` (#3627)
 - Drop `LegacySpeaker::isHidden()` (#3626)
 - Drop CSV-exporting the usergroup for registrations (#3625)
 - Drop the obsolete `RegistrationManager::SEND_*_EMAIL` constants (#3624)
