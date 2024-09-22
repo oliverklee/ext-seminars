@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUserGroup;
-use OliverKlee\FeUserExtraFields\Domain\Repository\FrontendUserGroupRepository;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
@@ -90,13 +88,6 @@ class LegacyRegistration extends AbstractModel
     protected $user;
 
     /**
-     * @var FrontendUserGroupRepository|null
-     *
-     * @deprecated will be removed in version 6.0.0 in #2977
-     */
-    private $frontEndUserGroupRepository;
-
-    /**
      * Purges our cached seminars array.
      *
      * This function is intended for testing purposes only.
@@ -104,18 +95,6 @@ class LegacyRegistration extends AbstractModel
     public static function purgeCachedSeminars(): void
     {
         self::$cachedSeminars = [];
-    }
-
-    /**
-     * @deprecated will be removed in version 6.0.0 in #2977
-     */
-    protected function getFrontEndUserGroupRepository(): FrontendUserGroupRepository
-    {
-        if (!$this->frontEndUserGroupRepository instanceof FrontendUserGroupRepository) {
-            $this->frontEndUserGroupRepository = GeneralUtility::makeInstance(FrontendUserGroupRepository::class);
-        }
-
-        return $this->frontEndUserGroupRepository;
     }
 
     /**
@@ -323,20 +302,6 @@ class LegacyRegistration extends AbstractModel
             case 'name':
                 $user = $this->getFrontEndUser();
                 $result = $user instanceof FrontEndUser ? $user->getName() : '';
-                break;
-            case 'usergroup':
-                // @deprecated will be removed in version 6.0.0 in #2977
-                $repository = $this->getFrontEndUserGroupRepository();
-                $titles = [];
-                /** @var int[] $uids */
-                $uids = GeneralUtility::intExplode(',', $rawData, true);
-                foreach ($uids as $uid) {
-                    $group = $repository->findByUid($uid);
-                    if ($group instanceof FrontendUserGroup) {
-                        $titles[] = $group->getTitle();
-                    }
-                }
-                $result = \implode(', ', $titles);
                 break;
             default:
                 $result = $rawData;

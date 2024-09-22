@@ -124,58 +124,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         self::assertSame(1, $event->getUid());
     }
 
-    // Tests concerning getUserData
-
-    /**
-     * @test
-     */
-    public function getUserDataForNoGroupReturnsEmptyString(): void
-    {
-        $this->subject->setUserData(['usergroup' => '']);
-
-        $result = $this->subject->getUserData('usergroup');
-
-        self::assertSame('', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getUserDataForInexistentGroupReturnsEmptyString(): void
-    {
-        $this->subject->setUserData(['usergroup' => '1234']);
-
-        $result = $this->subject->getUserData('usergroup');
-
-        self::assertSame('', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getUserDataForOneGroupReturnsGroupTitle(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
-        $this->subject->setUserData(['usergroup' => '1']);
-
-        $result = $this->subject->getUserData('usergroup');
-
-        self::assertSame('Group 1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getUserDataForTwoGroupReturnsCommaSeparatedTitlesInGivenOrder(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
-        $this->subject->setUserData(['usergroup' => '2,1']);
-
-        $result = $this->subject->getUserData('usergroup');
-
-        self::assertSame('Group 2, Group 1', $result);
-    }
-
     // Tests concerning dumpUserValues
 
     /**
@@ -515,32 +463,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $result = $this->subject->dumpUserValues('gender');
 
         self::assertStringContainsString($this->translate('label_gender.I.' . $value), $result);
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesForOneGroupDumpsGroupTitle(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
-        $this->subject->setUserData(['usergroup' => '1']);
-
-        $result = $this->subject->dumpUserValues('usergroup');
-
-        self::assertStringContainsString('Group 1', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesForTwoGroupsDumpsGroupTitlesInGivenOrder(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
-        $this->subject->setUserData(['usergroup' => '2,1']);
-
-        $result = $this->subject->dumpUserValues('usergroup');
-
-        self::assertStringContainsString('Group 2, Group 1', $result);
     }
 
     // Tests regarding the billing address
