@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the obsolete `RegistrationManager::SEND_*_EMAIL` constants (#3624)
 - Drop obsolete TCA options (#1612)
 - Drop the CSV export of events (#3606)
 - Drop obsolete entries from `ext_emconf.php` (#3597)
