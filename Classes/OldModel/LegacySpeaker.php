@@ -231,18 +231,6 @@ class LegacySpeaker extends AbstractModel
         $this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
     }
 
-    /**
-     * Returns TRUE if the speaker is hidden, otherwise FALSE.
-     *
-     * @return bool TRUE if the speaker is hidden, FALSE otherwise
-     *
-     * @deprecated will be removed in version 6.0.0 in #2961
-     */
-    public function isHidden(): bool
-    {
-        return $this->getRecordPropertyBoolean('hidden');
-    }
-
     public function hasImage(): bool
     {
         return $this->getRecordPropertyInteger('image') > 0;
