@@ -14,8 +14,8 @@ use OliverKlee\Seminars\Service\PriceFinder;
 use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
@@ -72,14 +72,10 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->oneTimeAccountConnectorMock = $this->createMock(OneTimeAccountConnector::class);
         $this->priceFinderMock = $this->createMock(PriceFinder::class);
 
-        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $methodsToMock[] = 'forward';
-        }
         /** @var EventRegistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventRegistrationController::class,
-            $methodsToMock,
+            ['htmlResponse', 'redirect', 'redirectToUri'],
             [
                 $this->registrationGuardMock,
                 $this->registrationProcesserMock,
@@ -118,7 +114,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -135,7 +130,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -155,12 +149,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::never())->method('redirectToUri');
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtAll'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
 
-        $this->subject->checkPrerequisitesAction($event);
+        $result = $this->subject->checkPrerequisitesAction($event);
+
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'noRegistrationPossibleAtAll'], $result->getArguments());
     }
 
     /**
@@ -176,12 +170,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::never())->method('redirectToUri');
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'noRegistrationPossibleAtTheMoment'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
 
-        $this->subject->checkPrerequisitesAction($event);
+        $result = $this->subject->checkPrerequisitesAction($event);
+
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'noRegistrationPossibleAtTheMoment'], $result->getArguments());
     }
 
     /**
@@ -201,12 +195,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::never())->method('redirectToUri');
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'alreadyRegistered'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
 
-        $this->subject->checkPrerequisitesAction($event);
+        $result = $this->subject->checkPrerequisitesAction($event);
+
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'alreadyRegistered'], $result->getArguments());
     }
 
     /**
@@ -228,12 +222,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::never())->method('redirectToUri');
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'fullyBooked'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
 
-        $this->subject->checkPrerequisitesAction($event);
+        $result = $this->subject->checkPrerequisitesAction($event);
+
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'fullyBooked'], $result->getArguments());
     }
 
     /**
@@ -254,7 +248,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(0);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
@@ -283,7 +276,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(null);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
@@ -312,7 +304,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(1);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
@@ -349,7 +340,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->uriBuilderMock->expects(self::exactly(2))->method('buildFrontendUri')
             ->willReturnOnConsecutiveCalls($redirectUrl, $loginPageUrl);
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::once())->method('redirectToUri')
             ->with($loginPageUrl)
@@ -1018,7 +1008,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $registration = new Registration();
 
-        $this->subject->expects(self::never())->method('forward');
         $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('thankYou', null, null, ['event' => $event, 'registration' => $registration])

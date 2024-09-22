@@ -211,6 +211,16 @@ parameters:
 			path: Classes/Controller/EventRegistrationController.php
 
 		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: Classes/Controller/EventRegistrationController.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: Classes/Controller/EventUnregistrationController.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Controller/FrontEndEditorController.php

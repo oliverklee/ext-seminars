@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Service\RegistrationProcessor;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -73,25 +74,26 @@ class EventRegistrationController extends ActionController
             $this->redirectToPageForNoEvent();
         }
         if (!$this->registrationGuard->isRegistrationPossibleAtAnyTimeAtAll($event)) {
-            $this->forwardToDenyAction('noRegistrationPossibleAtAll');
+            return $this->forwardToDenyAction('noRegistrationPossibleAtAll');
         }
         \assert($event instanceof SingleEvent || $event instanceof EventDate);
         if (!$this->registrationGuard->isRegistrationPossibleByDate($event)) {
-            $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
+            return $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
         }
         if (!$this->registrationGuard->existsFrontEndUserUidInSession()) {
             $this->redirectToLoginPage($event);
         }
         $userUid = $this->registrationGuard->getFrontEndUserUidFromSession();
         if (!$this->registrationGuard->isFreeFromRegistrationConflicts($event, $userUid)) {
-            $this->forwardToDenyAction('alreadyRegistered');
+            return $this->forwardToDenyAction('alreadyRegistered');
         }
         $vacancies = $this->registrationGuard->getVacancies($event);
         if ($vacancies === 0 && !$event->hasWaitingList()) {
-            $this->forwardToDenyAction('fullyBooked');
+            return $this->forwardToDenyAction('fullyBooked');
         }
 
         $this->redirect('new', null, null, ['event' => $event]);
+        return null;
     }
 
     /**
@@ -108,12 +110,10 @@ class EventRegistrationController extends ActionController
      *
      * @param non-empty-string $warningMessageKey the key of the message to display,
      *        will automatically get prefixed with `plugin.eventRegistration.error.`
-     *
-     * @return never
      */
-    private function forwardToDenyAction(string $warningMessageKey): void
+    private function forwardToDenyAction(string $warningMessageKey): ResponseInterface
     {
-        $this->forward('deny', null, null, ['warningMessageKey' => $warningMessageKey]);
+        return (new ForwardResponse('deny'))->withArguments(['warningMessageKey' => $warningMessageKey]);
     }
 
     public function denyAction(string $warningMessageKey): ?ResponseInterface

@@ -14,10 +14,9 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -63,14 +62,10 @@ final class EventUnregistrationControllerTest extends UnitTestCase
 
         $this->registrationManagerMock = $this->createMock(RegistrationManager::class);
 
-        $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $methodsToMock[] = 'forward';
-        }
         /** @var EventUnregistrationController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EventUnregistrationController::class,
-            $methodsToMock,
+            ['htmlResponse', 'redirect', 'redirectToUri'],
             [$this->registrationManagerMock]
         );
         $this->subject = $subject;
@@ -105,12 +100,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
      */
     public function checkPrerequisitesActionWithoutRegistrationForwardsToDenyAction(): void
     {
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'registrationMissing'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction();
 
-        $this->subject->checkPrerequisitesAction();
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'registrationMissing'], $result->getArguments());
     }
 
     /**
@@ -118,12 +112,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
      */
     public function checkPrerequisitesActionWithNullRegistrationForwardsToDenyAction(): void
     {
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'registrationMissing'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction(null);
 
-        $this->subject->checkPrerequisitesAction(null);
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'registrationMissing'], $result->getArguments());
     }
 
     /**
@@ -131,12 +124,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
      */
     public function checkPrerequisitesActionWithRegistrationWithoutUserForwardsToDenyAction(): void
     {
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'registrationMissing'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction(new Registration());
 
-        $this->subject->checkPrerequisitesAction(new Registration());
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'registrationMissing'], $result->getArguments());
     }
 
     /**
@@ -150,12 +142,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $registration->setUser($user);
         $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn(0);
 
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'registrationMissing'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction($registration);
 
-        $this->subject->checkPrerequisitesAction($registration);
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'registrationMissing'], $result->getArguments());
     }
 
     /**
@@ -172,12 +163,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $loggedInUserUid = 15;
         $this->context->method('getPropertyFromAspect')->with('frontend.user', 'id')->willReturn($loggedInUserUid);
 
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'registrationMissing'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction($registration);
 
-        $this->subject->checkPrerequisitesAction($registration);
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'registrationMissing'], $result->getArguments());
     }
 
     /**
@@ -196,12 +186,11 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $this->legacyRegistrationMock->expects(self::once())->method('getSeminarObject')->willReturn($legacyEvent);
         $legacyEvent->expects(self::once())->method('isUnregistrationPossible')->willReturn(false);
 
-        $this->subject->expects(self::once())->method('forward')
-            ->with('deny', null, null, ['warningMessageKey' => 'noUnregistrationPossible'])
-            ->willThrowException(new StopActionException('forward', 1476045801));
-        $this->expectException(StopActionException::class);
+        $result = $this->subject->checkPrerequisitesAction($registration);
 
-        $this->subject->checkPrerequisitesAction($registration);
+        self::assertInstanceOf(ForwardResponse::class, $result);
+        self::assertSame('deny', $result->getActionName());
+        self::assertSame(['warningMessageKey' => 'noUnregistrationPossible'], $result->getArguments());
     }
 
     /**

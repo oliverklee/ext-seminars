@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -36,23 +37,24 @@ class EventUnregistrationController extends ActionController
      *
      * @IgnoreValidation("registration")
      */
-    public function checkPrerequisitesAction(?Registration $registration = null): void
+    public function checkPrerequisitesAction(?Registration $registration = null): ?ResponseInterface
     {
         if (!$registration instanceof Registration) {
-            $this->forwardToDenyAction('registrationMissing');
+            return $this->forwardToDenyAction('registrationMissing');
         }
 
         if (!$this->belongsToLoggedInUser($registration)) {
             // To avoid information disclosure, we do not tell the user about registrations that are not theirs.
-            $this->forwardToDenyAction('registrationMissing');
+            return $this->forwardToDenyAction('registrationMissing');
         }
 
         if (!$this->isUnregistrationPossible($registration)) {
             // To avoid information disclosure, we do not tell the user about registrations that are not theirs.
-            $this->forwardToDenyAction('noUnregistrationPossible');
+            return $this->forwardToDenyAction('noUnregistrationPossible');
         }
 
         $this->redirect('confirm', null, null, ['registration' => $registration]);
+        return null;
     }
 
     private function belongsToLoggedInUser(Registration $registration): bool
@@ -81,12 +83,10 @@ class EventUnregistrationController extends ActionController
      *
      * @param non-empty-string $warningMessageKey the key of the message to display,
      *        will automatically get prefixed with `plugin.eventUnregistration.error.`
-     *
-     * @return never
      */
-    private function forwardToDenyAction(string $warningMessageKey): void
+    private function forwardToDenyAction(string $warningMessageKey): ResponseInterface
     {
-        $this->forward('deny', null, null, ['warningMessageKey' => $warningMessageKey]);
+        return (new ForwardResponse('deny'))->withArguments(['warningMessageKey' => $warningMessageKey]);
     }
 
     public function denyAction(string $warningMessageKey): ?ResponseInterface
