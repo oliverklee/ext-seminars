@@ -28,7 +28,7 @@ return RectorConfig::configure()
         __DIR__ . '/ext_localconf.php',
         __DIR__ . '/ext_tables.php',
     ])
-    ->withPhpVersion(PhpVersion::PHP_72)
+    ->withPhpVersion(PhpVersion::PHP_74)
     ->withPhpSets(
         true
     )
