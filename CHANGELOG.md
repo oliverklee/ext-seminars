@@ -47,6 +47,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid the deprecated `ActionController::forward()` method (#3637)
 - Drop tests for duplicated place associations (#3631)
 - Always return a response from controller actions (#3619)
 - Stop setting `TemplateHelper::cObj` (#3613)
