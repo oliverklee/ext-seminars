@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -24,6 +25,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventControllerTest extends UnitTestCase
 {
+    use RedirectMockTrait;
+
     /**
      * @var EventController&MockObject&AccessibleObjectInterface
      */
@@ -120,8 +123,7 @@ final class EventControllerTest extends UnitTestCase
      */
     public function hideActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('overview', 'BackEnd\\Module');
+        $this->mockRedirect('overview', 'BackEnd\\Module');
 
         $this->subject->hideAction(15);
     }
@@ -142,8 +144,7 @@ final class EventControllerTest extends UnitTestCase
      */
     public function unhideActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('overview', 'BackEnd\\Module');
+        $this->mockRedirect('overview', 'BackEnd\\Module');
 
         $this->subject->unhideAction(15);
     }
@@ -178,8 +179,7 @@ final class EventControllerTest extends UnitTestCase
      */
     public function deleteActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('overview', 'BackEnd\\Module');
+        $this->mockRedirect('overview', 'BackEnd\\Module');
 
         $this->subject->deleteAction(15);
     }
@@ -334,8 +334,7 @@ final class EventControllerTest extends UnitTestCase
      */
     public function duplicateActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('overview', 'BackEnd\\Module');
+        $this->mockRedirect('overview', 'BackEnd\\Module');
 
         $this->subject->duplicateAction(15);
     }

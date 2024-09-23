@@ -8,6 +8,7 @@ use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,6 +23,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EmailControllerTest extends UnitTestCase
 {
+    use RedirectMockTrait;
+
     /**
      * @var EmailController&MockObject&AccessibleObjectInterface
      */
@@ -322,8 +325,7 @@ final class EmailControllerTest extends UnitTestCase
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
 
-        $this->subject->expects(self::once())
-            ->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->mockRedirect('overview', 'BackEnd\\Module');
 
         $this->subject->sendAction($event, '', '');
     }
