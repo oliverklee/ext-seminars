@@ -289,7 +289,8 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $registration->setEvent($event);
 
-        $this->subject->expects(self::once())->method('redirect')->with('thankYou', null, null, ['event' => $event])
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('thankYou', null, null, ['event' => $event])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 

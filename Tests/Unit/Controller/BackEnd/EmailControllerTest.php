@@ -322,7 +322,8 @@ final class EmailControllerTest extends UnitTestCase
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
 
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->subject->expects(self::once())
+            ->method('redirect')->with('overview', 'BackEnd\\Module');
 
         $this->subject->sendAction($event, '', '');
     }
