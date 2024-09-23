@@ -118,7 +118,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
@@ -134,7 +133,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
@@ -150,9 +148,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleAtAnyTimeAtAll')
             ->with($event)->willReturn(false);
-
-        $this->subject->expects(self::never())->method('redirect');
-        $this->subject->expects(self::never())->method('redirectToUri');
 
         $result = $this->subject->checkPrerequisitesAction($event);
 
@@ -171,9 +166,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ->with($event)->willReturn(true);
         $this->registrationGuardMock->expects(self::once())->method('isRegistrationPossibleByDate')
             ->with($event)->willReturn(false);
-
-        $this->subject->expects(self::never())->method('redirect');
-        $this->subject->expects(self::never())->method('redirectToUri');
 
         $result = $this->subject->checkPrerequisitesAction($event);
 
@@ -196,9 +188,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->method('existsFrontEndUserUidInSession')->willReturn(true);
         $this->registrationGuardMock->expects(self::once())
             ->method('isFreeFromRegistrationConflicts')->with($event, $userUid)->willReturn(false);
-
-        $this->subject->expects(self::never())->method('redirect');
-        $this->subject->expects(self::never())->method('redirectToUri');
 
         $result = $this->subject->checkPrerequisitesAction($event);
 
@@ -223,9 +212,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
             ->with($event, $userUid)->willReturn(true);
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(0);
-
-        $this->subject->expects(self::never())->method('redirect');
-        $this->subject->expects(self::never())->method('redirectToUri');
 
         $result = $this->subject->checkPrerequisitesAction($event);
 
@@ -252,7 +238,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(0);
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -280,7 +265,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(null);
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -308,7 +292,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->registrationGuardMock->expects(self::once())
             ->method('getVacancies')->with($event)->willReturn(1);
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('new', null, null, ['event' => $event])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -344,7 +327,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->uriBuilderMock->expects(self::exactly(2))->method('buildFrontendUri')
             ->willReturnOnConsecutiveCalls($redirectUrl, $loginPageUrl);
 
-        $this->subject->expects(self::never())->method('redirect');
         $this->subject->expects(self::once())->method('redirectToUri')
             ->with($loginPageUrl)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
@@ -925,8 +907,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionAssertsBookableEventType(): void
     {
         $event = new SingleEvent();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationGuardMock->expects(self::once())->method('assertBookableEventType')->with($event);
@@ -943,8 +924,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $settings = ['registration' => ['registrationRecordsStorageFolder' => '5']];
         $this->subject->_set('settings', $settings);
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('enrichWithMetadata')
@@ -959,8 +939,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionCalculatesTotalPrice(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('calculateTotalPrice')
@@ -975,8 +954,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionCreatesRegistrationTitle(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('createTitle')->with($registration);
@@ -990,8 +968,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionWithoutUserStorageSettingCreatesAdditionalPersonsWithZeroStorageFolderUid(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('createAdditionalPersons')
@@ -1008,8 +985,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $folderUid = 15;
         $this->subject->_set('settings', ['additionalPersonsStorageFolder' => (string)$folderUid]);
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('createAdditionalPersons')
@@ -1024,8 +1000,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionPersistsRegistration(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('persist')->with($registration);
@@ -1039,8 +1014,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createActionSendsEmail(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->registrationProcesserMock->expects(self::once())->method('sendEmails')->with($registration);
@@ -1054,8 +1028,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     public function createDestroysOneTimeAccountSession(): void
     {
         $registration = new Registration();
-        $this->subject->expects(self::once())->method('redirect')
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+        $this->subject->method('redirect')->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
         $this->oneTimeAccountConnectorMock->expects(self::once())->method('destroyOneTimeSession');
@@ -1071,7 +1044,6 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $event = new SingleEvent();
         $registration = new Registration();
 
-        $this->subject->expects(self::never())->method('redirectToUri');
         $this->subject->expects(self::once())->method('redirect')
             ->with('thankYou', null, null, ['event' => $event, 'registration' => $registration])
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
