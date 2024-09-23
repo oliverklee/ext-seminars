@@ -71,7 +71,7 @@ class EventRegistrationController extends ActionController
     public function checkPrerequisitesAction(?Event $event = null): ResponseInterface
     {
         if (!$event instanceof Event) {
-            $this->redirectToPageForNoEvent();
+            return $this->redirectToPageForNoEvent();
         }
         if (!$this->registrationGuard->isRegistrationPossibleAtAnyTimeAtAll($event)) {
             return $this->forwardToDenyAction('noRegistrationPossibleAtAll');
@@ -81,7 +81,7 @@ class EventRegistrationController extends ActionController
             return $this->forwardToDenyAction('noRegistrationPossibleAtTheMoment');
         }
         if (!$this->registrationGuard->existsFrontEndUserUidInSession()) {
-            $this->redirectToLoginPage($event);
+            return $this->redirectToLoginPage($event);
         }
         $userUid = $this->registrationGuard->getFrontEndUserUidFromSession();
         if (!$this->registrationGuard->isFreeFromRegistrationConflicts($event, $userUid)) {
@@ -92,16 +92,13 @@ class EventRegistrationController extends ActionController
             return $this->forwardToDenyAction('fullyBooked');
         }
 
-        $this->redirect('new', null, null, ['event' => $event]);
+        return $this->redirect('new', null, null, ['event' => $event]);
     }
 
-    /**
-     * @return never
-     */
-    private function redirectToPageForNoEvent(): void
+    private function redirectToPageForNoEvent(): ResponseInterface
     {
         $pageUid = (int)($this->settings['pageForMissingEvent'] ?? 0);
-        $this->redirect(null, null, null, [], $pageUid);
+        return $this->redirect(null, null, null, [], $pageUid);
     }
 
     /**
@@ -122,10 +119,7 @@ class EventRegistrationController extends ActionController
         return $this->htmlResponse();
     }
 
-    /**
-     * @return never
-     */
-    private function redirectToLoginPage(Event $event): void
+    private function redirectToLoginPage(Event $event): ResponseInterface
     {
         // In order to shorten the URL by removing redundant arguments, we are not using `$uriBuilder->uriFor()` here.
         $redirectUrl = $this->uriBuilder->reset()->setCreateAbsoluteUri(true)
@@ -137,7 +131,7 @@ class EventRegistrationController extends ActionController
             ->setTargetPageUid($loginPageUid)->setArguments(['redirect_url' => $redirectUrl])
             ->buildFrontendUri();
 
-        $this->redirectToUri($loginPageUrlWithRedirect);
+        return $this->redirectToUri($loginPageUrlWithRedirect);
     }
 
     /**
@@ -221,7 +215,7 @@ class EventRegistrationController extends ActionController
 
         $this->oneTimeAccountConnector->destroyOneTimeSession();
 
-        $this->redirect('thankYou', null, null, ['event' => $event, 'registration' => $registration]);
+        return $this->redirect('thankYou', null, null, ['event' => $event, 'registration' => $registration]);
     }
 
     /**
