@@ -51,7 +51,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Avoid the deprecated `ActionController::forward()` method (#3637)
 - Drop tests for duplicated place associations (#3631)
 - Always return a response from controller actions
-  (#3619, #3638, #3668, #3669, #3671, #3672)
+  (#3619, #3638, #3668, #3669, #3671, #3672, #3673)
 - Stop setting `TemplateHelper::cObj` (#3613)
 - Avoid using the deprecated `GeneralUtility::_GPmerged()` (#3595)
 - Drop unused dependency on `MarkerBasedTemplateService` (#3594)

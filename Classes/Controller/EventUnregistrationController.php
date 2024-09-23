@@ -53,7 +53,7 @@ class EventUnregistrationController extends ActionController
             return $this->forwardToDenyAction('noUnregistrationPossible');
         }
 
-        $this->redirect('confirm', null, null, ['registration' => $registration]);
+        return $this->redirect('confirm', null, null, ['registration' => $registration]);
     }
 
     private function belongsToLoggedInUser(Registration $registration): bool
@@ -112,12 +112,12 @@ class EventUnregistrationController extends ActionController
      *
      * @IgnoreValidation("registration")
      */
-    public function unregisterAction(Registration $registration): void
+    public function unregisterAction(Registration $registration): ResponseInterface
     {
         $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
         $this->registrationManager->removeRegistration((int)$registration->getUid(), $configuration);
 
-        $this->redirect('thankYou', null, null, ['event' => $registration->getEvent()]);
+        return $this->redirect('thankYou', null, null, ['event' => $registration->getEvent()]);
     }
 
     /**
