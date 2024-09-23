@@ -13,6 +13,8 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -113,6 +115,8 @@ final class EventControllerTest extends UnitTestCase
     public function hideActionHidesEvent(): void
     {
         $uid = 15;
+        $this->stubRedirect();
+
         $this->eventRepositoryMock->expects(self::once())->method('hideViaDataHandler')->with($uid);
 
         $this->subject->hideAction($uid);
@@ -125,7 +129,12 @@ final class EventControllerTest extends UnitTestCase
     {
         $this->mockRedirect('overview', 'BackEnd\\Module');
 
-        $this->subject->hideAction(15);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->hideAction(15);
+        } else {
+            $result = $this->subject->hideAction(15);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -134,6 +143,8 @@ final class EventControllerTest extends UnitTestCase
     public function unhideActionUnhidesEvent(): void
     {
         $uid = 15;
+        $this->stubRedirect();
+
         $this->eventRepositoryMock->expects(self::once())->method('unhideViaDataHandler')->with($uid);
 
         $this->subject->unhideAction($uid);
@@ -146,7 +157,12 @@ final class EventControllerTest extends UnitTestCase
     {
         $this->mockRedirect('overview', 'BackEnd\\Module');
 
-        $this->subject->unhideAction(15);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->unhideAction(15);
+        } else {
+            $result = $this->subject->unhideAction(15);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -155,6 +171,8 @@ final class EventControllerTest extends UnitTestCase
     public function deleteActionDeletesEvent(): void
     {
         $uid = 15;
+        $this->stubRedirect();
+
         $this->eventRepositoryMock->expects(self::once())->method('deleteViaDataHandler')->with($uid);
 
         $this->subject->deleteAction($uid);
@@ -166,6 +184,8 @@ final class EventControllerTest extends UnitTestCase
     public function deleteActionAddsFlashMessage(): void
     {
         $localizedMessage = 'Event deleted!';
+        $this->stubRedirect();
+
         $this->languageServiceMock->expects(self::once())->method('sL')
             ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted')
             ->willReturn($localizedMessage);
@@ -181,7 +201,12 @@ final class EventControllerTest extends UnitTestCase
     {
         $this->mockRedirect('overview', 'BackEnd\\Module');
 
-        $this->subject->deleteAction(15);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->deleteAction(15);
+        } else {
+            $result = $this->subject->deleteAction(15);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -324,6 +349,8 @@ final class EventControllerTest extends UnitTestCase
     public function duplicateActionDuplicatesEvent(): void
     {
         $uid = 15;
+        $this->stubRedirect();
+
         $this->eventRepositoryMock->expects(self::once())->method('duplicateViaDataHandler')->with($uid);
 
         $this->subject->duplicateAction($uid);
@@ -336,6 +363,11 @@ final class EventControllerTest extends UnitTestCase
     {
         $this->mockRedirect('overview', 'BackEnd\\Module');
 
-        $this->subject->duplicateAction(15);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->duplicateAction(15);
+        } else {
+            $result = $this->subject->duplicateAction(15);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 }

@@ -115,7 +115,7 @@ class RegistrationController extends ActionController
      * @param positive-int $registrationUid
      * @param positive-int $eventUid
      */
-    public function deleteAction(int $registrationUid, int $eventUid): void
+    public function deleteAction(int $registrationUid, int $eventUid): ResponseInterface
     {
         $this->registrationRepository->deleteViaDataHandler($registrationUid);
 
@@ -123,6 +123,6 @@ class RegistrationController extends ActionController
             ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted');
         $this->addFlashMessage($message);
 
-        $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
+        return $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
     }
 }
