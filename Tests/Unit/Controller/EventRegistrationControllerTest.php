@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -316,10 +315,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $this->uriBuilderMock->expects(self::exactly(2))->method('buildFrontendUri')
             ->willReturnOnConsecutiveCalls($redirectUrl, $loginPageUrl);
 
-        $this->subject->expects(self::once())->method('redirectToUri')
-            ->with($loginPageUrl)
-            ->willThrowException(new StopActionException('redirectToUri', 1476045828));
-        $this->expectException(StopActionException::class);
+        $this->mockRedirectToUri($loginPageUrl);
 
         $this->subject->checkPrerequisitesAction($event);
     }

@@ -42,4 +42,21 @@ trait RedirectMockTrait
             $this->subject->method('redirect')->willReturn($redirectResponse);
         }
     }
+
+    /**
+     * @param non-empty-string $uri
+     */
+    private function mockRedirectToUri(string $uri): void
+    {
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->expects(self::once())->method('redirectToUri')
+                ->with($uri)
+                ->willThrowException(new StopActionException('redirectToUri', 1476045828));
+            $this->expectException(StopActionException::class);
+        } else {
+            $redirectResponse = $this->createStub(RedirectResponse::class);
+            $this->subject->expects(self::once())->method('redirectToUri')->with($uri)
+                ->willReturn($redirectResponse);
+        }
+    }
 }
