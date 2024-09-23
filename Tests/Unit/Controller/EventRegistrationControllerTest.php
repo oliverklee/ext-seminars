@@ -506,7 +506,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionWithoutSettingForMaximumBookableSeatsAndLessThanDefaultVacanciesPassesVacanciesToView(): void
+    public function newActionWithoutMaximumBookableSeatsSettingAndLessThanDefaultVacanciesPassesVacanciesToView(): void
     {
         $event = new SingleEvent();
         $vacancies = 9;
