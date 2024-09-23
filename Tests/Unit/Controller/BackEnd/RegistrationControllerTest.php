@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
@@ -31,6 +32,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationControllerTest extends UnitTestCase
 {
+    use RedirectMockTrait;
+
     /**
      * @var RegistrationController&MockObject&AccessibleObjectInterface
      */
@@ -577,8 +580,8 @@ final class RegistrationControllerTest extends UnitTestCase
     public function deleteActionRedirectsToShowRegistrationsForEventAction(): void
     {
         $eventUid = 2;
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
+
+        $this->mockRedirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
 
         $this->subject->deleteAction(15, $eventUid);
     }

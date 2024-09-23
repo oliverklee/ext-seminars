@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -25,6 +26,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ModuleControllerTest extends UnitTestCase
 {
+    use RedirectMockTrait;
+
     /**
      * @var ModuleController&MockObject&AccessibleObjectInterface
      */

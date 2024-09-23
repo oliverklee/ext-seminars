@@ -28,6 +28,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FrontEndEditorControllerTest extends UnitTestCase
 {
+    use RedirectMockTrait;
+
     /**
      * @var FrontEndEditorController&MockObject&AccessibleObjectInterface
      */
@@ -233,8 +235,8 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     public function updateActionRedirectsToIndexAction(): void
     {
         $event = new SingleEvent();
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('index');
+
+        $this->mockRedirect('index');
 
         $this->subject->updateAction($event);
     }
@@ -420,8 +422,7 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     {
         $event = new SingleEvent();
 
-        $this->subject->expects(self::once())->method('redirect')
-            ->with('index');
+        $this->mockRedirect('index');
 
         $this->subject->createAction($event);
     }
