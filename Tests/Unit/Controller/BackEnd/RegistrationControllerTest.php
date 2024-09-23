@@ -17,6 +17,8 @@ use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -552,6 +554,8 @@ final class RegistrationControllerTest extends UnitTestCase
     public function deleteActionDeletesRegistration(): void
     {
         $registrationUid = 15;
+        $this->stubRedirect();
+
         $this->registrationRepositoryMock->expects(self::once())->method('deleteViaDataHandler')
             ->with($registrationUid);
 
@@ -564,6 +568,8 @@ final class RegistrationControllerTest extends UnitTestCase
     public function deleteActionAddsFlashMessage(): void
     {
         $localizedMessage = 'Registration deleted!';
+        $this->stubRedirect();
+
         $this->languageServiceMock->expects(self::once())->method('sL')
             ->with(
                 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted'
@@ -583,6 +589,11 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
 
-        $this->subject->deleteAction(15, $eventUid);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->deleteAction(15, $eventUid);
+        } else {
+            $result = $this->subject->deleteAction(15, $eventUid);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 }

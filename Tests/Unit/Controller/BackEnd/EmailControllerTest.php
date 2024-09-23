@@ -11,6 +11,8 @@ use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -287,6 +289,7 @@ final class EmailControllerTest extends UnitTestCase
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
+        $this->stubRedirect();
 
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
@@ -306,6 +309,7 @@ final class EmailControllerTest extends UnitTestCase
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
+        $this->stubRedirect();
 
         $eventUid = 9;
         $event = $this->buildSingleEventMockWithUid($eventUid);
@@ -327,6 +331,11 @@ final class EmailControllerTest extends UnitTestCase
 
         $this->mockRedirect('overview', 'BackEnd\\Module');
 
-        $this->subject->sendAction($event, '', '');
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->sendAction($event, '', '');
+        } else {
+            $result = $this->subject->sendAction($event, '', '');
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 }

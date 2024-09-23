@@ -46,7 +46,7 @@ class EmailController extends ActionController
      *
      * @IgnoreValidation("event")
      */
-    public function sendAction(Event $event, string $subject, string $body): void
+    public function sendAction(Event $event, string $subject, string $body): ResponseInterface
     {
         $this->checkPermissions();
 
@@ -58,7 +58,7 @@ class EmailController extends ActionController
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);
         $emailService->sendEmailToAttendees();
 
-        $this->redirect('overview', 'BackEnd\\Module');
+        return $this->redirect('overview', 'BackEnd\\Module');
     }
 
     /**

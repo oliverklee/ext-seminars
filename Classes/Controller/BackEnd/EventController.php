@@ -49,9 +49,9 @@ class EventController extends ActionController
         $this->languageService = $languageService;
     }
 
-    private function redirectToOverviewAction(): void
+    private function redirectToOverviewAction(): ResponseInterface
     {
-        $this->redirect('overview', 'BackEnd\\Module');
+        return $this->redirect('overview', 'BackEnd\\Module');
     }
 
     /**
@@ -61,9 +61,7 @@ class EventController extends ActionController
     {
         $this->eventRepository->hideViaDataHandler($eventUid);
 
-        $this->redirectToOverviewAction();
-
-        return $this->htmlResponse();
+        return $this->redirectToOverviewAction();
     }
 
     /**
@@ -73,9 +71,7 @@ class EventController extends ActionController
     {
         $this->eventRepository->unhideViaDataHandler($eventUid);
 
-        $this->redirectToOverviewAction();
-
-        return $this->htmlResponse();
+        return $this->redirectToOverviewAction();
     }
 
     /**
@@ -89,9 +85,7 @@ class EventController extends ActionController
             ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted');
         $this->addFlashMessage($message);
 
-        $this->redirectToOverviewAction();
-
-        return $this->htmlResponse();
+        return $this->redirectToOverviewAction();
     }
 
     /**
@@ -122,8 +116,6 @@ class EventController extends ActionController
     {
         $this->eventRepository->duplicateViaDataHandler($eventUid);
 
-        $this->redirectToOverviewAction();
-
-        return $this->htmlResponse();
+        return $this->redirectToOverviewAction();
     }
 }
