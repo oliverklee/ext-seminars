@@ -120,7 +120,8 @@ final class EventControllerTest extends UnitTestCase
      */
     public function hideActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('overview', 'BackEnd\\Module');
 
         $this->subject->hideAction(15);
     }
@@ -141,7 +142,8 @@ final class EventControllerTest extends UnitTestCase
      */
     public function unhideActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('overview', 'BackEnd\\Module');
 
         $this->subject->unhideAction(15);
     }
@@ -176,7 +178,8 @@ final class EventControllerTest extends UnitTestCase
      */
     public function deleteActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('overview', 'BackEnd\\Module');
 
         $this->subject->deleteAction(15);
     }
@@ -331,7 +334,8 @@ final class EventControllerTest extends UnitTestCase
      */
     public function duplicateActionRedirectsToModuleOverviewAction(): void
     {
-        $this->subject->expects(self::once())->method('redirect')->with('overview', 'BackEnd\\Module');
+        $this->subject->expects(self::once())->method('redirect')
+            ->with('overview', 'BackEnd\\Module');
 
         $this->subject->duplicateAction(15);
     }

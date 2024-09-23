@@ -118,7 +118,8 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
+        $this->subject->expects(self::once())->method('redirect')
+            ->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
@@ -133,7 +134,8 @@ final class EventRegistrationControllerTest extends UnitTestCase
         $pageUid = 42;
         $this->subject->_set('settings', ['pageForMissingEvent' => (string)$pageUid]);
 
-        $this->subject->expects(self::once())->method('redirect')->with(null, null, null, [], $pageUid)
+        $this->subject->expects(self::once())->method('redirect')
+            ->with(null, null, null, [], $pageUid)
             ->willThrowException(new StopActionException('redirectToUri', 1476045828));
         $this->expectException(StopActionException::class);
 
