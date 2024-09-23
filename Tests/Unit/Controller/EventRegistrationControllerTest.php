@@ -15,6 +15,8 @@ use OliverKlee\Seminars\Service\RegistrationGuard;
 use OliverKlee\Seminars\Service\RegistrationProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -121,7 +123,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect(null, null, null, [], $pageUid);
 
-        $this->subject->checkPrerequisitesAction();
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction();
+        } else {
+            $result = $this->subject->checkPrerequisitesAction();
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -134,7 +141,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect(null, null, null, [], $pageUid);
 
-        $this->subject->checkPrerequisitesAction(null);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction(null);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction(null);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -237,7 +249,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('new', null, null, ['event' => $event]);
 
-        $this->subject->checkPrerequisitesAction($event);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction($event);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction($event);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -261,7 +278,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('new', null, null, ['event' => $event]);
 
-        $this->subject->checkPrerequisitesAction($event);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction($event);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction($event);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -285,13 +307,18 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('new', null, null, ['event' => $event]);
 
-        $this->subject->checkPrerequisitesAction($event);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction($event);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction($event);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
      * @test
      */
-    public function checkPrerequisitesActionForNoUserInSessionRedirectsLoginPageWithRedirectUrl(): void
+    public function checkPrerequisitesActionForNoUserInSessionRedirectsToLoginPageWithRedirectUrl(): void
     {
         $eventUid = 5;
         $event = $this->createMock(SingleEvent::class);
@@ -317,7 +344,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirectToUri($loginPageUrl);
 
-        $this->subject->checkPrerequisitesAction($event);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction($event);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction($event);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -1022,7 +1054,12 @@ final class EventRegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('thankYou', null, null, ['event' => $event, 'registration' => $registration]);
 
-        $this->subject->createAction($event, $registration);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->createAction($event, $registration);
+        } else {
+            $result = $this->subject->createAction($event, $registration);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
