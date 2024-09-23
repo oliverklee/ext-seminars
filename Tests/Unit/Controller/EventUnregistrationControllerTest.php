@@ -15,6 +15,8 @@ use OliverKlee\Seminars\Service\RegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -217,7 +219,12 @@ final class EventUnregistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('confirm', null, null, ['registration' => $registration]);
 
-        $this->subject->checkPrerequisitesAction($registration);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->checkPrerequisitesAction($registration);
+        } else {
+            $result = $this->subject->checkPrerequisitesAction($registration);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
@@ -271,6 +278,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
         $registrationUid = 4;
         $registration = $this->createMock(Registration::class);
         $registration->method('getUid')->willReturn($registrationUid);
+        $this->stubRedirect();
 
         $this->registrationManagerMock->expects(self::once())
             ->method('removeRegistration')->with($registrationUid, $this->legacyConfigurationMock);
@@ -289,7 +297,12 @@ final class EventUnregistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('thankYou', null, null, ['event' => $event]);
 
-        $this->subject->unregisterAction($registration);
+        if ((new Typo3Version())->getMajorVersion() < 12) {
+            $this->subject->unregisterAction($registration);
+        } else {
+            $result = $this->subject->unregisterAction($registration);
+            self::assertInstanceOf(RedirectResponse::class, $result);
+        }
     }
 
     /**
