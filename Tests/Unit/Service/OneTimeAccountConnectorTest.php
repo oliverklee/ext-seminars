@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
 
 use OliverKlee\Seminars\Service\OneTimeAccountConnector;
 use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -35,9 +35,8 @@ final class OneTimeAccountConnectorTest extends UnitTestCase
         $this->frontEndUserAuthenticationMock = $this->createMock(FrontendUserAuthentication::class);
         $mockFrontEndController->fe_user = $this->frontEndUserAuthenticationMock;
 
-        $requestMock = $this->createMock(ServerRequestInterface::class);
-        $requestMock->method('getAttribute')->with('frontend.user')->willReturn($this->frontEndUserAuthenticationMock);
-        $GLOBALS['TYPO3_REQUEST'] = $requestMock;
+        $request = (new ServerRequest())->withAttribute('frontend.user', $this->frontEndUserAuthenticationMock);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
 
         $this->subject = new OneTimeAccountConnector();
     }

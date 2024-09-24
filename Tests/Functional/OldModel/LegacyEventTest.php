@@ -52,10 +52,10 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         parent::setUp();
 
+        $this->testingFramework = new TestingFramework('tx_seminars');
+
         $configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
-
-        $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
     protected function tearDown(): void
@@ -71,10 +71,8 @@ final class LegacyEventTest extends FunctionalTestCase
      */
     private function importStaticData(): void
     {
-        if (
-            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_countries')
-                ->count('*', 'static_countries', []) === 0
-        ) {
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_countries');
+        if ($connection->count('*', 'static_countries', []) === 0) {
             $this->importDataSet(__DIR__ . '/Fixtures/Events/Countries.xml');
         }
     }
@@ -83,7 +81,6 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleRootPage.xml');
         $this->testingFramework->createFakeFrontEnd(1);
-        $this->initializeBackEndLanguage();
 
         $plugin = new DefaultController();
         $plugin->main('', ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html']);

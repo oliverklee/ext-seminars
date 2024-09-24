@@ -55,7 +55,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Stop setting `TemplateHelper::cObj` (#3613)
 - Avoid using the deprecated `GeneralUtility::_GPmerged()` (#3595)
 - Drop unused dependency on `MarkerBasedTemplateService` (#3594)
-- Provide PSR-7 request when testing `RichTextViewHelper` (#3592)
+- Provide PSR-7 request when testing `RichTextViewHelper` (#3592, #3639)
 - Avoid using the deprecated `$GLOBALS['TSFE']->fe_user` (#3568)
 - Stop calling outdated DBAL methods (#2159, #3527, #3533, #3542)
 
