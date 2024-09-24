@@ -28,7 +28,6 @@ Configuration
    AddingLinksToTheTermsConditionsPage/Index
    ConfiguringCss/Index
    SettingUpTheMultipleSeatsFeature/Index
-   SettingUpFront-endEditing/Index
    SettingUpTheDefaultEditorsFeature/Index
    PreselectionInTheListViewUrl/Index
    SEO

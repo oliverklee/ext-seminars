@@ -56,18 +56,6 @@ This extension uses a couple of different HTML templates:
          plugin.tx\_seminars **\_pi1** .templateFile (also in flexforms)
 
 
-.. container:: table-row
-
-   template path
-         Resources/Private/Templates/FrontEnd/EventEditor.html
-
-   contents
-         event editing form
-
-   TS setup variable
-         plugin.tx\_seminars **\_pi1** .eventEditorTemplateFile
-
-
 .. ###### END~OF~TABLE ######
 
 Note: Do  *not* change the HTML templates directly in the extension

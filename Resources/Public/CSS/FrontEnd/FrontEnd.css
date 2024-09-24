@@ -209,20 +209,6 @@ table.tx-seminars-pi1-timeslots td {
 }
 
 /*
- * FE editor
- */
-form.tx-seminars-frontendeditor input[type="datetime-local"],
-form.tx-seminars-frontendeditor input[type="number"],
-form.tx-seminars-frontendeditor input[autocomplete="number"] {
-    width: 13em;
-}
-
-/* Making label texts unselectable improves accessibility. */
-form.tx-seminars-frontendeditor label {
-    user-select: none;
-}
-
-/*
  * Registration form
  */
 form.tx-seminars-event-registration input[type="number"] {
