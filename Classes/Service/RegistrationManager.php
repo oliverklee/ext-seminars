@@ -63,7 +63,7 @@ class RegistrationManager
     protected $registrationEmailHookProvider;
 
     /**
-     * @var SingleViewLinkBuilder
+     * @var SingleViewLinkBuilder|null
      */
     private $linkBuilder;
 
@@ -741,9 +741,11 @@ class RegistrationManager
         string $helloSubjectPrefix,
         bool $useHtml = false
     ): string {
-        if (!$this->linkBuilder instanceof SingleViewLinkBuilder) {
+        $linkBuilder = $this->linkBuilder;
+        if (!$linkBuilder instanceof SingleViewLinkBuilder) {
             $configuration = $this->buildConfigurationWithFlexForms($contentObjectRenderer);
-            $this->setLinkBuilder(GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration));
+            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
+            $this->setLinkBuilder($linkBuilder);
         }
 
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
@@ -865,7 +867,7 @@ class RegistrationManager
         $eventUid = $event->getUid();
         \assert($eventUid > 0);
         $newEvent = MapperRegistry::get(EventMapper::class)->find($eventUid);
-        $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
+        $singleViewUrl = $linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $template->setMarker(
             'url',
             $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl
