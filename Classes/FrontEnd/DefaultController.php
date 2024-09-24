@@ -43,7 +43,6 @@ use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Plugin "Seminar Manager".
@@ -298,12 +297,7 @@ class DefaultController extends TemplateHelper
             $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
         }
 
-        /** @phpstan-ignore-next-line In unit tests, this property might not always be set. */
-        if ($this->frontendController instanceof TypoScriptFrontendController) {
-            $result = $this->pi_wrapInBaseClass($result);
-        }
-
-        return $result;
+        return $this->pi_wrapInBaseClass($result);
     }
 
     ///////////////////////
