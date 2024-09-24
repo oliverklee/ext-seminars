@@ -26,11 +26,9 @@ class CategoryList extends AbstractView
      */
     public function render(): string
     {
+        $recursive = \max(0, $this->getConfValueInteger('recursive'));
         $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
-        $seminarBagBuilder->setSourcePages(
-            $this->getConfValueString('pages'),
-            $this->getConfValueInteger('recursive')
-        );
+        $seminarBagBuilder->setSourcePages($this->getConfValueString('pages'), $recursive);
 
         $seminarBagBuilder->ignoreCanceledEvents();
         try {

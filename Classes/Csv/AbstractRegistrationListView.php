@@ -23,7 +23,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
     protected $tableName = 'tx_seminars_attendances';
 
     /**
-     * @var int
+     * @var int<0, max>
      */
     protected $eventUid = 0;
 
@@ -62,7 +62,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
     /**
      * Returns the event UID of the registrationsToRetrieve.
      *
-     * @return int the event UID, will be >= 0
+     * @return int<0, max> the event UID, will be >= 0
      */
     protected function getEventUid(): int
     {
@@ -156,7 +156,9 @@ abstract class AbstractRegistrationListView extends AbstractListView
         $registrationBagBuilder = $this->createRegistrationBagBuilder();
 
         if ($this->hasEventUid()) {
-            $registrationBagBuilder->limitToEvent($this->getEventUid());
+            $eventUid = $this->getEventUid();
+            \assert($eventUid > 0);
+            $registrationBagBuilder->limitToEvent($eventUid);
         } elseif ($this->hasPageUid()) {
             $registrationBagBuilder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);
         }

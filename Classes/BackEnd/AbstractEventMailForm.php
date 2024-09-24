@@ -114,8 +114,10 @@ abstract class AbstractEventMailForm
         $organizer = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
 
+        $eventUid = $event->getUid();
+        \assert($eventUid > 0);
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
-        $registrationBagBuilder->limitToEvent($event->getUid());
+        $registrationBagBuilder->limitToEvent($eventUid);
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {

@@ -1764,10 +1764,8 @@ class DefaultController extends TemplateHelper
     {
         $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
 
-        $seminarBagBuilder->setSourcePages(
-            $this->getConfValueString('pidList'),
-            $this->getConfValueInteger('recursive')
-        );
+        $recursive = \max(0, $this->getConfValueInteger('recursive'));
+        $seminarBagBuilder->setSourcePages($this->getConfValueString('pidList'), $recursive);
         $seminarBagBuilder->setOrderBy($this->getOrderByForListView());
 
         return $seminarBagBuilder;

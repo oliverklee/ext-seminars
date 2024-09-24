@@ -96,22 +96,12 @@ parameters:
 			path: Classes/Bag/AbstractBag.php
 
 		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 4
-			path: Classes/BagBuilder/AbstractBagBuilder.php
-
-		-
 			message: "#^Only booleans are allowed in a negated boolean, int\\|false given\\.$#"
 			count: 1
 			path: Classes/BagBuilder/AbstractBagBuilder.php
 
 		-
 			message: "#^Parameter \\#1 \\$pageUids of method OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\PageRepository\\:\\:findWithinParentPages\\(\\) expects array\\<int\\<1, max\\>\\>, array\\<int\\> given\\.$#"
-			count: 1
-			path: Classes/BagBuilder/AbstractBagBuilder.php
-
-		-
-			message: "#^Parameter \\#2 \\$recursion of method OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\PageRepository\\:\\:findWithinParentPages\\(\\) expects int\\<0, max\\>, int given\\.$#"
 			count: 1
 			path: Classes/BagBuilder/AbstractBagBuilder.php
 
@@ -147,11 +137,6 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:prepareSearchWord\\(\\) should return string but returns mixed\\.$#"
-			count: 1
-			path: Classes/BagBuilder/EventBagBuilder.php
-
-		-
-			message: "#^PHPDoc type string of property OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:\\$tableName is not the same as PHPDoc type string of overridden property OliverKlee\\\\Seminars\\\\BagBuilder\\\\AbstractBagBuilder\\<OliverKlee\\\\Seminars\\\\Bag\\\\EventBag\\>\\:\\:\\$tableName\\.$#"
 			count: 1
 			path: Classes/BagBuilder/EventBagBuilder.php
 

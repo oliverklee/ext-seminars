@@ -137,36 +137,6 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToEventWithNegativeEventUidThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $eventUid must be > 0.'
-        );
-
-        $this->subject->limitToEvent(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function limitToEventWithZeroEventUidThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $eventUid must be > 0.'
-        );
-
-        $this->subject->limitToEvent(0);
-    }
-
-    /**
-     * @test
-     */
     public function limitToEventWithValidEventUidFindsRegistrationOfEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
@@ -438,21 +408,6 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     ///////////////////////////////////
     // Tests for limitToSeatsAtMost()
     ///////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function limitToSeatsAtMostWithNegativeVacanciesThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $seats must be >= 0.'
-        );
-
-        $this->subject->limitToSeatsAtMost(-1);
-    }
 
     /**
      * @test

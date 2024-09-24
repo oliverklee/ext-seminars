@@ -16,30 +16,28 @@ class CategoryBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<CategoryBag> class name of the bag class that will be built
      */
-    protected $bagClassName = CategoryBag::class;
+    protected string $bagClassName = CategoryBag::class;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_categories';
+    protected string $tableName = 'tx_seminars_categories';
 
     /**
      * @var string the sorting field
      */
-    protected $orderBy = 'title';
+    protected string $orderBy = 'title';
 
     /**
-     * @var string the UIDs of the current events as comma-separated list,
-     *             will be set by limitToEvents
+     * @var string the UIDs of the current events as comma-separated list, will be set by limitToEvents
      */
-    protected $eventUids = '';
+    protected string $eventUids = '';
 
     /**
-     * Limits the bag to the categories of the events provided by the parameter
-     * $eventUids.
+     * Limits the bag to the categories of the events provided by the parameter `$eventUids`.
      *
      * Example: The events with the provided UIDs reference categories 9 and 12.
-     * So the bag will be limited to categories 9 and 12 (plus any additional
+     * So the bag will be limited to the categories 9 and 12 (plus any additional
      * limits).
      *
      * @param string $eventUids comma-separated list of UIDs of the events to which the category selection

@@ -383,11 +383,14 @@ abstract class AbstractModel
     }
 
     /**
-     * @return int our UID (or 0 if there is an error)
+     * @return int<0, max> our UID (or 0 if there is an error)
      */
     public function getUid(): int
     {
-        return $this->getRecordPropertyInteger('uid');
+        $uid = $this->getRecordPropertyInteger('uid');
+        \assert($uid >= 0);
+
+        return $uid;
     }
 
     protected function setUid(int $uid): void

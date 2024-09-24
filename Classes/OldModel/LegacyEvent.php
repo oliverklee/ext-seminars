@@ -1373,7 +1373,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets the number of vacancies for this seminar.
      *
-     * @return int the number of vacancies (will be 0 if the seminar is overbooked)
+     * @return int<0, max> the number of vacancies (will be 0 if the seminar is overbooked)
      */
     public function getVacancies(): int
     {
@@ -1635,8 +1635,13 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getOrganizerBag(): OrganizerBag
     {
+        $uid = $this->getUid();
+        if ($uid <= 0) {
+            throw new \UnexpectedValueException('This event has no UID.', 1727202740);
+        }
+
         $builder = GeneralUtility::makeInstance(OrganizerBagBuilder::class);
-        $builder->limitToEvent($this->getUid());
+        $builder->limitToEvent($uid);
 
         return $builder->build();
     }

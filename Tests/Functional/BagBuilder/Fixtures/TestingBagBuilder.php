@@ -17,12 +17,12 @@ final class TestingBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<TestingBag> class name of the bag class that will be built
      */
-    protected $bagClassName = TestingBag::class;
+    protected string $bagClassName = TestingBag::class;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_test';
+    protected string $tableName = 'tx_seminars_test';
 
     /**
      * Limits the bag to records with a particular title.

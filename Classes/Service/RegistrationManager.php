@@ -325,10 +325,12 @@ class RegistrationManager
             return;
         }
 
+        $seminarUid = $seminar->getUid();
+        \assert($seminarUid > 0);
         $vacancies = $seminar->getVacancies();
 
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
-        $registrationBagBuilder->limitToEvent($seminar->getUid());
+        $registrationBagBuilder->limitToEvent($seminarUid);
         $registrationBagBuilder->limitToOnQueue();
         $registrationBagBuilder->limitToSeatsAtMost($vacancies);
 

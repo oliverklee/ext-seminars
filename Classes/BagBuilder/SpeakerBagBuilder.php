@@ -16,10 +16,10 @@ class SpeakerBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<SpeakerBag> class name of the bag class that will be built
      */
-    protected $bagClassName = SpeakerBag::class;
+    protected string $bagClassName = SpeakerBag::class;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_speakers';
+    protected string $tableName = 'tx_seminars_speakers';
 }
