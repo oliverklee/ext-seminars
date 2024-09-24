@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Convert the manual to the new PHP-based rendering (#3692)
 - Use PHP 7.4 language features and native type declarations
   (#3643, #3682, #3683, #3689)
 - Use constructor injection (#3603, #3607, #3608, #3609, #3610)

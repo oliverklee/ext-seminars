@@ -1,4 +1,4 @@
-# Seminars TYPO3 extension
+# TYPO3 extension `seminars`
 
 [![TYPO3 V11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
 [![License](https://img.shields.io/github/license/oliverklee/ext-seminars)](https://packagist.org/packages/oliverklee/seminars)

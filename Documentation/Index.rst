@@ -1,34 +1,36 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
+============================
+TYPO3 extension ``seminars``
+============================
 
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-.. role::   php(code)
+:Extension key:
+   seminars
 
+:Package name:
+   oliverklee/seminars
 
-==========================
-Seminar Manager (seminars)
-==========================
+:Version:
+   |release|
 
-:Extension Key: seminars
-:Language:      en, de
-:Copyright:     `2005-2024, Oliver Klee, typo3-coding@oliverklee.de`
-:Maintainer:    `Oliver Klee, typo3-coding@oliverklee.de`
-:License:       `CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>`_
-:Rendered:      |today|
+:Language:
+   en
+
+:Author:
+   Oliver Klee
+
+:License:
+   This extension is published under the
+   `GNU General Public License v2.0 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`__.
+
+:Rendered:
+   |today|
 
 The content of this document is related to TYPO3 - a GNU/GPL CMS/Framework available from www.typo3.org
 
+**Table of Contents:**
+
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 2
    :titlesonly:
-   :glob:
 
    Introduction/Index
    Installation/Index
@@ -36,3 +38,10 @@ The content of this document is related to TYPO3 - a GNU/GPL CMS/Framework avail
    UsersManual/Index
    Reference/Index
    KnownProblems/Index
+
+.. Meta Menu
+
+.. toctree::
+   :hidden:
+
+   Sitemap
