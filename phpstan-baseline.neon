@@ -1611,11 +1611,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Instanceof between OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder and OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Parameter \\#1 \\$css of method Pelago\\\\Emogrifier\\\\CssInliner\\:\\:inlineCss\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php

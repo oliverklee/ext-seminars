@@ -48,6 +48,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Increase type safety in the `RegistrationManager` (#3678)
 - Avoid the deprecated `ActionController::forward()` method (#3637)
 - Drop tests for duplicated place associations (#3631)
 - Always return a response from controller actions
