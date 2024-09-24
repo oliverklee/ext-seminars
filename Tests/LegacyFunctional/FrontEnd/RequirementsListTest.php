@@ -28,30 +28,18 @@ final class RequirementsListTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RequirementsList
-     */
-    private $subject;
+    private RequirementsList $subject;
 
     /**
      * @var positive-int the UID of a seminar to which the plugin relates
      */
-    private $seminarUid;
+    private int $seminarUid;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $pluginConfiguration;
+    private DummyConfiguration $pluginConfiguration;
 
-    /**
-     * @var int
-     */
-    private $rootPageUid;
+    private int $rootPageUid;
 
     protected function setUp(): void
     {

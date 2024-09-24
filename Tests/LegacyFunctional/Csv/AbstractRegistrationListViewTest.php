@@ -33,31 +33,21 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
     /**
      * @var AbstractRegistrationListView&MockObject
      */
-    private $subject;
+    private AbstractRegistrationListView $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * PID of the system folder in which we store our test data
-     *
-     * @var int
      */
-    private $pageUid = 0;
+    private int $pageUid = 0;
 
     /**
      * UID of a test event record
-     *
-     * @var int
      */
-    private $eventUid = 0;
+    private int $eventUid = 0;
 
     /**
      * @var list<non-empty-string>
@@ -72,7 +62,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
     /**
      * @var list<class-string>
      */
-    private $mockedClassNames = [];
+    private array $mockedClassNames = [];
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables

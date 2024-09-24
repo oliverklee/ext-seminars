@@ -33,35 +33,26 @@ final class RegistrationsListTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationsList
-     */
-    private $subject;
+    private RegistrationsList $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var positive-int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid;
+    private int $seminarUid;
 
     /**
      * @var positive-int the UID of a front end user for testing purposes
      */
-    private $feUserUid;
+    private int $feUserUid;
 
     /**
      * @var positive-int the UID of a registration for testing purposes
      */
-    private $registrationUid;
+    private int $registrationUid;
 
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
+    private ResponseHeadersModifier $responseHeadersModifier;
 
     protected function setUp(): void
     {

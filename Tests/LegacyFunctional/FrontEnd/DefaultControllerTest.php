@@ -51,40 +51,34 @@ final class DefaultControllerTest extends FunctionalTestCase
         'currency' => 'EUR',
     ];
 
-    /**
-     * @var TestingDefaultController
-     */
-    private $subject;
+    private TestingDefaultController $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var positive-int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid;
+    private int $seminarUid;
 
     /**
      * @var positive-int PID of a dummy system folder
      */
-    private $systemFolderPid;
+    private int $systemFolderPid;
 
     /**
      * @var int<0, max> the number of target groups for the current event record
      */
-    private $numberOfTargetGroups = 0;
+    private int $numberOfTargetGroups = 0;
 
     /**
      * @var int<0, max> the number of categories for the current event record
      */
-    private $numberOfCategories = 0;
+    private int $numberOfCategories = 0;
 
     /**
      * @var int<0, max> the number of organizers for the current event record
      */
-    private $numberOfOrganizers = 0;
+    private int $numberOfOrganizers = 0;
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
@@ -98,25 +92,16 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     private $connectionPool;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $sharedConfiguration;
+    private DummyConfiguration $sharedConfiguration;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $extensionConfiguration;
+    private DummyConfiguration $extensionConfiguration;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $pluginConfiguration;
+    private DummyConfiguration $pluginConfiguration;
 
     /**
      * @var positive-int
      */
-    private $rootPageUid;
+    private int $rootPageUid;
 
     protected function setUp(): void
     {

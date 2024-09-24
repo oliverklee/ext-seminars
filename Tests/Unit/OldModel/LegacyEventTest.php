@@ -22,10 +22,7 @@ final class LegacyEventTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var TestingLegacyEvent
-     */
-    private $subject;
+    private TestingLegacyEvent $subject;
 
     protected function setUp(): void
     {

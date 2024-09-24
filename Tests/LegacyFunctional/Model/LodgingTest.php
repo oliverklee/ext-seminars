@@ -21,10 +21,7 @@ final class LodgingTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Lodging
-     */
-    private $subject;
+    private Lodging $subject;
 
     protected function setUp(): void
     {

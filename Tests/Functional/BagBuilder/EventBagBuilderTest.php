@@ -21,10 +21,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var EventBagBuilder
-     */
-    private $subject;
+    private EventBagBuilder $subject;
 
     protected function setUp(): void
     {

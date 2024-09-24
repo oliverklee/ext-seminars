@@ -23,15 +23,9 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class RegistrationDigest
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
+    private Configuration $configuration;
 
-    /**
-     * @var EventMapper
-     */
-    private $eventMapper;
+    private EventMapper $eventMapper;
 
     public function __construct()
     {

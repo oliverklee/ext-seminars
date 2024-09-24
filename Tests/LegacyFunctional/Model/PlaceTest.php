@@ -24,10 +24,7 @@ final class PlaceTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var Place
-     */
-    private $subject;
+    private Place $subject;
 
     protected function setUp(): void
     {

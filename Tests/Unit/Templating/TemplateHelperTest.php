@@ -18,10 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class TemplateHelperTest extends UnitTestCase
 {
-    /**
-     * @var TestingTemplateHelper
-     */
-    private $subject;
+    private TestingTemplateHelper $subject;
 
     protected function setUp(): void
     {

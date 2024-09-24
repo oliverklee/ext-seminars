@@ -27,32 +27,29 @@ final class RegistrationGuardTest extends UnitTestCase
     /**
      * @var non-empty-string
      */
-    private $now = '2022-04-01 10:00:00';
+    private string $now = '2022-04-01 10:00:00';
 
     /**
      * @var Context&MockObject
      */
-    private $contextMock;
+    private Context $contextMock;
 
     /**
      * @var RegistrationRepository&MockObject
      */
-    private $registrationRepositoryMock;
+    private RegistrationRepository $registrationRepositoryMock;
 
     /**
      * @var EventStatisticsCalculator&MockObject
      */
-    private $eventStatisticsCalculatorMock;
+    private EventStatisticsCalculator $eventStatisticsCalculatorMock;
 
     /**
      * @var OneTimeAccountConnector&MockObject
      */
-    private $oneTimeAccountConnectorMock;
+    private OneTimeAccountConnector $oneTimeAccountConnectorMock;
 
-    /**
-     * @var RegistrationGuard
-     */
-    private $subject;
+    private RegistrationGuard $subject;
 
     protected function setUp(): void
     {

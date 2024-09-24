@@ -31,30 +31,15 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class RegistrationProcessor implements SingletonInterface
 {
-    /**
-     * @var RegistrationRepository
-     */
-    private $registrationRepository;
+    private RegistrationRepository $registrationRepository;
 
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var FrontendUserRepository
-     */
-    private $frontendUserRepository;
+    private FrontendUserRepository $frontendUserRepository;
 
-    /**
-     * @var RegistrationGuard
-     */
-    private $registrationGuard;
+    private RegistrationGuard $registrationGuard;
 
-    /**
-     * @var RegistrationManager
-     */
-    private $registrationManager;
+    private RegistrationManager $registrationManager;
 
     public function __construct(
         RegistrationRepository $registrationRepository,

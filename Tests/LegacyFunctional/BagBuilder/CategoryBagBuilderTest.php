@@ -21,15 +21,9 @@ final class CategoryBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var CategoryBagBuilder
-     */
-    private $subject;
+    private CategoryBagBuilder $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

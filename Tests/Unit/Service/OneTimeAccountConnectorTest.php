@@ -17,15 +17,12 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class OneTimeAccountConnectorTest extends UnitTestCase
 {
-    /**
-     * @var OneTimeAccountConnector
-     */
-    private $subject;
+    private OneTimeAccountConnector $subject;
 
     /**
      * @var FrontendUserAuthentication&MockObject
      */
-    private $frontEndUserAuthenticationMock;
+    private FrontendUserAuthentication $frontEndUserAuthenticationMock;
 
     protected function setUp(): void
     {

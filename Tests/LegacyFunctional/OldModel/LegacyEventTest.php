@@ -47,35 +47,20 @@ final class LegacyEventTest extends FunctionalTestCase
         'unregistrationDeadlineDaysBeforeBeginDate' => 0,
     ];
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
-    /**
-     * @var TestingLegacyEvent
-     */
-    private $subject;
+    private TestingLegacyEvent $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var int
-     */
-    private $unregistrationDeadline = 0;
+    private int $unregistrationDeadline = 0;
 
     /**
      * @var positive-int
      */
-    private $now = 1524751343;
+    private int $now = 1524751343;
 
-    /**
-     * @var DefaultController|null
-     */
-    private $pi1;
+    private ?DefaultController $pi1 = null;
 
     /**
      * @var ConnectionPool

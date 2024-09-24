@@ -27,10 +27,7 @@ class SlugGenerator implements SingletonInterface
      */
     private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(EventDispatcherInterface $eventDispatcher)
     {

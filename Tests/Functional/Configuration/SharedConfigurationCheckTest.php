@@ -20,15 +20,9 @@ final class SharedConfigurationCheckTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var SharedConfigurationCheck
-     */
-    private $subject;
+    private SharedConfigurationCheck $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

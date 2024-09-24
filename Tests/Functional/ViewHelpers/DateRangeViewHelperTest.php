@@ -30,10 +30,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
      */
     private const BEGIN_DATE = 978307200;
 
-    /**
-     * @var DateRangeViewHelper
-     */
-    private $subject;
+    private DateRangeViewHelper $subject;
 
     protected function setUp(): void
     {

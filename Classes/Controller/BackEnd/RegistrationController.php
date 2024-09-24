@@ -29,20 +29,11 @@ class RegistrationController extends ActionController
      */
     private const CSV_FILENAME = 'registrations.csv';
 
-    /**
-     * @var RegistrationRepository
-     */
-    private $registrationRepository;
+    private RegistrationRepository $registrationRepository;
 
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var LanguageService
-     */
-    private $languageService;
+    private LanguageService $languageService;
 
     public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
     {

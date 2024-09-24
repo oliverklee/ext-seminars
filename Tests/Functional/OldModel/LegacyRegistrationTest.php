@@ -37,10 +37,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var LegacyRegistration
-     */
-    private $subject;
+    private LegacyRegistration $subject;
 
     /**
      * @var array<string, string>

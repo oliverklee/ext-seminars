@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacyOrganizerTest extends UnitTestCase
 {
-    /**
-     * @var LegacyOrganizer
-     */
-    private $subject;
+    private LegacyOrganizer $subject;
 
     protected function setUp(): void
     {

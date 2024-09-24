@@ -37,32 +37,32 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var EventRepository&MockObject
      */
-    private $eventRepositoryMock;
+    private EventRepository $eventRepositoryMock;
 
     /**
      * @var Permissions&MockObject
      */
-    private $permissionsMock;
+    private Permissions $permissionsMock;
 
     /**
      * @var EventStatisticsCalculator&MockObject
      */
-    private $eventStatisticsCalculatorMock;
+    private EventStatisticsCalculator $eventStatisticsCalculatorMock;
 
     /**
      * @var CsvDownloader&MockObject
      */
-    private $csvDownloaderMock;
+    private CsvDownloader $csvDownloaderMock;
 
     /**
      * @var LanguageService&MockObject
      */
-    private $languageServiceMock;
+    private LanguageService $languageServiceMock;
 
     protected function setUp(): void
     {

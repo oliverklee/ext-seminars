@@ -40,32 +40,32 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @var RegistrationGuard&MockObject
      */
-    private $registrationGuardMock;
+    private RegistrationGuard $registrationGuardMock;
 
     /**
      * @var RegistrationProcessor&MockObject
      */
-    private $registrationProcesserMock;
+    private RegistrationProcessor $registrationProcesserMock;
 
     /**
      * @var OneTimeAccountConnector&MockObject
      */
-    private $oneTimeAccountConnectorMock;
+    private OneTimeAccountConnector $oneTimeAccountConnectorMock;
 
     /**
      * @var PriceFinder&MockObject
      */
-    private $priceFinderMock;
+    private PriceFinder $priceFinderMock;
 
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var UriBuilder&MockObject
      */
-    private $uriBuilderMock;
+    private UriBuilder $uriBuilderMock;
 
     protected function setUp(): void
     {

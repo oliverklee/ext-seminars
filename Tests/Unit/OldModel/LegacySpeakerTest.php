@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacySpeakerTest extends UnitTestCase
 {
-    /**
-     * @var LegacySpeaker
-     */
-    private $subject;
+    private LegacySpeaker $subject;
 
     protected function setUp(): void
     {

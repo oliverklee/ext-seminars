@@ -30,25 +30,13 @@ class EventRegistrationController extends ActionController
      */
     protected const MAXIMUM_BOOKABLE_SEATS = 10;
 
-    /**
-     * @var RegistrationGuard
-     */
-    protected $registrationGuard;
+    protected RegistrationGuard $registrationGuard;
 
-    /**
-     * @var RegistrationProcessor
-     */
-    protected $registrationProcessor;
+    protected RegistrationProcessor $registrationProcessor;
 
-    /**
-     * @var OneTimeAccountConnector
-     */
-    protected $oneTimeAccountConnector;
+    protected OneTimeAccountConnector $oneTimeAccountConnector;
 
-    /**
-     * @var PriceFinder
-     */
-    protected $priceFinder;
+    protected PriceFinder $priceFinder;
 
     public function __construct(
         RegistrationGuard $registrationGuard,

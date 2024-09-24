@@ -48,10 +48,7 @@ abstract class AbstractListView
      */
     protected $tableName = '';
 
-    /**
-     * @var Configuration
-     */
-    protected $configuration;
+    protected Configuration $configuration;
 
     public function __construct()
     {

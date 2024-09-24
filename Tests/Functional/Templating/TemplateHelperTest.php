@@ -26,10 +26,7 @@ final class TemplateHelperTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var TestingTemplateHelper
-     */
-    private $subject;
+    private TestingTemplateHelper $subject;
 
     protected function setUp(): void
     {

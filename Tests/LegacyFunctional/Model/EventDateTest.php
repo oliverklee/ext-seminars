@@ -27,10 +27,7 @@ final class EventDateTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
     protected function setUp(): void
     {

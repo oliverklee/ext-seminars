@@ -29,32 +29,29 @@ final class RegistrationProcessorTest extends UnitTestCase
     /**
      * @var RegistrationRepository&MockObject
      */
-    private $registrationRepositoryMock;
+    private RegistrationRepository $registrationRepositoryMock;
 
     /**
      * @var EventRepository&MockObject
      */
-    private $eventRepositoryMock;
+    private EventRepository $eventRepositoryMock;
 
     /**
-     * @var FrontEndUserRepository&MockObject
+     * @var FrontendUserRepository&MockObject
      */
-    private $frontendUserRepositoryMock;
+    private FrontendUserRepository $frontendUserRepositoryMock;
 
     /**
      * @var RegistrationGuard&MockObject
      */
-    private $registrationGuardMock;
+    private RegistrationGuard $registrationGuardMock;
 
     /**
      * @var RegistrationManager&MockObject
      */
-    private $registrationManagerMock;
+    private RegistrationManager $registrationManagerMock;
 
-    /**
-     * @var RegistrationProcessor
-     */
-    private $subject;
+    private RegistrationProcessor $subject;
 
     protected function setUp(): void
     {

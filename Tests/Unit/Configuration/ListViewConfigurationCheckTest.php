@@ -14,15 +14,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ListViewConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var ListViewConfigurationCheck
-     */
-    private $subject;
+    private ListViewConfigurationCheck $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

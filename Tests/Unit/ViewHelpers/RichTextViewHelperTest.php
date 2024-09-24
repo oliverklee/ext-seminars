@@ -15,10 +15,7 @@ final class RichTextViewHelperTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var RichTextViewHelper
-     */
-    private $subject;
+    private RichTextViewHelper $subject;
 
     protected function setUp(): void
     {

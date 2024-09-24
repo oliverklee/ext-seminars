@@ -40,30 +40,15 @@ final class EmailServiceTest extends FunctionalTestCase
      */
     private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
-    /**
-     * @var EmailService
-     */
-    private $subject;
+    private EmailService $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var Event
-     */
-    private $event;
+    private Event $event;
 
-    /**
-     * @var FrontEndUser
-     */
-    private $user;
+    private FrontEndUser $user;
 
-    /**
-     * @var Organizer
-     */
-    private $organizer;
+    private Organizer $organizer;
 
     protected function setUp(): void
     {

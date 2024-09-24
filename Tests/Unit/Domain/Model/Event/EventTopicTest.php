@@ -25,10 +25,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventTopicTest extends UnitTestCase
 {
-    /**
-     * @var EventTopic
-     */
-    private $subject;
+    private EventTopic $subject;
 
     protected function setUp(): void
     {

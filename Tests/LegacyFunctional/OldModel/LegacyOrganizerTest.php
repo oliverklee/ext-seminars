@@ -20,22 +20,11 @@ final class LegacyOrganizerTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var LegacyOrganizer
-     */
-    private $subject;
+    private LegacyOrganizer $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * a maximal filled organizer
-     *
-     * @var LegacyOrganizer
-     */
-    private $maximalFixture;
+    private LegacyOrganizer $maximalFixture;
 
     protected function setUp(): void
     {

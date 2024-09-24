@@ -18,12 +18,12 @@ class ResponseHeadersModifier implements MiddlewareInterface, SingletonInterface
     /**
      * @var positive-int|null
      */
-    private $overrideStatusCode;
+    private ?int $overrideStatusCode = null;
 
     /**
      * @var array<non-empty-string, non-empty-string>
      */
-    private $overrideHeaders = [];
+    private array $overrideHeaders = [];
 
     /**
      * @return positive-int|null

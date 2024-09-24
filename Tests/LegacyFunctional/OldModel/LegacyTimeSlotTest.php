@@ -27,20 +27,11 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingLegacyTimeSlot
-     */
-    private $subject;
+    private TestingLegacyTimeSlot $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

@@ -41,10 +41,7 @@ class LegacyRegistration extends AbstractModel
      */
     private $seminar;
 
-    /**
-     * @var bool
-     */
-    private $userDataHasBeenRetrieved = false;
+    private bool $userDataHasBeenRetrieved = false;
 
     /**
      * This variable stores the data of the user as an array and makes it
@@ -52,7 +49,7 @@ class LegacyRegistration extends AbstractModel
      *
      * @var array<string, string|int|bool>|null
      */
-    private $userData;
+    private ?array $userData = null;
 
     /**
      * UIDs of lodging options associated with this record
@@ -80,7 +77,7 @@ class LegacyRegistration extends AbstractModel
      *
      * @var LegacyEvent[]
      */
-    private static $cachedSeminars = [];
+    private static array $cachedSeminars = [];
 
     /**
      * @var FrontEndUser|null

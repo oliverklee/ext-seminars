@@ -29,15 +29,9 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationBagBuilder
-     */
-    private $subject;
+    private RegistrationBagBuilder $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

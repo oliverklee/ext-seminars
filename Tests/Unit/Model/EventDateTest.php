@@ -18,10 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventDateTest extends UnitTestCase
 {
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
     protected function setUp(): void
     {

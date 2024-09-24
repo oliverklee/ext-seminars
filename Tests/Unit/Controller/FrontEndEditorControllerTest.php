@@ -38,37 +38,37 @@ final class FrontEndEditorControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var EventRepository&MockObject
      */
-    private $eventRepositoryMock;
+    private EventRepository $eventRepositoryMock;
 
     /**
      * @var EventTypeRepository&MockObject
      */
-    private $eventTypeRepositoryMock;
+    private EventTypeRepository $eventTypeRepositoryMock;
 
     /**
      * @var OrganizerRepository&MockObject
      */
-    private $organizerRepositoryMock;
+    private OrganizerRepository $organizerRepositoryMock;
 
     /**
      * @var SpeakerRepository&MockObject
      */
-    private $speakerRepositoryMock;
+    private SpeakerRepository $speakerRepositoryMock;
 
     /**
      * @var VenueRepository&MockObject
      */
-    private $venueRepositoryMock;
+    private VenueRepository $venueRepositoryMock;
 
     /**
      * @var Context&MockObject
      */
-    private $context;
+    private Context $context;
 
     protected function setUp(): void
     {

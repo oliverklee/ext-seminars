@@ -21,10 +21,7 @@ final class TargetGroupTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var TargetGroup
-     */
-    private $subject;
+    private TargetGroup $subject;
 
     protected function setUp(): void
     {

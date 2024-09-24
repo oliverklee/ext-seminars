@@ -41,20 +41,11 @@ final class EmailServiceTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var EmailService
-     */
-    private $subject;
+    private EmailService $subject;
 
-    /**
-     * @var Event
-     */
-    private $event;
+    private Event $event;
 
-    /**
-     * @var Organizer
-     */
-    private $organizer;
+    private Organizer $organizer;
 
     protected function setUp(): void
     {

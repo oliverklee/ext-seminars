@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PaymentMethodRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var PaymentMethodRepository
-     */
-    private $subject;
+    private PaymentMethodRepository $subject;
 
     protected function setUp(): void
     {

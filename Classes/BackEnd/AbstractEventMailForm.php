@@ -36,29 +36,18 @@ abstract class AbstractEventMailForm
      */
     private $oldEvent;
 
-    /**
-     * @var Event the event which this email form refers to
-     */
-    private $event;
+    private Event $event;
 
-    /**
-     * @var array
-     */
-    private $postData = [];
+    private array $postData = [];
 
     /**
      * hook objects for the list view
      *
      * @var list<BackEndModule>
      */
-    private $hooks = [];
+    private array $hooks = [];
 
-    /**
-     * whether the hooks in $this->hooks have been retrieved
-     *
-     * @var bool
-     */
-    private $hooksHaveBeenRetrieved = false;
+    private bool $hooksHaveBeenRetrieved = false;
 
     /**
      * The constructor of this class. Instantiates an event object.

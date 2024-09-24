@@ -50,22 +50,16 @@ class RegistrationManager
     /**
      * @var LegacyRegistration|null
      */
-    private $registration;
+    private ?LegacyRegistration $registration = null;
 
-    /**
-     * @var Template|null
-     */
-    private $emailTemplate;
+    private ?Template $emailTemplate = null;
 
     /**
      * @var HookProvider|null
      */
     protected $registrationEmailHookProvider;
 
-    /**
-     * @var SingleViewLinkBuilder|null
-     */
-    private $linkBuilder;
+    private ?SingleViewLinkBuilder $linkBuilder = null;
 
     /**
      * @return static the current singleton instance

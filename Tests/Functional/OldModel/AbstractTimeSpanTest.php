@@ -44,10 +44,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingTimeSpan
-     */
-    private $subject;
+    private TestingTimeSpan $subject;
 
     protected function setUp(): void
     {

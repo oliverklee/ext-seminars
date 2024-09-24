@@ -16,21 +16,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class RequirementsList extends AbstractView
 {
-    /**
-     * @var LegacyEvent|null the event to build the requirements list for
-     */
-    private $event;
+    private ?LegacyEvent $event = null;
 
-    /**
-     * @var SingleViewLinkBuilder|null
-     */
-    private $linkBuilder;
+    private ?SingleViewLinkBuilder $linkBuilder = null;
 
-    /**
-     * Sets the event to which this view relates.
-     *
-     * @param LegacyEvent $event the event to build the requirements list for
-     */
     public function setEvent(LegacyEvent $event): void
     {
         $this->event = $event;

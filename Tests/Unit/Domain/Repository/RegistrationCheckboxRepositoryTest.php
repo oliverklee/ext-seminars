@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationCheckboxRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var RegistrationCheckboxRepository
-     */
-    private $subject;
+    private RegistrationCheckboxRepository $subject;
 
     protected function setUp(): void
     {

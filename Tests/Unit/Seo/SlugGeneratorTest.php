@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SlugGeneratorTest extends UnitTestCase
 {
-    /**
-     * @var SlugGenerator
-     */
-    private $subject;
+    private SlugGenerator $subject;
 
     protected function setUp(): void
     {

@@ -9,20 +9,11 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class TestingSlugEventDispatcher implements EventDispatcherInterface
 {
-    /**
-     * @var AfterSlugGeneratedEvent|null
-     */
-    private $event;
+    private ?AfterSlugGeneratedEvent $event = null;
 
-    /**
-     * @var bool
-     */
-    private $dispatched = false;
+    private bool $dispatched = false;
 
-    /**
-     * @var string|null
-     */
-    private $slugToSet;
+    private ?string $slugToSet = null;
 
     public function setModifiedSlug(string $slug): void
     {

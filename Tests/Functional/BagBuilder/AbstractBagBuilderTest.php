@@ -22,10 +22,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingBagBuilder
-     */
-    private $subject;
+    private TestingBagBuilder $subject;
 
     protected function setUp(): void
     {

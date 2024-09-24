@@ -22,12 +22,9 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @var RegistrationRepository&MockObject
      */
-    private $registrationRepositoryMock;
+    private RegistrationRepository $registrationRepositoryMock;
 
-    /**
-     * @var EventStatisticsCalculator
-     */
-    private $subject;
+    private EventStatisticsCalculator $subject;
 
     protected function setUp(): void
     {

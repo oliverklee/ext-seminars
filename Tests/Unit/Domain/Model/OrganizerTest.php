@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class OrganizerTest extends UnitTestCase
 {
-    /**
-     * @var Organizer
-     */
-    private $subject;
+    private Organizer $subject;
 
     protected function setUp(): void
     {

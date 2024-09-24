@@ -31,10 +31,7 @@ final class RegistrationProcessorTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationProcessor
-     */
-    private $subject;
+    private RegistrationProcessor $subject;
 
     protected function setUp(): void
     {

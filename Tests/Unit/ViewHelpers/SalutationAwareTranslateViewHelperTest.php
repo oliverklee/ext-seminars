@@ -13,10 +13,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 final class SalutationAwareTranslateViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var SalutationAwareTranslateViewHelper
-     */
-    private $subject;
+    private SalutationAwareTranslateViewHelper $subject;
 
     protected function setUp(): void
     {

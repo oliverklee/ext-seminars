@@ -15,10 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CsvResponseTest extends UnitTestCase
 {
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {

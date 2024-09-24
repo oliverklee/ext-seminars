@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventTypeRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var EventTypeRepository
-     */
-    private $subject;
+    private EventTypeRepository $subject;
 
     protected function setUp(): void
     {

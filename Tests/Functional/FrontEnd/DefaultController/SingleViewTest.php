@@ -27,10 +27,7 @@ final class SingleViewTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     private TestingDefaultController $subject;
 

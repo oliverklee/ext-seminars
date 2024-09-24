@@ -31,25 +31,16 @@ final class EventStatusServiceTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var EventStatusService
-     */
-    private $subject;
+    private EventStatusService $subject;
 
     /**
      * @var EventMapper&MockObject
      */
-    private $eventMapper;
+    private EventMapper $eventMapper;
 
-    /**
-     * @var int
-     */
-    private $past = 0;
+    private int $past = 0;
 
-    /**
-     * @var int
-     */
-    private $future = 0;
+    private int $future = 0;
 
     protected function setUp(): void
     {

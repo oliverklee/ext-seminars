@@ -20,15 +20,9 @@ final class RegistrationMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationMapper
-     */
-    private $subject;
+    private RegistrationMapper $subject;
 
-    /**
-     * @var FrontEndUserMapper
-     */
-    private $userMapper;
+    private FrontEndUserMapper $userMapper;
 
     protected function setUp(): void
     {

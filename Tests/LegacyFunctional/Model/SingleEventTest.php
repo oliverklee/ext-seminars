@@ -25,10 +25,7 @@ final class SingleEventTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
     protected function setUp(): void
     {

@@ -21,15 +21,9 @@ final class PaymentMethodMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var PaymentMethodMapper
-     */
-    private $subject;
+    private PaymentMethodMapper $subject;
 
     protected function setUp(): void
     {

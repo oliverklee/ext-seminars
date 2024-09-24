@@ -13,12 +13,12 @@ final class SlugContext
      * @var int<0, max> the UID of the event (which for event dates will be the UID of the date, not the topic),
      *                  will be 0 if the event has not been saved yet
      */
-    private $eventUid;
+    private int $eventUid;
 
     /**
      * @var string the title used for the slug (which for event dates will the topic's title)
      */
-    private $displayTitle;
+    private string $displayTitle;
 
     /**
      * @var string the slugified title, which is not guaranteed to be unique

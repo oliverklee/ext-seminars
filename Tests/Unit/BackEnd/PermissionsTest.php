@@ -28,7 +28,7 @@ final class PermissionsTest extends UnitTestCase
     /**
      * @var BackendUserAuthentication&MockObject
      */
-    private $backendUserMock;
+    private BackendUserAuthentication $backendUserMock;
 
     protected function setUp(): void
     {

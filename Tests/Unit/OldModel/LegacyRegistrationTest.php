@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacyRegistrationTest extends UnitTestCase
 {
-    /**
-     * @var LegacyRegistration
-     */
-    private $subject;
+    private LegacyRegistration $subject;
 
     protected function setUp(): void
     {

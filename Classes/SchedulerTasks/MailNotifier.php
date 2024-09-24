@@ -54,10 +54,7 @@ class MailNotifier extends AbstractTask
      */
     protected $registrationDigest;
 
-    /**
-     * @var bool
-     */
-    private $dependenciesAreSetUp = false;
+    private bool $dependenciesAreSetUp = false;
 
     /**
      * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).

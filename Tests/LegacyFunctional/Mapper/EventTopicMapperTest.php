@@ -35,15 +35,9 @@ final class EventTopicMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var EventMapper
-     */
-    private $subject;
+    private EventMapper $subject;
 
     protected function setUp(): void
     {

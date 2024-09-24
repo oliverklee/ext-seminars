@@ -23,10 +23,7 @@ final class TimeSlotTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var TimeSlot
-     */
-    private $subject;
+    private TimeSlot $subject;
 
     protected function setUp(): void
     {

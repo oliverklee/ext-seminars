@@ -23,20 +23,14 @@ final class AbstractModelTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingModel
-     */
-    private $subject;
+    private TestingModel $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     /**
      * @var positive-int UID of the minimal fixture's data in the DB
      */
-    private $subjectUid;
+    private int $subjectUid;
 
     protected function setUp(): void
     {

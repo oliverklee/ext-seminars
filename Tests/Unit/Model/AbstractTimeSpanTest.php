@@ -16,7 +16,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @var AbstractTimeSpan&MockObject
      */
-    private $subject;
+    private AbstractTimeSpan $subject;
 
     protected function setUp(): void
     {

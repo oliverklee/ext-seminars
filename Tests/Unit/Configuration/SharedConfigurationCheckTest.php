@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SharedConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var SharedConfigurationCheck
-     */
-    private $subject;
+    private SharedConfigurationCheck $subject;
 
     protected function setUp(): void
     {

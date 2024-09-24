@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Configuration;
 
 use OliverKlee\Seminars\Configuration\LegacyConfiguration;
 use OliverKlee\Seminars\Templating\TemplateHelper;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -19,14 +20,11 @@ final class LegacyConfigurationTest extends UnitTestCase
     protected bool $resetSingletonInstances = true;
 
     /**
-     * @var ContentObjectRenderer
+     * @var ContentObjectRenderer&MockObject
      */
-    private $contentObjectMock;
+    private ContentObjectRenderer $contentObjectMock;
 
-    /**
-     * @var LegacyConfiguration
-     */
-    private $subject;
+    private LegacyConfiguration $subject;
 
     protected function setUp(): void
     {

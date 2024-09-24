@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AccommodationOptionTest extends UnitTestCase
 {
-    /**
-     * @var AccommodationOption
-     */
-    private $subject;
+    private AccommodationOption $subject;
 
     protected function setUp(): void
     {

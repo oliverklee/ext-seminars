@@ -21,15 +21,9 @@ final class PlaceMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var PlaceMapper
-     */
-    private $subject;
+    private PlaceMapper $subject;
 
     protected function setUp(): void
     {

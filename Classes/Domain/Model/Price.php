@@ -44,10 +44,9 @@ class Price
     ];
 
     /**
-     * @var float
      * @Transient
      */
-    private $amount;
+    private float $amount;
 
     /**
      * the full localization key in the seminars extension
@@ -55,13 +54,13 @@ class Price
      * @var non-empty-string
      * @Transient
      */
-    private $labelKey;
+    private string $labelKey;
 
     /**
      * @var self::PRICE_*
      * @Transient
      */
-    private $priceCode;
+    private string $priceCode;
 
     /**
      * @param float $amount

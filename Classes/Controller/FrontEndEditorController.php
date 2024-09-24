@@ -21,30 +21,15 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class FrontEndEditorController extends ActionController
 {
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var EventTypeRepository
-     */
-    private $eventTypeRepository;
+    private EventTypeRepository $eventTypeRepository;
 
-    /**
-     * @var OrganizerRepository
-     */
-    private $organizerRepository;
+    private OrganizerRepository $organizerRepository;
 
-    /**
-     * @var SpeakerRepository
-     */
-    private $speakerRepository;
+    private SpeakerRepository $speakerRepository;
 
-    /**
-     * @var VenueRepository
-     */
-    private $venueRepository;
+    private VenueRepository $venueRepository;
 
     public function __construct(
         EventRepository $eventRepository,

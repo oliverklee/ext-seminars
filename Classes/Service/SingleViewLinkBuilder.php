@@ -17,10 +17,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class SingleViewLinkBuilder
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {

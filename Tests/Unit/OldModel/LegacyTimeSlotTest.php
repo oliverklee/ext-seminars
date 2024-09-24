@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacyTimeSlotTest extends UnitTestCase
 {
-    /**
-     * @var LegacyTimeSlot
-     */
-    private $subject;
+    private LegacyTimeSlot $subject;
 
     protected function setUp(): void
     {

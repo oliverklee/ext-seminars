@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EventTypeTest extends UnitTestCase
 {
-    /**
-     * @var EventType
-     */
-    private $subject;
+    private EventType $subject;
 
     protected function setUp(): void
     {

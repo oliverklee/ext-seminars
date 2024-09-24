@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class MailNotifierConfigurationTest extends UnitTestCase
 {
-    /**
-     * @var MailNotifierConfiguration
-     */
-    private $subject;
+    private MailNotifierConfiguration $subject;
 
     protected function setUp(): void
     {

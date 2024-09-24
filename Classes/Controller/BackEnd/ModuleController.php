@@ -18,15 +18,9 @@ class ModuleController extends ActionController
     use PageUidTrait;
     use PermissionsTrait;
 
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var RegistrationRepository
-     */
-    private $registrationRepository;
+    private RegistrationRepository $registrationRepository;
 
     public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
     {

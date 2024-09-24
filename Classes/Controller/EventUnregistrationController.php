@@ -22,10 +22,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventUnregistrationController extends ActionController
 {
-    /**
-     * @var RegistrationManager
-     */
-    private $registrationManager;
+    private RegistrationManager $registrationManager;
 
     public function __construct(RegistrationManager $registrationManager)
     {

@@ -20,15 +20,9 @@ final class OrganizerBagTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var OrganizerBag
-     */
-    private $subject;
+    private OrganizerBag $subject;
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

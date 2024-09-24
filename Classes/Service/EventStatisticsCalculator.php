@@ -16,10 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EventStatisticsCalculator implements SingletonInterface
 {
-    /**
-     * @var RegistrationRepository
-     */
-    private $registrationRepository;
+    private RegistrationRepository $registrationRepository;
 
     public function __construct(RegistrationRepository $registrationRepository)
     {

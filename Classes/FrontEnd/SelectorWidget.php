@@ -34,7 +34,7 @@ class SelectorWidget extends AbstractView
     /**
      * @var string[] the keys of the search fields which should be displayed in the search form
      */
-    private $displayedSearchFields = [];
+    private array $displayedSearchFields = [];
 
     /**
      * @var string the prefix of every subpart of the search widget
@@ -49,7 +49,7 @@ class SelectorWidget extends AbstractView
     /**
      * @var Collection<Place>|null all places which are assigned to at least one event
      */
-    private $places;
+    private ?Collection $places = null;
 
     /**
      * @var HookProvider|null

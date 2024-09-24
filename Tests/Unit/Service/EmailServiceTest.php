@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class EmailServiceTest extends UnitTestCase
 {
-    /**
-     * @var EmailService
-     */
-    private $subject;
+    private EmailService $subject;
 
     protected function setUp(): void
     {

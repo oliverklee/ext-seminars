@@ -44,37 +44,37 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @var TemplateView&MockObject
      */
-    private $viewMock;
+    private TemplateView $viewMock;
 
     /**
      * @var Permissions&MockObject
      */
-    private $permissionsMock;
+    private Permissions $permissionsMock;
 
     /**
      * @var RegistrationRepository&MockObject
      */
-    private $registrationRepositoryMock;
+    private RegistrationRepository $registrationRepositoryMock;
 
     /**
      * @var EventRepository&MockObject
      */
-    private $eventRepositoryMock;
+    private EventRepository $eventRepositoryMock;
 
     /**
      * @var EventStatisticsCalculator&MockObject
      */
-    private $eventStatisticsCalculatorMock;
+    private EventStatisticsCalculator $eventStatisticsCalculatorMock;
 
     /**
      * @var CsvDownloader&MockObject
      */
-    private $csvDownloaderMock;
+    private CsvDownloader $csvDownloaderMock;
 
     /**
      * @var LanguageService&MockObject
      */
-    private $languageServiceMock;
+    private LanguageService $languageServiceMock;
 
     protected function setUp(): void
     {

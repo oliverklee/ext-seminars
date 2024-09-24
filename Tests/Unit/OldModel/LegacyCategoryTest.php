@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LegacyCategoryTest extends UnitTestCase
 {
-    /**
-     * @var LegacyCategory
-     */
-    private $subject;
+    private LegacyCategory $subject;
 
     protected function setUp(): void
     {

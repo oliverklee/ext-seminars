@@ -65,7 +65,7 @@ class DefaultController extends TemplateHelper
      * @var LegacyEvent|null the seminar which we want to list/show or
      *                          for which the user wants to register
      */
-    private $seminar;
+    private ?LegacyEvent $seminar = null;
 
     /**
      * @var LegacyRegistration|null the registration which we want to
@@ -74,7 +74,7 @@ class DefaultController extends TemplateHelper
     private $registration;
 
     /** @var string the previous event's category (used for the list view) */
-    private $previousCategory = '';
+    private string $previousCategory = '';
 
     /**
      * @var string[] field names (as keys) by which we can sort plus the corresponding SQL sort criteria (as value).
@@ -181,10 +181,7 @@ class DefaultController extends TemplateHelper
      */
     protected $singleViewHookProvider;
 
-    /**
-     * @var SingleViewLinkBuilder|null
-     */
-    private $linkBuilder;
+    private ?SingleViewLinkBuilder $linkBuilder = null;
 
     /**
      * @var int

@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CategoryListConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var CategoryListConfigurationCheck
-     */
-    private $subject;
+    private CategoryListConfigurationCheck $subject;
 
     protected function setUp(): void
     {

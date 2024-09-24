@@ -16,10 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class GenerateEventSlugsUpgradeWizardTest extends UnitTestCase
 {
-    /**
-     * @var GenerateEventSlugsUpgradeWizard
-     */
-    private $subject;
+    private GenerateEventSlugsUpgradeWizard $subject;
 
     protected function setUp(): void
     {

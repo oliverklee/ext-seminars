@@ -13,10 +13,7 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
  */
 class OneTimeAccountConnector implements SingletonInterface
 {
-    /**
-     * @var FrontendUserAuthentication
-     */
-    private $frontEndUserAuthentication;
+    private FrontendUserAuthentication $frontEndUserAuthentication;
 
     public function __construct()
     {

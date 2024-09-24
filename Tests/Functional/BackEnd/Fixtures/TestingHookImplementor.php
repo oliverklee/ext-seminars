@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 final class TestingHookImplementor implements BackEndModule, SingletonInterface
 {
-    /**
-     * @var int
-     */
-    private $countCallForGeneralEmail = 0;
+    private int $countCallForGeneralEmail = 0;
 
     public function modifyGeneralEmail(Registration $registration, MailMessage $email): void
     {

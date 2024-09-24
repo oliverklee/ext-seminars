@@ -18,10 +18,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var TestingTimeSpan
-     */
-    private $subject;
+    private TestingTimeSpan $subject;
 
     protected function setUp(): void
     {

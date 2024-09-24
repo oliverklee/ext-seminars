@@ -16,10 +16,7 @@ final class RegistrationManagerTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var RegistrationManager
-     */
-    private $subject;
+    private RegistrationManager $subject;
 
     protected function setUp(): void
     {

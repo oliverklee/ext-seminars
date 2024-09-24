@@ -26,20 +26,11 @@ final class CsvDownloaderTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var CsvDownloader
-     */
-    private $subject;
+    private CsvDownloader $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
+    private ResponseHeadersModifier $responseHeadersModifier;
 
     protected function setUp(): void
     {

@@ -34,10 +34,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class SingleEventTest extends UnitTestCase
 {
-    /**
-     * @var SingleEvent
-     */
-    private $subject;
+    private SingleEvent $subject;
 
     protected function setUp(): void
     {

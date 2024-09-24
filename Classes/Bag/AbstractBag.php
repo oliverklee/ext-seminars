@@ -35,48 +35,40 @@ abstract class AbstractBag implements \Iterator
 
     /**
      * comma-separated list of table names
-     *
-     * @var string
      */
-    private $allTableNames = '';
+    private string $allTableNames;
 
     /**
      * @var string the ORDER BY clause (without the actual string "ORDER BY")
      */
-    private $orderBy = '';
+    private string $orderBy;
 
     /**
      * @var string the GROUP BY clause (without the actual string "GROUP BY")
      */
-    private $groupBy = '';
+    private string $groupBy;
 
     /**
      * @var string the LIMIT clause (without the actual string "LIMIT")
      */
-    private $limit = '';
+    private string $limit;
 
     /**
      * @var string will be prepended to the WHERE clause using AND, e.g. 'pid=42'
      *             (the AND and the enclosing spaces are not necessary for this
      *             parameter)
      */
-    private $queryParameters = '';
+    private string $queryParameters;
 
     /**
      * @var string will be prepended to the WHERE clause, making sure that only
      *             enabled and non-deleted records will be processed
      */
-    private $enabledFieldsQuery = '';
+    private string $enabledFieldsQuery = '';
 
-    /**
-     * @var bool
-     */
-    private $showHiddenRecords;
+    private bool $showHiddenRecords;
 
-    /**
-     * @var bool
-     */
-    private $queryHasBeenExecuted = false;
+    private bool $queryHasBeenExecuted = false;
 
     /**
      * @var array<int, array<string, string|int|float|null>>
@@ -86,17 +78,17 @@ abstract class AbstractBag implements \Iterator
     /**
      * @var int<0, max>
      */
-    private $key = 0;
+    private int $key = 0;
 
     /**
      * @var int<0, max> how many objects this bag would hold without the LIMIT
      */
-    private $countWithoutLimit = 0;
+    private int $countWithoutLimit = 0;
 
     /**
      * @var bool whether $this->$countWithoutLimit has been calculated
      */
-    private $hasCountWithoutLimit = false;
+    private bool $hasCountWithoutLimit = false;
 
     /**
      * @var PageRepository

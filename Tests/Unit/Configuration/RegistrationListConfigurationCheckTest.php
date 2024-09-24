@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class RegistrationListConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var RegistrationListConfigurationCheck
-     */
-    private $subject;
+    private RegistrationListConfigurationCheck $subject;
 
     protected function setUp(): void
     {

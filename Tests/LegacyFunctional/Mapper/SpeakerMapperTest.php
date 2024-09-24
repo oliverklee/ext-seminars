@@ -21,15 +21,9 @@ final class SpeakerMapperTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var SpeakerMapper
-     */
-    private $subject;
+    private SpeakerMapper $subject;
 
     protected function setUp(): void
     {

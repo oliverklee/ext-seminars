@@ -16,10 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EventStatusService implements SingletonInterface
 {
-    /**
-     * @var EventMapper
-     */
-    protected $eventMapper;
+    protected EventMapper $eventMapper;
 
     public function __construct()
     {

@@ -23,10 +23,7 @@ final class EventTopicTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var Event
-     */
-    private $subject;
+    private Event $subject;
 
     protected function setUp(): void
     {

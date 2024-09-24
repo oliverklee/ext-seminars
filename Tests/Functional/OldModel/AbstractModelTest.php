@@ -19,7 +19,7 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @var positive-int
      */
-    private $now;
+    private int $now;
 
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',

@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FoodOptionTest extends UnitTestCase
 {
-    /**
-     * @var FoodOption
-     */
-    private $subject;
+    private FoodOption $subject;
 
     protected function setUp(): void
     {

@@ -14,15 +14,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class MyVipEventsConfigurationCheckTest extends UnitTestCase
 {
-    /**
-     * @var MyVipEventsConfigurationCheck
-     */
-    private $subject;
+    private MyVipEventsConfigurationCheck $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     protected function setUp(): void
     {
