@@ -16,10 +16,10 @@ class TimeSlotBag extends AbstractBag
     /**
      * @var class-string<LegacyTimeSlot>
      */
-    protected static $modelClassName = LegacyTimeSlot::class;
+    protected static string $modelClassName = LegacyTimeSlot::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_timeslots';
+    protected static string $tableName = 'tx_seminars_timeslots';
 }

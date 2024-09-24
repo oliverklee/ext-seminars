@@ -16,10 +16,10 @@ class RegistrationBag extends AbstractBag
     /**
      * @var class-string<LegacyRegistration>
      */
-    protected static $modelClassName = LegacyRegistration::class;
+    protected static string $modelClassName = LegacyRegistration::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_attendances';
+    protected static string $tableName = 'tx_seminars_attendances';
 }

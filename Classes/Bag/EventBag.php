@@ -16,10 +16,10 @@ class EventBag extends AbstractBag
     /**
      * @var class-string<LegacyEvent>
      */
-    protected static $modelClassName = LegacyEvent::class;
+    protected static string $modelClassName = LegacyEvent::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_seminars';
+    protected static string $tableName = 'tx_seminars_seminars';
 }

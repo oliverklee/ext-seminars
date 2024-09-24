@@ -16,10 +16,10 @@ class CategoryBag extends AbstractBag
     /**
      * @var class-string<LegacyCategory>
      */
-    protected static $modelClassName = LegacyCategory::class;
+    protected static string $modelClassName = LegacyCategory::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_categories';
+    protected static string $tableName = 'tx_seminars_categories';
 }
