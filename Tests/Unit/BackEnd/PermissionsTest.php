@@ -49,6 +49,7 @@ final class PermissionsTest extends UnitTestCase
      */
     public function classIsSingleton(): void
     {
+        $this->backendUserMock->method('check')->willReturn(true);
         self::assertInstanceOf(SingletonInterface::class, new Permissions());
     }
 

@@ -16,17 +16,7 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:setPostData\\(\\) has parameter \\$postData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractEventMailForm\\:\\:\\$postData type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
@@ -36,32 +26,12 @@ parameters:
 			path: Classes/BackEnd/AbstractEventMailForm.php
 
 		-
+			message: "#^Cannot access an offset on mixed\\.$#"
+			count: 2
+			path: Classes/BackEnd/FlexForms.php
+
+		-
 			message: "#^Cannot access offset 'Field' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/FlexForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getColumnsOfTable\\(\\) should return array\\<string\\> but returns array\\<int, mixed\\>\\.$#"
-			count: 1
-			path: Classes/BackEnd/FlexForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowFeUserFieldsInRegistrationsList\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/FlexForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowFeUserFieldsInRegistrationsList\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/FlexForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowRegistrationFieldsInRegistrationList\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/BackEnd/FlexForms.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\FlexForms\\:\\:getShowRegistrationFieldsInRegistrationList\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/FlexForms.php
 
