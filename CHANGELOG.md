@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Remove the FE editor (#3685)
 - Drop `RegistrationManager::existsSeminar()`/`::existsSeminarMessage()` (#3629)
 - Drop `RegistrationManager::isUserRegisteredMessage()` (#3628)
 - Drop `LegacyAbstractTimeSpam::getEndDate()` (#3627)
