@@ -16,10 +16,10 @@ class SpeakerBag extends AbstractBag
     /**
      * @var class-string<LegacySpeaker>
      */
-    protected static $modelClassName = LegacySpeaker::class;
+    protected static string $modelClassName = LegacySpeaker::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_speakers';
+    protected static string $tableName = 'tx_seminars_speakers';
 }

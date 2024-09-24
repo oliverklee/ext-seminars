@@ -17,10 +17,10 @@ final class TestingBag extends AbstractBag
     /**
      * @var class-string<TestingModel>
      */
-    protected static $modelClassName = TestingModel::class;
+    protected static string $modelClassName = TestingModel::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_test';
+    protected static string $tableName = 'tx_seminars_test';
 }

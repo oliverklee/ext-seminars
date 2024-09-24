@@ -16,10 +16,10 @@ class OrganizerBag extends AbstractBag
     /**
      * @var class-string<LegacyOrganizer>
      */
-    protected static $modelClassName = LegacyOrganizer::class;
+    protected static string $modelClassName = LegacyOrganizer::class;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = 'tx_seminars_organizers';
+    protected static string $tableName = 'tx_seminars_organizers';
 }

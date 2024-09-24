@@ -26,12 +26,12 @@ abstract class AbstractBag implements \Iterator
     /**
      * @var class-string<M>
      */
-    protected static $modelClassName;
+    protected static string $modelClassName;
 
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var non-empty-string
      */
-    protected static $tableName = '';
+    protected static string $tableName;
 
     /**
      * comma-separated list of table names
@@ -73,7 +73,7 @@ abstract class AbstractBag implements \Iterator
     /**
      * @var array<int, array<string, string|int|float|null>>
      */
-    private $queryResult = [];
+    private array $queryResult = [];
 
     /**
      * @var int<0, max>
@@ -90,10 +90,7 @@ abstract class AbstractBag implements \Iterator
      */
     private bool $hasCountWithoutLimit = false;
 
-    /**
-     * @var PageRepository
-     */
-    protected $pageRepository;
+    protected PageRepository $pageRepository;
 
     /**
      * Creates a bag that contains test records and allows iterating over them.
@@ -160,19 +157,17 @@ abstract class AbstractBag implements \Iterator
      * Is using the $TCA arrays "ctrl" part where the key "enablefields"
      * determines for each table which of these features applies to that table.
      *
-     * @param string $table
-     *        table name found in the $TCA array
      * @param int $showHidden
      *        If $showHidden is set (0/1), any hidden-fields in records are ignored.
      *        NOTICE: If you call this function, consider what to do with the show_hidden parameter.
-     *        Maybe it should be set? See ContentObjectRenderer->enableFields
+     *        Maybe it should be set? See `ContentObjectRenderer->enableFields`
      *        where it's implemented correctly.
      *
      * @return string the WHERE clause starting like " AND ...=... AND ...=..."
      */
     public function enableFields(string $table, int $showHidden = -1): string
     {
-        if (!in_array($showHidden, [-1, 0, 1], true)) {
+        if (!\in_array($showHidden, [-1, 0, 1], true)) {
             throw new \InvalidArgumentException(
                 '$showHidden may only be -1, 0 or 1, but actually is ' . $showHidden,
                 1331319963
@@ -244,9 +239,6 @@ abstract class AbstractBag implements \Iterator
         return static::$modelClassName::fromData($data);
     }
 
-    /**
-     * @return bool whether the current item is valid
-     */
     public function valid(): bool
     {
         $this->executeQueryIfNotDoneYet();
@@ -305,19 +297,12 @@ abstract class AbstractBag implements \Iterator
             ->count('*')
             ->where($this->queryParameters)
             ->executeQuery();
-        $count = (int)$result->fetchOne();
-
-        $this->countWithoutLimit = $count;
+        $this->countWithoutLimit = (int)$result->fetchOne();
         $this->hasCountWithoutLimit = true;
 
         return $this->countWithoutLimit;
     }
 
-    /**
-     * Checks whether this bag is empty.
-     *
-     * @return bool
-     */
     public function isEmpty(): bool
     {
         return $this->count() === 0;
