@@ -14,7 +14,6 @@
         <queue_size>1</queue_size>
         <attendees_min>5</attendees_min>
         <attendees_max>20</attendees_max>
-        <owner_feuser>15</owner_feuser>
         <offline_attendees>5</offline_attendees>
         <cancelled>2</cancelled>
     </tx_seminars_seminars>

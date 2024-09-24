@@ -1082,14 +1082,6 @@ class Event extends AbstractTimeSpan
         $this->setStatus(EventInterface::STATUS_CONFIRMED);
     }
 
-    public function getOwner(): ?OelibFrontEndUser
-    {
-        /** @var OelibFrontEndUser|null $owner */
-        $owner = $this->getAsModel('owner_feuser');
-
-        return $owner;
-    }
-
     /**
      * @return Collection<OelibFrontEndUser>
      */

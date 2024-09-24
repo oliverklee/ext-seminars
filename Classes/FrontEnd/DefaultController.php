@@ -338,7 +338,7 @@ class DefaultController extends TemplateHelper
         $event = LegacyEvent::fromUid($seminarUid, $showHidden);
         if ($event instanceof LegacyEvent) {
             $this->setSeminar($event);
-            $result = $showHidden ? $this->canShowCurrentEvent() : true;
+            $result = true;
         } else {
             $this->setSeminar();
             $result = false;
@@ -1656,9 +1656,6 @@ class DefaultController extends TemplateHelper
             if ($this->seminar->isCanceled()) {
                 $cssClasses[] = $this->pi_getClassName('canceled');
             }
-            if ($this->seminar->isOwnerFeUser()) {
-                $cssClasses[] = $this->pi_getClassName('owner');
-            }
             $completeClass = implode(' ', $cssClasses);
 
             $this->setMarker('class_itemrow', $completeClass);
@@ -2443,24 +2440,6 @@ class DefaultController extends TemplateHelper
 
         return !$limitToAttendees
             || ($this->isLoggedIn() && $this->seminar->isUserRegistered($this->getLoggedInFrontEndUserUid()));
-    }
-
-    /**
-     * Checks whether the currently logged-in user can display the current event.
-     *
-     * When this function is called, $this->seminar must contain a seminar, and
-     * a user must be logged in at the front end.
-     */
-    private function canShowCurrentEvent(): bool
-    {
-        if (!$this->seminar->isHidden()) {
-            return true;
-        }
-        if (!$this->seminar->hasOwner()) {
-            return false;
-        }
-
-        return $this->seminar->getOwner()->getUid() === $this->getLoggedInFrontEndUserUid();
     }
 
     /**

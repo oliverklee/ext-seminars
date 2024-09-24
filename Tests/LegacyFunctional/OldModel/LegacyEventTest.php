@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\OldModel;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
@@ -4595,122 +4594,6 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(
             $externalUrl,
             $event->getDetailsPage()
-        );
-    }
-
-    // Tests concerning isOwnerFeUser
-
-    /**
-     * @test
-     */
-    public function isOwnerFeUserForNoOwnerReturnsFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->isOwnerFeUser()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse(): void
-    {
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->setOwnerUid($userUid + 1);
-
-        self::assertFalse(
-            $this->subject->isOwnerFeUser()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue(): void
-    {
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
-        $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setOwnerUid($ownerUid);
-
-        self::assertTrue(
-            $this->subject->isOwnerFeUser()
-        );
-    }
-
-    // Tests concerning getOwner
-
-    /**
-     * @test
-     */
-    public function getOwnerForExistingOwnerReturnsFrontEndUserInstance(): void
-    {
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
-        $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setOwnerUid($ownerUid);
-
-        self::assertInstanceOf(OelibFrontEndUser::class, $this->subject->getOwner());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerForExistingOwnerReturnsUserWithOwnersUid(): void
-    {
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
-        $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setOwnerUid($ownerUid);
-
-        self::assertSame(
-            $ownerUid,
-            $this->subject->getOwner()->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerForNoOwnerReturnsNull(): void
-    {
-        self::assertNull(
-            $this->subject->getOwner()
-        );
-    }
-
-    // Tests concerning hasOwner
-
-    /**
-     * @test
-     */
-    public function hasOwnerForExistingOwnerReturnsTrue(): void
-    {
-        $rootPageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
-        $this->testingFramework->createFakeFrontEnd($rootPageUid);
-        $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->subject->setOwnerUid($ownerUid);
-
-        self::assertTrue(
-            $this->subject->hasOwner()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasOwnerForNoOwnerReturnsFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->hasOwner()
         );
     }
 

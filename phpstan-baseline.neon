@@ -266,16 +266,6 @@ parameters:
 			path: Classes/Domain/Repository/Event/EventRepository.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Event\\\\EventRepository\\:\\:findSingleEventsByOwnerUid\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
-			message: "#^Method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\>\\:\\:logicalAnd\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/Event/EventRepository.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
@@ -536,11 +526,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method getOwner\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method getPaymentMethods\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -651,11 +636,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 5
 			path: Classes/FrontEnd/DefaultController.php
@@ -751,11 +731,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Cannot call method hasOwner\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Cannot call method hasPartners\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -827,16 +802,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method isEventTopic\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method isHidden\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Cannot call method isOwnerFeUser\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -2964,11 +2929,6 @@ parameters:
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/OldModel/AbstractModelTest.php
-
-		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"

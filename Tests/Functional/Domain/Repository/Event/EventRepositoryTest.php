@@ -89,7 +89,6 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(20, $result->getMaximumNumberOfRegistrations());
         self::assertEqualsWithDelta(150.0, $result->getStandardPrice(), 0.0001);
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
-        self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
         self::assertTrue($result->hasAdditionalTerms());
         self::assertTrue($result->isMultipleRegistrationPossible());
@@ -133,7 +132,6 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('There is no glory in prevention.', $result->getDescription());
         self::assertEqualsWithDelta(150.0, $result->getStandardPrice(), 0.0001);
         self::assertEqualsWithDelta(125.0, $result->getEarlyBirdPrice(), 0.0001);
-        self::assertSame(15, $result->getOwnerUid());
         self::assertNull($result->getEventType());
         self::assertTrue($result->hasAdditionalTerms());
         self::assertTrue($result->isMultipleRegistrationPossible());
@@ -163,7 +161,6 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertTrue($result->hasWaitingList());
         self::assertSame(5, $result->getMinimumNumberOfRegistrations());
         self::assertSame(20, $result->getMaximumNumberOfRegistrations());
-        self::assertSame(15, $result->getOwnerUid());
         self::assertSame(5, $result->getNumberOfOfflineRegistrations());
         self::assertSame(EventInterface::STATUS_CONFIRMED, $result->getStatus());
     }
@@ -619,98 +616,6 @@ final class EventRepositoryTest extends FunctionalTestCase
 
         self::assertInstanceOf(SingleEvent::class, $result);
         self::assertTrue($result->isHidden());
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUid(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
-
-        self::assertCount(1, $result);
-        $firstMatch = $result[0];
-        self::assertInstanceOf(SingleEvent::class, $firstMatch);
-        self::assertSame(1, $firstMatch->getUid());
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidForUidZeroIgnoresEventWithoutOwner(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithoutOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(0);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidFindsSingleEventWithTheProvidedOwnerUidOnAnyPage(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwnerOnPage.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
-
-        self::assertCount(1, $result);
-        $firstMatch = $result[0];
-        self::assertInstanceOf(SingleEvent::class, $firstMatch);
-        self::assertSame(1, $firstMatch->getUid());
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidIgnoresSingleEventWithOtherOwnerUid(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidIgnoresEventDatesWithTheProvidedOwnerUid(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidIgnoresEventTopicsWithTheProvidedOwnerUid(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(5);
-
-        self::assertSame([], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleEventsByOwnerUidSortsEventByInternalTitleInAscendingOrder(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithOwner.xml');
-
-        $result = $this->subject->findSingleEventsByOwnerUid(42);
-
-        self::assertCount(2, $result);
-        $firstMatch = $result[0];
-        self::assertSame(2, $firstMatch->getUid());
     }
 
     /**

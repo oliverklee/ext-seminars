@@ -7,9 +7,7 @@ namespace OliverKlee\Seminars\OldModel;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Bag\OrganizerBag;
@@ -2784,44 +2782,6 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         return $options;
-    }
-
-    /**
-     * Gets this event's owner (the FE user who has created this event).
-     */
-    public function getOwner(): ?OelibFrontEndUser
-    {
-        if (!$this->hasRecordPropertyInteger('owner_feuser')) {
-            return null;
-        }
-
-        $ownerUid = $this->getRecordPropertyInteger('owner_feuser');
-        \assert($ownerUid > 0);
-
-        return MapperRegistry::get(OelibFrontEndUserMapper::class)->find($ownerUid);
-    }
-
-    /**
-     * Checks whether this event has an existing owner (the FE user who has
-     * created this event).
-     *
-     * @return bool TRUE if this event has an existing owner, FALSE otherwise
-     */
-    public function hasOwner(): bool
-    {
-        return $this->hasRecordPropertyInteger('owner_feuser');
-    }
-
-    /**
-     * Checks whether the logged-in FE user is the owner of this event.
-     *
-     * @return bool TRUE if a FE user is logged in and the user is the owner of this event, FALSE otherwise
-     */
-    public function isOwnerFeUser(): bool
-    {
-        $loggedInUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
-
-        return $loggedInUserUid > 0 && ($this->getRecordPropertyInteger('owner_feuser') === $loggedInUserUid);
     }
 
     /**

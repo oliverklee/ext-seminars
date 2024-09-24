@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Domain\Repository\Event;
 
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
-use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -81,28 +80,6 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     private function buildQuerySettingsForBackEnd(): QuerySettingsInterface
     {
         return GeneralUtility::makeInstance(Typo3QuerySettings::class)->setIgnoreEnableFields(true);
-    }
-
-    /**
-     * @return list<Event>
-     */
-    public function findSingleEventsByOwnerUid(int $ownerUid): array
-    {
-        if ($ownerUid <= 0) {
-            return [];
-        }
-
-        $query = $this->createQuery();
-        $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
-
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
-
-        $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
-        $ownerMatcher = $query->equals('ownerUid', $ownerUid);
-        $query->matching($query->logicalAnd($objectTypeMatcher, $ownerMatcher));
-
-        return $query->execute()->toArray();
     }
 
     /**

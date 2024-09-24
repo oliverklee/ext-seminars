@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dataset>
-    <tx_seminars_seminars>
-        <uid>1</uid>
-        <object_type>2</object_type>
-        <owner_feuser>42</owner_feuser>
-    </tx_seminars_seminars>
-</dataset>

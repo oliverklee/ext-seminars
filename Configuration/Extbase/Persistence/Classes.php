@@ -29,9 +29,6 @@ return [
             EventInterface::TYPE_EVENT_TOPIC => EventTopic::class,
             EventInterface::TYPE_EVENT_DATE => EventDate::class,
         ],
-        'properties' => [
-            'ownerUid' => ['fieldName' => 'owner_feuser'],
-        ],
     ],
     SingleEvent::class => [
         'tableName' => 'tx_seminars_seminars',
@@ -50,7 +47,6 @@ return [
             'standardPrice' => ['fieldName' => 'price_regular'],
             'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
             'venues' => ['fieldName' => 'place'],
-            'ownerUid' => ['fieldName' => 'owner_feuser'],
             'additionalTerms' => ['fieldName' => 'uses_terms_2'],
             'multipleRegistrationPossible' => ['fieldName' => 'allows_multiple_registrations'],
             'numberOfOfflineRegistrations' => ['fieldName' => 'offline_attendees'],
@@ -69,7 +65,6 @@ return [
             'internalTitle' => ['fieldName' => 'title'],
             'standardPrice' => ['fieldName' => 'price_regular'],
             'earlyBirdPrice' => ['fieldName' => 'price_regular_early'],
-            'ownerUid' => ['fieldName' => 'owner_feuser'],
             'additionalTerms' => ['fieldName' => 'uses_terms_2'],
             'multipleRegistrationPossible' => ['fieldName' => 'allows_multiple_registrations'],
             'specialPrice' => ['fieldName' => 'price_special'],
@@ -92,7 +87,6 @@ return [
             'minimumNumberOfRegistrations' => ['fieldName' => 'attendees_min'],
             'maximumNumberOfRegistrations' => ['fieldName' => 'attendees_max'],
             'venues' => ['fieldName' => 'place'],
-            'ownerUid' => ['fieldName' => 'owner_feuser'],
             'numberOfOfflineRegistrations' => ['fieldName' => 'offline_attendees'],
             'status' => ['fieldName' => 'cancelled'],
             'accommodationOptions' => ['fieldName' => 'lodgings'],
