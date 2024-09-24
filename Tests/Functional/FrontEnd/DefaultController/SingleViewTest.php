@@ -10,7 +10,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -21,8 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class SingleViewTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -35,17 +32,18 @@ final class SingleViewTest extends FunctionalTestCase
      */
     private $testingFramework;
 
+    private TestingDefaultController $subject;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->buildSubjectForSingleView();
 
         $extensionConfiguration = new DummyConfiguration();
         $extensionConfiguration->setAsBoolean('enableConfigCheck', false);
         ConfigurationProxy::setInstance('seminars', $extensionConfiguration);
-
-        $this->initializeBackEndLanguage();
     }
 
     protected function tearDown(): void
@@ -56,14 +54,9 @@ final class SingleViewTest extends FunctionalTestCase
         parent::tearDown();
     }
 
-    private function getFrontEndController(): TypoScriptFrontendController
+    private function buildSubjectForSingleView(): void
     {
-        return $GLOBALS['TSFE'];
-    }
-
-    private function buildSubjectForSingleView(string $fixtureFileName): TestingDefaultController
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/' . $fixtureFileName . '.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/EventSingleView.xml');
         $this->testingFramework->createFakeFrontEnd(1);
 
         $frontEndController = $this->getFrontEndController();
@@ -77,7 +70,12 @@ final class SingleViewTest extends FunctionalTestCase
             ]
         );
 
-        return $subject;
+        $this->subject = $subject;
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     // Tests concerning the single view
@@ -105,10 +103,9 @@ final class SingleViewTest extends FunctionalTestCase
      */
     public function singleViewContainsHtmlspecialcharedEventData(int $uid, string $expected): void
     {
-        $subject = $this->buildSubjectForSingleView('EventSingleView');
-        $subject->piVars['showUid'] = (string)$uid;
+        $this->subject->piVars['showUid'] = (string)$uid;
 
-        $result = $subject->main('', []);
+        $result = $this->subject->main('', []);
 
         self::assertStringContainsString($expected, $result);
     }
@@ -121,10 +118,9 @@ final class SingleViewTest extends FunctionalTestCase
         $pageTitleProvider = new SingleViewPageTitleProvider();
         GeneralUtility::setSingletonInstance(SingleViewPageTitleProvider::class, $pageTitleProvider);
 
-        $subject = $this->buildSubjectForSingleView('EventSingleView');
-        $subject->piVars['showUid'] = '1';
+        $this->subject->piVars['showUid'] = '1';
 
-        $subject->main('', []);
+        $this->subject->main('', []);
 
         self::assertSame('test & event', $pageTitleProvider->getTitle());
     }
