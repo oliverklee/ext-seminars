@@ -40,24 +40,19 @@ Key features
 - front-end list of registrations for an event (visible to participants
   and editors)
 
-- back-end module for managing event and registrations
-
-- front-end editing of event records
+- back-end module for managing events and registrations
 
 - publishing workflow for events entered in the front end
 
 - files can be attached to each event
 
-- CSV export of events and registrations of an event
+- CSV export of registrations of an event
 
-- the front-end output is mostly valid XHTML
+- the front-end output is valid XHTML
 
 - visual design is done using only CSS
 
-- mostly accessible front-end output, works with the
-  *sb\_accessiblecontent* extension (for version 0.8.0, the extension's
-  accessibility will be thoroughly checked for accordance with W3C WAI,
-  section 508 and BITV guidelines)
+- mostly accessible front-end output
 
 - currently full German, English, Dutch, Danish, Italian, French and
   Russian localization, including a switch between formal and informal
@@ -71,6 +66,3 @@ Key features
 - the code follows the TYPO3 coding guidelines
 
 - the extension is actively developed
-
-- is tested with Firefox, Safari and IE7 and 8 (if you need IE6
-  compatibility, this might require additional work on our side)
