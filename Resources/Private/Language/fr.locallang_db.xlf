@@ -828,10 +828,6 @@
         <source>Seminar Manager</source>
         <target state="final">Gestionnaire de séminaires</target>
       </trans-unit>
-      <trans-unit id="owner_feuser" resname="owner_feuser" approved="yes">
-        <source>Front-end user who has created this record</source>
-        <target state="final">Utilisateur front end qui a créé cet enregistrement</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>
