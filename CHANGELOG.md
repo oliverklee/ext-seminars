@@ -50,6 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid using the deprecated `GeneralUtility::_GET()` (#3690)
 - Increase type safety in the `RegistrationManager` (#3678)
 - Avoid the deprecated `ActionController::forward()` method (#3637)
 - Drop tests for duplicated place associations (#3631)

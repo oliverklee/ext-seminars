@@ -34,8 +34,8 @@ class CsvDownloader
      */
     public function main(): string
     {
-        $pageUid = \max(0, (int)GeneralUtility::_GET('pid'));
-        $eventUid = \max(0, (int)GeneralUtility::_GET('eventUid'));
+        $pageUid = \max(0, (int)($_GET['pid'] ?? 0));
+        $eventUid = \max(0, (int)($_GET['eventUid'] ?? 0));
         return $this->createAndOutputListOfRegistrations($eventUid, $pageUid);
     }
 
