@@ -24,63 +24,49 @@ abstract class AbstractBagBuilder
     /**
      * @var class-string<M> class name of the bag class that will be built
      */
-    protected $bagClassName;
+    protected string $bagClassName;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string
      */
-    protected $tableName = '';
+    protected string $tableName;
 
     /**
-     * @var string[] associative array with the WHERE clause parts (will be concatenated with " AND " later)
+     * @var array<string, non-empty-string> associative array with the WHERE clause parts (will be concatenated with " AND " later)
      */
-    protected $whereClauseParts = [];
+    protected array $whereClauseParts = [];
 
     /**
      * @var string the sorting field
      */
-    protected $orderBy = 'uid';
+    protected string $orderBy = 'uid';
 
     /**
      * @var string the field by which the DB query result should be grouped
      */
-    protected $groupBy = '';
+    protected string $groupBy = '';
 
     /**
-     * @var string the number of records to retrieve; leave empty to set
-     *             no limit
+     * @var string the number of records to retrieve; leave empty to set no limit
      */
-    protected $limit = '';
+    protected string $limit = '';
 
     /**
-     * @var string[] additional table names for the query
+     * @var array<string, non-empty-string> additional table names for the query
      */
-    protected $additionalTableNames = [];
+    protected array $additionalTableNames = [];
 
-    /**
-     * @var bool whether the timing of records should be ignored
-     */
-    protected $ignoreTimingOfRecords = false;
+    protected bool $ignoreTimingOfRecords = false;
 
-    /**
-     * @var bool whether hidden records should be shown, too
-     */
-    protected $showHiddenRecords = false;
+    protected bool $showHiddenRecords = false;
 
-    /**
-     * @var PageRepository
-     */
-    protected $pageRepository;
+    protected PageRepository $pageRepository;
 
     /**
      * The constructor. Checks that $this->tableName is not empty.
      */
     public function __construct()
     {
-        if ($this->tableName === '') {
-            throw new \RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
-        }
-
         $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
     }
 
@@ -120,8 +106,8 @@ abstract class AbstractBagBuilder
      *
      * @param string $sourcePagePids
      *        comma-separated list of PIDs of the system folders with the records;
-     *        must not be empty; need not be safeguarded against SQL injection
-     * @param int $recursionDepth
+     *        need not be safeguarded against SQL injection
+     * @param int<0, max> $recursionDepth
      *        recursion depth, must be >= 0
      */
     public function setSourcePages(string $sourcePagePids, int $recursionDepth = 0): void
@@ -143,9 +129,6 @@ abstract class AbstractBagBuilder
 
     /**
      * Checks whether some source pages have already been set.
-     *
-     * @return bool TRUE if source pages have already been set, FALSE
-     *                 otherwise
      */
     public function hasSourcePages(): bool
     {
@@ -159,11 +142,11 @@ abstract class AbstractBagBuilder
      *
      * If the bag does not have any limitations imposed upon, the return value will be a tautology.
      *
-     * @return string complete WHERE clause for the bag to create, will not be empty
+     * @return non-empty-string complete WHERE clause for the bag to create, will not be empty
      */
     public function getWhereClause(): string
     {
-        if (empty($this->whereClauseParts)) {
+        if ($this->whereClauseParts === []) {
             return '1=1';
         }
 
@@ -175,32 +158,24 @@ abstract class AbstractBagBuilder
      *
      * If the bag does not have such limitation imposed upon, the return value will be empty.
      *
-     * @param string $key the limitation key to return, must not be empty
+     * @param non-empty-string $key the limitation key to return, must not be empty
      *
      * @return string WHERE clause part for the bag to create, may be empty
      */
     public function getWhereClausePart(string $key): string
     {
-        if (empty($key)) {
-            throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331331);
-        }
-
         return $this->whereClauseParts[$key] ?? '';
     }
 
     /**
      * Sets a WHERE clause part (limitation) for the bag to create.
      *
-     * @param string $key the limitation key to return, must not be empty
+     * @param non-empty-string $key the limitation key to return, must not be empty
      * @param string $value the WHERE clause part of a limitation, empty value removes the limitation
      */
     public function setWhereClausePart(string $key, string $value): void
     {
-        if (empty($key)) {
-            throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331332);
-        }
-
-        if (empty($value)) {
+        if ($value === '') {
             unset($this->whereClauseParts[$key]);
             return;
         }
@@ -212,14 +187,10 @@ abstract class AbstractBagBuilder
      * Adds the table name given in the parameter $additionalTableName to
      * $this->additionalTableNames.
      *
-     * @param string $additionalTableName the table name to add to the additional table names array, must not be empty
+     * @param non-empty-string $additionalTableName the table name to add to the additional table names array
      */
     public function addAdditionalTableName(string $additionalTableName): void
     {
-        if ($additionalTableName === '') {
-            throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
-        }
-
         $this->additionalTableNames[$additionalTableName] = $additionalTableName;
     }
 
@@ -227,14 +198,10 @@ abstract class AbstractBagBuilder
      * Removes the table name given in the parameter $additionalTableName from
      * $this->additionalTableNames.
      *
-     * @param string $additionalTableName the table name to remove from the additional table names array, must not be empty
+     * @param non-empty-string $additionalTableName the table name to remove from the additional table names array
      */
     public function removeAdditionalTableName(string $additionalTableName): void
     {
-        if ($additionalTableName === '') {
-            throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
-        }
-
         if (!isset($this->additionalTableNames[$additionalTableName])) {
             throw new \InvalidArgumentException(
                 'The given additional table name does not exist in the list of additional table names.',
@@ -245,11 +212,6 @@ abstract class AbstractBagBuilder
         unset($this->additionalTableNames[$additionalTableName]);
     }
 
-    /**
-     * Sets the ORDER BY statement for the bag to build.
-     *
-     * @param string $orderBy the ORDER BY statement to set, may be empty
-     */
     public function setOrderBy(string $orderBy): void
     {
         $this->orderBy = $orderBy;

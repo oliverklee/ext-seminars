@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\Functional\BagBuilder\Fixtures\TestingBagBuilder;
-use OliverKlee\Seminars\Tests\LegacyFunctional\BagBuilder\Fixtures\BrokenBagBuilder;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -49,17 +48,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     ///////////////////////////////////////////
     // Tests for the basic builder functions.
     ///////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function builderThrowsExceptionForEmptyTableName(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('The attribute $this->tableName must not be empty.');
-
-        new BrokenBagBuilder();
-    }
 
     /**
      * @test
@@ -494,28 +482,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function whereClausePartGetKeyMustNotBeEmpty(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The parameter $key must not be empty.');
-
-        $this->subject->getWhereClausePart('');
-    }
-
-    /**
-     * @test
-     */
-    public function whereClausePartSetKeyMustNotBeEmpty(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The parameter $key must not be empty.');
-
-        $this->subject->setWhereClausePart('', '');
-    }
-
-    /**
-     * @test
-     */
     public function whereClausePartInitiallyIsEmpty(): void
     {
         self::assertSame('', $this->subject->getWhereClausePart('testpart'));
@@ -661,21 +627,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function addAdditionalTableNameWithEmptyTableNameThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $additionalTableName must not be empty.'
-        );
-
-        $this->subject->addAdditionalTableName('');
-    }
-
-    /**
-     * @test
-     */
     public function addAdditionalTableNameWithTableNameAddsAdditionalTableName(): void
     {
         $this->subject->addAdditionalTableName('tx_seminars_seminars');
@@ -689,21 +640,6 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /////////////////////////////////////////////////
     // Tests concerning removeAdditionalTableName()
     /////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function removeAdditionalTableNameWithEmptyTableNameThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $additionalTableName must not be empty.'
-        );
-
-        $this->subject->removeAdditionalTableName('');
-    }
 
     /**
      * @test

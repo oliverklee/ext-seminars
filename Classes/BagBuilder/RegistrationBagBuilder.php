@@ -17,32 +17,27 @@ class RegistrationBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<RegistrationBag> class name of the bag class that will be built
      */
-    protected $bagClassName = RegistrationBag::class;
+    protected string $bagClassName = RegistrationBag::class;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_attendances';
+    protected string $tableName = 'tx_seminars_attendances';
 
     /**
      * @var string the sorting field
      */
-    protected $orderBy = 'crdate';
+    protected string $orderBy = 'crdate';
 
     /**
      * Limits the bag to the registrations of the events provided by the
      * parameter $eventUids.
      *
-     * @param int $eventUid the UID of the event to which the registration selection should be limited, must be > 0
+     * @param positive-int $eventUid the UID of the event to which the registration selection should be limited, must be > 0
      */
     public function limitToEvent(int $eventUid): void
     {
-        if ($eventUid <= 0) {
-            throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
-        }
-
-        $this->whereClauseParts['event'] = 'tx_seminars_attendances' .
-            '.seminar=' . $eventUid;
+        $this->whereClauseParts['event'] = 'tx_seminars_attendances.seminar=' . $eventUid;
     }
 
     /**
@@ -98,14 +93,10 @@ class RegistrationBagBuilder extends AbstractBagBuilder
      * Limits the bag to contain only registrations with seats equal or less
      * than the seats given in the parameter $seats.
      *
-     * @param int $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
+     * @param int<0, max> $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
      */
     public function limitToSeatsAtMost(int $seats = 0): void
     {
-        if ($seats < 0) {
-            throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
-        }
-
         if ($seats === 0) {
             unset($this->whereClauseParts['seats']);
             return;
@@ -141,7 +132,7 @@ class RegistrationBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Sets the ORDER BY by statement for the bag to build and joins the
+     * Sets the `ORDER BY` by statement for the bag to build and joins the
      * registration results with the corresponding events.
      *
      * @param string $orderBy the ORDER BY statement to set, may be empty
@@ -160,8 +151,7 @@ class RegistrationBagBuilder extends AbstractBagBuilder
     public function limitToExistingUsers(): void
     {
         $this->whereClauseParts['existingUsers'] = 'EXISTS (
-            SELECT * FROM fe_users WHERE ' .
-            ' fe_users.uid = tx_seminars_attendances.user' .
+            SELECT * FROM fe_users WHERE fe_users.uid = tx_seminars_attendances.user' .
             $this->pageRepository->enableFields('fe_users') . ')';
     }
 }

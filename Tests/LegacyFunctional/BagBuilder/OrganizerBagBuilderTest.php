@@ -60,36 +60,6 @@ final class OrganizerBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToEventWithNegativeEventUidThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $eventUid must be > 0.'
-        );
-
-        $this->subject->limitToEvent(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function limitToEventWithZeroEventUidThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $eventUid must be > 0.'
-        );
-
-        $this->subject->limitToEvent(0);
-    }
-
-    /**
-     * @test
-     */
     public function limitToEventFindsOneOrganizerOfEvent(): void
     {
         $organizerUid = $this->testingFramework->createRecord(

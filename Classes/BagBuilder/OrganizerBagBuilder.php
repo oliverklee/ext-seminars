@@ -16,26 +16,22 @@ class OrganizerBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<OrganizerBag> class name of the bag class that will be built
      */
-    protected $bagClassName = OrganizerBag::class;
+    protected string $bagClassName = OrganizerBag::class;
 
     /**
-     * @var string the table name of the bag to build
+     * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_organizers';
+    protected string $tableName = 'tx_seminars_organizers';
 
     /**
      * Limits the bag to contain only organizers of the event given in the
      * parameter $eventUid (must be a single or date event as topic events don't
      * have any organizers).
      *
-     * @param int $eventUid the event UID to limit the organizers for, must be > 0
+     * @param positive-int $eventUid the event UID to limit the organizers for, must be > 0
      */
     public function limitToEvent(int $eventUid): void
     {
-        if ($eventUid <= 0) {
-            throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292898);
-        }
-
         $this->whereClauseParts['event'] = 'EXISTS (' .
             'SELECT * FROM tx_seminars_seminars_organizers_mm' .
             ' WHERE uid_local = ' . $eventUid . ' AND uid_foreign = ' .

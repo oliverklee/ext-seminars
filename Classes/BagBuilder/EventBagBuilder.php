@@ -24,12 +24,12 @@ class EventBagBuilder extends AbstractBagBuilder
     /**
      * @var class-string<EventBag> class name of the bag class that will be built
      */
-    protected $bagClassName = EventBag::class;
+    protected string $bagClassName = EventBag::class;
 
     /**
      * @var non-empty-string the table name of the bag to build
      */
-    protected $tableName = 'tx_seminars_seminars';
+    protected string $tableName = 'tx_seminars_seminars';
 
     /**
      * @var list<non-empty-string> list of the valid keys for time-frames
@@ -47,7 +47,7 @@ class EventBagBuilder extends AbstractBagBuilder
     ];
 
     /**
-     * @var array<string, list<string>> a list of field names of m:n associations in which we can search,
+     * @var array<string, list<non-empty-string>> a list of field names of m:n associations in which we can search,
      *      grouped by record type
      */
     private static array $searchFieldList = [
