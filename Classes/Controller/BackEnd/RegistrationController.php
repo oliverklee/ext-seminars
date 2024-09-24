@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\Controller\RedirectTrait;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
@@ -23,6 +24,7 @@ class RegistrationController extends ActionController
     use EventStatisticsTrait;
     use PageUidTrait;
     use PermissionsTrait;
+    use RedirectTrait;
 
     /**
      * @var non-empty-string
@@ -114,6 +116,6 @@ class RegistrationController extends ActionController
             ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted');
         $this->addFlashMessage($message);
 
-        return $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
+        return $this->buildRedirectToAction('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
     }
 }

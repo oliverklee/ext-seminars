@@ -17,11 +17,10 @@ use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
-use TYPO3\CMS\Core\Http\RedirectResponse;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -94,6 +93,7 @@ final class RegistrationControllerTest extends UnitTestCase
         );
         $this->subject = $subject;
 
+        $this->subject->_set('uriBuilder', $this->createStub(UriBuilder::class));
         $responseStub = $this->createStub(HtmlResponse::class);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
 
@@ -589,11 +589,9 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->mockRedirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
 
-        if ((new Typo3Version())->getMajorVersion() < 12) {
-            $this->subject->deleteAction(15, $eventUid);
-        } else {
-            $result = $this->subject->deleteAction(15, $eventUid);
-            self::assertInstanceOf(RedirectResponse::class, $result);
-        }
+        $result = $this->subject->deleteAction(15, $eventUid);
+
+        self::assertSame(307, $result->getStatusCode());
+        self::assertSame('Location', $result->getHeaders()['Location'][0]);
     }
 }
