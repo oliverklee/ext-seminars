@@ -22,25 +22,13 @@ class Permissions implements SingletonInterface
      */
     private const REGISTRATIONS_TABLE_NAME = 'tx_seminars_attendances';
 
-    /**
-     * @var bool
-     */
-    private $readAccessToEvents;
+    private bool $readAccessToEvents;
 
-    /**
-     * @var bool
-     */
-    private $readAccessToRegistrations;
+    private bool $readAccessToRegistrations;
 
-    /**
-     * @var bool
-     */
-    private $writeAccessToEvents;
+    private bool $writeAccessToEvents;
 
-    /**
-     * @var bool
-     */
-    private $writeAccessToRegistrations;
+    private bool $writeAccessToRegistrations;
 
     public function __construct()
     {

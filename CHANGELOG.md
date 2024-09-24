@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Use PHP 7.4 language features (#3643)
+- Use PHP 7.4 language features and native type declarations (#3643, #3682)
 - Use constructor injection (#3603, #3607, #3608, #3609, #3610)
 - Use short class names in configuration files (#3598)
 - Use modern string functions (#3579)

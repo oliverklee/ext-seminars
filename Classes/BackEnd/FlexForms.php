@@ -19,9 +19,9 @@ class FlexForms
      * Returns the configuration for the flex forms field
      * "showFeUserFieldsInRegistrationsList" with the selectable database columns.
      *
-     * @param array[] $configuration the flex forms configuration
+     * @param array<string, mixed> $configuration the flex forms configuration
      *
-     * @return array[] the modified flex forms configuration including the selectable database columns
+     * @return array<string, mixed> the modified flex forms configuration including the selectable database columns
      */
     public function getShowFeUserFieldsInRegistrationsList(array $configuration): array
     {
@@ -36,9 +36,9 @@ class FlexForms
      * Returns the configuration for the flex forms field
      * "showRegistrationFieldsInRegistrationList" with the selectable database columns.
      *
-     * @param array[] $configuration the flex forms configuration
+     * @param array<string, mixed> $configuration the flex forms configuration
      *
-     * @return array[] the modified flex forms configuration including the selectable database columns
+     * @return array<string, mixed> the modified flex forms configuration including the selectable database columns
      */
     public function getShowRegistrationFieldsInRegistrationList(array $configuration): array
     {
@@ -54,7 +54,7 @@ class FlexForms
      *
      * @param string $table the table name to get the columns for, must not be empty
      *
-     * @return string[] the column names of the given table name, will not be empty
+     * @return list<string> the column names of the given table name, will not be empty
      *
      * @throws \InvalidArgumentException
      */
@@ -68,7 +68,9 @@ class FlexForms
         $statement = $connection->query('SHOW FULL COLUMNS FROM `' . $table . '`');
         $columns = [];
         foreach ($statement->fetchAll() as $row) {
-            $columns[] = $row['Field'];
+            $field = $row['Field'];
+            \assert(\is_string($field));
+            $columns[] = $field;
         }
 
         return $columns;

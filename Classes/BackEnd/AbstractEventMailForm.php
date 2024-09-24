@@ -16,7 +16,6 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
-use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -31,13 +30,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 abstract class AbstractEventMailForm
 {
-    /**
-     * @var LegacyEvent the event which this email form refers to
-     */
-    private $oldEvent;
-
     private Event $event;
 
+    /**
+     * @var array<string, string|int>
+     */
     private array $postData = [];
 
     /**
@@ -54,35 +51,25 @@ abstract class AbstractEventMailForm
      *
      * @param positive-int $eventUid
      *
-     * @throws \InvalidArgumentException
      * @throws NotFoundException if event could not be instantiated
      */
     public function __construct(int $eventUid)
     {
-        $this->oldEvent = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid);
-
-        if (!$this->oldEvent->comesFromDatabase()) {
+        $mapper = MapperRegistry::get(EventMapper::class);
+        if (!$mapper->existsModel($eventUid)) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);
         }
 
-        $mapper = MapperRegistry::get(EventMapper::class);
         $this->event = $mapper->find($eventUid);
     }
 
-    /**
-     * Returns the event this email form refers to.
-     *
-     * @return Event the event
-     */
     protected function getEvent(): Event
     {
         return $this->event;
     }
 
     /**
-     * Sets the POST data.
-     *
-     * @param array $postData associative array with the POST data, may be empty
+     * @param array<string, string|int> $postData associative array with the POST data, may be empty
      */
     public function setPostData(array $postData): void
     {
@@ -110,8 +97,6 @@ abstract class AbstractEventMailForm
      * Checks whether the stored POST data contains data for a certain field.
      *
      * @param non-empty-string $key the key of the field to check for
-     *
-     * @return bool TRUE if the stored POST data contains an entry, FALSE otherwise
      *
      * @throws \InvalidArgumentException
      */
@@ -144,8 +129,7 @@ abstract class AbstractEventMailForm
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
-                $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-                $email = $emailBuilder->from($sender)
+                $email = GeneralUtility::makeInstance(EmailBuilder::class)->from($sender)
                     ->replyTo($organizer)
                     ->subject($this->getPostData('subject'))
                     ->to($user)
@@ -167,11 +151,6 @@ abstract class AbstractEventMailForm
         }
     }
 
-    /**
-     * Adds a flash message to the queue.
-     *
-     * @param FlashMessage $flashMessage
-     */
     protected function addFlashMessage(FlashMessage $flashMessage): void
     {
         $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
@@ -187,31 +166,23 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Creates the message body for the email.
-     *
-     * @param FrontEndUser $user the recipient of the email
-     * @param Organizer $organizer the organizer which is selected as sender
-     *
-     * @return string the message with the salutation replaced by the user's
-     *                name, will be empty if no message has been set in the POST
-     *                data
+     * @return string the message with the salutation replaced by the user's name,
+     *                will be empty if no message has been set in the POST data
      */
-    private function createMessageBody(FrontEndUser $user, Organizer $organizer): string
+    private function createMessageBody(FrontEndUser $recipient, Organizer $sender): string
     {
         $messageText = str_replace(
             '%salutation',
-            GeneralUtility::makeInstance(Salutation::class)->getSalutation($user),
+            GeneralUtility::makeInstance(Salutation::class)->getSalutation($recipient),
             $this->getPostData('messageBody')
         );
-        $messageFooter = $organizer->hasEmailFooter()
-            ? "\n-- \n" . $organizer->getEmailFooter() : '';
+        $messageFooter = $sender->hasEmailFooter()
+            ? "\n-- \n" . $sender->getEmailFooter() : '';
 
         return $messageText . $messageFooter;
     }
 
     /**
-     * Gets the hooks.
-     *
      * @return list<BackEndModule>
      *
      * @throws \UnexpectedValueException if any hook classes that do not implement the `BackEndModule` interface
