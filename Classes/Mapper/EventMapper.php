@@ -38,7 +38,6 @@ class EventMapper extends AbstractDataMapper
         'organizers' => OrganizerMapper::class,
         'organizing_partners' => OrganizerMapper::class,
         'target_groups' => TargetGroupMapper::class,
-        'owner_feuser' => OelibFrontEndUserMapper::class,
         'vips' => OelibFrontEndUserMapper::class,
         'checkboxes' => CheckboxMapper::class,
         'requirements' => EventMapper::class,

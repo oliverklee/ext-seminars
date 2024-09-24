@@ -2047,7 +2047,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function singleViewForZeroEventUidNoLoggedInUserReturnsWrongSeminarNumberMessage(): void
+    public function singleViewForZeroEventUidReturnsWrongSeminarNumberMessage(): void
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = 0;
@@ -2061,7 +2061,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function singleViewForHiddenRecordAndNoLoggedInUserReturnsWrongSeminarNumberMessage(): void
+    public function singleViewForHiddenRecordReturnsWrongSeminarNumberMessage(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2074,52 +2074,6 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString(
             $this->translate('message_wrongSeminarNumber'),
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForHiddenRecordAndLoggedInUserNotOwnerOfHiddenRecordReturnsWrongSeminarNumberMessage(): void
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['hidden' => 1]
-        );
-
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            $this->translate('message_wrongSeminarNumber'),
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForHiddenRecordAndLoggedInUserOwnerOfHiddenRecordShowsHiddenEvent(): void
-    {
-        $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            [
-                'hidden' => 1,
-                'title' => 'hidden event',
-                'owner_feuser' => $ownerUid,
-            ]
-        );
-
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-
-        self::assertStringContainsString(
-            'hidden event',
             $this->subject->main('', [])
         );
     }

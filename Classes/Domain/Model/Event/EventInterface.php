@@ -64,8 +64,6 @@ interface EventInterface
 
     public function getEventType(): ?EventType;
 
-    public function getOwnerUid(): int;
-
     public function hasAdditionalTerms(): bool;
 
     public function isMultipleRegistrationPossible(): bool;

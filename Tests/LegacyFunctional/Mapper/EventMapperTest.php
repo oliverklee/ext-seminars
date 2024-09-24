@@ -607,30 +607,6 @@ final class EventMapperTest extends FunctionalTestCase
         );
     }
 
-    // Tests regarding getOwner().
-
-    /**
-     * @test
-     */
-    public function getOwnerWithoutOwnerReturnsNull(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertNull($testingModel->getOwner());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithOwnerReturnsOwnerInstance(): void
-    {
-        $frontEndUserUid = MapperRegistry::get(OelibFrontEndUserMapper::class)->getNewGhost()->getUid();
-        \assert($frontEndUserUid > 0);
-        $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUserUid]);
-
-        self::assertInstanceOf(OelibFrontEndUser::class, $testingModel->getOwner());
-    }
-
     // Tests regarding getEventManagers().
 
     /**
