@@ -718,7 +718,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfSpeakers(): int
     {
-        return $this->getRecordPropertyInteger('speakers');
+        $number = $this->getRecordPropertyInteger('speakers');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -726,7 +729,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfPartners(): int
     {
-        return $this->getRecordPropertyInteger('partners');
+        $number = $this->getRecordPropertyInteger('partners');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -734,7 +740,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfTutors(): int
     {
-        return $this->getRecordPropertyInteger('tutors');
+        $number = $this->getRecordPropertyInteger('tutors');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -742,7 +751,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfLeaders(): int
     {
-        return $this->getRecordPropertyInteger('leaders');
+        $number = $this->getRecordPropertyInteger('leaders');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1198,7 +1210,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfPaymentMethods(): int
     {
-        return $this->getTopicInteger('payment_methods');
+        $number = $this->getTopicInteger('payment_methods');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1285,7 +1300,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getAttendancesMin(): int
     {
-        return $this->getRecordPropertyInteger('attendees_min');
+        $number = $this->getRecordPropertyInteger('attendees_min');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1296,7 +1314,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getAttendancesMax(): int
     {
-        return $this->getRecordPropertyInteger('attendees_max');
+        $number = $this->getRecordPropertyInteger('attendees_max');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1342,7 +1363,9 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getAttendancesNotPaid(): int
     {
-        return $this->getAttendances() - $this->getAttendancesPaid();
+        $number = $this->getAttendances() - $this->getAttendancesPaid();
+
+        return \max(0, $number);
     }
 
     /**
@@ -1465,7 +1488,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfTargetGroups(): int
     {
-        return $this->getRecordPropertyInteger('target_groups');
+        $number = $this->getRecordPropertyInteger('target_groups');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1781,7 +1807,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfOrganizers(): int
     {
-        return $this->getRecordPropertyInteger('organizers');
+        $number = $this->getRecordPropertyInteger('organizers');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -1830,7 +1859,10 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function getNumberOfOrganizingPartners(): int
     {
-        return $this->getRecordPropertyInteger('organizing_partners');
+        $number = $this->getRecordPropertyInteger('organizing_partners');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
