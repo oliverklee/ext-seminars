@@ -14,10 +14,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 trait EventStatisticsTrait
 {
-    /**
-     * @var EventStatisticsCalculator
-     */
-    private $eventStatisticsCalculator;
+    private EventStatisticsCalculator $eventStatisticsCalculator;
 
     public function injectEventStatisticsCalculator(EventStatisticsCalculator $calculator): void
     {

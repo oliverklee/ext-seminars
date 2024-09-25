@@ -14,10 +14,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 trait PermissionsTrait
 {
-    /**
-     * @var Permissions
-     */
-    private $permissions;
+    private Permissions $permissions;
 
     public function injectPermissions(Permissions $permissions): void
     {
