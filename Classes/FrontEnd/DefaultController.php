@@ -56,33 +56,31 @@ class DefaultController extends TemplateHelper
      */
     private const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
-    /**
-     * @var EventMapper|null
-     */
-    protected $eventMapper;
+    protected ?EventMapper $eventMapper = null;
 
     /**
-     * @var LegacyEvent|null the seminar which we want to list/show or
-     *                          for which the user wants to register
+     * @var LegacyEvent|null the seminar which we want to list/show or for which the user wants to register
      */
     private ?LegacyEvent $seminar = null;
 
     /**
-     * @var LegacyRegistration|null the registration which we want to
-     *                               list/show in the "my events" view
+     * @var LegacyRegistration|null the registration which we want to list/show in the "my events" view
      */
-    private $registration;
+    private ?LegacyRegistration $registration = null;
 
-    /** @var string the previous event's category (used for the list view) */
+    /**
+     * @var string the previous event's category (used for the list view)
+     */
     private string $previousCategory = '';
 
     /**
-     * @var string[] field names (as keys) by which we can sort plus the corresponding SQL sort criteria (as value).
+     * @var array<non-empty-string, non-empty-string> field names (as keys) by which we can sort plus the corresponding
+     *                                                SQL sort criteria (as value).
      *
      * We cannot use the database table name constants here because default
      * values for member variable don't allow for compound expression.
      */
-    public $orderByList = [
+    public array $orderByList = [
         // The MIN gives us the first category if there are more than one.
         // The clause before the OR gets the events made up of topics (type=1)
         // and concrete dates (type=2).
@@ -171,37 +169,19 @@ class DefaultController extends TemplateHelper
         'status_registration' => 'tx_seminars_attendances.registration_queue',
     ];
 
-    /**
-     * @var HookProvider|null
-     */
-    protected $listViewHookProvider;
+    protected ?HookProvider $listViewHookProvider = null;
 
-    /**
-     * @var HookProvider|null
-     */
-    protected $singleViewHookProvider;
+    protected ?HookProvider $singleViewHookProvider = null;
 
     private ?SingleViewLinkBuilder $linkBuilder = null;
 
-    /**
-     * @var int
-     */
-    protected $showUid = 0;
+    protected int $showUid = 0;
 
-    /**
-     * @var string
-     */
-    protected $whatToDisplay = '';
+    protected string $whatToDisplay = '';
 
-    /**
-     * @var Configuration|null
-     */
-    private $configuration;
+    private ?Configuration $configuration = null;
 
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
+    private ResponseHeadersModifier $responseHeadersModifier;
 
     /**
      * Displays the seminar manager HTML.

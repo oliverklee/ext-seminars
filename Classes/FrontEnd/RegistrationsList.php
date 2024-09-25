@@ -17,16 +17,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class RegistrationsList extends AbstractView
 {
-    /**
-     * @var LegacyEvent the seminar of which we want to list the
-     *                          registrations
-     */
-    private $seminar;
+    private LegacyEvent $seminar;
 
-    /**
-     * @var ResponseHeadersModifier
-     */
-    private $responseHeadersModifier;
+    private ResponseHeadersModifier $responseHeadersModifier;
 
     /**
      * The constructor.
