@@ -45,20 +45,20 @@ class Salutation
             }
         }
 
-        return implode(' ', $salutationParts) . ',';
+        return \implode(' ', $salutationParts) . ',';
     }
 
     /**
      * Gets all hooks for this class.
      *
-     * @return array the hook objects in an array, will be empty if no hooks have been set
+     * @return list<object> the hook objects in an array, will be empty if no hooks have been set
      */
     private function getHooks(): array
     {
         $result = [];
 
         $hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'] ?? null;
-        if (is_array($hooks)) {
+        if (\is_array($hooks)) {
             /** @var array<array-key, class-string> $hooks */
             foreach ($hooks as $classReference) {
                 $result[] = GeneralUtility::makeInstance($classReference);
@@ -87,12 +87,12 @@ class Salutation
             throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);
         }
 
-        $result = sprintf($introductionBegin, $event->getTitle());
+        $result = \sprintf($introductionBegin, $event->getTitle());
 
         if (!$event->hasDate()) {
             return $result;
         }
-        $result .= ' ' . sprintf(
+        $result .= ' ' . \sprintf(
             LocalizationUtility::translate('email_eventDate', 'seminars'),
             $event->getDate('-')
         );
@@ -103,7 +103,7 @@ class Salutation
             $label = ' ' . (!$event->isOpenEnded()
                     ? LocalizationUtility::translate('email_timeFrom', 'seminars')
                     : LocalizationUtility::translate('email_timeAt', 'seminars'));
-            $result .= sprintf($label, $time);
+            $result .= \sprintf($label, $time);
         }
 
         return $result;
