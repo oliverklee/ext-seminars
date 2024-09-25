@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guides xmlns="https://www.phpdoc.org/guides" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.phpdoc.org/guides ../vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+        links-are-relative="true">
+    <extension class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+               project-home="https://extensions.typo3.org/extension/seminars"
+               project-contact="mailto:typo3-coding@oliverklee.de"
+               project-repository="https://github.com/oliverklee/ext-seminars"
+               project-issues="https://github.com/oliverklee/ext-seminars/issues" edit-on-github-branch="main"
+               edit-on-github="oliverklee/ext-seminars" typo3-core-preferred="stable"
+               interlink-shortcode="oliverklee/seminars"/>
+    <project title="Seminar Manager" release="5.7.0" version="5.7" copyright="2024"/>
+</guides>

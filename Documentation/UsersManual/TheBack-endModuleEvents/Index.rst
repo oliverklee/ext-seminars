@@ -1,20 +1,3 @@
-.. include:: Images.txt
-
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-   :class:  typoscript
-.. role::   php(code)
-
-
 The back-end module “Events”
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -34,7 +17,8 @@ currently selected sysfolder, too.
 Tab: Events
 """""""""""
 
-|img-29|  *Abbildung 13: Tab "Events" in the back-end module “Events”*
+.. figure:: ../../Images/manual_html_7931605.png
+   :alt: Tab "Events" in the back-end module “Events”
 
 .. ### BEGIN~OF~TABLE ###
 
@@ -50,7 +34,6 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-30| Create new record
 
    Meaning
          creates a new event record in the selected sysfolder
@@ -59,7 +42,7 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-31| download as CSV
+         download as CSV
 
    Meaning
          downloads all events as CSV file which can be opened e.g. in Excel
@@ -68,7 +51,6 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-13| |img-15| |img-14|
 
    Meaning
          Record type:
@@ -78,7 +60,6 @@ Tab: Events
          .. container:: table-row
 
             a
-                  |img-13|
 
             b
                   Single event
@@ -87,7 +68,6 @@ Tab: Events
          .. container:: table-row
 
             a
-                  |img-14|
 
             b
                   Topic for multiple events
@@ -96,7 +76,6 @@ Tab: Events
          .. container:: table-row
 
             a
-                  |img-15|
 
             b
                   Date (for a topic)
@@ -135,7 +114,6 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-32|
 
    Meaning
          edit an event
@@ -144,7 +122,6 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-33|
 
    Meaning
          delete an event
@@ -153,7 +130,6 @@ Tab: Events
 .. container:: table-row
 
    Column/GUI element
-         |img-34|
 
    Meaning
          temporarily hide an event
@@ -165,7 +141,7 @@ Tab: Events
          act.
 
    Meaning
-         |img-35| the current number of registrations; the CSV button creates
+         the current number of registrations; the CSV button creates
          the registration as a CSV download which can be opened e.g. in Excel
 
 
@@ -254,7 +230,8 @@ If an event needs to be canceled, you can cancel it by clicking on the
 “Cancel” button. This also sends an email to all registered
 participants:
 
-|img-36|  *Abbildung 14: canceling an event*
+.. figure:: ../../Images/manual_html_3b2174d2.png
+   :alt:  canceling an event
 
 In the email form, there already is a default text which you can edit
 before sending the email. The placeholder **%s** will automatically
@@ -274,7 +251,8 @@ participants have signed up and you’ve got the speakers’ okay), you
 can mark an event as confirmed by using the “Confirm” button. This
 also sends an email to the registered participants:
 
-|img-37|  *Abbildung 15: marking an event as confirmed*
+.. figure:: ../../Images/manual_html_m3c134e90.png
+   :alt:  marking an event as confirmed
 
 Signing up for a confirmed event still is possible (as long as there
 are any vacancies); only the text in the confirmation email is a bit
@@ -284,28 +262,11 @@ different.
 Tab: Registrations
 """"""""""""""""""
 
-|img-38|  *Abbildung 16: Tab "Registrations" in the back-end module
-“Events”*
+.. figure:: ../../Images/manual_html_m6b092060.png
+   Tab "Registrations" in the back-end module “Events”
 
 In this tab,  **all** registration records of the currently selected
-sysfolder are displayed (i.e., of all events).
+folder are displayed (i.e., of all events).
 
 The first list **Regular registrations** contains those registrations
 that are not on the waiting list.
-
-
-Tab: Speakers
-"""""""""""""
-
-|img-39|  *Abbildung 17: Tab "Speakers" in the back-end module
-“Events”*
-
-In this tab, **all** speaker records of the currently selected
-sysfolder are displayed (i.e., of all events).
-
-
-Tab: Organizers
-"""""""""""""""
-
-In this tab, **all** organizer records of the currently selected
-sysfolder are displayed (i.e., of all events).

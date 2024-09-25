@@ -1,19 +1,3 @@
-.. include:: Images.txt
-
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-   :class:  typoscript
-.. role::   php(code)
-
 ======================
 Adding front-end pages
 ======================
@@ -23,15 +7,15 @@ explicitly disable that feature.
 
 Your page structure can then look like this:
 
-|img-10|  *Illustration 10: Page structure for a setup* without
-*online registration*
+.. figure:: ../../Images/manual_html_m47af9e9d.png
+   :alt: Page structure for a setup without online registration
 
 Usually, you’ll want to use this extension with the online
 registration feature. For this, the minimal page structure will look
 like this:
 
-|img-11|  *Illustration 11: Page structure for a minimal setup* with
-*online registration*
+.. figure:: ../../Images/manual_html_m3ceb94fd.png
+   :alt: Page structure for a minimal setup with online registration
 
 For a full-blown registration with several list views, two archive
 pages, the “my events page” (where a user can see the events to which
@@ -39,7 +23,8 @@ they have signed up), registrations lists for participants and s and
 front-end editing, the page structure would look like this (usually,
 you only need some of these pages):
 
-|img-12|  *Illustration 12: Page structure for a full-blown setup*
+.. figure:: ../../Images/manual_html_21553933.png
+   :alt: Page structure for a full-blown setup
 
 #. If you want users to be able register manually, then build up a front-
    end user system for your site. Remember which group corresponds to
