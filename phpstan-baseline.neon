@@ -1081,11 +1081,6 @@ parameters:
 			path: Classes/Hooks/HookProvider.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Hooks\\\\HookProvider\\:\\:\\$hookObjects \\(array\\<OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\Hook\\>\\) does not accept array\\<object\\>\\.$#"
-			count: 1
-			path: Classes/Hooks/HookProvider.php
-
-		-
 			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
 			count: 1
 			path: Classes/Hooks/HookProvider.php
@@ -3328,6 +3323,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 1577363367 on mixed\\.$#"
 			count: 5
+			path: Tests/Unit/Hooks/HookProviderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$interfaceName of class OliverKlee\\\\Seminars\\\\Hooks\\\\HookProvider constructor expects class\\-string\\<OliverKlee\\\\Seminars\\\\Hooks\\\\Interfaces\\\\Hook\\>, string given\\.$#"
+			count: 3
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-

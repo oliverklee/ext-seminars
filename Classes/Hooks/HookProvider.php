@@ -36,6 +36,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class HookProvider
 {
+    /**
+     * @var class-string<Hook>
+     */
     protected string $interfaceName;
 
     /**
@@ -44,17 +47,14 @@ class HookProvider
     protected string $index;
 
     /**
-     * @var Hook[]
+     * @var list<Hook>
      */
-    protected $hookObjects = [];
+    protected array $hookObjects = [];
+
+    protected bool $hooksHaveBeenRetrieved = false;
 
     /**
-     * @var bool
-     */
-    protected $hooksHaveBeenRetrieved = false;
-
-    /**
-     * @param string $interfaceName interface the hook needs implemented
+     * @param class-string<Hook> $interfaceName interface the hook needs implemented
      * @param string $index index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`
      *               if not using the interface name (for backwards compatibility)
      *               (the interface name is recommended)
@@ -77,7 +77,7 @@ class HookProvider
         }
 
         $this->interfaceName = $interfaceName;
-        $this->index = $index === '' ? $interfaceName : $index;
+        $this->index = ($index === '') ? $interfaceName : $index;
     }
 
     /**
@@ -139,7 +139,7 @@ class HookProvider
     /**
      * Gets the hook objects for the interface.
      *
-     * @return Hook[]
+     * @return list<Hook>
      */
     protected function getHooks(): array
     {
