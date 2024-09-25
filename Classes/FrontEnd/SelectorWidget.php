@@ -26,13 +26,11 @@ class SelectorWidget extends AbstractView
 {
     /**
      * needed for the list view to convert ISO codes to country names and languages
-     *
-     * @var PiBaseApi
      */
-    protected $staticInfo;
+    protected ?PiBaseApi $staticInfo = null;
 
     /**
-     * @var string[] the keys of the search fields which should be displayed in the search form
+     * @var list<non-empty-string> the keys of the search fields which should be displayed in the search form
      */
     private array $displayedSearchFields = [];
 
@@ -44,17 +42,14 @@ class SelectorWidget extends AbstractView
     /**
      * @var EventBag all seminars to show in the list view
      */
-    private $seminarBag;
+    private EventBag $seminarBag;
 
     /**
      * @var Collection<Place>|null all places which are assigned to at least one event
      */
     private ?Collection $places = null;
 
-    /**
-     * @var HookProvider|null
-     */
-    protected $selectorWidgetHookProvider;
+    protected ?HookProvider $selectorWidgetHookProvider = null;
 
     /**
      * Returns the selector widget if it is not hidden.
@@ -100,7 +95,6 @@ class SelectorWidget extends AbstractView
             true
         );
 
-        $this->instantiateStaticInfo();
         $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToEventTypes(
             GeneralUtility::intExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
@@ -241,14 +235,16 @@ class SelectorWidget extends AbstractView
     /**
      * Creates an instance of PiBaseApi if that has not happened yet.
      */
-    protected function instantiateStaticInfo(): void
+    protected function getStaticInfo(): PiBaseApi
     {
-        if ($this->staticInfo !== null) {
-            return;
+        if ($this->staticInfo instanceof PiBaseApi) {
+            return $this->staticInfo;
         }
 
         $this->staticInfo = GeneralUtility::makeInstance(PiBaseApi::class);
         $this->staticInfo->init();
+
+        return $this->staticInfo;
     }
 
     /**
@@ -493,7 +489,7 @@ class SelectorWidget extends AbstractView
                 $languageIsoCode = $event->getLanguage();
                 if (!empty($languageIsoCode) && !isset($result[$languageIsoCode])) {
                     /** @var string $languageName */
-                    $languageName = $this->staticInfo->getStaticInfoName('LANGUAGES', $languageIsoCode, '', '', 0);
+                    $languageName = $this->getStaticInfo()->getStaticInfoName('LANGUAGES', $languageIsoCode, '', '', 0);
                     $result[$languageIsoCode] = $languageName;
                 }
             }
@@ -575,7 +571,7 @@ class SelectorWidget extends AbstractView
                 $countryIsoCode = $place->getCountry()->getIsoAlpha2Code();
 
                 if (!isset($result[$countryIsoCode])) {
-                    $result[$countryIsoCode] = $this->staticInfo->getStaticInfoName('COUNTRIES', $countryIsoCode);
+                    $result[$countryIsoCode] = $this->getStaticInfo()->getStaticInfoName('COUNTRIES', $countryIsoCode);
                 }
             }
         }

@@ -18,15 +18,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 abstract class AbstractView extends TemplateHelper
 {
-    /**
-     * @var string
-     */
-    protected $whatToDisplay = '';
+    protected string $whatToDisplay = '';
 
-    /**
-     * @var Configuration|null
-     */
-    private $configuration;
+    private ?Configuration $configuration = null;
 
     /**
      * The constructor. Initializes the TypoScript configuration, initializes
