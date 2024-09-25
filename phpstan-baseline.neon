@@ -1366,32 +1366,7 @@ parameters:
 			path: Classes/OldModel/LegacyTimeSlot.php
 
 		-
-			message: "#^Cannot call method getLL\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 5
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Cannot call method includeLLFile\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Cannot call method init\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\BackEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/MailNotifier.php
 
@@ -1411,7 +1386,7 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
 
 		-
-			message: "#^Parameter \\#1 \\$taskInfo \\(array\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:getAdditionalFields\\(\\) should be contravariant with parameter \\$taskInfo \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:getAdditionalFields\\(\\)$#"
+			message: "#^Parameter \\#1 \\$taskInfo \\(array\\<string, string\\>\\) of method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifierConfiguration\\:\\:getAdditionalFields\\(\\) should be contravariant with parameter \\$taskInfo \\(array\\) of method TYPO3\\\\CMS\\\\Scheduler\\\\AdditionalFieldProviderInterface\\:\\:getAdditionalFields\\(\\)$#"
 			count: 2
 			path: Classes/SchedulerTasks/MailNotifierConfiguration.php
 

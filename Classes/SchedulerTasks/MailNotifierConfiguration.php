@@ -25,7 +25,7 @@ class MailNotifierConfiguration extends AbstractAdditionalFieldProvider
     /**
      * Gets additional fields to render in the form to add/edit a task
      *
-     * @param string[] $taskInfo Values of the fields from the add/edit task form
+     * @param array<string, string> $taskInfo Values of the fields from the add/edit task form
      * @param AbstractTask|null $task The task object being edited. Null when adding a task!
      * @param SchedulerModuleController $schedulerModule Reference to the scheduler backend module
      *
