@@ -14,7 +14,7 @@ class LegacyCategory extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_categories';
+    protected static string $tableName = 'tx_seminars_categories';
 
     /**
      * @deprecated will be removed in version 6.0.0 in #3370

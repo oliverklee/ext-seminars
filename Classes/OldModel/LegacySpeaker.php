@@ -16,7 +16,7 @@ class LegacySpeaker extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_speakers';
+    protected static string $tableName = 'tx_seminars_speakers';
 
     /**
      * Gets our organization.
@@ -109,14 +109,14 @@ class LegacySpeaker extends AbstractModel
     }
 
     /**
-     * Gets the number of skills associated with this speaker.
-     *
-     * @return int the number of skills associated with this speaker,
-     *                 will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfSkills(): int
     {
-        return $this->getRecordPropertyInteger('skills');
+        $number = $this->getRecordPropertyInteger('skills');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -214,17 +214,20 @@ class LegacySpeaker extends AbstractModel
     /**
      * Returns the cancelation period of this speaker in days.
      *
-     * @return int the cancelation period in days, will be >= 0
+     * @return int<0, max>
      */
     public function getCancelationPeriodInDays(): int
     {
-        return $this->getRecordPropertyInteger('cancelation_period');
+        $period = $this->getRecordPropertyInteger('cancelation_period');
+        \assert($period >= 0);
+
+        return $period;
     }
 
     /**
      * Sets the cancelation period of this speaker
      *
-     * @param int $cancelationPeriod the cancelation period of this speaker in days, must be > 0
+     * @param positive-int $cancelationPeriod the cancelation period of this speaker in days
      */
     public function setCancelationPeriod(int $cancelationPeriod): void
     {

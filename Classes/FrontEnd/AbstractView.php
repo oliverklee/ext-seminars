@@ -18,7 +18,10 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 abstract class AbstractView extends TemplateHelper
 {
-    protected string $whatToDisplay = '';
+    /**
+     * @var 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations'
+     */
+    protected string $whatToDisplay;
 
     private ?Configuration $configuration = null;
 

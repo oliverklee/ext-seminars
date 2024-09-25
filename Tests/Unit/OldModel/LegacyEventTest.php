@@ -29,12 +29,13 @@ final class LegacyEventTest extends UnitTestCase
         parent::setUp();
 
         $GLOBALS['TYPO3_CONF_VARS']['LOG'] = [];
+        $begin = \mktime(10, 0, 0, 4, 8, 2020);
+        \assert(\is_int($begin));
+        $end = \mktime(18, 30, 0, 4, 20, 2020);
+        \assert(\is_int($end));
+
         $this->subject = TestingLegacyEvent::fromData(
-            [
-                'title' => 'A nice event',
-                'begin_date' => mktime(10, 0, 0, 4, 8, 2020),
-                'end_date' => mktime(18, 30, 0, 4, 20, 2020),
-            ]
+            ['title' => 'A nice event', 'begin_date' => $begin, 'end_date' => $end]
         );
     }
 

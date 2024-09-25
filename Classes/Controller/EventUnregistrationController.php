@@ -111,8 +111,11 @@ class EventUnregistrationController extends ActionController
      */
     public function unregisterAction(Registration $registration): ResponseInterface
     {
-        $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
-        $this->registrationManager->removeRegistration((int)$registration->getUid(), $configuration);
+        $uid = $registration->getUid();
+        if (\is_int($uid) && $uid > 0) {
+            $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
+            $this->registrationManager->removeRegistration($uid, $configuration);
+        }
 
         return $this->redirect('thankYou', null, null, ['event' => $registration->getEvent()]);
     }

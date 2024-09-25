@@ -490,7 +490,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
      */
     public function dumpAttendanceValuesCreatesNoDoubleColonsAfterLabel(string $fieldName): void
     {
-        $subject = LegacyRegistration::fromData([$fieldName => '1234 some value']);
+        $subject = LegacyRegistration::fromData([$fieldName => '1234 some value', 'seminar' => 1]);
 
         $result = $subject->dumpAttendanceValues($fieldName);
 
@@ -585,13 +585,9 @@ final class LegacyRegistrationTest extends FunctionalTestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue(): void
     {
-        $this->subject->setPaymentDateAsUnixTimestamp(
-            (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-        );
+        $this->subject->setPaymentDateAsUnixTimestamp(12354);
 
-        self::assertTrue(
-            $this->subject->isPaid()
-        );
+        self::assertTrue($this->subject->isPaid());
     }
 
     /**
@@ -640,7 +636,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse(): void
+    public function hasExistingFrontEndUserWithZeroFrontEndUserUidReturnsFalse(): void
     {
         $this->subject->setFrontEndUserUid(0);
 
@@ -660,21 +656,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             1,
             $this->subject->getSeats()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function setSeatsWithNegativeSeatsThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $seats must be >= 0.'
-        );
-
-        $this->subject->setSeats(-1);
     }
 
     /**
@@ -784,21 +765,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             0,
             $this->subject->getNumberOfKids()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $numberOfKids must be >= 0.'
-        );
-
-        $this->subject->setNumberOfKids(-1);
     }
 
     /**
@@ -957,21 +923,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             0,
             $this->subject->getMethodOfPaymentUid()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function setMethodOfPaymentUidWithNegativeUidThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $uid must be >= 0.'
-        );
-
-        $this->subject->setMethodOfPaymentUid(-1);
     }
 
     /**

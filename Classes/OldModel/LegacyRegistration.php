@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class LegacyRegistration extends AbstractModel
 {
     /**
-     * @var string[][]
+     * @var array<non-empty-string, array{separator: non-empty-string, labelKey?: non-empty-string}>
      */
     private const BILLING_ADDRESS_FIELDS = [
         'company' => ['separator' => "\n"],
@@ -34,12 +34,9 @@ class LegacyRegistration extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_attendances';
+    protected static string $tableName = 'tx_seminars_attendances';
 
-    /**
-     * @var LegacyEvent|null the event to which this registration relates
-     */
-    private $seminar;
+    private ?LegacyEvent $seminar = null;
 
     private bool $userDataHasBeenRetrieved = false;
 
@@ -54,35 +51,32 @@ class LegacyRegistration extends AbstractModel
     /**
      * UIDs of lodging options associated with this record
      *
-     * @var array<int, int>
+     * @var list<positive-int>
      */
-    protected $lodgings = [];
+    protected array $lodgings = [];
 
     /**
      * UIDs of food options associated with this record
      *
-     * @var array<int, int>
+     * @var list<positive-int>
      */
-    protected $foods = [];
+    protected array $foods = [];
 
     /**
      * UIDs of option checkboxes associated with this record
      *
-     * @var array<int, int>
+     * @var list<positive-int>
      */
-    protected $checkboxes = [];
+    protected array $checkboxes = [];
 
     /**
      * cached seminar objects with the seminar UIDs as keys and the objects as values
      *
-     * @var LegacyEvent[]
+     * @var array<positive-int, LegacyEvent>
      */
     private static array $cachedSeminars = [];
 
-    /**
-     * @var FrontEndUser|null
-     */
-    protected $user;
+    protected ?FrontEndUser $user = null;
 
     /**
      * Purges our cached seminars array.
@@ -99,12 +93,13 @@ class LegacyRegistration extends AbstractModel
      *
      * If no value is saved in the record, 1 will be returned.
      *
-     * @return int the number of seats
+     * @return positive-int
      */
     public function getSeats(): int
     {
         if ($this->hasSeats()) {
             $seats = $this->getRecordPropertyInteger('seats');
+            \assert($seats >= 1);
         } else {
             $seats = 1;
         }
@@ -115,16 +110,12 @@ class LegacyRegistration extends AbstractModel
     /**
      * Sets our number of seats.
      *
-     * @param int $seats the number of seats, must be >= 0
+     * @param int<0, max> $seats
      *
      * @throws \InvalidArgumentException
      */
     public function setSeats(int $seats): void
     {
-        if ($seats < 0) {
-            throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
-        }
-
         $this->setRecordPropertyInteger('seats', $seats);
     }
 
@@ -223,8 +214,9 @@ class LegacyRegistration extends AbstractModel
                 $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'method_of_payment':
-                $result = $this->getSeminarObject()
-                    ->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
+                $uid = $this->getRecordPropertyInteger($trimmedKey);
+                \assert($uid >= 0);
+                $result = $this->getSeminarObject()->getSinglePaymentMethodShort($uid);
                 break;
             case 'gender':
                 $result = $this->getGender();
@@ -362,7 +354,7 @@ class LegacyRegistration extends AbstractModel
     /**
      * Sets the front-end user UID of the registration.
      *
-     * @param int $uid the front-end user UID of the attendee, must be > 0
+     * @param int<0, max> $uid the front-end user UID of the attendee
      */
     public function setFrontEndUserUid(int $uid): void
     {
@@ -386,13 +378,15 @@ class LegacyRegistration extends AbstractModel
      */
     public function getSeminarObject(): LegacyEvent
     {
-        if (!$this->seminar instanceof LegacyEvent && $this->isOk()) {
+        if (!($this->seminar instanceof LegacyEvent) && $this->isOk()) {
             $seminarUid = $this->getRecordPropertyInteger('seminar');
+            \assert($seminarUid > 0);
             if (isset(self::$cachedSeminars[$seminarUid])) {
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {
-                $this->seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
-                self::$cachedSeminars[$seminarUid] = $this->seminar;
+                $seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
+                $this->seminar = $seminar;
+                self::$cachedSeminars[$seminarUid] = $seminar;
             }
         }
 
@@ -412,8 +406,7 @@ class LegacyRegistration extends AbstractModel
     /**
      * Sets the date when this registration has been paid for.
      *
-     * @param int $paymentDate
-     *        the date of the payment as UNIX timestamp, must be >= 0
+     * @param int<0, max> $paymentDate the date of the payment as UNIX timestamp
      */
     public function setPaymentDateAsUnixTimestamp(int $paymentDate): void
     {
@@ -924,26 +917,25 @@ class LegacyRegistration extends AbstractModel
     /**
      * Returns our number of kids.
      *
-     * @return int the number of kids, will be >= 0, will be 0 if this registration has no kids
+     * @return int<0, max>
      */
     public function getNumberOfKids(): int
     {
-        return $this->getRecordPropertyInteger('kids');
+        $number = $this->getRecordPropertyInteger('kids');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
      * Sets the number of kids.
      *
-     * @param int $numberOfKids the number of kids, must be >= 0
+     * @param int<0, max> $numberOfKids the number of kids
      *
      * @throws \InvalidArgumentException
      */
     public function setNumberOfKids(int $numberOfKids): void
     {
-        if ($numberOfKids < 0) {
-            throw new \InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
-        }
-
         $this->setRecordPropertyInteger('kids', $numberOfKids);
     }
 
@@ -970,16 +962,12 @@ class LegacyRegistration extends AbstractModel
     /**
      * Sets our method of payment UID.
      *
-     * @param int $uid our method of payment UID, must be >= 0
+     * @param int<0, max> $uid our method of payment UID
      *
      * @throws \InvalidArgumentException
      */
     public function setMethodOfPaymentUid(int $uid): void
     {
-        if ($uid < 0) {
-            throw new \InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);
-        }
-
         $this->setRecordPropertyInteger('method_of_payment', $uid);
     }
 

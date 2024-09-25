@@ -300,19 +300,18 @@ class DefaultController extends TemplateHelper
     }
 
     /**
-     * Creates a seminar in $this->seminar.
-     * If the seminar cannot be created, $this->seminar will be NULL, and
-     * this function will return FALSE.
+     * Creates a seminar in `$this->seminar`.
+     * If the seminar cannot be created, `$this->seminar` will be `null`, and
+     * this function will return `false`.
      *
+     * @param positive-int $seminarUid
      * @param bool $showHidden whether hidden records should be retrieved as well
      *
      * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
      */
     public function createSeminar(int $seminarUid, bool $showHidden = false): bool
     {
-        if ($this->seminar !== null) {
-            unset($this->seminar);
-        }
+        $this->seminar = null;
 
         /** @var LegacyEvent|null $event */
         $event = LegacyEvent::fromUid($seminarUid, $showHidden);
