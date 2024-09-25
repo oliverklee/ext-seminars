@@ -63,7 +63,6 @@ class Price
     private string $priceCode;
 
     /**
-     * @param float $amount
      * @param non-empty-string $labelKey the full localization key in the seminars extension
      * @param self::PRICE_* $priceCode
      */

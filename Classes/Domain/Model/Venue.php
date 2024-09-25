@@ -13,34 +13,29 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Venue extends AbstractEntity
 {
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $contactPerson = '';
+    protected string $contactPerson = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $emailAddress = '';
+    protected string $emailAddress = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $phoneNumber = '';
+    protected string $phoneNumber = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 1024})
      */
-    protected $fullAddress = '';
+    protected string $fullAddress = '';
 
     public function getTitle(): string
     {
