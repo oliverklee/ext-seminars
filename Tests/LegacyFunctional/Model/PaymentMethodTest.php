@@ -29,6 +29,7 @@ final class PaymentMethodTest extends FunctionalTestCase
 
         $this->subject = new PaymentMethod();
     }
+
     /**
      * @test
      */

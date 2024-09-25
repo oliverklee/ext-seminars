@@ -2455,7 +2455,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateShowsEventWithBeginDateAfterFromDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2481,7 +2482,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateDoesNotShowEventWithBeginDateBeforeFromDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2508,7 +2510,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingDayShowsEventWithBeginDateOnFirstDayOfMonth(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2533,7 +2536,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingYearShowsEventWithBeginDateInCurrentYearAfterFromDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(
@@ -2559,7 +2563,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingMonthShowsEventWithBeginDateOnFirstMonthOfYear(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2584,7 +2589,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromDateWithMissingMonthAndDayShowsEventWithBeginDateOnFirstDayOfGivenYear(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2608,7 +2614,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateShowsEventWithBeginDateBeforeToDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2635,7 +2642,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateHidesEventWithBeginDateAfterToDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(
@@ -2662,7 +2670,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingDayShowsEventWithBeginDateOnEndOfGivenMonth(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2687,7 +2696,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingYearShowsEventWithBeginDateOnThisYearBeforeToDate(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2713,7 +2723,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingMonthShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -2737,7 +2748,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenToDateWithMissingMonthAndDayShowsEventWithBeginDateOnEndOfGivenYear(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -2760,7 +2772,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesShowsEventWithBeginDateWithinTimespan(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $toTime = $simTime + 86400;
 
@@ -2791,7 +2804,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesCanShowTwoEventsWithBeginDateWithinTimespan(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
         $toTime = $simTime + 86400;
 
@@ -2836,7 +2850,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateBeforeTimespan(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $toTime = $simTime + 86400;
 
         $this->testingFramework->createRecord(
@@ -2866,7 +2881,8 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateAfterTimespan(): void
     {
-        $simTime = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $simTime = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $fromTime = $simTime - 86400;
 
         $this->testingFramework->createRecord(

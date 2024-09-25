@@ -470,7 +470,8 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue(): void
     {
-        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $now = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         self::assertIsInt($now);
         $this->subject->setData(['datepaid' => $now]);
 

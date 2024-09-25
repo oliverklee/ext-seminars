@@ -506,7 +506,8 @@ final class RegistrationsListTest extends FunctionalTestCase
         $this->createLogInAndRegisterFrontEndUser();
 
         $feUserUid = $this->testingFramework->createFrontEndUser();
-        $now = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $now = GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         $secondRegistration = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
