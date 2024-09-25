@@ -23,7 +23,7 @@ final class SlugContext
     /**
      * @var string the slugified title, which is not guaranteed to be unique
      */
-    public $slugifiedTitle;
+    public string $slugifiedTitle;
 
     /**
      * @param int<0, max> $eventUid
