@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add upgrade notes (#3710)
 - Add `composer-unused` for CI (#3309)
 
 ### Changed
