@@ -18,11 +18,11 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 trait RawDataTrait
 {
     /**
-     * @var array<string, string|int|float|null>
+     * @var array<string, string|int|float|null>|null
      * @Transient
      * @internal
      */
-    protected $rawData;
+    protected ?array $rawData = null;
 
     /**
      * Returns the raw data as it is stored in the database.

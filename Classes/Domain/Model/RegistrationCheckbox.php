@@ -13,10 +13,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class RegistrationCheckbox extends AbstractEntity
 {
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $title = '';
+    protected string $title = '';
 
     public function getTitle(): string
     {

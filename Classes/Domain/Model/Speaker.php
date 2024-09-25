@@ -14,16 +14,14 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Speaker extends AbstractEntity implements MailRole
 {
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $emailAddress = '';
+    protected string $emailAddress = '';
 
     public function getName(): string
     {
