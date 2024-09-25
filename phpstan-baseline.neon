@@ -291,16 +291,6 @@ parameters:
 			path: Classes/Email/Salutation.php
 
 		-
-			message: "#^Cannot call method modifySalutation\\(\\) on class\\-string\\|object\\.$#"
-			count: 1
-			path: Classes/Email/Salutation.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Email\\\\Salutation\\:\\:getHooks\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Email/Salutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$format of function sprintf expects string, string\\|null given\\.$#"
 			count: 1
 			path: Classes/Email/Salutation.php

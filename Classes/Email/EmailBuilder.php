@@ -20,10 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailBuilder
 {
-    /**
-     * @var MailMessage
-     */
-    private $email;
+    private MailMessage $email;
 
     public function __construct()
     {
@@ -37,8 +34,6 @@ class EmailBuilder
      * returns a reference.
      *
      * Calling this method multiple times on the same builder instance will always return the same message instance.
-     *
-     * @return MailMessage
      */
     public function build(): MailMessage
     {
@@ -84,11 +79,9 @@ class EmailBuilder
     /**
      * Sets the recipients.
      *
-     * @param MailRole ...$recipients
-     *
      * @return $this
      */
-    public function to(...$recipients): self
+    public function to(MailRole ...$recipients): self
     {
         /** @var list<Address> $preparedRecipients */
         $preparedRecipients = [];
