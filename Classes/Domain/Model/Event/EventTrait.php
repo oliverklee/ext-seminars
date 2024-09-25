@@ -14,21 +14,17 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
  */
 trait EventTrait
 {
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
+    protected bool $hidden = false;
 
     /**
      * The title of this event as visible in the backend.
      * In the frontend, the title might be different, e.g., event dates will use the title of their
      * corresponding topic.
      *
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      * @Validate("NotEmpty")
      */
-    protected $internalTitle = '';
+    protected string $internalTitle = '';
 
     public function isHidden(): bool
     {

@@ -26,34 +26,28 @@ trait AttendeesTrait
     protected $user;
 
     /**
-     * @var int
      * @Validate("NumberRange", options={"minimum": 1, "maximum": 999})
      */
-    protected $seats = 1;
+    protected int $seats = 1;
+
+    protected bool $registeredThemselves = false;
 
     /**
-     * @var bool
-     */
-    protected $registeredThemselves = false;
-
-    /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $attendeesNames = '';
+    protected string $attendeesNames = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 1024})
      * @Transient
      */
-    protected $jsonEncodedAdditionAttendees = '{}';
+    protected string $jsonEncodedAdditionAttendees = '{}';
 
     /**
      * @var ObjectStorage<FrontendUser>
      * @Lazy
      */
-    protected $additionalPersons;
+    protected ObjectStorage $additionalPersons;
 
     public function getUser(): ?FrontendUser
     {

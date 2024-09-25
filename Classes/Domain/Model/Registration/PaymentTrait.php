@@ -18,22 +18,17 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 trait PaymentTrait
 {
     /**
-     * @var string
-     * @phpstan-var Price::PRICE_*
+     * @var Price::PRICE_*
      * @Validate("StringLength", options={"maximum": 32})
      */
-    protected $priceCode = Price::PRICE_STANDARD;
+    protected string $priceCode = Price::PRICE_STANDARD;
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $humanReadablePrice = '';
+    protected string $humanReadablePrice = '';
 
-    /**
-     * @var float
-     */
-    protected $totalPrice = 0.0;
+    protected float $totalPrice = 0.0;
 
     /**
      * @var PaymentMethod|null
