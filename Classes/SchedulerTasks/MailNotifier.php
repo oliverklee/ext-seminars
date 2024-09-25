@@ -32,27 +32,15 @@ class MailNotifier extends AbstractTask
     /**
      * @var int<0, max>
      */
-    protected $configurationPageUid = 0;
+    protected int $configurationPageUid = 0;
 
-    /**
-     * @var EventStatusService
-     */
-    protected $eventStatusService;
+    protected EventStatusService $eventStatusService;
 
-    /**
-     * @var EmailService
-     */
-    protected $emailService;
+    protected EmailService $emailService;
 
-    /**
-     * @var EventMapper
-     */
-    protected $eventMapper;
+    protected EventMapper $eventMapper;
 
-    /**
-     * @var RegistrationDigest
-     */
-    protected $registrationDigest;
+    protected RegistrationDigest $registrationDigest;
 
     private bool $dependenciesAreSetUp = false;
 
@@ -78,11 +66,6 @@ class MailNotifier extends AbstractTask
         $this->dependenciesAreSetUp = true;
     }
 
-    /**
-     * Runs the task.
-     *
-     * @return bool true on successful execution, false on error
-     */
     public function execute(): bool
     {
         if ($this->getConfigurationPageUid() <= 0) {
@@ -235,15 +218,11 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $builder = $this->getSeminarBagBuilder(EventInterface::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
-        $bag = $builder->build();
-
-        foreach ($bag as $event) {
-            if (
-                $event instanceof LegacyEvent && $event->getCancelationDeadline(
-                ) < (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')
-            ) {
+        foreach ($builder->build() as $event) {
+            if ($event instanceof LegacyEvent && $event->getCancelationDeadline() < $now) {
                 $result[] = $event;
             }
         }
@@ -255,13 +234,16 @@ class MailNotifier extends AbstractTask
      * Returns the TS setup configuration value of
      * 'sendEventTakesPlaceReminderDaysBeforeBeginDate'.
      *
-     * @return int how many days before an event the event-takes-place
+     * @return int<0, max> how many days before an event the event-takes-place
      *                 reminder should be sent, will be > 0 if this option is
      *                 enabled, zero disables sending the reminder
      */
     private function getDaysBeforeBeginDate(): int
     {
-        return $this->getConfiguration()->getAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
+        $number = $this->getConfiguration()->getAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -320,7 +302,7 @@ class MailNotifier extends AbstractTask
                 '%uid' => $event->getUid(),
             ] as $search => $replace
         ) {
-            $result = str_replace($search, (string)$replace, $result);
+            $result = \str_replace($search, (string)$replace, $result);
         }
 
         return $result;
@@ -329,7 +311,7 @@ class MailNotifier extends AbstractTask
     /**
      * Returns a timestamp formatted according to the current configuration.
      *
-     * @param int $timestamp timestamp, must be >= 0
+     * @param int<0, max> $timestamp
      *
      * @return string formatted date according to the TS setup configuration for 'dateFormatYMD', will not be empty
      */
@@ -386,9 +368,12 @@ class MailNotifier extends AbstractTask
         }
     }
 
-    protected function getLanguageService(): ?LanguageService
+    protected function getLanguageService(): LanguageService
     {
-        return $GLOBALS['LANG'] ?? null;
+        $languageService = $GLOBALS['LANG'];
+        \assert($languageService instanceof LanguageService);
+
+        return $languageService;
     }
 
     /**
@@ -397,6 +382,7 @@ class MailNotifier extends AbstractTask
     private function useUserConfiguredLanguage(): void
     {
         $uid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('backend.user', 'id');
+        \assert(\is_int($uid));
         if ($uid <= 0) {
             return;
         }
