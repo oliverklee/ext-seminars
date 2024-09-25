@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BagBuilder;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;

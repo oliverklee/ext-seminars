@@ -2,7 +2,6 @@
 
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Controller\EventUnregistrationController;
-use OliverKlee\Seminars\Controller\FrontEndEditorController;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
