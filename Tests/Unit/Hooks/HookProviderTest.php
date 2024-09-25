@@ -198,7 +198,7 @@ final class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForNonexistantInterfaceCannotBeCreated(): void
+    public function hookObjectForNonexistentInterfaceCannotBeCreated(): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1565089078);
