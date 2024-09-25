@@ -25,15 +25,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailService implements SingletonInterface
 {
-    /**
-     * @var Salutation
-     */
-    protected $salutationBuilder;
+    protected Salutation $salutationBuilder;
 
-    /**
-     * @var DateRangeViewHelper
-     */
-    protected $dateRangeViewHelper;
+    protected DateRangeViewHelper $dateRangeViewHelper;
 
     public function __construct()
     {

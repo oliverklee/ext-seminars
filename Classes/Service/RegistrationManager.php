@@ -37,38 +37,27 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This service checks and creates registrations for seminars.
+ *
+ * @phpstan-type HelloSubjectPrefix = 'confirmation'|'confirmationOnQueueUpdate'|'confirmationOnRegistrationForQueue'|'confirmationOnUnregistration'|'notification'|'notificationOnQueueUpdate'|'notificationOnRegistrationForQueue'|'notificationOnUnregistration'
  */
 class RegistrationManager
 {
     use SharedPluginConfiguration;
 
-    /**
-     * @var static|null
-     */
-    private static $instance;
+    private static ?RegistrationManager $instance = null;
 
-    /**
-     * @var LegacyRegistration|null
-     */
     private ?LegacyRegistration $registration = null;
 
     private ?Template $emailTemplate = null;
 
-    /**
-     * @var HookProvider|null
-     */
-    protected $registrationEmailHookProvider;
+    protected ?HookProvider $registrationEmailHookProvider = null;
 
     private ?SingleViewLinkBuilder $linkBuilder = null;
 
-    /**
-     * @return static the current singleton instance
-     */
     public static function getInstance(): RegistrationManager
     {
         if (!self::$instance instanceof RegistrationManager) {
-            $instance = GeneralUtility::makeInstance(static::class);
-            self::$instance = $instance;
+            self::$instance = GeneralUtility::makeInstance(static::class);
         }
 
         return self::$instance;
@@ -172,7 +161,7 @@ class RegistrationManager
      * @param LegacyEvent $event the seminar to create the registration link for
      *
      * @return string the HTML tag, will be empty if the event needs no registration, nobody can register to this event or the
-     *                currently logged in user is already registered to this event and the event does not allow multiple
+     *                currently logged-in user is already registered to this event and the event does not allow multiple
      *                registrations by one user
      */
     public function getRegistrationLink(DefaultController $plugin, LegacyEvent $event): string
@@ -196,11 +185,19 @@ class RegistrationManager
      */
     public function getLinkToRegistrationPage(DefaultController $plugin, LegacyEvent $event): string
     {
-        return $plugin->getContentObjectRenderer()->getTypoLink(
+        return $this->getContentObjectRendererFromPlugin($plugin)->getTypoLink(
             $this->getRegistrationLabel($event),
             (string)$plugin->getConfValueInteger('registerPID'),
             ['tx_seminars_eventregistration[event]' => $event->getUid()]
         );
+    }
+
+    private function getContentObjectRendererFromPlugin(TemplateHelper $plugin): ContentObjectRenderer
+    {
+        $contentObject = $plugin->getContentObjectRenderer();
+        \assert($contentObject instanceof ContentObjectRenderer);
+
+        return $contentObject;
     }
 
     /**
@@ -240,7 +237,7 @@ class RegistrationManager
      */
     public function getLinkToUnregistrationPage(TemplateHelper $plugin, LegacyRegistration $registration): string
     {
-        return $plugin->getContentObjectRenderer()->getTypoLink(
+        return $this->getContentObjectRendererFromPlugin($plugin)->getTypoLink(
             $this->translate('label_onlineUnregistration'),
             (string)$plugin->getConfValueInteger('registerPID'),
             [
@@ -362,15 +359,7 @@ class RegistrationManager
      * Sends an email to the attendee with a message concerning his/her registration or unregistration.
      *
      * @param LegacyRegistration $oldRegistration the registration for which the notification should be sent
-     * @param string $helloSubjectPrefix
-     *        prefix for the locallang key of the localized hello and subject
-     *        string; allowed values are:
-     *        - confirmation
-     *        - confirmationOnUnregistration
-     *        - confirmationOnRegistrationForQueue
-     *        - confirmationOnQueueUpdate
-     *        In the following the parameter is prefixed with "email_" and
-     *        suffixed with "Hello" or "Subject".
+     * @param HelloSubjectPrefix $helloSubjectPrefix
      */
     public function notifyAttendee(
         LegacyRegistration $oldRegistration,
@@ -391,11 +380,7 @@ class RegistrationManager
             return;
         }
 
-        $contentObject = $plugin->getContentObjectRenderer();
-        if (!$contentObject instanceof ContentObjectRenderer) {
-            throw new \RuntimeException('Content object renderer not available.', 1702722677);
-        }
-
+        $contentObject = $this->getContentObjectRendererFromPlugin($plugin);
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
         $emailBuilder->to($user)
             ->from($event->getEmailSender())
@@ -485,12 +470,7 @@ class RegistrationManager
      *
      * @param LegacyRegistration $registration
      *        the registration for which the notification should be sent
-     * @param string $helloSubjectPrefix
-     *        prefix for the locallang key of the localized hello and subject string, Allowed values are:
-     *        - notification
-     *        - notificationOnUnregistration
-     *        - notificationOnRegistrationForQueue
-     *        - notificationOnQueueUpdate
+     * @param HelloSubjectPrefix $helloSubjectPrefix
      *        In the following, the parameter is prefixed with "email_" and suffixed with "Hello" or "Subject".
      */
     public function notifyOrganizers(
@@ -1119,8 +1099,7 @@ class RegistrationManager
     }
 
     /**
-     * Fills or hides the unregistration notice depending on the notification
-     * email type.
+     * Fills or hides the unregistration notice depending on the notification email type.
      *
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
@@ -1130,7 +1109,6 @@ class RegistrationManager
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
      * @param LegacyRegistration $registration the registration the introduction should be created for
-     * @param bool $useHtml whether to send HTML instead of plain text email
      */
     private function fillOrHideUnregistrationNotice(
         string $helloSubjectPrefix,
@@ -1139,7 +1117,7 @@ class RegistrationManager
     ): void {
         $event = $registration->getSeminarObject();
         $template = $this->getInitializedEmailTemplate();
-        if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
+        if ($helloSubjectPrefix === 'confirmationOnUnregistration' || !$event->isUnregistrationPossible()) {
             $template->hideSubparts('unregistration_notice', ($useHtml ? 'html_' : '') . 'field_wrapper');
             return;
         }
@@ -1183,8 +1161,8 @@ class RegistrationManager
     protected function getRegistrationEmailHookProvider(): HookProvider
     {
         if (!$this->registrationEmailHookProvider instanceof HookProvider) {
-            $this->registrationEmailHookProvider
-                = GeneralUtility::makeInstance(HookProvider::class, RegistrationEmail::class);
+            $provider = GeneralUtility::makeInstance(HookProvider::class, RegistrationEmail::class);
+            $this->registrationEmailHookProvider = $provider;
         }
 
         return $this->registrationEmailHookProvider;
@@ -1228,8 +1206,14 @@ class RegistrationManager
         return \is_string($label) ? $label : $key;
     }
 
+    /**
+     * @return positive-int
+     */
     private function nowAsTimestamp(): int
     {
-        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        \assert($now > 0);
+
+        return $now;
     }
 }
