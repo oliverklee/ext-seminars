@@ -1206,7 +1206,10 @@ final class EventTopicTest extends UnitTestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue(): void
     {
         $this->subject->setData(
-            ['deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - 1]
+            [
+                'deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)
+                        ->getPropertyFromAspect('date', 'timestamp') - 1,
+            ]
         );
 
         self::assertTrue(
@@ -1219,7 +1222,8 @@ final class EventTopicTest extends UnitTestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue(): void
     {
-        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $now = (int)GeneralUtility::makeInstance(Context::class)
+            ->getPropertyFromAspect('date', 'timestamp');
         self::assertIsInt($now);
         $this->subject->setData(['deadline_early_bird' => $now]);
 
@@ -1234,7 +1238,10 @@ final class EventTopicTest extends UnitTestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse(): void
     {
         $this->subject->setData(
-            ['deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') + 1]
+            [
+                'deadline_early_bird' => (int)GeneralUtility::makeInstance(Context::class)
+                        ->getPropertyFromAspect('date', 'timestamp') + 1,
+            ]
         );
 
         self::assertFalse(

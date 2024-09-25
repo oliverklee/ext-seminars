@@ -90,7 +90,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
@@ -116,7 +117,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
                     ['first_name' => $firstName, 'last_name' => $lastName]
@@ -145,7 +147,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
                     ['first_name' => $firstName, 'last_name' => $lastName]
@@ -174,7 +177,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
@@ -202,7 +206,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
@@ -230,7 +235,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
             ]
@@ -257,7 +263,8 @@ final class EmailRegistrationListViewTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
             ]

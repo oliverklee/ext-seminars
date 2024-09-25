@@ -85,7 +85,8 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'title' => 'Title 1',
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
             ]
         );
 
@@ -191,7 +192,8 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
             'tx_seminars_attendances',
             [
                 'title' => 'Attendance 2',
-                'datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'datepaid' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
             ]
         );
         $this->subject->limitToPaid();
@@ -245,7 +247,10 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
+            [
+                'datepaid' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
+            ]
         );
         $this->subject->limitToUnpaid();
         $registrationBag = $this->subject->build();
@@ -283,7 +288,10 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['datepaid' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
+            [
+                'datepaid' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
+            ]
         );
         $this->subject->limitToUnpaid();
         $this->subject->removePaymentLimitation();

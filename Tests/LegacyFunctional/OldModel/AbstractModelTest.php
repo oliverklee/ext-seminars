@@ -44,9 +44,11 @@ final class AbstractModelTest extends FunctionalTestCase
         $this->testingFramework->createTemplate(
             $systemFolderUid,
             [
-                'tstamp' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'tstamp' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'sorting' => 256,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
+                    ->getPropertyFromAspect('date', 'timestamp'),
                 'title' => 'TEST',
                 'root' => 1,
                 'clear' => 3,

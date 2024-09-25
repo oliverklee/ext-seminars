@@ -48,8 +48,10 @@ final class EventStatusServiceTest extends FunctionalTestCase
 
         GeneralUtility::makeInstance(Context::class)
             ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
-        $this->past = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - 1;
-        $this->future = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') + 1;
+        $this->past = (int)GeneralUtility::makeInstance(Context::class)
+                ->getPropertyFromAspect('date', 'timestamp') - 1;
+        $this->future = (int)GeneralUtility::makeInstance(Context::class)
+                ->getPropertyFromAspect('date', 'timestamp') + 1;
 
         $this->eventMapper = $this->createMock(EventMapper::class);
         MapperRegistry::set(EventMapper::class, $this->eventMapper);
