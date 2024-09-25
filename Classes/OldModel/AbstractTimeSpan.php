@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 abstract class AbstractTimeSpan extends AbstractModel
 {
-    /**
-     * @var HookProvider|null
-     */
-    protected $dateTimeSpanHookProvider;
+    protected ?HookProvider $dateTimeSpanHookProvider = null;
 
     public function hasBeginDate(): bool
     {
@@ -154,19 +151,25 @@ abstract class AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * @return int our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
+     * @return int<0, max> our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
      */
     public function getBeginDateAsTimestamp(): int
     {
-        return $this->getRecordPropertyInteger('begin_date');
+        $begin = $this->getRecordPropertyInteger('begin_date');
+        \assert($begin >= 0);
+
+        return $begin;
     }
 
     /**
-     * @return int our end date and time as a UNIX timestamp or 0 if we don't have an end date
+     * @return int<0, max> our end date and time as a UNIX timestamp or 0 if we don't have an end date
      */
     public function getEndDateAsTimestamp(): int
     {
-        return $this->getRecordPropertyInteger('end_date');
+        $end = $this->getRecordPropertyInteger('end_date');
+        \assert($end >= 0);
+
+        return $end;
     }
 
     /**

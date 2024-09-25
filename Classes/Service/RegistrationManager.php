@@ -290,7 +290,7 @@ class RegistrationManager
      * Removes the given registration (if it exists and if it belongs to the
      * currently logged-in FE user).
      *
-     * @param int $uid the UID of the registration that should be removed
+     * @param positive-int $uid the UID of the registration that should be removed
      */
     public function removeRegistration(int $uid, TemplateHelper $plugin): void
     {
@@ -1192,10 +1192,15 @@ class RegistrationManager
 
     /**
      * Returns the UID of the logged-in front-end user (or 0 if no user is logged in).
+     *
+     * @return int<0, max>
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        $userUid = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        \assert($userUid >= 0);
+
+        return $userUid;
     }
 
     private function getConnectionForTable(string $table): Connection

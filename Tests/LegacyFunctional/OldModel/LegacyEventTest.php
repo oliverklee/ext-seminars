@@ -221,26 +221,16 @@ final class LegacyEventTest extends FunctionalTestCase
      *
      * @param array $paymentMethodData data of the payment method to add, may be empty
      *
-     * @return int the UID of the created record, will be > 0
+     * @return positive-int the UID of the created record, will be > 0
      */
-    private function addPaymentMethodRelation(
-        array $paymentMethodData = []
-    ): int {
+    private function addPaymentMethodRelation(array $paymentMethodData = []): int
+    {
         $eventUid = $this->subject->getUid();
         \assert($eventUid > 0);
 
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods',
-            $paymentMethodData
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $eventUid,
-            $uid
-        );
-        $this->subject->setNumberOfPaymentMethods(
-            $this->subject->getNumberOfPaymentMethods() + 1
-        );
+        $uid = $this->testingFramework->createRecord('tx_seminars_payment_methods', $paymentMethodData);
+        $this->testingFramework->createRelation('tx_seminars_seminars_payment_methods_mm', $eventUid, $uid);
+        $this->subject->setNumberOfPaymentMethods($this->subject->getNumberOfPaymentMethods() + 1);
 
         return $uid;
     }
@@ -637,18 +627,6 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(
             2,
             $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $eventUid])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function addPaymentMethodRelationReturnsUid(): void
-    {
-        $uid = $this->addPaymentMethodRelation();
-
-        self::assertTrue(
-            $uid > 0
         );
     }
 
@@ -2932,21 +2910,6 @@ final class LegacyEventTest extends FunctionalTestCase
     }
 
     // Tests regarding the event type
-
-    /**
-     * @test
-     */
-    public function setEventTypeThrowsExceptionForNegativeArgument(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$eventType must be >= 0.'
-        );
-
-        $this->subject->setEventType(-1);
-    }
 
     /**
      * @test

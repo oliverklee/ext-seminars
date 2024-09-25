@@ -79,7 +79,7 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the number of attendances.
      *
-     * @param int $number the number of attendances, must be >= 0
+     * @param int<0, max> $number the number of attendances
      */
     public function setNumberOfAttendances(int $number): void
     {
@@ -90,7 +90,7 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the number of attendances on the registration queue.
      *
-     * @param int $number the number of attendances on the registration queue, must be >= 0
+     * @param int<0, max> $number the number of attendances on the registration queue
      */
     public function setNumberOfAttendancesOnQueue(int $number): void
     {
@@ -103,7 +103,7 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of places.
      *
-     * @param int $places the number of places that are associated with this event, must be >= 0
+     * @param int<0, max> $places the number of places that are associated with this event
      */
     public function setNumberOfPlaces(int $places): void
     {
@@ -115,7 +115,7 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of target groups.
      *
-     * @param int $targetGroups the number of target groups that are associated with this event, must be >= 0
+     * @param int<0, max> $targetGroups the number of target groups that are associated with this event
      */
     public function setNumberOfTargetGroups(int $targetGroups): void
     {
@@ -129,7 +129,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * payment methods field was changed to an unsigned integer and we may use
      * the function createRelationAndUpdateCounter() of the testing framework.
      *
-     * @param int $paymentMethods the number of payment methods that are associated with this event, must be >= 0
+     * @param int<0, max> $paymentMethods the number of payment methods that are associated with this event
      */
     public function setNumberOfPaymentMethods(int $paymentMethods): void
     {
@@ -142,8 +142,8 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of organizing partners.
      *
-     * @param int $numberOfOrganizingPartners
-     *        the number of organizing partners that are associated with this event, must be >= 0
+     * @param int<0, max> $numberOfOrganizingPartners
+     *        the number of organizing partners that are associated with this event
      */
     public function setNumberOfOrganizingPartners(int $numberOfOrganizingPartners): void
     {
@@ -158,7 +158,7 @@ final class TestingLegacyEvent extends LegacyEvent
      *
      * TODO: This function needs to be removed once the testing framework can update the counter for the number of categories.
      *
-     * @param int $number the number of categories that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of categories that are associated with this event
      */
     public function setNumberOfCategories(int $number): void
     {
@@ -171,7 +171,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of organizers.
      *
-     * @param int $number the number of organizers that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of organizers that are associated with this event
      */
     public function setNumberOfOrganizers(int $number): void
     {
@@ -184,7 +184,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of speakers.
      *
-     * @param int $number the number of speakers that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of speakers that are associated with this event
      */
     public function setNumberOfSpeakers(int $number): void
     {
@@ -197,7 +197,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of partners.
      *
-     * @param int $number the number of partners that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of partners that are associated with this event
      */
     public function setNumberOfPartners(int $number): void
     {
@@ -210,7 +210,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of tutors.
      *
-     * @param int $number the number of tutors that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of tutors that are associated with this event
      */
     public function setNumberOfTutors(int $number): void
     {
@@ -223,7 +223,7 @@ final class TestingLegacyEvent extends LegacyEvent
      * TODO: This function needs to be removed once the testing framework
      * can update the counter for the number of leaders.
      *
-     * @param int $number the number of leaders that are associated with this event, must be >= 0
+     * @param int<0, max> $number the number of leaders that are associated with this event
      */
     public function setNumberOfLeaders(int $number): void
     {
@@ -274,7 +274,7 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the number of time slots.
      *
-     * @param int $numberOfTimeSlots the number of time slots for this event, must be >= 0
+     * @param int<0, max> $numberOfTimeSlots the number of time slots for this event
      */
     public function setNumberOfTimeSlots(int $numberOfTimeSlots): void
     {
@@ -331,7 +331,7 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the number of lodgings for this record.
      *
-     * @param int $lodgings the number of lodgings that are associated with this event, must be >= 0
+     * @param int<0, max> $lodgings the number of lodgings that are associated with this event
      */
     public function setNumberOfLodgings(int $lodgings): void
     {
@@ -346,14 +346,13 @@ final class TestingLegacyEvent extends LegacyEvent
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param string $speakerRelation the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDescriptionRaw(string $speakerRelation = 'speakers'): string
+    public function getSpeakersWithDescriptionRaw(string $speakerType = 'speakers'): string
     {
-        return parent::getSpeakersWithDescriptionRaw($speakerRelation);
+        return parent::getSpeakersWithDescriptionRaw($speakerType);
     }
 
     /**
@@ -432,14 +431,11 @@ final class TestingLegacyEvent extends LegacyEvent
     /**
      * Sets the number of offline registrations.
      *
-     * @param int $offlineRegistrations the number of offline registrations for this event, must be >= 0
+     * @param int<0, max> $offlineRegistrations the number of offline registrations for this event
      */
     public function setOfflineRegistrationNumber(int $offlineRegistrations): void
     {
-        $this->setRecordPropertyInteger(
-            'offline_attendees',
-            $offlineRegistrations
-        );
+        $this->setRecordPropertyInteger('offline_attendees', $offlineRegistrations);
     }
 
     /**

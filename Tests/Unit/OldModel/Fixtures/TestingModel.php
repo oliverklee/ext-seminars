@@ -14,7 +14,7 @@ final class TestingModel extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_test';
+    protected static string $tableName = 'tx_seminars_test';
 
     /**
      * Sets the test field of this record to a boolean value.
@@ -40,13 +40,15 @@ final class TestingModel extends AbstractModel
     /**
      * Adds m:n records that are referenced by this record.
      *
-     * Before this function may be called, $this->recordData['uid'] must be set
-     * correctly.
+     * Before this function may be called, $this->recordData['uid'] must be set correctly.
      *
-     * @param string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
-     * @param int[] $references array of uids of records from the foreign table to which we should create references, may be empty
+     * @param non-empty-string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting
+     * @param array<int> $references UIDs of records from the foreign table to which we should create references
      *
-     * @return int the number of created m:n records
+     * @return int<0, max> the number of created m:n records
+     *
+     * @throws \InvalidArgumentException
+     * @throws \BadMethodCallException
      */
     public function createMmRecords(string $mmTable, array $references): int
     {

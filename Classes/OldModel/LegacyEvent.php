@@ -41,42 +41,31 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_seminars';
+    protected static string $tableName = 'tx_seminars_seminars';
 
     private bool $registrationsHaveBeenRetrieved = false;
 
     /**
-     * @var array<int, array<string, string|int>>
+     * @var array<array<string, string|int>>
      */
-    private $registrations = [];
+    private array $registrations = [];
 
     /**
-     * the number of all attendances
-     *
-     * @var int
+     * @var int<0, max>
      */
-    protected $numberOfAttendances = 0;
+    protected int $numberOfAttendances = 0;
 
     /**
-     * the number of paid attendances
-     *
-     * @var int
+     * @var int<0, max>
      */
-    protected $numberOfAttendancesPaid = 0;
+    protected int $numberOfAttendancesPaid = 0;
 
     /**
-     * the number of attendances on the registration queue
-     *
-     * @var int
+     * @var int<0, max>
      */
-    protected $numberOfAttendancesOnQueue = 0;
+    protected int $numberOfAttendancesOnQueue = 0;
 
-    /**
-     * whether the statistics have been already calculate
-     *
-     * @var bool
-     */
-    protected $statisticsHaveBeenCalculated = false;
+    protected bool $statisticsHaveBeenCalculated = false;
 
     private ?LegacyEvent $topic = null;
 
@@ -109,11 +98,11 @@ class LegacyEvent extends AbstractTimeSpan
      * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
      * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
      *
-     * @return string[] the titles of the referenced records
+     * @return list<string> the titles of the referenced records
      */
     protected function getTopicMmRecordTitles(string $foreignTable, string $mmTable): array
     {
-        $uid = $this->isEventDate() ? $this->getRecordPropertyInteger('topic') : $this->getUid();
+        $uid = $this->isEventDate() ? $this->getTopicUid() : $this->getUid();
 
         return $this->getMmRecordTitlesByUid($foreignTable, $mmTable, $uid);
     }
@@ -313,6 +302,7 @@ class LegacyEvent extends AbstractTimeSpan
     public function hasCountry(): bool
     {
         $placesWithCountry = $this->getPlacesWithCountry();
+
         return $this->hasPlace() && !empty($placesWithCountry);
     }
 
@@ -322,7 +312,7 @@ class LegacyEvent extends AbstractTimeSpan
      * place is set, or the set place(s) don't have any country set, an empty
      * array will be returned.
      *
-     * @return string[] the list of ISO codes for the countries of this event, may be empty
+     * @return list<string> the list of ISO codes for the countries of this event, may be empty
      */
     public function getPlacesWithCountry(): array
     {
@@ -408,11 +398,11 @@ class LegacyEvent extends AbstractTimeSpan
      * place is set, or the set place(s) don't have any city set, an empty
      * array will be returned.
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getCitiesFromPlaces(): array
     {
-        return array_column($this->getPlacesAsArray(), 'city');
+        return \array_column($this->getPlacesAsArray(), 'city');
     }
 
     /**
@@ -493,14 +483,14 @@ class LegacyEvent extends AbstractTimeSpan
      * The second dimension is associative with the following keys:
      * title, address, city, country, homepage, directions
      *
-     * @return array<int, array<string, string|int>>
+     * @return list<array<string, string|int>>
      *         all places as a two-dimensional array, will be empty if there are no places assigned
      */
     protected function getPlacesAsArray(): array
     {
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
-        $queryResult = $queryBuilder
+        $result = $queryBuilder
             ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
@@ -519,8 +509,7 @@ class LegacyEvent extends AbstractTimeSpan
                 )
             )
             ->orderBy('mm.sorting')
-            ->executeQuery();
-        $result = $queryResult->fetchAllAssociative();
+            ->executeQuery()->fetchAllAssociative();
 
         /** @var list<array<string, string|int>> $resultWithoutDuplicates */
         $resultWithoutDuplicates = [];
@@ -533,6 +522,7 @@ class LegacyEvent extends AbstractTimeSpan
                 $resultWithoutDuplicates[] = $row;
             }
         }
+
         return $resultWithoutDuplicates;
     }
 
@@ -559,12 +549,11 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Creates and returns a speakerbag object.
      *
-     * @param string $speakerRelation the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      */
-    private function getSpeakerBag(string $speakerRelation = 'speakers'): SpeakerBag
+    private function getSpeakerBag(string $speakerType = 'speakers'): SpeakerBag
     {
-        switch ($speakerRelation) {
+        switch ($speakerType) {
             case 'partners':
                 $mmTable = 'tx_seminars_seminars_speakers_mm_partners';
                 break;
@@ -599,21 +588,20 @@ class LegacyEvent extends AbstractTimeSpan
      * leaders, the type relation can be specified. The default is "speakers".
      *
      * @param TemplateHelper $plugin the live pibase object
-     * @param string $speakerRelation the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDetails(TemplateHelper $plugin, string $speakerRelation = 'speakers'): string
+    public function getSpeakersWithDetails(TemplateHelper $plugin, string $speakerType = 'speakers'): string
     {
-        if (!$this->hasSpeakersOfType($speakerRelation)) {
+        if (!$this->hasSpeakersOfType($speakerType)) {
             return '';
         }
 
         $result = [];
 
         /** @var LegacySpeaker $speaker */
-        foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
+        foreach ($this->getSpeakerBag($speakerType) as $speaker) {
             $name = $speaker->getLinkedTitle();
             if ($speaker->hasOrganization()) {
                 $name .= ', ' . \htmlspecialchars($speaker->getOrganization(), ENT_QUOTES | ENT_HTML5);
@@ -657,22 +645,20 @@ class LegacyEvent extends AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      *
      * @return string our speakers (or '' if there is an error)
      */
-    protected function getSpeakersWithDescriptionRaw(string $speakerRelation = 'speakers'): string
+    protected function getSpeakersWithDescriptionRaw(string $speakerType = 'speakers'): string
     {
-        if (!$this->hasSpeakersOfType($speakerRelation)) {
+        if (!$this->hasSpeakersOfType($speakerType)) {
             return '';
         }
 
         $result = '';
 
         /** @var LegacySpeaker $speaker */
-        foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
+        foreach ($this->getSpeakerBag($speakerType) as $speaker) {
             $result .= $speaker->getTitle();
             if ($speaker->hasOrganization()) {
                 $result .= ', ' . $speaker->getOrganization();
@@ -698,14 +684,13 @@ class LegacyEvent extends AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param string $speakerRelation the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      *
      * @return string our speakers list, will be empty if an error occurred during processing
      */
-    public function getSpeakersShort(string $speakerRelation = 'speakers'): string
+    public function getSpeakersShort(string $speakerType = 'speakers'): string
     {
-        if (!$this->hasSpeakersOfType($speakerRelation)) {
+        if (!$this->hasSpeakersOfType($speakerType)) {
             return '';
         }
 
@@ -715,7 +700,7 @@ class LegacyEvent extends AbstractTimeSpan
         $contentObject = $frontEndController instanceof TypoScriptFrontendController ? $frontEndController->cObj : null;
 
         /** @var LegacySpeaker $speaker */
-        foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
+        foreach ($this->getSpeakerBag($speakerType) as $speaker) {
             $encodedTitle = \htmlspecialchars($speaker->getTitle(), ENT_QUOTES | ENT_HTML5);
 
             if ($contentObject instanceof ContentObjectRenderer && $speaker->hasHomepage()) {
@@ -729,9 +714,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of speakers associated with this event.
-     *
-     * @return int the number of speakers associated with this event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfSpeakers(): int
     {
@@ -739,9 +722,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of partners associated with this event.
-     *
-     * @return int the number of partners associated with this event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfPartners(): int
     {
@@ -749,9 +730,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of tutors associated with this event.
-     *
-     * @return int the number of tutors associated with this event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfTutors(): int
     {
@@ -759,9 +738,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of leaders associated with this event.
-     *
-     * @return int the number of leaders associated with this event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfLeaders(): int
     {
@@ -771,12 +748,11 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether we have speaker relations of the specified type set.
      *
-     * @param string $speakerRelation the relation in which the speakers stand to this event:
-     *        "speakers" (default), "partners", "tutors" or "leaders"
+     * @param 'speakers'|'tutors'|'leaders'|'partners' $speakerType
      */
-    public function hasSpeakersOfType(string $speakerRelation = 'speakers'): bool
+    public function hasSpeakersOfType(string $speakerType = 'speakers'): bool
     {
-        switch ($speakerRelation) {
+        switch ($speakerType) {
             case 'partners':
                 $hasSpeakers = $this->hasPartners();
                 break;
@@ -1196,7 +1172,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * Returns an empty string if the corresponding payment method could not be retrieved.
      *
-     * @param int $uid the UID of a single payment method, must be >= 0
+     * @param int<0, max> $uid the UID of a single payment method
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
@@ -1217,6 +1193,9 @@ class LegacyEvent extends AbstractTimeSpan
         return $this->hasTopicInteger('payment_methods');
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function getNumberOfPaymentMethods(): int
     {
         return $this->getTopicInteger('payment_methods');
@@ -1291,14 +1270,10 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Sets the event type for this event.
      *
-     * @param int $eventType the UID of the event type to set, must be >= 0
+     * @param int<0, max> $eventType the UID of the event type to set
      */
     public function setEventType(int $eventType): void
     {
-        if ($eventType < 0) {
-            throw new \InvalidArgumentException('$eventType must be >= 0.', 1333291840);
-        }
-
         $this->setRecordPropertyInteger('event_type', $eventType);
     }
 
@@ -1306,7 +1281,7 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets the minimum number of attendances required for this event
      * (ie. how many registrations are needed so this event can take place).
      *
-     * @return int the minimum number of attendances, will be >= 0
+     * @return int<0, max> the minimum number of attendances
      */
     public function getAttendancesMin(): int
     {
@@ -1317,7 +1292,7 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets the maximum number of attendances for this event
      * (the total number of seats for this event).
      *
-     * @return int the maximum number of attendances, will be >= 0
+     * @return int<0, max> the maximum number of attendances
      */
     public function getAttendancesMax(): int
     {
@@ -1328,7 +1303,7 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets the number of attendances for this seminar
      * (currently the paid attendances as well as the unpaid ones).
      *
-     * @return int the number of attendances, will be >= 0
+     * @return int<0, max>
      */
     public function getAttendances(): int
     {
@@ -1351,7 +1326,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets the number of paid attendances for this seminar.
      *
-     * @return int the number of paid attendances, will be >= 0
+     * @return int<0, max>
      */
     public function getAttendancesPaid(): int
     {
@@ -1363,7 +1338,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets the number of attendances that are not paid yet
      *
-     * @return int the number of attendances that are not paid yet, will be >= 0
+     * @return int<0, max>
      */
     public function getAttendancesNotPaid(): int
     {
@@ -1371,8 +1346,6 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of vacancies for this seminar.
-     *
      * @return int<0, max> the number of vacancies (will be 0 if the seminar is overbooked)
      */
     public function getVacancies(): int
@@ -1488,10 +1461,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of target groups associated with this event.
-     *
-     * @return int the number of target groups associated with this
-     *                 event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfTargetGroups(): int
     {
@@ -1623,11 +1593,14 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets the event's unregistration deadline as UNIX timestamp. Will be 0
      * if the event has no unregistration deadline set.
      *
-     * @return int the unregistration deadline as UNIX timestamp
+     * @return int<0, max> the unregistration deadline as UNIX timestamp
      */
     public function getUnregistrationDeadlineAsTimestamp(): int
     {
-        return $this->getRecordPropertyInteger('deadline_unregistration');
+        $deadline = $this->getRecordPropertyInteger('deadline_unregistration');
+        \assert($deadline >= 0);
+
+        return $deadline;
     }
 
     /**
@@ -1804,9 +1777,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of organizers.
-     *
-     * @return int the number of organizers, might be 0
+     * @return int<0, max>
      */
     public function getNumberOfOrganizers(): int
     {
@@ -1855,9 +1826,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of organizing partners associated with this event.
-     *
-     * @return int the number of organizing partners associated with this event, will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfOrganizingPartners(): int
     {
@@ -1985,7 +1954,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether a certain user already is registered for this seminar.
      *
-     * @param int $uid UID of the FE user to check, must be > 0
+     * @param int<0, max> $uid UID of the FE user to check
      *
      * @return bool whether if the user already is registered
      */
@@ -2001,7 +1970,7 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Checks whether a certain user already is registered for this seminar.
      *
-     * @param int $feUserUid UID of the FE user to check, must be > 0
+     * @param positive-int $feUserUid UID of the FE user to check
      *
      * @return string empty string if everything is OK, else a localized error message
      */
@@ -2015,8 +1984,8 @@ class LegacyEvent extends AbstractTimeSpan
      * but also checks whether this user is entered as a VIP for this event,
      * i.e., he/she is allowed to view the list of registrations for this event.
      *
-     * @param int $userUid UID of the FE user to check, must be > 0
-     * @param int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
+     * @param positive-int $userUid UID of the FE user to check
+     * @param positive-int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
      *
      * @return bool whether the user is a VIP for this event
      */
@@ -2052,21 +2021,17 @@ class LegacyEvent extends AbstractTimeSpan
      * c) the user is allowed to export the list of registrations as CSV
      *    ($whichPlugin = csv_export)
      *
-     * @param string $whichPlugin
-     *        the type of plugin: seminar_list, my_events, my_vip_events,
-     *        list_registrations or list_vip_registrations
-     * @param int $registrationsListPID
+     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $registrationsVipListPID
+     * @param int<0, max> $registrationsVipListPID
      *        the value of the registrationsVipListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $defaultEventVipsFeGroupID
+     * @param int<0, max> $defaultEventVipsFeGroupID
      *        the value of the defaultEventVipsGroupID parameter
      *        (only relevant for (list_vip_registration|my_vip_events))
-     * @param string $accessLevel
-     *        who is allowed to view the front-end registration lists:
-     *        "attendees_and_managers", "login" or "world"
+     * @param 'attendees_and_managers'|'login'|'world' $accessLevel
      *
      * @return bool TRUE if a FE user is logged in and the user may view
      *                 the registrations list or may see a link to that
@@ -2121,16 +2086,14 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "attendees and managers".
      *
-     * @param string $whichPlugin
-     *        the type of plugin: seminar_list, my_events, my_vip_events,
-     *        list_registrations or list_vip_registrations
-     * @param int $registrationsListPID
+     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $registrationsVipListPID
+     * @param int<0, max> $registrationsVipListPID
      *        the value of the registrationsVipListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $defaultEventVipsFeGroupID
+     * @param int<0, max> $defaultEventVipsFeGroupID
      *        the value of the defaultEventVipsGroupID parameter
      *        (only relevant for (list_vip_registration|my_vip_events))
      *
@@ -2145,6 +2108,7 @@ class LegacyEvent extends AbstractTimeSpan
         int $defaultEventVipsFeGroupID = 0
     ): bool {
         $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        \assert(\is_int($currentUserUid) && $currentUserUid >= 0);
         if ($currentUserUid <= 0) {
             return false;
         }
@@ -2193,16 +2157,14 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "login".
      *
-     * @param string $whichPlugin
-     *        the type of plugin: seminar_list, my_events, my_vip_events,
-     *        list_registrations or list_vip_registrations
-     * @param int $registrationsListPID
+     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $registrationsVipListPID
+     * @param int<0, max> $registrationsVipListPID
      *        the value of the registrationsVipListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $defaultEventVipsFeGroupID
+     * @param int<0, max> $defaultEventVipsFeGroupID
      *        the value of the defaultEventVipsGroupID parameter
      *        (only relevant for (list_vip_registration|my_vip_events))
      *
@@ -2252,16 +2214,14 @@ class LegacyEvent extends AbstractTimeSpan
      * This function assumes that the access level for FE registration lists is
      * "world".
      *
-     * @param string $whichPlugin
-     *        the type of plugin: seminar_list, my_events, my_vip_events,
-     *        list_registrations or list_vip_registrations
-     * @param int $registrationsListPID
+     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param int<0, max> $registrationsListPID
      *        the value of the registrationsListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $registrationsVipListPID
+     * @param int<0, max> $registrationsVipListPID
      *        the value of the registrationsVipListPID parameter
      *        (only relevant for (seminar_list|my_events|my_vip_events))
-     * @param int $defaultEventVipsFeGroupID
+     * @param int<0, max> $defaultEventVipsFeGroupID
      *        the value of the defaultEventVipsGroupID parameter
      *        (only relevant for (list_vip_registration|my_vip_events))
      *
@@ -2276,10 +2236,11 @@ class LegacyEvent extends AbstractTimeSpan
         int $defaultEventVipsFeGroupID = 0
     ): bool {
         $currentUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+        \assert(\is_int($currentUserUid) && $currentUserUid >= 0);
         $isLoggedIn = $currentUserUid > 0;
 
-        $hasListPid = ($registrationsListPID > 0);
-        $hasVipListPid = ($registrationsVipListPID > 0);
+        $hasListPid = $registrationsListPID > 0;
+        $hasVipListPid = $registrationsVipListPID > 0;
 
         switch ($whichPlugin) {
             case 'csv_export':
@@ -2309,11 +2270,8 @@ class LegacyEvent extends AbstractTimeSpan
      * This function is intended to be used from the registrations list,
      * NOT to check whether a link to that list should be shown.
      *
-     * @param string $whichPlugin
-     *        the type of plugin: list_registrations or list_vip_registrations
-     * @param string $accessLevel
-     *        who is allowed to view the front-end registration lists:
-     *        "attendees_and_managers", "login" or "world"
+     * @param 'seminar_list'|'my_events'|'my_vip_events'|'list_registrations'|'list_vip_registrations' $whichPlugin
+     * @param 'attendees_and_managers'|'login'|'world' $accessLevel
      *
      * @return string an empty string if everything is OK, a localized error
      *                message otherwise
@@ -2532,6 +2490,8 @@ class LegacyEvent extends AbstractTimeSpan
 
     /**
      * @param array<array<string, string|int>> $registrations
+     *
+     * @return int<0, max>
      */
     private function sumSeatsOfRegistrations(array $registrations): int
     {
@@ -2564,7 +2524,18 @@ class LegacyEvent extends AbstractTimeSpan
      */
     private function loadTopic(): ?LegacyEvent
     {
-        return self::fromUid($this->getRecordPropertyInteger('topic'));
+        return self::fromUid($this->getTopicUid());
+    }
+
+    /**
+     * @return int<0, max>
+     */
+    private function getTopicUid(): int
+    {
+        $topicUid = $this->getRecordPropertyInteger('topic');
+        \assert($topicUid >= 0);
+
+        return $topicUid;
     }
 
     /**
@@ -2768,8 +2739,10 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
-     *                 (for the UID), might be empty
+     * @param non-empty-string $foreignTable
+     * @param non-empty-string $mmTable
+     *
+     * @return list<array{caption: string, value: int<0, max>}>
      */
     protected function getMmRecordsForSelection(string $foreignTable, string $mmTable): array
     {
@@ -2777,13 +2750,17 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * @return list<array<string, mixed>>
+     * @param array<array<string, string|int|bool|null>> $records
+     *
+     * @return list<array{caption: string, value: int<0, max>}>
      */
     private function mmRecordsToSelection(array $records): array
     {
         $options = [];
         foreach ($records as $record) {
-            $options[] = ['caption' => $record['title'], 'value' => (int)$record['uid']];
+            $uid = (int)$record['uid'];
+            \assert($uid >= 0);
+            $options[] = ['caption' => (string)$record['title'], 'value' => $uid];
         }
 
         return $options;
@@ -3029,9 +3006,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of attendances on the registration queue.
-     *
-     * @return int number of attendances on the registration queue
+     * @return int<0, max>
      */
     public function getAttendancesOnRegistrationQueue(): int
     {
@@ -3056,17 +3031,15 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns our time slots in an array.
-     *
-     * @return array[] time slots or an empty array if there are no time slots
-     *               the array contains the following elements:
-     *               - 'date' as key and the time slot's begin date as value
-     *               - 'time' as key and the time slot's time as value
-     *               - 'entry_date' as key and the time slot's entry date as
-     *               value
-     *               - 'room' as key and the time slot's room as value
-     *               - 'place' as key and the time slot's place as value
-     *               - 'speakers' as key and the time slot's speakers as value
+     * @return list<array{
+     *     uid: int,
+     *     date: string,
+     *     time: string,
+     *     entry_date: string,
+     *     room: string,
+     *     place: string,
+     *     speakers: string,
+     * }>
      */
     public function getTimeSlotsAsArrayWithMarkers(): array
     {
@@ -3111,14 +3084,14 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of categories associated with this event.
-     *
-     * @return int the number of categories associated with this event,
-     *                 will be >= 0
+     * @return int<0, max>
      */
     public function getNumberOfCategories(): int
     {
-        return $this->getTopicInteger('categories');
+        $number = $this->getTopicInteger('categories');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**
@@ -3175,7 +3148,7 @@ class LegacyEvent extends AbstractTimeSpan
             ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getUid());
         if ($this->isEventDate()) {
             $attachmentsFromTopic = $this->getFileRepository()
-                ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getRecordPropertyInteger('topic'));
+                ->findByRelation('tx_seminars_seminars', 'attached_files', $this->getTopicUid());
             $attachments = \array_merge($attachments, $attachmentsFromTopic);
         }
 
@@ -3193,7 +3166,7 @@ class LegacyEvent extends AbstractTimeSpan
             return null;
         }
 
-        $uid = $this->isEventDate() ? $this->getRecordPropertyInteger('topic') : $this->getUid();
+        $uid = $this->isEventDate() ? $this->getTopicUid() : $this->getUid();
         $images = $this->getFileRepository()->findByRelation('tx_seminars_seminars', 'image', $uid);
 
         return \array_shift($images);
@@ -3275,17 +3248,20 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Gets the staus of this event.
      *
-     * @return int the status of this event, will be >= 0
+     * @return int<0, max> the status of this event
      */
     private function getStatus(): int
     {
-        return $this->getRecordPropertyInteger('cancelled');
+        $status = $this->getRecordPropertyInteger('cancelled');
+        \assert($status >= 0);
+
+        return $status;
     }
 
     /**
      * Sets whether this event is planned, canceled or confirmed.
      *
-     * @param int $status STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
+     * @param EventInterface::STATUS_* $status
      */
     public function setStatus(int $status): void
     {
@@ -3298,7 +3274,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * Before this function is called assure that this event has a begin date.
      *
-     * @return int the cancelation deadline of this event as timestamp, will be >= 0
+     * @return int<0, max> the cancelation deadline of this event as timestamp
      *
      * @throws \BadMethodCallException
      */
@@ -3319,7 +3295,7 @@ class LegacyEvent extends AbstractTimeSpan
         /** @var LegacySpeaker $speaker */
         foreach ($this->getSpeakerBag() as $speaker) {
             $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Time::SECONDS_PER_DAY);
-            $deadline = min($speakerDeadline, $deadline);
+            $deadline = \max(0, \min($speakerDeadline, $deadline));
         }
 
         return $deadline;
@@ -3449,12 +3425,15 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * Returns the number of offline registrations for this event.
      *
-     * @return int the number of offline registrations for this event, will
+     * @return int<0, max> the number of offline registrations for this event, will
      *                 be 0 if this event has no offline registrations
      */
     public function getOfflineRegistrations(): int
     {
-        return $this->getRecordPropertyInteger('offline_attendees');
+        $number = $this->getRecordPropertyInteger('offline_attendees');
+        \assert($number >= 0);
+
+        return $number;
     }
 
     /**

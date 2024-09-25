@@ -941,6 +941,16 @@ parameters:
 			path: Classes/FrontEnd/RegistrationsList.php
 
 		-
+			message: "#^Parameter \\#4 \\$defaultEventVipsFeGroupID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
+			message: "#^Parameter \\#5 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
 			message: "#^Cannot call method createRelativeUrlForEvent\\(\\) on OliverKlee\\\\Seminars\\\\Service\\\\SingleViewLinkBuilder\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RequirementsList.php
@@ -1152,36 +1162,11 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 2
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fetchDataByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecords\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordsByUid\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:setData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:\\$recordData type has no value type specified in iterable type array\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordsByUid\\(\\) should return array\\<array\\<string, bool\\|int\\|string\\|null\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
 
@@ -1261,12 +1246,27 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAttendancesMax\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAttendancesMin\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getAttendancesNotPaid\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCheckboxes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCitiesFromPlaces\\(\\) should return array\\<string\\> but returns array\\<int, int\\|string\\>\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCitiesFromPlaces\\(\\) should return list\\<string\\> but returns list\\<int\\|string\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1276,7 +1276,42 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getMmRecordsForSelection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfLeaders\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfOrganizers\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfOrganizingPartners\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfPartners\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfPaymentMethods\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfSpeakers\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfTargetGroups\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getNumberOfTutors\\(\\) should return int\\<0, max\\> but returns int\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1286,22 +1321,12 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return array\\<int, array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return list\\<array\\<string, int\\|string\\>\\> but returns list\\<array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesWithCountry\\(\\) should return array\\<string\\> but returns array\\<int\\<0, max\\>, int\\|string\\>\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTimeSlotsAsArrayWithMarkers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesWithCountry\\(\\) should return list\\<string\\> but returns array\\<int\\<0, max\\>, int\\|non\\-empty\\-string\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1316,6 +1341,11 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
+			message: "#^Parameter \\#1 \\$foreignTable of method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordTitlesByUid\\(\\) expects non\\-empty\\-string, string given\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
 			message: "#^Parameter \\#1 \\$isoCode of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCountryNameFromIsoCode\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
@@ -1326,17 +1356,22 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserRegistered\\(\\) expects int, mixed given\\.$#"
-			count: 2
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#1 \\$userUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int, mixed given\\.$#"
-			count: 9
+			message: "#^Parameter \\#1 \\$userUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
+			count: 3
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
 			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(int\\|string\\)\\: bool\\)\\|null, Closure\\(string\\)\\: bool given\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Parameter \\#2 \\$defaultEventVipsFeGroupUid of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:isUserVip\\(\\) expects int\\<1, max\\>, int\\<0, max\\> given\\.$#"
+			count: 9
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Parameter \\#2 \\$mmTable of method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordTitlesByUid\\(\\) expects non\\-empty\\-string, string given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -1346,13 +1381,23 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:\\$registrations \\(array\\<int, array\\<string, int\\|string\\>\\>\\) does not accept array\\<int, array\\<string, mixed\\>\\>\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:\\$registrations \\(array\\<array\\<string, int\\|string\\>\\>\\) does not accept array\\<int, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Strict comparison using \\!\\=\\= between int\\<1, max\\> and 0 will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/OldModel/LegacyEvent.php
+
+		-
+			message: "#^Switch condition type \\('list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list'\\) does not match case condition 'csv_export' \\(string\\)\\.$#"
+			count: 3
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -2966,14 +3011,39 @@ parameters:
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', 'csv_export' given\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', string given\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$whichPlugin of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsListMessage\\(\\) expects 'list_registrations'\\|'list_vip…'\\|'my_events'\\|'my_vip_events'\\|'seminar_list', string given\\.$#"
 			count: 1
-			path: Tests/LegacyFunctional/OldModel/LegacyRegistrationTest.php
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$accessLevel of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsListMessage\\(\\) expects 'attendees_and…'\\|'login'\\|'world', string given\\.$#"
+			count: 2
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$registrationsListPID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Parameter \\#3 \\$registrationsVipListPID of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:canViewRegistrationsList\\(\\) expects int\\<0, max\\>, int given\\.$#"
+			count: 4
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyEventTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/OldModel/LegacyEventTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\OldModel\\\\LegacyRegistrationTest\\:\\:setPaymentMethodRelation\\(\\) has parameter \\$paymentMethodData with no value type specified in iterable type array\\.$#"

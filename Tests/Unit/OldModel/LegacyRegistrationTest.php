@@ -156,16 +156,6 @@ final class LegacyRegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidNegativeValueThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->subject->setMethodOfPaymentUid(-1);
-    }
-
-    /**
-     * @test
-     */
     public function getUserDataForEmptyKeyReturnsEmptyString(): void
     {
         $result = $this->subject->getUserData('');

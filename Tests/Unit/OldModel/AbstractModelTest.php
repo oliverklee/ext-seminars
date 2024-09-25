@@ -362,17 +362,6 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function createMmRecordsForEmptyTableNameThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1333292359);
-
-        $this->subject->createMmRecords('', []);
-    }
-
-    /**
-     * @test
-     */
     public function createMmRecordsOnObjectWithoutUidThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);

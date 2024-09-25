@@ -14,7 +14,7 @@ class LegacyOrganizer extends AbstractModel implements MailRole
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected static $tableName = 'tx_seminars_organizers';
+    protected static string $tableName = 'tx_seminars_organizers';
 
     /**
      * Gets the organizer's real name.

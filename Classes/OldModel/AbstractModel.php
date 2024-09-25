@@ -30,24 +30,17 @@ abstract class AbstractModel
     use SharedPluginConfiguration;
     use TranslateTrait;
 
-    /**
-     * @var string the name of the SQL table this class corresponds to
-     */
-    protected static $tableName = '';
+    protected static string $tableName;
 
     /**
-     * @var array the values from/for the DB
+     * @var array<string, float|int|string|bool|null> the values from/for the DB
      */
-    protected $recordData = [];
+    protected array $recordData = [];
+
+    protected bool $isPersisted = false;
 
     /**
-     * @var bool
-     */
-    protected $isPersisted = false;
-
-    /**
-     * @param int $uid the UID of the record to retrieve from the DB
-     * @param bool $allowHidden whether it is possible to create an object from a hidden record
+     * @param int<0, max> $uid the UID of the record to retrieve from the DB
      */
     public function __construct(int $uid = 0, bool $allowHidden = false)
     {
@@ -62,6 +55,8 @@ abstract class AbstractModel
     /**
      * Creates a new instance that has the given data.
      *
+     * @param array<string, float|int|string|bool|null> $data
+     *
      * @return static
      */
     public static function fromData(array $data): AbstractModel
@@ -74,6 +69,8 @@ abstract class AbstractModel
 
     /**
      * Instantiates a model from the database. If there is no record with the given UID, this method will return null.
+     *
+     * @param int<0, max> $uid the UID of the record to retrieve from the DB
      *
      * @return static|null
      */
@@ -89,7 +86,7 @@ abstract class AbstractModel
     }
 
     /**
-     * @return array|false
+     * @return array<string, string|int|bool|null>|false
      */
     protected static function fetchDataByUid(int $uid, bool $allowHidden)
     {
@@ -103,9 +100,9 @@ abstract class AbstractModel
         $query->select('*')->from(static::$tableName);
         $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
 
-        $result = $query->executeQuery();
-
-        return $result->fetchAssociative();
+        /** @var array<string, string|int|bool|null>|false $data */
+        $data = $query->executeQuery()->fetchAssociative();
+        return $data;
     }
 
     /**
@@ -119,7 +116,7 @@ abstract class AbstractModel
      * Example:
      * `$dbResultRow['name'] => $this->recordData['name']`
      *
-     * @param array $data associative array of a DB query result
+     * @param array<string, float|int|string|bool|null> $data associative array of a DB query result
      */
     protected function setData(array $data): void
     {
@@ -130,14 +127,13 @@ abstract class AbstractModel
     }
 
     /**
-     * Checks whether this object has been properly initialized,
-     * has a non-empty table name set and thus is basically usable.
+     * Checks whether this object has been properly initialized and thus is basically usable.
      *
      * @return bool true if the object has been initialized, false otherwise
      */
     public function isOk(): bool
     {
-        return !empty($this->recordData) && static::$tableName !== '';
+        return $this->recordData !== [];
     }
 
     /**
@@ -202,8 +198,7 @@ abstract class AbstractModel
     }
 
     /**
-     * Checks a decimal element of the record data array for existence and
-     * value != 0.00.
+     * Checks a decimal element of the record data array for existence and value != 0.00.
      *
      * @param non-empty-string $key
      *
@@ -328,7 +323,10 @@ abstract class AbstractModel
         if (!$this->isPersisted || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
             $connection->insert(static::$tableName, $this->recordData);
-            $this->setUid((int)$connection->lastInsertId(static::$tableName));
+            $lastInsertId = (int)$connection->lastInsertId(static::$tableName);
+            if ($lastInsertId > 0) {
+                $this->setUid($lastInsertId);
+            }
         } else {
             $connection->update(static::$tableName, $this->recordData, ['uid' => $this->getUid()]);
         }
@@ -343,21 +341,16 @@ abstract class AbstractModel
      *
      * Before this function may be called, $this->recordData['uid'] must be set correctly.
      *
-     * @param string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting,
-     *        must not be empty
-     * @param int[] $references UIDs of records from the foreign table to which we should create references,
-     *        may be empty
+     * @param non-empty-string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting
+     * @param array<int> $references UIDs of records from the foreign table to which we should create references
      *
-     * @return int the number of created m:n records
+     * @return int<0, max> the number of created m:n records
      *
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException
      */
     protected function createMmRecords(string $mmTable, array $references): int
     {
-        if ($mmTable === '') {
-            throw new \InvalidArgumentException('$mmTable must not be empty.', 1333292359);
-        }
         if (!$this->hasUid()) {
             throw new \BadMethodCallException('createMmRecords may only be called on objects with a UID.', 1333292371);
         }
@@ -393,6 +386,9 @@ abstract class AbstractModel
         return $uid;
     }
 
+    /**
+     * @param int<0, max> $uid
+     */
     protected function setUid(int $uid): void
     {
         $this->setRecordPropertyInteger('uid', $uid);
@@ -424,20 +420,23 @@ abstract class AbstractModel
     /**
      * Returns this record's page UID.
      *
-     * @return int the page UID for this record, will be >= 0
+     * @return int<0, max> the page UID for this record
      */
     public function getPageUid(): int
     {
-        return $this->getRecordPropertyInteger('pid');
+        $pid = $this->getRecordPropertyInteger('pid');
+        \assert($pid >= 0);
+
+        return $pid;
     }
 
     /**
      * Gets a list of the titles of records referenced by this record.
      *
-     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
-     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param non-empty-string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param non-empty-string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
      *
-     * @return string[] the titles of the referenced records
+     * @return list<string> the titles of the referenced records
      */
     protected function getMmRecordTitles(string $foreignTable, string $mmTable): array
     {
@@ -447,11 +446,11 @@ abstract class AbstractModel
     /**
      * Gets a list of the titles of records referenced by this record.
      *
-     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
-     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
-     * @param int $uid
+     * @param non-empty-string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param non-empty-string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param int<0, max> $uid
      *
-     * @return string[] the titles of the referenced records
+     * @return list<string> the titles of the referenced records
      */
     protected function getMmRecordTitlesByUid(string $foreignTable, string $mmTable, int $uid): array
     {
@@ -466,10 +465,10 @@ abstract class AbstractModel
     /**
      * Gets records referenced by this record.
      *
-     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
-     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param non-empty-string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param non-empty-string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
      *
-     * @return array[]
+     * @return array<array<string, bool|int|string|null>>
      */
     protected function getMmRecords(string $foreignTable, string $mmTable): array
     {
@@ -477,13 +476,13 @@ abstract class AbstractModel
     }
 
     /**
-     * Gets records referenced by the the record with the given UID.
+     * Gets records referenced by the record with the given UID.
      *
-     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
-     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
-     * @param int $uid
+     * @param non-empty-string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param non-empty-string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param int<0, max> $uid
      *
-     * @return array[]
+     * @return array<array<string, string|int|bool|null>>
      */
     protected function getMmRecordsByUid(string $foreignTable, string $mmTable, int $uid): array
     {
