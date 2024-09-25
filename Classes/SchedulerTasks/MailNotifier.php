@@ -170,7 +170,9 @@ class MailNotifier extends AbstractTask
         /** @var string|null $attachmentBody */
         $attachmentBody = null;
         if ($this->shouldCsvFileBeAdded($event)) {
-            $attachmentBody = $this->getCsv($event->getUid());
+            $eventUid = $event->getUid();
+            \assert($eventUid > 0);
+            $attachmentBody = $this->getCsv($eventUid);
         }
 
         /** @var LegacyOrganizer $organizer */
@@ -281,7 +283,7 @@ class MailNotifier extends AbstractTask
     /**
      * Returns the CSV output for the list of registrations for the event with the provided UID.
      *
-     * @param int $eventUid UID of the event to create the output for, must be > 0
+     * @param positive-int $eventUid UID of the event to create the output for
      */
     private function getCsv(int $eventUid): string
     {

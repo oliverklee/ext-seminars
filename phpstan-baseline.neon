@@ -196,22 +196,27 @@ parameters:
 			path: Classes/Csv/CsvDownloader.php
 
 		-
-			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
+			message: "#^Parameter \\#1 \\$csvFileName of method OliverKlee\\\\Seminars\\\\Csv\\\\CsvDownloader\\:\\:setPageTypeAndDisposition\\(\\) expects non\\-empty\\-string, string given\\.$#"
+			count: 1
+			path: Classes/Csv/CsvDownloader.php
+
+		-
+			message: "#^Return type \\(list\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(list\\<non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
 			count: 1
 			path: Classes/Csv/DownloadRegistrationListView.php
 
 		-
-			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\)$#"
+			message: "#^Return type \\(list\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should be covariant with return type \\(list\\<non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\)$#"
 			count: 1
 			path: Classes/Csv/DownloadRegistrationListView.php
 
 		-
-			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should return list\\<non\\-empty\\-string\\> but returns list\\<string\\>\\.$#"
 			count: 1
 			path: Classes/Csv/EmailRegistrationListView.php
 
 		-
-			message: "#^Return type \\(array\\<int, string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should be covariant with return type \\(array\\<int, non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\)$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should return list\\<non\\-empty\\-string\\> but returns list\\<string\\>\\.$#"
 			count: 1
 			path: Classes/Csv/EmailRegistrationListView.php
 

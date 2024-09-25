@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractListView
 {
     /**
-     * @var string
+     * @var non-empty-string
      */
     protected const COLUMN_SEPARATOR = ';';
 
@@ -34,19 +34,16 @@ abstract class AbstractListView
     protected const RECURSION_DEPTH = 250;
 
     /**
-     * @var int
+     * @var int<0, max>
      */
-    protected $pageUid = 0;
+    protected int $pageUid = 0;
+
+    protected ?LanguageService $translator = null;
 
     /**
-     * @var LanguageService|null
+     * @var non-empty-string
      */
-    protected $translator;
-
-    /**
-     * @var string
-     */
-    protected $tableName = '';
+    protected string $tableName;
 
     protected Configuration $configuration;
 
@@ -104,18 +101,14 @@ abstract class AbstractListView
     }
 
     /**
-     * Sets the page UID of the records to retrieve.
-     *
-     * @param int $pageUid the page UID of the records
+     * @param int<0, max> $pageUid
      *
      * @throws \InvalidArgumentException
      */
     abstract public function setPageUid(int $pageUid): void;
 
     /**
-     * Returns the page UID of the records to check.
-     *
-     * @return int the page UID, will be >= 0
+     * @return int<0, max>
      */
     protected function getPageUid(): int
     {
@@ -132,6 +125,8 @@ abstract class AbstractListView
 
     /**
      * Returns the name of the main table for this CSV export.
+     *
+     * @return non-empty-string
      */
     protected function getTableName(): string
     {
@@ -160,20 +155,20 @@ abstract class AbstractListView
      */
     protected function createCsvHeading(): string
     {
-        return implode(self::COLUMN_SEPARATOR, $this->getLocalizedCsvHeadings());
+        return \implode(self::COLUMN_SEPARATOR, $this->getLocalizedCsvHeadings());
     }
 
     /**
      * Returns the localized field names.
      *
-     * @return string[] the translated field names in an array, will be empty if no fields should be exported
+     * @return list<string> the translated field names in an array, will be empty if no fields should be exported
      */
     abstract protected function getLocalizedCsvHeadings(): array;
 
     /**
      * Creates the body lines of the CSV export.
      *
-     * @return string[]
+     * @return list<string>
      */
     abstract protected function createCsvBodyLines(): array;
 
@@ -182,9 +177,9 @@ abstract class AbstractListView
      */
     protected function escapeFieldForCsv(string $fieldContent): string
     {
-        if (str_contains($fieldContent, '"')) {
-            $escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';
-        } elseif (str_contains($fieldContent, ';') || str_contains($fieldContent, "\n")) {
+        if (\str_contains($fieldContent, '"')) {
+            $escapedFieldValue = '"' . \str_replace('"', '""', $fieldContent) . '"';
+        } elseif (\str_contains($fieldContent, ';') || \str_contains($fieldContent, "\n")) {
             $escapedFieldValue = '"' . $fieldContent . '"';
         } else {
             $escapedFieldValue = $fieldContent;

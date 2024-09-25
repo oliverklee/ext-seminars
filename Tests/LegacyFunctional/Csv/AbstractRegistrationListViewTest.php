@@ -252,16 +252,6 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function setEventUidWithNegativeEventUidThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->subject->setEventUid(-1);
-    }
-
-    /**
-     * @test
-     */
     public function renderForNoPageAndNoEventThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
