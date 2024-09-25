@@ -23,128 +23,97 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 trait EventDateTrait
 {
-    /**
-     * @var \DateTime|null
-     */
-    protected $start;
+    protected ?\DateTime $start = null;
+
+    protected ?\DateTime $end = null;
+
+    protected ?\DateTime $registrationStart = null;
+
+    protected ?\DateTime $earlyBirdDeadline = null;
+
+    protected ?\DateTime $registrationDeadline = null;
+
+    protected bool $registrationRequired = false;
+
+    protected bool $waitingList = false;
 
     /**
-     * @var \DateTime|null
-     */
-    protected $end;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $registrationStart;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $earlyBirdDeadline;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $registrationDeadline;
-
-    /**
-     * @var bool
-     */
-    protected $registrationRequired = false;
-
-    /**
-     * @var bool
-     */
-    protected $waitingList = false;
-
-    /**
-     * @var int
      * @phpstan-var int<0, max>
      */
-    protected $minimumNumberOfRegistrations = 0;
+    protected int $minimumNumberOfRegistrations = 0;
 
     /**
-     * @var int
      * @phpstan-var int<0, max>
      */
-    protected $maximumNumberOfRegistrations = 0;
+    protected int $maximumNumberOfRegistrations = 0;
 
     /**
      * @var ObjectStorage<Venue>
      * @Lazy
      */
-    protected $venues;
+    protected ObjectStorage $venues;
 
     /**
      * @var ObjectStorage<Speaker>
      * @Lazy
      */
-    protected $speakers;
+    protected ObjectStorage $speakers;
 
     /**
      * @var ObjectStorage<Organizer>
      * @Lazy
      */
-    protected $organizers;
+    protected ObjectStorage $organizers;
+
+    protected int $numberOfOfflineRegistrations = 0;
 
     /**
-     * @var int
+     * @var EventInterface::STATUS_*
      */
-    protected $numberOfOfflineRegistrations = 0;
-
-    /**
-     * @var int
-     * @phpstan-var EventInterface::STATUS_*
-     */
-    protected $status = EventInterface::STATUS_PLANNED;
+    protected int $status = EventInterface::STATUS_PLANNED;
 
     /**
      * @var ObjectStorage<AccommodationOption>
      * @Lazy
      */
-    protected $accommodationOptions;
+    protected ObjectStorage $accommodationOptions;
 
     /**
      * @var ObjectStorage<FoodOption>
      * @Lazy
      */
-    protected $foodOptions;
+    protected ObjectStorage $foodOptions;
 
     /**
      * @var ObjectStorage<RegistrationCheckbox>
      * @Lazy
      */
-    protected $registrationCheckboxes;
+    protected ObjectStorage $registrationCheckboxes;
 
     /**
-     * @var EventStatistics|null
      * @Transient
      */
-    protected $statistics;
+    protected ?EventStatistics $statistics = null;
 
     /**
-     * @var int
-     * @phpstan-var EventDateInterface::EVENT_FORMAT_*
+     * @var EventDateInterface::EVENT_FORMAT_*
      */
-    protected $eventFormat = EventDateInterface::EVENT_FORMAT_ON_SITE;
+    protected int $eventFormat = EventDateInterface::EVENT_FORMAT_ON_SITE;
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $webinarUrl = '';
+    protected string $webinarUrl = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 2048})
      */
-    protected $additionalEmailText = '';
+    protected string $additionalEmailText = '';
 
     /**
      * @var list<EventDateInterface::EVENT_FORMAT_*>
      */
-    private static $partiallyOnSiteEventFormats = [
+    private static array $partiallyOnSiteEventFormats = [
         EventDateInterface::EVENT_FORMAT_ON_SITE,
         EventDateInterface::EVENT_FORMAT_HYBRID,
     ];
@@ -152,7 +121,7 @@ trait EventDateTrait
     /**
      * @var list<EventDateInterface::EVENT_FORMAT_*>
      */
-    private static $partiallyOnlineEventFormats = [
+    private static array $partiallyOnlineEventFormats = [
         EventDateInterface::EVENT_FORMAT_HYBRID,
         EventDateInterface::EVENT_FORMAT_ONLINE,
     ];

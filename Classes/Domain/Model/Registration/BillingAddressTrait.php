@@ -13,58 +13,47 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
  */
 trait BillingAddressTrait
 {
-    /**
-     * @var bool
-     */
-    protected $separateBillingAddress = false;
+    protected bool $separateBillingAddress = false;
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingCompany = '';
+    protected string $billingCompany = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingFullName = '';
+    protected string $billingFullName = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingStreetAddress = '';
+    protected string $billingStreetAddress = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16})
      */
-    protected $billingZipCode = '';
+    protected string $billingZipCode = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingCity = '';
+    protected string $billingCity = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingCountry = '';
+    protected string $billingCountry = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 32})
      */
-    protected $billingPhoneNumber = '';
+    protected string $billingPhoneNumber = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $billingEmailAddress = '';
+    protected string $billingEmailAddress = '';
 
     public function hasSeparateBillingAddress(): bool
     {

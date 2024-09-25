@@ -31,10 +31,9 @@ class Registration extends AbstractEntity implements RawDataInterface
     use PaymentTrait;
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 255})
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
      * @var Event|null
@@ -43,40 +42,32 @@ class Registration extends AbstractEntity implements RawDataInterface
      */
     protected $event;
 
-    /**
-     * @var bool
-     */
-    protected $onWaitingList = false;
+    protected bool $onWaitingList = false;
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $interests = '';
+    protected string $interests = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $expectations = '';
+    protected string $expectations = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $backgroundKnowledge = '';
+    protected string $backgroundKnowledge = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $comments = '';
+    protected string $comments = '';
 
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $knownFrom = '';
+    protected string $knownFrom = '';
 
     /**
      * @var ObjectStorage<AccommodationOption>
@@ -88,27 +79,25 @@ class Registration extends AbstractEntity implements RawDataInterface
      * @var ObjectStorage<FoodOption>
      * @Lazy
      */
-    protected $foodOptions;
+    protected ObjectStorage $foodOptions;
 
     /**
      * @var ObjectStorage<RegistrationCheckbox>
      * @Lazy
      */
-    protected $registrationCheckboxes;
+    protected ObjectStorage $registrationCheckboxes;
 
     /**
-     * @var bool
      * @Transient
      * @Validate(validator="Boolean", options={"is": "1"})
      */
-    protected $consentedToTermsAndConditions = false;
+    protected bool $consentedToTermsAndConditions = false;
 
     /**
-     * @var bool
      * @Transient
      * @Validate(validator="Boolean", options={"is": "1"})
      */
-    protected $consentedToAdditionalTerms = false;
+    protected bool $consentedToAdditionalTerms = false;
 
     public function __construct()
     {

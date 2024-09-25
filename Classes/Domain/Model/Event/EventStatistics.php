@@ -10,27 +10,27 @@ namespace OliverKlee\Seminars\Domain\Model\Event;
 class EventStatistics
 {
     /**
-     * @var int<0, max>
+     * @phpstan-var int<0, max>
      */
     private int $regularSeatsCountFromRegistrations;
 
     /**
-     * @var int<0, max>
+     * @phpstan-var int<0, max>
      */
     private int $offlineRegistrationsCount;
 
     /**
-     * @var int<0, max>
+     * @phpstan-var int<0, max>
      */
     private int $waitingListSeatsCount;
 
     /**
-     * @var int<0, max>
+     * @phpstan-var int<0, max>
      */
     private int $minimumRequiredSeats;
 
     /**
-     * @var int<0, max>
+     * @phpstan-var int<0, max>
      */
     private int $seatsLimit;
 

@@ -21,30 +21,17 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 trait EventTopicTrait
 {
     /**
-     * @var string
      * @Validate("StringLength", options={"maximum": 16383})
      */
-    protected $description = '';
+    protected string $description = '';
 
-    /**
-     * @var float
-     */
-    protected $standardPrice = 0.0;
+    protected float $standardPrice = 0.0;
 
-    /**
-     * @var float
-     */
-    protected $earlyBirdPrice = 0.0;
+    protected float $earlyBirdPrice = 0.0;
 
-    /**
-     * @var float
-     */
-    protected $specialPrice = 0.0;
+    protected float $specialPrice = 0.0;
 
-    /**
-     * @var float
-     */
-    protected $specialEarlyBirdPrice = 0.0;
+    protected float $specialEarlyBirdPrice = 0.0;
 
     /**
      * @var EventType|null
@@ -53,21 +40,15 @@ trait EventTopicTrait
      */
     protected $eventType;
 
-    /**
-     * @var bool
-     */
-    protected $additionalTerms = false;
+    protected bool $additionalTerms = false;
 
-    /**
-     * @var bool
-     */
-    protected $multipleRegistrationPossible = false;
+    protected bool $multipleRegistrationPossible = false;
 
     /**
      * @var ObjectStorage<PaymentMethod>
      * @Lazy
      */
-    protected $paymentMethods;
+    protected ObjectStorage $paymentMethods;
 
     private function initializeEventTopic(): void
     {

@@ -17,10 +17,7 @@ class EventDate extends Event implements EventDateInterface
     use EventTrait;
     use EventDateTrait;
 
-    /**
-     * @var EventTopic|null
-     */
-    protected $topic;
+    protected ?EventTopic $topic = null;
 
     public function __construct()
     {
