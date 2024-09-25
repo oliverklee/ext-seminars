@@ -18,44 +18,34 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractRegistrationListView extends AbstractListView
 {
     /**
-     * @var string
+     * @var non-empty-string
      */
-    protected $tableName = 'tx_seminars_attendances';
+    protected string $tableName = 'tx_seminars_attendances';
 
     /**
      * @var int<0, max>
      */
-    protected $eventUid = 0;
+    protected int $eventUid = 0;
 
     /**
      * Sets the page UID of the records to retrieve.
      *
-     * @param int $pageUid the page UID of the records, must be >= 0
-     *
-     * @throws \InvalidArgumentException
+     * @param int<0, max> $pageUid the page UID of the records, must be >= 0
      */
     public function setPageUid(int $pageUid): void
     {
-        if ($pageUid < 0) {
-            throw new \InvalidArgumentException('$pageUid must be >= 0, but actually is: ' . $pageUid, 1390307753);
-        }
-
         $this->pageUid = $pageUid;
     }
 
     /**
      * Sets the event UID of the registrations to retrieve.
      *
-     * @param int $eventUid the event UID of the registrations, must be >= 0
+     * @param int<0, max> $eventUid the event UID of the registrations, must be >= 0
      *
      * @throws \InvalidArgumentException
      */
     public function setEventUid(int $eventUid): void
     {
-        if ($eventUid < 0) {
-            throw new \InvalidArgumentException('$eventUid must be >= 0, but actually is: ' . $eventUid, 1390320633);
-        }
-
         $this->eventUid = $eventUid;
     }
 
@@ -99,7 +89,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
     /**
      * Returns the localized field names.
      *
-     * @return string[] the translated field names in an array, will be empty if no fields should be exported
+     * @return list<string> the translated field names in an array, will be empty if no fields should be exported
      */
     protected function getLocalizedCsvHeadings(): array
     {
@@ -109,16 +99,16 @@ abstract class AbstractRegistrationListView extends AbstractListView
             $this->getTableName()
         );
 
-        return array_merge($fieldsFromFeUser, $fieldsFromAttendances);
+        return \array_merge($fieldsFromFeUser, $fieldsFromAttendances);
     }
 
     /**
      * Returns the localized field names.
      *
-     * @param string[] $fieldNames the field names to translate, may be empty
-     * @param string $localizationPrefix the table to which the fields belong to
+     * @param list<string> $fieldNames the field names to translate, may be empty
+     * @param non-empty-string $localizationPrefix the table to which the fields belong to
      *
-     * @return string[] the translated field names in an array, will be empty if no field names were given
+     * @return list<string> the translated field names in an array, will be empty if no field names were given
      */
     protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, string $localizationPrefix): array
     {
@@ -126,7 +116,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
         $translator = $this->getInitializedTranslator();
 
         foreach ($fieldNames as $fieldName) {
-            $translations[] = rtrim($translator->getLL($localizationPrefix . '.' . $fieldName), ':');
+            $translations[] = \rtrim($translator->getLL($localizationPrefix . '.' . $fieldName), ':');
         }
 
         return $translations;
@@ -135,21 +125,21 @@ abstract class AbstractRegistrationListView extends AbstractListView
     /**
      * Returns the keys of the front-end user fields to export.
      *
-     * @return array<int, non-empty-string>
+     * @return list<non-empty-string>
      */
     abstract protected function getFrontEndUserFieldKeys(): array;
 
     /**
      * Returns the keys of the registration fields to export.
      *
-     * @return array<int, non-empty-string>
+     * @return list<non-empty-string>
      */
     abstract protected function getRegistrationFieldKeys(): array;
 
     /**
      * Creates the body lines of the CSV export.
      *
-     * @return string[]
+     * @return list<string>
      */
     protected function createCsvBodyLines(): array
     {
@@ -168,8 +158,6 @@ abstract class AbstractRegistrationListView extends AbstractListView
 
     /**
      * Creates a registrationBagBuilder with some preset limitations.
-     *
-     * @return RegistrationBagBuilder the bag builder with some preset limitations
      */
     protected function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
@@ -196,16 +184,15 @@ abstract class AbstractRegistrationListView extends AbstractListView
      * @param RegistrationBagBuilder $builder the bag builder already limited to the registrations
      *        which should be returned
      *
-     * @return string[] the list of registrations, will be empty if no registrations have been given
+     * @return list<string> the list of registrations, will be empty if no registrations have been given
      *
      * @throws \RuntimeException
      */
     protected function getRegistrationsCsvList(RegistrationBagBuilder $builder): array
     {
         $csvLines = [];
-        $bag = $builder->build();
 
-        foreach ($bag as $registration) {
+        foreach ($builder->build() as $registration) {
             $userData = $this->createCsvColumnsForFrontEndUser($registration);
             $registrationData = $this->createCsvColumnsForRegistration($registration);
             $csvLines[] = implode(self::COLUMN_SEPARATOR, array_merge($userData, $registrationData));
@@ -220,7 +207,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
      *
      * @param LegacyRegistration $model object that will deliver the data
      *
-     * @return string[] the data for the keys provided in $keys (may be empty)
+     * @return list<string> the data for the keys provided in $keys (may be empty)
      */
     protected function createCsvColumnsForRegistration(LegacyRegistration $model): array
     {
@@ -239,7 +226,7 @@ abstract class AbstractRegistrationListView extends AbstractListView
      *
      * @param LegacyRegistration $model object that will deliver the data
      *
-     * @return string[] the data for the keys provided in $keys (may be empty)
+     * @return list<string> the data for the keys provided in $keys (may be empty)
      */
     protected function createCsvColumnsForFrontEndUser(LegacyRegistration $model): array
     {

@@ -69,7 +69,7 @@ class CsvDownloader
      *
      * This function does not do any access checks.
      *
-     * @param int $eventUid UID of the event for which the registration list should be created, must be > 0
+     * @param int<0, max> $eventUid UID of the event for which the registration list should be created, must be > 0
      *
      * @return string CSV list of registrations for the given seminar or an
      *                empty string if there is not event with the provided UID
@@ -91,7 +91,9 @@ class CsvDownloader
      */
     private function setContentTypeForRegistrationLists(): void
     {
-        $this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForRegistrationsCsv'));
+        $filename = $this->configuration->getAsString('filenameForRegistrationsCsv');
+
+        $this->setPageTypeAndDisposition($filename);
     }
 
     /**
@@ -99,7 +101,7 @@ class CsvDownloader
      *
      * Adds the data directly to the page header.
      *
-     * @param string $csvFileName the name for the page which is used as storage name, must not be empty
+     * @param non-empty-string $csvFileName the name for the page which is used as storage name, must not be empty
      */
     private function setPageTypeAndDisposition(string $csvFileName): void
     {

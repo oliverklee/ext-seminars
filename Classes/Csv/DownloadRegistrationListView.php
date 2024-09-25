@@ -12,7 +12,7 @@ class DownloadRegistrationListView extends AbstractRegistrationListView
     /**
      * Returns the keys of the front-end user fields to export.
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     protected function getFrontEndUserFieldKeys(): array
     {
@@ -22,7 +22,7 @@ class DownloadRegistrationListView extends AbstractRegistrationListView
     /**
      * Returns the keys of the registration fields to export.
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     protected function getRegistrationFieldKeys(): array
     {
