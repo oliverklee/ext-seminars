@@ -15,10 +15,7 @@ use OliverKlee\Seminars\Service\DateFormatConverter;
  */
 trait SharedPluginConfiguration
 {
-    /**
-     * @var Configuration|null
-     */
-    private $sharedPluginConfiguration;
+    private ?Configuration $sharedPluginConfiguration = null;
 
     protected function getSharedConfiguration(): Configuration
     {
