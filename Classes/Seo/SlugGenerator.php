@@ -115,23 +115,20 @@ class SlugGenerator implements SingletonInterface
     }
 
     /**
-     * Counts the number of events with the given slug, exluding the event with the given UID (so that existing events
+     * Counts the number of events with the given slug, excluding the event with the given UID (so that existing events
      * can keep their slug).
      */
     private function countEventsWithSlug(string $slug, int $eventUid): int
     {
         $queryBuilder = $this->getQueryBuilder();
-        $query = $queryBuilder
+        $queryResult = $queryBuilder
             ->count('*')
             ->from(self::TABLE_NAME_EVENTS)
             ->andWhere(
                 $queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR)),
                 $queryBuilder->expr()->neq('uid', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
-            );
+            )->executeQuery();
 
-        $queryResult = $query->executeQuery();
-        $count = (int)$queryResult->fetchOne();
-
-        return $count;
+        return (int)$queryResult->fetchOne();
     }
 }
