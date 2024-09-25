@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use Doctrine\DBAL\Result;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\ViewHelpers\RichTextViewHelper;
