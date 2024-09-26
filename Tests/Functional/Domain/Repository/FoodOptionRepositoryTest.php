@@ -21,10 +21,7 @@ final class FoodOptionRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var FoodOptionRepository
-     */
-    private $subject;
+    private FoodOptionRepository $subject;
 
     protected function setUp(): void
     {

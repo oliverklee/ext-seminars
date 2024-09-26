@@ -21,10 +21,7 @@ final class OrganizerRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var OrganizerRepository
-     */
-    private $subject;
+    private OrganizerRepository $subject;
 
     protected function setUp(): void
     {

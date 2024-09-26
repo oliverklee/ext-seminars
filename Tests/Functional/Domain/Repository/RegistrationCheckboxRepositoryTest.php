@@ -21,10 +21,7 @@ final class RegistrationCheckboxRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationCheckboxRepository
-     */
-    private $subject;
+    private RegistrationCheckboxRepository $subject;
 
     protected function setUp(): void
     {

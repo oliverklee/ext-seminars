@@ -21,10 +21,7 @@ final class PaymentMethodRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var PaymentMethodRepository
-     */
-    private $subject;
+    private PaymentMethodRepository $subject;
 
     protected function setUp(): void
     {

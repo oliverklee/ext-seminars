@@ -20,10 +20,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var GenerateEventSlugsUpgradeWizard
-     */
-    private $subject;
+    private GenerateEventSlugsUpgradeWizard $subject;
 
     protected function setUp(): void
     {
