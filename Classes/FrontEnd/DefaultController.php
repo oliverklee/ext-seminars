@@ -480,10 +480,8 @@ class DefaultController extends TemplateHelper
             $this->responseHeadersModifier->setOverrideStatusCode(404);
         }
 
-        $this->setMarker(
-            'backlink',
-            $this->pi_linkTP($this->translate('label_back'), [], true, $this->getConfValueInteger('listPID'))
-        );
+        $listPid = \max(0, $this->getConfValueInteger('listPID'));
+        $this->setMarker('backlink', $this->pi_linkTP($this->translate('label_back'), [], true, $listPid));
         $result .= $this->getSubpart('BACK_VIEW');
 
         if ($this->isConfigurationCheckEnabled()) {
