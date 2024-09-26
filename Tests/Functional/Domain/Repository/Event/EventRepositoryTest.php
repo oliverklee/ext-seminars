@@ -45,10 +45,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var EventRepository
-     */
-    private $subject;
+    private EventRepository $subject;
 
     protected function setUp(): void
     {

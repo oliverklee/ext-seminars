@@ -31,10 +31,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var DataHandlerHook
-     */
-    private $subject;
+    private DataHandlerHook $subject;
 
     private DataHandler $dataHandler;
 

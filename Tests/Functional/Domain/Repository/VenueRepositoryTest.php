@@ -21,10 +21,7 @@ final class VenueRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var VenueRepository
-     */
-    private $subject;
+    private VenueRepository $subject;
 
     protected function setUp(): void
     {

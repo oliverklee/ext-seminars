@@ -21,10 +21,7 @@ final class AccommodationOptionRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var AccommodationOptionRepository
-     */
-    private $subject;
+    private AccommodationOptionRepository $subject;
 
     protected function setUp(): void
     {

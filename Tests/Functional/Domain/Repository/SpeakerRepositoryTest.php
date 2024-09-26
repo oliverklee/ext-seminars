@@ -21,10 +21,7 @@ final class SpeakerRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var SpeakerRepository
-     */
-    private $subject;
+    private SpeakerRepository $subject;
 
     protected function setUp(): void
     {

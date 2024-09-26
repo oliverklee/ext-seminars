@@ -41,20 +41,11 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var RegistrationRepository
-     */
-    private $subject;
+    private RegistrationRepository $subject;
 
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
-    /**
-     * @var PersistenceManager
-     */
-    private $persistenceManager;
+    private PersistenceManager $persistenceManager;
 
     protected function setUp(): void
     {
