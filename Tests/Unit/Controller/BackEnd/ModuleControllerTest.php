@@ -31,7 +31,7 @@ final class ModuleControllerTest extends UnitTestCase
     /**
      * @var ModuleController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private ModuleController $subject;
 
     /**
      * @var TemplateView&MockObject

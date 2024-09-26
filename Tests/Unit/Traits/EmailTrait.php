@@ -20,7 +20,7 @@ trait EmailTrait
     /**
      * @var MailMessage&MockObject
      */
-    private $email;
+    private MailMessage $email;
 
     /**
      * @return MailMessage&MockObject

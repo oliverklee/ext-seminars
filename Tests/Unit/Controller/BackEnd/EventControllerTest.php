@@ -32,7 +32,7 @@ final class EventControllerTest extends UnitTestCase
     /**
      * @var EventController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private EventController $subject;
 
     /**
      * @var TemplateView&MockObject

@@ -34,7 +34,7 @@ final class EventUnregistrationControllerTest extends UnitTestCase
     /**
      * @var EventUnregistrationController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private EventUnregistrationController $subject;
 
     /**
      * @var TemplateView&MockObject

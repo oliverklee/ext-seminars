@@ -33,10 +33,7 @@ final class EventTest extends UnitTestCase
 
     private DummyConfiguration $configuration;
 
-    /**
-     * @var int
-     */
-    protected $now = 1424751343;
+    protected int $now = 1424751343;
 
     private Organizer $organizer;
 

@@ -25,9 +25,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class HookProviderTest extends UnitTestCase
 {
     /**
-     * @var array|null
+     * backed-up extension configuration of the TYPO3 configuration variables
+     *
+     * @var array<string, mixed>|null
      */
-    private $extConfBackup = [];
+    private ?array $extConfBackup = [];
 
     protected function setUp(): void
     {
