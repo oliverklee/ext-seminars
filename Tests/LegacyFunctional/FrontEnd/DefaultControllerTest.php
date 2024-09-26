@@ -85,12 +85,9 @@ final class DefaultControllerTest extends FunctionalTestCase
      *
      * @var array<string, mixed>
      */
-    private $extConfBackup = [];
+    private array $extConfBackup = [];
 
-    /**
-     * @var ConnectionPool
-     */
-    private $connectionPool;
+    private ConnectionPool $connectionPool;
 
     private DummyConfiguration $sharedConfiguration;
 

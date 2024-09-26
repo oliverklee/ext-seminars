@@ -61,10 +61,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
     private ?DefaultController $pi1 = null;
 
-    /**
-     * @var ConnectionPool
-     */
-    private $connectionPool;
+    private ConnectionPool $connectionPool;
 
     protected function setUp(): void
     {

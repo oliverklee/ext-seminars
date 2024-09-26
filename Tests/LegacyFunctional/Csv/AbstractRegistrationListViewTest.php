@@ -69,7 +69,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
      *
      * @var array<string, mixed>
      */
-    private $extConfBackup = [];
+    private array $extConfBackup = [];
 
     protected function setUp(): void
     {

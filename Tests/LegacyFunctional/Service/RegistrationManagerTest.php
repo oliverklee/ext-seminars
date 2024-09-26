@@ -75,9 +75,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    private $extConfBackup = [];
+    private array $extConfBackup = [];
 
     /**
      * @var list<class-string>
