@@ -1546,6 +1546,11 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
+			message: "#^PHPDoc tag @var with type non\\-falsy\\-string is not subtype of native type lowercase\\-string\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
