@@ -38,10 +38,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
     private int $seminarUid = 0;
 
-    /**
-     * @var ConnectionPool
-     */
-    private $connectionPool;
+    private ConnectionPool $connectionPool;
 
     private DummyConfiguration $configuration;
 
