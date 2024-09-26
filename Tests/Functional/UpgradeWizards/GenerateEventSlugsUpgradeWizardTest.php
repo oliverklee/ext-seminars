@@ -42,7 +42,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForOnlyEventsWithSlugsReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithSlug.xml');
 
         self::assertFalse($this->subject->updateNecessary());
     }
@@ -52,7 +52,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForEventWithEmptySlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -62,7 +62,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -72,7 +72,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForHiddenEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/HiddenEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -82,7 +82,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForDeletedEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/DeletedEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -92,7 +92,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForTimedEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/TimedEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/TimedEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -102,13 +102,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateKeepsEventWithSlugUnmodified(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -121,13 +120,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfEventWithEmptySlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -140,13 +138,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/EventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -159,13 +156,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfHiddenEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/HiddenEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -178,13 +174,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfDeletedEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/DeletedEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -197,13 +192,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfTimedEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/TimedEventWithNullSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/TimedEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 1]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -216,13 +210,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeSuffixesSlugIfSlugAlreadyExistsBeforeWizard(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithExistingSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithExistingSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -235,13 +228,14 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeSuffixesSlugIfCollidingSlugHasJustBeenCreatedByWizard(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithNewlyCreatedSlug.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithNewlyCreatedSlug.xml'
+        );
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
@@ -254,13 +248,12 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeSuffixesSlugWithNextAvailableSuffixIfSuffixAlreadyExists(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SlugCollisionWithSuffixedSlug.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithSuffixedSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection
-            ->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 3]);
+        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 3]);
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
