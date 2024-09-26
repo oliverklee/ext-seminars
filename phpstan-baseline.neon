@@ -906,6 +906,11 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
+			message: "#^Parameter \\#1 \\$searchWords of method OliverKlee\\\\Seminars\\\\BagBuilder\\\\EventBagBuilder\\:\\:limitToFullTextSearch\\(\\) expects string, array\\|float\\|int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
 			message: "#^Parameter \\#1 \\$uid of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\>\\:\\:find\\(\\) expects int\\<1, max\\>, mixed given\\.$#"
 			count: 2
 			path: Classes/FrontEnd/DefaultController.php
@@ -922,6 +927,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:getLinkToUnregistrationPage\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, array\\|float\\|int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
 
@@ -976,6 +986,11 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
+			message: "#^Cannot cast array\\|float\\|int\\|string to string\\.$#"
+			count: 2
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -1007,6 +1022,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'country'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'country'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|float\\|int\\|string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
@@ -1551,17 +1571,12 @@ parameters:
 			path: Classes/Templating/TemplateHelper.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG type has no value type specified in iterable type array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$LOCAL_LANG \\(array\\<string, array\\<string, array\\<int, array\\<string, string\\>\\>\\>\\>\\) does not accept array\\<string, array\\<array\\<int, array\\<string, mixed\\>\\>\\>\\>\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$conf type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/Templating/TemplateHelper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$piVars type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/Templating/TemplateHelper.php
 
@@ -2751,6 +2766,11 @@ parameters:
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
+			message: "#^Cannot access an offset on array\\|float\\|int\\|string\\.$#"
+			count: 3
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 6
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
@@ -2819,6 +2839,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\FrontEnd\\\\RequirementsListTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/RequirementsListTest.php
+
+		-
+			message: "#^Cannot access an offset on array\\|float\\|int\\|string\\.$#"
+			count: 14
+			path: Tests/LegacyFunctional/FrontEnd/SelectorWidgetTest.php
 
 		-
 			message: "#^Cannot access an offset on mixed\\.$#"

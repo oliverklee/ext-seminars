@@ -36,21 +36,16 @@ abstract class TemplateHelper
      */
     private const FALSY_VALUES = [null, false, '', 0, '0'];
 
-    /**
-     * The back-reference to the mother cObj object set at call time
-     *
-     * @var ContentObjectRenderer|null
-     */
-    protected $cObj;
+    protected ?ContentObjectRenderer $cObj = null;
 
     /**
      * This is the incoming array by name `$this->prefixId` merged between POST and GET, POST taking precedence.
-     * Eg. if the class name is 'tx_myext'
-     * then the content of this array will be whatever comes into &tx_myext[...]=...
+     * Eg. if the class name is `tx_myext`,
+     * then the content of this array will be whatever comes into `&tx_myext[...]=...`
      *
-     * @var array
+     * @var array<string, string|int|float|array<mixed>>
      */
-    public $piVars = [
+    public array $piVars = [
         'pointer' => '',
         // Used as a pointer for lists
         'mode' => '',
@@ -73,7 +68,7 @@ abstract class TemplateHelper
      *        results_at_a_time: int
      *      }
      */
-    public $internal = [
+    public array $internal = [
         'descFlag' => false,
         'maxPages' => 10,
         'res_count' => 0,
@@ -83,9 +78,9 @@ abstract class TemplateHelper
     /**
      * Local Language content
      *
-     * @var array
+     * @var array<string, array<string, array<int, array<string, string>>>>
      */
-    private $LOCAL_LANG = [];
+    private array $LOCAL_LANG = [];
 
     /**
      * Flag that tells if the locallang file has been fetch (or tried to
@@ -96,7 +91,7 @@ abstract class TemplateHelper
     /**
      * Pointer to the language to use.
      */
-    private string $LLkey;
+    private string $LLkey = '';
 
     /**
      * Pointer to alternative fall-back language to use.
@@ -108,10 +103,8 @@ abstract class TemplateHelper
      *
      * $conf[LOCAL_LANG][_key_] is reserved for Local Language overrides.
      * $conf[userFunc] reserved for setting up the USER / USER_INT object. See TSref
-     *
-     * @var array
      */
-    public $conf = [];
+    public array $conf = [];
 
     /**
      * Property for accessing TypoScriptFrontendController centrally
@@ -121,7 +114,7 @@ abstract class TemplateHelper
     /**
      * @var non-empty-string the prefix used for CSS classes
      */
-    protected $prefixId = 'tx_seminars_pi1';
+    protected string $prefixId = 'tx_seminars_pi1';
 
     /**
      * faking `$this->scriptRelPath` so the `locallang.xlf` file is found
@@ -156,7 +149,7 @@ abstract class TemplateHelper
      *
      * @var array<int<0, max>, string>|null
      */
-    private $availableLanguages;
+    private ?array $availableLanguages = null;
 
     /**
      * An ordered list of language label suffixes that should be tried to get
@@ -227,9 +220,9 @@ abstract class TemplateHelper
      * If the parameter is omitted, the configuration for `plugin.tx_[extkey]` is
      * used instead, e.g., `plugin.tx_seminars`.
      *
-     * @param array<string, mixed>|mixed $configuration TypoScript configuration for the plugin (usually an array)
+     * @param array<string, mixed> $configuration TypoScript configuration for the plugin
      */
-    public function init($configuration = null): void
+    public function init(array $configuration = null): void
     {
         if ($this->isInitialized) {
             return;
@@ -1326,7 +1319,7 @@ abstract class TemplateHelper
      * @param string $str The content string to wrap in <a> tags
      * @param array $urlParameters Array with URL parameters as key/value pairs. They will be "imploded" and added to the list of parameters defined in the plugins TypoScript property "parent.addParams".
      * @param bool $cache If $cache is set (0/1), the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
-     * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
+     * @param int<0, max> $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
      * @return string The input string wrapped in <a> tags
      */
     // phpcs:disable
