@@ -303,10 +303,7 @@ class RichTextViewHelper
             ],
     ];
 
-    /**
-     * @var ContentObjectRenderer
-     */
-    private $contentObject;
+    private ContentObjectRenderer $contentObject;
 
     public function __construct()
     {
