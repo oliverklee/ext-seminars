@@ -3336,12 +3336,7 @@ parameters:
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup \\(array\\|null\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Hooks/HookProviderTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup type has no value type specified in iterable type array\\.$#"
+			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Hooks\\\\HookProviderTest\\:\\:\\$extConfBackup \\(array\\<string, mixed\\>\\|null\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/Unit/Hooks/HookProviderTest.php
 

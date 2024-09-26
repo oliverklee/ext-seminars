@@ -18,7 +18,7 @@ trait MakeInstanceTrait
     /**
      * @var list<class-string>
      */
-    private $mockClassNames = [];
+    private array $mockClassNames = [];
 
     /**
      * Adds an instance to the TYPO3 instance FIFO buffer used by `GeneralUtility::makeInstance()`

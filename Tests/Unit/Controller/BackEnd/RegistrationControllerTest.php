@@ -39,7 +39,7 @@ final class RegistrationControllerTest extends UnitTestCase
     /**
      * @var RegistrationController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private RegistrationController $subject;
 
     /**
      * @var TemplateView&MockObject

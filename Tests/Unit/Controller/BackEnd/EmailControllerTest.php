@@ -30,7 +30,7 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @var EmailController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private EmailController $subject;
 
     /**
      * @var TemplateView&MockObject

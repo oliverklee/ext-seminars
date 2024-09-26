@@ -35,7 +35,7 @@ final class EventRegistrationControllerTest extends UnitTestCase
     /**
      * @var EventRegistrationController&MockObject&AccessibleObjectInterface
      */
-    private $subject;
+    private EventRegistrationController $subject;
 
     /**
      * @var RegistrationGuard&MockObject
