@@ -11,7 +11,6 @@ use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -33,11 +32,6 @@ final class MailNotifierTest extends FunctionalTestCase
     ];
 
     private MailNotifier $subject;
-
-    /**
-     * @var LanguageService
-     */
-    private $languageService;
 
     /**
      * @var RegistrationDigest&MockObject

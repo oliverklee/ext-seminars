@@ -16,10 +16,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 trait LanguageHelper
 {
-    /**
-     * @var LanguageService|null
-     */
-    private $languageService;
+    private ?LanguageService $languageService = null;
 
     private function getLanguageService(): LanguageService
     {

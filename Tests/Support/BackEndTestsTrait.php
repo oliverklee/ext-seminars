@@ -24,42 +24,27 @@ trait BackEndTestsTrait
     /**
      * @var array<mixed>
      */
-    private $getBackup = [];
+    private array $getBackup = [];
 
     /**
      * @var array<mixed>
      */
-    private $postBackup = [];
+    private array $postBackup = [];
 
-    /**
-     * @var BackendUserAuthentication|null
-     */
-    private $backEndUserBackup;
+    private ?BackendUserAuthentication $backEndUserBackup = null;
 
-    /**
-     * @var string
-     */
-    private $languageBackup = '';
+    private string $languageBackup = '';
 
-    /**
-     * @var array
-     */
-    private $extConfBackup = [];
+    private array $extConfBackup = [];
 
-    /**
-     * @var array
-     */
-    private $t3VarBackup = [];
+    private array $t3VarBackup = [];
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
+    private DummyConfiguration $configuration;
 
     /**
      * @var positive-int
      */
-    private $now;
+    private int $now;
 
     /**
      * Replaces the current BE user with a mocked user, sets "default" as the current BE language, clears the
