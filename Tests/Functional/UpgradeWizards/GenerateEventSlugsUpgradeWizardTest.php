@@ -13,6 +13,11 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
 {
+    /**
+     * @var non-empty-string
+     */
+    private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/';
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -42,7 +47,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForOnlyEventsWithSlugsReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventWithSlug.xml');
 
         self::assertFalse($this->subject->updateNecessary());
     }
@@ -52,7 +57,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForEventWithEmptySlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventsWithAndWithEmptySlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -62,7 +67,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -72,7 +77,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForHiddenEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/HiddenEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'HiddenEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -82,7 +87,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForDeletedEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/DeletedEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'DeletedEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -92,7 +97,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function updateNecessaryForTimedEventWithNullSlugReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/TimedEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'TimedEventWithNullSlug.xml');
 
         self::assertTrue($this->subject->updateNecessary());
     }
@@ -102,7 +107,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateKeepsEventWithSlugUnmodified(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -120,7 +125,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfEventWithEmptySlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventsWithAndWithEmptySlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventsWithAndWithEmptySlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -138,7 +143,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/EventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'EventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -156,7 +161,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfHiddenEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/HiddenEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'HiddenEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -174,7 +179,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfDeletedEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/DeletedEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'DeletedEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -192,7 +197,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeUpdateUpdatesSlugOfTimedEventWithNullSlug(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/TimedEventWithNullSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'TimedEventWithNullSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -210,7 +215,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeSuffixesSlugIfSlugAlreadyExistsBeforeWizard(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithExistingSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'SlugCollisionWithExistingSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
@@ -248,7 +253,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
      */
     public function executeSuffixesSlugWithNextAvailableSuffixIfSuffixAlreadyExists(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithSuffixedSlug.xml');
+        $this->importDataSet(self::FIXTURES_PREFIX . 'SlugCollisionWithSuffixedSlug.xml');
 
         $wizardResult = $this->subject->executeUpdate();
 
