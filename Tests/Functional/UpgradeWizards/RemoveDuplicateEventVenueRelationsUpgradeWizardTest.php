@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\UpgradeWizards;
 
 use OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -87,6 +88,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function updateNecessaryForTwoDuplicatedRelationsReturnsTrue(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoDuplicateRelations.csv');
 
         self::assertTrue($this->subject->updateNecessary());
@@ -97,6 +102,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function updateNecessaryForOneDuplicatedRelationAndOneUniqueRelationReturnsTrue(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneDuplicateAndOneUniqueRelationFromOneEventToTwoVenues.csv');
 
         self::assertTrue($this->subject->updateNecessary());
@@ -143,6 +152,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function executeUpdateForTwoUniqueRelationsFromOneEventToTwoVenuesKeepsBothUniqueRelations(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromOneEventToTwoVenues.csv');
 
         $this->subject->executeUpdate();
@@ -155,6 +168,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function executeUpdateForTwoDuplicatedRelationsDeletesOneOfThem(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoDuplicateRelations.csv');
 
         $this->subject->executeUpdate();
@@ -167,6 +184,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function executeUpdateForThreeDuplicatedRelationDeletesTwoOfThem(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'ThreeDuplicateRelations.csv');
 
         $this->subject->executeUpdate();
@@ -179,6 +200,10 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
      */
     public function executeUpdateForOneDuplicatedRelationAndOneUniqueRelationRemovesDuplicate(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not relevant for TYPO3 v12 and later.');
+        }
+
         $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneDuplicateAndOneUniqueRelationFromOneEventToTwoVenues.csv');
 
         $this->subject->executeUpdate();
