@@ -1242,7 +1242,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
+			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
@@ -1286,7 +1286,7 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return list\\<array\\<string, int\\|string\\>\\> but returns list\\<array\\<string, mixed\\>\\>\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getPlacesAsArray\\(\\) should return list\\<array\\<string, int\\|string\\>\\> but returns array\\<int, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 

@@ -490,17 +490,14 @@ class LegacyEvent extends AbstractTimeSpan
     {
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
-        $result = $queryBuilder
+        return $queryBuilder
             ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
                 'tx_seminars_sites',
                 'tx_seminars_seminars_place_mm',
                 'mm',
-                $queryBuilder->expr()->eq(
-                    'tx_seminars_sites.uid',
-                    $queryBuilder->quoteIdentifier('mm.uid_foreign')
-                )
+                $queryBuilder->expr()->eq('tx_seminars_sites.uid', $queryBuilder->quoteIdentifier('mm.uid_foreign'))
             )
             ->where(
                 $queryBuilder->expr()->eq(
@@ -510,20 +507,6 @@ class LegacyEvent extends AbstractTimeSpan
             )
             ->orderBy('mm.sorting')
             ->executeQuery()->fetchAllAssociative();
-
-        /** @var list<array<string, string|int>> $resultWithoutDuplicates */
-        $resultWithoutDuplicates = [];
-        /** @var array<positive-int, bool> $usedUids */
-        $usedUids = [];
-        foreach ($result as $row) {
-            $placeUid = (int)$row['uid'];
-            if (!isset($usedUids[$placeUid])) {
-                $usedUids[$placeUid] = true;
-                $resultWithoutDuplicates[] = $row;
-            }
-        }
-
-        return $resultWithoutDuplicates;
     }
 
     /**
