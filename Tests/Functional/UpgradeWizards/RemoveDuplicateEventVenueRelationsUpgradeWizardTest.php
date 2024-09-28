@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\UpgradeWizards;
 
 use OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -33,6 +34,7 @@ class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTest
         parent::setUp();
 
         $this->subject = GeneralUtility::makeInstance(RemoveDuplicateEventVenueRelationsUpgradeWizard::class);
+        $this->subject->setLogger(new NullLogger());
     }
 
     /**
