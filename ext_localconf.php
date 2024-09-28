@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3') or die('Access denied.');
 
 (static function (): void {
@@ -79,6 +80,8 @@ defined('TYPO3') or die('Access denied.');
         = \OliverKlee\Seminars\UpgradeWizards\SeparateBillingAddressUpgradeWizard::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_generateEventSlugs']
         = \OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_removeDuplicateEventVenueRelations']
+        = \OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard::class;
 
     // This makes the plugin available for front-end rendering.
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
