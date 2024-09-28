@@ -7,6 +7,7 @@ use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard;
+use OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -91,6 +92,8 @@ defined('TYPO3') or die('Access denied.');
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_generateEventSlugs']
         = GenerateEventSlugsUpgradeWizard::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_removeDuplicateEventVenueRelations']
+        = RemoveDuplicateEventVenueRelationsUpgradeWizard::class;
 
     // This makes the plugin available for front-end rendering.
     ExtensionUtility::configurePlugin(

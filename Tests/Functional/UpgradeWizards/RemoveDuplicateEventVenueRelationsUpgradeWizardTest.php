@@ -1,0 +1,188 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OliverKlee\Seminars\Tests\Functional\UpgradeWizards;
+
+use OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+
+/**
+ * @covers \OliverKlee\Seminars\UpgradeWizards\RemoveDuplicateEventVenueRelationsUpgradeWizard
+ */
+class RemoveDuplicateEventVenueRelationsUpgradeWizardTest extends FunctionalTestCase
+{
+    /**
+     * @var non-empty-string
+     */
+    private const FIXTURES_PREFIX = __DIR__ . '/Fixtures/RemoveDuplicateEventVenueRelationsUpgradeWizard/';
+
+    protected array $testExtensionsToLoad = [
+        'typo3conf/ext/static_info_tables',
+        'typo3conf/ext/feuserextrafields',
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/seminars',
+    ];
+
+    private RemoveDuplicateEventVenueRelationsUpgradeWizard $subject;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->subject = GeneralUtility::makeInstance(RemoveDuplicateEventVenueRelationsUpgradeWizard::class);
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForEmptyDatabaseReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForNoRelationsReturnsFalse(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'NoRelations.csv');
+
+        self::assertFalse($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForOneUniqueRelationReturnsFalse(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneUniqueRelation.csv');
+
+        self::assertFalse($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForTwoUniqueRelationsFromTwoEventsToTheSameVenueReturnsFalse(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromTwoEventsToTheSameVenue.csv');
+
+        self::assertFalse($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForTwoUniqueRelationsFromOneEventToTwoVenusReturnsFalse(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromOneEventToTwoVenues.csv');
+
+        self::assertFalse($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForTwoDuplicatedRelationsReturnsTrue(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoDuplicateRelations.csv');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function updateNecessaryForOneDuplicatedRelationAndOneUniqueRelationReturnsTrue(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneDuplicateAndOneUniqueRelationFromOneEventToTwoVenues.csv');
+
+        self::assertTrue($this->subject->updateNecessary());
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForNoRelationsDoesNotAddAnyRelation(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'NoRelations.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'NoRelations.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForOneUniqueRelationKeepsUniqueRelation(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneUniqueRelation.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'OneUniqueRelation.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForTwoUniqueRelationsFromTwoEventsToTheSameVenueKeepsBothUniqueRelations(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromTwoEventsToTheSameVenue.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromTwoEventsToTheSameVenue.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForTwoUniqueRelationsFromOneEventToTwoVenuesKeepsBothUniqueRelations(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromOneEventToTwoVenues.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromOneEventToTwoVenues.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForTwoDuplicatedRelationsDeletesOneOfThem(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'TwoDuplicateRelations.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'OneUniqueRelation.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForThreeDuplicatedRelationDeletesTwoOfThem(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'ThreeDuplicateRelations.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'OneUniqueRelation.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function executeUpdateForOneDuplicatedRelationAndOneUniqueRelationRemovesDuplicate(): void
+    {
+        $this->importCSVDataSet(self::FIXTURES_PREFIX . 'OneDuplicateAndOneUniqueRelationFromOneEventToTwoVenues.csv');
+
+        $this->subject->executeUpdate();
+
+        $this->assertCSVDataSet(self::FIXTURES_PREFIX . 'TwoUniqueRelationsFromOneEventToTwoVenues.csv');
+    }
+}
