@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\UpgradeWizards;
 
 use OliverKlee\Seminars\UpgradeWizards\GenerateEventSlugsUpgradeWizard;
+use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -32,6 +33,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = GeneralUtility::makeInstance(GenerateEventSlugsUpgradeWizard::class);
+        $this->subject->setLogger(new NullLogger());
     }
 
     /**
