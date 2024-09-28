@@ -1811,6 +1811,26 @@ parameters:
 			path: Classes/UpgradeWizards/GenerateEventSlugsUpgradeWizard.php
 
 		-
+			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/RemoveDuplicateEventVenueRelationsUpgradeWizard.php
+
+		-
+			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/RemoveDuplicateEventVenueRelationsUpgradeWizard.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/UpgradeWizards/RemoveDuplicateEventVenueRelationsUpgradeWizard.php
+
+		-
+			message: "#^Parameter \\#1 \\$object_or_class of function method_exists expects object\\|string, Doctrine\\\\DBAL\\\\Result\\|int given\\.$#"
+			count: 2
+			path: Classes/UpgradeWizards/RemoveDuplicateEventVenueRelationsUpgradeWizard.php
+
+		-
 			message: "#^Cannot call method fetchColumn\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/UpgradeWizards/SeparateBillingAddressUpgradeWizard.php
