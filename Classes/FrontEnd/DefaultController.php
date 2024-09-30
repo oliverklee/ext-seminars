@@ -504,8 +504,6 @@ class DefaultController extends TemplateHelper
     protected function createSingleViewForExistingEvent(): string
     {
         $title = $this->seminar->getTitle();
-        // This sets the title of the page for use in indexed search results:
-        $this->getFrontEndController()->indexedDocTitle = $title;
         GeneralUtility::makeInstance(SingleViewPageTitleProvider::class)->setTitle($title);
 
         $this->setEventTypeMarker();
