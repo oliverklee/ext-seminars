@@ -3434,3 +3434,18 @@ parameters:
 			message: "#^OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Templating\\\\Fixtures\\\\TestingTemplateHelper\\:\\:__construct\\(\\) does not call parent constructor from OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\.$#"
 			count: 1
 			path: Tests/Unit/Templating/Fixtures/TestingTemplateHelper.php
+
+		-
+			message: "#^Access to private property \\$template of parent class OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\.$#"
+			count: 1
+			path: Tests/Unit/Templating/TemplateHelperTest.php
+
+		-
+			message: "#^Access to protected property OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Templating\\\\Fixtures\\\\TestingTemplateHelper\\:\\:\\$cObj\\.$#"
+			count: 2
+			path: Tests/Unit/Templating/TemplateHelperTest.php
+
+		-
+			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$cObj \\(TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\) does not accept array\\.$#"
+			count: 1
+			path: Tests/Unit/Templating/TemplateHelperTest.php

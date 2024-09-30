@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Templating;
 
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Seminars\Tests\Unit\Templating\Fixtures\TestingTemplateHelper;
 use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
@@ -68,6 +69,60 @@ final class TemplateHelperTest extends UnitTestCase
         $this->subject->init();
 
         self::assertInstanceOf(ContentObjectRenderer::class, $this->subject->getContentObjectRenderer());
+    }
+
+    /**
+     * @test
+     */
+    public function setContentObjectRendererSetsContentObjectRenderer(): void
+    {
+        $contentObjectRenderer = $this->createStub(ContentObjectRenderer::class);
+
+        $this->subject->setContentObjectRenderer($contentObjectRenderer);
+
+        self::assertSame($contentObjectRenderer, $this->subject->getContentObjectRenderer());
+    }
+
+    /**
+     * @test
+     *
+     * @deprecated will be removed in seminars 7.0.0 in #3735
+     */
+    public function canSetContentObjectRendererViaMagicSetter(): void
+    {
+        $contentObjectRenderer = $this->createStub(ContentObjectRenderer::class);
+
+        $this->subject->cObj = $contentObjectRenderer;
+
+        self::assertSame($contentObjectRenderer, $this->subject->getContentObjectRenderer());
+    }
+
+    /**
+     * @test
+     *
+     * @deprecated will be removed in seminars 7.0.0 in #3735
+     */
+    public function settingOtherPropertyViaMagicSetterThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot set other properties than `cObj` via a magic setter.');
+        $this->expectExceptionCode(1727698230);
+
+        $this->subject->template = new Template();
+    }
+
+    /**
+     * @test
+     *
+     * @deprecated will be removed in seminars 7.0.0 in #3735
+     */
+    public function setContentObjectRendererViaMagicSetterWithNonContentObjectRendererThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Can only set `cObj` to an instance of `ContentObjectRenderer`.');
+        $this->expectExceptionCode(1727698270);
+
+        $this->subject->cObj = [];
     }
 
     /////////////////////////////////////////////////////////////
