@@ -195,6 +195,31 @@ abstract class TemplateHelper
     }
 
     /**
+     * This is a workaround for TYPO3 <= 11LTS where `ContentObjectRenderer` sets `$this->cObj` directly.
+     * (TYPO3 12LTS uses the proper setter.)
+     *
+     * @param non-empty-string $name
+     * @param mixed $value
+     */
+    public function __set(string $name, $value): void
+    {
+        if ($name !== 'cObj') {
+            throw new \InvalidArgumentException(
+                'Cannot set other properties than `cObj` via a magic setter.',
+                1727698230
+            );
+        }
+        if (!$value instanceof ContentObjectRenderer) {
+            throw new \InvalidArgumentException(
+                'Can only set `cObj` to an instance of `ContentObjectRenderer`.',
+                1727698270
+            );
+        }
+
+        $this->cObj = $value;
+    }
+
+    /**
      * Sets `$this->piVars` from `$_POST` and `$_GET`.
      */
     private function extractPiVars(): void
@@ -207,6 +232,11 @@ abstract class TemplateHelper
         ArrayUtility::mergeRecursiveWithOverrule($mergedParameters, $postParameter);
 
         $this->piVars = $mergedParameters;
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $contentObjectRenderer): void
+    {
+        $this->cObj = $contentObjectRenderer;
     }
 
     /**

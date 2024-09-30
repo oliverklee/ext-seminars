@@ -53,6 +53,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fix setting `cObj` in the `TemplateHelper` in TYPO3 11LTS (#3736)
 - Add upgrade wizard to remove duplicate event-venue relations (#3717, #3732)
 - Avoid using the deprecated `GeneralUtility::_GET()` (#3690)
 - Increase type safety in the `RegistrationManager` (#3678)
