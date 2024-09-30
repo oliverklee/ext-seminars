@@ -12,8 +12,11 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,6 +41,16 @@ final class EventControllerTest extends UnitTestCase
      * @var TemplateView&MockObject
      */
     private TemplateView $viewMock;
+
+    /**
+     * @var ModuleTemplateFactory&MockObject
+     */
+    private ModuleTemplateFactory $moduleTemplateFactoryMock;
+
+    /**
+     * @var ModuleTemplate&MockObject
+     */
+    private ModuleTemplate $moduleTemplateMock;
 
     /**
      * @var EventRepository&MockObject
@@ -68,6 +81,7 @@ final class EventControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
@@ -79,14 +93,27 @@ final class EventControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EventController::class,
             $methodsToMock,
-            [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
+            [
+                $this->moduleTemplateFactoryMock,
+                $this->eventRepositoryMock,
+                $this->permissionsMock,
+                $this->eventStatisticsCalculatorMock,
+            ]
         );
         $this->subject = $subject;
 
+        $request = $this->createStub(ServerRequest::class);
+        $this->subject->_set('request', $request);
+        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
+        $this->moduleTemplateMock->method('renderContent')->willReturn('rendered content');
+        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
+
         $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->with('rendered content')->willReturn($responseStub);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
+        $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
@@ -214,6 +241,9 @@ final class EventControllerTest extends UnitTestCase
      */
     public function searchActionReturnsHtmlResponse(): void
     {
+        $this->moduleTemplateMock->expects(self::once())->method('setContent')
+            ->with('rendered view');
+
         $result = $this->subject->searchAction(1, '');
 
         self::assertInstanceOf(HtmlResponse::class, $result);

@@ -8,6 +8,7 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -16,6 +17,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EventController extends ActionController
 {
+    private ModuleTemplateFactory $moduleTemplateFactory;
+
     private EventRepository $eventRepository;
 
     private Permissions $permissions;
@@ -25,10 +28,12 @@ class EventController extends ActionController
     private LanguageService $languageService;
 
     public function __construct(
+        ModuleTemplateFactory $moduleTemplateFactory,
         EventRepository $eventRepository,
         Permissions $permissions,
         EventStatisticsCalculator $eventStatisticsCalculator
     ) {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->eventRepository = $eventRepository;
         $this->permissions = $permissions;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
@@ -94,7 +99,10 @@ class EventController extends ActionController
 
         $this->view->assign('searchTerm', \trim($searchTerm));
 
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**

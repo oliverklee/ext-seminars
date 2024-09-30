@@ -12,7 +12,10 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -49,6 +52,16 @@ final class ModuleControllerTest extends UnitTestCase
     private EventRepository $eventRepositoryMock;
 
     /**
+     * @var ModuleTemplateFactory&MockObject
+     */
+    private ModuleTemplateFactory $moduleTemplateFactoryMock;
+
+    /**
+     * @var ModuleTemplate&MockObject
+     */
+    private ModuleTemplate $moduleTemplateMock;
+
+    /**
      * @var RegistrationRepository&MockObject
      */
     private RegistrationRepository $registrationRepositoryMock;
@@ -62,6 +75,7 @@ final class ModuleControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
 
@@ -70,14 +84,21 @@ final class ModuleControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             ModuleController::class,
             $methodsToMock,
-            [$this->eventRepositoryMock, $this->registrationRepositoryMock]
+            [$this->moduleTemplateFactoryMock, $this->eventRepositoryMock, $this->registrationRepositoryMock]
         );
         $this->subject = $subject;
 
+        $request = $this->createStub(ServerRequest::class);
+        $this->subject->_set('request', $request);
+        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
+        $this->moduleTemplateMock->method('renderContent')->willReturn('rendered content');
+        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
+
         $responseStub = $this->createStub(HtmlResponse::class);
-        $this->subject->method('htmlResponse')->willReturn($responseStub);
+        $this->subject->method('htmlResponse')->with('rendered content')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
+        $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
@@ -135,6 +156,9 @@ final class ModuleControllerTest extends UnitTestCase
      */
     public function overviewActionReturnsHtmlResponse(): void
     {
+        $this->moduleTemplateMock->expects(self::once())->method('setContent')
+            ->with('rendered view');
+
         $result = $this->subject->overviewAction();
 
         self::assertInstanceOf(HtmlResponse::class, $result);

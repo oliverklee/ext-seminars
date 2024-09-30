@@ -16,8 +16,11 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -52,6 +55,16 @@ final class RegistrationControllerTest extends UnitTestCase
     private Permissions $permissionsMock;
 
     /**
+     * @var ModuleTemplateFactory&MockObject
+     */
+    private ModuleTemplateFactory $moduleTemplateFactoryMock;
+
+    /**
+     * @var ModuleTemplate&MockObject
+     */
+    private ModuleTemplate $moduleTemplateMock;
+
+    /**
      * @var RegistrationRepository&MockObject
      */
     private RegistrationRepository $registrationRepositoryMock;
@@ -80,6 +93,7 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
@@ -90,14 +104,20 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$this->registrationRepositoryMock, $this->eventRepositoryMock]
+            [$this->moduleTemplateFactoryMock, $this->registrationRepositoryMock, $this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
-        $responseStub = $this->createStub(HtmlResponse::class);
-        $this->subject->method('htmlResponse')->willReturn($responseStub);
+        $request = $this->createStub(ServerRequest::class);
+        $this->subject->_set('request', $request);
+        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
+        $this->moduleTemplateMock->method('renderContent')->willReturn('rendered content');
+        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
 
+        $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->with('rendered content')->willReturn($responseStub);
         $this->viewMock = $this->createMock(TemplateView::class);
+        $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
@@ -172,6 +192,9 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionReturnsHtmlResponse(): void
     {
+        $this->moduleTemplateMock->expects(self::once())->method('setContent')
+            ->with('rendered view');
+
         $eventUid = 5;
         $event = $this->createMock(EventTopic::class);
         $event->method('getUid')->willReturn($eventUid);

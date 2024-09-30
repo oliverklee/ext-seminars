@@ -10,8 +10,11 @@ use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -38,6 +41,16 @@ final class EmailControllerTest extends UnitTestCase
     private TemplateView $viewMock;
 
     /**
+     * @var ModuleTemplateFactory&MockObject
+     */
+    private ModuleTemplateFactory $moduleTemplateFactoryMock;
+
+    /**
+     * @var ModuleTemplate&MockObject
+     */
+    private ModuleTemplate $moduleTemplateMock;
+
+    /**
      * @var Permissions&MockObject
      */
     private Permissions $permissionsMock;
@@ -51,16 +64,27 @@ final class EmailControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
+
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock);
+        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock, [$this->moduleTemplateFactoryMock]);
         $this->subject = $subject;
 
+        $request = $this->createStub(ServerRequest::class);
+        $this->subject->_set('request', $request);
+        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
+        $this->moduleTemplateMock->method('renderContent')->willReturn('rendered content');
+        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
+
         $responseStub = $this->createStub(HtmlResponse::class);
+        $this->subject->method('htmlResponse')->with('rendered content')->willReturn($responseStub);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
+        $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
+
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
 
@@ -131,6 +155,9 @@ final class EmailControllerTest extends UnitTestCase
      */
     public function composeActionReturnsHtmlResponse(): void
     {
+        $this->moduleTemplateMock->expects(self::once())->method('setContent')
+            ->with('rendered view');
+
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
 
