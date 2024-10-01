@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -18,12 +19,18 @@ class ModuleController extends ActionController
     use PageUidTrait;
     use PermissionsTrait;
 
+    private ModuleTemplateFactory $moduleTemplateFactory;
+
     private EventRepository $eventRepository;
 
     private RegistrationRepository $registrationRepository;
 
-    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
-    {
+    public function __construct(
+        ModuleTemplateFactory $moduleTemplateFactory,
+        EventRepository $eventRepository,
+        RegistrationRepository $registrationRepository
+    ) {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->eventRepository = $eventRepository;
         $this->registrationRepository = $registrationRepository;
     }
@@ -46,6 +53,9 @@ class ModuleController extends ActionController
             $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
         );
 
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 }

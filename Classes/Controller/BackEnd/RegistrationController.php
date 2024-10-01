@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -29,14 +30,20 @@ class RegistrationController extends ActionController
      */
     private const CSV_FILENAME = 'registrations.csv';
 
+    private ModuleTemplateFactory $moduleTemplateFactory;
+
     private RegistrationRepository $registrationRepository;
 
     private EventRepository $eventRepository;
 
     private LanguageService $languageService;
 
-    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
-    {
+    public function __construct(
+        ModuleTemplateFactory $moduleTemplateFactory,
+        RegistrationRepository $registrationRepository,
+        EventRepository $eventRepository
+    ) {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
         $languageService = $GLOBALS['LANG'] ?? null;
@@ -72,7 +79,10 @@ class RegistrationController extends ActionController
             $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
         }
 
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**

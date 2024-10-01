@@ -156,7 +156,7 @@ abstract class AbstractEventMailForm
     protected function addFlashMessage(FlashMessage $flashMessage): void
     {
         $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
-            ->getMessageQueueByIdentifier();
+            ->getMessageQueueByIdentifier('extbase.flashmessages.tx_seminars_web_seminarsevents');
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -17,6 +18,13 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class EmailController extends ActionController
 {
     use PermissionsTrait;
+
+    private ModuleTemplateFactory $moduleTemplateFactory;
+
+    public function __construct(ModuleTemplateFactory $moduleTemplateFactory)
+    {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
+    }
 
     /**
      * Action for the displaying the email form.
@@ -38,7 +46,10 @@ class EmailController extends ActionController
         $this->view->assign('subject', $subject);
         $this->view->assign('body', $body);
 
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
