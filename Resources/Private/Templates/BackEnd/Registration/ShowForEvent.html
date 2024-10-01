@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:layout name="BackEndModule"/>
 
     <f:section name="Header">
-        <be:moduleLayout.button.linkButton
-            icon="actions-close"
-            title="{f:translate(key: 'backEndModule.action.backToEventList')}" showLabel="true"
-            link="{be:moduleLink(route: 'web_SeminarsEvents', arguments: '{id: pageUid}')}"
-            group="0"
-        />
     </f:section>
 
     <f:section name="Content">
@@ -33,6 +26,12 @@
                     </f:if>
                 </div>
             </div>
+            <p>
+                <f:link.action controller="BackEnd\Module" action="overview" arguments="{id: pageUid}">
+                    <f:translate key="backEndModule.action.backToEventList"/>
+                </f:link.action>
+            </p>
+
             <h2>
                 {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
                 <f:translate key="plugin.eventShared.heading.eventTitleAndDateAndUid"
