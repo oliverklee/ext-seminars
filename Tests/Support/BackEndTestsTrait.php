@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -128,7 +127,6 @@ trait BackEndTestsTrait
 
     private function restoreOriginalEnvironment(): void
     {
-        $this->flushAllFlashMessages();
         if ($this->backEndUserBackup !== null) {
             $GLOBALS['BE_USER'] = $this->backEndUserBackup;
         }
@@ -145,16 +143,6 @@ trait BackEndTestsTrait
         $_POST = $this->postBackup;
         unset($GLOBALS['TYPO3_REQUEST']);
         GeneralUtility::flushInternalRuntimeCaches();
-    }
-
-    /**
-     * Flushes all flash messages from the queue.
-     */
-    private function flushAllFlashMessages(): void
-    {
-        $defaultFlashMessageQueue = GeneralUtility::makeInstance(FlashMessageService::class)
-            ->getMessageQueueByIdentifier();
-        $defaultFlashMessageQueue->getAllMessagesAndFlush();
     }
 
     /**

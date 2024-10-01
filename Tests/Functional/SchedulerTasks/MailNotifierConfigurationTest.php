@@ -53,18 +53,8 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
 
         $moduleController = $this->createMock(SchedulerModuleController::class);
         $this->moduleController = $moduleController;
-        // We can remove this line once we have moved to PHPUnit 7.5.
-        // The reason is that PHPUnit 6.5 creates some deprecation notices in the mock builder with PHP 7.4.
-        $this->getFlashMessageQueue()->clear();
 
         $this->subject = new MailNotifierConfiguration();
-    }
-
-    protected function tearDown(): void
-    {
-        $this->getFlashMessageQueue()->clear();
-
-        parent::tearDown();
     }
 
     private function getFlashMessageQueue(): FlashMessageQueue
