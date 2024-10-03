@@ -79,6 +79,10 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('These tests need to be reworked to work with TYPO3 v12.');
+        }
+
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);

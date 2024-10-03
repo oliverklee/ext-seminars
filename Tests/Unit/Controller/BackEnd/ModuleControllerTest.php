@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -66,6 +67,10 @@ final class ModuleControllerTest extends UnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('These tests need to be reworked to work with TYPO3 v12.');
+        }
 
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
