@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
+use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
@@ -18,8 +19,10 @@ use OliverKlee\Seminars\Domain\Model\PaymentMethod;
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Model\Speaker;
 use OliverKlee\Seminars\Domain\Model\Venue;
+use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -59,6 +62,30 @@ final class EventRepositoryTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
         $this->setUpBackendUser(1);
         $this->unifyBackEndLanguage();
+    }
+
+    /**
+     * @test
+     */
+    public function isRepository(): void
+    {
+        self::assertInstanceOf(Repository::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function isRawDataCapableRepository(): void
+    {
+        self::assertInstanceOf(AbstractRawDataCapableRepository::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function implementsDirectPersist(): void
+    {
+        self::assertInstanceOf(DirectPersist::class, $this->subject);
     }
 
     /**
