@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Repository\AccommodationOptionRepository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -28,6 +29,14 @@ final class AccommodationOptionRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = $this->get(AccommodationOptionRepository::class);
+    }
+
+    /**
+     * @test
+     */
+    public function isRepository(): void
+    {
+        self::assertInstanceOf(Repository::class, $this->subject);
     }
 
     /**

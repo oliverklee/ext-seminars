@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Seminars\Domain\Model\FoodOption;
 use OliverKlee\Seminars\Domain\Repository\FoodOptionRepository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -28,6 +29,14 @@ final class FoodOptionRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = $this->get(FoodOptionRepository::class);
+    }
+
+    /**
+     * @test
+     */
+    public function isRepository(): void
+    {
+        self::assertInstanceOf(Repository::class, $this->subject);
     }
 
     /**

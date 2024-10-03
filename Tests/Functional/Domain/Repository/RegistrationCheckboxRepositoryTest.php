@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Seminars\Domain\Model\RegistrationCheckbox;
 use OliverKlee\Seminars\Domain\Repository\RegistrationCheckboxRepository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -28,6 +29,14 @@ final class RegistrationCheckboxRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = $this->get(RegistrationCheckboxRepository::class);
+    }
+
+    /**
+     * @test
+     */
+    public function isRepository(): void
+    {
+        self::assertInstanceOf(Repository::class, $this->subject);
     }
 
     /**
