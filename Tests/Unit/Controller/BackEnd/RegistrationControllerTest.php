@@ -16,15 +16,21 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Package\PackageManager;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -38,6 +44,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class RegistrationControllerTest extends UnitTestCase
 {
     use RedirectMockTrait;
+
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @var RegistrationController&MockObject&AccessibleObjectInterface
@@ -53,16 +61,6 @@ final class RegistrationControllerTest extends UnitTestCase
      * @var Permissions&MockObject
      */
     private Permissions $permissionsMock;
-
-    /**
-     * @var ModuleTemplateFactory&MockObject
-     */
-    private ModuleTemplateFactory $moduleTemplateFactoryMock;
-
-    /**
-     * @var ModuleTemplate&MockObject
-     */
-    private ModuleTemplate $moduleTemplateMock;
 
     /**
      * @var RegistrationRepository&MockObject
@@ -93,7 +91,7 @@ final class RegistrationControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
+        $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
@@ -104,14 +102,12 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$this->moduleTemplateFactoryMock, $this->registrationRepositoryMock, $this->eventRepositoryMock]
+            [$moduleTemplateFactory, $this->registrationRepositoryMock, $this->eventRepositoryMock]
         );
         $this->subject = $subject;
 
         $request = $this->createStub(ServerRequest::class);
         $this->subject->_set('request', $request);
-        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
-        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
 
         $responseStub = $this->createStub(HtmlResponse::class);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
@@ -129,10 +125,37 @@ final class RegistrationControllerTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        unset($_GET['id'], $_GET['pid'], $GLOBALS['LANG']);
+        unset($_GET['id'], $_GET['pid'], $GLOBALS['LANG'], $GLOBALS['BE_USER']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
+    }
+
+    /**
+     * Note: This is a real mockfest. We need to convert the BE controller tests to functional tests first.
+     */
+    private function createModuleTemplateFactory(): ModuleTemplateFactory
+    {
+        GeneralUtility::addInstance(StandaloneView::class, $this->createStub(StandaloneView::class));
+        $packageManagerMock = $this->createMock(PackageManager::class);
+        $packageManagerMock->method('getActivePackages')->willReturn([]);
+        GeneralUtility::setSingletonInstance(PackageManager::class, $packageManagerMock);
+        $languageServiceStub = $this->createStub(LanguageService::class);
+        $languageServiceStub->lang = 'default';
+        $GLOBALS['LANG'] = $languageServiceStub;
+        $extensionConfigurationMock = $this->createMock(ExtensionConfiguration::class);
+        $extensionConfigurationMock->method('get')->with('backend', 'backendFavicon')->willReturn('icon.svg');
+        GeneralUtility::addInstance(ExtensionConfiguration::class, $extensionConfigurationMock);
+        $GLOBALS['BE_USER'] = $this->createStub(BackendUserAuthentication::class);
+
+        $pageRenderMock = $this->createMock(PageRenderer::class);
+        $pageRenderMock->method('getLanguage')->willReturn('default');
+
+        return new ModuleTemplateFactory(
+            $pageRenderMock,
+            $this->createStub(IconFactory::class),
+            $this->createStub(FlashMessageService::class)
+        );
     }
 
     /**
@@ -191,9 +214,6 @@ final class RegistrationControllerTest extends UnitTestCase
      */
     public function showForEventActionReturnsHtmlResponse(): void
     {
-        $this->moduleTemplateMock->expects(self::once())->method('setContent')
-            ->with('rendered view');
-
         $eventUid = 5;
         $event = $this->createMock(EventTopic::class);
         $event->method('getUid')->willReturn($eventUid);

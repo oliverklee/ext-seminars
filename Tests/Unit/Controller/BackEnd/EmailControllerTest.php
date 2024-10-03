@@ -10,14 +10,21 @@ use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Package\PackageManager;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -30,6 +37,8 @@ final class EmailControllerTest extends UnitTestCase
 {
     use RedirectMockTrait;
 
+    protected bool $resetSingletonInstances = true;
+
     /**
      * @var EmailController&MockObject&AccessibleObjectInterface
      */
@@ -39,16 +48,6 @@ final class EmailControllerTest extends UnitTestCase
      * @var TemplateView&MockObject
      */
     private TemplateView $viewMock;
-
-    /**
-     * @var ModuleTemplateFactory&MockObject
-     */
-    private ModuleTemplateFactory $moduleTemplateFactoryMock;
-
-    /**
-     * @var ModuleTemplate&MockObject
-     */
-    private ModuleTemplate $moduleTemplateMock;
 
     /**
      * @var Permissions&MockObject
@@ -64,17 +63,14 @@ final class EmailControllerTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->moduleTemplateFactoryMock = $this->createMock(ModuleTemplateFactory::class);
-
+        $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock, [$this->moduleTemplateFactoryMock]);
+        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock, [$moduleTemplateFactory]);
         $this->subject = $subject;
 
         $request = $this->createStub(ServerRequest::class);
         $this->subject->_set('request', $request);
-        $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
-        $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
 
         $responseStub = $this->createStub(HtmlResponse::class);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
@@ -92,9 +88,37 @@ final class EmailControllerTest extends UnitTestCase
 
     public function tearDown(): void
     {
+        unset($_POST['subject'], $_POST['emailBody'], $GLOBALS['LANG'], $GLOBALS['BE_USER']);
         GeneralUtility::purgeInstances();
-        unset($_POST['subject'], $_POST['emailBody']);
+
         parent::tearDown();
+    }
+
+    /**
+     * Note: This is a real mockfest. We need to convert the BE controller tests to functional tests first.
+     */
+    private function createModuleTemplateFactory(): ModuleTemplateFactory
+    {
+        GeneralUtility::addInstance(StandaloneView::class, $this->createStub(StandaloneView::class));
+        $packageManagerMock = $this->createMock(PackageManager::class);
+        $packageManagerMock->method('getActivePackages')->willReturn([]);
+        GeneralUtility::setSingletonInstance(PackageManager::class, $packageManagerMock);
+        $languageServiceStub = $this->createStub(LanguageService::class);
+        $languageServiceStub->lang = 'default';
+        $GLOBALS['LANG'] = $languageServiceStub;
+        $extensionConfigurationMock = $this->createMock(ExtensionConfiguration::class);
+        $extensionConfigurationMock->method('get')->with('backend', 'backendFavicon')->willReturn('icon.svg');
+        GeneralUtility::addInstance(ExtensionConfiguration::class, $extensionConfigurationMock);
+        $GLOBALS['BE_USER'] = $this->createStub(BackendUserAuthentication::class);
+
+        $pageRenderMock = $this->createMock(PageRenderer::class);
+        $pageRenderMock->method('getLanguage')->willReturn('default');
+
+        return new ModuleTemplateFactory(
+            $pageRenderMock,
+            $this->createStub(IconFactory::class),
+            $this->createStub(FlashMessageService::class)
+        );
     }
 
     /**
@@ -153,9 +177,6 @@ final class EmailControllerTest extends UnitTestCase
      */
     public function composeActionReturnsHtmlResponse(): void
     {
-        $this->moduleTemplateMock->expects(self::once())->method('setContent')
-            ->with('rendered view');
-
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
 

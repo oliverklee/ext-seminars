@@ -54,6 +54,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid mocking the final `ModuleTemplateFactory` class (#3765)
 - Switch from the `be:moduleLayout` VH to `ModuleTemplate` (#3745, #3750)
 - Avoid using the deprecated `TSFE->indexedDocTitle` (#3740)
 - Fix setting `cObj` in the `TemplateHelper` in TYPO3 11LTS (#3736)
