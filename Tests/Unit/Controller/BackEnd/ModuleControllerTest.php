@@ -12,19 +12,10 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Imaging\IconFactory;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
-use TYPO3\CMS\Core\Package\PackageManager;
-use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -37,6 +28,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ModuleControllerTest extends UnitTestCase
 {
+    use BackEndControllerTestHelper;
     use RedirectMockTrait;
 
     protected bool $resetSingletonInstances = true;
@@ -109,33 +101,6 @@ final class ModuleControllerTest extends UnitTestCase
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
-    }
-
-    /**
-     * Note: This is a real mockfest. We need to convert the BE controller tests to functional tests first.
-     */
-    private function createModuleTemplateFactory(): ModuleTemplateFactory
-    {
-        GeneralUtility::addInstance(StandaloneView::class, $this->createStub(StandaloneView::class));
-        $packageManagerMock = $this->createMock(PackageManager::class);
-        $packageManagerMock->method('getActivePackages')->willReturn([]);
-        GeneralUtility::setSingletonInstance(PackageManager::class, $packageManagerMock);
-        $languageServiceStub = $this->createStub(LanguageService::class);
-        $languageServiceStub->lang = 'default';
-        $GLOBALS['LANG'] = $languageServiceStub;
-        $extensionConfigurationMock = $this->createMock(ExtensionConfiguration::class);
-        $extensionConfigurationMock->method('get')->with('backend', 'backendFavicon')->willReturn('icon.svg');
-        GeneralUtility::addInstance(ExtensionConfiguration::class, $extensionConfigurationMock);
-        $GLOBALS['BE_USER'] = $this->createStub(BackendUserAuthentication::class);
-
-        $pageRenderMock = $this->createMock(PageRenderer::class);
-        $pageRenderMock->method('getLanguage')->willReturn('default');
-
-        return new ModuleTemplateFactory(
-            $pageRenderMock,
-            $this->createStub(IconFactory::class),
-            $this->createStub(FlashMessageService::class)
-        );
     }
 
     /**
