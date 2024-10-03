@@ -74,11 +74,9 @@ final class EmailControllerTest extends UnitTestCase
         $request = $this->createStub(ServerRequest::class);
         $this->subject->_set('request', $request);
         $this->moduleTemplateMock = $this->createMock(ModuleTemplate::class);
-        $this->moduleTemplateMock->method('renderContent')->willReturn('rendered content');
         $this->moduleTemplateFactoryMock->method('create')->with($request)->willReturn($this->moduleTemplateMock);
 
         $responseStub = $this->createStub(HtmlResponse::class);
-        $this->subject->method('htmlResponse')->with('rendered content')->willReturn($responseStub);
         $this->subject->method('htmlResponse')->willReturn($responseStub);
 
         $this->viewMock = $this->createMock(TemplateView::class);
