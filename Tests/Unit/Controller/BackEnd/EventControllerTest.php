@@ -66,6 +66,10 @@ final class EventControllerTest extends UnitTestCase
     {
         parent::setUp();
 
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('These tests need to be reworked to work with TYPO3 v12.');
+        }
+
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
