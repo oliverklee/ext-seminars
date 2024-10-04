@@ -69,24 +69,7 @@ class LegacyRegistration extends AbstractModel
      */
     protected array $checkboxes = [];
 
-    /**
-     * cached seminar objects with the seminar UIDs as keys and the objects as values
-     *
-     * @var array<positive-int, LegacyEvent>
-     */
-    private static array $cachedSeminars = [];
-
     protected ?FrontEndUser $user = null;
-
-    /**
-     * Purges our cached seminars array.
-     *
-     * This function is intended for testing purposes only.
-     */
-    public static function purgeCachedSeminars(): void
-    {
-        self::$cachedSeminars = [];
-    }
 
     /**
      * Gets the number of seats that are registered with this registration.
@@ -381,13 +364,7 @@ class LegacyRegistration extends AbstractModel
         if (!($this->seminar instanceof LegacyEvent) && $this->isOk()) {
             $seminarUid = $this->getRecordPropertyInteger('seminar');
             \assert($seminarUid > 0);
-            if (isset(self::$cachedSeminars[$seminarUid])) {
-                $this->seminar = self::$cachedSeminars[$seminarUid];
-            } else {
-                $seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
-                $this->seminar = $seminar;
-                self::$cachedSeminars[$seminarUid] = $seminar;
-            }
+            $this->seminar = GeneralUtility::makeInstance(LegacyEvent::class, $seminarUid);
         }
 
         return $this->seminar;

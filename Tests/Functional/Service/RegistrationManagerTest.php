@@ -92,7 +92,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->initializeBackEndLanguage();
 
-        LegacyRegistration::purgeCachedSeminars();
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $this->configuration = new DummyConfiguration(
             [
