@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Merge `Csv/AbstractListView` into `Csv/AbstractRegistrationListView` (#3771)
 - Convert the manual to the new PHP-based rendering (#3692, #3696)
 - Use PHP 7.4 language features and native type declarations
   (#3643, #3682, #3683, #3689, #3698, #3699, #3701, #3702, #3703, #3704, #3705,

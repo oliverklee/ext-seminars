@@ -166,16 +166,6 @@ parameters:
 			path: Classes/Controller/EventRegistrationController.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractListView\\:\\:getBackEndUser\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\|null but returns mixed\\.$#"
-			count: 1
-			path: Classes/Csv/AbstractListView.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractListView\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
-			count: 1
-			path: Classes/Csv/AbstractListView.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:render\\(\\) should return string but returns mixed\\.$#"
 			count: 1
 			path: Classes/Csv/AbstractRegistrationListView.php
