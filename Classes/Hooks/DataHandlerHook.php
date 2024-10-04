@@ -38,8 +38,6 @@ class DataHandlerHook implements SingletonInterface
      */
     private const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
 
-    private DataHandler $dataHandler;
-
     private SlugGenerator $slugGenerator;
 
     public function __construct(SlugGenerator $slugGenerator)
@@ -54,19 +52,18 @@ class DataHandlerHook implements SingletonInterface
      */
     public function processDatamap_afterAllOperations(DataHandler $dataHandler): void
     {
-        $this->dataHandler = $dataHandler;
-        $this->processEvents();
+        $this->processEvents($dataHandler);
     }
 
     /**
      * Processes all events.
      */
-    private function processEvents(): void
+    private function processEvents(DataHandler $dataHandler): void
     {
-        $map = ($this->dataHandler->datamap[self::TABLE_EVENTS] ?? []);
+        $map = $dataHandler->datamap[self::TABLE_EVENTS] ?? [];
 
         foreach ($map as $possibleUid => $data) {
-            $uid = $this->createRealUid($possibleUid);
+            $uid = $this->createRealUid($possibleUid, $dataHandler);
             $this->processSingleEvent($uid);
         }
     }
@@ -74,11 +71,11 @@ class DataHandlerHook implements SingletonInterface
     /**
      * @param int|string $possibleUid
      */
-    private function createRealUid($possibleUid): int
+    private function createRealUid($possibleUid, DataHandler $dataHandler): int
     {
         return $this->isRealUid($possibleUid)
             ? (int)$possibleUid
-            : (int)$this->dataHandler->substNEWwithIDs[$possibleUid];
+            : (int)$dataHandler->substNEWwithIDs[$possibleUid];
     }
 
     /**
