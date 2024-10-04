@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Service;
 
-use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -15,15 +14,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class RegistrationManagerTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
-
-    private RegistrationManager $subject;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->subject = new RegistrationManager();
-    }
 
     protected function tearDown(): void
     {
@@ -60,24 +50,5 @@ final class RegistrationManagerTest extends UnitTestCase
         $secondInstance = RegistrationManager::getInstance();
 
         self::assertNotSame($firstInstance, $secondInstance);
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationInitiallyReturnsNull(): void
-    {
-        self::assertNull($this->subject->getRegistration());
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationSetsRegistration(): void
-    {
-        $model = new LegacyRegistration();
-        $this->subject->setRegistration($model);
-
-        self::assertSame($model, $this->subject->getRegistration());
     }
 }

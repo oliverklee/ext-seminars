@@ -46,8 +46,6 @@ class RegistrationManager
 
     private static ?RegistrationManager $instance = null;
 
-    private ?LegacyRegistration $registration = null;
-
     private ?Template $emailTemplate = null;
 
     protected ?HookProvider $registrationEmailHookProvider = null;
@@ -268,18 +266,18 @@ class RegistrationManager
     /**
      * Sends the emails for a new registration.
      */
-    public function sendEmailsForNewRegistration(TemplateHelper $plugin): void
+    public function sendEmailsForNewRegistration(TemplateHelper $plugin, LegacyRegistration $registration): void
     {
-        if ($this->registration->isOnRegistrationQueue()) {
-            $this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');
-            $this->notifyOrganizers($this->registration, 'notificationOnRegistrationForQueue');
+        if ($registration->isOnRegistrationQueue()) {
+            $this->notifyAttendee($registration, $plugin, 'confirmationOnRegistrationForQueue');
+            $this->notifyOrganizers($registration, 'notificationOnRegistrationForQueue');
         } else {
-            $this->notifyAttendee($this->registration, $plugin);
-            $this->notifyOrganizers($this->registration);
+            $this->notifyAttendee($registration, $plugin);
+            $this->notifyOrganizers($registration);
         }
 
         if ($this->getSharedConfiguration()->getAsBoolean('sendAdditionalNotificationEmails')) {
-            $this->sendAdditionalNotification($this->registration);
+            $this->sendAdditionalNotification($registration);
         }
     }
 
@@ -291,12 +289,12 @@ class RegistrationManager
      */
     public function removeRegistration(int $uid, TemplateHelper $plugin): void
     {
-        $this->registration = LegacyRegistration::fromUid($uid);
-        if (!($this->registration instanceof LegacyRegistration)) {
+        $unregistration = LegacyRegistration::fromUid($uid);
+        if (!($unregistration instanceof LegacyRegistration)) {
             return;
         }
 
-        if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
+        if ($unregistration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
             return;
         }
 
@@ -306,18 +304,18 @@ class RegistrationManager
             ['uid' => $uid]
         );
 
-        $this->notifyAttendee($this->registration, $plugin, 'confirmationOnUnregistration');
-        $this->notifyOrganizers($this->registration, 'notificationOnUnregistration');
+        $this->notifyAttendee($unregistration, $plugin, 'confirmationOnUnregistration');
+        $this->notifyOrganizers($unregistration, 'notificationOnUnregistration');
 
-        $this->fillVacancies($plugin);
+        $this->fillVacancies($plugin, $unregistration);
     }
 
     /**
      * Fills vacancies created through a unregistration with attendees from the registration queue.
      */
-    private function fillVacancies(TemplateHelper $plugin): void
+    private function fillVacancies(TemplateHelper $plugin, LegacyRegistration $unregistration): void
     {
-        $seminar = $this->registration->getSeminarObject();
+        $seminar = $unregistration->getSeminarObject();
         if (!$seminar->hasVacancies()) {
             return;
         }
@@ -1140,19 +1138,6 @@ class RegistrationManager
             $this->translate('email_unregistrationNotice'),
             \date($this->getDateFormat(), $unregistrationDeadline)
         );
-    }
-
-    /**
-     * Returns the registration created via `createRegistration` or `setRegistration`.
-     */
-    public function getRegistration(): ?LegacyRegistration
-    {
-        return $this->registration;
-    }
-
-    public function setRegistration(LegacyRegistration $registration): void
-    {
-        $this->registration = $registration;
     }
 
     /**

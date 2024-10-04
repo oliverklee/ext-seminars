@@ -1461,17 +1461,7 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Cannot call method getSeminarObject\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Cannot call method isOnRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 
@@ -1487,17 +1477,17 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$oldRegistration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:notifyAttendee\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
-			count: 3
+			count: 1
 			path: Classes/Service/RegistrationManager.php
 
 		-
 			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:notifyOrganizers\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
-			count: 4
+			count: 1
 			path: Classes/Service/RegistrationManager.php
 
 		-
 			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:sendAdditionalNotification\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Service/RegistrationManager.php
 
 		-
