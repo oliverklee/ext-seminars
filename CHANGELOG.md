@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use PHP 7.4 language features and native type declarations
   (#3643, #3682, #3683, #3689, #3698, #3699, #3701, #3702, #3703, #3704, #3705,
   #3706, #3709, #3712, #3713, #3714, #3720, #3721, #3722, #3723, #3724, #3725)
-- Use constructor injection (#3603, #3607, #3608, #3609, #3610, #3770)
+- Use constructor injection (#3603, #3607, #3608, #3609, #3610, #3770, #3773)
 - Use short class names in configuration files (#3598)
 - Use modern string functions (#3579)
 - Upgrade to PHPUnit 9.x (#3325)

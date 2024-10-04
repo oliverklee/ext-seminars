@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Csv\CsvResponse;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
@@ -23,7 +24,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class RegistrationController extends ActionController
 {
     use PageUidTrait;
-    use PermissionsTrait;
 
     /**
      * @var non-empty-string
@@ -40,16 +40,20 @@ class RegistrationController extends ActionController
 
     private EventStatisticsCalculator $eventStatisticsCalculator;
 
+    private Permissions $permissions;
+
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
         RegistrationRepository $registrationRepository,
         EventRepository $eventRepository,
-        EventStatisticsCalculator $eventStatisticsCalculator
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        Permissions $permissions
     ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->permissions = $permissions;
 
         $languageService = $GLOBALS['LANG'] ?? null;
         \assert($languageService instanceof LanguageService);

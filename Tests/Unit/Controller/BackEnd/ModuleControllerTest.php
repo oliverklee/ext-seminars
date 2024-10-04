@@ -24,7 +24,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\ModuleController
  * @covers \OliverKlee\Seminars\Controller\BackEnd\PageUidTrait
- * @covers \OliverKlee\Seminars\Controller\BackEnd\PermissionsTrait
  */
 final class ModuleControllerTest extends UnitTestCase
 {
@@ -75,6 +74,7 @@ final class ModuleControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->permissionsMock = $this->createMock(Permissions::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var ModuleController&AccessibleObjectInterface&MockObject $subject */
@@ -86,6 +86,7 @@ final class ModuleControllerTest extends UnitTestCase
                 $this->eventRepositoryMock,
                 $this->registrationRepositoryMock,
                 $this->eventStatisticsCalculatorMock,
+                $this->permissionsMock,
             ]
         );
         $this->subject = $subject;
@@ -99,8 +100,6 @@ final class ModuleControllerTest extends UnitTestCase
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
-        $this->permissionsMock = $this->createMock(Permissions::class);
-        $this->subject->injectPermissions($this->permissionsMock);
     }
 
     protected function tearDown(): void

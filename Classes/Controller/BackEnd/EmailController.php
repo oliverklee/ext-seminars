@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
+use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
@@ -17,13 +18,14 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class EmailController extends ActionController
 {
-    use PermissionsTrait;
-
     private ModuleTemplateFactory $moduleTemplateFactory;
 
-    public function __construct(ModuleTemplateFactory $moduleTemplateFactory)
+    private Permissions $permissions;
+
+    public function __construct(ModuleTemplateFactory $moduleTemplateFactory, Permissions $permissions)
     {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
+        $this->permissions = $permissions;
     }
 
     /**
