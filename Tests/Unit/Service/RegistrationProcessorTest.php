@@ -581,10 +581,8 @@ final class RegistrationProcessorTest extends UnitTestCase
         $configurationMock = $this->createMock(LegacyConfiguration::class);
         GeneralUtility::addInstance(LegacyConfiguration::class, $configurationMock);
 
-        $this->registrationManagerMock->expects(self::once())->method('setRegistration')
-            ->with($legacyRegistrationMock);
         $this->registrationManagerMock->expects(self::once())->method('sendEmailsForNewRegistration')
-            ->with($configurationMock);
+            ->with($configurationMock, $legacyRegistrationMock);
 
         $this->subject->sendEmails($registration);
     }

@@ -207,11 +207,9 @@ class RegistrationProcessor implements SingletonInterface
             throw new \RuntimeException('The registration has not been persisted yet.', 1668939288);
         }
 
-        $legacyRegistration = GeneralUtility::makeInstance(LegacyRegistration::class, $registrationUid);
-        $this->registrationManager->setRegistration($legacyRegistration);
-
         $configuration = GeneralUtility::makeInstance(LegacyConfiguration::class);
+        $legacyRegistration = GeneralUtility::makeInstance(LegacyRegistration::class, $registrationUid);
 
-        $this->registrationManager->sendEmailsForNewRegistration($configuration);
+        $this->registrationManager->sendEmailsForNewRegistration($configuration, $legacyRegistration);
     }
 }
