@@ -807,11 +807,6 @@
         <source>Title</source>
         <target state="final">Название</target>
       </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="tx_seminars_categories.icon" resname="tx_seminars_categories.icon">
-        <source>Icon</source>
-        <target state="needs-translation">Icon</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_categories.single_view_page" resname="tx_seminars_categories.single_view_page">
         <source>Single view page for events in this category</source>
         <target state="needs-translation">Single view page for events in this category</target>
