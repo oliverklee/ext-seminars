@@ -1,7 +1,5 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
 defined('TYPO3') or die();
 
 return [
@@ -25,27 +23,6 @@ return [
                 'eval' => 'required,trim',
             ],
         ],
-        // @deprecated will be removed in version 6.0.0 in #3370
-        'icon' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.icon',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'icon',
-                [
-                    'maxitems' => 1,
-                    'appearance' => [
-                        'collapseAll' => true,
-                        'expandSingle' => true,
-                        'useSortable' => false,
-                        'enabledControls' => [
-                            'sort' => false,
-                            'hide' => false,
-                        ],
-                        'fileUploadAllowed' => true,
-                    ],
-                ]
-            ),
-        ],
         'single_view_page' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.single_view_page',
@@ -60,6 +37,6 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title, icon, single_view_page'],
+        '0' => ['showitem' => 'title, single_view_page'],
     ],
 ];

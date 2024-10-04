@@ -675,22 +675,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" resname="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">
 				<source>Which registration fields to show in the list of registrations for an event:</source>
 			</trans-unit>
-			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-			<trans-unit id="seminars.pi_flexform.categoriesInListView" resname="seminars.pi_flexform.categoriesInListView">
-				<source>Display of the categories:</source>
-			</trans-unit>
-			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-			<trans-unit id="seminars.pi_flexform.iconAndText" resname="seminars.pi_flexform.iconAndText">
-				<source>Icons and text</source>
-			</trans-unit>
-			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-			<trans-unit id="seminars.pi_flexform.iconOnly" resname="seminars.pi_flexform.iconOnly">
-				<source>Icons only</source>
-			</trans-unit>
-			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-			<trans-unit id="seminars.pi_flexform.textOnly" resname="seminars.pi_flexform.textOnly">
-				<source>Text only</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.linkToSingleView" resname="seminars.pi_flexform.linkToSingleView">
 				<source>Link the single view from the list view:</source>
 			</trans-unit>

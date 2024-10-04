@@ -50,45 +50,4 @@ final class LegacyCategoryTest extends UnitTestCase
 
         self::assertSame($title, $subject->getTitle());
     }
-
-    public function hasIconForNoDataReturnsFalse(): void
-    {
-        $subject = LegacyCategory::fromData([]);
-
-        self::assertFalse($subject->hasIcon());
-    }
-
-    /**
-     * @return array<string, array{0: string|int}>
-     */
-    public function noIconDataProvider(): array
-    {
-        return [
-            'empty string' => [''],
-            'file name before migration' => ['icon.png'],
-            'zero as string' => ['0'],
-            'zero as integer' => [0],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @param string|int $icon
-     *
-     * @dataProvider noIconDataProvider
-     */
-    public function hasIconForNoIconReturnsFalse($icon): void
-    {
-        $subject = LegacyCategory::fromData(['icon' => $icon]);
-
-        self::assertFalse($subject->hasIcon());
-    }
-
-    public function hasIconWithPositiveNumberOfIconsReturnsTrue(): void
-    {
-        $subject = LegacyCategory::fromData(['icon' => 1]);
-
-        self::assertTrue($subject->hasIcon());
-    }
 }

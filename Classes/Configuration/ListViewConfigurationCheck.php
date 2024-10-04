@@ -44,7 +44,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkLimitListViewToCategories();
         $this->checkLimitListViewToPlaces();
         $this->checkLimitListViewToOrganizers();
-        $this->checkCategoryIconDisplay();
         $this->checkSeminarImageSizesForListView();
         $this->checkDisplaySearchFormFields();
         $this->checkNumberOfYearsInDateFilter();
@@ -205,19 +204,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
             'limitListViewToOrganizers',
             'This value specifies the organizers for which the list view should be filtered.
             If this value is not set correctly, some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * @deprecated will be removed in version 6.0.0 in #3370
-     */
-    private function checkCategoryIconDisplay(): void
-    {
-        $this->checkIfSingleInSetNotEmpty(
-            'categoriesInListView',
-            'This setting determines whether the seminar category is shown, as icon and text,
-            as text only or as icon only. If this value is not set correctly, the category will only be shown as text.',
-            ['both', 'text', 'icon']
         );
     }
 
