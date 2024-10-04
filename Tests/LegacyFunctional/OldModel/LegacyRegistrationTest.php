@@ -49,8 +49,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         GeneralUtility::makeInstance(Context::class)
             ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
-        LegacyRegistration::purgeCachedSeminars();
-
         $this->testingFramework = new TestingFramework('tx_seminars');
         $rootPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->changeRecord('pages', $rootPageUid, ['slug' => '/home']);
@@ -511,38 +509,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
             1,
             $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
-        );
-    }
-
-    // Tests regarding the cached seminars.
-
-    /**
-     * @test
-     */
-    public function purgeCachedSeminarsResultsInDifferentDataForSameSeminarUid(): void
-    {
-        $seminarUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['title' => 'test title 1']
-        );
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $seminarUid]
-        );
-
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $seminarUid,
-            ['title' => 'test title 2']
-        );
-
-        LegacyRegistration::purgeCachedSeminars();
-        $subject = new LegacyRegistration($registrationUid);
-
-        self::assertSame(
-            'test title 2',
-            $subject->getSeminarObject()->getTitle()
         );
     }
 
