@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the unused `SpeakerBagBuilder` (#3780)
 - Drop unused BE route configuration file (#3742)
 - Remove the FE editor (#3685, #3686)
 - Drop `RegistrationManager::existsSeminar()`/`::existsSeminarMessage()` (#3629)
