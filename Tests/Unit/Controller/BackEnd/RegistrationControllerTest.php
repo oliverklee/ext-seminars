@@ -28,7 +28,6 @@ use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
- * @covers \OliverKlee\Seminars\Controller\BackEnd\EventStatisticsTrait
  * @covers \OliverKlee\Seminars\Controller\BackEnd\PageUidTrait
  * @covers \OliverKlee\Seminars\Controller\BackEnd\PermissionsTrait
  * @covers \OliverKlee\Seminars\Controller\BackEnd\RegistrationController
@@ -86,6 +85,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
         $GLOBALS['LANG'] = $this->languageServiceMock;
 
@@ -94,7 +94,12 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$moduleTemplateFactory, $this->registrationRepositoryMock, $this->eventRepositoryMock]
+            [
+                $moduleTemplateFactory,
+                $this->registrationRepositoryMock,
+                $this->eventRepositoryMock,
+                $this->eventStatisticsCalculatorMock,
+            ]
         );
         $this->subject = $subject;
 
@@ -108,8 +113,6 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->subject->_set('view', $this->viewMock);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->subject->injectPermissions($this->permissionsMock);
-        $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
-        $this->subject->injectEventStatisticsCalculator($this->eventStatisticsCalculatorMock);
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);
