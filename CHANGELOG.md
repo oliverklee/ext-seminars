@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make `DataHandlerHook` stateless (#3774)
 - Merge `Csv/AbstractListView` into `Csv/AbstractRegistrationListView` (#3771)
 - Convert the manual to the new PHP-based rendering (#3692, #3696)
 - Use PHP 7.4 language features and native type declarations
