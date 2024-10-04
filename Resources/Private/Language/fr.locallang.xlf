@@ -911,26 +911,6 @@ This event now has been confirmed.</target>
         <source>Which registration fields to show in the list of registrations for an event:</source>
         <target state="final">Champs d'inscription à afficher dans la liste des inscriptions à un événement</target>
       </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.categoriesInListView" resname="seminars.pi_flexform.categoriesInListView" approved="yes">
-        <source>Display of the categories:</source>
-        <target state="final">Affichage des catégories :</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.iconAndText" resname="seminars.pi_flexform.iconAndText" approved="yes">
-        <source>Icons and text</source>
-        <target state="final">Texte et icônes</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.iconOnly" resname="seminars.pi_flexform.iconOnly" approved="yes">
-        <source>Icons only</source>
-        <target state="final">Icônes uniquement</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.textOnly" resname="seminars.pi_flexform.textOnly" approved="yes">
-        <source>Text only</source>
-        <target state="final">Texte uniquement</target>
-      </trans-unit>
       <trans-unit id="seminars.pi_flexform.linkToSingleView" resname="seminars.pi_flexform.linkToSingleView">
         <source>Link the single view from the list view:</source>
         <target state="needs-translation">Link the single view from the list view:</target>
