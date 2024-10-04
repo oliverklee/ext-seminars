@@ -70,10 +70,6 @@ plugin.tx_seminars_pi1 {
   # the normal sorting)
   sortListViewByCategory = 0
 
-  # how to display the categories in the event list view: icon, text, both
-  # @deprecated will be removed in version 6.0.0 in #3370
-  categoriesInListView = both
-
   # whether to use the label "Price" as column header for the standard price (instead of "Standard price")
   generalPriceInList = 0
 

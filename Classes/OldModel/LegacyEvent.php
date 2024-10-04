@@ -3113,7 +3113,7 @@ class LegacyEvent extends AbstractTimeSpan
      * Gets this event's category titles and icons as an associative
      * array (which may be empty), using the category UIDs as keys.
      *
-     * @return array<int, array{title: string, icon: FileReference|null}>
+     * @return array<int, array{title: string}>
      */
     public function getCategories(): array
     {
@@ -3127,8 +3127,7 @@ class LegacyEvent extends AbstractTimeSpan
 
         $result = [];
         foreach ($builder->build() as $category) {
-            // @deprecated icons will be removed in version 6.0.0 in #3370
-            $result[$category->getUid()] = ['title' => $category->getTitle(), 'icon' => $category->getIcon()];
+            $result[$category->getUid()] = ['title' => $category->getTitle()];
         }
 
         return $result;

@@ -357,22 +357,6 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         categoriesInListView
-
-   Data type
-         string
-
-   Description
-         whether to show only the category title, only the category icon or
-         both. Allowed values are: icon, text, both
-
-   Default
-         both
-
-
-.. container:: table-row
-
-   Property
          generalPriceInList
 
    Data type

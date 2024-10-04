@@ -689,10 +689,9 @@ class DefaultController extends TemplateHelper
         }
 
         $categoryMarker = '';
+        $this->setMarker('category_icon', '');
         foreach ($this->seminar->getCategories() as $category) {
             $this->setMarker('category_title', \htmlspecialchars($category['title'], ENT_QUOTES | ENT_HTML5));
-            // @deprecated will be removed in version 6.0.0 in #3370
-            $this->setMarker('category_icon', $this->createCategoryIconImage($category));
             $categoryMarker .= $this->getSubpart('SINGLE_CATEGORY');
         }
         $this->setSubpart('SINGLE_CATEGORY', $categoryMarker);
@@ -2138,27 +2137,6 @@ class DefaultController extends TemplateHelper
             true
         );
         $this->hideColumns($columns);
-    }
-
-    /**
-     * Creates the category icon IMG tag with the icon title as title attribute.
-     *
-     * @param array{title: string, icon: FileReference|null} $iconData
-     *
-     * @return string the icon IMG tag with the given icon, will be empty if the category has no icon
-     *
-     * @deprecated will be removed in version 6.0.0 in #3370
-     */
-    private function createCategoryIconImage(array $iconData): string
-    {
-        $icon = $iconData['icon'];
-        if (!$icon instanceof FileReference) {
-            return '';
-        }
-
-        $imageConfiguration = ['file' => $icon->getPublicUrl(), 'titleText' => $iconData['title']];
-
-        return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
     /**

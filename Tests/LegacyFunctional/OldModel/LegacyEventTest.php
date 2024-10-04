@@ -3181,7 +3181,7 @@ final class LegacyEventTest extends FunctionalTestCase
             $this->subject->getNumberOfCategories()
         );
         self::assertSame(
-            [$categoryUid => ['title' => 'Test', 'icon' => null]],
+            [$categoryUid => ['title' => 'Test']],
             $this->subject->getCategories()
         );
     }
@@ -3232,8 +3232,8 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertSame(
             [
-                $categoryUid1 => ['title' => 'Test 1', 'icon' => null],
-                $categoryUid2 => ['title' => 'Test 2', 'icon' => null],
+                $categoryUid1 => ['title' => 'Test 1'],
+                $categoryUid2 => ['title' => 'Test 2'],
             ],
             $this->subject->getCategories()
         );

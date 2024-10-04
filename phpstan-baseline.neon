@@ -296,11 +296,6 @@ parameters:
 			path: Classes/FrontEnd/AbstractView.php
 
 		-
-			message: "#^Cannot call method cObjGetSingle\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/FrontEnd/CategoryList.php
-
-		-
 			message: "#^Cannot call method getTypoLink\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/CategoryList.php
@@ -362,7 +357,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method cObjGetSingle\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
@@ -1197,11 +1192,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method cObjGetSingle\\(\\) on TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Cannot call method getIcon\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyCategory\\|null\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 

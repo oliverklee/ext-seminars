@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\FrontEnd;
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyCategory;
-use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -97,11 +96,7 @@ class CategoryList extends AbstractView
     /**
      * Creates the list of categories for the event list view.
      *
-     * Depending on the configuration value, categoriesInListView returns
-     * either only the titles as comma-separated list, only the icons with the
-     * title as title attribute or both.
-     *
-     * @param array<int, array{title: string, icon: FileReference|null}> $categoriesToDisplay
+     * @param array<int, array{title: string}> $categoriesToDisplay
      *
      * @return string the HTML output, will be empty if $categoriesToDisplay is empty
      */
@@ -111,56 +106,12 @@ class CategoryList extends AbstractView
             return '';
         }
 
-        $categoryUidsFromConfiguration = $this->getConfValueString('categoriesInListView', 's_listView');
         $allCategoryLinks = [];
-        $categorySeparator = ($categoryUidsFromConfiguration !== 'icon') ? ', ' : ' ';
-
         foreach ($categoriesToDisplay as $uid => $categoryData) {
-            $linkValue = '';
-            switch ($categoryUidsFromConfiguration) {
-                case 'both':
-                    // @deprecated will be removed in version 6.0.0 in #3370
-                    if ($categoryData['icon'] instanceof FileReference) {
-                        $linkValue = $this->createCategoryIconImage($categoryData) . '&nbsp;';
-                    }
-                    $linkValue .= \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
-                    break;
-                case 'icon':
-                    // @deprecated will be removed in version 6.0.0 in #3370
-                    $linkValue = $this->createCategoryIconImage($categoryData);
-                    if ($linkValue === '') {
-                        $linkValue = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
-                        $categorySeparator = ', ';
-                    }
-                    break;
-                default:
-                    $linkValue = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
-            }
-            $allCategoryLinks[] = $this->createLinkToListViewLimitedByCategory($uid, $linkValue);
+            $linkText = \htmlspecialchars($categoryData['title'], ENT_QUOTES | ENT_HTML5);
+            $allCategoryLinks[] = $this->createLinkToListViewLimitedByCategory($uid, $linkText);
         }
 
-        return implode($categorySeparator, $allCategoryLinks);
-    }
-
-    /**
-     * Creates the category icon with the icon title as alt text.
-     *
-     * @param array{title: string, icon: FileReference|null} $iconData
-     *
-     * @return string the icon tag with the given icon, will be empty if no icon was given
-     *
-     * @deprecated will be removed in version 6.0.0 in #3370
-     */
-    private function createCategoryIconImage(array $iconData): string
-    {
-        $icon = $iconData['icon'];
-        if (!$icon instanceof FileReference) {
-            return '';
-        }
-
-        $imageConfiguration = ['file' => $icon->getPublicUrl(), 'titleText' => $iconData['title']];
-        $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
-
-        return \str_replace('<img ', '<img class="category_image" ', $imageWithoutClass);
+        return \implode(', ', $allCategoryLinks);
     }
 }
