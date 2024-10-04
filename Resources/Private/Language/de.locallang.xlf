@@ -911,26 +911,6 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Which registration fields to show in the list of registrations for an event:</source>
         <target state="final">Zeige diese Anmeldungs-Felder in der Liste der Anmeldungen:</target>
       </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.categoriesInListView" resname="seminars.pi_flexform.categoriesInListView" approved="yes">
-        <source>Display of the categories:</source>
-        <target state="final">Anzeige der Kategorien:</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.iconAndText" resname="seminars.pi_flexform.iconAndText" approved="yes">
-        <source>Icons and text</source>
-        <target state="final">Icons und Titel</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.iconOnly" resname="seminars.pi_flexform.iconOnly" approved="yes">
-        <source>Icons only</source>
-        <target state="final">Nur Icons</target>
-      </trans-unit>
-      <!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-      <trans-unit id="seminars.pi_flexform.textOnly" resname="seminars.pi_flexform.textOnly" approved="yes">
-        <source>Text only</source>
-        <target state="final">Nur Titel</target>
-      </trans-unit>
       <trans-unit id="seminars.pi_flexform.linkToSingleView" resname="seminars.pi_flexform.linkToSingleView" approved="yes">
         <source>Link the single view from the list view:</source>
         <target state="final">Verlinke die Einzelansicht aus der Listenansicht:</target>
