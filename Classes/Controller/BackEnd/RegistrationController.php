@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -21,7 +22,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class RegistrationController extends ActionController
 {
-    use EventStatisticsTrait;
     use PageUidTrait;
     use PermissionsTrait;
 
@@ -38,14 +38,19 @@ class RegistrationController extends ActionController
 
     private LanguageService $languageService;
 
+    private EventStatisticsCalculator $eventStatisticsCalculator;
+
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
         RegistrationRepository $registrationRepository,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        EventStatisticsCalculator $eventStatisticsCalculator
     ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
+        $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+
         $languageService = $GLOBALS['LANG'] ?? null;
         \assert($languageService instanceof LanguageService);
         $this->languageService = $languageService;
