@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
+use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
@@ -17,7 +18,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class ModuleController extends ActionController
 {
     use PageUidTrait;
-    use PermissionsTrait;
 
     private ModuleTemplateFactory $moduleTemplateFactory;
 
@@ -27,16 +27,20 @@ class ModuleController extends ActionController
 
     private EventStatisticsCalculator $eventStatisticsCalculator;
 
+    private Permissions $permissions;
+
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
         EventRepository $eventRepository,
         RegistrationRepository $registrationRepository,
-        EventStatisticsCalculator $eventStatisticsCalculator
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        Permissions $permissions
     ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->eventRepository = $eventRepository;
         $this->registrationRepository = $registrationRepository;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->permissions = $permissions;
     }
 
     public function overviewAction(): ResponseInterface

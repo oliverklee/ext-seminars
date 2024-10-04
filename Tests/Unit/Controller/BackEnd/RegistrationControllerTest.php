@@ -28,7 +28,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\PageUidTrait
- * @covers \OliverKlee\Seminars\Controller\BackEnd\PermissionsTrait
  * @covers \OliverKlee\Seminars\Controller\BackEnd\RegistrationController
  */
 final class RegistrationControllerTest extends UnitTestCase
@@ -85,6 +84,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->permissionsMock = $this->createMock(Permissions::class);
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         /** @var RegistrationController&AccessibleObjectInterface&MockObject $subject */
@@ -96,6 +96,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 $this->registrationRepositoryMock,
                 $this->eventRepositoryMock,
                 $this->eventStatisticsCalculatorMock,
+                $this->permissionsMock,
             ]
         );
         $this->subject = $subject;
@@ -108,8 +109,6 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
-        $this->permissionsMock = $this->createMock(Permissions::class);
-        $this->subject->injectPermissions($this->permissionsMock);
 
         $this->csvDownloaderMock = $this->createMock(CsvDownloader::class);
         GeneralUtility::addInstance(CsvDownloader::class, $this->csvDownloaderMock);

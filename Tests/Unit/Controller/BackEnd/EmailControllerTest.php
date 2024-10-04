@@ -22,7 +22,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Seminars\Controller\BackEnd\EmailController
- * @covers \OliverKlee\Seminars\Controller\BackEnd\PermissionsTrait
  */
 final class EmailControllerTest extends UnitTestCase
 {
@@ -60,9 +59,15 @@ final class EmailControllerTest extends UnitTestCase
         }
 
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
+        $this->permissionsMock = $this->createMock(Permissions::class);
+
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
-        $subject = $this->getAccessibleMock(EmailController::class, $methodsToMock, [$moduleTemplateFactory]);
+        $subject = $this->getAccessibleMock(
+            EmailController::class,
+            $methodsToMock,
+            [$moduleTemplateFactory, $this->permissionsMock]
+        );
         $this->subject = $subject;
 
         $request = $this->createStub(ServerRequest::class);
@@ -74,9 +79,6 @@ final class EmailControllerTest extends UnitTestCase
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
-
-        $this->permissionsMock = $this->createMock(Permissions::class);
-        $this->subject->injectPermissions($this->permissionsMock);
 
         $this->emailServiceMock = $this->createMock(GeneralEventMailForm::class);
         GeneralUtility::addInstance(GeneralEventMailForm::class, $this->emailServiceMock);
