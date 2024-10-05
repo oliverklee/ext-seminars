@@ -144,7 +144,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
 
         $this->seminar = new TestingLegacyEvent($this->seminarUid);
-        $this->subject = RegistrationManager::getInstance();
+        $this->subject = $this->get(RegistrationManager::class);
     }
 
     protected function tearDown(): void
@@ -153,7 +153,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->purgeMockedInstances();
 
-        RegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
         parent::tearDown();
@@ -1490,9 +1489,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        unset($this->subject);
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -1519,8 +1515,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -1540,8 +1534,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -1564,8 +1556,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
@@ -1595,8 +1585,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $registration = $this->createRegistration();
@@ -1619,8 +1607,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->createRegistration();
@@ -1644,8 +1630,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -1665,8 +1649,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');
@@ -1687,9 +1669,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
             ['attendees_min' => 0, 'attendees_max' => 42]
         );
 
-        unset($this->subject);
-        RegistrationManager::purgeInstance();
-        $this->subject = RegistrationManager::getInstance();
         $this->configuration->setAsString('templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html');
 
         $this->email->expects(self::never())->method('send');

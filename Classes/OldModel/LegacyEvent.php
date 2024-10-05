@@ -2334,11 +2334,9 @@ class LegacyEvent extends AbstractTimeSpan
      */
     public function canSomebodyRegister(): bool
     {
-        $registrationManager = RegistrationManager::getInstance();
-        $allowsRegistrationByDate
-            = $registrationManager->allowsRegistrationByDate($this);
-        $allowsRegistrationBySeats
-            = $registrationManager->allowsRegistrationBySeats($this);
+        $registrationManager = GeneralUtility::makeInstance(RegistrationManager::class);
+        $allowsRegistrationByDate = $registrationManager->allowsRegistrationByDate($this);
+        $allowsRegistrationBySeats = $registrationManager->allowsRegistrationBySeats($this);
 
         return $this->needsRegistration() && !$this->isCanceled()
             && $allowsRegistrationByDate && $allowsRegistrationBySeats;
@@ -2361,7 +2359,7 @@ class LegacyEvent extends AbstractTimeSpan
     public function canSomebodyRegisterMessage(): string
     {
         $message = '';
-        $registrationManager = RegistrationManager::getInstance();
+        $registrationManager = GeneralUtility::makeInstance(RegistrationManager::class);
 
         if (!$this->needsRegistration()) {
             $message = $this->translate('message_noRegistrationNecessary');

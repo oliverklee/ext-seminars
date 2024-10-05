@@ -348,7 +348,7 @@ class DefaultController extends TemplateHelper
 
     public function getRegistrationManager(): RegistrationManager
     {
-        return RegistrationManager::getInstance();
+        return GeneralUtility::makeInstance(RegistrationManager::class);
     }
 
     /**

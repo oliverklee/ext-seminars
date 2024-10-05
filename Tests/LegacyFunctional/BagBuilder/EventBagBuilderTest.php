@@ -11,7 +11,6 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -62,8 +61,6 @@ final class EventBagBuilderTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
-
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

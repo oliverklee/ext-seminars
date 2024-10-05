@@ -11,7 +11,6 @@ use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -48,8 +47,6 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
-
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

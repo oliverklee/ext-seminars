@@ -10,7 +10,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RequirementsList;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -74,7 +73,6 @@ final class RequirementsListTest extends FunctionalTestCase
         $this->testingFramework->cleanUpWithoutDatabase();
 
         ConfigurationRegistry::purgeInstance();
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

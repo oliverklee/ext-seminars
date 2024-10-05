@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Seo\SingleViewPageTitleProvider;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -45,7 +44,6 @@ final class SingleViewTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        RegistrationManager::purgeInstance();
         $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();

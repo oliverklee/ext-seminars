@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\Bag;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\EventBag;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -42,8 +41,6 @@ final class EventBagTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
-
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }
