@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\FrontEnd\SelectorWidget;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -94,8 +93,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
-
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

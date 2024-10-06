@@ -31,6 +31,7 @@ use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -40,34 +41,15 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @phpstan-type HelloSubjectPrefix = 'confirmation'|'confirmationOnQueueUpdate'|'confirmationOnRegistrationForQueue'|'confirmationOnUnregistration'|'notification'|'notificationOnQueueUpdate'|'notificationOnRegistrationForQueue'|'notificationOnUnregistration'
  */
-class RegistrationManager
+class RegistrationManager implements SingletonInterface
 {
     use SharedPluginConfiguration;
-
-    private static ?RegistrationManager $instance = null;
 
     private ?Template $emailTemplate = null;
 
     protected ?HookProvider $registrationEmailHookProvider = null;
 
     private ?SingleViewLinkBuilder $linkBuilder = null;
-
-    public static function getInstance(): RegistrationManager
-    {
-        if (!self::$instance instanceof RegistrationManager) {
-            self::$instance = GeneralUtility::makeInstance(static::class);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Purges the current instance so that `getInstance` will create a new instance.
-     */
-    public static function purgeInstance(): void
-    {
-        self::$instance = null;
-    }
 
     public function setLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
     {

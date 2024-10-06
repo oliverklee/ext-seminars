@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd\DefaultController;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -45,7 +44,6 @@ final class ListViewTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        RegistrationManager::purgeInstance();
         $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();

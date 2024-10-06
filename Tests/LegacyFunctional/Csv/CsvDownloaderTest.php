@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\CsvDownloader;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\BackEndTestsTrait;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -67,7 +66,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
     protected function tearDown(): void
     {
-        RegistrationManager::purgeInstance();
         $this->testingFramework->cleanUpWithoutDatabase();
         $this->restoreOriginalEnvironment();
 

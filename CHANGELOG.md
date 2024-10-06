@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make the `RegistrationManager` a proper TYPO3 singleton (#3782)
 - Make the `RegistrationManager` stateless (#3776)
 - Make `DataHandlerHook` stateless (#3774)
 - Merge `Csv/AbstractListView` into `Csv/AbstractRegistrationListView` (#3771)

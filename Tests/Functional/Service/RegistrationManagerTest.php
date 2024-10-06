@@ -110,7 +110,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->secondEmail);
 
-        $this->subject = new RegistrationManager();
+        $this->subject = $this->get(RegistrationManager::class);
 
         $linkBuilder = $this->createPartialMock(SingleViewLinkBuilder::class, ['createAbsoluteUrlForEvent']);
         $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('https://singleview.example.com/');
@@ -122,7 +122,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->testingFramework->cleanUpWithoutDatabase();
 
         ConfigurationRegistry::purgeInstance();
-        RegistrationManager::purgeInstance();
         // Purge the FIFO buffer of mocks
         GeneralUtility::makeInstance(MailMessage::class);
         GeneralUtility::makeInstance(MailMessage::class);

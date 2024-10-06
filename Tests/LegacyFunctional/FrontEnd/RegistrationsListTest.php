@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\RegistrationsList;
 use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -95,8 +94,6 @@ final class RegistrationsListTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
-
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

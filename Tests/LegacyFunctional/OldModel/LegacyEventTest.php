@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
 use TYPO3\CMS\Core\Context\Context;
@@ -156,7 +155,6 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->testingFramework->cleanUpWithoutDatabase();
 
         ConfigurationRegistry::purgeInstance();
-        RegistrationManager::purgeInstance();
 
         parent::tearDown();
     }

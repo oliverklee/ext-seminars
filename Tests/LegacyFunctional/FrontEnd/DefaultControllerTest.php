@@ -175,7 +175,6 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         ConfigurationRegistry::purgeInstance();
         ConfigurationProxy::purgeInstances();
-        RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 
