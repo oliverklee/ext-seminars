@@ -19,6 +19,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 - Add upgrade wizard to remove duplicate event-venue relations (#3717)
 
+### Documentation
+
+- Announce the early-access program (#3785)
+
 ## 5.7.0: New fields, BE usability features, and deprecations
 
 ### Added
