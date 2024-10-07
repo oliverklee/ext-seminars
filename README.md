@@ -16,10 +16,8 @@ Most of the documentation is in ReST format
 
 ## Compatibility with TYPO3 12LTS/12.4
 
-This extension is not compatible TYPO3 12LTS/12.4 yet.
-Please consider supporting the
-[crowdfunding campaign](https://github.com/oliverklee/ext-seminars/wiki/12LTS-Crowdfunding-Campaign)
-to make this happen.
+A TYPO3-12LTS-compatible version of this extension is available via an
+[early-acces program](https://github.com/oliverklee/ext-seminars/wiki/Early-access-program-for-newer-TYPO3-versions).
 
 ## Give it a try!
 
