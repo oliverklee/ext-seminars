@@ -886,7 +886,8 @@ class Event extends AbstractTimeSpan
         if ($this->isEventDate()) {
             throw new \BadMethodCallException(
                 'setPaymentMethods may only be called on single events and ' .
-                'event topics, but not on event dates.'
+                'event topics, but not on event dates.',
+                5785383349
             );
         }
 
