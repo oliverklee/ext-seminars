@@ -61,13 +61,13 @@ class EventMapper extends AbstractDataMapper
     public function findAllByBeginDate(int $minimum, int $maximum): Collection
     {
         if ($minimum < 0) {
-            throw new \InvalidArgumentException('$minimum must be >= 0.');
+            throw new \InvalidArgumentException('$minimum must be >= 0.', 9971424020);
         }
         if ($maximum <= 0) {
-            throw new \InvalidArgumentException('$maximum must be > 0.');
+            throw new \InvalidArgumentException('$maximum must be > 0.', 6723294479);
         }
         if ($minimum > $maximum) {
-            throw new \InvalidArgumentException('$minimum must be <= $maximum.');
+            throw new \InvalidArgumentException('$minimum must be <= $maximum.', 3835793617);
         }
 
         $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
