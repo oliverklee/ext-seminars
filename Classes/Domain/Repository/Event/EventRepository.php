@@ -36,6 +36,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         // @deprecated #1324 will be removed in seminars 6.0
         'registrations',
         'slug',
+        'webinar_url',
     ];
 
     /**

@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Ignore the webinar URL when duplicating an event (#3806)
 - Fix incorrect translation references in the TCEforms (#3801)
 - Add upgrade wizard to remove duplicate event-venue relations (#3717)
 
