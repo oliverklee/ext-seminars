@@ -1796,7 +1796,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeIncludesCalendarInviteInEmail(): void
+    public function notifyAttendeeByDefaultIncludesCalendarInviteInEmail(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1815,6 +1815,50 @@ final class RegistrationManagerTest extends FunctionalTestCase
         self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
         self::assertSame('text', $firstIcsAttachment->getMediaType());
         self::assertStringStartsWith('calendar', $firstIcsAttachment->getMediaSubtype());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForRegistrationIncludesCalendarInviteInEmail(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer();
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller, 'confirmation');
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+
+        self::assertCount(1, $icsAttachments);
+        $firstIcsAttachment = $icsAttachments[0];
+        self::assertInstanceOf(DataPart::class, $firstIcsAttachment);
+        self::assertSame('text', $firstIcsAttachment->getMediaType());
+        self::assertStringStartsWith('calendar', $firstIcsAttachment->getMediaSubtype());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForUnregistrationDoesNotIncludeCalendarInviteInEmail(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->createEventWithOrganizer();
+
+        $controller = new DefaultController();
+        $controller->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $controller, 'confirmationOnUnregistration');
+
+        $icsAttachments = $this->filterEmailAttachmentsByType($this->email, 'text/calendar');
+
+        self::assertSame([], $icsAttachments);
     }
 
     /**
