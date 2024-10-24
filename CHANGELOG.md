@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fix incorrect translation references in the TCEforms (#3801)
 - Add upgrade wizard to remove duplicate event-venue relations (#3717)
 
 ### Documentation
