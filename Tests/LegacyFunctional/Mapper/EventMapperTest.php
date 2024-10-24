@@ -21,7 +21,6 @@ use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
-use OliverKlee\Seminars\Model\TimeSlot;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -54,64 +53,6 @@ final class EventMapperTest extends FunctionalTestCase
         $this->testingFramework->cleanUpWithoutDatabase();
 
         parent::tearDown();
-    }
-
-    // Tests regarding getTimeSlots().
-
-    /**
-     * @test
-     */
-    public function getTimeSlotsReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(Collection::class, $testingModel->getTimeSlots());
-    }
-
-    /**
-     * @test
-     */
-    public function getTimeSlotsWithOneTimeSlotReturnsListOfTimeSlots(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            ['seminar' => $uid]
-        );
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $uid,
-            ['timeslots' => 1]
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(
-            TimeSlot::class,
-            $model->getTimeSlots()->first()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTimeSlotsWithOneTimeSlotReturnsOneTimeSlot(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            ['seminar' => $uid]
-        );
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $uid,
-            ['timeslots' => 1]
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$timeSlotUid,
-            $model->getTimeSlots()->getUids()
-        );
     }
 
     // Tests regarding getPlaces().

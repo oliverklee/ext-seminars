@@ -284,17 +284,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<TimeSlot>
-     */
-    public function getTimeSlots(): Collection
-    {
-        /** @var Collection<TimeSlot> $timeSlots */
-        $timeSlots = $this->getAsCollection('timeslots');
-
-        return $timeSlots;
-    }
-
-    /**
      * @return int our registration deadline as UNIX time-stamp, will be 0 if this event has no registration deadline
      */
     public function getRegistrationDeadlineAsUnixTimeStamp(): int

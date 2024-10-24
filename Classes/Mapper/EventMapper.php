@@ -26,7 +26,6 @@ class EventMapper extends AbstractDataMapper
         'topic' => EventMapper::class,
         'categories' => CategoryMapper::class,
         'event_type' => EventTypeMapper::class,
-        'timeslots' => TimeSlotMapper::class,
         'place' => PlaceMapper::class,
         'lodgings' => LodgingMapper::class,
         'foods' => FoodMapper::class,
