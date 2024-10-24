@@ -60,6 +60,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Hide registration-related field for events without registration (#3807)
 - Ignore the webinar URL when duplicating an event (#3805)
 - Fix incorrect translation references in the TCEforms (#3800)
 - Avoid mocking the final `ModuleTemplateFactory` class (#3765)
