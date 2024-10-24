@@ -51,12 +51,12 @@ class LegacyTimeSlot extends AbstractTimeSpan
      * Gets our place as plain text (just the name).
      * Returns a localized string "will be announced" if the time slot has no place set.
      *
-     * @return string our places or a localized string "will be announced" if this times lot has no place assigned
+     * @return string our places or an empty string if this timeslot lot has no place assigned
      */
     public function getPlaceShort(): string
     {
         if (!$this->hasPlace()) {
-            return $this->translate('message_willBeAnnounced');
+            return '';
         }
 
         $table = 'tx_seminars_sites';
@@ -78,12 +78,12 @@ class LegacyTimeSlot extends AbstractTimeSpan
      * Gets the entry date and time as a formatted date. If the begin date of
      * this time slot is on the same day as the entry date, only the time will be returned.
      *
-     * @return string the entry date and time (or the localized string "will be announced" if no entry date is set)
+     * @return string the entry date and time (or an empty string if no entry date is set)
      */
     public function getEntryDate(): string
     {
         if (!$this->hasEntryDate()) {
-            return $this->translate('message_willBeAnnounced');
+            return '';
         }
 
         $beginDate = $this->getBeginDateAsTimestamp();
