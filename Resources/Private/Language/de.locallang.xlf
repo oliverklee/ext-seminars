@@ -1959,7 +1959,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="backEndModule.message.registrationDeleted" resname="backEndModule.message.registrationDeleted" approved="yes">
         <source>The registration has been deleted.</source>
-        <target state="final">Ihre Anmeldung wurde gelöscht.</target>
+        <target state="final">Die Anmeldung wurde gelöscht.</target>
       </trans-unit>
       <trans-unit id="plugin.eventUnregistration.heading.sorry" resname="plugin.eventUnregistration.heading.sorry" approved="yes">
         <source>Sorry!</source>
