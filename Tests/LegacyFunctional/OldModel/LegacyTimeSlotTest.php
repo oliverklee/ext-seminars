@@ -140,12 +140,9 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces(): void
+    public function getPlaceShortReturnsEmptyStringForNoPlaces(): void
     {
-        self::assertSame(
-            $this->translate('message_willBeAnnounced'),
-            $this->subject->getPlaceShort()
-        );
+        self::assertSame('', $this->subject->getPlaceShort());
     }
 
     /**
@@ -214,6 +211,14 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
         self::assertTrue(
             $this->subject->hasEntryDate()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function getEntryDateForNoEntryDateReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getEntryDate());
     }
 
     /**
