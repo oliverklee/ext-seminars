@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Display "will be announced" in fewer places (#3816)
 - Make the `RegistrationManager` a proper TYPO3 singleton (#3782)
 - Make the `RegistrationManager` stateless (#3776)
 - Make `DataHandlerHook` stateless (#3774)
