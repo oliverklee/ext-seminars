@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- - Hide registration-related field for events without registration (#3808)
 - Require higher TYPO3 bugfix versions (#3511)
 
 ### Deprecated
