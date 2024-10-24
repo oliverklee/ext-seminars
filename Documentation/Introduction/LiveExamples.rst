@@ -9,19 +9,24 @@ If you would like to test the extension yourself, there is a
 `DDEV-based TYPO3 distribution <https://github.com/oliverklee/TYPO3-testing-distribution>`_
 with this extension installed and some test records ready to go.
 
-Live examples
-=============
+References
+==========
 
-* `Elternschule Speyer <https://www.elternschule-speyer.de/unser-kursprogramm/>`__
-* `Deutsche Gesellschaft für Ernährung e.V.
-   <https://www.dge.de/qualifizierung/seminare/>`__
-* `GDCh-Fachgruppe Umweltchemie und Ökotoxikologie
-  <https://www.fachoekotoxikologie.de/kurse>`__
-* `Institut für klinische Hypnose und Ego-State-Therapie
-   <https://www.ifhe-berlin.de/>`__
-* `Kreis Mettmann <https://www.kultur-bergischesland.de/kulturwerkstatt/jahresprogramm>`__
-* `R. STAHL Aktiengesellschaft
-   <https://r-stahl.com/de/global/services-und-seminare/seminare/offene-seminare>`__
+* `Deutsche Gesellschaft für Ernährung e.V. <dge>`__
+* `Elternschule Speyer <speyer>`__
+* `GDCh-Fachgruppe Umweltchemie und Ökotoxikologie <gdch>`__
+* `Institut für klinische Hypnose und Ego-State-Therapie <ifhe>`__
+* `Kreis Mettmann <mettmann>`__
+* `R. STAHL Aktiengesellschaft <stahl>`__
+* `XXL-Sicherheit GmbH & CO. KG <xxl>`__
+
+.. _dge: https://www.dge.de/qualifizierung/seminare/
+.. _speyer: https://www.elternschule-speyer.de/unser-kursprogramm/
+.. _gdch: https://www.fachoekotoxikologie.de/kurse
+.. _ifhe: https://www.ifhe-berlin.de/
+.. _mettmann: https://www.kultur-bergischesland.de/kulturwerkstatt/jahresprogramm
+.. _stahl: https://r-stahl.com/de/global/services-und-seminare/seminare/offene-seminare/
+.. _xxl: https://www.xxl-sicherheit.de/
 
 If you would like your site to be listed here, please drop the
 extension author a short email.
