@@ -578,7 +578,7 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->languageServiceMock->expects(self::once())->method('sL')
             ->with(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.registrationDeleted'
             )
             ->willReturn($localizedMessage);
         $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);

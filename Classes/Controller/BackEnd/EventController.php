@@ -75,7 +75,7 @@ class EventController extends ActionController
         $this->eventRepository->deleteViaDataHandler($eventUid);
 
         $message = $this->languageService
-            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted');
+            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.eventDeleted');
         $this->addFlashMessage($message);
 
         return $this->redirectToOverviewAction();
