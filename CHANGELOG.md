@@ -60,6 +60,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Ignore the webinar URL when duplicating an event (#3805)
 - Fix incorrect translation references in the TCEforms (#3800)
 - Avoid mocking the final `ModuleTemplateFactory` class (#3765)
 - Switch from the `be:moduleLayout` VH to `ModuleTemplate` (#3745, #3750)
