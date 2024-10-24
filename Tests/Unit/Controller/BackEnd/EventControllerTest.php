@@ -197,7 +197,7 @@ final class EventControllerTest extends UnitTestCase
         $this->stubRedirect();
 
         $this->languageServiceMock->expects(self::once())->method('sL')
-            ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.eventDeleted')
+            ->with('LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.eventDeleted')
             ->willReturn($localizedMessage);
         $this->subject->expects(self::once())->method('addFlashMessage')->with($localizedMessage);
 

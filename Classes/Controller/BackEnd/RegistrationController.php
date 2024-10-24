@@ -130,7 +130,7 @@ class RegistrationController extends ActionController
         $this->registrationRepository->deleteViaDataHandler($registrationUid);
 
         $message = $this->languageService
-            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xml:backEndModule.message.registrationDeleted');
+            ->sL('LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:backEndModule.message.registrationDeleted');
         $this->addFlashMessage($message);
 
         return $this->redirect('showForEvent', 'BackEnd\\Registration', null, ['eventUid' => $eventUid]);
