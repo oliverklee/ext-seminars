@@ -796,6 +796,7 @@ $tca = [
         'additional_email_text' => [
             'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.additional_email_text',
+            'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'text',
                 'cols' => 30,
