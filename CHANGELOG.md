@@ -39,7 +39,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 - Drop unused old models and mappers
-  (#3815, #3818, #3819, #3820, #3821, #3822, #3823, #3824, #3825)
+  (#3815, #3818, #3819, #3820, #3821, #3822, #3823, #3824, #3825, #3826)
 - Drop icons for categories (#3777)
 - Drop the unused `SpeakerBagBuilder` (#3780)
 - Drop unused BE route configuration file (#3742)
