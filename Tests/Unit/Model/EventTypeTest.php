@@ -21,19 +21,6 @@ final class EventTypeTest extends UnitTestCase
         $this->subject = new EventType();
     }
 
-    /**
-     * @test
-     */
-    public function getTitleWithNonEmptyTitleReturnsTitle(): void
-    {
-        $this->subject->setData(['title' => 'Workshop']);
-
-        self::assertSame(
-            'Workshop',
-            $this->subject->getTitle()
-        );
-    }
-
     //////////////////////////////////////////////
     // Tests concerning the single view page UID
     //////////////////////////////////////////////

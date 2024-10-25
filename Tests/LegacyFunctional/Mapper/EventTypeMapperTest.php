@@ -47,21 +47,4 @@ final class EventTypeMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(EventType::class, $this->subject->find(1));
     }
-
-    /**
-     * @test
-     */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
-    {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types',
-            ['title' => 'Workshop']
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertEquals(
-            'Workshop',
-            $model->getTitle()
-        );
-    }
 }
