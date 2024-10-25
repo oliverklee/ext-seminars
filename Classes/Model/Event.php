@@ -982,21 +982,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<TargetGroup>
-     */
-    public function getTargetGroups(): Collection
-    {
-        if ($this->isEventDate()) {
-            return $this->getTopic()->getTargetGroups();
-        }
-
-        /** @var Collection<TargetGroup> $targetGroups */
-        $targetGroups = $this->getAsCollection('target_groups');
-
-        return $targetGroups;
-    }
-
-    /**
      * @return EventInterface::STATUS_*
      */
     public function getStatus(): int

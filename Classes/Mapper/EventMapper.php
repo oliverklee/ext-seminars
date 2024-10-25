@@ -34,7 +34,6 @@ class EventMapper extends AbstractDataMapper
         'payment_methods' => PaymentMethodMapper::class,
         'organizers' => OrganizerMapper::class,
         'organizing_partners' => OrganizerMapper::class,
-        'target_groups' => TargetGroupMapper::class,
         'vips' => OelibFrontEndUserMapper::class,
         'requirements' => EventMapper::class,
         'dependencies' => EventMapper::class,
