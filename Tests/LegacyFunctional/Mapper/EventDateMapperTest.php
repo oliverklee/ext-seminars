@@ -12,12 +12,10 @@ use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
-use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
-use OliverKlee\Seminars\Model\TargetGroup;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -277,84 +275,6 @@ final class EventDateMapperTest extends FunctionalTestCase
         self::assertSame(
             (string)$paymentMethodUid,
             $model->getPaymentMethods()->getUids()
-        );
-    }
-
-    ///////////////////////////////////////
-    // Tests regarding getTargetGroups().
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForEventDateReturnsListInstance(): void
-    {
-        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
-        $date = $this->subject->getLoadedTestingModel(
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topic->getUid(),
-            ]
-        );
-
-        self::assertInstanceOf(Collection::class, $date->getTargetGroups());
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsListOfTargetGroups(): void
-    {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
-            ]
-        );
-        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
-        \assert($targetGroupUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topicUid,
-            $targetGroupUid,
-            'target_groups'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(
-            TargetGroup::class,
-            $model->getTargetGroups()->first()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsOneTargetGroup(): void
-    {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
-            ]
-        );
-        $targetGroupUid = MapperRegistry::get(TargetGroupMapper::class)->getNewGhost()->getUid();
-        \assert($targetGroupUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topicUid,
-            $targetGroupUid,
-            'target_groups'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$targetGroupUid,
-            $model->getTargetGroups()->getUids()
         );
     }
 }
