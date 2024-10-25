@@ -11,12 +11,10 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Model\Food;
 use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
@@ -158,59 +156,6 @@ final class EventMapperTest extends FunctionalTestCase
         self::assertSame(
             (string)$lodgingUid,
             $model->getLodgings()->getUids()
-        );
-    }
-
-    // Tests regarding getFoods().
-
-    /**
-     * @test
-     */
-    public function getFoodsReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(Collection::class, $testingModel->getFoods());
-    }
-
-    /**
-     * @test
-     */
-    public function getFoodsWithOneFoodReturnsListOfFoods(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
-        \assert($foodUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $foodUid,
-            'foods'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(Food::class, $model->getFoods()->first());
-    }
-
-    /**
-     * @test
-     */
-    public function getFoodsWithOneFoodReturnsOneFood(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $foodUid = MapperRegistry::get(FoodMapper::class)->getNewGhost()->getUid();
-        \assert($foodUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $foodUid,
-            'foods'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$foodUid,
-            $model->getFoods()->getUids()
         );
     }
 

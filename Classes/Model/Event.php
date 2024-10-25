@@ -530,17 +530,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<Food>
-     */
-    public function getFoods(): Collection
-    {
-        /** @var Collection<Food> $foods */
-        $foods = $this->getAsCollection('foods');
-
-        return $foods;
-    }
-
-    /**
      * @return Collection<Speaker>
      */
     public function getPartners(): Collection
