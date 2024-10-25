@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Drop the old `TimeSlot` model and mapper (#3815)
+- Drop the old `TimeSlot` model and mapper (#3815, #3817)
 - Drop icons for categories (#3777)
 - Drop the unused `SpeakerBagBuilder` (#3780)
 - Drop unused BE route configuration file (#3742)
