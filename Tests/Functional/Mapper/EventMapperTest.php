@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
@@ -206,33 +205,5 @@ final class EventMapperTest extends FunctionalTestCase
         $result = $this->subject->findForRegistrationDigestEmail();
 
         self::assertNotContainsModelWithUid($result, 6);
-    }
-
-    /**
-     * @test
-     */
-    public function getDependenciesReturnsEmptyList(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
-
-        $model = $this->subject->find(1);
-        $result = $model->getDependencies();
-
-        self::assertInstanceOf(Collection::class, $result);
-        self::assertTrue($result->isEmpty());
-    }
-
-    /**
-     * @test
-     */
-    public function getRequirementsReturnsEmptyList(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
-
-        $model = $this->subject->find(1);
-        $result = $model->getRequirements();
-
-        self::assertInstanceOf(Collection::class, $result);
-        self::assertTrue($result->isEmpty());
     }
 }

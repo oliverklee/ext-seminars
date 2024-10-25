@@ -9,7 +9,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
@@ -507,50 +506,6 @@ class Event extends AbstractTimeSpan
         return $this->getSingleViewPageUidFromCategories() > 0;
     }
 
-    /**
-     * @return Collection<Place>
-     */
-    public function getPlaces(): Collection
-    {
-        /** @var Collection<Place> $places */
-        $places = $this->getAsCollection('place');
-
-        return $places;
-    }
-
-    /**
-     * @return Collection<Speaker>
-     */
-    public function getPartners(): Collection
-    {
-        /** @var Collection<Speaker> $partners */
-        $partners = $this->getAsCollection('partners');
-
-        return $partners;
-    }
-
-    /**
-     * @return Collection<Speaker>
-     */
-    public function getTutors(): Collection
-    {
-        /** @var Collection<Speaker> $tutors */
-        $tutors = $this->getAsCollection('tutors');
-
-        return $tutors;
-    }
-
-    /**
-     * @return Collection<Speaker>
-     */
-    public function getLeaders(): Collection
-    {
-        /** @var Collection<Speaker> $leaders */
-        $leaders = $this->getAsCollection('leaders');
-
-        return $leaders;
-    }
-
     public function getLanguage(): ?Language
     {
         if (!$this->hasLanguage()) {
@@ -852,17 +807,6 @@ class Event extends AbstractTimeSpan
         return $organizer;
     }
 
-    /**
-     * @return Collection<Organizer>
-     */
-    public function getOrganizingPartners(): Collection
-    {
-        /** @var Collection<Organizer> $partners */
-        $partners = $this->getAsCollection('organizing_partners');
-
-        return $partners;
-    }
-
     public function eventTakesPlaceReminderHasBeenSent(): bool
     {
         return $this->getAsBoolean('event_takes_place_reminder_sent');
@@ -1003,17 +947,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<OelibFrontEndUser>
-     */
-    public function getEventManagers(): Collection
-    {
-        /** @var Collection<OelibFrontEndUser> $managers */
-        $managers = $this->getAsCollection('vips');
-
-        return $managers;
-    }
-
-    /**
      * Returns whether this event makes use of the second terms & conditions.
      */
     public function usesTerms2(): bool
@@ -1050,37 +983,6 @@ class Event extends AbstractTimeSpan
         return $this->isEventDate()
             ? $this->getTopic()->hasNotes()
             : $this->hasString('notes');
-    }
-
-    /**
-     * @return Collection<Event>
-     */
-    public function getRequirements(): Collection
-    {
-        if ($this->isEventDate()) {
-            return
-                $this->getTopic()->getRequirements();
-        }
-
-        /** @var Collection<Event> $requirements */
-        $requirements = $this->getAsCollection('requirements');
-
-        return $requirements;
-    }
-
-    /**
-     * @return Collection<Event>
-     */
-    public function getDependencies(): Collection
-    {
-        if ($this->isEventDate()) {
-            return $this->getTopic()->getDependencies();
-        }
-
-        /** @var Collection<Event> $dependencies */
-        $dependencies = $this->getAsCollection('dependencies');
-
-        return $dependencies;
     }
 
     /**

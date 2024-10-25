@@ -1856,16 +1856,6 @@ parameters:
 			path: Tests/Functional/Hooks/DataHandlerHookTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventDateMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventDateMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventDateMapperTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventMapperTest.php
@@ -1874,16 +1864,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
 			count: 1
 			path: Tests/Functional/Mapper/EventMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventTopicMapperTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Mapper\\\\EventTopicMapperTest\\:\\:assertNotContainsModelWithUid\\(\\) has parameter \\$models with generic class OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection but does not specify its types\\: M$#"
-			count: 1
-			path: Tests/Functional/Mapper/EventTopicMapperTest.php
 
 		-
 			message: "#^Cannot access offset 'crdate' on array\\<string, mixed\\>\\|false\\.$#"

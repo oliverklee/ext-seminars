@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Database\Connection;
@@ -26,16 +25,7 @@ class EventMapper extends AbstractDataMapper
         'topic' => EventMapper::class,
         'categories' => CategoryMapper::class,
         'event_type' => EventTypeMapper::class,
-        'place' => PlaceMapper::class,
-        'speakers' => SpeakerMapper::class,
-        'partners' => SpeakerMapper::class,
-        'tutors' => SpeakerMapper::class,
-        'leaders' => SpeakerMapper::class,
         'organizers' => OrganizerMapper::class,
-        'organizing_partners' => OrganizerMapper::class,
-        'vips' => OelibFrontEndUserMapper::class,
-        'requirements' => EventMapper::class,
-        'dependencies' => EventMapper::class,
         // @deprecated #1324 will be removed in seminars 6.0
         'registrations' => RegistrationMapper::class,
     ];

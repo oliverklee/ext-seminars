@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Model;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
@@ -63,17 +62,6 @@ abstract class AbstractTimeSpan extends AbstractModel
     public function hasEndDate(): bool
     {
         return $this->hasInteger('end_date');
-    }
-
-    /**
-     * @return Collection<Speaker>
-     */
-    public function getSpeakers(): Collection
-    {
-        /** @var Collection<Speaker> $speakers */
-        $speakers = $this->getAsCollection('speakers');
-
-        return $speakers;
     }
 
     /**
