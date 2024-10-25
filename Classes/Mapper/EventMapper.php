@@ -38,7 +38,6 @@ class EventMapper extends AbstractDataMapper
         'organizing_partners' => OrganizerMapper::class,
         'target_groups' => TargetGroupMapper::class,
         'vips' => OelibFrontEndUserMapper::class,
-        'checkboxes' => CheckboxMapper::class,
         'requirements' => EventMapper::class,
         'dependencies' => EventMapper::class,
         // @deprecated #1324 will be removed in seminars 6.0

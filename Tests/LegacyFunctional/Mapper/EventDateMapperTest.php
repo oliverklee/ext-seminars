@@ -9,13 +9,11 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
-use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\TargetGroupMapper;
 use OliverKlee\Seminars\Model\Category;
-use OliverKlee\Seminars\Model\Checkbox;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\PaymentMethod;
@@ -357,81 +355,6 @@ final class EventDateMapperTest extends FunctionalTestCase
         self::assertSame(
             (string)$targetGroupUid,
             $model->getTargetGroups()->getUids()
-        );
-    }
-
-    /////////////////////////////////////
-    // Tests regarding getCheckboxes().
-    /////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getCheckboxesForEventDateReturnsListInstance(): void
-    {
-        $topic = $this->subject->getLoadedTestingModel(['object_type' => EventInterface::TYPE_EVENT_TOPIC]);
-        $date = $this->subject->getLoadedTestingModel(
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topic->getUid(),
-            ]
-        );
-
-        self::assertInstanceOf(Collection::class, $date->getCheckboxes());
-    }
-
-    /**
-     * @test
-     */
-    public function getCheckboxesForEventDateWithOneCheckboxReturnsListOfCheckboxes(): void
-    {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
-            ]
-        );
-        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
-        \assert($checkboxUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topicUid,
-            $checkboxUid,
-            'checkboxes'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(Checkbox::class, $model->getCheckboxes()->first());
-    }
-
-    /**
-     * @test
-     */
-    public function getCheckboxesForEventDateWithOneCheckboxReturnsOneCheckbox(): void
-    {
-        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_DATE,
-                'topic' => $topicUid,
-            ]
-        );
-        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
-        \assert($checkboxUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $topicUid,
-            $checkboxUid,
-            'checkboxes'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$checkboxUid,
-            $model->getCheckboxes()->getUids()
         );
     }
 }

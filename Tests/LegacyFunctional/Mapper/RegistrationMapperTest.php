@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\Mapper;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use OliverKlee\Seminars\Mapper\CheckboxMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FoodMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
@@ -245,62 +244,6 @@ final class RegistrationMapperTest extends FunctionalTestCase
         self::assertSame(
             $foodUid,
             $model->getFoods()->first()->getUid()
-        );
-    }
-
-    // Tests concerning the checkboxes.
-
-    /**
-     * @test
-     */
-    public function getCheckboxesReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
-    }
-
-    /**
-     * @test
-     */
-    public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
-        \assert($checkboxUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances',
-            $uid,
-            $checkboxUid,
-            'checkboxes'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            $checkboxUid,
-            $model->getCheckboxes()->first()->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getCheckboxesWithOneCheckboxReturnsOneCheckbox(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkboxUid = MapperRegistry::get(CheckboxMapper::class)->getNewGhost()->getUid();
-        \assert($checkboxUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances',
-            $uid,
-            $checkboxUid,
-            'checkboxes'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            $checkboxUid,
-            $model->getCheckboxes()->first()->getUid()
         );
     }
 
