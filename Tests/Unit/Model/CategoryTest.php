@@ -21,23 +21,6 @@ final class CategoryTest extends UnitTestCase
         $this->subject = new Category();
     }
 
-    ///////////////////////////////
-    // Tests regarding the title.
-    ///////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getTitleWithNonEmptyTitleReturnsTitle(): void
-    {
-        $this->subject->setData(['title' => 'Lecture']);
-
-        self::assertSame(
-            'Lecture',
-            $this->subject->getTitle()
-        );
-    }
-
     //////////////////////////////////////////////
     // Tests concerning the single view page UID
     //////////////////////////////////////////////

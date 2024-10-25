@@ -62,9 +62,6 @@ final class CategoryMapperTest extends FunctionalTestCase
         );
         $model = $this->subject->find($uid);
 
-        self::assertEquals(
-            'Lecture',
-            $model->getTitle()
-        );
+        self::assertInstanceOf(Category::class, $model);
     }
 }
