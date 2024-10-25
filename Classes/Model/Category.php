@@ -12,14 +12,6 @@ use OliverKlee\Oelib\Model\AbstractModel;
 class Category extends AbstractModel
 {
     /**
-     * @return string our title, will not be empty
-     */
-    public function getTitle(): string
-    {
-        return $this->getAsString('title');
-    }
-
-    /**
      * @return int the single view page, will be 0 if none has been set
      */
     public function getSingleViewPageUid(): int
