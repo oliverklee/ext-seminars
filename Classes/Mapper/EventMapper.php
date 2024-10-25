@@ -31,7 +31,6 @@ class EventMapper extends AbstractDataMapper
         'partners' => SpeakerMapper::class,
         'tutors' => SpeakerMapper::class,
         'leaders' => SpeakerMapper::class,
-        'payment_methods' => PaymentMethodMapper::class,
         'organizers' => OrganizerMapper::class,
         'organizing_partners' => OrganizerMapper::class,
         'vips' => OelibFrontEndUserMapper::class,

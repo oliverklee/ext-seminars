@@ -233,19 +233,6 @@ class Registration extends AbstractModel
         $this->setAsInteger('datepaid', $timestamp);
     }
 
-    public function getPaymentMethod(): ?PaymentMethod
-    {
-        /** @var PaymentMethod|null $paymentMethod */
-        $paymentMethod = $this->getAsModel('method_of_payment');
-
-        return $paymentMethod;
-    }
-
-    public function setPaymentMethod(?PaymentMethod $paymentMethod = null): void
-    {
-        $this->set('method_of_payment', $paymentMethod);
-    }
-
     /**
      * Returns the name of the company of the billing address of this registration.
      *

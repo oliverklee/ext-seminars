@@ -829,39 +829,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<PaymentMethod>
-     */
-    public function getPaymentMethods(): Collection
-    {
-        if ($this->isEventDate()) {
-            return $this->getTopic()->getPaymentMethods();
-        }
-
-        /** @var Collection<PaymentMethod> $paymentMethods */
-        $paymentMethods = $this->getAsCollection('payment_methods');
-
-        return $paymentMethods;
-    }
-
-    /**
-     * Note: This function should only be called on topic or single event records, not on event dates.
-     *
-     * @param Collection<PaymentMethod> $paymentMethods
-     */
-    public function setPaymentMethods(Collection $paymentMethods): void
-    {
-        if ($this->isEventDate()) {
-            throw new \BadMethodCallException(
-                'setPaymentMethods may only be called on single events and ' .
-                'event topics, but not on event dates.',
-                5785383349
-            );
-        }
-
-        $this->set('payment_methods', $paymentMethods);
-    }
-
-    /**
      * @return Collection<Organizer>
      */
     public function getOrganizers(): Collection

@@ -9,10 +9,8 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -536,37 +534,6 @@ final class RegistrationTest extends FunctionalTestCase
         );
 
         $this->subject->setPaymentDateAsUnixTimestamp(-1);
-    }
-
-    ////////////////////////////////////////
-    // Tests regarding the payment method.
-    ////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function setPaymentMethodSetsPaymentMethod(): void
-    {
-        /** @var PaymentMethod $paymentMethod */
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $this->subject->setPaymentMethod($paymentMethod);
-
-        self::assertSame(
-            $paymentMethod,
-            $this->subject->getPaymentMethod()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPaymentMethodCanSetPaymentMethodToNull(): void
-    {
-        $this->subject->setPaymentMethod();
-
-        self::assertNull(
-            $this->subject->getPaymentMethod()
-        );
     }
 
     /////////////////////////////////

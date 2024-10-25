@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1497,27 +1495,6 @@ final class EventTopicTest extends UnitTestCase
                 'special' => 34.567,
             ],
             $subject->getAvailablePrices()
-        );
-    }
-
-    /////////////////////////////////////////
-    // Tests concerning the payment methods
-    /////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function setPaymentMethodsSetsPaymentMethods(): void
-    {
-        $this->subject->setData([]);
-
-        /** @var Collection<PaymentMethod> $paymentMethods */
-        $paymentMethods = new Collection();
-        $this->subject->setPaymentMethods($paymentMethods);
-
-        self::assertSame(
-            $paymentMethods,
-            $this->subject->getPaymentMethods()
         );
     }
 }
