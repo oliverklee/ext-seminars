@@ -1136,16 +1136,6 @@ parameters:
 			path: Classes/Model/Event.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/Model/Event.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: Classes/Model/Event.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getStatus\\(\\) should return 0\\|1\\|2 but returns int\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
@@ -3229,11 +3219,6 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/EventTest.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 3
-			path: Tests/Unit/Model/EventTopicTest.php
 
 		-
 			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
