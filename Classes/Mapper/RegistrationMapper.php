@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
-use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * This class represents a mapper for registrations.
@@ -27,11 +25,4 @@ class RegistrationMapper extends AbstractDataMapper
         'lodgings' => LodgingMapper::class,
         'additional_persons' => FrontEndUserMapper::class,
     ];
-
-    public function countByFrontEndUser(FrontEndUser $user): int
-    {
-        /** @var Connection $connection */
-        $connection = $this->getConnectionForTable($this->getTableName());
-        return $connection->count('*', $this->getTableName(), ['user' => $user->getUid()]);
-    }
 }
