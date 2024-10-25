@@ -2826,11 +2826,6 @@ parameters:
 			path: Tests/LegacyFunctional/FrontEnd/SelectorWidgetTest.php
 
 		-
-			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\Lodging\\|null\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Mapper/RegistrationMapperTest.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Tests/LegacyFunctional/Model/RegistrationTest.php

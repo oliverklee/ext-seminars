@@ -519,17 +519,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<Lodging>
-     */
-    public function getLodgings(): Collection
-    {
-        /** @var Collection<Lodging> $lodgings */
-        $lodgings = $this->getAsCollection('lodgings');
-
-        return $lodgings;
-    }
-
-    /**
      * @return Collection<Speaker>
      */
     public function getPartners(): Collection

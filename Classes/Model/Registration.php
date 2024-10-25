@@ -506,17 +506,6 @@ class Registration extends AbstractModel
     }
 
     /**
-     * @return Collection<Lodging>
-     */
-    public function getLodgings(): Collection
-    {
-        /** @var Collection<Lodging> $lodgings */
-        $lodgings = $this->getAsCollection('lodgings');
-
-        return $lodgings;
-    }
-
-    /**
      * @return string the food of this registration, might be empty
      */
     public function getFood(): string
