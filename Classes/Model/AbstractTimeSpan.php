@@ -63,25 +63,4 @@ abstract class AbstractTimeSpan extends AbstractModel
     {
         return $this->hasInteger('end_date');
     }
-
-    /**
-     * @return string our room, will be empty if this time-span has no place
-     */
-    public function getRoom(): string
-    {
-        return $this->getAsString('room');
-    }
-
-    /**
-     * @param string $room our room, may be empty
-     */
-    public function setRoom(string $room): void
-    {
-        $this->setAsString('room', $room);
-    }
-
-    public function hasRoom(): bool
-    {
-        return $this->hasString('room');
-    }
 }

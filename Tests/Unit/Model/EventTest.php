@@ -90,48 +90,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function isSingleEventForSingleRecordReturnsTrue(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
-        );
-
-        self::assertTrue(
-            $this->subject->isSingleEvent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isSingleEventForTopicRecordReturnsFalse(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-
-        self::assertFalse(
-            $this->subject->isSingleEvent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isSingleEventForDateRecordReturnsFalse(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
-        );
-
-        self::assertFalse(
-            $this->subject->isSingleEvent()
-        );
-    }
-
     ///////////////////////////////////
     // Tests regarding isEventDate().
     ///////////////////////////////////
@@ -198,55 +156,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    /////////////////////////////////////
-    // Tests regarding the record type.
-    /////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_SINGLE_EVENT]
-        );
-
-        self::assertSame(
-            EventInterface::TYPE_SINGLE_EVENT,
-            $this->subject->getRecordType()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_DATE]
-        );
-
-        self::assertSame(
-            EventInterface::TYPE_EVENT_DATE,
-            $this->subject->getRecordType()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic(): void
-    {
-        $this->subject->setData(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-
-        self::assertSame(
-            EventInterface::TYPE_EVENT_TOPIC,
-            $this->subject->getRecordType()
-        );
-    }
-
     ////////////////////////////////
     // Tests concerning the title.
     ////////////////////////////////
@@ -274,73 +183,6 @@ final class EventTest extends UnitTestCase
         self::assertSame(
             'Superhero',
             $this->subject->getRawTitle()
-        );
-    }
-
-    //////////////////////////////////////////////
-    // Tests regarding the accreditation number.
-    //////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getAccreditationNumberWithoutAccreditationNumberReturnsAnEmptyString(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertSame(
-            '',
-            $this->subject->getAccreditationNumber()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAccreditationNumberWithAccreditationNumberReturnsAccreditationNumber(): void
-    {
-        $this->subject->setData(['accreditation_number' => 'a1234567890']);
-
-        self::assertSame(
-            'a1234567890',
-            $this->subject->getAccreditationNumber()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setAccreditationNumberSetsAccreditationNumber(): void
-    {
-        $this->subject->setAccreditationNumber('a1234567890');
-
-        self::assertSame(
-            'a1234567890',
-            $this->subject->getAccreditationNumber()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAccreditationNumberWithoutAccreditationNumberReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasAccreditationNumber()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasAccreditationNumberWithAccreditationNumberReturnsTrue(): void
-    {
-        $this->subject->setAccreditationNumber('a1234567890');
-
-        self::assertTrue(
-            $this->subject->hasAccreditationNumber()
         );
     }
 
@@ -377,47 +219,6 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $registrationDeadline must be >= 0.'
-        );
-
-        $this->subject->setRegistrationDeadlineAsUnixTimeStamp(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDeadlineAsUnixTimeStampWithZeroRegistrationDeadlineSetsRegistrationDeadline(): void
-    {
-        $this->subject->setRegistrationDeadlineAsUnixTimeStamp(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getRegistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setRegistrationDeadlineAsUnixTimeStampWithPositiveRegistrationDeadlineSetsRegistrationDeadline(): void
-    {
-        $this->subject->setRegistrationDeadlineAsUnixTimeStamp(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getRegistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function hasRegistrationDeadlineWithoutRegistrationDeadlineReturnsFalse(): void
     {
         $this->subject->setData([]);
@@ -432,413 +233,10 @@ final class EventTest extends UnitTestCase
      */
     public function hasRegistrationDeadlineWithRegistrationDeadlineReturnsTrue(): void
     {
-        $this->subject->setRegistrationDeadlineAsUnixTimeStamp(42);
+        $this->subject->setData(['deadline_registration' => 42]);
 
         self::assertTrue(
             $this->subject->hasRegistrationDeadline()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithoutAnyDatesReturnsZero(): void
-    {
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => 0,
-                'begin_date' => 0,
-                'end_date' => 0,
-            ]
-        );
-
-        self::assertSame(0, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginDateReturnsBeginDate(): void
-    {
-        $beginDate = 1524751343;
-        $endDate = $beginDate + 100000;
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => 0,
-                'begin_date' => $beginDate,
-                'end_date' => $endDate,
-            ]
-        );
-
-        self::assertSame($beginDate, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline(): void
-    {
-        $beginDate = 1524751343;
-        $endDate = $beginDate + 100000;
-        $registrationDeadline = 1524741343;
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => $registrationDeadline,
-                'begin_date' => $beginDate,
-                'end_date' => $endDate,
-            ]
-        );
-
-        self::assertSame($registrationDeadline, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate(): void
-    {
-        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
-
-        $beginDate = 1524751343;
-        $endDate = $beginDate + 100000;
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => 0,
-                'begin_date' => $beginDate,
-                'end_date' => $endDate,
-            ]
-        );
-
-        self::assertSame($endDate, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline(): void
-    {
-        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
-        $beginDate = 1524751343;
-        $endDate = $beginDate + 100000;
-        $registrationDeadline = 1524741343;
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => $registrationDeadline,
-                'begin_date' => $beginDate,
-                'end_date' => $endDate,
-            ]
-        );
-
-        self::assertSame($registrationDeadline, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /**
-     * @test
-     */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate(): void
-    {
-        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
-        $beginDate = $this->now - 100;
-        $this->subject->setData(
-            [
-                'title' => 'a test event',
-                'needs_registration' => 1,
-                'deadline_registration' => 0,
-                'begin_date' => $beginDate,
-                'end_date' => 0,
-            ]
-        );
-
-        self::assertSame($beginDate, $this->subject->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
-    }
-
-    /////////////////////////////////////////////
-    // Tests regarding the early bird deadline.
-    /////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getEarlyBirdDeadlineAsUnixTimeStampWithoutEarlyBirdDeadlineReturnsZero(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertSame(
-            0,
-            $this->subject->getEarlyBirdDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEarlyBirdDeadlineAsUnixTimeStampWithPositiveEarlyBirdDeadlineReturnsEarlyBirdDeadline(): void
-    {
-        $this->subject->setData(['deadline_early_bird' => 42]);
-
-        self::assertSame(
-            42,
-            $this->subject->getEarlyBirdDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $earlyBirdDeadline must be >= 0.'
-        );
-
-        $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setEarlyBirdDeadlineAsUnixTimeStampWithZeroEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
-    {
-        $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getEarlyBirdDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setEarlyBirdDeadlineWithPositiveEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
-    {
-        $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getEarlyBirdDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasEarlyBirdDeadlineWithoutEarlyBirdDeadlineReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasEarlyBirdDeadline()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasEarlyBirdDeadlineWithEarlyBirdDeadlineReturnsTrue(): void
-    {
-        $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(42);
-
-        self::assertTrue(
-            $this->subject->hasEarlyBirdDeadline()
-        );
-    }
-
-    /////////////////////////////////////////////////
-    // Tests regarding the unregistration deadline.
-    /////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithoutUnregistrationDeadlineReturnsZero(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertSame(
-            0,
-            $this->subject->getUnregistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline(): void
-    {
-        $this->subject->setData(['deadline_unregistration' => 42]);
-
-        self::assertSame(
-            42,
-            $this->subject->getUnregistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $unregistrationDeadline must be >= 0.'
-        );
-
-        $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithZeroUnregistrationDeadlineSetsUnregistrationDeadline(): void
-    {
-        $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getUnregistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline(): void
-    {
-        $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getUnregistrationDeadlineAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasUnregistrationDeadlineWithoutUnregistrationDeadlineReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasUnregistrationDeadline()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasUnregistrationDeadlineWithUnregistrationDeadlineReturnsTrue(): void
-    {
-        $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(42);
-
-        self::assertTrue(
-            $this->subject->hasUnregistrationDeadline()
-        );
-    }
-
-    ////////////////////////////////
-    // Tests regarding the expiry.
-    ////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getExpiryAsUnixTimeStampWithoutExpiryReturnsZero(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertSame(
-            0,
-            $this->subject->getExpiryAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getExpiryAsUnixTimeStampWithPositiveExpiryReturnsExpiry(): void
-    {
-        $this->subject->setData(['expiry' => 42]);
-
-        self::assertSame(
-            42,
-            $this->subject->getExpiryAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->subject->setExpiryAsUnixTimeStamp(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setExpiryAsUnixTimeStampWithZeroExpirySetsExpiry(): void
-    {
-        $this->subject->setExpiryAsUnixTimeStamp(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getExpiryAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setExpiryAsUnixTimeStampWithPositiveExpirySetsExpiry(): void
-    {
-        $this->subject->setExpiryAsUnixTimeStamp(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getExpiryAsUnixTimeStamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasExpiryWithoutExpiryReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasExpiry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasExpiryWithExpiryReturnsTrue(): void
-    {
-        $this->subject->setExpiryAsUnixTimeStamp(42);
-
-        self::assertTrue(
-            $this->subject->hasExpiry()
         );
     }
 
@@ -875,19 +273,6 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDetailsPageSetsDetailsPage(): void
-    {
-        $this->subject->setDetailsPage('https://example.com');
-
-        self::assertSame(
-            'https://example.com',
-            $this->subject->getDetailsPage()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function hasDetailsPageWithoutDetailsPageReturnsFalse(): void
     {
         $this->subject->setData([]);
@@ -902,7 +287,7 @@ final class EventTest extends UnitTestCase
      */
     public function hasDetailsPageWithDetailsPageReturnsTrue(): void
     {
-        $this->subject->setDetailsPage('https://example.com');
+        $this->subject->setData(['details_page' => 'https://example.com']);
 
         self::assertTrue(
             $this->subject->hasDetailsPage()
@@ -1165,90 +550,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    //////////////////////////////////////////////////////////
-    // Tests regarding eventTakesPlaceReminderHasBeenSent().
-    //////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function eventTakesPlaceReminderHasBeenSentWithUnsetEventTakesPlaceReminderSentReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->eventTakesPlaceReminderHasBeenSent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function eventTakesPlaceReminderHasBeenSentWithSetEventTakesPlaceReminderSentReturnsTrue(): void
-    {
-        $this->subject->setData(['event_takes_place_reminder_sent' => true]);
-
-        self::assertTrue(
-            $this->subject->eventTakesPlaceReminderHasBeenSent()
-        );
-    }
-
-    //////////////////////////////////////////////////////////////
-    // Tests regarding cancelationDeadlineReminderHasBeenSent().
-    //////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function cancelationDeadlineReminderHasBeenSentWithUnsetCancelationDeadlineReminderSentReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->cancelationDeadlineReminderHasBeenSent()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function cancelationDeadlineReminderHasBeenSentWithSetCancelationDeadlineReminderSentReturnsTrue(): void
-    {
-        $this->subject->setData(['cancelation_deadline_reminder_sent' => true]);
-
-        self::assertTrue(
-            $this->subject->cancelationDeadlineReminderHasBeenSent()
-        );
-    }
-
-    /////////////////////////////////////////
-    // Tests regarding needsRegistration().
-    /////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function needsRegistrationWithUnsetNeedsRegistrationReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->needsRegistration()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function needsRegistrationWithSetNeedsRegistrationReturnsTrue(): void
-    {
-        $this->subject->setData(['needs_registration' => true]);
-
-        self::assertTrue(
-            $this->subject->needsRegistration()
-        );
-    }
-
     ///////////////////////////////////////////
     // Tests regarding the minimum attendees.
     ///////////////////////////////////////////
@@ -1276,71 +577,6 @@ final class EventTest extends UnitTestCase
         self::assertSame(
             42,
             $this->subject->getMinimumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $minimumAttendees must be >= 0.'
-        );
-
-        $this->subject->setMinimumAttendees(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setMinimumAttendeesWithZeroMinimumAttendeesSetsMinimumAttendees(): void
-    {
-        $this->subject->setMinimumAttendees(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getMinimumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setMinimumAttendeesWithPositiveMinimumAttendeesSetsMinimumAttendees(): void
-    {
-        $this->subject->setMinimumAttendees(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getMinimumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasMinimumAttendeesWithoutMinimumAttendeesReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasMinimumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasMinimumAttendeesWithMinimumAttendeesReturnsTrue(): void
-    {
-        $this->subject->setMinimumAttendees(42);
-
-        self::assertTrue(
-            $this->subject->hasMinimumAttendees()
         );
     }
 
@@ -1377,47 +613,6 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $maximumAttendees must be >= 0.'
-        );
-
-        $this->subject->setMaximumAttendees(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function setMaximumAttendeesWithZeroMaximumAttendeesSetsMaximumAttendees(): void
-    {
-        $this->subject->setMaximumAttendees(0);
-
-        self::assertSame(
-            0,
-            $this->subject->getMaximumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setMaximumAttendeesWithPositiveAttendeesSetsMaximumAttendees(): void
-    {
-        $this->subject->setMaximumAttendees(42);
-
-        self::assertSame(
-            42,
-            $this->subject->getMaximumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function hasMaximumAttendeesWithoutMaximumAttendeesReturnsFalse(): void
     {
         $this->subject->setData([]);
@@ -1432,38 +627,10 @@ final class EventTest extends UnitTestCase
      */
     public function hasMaximumAttendeesWithMaximumAttendeesReturnsTrue(): void
     {
-        $this->subject->setMaximumAttendees(42);
+        $this->subject->setData(['attendees_max' => 42]);
 
         self::assertTrue(
             $this->subject->hasMaximumAttendees()
-        );
-    }
-
-    ////////////////////////////////////////////
-    // Tests regarding hasRegistrationQueue().
-    ////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasRegistrationQueueWithoutRegistrationQueueReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasRegistrationQueueWithRegistrationQueueReturnsTrue(): void
-    {
-        $this->subject->setData(['queue_size' => true]);
-
-        self::assertTrue(
-            $this->subject->hasRegistrationQueue()
         );
     }
 
@@ -1728,85 +895,7 @@ final class EventTest extends UnitTestCase
         $this->subject->confirm();
     }
 
-    ////////////////////////////////////////////////
-    // Tests regarding the registration begin date
-    ////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasRegistrationBeginForNoRegistrationBeginReturnsFalse(): void
-    {
-        $this->subject->setData(['begin_date_registration' => 0]);
-
-        self::assertFalse(
-            $this->subject->hasRegistrationBegin()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasRegistrationBeginForEventWithRegistrationBeginReturnsTrue(): void
-    {
-        $this->subject->setData(['begin_date_registration' => 42]);
-
-        self::assertTrue(
-            $this->subject->hasRegistrationBegin()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero(): void
-    {
-        $this->subject->setData(['begin_date_registration' => 0]);
-
-        self::assertSame(
-            0,
-            $this->subject->getRegistrationBeginAsUnixTimestamp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp(): void
-    {
-        $this->subject->setData(['begin_date_registration' => 42]);
-
-        self::assertSame(
-            42,
-            $this->subject->getRegistrationBeginAsUnixTimestamp()
-        );
-    }
-
     // Tests concerning the offline registrations
-
-    /**
-     * @test
-     */
-    public function hasOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsFalse(): void
-    {
-        $this->subject->setData(['offline_attendees' => 0]);
-
-        self::assertFalse(
-            $this->subject->hasOfflineRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTrue(): void
-    {
-        $this->subject->setData(['offline_attendees' => 2]);
-
-        self::assertTrue(
-            $this->subject->hasOfflineRegistrations()
-        );
-    }
 
     /**
      * @test
@@ -1830,22 +919,6 @@ final class EventTest extends UnitTestCase
 
         self::assertSame(
             2,
-            $this->subject->getOfflineRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setOfflineRegistrationsSetsOfflineRegistrations(): void
-    {
-        $numberOfOfflineRegistrations = 2;
-        $this->subject->setData(['offline_attendees' => 0]);
-
-        $this->subject->setOfflineRegistrations($numberOfOfflineRegistrations);
-
-        self::assertSame(
-            $numberOfOfflineRegistrations,
             $this->subject->getOfflineRegistrations()
         );
     }
@@ -2346,86 +1419,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    // Tests regarding the flag for organizers having been notified about enough attendees.
-
-    /**
-     * @test
-     */
-    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesByDefaultReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsFalseValueFromDatabase(): void
-    {
-        $this->subject->setData(['organizers_notified_about_minimum_reached' => 1]);
-
-        self::assertTrue(
-            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setOrganizersBeenNotifiedAboutEnoughAttendeesMarksItAsTrue(): void
-    {
-        $this->subject->setData([]);
-
-        $this->subject->setOrganizersBeenNotifiedAboutEnoughAttendees();
-
-        self::assertTrue(
-            $this->subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
-        );
-    }
-
-    // Tests regarding the flag for organizers having been notified about enough attendees.
-
-    /**
-     * @test
-     */
-    public function shouldMuteNotificationEmailsByDefaultReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->shouldMuteNotificationEmails()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function shouldMuteNotificationEmailsReturnsTrueValueFromDatabase(): void
-    {
-        $this->subject->setData(
-            ['mute_notification_emails' => 1]
-        );
-
-        self::assertTrue(
-            $this->subject->shouldMuteNotificationEmails()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function muteNotificationEmailsSetsShouldMute(): void
-    {
-        $this->subject->muteNotificationEmails();
-
-        self::assertTrue(
-            $this->subject->shouldMuteNotificationEmails()
-        );
-    }
-
     // Tests regarding the flag for automatic cancelation/confirmation
 
     /**
@@ -2823,25 +1816,6 @@ final class EventTest extends UnitTestCase
         $this->subject->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 2]);
 
         self::assertSame([], $this->subject->getAttendeeNamesAfterLastDigest());
-    }
-
-    // Tests concerning "price on request"
-
-    public function getPriceOnRequestByDefaultReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse($this->subject->getPriceOnRequest());
-    }
-
-    /**
-     * @test
-     */
-    public function getPriceOnRequestReturnsPriceOnRequest(): void
-    {
-        $this->subject->setData(['price_on_request' => true]);
-
-        self::assertTrue($this->subject->getPriceOnRequest());
     }
 
     // Tests regarding the date of the last registration digest email
