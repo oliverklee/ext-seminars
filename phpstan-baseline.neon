@@ -2797,11 +2797,6 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/Model/RegistrationTest.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
 			path: Tests/LegacyFunctional/OldModel/AbstractModelTest.php
 
