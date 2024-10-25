@@ -8,10 +8,8 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -111,29 +109,6 @@ final class RegistrationMapperTest extends FunctionalTestCase
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());
-    }
-
-    // Tests concerning the payment method.
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodWithoutPaymentMethodReturnsNull(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertNull($testingModel->getPaymentMethod());
-    }
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance(): void
-    {
-        $paymentMethod = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost();
-        $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
-
-        self::assertInstanceOf(PaymentMethod::class, $testingModel->getPaymentMethod());
     }
 
     // Tests concerning the relation to the additional registered persons

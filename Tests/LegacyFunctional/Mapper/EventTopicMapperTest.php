@@ -11,10 +11,8 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\CategoryMapper;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\EventTypeMapper;
-use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\EventType;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -164,70 +162,5 @@ final class EventTopicMapperTest extends FunctionalTestCase
         );
 
         self::assertInstanceOf(EventType::class, $testingModel->getEventType());
-    }
-
-    // Tests regarding getPaymentMethods().
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodsForEventTopicReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => EventInterface::TYPE_EVENT_TOPIC]
-        );
-
-        self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
-    }
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsListOfPaymentMethods(): void
-    {
-        $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
-        \assert($paymentMethodUid > 0);
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-                'payment_methods' => 1,
-            ]
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $uid,
-            $paymentMethodUid
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(PaymentMethod::class, $model->getPaymentMethods()->first());
-    }
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod(): void
-    {
-        $paymentMethodUid = MapperRegistry::get(PaymentMethodMapper::class)->getNewGhost()->getUid();
-        \assert($paymentMethodUid > 0);
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => EventInterface::TYPE_EVENT_TOPIC,
-                'payment_methods' => 1,
-            ]
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm',
-            $uid,
-            $paymentMethodUid
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$paymentMethodUid,
-            $model->getPaymentMethods()->getUids()
-        );
     }
 }

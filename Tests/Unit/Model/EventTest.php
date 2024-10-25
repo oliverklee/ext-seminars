@@ -14,7 +14,6 @@ use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
-use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -2344,41 +2343,6 @@ final class EventTest extends UnitTestCase
 
         self::assertFalse(
             $event->isFull()
-        );
-    }
-
-    // Tests concerning the payment methods
-
-    /**
-     * @test
-     */
-    public function getPaymentMethodsReturnsPaymentMethods(): void
-    {
-        $paymentMethods = new Collection();
-        $this->subject->setData(
-            ['payment_methods' => $paymentMethods]
-        );
-
-        self::assertSame(
-            $paymentMethods,
-            $this->subject->getPaymentMethods()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPaymentMethodsSetsPaymentMethods(): void
-    {
-        $this->subject->setData([]);
-
-        /** @var Collection<PaymentMethod> $paymentMethods */
-        $paymentMethods = new Collection();
-        $this->subject->setPaymentMethods($paymentMethods);
-
-        self::assertSame(
-            $paymentMethods,
-            $this->subject->getPaymentMethods()
         );
     }
 

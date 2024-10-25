@@ -21,7 +21,6 @@ class RegistrationMapper extends AbstractDataMapper
     protected $relations = [
         'seminar' => EventMapper::class,
         'user' => FrontEndUserMapper::class,
-        'method_of_payment' => PaymentMethodMapper::class,
         'additional_persons' => FrontEndUserMapper::class,
     ];
 }
