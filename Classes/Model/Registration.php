@@ -596,15 +596,4 @@ class Registration extends AbstractModel
 
         $this->setAsString('kids', $kids);
     }
-
-    /**
-     * @return Collection<Checkbox>
-     */
-    public function getCheckboxes(): Collection
-    {
-        /** @var Collection<Checkbox> $checkboxes */
-        $checkboxes = $this->getAsCollection('checkboxes');
-
-        return $checkboxes;
-    }
 }

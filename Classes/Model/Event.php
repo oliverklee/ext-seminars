@@ -1084,21 +1084,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return Collection<Checkbox>
-     */
-    public function getCheckboxes(): Collection
-    {
-        if ($this->isEventDate()) {
-            return $this->getTopic()->getCheckboxes();
-        }
-
-        /** @var Collection<Checkbox> $checkboxes */
-        $checkboxes = $this->getAsCollection('checkboxes');
-
-        return $checkboxes;
-    }
-
-    /**
      * Returns whether this event makes use of the second terms & conditions.
      */
     public function usesTerms2(): bool
