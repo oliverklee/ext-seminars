@@ -533,17 +533,6 @@ class Registration extends AbstractModel
     }
 
     /**
-     * @return Collection<Food>
-     */
-    public function getFoods(): Collection
-    {
-        /** @var Collection<Food> $foods */
-        $foods = $this->getAsCollection('foods');
-
-        return $foods;
-    }
-
-    /**
      * @return string where the attendee has heard of the event of this registration, might be empty
      */
     public function getKnownFrom(): string

@@ -25,7 +25,6 @@ class RegistrationMapper extends AbstractDataMapper
         'user' => FrontEndUserMapper::class,
         'method_of_payment' => PaymentMethodMapper::class,
         'lodgings' => LodgingMapper::class,
-        'foods' => FoodMapper::class,
         'additional_persons' => FrontEndUserMapper::class,
     ];
 
