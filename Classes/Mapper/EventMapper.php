@@ -41,53 +41,6 @@ class EventMapper extends AbstractDataMapper
     ];
 
     /**
-     * Retrieves all events that have a begin date of at least $minimum up to
-     * $maximum.
-     *
-     * These boundaries are inclusive, i.e., events with a begin date of
-     * exactly $minimum or $maximum will also be retrieved.
-     *
-     * @param int $minimum minimum begin date as a UNIX timestamp, must be >= 0
-     * @param int $maximum maximum begin date as a UNIX timestamp, must be >= $minimum
-     *
-     * @return Collection<Event> the found event models, will be empty if there are no matches
-     */
-    public function findAllByBeginDate(int $minimum, int $maximum): Collection
-    {
-        if ($minimum < 0) {
-            throw new \InvalidArgumentException('$minimum must be >= 0.', 9971424020);
-        }
-        if ($maximum <= 0) {
-            throw new \InvalidArgumentException('$maximum must be > 0.', 6723294479);
-        }
-        if ($minimum > $maximum) {
-            throw new \InvalidArgumentException('$minimum must be <= $maximum.', 3835793617);
-        }
-
-        $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
-        $queryResult = $queryBuilder
-            ->select('*')
-            ->from($this->getTableName())
-            ->where(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->gte(
-                        'begin_date',
-                        $queryBuilder->createNamedParameter($minimum, Connection::PARAM_INT)
-                    ),
-                    $queryBuilder->expr()->lte(
-                        'begin_date',
-                        $queryBuilder->createNamedParameter($maximum, Connection::PARAM_INT)
-                    )
-                )
-            )
-            ->orderBy('begin_date')
-            ->executeQuery();
-        $rows = $queryResult->fetchAllAssociative();
-
-        return $this->getListOfModels($rows);
-    }
-
-    /**
      * Finds events that have the status "planned" and that have the automatic status change enabled.
      *
      * @return Collection<Event>
