@@ -11,11 +11,9 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Mapper\SpeakerMapper;
-use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\Model\Speaker;
@@ -103,59 +101,6 @@ final class EventMapperTest extends FunctionalTestCase
         self::assertSame(
             (string)$placeUid,
             $model->getPlaces()->getUids()
-        );
-    }
-
-    // Tests regarding getLodgings().
-
-    /**
-     * @test
-     */
-    public function getLodgingsReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
-    }
-
-    /**
-     * @test
-     */
-    public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
-        \assert($lodgingUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $lodgingUid,
-            'lodgings'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(Lodging::class, $model->getLodgings()->first());
-    }
-
-    /**
-     * @test
-     */
-    public function getLodgingsWithOneLodgingReturnsOneLodging(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
-        \assert($lodgingUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $uid,
-            $lodgingUid,
-            'lodgings'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            (string)$lodgingUid,
-            $model->getLodgings()->getUids()
         );
     }
 

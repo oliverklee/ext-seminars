@@ -22,7 +22,6 @@ class RegistrationMapper extends AbstractDataMapper
         'seminar' => EventMapper::class,
         'user' => FrontEndUserMapper::class,
         'method_of_payment' => PaymentMethodMapper::class,
-        'lodgings' => LodgingMapper::class,
         'additional_persons' => FrontEndUserMapper::class,
     ];
 }

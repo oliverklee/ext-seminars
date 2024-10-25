@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyFunctional\Mapper;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
-use OliverKlee\Seminars\Mapper\LodgingMapper;
 use OliverKlee\Seminars\Mapper\PaymentMethodMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\Lodging;
 use OliverKlee\Seminars\Model\PaymentMethod;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -137,59 +134,6 @@ final class RegistrationMapperTest extends FunctionalTestCase
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertInstanceOf(PaymentMethod::class, $testingModel->getPaymentMethod());
-    }
-
-    // Tests concerning the lodgings.
-
-    /**
-     * @test
-     */
-    public function getLodgingsReturnsListInstance(): void
-    {
-        $testingModel = $this->subject->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
-    }
-
-    /**
-     * @test
-     */
-    public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
-        \assert($lodgingUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances',
-            $uid,
-            $lodgingUid,
-            'lodgings'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertInstanceOf(Lodging::class, $model->getLodgings()->first());
-    }
-
-    /**
-     * @test
-     */
-    public function getLodgingsWithOneLodgingReturnsOneLodging(): void
-    {
-        $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodgingUid = MapperRegistry::get(LodgingMapper::class)->getNewGhost()->getUid();
-        \assert($lodgingUid > 0);
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances',
-            $uid,
-            $lodgingUid,
-            'lodgings'
-        );
-
-        $model = $this->subject->find($uid);
-        self::assertSame(
-            $lodgingUid,
-            $model->getLodgings()->first()->getUid()
-        );
     }
 
     // Tests concerning the relation to the additional registered persons
