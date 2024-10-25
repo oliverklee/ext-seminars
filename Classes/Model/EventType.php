@@ -12,14 +12,6 @@ use OliverKlee\Oelib\Model\AbstractModel;
 class EventType extends AbstractModel
 {
     /**
-     * @return string our title, will not be empty
-     */
-    public function getTitle(): string
-    {
-        return $this->getAsString('title');
-    }
-
-    /**
      * Gets the UID of the single view page for events of this type.
      *
      * @return int the single view page, will be 0 if none has been set

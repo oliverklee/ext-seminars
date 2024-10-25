@@ -38,8 +38,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Drop the old `Checkbox` model and mapper (#3818)
-- Drop the old `TimeSlot` model and mapper (#3815, #3817)
+- Drop unused old `EventType::getTitle` (#3820)
+- Drop the old `Checkbox` model and mapper (#3819)
+- Drop the old `TimeSlot` model and mapper (#3815, #3818)
 - Drop icons for categories (#3777)
 - Drop the unused `SpeakerBagBuilder` (#3780)
 - Drop unused BE route configuration file (#3742)
