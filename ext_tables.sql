@@ -490,6 +490,7 @@ CREATE TABLE tx_seminars_attendances_foods_mm (
 #
 CREATE TABLE tx_seminars_timeslots (
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
+    # @deprecated will be removed in #3802 in seminars 6.0
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
     entry_date int(11) unsigned DEFAULT '0' NOT NULL,

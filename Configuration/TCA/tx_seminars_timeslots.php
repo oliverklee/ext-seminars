@@ -42,6 +42,7 @@ $tca = [
                 'default' => 0,
             ],
         ],
+        // @deprecated will be removed in #3802 in seminars 6.0
         'entry_date' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.entry_date',
@@ -94,6 +95,7 @@ $tca = [
         ],
     ],
     'types' => [
+        // drop `entry_date` #3802 in seminars 6.0
         '0' => ['showitem' => 'begin_date, end_date, entry_date, speakers, place, room'],
     ],
 ];
