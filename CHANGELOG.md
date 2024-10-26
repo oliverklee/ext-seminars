@@ -64,6 +64,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Only display the event times if there are no time slots (#3838)
 - Fix translation for flash message in BE module (#3810)
 - Hide registration-related field for events without registration (#3807)
 - Ignore the webinar URL when duplicating an event (#3805)

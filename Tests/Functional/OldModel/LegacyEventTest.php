@@ -1198,4 +1198,70 @@ final class LegacyEventTest extends FunctionalTestCase
 
         self::assertInstanceOf(FileReference::class, $subject->getImage());
     }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithoutDateReturnsFalse(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithoutDate.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertFalse($subject->hasTime());
+    }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithBeginAndEndDateReturnsTrue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithBeginAndWithEndDate.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertTrue($subject->hasTime());
+    }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithBeginDateAndWithoutEndDateReturnsTrue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithBeginAndWithoutEndDate.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertTrue($subject->hasTime());
+    }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithoutBeginDateAndWithEndDateReturnsFalse(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithoutBeginAndWithEndDate.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertFalse($subject->hasTime());
+    }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithOneTimeSlotReturnsFalse(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithOneTimeSlot.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertFalse($subject->hasTime());
+    }
+
+    /**
+     * @test
+     */
+    public function hasTimeForEventWithTwoTimeSlotsReturnsFalse(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/Events/hasTime/SingleEventWithTwoTimeSlots.csv');
+        $subject = new LegacyEvent(1);
+
+        self::assertFalse($subject->hasTime());
+    }
 }

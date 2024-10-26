@@ -3579,4 +3579,11 @@ class LegacyEvent extends AbstractTimeSpan
 
         return $queryResult->fetchAllAssociative();
     }
+
+    public function hasTime(): bool
+    {
+        // Events with time slots should only display their time with the time slots,
+        // but not as general times in order to avoid confusion.
+        return !$this->hasTimeslots() && parent::hasTime();
+    }
 }
