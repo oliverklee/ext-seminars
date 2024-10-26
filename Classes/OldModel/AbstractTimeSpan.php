@@ -42,7 +42,7 @@ abstract class AbstractTimeSpan extends AbstractModel
     /**
      * Gets the date.
      *
-     * Returns a localized string "will be announced" if there's no date set.
+     * Returns an empty string if there's no date set.
      *
      * Returns just one day if the timespan takes place on only one day.
      * Returns a date range if the timespan takes several days.
@@ -51,28 +51,28 @@ abstract class AbstractTimeSpan extends AbstractModel
      */
     public function getDate(string $dash = '&#8211;'): string
     {
-        if ($this->hasDate()) {
-            $beginDate = $this->getBeginDateAsTimestamp();
-            $endDate = $this->getEndDateAsTimestamp();
+        if (!$this->hasDate()) {
+            return '';
+        }
 
-            $dateFormat = $this->getDateFormat();
-            $beginDateDay = \date($dateFormat, $beginDate);
-            $endDateDay = \date($dateFormat, $endDate);
+        $beginDate = $this->getBeginDateAsTimestamp();
+        $endDate = $this->getEndDateAsTimestamp();
 
-            // Does the workshop span only one day (or is open-ended)?
-            if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
-                $result = $beginDateDay;
-            } else {
-                $resultBeforeHook = $beginDateDay . $dash . $endDateDay;
-                $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
-                    'modifyDateSpan',
-                    $resultBeforeHook,
-                    $this,
-                    $dash
-                );
-            }
+        $dateFormat = $this->getDateFormat();
+        $beginDateDay = \date($dateFormat, $beginDate);
+        $endDateDay = \date($dateFormat, $endDate);
+
+        // Does the workshop span only one day (or is open-ended)?
+        if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
+            $result = $beginDateDay;
         } else {
-            $result = $this->translate('message_willBeAnnounced');
+            $resultBeforeHook = $beginDateDay . $dash . $endDateDay;
+            $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
+                'modifyDateSpan',
+                $resultBeforeHook,
+                $this,
+                $dash
+            );
         }
 
         return (string)$result;
@@ -91,8 +91,8 @@ abstract class AbstractTimeSpan extends AbstractModel
     /**
      * Gets the time.
      *
-     * Returns a localized string "will be announced" if there's no time set
-     * (i.e. both begin time and end time are 00:00).
+     * Returns an empty string if there's no time set (i.e., both begin time and end time are 00:00).
+     *
      * Returns only the begin time if begin time and end time are the same.
      *
      * @param string $dash the character or HTML entity used to separate begin time and end time
@@ -100,7 +100,7 @@ abstract class AbstractTimeSpan extends AbstractModel
     public function getTime(string $dash = '&#8211;'): string
     {
         if (!$this->hasTime()) {
-            return $this->translate('message_willBeAnnounced');
+            return '';
         }
 
         $timeFormat = $this->getTimeFormat();
