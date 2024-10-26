@@ -1,0 +1,7 @@
+"tx_seminars_seminars"
+,"uid","begin_date","end_date","timeslots"
+,1,1729929600,1729958400,1
+
+"tx_seminars_timeslots"
+,"uid","seminar","begin_date","end_date"
+,1,1,1729929600,1729958400
