@@ -739,6 +739,8 @@ class DefaultController extends TemplateHelper
         foreach ($this->seminar->getTimeSlotsAsArrayWithMarkers() as $timeSlotData) {
             $this->setMarker('timeslot_date', $timeSlotData['date']);
             $this->setMarker('timeslot_time', $timeSlotData['time']);
+            // @deprecated set to an empty string in #3802 in seminars 6.0
+            // also set `LABEL_TIMESLOT_ENTRY_DATE` to an empty string
             $this->setMarker('timeslot_entry_date', $timeSlotData['entry_date']);
             $this->setMarker('timeslot_room', \htmlspecialchars($timeSlotData['room'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker('timeslot_place', \htmlspecialchars($timeSlotData['place'], ENT_QUOTES | ENT_HTML5));
