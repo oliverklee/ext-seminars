@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate time slot entry dates (#3842)
+
 ### Removed
 
 ### Fixed

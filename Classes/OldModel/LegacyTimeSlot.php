@@ -78,6 +78,8 @@ class LegacyTimeSlot extends AbstractTimeSpan
      * Gets the entry date and time as a formatted date. If the begin date of
      * this time slot is on the same day as the entry date, only the time will be returned.
      *
+     * @deprecated will be removed in #3802 in seminars 6.0
+     *
      * @return string the entry date and time (or an empty string if no entry date is set)
      */
     public function getEntryDate(): string
@@ -99,6 +101,9 @@ class LegacyTimeSlot extends AbstractTimeSpan
         return \date($dateFormat, $entryDate);
     }
 
+    /**
+     * @deprecated will be removed in #3802 in seminars 6.0
+     */
     public function hasEntryDate(): bool
     {
         return $this->hasRecordPropertyInteger('entry_date');
