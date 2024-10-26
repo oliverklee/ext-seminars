@@ -3139,6 +3139,7 @@ class LegacyEvent extends AbstractTimeSpan
                 'uid' => $timeSlot->getUid(),
                 'date' => $timeSlot->getDate(),
                 'time' => $timeSlot->getTime(),
+                // @deprecated will be removed in #3802 in seminars 6.0
                 'entry_date' => $timeSlot->getEntryDate(),
                 'room' => $timeSlot->getRoom(),
                 'place' => $timeSlot->getPlaceShort(),
