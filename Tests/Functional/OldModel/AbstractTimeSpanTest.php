@@ -72,12 +72,9 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForNoTimeReturnsWillBeAnnouncesMessage(): void
+    public function getTimeForNoTimeReturnsEmptyString(): void
     {
-        self::assertSame(
-            $this->translate('message_willBeAnnounced'),
-            $this->subject->getTime()
-        );
+        self::assertSame('', $this->subject->getTime());
     }
 
     /**
@@ -237,12 +234,9 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForNoDateReturnsWillBeAnnouncedMessage(): void
+    public function getDateForNoDateReturnsEmptyString(): void
     {
-        self::assertSame(
-            $this->translate('message_willBeAnnounced'),
-            $this->subject->getDate()
-        );
+        self::assertSame('', $this->subject->getDate());
     }
 
     /**
@@ -261,14 +255,11 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForEndDateReturnsWillBeAnnouncedMessage(): void
+    public function getDateForEndDateOnlyWithoutBeginDateReturnsEmptyString(): void
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
-        self::assertSame(
-            $this->translate('message_willBeAnnounced'),
-            $this->subject->getDate()
-        );
+        self::assertSame('', $this->subject->getDate());
     }
 
     /**
