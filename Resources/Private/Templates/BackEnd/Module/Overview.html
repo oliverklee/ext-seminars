@@ -15,11 +15,7 @@
         </f:if>
 
         <f:if condition="{permissions.readAccessToEvents}">
-            <div class="row">
-                <h1 class="col-auto me-auto">
-                    <f:translate key="backEndModule.heading.events"/>
-                </h1>
-            </div>
+            <f:render partial="BackEnd/EventListHeader" arguments="{_all}"/>
 
             <f:render partial="BackEnd/SearchForm" arguments="{_all}"/>
 
