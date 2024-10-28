@@ -17,6 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -58,6 +59,11 @@ final class RegistrationControllerTest extends UnitTestCase
     private $eventRepositoryMock;
 
     /**
+     * @var PageRenderer&MockObject
+     */
+    private $pageRendererMock;
+
+    /**
      * @var EventStatisticsCalculator&MockObject
      */
     private $eventStatisticsCalculatorMock;
@@ -83,6 +89,8 @@ final class RegistrationControllerTest extends UnitTestCase
 
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
+        $this->pageRendererMock = $this->createMock(PageRenderer::class);
+
         $this->languageServiceMock = $this->createMock(LanguageService::class);
         $GLOBALS['LANG'] = $this->languageServiceMock;
 
@@ -94,7 +102,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             RegistrationController::class,
             $methodsToMock,
-            [$this->registrationRepositoryMock, $this->eventRepositoryMock]
+            [$this->registrationRepositoryMock, $this->eventRepositoryMock, $this->pageRendererMock]
         );
         $this->subject = $subject;
 
@@ -426,6 +434,22 @@ final class RegistrationControllerTest extends UnitTestCase
             ->with($eventUid)->willReturn($waitingListRegistrations);
         $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([self::anything()], [$waitingListRegistrations]);
+
+        $this->subject->showForEventAction($eventUid);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionLoadsJavaScriptModule(): void
+    {
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
+
+        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+            ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->showForEventAction($eventUid);
     }

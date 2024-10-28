@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -45,6 +46,11 @@ class EventController extends ActionController
     private $eventStatisticsCalculator;
 
     /**
+     * @var PageRenderer
+     */
+    private $pageRenderer;
+
+    /**
      * @var LanguageService
      */
     private $languageService;
@@ -52,11 +58,14 @@ class EventController extends ActionController
     public function __construct(
         EventRepository $eventRepository,
         Permissions $permissions,
-        EventStatisticsCalculator $eventStatisticsCalculator
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        PageRenderer $pageRenderer
     ) {
         $this->eventRepository = $eventRepository;
         $this->permissions = $permissions;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->pageRenderer = $pageRenderer;
+
         $languageService = $GLOBALS['LANG'] ?? null;
         \assert($languageService instanceof LanguageService);
         $this->languageService = $languageService;
@@ -145,6 +154,8 @@ class EventController extends ActionController
         $this->view->assign('events', $events);
 
         $this->view->assign('searchTerm', \trim($searchTerm));
+
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
     }
 
     /**

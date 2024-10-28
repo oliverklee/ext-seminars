@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Show a confirmation dialog when deleting a record in the BE module (#3852)
 - Add button in the BE module to create an event (#3846)
 
 ### Changed

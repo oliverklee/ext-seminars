@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
@@ -51,6 +52,11 @@ final class ModuleControllerTest extends UnitTestCase
     private $registrationRepositoryMock;
 
     /**
+     * @var PageRenderer&MockObject
+     */
+    private $pageRendererMock;
+
+    /**
      * @var EventStatisticsCalculator&MockObject
      */
     private $eventStatisticsCalculatorMock;
@@ -61,6 +67,7 @@ final class ModuleControllerTest extends UnitTestCase
 
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->registrationRepositoryMock = $this->createMock(RegistrationRepository::class);
+        $this->pageRendererMock = $this->createMock(PageRenderer::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         if ((new Typo3Version())->getMajorVersion() < 12) {
@@ -70,7 +77,7 @@ final class ModuleControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             ModuleController::class,
             $methodsToMock,
-            [$this->eventRepositoryMock, $this->registrationRepositoryMock]
+            [$this->eventRepositoryMock, $this->registrationRepositoryMock, $this->pageRendererMock]
         );
         $this->subject = $subject;
 
@@ -231,6 +238,17 @@ final class ModuleControllerTest extends UnitTestCase
                 ['events', self::anything()],
                 ['numberOfRegistrations', $numberOfRegistrations]
             );
+
+        $this->subject->overviewAction();
+    }
+
+    /**
+     * @test
+     */
+    public function overviewActionLoadsJavaScriptModule(): void
+    {
+        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+            ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->overviewAction();
     }

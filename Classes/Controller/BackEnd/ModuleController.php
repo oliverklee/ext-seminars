@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -27,10 +28,19 @@ class ModuleController extends ActionController
      */
     private $registrationRepository;
 
-    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
-    {
+    /**
+     * @var PageRenderer
+     */
+    private $pageRenderer;
+
+    public function __construct(
+        EventRepository $eventRepository,
+        RegistrationRepository $registrationRepository,
+        PageRenderer $pageRenderer
+    ) {
         $this->eventRepository = $eventRepository;
         $this->registrationRepository = $registrationRepository;
+        $this->pageRenderer = $pageRenderer;
     }
 
     public function overviewAction(): void
@@ -50,5 +60,7 @@ class ModuleController extends ActionController
             'numberOfRegistrations',
             $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
         );
+
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
     }
 }
