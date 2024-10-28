@@ -29,7 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require Fluid >= 2.7.4 (#3554)
 - Require TYPO3 >= 11.5.37 (#3510)
 - Allow `psr/http-message` 2.x (#3507)
-- Require Emogrifier >= 7.2.0 (#3506)
+- Require Emogrifier >= 7.3.0 (#3506, #3850)
 - Require feuserextrafields >= 6.3.0 (#3505)
 - Drop the `ext-pdo` dependency (#3504)
 - Use short class names in type annotations (#2876)
