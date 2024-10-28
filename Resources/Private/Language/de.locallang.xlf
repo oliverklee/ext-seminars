@@ -1882,9 +1882,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Name</source>
         <target state="final">Name</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.createEvent" resname="backEndModule.action.createEvent">
+      <trans-unit id="backEndModule.action.createEvent" resname="backEndModule.action.createEvent" approved="yes">
         <source>Create event</source>
-        <target state="needs-translation">Create event</target>
+        <target state="final">Veranstaltung erstellen</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.edit" resname="backEndModule.action.edit" approved="yes">
         <source>Edit record</source>
