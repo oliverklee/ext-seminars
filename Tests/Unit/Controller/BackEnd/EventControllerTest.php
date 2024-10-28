@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -58,6 +59,11 @@ final class EventControllerTest extends UnitTestCase
     private EventStatisticsCalculator $eventStatisticsCalculatorMock;
 
     /**
+     * @var PageRenderer&MockObject
+     */
+    private PageRenderer $pageRendererMock;
+
+    /**
      * @var CsvDownloader&MockObject
      */
     private CsvDownloader $csvDownloaderMock;
@@ -74,6 +80,7 @@ final class EventControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->pageRendererMock = $this->createMock(PageRenderer::class);
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         /** @var EventController&AccessibleObjectInterface&MockObject $subject */
@@ -85,6 +92,7 @@ final class EventControllerTest extends UnitTestCase
                 $this->eventRepositoryMock,
                 $this->permissionsMock,
                 $this->eventStatisticsCalculatorMock,
+                $this->pageRendererMock,
             ]
         );
         $this->subject = $subject;
@@ -351,6 +359,17 @@ final class EventControllerTest extends UnitTestCase
             );
 
         $this->subject->searchAction(1, $searchTerm);
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionLoadsJavaScriptModule(): void
+    {
+        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+            ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
+
+        $this->subject->searchAction(1, 'specatacular event');
     }
 
     /**

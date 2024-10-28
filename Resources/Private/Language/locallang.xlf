@@ -1444,6 +1444,30 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.action.search" resname="backEndModule.action.search">
 				<source>Search</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteEvent.title" resname="backEndModule.confirm.deleteEvent.title">
+				<source>Delete event</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteEvent.content" resname="backEndModule.confirm.deleteEvent.content">
+				<source>Do you really want to delete this event?</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteEvent.cancel" resname="backEndModule.confirm.deleteEvent.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteEvent.okay" resname="backEndModule.confirm.deleteEvent.okay">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteRegistration.title" resname="backEndModule.confirm.deleteRegistration.title">
+				<source>Delete registration</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteRegistration.content" resname="backEndModule.confirm.deleteRegistration.content">
+				<source>Do you really want to delete this registration?</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteRegistration.cancel" resname="backEndModule.confirm.deleteRegistration.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.confirm.deleteRegistration.okay" resname="backEndModule.confirm.deleteRegistration.okay">
+				<source>Delete</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.search.label" resname="backEndModule.search.label">
 				<source>Search events</source>
 			</trans-unit>

@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -42,18 +43,22 @@ class RegistrationController extends ActionController
 
     private Permissions $permissions;
 
+    private PageRenderer $pageRenderer;
+
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
         RegistrationRepository $registrationRepository,
         EventRepository $eventRepository,
         EventStatisticsCalculator $eventStatisticsCalculator,
-        Permissions $permissions
+        Permissions $permissions,
+        PageRenderer $pageRenderer
     ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
         $this->permissions = $permissions;
+        $this->pageRenderer = $pageRenderer;
 
         $languageService = $GLOBALS['LANG'] ?? null;
         \assert($languageService instanceof LanguageService);
@@ -87,6 +92,8 @@ class RegistrationController extends ActionController
             $this->registrationRepository->enrichWithRawData($waitingListRegistrations);
             $this->view->assign('waitingListRegistrations', $waitingListRegistrations);
         }
+
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setContent($this->view->render());
