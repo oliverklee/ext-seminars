@@ -1227,6 +1227,7 @@ This event now has been confirmed.</target>
         <source>Time</source>
         <target state="final">Tijd</target>
       </trans-unit>
+      <!-- @deprecated will be removed in #3802 in seminars 6.0 -->
       <trans-unit id="label_timeslot_entry_date" resname="label_timeslot_entry_date" approved="yes">
         <source>Entry date</source>
         <target state="final">Entry datum</target>
@@ -1878,6 +1879,10 @@ This event now has been confirmed.</target>
       <trans-unit id="backEndModule.events.property.name" resname="backEndModule.events.property.name">
         <source>Name</source>
         <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.action.createEvent" resname="backEndModule.action.createEvent">
+        <source>Create event</source>
+        <target state="needs-translation">Create event</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.edit" resname="backEndModule.action.edit" approved="yes">
         <source>Edit record</source>
