@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:layout name="BackEndModule"/>
@@ -9,6 +10,7 @@
 
     <f:section name="Content">
         <f:variable name="propertyLabelPrefix" value="backEndModule.events.property"/>
+        <f:variable name="tableName" value="tx_seminars_seminars"/>
 
         <f:if condition="{pageUid} <= 0">
             <f:render partial="BackEnd/FlashMessage" arguments="{severity: 'info', messageBodyKey: 'selectFolder'}"/>
@@ -29,6 +31,14 @@
                             <core:icon identifier="actions-document-export-csv"/>
                             <f:translate key="backEndModule.action.csvDownload"/>
                         </f:link.action>
+                    </f:if>
+                </div>
+                <div class="col-auto">
+                    <f:if condition="{permissions.writeAccessToEvents}">
+                        <be:link.newRecord table="{tableName}" pid="{pageUid}" class="btn btn-default btn-sm">
+                            <core:icon identifier="actions-plus"/>
+                            <f:translate key="backEndModule.action.createEvent"/>
+                        </be:link.newRecord>
                     </f:if>
                 </div>
             </div>

@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:variable name="tableName" value="tx_seminars_seminars"/>
+
+    <div class="row">
+        <h1 class="col-auto me-auto">
+            <f:translate key="backEndModule.heading.events"/>
+        </h1>
+        <div class="col-auto">
+            <f:if condition="{permissions.writeAccessToEvents}">
+                <be:link.newRecord table="{tableName}" pid="{pageUid}" class="btn btn-default btn-sm">
+                    <core:icon identifier="actions-plus"/>
+                    <f:translate key="backEndModule.action.createEvent"/>
+                </be:link.newRecord>
+            </f:if>
+        </div>
+    </div>
+</html>

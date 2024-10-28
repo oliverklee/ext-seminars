@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add button in the BE module to create an event (#3846)
+
 ### Changed
 
 ### Deprecated
