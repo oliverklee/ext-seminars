@@ -1399,6 +1399,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.events.property.name" resname="backEndModule.events.property.name">
 				<source>Name</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.createEvent" resname="backEndModule.action.createEvent">
+				<source>Create event</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.edit" resname="backEndModule.action.edit">
 				<source>Edit record</source>
 			</trans-unit>
