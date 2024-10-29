@@ -7,18 +7,24 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Show a confirmation dialog when deleting a record in the BE module (#3852)
-- Add button in the BE module to create an event (#3846)
-
 ### Changed
 
 ### Deprecated
 
-- Deprecate time slot entry dates (#3842)
-
 ### Removed
 
 ### Fixed
+
+## 5.8.0: Usability features for the BE module
+
+### Added
+
+- Show a confirmation dialog when deleting a record in the BE module (#3852)
+- Add button in the BE module to create an event (#3846)
+
+### Deprecated
+
+- Deprecate time slot entry dates (#3842)
 
 ## 5.7.1: Bug fixes
 
