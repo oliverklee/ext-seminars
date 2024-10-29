@@ -10,6 +10,7 @@ use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Service\EventStatisticsCalculator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -29,18 +30,22 @@ class ModuleController extends ActionController
 
     private Permissions $permissions;
 
+    private PageRenderer $pageRenderer;
+
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
         EventRepository $eventRepository,
         RegistrationRepository $registrationRepository,
         EventStatisticsCalculator $eventStatisticsCalculator,
-        Permissions $permissions
+        Permissions $permissions,
+        PageRenderer $pageRenderer
     ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->eventRepository = $eventRepository;
         $this->registrationRepository = $registrationRepository;
         $this->eventStatisticsCalculator = $eventStatisticsCalculator;
         $this->permissions = $permissions;
+        $this->pageRenderer = $pageRenderer;
     }
 
     public function overviewAction(): ResponseInterface
@@ -60,6 +65,8 @@ class ModuleController extends ActionController
             'numberOfRegistrations',
             $this->registrationRepository->countRegularRegistrationsByPageUid($pageUid)
         );
+
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setContent($this->view->render());

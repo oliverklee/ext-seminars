@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -51,6 +52,11 @@ final class RegistrationControllerTest extends UnitTestCase
      * @var Permissions&MockObject
      */
     private Permissions $permissionsMock;
+
+    /**
+     * @var PageRenderer&MockObject
+     */
+    private PageRenderer $pageRendererMock;
 
     /**
      * @var RegistrationRepository&MockObject
@@ -85,6 +91,7 @@ final class RegistrationControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
+        $this->pageRendererMock = $this->createMock(PageRenderer::class);
 
         $methodsToMock = ['addFlashMessage', 'htmlResponse', 'redirect', 'redirectToUri'];
         /** @var RegistrationController&AccessibleObjectInterface&MockObject $subject */
@@ -97,6 +104,7 @@ final class RegistrationControllerTest extends UnitTestCase
                 $this->eventRepositoryMock,
                 $this->eventStatisticsCalculatorMock,
                 $this->permissionsMock,
+                $this->pageRendererMock,
             ]
         );
         $this->subject = $subject;
@@ -442,6 +450,22 @@ final class RegistrationControllerTest extends UnitTestCase
             ->with($eventUid)->willReturn($waitingListRegistrations);
         $this->registrationRepositoryMock->expects(self::exactly(2))->method('enrichWithRawData')
             ->withConsecutive([self::anything()], [$waitingListRegistrations]);
+
+        $this->subject->showForEventAction($eventUid);
+    }
+
+    /**
+     * @test
+     */
+    public function showForEventActionLoadsJavaScriptModule(): void
+    {
+        $eventUid = 5;
+        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $this->eventRepositoryMock->expects(self::once())
+            ->method('findOneByUidForBackend')->with($eventUid)->willReturn($event);
+
+        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+            ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
 
         $this->subject->showForEventAction($eventUid);
     }
