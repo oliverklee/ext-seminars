@@ -1942,37 +1942,37 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Search</source>
         <target state="final">Suchen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteEvent.title" resname="backEndModule.confirm.deleteEvent.title">
+      <trans-unit id="backEndModule.confirm.deleteEvent.title" resname="backEndModule.confirm.deleteEvent.title" approved="yes">
         <source>Delete event</source>
-        <target state="needs-translation">Delete event</target>
+        <target state="final">Veranstaltung löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteEvent.content" resname="backEndModule.confirm.deleteEvent.content">
+      <trans-unit id="backEndModule.confirm.deleteEvent.content" resname="backEndModule.confirm.deleteEvent.content" approved="yes">
         <source>Do you really want to delete this event?</source>
-        <target state="needs-translation">Do you really want to delete this event?</target>
+        <target state="final">Möchten Sie diese Veranstaltung wirklich löschen?</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteEvent.cancel" resname="backEndModule.confirm.deleteEvent.cancel">
+      <trans-unit id="backEndModule.confirm.deleteEvent.cancel" resname="backEndModule.confirm.deleteEvent.cancel" approved="yes">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="final">Abbrechen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteEvent.okay" resname="backEndModule.confirm.deleteEvent.okay">
+      <trans-unit id="backEndModule.confirm.deleteEvent.okay" resname="backEndModule.confirm.deleteEvent.okay" approved="yes">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="final">Löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteRegistration.title" resname="backEndModule.confirm.deleteRegistration.title">
+      <trans-unit id="backEndModule.confirm.deleteRegistration.title" resname="backEndModule.confirm.deleteRegistration.title" approved="yes">
         <source>Delete registration</source>
-        <target state="needs-translation">Delete registration</target>
+        <target state="final">Anmeldung löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteRegistration.content" resname="backEndModule.confirm.deleteRegistration.content">
+      <trans-unit id="backEndModule.confirm.deleteRegistration.content" resname="backEndModule.confirm.deleteRegistration.content" approved="yes">
         <source>Do you really want to delete this registration?</source>
-        <target state="needs-translation">Do you really want to delete this registration?</target>
+        <target state="final">Möchten Sie diese Anmeldung wirklich löschen?</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteRegistration.cancel" resname="backEndModule.confirm.deleteRegistration.cancel">
+      <trans-unit id="backEndModule.confirm.deleteRegistration.cancel" resname="backEndModule.confirm.deleteRegistration.cancel" approved="yes">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="final">Abbrechen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.confirm.deleteRegistration.okay" resname="backEndModule.confirm.deleteRegistration.okay">
+      <trans-unit id="backEndModule.confirm.deleteRegistration.okay" resname="backEndModule.confirm.deleteRegistration.okay" approved="yes">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="final">Löschen</target>
       </trans-unit>
       <trans-unit id="backEndModule.search.label" resname="backEndModule.search.label" approved="yes">
         <source>Search events</source>
