@@ -14,6 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Response;
@@ -52,6 +53,11 @@ final class EventControllerTest extends UnitTestCase
     private $eventStatisticsCalculatorMock;
 
     /**
+     * @var PageRenderer&MockObject
+     */
+    private $pageRendererMock;
+
+    /**
      * @var CsvDownloader&MockObject
      */
     private $csvDownloaderMock;
@@ -73,6 +79,7 @@ final class EventControllerTest extends UnitTestCase
         $this->eventRepositoryMock = $this->createMock(EventRepository::class);
         $this->permissionsMock = $this->createMock(Permissions::class);
         $this->eventStatisticsCalculatorMock = $this->createMock(EventStatisticsCalculator::class);
+        $this->pageRendererMock = $this->createMock(PageRenderer::class);
         $this->languageServiceMock = $this->createMock(LanguageService::class);
         $GLOBALS['LANG'] = $this->languageServiceMock;
 
@@ -84,7 +91,12 @@ final class EventControllerTest extends UnitTestCase
         $subject = $this->getAccessibleMock(
             EventController::class,
             $methodsToMock,
-            [$this->eventRepositoryMock, $this->permissionsMock, $this->eventStatisticsCalculatorMock]
+            [
+                $this->eventRepositoryMock,
+                $this->permissionsMock,
+                $this->eventStatisticsCalculatorMock,
+                $this->pageRendererMock,
+            ]
         );
         $this->subject = $subject;
 
@@ -398,6 +410,17 @@ final class EventControllerTest extends UnitTestCase
             );
 
         $this->subject->searchAction(1, $searchTerm);
+    }
+
+    /**
+     * @test
+     */
+    public function searchActionLoadsJavaScriptModule(): void
+    {
+        $this->pageRendererMock->expects(self::once())->method('loadRequireJsModule')
+            ->with('TYPO3/CMS/Seminars/BackEnd/DeleteConfirmation');
+
+        $this->subject->searchAction(1, 'specatacular event');
     }
 
     /**

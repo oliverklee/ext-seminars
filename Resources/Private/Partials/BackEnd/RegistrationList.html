@@ -24,6 +24,14 @@
             </tr>
         </thead>
         <tbody>
+            <f:variable name="confirmTitle"
+                        value="{f:translate(key: 'backEndModule.confirm.deleteRegistration.title')}"/>
+            <f:variable name="confirmContent"
+                        value="{f:translate(key: 'backEndModule.confirm.deleteRegistration.content')}"/>
+            <f:variable name="confirmCancel"
+                        value="{f:translate(key: 'backEndModule.confirm.deleteRegistration.cancel')}"/>
+            <f:variable name="confirmOkay" value="{f:translate(key: 'backEndModule.confirm.deleteRegistration.okay')}"/>
+
             <f:for each="{registrations}" as="registration">
                 <tr>
                     <td class="text-end text-right nowrap">
@@ -59,7 +67,10 @@
                                     <core:icon identifier="empty-empty"/>
                                 </span>
                                 <f:form controller="BackEnd\Registration" action="delete"
-                                        arguments="{registrationUid: registration.uid, eventUid: eventUid}">
+                                        arguments="{registrationUid: registration.uid, eventUid: eventUid}"
+                                        class="t3js-seminars-confirmation-modal-trigger"
+                                        data="{title: confirmTitle, content: confirmContent, button-close-text: confirmCancel, button-ok-text: confirmOkay}"
+                                    >
                                     <button type="submit" class="btn btn-default"
                                             title="{f:translate(key: '{actionLabelPrefix}.delete')}">
                                         <core:icon identifier="actions-delete"/>
