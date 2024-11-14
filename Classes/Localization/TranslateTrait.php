@@ -26,6 +26,6 @@ trait TranslateTrait
     {
         $label = LocalizationUtility::translate($key, 'seminars');
 
-        return \is_string($label) ? $label : $key;
+        return (\is_string($label) && $label !== '') ? $label : $key;
     }
 }
