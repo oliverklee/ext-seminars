@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid empty localized email subjects in some cases (#3867)
+
 ## 5.8.0: Usability features for the BE module
 
 ### Added
