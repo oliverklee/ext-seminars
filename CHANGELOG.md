@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Remove unneeded `resname` from the language files (#3872)
+
 ### Fixed
 
 - Avoid empty localized email subjects in some cases (#3867)

@@ -4,627 +4,627 @@
 		  product-name="seminars">
 		<header/>
 		<body>
-			<trans-unit id="moduleFunction.tx_seminars_modfunc1" resname="moduleFunction.tx_seminars_modfunc1">
+			<trans-unit id="moduleFunction.tx_seminars_modfunc1">
 				<source>Seminars</source>
 			</trans-unit>
-			<trans-unit id="LGL.hidden" resname="LGL.hidden">
+			<trans-unit id="LGL.hidden">
 				<source>Hide</source>
 			</trans-unit>
-			<trans-unit id="LGL.starttime" resname="LGL.starttime">
+			<trans-unit id="LGL.starttime">
 				<source>Start</source>
 			</trans-unit>
-			<trans-unit id="LGL.endtime" resname="LGL.endtime">
+			<trans-unit id="LGL.endtime">
 				<source>Stop</source>
 			</trans-unit>
-			<trans-unit id="LGL.telephone" resname="LGL.telephone">
+			<trans-unit id="LGL.telephone">
 				<source>Phone</source>
 			</trans-unit>
-			<trans-unit id="LGL.gender" resname="LGL.gender">
+			<trans-unit id="LGL.gender">
 				<source>Gender</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars" resname="tx_seminars_seminars">
+			<trans-unit id="tx_seminars_seminars">
 				<source>Seminars</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelGeneral" resname="tx_seminars_seminars.divLabelGeneral">
+			<trans-unit id="tx_seminars_seminars.divLabelGeneral">
 				<source>General</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uid" resname="tx_seminars_seminars.uid">
+			<trans-unit id="tx_seminars_seminars.uid">
 				<source>Event number</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type" resname="tx_seminars_seminars.object_type">
+			<trans-unit id="tx_seminars_seminars.object_type">
 				<source>Type</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.0" resname="tx_seminars_seminars.object_type.I.0">
+			<trans-unit id="tx_seminars_seminars.object_type.I.0">
 				<source>Single event</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.1" resname="tx_seminars_seminars.object_type.I.1">
+			<trans-unit id="tx_seminars_seminars.object_type.I.1">
 				<source>Topic for multiple events</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.2" resname="tx_seminars_seminars.object_type.I.2">
+			<trans-unit id="tx_seminars_seminars.object_type.I.2">
 				<source>Date for a topic</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.title" resname="tx_seminars_seminars.title">
+			<trans-unit id="tx_seminars_seminars.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.slug" resname="tx_seminars_seminars.slug">
+			<trans-unit id="tx_seminars_seminars.slug">
 				<source>URL segment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.subtitle" resname="tx_seminars_seminars.subtitle">
+			<trans-unit id="tx_seminars_seminars.subtitle">
 				<source>Subtitle</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.categories" resname="tx_seminars_seminars.categories">
+			<trans-unit id="tx_seminars_seminars.categories">
 				<source>Categories</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.teaser" resname="tx_seminars_seminars.teaser">
+			<trans-unit id="tx_seminars_seminars.teaser">
 				<source>Teaser text</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.description" resname="tx_seminars_seminars.description">
+			<trans-unit id="tx_seminars_seminars.description">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.topic" resname="tx_seminars_seminars.topic">
+			<trans-unit id="tx_seminars_seminars.topic">
 				<source>Topic</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_type" resname="tx_seminars_seminars.event_type">
+			<trans-unit id="tx_seminars_seminars.event_type">
 				<source>Event type</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date" resname="tx_seminars_seminars.date">
+			<trans-unit id="tx_seminars_seminars.date">
 				<source>Date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time" resname="tx_seminars_seminars.time">
+			<trans-unit id="tx_seminars_seminars.time">
 				<source>Time</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.language" resname="tx_seminars_seminars.language">
+			<trans-unit id="tx_seminars_seminars.language">
 				<source>Language</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.accreditation_number" resname="tx_seminars_seminars.accreditation_number">
+			<trans-unit id="tx_seminars_seminars.accreditation_number">
 				<source>Accreditation number</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.credit_points" resname="tx_seminars_seminars.credit_points">
+			<trans-unit id="tx_seminars_seminars.credit_points">
 				<source>Credit points</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.details_page" resname="tx_seminars_seminars.details_page">
+			<trans-unit id="tx_seminars_seminars.details_page">
 				<source>Page with the details view</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.additional_information" resname="tx_seminars_seminars.additional_information">
+			<trans-unit id="tx_seminars_seminars.additional_information">
 				<source>Additional information</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.checkboxes" resname="tx_seminars_seminars.checkboxes">
+			<trans-unit id="tx_seminars_seminars.checkboxes">
 				<source>Registration options with checkbox</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uses_terms_2" resname="tx_seminars_seminars.uses_terms_2">
+			<trans-unit id="tx_seminars_seminars.uses_terms_2">
 				<source>Display the travelling terms checkbox in the registration form</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.needs_registration" resname="tx_seminars_seminars.needs_registration">
+			<trans-unit id="tx_seminars_seminars.needs_registration">
 				<source>Needs registration</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations" resname="tx_seminars_seminars.allows_multiple_registrations">
+			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations">
 				<source>Allows multiple registrations from the same person</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled" resname="tx_seminars_seminars.cancelled">
+			<trans-unit id="tx_seminars_seminars.cancelled">
 				<source>Status</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_planned" resname="tx_seminars_seminars.cancelled_planned">
+			<trans-unit id="tx_seminars_seminars.cancelled_planned">
 				<source>planned</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_canceled" resname="tx_seminars_seminars.cancelled_canceled">
+			<trans-unit id="tx_seminars_seminars.cancelled_canceled">
 				<source>canceled</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_confirmed" resname="tx_seminars_seminars.cancelled_confirmed">
+			<trans-unit id="tx_seminars_seminars.cancelled_confirmed">
 				<source>confirmed</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation" resname="tx_seminars_seminars.automatic_confirmation_cancelation">
+			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation">
 				<source>Set the status automatically</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.notes" resname="tx_seminars_seminars.notes">
+			<trans-unit id="tx_seminars_seminars.notes">
 				<source>Internal Notes</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attached_files" resname="tx_seminars_seminars.attached_files">
+			<trans-unit id="tx_seminars_seminars.attached_files">
 				<source>Attached files</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelSpeakers" resname="tx_seminars_seminars.divLabelSpeakers">
+			<trans-unit id="tx_seminars_seminars.divLabelSpeakers">
 				<source>Speakers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.speakers" resname="tx_seminars_seminars.speakers">
+			<trans-unit id="tx_seminars_seminars.speakers">
 				<source>Speakers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.partners" resname="tx_seminars_seminars.partners">
+			<trans-unit id="tx_seminars_seminars.partners">
 				<source>Partners</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.tutors" resname="tx_seminars_seminars.tutors">
+			<trans-unit id="tx_seminars_seminars.tutors">
 				<source>Tutors</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.leaders" resname="tx_seminars_seminars.leaders">
+			<trans-unit id="tx_seminars_seminars.leaders">
 				<source>Leaders</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelOrganizers" resname="tx_seminars_seminars.divLabelOrganizers">
+			<trans-unit id="tx_seminars_seminars.divLabelOrganizers">
 				<source>Organizer</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers" resname="tx_seminars_seminars.organizers">
+			<trans-unit id="tx_seminars_seminars.organizers">
 				<source>Organizers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizing_partners" resname="tx_seminars_seminars.organizing_partners">
+			<trans-unit id="tx_seminars_seminars.organizing_partners">
 				<source>Organizing Partners</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent" resname="tx_seminars_seminars.event_takes_place_reminder_sent">
+			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent">
 				<source>Organizers have been reminded about this event being about to take place</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent" resname="tx_seminars_seminars.cancelation_deadline_reminder_sent">
+			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent">
 				<source>Organizers have been notified that the cancelation deadline has just passed</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime" resname="tx_seminars_seminars.divLabelPlaceTime">
+			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime">
 				<source>Place/Time</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format" resname="tx_seminars_seminars.event_format">
+			<trans-unit id="tx_seminars_seminars.event_format">
 				<source>Event format</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.on-site" resname="tx_seminars_seminars.format.event_on-site">
+			<trans-unit id="tx_seminars_seminars.event_format.on-site">
 				<source>on-site</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.hybrid" resname="tx_seminars_seminars.format.event_hybrid">
+			<trans-unit id="tx_seminars_seminars.event_format.hybrid">
 				<source>hybrid</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_format.online" resname="tx_seminars_seminars.event_format.online">
+			<trans-unit id="tx_seminars_seminars.event_format.online">
 				<source>online</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.webinar_url" resname="tx_seminars_seminars.webinar_url">
+			<trans-unit id="tx_seminars_seminars.webinar_url">
 				<source>Webinar URL</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date" resname="tx_seminars_seminars.begin_date">
+			<trans-unit id="tx_seminars_seminars.begin_date">
 				<source>Begin time and date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.end_date" resname="tx_seminars_seminars.end_date">
+			<trans-unit id="tx_seminars_seminars.end_date">
 				<source>End time and date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.timeslots" resname="tx_seminars_seminars.timeslots">
+			<trans-unit id="tx_seminars_seminars.timeslots">
 				<source>Time slots</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date_registration" resname="tx_seminars_seminars.begin_date_registration">
+			<trans-unit id="tx_seminars_seminars.begin_date_registration">
 				<source>Begin date for registration</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_registration" resname="tx_seminars_seminars.deadline_registration">
+			<trans-unit id="tx_seminars_seminars.deadline_registration">
 				<source>Registration deadline</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_early_bird" resname="tx_seminars_seminars.deadline_early_bird">
+			<trans-unit id="tx_seminars_seminars.deadline_early_bird">
 				<source>Early bird deadline</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_unregistration" resname="tx_seminars_seminars.deadline_unregistration">
+			<trans-unit id="tx_seminars_seminars.deadline_unregistration">
 				<source>Unregistration deadline</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.expiry" resname="tx_seminars_seminars.expiry">
+			<trans-unit id="tx_seminars_seminars.expiry">
 				<source>License expiry</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.place" resname="tx_seminars_seminars.place">
+			<trans-unit id="tx_seminars_seminars.place">
 				<source>Place</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.room" resname="tx_seminars_seminars.room">
+			<trans-unit id="tx_seminars_seminars.room">
 				<source>Room</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelLodging" resname="tx_seminars_seminars.divLabelLodging">
+			<trans-unit id="tx_seminars_seminars.divLabelLodging">
 				<source>Lodging/Food</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.lodgings" resname="tx_seminars_seminars.lodgings">
+			<trans-unit id="tx_seminars_seminars.lodgings">
 				<source>Available lodgings</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.foods" resname="tx_seminars_seminars.foods">
+			<trans-unit id="tx_seminars_seminars.foods">
 				<source>Available foods</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAttendees" resname="tx_seminars_seminars.divLabelAttendees">
+			<trans-unit id="tx_seminars_seminars.divLabelAttendees">
 				<source>Attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_min" resname="tx_seminars_seminars.attendees_min">
+			<trans-unit id="tx_seminars_seminars.attendees_min">
 				<source>Minimal number of attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_max" resname="tx_seminars_seminars.attendees_max">
+			<trans-unit id="tx_seminars_seminars.attendees_max">
 				<source>Maximal number of attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.queue_size" resname="tx_seminars_seminars.queue_size">
+			<trans-unit id="tx_seminars_seminars.queue_size">
 				<source>Registration queue</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.offline_attendees" resname="tx_seminars_seminars.offline_attendees">
+			<trans-unit id="tx_seminars_seminars.offline_attendees">
 				<source>Number of offline-registered attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" resname="tx_seminars_seminars.organizers_notified_about_minimum_reached">
+			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached">
 				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.mute_notification_emails" resname="tx_seminars_seminars.mute_notification_emails">
+			<trans-unit id="tx_seminars_seminars.mute_notification_emails">
 				<source>Mute the notification emails to the organizers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.target_groups" resname="tx_seminars_seminars.target_groups">
+			<trans-unit id="tx_seminars_seminars.target_groups">
 				<source>Target groups</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees" resname="tx_seminars_seminars.attendees">
+			<trans-unit id="tx_seminars_seminars.attendees">
 				<source>Current number of attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vacancies" resname="tx_seminars_seminars.vacancies">
+			<trans-unit id="tx_seminars_seminars.vacancies">
 				<source>Current number of vacancies</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.enough_attendees" resname="tx_seminars_seminars.enough_attendees">
+			<trans-unit id="tx_seminars_seminars.enough_attendees">
 				<source>Has enough registrations</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.is_full" resname="tx_seminars_seminars.is_full">
+			<trans-unit id="tx_seminars_seminars.is_full">
 				<source>Is full</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPayment" resname="tx_seminars_seminars.divLabelPayment">
+			<trans-unit id="tx_seminars_seminars.divLabelPayment">
 				<source>Payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular" resname="tx_seminars_seminars.price_regular">
+			<trans-unit id="tx_seminars_seminars.price_regular">
 				<source>Regular price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_early" resname="tx_seminars_seminars.price_regular_early">
+			<trans-unit id="tx_seminars_seminars.price_regular_early">
 				<source>Regular price (early bird)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special" resname="tx_seminars_seminars.price_special">
+			<trans-unit id="tx_seminars_seminars.price_special">
 				<source>Special price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_early" resname="tx_seminars_seminars.price_special_early">
+			<trans-unit id="tx_seminars_seminars.price_special_early">
 				<source>Special price (early bird)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.payment_methods" resname="tx_seminars_seminars.payment_methods">
+			<trans-unit id="tx_seminars_seminars.payment_methods">
 				<source>Allowed methods of payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAccess" resname="tx_seminars_seminars.divLabelAccess">
+			<trans-unit id="tx_seminars_seminars.divLabelAccess">
 				<source>Access</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vips" resname="tx_seminars_seminars.vips">
+			<trans-unit id="tx_seminars_seminars.vips">
 				<source>Managers of this event</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.image" resname="tx_seminars_seminars.image">
+			<trans-unit id="tx_seminars_seminars.image">
 				<source>Image</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.requirements" resname="tx_seminars_seminars.requirements">
+			<trans-unit id="tx_seminars_seminars.requirements">
 				<source>Requirements</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.dependencies" resname="tx_seminars_seminars.dependencies">
+			<trans-unit id="tx_seminars_seminars.dependencies">
 				<source>Requirement for</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_on_request" resname="tx_seminars_seminars.price_on_request">
+			<trans-unit id="tx_seminars_seminars.price_on_request">
 				<source>Price on request</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest" resname="tx_seminars_seminars.date_of_last_registration_digest">
+			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest">
 				<source>Date of last registration digest email</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.additional_email_text" resname="tx_seminars_seminars.additional_email_text">
+			<trans-unit id="tx_seminars_seminars.additional_email_text">
 				<source>Additional text for the thank-you email to the attendees</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers" resname="tx_seminars_speakers">
+			<trans-unit id="tx_seminars_speakers">
 				<source>Speakers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.title" resname="tx_seminars_speakers.title">
+			<trans-unit id="tx_seminars_speakers.title">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.organization" resname="tx_seminars_speakers.organization">
+			<trans-unit id="tx_seminars_speakers.organization">
 				<source>Organization</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.homepage" resname="tx_seminars_speakers.homepage">
+			<trans-unit id="tx_seminars_speakers.homepage">
 				<source>Homepage</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.description" resname="tx_seminars_speakers.description">
+			<trans-unit id="tx_seminars_speakers.description">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.image" resname="tx_seminars_speakers.image">
+			<trans-unit id="tx_seminars_speakers.image">
 				<source>Image</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.skills" resname="tx_seminars_speakers.skills">
+			<trans-unit id="tx_seminars_speakers.skills">
 				<source>Skills</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.notes" resname="tx_seminars_speakers.notes">
+			<trans-unit id="tx_seminars_speakers.notes">
 				<source>Internal Notes</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.address" resname="tx_seminars_speakers.address">
+			<trans-unit id="tx_seminars_speakers.address">
 				<source>Address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_work" resname="tx_seminars_speakers.phone_work">
+			<trans-unit id="tx_seminars_speakers.phone_work">
 				<source>Phone number (work)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_home" resname="tx_seminars_speakers.phone_home">
+			<trans-unit id="tx_seminars_speakers.phone_home">
 				<source>Phone numer (home)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_mobile" resname="tx_seminars_speakers.phone_mobile">
+			<trans-unit id="tx_seminars_speakers.phone_mobile">
 				<source>Phone number (mobile)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.email" resname="tx_seminars_speakers.email">
+			<trans-unit id="tx_seminars_speakers.email">
 				<source>Email address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.cancelation_period" resname="tx_seminars_speakers.cancelation_period">
+			<trans-unit id="tx_seminars_speakers.cancelation_period">
 				<source>Cancelation period (in days)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances" resname="tx_seminars_attendances">
+			<trans-unit id="tx_seminars_attendances">
 				<source>Attendances</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelOverview" resname="tx_seminars_attendances.divLabelOverview">
+			<trans-unit id="tx_seminars_attendances.divLabelOverview">
 				<source>Overview</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation" resname="tx_seminars_attendances.divLabelBookingInformation">
+			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation">
 				<source>Booking Information</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments" resname="tx_seminars_attendances.divLabelRegistrationComments">
+			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments">
 				<source>Registration Comments</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation" resname="tx_seminars_attendances.divLabelPaymentInformation">
+			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation">
 				<source>Payment Information</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress" resname="tx_seminars_attendances.divLabelBillingAddress">
+			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress">
 				<source>Billing Address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.uid" resname="tx_seminars_attendances.uid">
+			<trans-unit id="tx_seminars_attendances.uid">
 				<source>Ticket ID</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.crdate" resname="tx_seminars_attendances.crdate">
+			<trans-unit id="tx_seminars_attendances.crdate">
 				<source>Registration date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.title" resname="tx_seminars_attendances.title">
+			<trans-unit id="tx_seminars_attendances.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.user" resname="tx_seminars_attendances.user">
+			<trans-unit id="tx_seminars_attendances.user">
 				<source>Front-end User</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seminar" resname="tx_seminars_attendances.seminar">
+			<trans-unit id="tx_seminars_attendances.seminar">
 				<source>Seminar</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue" resname="tx_seminars_attendances.registration_queue">
+			<trans-unit id="tx_seminars_attendances.registration_queue">
 				<source>Is on the registration queue</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price" resname="tx_seminars_attendances.price">
+			<trans-unit id="tx_seminars_attendances.price">
 				<source>Price to pay</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code" resname="tx_seminars_attendances.price_code">
+			<trans-unit id="tx_seminars_attendances.price_code">
 				<source>Price code</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.standard" resname="tx_seminars_attendances.price_code.standard">
+			<trans-unit id="tx_seminars_attendances.price_code.standard">
 				<source>Regular price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.earlyBird" resname="tx_seminars_attendances.price_code.earlyBird">
+			<trans-unit id="tx_seminars_attendances.price_code.earlyBird">
 				<source>Early-bird price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.special" resname="tx_seminars_attendances.price_code.special">
+			<trans-unit id="tx_seminars_attendances.price_code.special">
 				<source>Special price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird" resname="tx_seminars_attendances.price_code.specialEarlyBird">
+			<trans-unit id="tx_seminars_attendances.price_code.specialEarlyBird">
 				<source>Early-bird special price</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.total_price" resname="tx_seminars_attendances.total_price">
+			<trans-unit id="tx_seminars_attendances.total_price">
 				<source>Total price for this attendance</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.datepaid" resname="tx_seminars_attendances.datepaid">
+			<trans-unit id="tx_seminars_attendances.datepaid">
 				<source>Date of payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.method_of_payment" resname="tx_seminars_attendances.method_of_payment">
+			<trans-unit id="tx_seminars_attendances.method_of_payment">
 				<source>Method of payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.separate_billing_address" resname="tx_seminars_attendances.separate_billing_address">
+			<trans-unit id="tx_seminars_attendances.separate_billing_address">
 				<source>Separate billing address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.company" resname="tx_seminars_attendances.company">
+			<trans-unit id="tx_seminars_attendances.company">
 				<source>Company</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.name" resname="tx_seminars_attendances.name">
+			<trans-unit id="tx_seminars_attendances.name">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender" resname="tx_seminars_attendances.gender">
+			<trans-unit id="tx_seminars_attendances.gender">
 				<source>Gender</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.0" resname="tx_seminars_attendances.gender.I.0">
+			<trans-unit id="tx_seminars_attendances.gender.I.0">
 				<source>Mr.</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.1" resname="tx_seminars_attendances.gender.I.1">
+			<trans-unit id="tx_seminars_attendances.gender.I.1">
 				<source>Ms.</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.2" resname="tx_seminars_attendances.gender.I.2">
+			<trans-unit id="tx_seminars_attendances.gender.I.2">
 				<source>diverse</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.address" resname="tx_seminars_attendances.address">
+			<trans-unit id="tx_seminars_attendances.address">
 				<source>Address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.zip" resname="tx_seminars_attendances.zip">
+			<trans-unit id="tx_seminars_attendances.zip">
 				<source>ZIP</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.city" resname="tx_seminars_attendances.city">
+			<trans-unit id="tx_seminars_attendances.city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.country" resname="tx_seminars_attendances.country">
+			<trans-unit id="tx_seminars_attendances.country">
 				<source>Country</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.telephone" resname="tx_seminars_attendances.telephone">
+			<trans-unit id="tx_seminars_attendances.telephone">
 				<source>Telephone</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.email" resname="tx_seminars_attendances.email">
+			<trans-unit id="tx_seminars_attendances.email">
 				<source>Email</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.been_there" resname="tx_seminars_attendances.been_there">
+			<trans-unit id="tx_seminars_attendances.been_there">
 				<source>Has attended</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.checkboxes" resname="tx_seminars_attendances.checkboxes">
+			<trans-unit id="tx_seminars_attendances.checkboxes">
 				<source>Selected options</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.interests" resname="tx_seminars_attendances.interests">
+			<trans-unit id="tx_seminars_attendances.interests">
 				<source>Special interests</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.expectations" resname="tx_seminars_attendances.expectations">
+			<trans-unit id="tx_seminars_attendances.expectations">
 				<source>Expectations for the event</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.background_knowledge" resname="tx_seminars_attendances.background_knowledge">
+			<trans-unit id="tx_seminars_attendances.background_knowledge">
 				<source>Background knowledge</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.lodgings" resname="tx_seminars_attendances.lodgings">
+			<trans-unit id="tx_seminars_attendances.lodgings">
 				<source>Selected lodging options</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.accommodation" resname="tx_seminars_attendances.accommodation">
+			<trans-unit id="tx_seminars_attendances.accommodation">
 				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.foods" resname="tx_seminars_attendances.foods">
+			<trans-unit id="tx_seminars_attendances.foods">
 				<source>Selected food options</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.food" resname="tx_seminars_attendances.food">
+			<trans-unit id="tx_seminars_attendances.food">
 				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.known_from" resname="tx_seminars_attendances.known_from">
+			<trans-unit id="tx_seminars_attendances.known_from">
 				<source>How have you heard of this event?</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.notes" resname="tx_seminars_attendances.notes">
+			<trans-unit id="tx_seminars_attendances.notes">
 				<source>Additional notes</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registered_themselves" resname="tx_seminars_attendances.registered_themselves">
+			<trans-unit id="tx_seminars_attendances.registered_themselves">
 				<source>Has signed up themselves</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seats" resname="tx_seminars_attendances.seats">
+			<trans-unit id="tx_seminars_attendances.seats">
 				<source>Number of seats</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendees_names" resname="tx_seminars_attendances.attendees_names">
+			<trans-unit id="tx_seminars_attendances.attendees_names">
 				<source>Additional registered persons</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.additional_persons" resname="tx_seminars_attendances.additional_persons">
+			<trans-unit id="tx_seminars_attendances.additional_persons">
 				<source>Additional registered persons</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.kids" resname="tx_seminars_attendances.kids">
+			<trans-unit id="tx_seminars_attendances.kids">
 				<source>Number of kids</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites" resname="tx_seminars_sites">
+			<trans-unit id="tx_seminars_sites">
 				<source>Seminar Sites</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.title" resname="tx_seminars_sites.title">
+			<trans-unit id="tx_seminars_sites.title">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.address" resname="tx_seminars_sites.address">
+			<trans-unit id="tx_seminars_sites.address">
 				<source>Address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.zip" resname="tx_seminars_sites.zip">
+			<trans-unit id="tx_seminars_sites.zip">
 				<source>ZIP code</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.city" resname="tx_seminars_sites.city">
+			<trans-unit id="tx_seminars_sites.city">
 				<source>City</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.country" resname="tx_seminars_sites.country">
+			<trans-unit id="tx_seminars_sites.country">
 				<source>Country</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.homepage" resname="tx_seminars_sites.homepage">
+			<trans-unit id="tx_seminars_sites.homepage">
 				<source>Homepage</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.directions" resname="tx_seminars_sites.directions">
+			<trans-unit id="tx_seminars_sites.directions">
 				<source>Directions</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.notes" resname="tx_seminars_sites.notes">
+			<trans-unit id="tx_seminars_sites.notes">
 				<source>Internal Notes</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.contact_person" resname="tx_seminars_sites.contact_person">
+			<trans-unit id="tx_seminars_sites.contact_person">
 				<source>Contact person</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.email_address" resname="tx_seminars_sites.email_address">
+			<trans-unit id="tx_seminars_sites.email_address">
 				<source>Email address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.phone_number" resname="tx_seminars_sites.phone_number">
+			<trans-unit id="tx_seminars_sites.phone_number">
 				<source>Phone number</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers" resname="tx_seminars_organizers">
+			<trans-unit id="tx_seminars_organizers">
 				<source>Organizers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.title" resname="tx_seminars_organizers.title">
+			<trans-unit id="tx_seminars_organizers.title">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.description" resname="tx_seminars_organizers.description">
+			<trans-unit id="tx_seminars_organizers.description">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.homepage" resname="tx_seminars_organizers.homepage">
+			<trans-unit id="tx_seminars_organizers.homepage">
 				<source>Homepage</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email" resname="tx_seminars_organizers.email">
+			<trans-unit id="tx_seminars_organizers.email">
 				<source>Email address</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email_footer" resname="tx_seminars_organizers.email_footer">
+			<trans-unit id="tx_seminars_organizers.email_footer">
 				<source>Footer text to be appended to all emails from this organizer</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods" resname="tx_seminars_payment_methods">
+			<trans-unit id="tx_seminars_payment_methods">
 				<source>Methods of payment</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.title" resname="tx_seminars_payment_methods.title">
+			<trans-unit id="tx_seminars_payment_methods.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.description" resname="tx_seminars_payment_methods.description">
+			<trans-unit id="tx_seminars_payment_methods.description">
 				<source>Detailed description for emails</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types" resname="tx_seminars_event_types">
+			<trans-unit id="tx_seminars_event_types">
 				<source>Event types</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.title" resname="tx_seminars_event_types.title">
+			<trans-unit id="tx_seminars_event_types.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.single_view_page" resname="tx_seminars_event_types.single_view_page">
+			<trans-unit id="tx_seminars_event_types.single_view_page">
 				<source>Single view page for events of this type</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes" resname="tx_seminars_checkboxes">
+			<trans-unit id="tx_seminars_checkboxes">
 				<source>Registration options with checkbox</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes.title" resname="tx_seminars_checkboxes.title">
+			<trans-unit id="tx_seminars_checkboxes.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings" resname="tx_seminars_lodgings">
+			<trans-unit id="tx_seminars_lodgings">
 				<source>Lodging options</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings.title" resname="tx_seminars_lodgings.title">
+			<trans-unit id="tx_seminars_lodgings.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_foods" resname="tx_seminars_foods">
+			<trans-unit id="tx_seminars_foods">
 				<source>Food options</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_foods.title" resname="tx_seminars_foods.title">
+			<trans-unit id="tx_seminars_foods.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots" resname="tx_seminars_timeslots">
+			<trans-unit id="tx_seminars_timeslots">
 				<source>Time slots</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.begin_date" resname="tx_seminars_timeslots.begin_date">
+			<trans-unit id="tx_seminars_timeslots.begin_date">
 				<source>Begin date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.end_date" resname="tx_seminars_timeslots.end_date">
+			<trans-unit id="tx_seminars_timeslots.end_date">
 				<source>End date</source>
 			</trans-unit>
 			<!-- @deprecated will be removed in #3802 in seminars 6.0 -->
-			<trans-unit id="tx_seminars_timeslots.entry_date" resname="tx_seminars_timeslots.entry_date">
+			<trans-unit id="tx_seminars_timeslots.entry_date">
 				<source>Entry date</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.speakers" resname="tx_seminars_timeslots.speakers">
+			<trans-unit id="tx_seminars_timeslots.speakers">
 				<source>Speakers</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.place" resname="tx_seminars_timeslots.place">
+			<trans-unit id="tx_seminars_timeslots.place">
 				<source>Place</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.room" resname="tx_seminars_timeslots.room">
+			<trans-unit id="tx_seminars_timeslots.room">
 				<source>Room</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups" resname="tx_seminars_target_groups">
+			<trans-unit id="tx_seminars_target_groups">
 				<source>Target Groups</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.title" resname="tx_seminars_target_groups.title">
+			<trans-unit id="tx_seminars_target_groups.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.minimum_age" resname="tx_seminars_target_groups.minimum_age">
+			<trans-unit id="tx_seminars_target_groups.minimum_age">
 				<source>Minimum age</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.maximum_age" resname="tx_seminars_target_groups.maximum_age">
+			<trans-unit id="tx_seminars_target_groups.maximum_age">
 				<source>Maximum age</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories" resname="tx_seminars_categories">
+			<trans-unit id="tx_seminars_categories">
 				<source>Categories</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories.title" resname="tx_seminars_categories.title">
+			<trans-unit id="tx_seminars_categories.title">
 				<source>Title</source>
 			</trans-unit>
 			<!-- @deprecated will be removed in version 6.0.0 in #3370 -->
-			<trans-unit id="tx_seminars_categories.icon" resname="tx_seminars_categories.icon">
+			<trans-unit id="tx_seminars_categories.icon">
 				<source>Icon</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories.single_view_page" resname="tx_seminars_categories.single_view_page">
+			<trans-unit id="tx_seminars_categories.single_view_page">
 				<source>Single view page for events in this category</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_skills" resname="tx_seminars_skills">
+			<trans-unit id="tx_seminars_skills">
 				<source>Skills</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_skills.title" resname="tx_seminars_skills.title">
+			<trans-unit id="tx_seminars_skills.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tt_content.list_type_pi1" resname="tt_content.list_type_pi1">
+			<trans-unit id="tt_content.list_type_pi1">
 				<source>Seminar Manager</source>
 			</trans-unit>
-			<trans-unit id="owner_feuser" resname="owner_feuser">
+			<trans-unit id="owner_feuser">
 				<source>Front-end user who has created this record</source>
 			</trans-unit>
 		</body>
