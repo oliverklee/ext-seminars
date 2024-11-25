@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use modern string functions (#3579)
 - Upgrade to PHPUnit 9.x (#3325)
 - Require Fluid >= 2.7.4 (#3554)
-- Require TYPO3 >= 11.5.37 (#3510)
+- Require TYPO3 >= 11.5.40 (#3510, #3875)
 - Allow `psr/http-message` 2.x (#3507)
 - Require Emogrifier >= 7.3.0 (#3506, #3850)
 - Require feuserextrafields >= 6.3.0 (#3505)
