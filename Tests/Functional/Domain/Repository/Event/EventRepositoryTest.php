@@ -1829,7 +1829,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @deprecated #1324 will be removed in seminars 5.0
+     * @deprecated #1324 will be removed in seminars 6.0
      */
     public function duplicateViaDataHandlerForEventWithRegistrationsResetsRegistrationsCounterToZero(): void
     {
@@ -1846,7 +1846,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @deprecated #1324 will be removed in seminars 5.0
+     * @deprecated #1324 will be removed in seminars 6.0
      */
     public function duplicateViaDataHandlerForEventWithRegistrationsDoesNotDuplicateRegistrations(): void
     {
