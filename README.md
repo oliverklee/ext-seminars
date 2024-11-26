@@ -49,7 +49,7 @@ To run all unit tests in a directory or file (using the directory
 `Tests/Unit/Model/` as an example):
 
 ```bash
-.Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit/Model/
+.Build/vendor/bin/phpunit -c Build/phpunit/UnitTests.xml Tests/Unit/Model/
 ```
 
 #### In PhpStorm
@@ -64,7 +64,7 @@ the script path `.Build/vendor/autoload.php` within your project.
 In the Run/Debug configurations for PHPUnit, use an alternative configuration
 file:
 
-`Configuration/UnitTests.xml`
+`Build/phpunit/UnitTests.xml`
 
 ### Running the functional tests
 
@@ -97,7 +97,7 @@ To run all functional tests in a directory or file (using the directory
 `Tests/Functional/Authentication/` as an example):
 
 ```bash
-typo3DatabaseUsername=typo3 typo3DatabasePassword=typo3pass typo3DatabaseName=typo3_test .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml Tests/Functional/Authentication/
+typo3DatabaseUsername=typo3 typo3DatabasePassword=typo3pass typo3DatabaseName=typo3_test .Build/vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml Tests/Functional/Authentication/
 ```
 
 #### In PhpStorm
@@ -112,7 +112,7 @@ the script path `.Build/vendor/autoload.php` within your project.
 In the Run/Debug configurations for PHPUnit, use an alternative configuration
 file:
 
-`Configuration/FunctionalTests.xml`
+`Build/phpunit/FunctionalTests.xml`
 
 Also set the following environment variables in your runner configuration:
 
@@ -125,4 +125,4 @@ Also set the following environment variables in your runner configuration:
 Running the legacy tests works exactly the same as running the functional tests,
 except that you run the tests in `Tests/LegacyFunctional/` instead
 of `Tests/Functional/`. You'll still need to use the configuration file
-`Configuration/FunctionalTests.xml`, though.
+`Build/phpunit/FunctionalTests.xml`, though.
