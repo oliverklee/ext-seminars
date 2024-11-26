@@ -8,8 +8,6 @@
 /.php_cs.dist export-ignore
 /Build/ export-ignore
 /CODE_OF_CONDUCT.md export-ignore
-/Configuration/FunctionalTests.xml export-ignore
-/Configuration/UnitTests.xml export-ignore
 /Resources/Private/Patches/ export-ignore
 /Tests/ export-ignore
 /composer-unused.php export-ignore
