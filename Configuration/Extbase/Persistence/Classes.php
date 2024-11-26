@@ -29,6 +29,14 @@ return [
             EventInterface::TYPE_EVENT_TOPIC => EventTopic::class,
             EventInterface::TYPE_EVENT_DATE => EventDate::class,
         ],
+        'properties' => [
+            // This is only needed so we can make queries on the end date before the actual type is known.
+            'end' => ['fieldName' => 'end_date'],
+            // This is only needed so we can make queries on the start date before the actual type is known.
+            'start' => ['fieldName' => 'begin_date'],
+            // This is only needed so we can make queries on the status before the actual type is known.
+            'status' => ['fieldName' => 'cancelled'],
+        ],
     ],
     SingleEvent::class => [
         'tableName' => 'tx_seminars_seminars',

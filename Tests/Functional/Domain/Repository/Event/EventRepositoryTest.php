@@ -1752,4 +1752,197 @@ final class EventRepositoryTest extends FunctionalTestCase
             __DIR__ . '/Fixtures/duplicateViaDataHandler/SingleEventWithOneRegistrationAndDuplicateWithRegistrations.csv'
         );
     }
+
+    /**
+     * @test
+     */
+    public function findInPastForNoEventsReturnsEmptyResult(): void
+    {
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastFindsPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresHiddenPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/HiddenPlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresDeletedPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/DeletedPlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastFindsConfirmedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/ConfirmedSingleEventInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresCanceledSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/CanceledSingleEventInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresPlannedSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedSingleEventInFuture.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresCurrentlyRunningSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedRunningSingleEvent.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresPlannedSingleEventWithoutStartAndWithoutEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedSingleEventWithoutStartAndWithoutEnd.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresSingleEventWithPastStartAndWithoutEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedSingleEventWithPastStartAndWithoutEnd.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresSingleEventWithoutStartAndWithPastEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedSingleEventWithoutStartAndWithPastEnd.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastFindsPlannedEventDateWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedEventDateInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresEventTopicWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/EventTopicInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastOrdersSubsequentEventsFronLatestToOldest(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/TwoSubsequentPlannedSingleEventsInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastOrdersOverlappingEventsFronLatestToOldestStartDate(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/TwoOverlappingPlannedSingleEventsInPast.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
 }

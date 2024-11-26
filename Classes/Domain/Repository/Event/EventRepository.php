@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\Domain\Repository\Event;
 
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -299,5 +301,30 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         // Note: We're not calling `$dataHandler->process_cmdmap();` here
         // because that would not allow us to provide the exclude fields.
         $dataHandler->copyRecord($this->getTableName(), $uid, -$uid, true, [], $excludeFields);
+    }
+
+    /**
+     * Finds single events and event dates that are in the past and that have not been canceled.
+     *
+     * @return array<Event>
+     */
+    public function findInPast(): array
+    {
+        $query = $this->createQuery();
+        $objectTypeMatcher = $query->in(
+            'objectType',
+            [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE]
+        );
+        $statusMatcher = $query->in('status', [EventInterface::STATUS_PLANNED, EventInterface::STATUS_CONFIRMED]);
+        $startMatcher = $query->logicalNot($query->equals('start', 0));
+        $endSetMatcher = $query->logicalNot($query->equals('endDate', 0));
+        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $endInPastMatcher = $query->lessThan('endDate', $now);
+        $query->matching(
+            $query->logicalAnd([$objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher, $endInPastMatcher])
+        );
+        $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
+
+        return $query->execute()->toArray();
     }
 }
