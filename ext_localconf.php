@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\Controller\EventController;
 use OliverKlee\Seminars\Controller\EventRegistrationController;
 use OliverKlee\Seminars\Controller\EventUnregistrationController;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
@@ -94,6 +95,15 @@ defined('TYPO3') or die('Access denied.');
         = GenerateEventSlugsUpgradeWizard::class;
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_removeDuplicateEventVenueRelations']
         = RemoveDuplicateEventVenueRelationsUpgradeWizard::class;
+
+    ExtensionUtility::configurePlugin(
+        'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+        'EventArchive', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [EventController::class => 'archive, show'],
+        // no non-cacheable actions
+        []
+    );
 
     ExtensionUtility::configurePlugin(
         'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
