@@ -321,7 +321,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $endInPastMatcher = $query->lessThan('endDate', $now);
         $query->matching(
-            $query->logicalAnd([$objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher, $endInPastMatcher])
+            $query->logicalAnd($objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher, $endInPastMatcher)
         );
         $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
 
