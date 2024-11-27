@@ -12,7 +12,7 @@ jobs:
   php-lint:
     name: "PHP linter"
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 3
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
   code-quality:
     name: "Code quality checks"
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 3
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -86,7 +86,7 @@ jobs:
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 3
     needs: php-lint
     steps:
       - name: "Checkout"
@@ -167,7 +167,7 @@ jobs:
   functional-tests:
     name: "Functional tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 6
     needs: php-lint
     env:
       DB_DATABASE: typo3
@@ -262,7 +262,7 @@ jobs:
   legacy-functional-tests:
     name: "Legacy functional tests"
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 7
     needs: php-lint
     env:
       DB_DATABASE: typo3
