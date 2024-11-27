@@ -95,7 +95,6 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_removeDuplicateEventVenueRelations']
         = RemoveDuplicateEventVenueRelationsUpgradeWizard::class;
 
-    // This makes the plugin available for front-end rendering.
     ExtensionUtility::configurePlugin(
         'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
         'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
@@ -116,8 +115,6 @@ defined('TYPO3') or die('Access denied.');
 if (ExtensionManagementUtility::isLoaded('seo')) {
     $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] = \array_merge(
         $GLOBALS['TYPO3_CONF_VARS']['FE']['additionalCanonicalizedUrlParameters'] ?? [],
-        [
-            'tx_seminars_pi1[showUid]',
-        ]
+        ['tx_seminars_pi1[showUid]']
     );
 }
