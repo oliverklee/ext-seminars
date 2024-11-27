@@ -29,7 +29,6 @@ defined('TYPO3') or die('Access denied.');
     // Registration form
     //
 
-    // This makes the plugin selectable in the BE.
     ExtensionUtility::registerPlugin(
         'Seminars',
         // arbitrary, but unique plugin name (not visible in the BE)
@@ -47,8 +46,7 @@ defined('TYPO3') or die('Access denied.');
 
     // These two commands add the flexform configuration for the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventregistration']
-        = 'pi_flexform';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventregistration'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventregistration',
         'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml'
