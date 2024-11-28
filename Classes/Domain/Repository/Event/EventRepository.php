@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -304,13 +305,53 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
-     * Finds single events and event dates that are in the past and that have not been canceled.
+     * Finds single events and event dates that have ended in the past.
+     *
+     * This method ignores events that have no start or end date set. Also, it ignores canceled events.
      *
      * @return array<Event>
      */
     public function findInPast(): array
     {
         $query = $this->createQuery();
+        $matchers = $this->createMatchersForFrontFrontEndListViews($query);
+        $matchers[] = $query->lessThan('endDate', $this->nowAsTimestamp());
+
+        return $query->matching($query->logicalAnd(...$matchers))
+            ->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING])
+            ->execute()->toArray();
+    }
+
+    /**
+     * Finds single events and event dates that have not ended yet.
+     *
+     * This method ignores events that have no start or end date set.Also, it ignores canceled events.
+     *
+     * @return array<Event>
+     */
+    public function findUpcoming(): array
+    {
+        $query = $this->createQuery();
+        $matchers = $this->createMatchersForFrontFrontEndListViews($query);
+        $matchers[] = $query->greaterThan('endDate', $this->nowAsTimestamp());
+
+        return $query->matching($query->logicalAnd(...$matchers))
+            ->setOrderings(['begin_date' => QueryInterface::ORDER_ASCENDING])
+            ->execute()->toArray();
+    }
+
+    private function nowAsTimestamp(): int
+    {
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+    }
+
+    /**
+     * @param QueryInterface<Event> $query
+     *
+     * @return array<ConstraintInterface>
+     */
+    private function createMatchersForFrontFrontEndListViews(QueryInterface $query): array
+    {
         $objectTypeMatcher = $query->in(
             'objectType',
             [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE]
@@ -318,13 +359,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $statusMatcher = $query->in('status', [EventInterface::STATUS_PLANNED, EventInterface::STATUS_CONFIRMED]);
         $startMatcher = $query->logicalNot($query->equals('start', 0));
         $endSetMatcher = $query->logicalNot($query->equals('endDate', 0));
-        $now = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
-        $endInPastMatcher = $query->lessThan('endDate', $now);
-        $query->matching(
-            $query->logicalAnd($objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher, $endInPastMatcher)
-        );
-        $query->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING]);
 
-        return $query->execute()->toArray();
+        return [$objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher];
     }
 }
