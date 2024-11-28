@@ -63,6 +63,7 @@
 		"symfony/console": "^5.4.47 || ^6.4.15 || ^7.1.8",
 		"symfony/translation": "^5.4.45 || ^6.4.13 || ^7.1.6",
 		"symfony/yaml": "^5.4.45 || ^6.4.13 || ^7.1.6",
+		"typo3/cms-fluid-styled-content": "^11.5.40",
 		"typo3/cms-install": "^11.5.40",
 		"typo3/cms-scheduler": "^11.5.40",
 		"typo3/coding-standards": "0.6.1",

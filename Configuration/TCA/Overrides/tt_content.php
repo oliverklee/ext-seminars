@@ -26,6 +26,22 @@ defined('TYPO3') or die('Access denied.');
     );
 
     //
+    // Event archive
+    //
+
+    ExtensionUtility::registerPlugin(
+        'Seminars',
+        'EventArchive', // arbitrary, but unique plugin name (not visible in the BE)
+        // plugin title, as visible in the drop-down in the BE
+        'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventArchive',
+        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+    );
+
+    // This removes the default controls from the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventarchive'] = 'recursive,pages';
+
+    //
     // Registration form
     //
 

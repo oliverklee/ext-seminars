@@ -1606,6 +1606,15 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventUnregistration.message.unregistrationDone_informal">
 				<source>Your registration to this event now has been canceled.</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventArchive">
+				<source>Event archive</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.message.noEventsFound">
+				<source>No events found.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.events.property.internalTitle">
+				<source>Title</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
