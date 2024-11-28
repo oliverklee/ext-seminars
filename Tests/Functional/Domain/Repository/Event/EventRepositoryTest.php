@@ -1969,4 +1969,224 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(SingleEvent::class, $firstMatch);
         self::assertSame(2, $firstMatch->getUid());
     }
+
+    /**
+     * @test
+     */
+    public function findUpcomingForNoEventsReturnsEmptyResult(): void
+    {
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresHiddenPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/HiddenPlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresDeletedPlannedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/DeletedPlannedSingleEventInPast.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresConfirmedSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/ConfirmedSingleEventInPast.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresCanceledSingleEventWithStartAndEndInPast(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/CanceledSingleEventInPast.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingFindsPlannedSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingFindsConfirmedSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/ConfirmedSingleEventInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresCanceledSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/CanceledSingleEventInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingFindsCurrentlyRunningSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedRunningSingleEvent.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(1, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresPlannedSingleEventWithoutStartAndWithoutEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithoutEnd.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresSingleEventWithPastStartAndWithoutEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithPastStartAndWithoutEnd.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresSingleEventWithoutStartAndWithPastEnd(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedSingleEventWithoutStartAndWithPastEnd.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingFindsPlannedEventDateWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/PlannedEventDateInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(1, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(EventDate::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingIgnoresEventTopicWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/EventTopicInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingOrdersSubsequentEventsFromOldestLatest(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/TwoSubsequentPlannedSingleEventsInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findUpcomingOrdersOverlappingEventsFromLatestToOldestStartDate(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findUpcoming/TwoOverlappingPlannedSingleEventsInFuture.csv');
+
+        $result = $this->subject->findUpcoming();
+
+        self::assertCount(2, $result);
+        $firstMatch = $result[0];
+        self::assertInstanceOf(SingleEvent::class, $firstMatch);
+        self::assertSame(2, $firstMatch->getUid());
+    }
 }
