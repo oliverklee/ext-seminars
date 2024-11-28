@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Add `EventRepository::findInPast()` (#3885, #3887)
+- Add `EventRepository::findInPast()` (#3885, #3887, #3891)
 - Show a confirmation dialog when deleting a record in the BE module (#3849)
 - Add button in the BE module to create an event (#3845)
 - Add upgrade notes (#3710)

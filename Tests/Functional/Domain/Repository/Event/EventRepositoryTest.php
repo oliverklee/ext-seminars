@@ -1844,6 +1844,30 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function findInPastIgnoresConfirmedSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/ConfirmedSingleEventInFuture.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findInPastIgnoresCanceledSingleEventWithStartAndEndInFuture(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/CanceledSingleEventInFuture.csv');
+
+        $result = $this->subject->findInPast();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
     public function findInPastIgnoresCurrentlyRunningSingleEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/PlannedRunningSingleEvent.csv');
@@ -1919,7 +1943,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findInPastOrdersSubsequentEventsFronLatestToOldest(): void
+    public function findInPastOrdersSubsequentEventsFromLatestToOldest(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/TwoSubsequentPlannedSingleEventsInPast.csv');
 
@@ -1934,7 +1958,7 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findInPastOrdersOverlappingEventsFronLatestToOldestStartDate(): void
+    public function findInPastOrdersOverlappingEventsFromLatestToOldestStartDate(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/findInPast/TwoOverlappingPlannedSingleEventsInPast.csv');
 
