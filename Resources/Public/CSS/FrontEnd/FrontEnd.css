@@ -15,30 +15,8 @@
     visibility: hidden;
 }
 
-.tx-seminars-pi1-listrow table {
-    background-color: #fff;
-    color: #000;
-}
-
-.tx-seminars-pi1-listrow th,
-.tx-seminars-pi1-listrow td {
-    margin: 0;
-    border-spacing: 0;
-    vertical-align: top;
-}
-
-.tx-seminars-pi1-listrow td {
-    padding: .2em .5em;
-}
-
-.tx-seminars-pi1-listrow th {
-    font-weight: bold;
-    text-align: center;
-}
-
 .tx-seminars-pi1-listrow th a {
     display: block;
-    padding: .2em .5em;
 }
 
 .tx-seminars-pi1-listrow img.category_image {
@@ -48,17 +26,6 @@
 
 .tx-seminars-pi1-listrow table ul {
     list-style: none;
-}
-
-th.tx-seminars-pi1-expiry,
-th.tx-seminars-pi1-seats,
-th.tx-seminars-pi1-total-price,
-th.tx-seminars-pi1-registration,
-th.tx-seminars-pi1-attached-files,
-th.tx-seminars-pi1-status,
-th.tx-seminars-pi1-edit,
-th.tx-seminars-pi1-list-registrations {
-    padding: .2em .5em;
 }
 
 th.tx-seminars-pi1-title {
@@ -83,22 +50,6 @@ td.tx-seminars-pi1-expiry,
 
 .tx-seminars-pi1-seats {
     text-align: center;
-}
-
-.tx-seminars-pi1-listrow .listrow-odd,
-.tx-seminars-pi1-listrow th {
-    background-color: #f0f0f0;
-    color: inherit;
-}
-
-.tx-seminars-pi1-listrow tr {
-    background-color: #fff;
-    color: inherit;
-}
-
-.tx-seminars-pi1-listrow tr:hover {
-    background-color: #e0e0e0;
-    color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-available .tx-seminars-pi1-square {
