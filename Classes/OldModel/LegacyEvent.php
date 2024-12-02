@@ -2780,6 +2780,44 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
+     * Gets this event's owner (the FE user who has created this event).
+     */
+    public function getOwner(): ?FrontEndUser
+    {
+        if (!$this->hasRecordPropertyInteger('owner_feuser')) {
+            return null;
+        }
+
+        $ownerUid = $this->getRecordPropertyInteger('owner_feuser');
+        \assert($ownerUid > 0);
+
+        return MapperRegistry::get(FrontEndUserMapper::class)->find($ownerUid);
+    }
+
+    /**
+     * Checks whether this event has an existing owner (the FE user who has
+     * created this event).
+     *
+     * @return bool TRUE if this event has an existing owner, FALSE otherwise
+     */
+    public function hasOwner(): bool
+    {
+        return $this->hasRecordPropertyInteger('owner_feuser');
+    }
+
+    /**
+     * Checks whether the logged-in FE user is the owner of this event.
+     *
+     * @return bool TRUE if a FE user is logged in and the user is the owner of this event, FALSE otherwise
+     */
+    public function isOwnerFeUser(): bool
+    {
+        $loggedInUserUid = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'id');
+
+        return $loggedInUserUid > 0 && ($this->getRecordPropertyInteger('owner_feuser') === $loggedInUserUid);
+    }
+
+    /**
      * Checkes whether the "travelling terms" checkbox (ie. the second "terms"
      * checkbox) should be displayed in the registration form for this event.
      *

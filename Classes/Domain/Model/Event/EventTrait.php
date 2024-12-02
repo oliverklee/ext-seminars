@@ -26,6 +26,11 @@ trait EventTrait
      */
     protected string $internalTitle = '';
 
+    /**
+     * the UID of the FE user who has created the event
+     */
+    protected int $ownerUid = 0;
+
     public function isHidden(): bool
     {
         return $this->hidden;
@@ -47,5 +52,15 @@ trait EventTrait
     public function setInternalTitle(string $name): void
     {
         $this->internalTitle = $name;
+    }
+
+    public function getOwnerUid(): int
+    {
+        return $this->ownerUid;
+    }
+
+    public function setOwnerUid(int $ownerUid): void
+    {
+        $this->ownerUid = $ownerUid;
     }
 }

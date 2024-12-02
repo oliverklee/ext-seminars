@@ -620,6 +620,9 @@
 			<trans-unit id="tt_content.list_type_pi1">
 				<source>Seminar Manager</source>
 			</trans-unit>
+			<trans-unit id="owner_feuser">
+				<source>Front-end user who has created this record</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

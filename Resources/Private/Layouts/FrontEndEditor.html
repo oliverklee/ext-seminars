@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:security.ifAuthenticated>
+        <f:then>
+            <f:render section="main"/>
+        </f:then>
+        <f:else>
+            <f:be.security.ifAuthenticated>
+                <f:then>
+                    <div class="alert alert-danger" role="alert">
+                        Please configure this plugin to be only visible if a FE user in the group with the
+                        permissions to edit events in the front end is logged in.
+                    </div>
+                </f:then>
+                <f:else>
+                    <div class="alert alert-warning" role="alert">
+                        The configuration for this plugin is not correct. Please contact the site administrator.
+                    </div>
+                </f:else>
+            </f:be.security.ifAuthenticated>
+        </f:else>
+    </f:security.ifAuthenticated>
+</html>

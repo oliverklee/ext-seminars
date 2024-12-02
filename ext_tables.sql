@@ -210,6 +210,7 @@ CREATE TABLE tx_seminars_seminars (
     # @deprecated #1324 will be removed in seminars 6.0
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
     vips int(11) unsigned DEFAULT '0' NOT NULL,
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
     uses_terms_2 tinyint(1) unsigned DEFAULT '0' NOT NULL,

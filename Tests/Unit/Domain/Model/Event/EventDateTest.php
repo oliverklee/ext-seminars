@@ -628,6 +628,25 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function getOwnerUidInitiallyReturnsZero(): void
+    {
+        self::assertSame(0, $this->subject->getOwnerUid());
+    }
+
+    /**
+     * @test
+     */
+    public function setOwnerUidSetsOwnerUid(): void
+    {
+        $value = 123456;
+        $this->subject->setOwnerUid($value);
+
+        self::assertSame($value, $this->subject->getOwnerUid());
+    }
+
+    /**
+     * @test
+     */
     public function getRegistrationStartInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getRegistrationStart());
