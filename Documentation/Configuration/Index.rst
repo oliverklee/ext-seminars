@@ -13,6 +13,7 @@ Configuration
    ChangingTheLocalizedStrings/Index
    ConfiguringCss/Index
    SettingUpTheMultipleSeatsFeature/Index
+   SettingUpFront-endEditing/Index
    SettingUpTheDefaultEditorsFeature/Index
    PreselectionInTheListViewUrl/Index
    SEO

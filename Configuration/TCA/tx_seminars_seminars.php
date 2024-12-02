@@ -958,6 +958,18 @@ $tca = [
                 ],
             ],
         ],
+        'owner_feuser' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:owner_feuser',
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'fe_users',
+                'default' => 0,
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
         'vips' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.vips',
@@ -1022,7 +1034,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, offline_attendees, additional_email_text, organizers_notified_about_minimum_reached, mute_notification_emails, target_groups, date_of_last_registration_digest, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_special, price_special_early, payment_methods, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, vips',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser, vips',
         ],
         EventInterface::TYPE_EVENT_TOPIC => [
             'showitem' =>

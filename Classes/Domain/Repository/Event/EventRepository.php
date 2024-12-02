@@ -87,6 +87,28 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     }
 
     /**
+     * @return list<Event>
+     */
+    public function findSingleEventsByOwnerUid(int $ownerUid): array
+    {
+        if ($ownerUid <= 0) {
+            return [];
+        }
+
+        $query = $this->createQuery();
+        $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
+
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $query->setQuerySettings($querySettings->setRespectStoragePage(false));
+
+        $objectTypeMatcher = $query->equals('objectType', EventInterface::TYPE_SINGLE_EVENT);
+        $ownerMatcher = $query->equals('ownerUid', $ownerUid);
+        $query->matching($query->logicalAnd($objectTypeMatcher, $ownerMatcher));
+
+        return $query->execute()->toArray();
+    }
+
+    /**
      * Updates the `Event.registrations` counter cache.
      *
      * @deprecated #1324 will be removed in seminars 6.0

@@ -26,6 +26,10 @@ user needs to be set as event manager for their events.
 **Tutors, partners, tutors and leaders** are just speakers that are
 listed under a different heading.
 
+**Owners** are the front-end users who have created an event record in
+the front end. They can view their created events in the “my entered
+events” view.
+
 **Event managers/VIPs** are special front-end users who are allowed to
 view the list of registrations for an event from their “my managed
 events” list. The extension can be configured so that all users from e

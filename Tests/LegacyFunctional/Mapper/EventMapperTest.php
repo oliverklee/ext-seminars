@@ -9,7 +9,9 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\OrganizerMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -100,6 +102,30 @@ final class EventMapperTest extends FunctionalTestCase
             (string)$organizerUid,
             $model->getOrganizers()->getUids()
         );
+    }
+
+    // Tests regarding getOwner().
+
+    /**
+     * @test
+     */
+    public function getOwnerWithoutOwnerReturnsNull(): void
+    {
+        $testingModel = $this->subject->getLoadedTestingModel([]);
+
+        self::assertNull($testingModel->getOwner());
+    }
+
+    /**
+     * @test
+     */
+    public function getOwnerWithOwnerReturnsOwnerInstance(): void
+    {
+        $frontEndUserUid = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost()->getUid();
+        \assert($frontEndUserUid > 0);
+        $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUserUid]);
+
+        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 
     ///////////////////////////////////////

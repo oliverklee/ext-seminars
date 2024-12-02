@@ -272,6 +272,16 @@ final class TestingLegacyEvent extends LegacyEvent
     }
 
     /**
+     * Sets the UID of the owner FE user.
+     *
+     * @param int $ownerUid the UID of the owner FE user, must be >= 0
+     */
+    public function setOwnerUid(int $ownerUid): void
+    {
+        $this->setRecordPropertyInteger('owner_feuser', $ownerUid);
+    }
+
+    /**
      * Sets the number of time slots.
      *
      * @param int<0, max> $numberOfTimeSlots the number of time slots for this event

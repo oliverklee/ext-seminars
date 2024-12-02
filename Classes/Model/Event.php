@@ -351,6 +351,14 @@ class Event extends AbstractTimeSpan
         $this->setStatus(EventInterface::STATUS_CONFIRMED);
     }
 
+    public function getOwner(): ?FrontEndUser
+    {
+        /** @var FrontEndUser|null $owner */
+        $owner = $this->getAsModel('owner_feuser');
+
+        return $owner;
+    }
+
     /**
      * @return int the number of offline registrations for this event, will
      *                 be 0 if this event has no offline registrations
