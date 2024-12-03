@@ -1612,8 +1612,17 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventArchive.message.noEventsFound">
 				<source>No events found.</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.events.property.internalTitle">
+			<trans-unit id="plugin.eventArchive.events.property.title">
 				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.events.property.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.events.property.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.events.property.venue">
+				<source>Venue</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -3,7 +3,16 @@
         <thead>
             <tr>
                 <th scope="col">
-                    <f:translate key="plugin.eventArchive.events.property.internalTitle"/>
+                    <f:translate key="plugin.eventArchive.events.property.title"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.eventArchive.events.property.date"/>
+                </th>
+                <th scope="city">
+                    <f:translate key="plugin.eventArchive.events.property.city"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.eventArchive.events.property.venue"/>
                 </th>
             </tr>
         </thead>
@@ -12,6 +21,19 @@
                 <tr>
                     <td>
                         {event.displayTitle}
+                    </td>
+                    <td class="text-end">
+                        <f:render partial="EventDate" arguments="{event: event}"/>
+                    </td>
+                    <td>
+                        <f:for each="{event.venues}" as="venue" iteration="iteration">
+                            {venue.city}{f:if(condition: iteration.isLast, then: '', else: ', ')}
+                        </f:for>
+                    </td>
+                    <td>
+                        <f:for each="{event.venues}" as="venue" iteration="iteration">
+                            {venue.title}{f:if(condition: iteration.isLast, then: '', else: ', ')}
+                        </f:for>
                     </td>
                 </tr>
             </f:for>
