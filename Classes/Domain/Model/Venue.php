@@ -37,6 +37,11 @@ class Venue extends AbstractEntity
      */
     protected string $fullAddress = '';
 
+    /**
+     * @Validate("StringLength", options={"maximum": 30})
+     */
+    protected string $city = '';
+
     public function getTitle(): string
     {
         return $this->title;
@@ -85,5 +90,15 @@ class Venue extends AbstractEntity
     public function setFullAddress(string $fullAddress): void
     {
         $this->fullAddress = $fullAddress;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
     }
 }

@@ -44,7 +44,7 @@ final class VenueRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/VenueRepository/VenueWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/VenueRepository/VenueWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -54,6 +54,7 @@ final class VenueRepositoryTest extends FunctionalTestCase
         self::assertSame('alex@example.com', $result->getEmailAddress());
         self::assertSame('+49 1234 56789', $result->getPhoneNumber());
         self::assertSame('Markplatz 1, 12345 Bonn', $result->getFullAddress());
+        self::assertSame('Bonn', $result->getCity());
     }
 
     /**
