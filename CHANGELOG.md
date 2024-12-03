@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Use responsive Bootstrap tables in the FE and BE (#3897)
+- Use responsive Bootstrap tables in the FE and BE (#3897, #3901)
 - Display "will be announced" in fewer places (#3816, #3836)
 - Make the `RegistrationManager` a proper TYPO3 singleton (#3782)
 - Make the `RegistrationManager` stateless (#3776)
