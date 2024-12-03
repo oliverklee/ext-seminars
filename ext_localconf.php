@@ -96,22 +96,9 @@ defined('TYPO3') or die('Access denied.');
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['seminars_removeDuplicateEventVenueRelations']
         = RemoveDuplicateEventVenueRelationsUpgradeWizard::class;
 
-    ExtensionUtility::configurePlugin(
-        'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
-        'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
-        // all actions
-        [
-            FrontEndEditorController::class => 'index, edit, update, new, create',
-        ],
-        // non-cacheable actions
-        [
-            FrontEndEditorController::class => 'index, edit, update, new, create',
-        ]
-    );
-
     // This makes the plugin available for front-end rendering.
     ExtensionUtility::configurePlugin(
-        'Seminars', // extension name, matching the PHP namespaces (but without the vendor)
+        'Seminars',
         'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
         // all actions
         [
@@ -123,6 +110,15 @@ defined('TYPO3') or die('Access denied.');
             EventRegistrationController::class => 'checkPrerequisites, new, confirm, create, thankYou',
             EventUnregistrationController::class => 'checkPrerequisites, confirm, unregister',
         ]
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Seminars',
+        'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [FrontEndEditorController::class => 'index, edit, update, new, create'],
+        // non-cacheable actions
+        [FrontEndEditorController::class => 'index, edit, update, new, create']
     );
 })();
 
