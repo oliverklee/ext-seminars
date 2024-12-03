@@ -2156,6 +2156,18 @@ This event now has been confirmed.</target>
         <source>Your registration to this event now has been canceled.</source>
         <target state="needs-translation">Your registration to this event now has been canceled.</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive">
+        <source>Event archive</source>
+        <target state="needs-translation">Event archive</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.message.noEventsFound">
+        <source>No events found.</source>
+        <target state="needs-translation">No events found.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.internalTitle">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
