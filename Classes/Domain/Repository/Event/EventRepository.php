@@ -337,7 +337,7 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
-        $matchers[] = $query->lessThan('end', $this->nowAsTimestamp());
+        $matchers[] = $query->lessThan('end', $this->now());
 
         return $query->matching($query->logicalAnd(...$matchers))
             ->setOrderings(['start' => QueryInterface::ORDER_DESCENDING])
@@ -355,16 +355,11 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
-        $matchers[] = $query->greaterThan('end', $this->nowAsTimestamp());
+        $matchers[] = $query->greaterThan('end', $this->now());
 
         return $query->matching($query->logicalAnd(...$matchers))
             ->setOrderings(['start' => QueryInterface::ORDER_ASCENDING])
             ->execute()->toArray();
-    }
-
-    private function nowAsTimestamp(): int
-    {
-        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
     }
 
     /**
@@ -381,5 +376,10 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
         $endMatcher = $query->greaterThan('end', 0);
 
         return [$objectTypeMatcher, $statusMatcher, $startMatcher, $endMatcher];
+    }
+
+    private function now(): \DateTimeInterface
+    {
+        return GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'full');
     }
 }
