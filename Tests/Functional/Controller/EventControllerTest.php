@@ -51,7 +51,24 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function archiveActionRendersPastSingleEvent(): void
+    public function archiveActionForNoEventsShowsMessage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate('plugin.eventArchive.message.noEventsFound', 'seminars');
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersTitleOfPastSingleEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEvent.csv');
@@ -99,17 +116,123 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function archiveActionForNoEventsShowsMessage(): void
+    public function archiveActionRendersDateOfSingleDayEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/SingleDayPastEvent.csv');
 
         $request = new InternalRequest();
         $request = $request->withPageId(1);
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
-        $expectedMessage = LocalizationUtility::translate('plugin.eventArchive.message.noEventsFound', 'seminars');
-        self::assertIsString($expectedMessage);
-        self::assertStringContainsString($expectedMessage, $html);
+        self::assertStringContainsString('2024-11-03', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersStartAndEndOfMultiDayEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/MultiDayPastEvent.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('2024-11-02–2024-11-03', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersCityOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithOneVenue.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersAllCitiesOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+        self::assertStringContainsString('Köln', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersOnlyOneCityForMultipleVenuesInSameCity(): void
+    {
+        self::markTestSkipped('Still to be implemented.');
+
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInSameCity.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+        self::assertStringNotContainsString('Bonn,', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersTitleOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithOneVenue.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Maritim Hotel', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersAllTitlesOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInDifferentCities.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Maritim Hotel', $html);
+        self::assertStringContainsString('Premier Inn', $html);
     }
 }
