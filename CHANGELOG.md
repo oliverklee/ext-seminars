@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Re-add the FE editor (#3894)
+- Re-add the FE editor (#3894, #3903, #3904)
 - Add `EventRepository::findUpcoming()` (#3892)
 - Add `EventRepository::findInPast()` (#3885, #3887, #3891)
 - Show a confirmation dialog when deleting a record in the BE module (#3849)
