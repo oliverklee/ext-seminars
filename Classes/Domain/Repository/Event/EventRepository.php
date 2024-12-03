@@ -337,10 +337,10 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
-        $matchers[] = $query->lessThan('endDate', $this->nowAsTimestamp());
+        $matchers[] = $query->lessThan('end', $this->nowAsTimestamp());
 
         return $query->matching($query->logicalAnd(...$matchers))
-            ->setOrderings(['begin_date' => QueryInterface::ORDER_DESCENDING])
+            ->setOrderings(['start' => QueryInterface::ORDER_DESCENDING])
             ->execute()->toArray();
     }
 
@@ -355,10 +355,10 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     {
         $query = $this->createQuery();
         $matchers = $this->createMatchersForFrontFrontEndListViews($query);
-        $matchers[] = $query->greaterThan('endDate', $this->nowAsTimestamp());
+        $matchers[] = $query->greaterThan('end', $this->nowAsTimestamp());
 
         return $query->matching($query->logicalAnd(...$matchers))
-            ->setOrderings(['begin_date' => QueryInterface::ORDER_ASCENDING])
+            ->setOrderings(['start' => QueryInterface::ORDER_ASCENDING])
             ->execute()->toArray();
     }
 
@@ -374,14 +374,12 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
      */
     private function createMatchersForFrontFrontEndListViews(QueryInterface $query): array
     {
-        $objectTypeMatcher = $query->in(
-            'objectType',
-            [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE]
-        );
+        $objectTypesWithDate = [EventInterface::TYPE_SINGLE_EVENT, EventInterface::TYPE_EVENT_DATE];
+        $objectTypeMatcher = $query->in('objectType', $objectTypesWithDate);
         $statusMatcher = $query->in('status', [EventInterface::STATUS_PLANNED, EventInterface::STATUS_CONFIRMED]);
-        $startMatcher = $query->logicalNot($query->equals('start', 0));
-        $endSetMatcher = $query->logicalNot($query->equals('endDate', 0));
+        $startMatcher = $query->greaterThan('start', 0);
+        $endMatcher = $query->greaterThan('end', 0);
 
-        return [$objectTypeMatcher, $statusMatcher, $startMatcher, $endSetMatcher];
+        return [$objectTypeMatcher, $statusMatcher, $startMatcher, $endMatcher];
     }
 }
