@@ -26,44 +26,15 @@ defined('TYPO3') or die('Access denied.');
     );
 
     //
-    // FE editor
-    //
-
-    // This makes the plugin selectable in the BE.
-    ExtensionUtility::registerPlugin(
-        'Seminars',
-        // arbitrary, but unique plugin name (not visible in the BE)
-        'FrontEndEditor',
-        // plugin title, as visible in the drop-down in the BE
-        'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor',
-        // the icon visible in the drop-down in the BE
-        'EXT:seminars/Resources/Public/Icons/Extension.svg'
-    );
-
-    // This removes the default controls from the plugin.
-    // @phpstan-ignore-next-line We know that this array key exists and is an array.
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_frontendeditor'] = 'recursive,pages';
-
-    // These two commands add the flexform configuration for the plugin.
-    // @phpstan-ignore-next-line We know that this array key exists and is an array.
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_frontendeditor'] = 'pi_flexform';
-    ExtensionManagementUtility::addPiFlexFormValue(
-        'seminars_frontendeditor',
-        'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
-    );
-
-    //
     // Registration form
     //
 
     ExtensionUtility::registerPlugin(
         'Seminars',
-        // arbitrary, but unique plugin name (not visible in the BE)
-        'EventRegistration',
+        'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
         // plugin title, as visible in the drop-down in the BE
         'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventRegistration',
-        // the icon visible in the drop-down in the BE
-        'EXT:seminars/Resources/Public/Icons/Extension.svg'
+        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
     );
 
     // This removes the default controls from the plugin.
@@ -77,5 +48,30 @@ defined('TYPO3') or die('Access denied.');
     ExtensionManagementUtility::addPiFlexFormValue(
         'seminars_eventregistration',
         'FILE:EXT:seminars/Configuration/FlexForms/EventRegistration.xml'
+    );
+
+    //
+    // FE editor
+    //
+
+    ExtensionUtility::registerPlugin(
+        'Seminars',
+        'FrontEndEditor', // arbitrary, but unique plugin name (not visible in the BE)
+        // plugin title, as visible in the drop-down in the BE
+        'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.frontEndEditor',
+        'EXT:seminars/Resources/Public/Icons/Extension.svg' // the icon visible in the drop-down in the BE
+    );
+
+    // This removes the default controls from the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_frontendeditor']
+        = 'recursive,pages';
+
+    // These two commands add the flexform configuration for the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_frontendeditor'] = 'pi_flexform';
+    ExtensionManagementUtility::addPiFlexFormValue(
+        'seminars_frontendeditor',
+        'FILE:EXT:seminars/Configuration/FlexForms/FrontEndEditor.xml'
     );
 })();
