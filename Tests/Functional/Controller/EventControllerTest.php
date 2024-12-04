@@ -185,8 +185,6 @@ final class EventControllerTest extends FunctionalTestCase
      */
     public function archiveActionRendersOnlyOneCityForMultipleVenuesInSameCity(): void
     {
-        self::markTestSkipped('Still to be implemented.');
-
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(
             __DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithTwoVenuesInSameCity.csv'

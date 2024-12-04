@@ -28,8 +28,8 @@
                         {event.displayTitle}
                     </td>
                     <td>
-                        <f:for each="{event.venues}" as="venue" iteration="iteration">
-                            {venue.city}{f:if(condition: iteration.isLast, then: '', else: ', ')}
+                        <f:for each="{event.cityNames}" as="cityName" iteration="iteration">
+                            {cityName}{f:if(condition: iteration.isLast, then: '', else: ', ')}
                         </f:for>
                     </td>
                     <td>
