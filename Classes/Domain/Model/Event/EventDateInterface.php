@@ -70,6 +70,13 @@ interface EventDateInterface
     public function getFirstVenue(): Venue;
 
     /**
+     * Returns a sorted, unique list of city names of all venues of this event.
+     *
+     * @return array<int, string>
+     */
+    public function getCityNames(): array;
+
+    /**
      * @return ObjectStorage<Speaker>
      */
     public function getSpeakers(): ObjectStorage;

@@ -274,6 +274,24 @@ trait EventDateTrait
     }
 
     /**
+     * Returns a sorted, unique list of city names of all venues of this event.
+     *
+     * @return array<int, string>
+     */
+    public function getCityNames(): array
+    {
+        $cityNames = [];
+        foreach ($this->getVenues() as $venue) {
+            $cityNames[] = $venue->getCity();
+        }
+
+        $uniqueCityNames = \array_unique($cityNames);
+        \sort($uniqueCityNames, \SORT_STRING);
+
+        return $uniqueCityNames;
+    }
+
+    /**
      * @return ObjectStorage<Speaker>
      */
     public function getSpeakers(): ObjectStorage

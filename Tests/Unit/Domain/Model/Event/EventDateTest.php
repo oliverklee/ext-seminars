@@ -1274,4 +1274,112 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getAdditionalEmailText());
     }
+
+    /**
+     * @test
+     */
+    public function getCityNamesForNoVenuesReturnsEmptyArray(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $this->subject->setVenues($venues);
+
+        $result = $this->subject->getCityNames();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCityNamesForOneVenueReturnsCityFromVenue(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+
+        $venue = new Venue();
+        $cityName = 'Berlin';
+        $venue->setCity($cityName);
+        $venues->attach($venue);
+
+        $this->subject->setVenues($venues);
+
+        $result = $this->subject->getCityNames();
+
+        self::assertSame([$cityName], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCityNamesForTwoVenuesInTheSameCityReturnsOnlyOneCity(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+        $cityName = 'Berlin';
+
+        $venue1 = new Venue();
+        $venue1->setCity($cityName);
+        $venues->attach($venue1);
+
+        $venue2 = new Venue();
+        $venue2->setCity($cityName);
+        $venues->attach($venue2);
+
+        $this->subject->setVenues($venues);
+
+        $result = $this->subject->getCityNames();
+
+        self::assertSame([$cityName], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCityNamesForTwoVenuesInDifferentCitiesReturnsBothCities(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+
+        $venue1 = new Venue();
+        $cityName1 = 'Berlin';
+        $venue1->setCity($cityName1);
+        $venues->attach($venue1);
+
+        $venue2 = new Venue();
+        $cityName2 = 'Bonn';
+        $venue2->setCity($cityName2);
+        $venues->attach($venue2);
+
+        $this->subject->setVenues($venues);
+
+        $result = $this->subject->getCityNames();
+
+        self::assertSame([$cityName1, $cityName2], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCityNamesSortsCityNames(): void
+    {
+        /** @var ObjectStorage<Venue> $venues */
+        $venues = new ObjectStorage();
+
+        $venue1 = new Venue();
+        $cityName1 = 'Köln';
+        $venue1->setCity($cityName1);
+        $venues->attach($venue1);
+
+        $venue2 = new Venue();
+        $cityName2 = 'Bonn';
+        $venue2->setCity($cityName2);
+        $venues->attach($venue2);
+
+        $this->subject->setVenues($venues);
+
+        $result = $this->subject->getCityNames();
+
+        self::assertSame([$cityName2, $cityName1], $result);
+    }
 }
