@@ -2170,6 +2170,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Date</source>
         <target state="needs-translation">Date</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.eventType">
+        <source>Event type</source>
+        <target state="needs-translation">Event type</target>
+      </trans-unit>
       <trans-unit id="plugin.eventArchive.events.property.topic">
         <source>Topic</source>
         <target state="needs-translation">Topic</target>
