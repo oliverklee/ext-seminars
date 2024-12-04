@@ -6,6 +6,9 @@
                     <f:translate key="plugin.eventArchive.events.property.date"/>
                 </th>
                 <th scope="col">
+                    <f:translate key="plugin.eventArchive.events.property.eventType"/>
+                </th>
+                <th scope="col">
                     <f:translate key="plugin.eventArchive.events.property.topic"/>
                 </th>
                 <th scope="city">
@@ -23,6 +26,11 @@
                         <span class="text-nowrap">
                             <f:render partial="EventDate" arguments="{event: event}"/>
                         </span>
+                    </td>
+                    <td>
+                        <f:if condition="{event.eventType}">
+                            {event.eventType.title}
+                        </f:if>
                     </td>
                     <td>
                         {event.displayTitle}

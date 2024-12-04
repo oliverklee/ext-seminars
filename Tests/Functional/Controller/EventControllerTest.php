@@ -233,4 +233,20 @@ final class EventControllerTest extends FunctionalTestCase
         self::assertStringContainsString('Maritim Hotel', $html);
         self::assertStringContainsString('Premier Inn', $html);
     }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersEventType(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEventWithEventType.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('workshop', $html);
+    }
 }
