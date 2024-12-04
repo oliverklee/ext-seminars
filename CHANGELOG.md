@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 - Add `Venue.city` property (#3908, #3914)
-- Add a new plugin for the event archive (#3895, #3909, #3910, #3911, #3913)
+- Add a new plugin for the event archive
+  (#3895, #3909, #3910, #3911, #3913, #3915)
 - Re-add the FE editor (#3894, #3903, #3904)
 - Add `EventRepository::findUpcoming()` (#3892, #3904)
 - Add `EventRepository::findInPast()` (#3885, #3887, #3891, #3904)
