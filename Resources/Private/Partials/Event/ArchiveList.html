@@ -23,7 +23,9 @@
                         {event.displayTitle}
                     </td>
                     <td class="text-end">
-                        <f:render partial="EventDate" arguments="{event: event}"/>
+                        <span class="text-nowrap">
+                            <f:render partial="EventDate" arguments="{event: event}"/>
+                        </span>
                     </td>
                     <td>
                         <f:for each="{event.venues}" as="venue" iteration="iteration">
