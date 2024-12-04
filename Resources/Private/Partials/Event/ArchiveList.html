@@ -3,10 +3,10 @@
         <thead>
             <tr>
                 <th scope="col">
-                    <f:translate key="plugin.eventArchive.events.property.title"/>
+                    <f:translate key="plugin.eventArchive.events.property.date"/>
                 </th>
                 <th scope="col">
-                    <f:translate key="plugin.eventArchive.events.property.date"/>
+                    <f:translate key="plugin.eventArchive.events.property.topic"/>
                 </th>
                 <th scope="city">
                     <f:translate key="plugin.eventArchive.events.property.city"/>
@@ -19,13 +19,13 @@
         <tbody>
             <f:for each="{events}" as="event">
                 <tr>
-                    <td>
-                        {event.displayTitle}
-                    </td>
                     <td class="text-end">
                         <span class="text-nowrap">
                             <f:render partial="EventDate" arguments="{event: event}"/>
                         </span>
+                    </td>
+                    <td>
+                        {event.displayTitle}
                     </td>
                     <td>
                         <f:for each="{event.venues}" as="venue" iteration="iteration">
