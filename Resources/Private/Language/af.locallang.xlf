@@ -2164,13 +2164,13 @@ This event now has been confirmed.</target>
         <source>No events found.</source>
         <target state="needs-translation">No events found.</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.title">
-        <source>Title</source>
-        <target state="needs-translation">Title</target>
-      </trans-unit>
       <trans-unit id="plugin.eventArchive.events.property.date">
         <source>Date</source>
         <target state="needs-translation">Date</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.events.property.topic">
+        <source>Topic</source>
+        <target state="needs-translation">Topic</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.events.property.city">
         <source>City</source>
