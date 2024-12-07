@@ -1103,9 +1103,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Attached files</source>
         <target state="final">Angehängte Dateien</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistration" approved="yes">
-        <source>Register now</source>
-        <target state="final">Jetzt anmelden</target>
+      <trans-unit id="label_onlineRegistration">
+        <source>Register</source>
+        <target state="needs-translation">Register</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistrationOnQueue" approved="yes">
         <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
@@ -1115,9 +1115,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Prebook now</source>
         <target state="final">Anmeldung vormerken</target>
       </trans-unit>
-      <trans-unit id="label_onlineUnregistration" approved="yes">
-        <source>Unregister now</source>
-        <target state="final">Jetzt abmelden</target>
+      <trans-unit id="label_onlineUnregistration">
+        <source>Unregister</source>
+        <target state="needs-translation">Unregister</target>
       </trans-unit>
       <trans-unit id="label_list_registrations" approved="yes">
         <source>List of registrations</source>
@@ -1340,113 +1340,113 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Date of birth</source>
         <target state="final">Geburtsdatum</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor">
+      <trans-unit id="plugin.frontEndEditor" approved="yes">
         <source>Front-end editor for events</source>
-        <target state="needs-translation">Front-end editor for events</target>
+        <target state="final">Front-end-Editor für Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents">
+      <trans-unit id="plugin.frontEndEditor.settings.folderForCreatedEvents" approved="yes">
         <source>Folder for the created events</source>
-        <target state="needs-translation">Folder for the created events</target>
+        <target state="final">Ordner für die angelegten Veranstaltungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.index.headline">
+      <trans-unit id="plugin.frontEndEditor.index.headline" approved="yes">
         <source>Events I have created</source>
-        <target state="needs-translation">Events I have created</target>
+        <target state="final">Veranstaltungen, die ich erstellt habe</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.edit.headline">
+      <trans-unit id="plugin.frontEndEditor.edit.headline" approved="yes">
         <source>Edit event</source>
-        <target state="needs-translation">Edit event</target>
+        <target state="final">Veranstaltung bearbeiten</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.new.headline">
+      <trans-unit id="plugin.frontEndEditor.new.headline" approved="yes">
         <source>Create new event</source>
-        <target state="needs-translation">Create new event</target>
+        <target state="final">Neue Veranstaltung anlegen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.uid">
+      <trans-unit id="plugin.frontEndEditor.property.uid" approved="yes">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="final">UID</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.internalTitle">
+      <trans-unit id="plugin.frontEndEditor.property.internalTitle" approved="yes">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.date">
+      <trans-unit id="plugin.frontEndEditor.property.date" approved="yes">
         <source>Date</source>
-        <target state="needs-translation">Date</target>
+        <target state="final">Datum</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.description">
+      <trans-unit id="plugin.frontEndEditor.property.description" approved="yes">
         <source>Description</source>
-        <target state="needs-translation">Description</target>
+        <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.standardPrice">
+      <trans-unit id="plugin.frontEndEditor.property.standardPrice" approved="yes">
         <source>Standard price</source>
-        <target state="needs-translation">Standard price</target>
+        <target state="final">Standardpreis</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice">
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdPrice" approved="yes">
         <source>Early-bird price</source>
-        <target state="needs-translation">Early-bird price</target>
+        <target state="final">Frühbucherpreis</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.eventType">
+      <trans-unit id="plugin.frontEndEditor.property.eventType" approved="yes">
         <source>Event type</source>
-        <target state="needs-translation">Event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.start">
+      <trans-unit id="plugin.frontEndEditor.property.start" approved="yes">
         <source>Start</source>
-        <target state="needs-translation">Start</target>
+        <target state="final">Anfang</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.end">
+      <trans-unit id="plugin.frontEndEditor.property.end" approved="yes">
         <source>End</source>
-        <target state="needs-translation">End</target>
+        <target state="final">Ende</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline">
+      <trans-unit id="plugin.frontEndEditor.property.earlyBirdDeadline" approved="yes">
         <source>Early-bird deadline</source>
-        <target state="needs-translation">Early-bird deadline</target>
+        <target state="final">Frühbucherfrist</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.registrationDeadline">
+      <trans-unit id="plugin.frontEndEditor.property.registrationDeadline" approved="yes">
         <source>Registration deadline</source>
-        <target state="needs-translation">Registration deadline</target>
+        <target state="final">Anmeldefrist</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.registrationRequired">
+      <trans-unit id="plugin.frontEndEditor.property.registrationRequired" approved="yes">
         <source>Registration is required</source>
-        <target state="needs-translation">Registration is required</target>
+        <target state="final">Anmeldung ist erforderlich</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.waitingList">
+      <trans-unit id="plugin.frontEndEditor.property.waitingList" approved="yes">
         <source>Has a waiting list</source>
-        <target state="needs-translation">Has a waiting list</target>
+        <target state="final">Hat eine Warteliste</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.property.minimumNumberOfRegistrations" approved="yes">
         <source>Required registrations</source>
-        <target state="needs-translation">Required registrations</target>
+        <target state="final">Minimal erforderliche Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations">
+      <trans-unit id="plugin.frontEndEditor.property.maximumNumberOfRegistrations" approved="yes">
         <source>Maximum registrations</source>
-        <target state="needs-translation">Maximum registrations</target>
+        <target state="final">Maximale Anzahl an Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.venues">
+      <trans-unit id="plugin.frontEndEditor.property.venues" approved="yes">
         <source>Venues</source>
-        <target state="needs-translation">Venues</target>
+        <target state="final">Veranstaltungsorte</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.speakers">
+      <trans-unit id="plugin.frontEndEditor.property.speakers" approved="yes">
         <source>Speakers</source>
-        <target state="needs-translation">Speakers</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.property.organizers">
+      <trans-unit id="plugin.frontEndEditor.property.organizers" approved="yes">
         <source>Organizers</source>
-        <target state="needs-translation">Organizers</target>
+        <target state="final">Veranstalter_innen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.action.new">
+      <trans-unit id="plugin.frontEndEditor.action.new" approved="yes">
         <source>Create a new event</source>
-        <target state="needs-translation">Create a new event</target>
+        <target state="final">Neue Veranstaltung anlegen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.action.edit">
+      <trans-unit id="plugin.frontEndEditor.action.edit" approved="yes">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="final">Bearbeiten</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.action.cancel">
+      <trans-unit id="plugin.frontEndEditor.action.cancel" approved="yes">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="final">Abbrechen</target>
       </trans-unit>
-      <trans-unit id="plugin.frontEndEditor.action.save">
+      <trans-unit id="plugin.frontEndEditor.action.save" approved="yes">
         <source>Save</source>
-        <target state="needs-translation">Save</target>
+        <target state="final">Speichern</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration" approved="yes">
         <source>Registration form for events</source>
@@ -2158,33 +2158,33 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Your registration to this event now has been canceled.</source>
         <target state="final">Deine Anmeldung zu dieser Veranstaltung wurde nun storniert.</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive">
+      <trans-unit id="plugin.eventArchive" approved="yes">
         <source>Event archive</source>
-        <target state="needs-translation">Event archive</target>
+        <target state="final">Veranstaltungsarchiv</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.message.noEventsFound">
+      <trans-unit id="plugin.eventArchive.message.noEventsFound" approved="yes">
         <source>No events found.</source>
-        <target state="needs-translation">No events found.</target>
+        <target state="final">Keine Veranstaltungen gefunden.</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.date">
+      <trans-unit id="plugin.eventArchive.events.property.date" approved="yes">
         <source>Date</source>
-        <target state="needs-translation">Date</target>
+        <target state="final">Datum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.eventType">
+      <trans-unit id="plugin.eventArchive.events.property.eventType" approved="yes">
         <source>Event type</source>
-        <target state="needs-translation">Event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.topic">
+      <trans-unit id="plugin.eventArchive.events.property.topic" approved="yes">
         <source>Topic</source>
-        <target state="needs-translation">Topic</target>
+        <target state="final">Thema</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.city">
+      <trans-unit id="plugin.eventArchive.events.property.city" approved="yes">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.events.property.venue">
+      <trans-unit id="plugin.eventArchive.events.property.venue" approved="yes">
         <source>Venue</source>
-        <target state="needs-translation">Venue</target>
+        <target state="final">Veranstaltungsort</target>
       </trans-unit>
     </body>
   </file>
