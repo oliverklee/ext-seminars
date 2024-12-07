@@ -1104,8 +1104,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Attached files</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistration">
-        <source>Register now</source>
-        <target state="needs-translation">Register now</target>
+        <source>Register</source>
+        <target state="needs-translation">Register</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistrationOnQueue">
         <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
@@ -1116,8 +1116,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Prebook now</target>
       </trans-unit>
       <trans-unit id="label_onlineUnregistration">
-        <source>Unregister now</source>
-        <target state="needs-translation">Unregister now</target>
+        <source>Unregister</source>
+        <target state="needs-translation">Unregister</target>
       </trans-unit>
       <trans-unit id="label_list_registrations">
         <source>List of registrations</source>
