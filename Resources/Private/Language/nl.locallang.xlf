@@ -3,9 +3,9 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z" product-name="seminars" target-language="nl">
     <header/>
     <body>
-      <trans-unit id="test-label">
+      <trans-unit id="test-label" approved="yes">
         <source>This is a test label.</source>
-        <target state="needs-translation">This is a test label.</target>
+        <target state="final">Dit is een testlabel.</target>
       </trans-unit>
       <trans-unit id="test-label-with-arguments">
         <source>Hello %s!</source>
@@ -175,9 +175,9 @@
         <source>Vacancies</source>
         <target state="final">Vrije Plaatsen</target>
       </trans-unit>
-      <trans-unit id="label_unlimited">
+      <trans-unit id="label_unlimited" approved="yes">
         <source>unlimited</source>
-        <target state="needs-translation">unlimited</target>
+        <target state="final">onbeperkt</target>
       </trans-unit>
       <trans-unit id="label_enough_attendees" approved="yes">
         <source>Enough attendees</source>
@@ -735,17 +735,17 @@ This event now has been confirmed.</target>
         <source>Event type</source>
         <target state="needs-translation">Event type</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.language">
+      <trans-unit id="seminars.pi_flexform.searchForm.language" approved="yes">
         <source>Language</source>
-        <target state="needs-translation">Language</target>
+        <target state="final">Taal</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.searchForm.country">
         <source>Country</source>
         <target state="needs-translation">Country</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.searchForm.city">
+      <trans-unit id="seminars.pi_flexform.searchForm.city" approved="yes">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="final">Stad</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.searchForm.place">
         <source>Place</source>
@@ -915,13 +915,13 @@ This event now has been confirmed.</target>
         <source>Link the single view from the list view:</source>
         <target state="needs-translation">Link the single view from the list view:</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.always">
+      <trans-unit id="seminars.pi_flexform.always" approved="yes">
         <source>always</source>
-        <target state="needs-translation">always</target>
+        <target state="final">altijd</target>
       </trans-unit>
-      <trans-unit id="seminars.pi_flexform.never">
+      <trans-unit id="seminars.pi_flexform.never" approved="yes">
         <source>never</source>
-        <target state="needs-translation">never</target>
+        <target state="final">nooit</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription">
         <source>if the event has a description</source>
