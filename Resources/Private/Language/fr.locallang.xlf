@@ -1103,9 +1103,9 @@ This event now has been confirmed.</target>
         <source>Attached files</source>
         <target state="final">Fichiers joints</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistration" approved="yes">
-        <source>Register now</source>
-        <target state="final">Inscrivez-vous maintenant</target>
+      <trans-unit id="label_onlineRegistration">
+        <source>Register</source>
+        <target state="needs-translation">Register</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistrationOnQueue" approved="yes">
         <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
@@ -1115,9 +1115,9 @@ This event now has been confirmed.</target>
         <source>Prebook now</source>
         <target state="final">Se préinscrire maintenant</target>
       </trans-unit>
-      <trans-unit id="label_onlineUnregistration" approved="yes">
-        <source>Unregister now</source>
-        <target state="final">Annuler votre inscription</target>
+      <trans-unit id="label_onlineUnregistration">
+        <source>Unregister</source>
+        <target state="needs-translation">Unregister</target>
       </trans-unit>
       <trans-unit id="label_list_registrations" approved="yes">
         <source>List of registrations</source>
