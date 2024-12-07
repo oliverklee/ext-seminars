@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Shorten the registation link label (#3921)
 - Use responsive Bootstrap tables in the FE and BE (#3897, #3901, #3916)
 - Display "will be announced" in fewer places (#3816, #3836)
 - Make the `RegistrationManager` a proper TYPO3 singleton (#3782)

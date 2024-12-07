@@ -820,7 +820,7 @@ This event now has been confirmed.</source>
 				<source>Attached files</source>
 			</trans-unit>
 			<trans-unit id="label_onlineRegistration">
-				<source>Register now</source>
+				<source>Register</source>
 			</trans-unit>
 			<trans-unit id="label_onlineRegistrationOnQueue">
 				<source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
@@ -829,7 +829,7 @@ This event now has been confirmed.</source>
 				<source>Prebook now</source>
 			</trans-unit>
 			<trans-unit id="label_onlineUnregistration">
-				<source>Unregister now</source>
+				<source>Unregister</source>
 			</trans-unit>
 			<trans-unit id="label_list_registrations">
 				<source>List of registrations</source>
