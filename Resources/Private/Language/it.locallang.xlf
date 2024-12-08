@@ -1223,11 +1223,6 @@ This event now has been confirmed.</target>
         <source>Time</source>
         <target state="final">Ora</target>
       </trans-unit>
-      <!-- @deprecated will be removed in #3802 in seminars 6.0 -->
-      <trans-unit id="label_timeslot_entry_date" approved="yes">
-        <source>Entry date</source>
-        <target state="final">Ora di arrivo</target>
-      </trans-unit>
       <trans-unit id="label_timeslot_room" approved="yes">
         <source>Room</source>
         <target state="final">Stanza</target>
@@ -1235,10 +1230,6 @@ This event now has been confirmed.</target>
       <trans-unit id="label_timeslot_place" approved="yes">
         <source>Place</source>
         <target state="final">Luogo</target>
-      </trans-unit>
-      <trans-unit id="label_timeslot_speakers" approved="yes">
-        <source>Speakers</source>
-        <target state="final">Oratori</target>
       </trans-unit>
       <trans-unit id="label_selector_submit" approved="yes">
         <source>Apply filter</source>
