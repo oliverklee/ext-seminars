@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Always use the singular form for the table names in the backend (#3930)
 - Improve the label for "register myself (as well)" (#3929)
 - Use the term "event" instead of "seminars" in the TCEforms (#3928)
-- Shorten the link label for the waiting list registration (#3926)
+- Shorten the link label for the waiting list registration (#3926, #3942)
 - Make some TCEforms labels more specific (#3924, #3925, #3927)
 - Shorten the registation link label (#3921)
 - Use responsive Bootstrap tables in the FE and BE (#3897, #3901, #3916)
