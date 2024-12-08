@@ -515,32 +515,6 @@ Implement the methods required by the interface:
 
 .. _backendemail_en:
 
-Hooks for the emails sent from the back-end module
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-
-The hook classes need to be registered and written like this:
-
-.. code-block:: php
-
-     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][]
-         = \tx_seminarspaypal_Hooks_BackEndModule::class;
-
-It's used like this:
-
-.. code-block:: php
-
-    class BackEndModuleHook implements BackEndModule {
-        /**
-         * Modifies the general email sent via the back-end module.
-         *
-         * Note: This hook does not get called yet. It is just here so the interface
-         * is finalized.
-         *
-         * @param Registration $registration
-         *        the registration to which the email refers
-         */
-         public function modifyGeneralEmail(Registration $registration, MailMessage $email): void {…}
-
 Hooks for the CSV generation of registration lists
 """"""""""""""""""""""""""""""""""""""""""""""""""
 

@@ -9,15 +9,11 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
-use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
-use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -36,15 +32,6 @@ class GeneralEventMailForm
      * @var array<string, string|int>
      */
     private array $postData = [];
-
-    /**
-     * hook objects for the list view
-     *
-     * @var list<BackEndModule>
-     */
-    private array $hooks = [];
-
-    private bool $hooksHaveBeenRetrieved = false;
 
     /**
      * The constructor of this class. Instantiates an event object.
@@ -121,13 +108,9 @@ class GeneralEventMailForm
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
-            $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
             /** @var LegacyRegistration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
-                $registrationUid = $oldRegistration->getUid();
-                \assert($registrationUid > 0);
-                $registration = $registrationMapper->find($registrationUid);
-                $user = $registration->getFrontEndUser();
+                $user = $oldRegistration->getFrontEndUser();
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
@@ -138,7 +121,6 @@ class GeneralEventMailForm
                     ->text($this->createMessageBody($user, $organizer))
                     ->build();
 
-                $this->modifyEmailWithHook($registration, $email);
                 $email->send();
             }
 
@@ -161,16 +143,6 @@ class GeneralEventMailForm
     }
 
     /**
-     * Calls all registered hooks for modifying the email.
-     */
-    private function modifyEmailWithHook(Registration $registration, MailMessage $email): void
-    {
-        foreach ($this->getHooks() as $hook) {
-            $hook->modifyGeneralEmail($registration, $email);
-        }
-    }
-
-    /**
      * @return string the message with the salutation replaced by the user's name,
      *                will be empty if no message has been set in the POST data
      */
@@ -185,34 +157,5 @@ class GeneralEventMailForm
             ? "\n-- \n" . $sender->getEmailFooter() : '';
 
         return $messageText . $messageFooter;
-    }
-
-    /**
-     * @return list<BackEndModule>
-     *
-     * @throws \UnexpectedValueException if any hook classes that do not implement the `BackEndModule` interface
-     */
-    private function getHooks(): array
-    {
-        if (!$this->hooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'] ?? null;
-            if (\is_array($hookClasses)) {
-                foreach ($hookClasses as $hookClass) {
-                    $hookInstance = GeneralUtility::makeInstance($hookClass);
-                    if (!$hookInstance instanceof BackEndModule) {
-                        throw new \UnexpectedValueException(
-                            'The class ' . \get_class($hookInstance) . ' is used for the event list view hook, ' .
-                            'but does not implement the BackEndModule interface.',
-                            1301928334
-                        );
-                    }
-                    $this->hooks[] = $hookInstance;
-                }
-            }
-
-            $this->hooksHaveBeenRetrieved = true;
-        }
-
-        return $this->hooks;
     }
 }

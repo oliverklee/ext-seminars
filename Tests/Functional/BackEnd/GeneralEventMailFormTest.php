@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
-use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -51,7 +50,6 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     protected function tearDown(): void
     {
         GeneralUtility::purgeInstances();
-        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule']);
 
         parent::tearDown();
     }
@@ -255,66 +253,5 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
             ]
         );
         $subject->sendEmailToAttendees();
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesCallsHookWithRegistration(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
-
-        $hook = GeneralUtility::makeInstance(TestingHookImplementor::class);
-        $hookClassName = TestingHookImplementor::class;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClassName] = $hookClassName;
-
-        $subject = new GeneralEventMailForm(1);
-
-        $subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'some message body',
-            ]
-        );
-
-        $this->email->expects(self::once())->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $subject->sendEmailToAttendees();
-
-        self::assertSame(1, $hook->getCountCallForGeneralEmail());
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForTwoRegistrationsCallsHookTwice(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
-
-        $hook = GeneralUtility::makeInstance(TestingHookImplementor::class);
-        $hookClassName = TestingHookImplementor::class;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClassName] = $hookClassName;
-
-        $subject = new GeneralEventMailForm(2);
-
-        $subject->setPostData(
-            [
-                'action' => 'sendEmail',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'some message body',
-            ]
-        );
-
-        $this->email->expects(self::exactly(2))->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $subject->sendEmailToAttendees();
-
-        self::assertSame(2, $hook->getCountCallForGeneralEmail());
     }
 }

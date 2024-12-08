@@ -53,6 +53,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the hooks for the email form in the BE module (#3954)
 - Drop code for paid/unpaid registrations (#3950)
 - Remove unused methods from `Registration` (#3949)
 - Drop the entry date and speakers from the timeslots (#3946)
