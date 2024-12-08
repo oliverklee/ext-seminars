@@ -391,9 +391,9 @@
         <source>Organization</source>
         <target state="final">Organisatie</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_speakers.homepage">
+      <trans-unit id="tx_seminars_speakers.homepage" approved="yes">
         <source>Homepage</source>
-        <target state="needs-translation">Homepage</target>
+        <target state="final">Homepage</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers.description" approved="yes">
         <source>Description</source>
@@ -635,9 +635,9 @@
         <source>Number of kids</source>
         <target state="final">Aantal kinder</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites">
+      <trans-unit id="tx_seminars_sites" approved="yes">
         <source>Venue</source>
-        <target state="needs-translation">Venue</target>
+        <target state="final">Locatie</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.title" approved="yes">
         <source>Name</source>
