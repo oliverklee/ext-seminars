@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Shorten the link label for the waiting list registration (#3926)
 - Make some TCEforms labels more specific (#3924, #3925)
 - Shorten the registation link label (#3921)
 - Use responsive Bootstrap tables in the FE and BE (#3897, #3901, #3916)

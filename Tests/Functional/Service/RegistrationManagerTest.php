@@ -422,7 +422,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $result = $this->subject->getLinkToRegistrationPage($plugin, $event);
 
-        $expected = \sprintf($this->translate('label_onlineRegistrationOnQueue'), 0);
+        $expected = $this->translate('label_onlineRegistrationOnQueue');
         self::assertStringContainsString($expected, $result);
     }
 

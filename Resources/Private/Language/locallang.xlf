@@ -823,10 +823,10 @@ This event now has been confirmed.</source>
 				<source>Register</source>
 			</trans-unit>
 			<trans-unit id="label_onlineRegistrationOnQueue">
-				<source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
+				<source>Waiting list</source>
 			</trans-unit>
 			<trans-unit id="label_onlinePrebooking">
-				<source>Prebook now</source>
+				<source>Prebook</source>
 			</trans-unit>
 			<trans-unit id="label_onlineUnregistration">
 				<source>Unregister</source>
