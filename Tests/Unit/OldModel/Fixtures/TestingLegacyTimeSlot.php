@@ -22,16 +22,6 @@ final class TestingLegacyTimeSlot extends LegacyTimeSlot
     }
 
     /**
-     * Sets the entry date.
-     *
-     * @param int $entryDate the entry date as a UNIX timestamp (has to be >= 0, 0 will unset the entry date)
-     */
-    public function setEntryDate(int $entryDate): void
-    {
-        $this->setRecordPropertyInteger('entry_date', $entryDate);
-    }
-
-    /**
      * Sets the begin date and time.
      *
      * @param int $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
