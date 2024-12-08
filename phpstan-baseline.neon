@@ -11,31 +11,6 @@ parameters:
 			path: Classes/BackEnd/FlexForms.php
 
 		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/GeneralEventMailForm.php
-
-		-
-			message: "#^Cannot access offset 'backEndModule' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/GeneralEventMailForm.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/GeneralEventMailForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/BackEnd/GeneralEventMailForm.php
-
-		-
-			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
-			count: 1
-			path: Classes/BackEnd/GeneralEventMailForm.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/BackEnd/TceForms.php
@@ -1592,7 +1567,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 4
+			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
@@ -1601,18 +1576,13 @@ parameters:
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
-			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\Tests\\\\\\\\Functional\\\\\\\\BackEnd\\\\\\\\Fixtures\\\\\\\\TestingHookImplementor' on mixed\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
-
-		-
 			message: "#^Cannot access offset 'backEndModule' on mixed\\.$#"
-			count: 4
+			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 4
+			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
