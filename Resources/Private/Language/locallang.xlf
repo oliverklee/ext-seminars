@@ -166,9 +166,6 @@
 			<trans-unit id="label_notes">
 				<source>Additional Notes</source>
 			</trans-unit>
-			<trans-unit id="label_url">
-				<source>More information</source>
-			</trans-unit>
 			<trans-unit id="label_webinar_url">
 				<source>Webinar URL</source>
 			</trans-unit>

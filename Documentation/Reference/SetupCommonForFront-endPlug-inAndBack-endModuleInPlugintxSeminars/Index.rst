@@ -85,7 +85,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          allowed values are in: hello, title, uid, ticket\_id, price, seats, to
          tal\_price,attendees\_names,lodgings,accommodation,foods,food,checkbox
          es, kids, accreditation\_number, credit\_points, date, time, place,
-         room,paymentmethod, billing\_address,interests,url,
+         room,paymentmethod, billing\_address,interests
          footer,planned\_disclaimer,unregistration\_notice
 
    Default

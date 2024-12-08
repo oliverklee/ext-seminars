@@ -19,7 +19,6 @@ use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Service\RegistrationManager;
-use OliverKlee\Seminars\Service\SingleViewLinkBuilder;
 use OliverKlee\Seminars\Tests\Functional\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -111,10 +110,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->secondEmail);
 
         $this->subject = $this->get(RegistrationManager::class);
-
-        $linkBuilder = $this->createPartialMock(SingleViewLinkBuilder::class, ['createAbsoluteUrlForEvent']);
-        $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('https://singleview.example.com/');
-        $this->subject->setLinkBuilder($linkBuilder);
     }
 
     protected function tearDown(): void
@@ -854,28 +849,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject->notifyAttendee($registration, $controller);
 
         self::assertStringContainsString('Harry Callagan', $this->extractHtmlBodyFromEmail($this->email));
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-
-        $this->createEventWithOrganizer();
-        $registration = $this->createRegistration();
-        $registration->getFrontEndUser()->setData(
-            ['email' => 'foo@bar.com']
-        );
-        $controller = new DefaultController();
-        $controller->init();
-
-        $this->subject->notifyAttendee($registration, $controller);
-        $seminarLink = 'https://singleview.example.com/';
-
-        self::assertStringContainsString('<a href="' . $seminarLink, $this->extractHtmlBodyFromEmail($this->email));
     }
 
     /**

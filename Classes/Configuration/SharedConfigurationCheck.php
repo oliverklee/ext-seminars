@@ -332,7 +332,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'paymentmethod',
                 'billing_address',
                 'interests',
-                'url',
                 'planned_disclaimer',
                 'footer',
                 'first_name',
