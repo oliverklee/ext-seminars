@@ -23,7 +23,7 @@
 				<source>Gender</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars">
-				<source>Seminars</source>
+				<source>Event</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelGeneral">
 				<source>General</source>
@@ -92,7 +92,7 @@
 				<source>Registration options with checkbox</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.uses_terms_2">
-				<source>Display the travelling terms checkbox in the registration form</source>
+				<source>Display the additional terms checkbox in the registration form</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.needs_registration">
 				<source>Needs registration</source>
@@ -359,7 +359,7 @@
 				<source>Front-end User</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.seminar">
-				<source>Seminar</source>
+				<source>Event</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.registration_queue">
 				<source>Is on the registration queue</source>
@@ -464,7 +464,7 @@
 				<source>Additional notes</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.registered_themselves">
-				<source>Has signed up themselves</source>
+				<source>Has signed up themselves (too)</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.seats">
 				<source>Number of seats</source>
@@ -530,7 +530,7 @@
 				<source>Email address</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer">
-				<source>Footer text to be appended to all emails from this organizer</source>
+				<source>Email footer</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods">
 				<source>Methods of payment</source>
