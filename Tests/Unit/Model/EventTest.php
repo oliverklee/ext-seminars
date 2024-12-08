@@ -610,30 +610,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function hasMaximumAttendeesWithoutMaximumAttendeesReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasMaximumAttendees()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasMaximumAttendeesWithMaximumAttendeesReturnsTrue(): void
-    {
-        $this->subject->setData(['attendees_max' => 42]);
-
-        self::assertTrue(
-            $this->subject->hasMaximumAttendees()
-        );
-    }
-
     // Tests regarding the status.
 
     /**
@@ -1006,34 +982,6 @@ final class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationsAfterLastDigest()->isEmpty());
     }
 
-    //////////////////////////////////////////////////////////////////////
-    // Tests concerning hasUnlimitedVacancies
-    //////////////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasUnlimitedVacanciesForMaxAttendeesZeroReturnsTrue(): void
-    {
-        $this->subject->setData(['attendees_max' => 0]);
-
-        self::assertTrue(
-            $this->subject->hasUnlimitedVacancies()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasUnlimitedVacanciesForMaxAttendeesOneReturnsFalse(): void
-    {
-        $this->subject->setData(['attendees_max' => 1]);
-
-        self::assertFalse(
-            $this->subject->hasUnlimitedVacancies()
-        );
-    }
-
     ////////////////////////////////////////
     // Tests concerning getRegisteredSeats
     ////////////////////////////////////////
@@ -1229,82 +1177,6 @@ final class EventTest extends UnitTestCase
         self::assertSame(
             0,
             $event->getVacancies()
-        );
-    }
-
-    //////////////////////////////////
-    // Tests concerning hasVacancies
-    //////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue(): void
-    {
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getRegisteredSeats']
-        );
-        $event->setData(['attendees_max' => 2]);
-        $event->method('getRegisteredSeats')
-            ->willReturn(1);
-
-        self::assertTrue(
-            $event->hasVacancies()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse(): void
-    {
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getRegisteredSeats']
-        );
-        $event->setData(['attendees_max' => 2]);
-        $event->method('getRegisteredSeats')
-            ->willReturn(2);
-
-        self::assertFalse(
-            $event->hasVacancies()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse(): void
-    {
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getRegisteredSeats']
-        );
-        $event->setData(['attendees_max' => 1]);
-        $event->method('getRegisteredSeats')
-            ->willReturn(2);
-
-        self::assertFalse(
-            $event->hasVacancies()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue(): void
-    {
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getRegisteredSeats']
-        );
-        $event->setData(['attendees_max' => 0]);
-        $event->method('getRegisteredSeats')
-            ->willReturn(1);
-
-        self::assertTrue(
-            $event->hasVacancies()
         );
     }
 

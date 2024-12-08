@@ -54,7 +54,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 - Drop some `Event` methods that are only called from tests
-  (#3932, #3933, #3934, #3935)
+  (#3932, #3933, #3934, #3935, #3936)
 - Drop the single view links from the emails (#3931)
 - Remove unneeded `resname` from the language files (#3871)
 - Drop unused old models and mappers

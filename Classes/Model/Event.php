@@ -287,16 +287,6 @@ class Event extends AbstractTimeSpan
         return $this->getAsInteger('attendees_max');
     }
 
-    public function hasMaximumAttendees(): bool
-    {
-        return $this->hasInteger('attendees_max');
-    }
-
-    public function hasUnlimitedVacancies(): bool
-    {
-        return !$this->hasMaximumAttendees();
-    }
-
     /**
      * @return EventInterface::STATUS_*
      */
@@ -524,23 +514,6 @@ class Event extends AbstractTimeSpan
             0,
             $this->getMaximumAttendees() - $this->getRegisteredSeats()
         );
-    }
-
-    /**
-     * Checks whether this event has at least one vacancy.
-     *
-     * If this event has an unlimited number of possible registrations, this
-     * function will always return TRUE.
-     *
-     * @deprecated will be removed in version 6.0 in #3422
-     */
-    public function hasVacancies(): bool
-    {
-        if ($this->hasUnlimitedVacancies()) {
-            return true;
-        }
-
-        return $this->getVacancies() > 0;
     }
 
     /**
