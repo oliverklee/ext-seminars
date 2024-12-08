@@ -1107,13 +1107,13 @@ This event now has been confirmed.</target>
         <source>Register</source>
         <target state="needs-translation">Register</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistrationOnQueue" approved="yes">
-        <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
-        <target state="final">Зарегистрироваться в списоке ожидания (%d регистрация в списоке ожидания)</target>
+      <trans-unit id="label_onlineRegistrationOnQueue">
+        <source>Waiting list</source>
+        <target state="needs-translation">Waiting list</target>
       </trans-unit>
       <trans-unit id="label_onlinePrebooking">
-        <source>Prebook now</source>
-        <target state="needs-translation">Prebook now</target>
+        <source>Prebook</source>
+        <target state="needs-translation">Prebook</target>
       </trans-unit>
       <trans-unit id="label_onlineUnregistration">
         <source>Unregister</source>
@@ -1176,8 +1176,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Persons to register:</target>
       </trans-unit>
       <trans-unit id="label_registered_themselves">
-        <source>myself</source>
-        <target state="needs-translation">myself</target>
+        <source>myself (too)</source>
+        <target state="needs-translation">myself (too)</target>
       </trans-unit>
       <trans-unit id="label_firstname">
         <source>First name:</source>
@@ -1215,9 +1215,9 @@ This event now has been confirmed.</target>
         <source>I accept the terms and conditions.</source>
         <target state="final">Я принимаю условия.</target>
       </trans-unit>
-      <trans-unit id="label_terms_2" approved="yes">
-        <source>I accept the terms for travelling.</source>
-        <target state="final">Я принимаю транспортные условия.</target>
+      <trans-unit id="label_terms_2">
+        <source>I accept the additional terms.</source>
+        <target state="needs-translation">I accept the additional terms.</target>
       </trans-unit>
       <trans-unit id="label_timeslot_date" approved="yes">
         <source>Date</source>
@@ -1509,8 +1509,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Maximum bookable seats per registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
-        <source>People register themselves by default</source>
-        <target state="needs-translation">People register themselves by default</target>
+        <source>People register themselves (too) by default</source>
+        <target state="needs-translation">People register themselves (too) by default</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
         <source>Show an email field for additional attendees</source>
@@ -1533,8 +1533,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Seats</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
-        <source>Is registering themselves</source>
-        <target state="needs-translation">Is registering themselves</target>
+        <source>Is registering themselves (too)</source>
+        <target state="needs-translation">Is registering themselves (too)</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
         <source>Persons to register</source>
@@ -1801,8 +1801,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Seats to book</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.registeredThemselves">
-        <source>I am registering myself.</source>
-        <target state="needs-translation">I am registering myself.</target>
+        <source>I am registering myself (too).</source>
+        <target state="needs-translation">I am registering myself (too).</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
         <source>I am not registering myself.</source>
