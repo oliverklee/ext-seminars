@@ -744,6 +744,7 @@ class DefaultController extends TemplateHelper
             $this->setMarker('timeslot_entry_date', $timeSlotData['entry_date']);
             $this->setMarker('timeslot_room', \htmlspecialchars($timeSlotData['room'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker('timeslot_place', \htmlspecialchars($timeSlotData['place'], ENT_QUOTES | ENT_HTML5));
+            // @deprecated will be removed in #3802 in seminars 6.0
             $this->setMarker('timeslot_speakers', \htmlspecialchars($timeSlotData['speakers'], ENT_QUOTES | ENT_HTML5));
 
             $timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');

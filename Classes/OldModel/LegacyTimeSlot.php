@@ -19,6 +19,8 @@ class LegacyTimeSlot extends AbstractTimeSpan
 
     /**
      * Creates and returns a speaker bag.
+     *
+     * @deprecated will be removed in #3802 in seminars 6.0
      */
     private function getSpeakerBag(): SpeakerBag
     {
@@ -35,6 +37,8 @@ class LegacyTimeSlot extends AbstractTimeSpan
      * Gets the speakers of the time slot as a plain-text comma-separated list.
      *
      * @return string the comma-separated plain text list of speakers (or '' if there was an error)
+     *
+     * @deprecated will be removed in #3802 in seminars 6.0
      */
     public function getSpeakersShortCommaSeparated(): string
     {

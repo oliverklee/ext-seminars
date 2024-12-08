@@ -3087,7 +3087,7 @@ class LegacyEvent extends AbstractTimeSpan
      *     entry_date: string,
      *     room: string,
      *     place: string,
-     *     speakers: string,
+     *     speakers: string
      * }>
      */
     public function getTimeSlotsAsArrayWithMarkers(): array
@@ -3104,6 +3104,7 @@ class LegacyEvent extends AbstractTimeSpan
                 'entry_date' => $timeSlot->getEntryDate(),
                 'room' => $timeSlot->getRoom(),
                 'place' => $timeSlot->getPlaceShort(),
+                // @deprecated will be removed in #3802 in seminars 6.0
                 'speakers' => $timeSlot->getSpeakersShortCommaSeparated(),
             ];
         }
