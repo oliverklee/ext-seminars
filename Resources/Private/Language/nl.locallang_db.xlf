@@ -28,8 +28,8 @@
         <target state="needs-translation">Gender</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars">
-        <source>Seminars</source>
-        <target state="needs-translation">Seminars</target>
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelGeneral" approved="yes">
         <source>General</source>
@@ -119,9 +119,9 @@
         <source>Registration options with checkbox</source>
         <target state="final">Registratie opties met checkbox</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.uses_terms_2" approved="yes">
-        <source>Display the travelling terms checkbox in the registration form</source>
-        <target state="final">Toon de reisvoorwaarden checkbox</target>
+      <trans-unit id="tx_seminars_seminars.uses_terms_2">
+        <source>Display the additional terms checkbox in the registration form</source>
+        <target state="needs-translation">Display the additional terms checkbox in the registration form</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.needs_registration">
         <source>Needs registration</source>
@@ -476,8 +476,8 @@
         <target state="final">Gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seminar">
-        <source>Seminar</source>
-        <target state="needs-translation">Seminar</target>
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue" approved="yes">
         <source>Is on the registration queue</source>
@@ -616,8 +616,8 @@
         <target state="final">Aanvullende opmerkingen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registered_themselves">
-        <source>Has signed up themselves</source>
-        <target state="needs-translation">Has signed up themselves</target>
+        <source>Has signed up themselves (too)</source>
+        <target state="needs-translation">Has signed up themselves (too)</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seats" approved="yes">
         <source>Number of seats</source>
@@ -703,9 +703,9 @@
         <source>Email address</source>
         <target state="final">E-mail adres</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_organizers.email_footer" approved="yes">
-        <source>Footer text to be appended to all emails from this organizer</source>
-        <target state="final">Voettekst voor de bevestigingse-mails die naar de deelnemers wordt gezonden</target>
+      <trans-unit id="tx_seminars_organizers.email_footer">
+        <source>Email footer</source>
+        <target state="needs-translation">Email footer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods" approved="yes">
         <source>Methods of payment</source>
