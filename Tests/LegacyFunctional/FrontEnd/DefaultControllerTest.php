@@ -4240,10 +4240,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
 
         self::assertStringContainsString(
-            sprintf(
-                $this->translate('label_onlineRegistrationOnQueue'),
-                0
-            ),
+            $this->translate('label_onlineRegistrationOnQueue'),
             $this->subject->main('', [])
         );
     }
@@ -4276,10 +4273,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
 
         self::assertStringNotContainsString(
-            sprintf(
-                $this->translate('label_onlineRegistrationOnQueue'),
-                0
-            ),
+            $this->translate('label_onlineRegistrationOnQueue'),
             $this->subject->main('', [])
         );
     }
@@ -5016,10 +5010,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            sprintf(
-                $this->translate('label_onlineRegistrationOnQueue'),
-                0
-            ),
+            $this->translate('label_onlineRegistrationOnQueue'),
             $this->subject->main('', [])
         );
     }
@@ -5055,10 +5046,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringNotContainsString(
-            sprintf(
-                $this->translate('label_onlineRegistrationOnQueue'),
-                0
-            ),
+            $this->translate('label_onlineRegistrationOnQueue'),
             $this->subject->main('', [])
         );
     }

@@ -196,10 +196,7 @@ class RegistrationManager implements SingletonInterface
                 $label = $this->translate('label_onlinePrebooking');
             }
         } elseif ($event->hasRegistrationQueue()) {
-            $label = \sprintf(
-                $this->translate('label_onlineRegistrationOnQueue'),
-                $event->getAttendancesOnRegistrationQueue()
-            );
+            $label = \sprintf($this->translate('label_onlineRegistrationOnQueue'), '');
         } else {
             $label = $this->translate('label_onlineRegistration');
         }
