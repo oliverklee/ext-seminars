@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Configuration\FallbackConfiguration;
-use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
@@ -19,7 +16,6 @@ use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
-use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
@@ -48,13 +44,6 @@ class RegistrationManager implements SingletonInterface
     private ?Template $emailTemplate = null;
 
     protected ?HookProvider $registrationEmailHookProvider = null;
-
-    private ?SingleViewLinkBuilder $linkBuilder = null;
-
-    public function setLinkBuilder(SingleViewLinkBuilder $linkBuilder): void
-    {
-        $this->linkBuilder = $linkBuilder;
-    }
 
     /**
      * Checks whether is possible to register for a given event at all:
@@ -694,13 +683,6 @@ class RegistrationManager implements SingletonInterface
         string $helloSubjectPrefix,
         bool $useHtml = false
     ): string {
-        $linkBuilder = $this->linkBuilder;
-        if (!$linkBuilder instanceof SingleViewLinkBuilder) {
-            $configuration = $this->buildConfigurationWithFlexForms($contentObjectRenderer);
-            $linkBuilder = GeneralUtility::makeInstance(SingleViewLinkBuilder::class, $configuration);
-            $this->setLinkBuilder($linkBuilder);
-        }
-
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
 
         $template = $this->getInitializedEmailTemplate();
@@ -817,15 +799,11 @@ class RegistrationManager implements SingletonInterface
             $template->hideSubparts('interests', $wrapperPrefix);
         }
 
+        // for customized email templates that still have the removed subpart
+        $template->hideSubparts('url', $wrapperPrefix);
+
         $eventUid = $event->getUid();
         \assert($eventUid > 0);
-        $newEvent = MapperRegistry::get(EventMapper::class)->find($eventUid);
-        $singleViewUrl = $linkBuilder->createAbsoluteUrlForEvent($newEvent);
-        $template->setMarker(
-            'url',
-            $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl
-        );
-
         $newEvent = $this->getEventRepository()->findByUid($eventUid);
         \assert($newEvent instanceof EventDateInterface);
         if ($newEvent->hasUsableWebinarUrl()) {
@@ -894,14 +872,6 @@ class RegistrationManager implements SingletonInterface
     private function convertFromPlainTextToHtml(string $plainText): string
     {
         return \nl2br(\htmlspecialchars($plainText, ENT_QUOTES | ENT_HTML5));
-    }
-
-    private function buildConfigurationWithFlexForms(
-        ContentObjectRenderer $contentObjectRenderer
-    ): FallbackConfiguration {
-        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
-        $flexFormsConfiguration = new FlexformsConfiguration($contentObjectRenderer);
-        return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
     }
 
     private function addCssToHtmlEmail(string $emailBody): string

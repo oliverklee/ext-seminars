@@ -53,6 +53,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the single view links from the emails (#3931)
 - Remove unneeded `resname` from the language files (#3871)
 - Drop unused old models and mappers
   (#3815, #3818, #3819, #3820, #3821, #3822, #3823, #3824, #3825, #3826, #3827,

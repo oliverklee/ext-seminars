@@ -2396,11 +2396,6 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Cannot call method setData\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
