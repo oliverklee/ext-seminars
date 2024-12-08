@@ -23,7 +23,7 @@
 				<source>Gender</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars">
-				<source>Seminars</source>
+				<source>Event</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelGeneral">
 				<source>General</source>
@@ -359,7 +359,7 @@
 				<source>Front-end User</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.seminar">
-				<source>Seminar</source>
+				<source>Event</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.registration_queue">
 				<source>Is on the registration queue</source>
