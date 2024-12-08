@@ -521,34 +521,6 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    //////////////////////////////////
-    // Tests regarding our language.
-    //////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getLanguageWithoutLanguageReturnsNull(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertNull(
-            $this->subject->getLanguage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasLanguageWithoutLanguageReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->hasLanguage()
-        );
-    }
-
     ///////////////////////////////////////////
     // Tests regarding the minimum attendees.
     ///////////////////////////////////////////
