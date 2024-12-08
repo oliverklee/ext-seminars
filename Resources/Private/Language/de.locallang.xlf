@@ -1033,11 +1033,11 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_leaders_single_unknown" approved="yes">
         <source>Leader</source>
-        <target state="final">KursleiterIn</target>
+        <target state="final">Kursleitung</target>
       </trans-unit>
       <trans-unit id="label_leaders" approved="yes">
         <source>Leaders</source>
-        <target state="final">Kursleiter_innen</target>
+        <target state="final">Kursleitung</target>
       </trans-unit>
       <trans-unit id="label_language" approved="yes">
         <source>Language</source>
