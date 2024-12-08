@@ -41,14 +41,11 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
         $this->configuration = new DummyConfiguration([]);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $seminarUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $seminarUid,
-                'entry_date' => 0,
                 'place' => 0,
             ]
         );
@@ -186,68 +183,5 @@ final class LegacyTimeSlotTest extends FunctionalTestCase
         $this->subject->setPlace($placeUid);
 
         self::assertSame('', $this->subject->getPlaceShort());
-    }
-
-    //////////////////////////////////////////
-    // Tests for the time slot's entry date.
-    //////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasEntryDateIsInitiallyFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->hasEntryDate()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasEntryDate(): void
-    {
-        $this->subject->setEntryDate(42);
-        self::assertTrue(
-            $this->subject->hasEntryDate()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEntryDateForNoEntryDateReturnsEmptyString(): void
-    {
-        self::assertSame('', $this->subject->getEntryDate());
-    }
-
-    /**
-     * @test
-     */
-    public function getEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime(): void
-    {
-        // chosen randomly 2001-01-01 13:01
-        $time = 978354060;
-        $this->subject->setEntryDate($time);
-        $this->subject->setBeginDate($time);
-        $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
-        $this->configuration->setAsString('timeFormat', '%H:%M');
-
-        self::assertSame(\date('H:i', $time), $this->subject->getEntryDate());
-    }
-
-    /**
-     * @test
-     */
-    public function getEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate(): void
-    {
-        // chosen randomly 2001-01-01 13:01
-        $time = 978354060;
-        $this->subject->setEntryDate($time);
-        $this->subject->setBeginDate($time + 86400);
-        $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
-        $this->configuration->setAsString('timeFormat', '%H:%M');
-
-        self::assertSame(\date('d - m - Y H:i', $time), $this->subject->getEntryDate());
     }
 }

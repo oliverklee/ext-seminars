@@ -493,27 +493,10 @@ CREATE TABLE tx_seminars_timeslots (
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated will be removed in #3802 in seminars 6.0
-    entry_date int(11) unsigned DEFAULT '0' NOT NULL,
-    # @deprecated will be removed in #3802 in seminars 6.0
-    speakers int(11) unsigned DEFAULT '0' NOT NULL,
     place int(11) unsigned DEFAULT '0' NOT NULL,
     room text,
 
     KEY seminar (seminar)
-);
-
-
-#
-# Table structure for table 'tx_seminars_timeslots_speakers_mm'
-#
-CREATE TABLE tx_seminars_timeslots_speakers_mm (
-    uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-    uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    tablenames varchar(30) DEFAULT '' NOT NULL,
-    sorting int(11) unsigned DEFAULT '0' NOT NULL,
-    KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign)
 );
 
 

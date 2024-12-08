@@ -42,33 +42,6 @@ $tca = [
                 'default' => 0,
             ],
         ],
-        // @deprecated will be removed in #3802 in seminars 6.0
-        'entry_date' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.entry_date',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 12,
-                'eval' => 'datetime, int',
-                'default' => 0,
-            ],
-        ],
-        // @deprecated will be removed in #3802 in seminars 6.0
-        'speakers' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.speakers',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_seminars_speakers',
-                'foreign_table_where' => 'ORDER BY title',
-                'size' => 10,
-                'minitems' => 0,
-                'maxitems' => 999,
-                'MM' => 'tx_seminars_timeslots_speakers_mm',
-            ],
-        ],
         'place' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.place',
@@ -96,8 +69,7 @@ $tca = [
         ],
     ],
     'types' => [
-        // drop `entry_date` #3802 in seminars 6.0
-        '0' => ['showitem' => 'begin_date, end_date, entry_date, speakers, place, room'],
+        '0' => ['showitem' => 'begin_date, end_date, place, room'],
     ],
 ];
 

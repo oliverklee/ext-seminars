@@ -3084,10 +3084,8 @@ class LegacyEvent extends AbstractTimeSpan
      *     uid: int,
      *     date: string,
      *     time: string,
-     *     entry_date: string,
      *     room: string,
-     *     place: string,
-     *     speakers: string
+     *     place: string
      * }>
      */
     public function getTimeSlotsAsArrayWithMarkers(): array
@@ -3100,12 +3098,8 @@ class LegacyEvent extends AbstractTimeSpan
                 'uid' => $timeSlot->getUid(),
                 'date' => $timeSlot->getDate(),
                 'time' => $timeSlot->getTime(),
-                // @deprecated will be removed in #3802 in seminars 6.0
-                'entry_date' => $timeSlot->getEntryDate(),
                 'room' => $timeSlot->getRoom(),
                 'place' => $timeSlot->getPlaceShort(),
-                // @deprecated will be removed in #3802 in seminars 6.0
-                'speakers' => $timeSlot->getSpeakersShortCommaSeparated(),
             ];
         }
 
