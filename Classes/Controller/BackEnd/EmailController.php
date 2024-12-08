@@ -64,12 +64,13 @@ class EmailController extends ActionController
         $this->checkPermissions();
 
         $eventUid = $event->getUid();
+        \assert(\is_int($eventUid) && $eventUid > 0);
         $_POST['subject'] = $subject;
         $_POST['emailBody'] = $body;
 
-        $emailService = GeneralUtility::makeInstance(EmailService::class, $eventUid);
+        $emailService = GeneralUtility::makeInstance(EmailService::class);
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);
-        $emailService->sendEmailToAttendees();
+        $emailService->sendEmailToAttendees($eventUid);
 
         return $this->redirect('overview', 'BackEnd\\Module');
     }

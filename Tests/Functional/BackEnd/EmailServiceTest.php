@@ -35,6 +35,8 @@ final class EmailServiceTest extends FunctionalTestCase
         ],
     ];
 
+    private EmailService $subject;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -44,6 +46,8 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->initializeBackEndLanguage();
 
         $this->email = $this->createEmailMock();
+
+        $this->subject = new EmailService();
     }
 
     protected function tearDown(): void
@@ -64,9 +68,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new EmailService(2);
-
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -74,7 +76,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'some message body',
             ]
         );
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(2);
     }
 
     /**
@@ -87,10 +89,8 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new EmailService(1);
-
         $messageBody = '%salutation';
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -98,7 +98,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => $messageBody,
             ]
         );
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(1);
 
         self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
     }
@@ -110,9 +110,7 @@ final class EmailServiceTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new EmailService(2);
-
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -124,7 +122,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(2);
 
         self::assertArrayHasKey('system-foo@example.com', $this->getFromOfEmail($this->email));
     }
@@ -138,9 +136,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new EmailService(2);
-
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -151,7 +147,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(2);
 
         self::assertArrayHasKey('oliver@example.com', $this->getFromOfEmail($this->email));
     }
@@ -163,9 +159,7 @@ final class EmailServiceTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new EmailService(2);
-
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -176,7 +170,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(2);
 
         self::assertArrayHasKey('oliver@example.com', $this->getReplyToOfEmail($this->email));
     }
@@ -192,9 +186,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new EmailService(2);
-
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -202,7 +194,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(2);
 
         self::assertStringContainsString("\n-- \nThe one and only", $this->email->getTextBody());
     }
@@ -218,8 +210,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
 
         $emailSubject = 'Thank you for your registration.';
-        $subject = new EmailService(1);
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -227,7 +218,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(1);
 
         self::assertSame($emailSubject, $this->email->getSubject());
     }
@@ -242,8 +233,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::never())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new EmailService(4);
-        $subject->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendEmail',
                 'isSubmitted' => '1',
@@ -251,6 +241,6 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $subject->sendEmailToAttendees();
+        $this->subject->sendEmailToAttendees(4);
     }
 }
