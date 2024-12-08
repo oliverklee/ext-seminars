@@ -287,7 +287,7 @@
 				<source>Additional text for the thank-you email to the attendees</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers">
-				<source>Speakers</source>
+				<source>Speaker</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.title">
 				<source>Name</source>
@@ -329,7 +329,7 @@
 				<source>Cancelation period (in days)</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances">
-				<source>Attendances</source>
+				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.divLabelOverview">
 				<source>Overview</source>
@@ -479,7 +479,7 @@
 				<source>Number of kids</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_sites">
-				<source>Seminar Sites</source>
+				<source>Venue</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_sites.title">
 				<source>Name</source>
@@ -515,7 +515,7 @@
 				<source>Phone number</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers">
-				<source>Organizers</source>
+				<source>Organizer</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.title">
 				<source>Name</source>
@@ -533,7 +533,7 @@
 				<source>Email footer</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods">
-				<source>Methods of payment</source>
+				<source>Method of payment</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods.title">
 				<source>Title</source>
@@ -542,7 +542,7 @@
 				<source>Detailed description for emails</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types">
-				<source>Event types</source>
+				<source>Event type</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_event_types.title">
 				<source>Title</source>
@@ -551,25 +551,25 @@
 				<source>Single view page for events of this type</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_checkboxes">
-				<source>Registration options with checkbox</source>
+				<source>Registration option with checkbox</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_checkboxes.title">
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_lodgings">
-				<source>Lodging options</source>
+				<source>Lodging option</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_lodgings.title">
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_foods">
-				<source>Food options</source>
+				<source>Food option</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_foods.title">
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_timeslots">
-				<source>Time slots</source>
+				<source>Time slot</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_timeslots.begin_date">
 				<source>Begin date</source>
@@ -603,7 +603,7 @@
 				<source>Maximum age</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_categories">
-				<source>Categories</source>
+				<source>Event category</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_categories.title">
 				<source>Title</source>
@@ -612,7 +612,7 @@
 				<source>Single view page for events in this category</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_skills">
-				<source>Skills</source>
+				<source>Skill</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_skills.title">
 				<source>Title</source>
