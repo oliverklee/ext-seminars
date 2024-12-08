@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
+use OliverKlee\Seminars\BackEnd\EmailService;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use Psr\Http\Message\ResponseInterface;
@@ -67,7 +67,7 @@ class EmailController extends ActionController
         $_POST['subject'] = $subject;
         $_POST['emailBody'] = $body;
 
-        $emailService = GeneralUtility::makeInstance(GeneralEventMailForm::class, $eventUid);
+        $emailService = GeneralUtility::makeInstance(EmailService::class, $eventUid);
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);
         $emailService->sendEmailToAttendees();
 
