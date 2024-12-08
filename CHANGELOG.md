@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Improve the label for "register myself (as well)" (#3929)
 - Use the term "event" instead of "seminars" in the TCEforms (#3928)
 - Shorten the link label for the waiting list registration (#3926)
 - Make some TCEforms labels more specific (#3924, #3925, #3927)

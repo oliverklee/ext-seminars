@@ -874,7 +874,7 @@ This event now has been confirmed.</source>
 				<source>Persons to register:</source>
 			</trans-unit>
 			<trans-unit id="label_registered_themselves">
-				<source>myself</source>
+				<source>myself (too)</source>
 			</trans-unit>
 			<trans-unit id="label_firstname">
 				<source>First name:</source>
@@ -1124,7 +1124,7 @@ This event now has been confirmed.</source>
 				<source>Maximum bookable seats per registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
-				<source>People register themselves by default</source>
+				<source>People register themselves (too) by default</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees">
 				<source>Show an email field for additional attendees</source>
@@ -1142,7 +1142,7 @@ This event now has been confirmed.</source>
 				<source>Seats</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
-				<source>Is registering themselves</source>
+				<source>Is registering themselves (too)</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
 				<source>Persons to register</source>
@@ -1340,7 +1340,7 @@ This event now has been confirmed.</source>
 				<source>Seats to book</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.registeredThemselves">
-				<source>I am registering myself.</source>
+				<source>I am registering myself (too).</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.registeredThemselves.not">
 				<source>I am not registering myself.</source>

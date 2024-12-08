@@ -464,7 +464,7 @@
 				<source>Additional notes</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.registered_themselves">
-				<source>Has signed up themselves</source>
+				<source>Has signed up themselves (too)</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.seats">
 				<source>Number of seats</source>
