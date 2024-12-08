@@ -2001,18 +2001,8 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
-			message: "#^Cannot call method getAttendancesNotPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 4
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
 			message: "#^Cannot call method getAttendancesOnRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
 			count: 1
-			path: Tests/Functional/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot call method getAttendancesPaid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
@@ -2286,11 +2276,6 @@ parameters:
 			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
 
 		-
-			message: "#^Cannot call method isPaid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
-			count: 1
-			path: Tests/Functional/OldModel/LegacyRegistrationTest.php
-
-		-
 			message: "#^Cannot call method getAddress\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacySpeaker\\|null\\.$#"
 			count: 1
 			path: Tests/Functional/OldModel/LegacySpeakerTest.php
@@ -2467,7 +2452,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 4
+			count: 1
 			path: Tests/LegacyFunctional/BagBuilder/RegistrationBagBuilderTest.php
 
 		-

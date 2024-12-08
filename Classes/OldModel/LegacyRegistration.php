@@ -193,9 +193,6 @@ class LegacyRegistration extends AbstractModel
                 $result = $this->getRecordPropertyBoolean($trimmedKey)
                     ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
-            case 'datepaid':
-                $result = \date($this->getDateFormat(), $this->getRecordPropertyInteger($trimmedKey));
-                break;
             case 'method_of_payment':
                 $uid = $this->getRecordPropertyInteger($trimmedKey);
                 \assert($uid >= 0);
@@ -368,26 +365,6 @@ class LegacyRegistration extends AbstractModel
         }
 
         return $this->seminar;
-    }
-
-    /**
-     * Gets whether this attendance has already been paid for.
-     *
-     * @return bool whether this attendance has already been paid for
-     */
-    public function isPaid(): bool
-    {
-        return $this->getRecordPropertyInteger('datepaid') > 0;
-    }
-
-    /**
-     * Sets the date when this registration has been paid for.
-     *
-     * @param int<0, max> $paymentDate the date of the payment as UNIX timestamp
-     */
-    public function setPaymentDateAsUnixTimestamp(int $paymentDate): void
-    {
-        $this->setRecordPropertyInteger('datepaid', $paymentDate);
     }
 
     /**

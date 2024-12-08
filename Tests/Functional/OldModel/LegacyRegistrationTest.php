@@ -77,7 +77,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         self::assertSame(4, $subject->getSeats());
         self::assertSame(1, $subject->getUser());
         self::assertSame(1, $subject->getSeminar());
-        self::assertTrue($subject->isPaid());
         self::assertSame('coding', $subject->getInterests());
         self::assertSame('good coffee', $subject->getExpectations());
         self::assertSame('latte art', $subject->getKnowledge());

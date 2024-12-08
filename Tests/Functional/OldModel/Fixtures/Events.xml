@@ -96,29 +96,6 @@
         <registration_queue>1</registration_queue>
     </tx_seminars_attendances>
     <tx_seminars_seminars>
-        <uid>7</uid>
-        <title>event with one paid, non-queue registration</title>
-        <registrations>1</registrations>
-    </tx_seminars_seminars>
-    <tx_seminars_attendances>
-        <uid>7</uid>
-        <seminar>7</seminar>
-        <seats>2</seats>
-        <datepaid>1575030383</datepaid>
-    </tx_seminars_attendances>
-    <tx_seminars_seminars>
-        <uid>8</uid>
-        <title>event with one paid, queue registration</title>
-        <registrations>1</registrations>
-    </tx_seminars_seminars>
-    <tx_seminars_attendances>
-        <uid>8</uid>
-        <seminar>8</seminar>
-        <seats>2</seats>
-        <datepaid>1575030383</datepaid>
-        <registration_queue>1</registration_queue>
-    </tx_seminars_attendances>
-    <tx_seminars_seminars>
         <uid>9</uid>
         <title>event without any registrations, but with open seats</title>
         <attendees_max>12</attendees_max>

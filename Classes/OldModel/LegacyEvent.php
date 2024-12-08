@@ -58,11 +58,6 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * @var int<0, max>
      */
-    protected int $numberOfAttendancesPaid = 0;
-
-    /**
-     * @var int<0, max>
-     */
     protected int $numberOfAttendancesOnQueue = 0;
 
     protected bool $statisticsHaveBeenCalculated = false;
@@ -1304,8 +1299,7 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Gets the number of attendances for this seminar
-     * (currently the paid attendances as well as the unpaid ones).
+     * Gets the number of attendances for this seminar.
      *
      * @return int<0, max>
      */
@@ -1317,38 +1311,13 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether there is at least one registration for this event
-     * (counting the paid attendances as well as the unpaid ones).
+     * Checks whether there is at least one registration for this event.
      *
      * @return bool true if there is at least one registration for this event, false otherwise
      */
     public function hasAttendances(): bool
     {
         return $this->getAttendances() > 0;
-    }
-
-    /**
-     * Gets the number of paid attendances for this seminar.
-     *
-     * @return int<0, max>
-     */
-    public function getAttendancesPaid(): int
-    {
-        $this->calculateStatisticsIfNeeded();
-
-        return $this->numberOfAttendancesPaid;
-    }
-
-    /**
-     * Gets the number of attendances that are not paid yet
-     *
-     * @return int<0, max>
-     */
-    public function getAttendancesNotPaid(): int
-    {
-        $number = $this->getAttendances() - $this->getAttendancesPaid();
-
-        return \max(0, $number);
     }
 
     /**
@@ -2456,7 +2425,6 @@ class LegacyEvent extends AbstractTimeSpan
 
         $this->numberOfAttendances = $this->getOfflineRegistrations()
             + $this->sumSeatsOfRegistrations($this->getNonQueueRegistrations());
-        $this->numberOfAttendancesPaid = $this->sumSeatsOfRegistrations($this->getPaidRegistrations());
         $this->numberOfAttendancesOnQueue = $this->sumSeatsOfRegistrations($this->getQueueRegistrations());
 
         $this->statisticsHaveBeenCalculated = true;
@@ -2485,19 +2453,6 @@ class LegacyEvent extends AbstractTimeSpan
         return \array_filter(
             $this->registrations,
             static fn (array $registration): bool => (bool)$registration['registration_queue']
-        );
-    }
-
-    /**
-     * @return array<int, array<string, string|int>>
-     */
-    private function getPaidRegistrations(): array
-    {
-        $this->retrieveRegistrations();
-
-        return \array_filter(
-            $this->getNonQueueRegistrations(),
-            static fn (array $registration): bool => (int)$registration['datepaid'] > 0
         );
     }
 
