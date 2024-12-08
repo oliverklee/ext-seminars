@@ -509,7 +509,7 @@ die Veranstaltung "%event" (Veranstaltungsnummer: %uid) beginnt in %days Tagen. 
 the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
         <target state="final">Hallo %organizer,
 
-das Ende der Absagefrist für die ReferentInnen der Veranstaltung "%event" wurde erreicht (Veranstaltungsnummer: %uid, Beginn: %begin_date). Zur Zeit ist diese Veranstaltung weder bestätigt noch abgesagt und es gibt %registrations Anmeldungen für diese Veranstaltung.</target>
+das Ende der Absagefrist für die Referent_innen der Veranstaltung "%event" wurde erreicht (Veranstaltungsnummer: %uid, Beginn: %begin_date). Zur Zeit ist diese Veranstaltung weder bestätigt noch abgesagt und es gibt %registrations Anmeldungen für diese Veranstaltung.</target>
       </trans-unit>
       <trans-unit id="label_planned_disclaimer" approved="yes">
         <source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
@@ -629,7 +629,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="message_emailToAttendeesSent" approved="yes">
         <source>The email to the attendees has been sent.</source>
-        <target state="final">Die E-Mail an die TeilnehmerInnen wurde verschickt.</target>
+        <target state="final">Die E-Mail an die angemeldeten Personen wurde verschickt.</target>
       </trans-unit>
       <trans-unit id="mlang_tabs_tab" approved="yes">
         <source>Events</source>
@@ -677,7 +677,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.list_registrations" approved="yes">
         <source>List of Registrations (for attendees)</source>
-        <target state="final">Liste der Anmeldungen (für TeilnehmerInnen)</target>
+        <target state="final">Liste der Anmeldungen (für angemeldete Personen)</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.list_vip_registrations" approved="yes">
         <source>List of Registrations (for event managers)</source>
@@ -709,7 +709,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.registrationsListPID" approved="yes">
         <source>Page that contains the list of registrations (for attendees):</source>
-        <target state="final">Seite mit der Liste der Anmeldungen (für TeilnehmerInnen):</target>
+        <target state="final">Seite mit der Liste der Anmeldungen (für angemeldete Personen):</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.registrationsVipListPID" approved="yes">
         <source>Page that contains the list of registrations (for event managers):</source>
@@ -1017,7 +1017,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_speakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="label_partners_single_unknown" approved="yes">
         <source>Partner</source>
@@ -1041,7 +1041,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_leaders" approved="yes">
         <source>Leaders</source>
-        <target state="final">KursleiterInnen</target>
+        <target state="final">Kursleiter_innen</target>
       </trans-unit>
       <trans-unit id="label_language" approved="yes">
         <source>Language</source>
@@ -1242,7 +1242,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_timeslot_speakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="label_selector_submit" approved="yes">
         <source>Apply filter</source>
@@ -1430,7 +1430,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.property.organizers" approved="yes">
         <source>Organizers</source>
-        <target state="final">Veranstalter_innen</target>
+        <target state="final">Veranstalter</target>
       </trans-unit>
       <trans-unit id="plugin.frontEndEditor.action.new" approved="yes">
         <source>Create a new event</source>
