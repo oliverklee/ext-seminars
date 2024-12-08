@@ -1099,21 +1099,21 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Attached files</source>
         <target state="final">Angehängte Dateien</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistration" approved="yes">
-        <source>Register</source>
-        <target state="final">Anmelden</target>
+      <trans-unit id="label_onlineRegistration">
+        <source>register</source>
+        <target state="needs-translation">register</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistrationOnQueue" approved="yes">
-        <source>Waiting list</source>
-        <target state="final">Warteliste</target>
+      <trans-unit id="label_onlineRegistrationOnQueue">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
       </trans-unit>
-      <trans-unit id="label_onlinePrebooking" approved="yes">
-        <source>Prebook</source>
-        <target state="final">Voranmelden</target>
+      <trans-unit id="label_onlinePrebooking">
+        <source>prebook</source>
+        <target state="needs-translation">prebook</target>
       </trans-unit>
-      <trans-unit id="label_onlineUnregistration" approved="yes">
-        <source>Unregister</source>
-        <target state="final">Abmelden</target>
+      <trans-unit id="label_onlineUnregistration">
+        <source>unregister</source>
+        <target state="needs-translation">unregister</target>
       </trans-unit>
       <trans-unit id="label_list_registrations" approved="yes">
         <source>List of registrations</source>
