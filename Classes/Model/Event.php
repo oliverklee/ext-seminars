@@ -544,19 +544,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether this event is fully booked.
-     *
-     * If this event has an unlimited number of possible registrations, this
-     * function will always return FALSE.
-     *
-     * @deprecated will be removed in version 6.0 in #3422
-     */
-    public function isFull(): bool
-    {
-        return !$this->hasVacancies();
-    }
-
-    /**
      * Returns the names of registered attendees (including additional attendees and queue registrations),
      * but only those that have registered after the last registration digest email.
      *
