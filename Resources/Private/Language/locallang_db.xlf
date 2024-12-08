@@ -581,6 +581,7 @@
 			<trans-unit id="tx_seminars_timeslots.entry_date">
 				<source>Entry date</source>
 			</trans-unit>
+			<!-- @deprecated will be removed in #3802 in seminars 6.0 -->
 			<trans-unit id="tx_seminars_timeslots.speakers">
 				<source>Speakers</source>
 			</trans-unit>

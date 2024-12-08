@@ -1456,11 +1456,6 @@ parameters:
 			path: Classes/OldModel/LegacyEvent.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getTimeSlotsAsArrayWithMarkers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:mmRecordsToSelection\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
