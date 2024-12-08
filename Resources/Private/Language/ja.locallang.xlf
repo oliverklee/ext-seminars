@@ -219,10 +219,6 @@
         <source>Additional Notes</source>
         <target state="needs-translation">Additional Notes</target>
       </trans-unit>
-      <trans-unit id="label_url">
-        <source>More information</source>
-        <target state="needs-translation">More information</target>
-      </trans-unit>
       <trans-unit id="label_webinar_url">
         <source>Webinar URL</source>
         <target state="needs-translation">Webinar URL</target>
