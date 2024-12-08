@@ -135,38 +135,6 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getQueueRegistrationsReturnsQueueRegistrations(): void
-    {
-        /** @var Collection<Registration> $registrations */
-        $registrations = new Collection();
-        $registration = MapperRegistry::get(RegistrationMapper::class)
-            ->getLoadedTestingModel(['registration_queue' => 1]);
-        $registrations->add($registration);
-        $this->subject->setRegistrations($registrations);
-
-        self::assertEquals(
-            $registration->getUid(),
-            $this->subject->getQueueRegistrations()->getUids()
-        );
-    }
-
-    public function getQueueRegistrationsNotReturnsRegularRegistrations(): void
-    {
-        /** @var Collection<Registration> $registrations */
-        $registrations = new Collection();
-        $registration = MapperRegistry::get(RegistrationMapper::class)
-            ->getLoadedTestingModel(['registration_queue' => 0]);
-        $registrations->add($registration);
-        $this->subject->setRegistrations($registrations);
-
-        self::assertTrue(
-            $this->subject->getQueueRegistrations()->isEmpty()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getRegisteredSeatsCountsSingleSeatRegularRegistrations(): void
     {
         $registrations = new Collection();
@@ -216,22 +184,12 @@ final class EventTest extends FunctionalTestCase
     public function getRegisteredSeatsNotCountsQueueRegistrations(): void
     {
         $queueRegistrations = new Collection();
-        $registration = MapperRegistry::get(RegistrationMapper::class)
-            ->getLoadedTestingModel(['seats' => 1]);
+        $registration = MapperRegistry::get(RegistrationMapper::class)->getLoadedTestingModel(['seats' => 1]);
         $queueRegistrations->add($registration);
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getRegularRegistrations', 'getQueueRegistrations']
-        );
+        $event = $this->createPartialMock(Event::class, ['getRegularRegistrations']);
         $event->setData([]);
-        $event->method('getQueueRegistrations')
-            ->willReturn($queueRegistrations);
-        $event->method('getRegularRegistrations')
-            ->willReturn(new Collection());
+        $event->method('getRegularRegistrations')->willReturn(new Collection());
 
-        self::assertEquals(
-            0,
-            $event->getRegisteredSeats()
-        );
+        self::assertSame(0, $event->getRegisteredSeats());
     }
 }

@@ -418,30 +418,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Gets the queue registrations for this event, i.e., the registrations
-     * that are no regular registrations (yet).
-     *
-     * @return Collection<Registration> the queue registrations for this event, will be
-     *                       will be empty if this event no queue registrations
-     *
-     * @deprecated #1324 will be removed in seminars 6.0
-     */
-    public function getQueueRegistrations(): Collection
-    {
-        /** @var Collection<Registration> $queueRegistrations */
-        $queueRegistrations = new Collection();
-
-        /** @var Registration $registration */
-        foreach ($this->getRegistrations() as $registration) {
-            if ($registration->isOnRegistrationQueue()) {
-                $queueRegistrations->add($registration);
-            }
-        }
-
-        return $queueRegistrations;
-    }
-
-    /**
      * @return Collection<Registration>
      *
      * @deprecated will be removed in version 6.0 in #3422
