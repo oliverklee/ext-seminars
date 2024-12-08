@@ -28,8 +28,8 @@
         <target state="needs-translation">Gender</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars">
-        <source>Seminars</source>
-        <target state="needs-translation">Seminars</target>
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelGeneral">
         <source>General</source>
@@ -120,8 +120,8 @@
         <target state="needs-translation">Registration options with checkbox</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.uses_terms_2">
-        <source>Display the travelling terms checkbox in the registration form</source>
-        <target state="needs-translation">Display the travelling terms checkbox in the registration form</target>
+        <source>Display the additional terms checkbox in the registration form</source>
+        <target state="needs-translation">Display the additional terms checkbox in the registration form</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.needs_registration">
         <source>Needs registration</source>
@@ -476,8 +476,8 @@
         <target state="needs-translation">Front-end User</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seminar">
-        <source>Seminar</source>
-        <target state="needs-translation">Seminar</target>
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue">
         <source>Is on the registration queue</source>
@@ -616,8 +616,8 @@
         <target state="needs-translation">Additional notes</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registered_themselves">
-        <source>Has signed up themselves</source>
-        <target state="needs-translation">Has signed up themselves</target>
+        <source>Has signed up themselves (too)</source>
+        <target state="needs-translation">Has signed up themselves (too)</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seats">
         <source>Number of seats</source>
@@ -704,8 +704,8 @@
         <target state="needs-translation">Email address</target>
       </trans-unit>
       <trans-unit id="tx_seminars_organizers.email_footer">
-        <source>Footer text to be appended to all emails from this organizer</source>
-        <target state="needs-translation">Footer text to be appended to all emails from this organizer</target>
+        <source>Email footer</source>
+        <target state="needs-translation">Email footer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods">
         <source>Methods of payment</source>
