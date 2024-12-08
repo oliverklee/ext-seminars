@@ -454,24 +454,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Returns the number of vacancies for this event.
-     *
-     * If this event has an unlimited number of possible registrations, this
-     * function will always return zero.
-     *
-     * @return int the number of vacancies for this event, will be >= 0
-     *
-     * @deprecated will be removed in version 6.0 in #3422
-     */
-    public function getVacancies(): int
-    {
-        return max(
-            0,
-            $this->getMaximumAttendees() - $this->getRegisteredSeats()
-        );
-    }
-
-    /**
      * @return int the date as UNIX time-stamp, will be 0 if this no digest has been sent yet
      */
     public function getDateOfLastRegistrationDigestEmailAsUnixTimeStamp(): int
