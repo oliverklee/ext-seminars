@@ -4,12 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Model;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Interfaces\Configuration;
-use OliverKlee\Oelib\Mapper\LanguageMapper;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
@@ -21,23 +16,14 @@ class Event extends AbstractTimeSpan
     use EventEmailSenderTrait;
 
     /**
-     * @var int represents the type for an event date
-     */
-    public const TYPE_DATE = 2;
-
-    protected function getConfiguration(): Configuration
-    {
-        return ConfigurationRegistry::get('plugin.tx_seminars');
-    }
-
-    /**
      * Returns whether this event is a valid event date (i.e., a date with an associated topic).
      *
      * @return bool TRUE if this event is an event date, FALSE otherwise
      */
     public function isEventDate(): bool
     {
-        return $this->getAsInteger('object_type') === self::TYPE_DATE && $this->getAsModel('topic') !== null;
+        return $this->getAsInteger('object_type') === EventInterface::TYPE_EVENT_DATE
+            && $this->getAsModel('topic') !== null;
     }
 
     /**
@@ -221,27 +207,6 @@ class Event extends AbstractTimeSpan
     protected function hasSingleViewPageUidFromCategories(): bool
     {
         return $this->getSingleViewPageUidFromCategories() > 0;
-    }
-
-    public function getLanguage(): ?Language
-    {
-        if (!$this->hasLanguage()) {
-            return null;
-        }
-        /** @var non-empty-string $languageCode */
-        $languageCode = $this->getAsString('language');
-
-        return MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code($languageCode);
-    }
-
-    public function setLanguage(Language $language): void
-    {
-        $this->setAsString('language', $language->getIsoAlpha2Code());
-    }
-
-    public function hasLanguage(): bool
-    {
-        return $this->hasString('language');
     }
 
     /**

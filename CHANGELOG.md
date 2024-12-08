@@ -55,7 +55,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 - Drop the entry date and speakers from the timeslots (#3946)
 - Drop some `Event` methods that are only called from tests
-  (#3932, #3933, #3934, #3935, #3936, #3937, #3938, #3941, #3943)
+  (#3932, #3933, #3934, #3935, #3936, #3937, #3938, #3941, #3943, #3948)
 - Drop the single view links from the emails (#3931)
 - Remove unneeded `resname` from the language files (#3871)
 - Drop unused old models and mappers

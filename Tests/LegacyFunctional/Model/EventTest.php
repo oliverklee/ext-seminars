@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyFunctional\Model;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
@@ -51,50 +50,6 @@ final class EventTest extends FunctionalTestCase
         ConfigurationRegistry::purgeInstance();
 
         parent::tearDown();
-    }
-
-    /////////////////////////////////////
-    // Tests regarding isSingleEvent().
-    /////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getLanguageWithLanguageReturnsLanguage(): void
-    {
-        $this->subject->setData(['language' => 'DE']);
-
-        self::assertSame(
-            MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE'),
-            $this->subject->getLanguage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setLanguageSetsLanguage(): void
-    {
-        $language = MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE');
-        $this->subject->setLanguage($language);
-
-        self::assertSame(
-            $language,
-            $this->subject->getLanguage()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasLanguageWithLanguageReturnsTrue(): void
-    {
-        $language = MapperRegistry::get(LanguageMapper::class)->findByIsoAlpha2Code('DE');
-        $this->subject->setLanguage($language);
-
-        self::assertTrue(
-            $this->subject->hasLanguage()
-        );
     }
 
     /**
