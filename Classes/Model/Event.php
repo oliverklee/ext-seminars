@@ -568,18 +568,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Returns the names of all registered attendees (including additional attendees and queue registrations).
-     *
-     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
-     *
-     * @deprecated will be removed in version 6.0 in #3422
-     */
-    public function getAttendeeNames(): array
-    {
-        return $this->extractNamesFromRegistrations($this->getRegistrations());
-    }
-
-    /**
      * Returns the names of registered attendees (including additional attendees and queue registrations),
      * but only those that have registered after the last registration digest email.
      *
