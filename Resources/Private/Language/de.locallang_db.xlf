@@ -161,11 +161,11 @@
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelSpeakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.speakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.partners" approved="yes">
         <source>Partners</source>
@@ -277,11 +277,11 @@
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelAttendees" approved="yes">
         <source>Attendees</source>
-        <target state="final">Teilnehmer</target>
+        <target state="final">Anmeldungen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.attendees_min" approved="yes">
         <source>Minimal number of attendees</source>
-        <target state="final">Minimale Anzahl TeilnehmerInnen</target>
+        <target state="final">Minimale Anzahl Anmeldungen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.attendees_max" approved="yes">
         <source>Maximal number of attendees</source>
@@ -293,11 +293,11 @@
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.offline_attendees" approved="yes">
         <source>Number of offline-registered attendees</source>
-        <target state="final">Anzahl der offline angemeldeten TeilnehmerInnen</target>
+        <target state="final">Anzahl der Offline-Anmeldungen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" approved="yes">
         <source>Organizers have been notified that the minimum number of attendees has been reached</source>
-        <target state="final">Veranstalter wurde benachrichtigt, dass es genug Teilnehmer gibt</target>
+        <target state="final">Veranstalter wurde benachrichtigt, dass es genug Anmeldungen gibt</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.mute_notification_emails" approved="yes">
         <source>Mute the notification emails to the organizers</source>
@@ -353,7 +353,7 @@
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.vips" approved="yes">
         <source>Managers of this event</source>
-        <target state="final">Verwalter dieser Veranstaltung</target>
+        <target state="final">Verwaltung dieser Veranstaltung</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.image" approved="yes">
         <source>Image</source>
@@ -381,7 +381,7 @@
       </trans-unit>
       <trans-unit id="tx_seminars_speakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers.title" approved="yes">
         <source>Name</source>
@@ -643,9 +643,9 @@
         <source>Name</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites.address" approved="yes">
-        <source>Address</source>
-        <target state="final">Adresse</target>
+      <trans-unit id="tx_seminars_sites.address">
+        <source>Full address</source>
+        <target state="needs-translation">Full address</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.zip" approved="yes">
         <source>ZIP code</source>
@@ -774,7 +774,7 @@
       </trans-unit>
       <trans-unit id="tx_seminars_timeslots.speakers" approved="yes">
         <source>Speakers</source>
-        <target state="final">ReferentInnen</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_timeslots.place" approved="yes">
         <source>Place</source>
