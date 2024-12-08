@@ -10,7 +10,6 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -26,33 +25,16 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class EmailService
 {
-    private Event $event;
+    private EventMapper $eventMapper;
 
     /**
      * @var array<string, string|int>
      */
     private array $postData = [];
 
-    /**
-     * The constructor of this class. Instantiates an event object.
-     *
-     * @param positive-int $eventUid
-     *
-     * @throws NotFoundException if event could not be instantiated
-     */
-    public function __construct(int $eventUid)
+    public function __construct()
     {
-        $mapper = MapperRegistry::get(EventMapper::class);
-        if (!$mapper->existsModel($eventUid)) {
-            throw new NotFoundException('There is no event with this UID.', 1333292164);
-        }
-
-        $this->event = $mapper->find($eventUid);
-    }
-
-    private function getEvent(): Event
-    {
-        return $this->event;
+        $this->eventMapper = MapperRegistry::get(EventMapper::class);
     }
 
     /**
@@ -94,15 +76,21 @@ class EmailService
 
     /**
      * Sends an email to the attendees to inform about the changed event status.
+     *
+     * @param positive-int $eventUid
+     *
+     * @throws NotFoundException if event could not be instantiated
      */
-    public function sendEmailToAttendees(): void
+    public function sendEmailToAttendees(int $eventUid): void
     {
-        $event = $this->getEvent();
+        if (!$this->eventMapper->existsModel($eventUid)) {
+            throw new NotFoundException('There is no event with this UID.', 1333292164);
+        }
+
+        $event = $this->eventMapper->find($eventUid);
         $organizer = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
 
-        $eventUid = $event->getUid();
-        \assert($eventUid > 0);
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($eventUid);
         $registrations = $registrationBagBuilder->build();
