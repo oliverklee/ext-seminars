@@ -92,7 +92,7 @@
 				<source>Registration options with checkbox</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.uses_terms_2">
-				<source>Display the travelling terms checkbox in the registration form</source>
+				<source>Display the additional terms checkbox in the registration form</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.needs_registration">
 				<source>Needs registration</source>

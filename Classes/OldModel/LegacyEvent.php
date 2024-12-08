@@ -2818,13 +2818,11 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Checkes whether the "travelling terms" checkbox (ie. the second "terms"
-     * checkbox) should be displayed in the registration form for this event.
+     * Checkes whether the "additional terms" checkbox should be displayed in the registration form for this event.
      *
-     * If we are a date record, this is checked for the corresponding topic
-     * record.
+     * If we are a date record, this is checked for the corresponding topic record.
      *
-     * @return bool whether if the "travelling terms" checkbox should be displayed
+     * @return bool whether if the "additional terms" checkbox should be displayed
      */
     public function hasTerms2(): bool
     {
