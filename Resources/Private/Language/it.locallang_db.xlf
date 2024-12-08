@@ -643,9 +643,9 @@
         <source>Name</source>
         <target state="final">Nome</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites.address" approved="yes">
-        <source>Address</source>
-        <target state="final">Indirizzo</target>
+      <trans-unit id="tx_seminars_sites.address">
+        <source>Full address</source>
+        <target state="needs-translation">Full address</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.zip">
         <source>ZIP code</source>
