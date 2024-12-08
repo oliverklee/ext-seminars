@@ -528,40 +528,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         );
     }
 
-    // Tests for isPaid()
-
-    /**
-     * @test
-     */
-    public function isPaidInitiallyReturnsFalse(): void
-    {
-        self::assertFalse(
-            $this->subject->isPaid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isPaidForPaidRegistrationReturnsTrue(): void
-    {
-        $this->subject->setPaymentDateAsUnixTimestamp(12354);
-
-        self::assertTrue($this->subject->isPaid());
-    }
-
-    /**
-     * @test
-     */
-    public function isPaidForUnpaidRegistrationReturnsFalse(): void
-    {
-        $this->subject->setPaymentDateAsUnixTimestamp(0);
-
-        self::assertFalse(
-            $this->subject->isPaid()
-        );
-    }
-
     // Tests regarding hasExistingFrontEndUser().
 
     /**

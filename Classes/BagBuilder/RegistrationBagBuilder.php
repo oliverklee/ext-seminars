@@ -41,30 +41,6 @@ class RegistrationBagBuilder extends AbstractBagBuilder
     }
 
     /**
-     * Limits the bag to paid registrations.
-     */
-    public function limitToPaid(): void
-    {
-        $this->whereClauseParts['paid'] = 'tx_seminars_attendances.datepaid <> 0';
-    }
-
-    /**
-     * Limits the bag to unpaid registrations.
-     */
-    public function limitToUnpaid(): void
-    {
-        $this->whereClauseParts['paid'] = 'tx_seminars_attendances.datepaid = 0';
-    }
-
-    /**
-     * Removes the limitation for paid or unpaid registrations.
-     */
-    public function removePaymentLimitation(): void
-    {
-        unset($this->whereClauseParts['paid']);
-    }
-
-    /**
      * Limits the bag to the registrations on the registration queue.
      */
     public function limitToOnQueue(): void
