@@ -27,9 +27,9 @@
         <source>Gender</source>
         <target state="needs-translation">Gender</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars" approved="yes">
-        <source>Seminars</source>
-        <target state="final">Семинары</target>
+      <trans-unit id="tx_seminars_seminars">
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelGeneral" approved="yes">
         <source>General</source>
@@ -119,9 +119,9 @@
         <source>Registration options with checkbox</source>
         <target state="final">Опции регистрации</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.uses_terms_2" approved="yes">
-        <source>Display the travelling terms checkbox in the registration form</source>
-        <target state="final">Отображать транспортные условия в форме регистрации</target>
+      <trans-unit id="tx_seminars_seminars.uses_terms_2">
+        <source>Display the additional terms checkbox in the registration form</source>
+        <target state="needs-translation">Display the additional terms checkbox in the registration form</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.needs_registration">
         <source>Needs registration</source>
@@ -475,9 +475,9 @@
         <source>Front-end User</source>
         <target state="final">Пользователь сайта</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.seminar" approved="yes">
-        <source>Seminar</source>
-        <target state="final">Семинар</target>
+      <trans-unit id="tx_seminars_attendances.seminar">
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue" approved="yes">
         <source>Is on the registration queue</source>
@@ -616,8 +616,8 @@
         <target state="final">Дополнительные заметки</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registered_themselves">
-        <source>Has signed up themselves</source>
-        <target state="needs-translation">Has signed up themselves</target>
+        <source>Has signed up themselves (too)</source>
+        <target state="needs-translation">Has signed up themselves (too)</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seats" approved="yes">
         <source>Number of seats</source>
@@ -703,9 +703,9 @@
         <source>Email address</source>
         <target state="final">E-mail</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_organizers.email_footer" approved="yes">
-        <source>Footer text to be appended to all emails from this organizer</source>
-        <target state="final">Текст подтверждающий E-mail</target>
+      <trans-unit id="tx_seminars_organizers.email_footer">
+        <source>Email footer</source>
+        <target state="needs-translation">Email footer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods" approved="yes">
         <source>Methods of payment</source>
