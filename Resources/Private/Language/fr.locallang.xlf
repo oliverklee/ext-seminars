@@ -1100,20 +1100,20 @@ This event now has been confirmed.</target>
         <target state="final">Fichiers joints</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistration">
-        <source>Register</source>
-        <target state="needs-translation">Register</target>
+        <source>register</source>
+        <target state="needs-translation">register</target>
       </trans-unit>
       <trans-unit id="label_onlineRegistrationOnQueue">
-        <source>Waiting list</source>
-        <target state="needs-translation">Waiting list</target>
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
       </trans-unit>
       <trans-unit id="label_onlinePrebooking">
-        <source>Prebook</source>
-        <target state="needs-translation">Prebook</target>
+        <source>prebook</source>
+        <target state="needs-translation">prebook</target>
       </trans-unit>
       <trans-unit id="label_onlineUnregistration">
-        <source>Unregister</source>
-        <target state="needs-translation">Unregister</target>
+        <source>unregister</source>
+        <target state="needs-translation">unregister</target>
       </trans-unit>
       <trans-unit id="label_list_registrations" approved="yes">
         <source>List of registrations</source>
