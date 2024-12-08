@@ -27,9 +27,9 @@
         <source>Gender</source>
         <target state="final">Anrede</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars">
+      <trans-unit id="tx_seminars_seminars" approved="yes">
         <source>Event</source>
-        <target state="needs-translation">Event</target>
+        <target state="final">Veranstaltung</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelGeneral" approved="yes">
         <source>General</source>
@@ -119,9 +119,9 @@
         <source>Registration options with checkbox</source>
         <target state="final">Anmeldeoptionen mit Checkbox</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_seminars.uses_terms_2">
+      <trans-unit id="tx_seminars_seminars.uses_terms_2" approved="yes">
         <source>Display the additional terms checkbox in the registration form</source>
-        <target state="needs-translation">Display the additional terms checkbox in the registration form</target>
+        <target state="final">Checkbox für zusätzliche Anmeldebedingungen im Anmeldeformular anzeigen</target>
       </trans-unit>
       <trans-unit id="tx_seminars_seminars.needs_registration" approved="yes">
         <source>Needs registration</source>
@@ -379,9 +379,9 @@
         <source>Additional text for the thank-you email to the attendees</source>
         <target state="final">Zusätzlicher Text für die Bestätigungs-E-Mail an die angemeldeten Personen</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_speakers" approved="yes">
-        <source>Speakers</source>
-        <target state="final">Referent_innen</target>
+      <trans-unit id="tx_seminars_speakers">
+        <source>Speaker</source>
+        <target state="needs-translation">Speaker</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers.title" approved="yes">
         <source>Name</source>
@@ -435,9 +435,9 @@
         <source>Cancelation period (in days)</source>
         <target state="final">Absagefrist (in Tagen)</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances" approved="yes">
-        <source>Attendances</source>
-        <target state="final">Anmeldungen</target>
+      <trans-unit id="tx_seminars_attendances">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.divLabelOverview" approved="yes">
         <source>Overview</source>
@@ -475,9 +475,9 @@
         <source>Front-end User</source>
         <target state="final">Frontend-User</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.seminar">
+      <trans-unit id="tx_seminars_attendances.seminar" approved="yes">
         <source>Event</source>
-        <target state="needs-translation">Event</target>
+        <target state="final">Veranstaltung</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue" approved="yes">
         <source>Is on the registration queue</source>
@@ -615,9 +615,9 @@
         <source>Additional notes</source>
         <target state="final">Weitere Mitteilungen</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.registered_themselves">
+      <trans-unit id="tx_seminars_attendances.registered_themselves" approved="yes">
         <source>Has signed up themselves (too)</source>
-        <target state="needs-translation">Has signed up themselves (too)</target>
+        <target state="final">Hat sich (auch) selbst angemeldet</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.seats" approved="yes">
         <source>Number of seats</source>
@@ -635,9 +635,9 @@
         <source>Number of kids</source>
         <target state="final">Anzahl Kinder</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_sites" approved="yes">
-        <source>Seminar Sites</source>
-        <target state="final">Veranstaltungsorte</target>
+      <trans-unit id="tx_seminars_sites">
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.title" approved="yes">
         <source>Name</source>
@@ -683,9 +683,9 @@
         <source>Phone number</source>
         <target state="final">Telefonnummer</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_organizers" approved="yes">
-        <source>Organizers</source>
-        <target state="final">Veranstalter</target>
+      <trans-unit id="tx_seminars_organizers">
+        <source>Organizer</source>
+        <target state="needs-translation">Organizer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_organizers.title" approved="yes">
         <source>Name</source>
@@ -703,13 +703,13 @@
         <source>Email address</source>
         <target state="final">E-Mail-Adresse</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_organizers.email_footer">
+      <trans-unit id="tx_seminars_organizers.email_footer" approved="yes">
         <source>Email footer</source>
-        <target state="needs-translation">Email footer</target>
+        <target state="final">E-Mail-Fußzeile</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_payment_methods" approved="yes">
-        <source>Methods of payment</source>
-        <target state="final">Zahlungsarten</target>
+      <trans-unit id="tx_seminars_payment_methods">
+        <source>Method of payment</source>
+        <target state="needs-translation">Method of payment</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods.title" approved="yes">
         <source>Title</source>
@@ -719,9 +719,9 @@
         <source>Detailed description for emails</source>
         <target state="final">Detaillierte Beschreibung für E-Mails</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_event_types" approved="yes">
-        <source>Event types</source>
-        <target state="final">Veranstaltungsarten</target>
+      <trans-unit id="tx_seminars_event_types">
+        <source>Event type</source>
+        <target state="needs-translation">Event type</target>
       </trans-unit>
       <trans-unit id="tx_seminars_event_types.title" approved="yes">
         <source>Title</source>
@@ -731,33 +731,33 @@
         <source>Single view page for events of this type</source>
         <target state="final">Seite mit der Einzelansicht für Veranstaltungen dieses Typs</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_checkboxes" approved="yes">
-        <source>Registration options with checkbox</source>
-        <target state="final">Anmeldeoptionen mit Checkbox</target>
+      <trans-unit id="tx_seminars_checkboxes">
+        <source>Registration option with checkbox</source>
+        <target state="needs-translation">Registration option with checkbox</target>
       </trans-unit>
       <trans-unit id="tx_seminars_checkboxes.title" approved="yes">
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_lodgings" approved="yes">
-        <source>Lodging options</source>
-        <target state="final">Unterbringungsmöglichkeiten</target>
+      <trans-unit id="tx_seminars_lodgings">
+        <source>Lodging option</source>
+        <target state="needs-translation">Lodging option</target>
       </trans-unit>
       <trans-unit id="tx_seminars_lodgings.title" approved="yes">
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_foods" approved="yes">
-        <source>Food options</source>
-        <target state="final">Verpflegungsmöglichkeiten</target>
+      <trans-unit id="tx_seminars_foods">
+        <source>Food option</source>
+        <target state="needs-translation">Food option</target>
       </trans-unit>
       <trans-unit id="tx_seminars_foods.title" approved="yes">
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_timeslots" approved="yes">
-        <source>Time slots</source>
-        <target state="final">Zeitblöcke</target>
+      <trans-unit id="tx_seminars_timeslots">
+        <source>Time slot</source>
+        <target state="needs-translation">Time slot</target>
       </trans-unit>
       <trans-unit id="tx_seminars_timeslots.begin_date" approved="yes">
         <source>Begin date</source>
@@ -800,9 +800,9 @@
         <source>Maximum age</source>
         <target state="final">Höchstalter</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_categories" approved="yes">
-        <source>Categories</source>
-        <target state="final">Kategorien</target>
+      <trans-unit id="tx_seminars_categories">
+        <source>Event category</source>
+        <target state="needs-translation">Event category</target>
       </trans-unit>
       <trans-unit id="tx_seminars_categories.title" approved="yes">
         <source>Title</source>
@@ -812,9 +812,9 @@
         <source>Single view page for events in this category</source>
         <target state="final">Seite mit der Einzelansicht für Veranstaltungen in dieser Kategorie</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_skills" approved="yes">
-        <source>Skills</source>
-        <target state="final">Fähigkeiten</target>
+      <trans-unit id="tx_seminars_skills">
+        <source>Skill</source>
+        <target state="needs-translation">Skill</target>
       </trans-unit>
       <trans-unit id="tx_seminars_skills.title" approved="yes">
         <source>Title</source>
