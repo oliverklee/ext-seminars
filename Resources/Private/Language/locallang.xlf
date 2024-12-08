@@ -817,16 +817,16 @@ This event now has been confirmed.</source>
 				<source>Attached files</source>
 			</trans-unit>
 			<trans-unit id="label_onlineRegistration">
-				<source>Register</source>
+				<source>register</source>
 			</trans-unit>
 			<trans-unit id="label_onlineRegistrationOnQueue">
-				<source>Waiting list</source>
+				<source>waiting list</source>
 			</trans-unit>
 			<trans-unit id="label_onlinePrebooking">
-				<source>Prebook</source>
+				<source>prebook</source>
 			</trans-unit>
 			<trans-unit id="label_onlineUnregistration">
-				<source>Unregister</source>
+				<source>unregister</source>
 			</trans-unit>
 			<trans-unit id="label_list_registrations">
 				<source>List of registrations</source>
