@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
+use OliverKlee\Seminars\BackEnd\EmailService;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
@@ -46,9 +46,9 @@ final class EmailControllerTest extends UnitTestCase
     private Permissions $permissionsMock;
 
     /**
-     * @var GeneralEventMailForm&MockObject
+     * @var EmailService&MockObject
      */
-    private GeneralEventMailForm $emailServiceMock;
+    private EmailService $emailServiceMock;
 
     protected function setUp(): void
     {
@@ -80,8 +80,8 @@ final class EmailControllerTest extends UnitTestCase
         $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
 
-        $this->emailServiceMock = $this->createMock(GeneralEventMailForm::class);
-        GeneralUtility::addInstance(GeneralEventMailForm::class, $this->emailServiceMock);
+        $this->emailServiceMock = $this->createMock(EmailService::class);
+        GeneralUtility::addInstance(EmailService::class, $this->emailServiceMock);
     }
 
     public function tearDown(): void

@@ -20,11 +20,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * This class represents an email form.
+ * Service for sending emails to the attendees of an event from the seminars back-end module.
  *
  * @internal
  */
-class GeneralEventMailForm
+class EmailService
 {
     private Event $event;
 

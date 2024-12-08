@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
+use OliverKlee\Seminars\BackEnd\EmailService;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -13,9 +13,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
- * @covers \OliverKlee\Seminars\BackEnd\GeneralEventMailForm
+ * @covers \OliverKlee\Seminars\BackEnd\EmailService
  */
-final class GeneralEventMailFormTest extends FunctionalTestCase
+final class EmailServiceTest extends FunctionalTestCase
 {
     use LanguageHelper;
     use EmailTrait;
@@ -39,7 +39,6 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'] = [];
         $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
         $this->setUpBackendUser(1);
         $this->initializeBackEndLanguage();
@@ -65,7 +64,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new GeneralEventMailForm(2);
+        $subject = new EmailService(2);
 
         $subject->setPostData(
             [
@@ -88,7 +87,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new GeneralEventMailForm(1);
+        $subject = new EmailService(1);
 
         $messageBody = '%salutation';
         $subject->setPostData(
@@ -111,7 +110,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new GeneralEventMailForm(2);
+        $subject = new EmailService(2);
 
         $subject->setPostData(
             [
@@ -139,7 +138,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
 
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new GeneralEventMailForm(2);
+        $subject = new EmailService(2);
 
         $subject->setPostData(
             [
@@ -164,7 +163,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $subject = new GeneralEventMailForm(2);
+        $subject = new EmailService(2);
 
         $subject->setPostData(
             [
@@ -193,7 +192,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new GeneralEventMailForm(2);
+        $subject = new EmailService(2);
 
         $subject->setPostData(
             [
@@ -219,7 +218,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
 
         $emailSubject = 'Thank you for your registration.';
-        $subject = new GeneralEventMailForm(1);
+        $subject = new EmailService(1);
         $subject->setPostData(
             [
                 'action' => 'sendEmail',
@@ -243,7 +242,7 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         $this->email->expects(self::never())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $subject = new GeneralEventMailForm(4);
+        $subject = new EmailService(4);
         $subject->setPostData(
             [
                 'action' => 'sendEmail',
