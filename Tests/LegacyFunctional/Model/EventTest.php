@@ -167,27 +167,6 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue(): void
-    {
-        $registrations = new Collection();
-        $registration = MapperRegistry::get(RegistrationMapper::class)
-            ->getLoadedTestingModel(['registration_queue' => 1]);
-        $registrations->add($registration);
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getQueueRegistrations']
-        );
-        $event->method('getQueueRegistrations')
-            ->willReturn($registrations);
-
-        self::assertTrue(
-            $event->hasQueueRegistrations()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getRegisteredSeatsCountsSingleSeatRegularRegistrations(): void
     {
         $registrations = new Collection();

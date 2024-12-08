@@ -452,17 +452,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * Checks whether this event has any registrations on its registration
-     * queue (i.e., on the waiting list).
-     *
-     * @deprecated #1324 will be removed in seminars 6.0
-     */
-    public function hasQueueRegistrations(): bool
-    {
-        return !$this->getQueueRegistrations()->isEmpty();
-    }
-
-    /**
      * @return Collection<Registration>
      *
      * @deprecated will be removed in version 6.0 in #3422

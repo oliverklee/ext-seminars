@@ -1006,23 +1006,6 @@ final class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationsAfterLastDigest()->isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse(): void
-    {
-        $event = $this->createPartialMock(
-            Event::class,
-            ['getQueueRegistrations']
-        );
-        $event->method('getQueueRegistrations')
-            ->willReturn(new Collection());
-
-        self::assertFalse(
-            $event->hasQueueRegistrations()
-        );
-    }
-
     //////////////////////////////////////////////////////////////////////
     // Tests concerning hasUnlimitedVacancies
     //////////////////////////////////////////////////////////////////////
