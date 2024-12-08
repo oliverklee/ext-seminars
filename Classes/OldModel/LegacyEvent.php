@@ -3117,17 +3117,15 @@ class LegacyEvent extends AbstractTimeSpan
     }
 
     /**
-     * Returns our time slots in an array.
-     *
-     * @return array[] time slots or an empty array if there are no time slots
-     *               the array contains the following elements:
-     *               - 'date' as key and the time slot's begin date as value
-     *               - 'time' as key and the time slot's time as value
-     *               - 'entry_date' as key and the time slot's entry date as
-     *               value
-     *               - 'room' as key and the time slot's room as value
-     *               - 'place' as key and the time slot's place as value
-     *               - 'speakers' as key and the time slot's speakers as value
+     * @return list<array{
+     *     uid: int,
+     *     date: string,
+     *     time: string,
+     *     entry_date: string,
+     *     room: string,
+     *     place: string,
+     *     speakers: string
+     * }>
      */
     public function getTimeSlotsAsArrayWithMarkers(): array
     {
@@ -3143,6 +3141,7 @@ class LegacyEvent extends AbstractTimeSpan
                 'entry_date' => $timeSlot->getEntryDate(),
                 'room' => $timeSlot->getRoom(),
                 'place' => $timeSlot->getPlaceShort(),
+                // @deprecated will be removed in #3802 in seminars 6.0
                 'speakers' => $timeSlot->getSpeakersShortCommaSeparated(),
             ];
         }

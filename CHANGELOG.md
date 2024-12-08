@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate speakers for time slots (#3945)
 - Deprecate time slot entry dates (#3842)
 
 ## 5.7.1: Bug fixes

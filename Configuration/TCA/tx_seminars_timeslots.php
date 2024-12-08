@@ -54,6 +54,7 @@ $tca = [
                 'default' => 0,
             ],
         ],
+        // @deprecated will be removed in #3802 in seminars 6.0
         'speakers' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.speakers',
