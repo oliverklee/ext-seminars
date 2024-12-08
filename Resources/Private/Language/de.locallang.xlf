@@ -1107,13 +1107,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Register</source>
         <target state="final">Anmelden</target>
       </trans-unit>
-      <trans-unit id="label_onlineRegistrationOnQueue" approved="yes">
-        <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
-        <target state="final">Für die Warteliste anmelden&lt;br /&gt;(%d Anmeldungen auf der Warteliste)</target>
+      <trans-unit id="label_onlineRegistrationOnQueue">
+        <source>Waiting list</source>
+        <target state="needs-translation">Waiting list</target>
       </trans-unit>
-      <trans-unit id="label_onlinePrebooking" approved="yes">
-        <source>Prebook now</source>
-        <target state="final">Anmeldung vormerken</target>
+      <trans-unit id="label_onlinePrebooking">
+        <source>Prebook</source>
+        <target state="needs-translation">Prebook</target>
       </trans-unit>
       <trans-unit id="label_onlineUnregistration" approved="yes">
         <source>Unregister</source>
@@ -1175,9 +1175,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Persons to register:</source>
         <target state="final">Angemeldete Personen:</target>
       </trans-unit>
-      <trans-unit id="label_registered_themselves" approved="yes">
-        <source>myself</source>
-        <target state="final">ich selbst</target>
+      <trans-unit id="label_registered_themselves">
+        <source>myself (too)</source>
+        <target state="needs-translation">myself (too)</target>
       </trans-unit>
       <trans-unit id="label_firstname" approved="yes">
         <source>First name:</source>
@@ -1215,9 +1215,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>I accept the terms and conditions.</source>
         <target state="final">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</target>
       </trans-unit>
-      <trans-unit id="label_terms_2" approved="yes">
-        <source>I accept the terms for travelling.</source>
-        <target state="final">Ich akzeptiere die Reisebedingungen.</target>
+      <trans-unit id="label_terms_2">
+        <source>I accept the additional terms.</source>
+        <target state="needs-translation">I accept the additional terms.</target>
       </trans-unit>
       <trans-unit id="label_timeslot_date" approved="yes">
         <source>Date</source>
@@ -1508,9 +1508,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Maximum bookable seats per registration</source>
         <target state="final">Maximal buchbare Plätze pro Anmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault" approved="yes">
-        <source>People register themselves by default</source>
-        <target state="final">Leute melden sich standardmäßig selbst an</target>
+      <trans-unit id="plugin.eventRegistration.settings.registerThemselvesDefault">
+        <source>People register themselves (too) by default</source>
+        <target state="needs-translation">People register themselves (too) by default</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.showEmailFieldForAdditionalAttendees" approved="yes">
         <source>Show an email field for additional attendees</source>
@@ -1532,9 +1532,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Seats</source>
         <target state="final">Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves" approved="yes">
-        <source>Is registering themselves</source>
-        <target state="final">Meldet sich selbst an</target>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+        <source>Is registering themselves (too)</source>
+        <target state="needs-translation">Is registering themselves (too)</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames" approved="yes">
         <source>Persons to register</source>
@@ -1802,9 +1802,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Seats to book</source>
         <target state="final">Zu buchende Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.registeredThemselves" approved="yes">
-        <source>I am registering myself.</source>
-        <target state="final">Ich melde mich selbst an.</target>
+      <trans-unit id="plugin.eventRegistration.property.registeredThemselves">
+        <source>I am registering myself (too).</source>
+        <target state="needs-translation">I am registering myself (too).</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.registeredThemselves.not" approved="yes">
         <source>I am not registering myself.</source>
