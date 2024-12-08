@@ -1,31 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Cannot access offset 'backEndModule' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
-			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
-			count: 1
-			path: Classes/BackEnd/AbstractEventMailForm.php
-
-		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 2
 			path: Classes/BackEnd/FlexForms.php
@@ -34,6 +9,31 @@ parameters:
 			message: "#^Cannot access offset 'Field' on mixed\\.$#"
 			count: 1
 			path: Classes/BackEnd/FlexForms.php
+
+		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 1
+			path: Classes/BackEnd/GeneralEventMailForm.php
+
+		-
+			message: "#^Cannot access offset 'backEndModule' on mixed\\.$#"
+			count: 1
+			path: Classes/BackEnd/GeneralEventMailForm.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 1
+			path: Classes/BackEnd/GeneralEventMailForm.php
+
+		-
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<object\\>, mixed given\\.$#"
+			count: 1
+			path: Classes/BackEnd/GeneralEventMailForm.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
+			count: 1
+			path: Classes/BackEnd/GeneralEventMailForm.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\BackEnd\\\\TceForms\\:\\:createCountrySelector\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
@@ -1591,18 +1591,13 @@ parameters:
 			path: Classes/ViewHelpers/SalutationAwareTranslateViewHelper.php
 
 		-
-			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 4
+			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 1
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
@@ -1618,6 +1613,11 @@ parameters:
 		-
 			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
 			count: 4
+			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, resource\\|string\\|null given\\.$#"
+			count: 2
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
