@@ -530,7 +530,7 @@
 				<source>Email address</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_organizers.email_footer">
-				<source>Footer text to be appended to all emails from this organizer</source>
+				<source>Email footer</source>
 			</trans-unit>
 			<trans-unit id="tx_seminars_payment_methods">
 				<source>Methods of payment</source>
