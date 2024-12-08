@@ -380,8 +380,8 @@
         <target state="needs-translation">Additional text for the thank-you email to the attendees</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers">
-        <source>Speakers</source>
-        <target state="needs-translation">Speakers</target>
+        <source>Speaker</source>
+        <target state="needs-translation">Speaker</target>
       </trans-unit>
       <trans-unit id="tx_seminars_speakers.title">
         <source>Name</source>
@@ -436,8 +436,8 @@
         <target state="needs-translation">Cancelation period (in days)</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances">
-        <source>Attendances</source>
-        <target state="needs-translation">Attendances</target>
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.divLabelOverview">
         <source>Overview</source>
@@ -636,8 +636,8 @@
         <target state="needs-translation">Number of kids</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites">
-        <source>Seminar Sites</source>
-        <target state="needs-translation">Seminar Sites</target>
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
       </trans-unit>
       <trans-unit id="tx_seminars_sites.title">
         <source>Name</source>
@@ -684,8 +684,8 @@
         <target state="needs-translation">Phone number</target>
       </trans-unit>
       <trans-unit id="tx_seminars_organizers">
-        <source>Organizers</source>
-        <target state="needs-translation">Organizers</target>
+        <source>Organizer</source>
+        <target state="needs-translation">Organizer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_organizers.title">
         <source>Name</source>
@@ -708,8 +708,8 @@
         <target state="needs-translation">Email footer</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods">
-        <source>Methods of payment</source>
-        <target state="needs-translation">Methods of payment</target>
+        <source>Method of payment</source>
+        <target state="needs-translation">Method of payment</target>
       </trans-unit>
       <trans-unit id="tx_seminars_payment_methods.title">
         <source>Title</source>
@@ -720,8 +720,8 @@
         <target state="needs-translation">Detailed description for emails</target>
       </trans-unit>
       <trans-unit id="tx_seminars_event_types">
-        <source>Event types</source>
-        <target state="needs-translation">Event types</target>
+        <source>Event type</source>
+        <target state="needs-translation">Event type</target>
       </trans-unit>
       <trans-unit id="tx_seminars_event_types.title">
         <source>Title</source>
@@ -732,32 +732,32 @@
         <target state="needs-translation">Single view page for events of this type</target>
       </trans-unit>
       <trans-unit id="tx_seminars_checkboxes">
-        <source>Registration options with checkbox</source>
-        <target state="needs-translation">Registration options with checkbox</target>
+        <source>Registration option with checkbox</source>
+        <target state="needs-translation">Registration option with checkbox</target>
       </trans-unit>
       <trans-unit id="tx_seminars_checkboxes.title">
         <source>Title</source>
         <target state="needs-translation">Title</target>
       </trans-unit>
       <trans-unit id="tx_seminars_lodgings">
-        <source>Lodging options</source>
-        <target state="needs-translation">Lodging options</target>
+        <source>Lodging option</source>
+        <target state="needs-translation">Lodging option</target>
       </trans-unit>
       <trans-unit id="tx_seminars_lodgings.title">
         <source>Title</source>
         <target state="needs-translation">Title</target>
       </trans-unit>
       <trans-unit id="tx_seminars_foods">
-        <source>Food options</source>
-        <target state="needs-translation">Food options</target>
+        <source>Food option</source>
+        <target state="needs-translation">Food option</target>
       </trans-unit>
       <trans-unit id="tx_seminars_foods.title">
         <source>Title</source>
         <target state="needs-translation">Title</target>
       </trans-unit>
       <trans-unit id="tx_seminars_timeslots">
-        <source>Time slots</source>
-        <target state="needs-translation">Time slots</target>
+        <source>Time slot</source>
+        <target state="needs-translation">Time slot</target>
       </trans-unit>
       <trans-unit id="tx_seminars_timeslots.begin_date">
         <source>Begin date</source>
@@ -801,8 +801,8 @@
         <target state="needs-translation">Maximum age</target>
       </trans-unit>
       <trans-unit id="tx_seminars_categories">
-        <source>Categories</source>
-        <target state="needs-translation">Categories</target>
+        <source>Event category</source>
+        <target state="needs-translation">Event category</target>
       </trans-unit>
       <trans-unit id="tx_seminars_categories.title">
         <source>Title</source>
@@ -813,8 +813,8 @@
         <target state="needs-translation">Single view page for events in this category</target>
       </trans-unit>
       <trans-unit id="tx_seminars_skills">
-        <source>Skills</source>
-        <target state="needs-translation">Skills</target>
+        <source>Skill</source>
+        <target state="needs-translation">Skill</target>
       </trans-unit>
       <trans-unit id="tx_seminars_skills.title">
         <source>Title</source>
