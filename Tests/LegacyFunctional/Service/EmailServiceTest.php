@@ -90,7 +90,8 @@ final class EmailServiceTest extends FunctionalTestCase
         $registration = new Registration();
         $registration->setData([]);
         $registration->setFrontEndUser($this->user);
-        $this->event->attachRegistration($registration);
+        $registration->setEvent($this->event);
+        $this->event->getRegistrations()->add($registration);
 
         $this->subject = new EmailService();
     }
@@ -268,7 +269,8 @@ final class EmailServiceTest extends FunctionalTestCase
         $secondRegistration = new Registration();
         $secondRegistration->setData([]);
         $secondRegistration->setFrontEndUser($secondUser);
-        $this->event->attachRegistration($secondRegistration);
+        $secondRegistration->setEvent($this->event);
+        $this->event->getRegistrations()->add($secondRegistration);
 
         $this->email
             ->expects(self::exactly(2))

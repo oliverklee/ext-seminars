@@ -86,7 +86,8 @@ final class EmailServiceTest extends FunctionalTestCase
         $registration = new Registration();
         $registration->setData([]);
         $registration->setFrontEndUser($user);
-        $this->event->attachRegistration($registration);
+        $registration->setEvent($this->event);
+        $this->event->getRegistrations()->add($registration);
 
         $this->subject = new EmailService();
     }

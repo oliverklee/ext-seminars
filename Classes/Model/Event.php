@@ -403,15 +403,6 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @deprecated #1324 will be removed in seminars 6.0
-     */
-    public function attachRegistration(Registration $registration): void
-    {
-        $registration->setEvent($this);
-        $this->getRegistrations()->add($registration);
-    }
-
-    /**
      * Gets the regular registrations for this event, i.e., the registrations
      * that are not on the waiting list.
      *
