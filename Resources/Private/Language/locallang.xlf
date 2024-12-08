@@ -904,7 +904,7 @@ This event now has been confirmed.</source>
 				<source>I accept the terms and conditions.</source>
 			</trans-unit>
 			<trans-unit id="label_terms_2">
-				<source>I accept the terms for travelling.</source>
+				<source>I accept the additional terms.</source>
 			</trans-unit>
 			<trans-unit id="label_timeslot_date">
 				<source>Date</source>
