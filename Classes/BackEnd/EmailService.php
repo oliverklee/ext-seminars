@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\MailRole;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Organizer;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;
-use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Model\Event;
-use OliverKlee\Seminars\Model\Organizer;
-use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -27,11 +26,14 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class EmailService implements SingletonInterface
 {
-    private EventMapper $eventMapper;
+    private EventRepository $eventRepository;
 
-    public function __construct()
+    private RegistrationRepository $registrationRepository;
+
+    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
     {
-        $this->eventMapper = MapperRegistry::get(EventMapper::class);
+        $this->eventRepository = $eventRepository;
+        $this->registrationRepository = $registrationRepository;
     }
 
     /**
@@ -44,23 +46,20 @@ class EmailService implements SingletonInterface
      */
     public function sendPlainTextEmailToRegularAttendees(int $eventUid, string $subject, string $rawBody): void
     {
-        if (!$this->eventMapper->existsModel($eventUid)) {
+        $event = $this->eventRepository->findByUid($eventUid);
+        if (!$event instanceof EventDateInterface) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);
         }
 
-        $event = $this->eventMapper->find($eventUid);
         $organizer = $event->getFirstOrganizer();
         $sender = $this->determineEmailSenderForEvent($event);
 
-        $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
-        $registrationBagBuilder->limitToEvent($eventUid);
-        $registrations = $registrationBagBuilder->build();
+        $registrations = $this->registrationRepository->findRegularRegistrationsByEvent($eventUid);
 
-        if (!$registrations->isEmpty()) {
-            /** @var LegacyRegistration $oldRegistration */
-            foreach ($registrations as $oldRegistration) {
-                $user = $oldRegistration->getFrontEndUser();
-                if (($user === null) || !$user->hasEmailAddress()) {
+        if ($registrations !== []) {
+            foreach ($registrations as $registration) {
+                $user = $registration->getUser();
+                if (!($user instanceof FrontendUser) || $user->getEmail() === '') {
                     continue;
                 }
                 $email = GeneralUtility::makeInstance(EmailBuilder::class)->from($sender)
@@ -89,7 +88,7 @@ class EmailService implements SingletonInterface
      *
      * Otherwise, returns the first organizer of the given event.
      */
-    private function determineEmailSenderForEvent(Event $event): MailRole
+    private function determineEmailSenderForEvent(EventDateInterface $event): MailRole
     {
         $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
         if ($systemEmailFromBuilder->canBuild()) {
