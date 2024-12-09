@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Email;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Tests\Unit\Email\Fixtures\TestingMailRole;
 use Symfony\Component\Mime\Part\DataPart;
@@ -125,7 +126,7 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function toCanSetOneRecipient(): void
+    public function toCanSetOneMailRoleRecipient(): void
     {
         $to = new TestingMailRole('max', 'max@example.com');
         $this->subject->to($to);
@@ -139,7 +140,23 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function toCanSetTwoRecipients(): void
+    public function toCanSetOneFrontEndUserRecipient(): void
+    {
+        $to = new FrontendUser();
+        $to->setName('max');
+        $to->setEmail('max@example.com');
+        $this->subject->to($to);
+
+        $email = $this->subject->build();
+
+        self::assertSame($to->getEmail(), $email->getTo()[0]->getAddress());
+        self::assertSame($to->getName(), $email->getTo()[0]->getName());
+    }
+
+    /**
+     * @test
+     */
+    public function toCanSetTwoMailRoleRecipients(): void
     {
         $to1 = new TestingMailRole('max', 'max@example.com');
         $to2 = new TestingMailRole('ben', 'ben@example.com');
@@ -150,6 +167,25 @@ final class EmailBuilderTest extends UnitTestCase
         self::assertSame($to1->getEmailAddress(), $email->getTo()[0]->getAddress());
         self::assertSame($to1->getName(), $email->getTo()[0]->getName());
         self::assertSame($to2->getEmailAddress(), $email->getTo()[1]->getAddress());
+        self::assertSame($to2->getName(), $email->getTo()[1]->getName());
+    }
+
+    /**
+     * @test
+     */
+    public function toCanSetOneMailRoleAndOneUserRecipient(): void
+    {
+        $to1 = new TestingMailRole('max', 'max@example.com');
+        $to2 = new FrontendUser();
+        $to2->setName('ben');
+        $to2->setEmail('ben@example.com');
+        $this->subject->to($to1, $to2);
+
+        $email = $this->subject->build();
+
+        self::assertSame($to1->getEmailAddress(), $email->getTo()[0]->getAddress());
+        self::assertSame($to1->getName(), $email->getTo()[0]->getName());
+        self::assertSame($to2->getEmail(), $email->getTo()[1]->getAddress());
         self::assertSame($to2->getName(), $email->getTo()[1]->getName());
     }
 
@@ -186,7 +222,7 @@ final class EmailBuilderTest extends UnitTestCase
     /**
      * @test
      */
-    public function replyToCanSetOneRecipient(): void
+    public function replyToCanSetOneMailRoleRecipient(): void
     {
         $replyTo = new TestingMailRole('max', 'max@example.com');
         $this->subject->replyTo($replyTo);
@@ -194,6 +230,22 @@ final class EmailBuilderTest extends UnitTestCase
         $email = $this->subject->build();
 
         self::assertSame($replyTo->getEmailAddress(), $email->getReplyTo()[0]->getAddress());
+        self::assertSame($replyTo->getName(), $email->getReplyTo()[0]->getName());
+    }
+
+    /**
+     * @test
+     */
+    public function replyToCanSetOneUserRecipient(): void
+    {
+        $replyTo = new FrontendUser();
+        $replyTo->setName('max');
+        $replyTo->setEmail('max@example.com');
+        $this->subject->replyTo($replyTo);
+
+        $email = $this->subject->build();
+
+        self::assertSame($replyTo->getEmail(), $email->getReplyTo()[0]->getAddress());
         self::assertSame($replyTo->getName(), $email->getReplyTo()[0]->getName());
     }
 
