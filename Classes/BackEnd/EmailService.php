@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -47,7 +50,7 @@ class EmailService implements SingletonInterface
 
         $event = $this->eventMapper->find($eventUid);
         $organizer = $event->getFirstOrganizer();
-        $sender = $event->getEmailSender();
+        $sender = $this->determineEmailSenderForEvent($event);
 
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $registrationBagBuilder->limitToEvent($eventUid);
@@ -79,6 +82,23 @@ class EmailService implements SingletonInterface
             );
             $this->addFlashMessage($message);
         }
+    }
+
+    /**
+     * Returns a `MailRole` with the default email data from the TYPO3 configuration if possible.
+     *
+     * Otherwise, returns the first organizer of the given event.
+     */
+    private function determineEmailSenderForEvent(Event $event): MailRole
+    {
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $sender = $systemEmailFromBuilder->build();
+        } else {
+            $sender = $event->getFirstOrganizer();
+        }
+
+        return $sender;
     }
 
     private function addFlashMessage(FlashMessage $flashMessage): void

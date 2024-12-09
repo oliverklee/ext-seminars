@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
-use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
-use OliverKlee\Seminars\Bag\OrganizerBag;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
-use OliverKlee\Seminars\OldModel\LegacyOrganizer;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -186,49 +182,6 @@ final class LegacyEventTest extends UnitTestCase
         $subject->setTopic($topic);
 
         self::assertTrue($subject->hasCheckboxes());
-    }
-
-    /**
-     * @test
-     */
-    public function getEmailSenderReturnsSystemEmailMailRole(): void
-    {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
-        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-
-        self::assertEquals(
-            $systemEmailFromBuilder->build(),
-            $this->subject->getEmailSender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEmailSenderReturnsFirstOrganizerMailRole(): void
-    {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
-
-        $organizer = LegacyOrganizer::fromData(
-            [
-                'title' => 'Brain Gourmets',
-                'email' => 'organizer@example.com',
-                'email_footer' => 'Best workshops in town!',
-            ]
-        );
-
-        $organizerBagMock = $this->createMock(OrganizerBag::class);
-        $organizerBagMock->method('current')->willReturn($organizer);
-
-        GeneralUtility::addInstance(OrganizerBag::class, $organizerBagMock);
-        $this->subject->setEventData(['uid' => 1, 'organizers' => 1]);
-
-        self::assertSame(
-            $organizer,
-            $this->subject->getEmailSender()
-        );
     }
 
     public function hasImageForNoDataReturnsFalse(): void

@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\BackEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
@@ -148,7 +150,7 @@ class MailNotifier extends AbstractTask
     private function sendRemindersToOrganizers(LegacyEvent $event, string $messageKey): void
     {
         $replyTo = $event->getFirstOrganizer();
-        $sender = $event->getEmailSender();
+        $sender = $this->determineEmailSenderForEvent($event);
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);
         /** @var string|null $attachmentBody */
         $attachmentBody = null;
@@ -173,6 +175,23 @@ class MailNotifier extends AbstractTask
 
             $emailBuilder->build()->send();
         }
+    }
+
+    /**
+     * Returns a `MailRole` with the default email data from the TYPO3 configuration if possible.
+     *
+     * Otherwise, returns the first organizer of the given event.
+     */
+    private function determineEmailSenderForEvent(LegacyEvent $event): MailRole
+    {
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $sender = $systemEmailFromBuilder->build();
+        } else {
+            $sender = $event->getFirstOrganizer();
+        }
+
+        return $sender;
     }
 
     /**
