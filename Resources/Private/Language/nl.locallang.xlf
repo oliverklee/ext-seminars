@@ -2171,6 +2171,34 @@ This event now has been confirmed.</target>
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook">
+        <source>Event outlook</source>
+        <target state="needs-translation">Event outlook</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.message.noEventsFound">
+        <source>No events found.</source>
+        <target state="needs-translation">No events found.</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.date">
+        <source>Date</source>
+        <target state="needs-translation">Date</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.eventType">
+        <source>Event type</source>
+        <target state="needs-translation">Event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.topic">
+        <source>Topic</source>
+        <target state="needs-translation">Topic</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.city">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.venue">
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
