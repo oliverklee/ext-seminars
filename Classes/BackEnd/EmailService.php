@@ -75,13 +75,13 @@ class EmailService
     }
 
     /**
-     * Sends an email to the attendees to inform about the changed event status.
+     * Sends an email to the regular attendees of the event with the given UID.
      *
      * @param positive-int $eventUid
      *
      * @throws NotFoundException if event could not be instantiated
      */
-    public function sendEmailToAttendees(int $eventUid): void
+    public function sendEmailToRegularAttendees(int $eventUid): void
     {
         if (!$this->eventMapper->existsModel($eventUid)) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);

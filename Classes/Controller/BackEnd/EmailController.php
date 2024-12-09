@@ -70,7 +70,7 @@ class EmailController extends ActionController
 
         $emailService = GeneralUtility::makeInstance(EmailService::class);
         $emailService->setPostData(['subject' => $subject, 'messageBody' => $body]);
-        $emailService->sendEmailToAttendees($eventUid);
+        $emailService->sendEmailToRegularAttendees($eventUid);
 
         return $this->redirect('overview', 'BackEnd\\Module');
     }
