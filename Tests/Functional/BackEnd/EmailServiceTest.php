@@ -60,7 +60,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForTwoRegistrationsSendsTwoEmails(): void
+    public function sendEmailToRegularAttendeesForTwoRegistrationsSendsTwoEmails(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -76,13 +76,13 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'some message body',
             ]
         );
-        $this->subject->sendEmailToAttendees(2);
+        $this->subject->sendEmailToRegularAttendees(2);
     }
 
     /**
      * @test
      */
-    public function sendEmailToAttendeesSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
+    public function sendEmailToRegularAttendeesSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -98,7 +98,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => $messageBody,
             ]
         );
-        $this->subject->sendEmailToAttendees(1);
+        $this->subject->sendEmailToRegularAttendees(1);
 
         self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
     }
@@ -106,7 +106,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender(): void
+    public function sendEmailToRegularAttendeesUsesTypo3DefaultFromAddressAsSender(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -122,7 +122,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $this->subject->sendEmailToAttendees(2);
+        $this->subject->sendEmailToRegularAttendees(2);
 
         self::assertArrayHasKey('system-foo@example.com', $this->getFromOfEmail($this->email));
     }
@@ -130,7 +130,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesFirstOrganizerAsSender(): void
+    public function sendEmailToRegularAttendeesUsesFirstOrganizerAsSender(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
 
@@ -147,7 +147,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $this->subject->sendEmailToAttendees(2);
+        $this->subject->sendEmailToRegularAttendees(2);
 
         self::assertArrayHasKey('oliver@example.com', $this->getFromOfEmail($this->email));
     }
@@ -155,7 +155,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesEmailUsesFirstOrganizerAsReplyTo(): void
+    public function sendEmailToRegularAttendeesEmailUsesFirstOrganizerAsReplyTo(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -170,7 +170,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
-        $this->subject->sendEmailToAttendees(2);
+        $this->subject->sendEmailToRegularAttendees(2);
 
         self::assertArrayHasKey('oliver@example.com', $this->getReplyToOfEmail($this->email));
     }
@@ -178,7 +178,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesEmailAppendsFirstOrganizerFooterToMessageBody(): void
+    public function sendEmailToRegularAttendeesEmailAppendsFirstOrganizerFooterToMessageBody(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -194,7 +194,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $this->subject->sendEmailToAttendees(2);
+        $this->subject->sendEmailToRegularAttendees(2);
 
         self::assertStringContainsString("\n-- \nThe one and only", $this->email->getTextBody());
     }
@@ -202,7 +202,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesProvidedEmailSubject(): void
+    public function sendEmailToRegularAttendeesUsesProvidedEmailSubject(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -218,7 +218,7 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $this->subject->sendEmailToAttendees(1);
+        $this->subject->sendEmailToRegularAttendees(1);
 
         self::assertSame($emailSubject, $this->email->getSubject());
     }
@@ -226,7 +226,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesNotSendsEmailToUserWithoutEmailAddress(): void
+    public function sendEmailToRegularAttendeesNotSendsEmailToUserWithoutEmailAddress(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -241,6 +241,6 @@ final class EmailServiceTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
-        $this->subject->sendEmailToAttendees(4);
+        $this->subject->sendEmailToRegularAttendees(4);
     }
 }
