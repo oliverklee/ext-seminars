@@ -489,26 +489,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         self::assertStringNotContainsString('::', $result);
     }
 
-    // Tests regarding committing registrations to the database.
-
-    /**
-     * @test
-     */
-    public function commitToDbCanCreateNewRecord(): void
-    {
-        $registration = new LegacyRegistration();
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
-
-        self::assertTrue(
-            $registration->commitToDatabase()
-        );
-        self::assertSame(
-            1,
-            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
-            'The registration record cannot be found in the DB.'
-        );
-    }
-
     // Tests for setting and getting the user data
 
     /**

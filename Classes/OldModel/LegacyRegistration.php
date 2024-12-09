@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
-use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -747,68 +746,6 @@ class LegacyRegistration extends AbstractModel
             "\n",
             $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm')
         );
-    }
-
-    /**
-     * Writes this record to the DB and adds any needed m:n records.
-     *
-     * This function actually calls the same method in the parent class
-     * (which saves the record to the DB) and then adds any necessary m:n relations.
-     *
-     * The UID of the parent page must be set in $this->recordData['pid'].
-     * (otherwise the record will be created in the root page).
-     *
-     * @return bool true if everything went OK, false otherwise
-     */
-    public function commitToDatabase(): bool
-    {
-        $this->fillEmptyDefaultFields();
-        if (!parent::commitToDatabase()) {
-            return false;
-        }
-
-        if ($this->hasUid()) {
-            $this->createMmRecords('tx_seminars_attendances_lodgings_mm', $this->lodgings);
-            $this->createMmRecords('tx_seminars_attendances_foods_mm', $this->foods);
-            $this->createMmRecords('tx_seminars_attendances_checkboxes_mm', $this->checkboxes);
-        }
-
-        GeneralUtility::makeInstance(ReferenceIndex::class)
-            ->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
-
-        return true;
-    }
-
-    /**
-     * Fills the default fields that don't have any data.
-     */
-    protected function fillEmptyDefaultFields(): void
-    {
-        $integerDefaultFieldKeys = [
-            'kids',
-            'method_of_payment',
-            'gender',
-        ];
-        $stringDefaultFieldKeys = [
-            'name',
-            'zip',
-            'city',
-            'country',
-            'telephone',
-            'email',
-        ];
-
-        foreach ($integerDefaultFieldKeys as $key) {
-            if (!$this->hasRecordPropertyInteger($key)) {
-                $this->setRecordPropertyInteger($key, 0);
-            }
-        }
-
-        foreach ($stringDefaultFieldKeys as $key) {
-            if (!$this->hasRecordPropertyString($key)) {
-                $this->setRecordPropertyString($key, '');
-            }
-        }
     }
 
     /**
