@@ -86,7 +86,7 @@ final class EmailControllerTest extends UnitTestCase
 
     public function tearDown(): void
     {
-        unset($_POST['subject'], $_POST['emailBody'], $GLOBALS['LANG'], $GLOBALS['BE_USER']);
+        unset($GLOBALS['LANG'], $GLOBALS['BE_USER']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
@@ -302,7 +302,7 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function sendActionSetsProvidedSubjectAndBody(): void
+    public function sendActionSendsEmailWithProvidedSubjectAndBody(): void
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
@@ -313,26 +313,10 @@ final class EmailControllerTest extends UnitTestCase
         $subject = 'email subject';
         $body = 'email body';
 
-        $this->emailServiceMock->expects(self::once())->method('setPostData')
-            ->with(['subject' => $subject, 'messageBody' => $body]);
+        $this->emailServiceMock->expects(self::once())->method('sendEmailToRegularAttendees')
+            ->with($eventUid, $subject, $body);
 
         $this->subject->sendAction($event, $subject, $body);
-    }
-
-    /**
-     * @test
-     */
-    public function sendActionSendsEmail(): void
-    {
-        $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
-        $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
-        $this->stubRedirect();
-
-        $eventUid = 9;
-        $event = $this->buildSingleEventMockWithUid($eventUid);
-        $this->emailServiceMock->expects(self::once())->method('sendEmailToRegularAttendees')->with($eventUid);
-
-        $this->subject->sendAction($event, 'email subject', 'email body');
     }
 
     /**

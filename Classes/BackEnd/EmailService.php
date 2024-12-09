@@ -27,61 +27,20 @@ class EmailService
 {
     private EventMapper $eventMapper;
 
-    /**
-     * @var array<string, string|int>
-     */
-    private array $postData = [];
-
     public function __construct()
     {
         $this->eventMapper = MapperRegistry::get(EventMapper::class);
     }
 
     /**
-     * @param array<string, string|int> $postData associative array with the POST data, may be empty
-     */
-    public function setPostData(array $postData): void
-    {
-        $this->postData = $postData;
-    }
-
-    /**
-     * Returns an entry from the stored POST data or an empty string if that
-     * key is not set.
-     *
-     * @param non-empty-string $key the key of the field to return
-     *
-     * @return string the value of the field, may be empty
-     */
-    private function getPostData(string $key): string
-    {
-        if (!$this->hasPostData($key)) {
-            return '';
-        }
-
-        return (string)$this->postData[$key];
-    }
-
-    /**
-     * Checks whether the stored POST data contains data for a certain field.
-     *
-     * @param non-empty-string $key the key of the field to check for
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function hasPostData(string $key): bool
-    {
-        return isset($this->postData[$key]);
-    }
-
-    /**
-     * Sends an email to the regular attendees of the event with the given UID.
+     * Sends an email to the regular attendees of the event with the given UID using the provided email subject
+     * and message body.
      *
      * @param positive-int $eventUid
      *
      * @throws NotFoundException if event could not be instantiated
      */
-    public function sendEmailToRegularAttendees(int $eventUid): void
+    public function sendEmailToRegularAttendees(int $eventUid, string $subject, string $rawBody): void
     {
         if (!$this->eventMapper->existsModel($eventUid)) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);
@@ -104,9 +63,9 @@ class EmailService
                 }
                 $email = GeneralUtility::makeInstance(EmailBuilder::class)->from($sender)
                     ->replyTo($organizer)
-                    ->subject($this->getPostData('subject'))
+                    ->subject($subject)
                     ->to($user)
-                    ->text($this->createMessageBody($user, $organizer))
+                    ->text($this->createMessageBody($rawBody, $user, $organizer))
                     ->build();
 
                 $email->send();
@@ -134,15 +93,11 @@ class EmailService
      * @return string the message with the salutation replaced by the user's name,
      *                will be empty if no message has been set in the POST data
      */
-    private function createMessageBody(FrontEndUser $recipient, Organizer $sender): string
+    private function createMessageBody(string $rawBody, FrontEndUser $recipient, Organizer $sender): string
     {
-        $messageText = str_replace(
-            '%salutation',
-            GeneralUtility::makeInstance(Salutation::class)->getSalutation($recipient),
-            $this->getPostData('messageBody')
-        );
-        $messageFooter = $sender->hasEmailFooter()
-            ? "\n-- \n" . $sender->getEmailFooter() : '';
+        $salutation = GeneralUtility::makeInstance(Salutation::class)->getSalutation($recipient);
+        $messageText = \str_replace('%salutation', $salutation, $rawBody);
+        $messageFooter = $sender->hasEmailFooter() ? "\n-- \n" . $sender->getEmailFooter() : '';
 
         return $messageText . $messageFooter;
     }
