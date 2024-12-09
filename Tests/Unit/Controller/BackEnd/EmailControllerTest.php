@@ -313,7 +313,7 @@ final class EmailControllerTest extends UnitTestCase
         $subject = 'email subject';
         $body = 'email body';
 
-        $this->emailServiceMock->expects(self::once())->method('sendEmailToRegularAttendees')
+        $this->emailServiceMock->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
             ->with($eventUid, $subject, $body);
 
         $this->subject->sendAction($event, $subject, $body);
