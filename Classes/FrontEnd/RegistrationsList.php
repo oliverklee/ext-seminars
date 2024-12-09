@@ -73,7 +73,7 @@ class RegistrationsList extends AbstractView
         $errorMessage = '';
         $isOkay = false;
 
-        if ($this->seminar->comesFromDatabase()) {
+        if ($this->seminar->hasUid()) {
             // Okay, at least the seminar UID is valid so we can show the
             // seminar title and date.
             $this->setMarker('title', \htmlspecialchars($this->seminar->getTitleAndDate(), ENT_QUOTES | ENT_HTML5));
