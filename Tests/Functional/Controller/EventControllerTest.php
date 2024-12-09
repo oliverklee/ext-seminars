@@ -249,4 +249,206 @@ final class EventControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString('workshop', $html);
     }
+
+    /**
+     * @test
+     */
+    public function outlookActionForNoEventsShowsMessage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate('plugin.eventArchive.message.noEventsFound', 'seminars');
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersTitleOfFutureSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEvent.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionDoesDoesNotRenderPastSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/PastEvent.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersFutureDateWithTitleFromTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureDateWithTopic.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersDateOfSingleDayEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/SingleDayFutureEvent.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('2039-12-01', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersStartAndEndOfMultiDayEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/MultiDayFutureEvent.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('2039-12-01–2039-12-02', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersCityOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithOneVenue.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersAllCitiesOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+        self::assertStringContainsString('Köln', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersOnlyOneCityForMultipleVenuesInSameCity(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInSameCity.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Bonn', $html);
+        self::assertStringNotContainsString('Bonn,', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersTitleOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithOneVenue.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Maritim Hotel', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersAllTitlesOfVenue(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithTwoVenuesInDifferentCities.csv'
+        );
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Maritim Hotel', $html);
+        self::assertStringContainsString('Premier Inn', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersEventType(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithEventType.csv');
+
+        $request = new InternalRequest();
+        $request = $request->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('workshop', $html);
+    }
 }
