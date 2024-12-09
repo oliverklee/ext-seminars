@@ -31,4 +31,16 @@ class EventController extends ActionController
 
         return $this->htmlResponse();
     }
+
+    /**
+     * Shows a list of upcoming events.
+     */
+    public function outlookAction(): ResponseInterface
+    {
+        $events = $this->eventRepository->findUpcoming();
+
+        $this->view->assign('events', $events);
+
+        return $this->htmlResponse();
+    }
 }

@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a new plugin for the event outlook (#3969)
 - Add `Venue.city` property (#3908, #3914)
 - Add a new plugin for the event archive
   (#3895, #3909, #3910, #3911, #3913, #3915)

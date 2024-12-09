@@ -1,0 +1,52 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <table class="table table-hover table-striped table-responsive w-auto">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <f:translate key="plugin.eventOutlook.events.property.date"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.eventOutlook.events.property.eventType"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.eventOutlook.events.property.topic"/>
+                </th>
+                <th scope="city">
+                    <f:translate key="plugin.eventOutlook.events.property.city"/>
+                </th>
+                <th scope="col">
+                    <f:translate key="plugin.eventOutlook.events.property.venue"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{events}" as="event">
+                <tr>
+                    <td class="text-end">
+                        <span class="text-nowrap">
+                            <f:render partial="EventDate" arguments="{event: event}"/>
+                        </span>
+                    </td>
+                    <td>
+                        <f:if condition="{event.eventType}">
+                            {event.eventType.title}
+                        </f:if>
+                    </td>
+                    <td>
+                        {event.displayTitle}
+                    </td>
+                    <td>
+                        <f:for each="{event.cityNames}" as="cityName" iteration="iteration">
+                            {cityName}{f:if(condition: iteration.isLast, then: '', else: ', ')}
+                        </f:for>
+                    </td>
+                    <td>
+                        <f:for each="{event.venues}" as="venue" iteration="iteration">
+                            {venue.title}{f:if(condition: iteration.isLast, then: '', else: ', ')}
+                        </f:for>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</html>

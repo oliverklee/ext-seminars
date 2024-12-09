@@ -1,0 +1,13 @@
+"tx_seminars_seminars"
+,"uid","pid","title","begin_date","end_date","place"
+,1,2,"Extension Development with Extbase and Fluid",2524604400,2524604401,2
+
+"tx_seminars_sites"
+,"uid","pid","title","address","zip","city"
+,1,2,"Maritim Hotel","Kurt-Georg-Kiesinger-Allee 1, 53175 Bonn","53175","Bonn"
+,2,2,"Premier Inn","Perlengraben 2, 50676 Köln","50676","Köln"
+
+"tx_seminars_seminars_place_mm"
+,"uid_local","uid_foreign","tablenames"
+,1,1,"tx_seminars_sites"
+,1,2,"tx_seminars_sites"

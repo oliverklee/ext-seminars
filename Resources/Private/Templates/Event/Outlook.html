@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="FrontEndDefault"/>
+
+    <f:section name="main">
+        <f:if condition="{f:count(subject: events)}">
+            <f:then>
+                <f:render partial="Event/OutlookList" arguments="{_all}"/>
+            </f:then>
+            <f:else>
+                <p class="alert alert-info" role="alert">
+                    <f:translate key="plugin.eventArchive.message.noEventsFound"/>
+                </p>
+            </f:else>
+        </f:if>
+    </f:section>
+</html>
