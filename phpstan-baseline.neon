@@ -3181,21 +3181,6 @@ parameters:
 			path: Tests/Unit/Hooks/HookProviderTest.php
 
 		-
-			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 4
-			path: Tests/Unit/Model/EventTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Model/EventTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Model/EventTest.php
-
-		-
 			message: "#^Binary operation \"\\+\" between mixed and 42 results in an error\\.$#"
 			count: 1
 			path: Tests/Unit/OldModel/AbstractTimeSpanTest.php
@@ -3223,21 +3208,6 @@ parameters:
 		-
 			message: "#^Cannot access offset 'LOG' on mixed\\.$#"
 			count: 1
-			path: Tests/Unit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 4
-			path: Tests/Unit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/OldModel/LegacyEventTest.php
-
-		-
-			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
-			count: 2
 			path: Tests/Unit/OldModel/LegacyEventTest.php
 
 		-

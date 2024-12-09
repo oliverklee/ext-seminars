@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Event;
@@ -33,8 +32,6 @@ final class EventTest extends UnitTestCase
 
     protected int $now = 1424751343;
 
-    private Organizer $organizer;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -53,40 +50,6 @@ final class EventTest extends UnitTestCase
     {
         ConfigurationRegistry::purgeInstance();
         parent::tearDown();
-    }
-
-    /**
-     * @test
-     */
-    public function getEmailSenderReturnsSystemEmailMailRole(): void
-    {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
-        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-
-        self::assertEquals(
-            $systemEmailFromBuilder->build(),
-            $this->subject->getEmailSender()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getEmailSenderReturnsFirstOrganizerMailRole(): void
-    {
-        $this->organizer = new Organizer();
-        $this->organizer->setData([]);
-        $organizers = new Collection();
-        $organizers->add($this->organizer);
-        $this->subject->setData(['organizers' => $organizers]);
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
-
-        self::assertSame(
-            $this->organizer,
-            $this->subject->getEmailSender()
-        );
     }
 
     ///////////////////////////////////

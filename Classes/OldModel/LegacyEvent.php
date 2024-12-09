@@ -21,7 +21,6 @@ use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Place;
-use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
 use OliverKlee\Seminars\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Context\Context;
@@ -36,8 +35,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class LegacyEvent extends AbstractTimeSpan
 {
-    use EventEmailSenderTrait;
-
     /**
      * @var string the name of the SQL table this class corresponds to
      */

@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Move determining the email sender out of the models (#3965)
 - Refactor the email service for the BE module
   (#3955, #3956, #3957, #3958, #3962, #3963)
 - Always use the singular form for the table names in the backend (#3930)

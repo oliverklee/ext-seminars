@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
@@ -349,7 +351,7 @@ class RegistrationManager implements SingletonInterface
         $contentObject = $this->getContentObjectRendererFromPlugin($plugin);
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
         $emailBuilder->to($user)
-            ->from($event->getEmailSender())
+            ->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->subject(
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
@@ -367,6 +369,23 @@ class RegistrationManager implements SingletonInterface
             ->executeHook('modifyAttendeeEmail', $email, $registration, $helloSubjectPrefix);
 
         $email->send();
+    }
+
+    /**
+     * Returns a `MailRole` with the default email data from the TYPO3 configuration if possible.
+     *
+     * Otherwise, returns the first organizer of the given event.
+     */
+    private function determineEmailSenderForEvent(LegacyEvent $event): MailRole
+    {
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $sender = $systemEmailFromBuilder->build();
+        } else {
+            $sender = $event->getFirstOrganizer();
+        }
+
+        return $sender;
     }
 
     /**
@@ -457,7 +476,7 @@ class RegistrationManager implements SingletonInterface
 
         $organizers = $event->getOrganizerBag();
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-        $emailBuilder->from($event->getEmailSender())
+        $emailBuilder->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->subject(
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle()
@@ -545,7 +564,7 @@ class RegistrationManager implements SingletonInterface
         }
 
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
-        $emailBuilder->from($event->getEmailSender())
+        $emailBuilder->from($this->determineEmailSenderForEvent($event))
             ->replyTo($event->getFirstOrganizer())
             ->text($this->getMessageForNotification($registration, $emailReason))
             ->subject(

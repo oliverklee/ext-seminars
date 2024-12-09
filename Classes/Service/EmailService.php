@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Model\Event;
@@ -42,6 +44,9 @@ class EmailService implements SingletonInterface
      */
     public function sendEmailToAttendees(Event $event, string $subject, string $body): void
     {
+        $sender = $this->determineEmailSenderForEvent($event);
+        $firstOrganizer = $event->getFirstOrganizer();
+
         /** @var Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
             $user = $registration->getFrontEndUser();
@@ -51,12 +56,29 @@ class EmailService implements SingletonInterface
 
             GeneralUtility::makeInstance(EmailBuilder::class)
                 ->to($user)
-                ->from($event->getEmailSender())
-                ->replyTo($event->getFirstOrganizer())
+                ->from($sender)
+                ->replyTo($firstOrganizer)
                 ->subject($this->replaceMarkers($subject, $event, $user))
                 ->text($this->buildMessageBody($body, $event, $user))
                 ->build()->send();
         }
+    }
+
+    /**
+     * Returns a `MailRole` with the default email data from the TYPO3 configuration if possible.
+     *
+     * Otherwise, returns the first organizer of the given event.
+     */
+    private function determineEmailSenderForEvent(Event $event): MailRole
+    {
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $sender = $systemEmailFromBuilder->build();
+        } else {
+            $sender = $event->getFirstOrganizer();
+        }
+
+        return $sender;
     }
 
     /**

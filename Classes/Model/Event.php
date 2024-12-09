@@ -6,15 +6,12 @@ namespace OliverKlee\Seminars\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
-use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents an event.
  */
 class Event extends AbstractTimeSpan
 {
-    use EventEmailSenderTrait;
-
     /**
      * Returns whether this event is a valid event date (i.e., a date with an associated topic).
      *
