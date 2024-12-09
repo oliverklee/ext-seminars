@@ -57,7 +57,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Drop `AbstractModel::comesFromDatabase()` (#3969)
+- Drop `LegacyRegistration::commitToDatabase()` (#3971)
+- Drop `AbstractModel::comesFromDatabase()` (#3970)
 - Drop automatic salutations from the backend module emails (#3959)
 - Drop the hooks for the email form in the BE module (#3954)
 - Drop code for paid/unpaid registrations (#3950)
