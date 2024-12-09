@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BagBuilder;
 
-use OliverKlee\Oelib\Domain\Repository\PageRepository as OelibPageRepository;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Domain\Repository\PageRepository as SeminarsPageRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -121,7 +121,7 @@ abstract class AbstractBagBuilder
         // Todo: Remove this after we pass an array from outside
         $uids = GeneralUtility::intExplode(',', $sourcePagePids);
 
-        $recursivePidList = GeneralUtility::makeInstance(OelibPageRepository::class)
+        $recursivePidList = GeneralUtility::makeInstance(SeminarsPageRepository::class)
             ->findWithinParentPages($uids, $recursionDepth);
 
         $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . \implode(',', $recursivePidList) . ')';
