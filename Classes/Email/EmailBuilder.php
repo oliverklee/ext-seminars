@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Email;
 
+use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -79,9 +80,11 @@ class EmailBuilder
     /**
      * Sets the recipients.
      *
+     * @param MailRole|FrontendUser ...$recipients
+     *
      * @return $this
      */
-    public function to(MailRole ...$recipients): self
+    public function to(...$recipients): self
     {
         /** @var list<Address> $preparedRecipients */
         $preparedRecipients = [];
@@ -108,7 +111,7 @@ class EmailBuilder
     /**
      * Sets the reply-to.
      *
-     * @param MailRole $recipients
+     * @param MailRole|FrontendUser $recipients
      *
      * @return $this
      */
@@ -140,8 +143,17 @@ class EmailBuilder
         return $this;
     }
 
-    private function mailRoleToAddress(MailRole $mailRole): Address
+    /**
+     * @param MailRole|FrontendUser $mailRole
+     */
+    private function mailRoleToAddress($mailRole): Address
     {
-        return new Address($mailRole->getEmailAddress(), $mailRole->getName());
+        if ($mailRole instanceof FrontendUser) {
+            $address = new Address($mailRole->getEmail(), $mailRole->getName());
+        } else {
+            $address = new Address($mailRole->getEmailAddress(), $mailRole->getName());
+        }
+
+        return $address;
     }
 }

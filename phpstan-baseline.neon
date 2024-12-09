@@ -1481,7 +1481,7 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:to\\(\\) expects OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\.\\.\\.\\$recipients of method OliverKlee\\\\Seminars\\\\Email\\\\EmailBuilder\\:\\:to\\(\\) expects OliverKlee\\\\FeUserExtraFields\\\\Domain\\\\Model\\\\FrontendUser\\|OliverKlee\\\\Oelib\\\\Interfaces\\\\MailRole, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyOrganizer\\|null given\\.$#"
 			count: 2
 			path: Classes/Service/RegistrationManager.php
 
