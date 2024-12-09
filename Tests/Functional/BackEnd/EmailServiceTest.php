@@ -74,22 +74,6 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToRegularAttendeesSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
-
-        $this->email->expects(self::once())->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-        $messageBody = '%salutation!';
-
-        $this->subject->sendEmailToRegularAttendees(1, 'foo', $messageBody);
-
-        self::assertStringContainsString('Joe Johnson', $this->email->getTextBody());
-    }
-
-    /**
-     * @test
-     */
     public function sendEmailToRegularAttendeesUsesTypo3DefaultFromAddressAsSender(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
@@ -106,7 +90,7 @@ final class EmailServiceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailToRegularAttendeesUsesFirstOrganizerAsSender(): void
+    public function sendEmailToRegularAttendeesForNoTypo3EmailConfiguredUsesFirstOrganizerAsSender(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
 

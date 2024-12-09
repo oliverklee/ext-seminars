@@ -8,9 +8,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Email\EmailBuilder;
-use OliverKlee\Seminars\Email\Salutation;
 use OliverKlee\Seminars\Mapper\EventMapper;
-use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -65,7 +63,7 @@ class EmailService
                     ->replyTo($organizer)
                     ->subject($subject)
                     ->to($user)
-                    ->text($this->createMessageBody($rawBody, $user, $organizer))
+                    ->text($this->appendEmailFooterIfProvided($rawBody, $organizer))
                     ->build();
 
                 $email->send();
@@ -89,16 +87,10 @@ class EmailService
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 
-    /**
-     * @return string the message with the salutation replaced by the user's name,
-     *                will be empty if no message has been set in the POST data
-     */
-    private function createMessageBody(string $rawBody, FrontEndUser $recipient, Organizer $sender): string
+    private function appendEmailFooterIfProvided(string $rawBody, Organizer $sender): string
     {
-        $salutation = GeneralUtility::makeInstance(Salutation::class)->getSalutation($recipient);
-        $messageText = \str_replace('%salutation', $salutation, $rawBody);
         $messageFooter = $sender->hasEmailFooter() ? "\n-- \n" . $sender->getEmailFooter() : '';
 
-        return $messageText . $messageFooter;
+        return $rawBody . $messageFooter;
     }
 }
