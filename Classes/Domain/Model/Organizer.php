@@ -23,6 +23,11 @@ class Organizer extends AbstractEntity implements MailRole
      */
     protected string $emailAddress = '';
 
+    /**
+     * @Validate("StringLength", options={"maximum": 255})
+     */
+    protected string $emailFooter = '';
+
     public function getName(): string
     {
         return $this->name;
@@ -41,5 +46,20 @@ class Organizer extends AbstractEntity implements MailRole
     public function setEmailAddress(string $emailAddress): void
     {
         $this->emailAddress = $emailAddress;
+    }
+
+    public function getEmailFooter(): string
+    {
+        return $this->emailFooter;
+    }
+
+    public function hasEmailFooter(): bool
+    {
+        return $this->getEmailFooter() !== '';
+    }
+
+    public function setEmailFooter(string $emailFooter): void
+    {
+        $this->emailFooter = $emailFooter;
     }
 }

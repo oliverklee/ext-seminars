@@ -44,13 +44,14 @@ final class OrganizerRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/OrganizerRepository/OrganizerWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/OrganizerRepository/OrganizerWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
         self::assertInstanceOf(Organizer::class, $result);
         self::assertSame('Dan Chase', $result->getName());
         self::assertSame('dan@example.com', $result->getEmailAddress());
+        self::assertSame('Always the best.', $result->getEmailFooter());
     }
 
     /**
