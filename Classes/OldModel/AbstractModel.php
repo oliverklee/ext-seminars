@@ -136,14 +136,6 @@ abstract class AbstractModel
     }
 
     /**
-     * Checks whether this model has been read from the database.
-     */
-    public function comesFromDatabase(): bool
-    {
-        return $this->hasUid();
-    }
-
-    /**
      * Gets a trimmed string element of the record data array.
      * If the array has not been initialized properly, an empty string is
      * returned instead.

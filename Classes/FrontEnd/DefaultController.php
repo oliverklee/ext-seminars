@@ -1621,9 +1621,8 @@ class DefaultController extends TemplateHelper
     {
         $result = '';
 
-        if ($this->seminar->comesFromDatabase()) {
-            $eventUid = $this->seminar->getUid();
-            \assert($eventUid > 0);
+        $eventUid = $this->seminar->getUid();
+        if ($eventUid > 0) {
             $event = MapperRegistry::get(EventMapper::class)->find($eventUid);
 
             $cssClasses = [];

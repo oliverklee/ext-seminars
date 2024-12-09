@@ -280,45 +280,6 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function comesFromDatabaseWithModelReadFromDatabaseIsTrue(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
-
-        /** @var TestingModel $result */
-        $result = TestingModel::fromUid(1);
-
-        self::assertTrue($result->comesFromDatabase());
-    }
-
-    /**
-     * @test
-     */
-    public function comesFromDatabaseWithModelReadFromDatabaseViaUidInConstructorIsTrue(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
-
-        /** @var TestingModel $result */
-        $result = new TestingModel(1);
-
-        self::assertTrue($result->comesFromDatabase());
-    }
-
-    /**
-     * @test
-     */
-    public function comesFromDatabaseWithInexistentModelViaUidInConstructorIsFalse(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
-
-        /** @var TestingModel $result */
-        $result = new TestingModel(99);
-
-        self::assertFalse($result->comesFromDatabase());
-    }
-
-    /**
-     * @test
-     */
     public function commitToDatabaseCanCreateNewRecord(): void
     {
         $title = 'There is no spoon.';
@@ -394,19 +355,6 @@ final class AbstractModelTest extends FunctionalTestCase
         $recordInDatabase = $result->fetchAssociative();
 
         self::assertSame($this->now, (int)$recordInDatabase['tstamp']);
-    }
-
-    /**
-     * @test
-     */
-    public function commitToDatabaseMarksNewRecordAsFromDatabase(): void
-    {
-        $model = new TestingModel();
-        $model->setTitle('There is no spoon.');
-
-        $model->commitToDatabase();
-
-        self::assertTrue($model->comesFromDatabase());
     }
 
     /**
