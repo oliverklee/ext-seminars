@@ -57,6 +57,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the unused `AbstractModel::addMissingProtocolToUrl()` (#3972)
 - Drop `LegacyRegistration::commitToDatabase()` (#3971)
 - Drop `AbstractModel::comesFromDatabase()` (#3970)
 - Drop automatic salutations from the backend module emails (#3959)
