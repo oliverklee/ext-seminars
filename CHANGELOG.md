@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Move the webinar URL further up in the TCEforms (#3975)
 - Move determining the email sender out of the models (#3965)
 - Refactor the email service for the BE module
   (#3955, #3956, #3957, #3958, #3962, #3963)
