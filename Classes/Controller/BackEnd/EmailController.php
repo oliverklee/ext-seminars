@@ -9,7 +9,6 @@ use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -22,10 +21,16 @@ class EmailController extends ActionController
 
     private Permissions $permissions;
 
-    public function __construct(ModuleTemplateFactory $moduleTemplateFactory, Permissions $permissions)
-    {
+    private EmailService $emailService;
+
+    public function __construct(
+        ModuleTemplateFactory $moduleTemplateFactory,
+        Permissions $permissions,
+        EmailService $emailService
+    ) {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->permissions = $permissions;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -65,9 +70,7 @@ class EmailController extends ActionController
 
         $eventUid = $event->getUid();
         \assert(\is_int($eventUid) && $eventUid > 0);
-
-        $emailService = GeneralUtility::makeInstance(EmailService::class);
-        $emailService->sendPlainTextEmailToRegularAttendees($eventUid, $subject, $body);
+        $this->emailService->sendPlainTextEmailToRegularAttendees($eventUid, $subject, $body);
 
         return $this->redirect('overview', 'BackEnd\\Module');
     }
