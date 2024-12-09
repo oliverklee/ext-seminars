@@ -40,9 +40,6 @@ final class EmailServiceTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
-        $this->setUpBackendUser(1);
         $this->initializeBackEndLanguage();
 
         $this->email = $this->createEmailMock();
