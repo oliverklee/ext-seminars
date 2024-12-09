@@ -67,7 +67,7 @@ class EmailController extends ActionController
         \assert(\is_int($eventUid) && $eventUid > 0);
 
         $emailService = GeneralUtility::makeInstance(EmailService::class);
-        $emailService->sendEmailToRegularAttendees($eventUid, $subject, $body);
+        $emailService->sendPlainTextEmailToRegularAttendees($eventUid, $subject, $body);
 
         return $this->redirect('overview', 'BackEnd\\Module');
     }

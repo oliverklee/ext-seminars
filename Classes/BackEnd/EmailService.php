@@ -38,7 +38,7 @@ class EmailService
      *
      * @throws NotFoundException if event could not be instantiated
      */
-    public function sendEmailToRegularAttendees(int $eventUid, string $subject, string $rawBody): void
+    public function sendPlainTextEmailToRegularAttendees(int $eventUid, string $subject, string $rawBody): void
     {
         if (!$this->eventMapper->existsModel($eventUid)) {
             throw new NotFoundException('There is no event with this UID.', 1333292164);

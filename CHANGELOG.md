@@ -20,7 +20,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Refactor the email service for the BE module (#3955, #3956, #3957, #3958)
+- Refactor the email service for the BE module
+  (#3955, #3956, #3957, #3958, #3962)
 - Always use the singular form for the table names in the backend (#3930)
 - Improve the label for "register myself (as well)" (#3929)
 - Use the term "event" instead of "seminars" in the TCEforms (#3928)
