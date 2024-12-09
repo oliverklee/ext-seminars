@@ -524,20 +524,6 @@ abstract class AbstractModel
         return GeneralUtility::makeInstance(FileRepository::class);
     }
 
-    /**
-     * @deprecated will be removed in seminars 6.0
-     */
-    protected function addMissingProtocolToUrl(string $url): string
-    {
-        if ($url === '') {
-            return '';
-        }
-
-        $hasProtocol = \str_contains($url, '://');
-
-        return $hasProtocol ? $url : ('https://' . $url);
-    }
-
     protected function renderAsRichText(string $rawData): string
     {
         return GeneralUtility::makeInstance(RichTextViewHelper::class)->render($rawData);
