@@ -45,7 +45,7 @@ final class EmailServiceTest extends FunctionalTestCase
 
         $this->email = $this->createEmailMock();
 
-        $this->subject = new EmailService();
+        $this->subject = $this->get(EmailService::class);
     }
 
     protected function tearDown(): void
