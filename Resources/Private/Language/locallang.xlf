@@ -1617,6 +1617,27 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventArchive.events.property.venue">
 				<source>Venue</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook">
+				<source>Event outlook</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
+				<source>No events found.</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.eventType">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.topic">
+				<source>Topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.venue">
+				<source>Venue</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
