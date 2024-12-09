@@ -13,6 +13,7 @@ use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -21,7 +22,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * @internal
  */
-class EmailService
+class EmailService implements SingletonInterface
 {
     private EventMapper $eventMapper;
 

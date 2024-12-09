@@ -60,13 +60,14 @@ final class EmailControllerTest extends UnitTestCase
 
         $moduleTemplateFactory = $this->createModuleTemplateFactory();
         $this->permissionsMock = $this->createMock(Permissions::class);
+        $this->emailServiceMock = $this->createMock(EmailService::class);
 
         $methodsToMock = ['htmlResponse', 'redirect', 'redirectToUri'];
         /** @var EmailController&AccessibleObjectInterface&MockObject $subject */
         $subject = $this->getAccessibleMock(
             EmailController::class,
             $methodsToMock,
-            [$moduleTemplateFactory, $this->permissionsMock]
+            [$moduleTemplateFactory, $this->permissionsMock, $this->emailServiceMock]
         );
         $this->subject = $subject;
 
@@ -79,14 +80,10 @@ final class EmailControllerTest extends UnitTestCase
         $this->viewMock = $this->createMock(TemplateView::class);
         $this->viewMock->method('render')->willReturn('rendered view');
         $this->subject->_set('view', $this->viewMock);
-
-        $this->emailServiceMock = $this->createMock(EmailService::class);
-        GeneralUtility::addInstance(EmailService::class, $this->emailServiceMock);
     }
 
     public function tearDown(): void
     {
-        unset($GLOBALS['LANG'], $GLOBALS['BE_USER']);
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
