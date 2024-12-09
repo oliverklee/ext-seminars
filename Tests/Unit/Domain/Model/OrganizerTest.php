@@ -76,4 +76,43 @@ final class OrganizerTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getEmailAddress());
     }
+
+    /**
+     * @test
+     */
+    public function getEmailFooterInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getEmailFooter());
+    }
+
+    /**
+     * @test
+     */
+    public function setEmailFooterSetsEmailFooter(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setEmailFooter($value);
+
+        self::assertSame($value, $this->subject->getEmailFooter());
+    }
+
+    /**
+     * @test
+     */
+    public function hasEmailFooterForEmptyFooterReturnsFalse(): void
+    {
+        $this->subject->setEmailFooter('');
+
+        self::assertFalse($this->subject->hasEmailFooter());
+    }
+
+    /**
+     * @test
+     */
+    public function hasEmailFooterForNonEmptyFooterReturnsTrue(): void
+    {
+        $this->subject->setEmailFooter('The best speaker in the world!');
+
+        self::assertTrue($this->subject->hasEmailFooter());
+    }
 }

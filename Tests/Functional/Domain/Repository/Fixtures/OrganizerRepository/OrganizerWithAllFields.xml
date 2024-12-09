@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dataset>
-    <tx_seminars_organizers>
-        <uid>1</uid>
-        <title>Dan Chase</title>
-        <email>dan@example.com</email>
-    </tx_seminars_organizers>
-</dataset>
