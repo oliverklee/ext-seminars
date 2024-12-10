@@ -2201,9 +2201,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView">
+      <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
-        <target state="needs-translation">Event single view</target>
+        <target state="final">Veranstaltungs-Einzelansicht</target>
       </trans-unit>
     </body>
   </file>
