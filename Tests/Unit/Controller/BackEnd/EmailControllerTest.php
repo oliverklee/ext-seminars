@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\Unit\Controller\BackEnd;
 use OliverKlee\Seminars\BackEnd\EmailService;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Controller\BackEnd\EmailController;
+use OliverKlee\Seminars\Domain\Model\Event\EventDate;
+use OliverKlee\Seminars\Domain\Model\Event\EventTopic;
 use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
 use OliverKlee\Seminars\Tests\Unit\Controller\RedirectMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -87,19 +89,6 @@ final class EmailControllerTest extends UnitTestCase
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
-    }
-
-    /**
-     * @param positive-int $eventUid
-     *
-     * @return SingleEvent&MockObject
-     */
-    private function buildSingleEventMockWithUid(int $eventUid): SingleEvent
-    {
-        $event = $this->createMock(SingleEvent::class);
-        $event->method('getUid')->willReturn($eventUid);
-
-        return $event;
     }
 
     /**
@@ -299,19 +288,55 @@ final class EmailControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function sendActionSendsEmailWithProvidedSubjectAndBody(): void
+    public function sendActionWithSingleEventSendsEmailWithProvidedSubjectAndBody(): void
     {
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
         $this->stubRedirect();
 
-        $eventUid = 9;
-        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $event = new SingleEvent();
         $subject = 'email subject';
         $body = 'email body';
 
         $this->emailServiceMock->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
-            ->with($eventUid, $subject, $body);
+            ->with($event, $subject, $body);
+
+        $this->subject->sendAction($event, $subject, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function sendActionWithEventDateSendsEmailWithProvidedSubjectAndBody(): void
+    {
+        $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
+        $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
+        $this->stubRedirect();
+
+        $event = new EventDate();
+        $subject = 'email subject';
+        $body = 'email body';
+
+        $this->emailServiceMock->expects(self::once())->method('sendPlainTextEmailToRegularAttendees')
+            ->with($event, $subject, $body);
+
+        $this->subject->sendAction($event, $subject, $body);
+    }
+
+    /**
+     * @test
+     */
+    public function sendActionWithEventTopicDoesNotSendEmail(): void
+    {
+        $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
+        $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
+        $this->stubRedirect();
+
+        $event = new EventTopic();
+        $subject = 'email subject';
+        $body = 'email body';
+
+        $this->emailServiceMock->expects(self::never())->method('sendPlainTextEmailToRegularAttendees');
 
         $this->subject->sendAction($event, $subject, $body);
     }
@@ -324,8 +349,7 @@ final class EmailControllerTest extends UnitTestCase
         $this->permissionsMock->method('hasReadAccessToEvents')->willReturn(true);
         $this->permissionsMock->method('hasReadAccessToRegistrations')->willReturn(true);
 
-        $eventUid = 9;
-        $event = $this->buildSingleEventMockWithUid($eventUid);
+        $event = new SingleEvent();
 
         $this->mockRedirect('overview', 'BackEnd\\Module');
 

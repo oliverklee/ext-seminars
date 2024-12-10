@@ -8,9 +8,9 @@ use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\MailRole;
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use OliverKlee\Seminars\Domain\Model\Organizer;
-use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Domain\Repository\Registration\RegistrationRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -26,13 +26,10 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class EmailService implements SingletonInterface
 {
-    private EventRepository $eventRepository;
-
     private RegistrationRepository $registrationRepository;
 
-    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository)
+    public function __construct(RegistrationRepository $registrationRepository)
     {
-        $this->eventRepository = $eventRepository;
         $this->registrationRepository = $registrationRepository;
     }
 
@@ -40,47 +37,41 @@ class EmailService implements SingletonInterface
      * Sends an email to the regular attendees of the event with the given UID using the provided email subject
      * and message body.
      *
-     * @param positive-int $eventUid
+     * @param Event&EventDateInterface $event
      *
      * @throws NotFoundException if event could not be instantiated
      */
-    public function sendPlainTextEmailToRegularAttendees(int $eventUid, string $subject, string $rawBody): void
+    public function sendPlainTextEmailToRegularAttendees($event, string $subject, string $rawBody): void
     {
-        $event = $this->eventRepository->findByUid($eventUid);
-        if (!$event instanceof EventDateInterface) {
-            throw new NotFoundException('There is no event with this UID.', 1333292164);
-        }
-
         $organizer = $event->getFirstOrganizer();
         $sender = $this->determineEmailSenderForEvent($event);
+        $eventUid = $event->getUid();
+        \assert(\is_int($eventUid) && $eventUid > 0);
 
-        $registrations = $this->registrationRepository->findRegularRegistrationsByEvent($eventUid);
-
-        if ($registrations !== []) {
-            foreach ($registrations as $registration) {
-                $user = $registration->getUser();
-                if (!($user instanceof FrontendUser) || $user->getEmail() === '') {
-                    continue;
-                }
-                $email = GeneralUtility::makeInstance(EmailBuilder::class)->from($sender)
-                    ->replyTo($organizer)
-                    ->subject($subject)
-                    ->to($user)
-                    ->text($this->appendEmailFooterIfProvided($rawBody, $organizer))
-                    ->build();
-
-                $email->send();
+        foreach ($this->registrationRepository->findRegularRegistrationsByEvent($eventUid) as $registration) {
+            $user = $registration->getUser();
+            if (!($user instanceof FrontendUser) || $user->getEmail() === '') {
+                continue;
             }
 
-            $message = GeneralUtility::makeInstance(
-                FlashMessage::class,
-                LocalizationUtility::translate('message_emailToAttendeesSent', 'seminars'),
-                '',
-                FlashMessage::OK,
-                true
-            );
-            $this->addFlashMessage($message);
+            $email = GeneralUtility::makeInstance(EmailBuilder::class)->from($sender)
+                ->replyTo($organizer)
+                ->subject($subject)
+                ->to($user)
+                ->text($this->appendEmailFooterIfProvided($rawBody, $organizer))
+                ->build();
+
+            $email->send();
         }
+
+        $message = GeneralUtility::makeInstance(
+            FlashMessage::class,
+            LocalizationUtility::translate('message_emailToAttendeesSent', 'seminars'),
+            '',
+            FlashMessage::OK,
+            true
+        );
+        $this->addFlashMessage($message);
     }
 
     /**

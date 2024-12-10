@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Controller\BackEnd;
 use OliverKlee\Seminars\BackEnd\EmailService;
 use OliverKlee\Seminars\BackEnd\Permissions;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
+use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -68,9 +69,9 @@ class EmailController extends ActionController
     {
         $this->checkPermissions();
 
-        $eventUid = $event->getUid();
-        \assert(\is_int($eventUid) && $eventUid > 0);
-        $this->emailService->sendPlainTextEmailToRegularAttendees($eventUid, $subject, $body);
+        if ($event instanceof EventDateInterface) {
+            $this->emailService->sendPlainTextEmailToRegularAttendees($event, $subject, $body);
+        }
 
         return $this->redirect('overview', 'BackEnd\\Module');
     }
