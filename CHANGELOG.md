@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a new Extbase-/Fluid based single view (#3986)
 - Add `Organizer.emailFooter` to the Extbase model (#3977)
 - Add a new plugin for the event outlook (#3969)
 - Add `Venue.city` property (#3908, #3914)

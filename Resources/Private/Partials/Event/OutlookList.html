@@ -24,7 +24,10 @@
                 <tr>
                     <td class="text-end">
                         <span class="text-nowrap">
-                            <f:render partial="EventDate" arguments="{event: event}"/>
+                            <f:link.action action="show" arguments="{event: event}"
+                                           pageUid="{settings.singleViewPage}}">
+                                <f:render partial="EventDate" arguments="{event: event}"/>
+                            </f:link.action>
                         </span>
                     </td>
                     <td>
@@ -33,7 +36,9 @@
                         </f:if>
                     </td>
                     <td>
-                        {event.displayTitle}
+                        <f:link.action action="show" arguments="{event: event}" pageUid="{settings.singleViewPage}}">
+                            {event.displayTitle}
+                        </f:link.action>
                     </td>
                     <td>
                         <f:for each="{event.cityNames}" as="cityName" iteration="iteration">
