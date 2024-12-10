@@ -1,1 +1,7 @@
-plugin.tx_seminars.persistence.storagePid = 2
+plugin.tx_seminars {
+  persistence.storagePid = 2
+
+  settings {
+    singleViewPage = 3
+  }
+}

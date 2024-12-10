@@ -117,6 +117,15 @@ defined('TYPO3') or die('Access denied.');
 
     ExtensionUtility::configurePlugin(
         'Seminars',
+        'EventSingleView', // arbitrary, but unique plugin name (not visible in the BE)
+        // all actions
+        [EventController::class => 'show'],
+        // no non-cacheable actions
+        []
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Seminars',
         'EventRegistration', // arbitrary, but unique plugin name (not visible in the BE)
         // all actions
         [

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Controller;
 
+use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -40,6 +42,16 @@ class EventController extends ActionController
         $events = $this->eventRepository->findUpcoming();
 
         $this->view->assign('events', $events);
+
+        return $this->htmlResponse();
+    }
+
+    /**
+     * @IgnoreValidation("event")
+     */
+    public function showAction(Event $event): ResponseInterface
+    {
+        $this->view->assign('event', $event);
 
         return $this->htmlResponse();
     }

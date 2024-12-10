@@ -1,7 +1,6 @@
 base: '/'
 languages:
-  -
-    title: English
+  - title: English
     enabled: true
     languageId: '0'
     base: /
@@ -14,3 +13,21 @@ languages:
     flag: us
     websiteTitle: ''
 rootPageId: 1
+routeEnhancers:
+  EventSingleView:
+    type: Extbase
+    limitToPages:
+      - 3
+    extension: Seminars
+    plugin: EventSingleView
+    defaultController: 'Event::show'
+    routes:
+      - routePath: '/{event}'
+        _controller: 'Event::show'
+        _arguments:
+          event: event
+    aspects:
+      event:
+        type: PersistedAliasMapper
+        tableName: 'tx_seminars_seminars'
+        routeFieldName: 'uid'
