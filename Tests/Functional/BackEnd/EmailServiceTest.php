@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use OliverKlee\Seminars\BackEnd\EmailService;
+use OliverKlee\Seminars\Domain\Model\Event\SingleEvent;
+use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -38,12 +40,15 @@ final class EmailServiceTest extends FunctionalTestCase
 
     private EmailService $subject;
 
+    private EventRepository $eventRepository;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->initializeBackEndLanguage();
 
         $this->email = $this->createEmailMock();
+        $this->eventRepository = $this->get(EventRepository::class);
 
         $this->subject = $this->get(EmailService::class);
     }
@@ -69,12 +74,14 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesForTwoRegistrationsSendsTwoEmails(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(2);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(2, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
     }
 
     /**
@@ -83,12 +90,14 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesUsesTypo3DefaultFromAddressAsSender(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(2);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(2, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
 
         self::assertArrayHasKey('system-foo@example.com', $this->getFromOfEmail($this->email));
     }
@@ -101,12 +110,14 @@ final class EmailServiceTest extends FunctionalTestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
 
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(2);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(2, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
 
         self::assertArrayHasKey('oliver@example.com', $this->getFromOfEmail($this->email));
     }
@@ -117,12 +128,14 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesEmailUsesFirstOrganizerAsReplyTo(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(2);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(2, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
 
         self::assertArrayHasKey('oliver@example.com', $this->getReplyToOfEmail($this->email));
     }
@@ -133,12 +146,14 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesEmailAppendsFirstOrganizerFooterToMessageBody(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(2);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::exactly(2))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(2, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
 
         self::assertStringContainsString("\n-- \nThe one and only", $this->email->getTextBody());
     }
@@ -149,12 +164,14 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesUsesProvidedEmailSubject(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
         $emailSubject = 'Thank you for your registration.';
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(1, $emailSubject, 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, $emailSubject, 'some message body');
 
         self::assertSame($emailSubject, $this->email->getSubject());
     }
@@ -165,10 +182,12 @@ final class EmailServiceTest extends FunctionalTestCase
     public function sendPlainTextEmailToRegularAttendeesNotSendsEmailToUserWithoutEmailAddress(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $event = $this->eventRepository->findByUid(4);
+        self::assertInstanceOf(SingleEvent::class, $event);
 
         $this->email->expects(self::never())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendPlainTextEmailToRegularAttendees(4, 'foo', 'some message body');
+        $this->subject->sendPlainTextEmailToRegularAttendees($event, 'foo', 'some message body');
     }
 }
