@@ -2199,6 +2199,10 @@ This event now has been confirmed.</target>
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView">
+        <source>Event single view</source>
+        <target state="needs-translation">Event single view</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
