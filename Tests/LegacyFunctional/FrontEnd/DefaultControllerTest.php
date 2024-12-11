@@ -46,8 +46,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      * @var array<string, non-empty-string>
      */
     private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
         'currency' => 'EUR',
     ];
 
@@ -1784,7 +1782,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $uid;
 
         self::assertStringContainsString(
-            '01.01.2008',
+            '2008-01-01',
             $this->subject->main('', [])
         );
     }
@@ -4355,7 +4353,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
 
         self::assertStringContainsString(
-            \sprintf($this->translate('message_registrationOpensOn'), \date('d.m.Y H:i', $registrationBegin)),
+            \sprintf($this->translate('message_registrationOpensOn'), \date('Y-m-d H:i', $registrationBegin)),
             $this->subject->main('', [])
         );
     }
@@ -4457,7 +4455,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
         self::assertStringContainsString(
-            '01.01.2008',
+            '2008-01-01',
             $this->subject->main('', [])
         );
     }
@@ -5135,7 +5133,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertStringContainsString(
-            \sprintf($this->translate('message_registrationOpensOn'), \date('d.m.Y H:i', $registrationBegin)),
+            \sprintf($this->translate('message_registrationOpensOn'), \date('Y-m-d H:i', $registrationBegin)),
             $this->subject->main('', [])
         );
     }

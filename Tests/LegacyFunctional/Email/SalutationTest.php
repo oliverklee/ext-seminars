@@ -24,32 +24,22 @@ final class SalutationTest extends FunctionalTestCase
 {
     use BackEndTestsTrait;
 
+    /**
+     * @var non-empty-string
+     */
+    private const DATE_FORMAT = 'Y-m-d';
+
+    /**
+     * @var non-empty-string
+     */
+    private const TIME_FORMAT = 'H:i';
+
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
         'typo3conf/ext/oelib',
         'typo3conf/ext/seminars',
     ];
-
-    /**
-     * @var non-empty-string
-     */
-    private const STRFTIME_DATE_FORMAT = '%d.%m.%Y';
-
-    /**
-     * @var non-empty-string
-     */
-    private const DATE_FORMAT = 'd.m.Y';
-
-    /**
-     * @var non-empty-string
-     */
-    private const STRFTIME_TIME_FORMAT = '%H:%M';
-
-    /**
-     * @var non-empty-string
-     */
-    private const TIME_FORMAT = 'H:i';
 
     private TestingFramework $testingFramework;
 
@@ -63,8 +53,6 @@ final class SalutationTest extends FunctionalTestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->configuration->setAsString('salutation', 'formal');
-        $this->configuration->setAsString('dateFormatYMD', self::STRFTIME_DATE_FORMAT);
-        $this->configuration->setAsString('timeFormat', self::STRFTIME_TIME_FORMAT);
 
         $this->subject = new Salutation();
     }

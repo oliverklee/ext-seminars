@@ -19,24 +19,6 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    /**
-     * @var string
-     */
-    private const TIME_FORMAT = '%H:%M';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_YMD = '%d.%m.%Y';
-
-    /**
-     * @var array<string, string|bool>
-     */
-    private const CONFIGURATION = [
-        'timeFormat' => self::TIME_FORMAT,
-        'dateFormatYMD' => self::DATE_FORMAT_YMD,
-    ];
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -53,8 +35,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->initializeBackEndLanguage();
 
         $this->subject = new TestingTimeSpan();
-        $configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
     }
 
     protected function tearDown(): void
@@ -244,7 +225,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
         self::assertSame(
-            '01.01.2010',
+            '2010-01-01',
             $this->subject->getDate()
         );
     }
@@ -268,7 +249,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
         self::assertSame(
-            '01.01.2010',
+            '2010-01-01',
             $this->subject->getDate()
         );
     }
@@ -282,7 +263,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 3, 2010));
 
         self::assertSame(
-            '01.01.2010&#8211;03.01.2010',
+            '2010-01-01&#8211;2010-01-03',
             $this->subject->getDate()
         );
     }
@@ -370,7 +351,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::once())->method('modifyDateSpan')
-            ->with('01.01.2010&#8211;03.01.2010', $this->subject, '&#8211;')
+            ->with('2010-01-01&#8211;2010-01-03', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
         $hook->expects(self::never())->method('modifyTimeSpan');
 

@@ -61,6 +61,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the `strftime` date and time format configuration (#3990)
 - Drop the unused `AbstractModel::addMissingProtocolToUrl()` (#3972)
 - Drop `LegacyRegistration::commitToDatabase()` (#3971)
 - Drop `AbstractModel::comesFromDatabase()` (#3970)

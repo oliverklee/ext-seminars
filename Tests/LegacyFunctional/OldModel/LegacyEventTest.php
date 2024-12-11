@@ -38,11 +38,9 @@ final class LegacyEventTest extends FunctionalTestCase
     ];
 
     /**
-     * @var array<string, non-empty-string|int|bool>
+     * @var array<string, int>
      */
     private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
         'unregistrationDeadlineDaysBeforeBeginDate' => 0,
     ];
 
@@ -1939,7 +1937,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setUnregistrationDeadline(1893488400);
 
         self::assertSame(
-            '01.01.2030 09:00',
+            '2030-01-01 09:00',
             $this->subject->getUnregistrationDeadline()
         );
     }
@@ -1951,7 +1949,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setUnregistrationDeadline(1893488400);
 
-        self::assertSame('01.01.2030 09:00', $this->subject->getUnregistrationDeadline());
+        self::assertSame('2030-01-01 09:00', $this->subject->getUnregistrationDeadline());
     }
 
     /**
@@ -5729,7 +5727,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setExpiry(mktime(0, 0, 0, 12, 31, 2000));
 
         self::assertSame(
-            '31.12.2000',
+            '2000-12-31',
             $this->subject->getExpiry()
         );
     }
@@ -5743,7 +5741,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setUnregistrationDeadline(1893488400);
 
-        self::assertSame('01.01.2030 09:00', $this->subject->getEventData('deadline_unregistration'));
+        self::assertSame('2030-01-01 09:00', $this->subject->getEventData('deadline_unregistration'));
     }
 
     /**
@@ -6248,7 +6246,7 @@ final class LegacyEventTest extends FunctionalTestCase
     {
         $this->subject->setRegistrationBeginDate($this->now);
 
-        self::assertSame(\date('d.m.Y H:i', $this->now), $this->subject->getRegistrationBegin());
+        self::assertSame(\date('Y-m-d H:i', $this->now), $this->subject->getRegistrationBegin());
     }
 
     // Tests regarding the description.

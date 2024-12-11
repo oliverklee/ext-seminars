@@ -383,38 +383,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         timeFormat
-
-   Data type
-         string
-
-   Description
-         the time format (in  *strftime* format),
-         @deprecated #2342 will be removed in seminars 6.0
-
-   Default
-         %H:%M
-
-
-.. container:: table-row
-
-   Property
-         dateFormatYMD
-
-   Data type
-         string
-
-   Description
-         the  *strftime* format code for the full date (change this to your
-         local date format), @deprecated #2342 will be removed in seminars 6.0
-
-   Default
-         %d.%m.%Y
-
-
-.. container:: table-row
-
-   Property
          currency
 
    Data type

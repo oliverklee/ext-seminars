@@ -63,12 +63,6 @@ plugin.tx_seminars {
   # Whether to add the CSV file of the registrations when sending the reminder emails to the organizers.
   addRegistrationCsvToOrganizerReminderMail = 0
 
-  # the time format (in strftime format), @deprecated #2342 will be removed in seminars 6.0
-  timeFormat = %H:%M
-
-  # the strftime format code for the full date, @deprecated #2342 will be removed in seminars 6.0
-  dateFormatYMD = %d.%m.%Y
-
   # ISO 4217 alpha 3 code of the currency to be used, must be valid
   currency = EUR
 
