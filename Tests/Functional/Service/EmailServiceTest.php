@@ -29,11 +29,6 @@ final class EmailServiceTest extends FunctionalTestCase
     use EmailTrait;
     use MakeInstanceTrait;
 
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_YMD = '%d.%m.%Y';
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -56,8 +51,7 @@ final class EmailServiceTest extends FunctionalTestCase
         $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
         $GLOBALS['LANG'] = $languageService;
 
-        $configuration = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT_YMD]);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
         $this->email = $this->createEmailMock();
 

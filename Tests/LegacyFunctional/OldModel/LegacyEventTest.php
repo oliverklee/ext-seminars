@@ -38,11 +38,9 @@ final class LegacyEventTest extends FunctionalTestCase
     ];
 
     /**
-     * @var array<string, non-empty-string|int|bool>
+     * @var array<string, int>
      */
     private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
         'unregistrationDeadlineDaysBeforeBeginDate' => 0,
     ];
 
