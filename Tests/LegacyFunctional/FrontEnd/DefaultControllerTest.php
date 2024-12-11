@@ -46,8 +46,6 @@ final class DefaultControllerTest extends FunctionalTestCase
      * @var array<string, non-empty-string>
      */
     private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
         'currency' => 'EUR',
     ];
 

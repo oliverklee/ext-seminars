@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -527,5 +528,21 @@ abstract class AbstractModel
     protected function renderAsRichText(string $rawData): string
     {
         return GeneralUtility::makeInstance(RichTextViewHelper::class)->render($rawData);
+    }
+
+    protected function getDateFormat(): string
+    {
+        $format = LocalizationUtility::translate('dateFormat', 'seminars');
+        \assert(\is_string($format));
+
+        return $format;
+    }
+
+    protected function getTimeFormat(): string
+    {
+        $format = LocalizationUtility::translate('timeFormat', 'seminars');
+        \assert(\is_string($format));
+
+        return $format;
     }
 }

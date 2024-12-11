@@ -22,7 +22,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
         $this->checkRegistrationFlag();
         $this->checkSalutationMode();
         $this->checkStaticIncluded();
-        $this->checkTimeAndDate();
 
         if ($this->configuration->getAsBoolean('enableRegistration')) {
             $this->checkAllowRegistrationForEventsWithoutDate();
@@ -68,19 +67,6 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
             'This value specifies whether the extension will provide online registration.
             If this value is incorrect, the online  registration will not be enabled or disabled correctly.'
         );
-    }
-
-    /**
-     * Checks the settings for time and date format.
-     */
-    private function checkTimeAndDate(): void
-    {
-        $explanation = 'This determines the way dates and times are displayed.
-            If this is not set correctly, dates and times might be mangled or not get displayed at all.';
-        $configVariables = ['timeFormat', 'dateFormatYMD'];
-        foreach ($configVariables as $configVariable) {
-            $this->checkForNonEmptyString($configVariable, $explanation);
-        }
     }
 
     private function checkAllowRegistrationForEventsWithoutDate(): void

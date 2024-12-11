@@ -19,24 +19,6 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    /**
-     * @var string
-     */
-    private const TIME_FORMAT = '%H:%M';
-
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_YMD = '%d.%m.%Y';
-
-    /**
-     * @var array<string, string|bool>
-     */
-    private const CONFIGURATION = [
-        'timeFormat' => self::TIME_FORMAT,
-        'dateFormatYMD' => self::DATE_FORMAT_YMD,
-    ];
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -53,8 +35,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->initializeBackEndLanguage();
 
         $this->subject = new TestingTimeSpan();
-        $configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
     }
 
     protected function tearDown(): void

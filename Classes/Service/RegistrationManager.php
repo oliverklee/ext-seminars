@@ -1101,10 +1101,12 @@ class RegistrationManager implements SingletonInterface
     protected function getUnregistrationNotice(LegacyEvent $event): string
     {
         $unregistrationDeadline = $event->getUnregistrationDeadlineFromModelAndConfiguration();
+        $format = LocalizationUtility::translate('dateFormat', 'seminars');
+        \assert(\is_string($format));
 
         return \sprintf(
             $this->translate('email_unregistrationNotice'),
-            \date($this->getDateFormat(), $unregistrationDeadline)
+            \date($format, $unregistrationDeadline)
         );
     }
 

@@ -55,12 +55,13 @@ class DateRangeViewHelper
     }
 
     /**
-     * Renders a UNIX timestamp in the strftime format specified in plugin.tx_seminars_seminars.dateFormatYMD.
-     *
-     * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatYMD
+     * Renders a UNIX timestamp in the localized date format.
      */
     protected function getAsDateFormatYmd(int $timestamp): string
     {
-        return \date($this->getDateFormat(), $timestamp);
+        $format = LocalizationUtility::translate('dateFormat', 'seminars');
+        \assert(\is_string($format));
+
+        return \date($format, $timestamp);
     }
 }

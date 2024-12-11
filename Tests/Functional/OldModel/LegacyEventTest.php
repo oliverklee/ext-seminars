@@ -28,14 +28,6 @@ final class LegacyEventTest extends FunctionalTestCase
     use FalHelper;
     use LanguageHelper;
 
-    /**
-     * @var array<string, non-empty-string>
-     */
-    private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
-    ];
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -51,8 +43,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
     }
 
     protected function tearDown(): void
