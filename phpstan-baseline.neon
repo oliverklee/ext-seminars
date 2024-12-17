@@ -1151,6 +1151,11 @@ parameters:
 			path: Classes/Mapper/RegistrationMapper.php
 
 		-
+			message: "#^Cannot call method getName\\(\\) on OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			count: 1
+			path: Classes/Model/Event.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Model\\\\Event\\:\\:getStatus\\(\\) should return 0\\|1\\|2 but returns int\\.$#"
 			count: 1
 			path: Classes/Model/Event.php
