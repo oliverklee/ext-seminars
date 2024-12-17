@@ -865,6 +865,57 @@ final class EventTest extends UnitTestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function getRegistrationsAfterLastDigestReturnsNewerRegistrations(): void
+    {
+        $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
+
+        /** @var Collection<Registration> $registrations */
+        $registrations = new Collection();
+        $registration = new Registration();
+        $registration->setData(['crdate' => 2]);
+        $registrations->add($registration);
+        $this->subject->setRegistrations($registrations);
+
+        self::assertContains($registration, $this->subject->getRegistrationsAfterLastDigest());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationsAfterLastDigestNotReturnsOlderRegistrations(): void
+    {
+        $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
+
+        /** @var Collection<Registration> $registrations */
+        $registrations = new Collection();
+        $registration = new Registration();
+        $registration->setData(['crdate' => 1]);
+        $registrations->add($registration);
+        $this->subject->setRegistrations($registrations);
+
+        self::assertTrue($this->subject->getRegistrationsAfterLastDigest()->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationsAfterLastDigestNotReturnsRegistrationsExactlyAtDigestDate(): void
+    {
+        $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
+
+        /** @var Collection<Registration> $registrations */
+        $registrations = new Collection();
+        $registration = new Registration();
+        $registration->setData(['crdate' => 1]);
+        $registrations->add($registration);
+        $this->subject->setRegistrations($registrations);
+
+        self::assertTrue($this->subject->getRegistrationsAfterLastDigest()->isEmpty());
+    }
+
     ////////////////////////////////////////
     // Tests concerning getRegisteredSeats
     ////////////////////////////////////////
