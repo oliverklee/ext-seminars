@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Model\Category;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\EventType;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Organizer;
 use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Context\Context;
@@ -1121,6 +1122,67 @@ final class EventTest extends UnitTestCase
         $result = $this->subject->getFirstOrganizer();
 
         self::assertSame($firstOrganizer, $result);
+    }
+
+    // Tests concerning getAttendeeNamesAfterLastDigest
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesAfterLastDigestUsesNewerRegistration(): void
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new FrontEndUser();
+        $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+
+        $registration = new Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => true,
+                'additional_persons' => new Collection(),
+                'crdate' => 2,
+            ]
+        );
+        $registrations = new Collection();
+        $registrations->add($registration);
+
+        $this->subject->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 1]);
+
+        self::assertSame(
+            [$firstName . ' ' . $lastName],
+            $this->subject->getAttendeeNamesAfterLastDigest()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesAfterLastDigestIgnoresOlderRegistration(): void
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new FrontEndUser();
+        $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+
+        $registration = new Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => true,
+                'additional_persons' => new Collection(),
+                'crdate' => 1,
+            ]
+        );
+        $registrations = new Collection();
+        $registrations->add($registration);
+
+        $this->subject->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 2]);
+
+        self::assertSame([], $this->subject->getAttendeeNamesAfterLastDigest());
     }
 
     // Tests regarding the date of the last registration digest email
