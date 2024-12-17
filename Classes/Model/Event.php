@@ -380,6 +380,27 @@ class Event extends AbstractTimeSpan
     }
 
     /**
+     * @return Collection<Registration>
+     *
+     * @deprecated will be removed in version 6.0 in #3422
+     */
+    public function getRegistrationsAfterLastDigest(): Collection
+    {
+        /** @var Collection<Registration> $newerRegistrations */
+        $newerRegistrations = new Collection();
+        $dateOfLastDigest = $this->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp();
+
+        /** @var Registration $registration */
+        foreach ($this->getRegistrations() as $registration) {
+            if ($registration->getCreationDateAsUnixTimeStamp() > $dateOfLastDigest) {
+                $newerRegistrations->add($registration);
+            }
+        }
+
+        return $newerRegistrations;
+    }
+
+    /**
      * Returns the number of regularly registered seats for this event.
      *
      * This functions counts the number of registered seats from regular
