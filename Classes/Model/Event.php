@@ -437,6 +437,55 @@ class Event extends AbstractTimeSpan
     }
 
     /**
+     * Returns the names of registered attendees (including additional attendees and queue registrations),
+     * but only those that have registered after the last registration digest email.
+     *
+     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
+     *
+     * @deprecated will be removed in version 6.0 in #3422
+     */
+    public function getAttendeeNamesAfterLastDigest(): array
+    {
+        return $this->extractNamesFromRegistrations($this->getRegistrationsAfterLastDigest());
+    }
+
+    /**
+     * @param Collection<Registration> $registrations
+     *
+     * @return list<string> attendee names: ['Jane Doe', 'John Doe']
+     */
+    private function extractNamesFromRegistrations(Collection $registrations): array
+    {
+        $names = [];
+
+        /** @var Registration $registration */
+        foreach ($registrations as $registration) {
+            if ($registration->hasRegisteredThemselves()) {
+                $names[] = $registration->getFrontEndUser()->getName();
+            }
+
+            $hasAdditionalPersons = false;
+            /** @var FrontEndUser $person */
+            foreach ($registration->getAdditionalPersons() as $person) {
+                $names[] = $person->getName();
+                $hasAdditionalPersons = true;
+            }
+
+            if (!$hasAdditionalPersons) {
+                foreach (explode("\r\n", $registration->getAttendeesNames()) as $name) {
+                    $trimmedName = trim($name);
+                    if ($trimmedName !== '') {
+                        $names[] = $trimmedName;
+                    }
+                }
+            }
+        }
+        sort($names, SORT_STRING);
+
+        return $names;
+    }
+
+    /**
      * @return int the date as UNIX time-stamp, will be 0 if this no digest has been sent yet
      */
     public function getDateOfLastRegistrationDigestEmailAsUnixTimeStamp(): int
