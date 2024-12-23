@@ -47,7 +47,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
         $this->setUpBackendUser(1);
         $this->initializeBackEndLanguage();
 
@@ -111,7 +111,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
      */
     public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $submittedData = ['seminars_configurationPageUid' => '1'];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
@@ -124,7 +124,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
      */
     public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $submittedData = ['seminars_configurationPageUid' => '1'];
 
         $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
@@ -185,7 +185,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
      */
     public function saveAdditionalFieldsSavesIntegerPageUidToTask(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $pageUid = 1;
         $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
