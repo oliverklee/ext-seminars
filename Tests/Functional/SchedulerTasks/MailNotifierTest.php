@@ -114,7 +114,7 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function executeWithPageConfigurationReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
 
         $subject = new MailNotifier();
         $subject->setConfigurationPageUid(1);
@@ -129,7 +129,7 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function executeWithPageConfigurationCallsAllSeparateSteps(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -166,7 +166,7 @@ final class MailNotifierTest extends FunctionalTestCase
      */
     public function executeWithPageConfigurationExecutesRegistrationDigest(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.csv');
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
