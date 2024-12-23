@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -21,7 +22,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 /**
  * This class takes care of sending the daily registration digest email for events.
  */
-class RegistrationDigest
+class RegistrationDigest implements SingletonInterface
 {
     private Configuration $configuration;
 

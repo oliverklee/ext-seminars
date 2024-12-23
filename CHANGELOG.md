@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make `RegistrationDigest` a singleton (#4002)
 - Move the webinar URL further up in the TCEforms (#3975)
 - Move determining the email sender out of the models (#3965)
 - Refactor the email service for the BE module

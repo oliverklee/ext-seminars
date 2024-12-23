@@ -48,14 +48,13 @@ final class MailNotifierTest extends FunctionalTestCase
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
         $this->registrationDigestMock = $this->createMock(RegistrationDigest::class);
-        GeneralUtility::addInstance(RegistrationDigest::class, $this->registrationDigestMock);
+        GeneralUtility::setSingletonInstance(RegistrationDigest::class, $this->registrationDigestMock);
 
         $this->subject = new MailNotifier();
     }
 
     protected function tearDown(): void
     {
-        GeneralUtility::makeInstance(RegistrationDigest::class);
         ConfigurationRegistry::purgeInstance();
         MapperRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
