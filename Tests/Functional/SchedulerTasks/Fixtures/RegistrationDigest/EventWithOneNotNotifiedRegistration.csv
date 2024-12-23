@@ -1,0 +1,11 @@
+"tx_seminars_seminars"
+,"uid","title","date_of_last_registration_digest","registrations","begin_date","end_date"
+,1,"some event",1,1,2524604400,2524604401
+
+"fe_users"
+,"uid","name"
+,1,"the dragonborn"
+
+"tx_seminars_attendances"
+,"uid","crdate","seminar","user"
+,1,2,1,1
