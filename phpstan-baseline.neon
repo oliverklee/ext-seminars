@@ -2961,16 +2961,6 @@ parameters:
 			path: Tests/LegacyFunctional/SchedulerTasks/MailNotifierTest.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/SchedulerTasks/RegistrationDigestTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyFunctional\\\\SchedulerTasks\\\\RegistrationDigestTest\\:\\:\\$now \\(int\\<1, max\\>\\) does not accept int\\.$#"
-			count: 1
-			path: Tests/LegacyFunctional/SchedulerTasks/RegistrationDigestTest.php
-
-		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 3
 			path: Tests/LegacyFunctional/Service/EmailServiceTest.php
