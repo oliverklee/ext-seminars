@@ -66,7 +66,10 @@ final class RegistrationMapperTest extends FunctionalTestCase
         );
 
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(Registration::class, $model);
+        self::assertEquals(
+            'registration for event',
+            $model->getTitle()
+        );
     }
 
     // Tests concerning the event.
@@ -106,5 +109,28 @@ final class RegistrationMapperTest extends FunctionalTestCase
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());
+    }
+
+    // Tests concerning the relation to the additional registered persons
+
+    /**
+     * @test
+     */
+    public function relationToAdditionalPersonsReturnsPersonsFromDatabase(): void
+    {
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['additional_persons' => 1]
+        );
+        $personUid = $this->testingFramework->createFrontEndUser(
+            '',
+            ['tx_seminars_registration' => $registrationUid]
+        );
+
+        $model = $this->subject->find($registrationUid);
+        self::assertEquals(
+            (string)$personUid,
+            $model->getAdditionalPersons()->getUids()
+        );
     }
 }

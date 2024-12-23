@@ -51,6 +51,23 @@ final class RegistrationTest extends FunctionalTestCase
         parent::tearDown();
     }
 
+    ///////////////////////////////
+    // Tests regarding the title.
+    ///////////////////////////////
+
+    /**
+     * @test
+     */
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
+    {
+        $this->subject->setData(['title' => 'registration for event']);
+
+        self::assertEquals(
+            'registration for event',
+            $this->subject->getTitle()
+        );
+    }
+
     ////////////////////////////////////////
     // Tests regarding the front-end user.
     ////////////////////////////////////////
@@ -185,6 +202,77 @@ final class RegistrationTest extends FunctionalTestCase
         self::assertEquals(
             42,
             $this->subject->getSeats()
+        );
+    }
+
+    ///////////////////////////////////////////////
+    // Tests regarding hasRegisteredThemselves().
+    ///////////////////////////////////////////////
+
+    /**
+     * @test
+     */
+    public function hasRegisteredThemselvesForThirdPartyRegistrationReturnsFalse(): void
+    {
+        $this->subject->setData([]);
+
+        self::assertFalse(
+            $this->subject->hasRegisteredThemselves()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function hasRegisteredThemselvesForSelfRegistrationReturnsTrue(): void
+    {
+        $this->subject->setData(['registered_themselves' => true]);
+
+        self::assertTrue(
+            $this->subject->hasRegisteredThemselves()
+        );
+    }
+
+    /////////////////////////////////////////
+    // Tests regarding the attendees names.
+    /////////////////////////////////////////
+
+    /**
+     * @test
+     */
+    public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString(): void
+    {
+        $this->subject->setData([]);
+
+        self::assertEquals(
+            '',
+            $this->subject->getAttendeesNames()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeesNamesWithAttendeesNamesReturnsAttendeesNames(): void
+    {
+        $this->subject->setData(['attendees_names' => 'John Doe']);
+
+        self::assertEquals(
+            'John Doe',
+            $this->subject->getAttendeesNames()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setAttendeesNamesSetsAttendeesNames(): void
+    {
+        $this->subject->setAttendeesNames('John Doe');
+
+        self::assertEquals(
+            'John Doe',
+            $this->subject->getAttendeesNames()
         );
     }
 }

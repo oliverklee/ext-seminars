@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
@@ -11,6 +12,14 @@ use OliverKlee\Oelib\Model\AbstractModel;
  */
 class Registration extends AbstractModel
 {
+    /**
+     * @return string the title of this registration, will not be empty
+     */
+    public function getTitle(): string
+    {
+        return $this->getAsString('title');
+    }
+
     public function getFrontEndUser(): ?FrontEndUser
     {
         /** @var FrontEndUser|null $user */
@@ -72,5 +81,53 @@ class Registration extends AbstractModel
     public function getSeats(): int
     {
         return $this->getAsInteger('seats');
+    }
+
+    /**
+     * Returns whether the front-end user registered themselves.
+     */
+    public function hasRegisteredThemselves(): bool
+    {
+        return $this->getAsBoolean('registered_themselves');
+    }
+
+    /**
+     * @return string the names of the attendees of this registration separated by CRLF, might be empty
+     */
+    public function getAttendeesNames(): string
+    {
+        return $this->getAsString('attendees_names');
+    }
+
+    /**
+     * @param string $attendeesNames the names of the attendees of this registration to set separated
+     *        by CRLF, may be empty
+     */
+    public function setAttendeesNames(string $attendeesNames): void
+    {
+        $this->setAsString('attendees_names', $attendeesNames);
+    }
+
+    /**
+     * Gets the additional persons (FE users) attached to this registration.
+     *
+     * @return Collection<FrontEndUser>
+     */
+    public function getAdditionalPersons(): Collection
+    {
+        /** @var Collection<FrontEndUser> $additionalPersons */
+        $additionalPersons = $this->getAsCollection('additional_persons');
+
+        return $additionalPersons;
+    }
+
+    /**
+     * Sets the additional persons attached to this registration.
+     *
+     * @param Collection<FrontEndUser> $persons
+     */
+    public function setAdditionalPersons(Collection $persons): void
+    {
+        $this->set('additional_persons', $persons);
     }
 }
