@@ -90,7 +90,7 @@ final class MailNotifierTest extends FunctionalTestCase
         GeneralUtility::setSingletonInstance(EmailService::class, $this->emailService);
 
         $registrationDigestMock = $this->createMock(RegistrationDigest::class);
-        GeneralUtility::addInstance(RegistrationDigest::class, $registrationDigestMock);
+        GeneralUtility::setSingletonInstance(RegistrationDigest::class, $registrationDigestMock);
 
         $this->email = $this->createEmailMock();
 
@@ -109,7 +109,6 @@ final class MailNotifierTest extends FunctionalTestCase
             $this->testingFramework->cleanUpWithoutDatabase();
         }
 
-        GeneralUtility::makeInstance(RegistrationDigest::class);
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
         GeneralUtility::resetSingletonInstances([]);
