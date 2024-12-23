@@ -6,8 +6,8 @@ namespace OliverKlee\Seminars\Tests\Functional\SchedulerTasks;
 
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -20,8 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class MailNotifierConfigurationTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     /**
      * @var non-empty-string
      */
@@ -48,11 +46,10 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
-        $this->setUpBackendUser(1);
-        $this->initializeBackEndLanguage();
+        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+            ->createFromUserPreferences($this->setUpBackendUser(1));
 
-        $moduleController = $this->createMock(SchedulerModuleController::class);
-        $this->moduleController = $moduleController;
+        $this->moduleController = $this->createMock(SchedulerModuleController::class);
 
         $this->subject = new MailNotifierConfiguration();
     }

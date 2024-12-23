@@ -9,8 +9,8 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\RegistrationDigest;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -20,8 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class MailNotifierTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     protected array $coreExtensionsToLoad = ['scheduler'];
 
     protected array $testExtensionsToLoad = [
@@ -42,7 +40,9 @@ final class MailNotifierTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->initializeBackEndLanguage();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
+        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+            ->createFromUserPreferences($this->setUpBackendUser(1));
 
         ConfigurationRegistry::getInstance()->set('plugin', new DummyConfiguration());
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
