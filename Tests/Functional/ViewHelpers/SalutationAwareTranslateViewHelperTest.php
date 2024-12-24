@@ -28,16 +28,11 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->setUpLanguageService();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
+        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+            ->createFromUserPreferences($this->setUpBackendUser(1));
+
         $this->variableProvider = new StandardVariableProvider();
-    }
-
-    public function setUpLanguageService(): void
-    {
-        $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-
-        $GLOBALS['LANG'] = $languageService;
     }
 
     private function embedInHtmlWithNamespace(string $html): string
@@ -48,9 +43,6 @@ final class SalutationAwareTranslateViewHelperTest extends FunctionalTestCase
 
     private function renderViewHelper(string $html): string
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
-        $this->setUpBackendUser(1);
-
         $view = new StandaloneView();
 
         $renderingContext = $view->getRenderingContext();

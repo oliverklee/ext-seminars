@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingLegacyEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -48,6 +49,10 @@ final class LegacyEventTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
+        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+            ->createFromUserPreferences($this->setUpBackendUser(1));
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
