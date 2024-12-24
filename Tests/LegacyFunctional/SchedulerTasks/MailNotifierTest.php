@@ -76,7 +76,6 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 2);
         $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', true);
         $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
-        $this->configuration->setAsString('dateFormatYMD', '%d.%m.%Y');
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'title');
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
 
@@ -1367,7 +1366,7 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->subject->sendCancellationDeadlineReminders();
 
         self::assertStringContainsString(
-            \date('d.m.Y', $this->now + Time::SECONDS_PER_DAY),
+            \date('Y-m-d', $this->now + Time::SECONDS_PER_DAY),
             $this->email->getTextBody()
         );
     }

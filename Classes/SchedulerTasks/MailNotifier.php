@@ -18,12 +18,12 @@ use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyOrganizer;
-use OliverKlee\Seminars\Service\DateFormatConverter;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
@@ -328,18 +328,16 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Returns a timestamp formatted according to the current configuration.
+     * Returns a timestamp formated as a localized date.
      *
      * @param int<0, max> $timestamp
-     *
-     * @return string formatted date according to the TS setup configuration for 'dateFormatYMD', will not be empty
      */
     private function getDate(int $timestamp): string
     {
-        $format = $this->getConfiguration()->getAsString('dateFormatYMD');
-        $newFormat = DateFormatConverter::convert($format);
+        $format = LocalizationUtility::translate('dateFormat', 'seminars');
+        \assert(\is_string($format));
 
-        return \date($newFormat, $timestamp);
+        return \date($format, $timestamp);
     }
 
     /**

@@ -8,9 +8,6 @@ plugin.tx_seminars_pi1 {
   # location of the HTML template file
   templateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html
 
-  # the strftime format code for the full date, @deprecated #2342 will be removed in seminars 6.0
-  dateFormatYMD < plugin.tx_seminars.dateFormatYMD
-
   # whether to use formal or informal language
   salutation = formal
 

@@ -43,8 +43,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
 
-        $configuration = new DummyConfiguration(['dateFormatYMD' => '%d.%m.%Y']);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
         $this->subject = new DateRangeViewHelper();
     }
@@ -72,7 +71,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            \date('d.m.Y', self::BEGIN_DATE),
+            \date('Y-m-d', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -87,7 +86,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            \date('d.m.Y', self::BEGIN_DATE),
+            \date('Y-m-d', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -102,7 +101,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
 
         self::assertSame(
-            \date('d.m.Y', self::BEGIN_DATE),
+            \date('Y-m-d', self::BEGIN_DATE),
             $this->subject->render($timeSpan)
         );
     }
@@ -118,7 +117,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
         self::assertSame(
-            \date('d.m.Y', self::BEGIN_DATE) . '&#8211;' . \date('d.m.Y', $endDate),
+            \date('Y-m-d', self::BEGIN_DATE) . '&#8211;' . \date('Y-m-d', $endDate),
             $this->subject->render($timeSpan)
         );
     }
@@ -136,7 +135,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
         self::assertSame(
-            \date('d.m.Y', self::BEGIN_DATE) . $dash . \date('d.m.Y', $endDate),
+            \date('Y-m-d', self::BEGIN_DATE) . $dash . \date('Y-m-d', $endDate),
             $this->subject->render($timeSpan, $dash)
         );
     }

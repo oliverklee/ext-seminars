@@ -20,16 +20,6 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT = '%d.%m.%Y';
-
-    /**
-     * @var string
-     */
-    private const TIME_FORMAT = '%H:%M';
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -39,21 +29,12 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
     private LegacyRegistration $subject;
 
-    /**
-     * @var array<string, string>
-     */
-    private const CONFIGURATION = [
-        'dateFormatYMD' => self::DATE_FORMAT,
-        'timeFormat' => self::TIME_FORMAT,
-    ];
-
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->initializeBackEndLanguage();
-        $configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
 
         $this->subject = new LegacyRegistration();
     }
@@ -245,7 +226,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        $expected = \date('d.m.Y', $value) . ' ' . \date('H:i', $value);
+        $expected = \date('Y-m-d', $value) . ' ' . \date('H:i', $value);
         self::assertStringContainsString($expected, $result);
     }
 
@@ -275,7 +256,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        $expected = \date('d.m.Y', $value);
+        $expected = \date('Y-m-d', $value);
         self::assertStringContainsString($expected, $result);
     }
 

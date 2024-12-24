@@ -35,11 +35,6 @@ final class EmailServiceTest extends FunctionalTestCase
         'typo3conf/ext/seminars',
     ];
 
-    /**
-     * @var string
-     */
-    private const DATE_FORMAT_YMD = '%d.%m.%Y';
-
     private EmailService $subject;
 
     private TestingFramework $testingFramework;
@@ -59,8 +54,6 @@ final class EmailServiceTest extends FunctionalTestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-
-        $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
 
         $this->email = $this->createEmailMock();
 

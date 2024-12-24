@@ -29,14 +29,6 @@ final class LegacyEventTest extends FunctionalTestCase
     use FalHelper;
     use LanguageHelper;
 
-    /**
-     * @var array<string, non-empty-string>
-     */
-    private const CONFIGURATION = [
-        'dateFormatYMD' => '%d.%m.%Y',
-        'timeFormat' => '%H:%M',
-    ];
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -56,8 +48,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new DummyConfiguration(self::CONFIGURATION);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new DummyConfiguration());
     }
 
     protected function tearDown(): void
@@ -107,10 +98,10 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(1575026911, $subject->getBeginDateAsTimestamp());
         self::assertSame(1575926911, $subject->getEndDateAsTimestamp());
         self::assertSame(1570026911, $subject->getRegistrationBeginAsUnixTimestamp());
-        self::assertSame('17.11.2019 21:41', $subject->getRegistrationDeadline());
-        self::assertSame('14.10.2019 04:21', $subject->getEarlyBirdDeadline());
+        self::assertSame('2019-11-17 21:41', $subject->getRegistrationDeadline());
+        self::assertSame('2019-10-14 04:21', $subject->getEarlyBirdDeadline());
         self::assertSame(1573026911, $subject->getUnregistrationDeadlineAsTimestamp());
-        self::assertSame('11.12.2019', $subject->getExpiry());
+        self::assertSame('2019-12-11', $subject->getExpiry());
         self::assertSame('12', $subject->getDetailsPage());
         self::assertSame('the first one to the left', $subject->getRoom());
         self::assertSame('€ 1.234,56', $subject->getPriceRegular());
