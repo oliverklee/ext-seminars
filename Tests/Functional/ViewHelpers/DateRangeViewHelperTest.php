@@ -7,8 +7,10 @@ namespace OliverKlee\Seminars\Tests\Functional\ViewHelpers;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Model\AbstractTimeSpan;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -16,8 +18,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class DateRangeViewHelperTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -35,6 +35,10 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/AdminBackEndUser.csv');
+        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class)
+            ->createFromUserPreferences($this->setUpBackendUser(1));
 
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
@@ -54,7 +58,7 @@ final class DateRangeViewHelperTest extends FunctionalTestCase
         $timeSpan->setData([]);
 
         self::assertSame(
-            $this->translate('message_willBeAnnounced'),
+            LocalizationUtility::translate('message_willBeAnnounced', 'seminars'),
             $this->subject->render($timeSpan)
         );
     }
