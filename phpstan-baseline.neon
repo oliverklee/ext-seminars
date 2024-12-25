@@ -3309,3 +3309,73 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Templating\\\\TemplateHelper\\:\\:\\$cObj \\(TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\|null\\) does not accept array\\.$#"
 			count: 1
 			path: Tests/Unit/Templating/TemplateHelperTest.php
+
+		-
+			message: "#^Cannot access offset 'FE' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'OliverKlee\\\\\\\\Seminars\\\\\\\\SchedulerTasks\\\\\\\\MailNotifier' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'SC_OPTIONS' on mixed\\.$#"
+			count: 5
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'additionalCanonical…' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'ext/install' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'processCmdmapClass' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'processDatamapClass' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'scheduler' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'seminars' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'seminars…' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 't3lib/class\\.t3lib…' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'tasks' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'update' on mixed\\.$#"
+			count: 2
+			path: ext_localconf.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, mixed given\\.$#"
+			count: 1
+			path: ext_localconf.php
