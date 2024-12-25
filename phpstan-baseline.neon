@@ -171,6 +171,11 @@ parameters:
 			path: Classes/Csv/CsvDownloader.php
 
 		-
+			message: "#^Call to function is_string\\(\\) with non\\-empty\\-string will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Csv/CsvResponse.php
+
+		-
 			message: "#^Return type \\(list\\<string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should be covariant with return type \\(list\\<non\\-empty\\-string\\>\\) of method OliverKlee\\\\Seminars\\\\Csv\\\\AbstractRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\)$#"
 			count: 1
 			path: Classes/Csv/DownloadRegistrationListView.php
@@ -194,6 +199,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventDate\\:\\:getPaymentMethods\\(\\) should return TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\PaymentMethod\\> but returns TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<mixed\\>\\.$#"
 			count: 1
 			path: Classes/Domain/Model/Event/EventDate.php
+
+		-
+			message: "#^Call to static method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Price\\:\\:isPriceCodeValid\\(\\) with 'price_regular'\\|'price_regular_early'\\|'price_special'\\|'price_special_early' will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Registration/Registration.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
@@ -1626,6 +1636,11 @@ parameters:
 			path: Tests/Functional/BagBuilder/EventBagBuilderTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{\\} and array\\{\\} will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
+
+		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 3
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
@@ -1664,6 +1679,11 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Domain\\\\Repository\\\\Event\\\\EventRepositoryTest\\:\\:\\$t3VarBackup type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Tests/Functional/Domain/Repository/Event/EventRepositoryTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{\\} and array\\{\\} will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/Domain/Repository/Registration/RegistrationRepositoryTest.php
 
 		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
@@ -2366,6 +2386,11 @@ parameters:
 			path: Tests/LegacyFunctional/Bag/AbstractBagTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsObject\\(\\) with OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\Bag\\\\Fixtures\\\\TestingBag will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/BagBuilder/AbstractBagBuilderTest.php
+
+		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingModel\\|null\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/BagBuilder/AbstractBagBuilderTest.php
@@ -2668,6 +2693,11 @@ parameters:
 		-
 			message: "#^Binary operation \"\\-\" between mixed and 45 results in an error\\.$#"
 			count: 3
+			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNotNull\\(\\) with OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\FrontEnd\\\\Fixtures\\\\TestingDefaultController will always evaluate to true\\.$#"
+			count: 1
 			path: Tests/LegacyFunctional/FrontEnd/DefaultControllerTest.php
 
 		-
@@ -3021,6 +3051,16 @@ parameters:
 			path: Tests/LegacyFunctional/Service/EventStatusServiceTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNotNull\\(\\) with OliverKlee\\\\Seminars\\\\FrontEnd\\\\DefaultController will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNotNull\\(\\) with PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 4
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
@@ -3086,9 +3126,29 @@ parameters:
 			path: Tests/LegacyFunctional/Service/RegistrationManagerTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+			count: 3
+			path: Tests/Unit/Configuration/EventRegistrationFlexFormsTest.php
+
+		-
 			message: "#^Instanceof between Psr\\\\Http\\\\Message\\\\ResponseInterface and Psr\\\\Http\\\\Message\\\\ResponseInterface will always evaluate to true\\.$#"
 			count: 2
 			path: Tests/Unit/Controller/BackEnd/RegistrationControllerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with '' and '' will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Model/NullEventTypeTest.php
+
+		-
+			message: "#^Call to static method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Price\\:\\:isPriceCodeValid\\(\\) with 'price_regular'\\|'price_regular_early'\\|'price_special'\\|'price_special_early' will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Model/PriceTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Model/PriceTest.php
 
 		-
 			message: "#^Cannot call method toString\\(\\) on Symfony\\\\Component\\\\Mime\\\\Header\\\\HeaderInterface\\|null\\.$#"

@@ -16,5 +16,7 @@ parameters:
     - Classes
     - Tests
 
-  # Allow instanceof checks, particularly in tests
-  checkAlwaysTrueCheckTypeFunctionCall: false
+  ignoreErrors:
+    -
+      message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) .* will always evaluate to#'
+      path: 'Tests/'
