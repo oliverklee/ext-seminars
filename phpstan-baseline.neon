@@ -186,16 +186,6 @@ parameters:
 			path: Classes/Csv/DownloadRegistrationListView.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should return list\\<non\\-empty\\-string\\> but returns list\\<string\\>\\.$#"
-			count: 1
-			path: Classes/Csv/EmailRegistrationListView.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should return list\\<non\\-empty\\-string\\> but returns list\\<string\\>\\.$#"
-			count: 1
-			path: Classes/Csv/EmailRegistrationListView.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventDate\\:\\:getPaymentMethods\\(\\) should return TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\PaymentMethod\\> but returns TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\ObjectStorage\\<mixed\\>\\.$#"
 			count: 1
 			path: Classes/Domain/Model/Event/EventDate.php
