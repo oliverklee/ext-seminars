@@ -259,10 +259,7 @@ class MailNotifier extends AbstractTask
      */
     private function getDaysBeforeBeginDate(): int
     {
-        $number = $this->getConfiguration()->getAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
-        \assert($number >= 0);
-
-        return $number;
+        return $this->getConfiguration()->getAsNonNegativeInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
     }
 
     /**

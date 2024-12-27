@@ -104,10 +104,10 @@ class SingleViewLinkBuilder
     /**
      * Retrieves the single view page UID from the flexforms/TS Setup configuration.
      *
-     * @return int the single view page UID from the configuration, will be 0 if no page UID has been set
+     * @return int<0, max> the single view page UID from the configuration, will be 0 if no page UID has been set
      */
     protected function getSingleViewPageFromConfiguration(): int
     {
-        return $this->configuration->getAsInteger('detailPID');
+        return $this->configuration->getAsNonNegativeInteger('detailPID');
     }
 }

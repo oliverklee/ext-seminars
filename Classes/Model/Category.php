@@ -12,11 +12,11 @@ use OliverKlee\Oelib\Model\AbstractModel;
 class Category extends AbstractModel
 {
     /**
-     * @return int the single view page, will be 0 if none has been set
+     * @return int<0, max> the single view page, will be 0 if none has been set
      */
     public function getSingleViewPageUid(): int
     {
-        return $this->getAsInteger('single_view_page');
+        return $this->getAsNonNegativeInteger('single_view_page');
     }
 
     public function hasSingleViewPageUid(): bool
