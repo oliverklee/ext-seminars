@@ -55,7 +55,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require feuserextrafields >= 6.3.0 (#3505)
 - Drop the `ext-pdo` dependency (#3504)
 - Use short class names in type annotations (#2876)
-- Require oelib >= 6.0.2 (#3500, #3555, #3674)
+- Require oelib >= 6.1.0 (#3500, #3555, #3674, #4009)
 
 ### Deprecated
 
