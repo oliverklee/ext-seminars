@@ -172,7 +172,7 @@ abstract class TemplateHelper
      *
      * @param null $_ unused,
      */
-    public function __construct($_ = null, TypoScriptFrontendController $frontendController = null)
+    public function __construct($_ = null, ?TypoScriptFrontendController $frontendController = null)
     {
         if ($frontendController instanceof TypoScriptFrontendController) {
             $this->frontendController = $frontendController;
@@ -250,9 +250,9 @@ abstract class TemplateHelper
      * If the parameter is omitted, the configuration for `plugin.tx_[extkey]` is
      * used instead, e.g., `plugin.tx_seminars`.
      *
-     * @param array<string, mixed> $configuration TypoScript configuration for the plugin
+     * @param array<string, mixed>|null $configuration TypoScript configuration for the plugin
      */
-    public function init(array $configuration = null): void
+    public function init(?array $configuration = null): void
     {
         if ($this->isInitialized) {
             return;
