@@ -76,11 +76,11 @@ class Registration extends AbstractModel
      *
      * In older versions 0 equals 1 seat, which is deprecated.
      *
-     * @return int the number of registered seats of this registration, will be >= 0
+     * @return int<0, max> the number of registered seats of this registration, will be >= 0
      */
     public function getSeats(): int
     {
-        return $this->getAsInteger('seats');
+        return $this->getAsNonNegativeInteger('seats');
     }
 
     /**

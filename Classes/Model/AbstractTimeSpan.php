@@ -12,11 +12,11 @@ use OliverKlee\Oelib\Model\AbstractModel;
 abstract class AbstractTimeSpan extends AbstractModel
 {
     /**
-     * @return int our begin date as UNIX time-stamp, will be >= 0, 0 means "no begin date"
+     * @return int<0, max> our begin date as UNIX time-stamp, will be >= 0, 0 means "no begin date"
      */
     public function getBeginDateAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('begin_date');
+        return $this->getAsNonNegativeInteger('begin_date');
     }
 
     /**
@@ -40,11 +40,11 @@ abstract class AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * @return int our end date as UNIX time-stamp, will be >= 0, 0 means "no end date"
+     * @return int<0, max> our end date as UNIX time-stamp, will be >= 0, 0 means "no end date"
      */
     public function getEndDateAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('end_date');
+        return $this->getAsNonNegativeInteger('end_date');
     }
 
     /**

@@ -19,7 +19,7 @@ class Event extends AbstractTimeSpan
      */
     public function isEventDate(): bool
     {
-        return $this->getAsInteger('object_type') === EventInterface::TYPE_EVENT_DATE
+        return $this->getAsNonNegativeInteger('object_type') === EventInterface::TYPE_EVENT_DATE
             && $this->getAsModel('topic') !== null;
     }
 
@@ -102,11 +102,11 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return int our registration deadline as UNIX time-stamp, will be 0 if this event has no registration deadline
+     * @return int<0, max> our registration deadline as UNIX time-stamp, will be 0 if this event has no registration deadline
      */
     public function getRegistrationDeadlineAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('deadline_registration');
+        return $this->getAsNonNegativeInteger('deadline_registration');
     }
 
     public function hasRegistrationDeadline(): bool
@@ -231,22 +231,22 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return int our minimum attendees, will be 0 if this event has no
+     * @return int<0, max> our minimum attendees, will be 0 if this event has no
      *                 minimum attendees, will be >= 0
      */
     public function getMinimumAttendees(): int
     {
-        return $this->getAsInteger('attendees_min');
+        return $this->getAsNonNegativeInteger('attendees_min');
     }
 
     /**
-     * @return int our maximum attendees, will be 0 if this event has no
+     * @return int<0, max> our maximum attendees, will be 0 if this event has no
      *                 maximum attendees and allows unlimited number of attendees,
      *                 will be >= 0
      */
     public function getMaximumAttendees(): int
     {
-        return $this->getAsInteger('attendees_max');
+        return $this->getAsNonNegativeInteger('attendees_max');
     }
 
     /**
@@ -312,12 +312,12 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return int the number of offline registrations for this event, will
+     * @return int<0, max> the number of offline registrations for this event, will
      *                 be 0 if this event has no offline registrations
      */
     public function getOfflineRegistrations(): int
     {
-        return $this->getAsInteger('offline_attendees');
+        return $this->getAsNonNegativeInteger('offline_attendees');
     }
 
     /**
@@ -486,11 +486,11 @@ class Event extends AbstractTimeSpan
     }
 
     /**
-     * @return int the date as UNIX time-stamp, will be 0 if this no digest has been sent yet
+     * @return int<0, max> the date as UNIX time-stamp, will be 0 if this no digest has been sent yet
      */
     public function getDateOfLastRegistrationDigestEmailAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('date_of_last_registration_digest');
+        return $this->getAsNonNegativeInteger('date_of_last_registration_digest');
     }
 
     /**

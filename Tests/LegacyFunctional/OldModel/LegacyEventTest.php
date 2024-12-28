@@ -2062,7 +2062,7 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function isUnregistrationPossibleWithoutBeginDateAndWithGlobalDeadlineReturnsTrue(): void
+    public function isUnregistrationPossibleWithoutBeginDateAndWithGlobalDeadlineReturnsFalse(): void
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
         $this->configuration->setAsInteger('unregistrationDeadlineDaysBeforeBeginDate', 1);
@@ -2071,7 +2071,7 @@ final class LegacyEventTest extends FunctionalTestCase
         $this->subject->setBeginDate(0);
         $this->subject->setAttendancesMax(10);
 
-        self::assertTrue(
+        self::assertFalse(
             $this->subject->isUnregistrationPossible()
         );
     }

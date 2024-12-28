@@ -1347,7 +1347,7 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $vacancies = $this->getVacancies();
-        $vacanciesThreshold = $this->getSharedConfiguration()->getAsInteger('showVacanciesThreshold');
+        $vacanciesThreshold = $this->getSharedConfiguration()->getAsNonNegativeInteger('showVacanciesThreshold');
 
         if ($vacancies === 0) {
             $result = $this->translate('message_fullyBooked');
@@ -3478,7 +3478,7 @@ class LegacyEvent extends AbstractTimeSpan
      *
      * This function may only be called if this event has a begin date.
      *
-     * @return int the unregistration deadline as UNIX timestamp determined
+     * @return int<0, max> the unregistration deadline as UNIX timestamp determined
      *                 by configuration and the begin date, will be 0 if the
      *                 unregistrationDeadlineDaysBeforeBeginDate is not set
      */
@@ -3490,16 +3490,16 @@ class LegacyEvent extends AbstractTimeSpan
         }
 
         $secondsForUnregistration = Time::SECONDS_PER_DAY
-            * $configuration->getAsInteger('unregistrationDeadlineDaysBeforeBeginDate');
+            * $configuration->getAsNonNegativeInteger('unregistrationDeadlineDaysBeforeBeginDate');
 
-        return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;
+        return \max(0, $this->getBeginDateAsTimestamp() - $secondsForUnregistration);
     }
 
     /**
      * Returns the effective unregistration deadline for this event as UNIX
      * timestamp.
      *
-     * @return int the unregistration deadline for this event as UNIX
+     * @return int<0, max> the unregistration deadline for this event as UNIX
      *                 timestamp, will be 0 if this event has no begin date
      */
     public function getUnregistrationDeadlineFromModelAndConfiguration(): int
