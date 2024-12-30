@@ -249,7 +249,7 @@
       </trans-unit>
       <trans-unit id="label_status.I.2" approved="yes">
         <source>Job seeking</source>
-        <target state="final">Schüler</target>
+        <target state="final">auf Arbeitssuche</target>
       </trans-unit>
       <trans-unit id="label_status.I.3" approved="yes">
         <source>Working</source>
@@ -793,7 +793,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" approved="yes">
         <source>Show attached files list only to attendees:</source>
-        <target state="final">Zeige angehängte Dateien nur für Teilnehmer:</target>
+        <target state="final">Zeige angehängte Dateien nur für angemeldete Personen:</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.startingpoint" approved="yes">
         <source>Data source:</source>
@@ -901,7 +901,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" approved="yes">
         <source>Which FEuser fields to show in the list of registrations for an event</source>
-        <target state="final">Zeige diese FEuser-Felder in der Liste der Anmeldungen</target>
+        <target state="final">Zeige diese FE-User-Felder in der Liste der Anmeldungen</target>
       </trans-unit>
       <trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" approved="yes">
         <source>Which registration fields to show in the list of registrations for an event:</source>
@@ -1009,7 +1009,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_speakers_single_unknown" approved="yes">
         <source>Speaker</source>
-        <target state="final">ReferentIn</target>
+        <target state="final">Referent_in</target>
       </trans-unit>
       <trans-unit id="label_speakers" approved="yes">
         <source>Speakers</source>
@@ -1017,7 +1017,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="label_partners_single_unknown" approved="yes">
         <source>Partner</source>
-        <target state="final">PartnerIn</target>
+        <target state="final">Partner_in</target>
       </trans-unit>
       <trans-unit id="label_partners" approved="yes">
         <source>Partners</source>
