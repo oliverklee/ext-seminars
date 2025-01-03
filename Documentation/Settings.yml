@@ -4,7 +4,7 @@
 
 ---
 conf.py:
-    copyright: 2024
+    copyright: 2025
     project: Seminar Manager
     version: 5.8
     release: 5.8.0
