@@ -150,21 +150,6 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function archiveActionLinksEventDateToSingleView(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/SingleDayPastEvent.csv');
-
-        $request = (new InternalRequest())->withPageId(1);
-
-        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
-
-        self::assertMatchesRegularExpression('#<a href="/event-single-view/1">.*2024-11-03#s', $html);
-    }
-
-    /**
-     * @test
-     */
     public function archiveActionRendersStartAndEndOfMultiDayEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
@@ -365,21 +350,6 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         self::assertStringContainsString('2039-12-01', $html);
-    }
-
-    /**
-     * @test
-     */
-    public function outlookActionLinksEventDateToSingleView(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/SingleDayFutureEvent.csv');
-
-        $request = (new InternalRequest())->withPageId(1);
-
-        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
-
-        self::assertMatchesRegularExpression('#<a href="/event-single-view/1">.*2039-12-01#s', $html);
     }
 
     /**

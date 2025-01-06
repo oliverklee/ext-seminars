@@ -22,12 +22,9 @@
         <tbody>
             <f:for each="{events}" as="event">
                 <tr>
-                    <td class="text-end">
+                    <td>
                         <span class="text-nowrap">
-                            <f:link.action action="show" arguments="{event: event}"
-                                           pageUid="{settings.singleViewPage}}">
-                                <f:render partial="EventDate" arguments="{event: event}"/>
-                            </f:link.action>
+                            <f:render partial="EventDate" arguments="{event: event}"/>
                         </span>
                     </td>
                     <td>
