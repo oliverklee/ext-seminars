@@ -14,8 +14,12 @@
                                                                         <field index=""settings.singleViewPage"">
                                                                             <value index=""vDEF"">3</value>
                                                                         </field>
-                                                                        <field index=""settings.fieldsToShow"">
-                                                                            <value index=""vDEF"">date,eventType,topic,city,venue</value>
+                                                                     </language>
+                                                                 </sheet>
+                                                                 <sheet index=""displayOptions"">
+                                                                     <language index=""lDEF"">
+                                                                         <field index=""settings.fieldsToShow"">
+                                                                             <value index=""vDEF"">date,eventType,topic,city,venue</value>
                                                                         </field>
                                                                      </language>
                                                                  </sheet>

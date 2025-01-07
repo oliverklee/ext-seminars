@@ -10,6 +10,28 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.fieldsToShow>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay
+                            </label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectCheckBox</renderType>
+                                <minitems>1</minitems>
+                                <maxitems>99</maxitems>
+                                <default>title</default>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title
+                                        </numIndex>
+                                        <numIndex index="1">title</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.fieldsToShow>
                 </el>
             </ROOT>
         </displayOptions>
