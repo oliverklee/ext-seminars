@@ -2149,6 +2149,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event archive</source>
         <target state="final">Veranstaltungsarchiv</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
+      </trans-unit>
       <trans-unit id="plugin.eventArchive.message.noEventsFound" approved="yes">
         <source>No events found.</source>
         <target state="final">Keine Veranstaltungen gefunden.</target>
@@ -2177,6 +2185,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event outlook</source>
         <target state="final">Veranstaltungsausblick</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
         <target state="final">Keine Veranstaltungen gefunden.</target>
@@ -2204,6 +2220,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
         <target state="final">Veranstaltungs-Einzelansicht</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
       </trans-unit>
     </body>
   </file>
