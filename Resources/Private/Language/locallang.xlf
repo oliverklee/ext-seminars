@@ -1710,6 +1710,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay">
+				<source>Data to display</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title">
+				<source>title</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

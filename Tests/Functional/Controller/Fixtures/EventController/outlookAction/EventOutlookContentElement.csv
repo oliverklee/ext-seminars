@@ -14,6 +14,10 @@
                                                                         <field index=""settings.singleViewPage"">
                                                                             <value index=""vDEF"">3</value>
                                                                         </field>
+                                                                     </language>
+                                                                 </sheet>
+                                                                 <sheet index=""displayOptions"">
+                                                                     <language index=""lDEF"">
                                                                         <field index=""settings.fieldsToShow"">
                                                                             <value index=""vDEF"">date,eventType,topic,city,venue</value>
                                                                         </field>
@@ -21,4 +25,3 @@
                                                                 </sheet>
                                                             </data>
                                                         </T3FlexForms>"
-
