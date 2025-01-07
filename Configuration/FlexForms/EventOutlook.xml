@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+    <sheets>
+        <pagesAndFolders>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.tab.pagesAndFolders
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                </el>
+            </ROOT>
+        </pagesAndFolders>
+        <displayOptions>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.tab.displayOptions
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                </el>
+            </ROOT>
+        </displayOptions>
+    </sheets>
+</T3DataStructure>

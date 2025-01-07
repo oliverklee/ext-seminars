@@ -1599,6 +1599,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventArchive">
 				<source>Event archive</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
+				<source>Pages and folders</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
+				<source>Display options</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventArchive.message.noEventsFound">
 				<source>No events found.</source>
 			</trans-unit>
@@ -1620,6 +1626,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook">
 				<source>Event outlook</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
+				<source>Pages and folders</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
+				<source>Display options</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
 				<source>No events found.</source>
 			</trans-unit>
@@ -1640,6 +1652,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
+				<source>Display options</source>
 			</trans-unit>
 		</body>
 	</file>
