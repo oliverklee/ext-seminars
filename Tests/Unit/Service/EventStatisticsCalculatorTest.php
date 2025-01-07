@@ -57,7 +57,7 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @test
      */
-    public function enrichWithStatisticsForEventDateWithoutRegistrationStatistics(): void
+    public function enrichWithStatisticsForEventDateWithoutRegistrationSetsStatistics(): void
     {
         $event = new EventDate();
 
@@ -69,7 +69,7 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
     /**
      * @test
      */
-    public function enrichWithStatisticsForSingleEventWithoutRegistrationStatistics(): void
+    public function enrichWithStatisticsForSingleEventWithoutRegistrationSetsStatistics(): void
     {
         $event = new SingleEvent();
 
@@ -89,6 +89,23 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         $this->subject->enrichWithStatistics($event);
 
         self::assertInstanceOf(EventStatistics::class, $event->getStatistics());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsCalledTwiceReturnsSameStatistics(): void
+    {
+        $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
+
+        $this->subject->enrichWithStatistics($event);
+        $statisticsAfterFirstCall = $event->getStatistics();
+
+        $this->subject->enrichWithStatistics($event);
+        $statisticsAfterSecondCall = $event->getStatistics();
+
+        self::assertSame($statisticsAfterFirstCall, $statisticsAfterSecondCall);
     }
 
     /**

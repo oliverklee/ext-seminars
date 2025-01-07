@@ -25,10 +25,15 @@ class EventStatisticsCalculator implements SingletonInterface
 
     /**
      * Calculates and sets `$event.statistics` if the event allows registration in general.
+     *
+     * If the statistics already exist for the given event, the existing statistics will be kept and not overwritten.
      */
     public function enrichWithStatistics(Event $event): void
     {
-        if (!$event instanceof EventDateInterface) {
+        if (!($event instanceof EventDateInterface)) {
+            return;
+        }
+        if ($event->getStatistics() instanceof EventStatistics) {
             return;
         }
 
