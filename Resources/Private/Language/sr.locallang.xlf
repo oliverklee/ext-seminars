@@ -2295,6 +2295,14 @@ This event now has been confirmed.</target>
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay">
+        <source>Data to display</source>
+        <target state="needs-translation">Data to display</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title">
+        <source>title</source>
+        <target state="needs-translation">title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
