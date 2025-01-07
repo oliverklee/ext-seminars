@@ -529,6 +529,153 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function outlookActionForEventWithUnlimitedSeatsRendersEnoughVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithUnlimitedSeats.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $enough = LocalizationUtility::translate('plugin.eventOutlook.events.property.vacancies.enough', 'seminars');
+        self::assertIsString($enough);
+        self::assertStringContainsString($enough, $html);
+        self::assertStringContainsString('🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithMoreThanEnoughVacanciesRendersEnoughVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithMoreThanEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $enough = LocalizationUtility::translate('plugin.eventOutlook.events.property.vacancies.enough', 'seminars');
+        self::assertIsString($enough);
+        self::assertStringContainsString($enough, $html);
+        self::assertStringContainsString('🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithExactlyEnoughVacanciesRendersEnoughVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithExactlyEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $enough = LocalizationUtility::translate('plugin.eventOutlook.events.property.vacancies.enough', 'seminars');
+        self::assertIsString($enough);
+        self::assertStringContainsString($enough, $html);
+        self::assertStringContainsString('🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithLessThanEnoughVacanciesRendersExactVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithLessThanEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('4 🟡', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithOneVacancyRendersExactVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('1 🟡', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithNoVacancyRendersFullyBooked(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacancies.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $fullyBooked = LocalizationUtility::translate(
+            'plugin.eventOutlook.events.property.vacancies.fullyBooked',
+            'seminars'
+        );
+        self::assertIsString($fullyBooked);
+        self::assertStringContainsString($fullyBooked, $html);
+        self::assertStringContainsString('🔴', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithMoreThanEnoughVacanciesButDeadlineOverRendersNoVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithEnoughVacanciesButDeadlineOver.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $enough = LocalizationUtility::translate('plugin.eventOutlook.events.property.vacancies.enough', 'seminars');
+        self::assertIsString($enough);
+        self::assertStringNotContainsString($enough, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithoutRegistrationRendersNoVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithoutRegistration.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $enough = LocalizationUtility::translate('plugin.eventOutlook.events.property.vacancies.enough', 'seminars');
+        self::assertIsString($enough);
+        self::assertStringNotContainsString($enough, $html);
+    }
+
+    /**
+     * @test
+     */
     public function showActionRendersTitleOfSingleEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');

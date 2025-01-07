@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Controller;
 
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
+use OliverKlee\Seminars\Service\EventStatisticsCalculator;
+use OliverKlee\Seminars\Service\RegistrationGuard;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -17,9 +19,18 @@ class EventController extends ActionController
 {
     protected EventRepository $eventRepository;
 
-    public function __construct(EventRepository $eventRepository)
-    {
+    protected EventStatisticsCalculator $eventStatisticsCalculator;
+
+    protected RegistrationGuard $registrationGuard;
+
+    public function __construct(
+        EventRepository $eventRepository,
+        EventStatisticsCalculator $eventStatisticsCalculator,
+        RegistrationGuard $registrationGuard
+    ) {
         $this->eventRepository = $eventRepository;
+        $this->eventStatisticsCalculator = $eventStatisticsCalculator;
+        $this->registrationGuard = $registrationGuard;
     }
 
     /**
@@ -40,6 +51,10 @@ class EventController extends ActionController
     public function outlookAction(): ResponseInterface
     {
         $events = $this->eventRepository->findUpcoming();
+        foreach ($events as $event) {
+            $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        }
+        $this->registrationGuard->setRegistrationPossibleByDateForEvents($events);
 
         $this->view->assign('events', $events);
 

@@ -9,4 +9,7 @@ plugin.tx_seminars.settings {
     decimals = {$plugin.tx_seminars.settings.currency.decimals}
     useDash = {$plugin.tx_seminars.settings.currency.useDash}
   }
+
+  # show "enough" instead of the exact number if there are at last this many vacancies
+  enoughVacanciesThreshold = {$plugin.tx_seminars.settings.enoughVacanciesThreshold}
 }

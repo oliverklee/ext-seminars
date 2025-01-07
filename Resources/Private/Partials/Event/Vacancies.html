@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="statistics" value="{event.statistics}"/>
+    <f:if condition="({event.registrationRequired} && {event.registrationPossibleByDate})">
+        <f:if condition="({event.unlimitedSeats} || ({statistics.vacancies} >= {settings.enoughVacanciesThreshold}))">
+            <f:then>
+                <f:translate key="plugin.eventOutlook.events.property.vacancies.enough"/>
+                🟢
+            </f:then>
+            <f:else if="{statistics.fullyBooked}">
+                <f:translate key="plugin.eventOutlook.events.property.vacancies.fullyBooked"/>
+                🔴
+            </f:else>
+            <f:else>
+                {statistics.vacancies} 🟡
+            </f:else>
+        </f:if>
+    </f:if>
+</html>
