@@ -2167,27 +2167,27 @@ This event now has been confirmed.</target>
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns">
         <source>Columns to show</source>
         <target state="needs-translation">Columns to show</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.date">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date">
         <source>date</source>
         <target state="needs-translation">date</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.eventType">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.eventType">
         <source>event type</source>
         <target state="needs-translation">event type</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.topic">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.topic">
         <source>topic</source>
         <target state="needs-translation">topic</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.city">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.city">
         <source>city</source>
         <target state="needs-translation">city</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.venue">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.venue">
         <source>venue</source>
         <target state="needs-translation">venue</target>
       </trans-unit>
@@ -2239,27 +2239,27 @@ This event now has been confirmed.</target>
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns">
         <source>Columns to show</source>
         <target state="needs-translation">Columns to show</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.date">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date">
         <source>date</source>
         <target state="needs-translation">date</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.eventType">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.eventType">
         <source>event type</source>
         <target state="needs-translation">event type</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.topic">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.topic">
         <source>topic</source>
         <target state="needs-translation">topic</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.city">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.city">
         <source>city</source>
         <target state="needs-translation">city</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.venue">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue">
         <source>venue</source>
         <target state="needs-translation">venue</target>
       </trans-unit>
@@ -2295,11 +2295,11 @@ This event now has been confirmed.</target>
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay">
         <source>Data to display</source>
         <target state="needs-translation">Data to display</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
         <source>title</source>
         <target state="needs-translation">title</target>
       </trans-unit>
