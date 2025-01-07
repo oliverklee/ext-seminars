@@ -400,6 +400,50 @@ final class RegistrationGuardTest extends UnitTestCase
 
     /**
      * @test
+     *
+     * @dataProvider registrationPossibleDataProvider
+     */
+    public function setRegistrationPossibleByDateForEventsCanSetTruePossibilityForGivenEvents(
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
+    ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
+        $event = new SingleEvent();
+        $event->setStart($start);
+        $event->setRegistrationStart($registrationStart);
+        $event->setRegistrationDeadline($registrationDeadline);
+
+        $this->subject->setRegistrationPossibleByDateForEvents([$event]);
+
+        self::assertTrue($event->isRegistrationPossibleByDate());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider registrationNotPossibleDataProvider
+     */
+    public function setRegistrationPossibleByDateForEventsCanSetFalsePossibilityForGivenEvents(
+        ?\DateTime $start,
+        ?\DateTime $registrationStart,
+        ?\DateTime $registrationDeadline
+    ): void {
+        $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
+
+        $event = new SingleEvent();
+        $event->setStart($start);
+        $event->setRegistrationStart($registrationStart);
+        $event->setRegistrationDeadline($registrationDeadline);
+
+        $this->subject->setRegistrationPossibleByDateForEvents([$event]);
+
+        self::assertFalse($event->isRegistrationPossibleByDate());
+    }
+
+    /**
+     * @test
      */
     public function isFreeFromRegistrationConflictsForNoConflictAndNoMultipleRegistrationsPossibleReturnsTrue(): void
     {

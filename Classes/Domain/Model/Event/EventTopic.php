@@ -21,4 +21,9 @@ class EventTopic extends Event implements EventTopicInterface
     {
         return null;
     }
+
+    public function isRegistrationPossibleByDate(): bool
+    {
+        return false;
+    }
 }

@@ -35,6 +35,13 @@ trait EventDateTrait
 
     protected bool $registrationRequired = false;
 
+    /**
+     * This property is expected to be set from the outside by the `RegistationGuard`.
+     *
+     * @Transient
+     */
+    protected ?bool $registrationPossibleByDate = null;
+
     protected bool $waitingList = false;
 
     /**
@@ -194,6 +201,24 @@ trait EventDateTrait
     public function setRegistrationRequired(bool $registrationRequired): void
     {
         $this->registrationRequired = $registrationRequired;
+    }
+
+    /**
+     * @throws \BadMethodCallException if registrationPossibleByDate has not been set yet
+     */
+    public function isRegistrationPossibleByDate(): bool
+    {
+        $possible = $this->registrationPossibleByDate;
+        if (!\is_bool($possible)) {
+            throw new \BadMethodCallException('registrationPossibleByDate has not been set set.', 1736269500);
+        }
+
+        return $possible;
+    }
+
+    public function setRegistrationPossibleByDate(bool $possible): void
+    {
+        $this->registrationPossibleByDate = $possible;
     }
 
     public function hasWaitingList(): bool

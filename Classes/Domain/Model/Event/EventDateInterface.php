@@ -45,6 +45,10 @@ interface EventDateInterface
 
     public function isRegistrationRequired(): bool;
 
+    public function isRegistrationPossibleByDate(): bool;
+
+    public function setRegistrationPossibleByDate(bool $possible): void;
+
     public function hasWaitingList(): bool;
 
     /**
