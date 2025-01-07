@@ -75,7 +75,7 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function archiveActionRendersTitleOfPastSingleEvent(): void
+    public function archiveActionRendersTitleOfPastSingleEventInStorageFolder(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEvent.csv');
@@ -85,6 +85,36 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionRendersTitleOfPastSingleEventInSubfolderOfStorageFolder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEventInSubfolder.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function archiveActionIgnoresEventInOtherFolder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/EventArchiveContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/archiveAction/PastEventInOtherFolder.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('Extension Development with Extbase and Fluid', $html);
     }
 
     /**
@@ -280,7 +310,7 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function outlookActionRendersTitleOfFutureSingleEvent(): void
+    public function outlookActionRendersTitleOfFutureSingleEventInStorageFolder(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEvent.csv');
@@ -290,6 +320,36 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionRendersTitleOfFutureSingleEventInSubfolderOfStorageFolder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventInSubfolder.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Extension Development with Extbase and Fluid', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionIgnoresEventInOtherFolder(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventInOtherFolder.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('Extension Development with Extbase and Fluid', $html);
     }
 
     /**
