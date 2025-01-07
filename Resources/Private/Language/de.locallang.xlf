@@ -2149,13 +2149,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event archive</source>
         <target state="final">Veranstaltungsarchiv</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
+      <trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders" approved="yes">
         <source>Pages and folders</source>
-        <target state="needs-translation">Pages and folders</target>
+        <target state="final">Seiten und Ordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
-        <target state="needs-translation">Display options</target>
+        <target state="final">Anzeigeoptionen</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2185,13 +2185,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event outlook</source>
         <target state="final">Veranstaltungsausblick</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
+      <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders" approved="yes">
         <source>Pages and folders</source>
-        <target state="needs-translation">Pages and folders</target>
+        <target state="final">Seiten und Ordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
-        <target state="needs-translation">Display options</target>
+        <target state="final">Anzeigeoptionen</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2221,9 +2221,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event single view</source>
         <target state="final">Veranstaltungs-Einzelansicht</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
-        <target state="needs-translation">Display options</target>
+        <target state="final">Anzeigeoptionen</target>
       </trans-unit>
     </body>
   </file>
