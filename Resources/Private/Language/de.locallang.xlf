@@ -2153,45 +2153,45 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Pages and folders</source>
         <target state="final">Seiten und Ordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid" approved="yes">
         <source>Folders with the event records</source>
-        <target state="needs-translation">Folders with the event records</target>
+        <target state="final">Ordner mit den Veranstaltungsdatensätzen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive" approved="yes">
         <source>Recursion into subfolders</source>
-        <target state="needs-translation">Recursion into subfolders</target>
+        <target state="final">Rekursion in Unterordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage">
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage" approved="yes">
         <source>Page with the single view</source>
-        <target state="needs-translation">Page with the single view</target>
+        <target state="final">Seite mit der Einzelansicht</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns" approved="yes">
         <source>Columns to show</source>
-        <target state="needs-translation">Columns to show</target>
+        <target state="final">anzuzeigende Spalten</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.date">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
-        <target state="needs-translation">date</target>
+        <target state="final">Datum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.eventType">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.eventType" approved="yes">
         <source>event type</source>
-        <target state="needs-translation">event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.topic">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.topic" approved="yes">
         <source>topic</source>
-        <target state="needs-translation">topic</target>
+        <target state="final">Thema</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.city">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.city" approved="yes">
         <source>city</source>
-        <target state="needs-translation">city</target>
+        <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.venue">
+      <trans-unit id="plugin.eventArchive.settings.displayOptions.columns.venue" approved="yes">
         <source>venue</source>
-        <target state="needs-translation">venue</target>
+        <target state="final">Veranstaltungsort</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2225,45 +2225,45 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Pages and folders</source>
         <target state="final">Seiten und Ordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid" approved="yes">
         <source>Folders with the event records</source>
-        <target state="needs-translation">Folders with the event records</target>
+        <target state="final">Ordner mit den Veranstaltungsdatensätzen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive" approved="yes">
         <source>Recursion into subfolders</source>
-        <target state="needs-translation">Recursion into subfolders</target>
+        <target state="final">Rekursion in Unterordner</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage" approved="yes">
         <source>Page with the single view</source>
-        <target state="needs-translation">Page with the single view</target>
+        <target state="final">Seite mit der Einzelansicht</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns" approved="yes">
         <source>Columns to show</source>
-        <target state="needs-translation">Columns to show</target>
+        <target state="final">anzuzeigende Spalten</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.date">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date" approved="yes">
         <source>date</source>
-        <target state="needs-translation">date</target>
+        <target state="final">Datum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.eventType">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.eventType" approved="yes">
         <source>event type</source>
-        <target state="needs-translation">event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.topic">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.topic" approved="yes">
         <source>topic</source>
-        <target state="needs-translation">topic</target>
+        <target state="final">Thema</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.city">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.city" approved="yes">
         <source>city</source>
-        <target state="needs-translation">city</target>
+        <target state="final">Stadt</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.venue">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue" approved="yes">
         <source>venue</source>
-        <target state="needs-translation">venue</target>
+        <target state="final">Veranstaltungsort</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2297,13 +2297,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay" approved="yes">
         <source>Data to display</source>
-        <target state="needs-translation">Data to display</target>
+        <target state="final">Anzuzeigende Daten</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title" approved="yes">
         <source>title</source>
-        <target state="needs-translation">title</target>
+        <target state="final">Titel</target>
       </trans-unit>
     </body>
   </file>
