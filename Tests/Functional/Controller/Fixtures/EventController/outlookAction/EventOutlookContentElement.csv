@@ -11,6 +11,9 @@
                                                                         <field index=""persistence.recursive"">
                                                                             <value index=""vDEF"">4</value>
                                                                         </field>
+                                                                        <field index=""settings.singleViewPage"">
+                                                                            <value index=""vDEF"">3</value>
+                                                                        </field>
                                                                     </language>
                                                                 </sheet>
                                                             </data>
