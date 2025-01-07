@@ -100,6 +100,16 @@ class RegistrationGuard implements SingletonInterface
         return $registrationIsEarlyEnough && $registrationIsLateEnough;
     }
 
+    /**
+     * @param array<EventDateInterface> $events
+     */
+    public function setRegistrationPossibleByDateForEvents(array $events): void
+    {
+        foreach ($events as $event) {
+            $event->setRegistrationPossibleByDate($this->isRegistrationPossibleByDate($event));
+        }
+    }
+
     private function getRegistrationDeadlineForEvent(EventDateInterface $event): ?\DateTime
     {
         if ($event->getStart() === null && $event->getRegistrationDeadline() === null) {

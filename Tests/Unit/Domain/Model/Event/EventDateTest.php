@@ -1382,4 +1382,38 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame([$cityName2, $cityName1], $result);
     }
+
+    /**
+     * @test
+     */
+    public function isRegistrationPossibleByDateInitiallyThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('registrationPossibleByDate has not been set set.');
+        $this->expectExceptionCode(1736269500);
+
+        $this->subject->isRegistrationPossibleByDate();
+    }
+
+    /**
+     * @return array<string, array{0: bool}>
+     */
+    public static function booleanDataProvider(): array
+    {
+        return [
+            'true' => [true],
+            'false' => [false],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider booleanDataProvider
+     */
+    public function setRegistrationPossibleByDateSetsRegistrationPossibleByDate(bool $value): void
+    {
+        $this->subject->setRegistrationPossibleByDate($value);
+
+        self::assertSame($value, $this->subject->isRegistrationPossibleByDate());
+    }
 }

@@ -581,4 +581,12 @@ final class EventTopicTest extends UnitTestCase
     {
         self::assertNull($this->subject->getStatistics());
     }
+
+    /**
+     * @test
+     */
+    public function isRegistrationPossibleByDateAlwaysReturnsFalse(): void
+    {
+        self::assertFalse($this->subject->isRegistrationPossibleByDate());
+    }
 }
