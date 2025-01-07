@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `Organizer.emailFooter` to the Extbase model (#3977)
 - Add `Venue.city` property (#3908, #3914)
 - Add a new plugin for the event archive, outlook and single view
-  (#3895, #3909, #3910, #3911, #3913, #3915, #3986, #3969, #4024, #4025)
+  (#3895, #3909, #3910, #3911, #3913, #3915, #3986, #3969, #4024, #4025, #4026)
 - Re-add the FE editor (#3894, #3903, #3904)
 - Add `EventRepository::findUpcoming()` (#3892, #3904)
 - Add `EventRepository::findInPast()` (#3885, #3887, #3891, #3904)
