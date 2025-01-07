@@ -1603,10 +1603,13 @@ This event now has been confirmed.</source>
 				<source>Pages and folders</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
-				<source>Folder with the event records</source>
+				<source>Folders with the event records</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
 				<source>Recursion into subfolders</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage">
+				<source>Page with the single view</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
 				<source>Display options</source>
@@ -1636,10 +1639,13 @@ This event now has been confirmed.</source>
 				<source>Pages and folders</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
-				<source>Folder with the event records</source>
+				<source>Folders with the event records</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
 				<source>Recursion into subfolders</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
+				<source>Page with the single view</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
 				<source>Display options</source>

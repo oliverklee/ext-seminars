@@ -1,5 +1,4 @@
 plugin.tx_seminars {
   settings {
-    singleViewPage = 3
   }
 }

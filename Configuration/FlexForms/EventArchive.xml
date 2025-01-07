@@ -10,6 +10,21 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.singleViewPage>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventArchive.settings.pagesAndFolders.singleViewPage
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                            </config>
+                        </TCEforms>
+                    </settings.singleViewPage>
                     <persistence.storagePid>
                         <TCEforms>
                             <label>
