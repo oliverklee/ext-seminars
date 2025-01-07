@@ -2147,6 +2147,14 @@ This event now has been confirmed.</target>
         <source>Event archive</source>
         <target state="needs-translation">Event archive</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
+      </trans-unit>
       <trans-unit id="plugin.eventArchive.message.noEventsFound">
         <source>No events found.</source>
         <target state="needs-translation">No events found.</target>
@@ -2175,6 +2183,14 @@ This event now has been confirmed.</target>
         <source>Event outlook</source>
         <target state="needs-translation">Event outlook</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound">
         <source>No events found.</source>
         <target state="needs-translation">No events found.</target>
@@ -2202,6 +2218,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView">
         <source>Event single view</source>
         <target state="needs-translation">Event single view</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
+        <source>Display options</source>
+        <target state="needs-translation">Display options</target>
       </trans-unit>
     </body>
   </file>
