@@ -1614,22 +1614,22 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns">
 				<source>Columns to show</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.date">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.date">
 				<source>date</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.eventType">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.eventType">
 				<source>event type</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.topic">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.topic">
 				<source>topic</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.city">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.city">
 				<source>city</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.venue">
+			<trans-unit id="plugin.eventArchive.settings.displayOptions.columns.venue">
 				<source>venue</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.message.noEventsFound">
@@ -1668,22 +1668,22 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns">
 				<source>Columns to show</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.date">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.date">
 				<source>date</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.eventType">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.eventType">
 				<source>event type</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.topic">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.topic">
 				<source>topic</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.city">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.city">
 				<source>city</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.venue">
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue">
 				<source>venue</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
@@ -1710,10 +1710,10 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay">
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay">
 				<source>Data to display</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title">
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
 				<source>title</source>
 			</trans-unit>
 		</body>
