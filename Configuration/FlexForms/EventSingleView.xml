@@ -13,7 +13,7 @@
                     <settings.fieldsToShow>
                         <TCEforms>
                             <label>
-                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay
                             </label>
                             <config>
                                 <type>select</type>
@@ -24,7 +24,7 @@
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
-                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.tab.displayOptions.dataToDisplay.title
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.title
                                         </numIndex>
                                         <numIndex index="1">title</numIndex>
                                     </numIndex>
