@@ -41,6 +41,14 @@ defined('TYPO3') or die('Access denied.');
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventarchive'] = 'recursive,pages';
 
+    // These two commands add the flexform configuration for the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventarchive'] = 'pi_flexform';
+    ExtensionManagementUtility::addPiFlexFormValue(
+        'seminars_eventarchive',
+        'FILE:EXT:seminars/Configuration/FlexForms/EventArchive.xml'
+    );
+
     //
     // Event outlook
     //
@@ -56,6 +64,14 @@ defined('TYPO3') or die('Access denied.');
     // This removes the default controls from the plugin.
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventoutlook'] = 'recursive,pages';
+
+    // These two commands add the flexform configuration for the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventoutlook'] = 'pi_flexform';
+    ExtensionManagementUtility::addPiFlexFormValue(
+        'seminars_eventoutlook',
+        'FILE:EXT:seminars/Configuration/FlexForms/EventOutlook.xml'
+    );
 
     //
     // Event single view
@@ -73,6 +89,14 @@ defined('TYPO3') or die('Access denied.');
     // @phpstan-ignore-next-line We know that this array key exists and is an array.
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['seminars_eventsingleview']
         = 'recursive,pages';
+
+    // These two commands add the flexform configuration for the plugin.
+    // @phpstan-ignore-next-line We know that this array key exists and is an array.
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['seminars_eventsingleview'] = 'pi_flexform';
+    ExtensionManagementUtility::addPiFlexFormValue(
+        'seminars_eventsingleview',
+        'FILE:EXT:seminars/Configuration/FlexForms/EventSingleView.xml'
+    );
 
     //
     // Registration form

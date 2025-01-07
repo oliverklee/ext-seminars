@@ -8,12 +8,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 - Add support for PHP 8.4 (#4012)
-- Add a new Extbase-/Fluid based single view (#3986)
 - Add `Organizer.emailFooter` to the Extbase model (#3977)
-- Add a new plugin for the event outlook (#3969)
 - Add `Venue.city` property (#3908, #3914)
-- Add a new plugin for the event archive
-  (#3895, #3909, #3910, #3911, #3913, #3915)
+- Add a new plugin for the event archive, outlook and single view
+  (#3895, #3909, #3910, #3911, #3913, #3915, #3986, #3969, #4024, #4025)
 - Re-add the FE editor (#3894, #3903, #3904)
 - Add `EventRepository::findUpcoming()` (#3892, #3904)
 - Add `EventRepository::findInPast()` (#3885, #3887, #3891, #3904)
