@@ -1614,6 +1614,24 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns">
+				<source>Columns to show</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.date">
+				<source>date</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.eventType">
+				<source>event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.topic">
+				<source>topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.city">
+				<source>city</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.venue">
+				<source>venue</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventArchive.message.noEventsFound">
 				<source>No events found.</source>
 			</trans-unit>
@@ -1649,6 +1667,24 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
 				<source>Display options</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns">
+				<source>Columns to show</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.date">
+				<source>date</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.eventType">
+				<source>event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.topic">
+				<source>topic</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.city">
+				<source>city</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.venue">
+				<source>venue</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
 				<source>No events found.</source>
