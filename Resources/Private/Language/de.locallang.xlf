@@ -2153,6 +2153,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Pages and folders</source>
         <target state="final">Seiten und Ordner</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
+        <source>Folder with the event records</source>
+        <target state="needs-translation">Folder with the event records</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
+        <source>Recursion into subfolders</source>
+        <target state="needs-translation">Recursion into subfolders</target>
+      </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
@@ -2188,6 +2196,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventOutlook.settings.tab.pagesAndFolders" approved="yes">
         <source>Pages and folders</source>
         <target state="final">Seiten und Ordner</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
+        <source>Folder with the event records</source>
+        <target state="needs-translation">Folder with the event records</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
+        <source>Recursion into subfolders</source>
+        <target state="needs-translation">Recursion into subfolders</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
