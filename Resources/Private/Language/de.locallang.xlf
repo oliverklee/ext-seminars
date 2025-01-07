@@ -2154,16 +2154,44 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <target state="final">Seiten und Ordner</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.storagePid">
-        <source>Folder with the event records</source>
-        <target state="needs-translation">Folder with the event records</target>
+        <source>Folders with the event records</source>
+        <target state="needs-translation">Folders with the event records</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.recursive">
         <source>Recursion into subfolders</source>
         <target state="needs-translation">Recursion into subfolders</target>
       </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.pagesAndFolders.singleViewPage">
+        <source>Page with the single view</source>
+        <target state="needs-translation">Page with the single view</target>
+      </trans-unit>
       <trans-unit id="plugin.eventArchive.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns">
+        <source>Columns to show</source>
+        <target state="needs-translation">Columns to show</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.date">
+        <source>date</source>
+        <target state="needs-translation">date</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.eventType">
+        <source>event type</source>
+        <target state="needs-translation">event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.topic">
+        <source>topic</source>
+        <target state="needs-translation">topic</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.city">
+        <source>city</source>
+        <target state="needs-translation">city</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventArchive.settings.tab.displayOptions.columns.venue">
+        <source>venue</source>
+        <target state="needs-translation">venue</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2198,16 +2226,44 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <target state="final">Seiten und Ordner</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.storagePid">
-        <source>Folder with the event records</source>
-        <target state="needs-translation">Folder with the event records</target>
+        <source>Folders with the event records</source>
+        <target state="needs-translation">Folders with the event records</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.recursive">
         <source>Recursion into subfolders</source>
         <target state="needs-translation">Recursion into subfolders</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
+        <source>Page with the single view</source>
+        <target state="needs-translation">Page with the single view</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns">
+        <source>Columns to show</source>
+        <target state="needs-translation">Columns to show</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.date">
+        <source>date</source>
+        <target state="needs-translation">date</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.eventType">
+        <source>event type</source>
+        <target state="needs-translation">event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.topic">
+        <source>topic</source>
+        <target state="needs-translation">topic</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.city">
+        <source>city</source>
+        <target state="needs-translation">city</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions.columns.venue">
+        <source>venue</source>
+        <target state="needs-translation">venue</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
