@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Repository\Registration;
 
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
-use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
@@ -22,7 +21,13 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 class RegistrationRepository extends AbstractRawDataCapableRepository implements DirectPersist
 {
     use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
-    use StoragePageAgnostic;
+
+    public function initializeObject(): void
+    {
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 
     /**
      * @return non-empty-string
