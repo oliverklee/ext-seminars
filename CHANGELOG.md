@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Allow `typo3fluid/fluid:^4.0` (#4041)
 - Make `enrichWithStatistics` keep existing statistics (#4032)
 - Make `RegistrationDigest` a singleton (#4002)
 - Move the webinar URL further up in the TCEforms (#3975)
