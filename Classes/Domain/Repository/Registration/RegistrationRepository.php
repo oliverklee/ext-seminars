@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Registration;
 
-use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
@@ -18,10 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * @extends AbstractRawDataCapableRepository<Registration>
  */
-class RegistrationRepository extends AbstractRawDataCapableRepository implements DirectPersist
+class RegistrationRepository extends AbstractRawDataCapableRepository
 {
-    use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
-
     public function initializeObject(): void
     {
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
@@ -35,6 +32,14 @@ class RegistrationRepository extends AbstractRawDataCapableRepository implements
     protected function getTableName(): string
     {
         return 'tx_seminars_attendances';
+    }
+
+    /**
+     * Persists all added or updated models.
+     */
+    public function persistAll(): void
+    {
+        $this->persistenceManager->persistAll();
     }
 
     public function existsRegistrationForEventAndUser(EventInterface $event, int $userUid): bool
