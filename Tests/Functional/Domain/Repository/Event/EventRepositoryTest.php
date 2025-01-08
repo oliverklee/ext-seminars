@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Domain\Repository\Event;
 
-use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\AccommodationOption;
 use OliverKlee\Seminars\Domain\Model\Event\EventDate;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
@@ -78,14 +77,6 @@ final class EventRepositoryTest extends FunctionalTestCase
     public function isRawDataCapableRepository(): void
     {
         self::assertInstanceOf(AbstractRawDataCapableRepository::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
-    public function implementsDirectPersist(): void
-    {
-        self::assertInstanceOf(DirectPersist::class, $this->subject);
     }
 
     /**

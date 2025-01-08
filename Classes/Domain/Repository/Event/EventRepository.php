@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Domain\Repository\Event;
 
-use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
 use OliverKlee\Seminars\Domain\Model\Event\Event;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Domain\Repository\AbstractRawDataCapableRepository;
@@ -21,10 +20,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * @extends AbstractRawDataCapableRepository<Event>
  */
-class EventRepository extends AbstractRawDataCapableRepository implements DirectPersist
+class EventRepository extends AbstractRawDataCapableRepository
 {
-    use \OliverKlee\Oelib\Domain\Repository\Traits\DirectPersist;
-
     /**
      * @var list<non-empty-string>
      */
@@ -47,6 +44,14 @@ class EventRepository extends AbstractRawDataCapableRepository implements Direct
     protected function getTableName(): string
     {
         return 'tx_seminars_seminars';
+    }
+
+    /**
+     * Persists all added or updated models.
+     */
+    public function persistAll(): void
+    {
+        $this->persistenceManager->persistAll();
     }
 
     /**
