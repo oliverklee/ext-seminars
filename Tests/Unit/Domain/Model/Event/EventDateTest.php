@@ -1416,4 +1416,23 @@ final class EventDateTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->isRegistrationPossibleByDate());
     }
+
+    /**
+     * @test
+     */
+    public function getRoomInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getRoom());
+    }
+
+    /**
+     * @test
+     */
+    public function setRoomSetsRoom(): void
+    {
+        $value = 'room 13 B';
+        $this->subject->setRoom($value);
+
+        self::assertSame($value, $this->subject->getRoom());
+    }
 }

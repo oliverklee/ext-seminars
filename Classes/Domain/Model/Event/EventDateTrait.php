@@ -36,6 +36,11 @@ trait EventDateTrait
     protected bool $registrationRequired = false;
 
     /**
+     * @Validate("StringLength", options={"maximum": 255})
+     */
+    protected string $room = '';
+
+    /**
      * This property is expected to be set from the outside by the `RegistationGuard`.
      *
      * @Transient
@@ -508,5 +513,15 @@ trait EventDateTrait
     public function setAdditionalEmailText(string $additionalEmailText): void
     {
         $this->additionalEmailText = $additionalEmailText;
+    }
+
+    public function getRoom(): string
+    {
+        return $this->room;
+    }
+
+    public function setRoom(string $room): void
+    {
+        $this->room = $room;
     }
 }

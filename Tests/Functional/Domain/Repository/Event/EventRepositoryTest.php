@@ -84,7 +84,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsSingleEventWithAllFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -115,6 +115,7 @@ final class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(EventDateInterface::EVENT_FORMAT_ONLINE, $result->getEventFormat());
         self::assertSame('https://webinar.example.com/', $result->getWebinarUrl());
         self::assertSame('Some more text for the attendees', $result->getAdditionalEmailText());
+        self::assertSame('conference room 2', $result->getRoom());
     }
 
     /**
@@ -310,7 +311,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function mapsEmptyEventTypeAssociationForSingleEventAsNull(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $result);
@@ -733,7 +734,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function updateRegistrationCounterCacheForNoRegistrationsSetsCounterCacheAtZero(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.csv');
         $event = $this->subject->findByUid(1);
 
         $this->subject->updateRegistrationCounterCache($event);
@@ -1508,7 +1509,7 @@ final class EventRepositoryTest extends FunctionalTestCase
      */
     public function enrichWithRawDataAddsRawDataToEvents(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SingleEventWithAllFields.csv');
         $event = $this->subject->findByUid(1);
         self::assertInstanceOf(SingleEvent::class, $event);
         $events = [$event];

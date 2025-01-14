@@ -154,4 +154,6 @@ interface EventDateInterface
     public function hasUsableWebinarUrl(): bool;
 
     public function getAdditionalEmailText(): string;
+
+    public function getRoom(): string;
 }
