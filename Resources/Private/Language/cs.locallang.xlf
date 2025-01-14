@@ -2263,6 +2263,10 @@ This event now has been confirmed.</target>
         <source>venue</source>
         <target state="needs-translation">venue</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
+        <source>vacancies</source>
+        <target state="needs-translation">vacancies</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound">
         <source>No events found.</source>
         <target state="needs-translation">No events found.</target>
@@ -2287,6 +2291,18 @@ This event now has been confirmed.</target>
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies">
+        <source>Vacancies</source>
+        <target state="needs-translation">Vacancies</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
+        <source>enough</source>
+        <target state="needs-translation">enough</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
+        <source>fully booked</source>
+        <target state="needs-translation">fully booked</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView">
         <source>Event single view</source>
         <target state="needs-translation">Event single view</target>
@@ -2302,6 +2318,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
         <source>title</source>
         <target state="needs-translation">title</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+        <source>description</source>
+        <target state="needs-translation">description</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
+        <source>room</source>
+        <target state="needs-translation">room</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.room">
+        <source>Room</source>
+        <target state="needs-translation">Room</target>
       </trans-unit>
     </body>
   </file>
