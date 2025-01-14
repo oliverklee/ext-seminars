@@ -169,7 +169,7 @@ class RegistrationGuard implements SingletonInterface
             return $this->vacanciesCache[$eventUid];
         }
 
-        if ($event->allowsUnlimitedRegistrations()) {
+        if ($event->hasUnlimitedSeats()) {
             $this->vacanciesCache[$eventUid] = null;
             return null;
         }
