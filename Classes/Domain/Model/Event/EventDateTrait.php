@@ -263,6 +263,11 @@ trait EventDateTrait
         $this->maximumNumberOfRegistrations = $maximumNumberOfRegistrations;
     }
 
+    public function hasUnlimitedSeats(): bool
+    {
+        return $this->isRegistrationRequired() && $this->getMaximumNumberOfRegistrations() === 0;
+    }
+
     /**
      * @return ObjectStorage<Venue>
      */
@@ -439,11 +444,6 @@ trait EventDateTrait
     public function setRegistrationCheckboxes(ObjectStorage $registrationCheckboxes): void
     {
         $this->registrationCheckboxes = $registrationCheckboxes;
-    }
-
-    public function hasUnlimitedSeats(): bool
-    {
-        return $this->isRegistrationRequired() && $this->getMaximumNumberOfRegistrations() === 0;
     }
 
     public function getStatistics(): ?EventStatistics
