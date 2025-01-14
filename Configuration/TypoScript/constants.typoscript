@@ -21,5 +21,8 @@ plugin {
       # cat=plugin.tx_seminars.settings.currency//; type=boolean; label=Use the dash instead of decimal 00
       useDash = 0
     }
+
+    # cat=plugin.tx_seminars.settings//; type=int[1-999]; label=Show "enough" instead of the exact number if there are at last this many vacancies
+    enoughVacanciesThreshold = 5
   }
 }

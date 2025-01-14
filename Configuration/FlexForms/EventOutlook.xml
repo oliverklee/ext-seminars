@@ -95,7 +95,7 @@
                                 <renderType>selectCheckBox</renderType>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
-                                <default>date,topic,city</default>
+                                <default>date,topic,city,vacancies</default>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
@@ -126,6 +126,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.displayOptions.columns.venue
                                         </numIndex>
                                         <numIndex index="1">venue</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.displayOptions.columns.vacancies
+                                        </numIndex>
+                                        <numIndex index="1">vacancies</numIndex>
                                     </numIndex>
                                 </items>
                             </config>

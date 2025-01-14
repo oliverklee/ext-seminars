@@ -101,12 +101,14 @@ class RegistrationGuard implements SingletonInterface
     }
 
     /**
-     * @param array<EventDateInterface> $events
+     * @param array<Event> $events
      */
     public function setRegistrationPossibleByDateForEvents(array $events): void
     {
         foreach ($events as $event) {
-            $event->setRegistrationPossibleByDate($this->isRegistrationPossibleByDate($event));
+            if ($event instanceof EventDateInterface) {
+                $event->setRegistrationPossibleByDate($this->isRegistrationPossibleByDate($event));
+            }
         }
     }
 
