@@ -61,6 +61,8 @@ interface EventDateInterface
      */
     public function getMaximumNumberOfRegistrations(): int;
 
+    public function hasUnlimitedSeats(): bool;
+
     /**
      * @return ObjectStorage<Venue>
      */
@@ -128,8 +130,6 @@ interface EventDateInterface
      * @return array<Price::PRICE_*, Price>
      */
     public function getAllPrices(): array;
-
-    public function hasUnlimitedSeats(): bool;
 
     public function setStatistics(EventStatistics $statistics): void;
 
