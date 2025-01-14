@@ -2265,9 +2265,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies" approved="yes">
         <source>vacancies</source>
-        <target state="needs-translation">vacancies</target>
+        <target state="final">freie Plätze</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2293,17 +2293,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.vacancies">
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies" approved="yes">
         <source>Vacancies</source>
-        <target state="needs-translation">Vacancies</target>
+        <target state="final">Freie Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.enough" approved="yes">
         <source>enough</source>
-        <target state="needs-translation">enough</target>
+        <target state="final">genug</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked" approved="yes">
         <source>fully booked</source>
-        <target state="needs-translation">fully booked</target>
+        <target state="final">ausgebucht</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
@@ -2321,17 +2321,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
         <source>description</source>
-        <target state="needs-translation">description</target>
+        <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
-        <target state="needs-translation">room</target>
+        <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.room">
+      <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
-        <target state="needs-translation">Room</target>
+        <target state="final">Raum</target>
       </trans-unit>
     </body>
   </file>
