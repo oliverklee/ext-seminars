@@ -2265,6 +2265,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
+        <source>vacancies</source>
+        <target state="needs-translation">vacancies</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
         <target state="final">Keine Veranstaltungen gefunden.</target>
@@ -2289,6 +2293,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies">
+        <source>Vacancies</source>
+        <target state="needs-translation">Vacancies</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
+        <source>enough</source>
+        <target state="needs-translation">enough</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
+        <source>fully booked</source>
+        <target state="needs-translation">fully booked</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
         <target state="final">Veranstaltungs-Einzelansicht</target>
@@ -2304,6 +2320,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title" approved="yes">
         <source>title</source>
         <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+        <source>description</source>
+        <target state="needs-translation">description</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
+        <source>room</source>
+        <target state="needs-translation">room</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.room">
+        <source>Room</source>
+        <target state="needs-translation">Room</target>
       </trans-unit>
     </body>
   </file>
