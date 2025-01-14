@@ -1137,34 +1137,34 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
-    public function allowsUnlimitedRegistrationsForZeroMaxRegistrationsAndRegistrationRequiredReturnsTrue(): void
+    public function hasUnlimitedSeatsForZeroMaxRegistrationsAndRegistrationRequiredReturnsTrue(): void
     {
         $this->subject->setMaximumNumberOfRegistrations(0);
         $this->subject->setRegistrationRequired(true);
 
-        self::assertTrue($this->subject->allowsUnlimitedRegistrations());
+        self::assertTrue($this->subject->hasUnlimitedSeats());
     }
 
     /**
      * @test
      */
-    public function allowsUnlimitedRegistrationsForNonZeroMaxRegistrationsAndRegistrationRequiredReturnsFalse(): void
+    public function hasUnlimitedSeatsForNonZeroMaxRegistrationsAndRegistrationRequiredReturnsFalse(): void
     {
         $this->subject->setMaximumNumberOfRegistrations(10);
         $this->subject->setRegistrationRequired(true);
 
-        self::assertFalse($this->subject->allowsUnlimitedRegistrations());
+        self::assertFalse($this->subject->hasUnlimitedSeats());
     }
 
     /**
      * @test
      */
-    public function allowsUnlimitedRegistrationsForZeroMaxRegistrationsAndRegistrationNotRequiredReturnsFalse(): void
+    public function hasUnlimitedSeatsForZeroMaxRegistrationsAndRegistrationNotRequiredReturnsFalse(): void
     {
         $this->subject->setMaximumNumberOfRegistrations(0);
         $this->subject->setRegistrationRequired(false);
 
-        self::assertFalse($this->subject->allowsUnlimitedRegistrations());
+        self::assertFalse($this->subject->hasUnlimitedSeats());
     }
 
     /**
