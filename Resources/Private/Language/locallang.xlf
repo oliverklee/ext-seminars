@@ -1686,6 +1686,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.venue">
 				<source>venue</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
+				<source>vacancies</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
 				<source>No events found.</source>
 			</trans-unit>
@@ -1704,6 +1707,15 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.events.property.venue">
 				<source>Venue</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.vacancies">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
+				<source>enough</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
+				<source>fully booked</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>
 			</trans-unit>
@@ -1715,6 +1727,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
 				<source>title</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
+				<source>room</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.room">
+				<source>Room</source>
 			</trans-unit>
 		</body>
 	</file>
