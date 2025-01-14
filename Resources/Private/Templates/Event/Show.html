@@ -12,9 +12,7 @@
 
         <oelib:isFieldEnabled fieldName="description">
             <f:if condition="{event.description}">
-                <f:format.html>
-                    {event.description}
-                </f:format.html>
+                {event.description -> f:format.html()}
             </f:if>
         </oelib:isFieldEnabled>
 
