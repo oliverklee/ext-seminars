@@ -60,21 +60,21 @@ final class EventStatisticsTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasSeatsLimitForPositiveSeatsLimitReturnsTrue(): void
+    public function hasUnlimitedSeatsForPositiveSeatsLimitReturnsFalse(): void
     {
         $subject = new EventStatistics(0, 0, 0, 0, 1);
 
-        self::assertTrue($subject->hasSeatsLimit());
+        self::assertFalse($subject->hasUnlimitedSeats());
     }
 
     /**
      * @test
      */
-    public function hasSeatsLimitForZeroSeatsLimitReturnsFalse(): void
+    public function hasUnlimitedSeatsForZeroSeatsLimitReturnsTrue(): void
     {
         $subject = new EventStatistics(0, 0, 0, 0, 0);
 
-        self::assertFalse($subject->hasSeatsLimit());
+        self::assertTrue($subject->hasUnlimitedSeats());
     }
 
     /**
