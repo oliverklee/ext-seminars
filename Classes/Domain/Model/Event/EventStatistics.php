@@ -96,9 +96,9 @@ class EventStatistics
         return $this->seatsLimit;
     }
 
-    public function hasSeatsLimit(): bool
+    public function hasUnlimitedSeats(): bool
     {
-        return $this->seatsLimit > 0;
+        return $this->getSeatsLimit() === 0;
     }
 
     /**
@@ -114,7 +114,7 @@ class EventStatistics
      */
     public function getVacancies(): ?int
     {
-        if (!$this->hasSeatsLimit()) {
+        if ($this->hasUnlimitedSeats()) {
             return null;
         }
 
