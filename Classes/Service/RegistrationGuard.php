@@ -83,7 +83,7 @@ class RegistrationGuard implements SingletonInterface
 
     public function isRegistrationPossibleByDate(EventDateInterface $event): bool
     {
-        $registrationDeadline = $this->getRegistrationDeadlineForEvent($event);
+        $registrationDeadline = $event->getEffectiveRegistrationDeadline();
         if (!$registrationDeadline instanceof \DateTimeInterface) {
             return false;
         }
@@ -110,20 +110,6 @@ class RegistrationGuard implements SingletonInterface
                 $event->setRegistrationPossibleByDate($this->isRegistrationPossibleByDate($event));
             }
         }
-    }
-
-    private function getRegistrationDeadlineForEvent(EventDateInterface $event): ?\DateTime
-    {
-        if ($event->getStart() === null && $event->getRegistrationDeadline() === null) {
-            return null;
-        }
-
-        $deadline = $event->getStart();
-        if ($event->getRegistrationDeadline() instanceof \DateTimeInterface) {
-            $deadline = $event->getRegistrationDeadline();
-        }
-
-        return $deadline;
     }
 
     private function now(): \DateTimeImmutable

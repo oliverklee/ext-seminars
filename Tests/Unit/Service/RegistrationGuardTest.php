@@ -331,6 +331,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new EventDate();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -351,6 +352,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new EventDate();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -371,6 +373,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -391,6 +394,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -411,6 +415,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -433,6 +438,7 @@ final class RegistrationGuardTest extends UnitTestCase
         $this->contextMock->method('getPropertyFromAspect')->with('date', 'full')->willReturn($this->now());
 
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $event->setStart($start);
         $event->setRegistrationStart($registrationStart);
         $event->setRegistrationDeadline($registrationDeadline);
@@ -449,6 +455,7 @@ final class RegistrationGuardTest extends UnitTestCase
     {
         $userUid = 47;
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(false);
         $event->setMultipleRegistrationPossible(true);
@@ -463,6 +470,7 @@ final class RegistrationGuardTest extends UnitTestCase
     {
         $userUid = 47;
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(false);
         $event->setMultipleRegistrationPossible(true);
@@ -477,6 +485,7 @@ final class RegistrationGuardTest extends UnitTestCase
     {
         $userUid = 47;
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(true);
         $event->setMultipleRegistrationPossible(true);
@@ -491,6 +500,7 @@ final class RegistrationGuardTest extends UnitTestCase
     {
         $userUid = 47;
         $event = new SingleEvent();
+        $event->setRegistrationRequired(true);
         $this->registrationRepositoryMock->method('existsRegistrationForEventAndUser')
             ->with($event, $userUid)->willReturn(true);
         $event->setMultipleRegistrationPossible(false);
