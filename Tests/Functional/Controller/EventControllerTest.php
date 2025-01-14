@@ -676,7 +676,7 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showActionRendersTitleOfSingleEvent(): void
+    public function showActionRendersTitleOfFutureSingleEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEvent.csv');
@@ -686,6 +686,87 @@ final class EventControllerTest extends FunctionalTestCase
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
-        self::assertMatchesRegularExpression('#<h1>.*Extension Development#s', $html);
+        self::assertMatchesRegularExpression('#<h1>\\s*Extension Development#s', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersTitleOfPastSingleEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/PastEvent.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertMatchesRegularExpression('#<h1>\\s*Extension Development#s', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersDisplayTitleOfEventDate(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureDateWithTopic.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertMatchesRegularExpression('#<h1>\\s*Extension Development#s', $html);
+        self::assertStringNotContainsString('date record', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersDisplayTitleOfEventTopic(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/Topic.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertMatchesRegularExpression('#<h1>\\s*Extension Development#s', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersDescriptionAsRichText(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('a <b>big</b> event', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersRoom(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('room 13 B', $html);
     }
 }
