@@ -318,6 +318,71 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function getEffectiveRegistrationDeadlineWithNoRegistrationAndNoDatesSetReturnsNull(): void
+    {
+        $this->subject->setRegistrationRequired(false);
+        $this->subject->setStart(null);
+        $this->subject->setRegistrationDeadline(null);
+
+        self::assertNull($this->subject->getEffectiveRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function getEffectiveRegistrationDeadlineWithNoRegistrationAndStartAndDeadlineSetReturnsNull(): void
+    {
+        $this->subject->setRegistrationRequired(false);
+        $this->subject->setStart(new \DateTime());
+        $this->subject->setRegistrationDeadline(new \DateTime());
+
+        self::assertNull($this->subject->getEffectiveRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function getEffectiveRegistrationDeadlineWithRegistrationAndNoDatesSetReturnsNull(): void
+    {
+        $this->subject->setRegistrationRequired(true);
+        $this->subject->setStart(null);
+        $this->subject->setRegistrationDeadline(null);
+
+        self::assertNull($this->subject->getEffectiveRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function getEffectiveRegistrationDeadlineWithRegistrationAndStartDateSetSetReturnsStartDate(): void
+    {
+        $startDate = new \DateTime();
+
+        $this->subject->setRegistrationRequired(true);
+        $this->subject->setStart($startDate);
+        $this->subject->setRegistrationDeadline(null);
+
+        self::assertSame($startDate, $this->subject->getEffectiveRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
+    public function getEffectiveRegistrationDeadlineWithRegistrationAndStartDateAndDeadlineSetSetReturnsDeadline(): void
+    {
+        $deadline = new \DateTime('now');
+        $startDate = new \DateTime('now +1 day');
+
+        $this->subject->setRegistrationRequired(true);
+        $this->subject->setStart($startDate);
+        $this->subject->setRegistrationDeadline($deadline);
+
+        self::assertSame($deadline, $this->subject->getEffectiveRegistrationDeadline());
+    }
+
+    /**
+     * @test
+     */
     public function hasWaitingListInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasWaitingList());

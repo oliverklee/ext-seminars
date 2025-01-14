@@ -198,6 +198,17 @@ trait EventDateTrait
         $this->registrationDeadline = $registrationDeadline;
     }
 
+    public function getEffectiveRegistrationDeadline(): ?\DateTime
+    {
+        if (!$this->isRegistrationRequired()) {
+            return null;
+        }
+
+        $registrationDeadline = $this->getRegistrationDeadline();
+
+        return ($registrationDeadline instanceof \DateTime) ? $registrationDeadline : $this->getStart();
+    }
+
     public function isRegistrationRequired(): bool
     {
         return $this->registrationRequired;

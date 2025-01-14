@@ -43,6 +43,8 @@ interface EventDateInterface
 
     public function getRegistrationDeadline(): ?\DateTime;
 
+    public function getEffectiveRegistrationDeadline(): ?\DateTime;
+
     public function isRegistrationRequired(): bool;
 
     public function isRegistrationPossibleByDate(): bool;
