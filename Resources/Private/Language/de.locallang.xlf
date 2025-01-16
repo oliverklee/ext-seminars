@@ -591,9 +591,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>New registrations</source>
         <target state="final">Neue Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="range">
+      <trans-unit id="range" approved="yes">
         <source>%1s–%2s</source>
-        <target state="needs-translation">%1s–%2s</target>
+        <target state="final">%1s–%2s</target>
       </trans-unit>
       <trans-unit id="dateFormat" approved="yes">
         <source>Y-m-d</source>
@@ -602,6 +602,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="timeFormat" approved="yes">
         <source>H:i</source>
         <target state="final">H:i</target>
+      </trans-unit>
+      <trans-unit id="timeWithUnit">
+        <source>%1s</source>
+        <target state="needs-translation">%1s</target>
       </trans-unit>
       <trans-unit id="decimalSeparator" approved="yes">
         <source>.</source>
@@ -2325,6 +2329,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>event type</source>
         <target state="final">Veranstaltungsart</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
+        <source>date and time</source>
+        <target state="needs-translation">date and time</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
         <target state="final">Raum</target>
@@ -2332,6 +2340,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
         <source>description</source>
         <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
+        <source>Date and time</source>
+        <target state="needs-translation">Date and time</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
+        <source>Start: %1s %2s</source>
+        <target state="needs-translation">Start: %1s %2s</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
+        <source>End: %1s %2s</source>
+        <target state="needs-translation">End: %1s %2s</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
