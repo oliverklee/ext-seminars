@@ -2317,13 +2317,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
-        <source>description</source>
-        <target state="final">Beschreibung</target>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
+        <source>event type</source>
+        <target state="needs-translation">event type</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
         <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
+        <source>description</source>
+        <target state="final">Beschreibung</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
