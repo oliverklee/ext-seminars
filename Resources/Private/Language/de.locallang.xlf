@@ -603,9 +603,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>H:i</source>
         <target state="final">H:i</target>
       </trans-unit>
-      <trans-unit id="timeWithUnit">
+      <trans-unit id="timeWithUnit" approved="yes">
         <source>%1s</source>
-        <target state="needs-translation">%1s</target>
+        <target state="final">%1s Uhr</target>
       </trans-unit>
       <trans-unit id="decimalSeparator" approved="yes">
         <source>.</source>
@@ -2329,9 +2329,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>event type</source>
         <target state="final">Veranstaltungsart</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime" approved="yes">
         <source>date and time</source>
-        <target state="needs-translation">date and time</target>
+        <target state="final">Datum und Zeit</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
@@ -2341,17 +2341,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>description</source>
         <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
+      <trans-unit id="plugin.eventSingleView.events.property.dateAndTime" approved="yes">
         <source>Date and time</source>
-        <target state="needs-translation">Date and time</target>
+        <target state="final">Datum und Zeit</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
+      <trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit" approved="yes">
         <source>Start: %1s %2s</source>
-        <target state="needs-translation">Start: %1s %2s</target>
+        <target state="final">Beginn: %1s %2s Uhr</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
+      <trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit" approved="yes">
         <source>End: %1s %2s</source>
-        <target state="needs-translation">End: %1s %2s</target>
+        <target state="final">Ende: %1s %2s Uhr</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
