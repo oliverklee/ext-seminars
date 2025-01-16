@@ -3,7 +3,7 @@
         {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') -> f:variable(name: 'startDate')}
         <f:if condition="{event.end}">
             {event.end -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') -> f:variable(name: 'endDate')}
-            <f:if condition="{startDate} != {endDate}">
+            <f:if condition="{event.multiDay}">
                 <f:variable name="endDateWithDash" value="–{endDate}"/>
             </f:if>
         </f:if>
