@@ -1639,7 +1639,7 @@ This event now has been confirmed.</source>
 				<source>Date</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.events.property.eventType">
-				<source>Event type</source>
+				<source>Type</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventArchive.events.property.topic">
 				<source>Topic</source>
@@ -1696,7 +1696,7 @@ This event now has been confirmed.</source>
 				<source>Date</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.eventType">
-				<source>Event type</source>
+				<source>Type</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.topic">
 				<source>Topic</source>
@@ -1714,7 +1714,7 @@ This event now has been confirmed.</source>
 				<source>enough</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
-				<source>fully booked</source>
+				<source>full</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>
