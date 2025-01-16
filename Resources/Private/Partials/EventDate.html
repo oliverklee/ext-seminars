@@ -1,12 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:if condition="{event.start}">
         {event.start -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') -> f:variable(name: 'startDate')}
-        <f:if condition="{event.end}">
-            {event.end -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') -> f:variable(name: 'endDate')}
-            <f:if condition="{event.multiDay}">
-                <f:variable name="endDateWithDash" value="–{endDate}"/>
-            </f:if>
+        <f:if condition="{event.multiDay}">
+            <f:then>
+                {event.end -> f:format.date(format: '{f:translate(key: \'dateFormat\')}') -> f:variable(name: 'endDate')}
+                <f:translate key="range" arguments="{0: startDate, 1: endDate}"/>
+            </f:then>
+            <f:else>
+                {startDate}
+            </f:else>
         </f:if>
-        {startDate}{endDateWithDash}
     </f:if>
 </html>
