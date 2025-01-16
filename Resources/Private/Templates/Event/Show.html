@@ -10,12 +10,6 @@
             </h1>
         </oelib:isFieldEnabled>
 
-        <oelib:isFieldEnabled fieldName="description">
-            <f:if condition="{event.description}">
-                {event.description -> f:format.html()}
-            </f:if>
-        </oelib:isFieldEnabled>
-
         <oelib:isFieldEnabled fieldName="room">
             <f:if condition="{event.room}">
                 <h3>
@@ -24,6 +18,12 @@
                 <p>
                     {event.room}
                 </p>
+            </f:if>
+        </oelib:isFieldEnabled>
+
+        <oelib:isFieldEnabled fieldName="description">
+            <f:if condition="{event.description}">
+                {event.description -> f:format.html()}
             </f:if>
         </oelib:isFieldEnabled>
     </f:section>
