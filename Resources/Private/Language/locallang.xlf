@@ -1725,11 +1725,14 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.title">
 				<source>title</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
-				<source>description</source>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
+				<source>event type</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
 				<source>room</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+				<source>description</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.room">
 				<source>Room</source>
