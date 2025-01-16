@@ -28,17 +28,17 @@
                                         </numIndex>
                                         <numIndex index="1">title</numIndex>
                                     </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">
-                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.description
-                                        </numIndex>
-                                        <numIndex index="1">description</numIndex>
-                                    </numIndex>
-                                    <numIndex index="2" type="array">
+                                    <numIndex index="5" type="array">
                                         <numIndex index="0">
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.room
                                         </numIndex>
                                         <numIndex index="1">room</numIndex>
+                                    </numIndex>
+                                    <numIndex index="8" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.description
+                                        </numIndex>
+                                        <numIndex index="1">description</numIndex>
                                     </numIndex>
                                 </items>
                             </config>

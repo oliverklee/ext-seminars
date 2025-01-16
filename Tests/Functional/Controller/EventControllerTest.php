@@ -696,22 +696,6 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showActionRendersDescriptionAsRichText(): void
-    {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
-
-        $request = (new InternalRequest())->withPageId(3)
-            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
-
-        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
-
-        self::assertStringContainsString('a <b>big</b> event', $html);
-    }
-
-    /**
-     * @test
-     */
     public function showActionRendersRoom(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
@@ -723,5 +707,21 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         self::assertStringContainsString('room 13 B', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersDescriptionAsRichText(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('a <b>big</b> event', $html);
     }
 }
