@@ -6,7 +6,7 @@
                                                                       <sheet index=""displayOptions"">
                                                                           <language index=""lDEF"">
                                                                               <field index=""settings.fieldsToShow"">
-                                                                                  <value index=""vDEF"">title,room,description</value>
+                                                                                  <value index=""vDEF"">title,eventType,room,description</value>
                                                                               </field>
                                                                           </language>
                                                                       </sheet>

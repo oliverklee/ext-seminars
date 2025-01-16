@@ -712,6 +712,22 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function showActionRendersEventType(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithEventType.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('workshop', $html);
+    }
+
+    /**
+     * @test
+     */
     public function showActionRendersDescriptionAsRichText(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');

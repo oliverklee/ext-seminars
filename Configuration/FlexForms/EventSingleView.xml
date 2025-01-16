@@ -28,6 +28,12 @@
                                         </numIndex>
                                         <numIndex index="1">title</numIndex>
                                     </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType
+                                        </numIndex>
+                                        <numIndex index="1">eventType</numIndex>
+                                    </numIndex>
                                     <numIndex index="5" type="array">
                                         <numIndex index="0">
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.room
