@@ -2317,9 +2317,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>title</source>
         <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType" approved="yes">
         <source>event type</source>
-        <target state="needs-translation">event type</target>
+        <target state="final">Veranstaltungsart</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
