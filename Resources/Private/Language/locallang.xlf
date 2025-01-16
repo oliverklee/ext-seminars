@@ -1710,9 +1710,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.events.property.vacancies">
 				<source>Vacancies</source>
 			</trans-unit>
-			<trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
-				<source>enough</source>
-			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
 				<source>full</source>
 			</trans-unit>

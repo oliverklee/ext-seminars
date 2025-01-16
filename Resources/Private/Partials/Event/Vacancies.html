@@ -2,12 +2,13 @@
     <f:variable name="statistics" value="{event.statistics}"/>
     <f:if condition="({event.registrationRequired} && {event.registrationPossibleByDate})">
         <span class="text-nowrap">
-            <f:if
-                condition="({event.unlimitedSeats} || ({statistics.vacancies} >= {settings.enoughVacanciesThreshold}))">
+            <f:if condition="{event.unlimitedSeats}">
                 <f:then>
-                    <f:translate key="plugin.eventOutlook.events.property.vacancies.enough"/>
-                    🟢
+                    ∞ 🟢
                 </f:then>
+                <f:else if="({statistics.vacancies} >= {settings.enoughVacanciesThreshold})">
+                    ≥ {settings.enoughVacanciesThreshold} 🟢
+                </f:else>
                 <f:else if="{statistics.fullyBooked}">
                     <f:translate key="plugin.eventOutlook.events.property.vacancies.fullyBooked"/>
                     🔴
