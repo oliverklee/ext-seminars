@@ -2331,6 +2331,10 @@ This event now has been confirmed.</target>
         <source>date and time</source>
         <target state="needs-translation">date and time</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.venue">
+        <source>venue</source>
+        <target state="needs-translation">venue</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
         <source>room</source>
         <target state="needs-translation">room</target>
@@ -2354,6 +2358,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.events.property.room">
         <source>Room</source>
         <target state="needs-translation">Room</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.venue">
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
       </trans-unit>
     </body>
   </file>
