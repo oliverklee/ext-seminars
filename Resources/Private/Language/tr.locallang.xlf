@@ -2200,8 +2200,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Date</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.events.property.eventType">
-        <source>Event type</source>
-        <target state="needs-translation">Event type</target>
+        <source>Type</source>
+        <target state="needs-translation">Type</target>
       </trans-unit>
       <trans-unit id="plugin.eventArchive.events.property.topic">
         <source>Topic</source>
@@ -2276,8 +2276,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Date</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.eventType">
-        <source>Event type</source>
-        <target state="needs-translation">Event type</target>
+        <source>Type</source>
+        <target state="needs-translation">Type</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.topic">
         <source>Topic</source>
@@ -2300,8 +2300,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">enough</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
-        <source>fully booked</source>
-        <target state="needs-translation">fully booked</target>
+        <source>full</source>
+        <target state="needs-translation">full</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView">
         <source>Event single view</source>
