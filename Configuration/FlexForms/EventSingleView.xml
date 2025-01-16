@@ -20,7 +20,7 @@
                                 <renderType>selectCheckBox</renderType>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
-                                <default>title,description,room</default>
+                                <default>title,eventType,dateAndTime,room,description</default>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
@@ -33,6 +33,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType
                                         </numIndex>
                                         <numIndex index="1">eventType</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime
+                                        </numIndex>
+                                        <numIndex index="1">dateAndTime</numIndex>
                                     </numIndex>
                                     <numIndex index="5" type="array">
                                         <numIndex index="0">
