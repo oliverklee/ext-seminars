@@ -591,6 +591,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>New registrations</source>
         <target state="final">Neue Anmeldungen</target>
       </trans-unit>
+      <trans-unit id="range">
+        <source>%1s–%2s</source>
+        <target state="needs-translation">%1s–%2s</target>
+      </trans-unit>
       <trans-unit id="dateFormat" approved="yes">
         <source>Y-m-d</source>
         <target state="final">d.m.Y</target>
