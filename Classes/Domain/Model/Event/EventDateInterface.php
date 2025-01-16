@@ -37,6 +37,8 @@ interface EventDateInterface
 
     public function getEnd(): ?\DateTime;
 
+    public function isMultiDay(): bool;
+
     public function getRegistrationStart(): ?\DateTime;
 
     public function getEarlyBirdDeadline(): ?\DateTime;

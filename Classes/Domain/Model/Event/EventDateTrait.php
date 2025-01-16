@@ -168,6 +168,20 @@ trait EventDateTrait
         $this->end = $end;
     }
 
+    public function isMultiDay(): bool
+    {
+        $start = $this->getStart();
+        $end = $this->getEnd();
+        if (!($start instanceof \DateTimeInterface) || !($end instanceof \DateTimeInterface)) {
+            return false;
+        }
+
+        $startDay = $start->format('Y-m-d');
+        $endDay = $end->format('Y-m-d');
+
+        return $startDay !== $endDay;
+    }
+
     public function getRegistrationStart(): ?\DateTime
     {
         return $this->registrationStart;

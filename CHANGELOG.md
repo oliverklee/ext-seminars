@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Event.isMultiDay()` (#4059)
 - Add more getters and setters to the `Event` model (#4050, #4051)
 - Add support for PHP 8.4 (#4012)
 - Add `Organizer.emailFooter` to the Extbase model (#3977)

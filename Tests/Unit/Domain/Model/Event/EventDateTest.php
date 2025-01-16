@@ -242,6 +242,72 @@ final class EventDateTest extends UnitTestCase
     /**
      * @test
      */
+    public function isMultiDayForNoStartAndNoEndReturnsFalse(): void
+    {
+        $this->subject->setStart(null);
+        $this->subject->setEnd(null);
+
+        self::assertFalse($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultiDayForStartAndNoEndReturnsFalse(): void
+    {
+        $this->subject->setStart(new \DateTime('2035-10-01 10:00'));
+        $this->subject->setEnd(null);
+
+        self::assertFalse($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultiDayForNoStartButEndReturnsFalse(): void
+    {
+        $this->subject->setStart(null);
+        $this->subject->setEnd(new \DateTime('2035-10-01 18:00'));
+
+        self::assertFalse($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultiDayForStartAndEndOnSameDayReturnsFalse(): void
+    {
+        $this->subject->setStart(new \DateTime('2035-10-01 10:00'));
+        $this->subject->setEnd(new \DateTime('2035-10-01 18:00'));
+
+        self::assertFalse($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultiDayForStartAndEndOnConsecutiveDaysReturnsTrue(): void
+    {
+        $this->subject->setStart(new \DateTime('2035-10-01 10:00'));
+        $this->subject->setEnd(new \DateTime('2035-10-02 18:00'));
+
+        self::assertTrue($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
+    public function isMultiDayForStartAndEndTwoDaysApartReturnsTrue(): void
+    {
+        $this->subject->setStart(new \DateTime('2035-10-01 10:00'));
+        $this->subject->setEnd(new \DateTime('2035-10-03 18:00'));
+
+        self::assertTrue($this->subject->isMultiDay());
+    }
+
+    /**
+     * @test
+     */
     public function getEarlyBirdDeadlineInitiallyReturnsNull(): void
     {
         self::assertNull($this->subject->getEarlyBirdDeadline());
