@@ -2315,13 +2315,17 @@ This event now has been confirmed.</target>
         <source>title</source>
         <target state="needs-translation">title</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
-        <source>description</source>
-        <target state="needs-translation">description</target>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
+        <source>event type</source>
+        <target state="needs-translation">event type</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
         <source>room</source>
         <target state="needs-translation">room</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
+        <source>description</source>
+        <target state="needs-translation">description</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.room">
         <source>Room</source>
