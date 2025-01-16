@@ -2333,6 +2333,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>date and time</source>
         <target state="final">Datum und Zeit</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.venue">
+        <source>venue</source>
+        <target state="needs-translation">venue</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room" approved="yes">
         <source>room</source>
         <target state="final">Raum</target>
@@ -2356,6 +2360,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
         <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.venue">
+        <source>Venue</source>
+        <target state="needs-translation">Venue</target>
       </trans-unit>
     </body>
   </file>
