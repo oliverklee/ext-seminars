@@ -603,6 +603,10 @@ This event now has been confirmed.</target>
         <source>H:i</source>
         <target state="needs-translation">H:i</target>
       </trans-unit>
+      <trans-unit id="timeWithUnit">
+        <source>%1s</source>
+        <target state="needs-translation">%1s</target>
+      </trans-unit>
       <trans-unit id="decimalSeparator" approved="yes">
         <source>.</source>
         <target state="final">,</target>
@@ -2323,6 +2327,10 @@ This event now has been confirmed.</target>
         <source>event type</source>
         <target state="needs-translation">event type</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
+        <source>date and time</source>
+        <target state="needs-translation">date and time</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
         <source>room</source>
         <target state="needs-translation">room</target>
@@ -2330,6 +2338,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
         <source>description</source>
         <target state="needs-translation">description</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
+        <source>Date and time</source>
+        <target state="needs-translation">Date and time</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
+        <source>Start: %1s %2s</source>
+        <target state="needs-translation">Start: %1s %2s</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
+        <source>End: %1s %2s</source>
+        <target state="needs-translation">End: %1s %2s</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.room">
         <source>Room</source>
