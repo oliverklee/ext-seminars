@@ -444,6 +444,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="timeFormat">
 				<source>H:i</source>
 			</trans-unit>
+			<trans-unit id="timeWithUnit">
+				<source>%1s</source>
+			</trans-unit>
 			<trans-unit id="decimalSeparator">
 				<source>.</source>
 			</trans-unit>
@@ -1731,11 +1734,23 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
 				<source>event type</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
+				<source>date and time</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
 				<source>room</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
 				<source>description</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
+				<source>Date and time</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.startDateAndTimeWithUnit">
+				<source>Start: %1s %2s</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.endDateAndTimeWithUnit">
+				<source>End: %1s %2s</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.room">
 				<source>Room</source>
