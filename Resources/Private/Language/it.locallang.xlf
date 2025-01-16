@@ -2295,10 +2295,6 @@ This event now has been confirmed.</target>
         <source>Vacancies</source>
         <target state="needs-translation">Vacancies</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.vacancies.enough">
-        <source>enough</source>
-        <target state="needs-translation">enough</target>
-      </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
         <source>full</source>
         <target state="needs-translation">full</target>
