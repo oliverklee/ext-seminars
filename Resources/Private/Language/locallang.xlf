@@ -435,6 +435,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="registrationDigestEmail_Subject">
 				<source>New registrations</source>
 			</trans-unit>
+			<trans-unit id="range">
+				<source>%1s–%2s</source>
+			</trans-unit>
 			<trans-unit id="dateFormat">
 				<source>Y-m-d</source>
 			</trans-unit>
