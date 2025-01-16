@@ -1737,6 +1737,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
 				<source>date and time</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.venue">
+				<source>venue</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
 				<source>room</source>
 			</trans-unit>
@@ -1754,6 +1757,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.room">
 				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.venue">
+				<source>Venue</source>
 			</trans-unit>
 		</body>
 	</file>

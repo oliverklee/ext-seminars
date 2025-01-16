@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add a new plugin for the event archive, outlook and single view
   (#3895, #3909, #3910, #3911, #3913, #3915, #3986, #3969, #4024, #4025, #4026,
   #4027, #4028, #4029, #4030, #4031, #4033, #4049, #4052, #4054, #4055, #4056,
-  #4057, #4058, #4060)
+  #4057, #4058, #4060, #4061)
 - Re-add the FE editor (#3894, #3903, #3904)
 - Add `EventRepository::findUpcoming()` (#3892, #3904)
 - Add `EventRepository::findInPast()` (#3885, #3887, #3891, #3904)

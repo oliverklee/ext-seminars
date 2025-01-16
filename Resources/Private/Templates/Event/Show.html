@@ -56,6 +56,33 @@
             </f:if>
         </oelib:isFieldEnabled>
 
+        <oelib:isFieldEnabled fieldName="venue">
+            <f:if condition="{event.venues}">
+                <h3>
+                    <f:translate key="plugin.eventSingleView.events.property.venue"/>
+                </h3>
+
+                <div class="row">
+                    <f:for each="{event.venues}" as="venue">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {venue.title}
+                                    </h5>
+                                    <f:if condition="{venue.fullAddress}">
+                                        <p class="card-text">
+                                            {venue.fullAddress -> f:format.nl2br()}
+                                        </p>
+                                    </f:if>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </f:if>
+        </oelib:isFieldEnabled>
+
         <oelib:isFieldEnabled fieldName="room">
             <f:if condition="{event.room}">
                 <h3>

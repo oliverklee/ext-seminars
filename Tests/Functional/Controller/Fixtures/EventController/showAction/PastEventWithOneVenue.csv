@@ -1,0 +1,12 @@
+"tx_seminars_seminars"
+,"uid","pid","title","begin_date","end_date","place"
+,1,2,"Extension Development with Extbase and Fluid",1,2,1
+
+"tx_seminars_sites"
+,"uid","pid","title","address","zip","city"
+,1,2,"Maritim Hotel","Kurt-Georg-Kiesinger-Allee 1
+53175 Bonn","53175","Bonn"
+
+"tx_seminars_seminars_place_mm"
+,"uid_local","uid_foreign","tablenames"
+,1,1,"tx_seminars_sites"
