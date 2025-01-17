@@ -1719,6 +1719,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.events.property.vacancies.fullyBooked">
 				<source>full</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
+				<source>∞</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>
 			</trans-unit>
@@ -1743,6 +1746,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
 				<source>room</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
+				<source>vacancies</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
 				<source>description</source>
 			</trans-unit>
@@ -1757,6 +1763,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.room">
 				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.vacancies">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
+				<source>fully booked</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
+				<source>unlimited</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.venue">
 				<source>Venue</source>
