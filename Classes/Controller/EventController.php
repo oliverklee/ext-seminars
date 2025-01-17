@@ -66,6 +66,9 @@ class EventController extends ActionController
      */
     public function showAction(Event $event): ResponseInterface
     {
+        $this->eventStatisticsCalculator->enrichWithStatistics($event);
+        $this->registrationGuard->setRegistrationPossibleByDateForEvents([$event]);
+
         $this->view->assign('event', $event);
 
         return $this->htmlResponse();

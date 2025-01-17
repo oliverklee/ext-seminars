@@ -529,7 +529,7 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function outlookActionForEventWithUnlimitedSeatsRendersInfiniteSeats(): void
+    public function outlookActionForEventWithUnlimitedSeatsRendersUnlimitedSeats(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithUnlimitedSeats.csv');
@@ -538,7 +538,13 @@ final class EventControllerTest extends FunctionalTestCase
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
-        self::assertStringContainsString('∞ 🟢', $html);
+        $unlimited = LocalizationUtility::translate(
+            'plugin.eventOutlook.events.property.vacancies.unlimited',
+            'seminars'
+        );
+        self::assertIsString($unlimited);
+        self::assertStringContainsString($unlimited, $html);
+        self::assertStringContainsString('🟢', $html);
     }
 
     /**
@@ -887,6 +893,120 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         self::assertStringContainsString('room 13 B', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithUnlimitedSeatsRendersUnlimitedSeats(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithUnlimitedSeats.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $unlimited = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.vacancies.unlimited',
+            'seminars'
+        );
+        self::assertIsString($unlimited);
+        self::assertStringContainsString($unlimited, $html);
+        self::assertStringContainsString('🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithMoreThanEnoughVacanciesRendersThreshold(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithMoreThanEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('≥ 5 🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithExactlyEnoughVacanciesRendersRendersThreshold(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithExactlyEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('≥ 5 🟢', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithLessThanEnoughVacanciesRendersExactVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithLessThanEnoughVacancies.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('4 🟡', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithOneVacancyRendersExactVacancies(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('1 🟡', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithNoVacancyRendersFullyBooked(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacancies.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $fullyBooked = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.vacancies.fullyBooked',
+            'seminars'
+        );
+        self::assertIsString($fullyBooked);
+        self::assertStringContainsString($fullyBooked, $html);
+        self::assertStringContainsString('🔴', $html);
     }
 
     /**

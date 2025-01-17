@@ -94,6 +94,18 @@
             </f:if>
         </oelib:isFieldEnabled>
 
+        <oelib:isFieldEnabled fieldName="vacancies">
+            <f:if condition="({event.registrationRequired} && {event.registrationPossibleByDate})">
+                <h3>
+                    <f:translate key="plugin.eventSingleView.events.property.vacancies"/>
+                </h3>
+
+                <p>
+                    <f:render partial="Event/Vacancies" arguments="{event: event, viewName: 'eventSingleView'}"/>
+                </p>
+            </f:if>
+        </oelib:isFieldEnabled>
+
         <oelib:isFieldEnabled fieldName="description">
             <f:if condition="{event.description}">
                 {event.description -> f:format.html()}
