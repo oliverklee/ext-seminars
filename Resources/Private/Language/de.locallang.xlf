@@ -2353,9 +2353,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>description</source>
         <target state="final">Beschreibung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers" approved="yes">
         <source>speakers</source>
-        <target state="needs-translation">speakers</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.dateAndTime" approved="yes">
         <source>Date and time</source>
@@ -2389,17 +2389,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.speakers.one">
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.one" approved="yes">
         <source>Speaker</source>
-        <target state="needs-translation">Speaker</target>
+        <target state="final">Referent_in</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.speakers.many">
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.many" approved="yes">
         <source>Speakers</source>
-        <target state="needs-translation">Speakers</target>
+        <target state="final">Referent_innen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage" approved="yes">
         <source>Homepage</source>
-        <target state="needs-translation">Homepage</target>
+        <target state="final">Homepage</target>
       </trans-unit>
     </body>
   </file>
