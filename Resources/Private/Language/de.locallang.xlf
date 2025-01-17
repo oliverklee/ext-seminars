@@ -2353,6 +2353,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>description</source>
         <target state="final">Beschreibung</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
+        <source>speakers</source>
+        <target state="needs-translation">speakers</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.dateAndTime" approved="yes">
         <source>Date and time</source>
         <target state="final">Datum und Zeit</target>
@@ -2384,6 +2388,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.events.property.venue" approved="yes">
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.one">
+        <source>Speaker</source>
+        <target state="needs-translation">Speaker</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.many">
+        <source>Speakers</source>
+        <target state="needs-translation">Speakers</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
+        <source>Homepage</source>
+        <target state="needs-translation">Homepage</target>
       </trans-unit>
     </body>
   </file>
