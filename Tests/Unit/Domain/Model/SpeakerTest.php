@@ -76,4 +76,42 @@ final class SpeakerTest extends UnitTestCase
 
         self::assertSame($value, $this->subject->getEmailAddress());
     }
+
+    /**
+     * @test
+     */
+    public function getOrganizationInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getOrganization());
+    }
+
+    /**
+     * @test
+     */
+    public function setOrganizationSetsOrganization(): void
+    {
+        $value = 'Speaking Inc.';
+        $this->subject->setOrganization($value);
+
+        self::assertSame($value, $this->subject->getOrganization());
+    }
+
+    /**
+     * @test
+     */
+    public function getHomepageInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getHomepage());
+    }
+
+    /**
+     * @test
+     */
+    public function setHomepageSetsHomepage(): void
+    {
+        $value = 'https://www.example.com/';
+        $this->subject->setHomepage($value);
+
+        self::assertSame($value, $this->subject->getHomepage());
+    }
 }
