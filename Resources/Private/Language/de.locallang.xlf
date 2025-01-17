@@ -2309,9 +2309,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>full</source>
         <target state="final">voll</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited" approved="yes">
         <source>∞</source>
-        <target state="needs-translation">∞</target>
+        <target state="final">∞</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
@@ -2345,9 +2345,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>room</source>
         <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies" approved="yes">
         <source>vacancies</source>
-        <target state="needs-translation">vacancies</target>
+        <target state="final">freie Plätze</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
         <source>description</source>
@@ -2369,17 +2369,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Room</source>
         <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.vacancies">
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies" approved="yes">
         <source>Vacancies</source>
-        <target state="needs-translation">Vacancies</target>
+        <target state="final">Freie Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked" approved="yes">
         <source>fully booked</source>
-        <target state="needs-translation">fully booked</target>
+        <target state="final">ausgebucht</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited" approved="yes">
         <source>unlimited</source>
-        <target state="needs-translation">unlimited</target>
+        <target state="final">unbegrenzt</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.venue" approved="yes">
         <source>Venue</source>
