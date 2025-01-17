@@ -1024,4 +1024,131 @@ final class EventControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString('a <b>big</b> event', $html);
     }
+
+    /**
+     * @test
+     */
+    public function showActionRendersNameOfSpeaker(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Oliver Klee', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionCanRenderMultipleSpeakers(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithTwoSpeakers.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('Oliver Klee', $html);
+        self::assertStringContainsString('Bilbo Baggins', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersOrganizationOfSpeaker(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('[oliverklee.de] TYPO3 und Workshops', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersExternalHomepageOfSpeakerAsLink(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithExternalHomepage.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('href="https://www.oliverklee.de/', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionRendersInternalHomepageOfSpeakerAsLink(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithSpeakerWithInternalHomepage.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('href="/speaker-details', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionWithOneSpeakerUsesSingularHeading(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneSpeaker.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedLabel = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.speakers.one',
+            'seminars'
+        );
+        self::assertIsString($expectedLabel);
+        self::assertStringContainsString($expectedLabel, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionWithTwoSpeakersUsesPluralHeading(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithTwoSpeakers.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedLabel = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.speakers.many',
+            'seminars'
+        );
+        self::assertIsString($expectedLabel);
+        self::assertStringContainsString($expectedLabel, $html);
+    }
 }

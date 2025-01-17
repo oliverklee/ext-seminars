@@ -111,5 +111,52 @@
                 {event.description -> f:format.html()}
             </f:if>
         </oelib:isFieldEnabled>
+
+        <oelib:isFieldEnabled fieldName="speakers">
+            <f:variable name="speakers" value="{event.speakers}"/>
+            <f:if condition="{speakers}">
+                <h3>
+                    <f:variable name="numberOfSpeakers" value="{speakers -> f:count()}"/>
+                    <f:if condition="{numberOfSpeakers} == 1">
+                        <f:then>
+                            <f:translate key="plugin.eventSingleView.events.property.speakers.one"/>
+                        </f:then>
+                        <f:else>
+                            <f:translate key="plugin.eventSingleView.events.property.speakers.many"/>
+                        </f:else>
+                    </f:if>
+                </h3>
+
+                <div class="row">
+                    <f:for each="{speakers}" as="speaker">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {speaker.name}
+                                    </h5>
+                                    <f:if condition="{speaker.organization}">
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                                            {speaker.organization}
+                                        </h6>
+                                    </f:if>
+
+                                    <f:if condition="{speaker.homepage}">
+                                        <p>
+                                            <f:link.typolink parameter="{speaker.homepage}" class="card-link"
+                                                             target="_blank">
+                                                <f:translate
+                                                    key="plugin.eventSingleView.events.property.speakers.homepage"/>
+                                            </f:link.typolink>
+                                        </p>
+                                    </f:if>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </f:if>
+        </oelib:isFieldEnabled>
     </f:section>
+
 </html>
