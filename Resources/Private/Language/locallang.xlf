@@ -1752,6 +1752,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
 				<source>description</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
+				<source>speakers</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
 				<source>Date and time</source>
 			</trans-unit>
@@ -1775,6 +1778,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.venue">
 				<source>Venue</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.speakers.one">
+				<source>Speaker</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.speakers.many">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
+				<source>Homepage</source>
 			</trans-unit>
 		</body>
 	</file>
