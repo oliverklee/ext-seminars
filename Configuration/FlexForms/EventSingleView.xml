@@ -20,7 +20,7 @@
                                 <renderType>selectCheckBox</renderType>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
-                                <default>title, eventType, dateAndTime, venue, room, vacancies, description</default>
+                                <default>title, eventType, dateAndTime, venue, room, vacancies, description, speakers</default>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
@@ -63,6 +63,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.description
                                         </numIndex>
                                         <numIndex index="1">description</numIndex>
+                                    </numIndex>
+                                    <numIndex index="9" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers
+                                        </numIndex>
+                                        <numIndex index="1">speakers</numIndex>
                                     </numIndex>
                                 </items>
                             </config>
