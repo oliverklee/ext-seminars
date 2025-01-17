@@ -44,13 +44,15 @@ final class SpeakerRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFields(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/SpeakerRepository/SpeakerWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/SpeakerRepository/SpeakerWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
         self::assertInstanceOf(Speaker::class, $result);
         self::assertSame('Dan Chase', $result->getName());
         self::assertSame('dan@example.com', $result->getEmailAddress());
+        self::assertSame('Danish Institute for Theoretical Simulation', $result->getOrganization());
+        self::assertSame('https://www.example.com/', $result->getHomepage());
     }
 
     /**

@@ -23,6 +23,16 @@ class Speaker extends AbstractEntity implements MailRole
      */
     protected string $emailAddress = '';
 
+    /**
+     * @Validate("StringLength", options={"maximum": 255})
+     */
+    protected string $organization = '';
+
+    /**
+     * @Validate("StringLength", options={"maximum": 255})
+     */
+    protected string $homepage = '';
+
     public function getName(): string
     {
         return $this->name;
@@ -41,5 +51,25 @@ class Speaker extends AbstractEntity implements MailRole
     public function setEmailAddress(string $emailAddress): void
     {
         $this->emailAddress = $emailAddress;
+    }
+
+    public function getOrganization(): string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(string $organization): void
+    {
+        $this->organization = $organization;
+    }
+
+    public function getHomepage(): string
+    {
+        return $this->homepage;
+    }
+
+    public function setHomepage(string $homepage): void
+    {
+        $this->homepage = $homepage;
     }
 }
