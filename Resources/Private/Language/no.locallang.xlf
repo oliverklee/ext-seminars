@@ -2307,6 +2307,10 @@ This event now has been confirmed.</target>
         <source>full</source>
         <target state="needs-translation">full</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
+        <source>∞</source>
+        <target state="needs-translation">∞</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView">
         <source>Event single view</source>
         <target state="needs-translation">Event single view</target>
@@ -2339,6 +2343,10 @@ This event now has been confirmed.</target>
         <source>room</source>
         <target state="needs-translation">room</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
+        <source>vacancies</source>
+        <target state="needs-translation">vacancies</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description">
         <source>description</source>
         <target state="needs-translation">description</target>
@@ -2358,6 +2366,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.events.property.room">
         <source>Room</source>
         <target state="needs-translation">Room</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies">
+        <source>Vacancies</source>
+        <target state="needs-translation">Vacancies</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
+        <source>fully booked</source>
+        <target state="needs-translation">fully booked</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
+        <source>unlimited</source>
+        <target state="needs-translation">unlimited</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.venue">
         <source>Venue</source>
