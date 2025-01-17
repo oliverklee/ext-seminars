@@ -2309,6 +2309,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>full</source>
         <target state="final">voll</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
+        <source>∞</source>
+        <target state="needs-translation">∞</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
         <target state="final">Veranstaltungs-Einzelansicht</target>
@@ -2341,6 +2345,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>room</source>
         <target state="final">Raum</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
+        <source>vacancies</source>
+        <target state="needs-translation">vacancies</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.description" approved="yes">
         <source>description</source>
         <target state="final">Beschreibung</target>
@@ -2360,6 +2368,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
         <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies">
+        <source>Vacancies</source>
+        <target state="needs-translation">Vacancies</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.fullyBooked">
+        <source>fully booked</source>
+        <target state="needs-translation">fully booked</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.vacancies.unlimited">
+        <source>unlimited</source>
+        <target state="needs-translation">unlimited</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.venue" approved="yes">
         <source>Venue</source>
