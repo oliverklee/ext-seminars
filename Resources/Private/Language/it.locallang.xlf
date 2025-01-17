@@ -2351,6 +2351,10 @@ This event now has been confirmed.</target>
         <source>description</source>
         <target state="needs-translation">description</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
+        <source>speakers</source>
+        <target state="needs-translation">speakers</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
         <source>Date and time</source>
         <target state="needs-translation">Date and time</target>
@@ -2382,6 +2386,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.events.property.venue">
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.one">
+        <source>Speaker</source>
+        <target state="needs-translation">Speaker</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.many">
+        <source>Speakers</source>
+        <target state="needs-translation">Speakers</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
+        <source>Homepage</source>
+        <target state="needs-translation">Homepage</target>
       </trans-unit>
     </body>
   </file>
