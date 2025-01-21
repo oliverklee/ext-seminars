@@ -20,8 +20,8 @@
                                 <internal_type>db</internal_type>
                                 <allowed>pages</allowed>
                                 <size>1</size>
-                                <maxitems>1</maxitems>
                                 <minitems>1</minitems>
+                                <maxitems>1</maxitems>
                             </config>
                         </TCEforms>
                     </settings.singleViewPage>
@@ -35,8 +35,8 @@
                                 <internal_type>db</internal_type>
                                 <allowed>pages</allowed>
                                 <size>3</size>
-                                <maxitems>99</maxitems>
                                 <minitems>1</minitems>
+                                <maxitems>99</maxitems>
                             </config>
                         </TCEforms>
                     </persistence.storagePid>
@@ -70,8 +70,8 @@
                                         <numIndex index="1">4</numIndex>
                                     </numIndex>
                                 </items>
-                                <minitems>0</minitems>
                                 <maxitems>1</maxitems>
+                                <minitems>0</minitems>
                                 <size>1</size>
                             </config>
                         </TCEforms>

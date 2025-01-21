@@ -64,8 +64,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</listPID>
@@ -78,8 +78,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</detailPID>
@@ -92,8 +92,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</myEventsPID>
@@ -106,8 +106,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</registerPID>
@@ -120,8 +120,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</loginPID>
@@ -134,8 +134,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</registrationsListPID>
@@ -148,8 +148,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</registrationsVipListPID>
@@ -170,8 +170,8 @@
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
 								<size>3</size>
-								<maxitems>99</maxitems>
 								<minitems>0</minitems>
+								<maxitems>99</maxitems>
 							</config>
 						</TCEforms>
 					</pages>
@@ -424,8 +424,8 @@
 								<internal_type>db</internal_type>
 								<allowed>tx_seminars_seminars</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</showSingleEvent>
@@ -487,8 +487,8 @@
 								<internal_type>db</internal_type>
 								<allowed>fe_groups</allowed>
 								<size>1</size>
-								<maxitems>1</maxitems>
 								<minitems>0</minitems>
+								<maxitems>1</maxitems>
 							</config>
 						</TCEforms>
 					</defaultEventVipsFeGroupID>
