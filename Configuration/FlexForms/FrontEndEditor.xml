@@ -24,6 +24,7 @@
                                 <size>1</size>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
                             </config>
                         </TCEforms>
                     </settings.folderForCreatedEvents>

@@ -66,6 +66,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</listPID>
@@ -80,6 +81,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</detailPID>
@@ -94,6 +96,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</myEventsPID>
@@ -108,6 +111,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</registerPID>
@@ -122,6 +126,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</loginPID>
@@ -136,6 +141,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</registrationsListPID>
@@ -150,6 +156,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</registrationsVipListPID>
@@ -172,6 +179,7 @@
 								<size>3</size>
 								<minitems>0</minitems>
 								<maxitems>99</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</pages>
@@ -426,6 +434,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</showSingleEvent>
@@ -489,6 +498,7 @@
 								<size>1</size>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
 							</config>
 						</TCEforms>
 					</defaultEventVipsFeGroupID>
