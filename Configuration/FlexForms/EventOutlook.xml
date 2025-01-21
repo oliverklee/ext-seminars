@@ -26,6 +26,22 @@
                             </config>
                         </TCEforms>
                     </settings.singleViewPage>
+                    <settings.registrationPage>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.pagesAndFolders.registrationPage
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <minitems>0</minitems>
+                                <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
+                            </config>
+                        </TCEforms>
+                    </settings.registrationPage>
                     <persistence.storagePid>
                         <TCEforms>
                             <label>
@@ -97,7 +113,7 @@
                                 <renderType>selectCheckBox</renderType>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
-                                <default>date,topic,city,vacancies</default>
+                                <default>date,topic,city,vacancies,registration</default>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
@@ -134,6 +150,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.displayOptions.columns.vacancies
                                         </numIndex>
                                         <numIndex index="1">vacancies</numIndex>
+                                    </numIndex>
+                                    <numIndex index="6" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventOutlook.settings.displayOptions.columns.registration
+                                        </numIndex>
+                                        <numIndex index="1">registration</numIndex>
                                     </numIndex>
                                 </items>
                             </config>

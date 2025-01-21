@@ -637,6 +637,116 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function outlookActionForEventWithOneVacancyRendersLinkToRegistrationForEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;tx_seminars_eventregistration%5Bevent%5D=1';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForEventWithOneVacancyRendersRegistrationLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate(
+            'plugin.eventOutlook.events.property.registration.register',
+            'seminars'
+        );
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForFutureEventWithNoVacanciesAndWaitingListRendersLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;tx_seminars_eventregistration%5Bevent%5D=1';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForFutureEventWithNoVacanciesAndWaitingListRendersWaitingListLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate(
+            'plugin.eventOutlook.events.property.registration.waitingList',
+            'seminars'
+        );
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForFutureEventWithNoVacanciesAndNoWaitingListDoesNotRenderLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithNoVacancies.csv');
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('href="/registration', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function outlookActionForFutureEventWithVacanciesAndDeadlineOverDoesNotRenderLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/outlookAction/EventOutlookContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/outlookAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('href="/registration', $html);
+    }
+
+    /**
+     * @test
+     */
     public function showActionRendersTitleOfFutureSingleEvent(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');

@@ -376,4 +376,44 @@ final class EventStatisticsTest extends UnitTestCase
 
         self::assertFalse($subject->hasWaitingListVacancies());
     }
+
+    /**
+     * @test
+     */
+    public function hasAnyVacanciesForNoLimitReturnsTrue(): void
+    {
+        $subject = new EventStatistics(5, 6, 0, 0, 0, false);
+
+        self::assertTrue($subject->hasAnyVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyVacanciesForOneVacancyReturnsTrue(): void
+    {
+        $subject = new EventStatistics(5, 4, 0, 0, 10, false);
+
+        self::assertTrue($subject->hasAnyVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyVacanciesForFullyBookedWithoutWaitingListReturnsFalse(): void
+    {
+        $subject = new EventStatistics(5, 5, 0, 0, 10, false);
+
+        self::assertFalse($subject->hasAnyVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyVacanciesForFullyBookedWithWaitingListReturnsTrue(): void
+    {
+        $subject = new EventStatistics(5, 5, 0, 0, 10, true);
+
+        self::assertTrue($subject->hasAnyVacancies());
+    }
 }

@@ -149,6 +149,14 @@ class EventStatistics
         return $this->waitingList && !$this->hasRegularVacancies();
     }
 
+    /**
+     * Checks if either any  regular or any waiting list vacancies are available.
+     */
+    public function hasAnyVacancies(): bool
+    {
+        return $this->hasRegularVacancies() || $this->hasWaitingListVacancies();
+    }
+
     public function isFullyBooked(): bool
     {
         return $this->getVacancies() === 0;

@@ -14,12 +14,15 @@
                                                                         <field index=""settings.singleViewPage"">
                                                                             <value index=""vDEF"">3</value>
                                                                         </field>
+                                                                        <field index=""settings.registrationPage"">
+                                                                            <value index=""vDEF"">6</value>
+                                                                        </field>
                                                                      </language>
                                                                  </sheet>
                                                                  <sheet index=""displayOptions"">
                                                                      <language index=""lDEF"">
                                                                         <field index=""settings.fieldsToShow"">
-                                                                            <value index=""vDEF"">date,eventType,topic,city,venue,vacancies</value>
+                                                                            <value index=""vDEF"">date,eventType,topic,city,venue,vacancies,registration</value>
                                                                         </field>
                                                                     </language>
                                                                 </sheet>
