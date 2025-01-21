@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Make the flexforms more compact (#4071)
 - Rename and flip `EventStatistics.hasSeatsLimit` (#4047)
 - Rename `Event.allowsUnlimitedRegistrations` (#4046)
 - Allow `typo3fluid/fluid:^4.0` (#4041)

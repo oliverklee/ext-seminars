@@ -22,6 +22,7 @@
                                 <size>1</size>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
+                                <hideSuggest>1</hideSuggest>
                             </config>
                         </TCEforms>
                     </settings.singleViewPage>
@@ -37,6 +38,7 @@
                                 <size>3</size>
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
+                                <hideSuggest>1</hideSuggest>
                             </config>
                         </TCEforms>
                     </persistence.storagePid>
