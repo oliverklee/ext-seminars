@@ -647,7 +647,8 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
-            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;tx_seminars_eventregistration%5Bevent%5D=1';
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;'
+            . 'tx_seminars_eventregistration%5Bevent%5D=1';
         self::assertStringContainsString($expected, $html);
     }
 
@@ -686,7 +687,8 @@ final class EventControllerTest extends FunctionalTestCase
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
         $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
-            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;tx_seminars_eventregistration%5Bevent%5D=1';
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;'
+            . 'tx_seminars_eventregistration%5Bevent%5D=1';
         self::assertStringContainsString($expected, $html);
     }
 
