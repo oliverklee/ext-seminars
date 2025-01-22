@@ -118,6 +118,7 @@ trait EventDateTrait
     /**
      * @var EventStatistics|null
      * @TYPO3\CMS\Extbase\Annotation\ORM\Transient
+     * @internal
      */
     protected $statistics;
 
@@ -432,11 +433,17 @@ trait EventDateTrait
         return $this->isRegistrationRequired() && $this->getMaximumNumberOfRegistrations() === 0;
     }
 
+    /**
+     * @internal
+     */
     public function getStatistics(): ?EventStatistics
     {
         return $this->statistics;
     }
 
+    /**
+     * @internal
+     */
     public function setStatistics(EventStatistics $statistics): void
     {
         $this->statistics = $statistics;
