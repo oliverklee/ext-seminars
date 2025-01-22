@@ -135,6 +135,9 @@ interface EventDateInterface
      */
     public function getAllPrices(): array;
 
+    /**
+     * @internal
+     */
     public function setStatistics(EventStatistics $statistics): void;
 
     /**

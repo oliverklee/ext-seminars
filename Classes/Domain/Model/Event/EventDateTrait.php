@@ -104,6 +104,8 @@ trait EventDateTrait
 
     /**
      * @Transient
+     *
+     * @internal
      */
     protected ?EventStatistics $statistics = null;
 
@@ -476,11 +478,17 @@ trait EventDateTrait
         $this->registrationCheckboxes = $registrationCheckboxes;
     }
 
+    /**
+     * @internal
+     */
     public function getStatistics(): ?EventStatistics
     {
         return $this->statistics;
     }
 
+    /**
+     * @internal
+     */
     public function setStatistics(EventStatistics $statistics): void
     {
         $this->statistics = $statistics;

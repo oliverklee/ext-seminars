@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Make the event statistics internal (#4074)
 - Add more properties to the `Speaker` model (#4067)
 - Add `Event.isMultiDay()` (#4059)
 - Add more getters and setters to the `Event` model (#4050, #4051)
