@@ -34,6 +34,8 @@ class EventStatistics
      */
     private int $seatsLimit;
 
+    private bool $waitingList;
+
     /**
      * @param int<0, max> $regularSeatsCountFromRegistrations
      * @param int<0, max> $offlineRegistrationsCount
@@ -46,13 +48,15 @@ class EventStatistics
         int $offlineRegistrationsCount,
         int $waitingListSeatsCount,
         int $minimumRequiredSeats,
-        int $seatsLimit
+        int $seatsLimit,
+        bool $waitingList
     ) {
         $this->regularSeatsCountFromRegistrations = $regularSeatsCountFromRegistrations;
         $this->offlineRegistrationsCount = $offlineRegistrationsCount;
         $this->waitingListSeatsCount = $waitingListSeatsCount;
         $this->minimumRequiredSeats = $minimumRequiredSeats;
         $this->seatsLimit = $seatsLimit;
+        $this->waitingList = $waitingList;
     }
 
     /**
@@ -119,6 +123,28 @@ class EventStatistics
         }
 
         return \max(0, $this->getSeatsLimit() - $this->getRegularSeatsCount());
+    }
+
+    /**
+     * Checks whether the event has regular vacancies left (not taking the waiting list into account).
+     */
+    public function hasRegularVacancies(): bool
+    {
+        if ($this->hasUnlimitedSeats()) {
+            return true;
+        }
+
+        $vacancies = $this->getVacancies();
+
+        return \is_int($vacancies) && $vacancies > 0;
+    }
+
+    /**
+     * Checks whether the event has an open waiting list. This will only be the case if all regular seats are taken.
+     */
+    public function hasWaitingListVacancies(): bool
+    {
+        return $this->waitingList && !$this->hasRegularVacancies();
     }
 
     public function isFullyBooked(): bool

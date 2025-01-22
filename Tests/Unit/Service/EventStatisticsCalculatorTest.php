@@ -257,4 +257,179 @@ final class EventStatisticsCalculatorTest extends UnitTestCase
         self::assertInstanceOf(EventStatistics::class, $statistics);
         self::assertSame($waitingListSeats, $statistics->getWaitingListSeatsCount());
     }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForEventWithUnlimitedSeatsMakesRegularVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(0);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertTrue($statistics->hasRegularVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForEventWithAvailableLimitedSeatsMakesRegularVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertTrue($statistics->hasRegularVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForFullyBookedEventWithoutWaitingSetsNoRegularVacancies(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setNumberOfOfflineRegistrations(5);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasRegularVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForFullyBookedEventWithWaitingSetsNoRegularVacancies(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setNumberOfOfflineRegistrations(5);
+        $event->setWaitingList(true);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasRegularVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForEventWithUnlimitedSeatsMakesNoWaitingListVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(0);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasWaitingListVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForEventWithAvailableLimitedSeatsMakesNoWaitingListVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasWaitingListVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForEventWithVacanciesAndWaitingListMakesNoWaitingListVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setWaitingList(true);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasWaitingListVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForFullyBookedEventWithoutWaitingMakesNoWaitingListVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setNumberOfOfflineRegistrations(5);
+        $event->setWaitingList(false);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertFalse($statistics->hasWaitingListVacancies());
+    }
+
+    /**
+     * @test
+     */
+    public function enrichWithStatisticsForFullyBookedEventWithWaitingSMakesWaitingListVacanciesAvailable(): void
+    {
+        $eventUid = 9;
+        $event = $this->getMockBuilder(SingleEvent::class)->onlyMethods(['getUid'])->getMock();
+        $event->method('getUid')->willReturn($eventUid);
+        $event->setRegistrationRequired(true);
+        $event->setMaximumNumberOfRegistrations(5);
+        $event->setNumberOfOfflineRegistrations(5);
+        $event->setWaitingList(true);
+
+        $this->subject->enrichWithStatistics($event);
+
+        $statistics = $event->getStatistics();
+        self::assertInstanceOf(EventStatistics::class, $statistics);
+        self::assertTrue($statistics->hasWaitingListVacancies());
+    }
 }
