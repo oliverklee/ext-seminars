@@ -2440,12 +2440,12 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.register">
-        <source>Register for this event</source>
-        <target state="needs-translation">Register for this event</target>
+        <source>register for this event</source>
+        <target state="needs-translation">register for this event</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
-        <source>Register for the waiting list</source>
-        <target state="needs-translation">Register for the waiting list</target>
+        <source>register for the waiting list</source>
+        <target state="needs-translation">register for the waiting list</target>
       </trans-unit>
     </body>
   </file>
