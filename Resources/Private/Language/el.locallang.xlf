@@ -2243,6 +2243,10 @@ This event now has been confirmed.</target>
         <source>Page with the single view</source>
         <target state="needs-translation">Page with the single view</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+        <target state="needs-translation">Page with the event registration form</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
@@ -2274,6 +2278,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
         <source>vacancies</source>
         <target state="needs-translation">vacancies</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
+        <source>registration</source>
+        <target state="needs-translation">registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound">
         <source>No events found.</source>
@@ -2310,6 +2318,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
         <source>∞</source>
         <target state="needs-translation">∞</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.register">
+        <source>register</source>
+        <target state="needs-translation">register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView">
         <source>Event single view</source>
