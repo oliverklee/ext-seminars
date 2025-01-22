@@ -2441,13 +2441,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Registration</source>
         <target state="final">Anmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.registration.register">
+      <trans-unit id="plugin.eventSingleView.events.property.registration.register" approved="yes">
         <source>register for this event</source>
-        <target state="needs-translation">register for this event</target>
+        <target state="final">zu dieser Veranstaltung anmelden</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
+      <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList" approved="yes">
         <source>register for the waiting list</source>
-        <target state="needs-translation">register for the waiting list</target>
+        <target state="final">auf die Warteliste eintragen</target>
       </trans-unit>
     </body>
   </file>
