@@ -1740,6 +1740,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.tab.pagesAndFolders">
+				<source>Pages and folders</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.pagesAndFolders.registrationPage">
+				<source>Page with the event registration form</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
@@ -1751,6 +1757,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
 				<source>event type</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationTop">
+				<source>registration link (top)</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
 				<source>date and time</source>
@@ -1769,6 +1778,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
 				<source>speakers</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationBottom">
+				<source>registration link (bottom)</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
 				<source>Date and time</source>
@@ -1802,6 +1814,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
 				<source>Homepage</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.registration">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.registration.register">
+				<source>Register for this event</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
+				<source>Register for the waiting list</source>
 			</trans-unit>
 		</body>
 	</file>
