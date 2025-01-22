@@ -2245,6 +2245,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Page with the single view</source>
         <target state="final">Seite mit der Einzelansicht</target>
       </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+        <target state="needs-translation">Page with the event registration form</target>
+      </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
         <target state="final">Anzeigeoptionen</target>
@@ -2276,6 +2280,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies" approved="yes">
         <source>vacancies</source>
         <target state="final">freie Plätze</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
+        <source>registration</source>
+        <target state="needs-translation">registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2312,6 +2320,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited" approved="yes">
         <source>∞</source>
         <target state="final">∞</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.register">
+        <source>register</source>
+        <target state="needs-translation">register</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
