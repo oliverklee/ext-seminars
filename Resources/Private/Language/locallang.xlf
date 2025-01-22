@@ -1819,10 +1819,10 @@ This event now has been confirmed.</source>
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.register">
-				<source>Register for this event</source>
+				<source>register for this event</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
-				<source>Register for the waiting list</source>
+				<source>register for the waiting list</source>
 			</trans-unit>
 		</body>
 	</file>
