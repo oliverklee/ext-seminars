@@ -1263,4 +1263,140 @@ final class EventControllerTest extends FunctionalTestCase
         self::assertIsString($expectedLabel);
         self::assertStringContainsString($expectedLabel, $html);
     }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithOneVacancyRendersLinkToRegistrationForEvent(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;'
+            . 'tx_seminars_eventregistration%5Bevent%5D=1';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithOneVacancyRendersRegistrationLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithOneVacancy.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.registration.register',
+            'seminars'
+        );
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForFutureEventWithNoVacanciesAndWaitingListRendersLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expected = 'href="/registration?tx_seminars_eventregistration%5Baction%5D=checkPrerequisites&amp;'
+            . 'tx_seminars_eventregistration%5Bcontroller%5D=EventRegistration&amp;'
+            . 'tx_seminars_eventregistration%5Bevent%5D=1';
+        self::assertStringContainsString($expected, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionCanHaveRegistrationLinkTwice(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertSame(2, \substr_count($html, 'href="/registration'));
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForFutureEventWithNoVacanciesAndWaitingListRendersWaitingListLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacanciesAndWaitingList.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        $expectedMessage = LocalizationUtility::translate(
+            'plugin.eventSingleView.events.property.registration.waitingList',
+            'seminars'
+        );
+        self::assertIsString($expectedMessage);
+        self::assertStringContainsString($expectedMessage, $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForFutureEventWithNoVacanciesAndNoWaitingListDoesNotRenderLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithNoVacancies.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('href="/registration', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForFutureEventWithVacanciesAndDeadlineOverDoesNotRenderLinkToRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('href="/registration', $html);
+    }
 }
