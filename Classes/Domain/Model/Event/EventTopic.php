@@ -17,6 +17,9 @@ class EventTopic extends Event implements EventTopicInterface
         $this->initializeEventTopic();
     }
 
+    /**
+     * @internal
+     */
     public function getStatistics(): ?EventStatistics
     {
         return null;

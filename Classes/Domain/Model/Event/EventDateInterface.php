@@ -120,6 +120,9 @@ interface EventDateInterface
 
     public function allowsUnlimitedRegistrations(): bool;
 
+    /**
+     * @internal
+     */
     public function setStatistics(EventStatistics $statistics): void;
 
     /**
