@@ -2245,9 +2245,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Page with the single view</source>
         <target state="final">Seite mit der Einzelansicht</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
+      <trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage" approved="yes">
         <source>Page with the event registration form</source>
-        <target state="needs-translation">Page with the event registration form</target>
+        <target state="final">Seite mit dem Formular zur Veranstaltungsanmeldung</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
@@ -2281,9 +2281,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>vacancies</source>
         <target state="final">freie Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
+      <trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration" approved="yes">
         <source>registration</source>
-        <target state="needs-translation">registration</target>
+        <target state="final">Anmeldung</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.message.noEventsFound" approved="yes">
         <source>No events found.</source>
@@ -2321,21 +2321,29 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>∞</source>
         <target state="final">∞</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.registration">
+      <trans-unit id="plugin.eventOutlook.events.property.registration" approved="yes">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="final">Anmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.registration.register">
+      <trans-unit id="plugin.eventOutlook.events.property.registration.register" approved="yes">
         <source>register</source>
-        <target state="needs-translation">register</target>
+        <target state="final">anmelden</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
+      <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList" approved="yes">
         <source>waiting list</source>
-        <target state="needs-translation">waiting list</target>
+        <target state="final">Warteliste</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView" approved="yes">
         <source>Event single view</source>
         <target state="final">Veranstaltungs-Einzelansicht</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+        <target state="needs-translation">Page with the event registration form</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions" approved="yes">
         <source>Display options</source>
@@ -2352,6 +2360,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType" approved="yes">
         <source>event type</source>
         <target state="final">Veranstaltungsart</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationTop">
+        <source>registration link (top)</source>
+        <target state="needs-translation">registration link (top)</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime" approved="yes">
         <source>date and time</source>
@@ -2376,6 +2388,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers" approved="yes">
         <source>speakers</source>
         <target state="final">Referent_innen</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationBottom">
+        <source>registration link (bottom)</source>
+        <target state="needs-translation">registration link (bottom)</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.dateAndTime" approved="yes">
         <source>Date and time</source>
@@ -2420,6 +2436,18 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage" approved="yes">
         <source>Homepage</source>
         <target state="final">Homepage</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.register">
+        <source>Register for this event</source>
+        <target state="needs-translation">Register for this event</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
+        <source>Register for the waiting list</source>
+        <target state="needs-translation">Register for the waiting list</target>
       </trans-unit>
     </body>
   </file>
