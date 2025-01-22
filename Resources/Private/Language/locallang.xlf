@@ -1671,6 +1671,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.singleViewPage">
 				<source>Page with the single view</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.pagesAndFolders.registrationPage">
+				<source>Page with the event registration form</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.tab.displayOptions">
 				<source>Display options</source>
 			</trans-unit>
@@ -1694,6 +1697,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.vacancies">
 				<source>vacancies</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.settings.displayOptions.columns.registration">
+				<source>registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.message.noEventsFound">
 				<source>No events found.</source>
@@ -1721,6 +1727,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.vacancies.unlimited">
 				<source>∞</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.registration">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.registration.register">
+				<source>register</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
+				<source>waiting list</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView">
 				<source>Event single view</source>

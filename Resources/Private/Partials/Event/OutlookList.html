@@ -33,6 +33,11 @@
                         <f:translate key="plugin.eventOutlook.events.property.vacancies"/>
                     </th>
                 </oelib:isFieldEnabled>
+                <oelib:isFieldEnabled fieldName="registration">
+                    <th scope="col">
+                        <f:translate key="plugin.eventOutlook.events.property.registration"/>
+                    </th>
+                </oelib:isFieldEnabled>
             </tr>
         </thead>
         <tbody>
@@ -75,6 +80,28 @@
                     <oelib:isFieldEnabled fieldName="vacancies">
                         <td class="text-end">
                             <f:render partial="Event/Vacancies" arguments="{event: event, viewName: 'eventOutlook'}"/>
+                        </td>
+                    </oelib:isFieldEnabled>
+                    <oelib:isFieldEnabled fieldName="registration">
+                        <td>
+                            <f:if condition="({settings.registrationPage} && {event.registrationRequired}">
+                                <f:variable name="statistics" value="{event.statistics}"/>
+                                <f:if condition="({event.registrationPossibleByDate} && {statistics.anyVacancies})">
+                                    <f:link.action controller="EventRegistration" action="checkPrerequisites"
+                                                   pageUid="{settings.registrationPage}" arguments="{event: event}">
+                                        <f:if condition="{statistics.regularVacancies}">
+                                            <f:then>
+                                                <f:translate
+                                                    key="plugin.eventOutlook.events.property.registration.register"/>
+                                            </f:then>
+                                            <f:else>
+                                                <f:translate
+                                                    key="plugin.eventOutlook.events.property.registration.waitingList"/>
+                                            </f:else>
+                                        </f:if>
+                                    </f:link.action>
+                                </f:if>
+                            </f:if>
                         </td>
                     </oelib:isFieldEnabled>
                 </tr>
