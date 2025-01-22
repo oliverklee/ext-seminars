@@ -2335,6 +2335,14 @@ This event now has been confirmed.</target>
         <source>Event single view</source>
         <target state="needs-translation">Event single view</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.tab.pagesAndFolders">
+        <source>Pages and folders</source>
+        <target state="needs-translation">Pages and folders</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.pagesAndFolders.registrationPage">
+        <source>Page with the event registration form</source>
+        <target state="needs-translation">Page with the event registration form</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.tab.displayOptions">
         <source>Display options</source>
         <target state="needs-translation">Display options</target>
@@ -2350,6 +2358,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.eventType">
         <source>event type</source>
         <target state="needs-translation">event type</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationTop">
+        <source>registration link (top)</source>
+        <target state="needs-translation">registration link (top)</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.dateAndTime">
         <source>date and time</source>
@@ -2374,6 +2386,10 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.speakers">
         <source>speakers</source>
         <target state="needs-translation">speakers</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.registrationBottom">
+        <source>registration link (bottom)</source>
+        <target state="needs-translation">registration link (bottom)</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.dateAndTime">
         <source>Date and time</source>
@@ -2418,6 +2434,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventSingleView.events.property.speakers.homepage">
         <source>Homepage</source>
         <target state="needs-translation">Homepage</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.register">
+        <source>Register for this event</source>
+        <target state="needs-translation">Register for this event</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
+        <source>Register for the waiting list</source>
+        <target state="needs-translation">Register for the waiting list</target>
       </trans-unit>
     </body>
   </file>
