@@ -904,8 +904,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
-        self::assertStringContainsString('2024-11-02', $html);
-        self::assertStringContainsString('09:00', $html);
+        self::assertStringContainsString('2024-11-02 09:00', $html);
     }
 
     /**
@@ -921,8 +920,7 @@ final class EventControllerTest extends FunctionalTestCase
 
         $html = (string)$this->executeFrontendSubRequest($request)->getBody();
 
-        self::assertStringContainsString('2024-11-03', $html);
-        self::assertStringContainsString('17:00', $html);
+        self::assertStringContainsString('2024-11-03 17:00', $html);
     }
 
     /**
