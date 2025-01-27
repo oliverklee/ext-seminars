@@ -40,6 +40,7 @@
                     <f:translate key="plugin.eventSingleView.events.property.dateAndTime"/>
                 </h3>
 
+                {f:translate(key: 'dateFormat') -> f:variable(name: 'dateFormat')}
                 {f:translate(key: 'timeFormat') -> f:variable(name: 'timeFormat')}
                 {event.start -> f:format.date(format: dateFormat) -> f:variable(name: 'startDate')}
                 {event.start -> f:format.date(format: timeFormat) -> f:variable(name: 'startTime')}
