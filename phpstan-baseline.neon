@@ -107,7 +107,7 @@ parameters:
 
 		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
-			count: 11
+			count: 10
 			path: Classes/BagBuilder/EventBagBuilder.php
 
 		-
@@ -1107,16 +1107,11 @@ parameters:
 
 		-
 			message: "#^Argument of an invalid type OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\<OliverKlee\\\\Seminars\\\\Model\\\\Place\\>\\|null supplied for foreach, only iterables are supported\\.$#"
-			count: 3
+			count: 2
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
 			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
-			message: "#^Cannot call method getIsoAlpha2Code\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
@@ -1136,11 +1131,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:getCountryData\\(\\) should return array\\<string\\> but returns array\\<bool\\|string\\>\\.$#"
-			count: 1
-			path: Classes/FrontEnd/SelectorWidget.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:removeDummyOptionFromFormData\\(\\) has parameter \\$formData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
@@ -1156,7 +1146,7 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'country'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'country'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
+			message: "#^Parameter \\#1 \\$name of method OliverKlee\\\\Seminars\\\\FrontEnd\\\\SelectorWidget\\:\\:createOptionBox\\(\\) expects 'city'\\|'event_type'\\|'language'\\|'places', 'categories'\\|'city'\\|'event_type'\\|'language'\\|'organizer'\\|'place' given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/SelectorWidget.php
 
@@ -1427,11 +1417,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$foreignTable of method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:getMmRecordTitlesByUid\\(\\) expects non\\-empty\\-string, string given\\.$#"
-			count: 1
-			path: Classes/OldModel/LegacyEvent.php
-
-		-
-			message: "#^Parameter \\#1 \\$isoCode of method OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\:\\:getCountryNameFromIsoCode\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: Classes/OldModel/LegacyEvent.php
 
@@ -2537,7 +2522,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUid\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyEvent\\|null\\.$#"
-			count: 42
+			count: 40
 			path: Tests/LegacyFunctional/BagBuilder/EventBagBuilderTest.php
 
 		-
@@ -2907,7 +2892,7 @@ parameters:
 
 		-
 			message: "#^Cannot access an offset on array\\|float\\|int\\|string\\.$#"
-			count: 14
+			count: 12
 			path: Tests/LegacyFunctional/FrontEnd/SelectorWidgetTest.php
 
 		-

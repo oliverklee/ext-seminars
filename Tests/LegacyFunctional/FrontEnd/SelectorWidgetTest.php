@@ -262,7 +262,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'event_type,language,country,city,place,full_text_search,date,' .
+            'event_type,language,city,place,full_text_search,date,' .
             'age,organizer,price'
         );
 
@@ -514,7 +514,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
                     'getLanguageData',
                     'getPlaceData',
                     'getCityData',
-                    'getCountryData',
                 ]
             )->setConstructorArgs(
                 [
@@ -535,8 +534,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
         $subject->method('getPlaceData')
             ->willReturn([]);
         $subject->method('getCityData')
-            ->willReturn([]);
-        $subject->method('getCountryData')
             ->willReturn([]);
 
         $output = $subject->render();
@@ -914,7 +911,7 @@ final class SelectorWidgetTest extends FunctionalTestCase
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
-            'country'
+            'language'
         );
 
         $this->subject->render();
@@ -1081,256 +1078,6 @@ final class SelectorWidgetTest extends FunctionalTestCase
         self::assertStringContainsString(
             '<option value="' . $cityTitle2 . '" selected="selected">' .
             $cityTitle2 . '</option>',
-            $output
-        );
-    }
-
-    /////////////////////////////////////////////////////////////
-    // Tests concerning the rendering of the country option box
-    /////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function renderForDisabledCountryOptionsHidesCountrySubpart(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'city'
-        );
-
-        $this->subject->render();
-
-        self::assertFalse(
-            $this->subject->isSubpartVisible('SEARCH_PART_COUNTRY')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForDisabledCountryOptionsDoesNotShowCountryOptionsMarker(): void
-    {
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'city'
-        );
-
-        self::assertStringNotContainsString(
-            '###OPTIONS_COUNTRY###',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledCountryOptionsCanContainCountryOption(): void
-    {
-        $this->instantiateStaticInfo();
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'country'
-        );
-
-        $countryIsoCode = 'DE';
-        $countryName = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode
-        );
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode]
-        );
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid,
-            $placeUid,
-            'place'
-        );
-
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode . '">' . $countryName .
-            '</option>',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledCountryOptionsCanContainMultipleCountryOptions(): void
-    {
-        $this->instantiateStaticInfo();
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'country'
-        );
-
-        $countryIsoCode1 = 'DE';
-        $countryName1 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode1
-        );
-        $countryIsoCode2 = 'GB';
-        $countryName2 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode2
-        );
-
-        $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode1]
-        );
-        $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid1,
-            $placeUid1,
-            'place'
-        );
-
-        $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode2]
-        );
-        $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid2,
-            $placeUid2,
-            'place'
-        );
-
-        $output = $this->subject->render();
-
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode1 . '">' . $countryName1 .
-            '</option>',
-            $output
-        );
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode2 . '">' . $countryName2 .
-            '</option>',
-            $output
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledCountryOptionsCanPreselectOneCountryOption(): void
-    {
-        $this->instantiateStaticInfo();
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'country'
-        );
-
-        $countryIsoCode = 'DE';
-        $countryName = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode
-        );
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode]
-        );
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid,
-            $placeUid,
-            'place'
-        );
-
-        $this->subject->piVars['country'][] = $countryIsoCode;
-
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode . '" selected="selected">' .
-            $countryName . '</option>',
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEnabledCountryOptionsCanPreselectMultipleCountryOptions(): void
-    {
-        $this->instantiateStaticInfo();
-        $this->subject->setConfigurationValue(
-            'displaySearchFormFields',
-            'country'
-        );
-
-        $countryIsoCode1 = 'DE';
-        $countryName1 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode1
-        );
-        $countryIsoCode2 = 'GB';
-        $countryName2 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES',
-            $countryIsoCode2
-        );
-
-        $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode1]
-        );
-        $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid1,
-            $placeUid1,
-            'place'
-        );
-
-        $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['country' => $countryIsoCode2]
-        );
-        $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars'
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $eventUid2,
-            $placeUid2,
-            'place'
-        );
-
-        $this->subject->piVars['country'][] = $countryIsoCode1;
-        $this->subject->piVars['country'][] = $countryIsoCode2;
-
-        $output = $this->subject->render();
-
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode1 . '" selected="selected">' .
-            $countryName1 . '</option>',
-            $output
-        );
-        self::assertStringContainsString(
-            '<option value="' . $countryIsoCode2 . '" selected="selected">' .
-            $countryName2 . '</option>',
             $output
         );
     }
