@@ -86,7 +86,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheBaseModel(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -107,7 +107,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheAttendeesTrait(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -123,7 +123,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheBillingAddressTrait(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -143,7 +143,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromThePaymentTrait(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -842,7 +842,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function enrichWithRawDataAddsRawDataToRegistrations(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
         $registration = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $registration);
         $registrations = [$registration];
