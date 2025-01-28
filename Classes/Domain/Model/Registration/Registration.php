@@ -232,6 +232,11 @@ class Registration extends AbstractEntity implements RawDataInterface
         $this->onWaitingList = $onWaitingList;
     }
 
+    public function isRegularRegistration(): bool
+    {
+        return !$this->isOnWaitingList();
+    }
+
     public function getInterests(): string
     {
         return $this->interests;

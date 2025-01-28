@@ -228,11 +228,39 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOnWaitingListSetsOnWaitingList(): void
+    public function setOnWaitingListCanSetOnWaitingListToTrue(): void
     {
         $this->subject->setOnWaitingList(true);
 
         self::assertTrue($this->subject->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function isRegularRegistrationInitiallyReturnsTrue(): void
+    {
+        self::assertTrue($this->subject->isRegularRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function isRegularRegistrationForRegularRegistrationReturnsTrue(): void
+    {
+        $this->subject->setOnWaitingList(false);
+
+        self::assertTrue($this->subject->isRegularRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function isRegularRegistrationForRegistrationOnWaitingListReturnsFalse(): void
+    {
+        $this->subject->setOnWaitingList(true);
+
+        self::assertFalse($this->subject->isRegularRegistration());
     }
 
     /**
