@@ -73,6 +73,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Drop the dedicated ZIP code and country fields from venues (#4087)
 - Improve some type annotations (#4014)
 - Drop the `strftime` date and time format configuration (#3990)
 - Drop the unused `AbstractModel::addMissingProtocolToUrl()` (#3972)
