@@ -467,6 +467,18 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function countRegularRegistrationsByPageUidIgnoresNonbindingReservationsOnTheGivenPage(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/countRegularRegistrationsByPageUid/NonbindingReservationOnPage.csv'
+        );
+
+        self::assertSame(0, $this->subject->countRegularRegistrationsByPageUid(1));
+    }
+
+    /**
+     * @test
+     */
     public function countRegularRegistrationsByPageUidIgnoresHiddenRegistrationsOnTheGivenPage(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/countRegularRegistrationsByPageUid/HiddenRegistrationOnPage.csv');

@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration as ExtbaseRegistration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Model\Place;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -215,7 +216,7 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function calculateStatisticsTakesNewRegistrationRecordsIntoAccount(): void
+    public function calculateStatisticsTakesRegularRegistrationRecordsIntoAccount(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -224,10 +225,62 @@ final class LegacyEventTest extends FunctionalTestCase
         self::assertSame(3, $subject->getAttendances());
 
         GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
-            ->insert('tx_seminars_attendances', ['seminar' => $eventUid, 'seats' => 2]);
+            ->insert(
+                'tx_seminars_attendances',
+                ['seminar' => $eventUid, 'seats' => 2, 'registration_queue' => ExtbaseRegistration::STATUS_REGULAR]
+            );
         $subject->calculateStatistics();
 
         self::assertSame(5, $subject->getAttendances());
+        self::assertSame(0, $subject->getAttendancesOnRegistrationQueue());
+    }
+
+    /**
+     * @test
+     */
+    public function calculateStatisticsTakesWaitingListRegistrationsIntoAccount(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        $eventUid = 4;
+        $subject = TestingLegacyEvent::fromUid($eventUid);
+        self::assertSame(3, $subject->getAttendances());
+
+        GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
+            ->insert(
+                'tx_seminars_attendances',
+                ['seminar' => $eventUid, 'seats' => 1, 'registration_queue' => ExtbaseRegistration::STATUS_WAITING_LIST]
+            );
+        $subject->calculateStatistics();
+
+        self::assertSame(3, $subject->getAttendances());
+        self::assertSame(1, $subject->getAttendancesOnRegistrationQueue());
+    }
+
+    /**
+     * @test
+     */
+    public function calculateStatisticsIgnoresNonbindingReservations(): void
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        $eventUid = 4;
+        $subject = TestingLegacyEvent::fromUid($eventUid);
+        self::assertSame(3, $subject->getAttendances());
+
+        GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_seminars_attendances')
+            ->insert(
+                'tx_seminars_attendances',
+                [
+                    'seminar' => $eventUid,
+                    'seats' => 1,
+                    'registration_queue' => ExtbaseRegistration::STATUS_NONBINDING_RESERVATION,
+                ]
+            );
+        $subject->calculateStatistics();
+
+        self::assertSame(3, $subject->getAttendances());
+        self::assertSame(0, $subject->getAttendancesOnRegistrationQueue());
     }
 
     /**

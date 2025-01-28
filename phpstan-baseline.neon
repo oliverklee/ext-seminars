@@ -256,7 +256,7 @@ parameters:
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findByEventAndWaitingListStatus\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Repository\\\\Registration\\\\RegistrationRepository\\:\\:findByEventAndStatus\\(\\) should return list\\<OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\> but returns array\\<int, OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\>\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/Registration/RegistrationRepository.php
 
@@ -1937,7 +1937,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method calculateStatistics\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 2
+			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
@@ -1952,7 +1952,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getAttendances\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 9
+			count: 13
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-
@@ -1967,7 +1967,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getAttendancesOnRegistrationQueue\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 1
+			count: 4
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-

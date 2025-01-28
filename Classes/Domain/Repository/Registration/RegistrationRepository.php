@@ -64,7 +64,11 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
     {
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->getTableName());
 
-        $count = $connection->count('*', $this->getTableName(), ['pid' => $pageUid, 'registration_queue' => 0]);
+        $count = $connection->count(
+            '*',
+            $this->getTableName(),
+            ['pid' => $pageUid, 'registration_queue' => Registration::STATUS_REGULAR]
+        );
         \assert($count >= 0);
 
         return $count;
@@ -81,7 +85,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      */
     public function countRegularSeatsByEvent(int $eventUid): int
     {
-        return $this->countSeatsByEvent($eventUid, false);
+        return $this->countSeatsByEvent($eventUid, Registration::STATUS_REGULAR);
     }
 
     /**
@@ -95,7 +99,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      */
     public function countWaitingListSeatsByEvent(int $eventUid): int
     {
-        return $this->countSeatsByEvent($eventUid, true);
+        return $this->countSeatsByEvent($eventUid, Registration::STATUS_WAITING_LIST);
     }
 
     /**
@@ -104,11 +108,11 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      * Registrations with 0 seats will be ignored.
      *
      * @param positive-int $eventUid
-     * @param bool $onWaitingList whether to count waiting list or regular registrations
+     * @param Registration::STATUS_* $status
      *
      * @return int<0, max>
      */
-    private function countSeatsByEvent(int $eventUid, bool $onWaitingList): int
+    private function countSeatsByEvent(int $eventUid, int $status): int
     {
         $tableName = $this->getTableName();
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
@@ -121,7 +125,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
                 ),
                 $queryBuilder->expr()->eq(
                     'registration_queue',
-                    $queryBuilder->createNamedParameter((int)$onWaitingList, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($status, Connection::PARAM_INT)
                 )
             );
         $queryResult = $query->executeQuery();
@@ -136,7 +140,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      */
     public function findRegularRegistrationsByEvent(int $eventUid): array
     {
-        return $this->findByEventAndWaitingListStatus($eventUid, false);
+        return $this->findByEventAndStatus($eventUid, Registration::STATUS_REGULAR);
     }
 
     /**
@@ -146,15 +150,16 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
      */
     public function findWaitingListRegistrationsByEvent(int $eventUid): array
     {
-        return $this->findByEventAndWaitingListStatus($eventUid, true);
+        return $this->findByEventAndStatus($eventUid, Registration::STATUS_WAITING_LIST);
     }
 
     /**
      * @param positive-int $eventUid
+     * @param Registration::STATUS_* $status
      *
      * @return list<Registration>
      */
-    private function findByEventAndWaitingListStatus(int $eventUid, bool $onWaitingList): array
+    private function findByEventAndStatus(int $eventUid, int $status): array
     {
         $query = $this->createQuery();
         $query->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
@@ -166,7 +171,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $query->matching(
             $query->logicalAnd(
                 $query->equals('event', $eventUid),
-                $query->equals('onWaitingList', $onWaitingList)
+                $query->equals('onWaitingList', $status)
             )
         );
 

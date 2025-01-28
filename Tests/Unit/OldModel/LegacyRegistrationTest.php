@@ -95,6 +95,16 @@ final class LegacyRegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function isOnRegistrationQueueForNonbindingReservationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        self::assertFalse($this->subject->isOnRegistrationQueue());
+    }
+
+    /**
+     * @test
+     */
     public function getMethodOfPaymentUidInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getMethodOfPaymentUid());

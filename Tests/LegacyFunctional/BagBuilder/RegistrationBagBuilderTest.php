@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Context\Context;
@@ -183,11 +184,11 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToOnQueueFindsRegistrationOnQueue(): void
+    public function limitToOnQueueFindsWaitingListRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 1]
+            ['registration_queue' => Registration::STATUS_WAITING_LIST]
         );
         $this->subject->limitToOnQueue();
         /** @var LegacyRegistration $currentModel */
@@ -203,14 +204,27 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 0]
+            ['registration_queue' => Registration::STATUS_REGULAR]
         );
         $this->subject->limitToOnQueue();
         $registrationBag = $this->subject->build();
 
-        self::assertTrue(
-            $registrationBag->isEmpty()
+        self::assertTrue($registrationBag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToOnQueueIgnoresNonbindingReservation(): void
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION]
         );
+        $this->subject->limitToOnQueue();
+        $registrationBag = $this->subject->build();
+
+        self::assertTrue($registrationBag->isEmpty());
     }
 
     ///////////////////////////////
@@ -224,7 +238,7 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 0]
+            ['registration_queue' => Registration::STATUS_REGULAR]
         );
         $this->subject->limitToRegular();
         /** @var LegacyRegistration $currentModel */
@@ -236,18 +250,31 @@ final class RegistrationBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToRegularIgnoresRegistrationOnQueue(): void
+    public function limitToRegularIgnoresWaitingListRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['registration_queue' => 1]
+            ['registration_queue' => Registration::STATUS_WAITING_LIST]
         );
         $this->subject->limitToRegular();
         $registrationBag = $this->subject->build();
 
-        self::assertTrue(
-            $registrationBag->isEmpty()
+        self::assertTrue($registrationBag->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function limitToRegularIgnoresNonbindingReservation(): void
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['registration_queue' => Registration::STATUS_NONBINDING_RESERVATION]
         );
+        $this->subject->limitToRegular();
+        $registrationBag = $this->subject->build();
+
+        self::assertTrue($registrationBag->isEmpty());
     }
 
     //////////////////////////////////////
