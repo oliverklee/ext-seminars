@@ -1019,7 +1019,7 @@ class RegistrationManager implements SingletonInterface
      */
     private function formatPlace(Place $place, string $newline): string
     {
-        $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
+        $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getFullAddress())));
 
         return $place->getTitle() . $newline . $address;
     }
