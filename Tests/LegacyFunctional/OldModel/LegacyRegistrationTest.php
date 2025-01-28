@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\Support\LanguageHelper;
@@ -177,43 +178,38 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         self::assertTrue($this->subject->isOk());
     }
 
-    // Tests regarding the registration queue.
+    // Tests regarding the status.
 
     /**
      * @test
      */
-    public function statusIsInitiallyRegular(): void
+    public function getStatusInitiallyReturnsRegular(): void
     {
-        self::assertSame(
-            'regular',
-            $this->subject->getStatus()
-        );
+        self::assertSame('regular', $this->subject->getStatus());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::STATUS_*, 1: non-empty-string}>
+     */
+    public static function statusDataProvider(): array
+    {
+        return [
+            'regular' => [Registration::STATUS_REGULAR, 'regular'],
+            'waiting list' => [Registration::STATUS_WAITING_LIST, 'waiting list'],
+        ];
     }
 
     /**
      * @test
+     *
+     * @param Registration::STATUS_* $status
+     * @dataProvider statusDataProvider
      */
-    public function statusIsRegularIfNotOnQueue(): void
+    public function getStatusReturnsLabelForStatus(int $status, string $label): void
     {
-        $this->subject->setIsOnRegistrationQueue(false);
+        $this->subject->setStatus($status);
 
-        self::assertSame(
-            'regular',
-            $this->subject->getStatus()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function statusIsWaitingListIfOnQueue(): void
-    {
-        $this->subject->setIsOnRegistrationQueue(true);
-
-        self::assertSame(
-            'waiting list',
-            $this->subject->getStatus()
-        );
+        self::assertSame($label, $this->subject->getStatus());
     }
 
     // Tests regarding getting the registration data.

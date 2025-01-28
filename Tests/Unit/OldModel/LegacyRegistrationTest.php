@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -66,49 +67,29 @@ final class LegacyRegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOnRegistrationByDefaultReturnsFalse(): void
+    public function isOnRegistrationQueueByDefaultReturnsFalse(): void
     {
         self::assertFalse($this->subject->isOnRegistrationQueue());
-
-        $this->subject->setIsOnRegistrationQueue(true);
-        self::assertTrue(
-            $this->subject->isOnRegistrationQueue()
-        );
     }
 
     /**
      * @test
      */
-    public function isOnRegistrationReturnsRegistrationQueue(): void
+    public function isOnRegistrationQueueForRegularRegistrationReturnsFalse(): void
     {
-        $subject = LegacyRegistration::fromData(['registration_queue' => 1]);
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
 
-        self::assertTrue($subject->isOnRegistrationQueue());
-    }
-
-    /**
-     * @return bool[][]
-     */
-    public function booleanDataProvider(): array
-    {
-        return [
-            'false' => [false],
-            'true' => [true],
-        ];
+        self::assertFalse($this->subject->isOnRegistrationQueue());
     }
 
     /**
      * @test
-     *
-     * @param bool $value
-     *
-     * @dataProvider booleanDataProvider
      */
-    public function setIsOnRegistrationQueueSetsOnRegistrationQueue(bool $value): void
+    public function isOnRegistrationQueueForWaitingListRegistrationReturnsTrue(): void
     {
-        $this->subject->setIsOnRegistrationQueue($value);
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
 
-        self::assertSame($value, $this->subject->isOnRegistrationQueue());
+        self::assertTrue($this->subject->isOnRegistrationQueue());
     }
 
     /**
@@ -259,9 +240,18 @@ final class LegacyRegistrationTest extends UnitTestCase
     }
 
     /**
+     * @return array<string, array{0: bool}>
+     */
+    public function booleanDataProvider(): array
+    {
+        return [
+            'false' => [false],
+            'true' => [true],
+        ];
+    }
+
+    /**
      * @test
-     *
-     * @param bool $value
      *
      * @dataProvider booleanDataProvider
      */

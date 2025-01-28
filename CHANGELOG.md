@@ -30,7 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Make the registration status (regular/waiting list) a drop-down (#4091)
+- Make the registration status (regular/waiting list) a drop-down (#4091, #4092)
 - !!! Rename `Place::getAddress()` to `Place::getFullAddress()` (#4086)
 - !!! Assume that the venue address field contains the full address (#4085)
 - Make the flexforms more compact (#4071)
