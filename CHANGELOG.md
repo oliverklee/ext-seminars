@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Registration.attendanceMode` (#4088)
 - Make the event statistics internal (#4074)
 - Add more properties to the `Speaker` model (#4067)
 - Add `Event.isMultiDay()` (#4059)

@@ -929,4 +929,130 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertSame($rawData, $this->subject->getRawData());
     }
+
+    /**
+     * @test
+     */
+    public function getAttendanceModeInitiallyReturnsNotSet(): void
+    {
+        self::assertSame(Registration::ATTENDANCE_MODE_NOT_SET, $this->subject->getAttendanceMode());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::ATTENDANCE_MODE_*}>
+     */
+    public static function attendanceModeDataProvider(): array
+    {
+        return [
+            'not set' => [Registration::ATTENDANCE_MODE_NOT_SET],
+            'on site' => [Registration::ATTENDANCE_MODE_ON_SITE],
+            'online' => [Registration::ATTENDANCE_MODE_ONLINE],
+            'hybrid' => [Registration::ATTENDANCE_MODE_HYBRID],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param Registration::ATTENDANCE_MODE_* $mode
+     * @dataProvider attendanceModeDataProvider
+     */
+    public function setAttendanceModeCanSetAttendanceModeToAnyExistingMode(int $mode): void
+    {
+        $this->subject->setAttendanceMode($mode);
+
+        self::assertSame($mode, $this->subject->getAttendanceMode());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::ATTENDANCE_MODE_*}>
+     */
+    public static function onSiteAttendanceModeDataProvider(): array
+    {
+        return [
+            'on site' => [Registration::ATTENDANCE_MODE_ON_SITE],
+            'hybrid' => [Registration::ATTENDANCE_MODE_HYBRID],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Registration::ATTENDANCE_MODE_* $mode
+     * @dataProvider onSiteAttendanceModeDataProvider
+     */
+    public function isAtLeastPartiallyOnSiteForAtLeastPartiallyOnSiteAttendanceReturnsTrue(int $mode): void
+    {
+        $this->subject->setAttendanceMode($mode);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnSite());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::ATTENDANCE_MODE_*}>
+     */
+    public static function notOnSiteAttendanceModeDataProvider(): array
+    {
+        return [
+            'not set' => [Registration::ATTENDANCE_MODE_NOT_SET],
+            'online' => [Registration::ATTENDANCE_MODE_ONLINE],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Registration::ATTENDANCE_MODE_* $mode
+     * @dataProvider notOnSiteAttendanceModeDataProvider
+     */
+    public function isAtLeastPartiallyOnSiteForAtNotLeastPartiallyOnSiteAttendanceReturnsFalse(int $mode): void
+    {
+        $this->subject->setAttendanceMode($mode);
+
+        self::assertFalse($this->subject->isAtLeastPartiallyOnSite());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::ATTENDANCE_MODE_*}>
+     */
+    public static function onlineAttendanceModeDataProvider(): array
+    {
+        return [
+            'online' => [Registration::ATTENDANCE_MODE_ONLINE],
+            'hybrid' => [Registration::ATTENDANCE_MODE_HYBRID],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Registration::ATTENDANCE_MODE_* $mode
+     * @dataProvider onlineAttendanceModeDataProvider
+     */
+    public function isAtLeastPartiallyOnlineForAtLeastPartiallyOnlineAttendanceReturnsTrue(int $mode): void
+    {
+        $this->subject->setAttendanceMode($mode);
+
+        self::assertTrue($this->subject->isAtLeastPartiallyOnline());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::ATTENDANCE_MODE_*}>
+     */
+    public static function notOnlineAttendanceModeDataProvider(): array
+    {
+        return [
+            'not set' => [Registration::ATTENDANCE_MODE_NOT_SET],
+            'on site' => [Registration::ATTENDANCE_MODE_ON_SITE],
+        ];
+    }
+
+    /**
+     * @test
+     * @param Registration::ATTENDANCE_MODE_* $mode
+     * @dataProvider notOnlineAttendanceModeDataProvider
+     */
+    public function isAtLeastPartiallyOnlineForAtNotLeastPartiallyOnlineAttendanceReturnsFalse(int $mode): void
+    {
+        $this->subject->setAttendanceMode($mode);
+
+        self::assertFalse($this->subject->isAtLeastPartiallyOnline());
+    }
 }
