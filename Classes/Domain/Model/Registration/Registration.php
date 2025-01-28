@@ -33,6 +33,16 @@ class Registration extends AbstractEntity implements RawDataInterface
     /**
      * @var int<0, max>
      */
+    public const STATUS_REGULAR = 0;
+
+    /**
+     * @var int<0, max>
+     */
+    public const STATUS_WAITING_LIST = 1;
+
+    /**
+     * @var int<0, max>
+     */
     public const ATTENDANCE_MODE_NOT_SET = 0;
 
     /**
