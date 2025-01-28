@@ -479,9 +479,17 @@
         <source>Event</source>
         <target state="final">Veranstaltung</target>
       </trans-unit>
-      <trans-unit id="tx_seminars_attendances.registration_queue" approved="yes">
-        <source>Is on the registration queue</source>
-        <target state="final">Ist auf der Warteliste</target>
+      <trans-unit id="tx_seminars_attendances.registration_queue">
+        <source>Status</source>
+        <target state="needs-translation">Status</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.regular">
+        <source>regular registration</source>
+        <target state="needs-translation">regular registration</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.waitingList">
+        <source>waiting list</source>
+        <target state="needs-translation">waiting list</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.price" approved="yes">
         <source>Price to pay</source>
