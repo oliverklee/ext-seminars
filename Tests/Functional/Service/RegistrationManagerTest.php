@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -27,7 +26,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -205,19 +203,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
 
         return new LegacyRegistration($registrationUid);
-    }
-
-    /**
-     * Imports static records - but only if they aren't already available as static data.
-     */
-    private function importStaticData(): void
-    {
-        if (
-            GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('static_countries')
-                ->count('*', 'static_countries', []) === 0
-        ) {
-            $this->importDataSet(__DIR__ . '/Fixtures/Countries.xml');
-        }
     }
 
     /**
@@ -1538,14 +1523,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace(): void
+    public function notifyAttendeeHasVenuCityOnlyOnceInPlainTextEmail(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['city' => 'footown']
+            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1560,101 +1545,14 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        self::assertStringContainsString('footown', $this->extractTextBodyFromEmail($this->email));
+        $textBody = $this->extractTextBodyFromEmail($this->email);
+        self::assertSame(1, \substr_count($textBody, 'Footown'));
     }
 
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->createEventWithOrganizer();
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['zip' => '12345', 'city' => 'footown']
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $uid,
-            'place'
-        );
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        self::assertStringContainsString('12345 footown', $this->extractTextBodyFromEmail($this->email));
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-
-        $this->importStaticData();
-        $this->createEventWithOrganizer();
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['city' => 'footown', 'country' => $country->getIsoAlpha2Code()]
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $uid,
-            'place'
-        );
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        self::assertStringContainsString($country->getLocalShortName(), $this->extractTextBodyFromEmail($this->email));
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->createEventWithOrganizer();
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['address' => 'address', 'city' => 'footown']
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $uid,
-            'place'
-        );
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        self::assertStringContainsString("address\nfootown", $this->extractTextBodyFromEmail($this->email));
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForPlaceAddressAndHtmlMailsHasAddressAndCity(): void
+    public function notifyAttendeeHasVenuCityOnlyOnceInHtmlEmail(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -1666,7 +1564,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->createEventWithOrganizer();
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address', 'city' => 'footown']
+            ['address' => "On the Hill 12\n12345 Footown", 'city' => 'Footown']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1681,77 +1579,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $controller);
 
-        $emailBody = $this->extractHtmlBodyFromEmail($this->email);
-
-        self::assertStringContainsString('address', $emailBody);
-        self::assertStringContainsString('footown', $emailBody);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-
-        $this->importStaticData();
-        $this->createEventWithOrganizer();
-        $mapper = MapperRegistry::get(CountryMapper::class);
-        $country = $mapper->find(54);
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            [
-                'address' => 'address',
-                'city' => 'footown',
-                'country' => $country->getIsoAlpha2Code(),
-            ]
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $uid,
-            'place'
-        );
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        self::assertStringContainsString(
-            'footown, ' . $country->getLocalShortName(),
-            $this->extractTextBodyFromEmail($this->email)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity(): void
-    {
-        $this->setUpFakeFrontEnd();
-        $this->configuration->setAsBoolean('sendConfirmation', true);
-        $this->createEventWithOrganizer();
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['address' => 'address', 'city' => 'footown']
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            $uid,
-            'place'
-        );
-
-        $controller = new DefaultController();
-        $controller->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $controller);
-
-        self::assertStringNotContainsString('footown,', $this->extractTextBodyFromEmail($this->email));
+        $htmlBody = $this->extractHtmlBodyFromEmail($this->email);
+        self::assertSame(1, \substr_count($htmlBody, 'Footown'));
     }
 
     /**

@@ -1093,64 +1093,6 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function singleViewForSiteDetailsContainsHtmlSpecialcharedCityOfEventPlace(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('showSiteDetails', true);
-
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['place' => 1]
-        );
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['city' => 'Knödlingen & Großwürsteling']
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm',
-            $eventUid,
-            $placeUid
-        );
-        $this->subject->piVars['showUid'] = $eventUid;
-
-        self::assertStringContainsString(
-            'Knödlingen &amp; Großwürsteling',
-            $this->subject->main('', [])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function singleViewForSiteDetailsContainsHtmlSpecialcharedZipOfEventPlace(): void
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue('showSiteDetails', true);
-
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['place' => 1]
-        );
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['city' => 'Bonn', 'zip' => '12 & 45']
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm',
-            $eventUid,
-            $placeUid
-        );
-        $this->subject->piVars['showUid'] = $eventUid;
-
-        self::assertStringContainsString(
-            '12 &amp; 45',
-            $this->subject->main('', [])
-        );
-    }
-
     ////////////////////////////////////////////////////
     // Tests concerning time slots in the single view.
     ////////////////////////////////////////////////////

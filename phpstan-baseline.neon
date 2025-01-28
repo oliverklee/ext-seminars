@@ -1446,11 +1446,6 @@ parameters:
 			path: Classes/Service/RegistrationGuard.php
 
 		-
-			message: "#^Cannot call method getLocalShortName\\(\\) on OliverKlee\\\\Oelib\\\\Model\\\\Country\\|null\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
 			message: "#^Cannot call method getSeats\\(\\) on OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null\\.$#"
 			count: 2
 			path: Classes/Service/RegistrationManager.php
@@ -2042,7 +2037,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method getPlaceWithDetails\\(\\) on OliverKlee\\\\Seminars\\\\Tests\\\\Unit\\\\OldModel\\\\Fixtures\\\\TestingLegacyEvent\\|null\\.$#"
-			count: 8
+			count: 7
 			path: Tests/Functional/OldModel/LegacyEventTest.php
 
 		-

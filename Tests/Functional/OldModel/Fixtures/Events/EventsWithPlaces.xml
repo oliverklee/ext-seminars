@@ -80,7 +80,8 @@
     <tx_seminars_sites>
         <uid>1</uid>
         <title>The Castle (without country)</title>
-        <address>on top of the mountain</address>
+        <address>On top of the mountain
+12345 Hamm</address>
         <zip>12345</zip>
         <city>Hamm</city>
         <directions>3 turns left, then always right</directions>
