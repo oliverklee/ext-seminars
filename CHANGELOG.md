@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Rename `Place::getAddress()` to `Place::getFullAddress()` (#4086)
 - !!! Assume that the venue address field contains the full address (#4085)
 - Make the flexforms more compact (#4071)
 - Rename and flip `EventStatistics.hasSeatsLimit` (#4047)

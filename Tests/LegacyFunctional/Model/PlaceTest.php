@@ -67,27 +67,22 @@ final class PlaceTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAddressWithoutAddressReturnsAnEmptyString(): void
+    public function getFullAddressWithoutFullAddressReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
-        self::assertEquals(
-            '',
-            $this->subject->getAddress()
-        );
+        self::assertSame('', $this->subject->getFullAddress());
     }
 
     /**
      * @test
      */
-    public function getAddressWithNonEmptyAddressReturnsAddress(): void
+    public function getFullAddressWithNonEmptyFullAddressReturnsAddress(): void
     {
-        $this->subject->setData(['address' => 'Backstreet 42']);
+        $address = "Backstreet 42\n13373 Hicksville";
+        $this->subject->setData(['address' => $address]);
 
-        self::assertEquals(
-            'Backstreet 42',
-            $this->subject->getAddress()
-        );
+        self::assertSame($address, $this->subject->getFullAddress());
     }
 
     /**

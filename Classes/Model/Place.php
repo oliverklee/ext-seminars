@@ -23,10 +23,7 @@ class Place extends AbstractModel
         return $this->getAsString('title');
     }
 
-    /**
-     * @return string our address, might be empty
-     */
-    public function getAddress(): string
+    public function getFullAddress(): string
     {
         return $this->getAsString('address');
     }
