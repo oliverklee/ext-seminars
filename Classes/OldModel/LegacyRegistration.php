@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\OldModel;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -758,9 +759,14 @@ class LegacyRegistration extends AbstractModel
         return $this->getRecordPropertyBoolean('registration_queue');
     }
 
-    public function setIsOnRegistrationQueue(bool $isOnRegistrationQueue): void
+    /**
+     * @internal only used for testing
+     *
+     * @param Registration::STATUS_* $status
+     */
+    public function setStatus(int $status): void
     {
-        $this->setRecordPropertyInteger('registration_queue', (int)$isOnRegistrationQueue);
+        $this->setRecordPropertyInteger('registration_queue', $status);
     }
 
     /**
