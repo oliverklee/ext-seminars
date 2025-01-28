@@ -340,7 +340,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function existsRegistrationForEventAndUserForZeroUserUidReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/existsRegistrationForEventAndUser/RegistrationWithEventAndUser.csv'
+        );
         $event = $this->eventRepository->findByUid(1);
 
         self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 0));
@@ -351,7 +353,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function existsRegistrationForEventAndOtherUserUidReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/existsRegistrationForEventAndUser/RegistrationWithEventAndUser.csv'
+        );
         $event = $this->eventRepository->findByUid(1);
 
         self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 2));
@@ -393,9 +397,11 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function existsRegistrationMatchingRegistrationReturnsTrue(): void
+    public function existsRegistrationForEventAndUserForMatchingRegistrationReturnsTrue(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/existsRegistrationForEventAndUser/RegistrationWithEventAndUser.csv'
+        );
         $event = $this->eventRepository->findByUid(1);
 
         self::assertTrue($this->subject->existsRegistrationForEventAndUser($event, 1));
@@ -481,9 +487,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countRegularSeatsByEventIgnoresRegistrationsWithZeroSeats(): void
+    public function countRegularSeatsByEventIgnoresRegularRegistrationsWithZeroSeats(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/countRegularSeatsByEvent/RegularRegistrationWithZeroSeats.csv');
 
         self::assertSame(0, $this->subject->countRegularSeatsByEvent(1));
     }
@@ -619,9 +625,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countWaitingListSeatsByEventIgnoresRegularOnWaitingList(): void
+    public function countWaitingListSeatsByEventIgnoresRegularRegistrationWithOneSeat(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/countWaitingListSeatsByEvent/RegularRegistrationWithOneSeat.csv');
 
         self::assertSame(0, $this->subject->countWaitingListSeatsByEvent(1));
     }
@@ -641,7 +647,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventFindsRegularRegistrationsForTheGivenEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/countWaitingListSeatsByEvent/RegularRegistrationWithOneSeat.csv');
 
         $result = $this->subject->findRegularRegistrationsByEvent(1);
 
@@ -681,7 +687,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventIgnoresRegistrationsForDifferentEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/countWaitingListSeatsByEvent/RegularRegistrationWithOneSeat.csv');
 
         $result = $this->subject->findRegularRegistrationsByEvent(2);
 
@@ -755,7 +761,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findWaitingListRegistrationsByEventIgnoresRegularRegistrationsForTheGivenEvent(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUser.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/RegularRegistrationWithEventAndUser.csv'
+        );
 
         $result = $this->subject->findWaitingListRegistrationsByEvent(1);
 
