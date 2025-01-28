@@ -635,6 +635,22 @@
         <source>Number of kids</source>
         <target state="final">Nombre d'enfants</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode">
+        <source>Attendance mode</source>
+        <target state="needs-translation">Attendance mode</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.onSite">
+        <source>on-site</source>
+        <target state="needs-translation">on-site</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.online">
+        <source>online</source>
+        <target state="needs-translation">online</target>
+      </trans-unit>
+      <trans-unit id="tx_seminars_attendances.attendance_mode.hybrid">
+        <source>hybrid</source>
+        <target state="needs-translation">hybrid</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_sites">
         <source>Venue</source>
         <target state="needs-translation">Venue</target>
