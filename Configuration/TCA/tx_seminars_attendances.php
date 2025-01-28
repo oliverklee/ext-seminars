@@ -1,6 +1,7 @@
 <?php
 
 use OliverKlee\Seminars\Domain\Model\Price;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 
 defined('TYPO3') or die();
 
@@ -72,6 +73,30 @@ $tca = [
             'config' => [
                 'type' => 'check',
                 'default' => 0,
+            ],
+        ],
+        'attendance_mode' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.attendance_mode',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'default' => Registration::ATTENDANCE_MODE_NOT_SET,
+                'items' => [
+                    ['', Registration::ATTENDANCE_MODE_NOT_SET],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.attendance_mode.onSite',
+                        Registration::ATTENDANCE_MODE_ON_SITE,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.attendance_mode.online',
+                        Registration::ATTENDANCE_MODE_ONLINE,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.attendance_mode.hybrid',
+                        Registration::ATTENDANCE_MODE_HYBRID,
+                    ],
+                ],
             ],
         ],
         'registration_queue' => [
@@ -449,7 +474,7 @@ $tca = [
         '0' => [
             'showitem' => '' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user, been_there, hidden, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, price_code, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, attendance_mode, registration_queue, registered_themselves, seats, price, price_code, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, method_of_payment, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, separate_billing_address, company, gender, name, address, zip, city, country, telephone, email',

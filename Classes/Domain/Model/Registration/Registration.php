@@ -31,6 +31,42 @@ class Registration extends AbstractEntity implements RawDataInterface
     use PaymentTrait;
 
     /**
+     * @var int<0, max>
+     */
+    public const ATTENDANCE_MODE_NOT_SET = 0;
+
+    /**
+     * @var int<0, max>
+     */
+    public const ATTENDANCE_MODE_ON_SITE = 1;
+
+    /**
+     * @var int<0, max>
+     */
+    public const ATTENDANCE_MODE_ONLINE = 2;
+
+    /**
+     * @var int<0, max>
+     */
+    public const ATTENDANCE_MODE_HYBRID = 3;
+
+    /**
+     * @var list<self::ATTENDANCE_MODE_*>
+     */
+    private const PARTIALLY_ON_SITE_ATTENDANCE_MODES = [
+        self::ATTENDANCE_MODE_ON_SITE,
+        self::ATTENDANCE_MODE_HYBRID,
+    ];
+
+    /**
+     * @var list<self::ATTENDANCE_MODE_*>
+     */
+    private const PARTIALLY_ONLINE_ATTENDANCE_MODES = [
+        self::ATTENDANCE_MODE_ONLINE,
+        self::ATTENDANCE_MODE_HYBRID,
+    ];
+
+    /**
      * @Validate("StringLength", options={"maximum": 255})
      */
     protected string $title = '';
@@ -41,6 +77,11 @@ class Registration extends AbstractEntity implements RawDataInterface
      * @Lazy
      */
     protected $event;
+
+    /**
+     * @var self::ATTENDANCE_MODE_*
+     */
+    protected int $attendanceMode = self::ATTENDANCE_MODE_NOT_SET;
 
     protected bool $onWaitingList = false;
 
@@ -153,6 +194,32 @@ class Registration extends AbstractEntity implements RawDataInterface
     public function hasNecessaryAssociations(): bool
     {
         return $this->hasValidEventType() && $this->getUser() instanceof FrontendUser;
+    }
+
+    /**
+     * @return self::ATTENDANCE_MODE_*
+     */
+    public function getAttendanceMode(): int
+    {
+        return $this->attendanceMode;
+    }
+
+    public function isAtLeastPartiallyOnSite(): bool
+    {
+        return \in_array($this->getAttendanceMode(), self::PARTIALLY_ON_SITE_ATTENDANCE_MODES, true);
+    }
+
+    public function isAtLeastPartiallyOnline(): bool
+    {
+        return \in_array($this->getAttendanceMode(), self::PARTIALLY_ONLINE_ATTENDANCE_MODES, true);
+    }
+
+    /**
+     * @param self::ATTENDANCE_MODE_* $attendanceMode
+     */
+    public function setAttendanceMode(int $attendanceMode): void
+    {
+        $this->attendanceMode = $attendanceMode;
     }
 
     public function isOnWaitingList(): bool
