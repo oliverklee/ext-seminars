@@ -543,7 +543,7 @@ final class LegacyEventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlaceWithDetailsContainsAddressOfOnePlace(): void
+    public function getPlaceWithDetailsCanContainAddressOfOneVenue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
         $plugin = $this->buildFrontEndAndPlugin();
@@ -551,13 +551,13 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetails($plugin);
 
-        self::assertStringContainsString('on top of the mountain', $result);
+        self::assertStringContainsString("On top of the mountain\n12345 Hamm", $result);
     }
 
     /**
      * @test
      */
-    public function getPlaceWithDetailsForNonEmptyZipAndCityContainsZipAndCity(): void
+    public function getPlaceWithDetailsHasCityOfVenueOnlyOnce(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
         $plugin = $this->buildFrontEndAndPlugin();
@@ -565,23 +565,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetails($plugin);
 
-        self::assertStringContainsString('12345', $result);
-        self::assertStringContainsString('Hamm', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getPlaceWithDetailsContainsCountryOfOnePlace(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
-        $this->importStaticData();
-        $plugin = $this->buildFrontEndAndPlugin();
-        $subject = TestingLegacyEvent::fromUid(4);
-
-        $result = $subject->getPlaceWithDetails($plugin);
-
-        self::assertStringContainsString('Schweiz', $result);
+        self::assertSame(1, substr_count($result, 'Hamm'));
     }
 
     /**
@@ -664,7 +648,7 @@ final class LegacyEventTest extends FunctionalTestCase
 
         $result = $subject->getPlaceWithDetailsRaw();
 
-        self::assertStringContainsString('on top of the mountain', $result);
+        self::assertStringContainsString('On top of the mountain', $result);
     }
 
     /**

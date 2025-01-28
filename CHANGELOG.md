@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Assume that the venue address field contains the full address (#4085)
 - Make the flexforms more compact (#4071)
 - Rename and flip `EventStatistics.hasSeatsLimit` (#4047)
 - Rename `Event.allowsUnlimitedRegistrations` (#4046)
@@ -111,6 +112,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Do not double ZIP code, city and country when showing a venue address (#4085)
 - Avoid empty localized email subjects in some cases (#3866)
 - Only display the event times if there are no time slots (#3838)
 - Fix translation for flash message in BE module (#3810)

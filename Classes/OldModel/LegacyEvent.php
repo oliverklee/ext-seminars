@@ -252,18 +252,6 @@ class LegacyEvent extends AbstractTimeSpan
                 $address = \implode(', ', $addressParts);
                 $descriptionParts[] = \htmlspecialchars($address, ENT_QUOTES | ENT_HTML5);
             }
-            if ((string)$place['city'] !== '') {
-                $descriptionParts[] = \htmlspecialchars(
-                    \trim($place['zip'] . ' ' . $place['city']),
-                    ENT_QUOTES | ENT_HTML5
-                );
-            }
-            if ((string)$place['country'] !== '') {
-                $countryName = $this->getCountryNameFromIsoCode((string)$place['country']);
-                if ($countryName !== '') {
-                    $descriptionParts[] = \htmlspecialchars($countryName, ENT_QUOTES | ENT_HTML5);
-                }
-            }
 
             $description = \implode(', ', $descriptionParts);
             if (!empty($place['directions'])) {

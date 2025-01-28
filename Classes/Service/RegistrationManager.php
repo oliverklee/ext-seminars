@@ -1021,10 +1021,7 @@ class RegistrationManager implements SingletonInterface
     {
         $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 
-        $countryName = $place->hasCountry() ? ', ' . $place->getCountry()->getLocalShortName() : '';
-        $zipAndCity = trim($place->getZip() . ' ' . $place->getCity());
-
-        return $place->getTitle() . $newline . $address . $newline . $zipAndCity . $countryName;
+        return $place->getTitle() . $newline . $address;
     }
 
     /**
