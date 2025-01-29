@@ -93,7 +93,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
 
         self::assertSame('some new registration', $result->getTitle());
         self::assertNull($result->getEvent());
-        self::assertTrue($result->isOnWaitingList());
+        self::assertSame(Registration::STATUS_WAITING_LIST, $result->getStatus());
         self::assertSame('escapism', $result->getInterests());
         self::assertSame('fast escapes', $result->getExpectations());
         self::assertSame('Looking forward to the event!', $result->getComments());
