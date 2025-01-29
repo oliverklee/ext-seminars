@@ -115,6 +115,10 @@ $tca = [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue.waitingList',
                         Registration::STATUS_WAITING_LIST,
                     ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue.nonbindingReservation',
+                        Registration::STATUS_NONBINDING_RESERVATION,
+                    ],
                 ],
             ],
         ],
