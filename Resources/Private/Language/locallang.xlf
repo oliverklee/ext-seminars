@@ -549,9 +549,6 @@ This event now has been confirmed.</source>
 			<trans-unit id="seminars.pi_flexform.searchForm.language">
 				<source>Language</source>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.searchForm.country">
-				<source>Country</source>
-			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.searchForm.city">
 				<source>City</source>
 			</trans-unit>
