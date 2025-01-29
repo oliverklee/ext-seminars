@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * This class represents a registration (or a waiting list entry) for an event.
+ * This class represents a registration (or a waiting list entry or nonbinding reservation) for an event.
  */
 class Registration extends AbstractEntity implements RawDataInterface
 {
@@ -98,7 +98,10 @@ class Registration extends AbstractEntity implements RawDataInterface
      */
     protected int $attendanceMode = self::ATTENDANCE_MODE_NOT_SET;
 
-    protected bool $onWaitingList = false;
+    /**
+     * @var self::STATUS_*
+     */
+    protected int $status = self::STATUS_REGULAR;
 
     /**
      * @Validate("StringLength", options={"maximum": 16383})
@@ -237,19 +240,45 @@ class Registration extends AbstractEntity implements RawDataInterface
         $this->attendanceMode = $attendanceMode;
     }
 
-    public function isOnWaitingList(): bool
-    {
-        return $this->onWaitingList;
-    }
-
-    public function setOnWaitingList(bool $onWaitingList): void
-    {
-        $this->onWaitingList = $onWaitingList;
-    }
-
     public function isRegularRegistration(): bool
     {
-        return !$this->isOnWaitingList();
+        return $this->getStatus() === self::STATUS_REGULAR;
+    }
+
+    public function isOnWaitingList(): bool
+    {
+        return $this->getStatus() === self::STATUS_WAITING_LIST;
+    }
+
+    public function isNonbindingReservation(): bool
+    {
+        return $this->getStatus() === self::STATUS_NONBINDING_RESERVATION;
+    }
+
+    public function convertToRegularRegistration(): void
+    {
+        $this->setStatus(self::STATUS_REGULAR);
+    }
+
+    public function moveToWaitingList(): void
+    {
+        $this->setStatus(self::STATUS_WAITING_LIST);
+    }
+
+    /**
+     * @return self::STATUS_*
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param self::STATUS_* $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 
     public function getInterests(): string

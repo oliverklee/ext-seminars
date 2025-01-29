@@ -82,7 +82,7 @@ class RegistrationProcessor implements SingletonInterface
         $registration->setPid($folderUid);
 
         if ($event->hasWaitingList() && $this->registrationGuard->getVacancies($event) === 0) {
-            $registration->setOnWaitingList(true);
+            $registration->moveToWaitingList();
         }
     }
 

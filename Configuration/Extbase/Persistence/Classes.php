@@ -126,7 +126,7 @@ return [
         'tableName' => 'tx_seminars_attendances',
         'properties' => [
             'event' => ['fieldName' => 'seminar'],
-            'onWaitingList' => ['fieldName' => 'registration_queue'],
+            'status' => ['fieldName' => 'registration_queue'],
             'comments' => ['fieldName' => 'notes'],
             'accommodationOptions' => ['fieldName' => 'lodgings'],
             'foodOptions' => ['fieldName' => 'foods'],

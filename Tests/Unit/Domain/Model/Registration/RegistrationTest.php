@@ -220,27 +220,33 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOnWaitingListInitiallyReturnsFalse(): void
+    public function getStatusInitiallyReturnsRegular(): void
     {
-        self::assertFalse($this->subject->isOnWaitingList());
+        self::assertSame(Registration::STATUS_REGULAR, $this->subject->getStatus());
+    }
+
+    /**
+     * @return array<string, array{0: Registration::STATUS_*}>
+     */
+    public static function statusDataProvider(): array
+    {
+        return [
+            'regular' => [Registration::STATUS_REGULAR],
+            'waiting list' => [Registration::STATUS_WAITING_LIST],
+            'nonbinding reservation' => [Registration::STATUS_NONBINDING_RESERVATION],
+        ];
     }
 
     /**
      * @test
+     * @param Registration::STATUS_* $status
+     * @dataProvider statusDataProvider
      */
-    public function setOnWaitingListCanSetOnWaitingListToTrue(): void
+    public function setStatusSetsStatus(int $status): void
     {
-        $this->subject->setOnWaitingList(true);
+        $this->subject->setStatus($status);
 
-        self::assertTrue($this->subject->isOnWaitingList());
-    }
-
-    /**
-     * @test
-     */
-    public function isRegularRegistrationInitiallyReturnsTrue(): void
-    {
-        self::assertTrue($this->subject->isRegularRegistration());
+        self::assertSame($status, $this->subject->getStatus());
     }
 
     /**
@@ -248,7 +254,7 @@ final class RegistrationTest extends UnitTestCase
      */
     public function isRegularRegistrationForRegularRegistrationReturnsTrue(): void
     {
-        $this->subject->setOnWaitingList(false);
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
 
         self::assertTrue($this->subject->isRegularRegistration());
     }
@@ -256,11 +262,153 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isRegularRegistrationForRegistrationOnWaitingListReturnsFalse(): void
+    public function isRegularRegistrationForWaitingListRegistrationReturnsFalse(): void
     {
-        $this->subject->setOnWaitingList(true);
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
 
         self::assertFalse($this->subject->isRegularRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function isRegularRegistrationForNonbindingReservationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        self::assertFalse($this->subject->isRegularRegistration());
+    }
+
+    /**
+     * @test
+     */
+    public function isOnWaitingListForRegularRegistrationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
+
+        self::assertFalse($this->subject->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function isOnWaitingListForWaitingListRegistrationReturnsTrue(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
+
+        self::assertTrue($this->subject->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function isOnWaitingListForNonbindingReservationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        self::assertFalse($this->subject->isOnWaitingList());
+    }
+
+    /**
+     * @test
+     */
+    public function isNonbindingReservationForRegularRegistrationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
+
+        self::assertFalse($this->subject->isNonbindingReservation());
+    }
+
+    /**
+     * @test
+     */
+    public function isNonbindingReservationForWaitingListRegistrationReturnsFalse(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
+
+        self::assertFalse($this->subject->isNonbindingReservation());
+    }
+
+    /**
+     * @test
+     */
+    public function isNonbindingReservationForNonbindingReservationReturnsTrue(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        self::assertTrue($this->subject->isNonbindingReservation());
+    }
+
+    /**
+     * @test
+     */
+    public function convertToRegularRegistrationKeepsRegularRegistrationUnchanged(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
+
+        $this->subject->convertToRegularRegistration();
+
+        self::assertSame(Registration::STATUS_REGULAR, $this->subject->getStatus());
+    }
+
+    /**
+     * @test
+     */
+    public function convertToRegularRegistrationConvertsWaitingListRegistration(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
+
+        $this->subject->convertToRegularRegistration();
+
+        self::assertSame(Registration::STATUS_REGULAR, $this->subject->getStatus());
+    }
+
+    /**
+     * @test
+     */
+    public function convertToRegularRegistrationConvertsNonbindingReservation(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        $this->subject->convertToRegularRegistration();
+
+        self::assertSame(Registration::STATUS_REGULAR, $this->subject->getStatus());
+    }
+
+    /**
+     * @test
+     */
+    public function moveToWaitingListConvertsRegularRegistration(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_REGULAR);
+
+        $this->subject->moveToWaitingList();
+
+        self::assertSame(Registration::STATUS_WAITING_LIST, $this->subject->getStatus());
+    }
+
+    /**
+     * @test
+     */
+    public function moveToWaitingListKeepsWaitingListRegistrationUnchanged(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_WAITING_LIST);
+
+        $this->subject->moveToWaitingList();
+
+        self::assertSame(Registration::STATUS_WAITING_LIST, $this->subject->getStatus());
+    }
+
+    /**
+     * @test
+     */
+    public function moveToWaitingListConvertsNonbindingReservation(): void
+    {
+        $this->subject->setStatus(Registration::STATUS_NONBINDING_RESERVATION);
+
+        $this->subject->moveToWaitingList();
+
+        self::assertSame(Registration::STATUS_WAITING_LIST, $this->subject->getStatus());
     }
 
     /**

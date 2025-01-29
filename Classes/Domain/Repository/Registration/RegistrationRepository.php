@@ -171,7 +171,7 @@ class RegistrationRepository extends AbstractRawDataCapableRepository
         $query->matching(
             $query->logicalAnd(
                 $query->equals('event', $eventUid),
-                $query->equals('onWaitingList', $status)
+                $query->equals('status', $status)
             )
         );
 
