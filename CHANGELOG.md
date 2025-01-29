@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a registration status "nonbinding reservation" (#4104)
 - Add `Registration::isRegularRegistration()` (#4089)
 - Add `Registration.attendanceMode` (#4088)
 - Make the event statistics internal (#4074)

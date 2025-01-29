@@ -370,6 +370,9 @@
 			<trans-unit id="tx_seminars_attendances.registration_queue.waitingList">
 				<source>waiting list</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.registration_queue.nonbindingReservation">
+				<source>nonbinding reservation</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_attendances.price">
 				<source>Price to pay</source>
 			</trans-unit>
