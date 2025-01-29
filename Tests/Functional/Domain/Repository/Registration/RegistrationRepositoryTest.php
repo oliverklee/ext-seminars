@@ -377,7 +377,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function existsRegistrationForHiddenMatchingRegistrationReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/existsRegistrationForEventAndUser/HiddenRegistrationWithEventAndUser.xml'
+        );
         $event = $this->eventRepository->findByUid(1);
 
         self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
@@ -388,7 +390,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function existsRegistrationForDeletedMatchingRegistrationReturnsFalse(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEventAndUser.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/existsRegistrationForEventAndUser/DeletedRegistrationWithEventAndUser.xml'
+        );
         $event = $this->eventRepository->findByUid(1);
 
         self::assertFalse($this->subject->existsRegistrationForEventAndUser($event, 1));
@@ -705,7 +709,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventFindsRegistrationsOnAnyPage(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventAndUserOnPage.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/RegistrationWithEventAndUserOnPage.xml'
+        );
 
         $result = $this->subject->findRegularRegistrationsByEvent(1);
 
@@ -719,7 +725,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventIgnoresRegistrationsForDifferentEvent(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/countWaitingListSeatsByEvent/RegularRegistrationWithOneSeat.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/RegularRegistrationWithOneSeat.csv'
+        );
 
         $result = $this->subject->findRegularRegistrationsByEvent(2);
 
@@ -731,7 +739,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventIgnoresHiddenRegistrations(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/HiddenRegistrationWithEventAndUser.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/HiddenRegistrationWithEventAndUser.xml'
+        );
 
         $result = $this->subject->findRegularRegistrationsByEvent(1);
 
@@ -743,7 +753,9 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventIgnoresDeletedRegistrations(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/DeletedRegistrationWithEventAndUser.xml');
+        $this->importDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/DeletedRegistrationWithEventAndUser.xml'
+        );
 
         $result = $this->subject->findRegularRegistrationsByEvent(1);
 
