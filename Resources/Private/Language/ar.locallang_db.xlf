@@ -491,6 +491,10 @@
         <source>waiting list</source>
         <target state="needs-translation">waiting list</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_attendances.registration_queue.nonbindingReservation">
+        <source>nonbinding reservation</source>
+        <target state="needs-translation">nonbinding reservation</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_attendances.price">
         <source>Price to pay</source>
         <target state="needs-translation">Price to pay</target>
