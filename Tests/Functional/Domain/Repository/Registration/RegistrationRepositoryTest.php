@@ -677,8 +677,22 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegularRegistrationsByEventIgnoresWaitingListRegistrationsForTheGivenEvent(): void
     {
-        $this->importDataSet(
-            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/WaitingListRegistrationWithEvent.xml'
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/WaitingListRegistrationWithEvent.csv'
+        );
+
+        $result = $this->subject->findRegularRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findRegularRegistrationsByEventIgnoresNonbindingReservationForTheGivenEvent(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findRegularRegistrationsByEvent/NonbindingReservationWithEvent.csv'
         );
 
         $result = $this->subject->findRegularRegistrationsByEvent(1);
@@ -767,8 +781,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findWaitingListRegistrationsByEventFindsWaitingListRegistrationsForTheGivenEvent(): void
     {
-        $this->importDataSet(
-            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/WaitingListRegistrationWithEvent.xml'
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/WaitingListRegistrationWithEvent.csv'
         );
 
         $result = $this->subject->findWaitingListRegistrationsByEvent(1);
@@ -785,6 +799,20 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     {
         $this->importCSVDataSet(
             __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/RegularRegistrationWithEventAndUser.csv'
+        );
+
+        $result = $this->subject->findWaitingListRegistrationsByEvent(1);
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function findWaitingListRegistrationsByEventIgnoresNonbindingReservationForTheGivenEvent(): void
+    {
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/NonbindingReservationWithEvent.csv'
         );
 
         $result = $this->subject->findWaitingListRegistrationsByEvent(1);
@@ -813,8 +841,8 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findWaitingListRegistrationsByEventIgnoresRegistrationsForDifferentEvent(): void
     {
-        $this->importDataSet(
-            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/WaitingListRegistrationWithEvent.xml'
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/findWaitingListRegistrationsByEvent/WaitingListRegistrationWithEvent.csv'
         );
 
         $result = $this->subject->findWaitingListRegistrationsByEvent(2);
