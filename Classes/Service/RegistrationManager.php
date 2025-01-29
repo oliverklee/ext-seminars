@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Domain\Model\Event\EventDateInterface;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Domain\Repository\Event\EventRepository;
 use OliverKlee\Seminars\Email\EmailBuilder;
 use OliverKlee\Seminars\Email\Salutation;
@@ -308,7 +309,7 @@ class RegistrationManager implements SingletonInterface
             if ($registration->getSeats() <= $vacancies) {
                 $this->getConnectionForTable('tx_seminars_attendances')->update(
                     'tx_seminars_attendances',
-                    ['registration_queue' => 0],
+                    ['registration_queue' => Registration::STATUS_REGULAR],
                     ['uid' => $registration->getUid()]
                 );
                 $vacancies -= $registration->getSeats();

@@ -147,34 +147,6 @@ final class RegistrationTest extends FunctionalTestCase
         );
     }
 
-    /////////////////////////////////////////////////////////////////////
-    // Tests regarding isOnRegistrationQueue and setOnRegistrationQueue
-    /////////////////////////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function isOnRegistrationQueueForRegularRegistrationReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->isOnRegistrationQueue()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function isOnRegistrationQueueForQueueRegistrationReturnsTrue(): void
-    {
-        $this->subject->setData(['registration_queue' => true]);
-
-        self::assertTrue(
-            $this->subject->isOnRegistrationQueue()
-        );
-    }
-
     ///////////////////////////////
     // Tests regarding the seats.
     ///////////////////////////////

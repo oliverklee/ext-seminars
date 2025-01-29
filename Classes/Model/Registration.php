@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration as ExtbaseRegistration;
 
 /**
  * This class represents a registration for an event.
@@ -68,7 +69,7 @@ class Registration extends AbstractModel
 
     public function isOnRegistrationQueue(): bool
     {
-        return $this->getAsBoolean('registration_queue');
+        return $this->getAsInteger('registration_queue') === ExtbaseRegistration::STATUS_WAITING_LIST;
     }
 
     /**

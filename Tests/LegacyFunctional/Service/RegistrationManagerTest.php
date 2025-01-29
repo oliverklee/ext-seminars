@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
@@ -836,7 +837,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue(): void
+    public function removeRegistrationWithWaitingListRegistrationMovesItToRegular(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -855,22 +856,62 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'user' => $userUid,
                 'seminar' => $seminarUid,
                 'seats' => 1,
-                'registration_queue' => 1,
+                'registration_queue' => Registration::STATUS_WAITING_LIST,
             ]
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
         $connection = $this->getConnectionForTable('tx_seminars_attendances');
 
-        self::assertGreaterThan(
+        self::assertSame(
+            1,
+            $connection->count(
+                '*',
+                'tx_seminars_attendances',
+                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $queueRegistrationUid]
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeRegistrationDoesNotMoveNonbindingReservationToRegular(): void
+    {
+        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
+        $seminarUid = $this->seminarUid;
+        $this->createFrontEndPages();
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'user' => $userUid,
+                'seminar' => $seminarUid,
+            ]
+        );
+        $queueRegistrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'user' => $userUid,
+                'seminar' => $seminarUid,
+                'seats' => 1,
+                'registration_queue' => Registration::STATUS_NONBINDING_RESERVATION,
+            ]
+        );
+
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
+
+        self::assertSame(
             0,
             $connection->count(
                 '*',
                 'tx_seminars_attendances',
-                ['registration_queue' => 0, 'uid' => $queueRegistrationUid]
+                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $queueRegistrationUid]
             )
         );
     }
+
     // Tests concerning the unregistration notice
 
     /**

@@ -756,13 +756,13 @@ class LegacyRegistration extends AbstractModel
      */
     public function isOnRegistrationQueue(): bool
     {
-        return $this->getRecordPropertyBoolean('registration_queue');
+        return $this->getRecordPropertyInteger('registration_queue') === Registration::STATUS_WAITING_LIST;
     }
 
     /**
-     * @internal only used for testing
-     *
      * @param Registration::STATUS_* $status
+     *
+     * @internal only used for testing
      */
     public function setStatus(int $status): void
     {

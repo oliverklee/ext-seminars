@@ -17,6 +17,7 @@ use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration as ExtbaseRegistration;
 use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\PlaceMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
@@ -2409,8 +2410,8 @@ class LegacyEvent extends AbstractTimeSpan
         $this->registrationsHaveBeenRetrieved = false;
 
         $this->numberOfAttendances = $this->getOfflineRegistrations()
-            + $this->sumSeatsOfRegistrations($this->getNonQueueRegistrations());
-        $this->numberOfAttendancesOnQueue = $this->sumSeatsOfRegistrations($this->getQueueRegistrations());
+            + $this->sumSeatsOfRegistrations($this->getRegularRegistrations());
+        $this->numberOfAttendancesOnQueue = $this->sumSeatsOfRegistrations($this->getWaitingListRegistrations());
 
         $this->statisticsHaveBeenCalculated = true;
     }
@@ -2418,26 +2419,28 @@ class LegacyEvent extends AbstractTimeSpan
     /**
      * @return array<int, array<string, string|int>>
      */
-    private function getNonQueueRegistrations(): array
+    private function getRegularRegistrations(): array
     {
         $this->retrieveRegistrations();
 
         return \array_filter(
             $this->registrations,
-            static fn (array $registration): bool => !(bool)$registration['registration_queue']
+            static fn (array $registration): bool => (int)$registration['registration_queue']
+                === ExtbaseRegistration::STATUS_REGULAR
         );
     }
 
     /**
      * @return array<int, array<string, string|int>>
      */
-    private function getQueueRegistrations(): array
+    private function getWaitingListRegistrations(): array
     {
         $this->retrieveRegistrations();
 
         return \array_filter(
             $this->registrations,
-            static fn (array $registration): bool => (bool)$registration['registration_queue']
+            static fn (array $registration): bool => (int)$registration['registration_queue']
+                === ExtbaseRegistration::STATUS_WAITING_LIST
         );
     }
 
