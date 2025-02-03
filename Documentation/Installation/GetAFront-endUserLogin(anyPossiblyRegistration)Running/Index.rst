@@ -26,6 +26,8 @@ There are two possible scenarios for the login page:
     for events, to unregister again, or to manage events.
     In this case, you will need regular login form using the **felogin**
     extension that comes with the TYPO3 Core.
+    Make sure to enable the "Redirect defined by GET/POST parameters" in the
+    login plugin settings.
 
 2.  You want people to register for your events, but you do not want bother them
     with having to create an account. In this case, you will need the
