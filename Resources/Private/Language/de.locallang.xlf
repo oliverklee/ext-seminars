@@ -1611,9 +1611,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Consent to terms &amp; conditions</source>
         <target state="final">AGB-Zustimmung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDate" approved="yes">
         <source>%1$s, %2$s</source>
-        <target state="needs-translation">%1$s, %2$s</target>
+        <target state="final">%1$s, %2$s</target>
       </trans-unit>
       <trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid" approved="yes">
         <source>%1$s, %2$s (event #%3$u)</source>
@@ -1627,9 +1627,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event registration</source>
         <target state="final">Veranstaltungsanmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList" approved="yes">
         <source>Waiting list registration</source>
-        <target state="needs-translation">Waiting list registration</target>
+        <target state="final">Wartelisten-Registrierung</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.heading.registrationData_formal" approved="yes">
         <source>Your registration data</source>
