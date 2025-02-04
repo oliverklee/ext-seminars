@@ -499,6 +499,9 @@
 			<trans-unit id="tx_seminars_attendances.attendance_mode.hybrid">
 				<source>hybrid</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_attendances.order_reference">
+				<source>Order reference</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_sites">
 				<source>Venue</source>
 			</trans-unit>

@@ -326,6 +326,7 @@ CREATE TABLE tx_seminars_attendances (
     kids int(11) unsigned DEFAULT '0' NOT NULL,
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
     attendance_mode int(1) unsigned DEFAULT '0' NOT NULL,
+    order_reference tinytext,
 
     KEY seminar (seminar),
     KEY user (user)

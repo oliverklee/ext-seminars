@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `Registration.orderReference` (#4121)
 - Also show non-binding reservations in the "my events" list (#4120)
 - Add a configuration whether to automatically succeed waiting list
   registrations when a vacancy opens up (#4119)

@@ -86,7 +86,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheBaseModel(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -108,7 +108,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheAttendeesTrait(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
 
@@ -124,7 +124,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromTheBillingAddressTrait(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -144,7 +144,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function mapsAllModelFieldsFromThePaymentTrait(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithAllFields.csv');
 
         $result = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $result);
@@ -153,6 +153,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame('Standard price: 200€', $result->getHumanReadablePrice());
         self::assertSame(199.99, $result->getTotalPrice());
         self::assertNull($result->getPaymentMethod());
+        self::assertSame('order-1234', $result->getOrderReference());
     }
 
     /**
@@ -974,7 +975,7 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function enrichWithRawDataAddsRawDataToRegistrations(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationWithAllFields.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/enrichWithRawData/RegistrationWithAllFields.csv');
         $registration = $this->subject->findByUid(1);
         self::assertInstanceOf(Registration::class, $registration);
         $registrations = [$registration];
