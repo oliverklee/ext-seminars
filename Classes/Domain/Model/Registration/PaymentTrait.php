@@ -87,9 +87,7 @@ trait PaymentTrait
         $paymentMethod = $this->paymentMethod;
         if ($paymentMethod instanceof LazyLoadingProxy) {
             $paymentMethod = $paymentMethod->_loadRealInstance();
-            if ($paymentMethod instanceof PaymentMethod) {
-                $this->paymentMethod = $paymentMethod;
-            }
+            $this->paymentMethod = ($paymentMethod instanceof PaymentMethod) ? $paymentMethod : null;
         }
 
         return $paymentMethod;
