@@ -286,6 +286,9 @@ class RegistrationManager implements SingletonInterface
      */
     private function fillVacancies(TemplateHelper $plugin, LegacyRegistration $unregistration): void
     {
+        if (!$this->getSharedConfiguration()->getAsBoolean('automaticallyFillVacanciesOnUnregistration')) {
+            return;
+        }
         $seminar = $unregistration->getSeminarObject();
         if (!$seminar->hasVacancies()) {
             return;

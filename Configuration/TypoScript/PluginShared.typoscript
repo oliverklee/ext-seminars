@@ -79,6 +79,10 @@ plugin.tx_seminars {
   # on the waiting list yet.
   allowUnregistrationWithEmptyWaitingList = 0
 
+  # whether to waiting list registrations automatically will succeed to regular registrations when someone unregisters
+  # and hence a vacancy is created
+  automaticallyFillVacanciesOnUnregistration = 1
+
   # If there are at least this many vancancies, "enough" is displayed instead of the exact number.
   showVacanciesThreshold = 10
 

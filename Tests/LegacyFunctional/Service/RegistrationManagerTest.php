@@ -837,8 +837,10 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function removeRegistrationWithWaitingListRegistrationMovesItToRegular(): void
+    public function removeRegistrationWithWaitingListRegistrationMovesItToRegularIfEnabled(): void
     {
+        $this->configuration->setAsBoolean('automaticallyFillVacanciesOnUnregistration', true);
+
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
         $this->createFrontEndPages();
@@ -850,7 +852,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
                 'seminar' => $seminarUid,
             ]
         );
-        $queueRegistrationUid = $this->testingFramework->createRecord(
+        $waitingListRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'user' => $userUid,
@@ -868,7 +870,48 @@ final class RegistrationManagerTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_seminars_attendances',
-                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $queueRegistrationUid]
+                ['registration_queue' => Registration::STATUS_REGULAR, 'uid' => $waitingListRegistrationUid]
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeRegistrationWithWaitingListRegistrationKeepsItOnWaitingListIfSuccessionIsDisabled(): void
+    {
+        $this->configuration->setAsBoolean('automaticallyFillVacanciesOnUnregistration', false);
+
+        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
+        $seminarUid = $this->seminarUid;
+        $this->createFrontEndPages();
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'user' => $userUid,
+                'seminar' => $seminarUid,
+            ]
+        );
+        $waitingListRegistrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'user' => $userUid,
+                'seminar' => $seminarUid,
+                'seats' => 1,
+                'registration_queue' => Registration::STATUS_WAITING_LIST,
+            ]
+        );
+
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
+
+        self::assertSame(
+            1,
+            $connection->count(
+                '*',
+                'tx_seminars_attendances',
+                ['registration_queue' => Registration::STATUS_WAITING_LIST, 'uid' => $waitingListRegistrationUid]
             )
         );
     }
