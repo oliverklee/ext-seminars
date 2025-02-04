@@ -217,6 +217,19 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function mapsDeletedEventAssociationAsNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithDeletedEvent.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertNull($result->getEvent());
+    }
+
+    /**
+     * @test
+     */
     public function mapsEventAssociationWithEventDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationWithEventDate.xml');
@@ -254,6 +267,19 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Registration::class, $result);
 
         self::assertInstanceOf(FrontendUser::class, $result->getUser());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsDeletedUserAssociationAsNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithDeletedUser.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertNull($result->getUser());
     }
 
     /**
@@ -331,6 +357,19 @@ final class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(Registration::class, $result);
 
         self::assertInstanceOf(PaymentMethod::class, $result->getPaymentMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function mapsDeletedPaymentMethodAssociationAsNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/RegistrationWithDeletedPaymentMethod.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(Registration::class, $result);
+
+        self::assertNull($result->getPaymentMethod());
     }
 
     /**

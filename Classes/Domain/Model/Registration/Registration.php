@@ -131,8 +131,9 @@ class Registration extends AbstractEntity implements RawDataInterface
         $event = $this->event;
         if ($event instanceof LazyLoadingProxy) {
             $event = $event->_loadRealInstance();
-            \assert($event instanceof Event);
-            $this->event = $event;
+            if ($event instanceof Event) {
+                $this->event = $event;
+            }
         }
 
         return $event;
