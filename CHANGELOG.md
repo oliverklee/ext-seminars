@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Do not display the event UID in the registration process (#4113)
 - Make the registration status (regular/waiting list) a drop-down
   (#4091, #4092, #4093, #4103)
 - !!! Rename `Place::getAddress()` to `Place::getFullAddress()` (#4086)

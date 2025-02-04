@@ -1,0 +1,4 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    {f:render(partial: 'EventDate', arguments: {event: event}) -> f:variable(name: 'eventDate')}
+    <f:translate key="plugin.eventShared.heading.eventTitleAndDate" arguments="{0: event.displayTitle, 1: eventDate}"/>
+</html>
