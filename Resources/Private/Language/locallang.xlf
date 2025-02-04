@@ -1213,7 +1213,7 @@ This event now has been confirmed.</source>
 				<source>Event registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
-				<source>Event registration (waiting list)</source>
+				<source>Waiting list registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
 				<source>Your registration data</source>
