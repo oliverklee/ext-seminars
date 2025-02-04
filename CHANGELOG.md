@@ -121,7 +121,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 
 - Improve display of users without a full name in the BE module (#4111)
-- Avoid crashes for deleted lazy-loaded associations (#4109)
+- Avoid crashes for deleted lazy-loaded associations (#4109, #4115)
 - Do not double ZIP code, city and country when showing a venue address (#4085)
 - Avoid empty localized email subjects in some cases (#3866)
 - Only display the event times if there are no time slots (#3838)

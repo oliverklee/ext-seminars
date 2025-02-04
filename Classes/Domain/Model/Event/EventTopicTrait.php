@@ -123,9 +123,7 @@ trait EventTopicTrait
         $eventType = $this->eventType;
         if ($eventType instanceof LazyLoadingProxy) {
             $eventType = $eventType->_loadRealInstance();
-            if ($eventType instanceof EventType) {
-                $this->eventType = $eventType;
-            }
+            $this->eventType = ($eventType instanceof EventType) ? $eventType : null;
         }
 
         return $eventType;
