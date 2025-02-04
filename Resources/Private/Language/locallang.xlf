@@ -1200,6 +1200,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
 				<source>Consent to terms &amp; conditions</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
+				<source>%1$s, %2$s</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid">
 				<source>%1$s, %2$s (event #%3$u)</source>
 			</trans-unit>
