@@ -54,8 +54,9 @@ trait AttendeesTrait
         $user = $this->user;
         if ($user instanceof LazyLoadingProxy) {
             $user = $user->_loadRealInstance();
-            \assert($user instanceof FrontendUser);
-            $this->user = $user;
+            if ($user instanceof FrontendUser) {
+                $this->user = $user;
+            }
         }
 
         return $user;

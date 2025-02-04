@@ -118,6 +118,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Avoid crashes for deleted lazy-loaded associations (#4109)
 - Do not double ZIP code, city and country when showing a venue address (#4085)
 - Avoid empty localized email subjects in some cases (#3866)
 - Only display the event times if there are no time slots (#3838)
