@@ -267,6 +267,10 @@
         <source>waiting list</source>
         <target state="needs-translation">waiting list</target>
       </trans-unit>
+      <trans-unit id="status_nonbinding_reservation">
+        <source>nonbinding reservation</source>
+        <target state="needs-translation">nonbinding reservation</target>
+      </trans-unit>
       <trans-unit id="label_yes">
         <source>yes</source>
         <target state="needs-translation">yes</target>
