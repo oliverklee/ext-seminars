@@ -33,7 +33,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 - Stop including the ticket ID in the thank-you email by default (#4117)
 - Shorten the heading when registering for the waiting list (#4114)
-- Do not display the event UID in the registration process (#4113)
+- Do not display the event UID in the (un)registration process (#4113, #4118)
 - Make the registration status (regular/waiting list) a drop-down
   (#4091, #4092, #4093, #4103)
 - !!! Rename `Place::getAddress()` to `Place::getFullAddress()` (#4086)
