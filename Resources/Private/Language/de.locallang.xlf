@@ -1985,6 +1985,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Name</source>
         <target state="final">Name</target>
       </trans-unit>
+      <trans-unit id="backEndModule.registration.noName">
+        <source>(User %1$u)</source>
+        <target state="needs-translation">(User %1$u)</target>
+      </trans-unit>
+      <trans-unit id="backEndModule.registration.noUser">
+        <source>(deleted user)</source>
+        <target state="needs-translation">(deleted user)</target>
+      </trans-unit>
       <trans-unit id="backEndModule.action.createEvent" approved="yes">
         <source>Create event</source>
         <target state="final">Veranstaltung erstellen</target>
