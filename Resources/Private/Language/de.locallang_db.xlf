@@ -663,6 +663,10 @@
         <source>hybrid</source>
         <target state="final">hybrid</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_attendances.order_reference">
+        <source>Order reference</source>
+        <target state="needs-translation">Order reference</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_sites" approved="yes">
         <source>Venue</source>
         <target state="final">Veranstaltungsort</target>
