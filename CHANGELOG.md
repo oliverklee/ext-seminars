@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Improve display of users without a full name in the BE module (#4112)
 - Avoid crashes for deleted lazy-loaded associations (#4110)
 - Avoid empty localized email subjects in some cases (#3867)
 
