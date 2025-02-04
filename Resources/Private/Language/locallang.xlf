@@ -202,6 +202,9 @@
 			<trans-unit id="status_waiting_list">
 				<source>waiting list</source>
 			</trans-unit>
+			<trans-unit id="status_nonbinding_reservation">
+				<source>nonbinding reservation</source>
+			</trans-unit>
 			<trans-unit id="label_yes">
 				<source>yes</source>
 			</trans-unit>

@@ -196,6 +196,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         return [
             'regular' => [Registration::STATUS_REGULAR, 'regular'],
             'waiting list' => [Registration::STATUS_WAITING_LIST, 'waiting list'],
+            'nonbinding reservation' => [Registration::STATUS_NONBINDING_RESERVATION, 'nonbinding reservation'],
         ];
     }
 

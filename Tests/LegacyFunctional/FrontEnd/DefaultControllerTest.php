@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Mapper\EventMapper;
@@ -218,7 +219,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      * Creates a FE user, registers him/her to the seminar with the UID in
      * $this->seminarUid and logs him/her in.
      *
-     * @return int the UID of the created registration record, will be > 0
+     * @return int<1, max> the UID of the created registration record
      */
     private function createLogInAndRegisterFeUser(): int
     {
@@ -228,6 +229,7 @@ final class DefaultControllerTest extends FunctionalTestCase
             [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
+                'registration_queue' => Registration::STATUS_REGULAR,
             ]
         );
     }
@@ -4363,9 +4365,31 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function myEventsContainsTitleOfEventWithRegistrationForLoggedInUser(): void
+    public function myEventsContainsTitleOfEventWithRegularRegistrationForLoggedInUser(): void
     {
         $this->createLogInAndRegisterFeUser();
+        $this->subject->setConfigurationValue('what_to_display', 'my_events');
+
+        self::assertStringContainsString(
+            'Test &amp; event',
+            $this->subject->main('', [])
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function myEventsContainsTitleOfEventWithNonbindingReservationForLoggedInUser(): void
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'seminar' => $this->seminarUid,
+                'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+                'registration_queue' => Registration::STATUS_NONBINDING_RESERVATION,
+            ]
+        );
+
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
         self::assertStringContainsString(

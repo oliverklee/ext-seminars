@@ -772,11 +772,21 @@ class LegacyRegistration extends AbstractModel
     /**
      * Gets this registration's status as a localized string.
      *
-     * @return string a localized version of either "waiting list" or "regular", will not be empty
+     * @return string a localized version of either "waiting list", "nonbinding reservation" or "regular"
      */
     public function getStatus(): string
     {
-        $languageKey = $this->isOnRegistrationQueue() ? 'status_waiting_list' : 'status_regular';
+        $status = $this->getRecordPropertyInteger('registration_queue');
+        switch ($status) {
+            case Registration::STATUS_WAITING_LIST:
+                $languageKey = 'status_waiting_list';
+                break;
+            case Registration::STATUS_NONBINDING_RESERVATION:
+                $languageKey = 'status_nonbinding_reservation';
+                break;
+            default:
+                $languageKey = 'status_regular';
+        }
 
         return $this->translate($languageKey);
     }
@@ -784,7 +794,7 @@ class LegacyRegistration extends AbstractModel
     /**
      * Returns our attendees names.
      *
-     * @return string our attendees names, will be empty if this registration has no attendees names
+     * @return string our attendees' names, will be empty if this registration has no attendees names
      */
     public function getAttendeesNames(): string
     {
