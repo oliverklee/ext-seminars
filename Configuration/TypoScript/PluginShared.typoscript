@@ -13,7 +13,7 @@ plugin.tx_seminars {
   salutation = formal
 
   # comma-separated list of section names that shouldn't be displayed in the thank-you email to the user
-  hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
+  hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer,ticket_id
 
   # the CSS file for the HTML email to the attendees
   cssFileForAttendeeMail = EXT:seminars/Resources/Private/CSS/thankYouMail.css
