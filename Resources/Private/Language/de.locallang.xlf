@@ -1611,6 +1611,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Consent to terms &amp; conditions</source>
         <target state="final">AGB-Zustimmung</target>
       </trans-unit>
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
+        <source>%1$s, %2$s</source>
+        <target state="needs-translation">%1$s, %2$s</target>
+      </trans-unit>
       <trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid" approved="yes">
         <source>%1$s, %2$s (event #%3$u)</source>
         <target state="final">%1$s, %2$s (Veranstaltung Nr. %3$u)</target>
@@ -1623,9 +1627,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Event registration</source>
         <target state="final">Veranstaltungsanmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList" approved="yes">
-        <source>Event registration (waiting list)</source>
-        <target state="final">Veranstaltungsanmeldung (Warteliste)</target>
+      <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
+        <source>Waiting list registration</source>
+        <target state="needs-translation">Waiting list registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.heading.registrationData_formal" approved="yes">
         <source>Your registration data</source>
@@ -1985,13 +1989,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Name</source>
         <target state="final">Name</target>
       </trans-unit>
-      <trans-unit id="backEndModule.registration.noName">
+      <trans-unit id="backEndModule.registration.noName" approved="yes">
         <source>(User %1$u)</source>
-        <target state="needs-translation">(User %1$u)</target>
+        <target state="final">(User %1$u)</target>
       </trans-unit>
-      <trans-unit id="backEndModule.registration.noUser">
+      <trans-unit id="backEndModule.registration.noUser" approved="yes">
         <source>(deleted user)</source>
-        <target state="needs-translation">(deleted user)</target>
+        <target state="final">(gelöschter Benutzer)</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.createEvent" approved="yes">
         <source>Create event</source>
