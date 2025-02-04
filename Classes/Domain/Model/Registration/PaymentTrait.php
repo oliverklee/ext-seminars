@@ -38,6 +38,11 @@ trait PaymentTrait
     protected $paymentMethod;
 
     /**
+     * @Validate("StringLength", options={"maximum": 255})
+     */
+    protected string $orderReference = '';
+
+    /**
      * @return Price::PRICE_*
      */
     public function getPriceCode(): string
@@ -92,5 +97,15 @@ trait PaymentTrait
     public function setPaymentMethod(?PaymentMethod $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
+    }
+
+    public function getOrderReference(): string
+    {
+        return $this->orderReference;
+    }
+
+    public function setOrderReference(string $orderReference): void
+    {
+        $this->orderReference = $orderReference;
     }
 }

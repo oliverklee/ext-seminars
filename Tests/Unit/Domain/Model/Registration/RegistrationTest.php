@@ -1231,4 +1231,23 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertFalse($this->subject->isAtLeastPartiallyOnline());
     }
+
+    /**
+     * @test
+     */
+    public function getOrderReferenceInitiallyReturnsEmptyString(): void
+    {
+        self::assertSame('', $this->subject->getOrderReference());
+    }
+
+    /**
+     * @test
+     */
+    public function setOrderReferenceSetsOrderReference(): void
+    {
+        $value = 'Club-Mate';
+        $this->subject->setOrderReference($value);
+
+        self::assertSame($value, $this->subject->getOrderReference());
+    }
 }
