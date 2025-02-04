@@ -326,6 +326,19 @@ final class EventRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function mapsDeletedEventTypeAssociationForSingleEventAsNull(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/propertyMapping/SingleEventWithDeletedEventType.csv');
+
+        $result = $this->subject->findByUid(1);
+        self::assertInstanceOf(SingleEvent::class, $result);
+
+        self::assertNull($result->getEventType());
+    }
+
+    /**
+     * @test
+     */
     public function mapsEmptyEventTypeAssociationForEventTopicAsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventTopicWithAllFields.xml');
