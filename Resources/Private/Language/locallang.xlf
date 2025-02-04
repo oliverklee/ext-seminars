@@ -1476,6 +1476,12 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.events.property.name">
 				<source>Name</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.registration.noName">
+				<source>(User %1$u)</source>
+			</trans-unit>
+			<trans-unit id="backEndModule.registration.noUser">
+				<source>(deleted user)</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.createEvent">
 				<source>Create event</source>
 			</trans-unit>
