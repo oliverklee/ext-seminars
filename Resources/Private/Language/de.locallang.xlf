@@ -267,9 +267,9 @@
         <source>waiting list</source>
         <target state="final">Warteliste</target>
       </trans-unit>
-      <trans-unit id="status_nonbinding_reservation">
+      <trans-unit id="status_nonbinding_reservation" approved="yes">
         <source>nonbinding reservation</source>
-        <target state="needs-translation">nonbinding reservation</target>
+        <target state="final">unverbindliche Reservierung</target>
       </trans-unit>
       <trans-unit id="label_yes" approved="yes">
         <source>yes</source>
@@ -1995,7 +1995,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="backEndModule.registration.noName" approved="yes">
         <source>(User %1$u)</source>
-        <target state="final">(User %1$u)</target>
+        <target state="final">(Benutzer %1$u)</target>
       </trans-unit>
       <trans-unit id="backEndModule.registration.noUser" approved="yes">
         <source>(deleted user)</source>
