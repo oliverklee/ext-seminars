@@ -1611,6 +1611,10 @@ This event now has been confirmed.</target>
         <source>Consent to terms &amp; conditions</source>
         <target state="needs-translation">Consent to terms &amp; conditions</target>
       </trans-unit>
+      <trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
+        <source>%1$s, %2$s</source>
+        <target state="needs-translation">%1$s, %2$s</target>
+      </trans-unit>
       <trans-unit id="plugin.eventShared.heading.eventTitleAndDateAndUid" approved="yes">
         <source>%1$s, %2$s (event #%3$u)</source>
         <target state="final">%1$s, %2$s (événement #%3$u)</target>
@@ -1624,8 +1628,8 @@ This event now has been confirmed.</target>
         <target state="final">Inscription à l'événement (liste d'attente)</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.heading.eventRegistrationForWaitingList">
-        <source>Event registration (waiting list)</source>
-        <target state="needs-translation">Event registration (waiting list)</target>
+        <source>Waiting list registration</source>
+        <target state="needs-translation">Waiting list registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.heading.registrationData_formal">
         <source>Your registration data</source>
