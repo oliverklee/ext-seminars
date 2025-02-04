@@ -44,7 +44,28 @@
                         <f:if condition="{permissions.writeAccessToRegistrations}">
                             <f:then>
                                 <be:link.editRecord uid="{registration.uid}" table="{tableName}">
-                                    {registration.user.name}
+                                    <f:variable name="user" value="{registration.user}"/>
+                                    <f:if condition="{user}">
+                                        <f:then>
+                                            <f:if condition="{user.name}">
+                                                <f:then>
+                                                    {user.name}
+                                                </f:then>
+                                                <f:else if="{user.lastName}">
+                                                    {user.lastName}
+                                                </f:else>
+                                                <f:else>
+                                                    <f:translate key="backEndModule.registration.noName"
+                                                                 arguments="{0: user.uid}"/>
+                                                </f:else>
+                                            </f:if>
+                                        </f:then>
+                                        <f:else>
+                                            <i>
+                                                <f:translate key="backEndModule.registration.noUser"/>
+                                            </i>
+                                        </f:else>
+                                    </f:if>
                                 </be:link.editRecord>
                             </f:then>
                             <f:else>
@@ -70,7 +91,7 @@
                                         arguments="{registrationUid: registration.uid, eventUid: eventUid}"
                                         class="t3js-seminars-confirmation-modal-trigger"
                                         data="{title: confirmTitle, content: confirmContent, button-close-text: confirmCancel, button-ok-text: confirmOkay}"
-                                    >
+                                >
                                     <button type="submit" class="btn btn-default"
                                             title="{f:translate(key: '{actionLabelPrefix}.delete')}">
                                         <core:icon identifier="actions-delete"/>
