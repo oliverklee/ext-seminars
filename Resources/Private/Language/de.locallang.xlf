@@ -1527,13 +1527,13 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Input fields</source>
         <target state="final">Eingabefelder</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats" approved="yes">
         <source>seats</source>
-        <target state="translated">Plätze</target>
+        <target state="final">Plätze</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves" approved="yes">
         <source>is registering themselves (too)</source>
-        <target state="translated">meldet sich (auch) selbst an</target>
+        <target state="final">meldet sich (auch) selbst an</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames" approved="yes">
         <source>persons to register</source>
@@ -1557,7 +1557,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments" approved="yes">
         <source>comments</source>
-        <target state="final">Kommentare</target>
+        <target state="final">Anmerkungen</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode" approved="yes">
         <source>price</source>
@@ -1787,19 +1787,19 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_formal" approved="yes">
         <source>What are is your background knowledge?</source>
-        <target state="final">Was ist Ihr Hintergrundwissen?</target>
+        <target state="final">Welche Vorkenntnisse haben Sie?</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.backgroundKnowledge_informal" approved="yes">
         <source>What are is your background knowledge?</source>
-        <target state="final">Was ist dein Hintergrundwissen?</target>
+        <target state="final">Welche Vorkenntnisse hast du?</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.knownFrom_formal" approved="yes">
         <source>How did you hear about this event?</source>
         <target state="final">Wie haben Sie von dieser Veranstaltung erfahren?</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal" approved="yes">
-        <source>What are is your background knowledge on the topic of this event?</source>
-        <target state="final">Wie hast du von dieser Veranstaltung erfahren?</target>
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
+        <source>How did you hear about this event?</source>
+        <target state="needs-translation">How did you hear about this event?</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.comments" approved="yes">
         <source>Other comments</source>
