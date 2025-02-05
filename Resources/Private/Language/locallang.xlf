@@ -1138,73 +1138,73 @@ This event now has been confirmed.</source>
 				<source>Input fields</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
-				<source>Seats</source>
+				<source>seats</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.registeredThemselves">
-				<source>Is registering themselves (too)</source>
+				<source>is registering themselves (too)</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendeesNames">
-				<source>Persons to register</source>
+				<source>persons to register</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.interests">
-				<source>Interests</source>
+				<source>interests</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.expectations">
-				<source>Expectations</source>
+				<source>expectations</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.backgroundKnowledge">
-				<source>Background knowledge</source>
+				<source>background knowledge</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.knownFrom">
 				<source>Known from where?</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.comments">
-				<source>Comments</source>
+				<source>comments</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
-				<source>Price</source>
+				<source>price</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.orderReference">
-				<source>Order reference</source>
+				<source>order reference</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
 				<source>Billing address</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.separateBillingAddress">
-				<source>Separate billing address</source>
+				<source>separate billing address</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCompany">
-				<source>Company</source>
+				<source>company</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingFullName">
-				<source>Full name</source>
+				<source>full name</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingStreetAddress">
-				<source>Street address</source>
+				<source>street address</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingZipCode">
 				<source>ZIP code</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCity">
-				<source>City</source>
+				<source>city</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingCountry">
-				<source>Country</source>
+				<source>country</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingPhoneNumber">
-				<source>Phone number</source>
+				<source>phone number</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.billingEmailAddress">
-				<source>Email address</source>
+				<source>email address</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.confirmationPage">
 				<source>Confirmation page</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.personalData">
-				<source>Personal data</source>
+				<source>personal data</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.consentedToTermsAndConditions">
-				<source>Consent to terms &amp; conditions</source>
+				<source>consent to terms &amp; conditions</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventShared.heading.eventTitleAndDate">
 				<source>%1$s, %2$s</source>
