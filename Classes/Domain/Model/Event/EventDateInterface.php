@@ -154,6 +154,8 @@ interface EventDateInterface
 
     public function isAtLeastPartiallyOnline(): bool;
 
+    public function isHybrid(): bool;
+
     public function getWebinarUrl(): string;
 
     public function setWebinarUrl(string $webinarUrl): void;

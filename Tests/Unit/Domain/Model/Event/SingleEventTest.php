@@ -1433,6 +1433,36 @@ final class SingleEventTest extends UnitTestCase
     /**
      * @test
      */
+    public function isHybridForOnSiteEventReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ON_SITE);
+
+        self::assertFalse($this->subject->isHybrid());
+    }
+
+    /**
+     * @test
+     */
+    public function isHybridForOnlineEventReturnsFalse(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_ONLINE);
+
+        self::assertFalse($this->subject->isHybrid());
+    }
+
+    /**
+     * @test
+     */
+    public function isHybridForHybridEventReturnsTrue(): void
+    {
+        $this->subject->setEventFormat(EventDateInterface::EVENT_FORMAT_HYBRID);
+
+        self::assertTrue($this->subject->isHybrid());
+    }
+
+    /**
+     * @test
+     */
     public function getWebinarUrlInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getWebinarUrl());

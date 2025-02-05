@@ -26,6 +26,19 @@
 
             <table class="table table-hover table-striped table-responsive">
                 <tbody>
+                    <oelib:isFieldEnabled fieldName="attendanceMode">
+                        <f:if condition="{registration.attendanceMode}">
+                            <tr>
+                                <th scope="row">
+                                    <f:translate key="{labelPrefix}.attendanceMode"/>
+                                </th>
+                                <td>
+                                    <f:translate key="{labelPrefix}.attendanceMode.{registration.attendanceMode}"/>
+                                </td>
+                            </tr>
+                        </f:if>
+                    </oelib:isFieldEnabled>
+
                     <tr>
                         <th scope="row">
                             <f:translate key="{labelPrefix}.seats"/>
@@ -550,6 +563,7 @@
 
             <div class="d-none tx-seminars-display-none">
                 <f:form.hidden name="event" value="{event}"/>
+                <f:form.hidden property="attendanceMode"/>
                 <f:form.hidden property="seats"/>
                 <f:form.hidden property="registeredThemselves"/>
                 <f:form.hidden property="attendeesNames"/>

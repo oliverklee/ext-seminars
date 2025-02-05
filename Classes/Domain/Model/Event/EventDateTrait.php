@@ -520,6 +520,11 @@ trait EventDateTrait
         return \in_array($this->getEventFormat(), self::$partiallyOnlineEventFormats, true);
     }
 
+    public function isHybrid(): bool
+    {
+        return $this->getEventFormat() === EventDateInterface::EVENT_FORMAT_HYBRID;
+    }
+
     public function getWebinarUrl(): string
     {
         return $this->webinarUrl;
