@@ -1563,6 +1563,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Price</source>
         <target state="final">Preis</target>
       </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.orderReference">
+        <source>Order reference</source>
+        <target state="needs-translation">Order reference</target>
+      </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress" approved="yes">
         <source>Billing address</source>
         <target state="final">Rechnungsadresse</target>
@@ -1872,6 +1876,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventRegistration.property.priceCode" approved="yes">
         <source>Price</source>
         <target state="final">Preis</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.orderReference">
+        <source>Order reference</source>
+        <target state="needs-translation">Order reference</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.totalPrice" approved="yes">
         <source>Total price (incl. VAT)</source>
