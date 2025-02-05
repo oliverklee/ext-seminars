@@ -1527,6 +1527,10 @@ This event now has been confirmed.</target>
         <source>Input fields</source>
         <target state="needs-translation">Input fields</target>
       </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
+        <source>attendance mode</source>
+        <target state="needs-translation">attendance mode</target>
+      </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
         <source>seats</source>
         <target state="needs-translation">seats</target>
@@ -1802,6 +1806,18 @@ This event now has been confirmed.</target>
       <trans-unit id="plugin.eventRegistration.property.comments">
         <source>Other comments</source>
         <target state="needs-translation">Other comments</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode">
+        <source>Attendance mode</source>
+        <target state="needs-translation">Attendance mode</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
+        <source>on-site</source>
+        <target state="needs-translation">on-site</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
+        <source>online</source>
+        <target state="needs-translation">online</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.seats">
         <source>Seats to book</source>
