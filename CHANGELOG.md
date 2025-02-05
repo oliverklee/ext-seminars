@@ -129,6 +129,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Fix a copy'n'paste error in a label (#4127)
 - Avoid using the deprecated Extbase models (#3322)
 - Mock controller methods in a TYPO3-version-specific way (#3321)
 - Use the correct queue for flash messages in the BE module (#3305)
