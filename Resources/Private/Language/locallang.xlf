@@ -1336,7 +1336,7 @@ This event now has been confirmed.</source>
 				<source>How did you hear about this event?</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
-				<source>What are is your background knowledge on the topic of this event?</source>
+				<source>How did you hear about this event?</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.comments">
 				<source>Other comments</source>
