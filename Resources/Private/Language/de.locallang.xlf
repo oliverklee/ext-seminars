@@ -1527,9 +1527,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Input fields</source>
         <target state="final">Eingabefelder</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode" approved="yes">
         <source>attendance mode</source>
-        <target state="needs-translation">attendance mode</target>
+        <target state="final">Teilnahmemodus</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats" approved="yes">
         <source>seats</source>
@@ -1809,17 +1809,17 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Other comments</source>
         <target state="final">Sonstige Anmerkungen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.attendanceMode">
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode" approved="yes">
         <source>Attendance mode</source>
-        <target state="needs-translation">Attendance mode</target>
+        <target state="final">Teilnahmemodus</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.1" approved="yes">
         <source>on-site</source>
-        <target state="needs-translation">on-site</target>
+        <target state="final">vor Ort</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.2" approved="yes">
         <source>online</source>
-        <target state="needs-translation">online</target>
+        <target state="final">online</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.seats" approved="yes">
         <source>Seats to book</source>
