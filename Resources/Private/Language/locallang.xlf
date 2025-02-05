@@ -1164,6 +1164,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.priceCode">
 				<source>Price</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.orderReference">
+				<source>Order reference</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.billingAddress">
 				<source>Billing address</source>
 			</trans-unit>
@@ -1391,6 +1394,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.priceCode">
 				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.orderReference">
+				<source>Order reference</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.totalPrice">
 				<source>Total price (incl. VAT)</source>
