@@ -219,7 +219,7 @@
                                 <type>select</type>
                                 <renderType>selectCheckBox</renderType>
                                 <minitems>0</minitems>
-                                <maxitems>20</maxitems>
+                                <maxitems>99</maxitems>
                                 <itemsProcFunc>
                                     OliverKlee\Seminars\Configuration\EventRegistrationFlexForms->buildFields
                                 </itemsProcFunc>

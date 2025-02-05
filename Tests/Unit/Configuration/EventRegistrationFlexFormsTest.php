@@ -46,6 +46,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
             'knownFrom' => ['knownFrom'],
             'comments' => ['comments'],
             'priceCode' => ['priceCode'],
+            'orderReference' => ['orderReference'],
         ];
     }
 

@@ -35,6 +35,7 @@ class EventRegistrationFlexForms
             'knownFrom',
             'comments',
             'priceCode',
+            'orderReference',
         ],
         'billingAddress' => [
             'separateBillingAddress',
