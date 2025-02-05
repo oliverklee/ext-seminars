@@ -1137,6 +1137,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.group.inputFields">
 				<source>Input fields</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
+				<source>attendance mode</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats">
 				<source>seats</source>
 			</trans-unit>
@@ -1340,6 +1343,15 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.comments">
 				<source>Other comments</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.attendanceMode">
+				<source>Attendance mode</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
+				<source>on-site</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
+				<source>online</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.seats">
 				<source>Seats to book</source>

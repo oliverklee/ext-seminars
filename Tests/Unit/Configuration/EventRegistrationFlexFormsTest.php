@@ -37,6 +37,7 @@ final class EventRegistrationFlexFormsTest extends UnitTestCase
     public function inputFieldKeysDataProvider(): array
     {
         return [
+            'attendanceMode' => ['attendanceMode'],
             'seats' => ['seats'],
             'registeredThemselves' => ['registeredThemselves'],
             'attendeesNames' => ['attendeesNames'],

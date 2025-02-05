@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Allow selecting the attendance mode when registering for hybrid events (#4128)
 - Add an order reference input to the registration form (#4122)
 - Add `Registration.orderReference` (#4121)
 - Also show non-binding reservations in the "my events" list (#4120)

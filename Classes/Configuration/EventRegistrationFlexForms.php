@@ -26,6 +26,7 @@ class EventRegistrationFlexForms
      */
     protected const AVAILABLE_FIELDS = [
         'inputFields' => [
+            'attendanceMode',
             'seats',
             'registeredThemselves',
             'attendeesNames',
