@@ -217,6 +217,17 @@
                             </td>
                         </tr>
                     </f:if>
+
+                    <f:if condition="{registration.orderReference}">
+                        <tr>
+                            <th scope="row">
+                                <s:salutationAwareTranslate key="{labelPrefix}.orderReference"/>
+                            </th>
+                            <td>
+                                {registration.orderReference}
+                            </td>
+                        </tr>
+                    </f:if>
                 </tbody>
             </table>
 
@@ -573,6 +584,7 @@
                 <f:for each="{event.registrationCheckboxes}" as="registrationCheckbox">
                     <f:form.checkbox property="registrationCheckboxes" value="{registrationCheckbox.uid}"/>
                 </f:for>
+                <f:form.hidden property="orderReference"/>
             </div>
 
             <div class="d-flex justify-content-end mt-3 mb-3">
