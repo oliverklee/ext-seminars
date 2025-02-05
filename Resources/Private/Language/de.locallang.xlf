@@ -1527,6 +1527,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Input fields</source>
         <target state="final">Eingabefelder</target>
       </trans-unit>
+      <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.attendanceMode">
+        <source>attendance mode</source>
+        <target state="needs-translation">attendance mode</target>
+      </trans-unit>
       <trans-unit id="plugin.eventRegistration.settings.fieldsToShow.seats" approved="yes">
         <source>seats</source>
         <target state="final">Plätze</target>
@@ -1797,13 +1801,25 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>How did you hear about this event?</source>
         <target state="final">Wie haben Sie von dieser Veranstaltung erfahren?</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal">
+      <trans-unit id="plugin.eventRegistration.property.knownFrom_informal" approved="yes">
         <source>How did you hear about this event?</source>
-        <target state="needs-translation">How did you hear about this event?</target>
+        <target state="final">Wie hast du von dieser Veranstaltung erfahren?</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.comments" approved="yes">
         <source>Other comments</source>
         <target state="final">Sonstige Anmerkungen</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode">
+        <source>Attendance mode</source>
+        <target state="needs-translation">Attendance mode</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
+        <source>on-site</source>
+        <target state="needs-translation">on-site</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode.2">
+        <source>online</source>
+        <target state="needs-translation">online</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.seats" approved="yes">
         <source>Seats to book</source>
