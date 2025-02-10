@@ -86,14 +86,8 @@ plugin.tx_seminars {
   # If there are at least this many vancancies, "enough" is displayed instead of the exact number.
   showVacanciesThreshold = 10
 
-  # the filename proposed for CSV export of event lists
-  filenameForEventsCsv = events.csv
-
   # the filename proposed for CSV export of registration lists
   filenameForRegistrationsCsv = registrations.csv
-
-  # comma-separated list of field names from tx_seminars_seminars that will be used for CSV export
-  fieldsFromEventsForCsv = uid,title,subtitle,description,event_type,date,time,place,room,speakers,price_regular,attendees,attendees_max,vacancies,is_full
 
   # comma-separated list of field names from fe_users that will be used for CSV export
   fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
