@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Seminars\Csv\AbstractRegistrationListView;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -21,8 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class AbstractRegistrationListViewTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -80,9 +77,6 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
-
-        $this->getLanguageService()->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -233,20 +227,6 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->purgeMockedInstances();
 
         self::assertNotSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
-    }
-
-    /**
-     * Retrieves the localization for the given locallang key and then strips the trailing colon from the localization.
-     *
-     * @param non-empty-string $locallangKey
-     *        the locallang key with the localization to remove the trailing colon from, must not be empty and the localization
-     *        must have a trailing colon
-     *
-     * @return string locallang string with the removed trailing colon, will not be empty
-     */
-    private function localizeAndRemoveColon(string $locallangKey): string
-    {
-        return \rtrim($this->translate($locallangKey), ':');
     }
 
     /**
@@ -613,16 +593,9 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->registrationFieldKeys = ['address'];
 
         $registrationsList = $this->subject->render();
-        $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
 
-        self::assertStringContainsString(
-            $localizedAddress,
-            $registrationsList
-        );
-        self::assertStringNotContainsString(
-            '"' . $localizedAddress . '"',
-            $registrationsList
-        );
+        self::assertStringContainsString('tx_seminars_attendances.address', $registrationsList);
+        self::assertStringNotContainsString('"tx_seminars_attendances.address"', $registrationsList);
     }
 
     /**
@@ -633,8 +606,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->registrationFieldKeys = ['address', 'title'];
 
         self::assertStringContainsString(
-            $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
-            ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
+            'tx_seminars_attendances.address;tx_seminars_attendances.title',
             $this->subject->render()
         );
     }
@@ -673,12 +645,7 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         $this->registrationFieldKeys = ['address'];
         $this->frontEndUserFieldKeys = ['name'];
 
-        self::assertStringContainsString(
-            $this->localizeAndRemoveColon(
-                'LGL.name'
-            ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
-            $this->subject->render()
-        );
+        self::assertStringContainsString('fe_users.name;tx_seminars_attendances.address', $this->subject->render());
     }
 
     /**

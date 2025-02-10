@@ -10,9 +10,6 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -44,8 +41,6 @@ abstract class AbstractRegistrationListView
      */
     protected int $pageUid = 0;
 
-    protected ?LanguageService $translator = null;
-
     /**
      * @var non-empty-string
      */
@@ -59,60 +54,6 @@ abstract class AbstractRegistrationListView
     public function __construct()
     {
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-    }
-
-    protected function getLanguageService(): ?LanguageService
-    {
-        $languageService = $GLOBALS['LANG'] ?? null;
-        \assert(($languageService instanceof LanguageService) || $languageService === null);
-
-        return $languageService;
-    }
-
-    protected function getBackEndUser(): ?BackendUserAuthentication
-    {
-        $backendUser = $GLOBALS['BE_USER'] ?? null;
-        \assert(($backendUser instanceof BackendUserAuthentication) || $backendUser === null);
-
-        return $backendUser;
-    }
-
-    /**
-     * Loads the language data and returns the corresponding translator instance.
-     */
-    protected function getInitializedTranslator(): LanguageService
-    {
-        if ($this->translator instanceof LanguageService) {
-            return $this->translator;
-        }
-
-        if ($this->getLanguageService() instanceof LanguageService) {
-            $languageService = $this->getLanguageService();
-        } else {
-            $backEndUser = $this->getBackEndUser();
-            if ($backEndUser instanceof BackendUserAuthentication) {
-                $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)
-                    ->createFromUserPreferences($backEndUser);
-            } else {
-                $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
-            }
-        }
-
-        $this->translator = $languageService;
-        $languageService->includeLLFile('EXT:core/Resources/Private/Language/locallang_general.xlf');
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $this->includeAdditionalLanguageFiles();
-
-        return $languageService;
-    }
-
-    /**
-     * Includes additional language files for $this->translator.
-     *
-     * This function is intended to be overwritten in subclasses.
-     */
-    protected function includeAdditionalLanguageFiles(): void
-    {
     }
 
     /**
@@ -161,7 +102,7 @@ abstract class AbstractRegistrationListView
      */
     protected function createCsvHeading(): string
     {
-        return \implode(self::COLUMN_SEPARATOR, $this->getLocalizedCsvHeadings());
+        return \implode(self::COLUMN_SEPARATOR, $this->getCsvHeadings());
     }
 
     /**
@@ -242,37 +183,19 @@ abstract class AbstractRegistrationListView
     /**
      * Returns the localized field names.
      *
-     * @return list<string> the translated field names in an array, will be empty if no fields should be exported
+     * @return list<string> field keys, will be empty if no fields should be exported
      */
-    protected function getLocalizedCsvHeadings(): array
+    protected function getCsvHeadings(): array
     {
-        $fieldsFromFeUser = $this->createLocalizedCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
-        $fieldsFromAttendances = $this->createLocalizedCsvHeadingsForOneTable(
-            $this->getRegistrationFieldKeys(),
-            $this->getTableName()
-        );
-
-        return \array_merge($fieldsFromFeUser, $fieldsFromAttendances);
-    }
-
-    /**
-     * Returns the localized field names.
-     *
-     * @param list<string> $fieldNames the field names to translate, may be empty
-     * @param non-empty-string $localizationPrefix the table to which the fields belong to
-     *
-     * @return list<string> the translated field names in an array, will be empty if no field names were given
-     */
-    protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, string $localizationPrefix): array
-    {
-        $translations = [];
-        $translator = $this->getInitializedTranslator();
-
-        foreach ($fieldNames as $fieldName) {
-            $translations[] = \rtrim($translator->getLL($localizationPrefix . '.' . $fieldName), ':');
+        $headerLabels = [];
+        foreach ($this->getFrontEndUserFieldKeys() as $key) {
+            $headerLabels[] = 'fe_users.' . $key;
+        }
+        foreach ($this->getRegistrationFieldKeys() as $key) {
+            $headerLabels[] = $this->getTableName() . '.' . $key;
         }
 
-        return $translations;
+        return $headerLabels;
     }
 
     /**

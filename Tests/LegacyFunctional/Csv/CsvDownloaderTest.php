@@ -72,20 +72,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
         parent::tearDown();
     }
 
-    // Utility functions
-
-    /**
-     * Retrieves the localization for the given locallang key and then strips the trailing colon from it.
-     *
-     * @param non-empty-string $key the locallang key with the localization to remove the trailing colon from
-     *
-     * @return string locallang string with the removed trailing colon, will not be empty
-     */
-    private function localizeAndRemoveColon(string $key): string
-    {
-        return \rtrim($this->translate($key), ':');
-    }
-
     // Tests for the CSV export of registrations.
 
     /**
@@ -183,9 +169,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
         );
 
         self::assertStringContainsString(
-            $this->localizeAndRemoveColon(
-                'tx_seminars_attendances.registered_themselves'
-            ),
+            'tx_seminars_attendances.registered_themselves',
             $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
@@ -208,7 +192,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
         );
 
         self::assertStringContainsString(
-            $this->localizeAndRemoveColon('tx_seminars_attendances.company'),
+            'tx_seminars_attendances.company',
             $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
@@ -660,16 +644,8 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
-        $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
-
-        self::assertStringContainsString(
-            $localizedAddress,
-            $registrationsList
-        );
-        self::assertStringNotContainsString(
-            '"' . $localizedAddress . '"',
-            $registrationsList
-        );
+        self::assertStringContainsString('tx_seminars_attendances.address', $registrationsList);
+        self::assertStringNotContainsString('"tx_seminars_attendances.address"', $registrationsList);
     }
 
     /**
@@ -680,8 +656,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address,title');
 
         self::assertStringContainsString(
-            $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
-            ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
+            'tx_seminars_attendances.address;tx_seminars_attendances.title',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }

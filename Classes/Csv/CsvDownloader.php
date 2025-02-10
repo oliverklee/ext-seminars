@@ -6,7 +6,6 @@ namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Configuration;
-use OliverKlee\Seminars\Localization\TranslateTrait;
 use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -18,8 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CsvDownloader
 {
-    use TranslateTrait;
-
     protected Configuration $configuration;
 
     public function __construct()
