@@ -16,12 +16,6 @@
 			<trans-unit id="LGL.endtime">
 				<source>Stop</source>
 			</trans-unit>
-			<trans-unit id="LGL.telephone">
-				<source>Phone</source>
-			</trans-unit>
-			<trans-unit id="LGL.gender">
-				<source>Gender</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_seminars">
 				<source>Event</source>
 			</trans-unit>
