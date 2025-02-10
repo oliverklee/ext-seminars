@@ -19,14 +19,6 @@
         <source>Stop</source>
         <target state="final">Stopp</target>
       </trans-unit>
-      <trans-unit id="LGL.telephone" approved="yes">
-        <source>Phone</source>
-        <target state="final">Telefon</target>
-      </trans-unit>
-      <trans-unit id="LGL.gender" approved="yes">
-        <source>Gender</source>
-        <target state="final">Anrede</target>
-      </trans-unit>
       <trans-unit id="tx_seminars_seminars" approved="yes">
         <source>Event</source>
         <target state="final">Veranstaltung</target>
