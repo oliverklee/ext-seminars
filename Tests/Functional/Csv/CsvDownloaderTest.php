@@ -8,7 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
-use OliverKlee\Seminars\Tests\Support\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -17,8 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class CsvDownloaderTest extends FunctionalTestCase
 {
-    use LanguageHelper;
-
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/static_info_tables',
         'typo3conf/ext/feuserextrafields',
@@ -36,10 +33,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
-        $this->setUpBackendUser(1);
         $this->setUpExtensionConfiguration();
-        $this->initializeBackEndLanguage();
 
         $this->responseHeadersModifier = new ResponseHeadersModifier();
         GeneralUtility::setSingletonInstance(ResponseHeadersModifier::class, $this->responseHeadersModifier);
@@ -53,18 +47,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $configurationRegistry->set('plugin', new DummyConfiguration());
         $this->configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
-    }
-
-    /**
-     * Retrieves the localization for the given locallang key and then strips the trailing colon from it.
-     *
-     * @param non-empty-string $key the locallang key with the localization to remove the trailing colon from
-     *
-     * @return string locallang string with the removed trailing colon, will not be empty
-     */
-    private function localizeAndRemoveColon(string $key): string
-    {
-        return \rtrim($this->translate($key), ':');
     }
 
     /**
@@ -113,26 +95,23 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $result = $this->subject->createAndOutputListOfRegistrations(1);
 
-        $expected = $this->localizeAndRemoveColon('LGL.name') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_attendances.uid') . "\r\n";
-
+        $expected = "fe_users.name;tx_seminars_attendances.uid\r\n";
         self::assertSame($expected, $result);
     }
 
     /**
      * @test
      */
-    public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenFieldsHeaders(): void
+    public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenFieldHeaders(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
 
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $result = $this->subject->createAndOutputListOfRegistrations(1);
 
-        $expected = $this->localizeAndRemoveColon('LGL.name') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_attendances.address');
+        $expected = 'fe_users.name;tx_seminars_attendances.address';
         self::assertStringContainsString($expected, $result);
     }
 

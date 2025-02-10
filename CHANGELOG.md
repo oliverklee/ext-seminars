@@ -37,6 +37,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Do not localize the CSV headings anymore (#4133)
 - Stop including the ticket ID in the thank-you email by default (#4117)
 - Shorten the heading when registering for the waiting list (#4114)
 - Do not display the event UID in the (un)registration process (#4113, #4118)
