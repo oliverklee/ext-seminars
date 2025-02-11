@@ -10,6 +10,9 @@ plugin.tx_seminars.settings {
     useDash = {$plugin.tx_seminars.settings.currency.useDash}
   }
 
+  # VAT rate in percent (temporary configuration)
+  vatRate = {$plugin.tx_seminars.settings.vatRate}
+
   # show "enough" instead of the exact number if there are at last this many vacancies
   enoughVacanciesThreshold = {$plugin.tx_seminars.settings.enoughVacanciesThreshold}
 }
