@@ -1800,6 +1800,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.room">
 				<source>room</source>
 			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.price">
+				<source>price</source>
+			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies">
 				<source>vacancies</source>
 			</trans-unit>
@@ -1823,6 +1826,9 @@ This event now has been confirmed.</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.room">
 				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="plugin.eventSingleView.events.property.price">
+				<source>Price</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.vacancies">
 				<source>Vacancies</source>
