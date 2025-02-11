@@ -49,7 +49,7 @@
                                 <minitems>1</minitems>
                                 <maxitems>99</maxitems>
                                 <default>
-                                    title, eventType, registrationTop, dateAndTime, venue, room, vacancies,
+                                    title, eventType, registrationTop, dateAndTime, venue, room, price, vacancies,
                                     description, speakers, registrationBottom
                                 </default>
                                 <items type="array">
@@ -88,6 +88,12 @@
                                             LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.room
                                         </numIndex>
                                         <numIndex index="1">room</numIndex>
+                                    </numIndex>
+                                    <numIndex index="6" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:plugin.eventSingleView.settings.displayOptions.dataToDisplay.price
+                                        </numIndex>
+                                        <numIndex index="1">price</numIndex>
                                     </numIndex>
                                     <numIndex index="7" type="array">
                                         <numIndex index="0">
