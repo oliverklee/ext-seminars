@@ -1008,6 +1008,40 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function showActionRendersPrice(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('499.50 €', $html);
+    }
+
+    /**
+     * @test
+     */
+    public function showActionForEventWithRegistrationDeadlineOverDoesNotRenderPrice(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/EventController/showAction/FutureEventWithVacanciesAndDeadlineOver.csv'
+        );
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringNotContainsString('499.50 €', $html);
+    }
+
+    /**
+     * @test
+     */
     public function showActionForEventWithUnlimitedSeatsRendersUnlimitedSeats(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');

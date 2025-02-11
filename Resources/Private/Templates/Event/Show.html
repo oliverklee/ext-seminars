@@ -111,6 +111,17 @@
             </f:if>
         </oelib:isFieldEnabled>
 
+        <oelib:isFieldEnabled fieldName="price">
+            <f:if condition="{event.registrationPossibleByDate}">
+                <h3>
+                    <f:translate key="plugin.eventSingleView.events.property.price"/>
+                </h3>
+                <p>
+                    <f:render partial="Price" arguments="{amount: event.standardPrice}"/>
+                </p>
+            </f:if>
+        </oelib:isFieldEnabled>
+
         <oelib:isFieldEnabled fieldName="vacancies">
             <f:if condition="({event.registrationRequired} && {event.registrationPossibleByDate})">
                 <h3>
