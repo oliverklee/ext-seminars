@@ -2417,6 +2417,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>room</source>
         <target state="final">Raum</target>
       </trans-unit>
+      <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.price">
+        <source>price</source>
+        <target state="needs-translation">price</target>
+      </trans-unit>
       <trans-unit id="plugin.eventSingleView.settings.displayOptions.dataToDisplay.vacancies" approved="yes">
         <source>vacancies</source>
         <target state="final">freie Plätze</target>
@@ -2448,6 +2452,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
       <trans-unit id="plugin.eventSingleView.events.property.room" approved="yes">
         <source>Room</source>
         <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="plugin.eventSingleView.events.property.price">
+        <source>Price</source>
+        <target state="needs-translation">Price</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.vacancies" approved="yes">
         <source>Vacancies</source>
