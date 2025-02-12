@@ -1024,6 +1024,38 @@ final class EventControllerTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function showActionWithNonZeroVatRateRendersPriceWithVat(): void
+    {
+        $this->setUpFrontendRootPage(1, [
+            'constants' => [
+                'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript',
+                'EXT:seminars/Configuration/TypoScript/constants.typoscript',
+            ],
+            'setup' => [
+                'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript',
+                'EXT:seminars/Configuration/TypoScript/setup.typoscript',
+                'EXT:seminars/Tests/Functional/Controller/Fixtures/TypoScript/Setup/Rendering.typoscript',
+                'EXT:seminars/Tests/Functional/Controller/Fixtures/TypoScript/Setup/PluginConfiguration.typoscript',
+                'EXT:seminars/Tests/Functional/Controller/Fixtures/TypoScript/Setup/Vat.typoscript',
+            ],
+        ]);
+
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/FutureEventWithAllScalarData.csv');
+
+        $request = (new InternalRequest())->withPageId(3)
+            ->withQueryParameter('tx_seminars_eventsingleview[event]', 1);
+
+        $html = (string)$this->executeFrontendSubRequest($request)->getBody();
+
+        self::assertStringContainsString('594.41 €', $html);
+        self::assertStringContainsString('499.50 €', $html);
+        self::assertStringContainsString('94.91 €', $html);
+    }
+
+    /**
+     * @test
+     */
     public function showActionForEventWithRegistrationDeadlineOverDoesNotRenderPrice(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/EventController/showAction/EventSingleViewContentElement.csv');

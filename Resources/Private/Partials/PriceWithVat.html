@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:variable name="vatRate" value="{settings.vatRate}"/>
+
+    <f:if condition="{vatRate}">
+        <f:then>
+            <f:variable name="amountExcludingVat" value="{amount}"/>
+            <f:variable name="vatAmount" value="{amount * vatRate / 100}"/>
+            <f:variable name="amountIncludingVat" value="{amountExcludingVat + vatAmount}"/>
+
+            {f:render(partial: 'Price', arguments: {amount: amountExcludingVat}) -> f:variable(name:
+            'priceExcludingVat')}
+            {f:render(partial: 'Price', arguments: {amount: vatAmount}) -> f:variable(name: 'vat')}
+            {f:render(partial: 'Price', arguments: {amount: amountIncludingVat}) -> f:variable(name:
+            'priceIncludingVat')}
+
+            <f:translate key="priceWithAndWithoutVat" arguments="{0: priceIncludingVat, 1: priceExcludingVat, 2: vat}"/>
+        </f:then>
+        <f:else>
+            <f:render partial="Price" arguments="{amount: amount}"/>
+        </f:else>
+    </f:if>
+</html>
