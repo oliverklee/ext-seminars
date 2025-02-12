@@ -1813,9 +1813,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Other comments</source>
         <target state="final">Sonstige Anmerkungen</target>
       </trans-unit>
-      <trans-unit id="plugin.eventRegistration.property.attendanceMode">
+      <trans-unit id="plugin.eventRegistration.property.attendanceMode" approved="yes">
         <source>On-site/online</source>
-        <target state="needs-translation">On-site/online</target>
+        <target state="final">Vor Ort/online</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.attendanceMode.1" approved="yes">
         <source>on-site</source>
@@ -2369,9 +2369,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Registration</source>
         <target state="final">Anmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventOutlook.events.property.registration.register">
+      <trans-unit id="plugin.eventOutlook.events.property.registration.register" approved="yes">
         <source>registration</source>
-        <target state="needs-translation">registration</target>
+        <target state="final">zur Anmeldung</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList" approved="yes">
         <source>waiting list</source>
@@ -2493,9 +2493,9 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Registration</source>
         <target state="final">Anmeldung</target>
       </trans-unit>
-      <trans-unit id="plugin.eventSingleView.events.property.registration.register">
+      <trans-unit id="plugin.eventSingleView.events.property.registration.register" approved="yes">
         <source>registration</source>
-        <target state="needs-translation">registration</target>
+        <target state="final">zur Anmeldung</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList" approved="yes">
         <source>register for the waiting list</source>
