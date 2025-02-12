@@ -1812,8 +1812,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Other comments</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.attendanceMode">
-        <source>Attendance mode</source>
-        <target state="needs-translation">Attendance mode</target>
+        <source>On-site/online</source>
+        <target state="needs-translation">On-site/online</target>
       </trans-unit>
       <trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
         <source>on-site</source>
@@ -2368,8 +2368,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.registration.register">
-        <source>register</source>
-        <target state="needs-translation">register</target>
+        <source>registration</source>
+        <target state="needs-translation">registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
         <source>waiting list</source>
@@ -2492,8 +2492,8 @@ This event now has been confirmed.</target>
         <target state="needs-translation">Registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.register">
-        <source>register for this event</source>
-        <target state="needs-translation">register for this event</target>
+        <source>registration</source>
+        <target state="needs-translation">registration</target>
       </trans-unit>
       <trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
         <source>register for the waiting list</source>
