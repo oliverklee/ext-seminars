@@ -477,7 +477,7 @@
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue.regular" approved="yes">
         <source>regular registration</source>
-        <target state="final">reguläre Anmeldungen</target>
+        <target state="final">reguläre Anmeldung</target>
       </trans-unit>
       <trans-unit id="tx_seminars_attendances.registration_queue.waitingList" approved="yes">
         <source>waiting list</source>
