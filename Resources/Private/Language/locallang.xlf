@@ -1348,7 +1348,7 @@ This event now has been confirmed.</source>
 				<source>Other comments</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.attendanceMode">
-				<source>Attendance mode</source>
+				<source>On-site/online</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventRegistration.property.attendanceMode.1">
 				<source>on-site</source>
@@ -1765,7 +1765,7 @@ This event now has been confirmed.</source>
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.registration.register">
-				<source>register</source>
+				<source>registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventOutlook.events.property.registration.waitingList">
 				<source>waiting list</source>
@@ -1858,7 +1858,7 @@ This event now has been confirmed.</source>
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.register">
-				<source>register for this event</source>
+				<source>registration</source>
 			</trans-unit>
 			<trans-unit id="plugin.eventSingleView.events.property.registration.waitingList">
 				<source>register for the waiting list</source>

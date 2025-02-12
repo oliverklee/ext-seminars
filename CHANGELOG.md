@@ -39,6 +39,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Improve some FE labels (#4141)
 - !!! Do not localize the CSV headings anymore (#4133)
 - Stop including the ticket ID in the thank-you email by default (#4117)
 - Shorten the heading when registering for the waiting list (#4114)
