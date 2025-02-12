@@ -456,6 +456,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="thousandsSeparator">
 				<source>,</source>
 			</trans-unit>
+			<trans-unit id="priceWithAndWithoutVat">
+				<source>%1$s incl. VAT (%2$s plus %3$s VAT)</source>
+			</trans-unit>
 			<trans-unit id="registrationTitleFormat">
 				<source>%1s / %2s, %3s</source>
 			</trans-unit>

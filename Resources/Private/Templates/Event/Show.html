@@ -117,7 +117,7 @@
                     <f:translate key="plugin.eventSingleView.events.property.price"/>
                 </h3>
                 <p>
-                    <f:render partial="Price" arguments="{amount: event.standardPrice}"/>
+                    <f:render partial="PriceWithVat" arguments="{amount: event.standardPrice}"/>
                 </p>
             </f:if>
         </oelib:isFieldEnabled>
