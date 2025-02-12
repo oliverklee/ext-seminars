@@ -619,6 +619,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>,</source>
         <target state="final">.</target>
       </trans-unit>
+      <trans-unit id="priceWithAndWithoutVat">
+        <source>%1$s incl. VAT (%2$s plus %3$s VAT)</source>
+        <target state="needs-translation">%1$s incl. VAT (%2$s plus %3$s VAT)</target>
+      </trans-unit>
       <trans-unit id="registrationTitleFormat" approved="yes">
         <source>%1s / %2s, %3s</source>
         <target state="final">%1s / %2s, %3s</target>
