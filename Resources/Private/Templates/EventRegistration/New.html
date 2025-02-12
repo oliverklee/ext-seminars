@@ -339,7 +339,7 @@
                                     <f:for each="{applicablePrices}" as="price">
                                         <f:form.select.option value="{price.priceCode}">
                                             <f:translate key="{price.labelKey}"/>
-                                            <f:render partial="Price" arguments="{amount: price.amount}"/>
+                                            <f:render partial="PriceWithVat" arguments="{amount: price.amount}"/>
                                         </f:form.select.option>
                                     </f:for>
                                 </f:form.select>

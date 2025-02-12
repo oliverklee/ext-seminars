@@ -204,7 +204,7 @@
                                     <f:then>
                                         <p>
                                             <f:translate key="{selectedPrice.labelKey}"/>
-                                            <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                            <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
                                         </p>
                                         <p class="alert alert-info" role="alert">
                                             <s:salutationAwareTranslate
@@ -213,7 +213,7 @@
                                     </f:then>
                                     <f:else>
                                         <f:translate key="{selectedPrice.labelKey}"/>
-                                        <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                        <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
                                     </f:else>
                                 </f:if>
                             </td>
@@ -534,7 +534,7 @@
                             </th>
                             <td>
                                 <f:translate key="{selectedPrice.labelKey}"/>
-                                <f:render partial="Price" arguments="{amount: selectedPrice.amount}"/>
+                                <f:render partial="PriceWithVat" arguments="{amount: selectedPrice.amount}"/>
                             </td>
                         </tr>
                     </f:if>
@@ -554,7 +554,7 @@
                         </th>
                         <td>
                             <strong>
-                                <f:render partial="Price" arguments="{amount: registration.totalPrice}"/>
+                                <f:render partial="PriceWithVat" arguments="{amount: registration.totalPrice}"/>
                             </strong>
                         </td>
                     </tr>
