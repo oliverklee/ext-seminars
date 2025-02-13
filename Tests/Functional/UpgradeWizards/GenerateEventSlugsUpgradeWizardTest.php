@@ -136,7 +136,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertSame('event-without-slug/2', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 
@@ -154,7 +154,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertSame('event-without-slug/1', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 
@@ -172,7 +172,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertSame('event-without-slug/1', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 
@@ -190,7 +190,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug', $databaseRow['slug']);
+        self::assertSame('event-without-slug/1', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 
@@ -208,63 +208,7 @@ class GenerateEventSlugsUpgradeWizardTest extends FunctionalTestCase
         $databaseRow = $result->fetchAssociative();
 
         self::assertIsArray($databaseRow);
-        self::assertSame('event-without-slug', $databaseRow['slug']);
-        self::assertTrue($wizardResult);
-    }
-
-    /**
-     * @test
-     */
-    public function executeSuffixesSlugIfSlugAlreadyExistsBeforeWizard(): void
-    {
-        $this->importDataSet(self::FIXTURES_PREFIX . 'SlugCollisionWithExistingSlug.xml');
-
-        $wizardResult = $this->subject->executeUpdate();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame('event-title-1', $databaseRow['slug']);
-        self::assertTrue($wizardResult);
-    }
-
-    /**
-     * @test
-     */
-    public function executeSuffixesSlugIfCollidingSlugHasJustBeenCreatedByWizard(): void
-    {
-        $this->importDataSet(
-            __DIR__ . '/Fixtures/GenerateEventSlugsUpgradeWizard/SlugCollisionWithNewlyCreatedSlug.xml'
-        );
-
-        $wizardResult = $this->subject->executeUpdate();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 2]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame('event-title-1', $databaseRow['slug']);
-        self::assertTrue($wizardResult);
-    }
-
-    /**
-     * @test
-     */
-    public function executeSuffixesSlugWithNextAvailableSuffixIfSuffixAlreadyExists(): void
-    {
-        $this->importDataSet(self::FIXTURES_PREFIX . 'SlugCollisionWithSuffixedSlug.xml');
-
-        $wizardResult = $this->subject->executeUpdate();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_seminars_seminars');
-        $result = $connection->executeQuery('SELECT * FROM tx_seminars_seminars WHERE uid = :uid', ['uid' => 3]);
-        $databaseRow = $result->fetchAssociative();
-
-        self::assertIsArray($databaseRow);
-        self::assertSame('event-title-2', $databaseRow['slug']);
+        self::assertSame('event-without-slug/1', $databaseRow['slug']);
         self::assertTrue($wizardResult);
     }
 }

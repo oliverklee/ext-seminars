@@ -4,6 +4,6 @@
         <uid>1</uid>
         <title>Event date</title>
         <object_type>2</object_type>
-        <slug>existing-date-slug</slug>
+        <slug>existing-date-slug/1</slug>
     </tx_seminars_seminars>
 </dataset>
