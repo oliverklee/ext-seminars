@@ -83,6 +83,18 @@
         <source>Room</source>
         <target state="final">Комната</target>
       </trans-unit>
+      <trans-unit id="label_attendance_mode">
+        <source>On-site/online</source>
+        <target state="needs-translation">On-site/online</target>
+      </trans-unit>
+      <trans-unit id="label_attendance_mode.onSite">
+        <source>on-site</source>
+        <target state="needs-translation">on-site</target>
+      </trans-unit>
+      <trans-unit id="label_attendance_mode.online">
+        <source>online</source>
+        <target state="needs-translation">online</target>
+      </trans-unit>
       <trans-unit id="label_seats" approved="yes">
         <source>Seats</source>
         <target state="final">Количество мест:</target>
