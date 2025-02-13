@@ -352,7 +352,6 @@ class RegistrationManager implements SingletonInterface
             return;
         }
 
-        $contentObject = $this->getContentObjectRendererFromPlugin($plugin);
         $emailBuilder = GeneralUtility::makeInstance(EmailBuilder::class);
         $emailBuilder->to($user)
             ->from($this->determineEmailSenderForEvent($event))
@@ -360,8 +359,8 @@ class RegistrationManager implements SingletonInterface
             ->subject(
                 $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
             )
-            ->text($this->buildEmailContent($oldRegistration, $contentObject, $helloSubjectPrefix));
-        $emailBuilder->html($this->buildEmailContent($oldRegistration, $contentObject, $helloSubjectPrefix, true));
+            ->text($this->buildEmailContent($oldRegistration, $helloSubjectPrefix));
+        $emailBuilder->html($this->buildEmailContent($oldRegistration, $helloSubjectPrefix, true));
 
         $registrationUid = $oldRegistration->getUid();
         \assert($registrationUid > 0);
@@ -686,8 +685,6 @@ class RegistrationManager implements SingletonInterface
     /**
      * Builds the email body for an email to the attendee.
      *
-     * @param LegacyRegistration $registration
-     *        the registration for which the notification should be sent
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
      *        string; allowed values are:
@@ -702,7 +699,6 @@ class RegistrationManager implements SingletonInterface
      */
     private function buildEmailContent(
         LegacyRegistration $registration,
-        ContentObjectRenderer $contentObjectRenderer,
         string $helloSubjectPrefix,
         bool $useHtml = false
     ): string {
