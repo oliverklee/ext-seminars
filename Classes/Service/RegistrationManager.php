@@ -719,6 +719,13 @@ class RegistrationManager implements SingletonInterface
 
         $template->setMarker('registration_uid', $registration->getUid());
 
+        $attendanceMode = $registration->getRegistrationData('attendance_mode');
+        if ($attendanceMode !== '') {
+            $template->setMarker('attendance_mode', $attendanceMode);
+        } else {
+            $template->hideSubparts('attendance_mode', $wrapperPrefix);
+        }
+
         if ($registration->hasSeats()) {
             $template->setMarker('seats', $registration->getSeats());
         } else {
