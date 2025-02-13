@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Seo;
 use OliverKlee\Seminars\Domain\Model\Event\EventInterface;
 use OliverKlee\Seminars\Seo\Event\AfterSlugGeneratedEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
@@ -54,31 +53,32 @@ class SlugGenerator implements SingletonInterface
     public function generateSlug(array $parameters): string
     {
         $record = $parameters['record'];
-        $recordType = (int)($record['object_type'] ?? 0);
-        \assert($recordType >= 0);
         $eventUid = (int)($record['uid'] ?? 0);
-        \assert($eventUid >= 0);
+        $recordType = (int)($record['object_type'] ?? 0);
         $topicUid = (int)($record['topic'] ?? 0);
-        \assert($topicUid >= 0);
+        if ($eventUid <= 0 || $recordType < 0 || $topicUid < 0) {
+            return '';
+        }
 
         $title = '';
         if ($recordType === EventInterface::TYPE_EVENT_DATE) {
             $result = $this->getQueryBuilder()->select('title')->from(self::TABLE_NAME_EVENTS)
                 ->where('uid = :uid')->setParameter('uid', $topicUid)
                 ->executeQuery();
-            /** @var DatabaseRow|false $data */
             $data = $result->fetchAssociative();
             if (\is_array($data)) {
+                /** @var DatabaseRow $data */
                 $title = (string)$data['title'];
             }
         } else {
             $title = $record['title'] ?? '';
         }
 
-        $slugCandidate = (new SlugHelper(self::TABLE_NAME_EVENTS, 'slug', []))->sanitize($title);
+        $slugifiedTitle = (new SlugHelper(self::TABLE_NAME_EVENTS, 'slug', []))->sanitize($title);
+        $slug = ($slugifiedTitle !== '') ? ($slugifiedTitle . '/' . $eventUid) : (string)$eventUid;
+        $slugContext = new SlugContext($eventUid, $title, $slugifiedTitle);
 
-        $slugContext = new SlugContext($eventUid, $title, $slugCandidate);
-        $event = new AfterSlugGeneratedEvent($slugContext, $this->makeSlugUnique($slugCandidate, $eventUid));
+        $event = new AfterSlugGeneratedEvent($slugContext, $slug);
         $this->eventDispatcher->dispatch($event);
 
         return $event->getSlug();
@@ -95,40 +95,5 @@ class SlugGenerator implements SingletonInterface
         $queryBuilder->getRestrictions()->removeAll();
 
         return $queryBuilder;
-    }
-
-    /**
-     * Makes the given slug unique by appending a suffix if necessary. The resulting slug is allowed to be the same as
-     * the slug from the event with the given UID, practically allowing events to keep their slug.
-     */
-    private function makeSlugUnique(string $slugCandidate, int $eventUid): string
-    {
-        $slug = $slugCandidate;
-        $suffix = 0;
-
-        while ($this->countEventsWithSlug($slug, $eventUid) > 0) {
-            $suffix++;
-            $slug = $slugCandidate . '-' . $suffix;
-        }
-
-        return $slug;
-    }
-
-    /**
-     * Counts the number of events with the given slug, excluding the event with the given UID (so that existing events
-     * can keep their slug).
-     */
-    private function countEventsWithSlug(string $slug, int $eventUid): int
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryResult = $queryBuilder
-            ->count('*')
-            ->from(self::TABLE_NAME_EVENTS)
-            ->andWhere(
-                $queryBuilder->expr()->eq('slug', $queryBuilder->createNamedParameter($slug, Connection::PARAM_STR)),
-                $queryBuilder->expr()->neq('uid', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
-            )->executeQuery();
-
-        return (int)$queryResult->fetchOne();
     }
 }

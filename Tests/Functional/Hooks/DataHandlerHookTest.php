@@ -591,7 +591,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('unchanged-slug', $row['slug']);
+        self::assertSame('unchanged-slug/1', $row['slug']);
     }
 
     /**
@@ -607,7 +607,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('unchanged-slug', $row['slug']);
+        self::assertSame('unchanged-slug/1', $row['slug']);
     }
 
     /**
@@ -623,7 +623,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('unchanged-slug', $row['slug']);
+        self::assertSame('unchanged-slug/1', $row['slug']);
     }
 
     /**
@@ -639,7 +639,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('single-event-without-slug', $row['slug']);
+        self::assertSame('single-event-without-slug/1', $row['slug']);
     }
 
     /**
@@ -655,7 +655,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('topic-without-slug', $row['slug']);
+        self::assertSame('topic-without-slug/1', $row['slug']);
     }
 
     /**
@@ -671,7 +671,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $result = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable(self::TABLE_SEMINARS)
             ->select(['*'], self::TABLE_SEMINARS, ['uid' => $uid]);
         $row = $result->fetchAssociative();
-        self::assertSame('topic-with-slug', $row['slug']);
+        self::assertSame('topic-with-slug/1', $row['slug']);
     }
 
     /**

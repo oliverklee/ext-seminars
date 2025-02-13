@@ -4,6 +4,6 @@
         <uid>1</uid>
         <title>topic without slug</title>
         <object_type>1</object_type>
-        <slug>-1</slug>
+        <slug></slug>
     </tx_seminars_seminars>
 </dataset>

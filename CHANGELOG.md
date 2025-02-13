@@ -40,6 +40,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- !!! Always include the UID in the event slugs (#4152)
 - Improve some FE labels (#4141)
 - !!! Do not localize the CSV headings anymore (#4133)
 - Stop including the ticket ID in the thank-you email by default (#4117)

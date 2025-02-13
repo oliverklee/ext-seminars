@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Seo;
 
 /**
- * Context for generating a slug.
+ * Context for generating a slug for an event.
  */
 final class SlugContext
 {

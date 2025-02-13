@@ -65,7 +65,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $subject->generateSlug(['record' => $record]);
 
-        self::assertSame('there-will-be-cake', $result);
+        self::assertSame('there-will-be-cake/1234', $result);
     }
 
     /**
@@ -95,14 +95,14 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventWithEmptyTitleReturnsEmptyString(int $type): void
+    public function generateSlugForNonDateEventWithEmptyTitleReturnsUidWithoutTrailingSlash(int $type): void
     {
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => $type, 'title' => ''];
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('', $result);
+        self::assertSame((string)$uid, $result);
     }
 
     /**
@@ -111,14 +111,14 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventWithWhitespaceOnlyTitleReturnsEmptyString(int $type): void
+    public function generateSlugForNonDateEventWithWhitespaceOnlyTitleReturnsUidWithoutTrailingSlash(int $type): void
     {
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => $type, 'title' => " \t\n\r"];
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('', $result);
+        self::assertSame((string)$uid, $result);
     }
 
     /**
@@ -127,20 +127,20 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventWithNonEmptyTitleReturnsSlugifiedTitle(int $type): void
+    public function generateSlugForNonDateEventWithNonEmptyTitleReturnsSlugifiedTitleAndUid(int $type): void
     {
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => $type, 'title' => 'There will be cake!'];
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('there-will-be-cake', $result);
+        self::assertSame('there-will-be-cake/' . $uid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicReturnsSlugFromTopicTitle(): void
+    public function generateSlugForEventDateWithTopicReturnsSlugFromTopicTitleAndEventDateUid(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
 
@@ -155,13 +155,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('event-topic', $result);
+        self::assertSame('event-topic/' . $eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicWithValuesAsStringReturnsSlugFromTopicTitle(): void
+    public function generateSlugForEventDateWithTopicWithValuesAsStringReturnsSlugFromTopicTitleAndEventDateUid(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
 
@@ -176,13 +176,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('event-topic', $result);
+        self::assertSame('event-topic/' . $eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicWithEmptyTitleReturnsEmptyString(): void
+    public function generateSlugForEventDateWithTopicWithEmptyTitleReturnsEventDateUidWithoutTrailingSlash(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopicWithoutTitle.xml');
 
@@ -197,13 +197,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('', $result);
+        self::assertSame((string)$eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithoutTopicReturnsEmptyString(): void
+    public function generateSlugForEventDateWithoutTopicReturnsEventDateUidWithoutTrailingSlash(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithoutTopic.xml');
 
@@ -218,13 +218,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('', $result);
+        self::assertSame((string)$eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithDeletedTopicReturnsSlugFromTopicTitle(): void
+    public function generateSlugForEventDateWithDeletedTopicReturnsSlugFromTopicTitleAndEventDateUid(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithDeletedTopic.xml');
 
@@ -239,13 +239,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('deleted-event-topic', $result);
+        self::assertSame('deleted-event-topic/' . $eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithHiddenTopicReturnsSlugFromTopicTitle(): void
+    public function generateSlugForEventDateWithHiddenTopicReturnsSlugFromTopicTitleAndEventDateUid(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithHiddenTopic.xml');
 
@@ -260,13 +260,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('hidden-event-topic', $result);
+        self::assertSame('hidden-event-topic/' . $eventDateUid, $result);
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTimedTopicReturnsSlugFromTopicTitle(): void
+    public function generateSlugForEventDateWithTimedTopicReturnsSlugFromTopicTitleAndEventDateUid(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTimedTopic.xml');
 
@@ -281,22 +281,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('timed-event-topic', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function generateSlugAddsSuffixIfEventWithThePossibleSlugAlreadyExists(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
-
-        $uid = 1234;
-        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'some-event'];
-
-        $result = $this->subject->generateSlug(['record' => $record]);
-
-        self::assertSame('some-event-1', $result);
+        self::assertSame('timed-event-topic/' . $eventDateUid, $result);
     }
 
     /**
@@ -310,22 +295,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
 
         $result = $this->subject->generateSlug(['record' => $record]);
 
-        self::assertSame('some-event', $result);
-    }
-
-    /**
-     * @test
-     */
-    public function generateSlugAddsIncreasedSuffixIfEventWithThePossibleSuffixedSlugAlreadyExists(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/TwoSingleEventsWithSlug.xml');
-
-        $uid = 1234;
-        $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => 'some-event'];
-
-        $result = $this->subject->generateSlug(['record' => $record]);
-
-        self::assertSame('some-event-2', $result);
+        self::assertSame('some-event/1', $result);
     }
 
     /**
@@ -334,7 +304,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventDispatchesSlugGeneratedEventWithEventUid(int $type): void
+    public function generateSlugForNonDateEventDispatchesAfterSlugGeneratedEventWithEventUid(int $type): void
     {
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => $type, 'title' => ''];
@@ -351,7 +321,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventDispatchesSlugGeneratedEventWithEventDisplayTitle(int $type): void
+    public function generateSlugForNonDateEventDispatchesSAfterSlugGeneratedEventWithEventDisplayTitle(int $type): void
     {
         $title = 'Tea tasting';
         $record = ['uid' => 1234, 'object_type' => $type, 'title' => $title];
@@ -368,8 +338,9 @@ final class SlugGeneratorTest extends FunctionalTestCase
      * @param EventInterface::TYPE_* $type
      * @dataProvider nonDateEventTypeDataProvider
      */
-    public function generateSlugForNonDateEventDispatchesSlugGeneratedEventWithGeneratedUniqueSlug(int $type): void
-    {
+    public function generateSlugForNonDateEventDispatchesAfterSlugGeneratedEventWithGeneratedSlugWithUid(
+        int $type
+    ): void {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
 
         $uid = 1234;
@@ -378,13 +349,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
         $this->subject->generateSlug(['record' => $record]);
 
         self::assertTrue($this->eventDispatcher->isDispatched());
-        self::assertSame('some-event-1', $this->eventDispatcher->getEvent()->getSlug());
+        self::assertSame('some-event/' . $uid, $this->eventDispatcher->getEvent()->getSlug());
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicDispatchesSlugGeneratedEventWithGeneratedSlugFromTopic(): void
+    public function generateSlugForEventDateWithTopicDispatchesAfterSlugGeneratedEventGeneratedSlugFromTopic(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
 
@@ -400,13 +371,13 @@ final class SlugGeneratorTest extends FunctionalTestCase
         $this->subject->generateSlug(['record' => $record]);
 
         self::assertTrue($this->eventDispatcher->isDispatched());
-        self::assertSame('event-topic', $this->eventDispatcher->getEvent()->getSlug());
+        self::assertSame('event-topic/' . $eventDateUid, $this->eventDispatcher->getEvent()->getSlug());
     }
 
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicDispatchesSlugGeneratedEventWithTitleFromTopic(): void
+    public function generateSlugForEventDateWithTopicDispatchesAfterSlugGeneratedEventWithTitleFromTopic(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
 
@@ -427,7 +398,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function generateSlugForEventDateWithTopicDispatchesSlugGeneratedEventWithUidFromDate(): void
+    public function generateSlugForEventDateWithTopicDispatchesAfterSlugGeneratedEventWithEventUidFromDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventDateWithTopic.xml');
 
@@ -449,7 +420,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function generateSlugPassesNonUniqueSlugifiedTitleToEvent(): void
+    public function generateSlugPassesSlugifiedTitleToEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/SingleEventWithSlug.xml');
 
@@ -459,7 +430,10 @@ final class SlugGeneratorTest extends FunctionalTestCase
         $this->subject->generateSlug(['record' => $record]);
 
         self::assertTrue($this->eventDispatcher->isDispatched());
-        self::assertSame('some-event', $this->eventDispatcher->getEvent()->getSlugContext()->getSlugifiedTitle());
+        self::assertSame(
+            'some-event',
+            $this->eventDispatcher->getEvent()->getSlugContext()->getSlugifiedTitle()
+        );
     }
 
     /**
@@ -467,7 +441,7 @@ final class SlugGeneratorTest extends FunctionalTestCase
      */
     public function generateSlugReturnsSlugModifiedByEvent(): void
     {
-        $modifiedSlug = 'there-is-no-spoon/42';
+        $modifiedSlug = '42/there-is-no-spoon';
         $this->eventDispatcher->setModifiedSlug($modifiedSlug);
         $uid = 1234;
         $record = ['uid' => $uid, 'object_type' => EventInterface::TYPE_SINGLE_EVENT, 'title' => ''];
