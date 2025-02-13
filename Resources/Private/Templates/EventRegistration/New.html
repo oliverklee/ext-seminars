@@ -507,7 +507,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <f:form.textfield property="billingPhoneNumber" id="{idPrefix}-billingPhoneNumber"
-                                                      maxlength="20" class="form-control" errorClass="is-invalid"
+                                                      maxlength="255" class="form-control" errorClass="is-invalid"
                                                       type="tel" additionalAttributes="{autocomplete: 'tel'}"/>
                                     <f:render partial="EventRegistration/ValidationResult"
                                               arguments="{property: 'billingPhoneNumber'}"/>

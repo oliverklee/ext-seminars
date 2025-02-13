@@ -46,7 +46,7 @@ trait BillingAddressTrait
     protected string $billingCountry = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 32})
+     * @Validate("StringLength", options={"maximum": 255})
      */
     protected string $billingPhoneNumber = '';
 
