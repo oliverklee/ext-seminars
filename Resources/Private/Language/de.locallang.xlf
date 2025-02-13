@@ -83,17 +83,17 @@
         <source>Room</source>
         <target state="final">Raum</target>
       </trans-unit>
-      <trans-unit id="label_attendance_mode">
+      <trans-unit id="label_attendance_mode" approved="yes">
         <source>On-site/online</source>
-        <target state="needs-translation">On-site/online</target>
+        <target state="final">Vor Ort/online</target>
       </trans-unit>
-      <trans-unit id="label_attendance_mode.onSite">
+      <trans-unit id="label_attendance_mode.onSite" approved="yes">
         <source>on-site</source>
-        <target state="needs-translation">on-site</target>
+        <target state="final">vor Ort</target>
       </trans-unit>
-      <trans-unit id="label_attendance_mode.online">
+      <trans-unit id="label_attendance_mode.online" approved="yes">
         <source>online</source>
-        <target state="needs-translation">online</target>
+        <target state="final">online</target>
       </trans-unit>
       <trans-unit id="label_seats" approved="yes">
         <source>Seats</source>
