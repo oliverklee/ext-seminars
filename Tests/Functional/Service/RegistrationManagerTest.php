@@ -235,6 +235,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         );
         $this->addMockedInstance(MailMessage::class, $this->email);
         $registration = LegacyRegistration::fromUid(1);
+        self::assertInstanceOf(LegacyRegistration::class, $registration);
 
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);
@@ -244,6 +245,50 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $expectedExpression = '/' . $this->translate('label_vacancies') . ': 1\\n*$/';
         self::assertMatchesRegularExpression($expectedExpression, $this->extractTextBodyFromEmail($this->email));
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForOnSiteRegistationContainsOnSiteLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyOrganizers/OnSiteRegistration.csv');
+        $this->configuration->setAsString('showAttendanceFieldsInNotificationMail', 'attendance_mode');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $registration = LegacyRegistration::fromUid(1);
+        self::assertInstanceOf(LegacyRegistration::class, $registration);
+
+        $this->configuration->setAsBoolean('sendNotification', true);
+        $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
+
+        $this->subject->notifyOrganizers($registration);
+
+        $label = $this->translate('label_attendance_mode.onSite');
+        $emailBody = $this->extractTextBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $emailBody);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForOnlineRegistationContainsOnlineLabel(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyOrganizers/OnlineRegistration.csv');
+        $this->configuration->setAsString('showAttendanceFieldsInNotificationMail', 'attendance_mode');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $registration = LegacyRegistration::fromUid(1);
+        self::assertInstanceOf(LegacyRegistration::class, $registration);
+
+        $this->configuration->setAsBoolean('sendNotification', true);
+        $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);
+        $this->configuration->setAsString('showSeminarFieldsInNotificationMail', 'vacancies');
+
+        $this->subject->notifyOrganizers($registration);
+
+        $label = $this->translate('label_attendance_mode.online');
+        $emailBody = $this->extractTextBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $emailBody);
     }
 
     // Tests concerning getRegistrationLink

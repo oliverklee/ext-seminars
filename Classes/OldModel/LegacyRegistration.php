@@ -169,7 +169,7 @@ class LegacyRegistration extends AbstractModel
     public function getRegistrationData(string $key): string
     {
         /** @var non-empty-string $trimmedKey */
-        $trimmedKey = trim($key);
+        $trimmedKey = \trim($key);
 
         switch ($trimmedKey) {
             case 'crdate':
@@ -215,6 +215,19 @@ class LegacyRegistration extends AbstractModel
                 break;
             case 'attendees_names':
                 $result = $this->getEnumeratedAttendeeNames();
+                break;
+            case 'attendance_mode':
+                $value = $this->getRecordPropertyInteger($trimmedKey);
+                switch ($value) {
+                    case Registration::ATTENDANCE_MODE_ON_SITE:
+                        $result = $this->translate('label_attendance_mode.onSite');
+                        break;
+                    case Registration::ATTENDANCE_MODE_ONLINE:
+                        $result = $this->translate('label_attendance_mode.online');
+                        break;
+                    default:
+                        $result = '';
+                }
                 break;
             default:
                 $result = $this->getRecordPropertyString($trimmedKey);

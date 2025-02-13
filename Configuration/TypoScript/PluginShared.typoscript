@@ -31,7 +31,7 @@ plugin.tx_seminars {
   showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone
 
   # comma-separated list of field names from attendances that should be mentioned in the notification email to the organizers  (in the "attendancedata" section)
-  showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
+  showAttendanceFieldsInNotificationMail = uid,price,attendance_mode,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
   # Whether to send the additional notification emails to the organizers or not. Additional notification mails are sent if for example an event gets full.
   sendAdditionalNotificationEmails = 1

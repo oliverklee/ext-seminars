@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 use OliverKlee\FeUserExtraFields\Domain\Model\FrontendUser as ExtraFrontEndUser;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Seminars\Domain\Model\Registration\Registration;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -492,5 +493,43 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $result = $subject->getBillingAddress();
 
         self::assertStringContainsString($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationDataWithAttendanceModeForNoModeSetReturnsEmptyString(): void
+    {
+        $subject = LegacyRegistration::fromData(['attendance_mode' => Registration::ATTENDANCE_MODE_NOT_SET]);
+
+        $result = $subject->getRegistrationData('attendance_mode');
+
+        self::assertSame('', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationDataWithAttendanceModeForOnSiteRegistrationReturnsOnSiteLabel(): void
+    {
+        $subject = LegacyRegistration::fromData(['attendance_mode' => Registration::ATTENDANCE_MODE_ON_SITE]);
+
+        $result = $subject->getRegistrationData('attendance_mode');
+
+        $expected = $this->translate('label_attendance_mode.onSite');
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationDataWithAttendanceModeForOnlineRegistrationReturnsOnlineLabel(): void
+    {
+        $subject = LegacyRegistration::fromData(['attendance_mode' => Registration::ATTENDANCE_MODE_ONLINE]);
+
+        $result = $subject->getRegistrationData('attendance_mode');
+
+        $expected = $this->translate('label_attendance_mode.online');
+        self::assertSame($expected, $result);
     }
 }

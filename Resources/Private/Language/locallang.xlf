@@ -64,6 +64,15 @@
 			<trans-unit id="label_room">
 				<source>Room</source>
 			</trans-unit>
+			<trans-unit id="label_attendance_mode">
+				<source>On-site/online</source>
+			</trans-unit>
+			<trans-unit id="label_attendance_mode.onSite">
+				<source>on-site</source>
+			</trans-unit>
+			<trans-unit id="label_attendance_mode.online">
+				<source>online</source>
+			</trans-unit>
 			<trans-unit id="label_seats">
 				<source>Seats</source>
 			</trans-unit>
