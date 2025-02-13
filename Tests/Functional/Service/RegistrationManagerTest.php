@@ -2614,4 +2614,88 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString('<p></p>', $this->extractHtmlBodyFromEmail($this->email));
     }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteRegistrationHasOnSiteInTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyAttendee/OnSiteRegistration.csv');
+        $registration = new LegacyRegistration(1);
+
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $label = $this->translate('label_attendance_mode.onSite');
+        $textBody = $this->extractTextBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $textBody);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnSiteRegistrationHasOnSiteInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyAttendee/OnSiteRegistration.csv');
+        $registration = new LegacyRegistration(1);
+
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $label = $this->translate('label_attendance_mode.onSite');
+        $htmlBody = $this->extractHtmlBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $htmlBody);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineRegistrationHasOnlineInTextBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyAttendee/OnlineRegistration.csv');
+        $registration = new LegacyRegistration(1);
+
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $label = $this->translate('label_attendance_mode.online');
+        $textBody = $this->extractTextBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $textBody);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForOnlineRegistrationHasOnlineInHtmlBody(): void
+    {
+        $this->setUpFakeFrontEnd();
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $controller = new DefaultController();
+        $controller->init();
+
+        $this->createEventWithOrganizer();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/RegistrationManager/notifyAttendee/OnlineRegistration.csv');
+        $registration = new LegacyRegistration(1);
+
+        $this->subject->notifyAttendee($registration, $controller);
+
+        $label = $this->translate('label_attendance_mode.online');
+        $htmlBody = $this->extractHtmlBodyFromEmail($this->email);
+        self::assertStringContainsString($label, $htmlBody);
+    }
 }

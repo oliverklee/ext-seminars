@@ -301,6 +301,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'uid',
                 'ticket_id',
                 'price',
+                'attendance_mode',
                 'seats',
                 'total_price',
                 'attendees_names',

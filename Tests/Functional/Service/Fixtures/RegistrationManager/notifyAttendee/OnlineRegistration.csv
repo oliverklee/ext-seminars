@@ -1,0 +1,11 @@
+"fe_groups"
+,"uid","title"
+,1,"visitors"
+
+"fe_users"
+,"uid","username","usergroup","email"
+,1,"jane",1,"jane@example.com"
+
+"tx_seminars_attendances"
+,"uid","seminar","user","attendance_mode"
+,1,1,1,2

@@ -82,8 +82,8 @@ only be configured using your TypoScript setup, but not via flexforms.
          comma-separated list of section names that shouldn't be displayed in
          the thank-you email to the user
 
-         allowed values are in: hello, title, uid, ticket\_id, price, seats, to
-         tal\_price,attendees\_names,lodgings,accommodation,foods,food,checkbox
+         allowed values are in: hello, title, uid, ticket\_id, price, attendance\_mode,
+         seats, total\_price,attendees\_names,lodgings,accommodation,foods,food,checkbox
          es, kids, accreditation\_number, credit\_points, date, time, place,
          room,paymentmethod, billing\_address,interests
          footer,planned\_disclaimer,unregistration\_notice,ticket\_id

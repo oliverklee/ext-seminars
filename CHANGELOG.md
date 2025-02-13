@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Include the attendance mode in the registration emails (#4148)
+- Include the attendance mode in the registration emails (#4148, #4151)
 - Display prices with VAT in the new plugins (#4137, #4139, #4142)
 - Allow selecting the attendance mode when registering for hybrid events (#4128)
 - Add an order reference input to the registration form (#4122)
