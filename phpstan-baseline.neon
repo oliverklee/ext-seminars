@@ -2371,11 +2371,6 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$registration of method OliverKlee\\\\Seminars\\\\Service\\\\RegistrationManager\\:\\:notifyOrganizers\\(\\) expects OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration, OliverKlee\\\\Seminars\\\\OldModel\\\\LegacyRegistration\\|null given\\.$#"
-			count: 1
-			path: Tests/Functional/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|null given\\.$#"
 			count: 2
 			path: Tests/Functional/Service/RegistrationManagerTest.php

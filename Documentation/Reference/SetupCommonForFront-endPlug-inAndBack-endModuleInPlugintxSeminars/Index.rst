@@ -209,7 +209,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          mentioned in the notification email to the organizers (in the
          “attendancedata” section)allowed values are in: uid, interests,
          expectations, background\_knowledge, lodgings, accommodation, foods,
-         food, known\_from, notes, checkboxes, price, seats, total\_price,
+         food, known\_from, notes, checkboxes, price, attendance\_mode, seats, total\_price,
          attendees\_names, kids, method\_of\_payment, gender, name, address,
          zip, city, country, telephone, email
 

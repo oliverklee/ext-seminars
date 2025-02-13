@@ -7,17 +7,17 @@
 ,1,"jane",1,"jane@example.com"
 
 "tx_seminars_seminars"
-,"uid","title","organizers","attendees_max","registrations"
-,1,"event with one regular registration with seats and one vacancy",1,5,1
+,"uid","title","organizers","registrations"
+,1,"event with one regular registration with seats and one vacancy",1,1
 
 "tx_seminars_organizers"
-,"uid","title","email","email_footer"
-,1,"Max Payne","payne@example.com","Video games etc."
+,"uid","title","email"
+,1,"Max Payne","payne@example.com"
 
 "tx_seminars_seminars_organizers_mm"
 ,"uid_local","uid_foreign"
 ,1,1
 
 "tx_seminars_attendances"
-,"uid","seminar","user","seats"
-,1,1,1,4
+,"uid","seminar","user","attendance_mode"
+,1,1,1,2

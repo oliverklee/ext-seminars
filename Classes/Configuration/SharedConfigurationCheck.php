@@ -200,6 +200,7 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
                 'notes',
                 'checkboxes',
                 'price',
+                'attendance_mode',
                 'seats',
                 'total_price',
                 'attendees_names',
