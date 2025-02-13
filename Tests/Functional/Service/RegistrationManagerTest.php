@@ -230,7 +230,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/RegistrationManagerRecords.xml');
+        $this->importCSVDataSet(
+            __DIR__ . '/Fixtures/RegistrationManager/notifyOrganizers/RegistrationForEventWithOneVacancy.csv'
+        );
         $this->addMockedInstance(MailMessage::class, $this->email);
         $registration = LegacyRegistration::fromUid(1);
 
@@ -534,7 +536,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeemailSubjectContainsConfirmationSubject(): void
+    public function notifyAttendeCreatesEmailWithSubjectContainingConfirmationSubject(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -656,7 +658,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeemailSubjectContainsEventTitle(): void
+    public function notifyAttendeCreatesEmailWithSubjectContainingEventTitle(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -812,7 +814,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody(): void
+    public function notifyAttendeeForHtmlMailsContainsNameOfUserInHtmlBody(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
@@ -918,7 +920,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyAttendeeConvertsLinebreaksInOrganizerFooterInTextBody(): void
+    public function notifyAttendeeConvertsLinebreaksInOrganizerFooterInHtmlBody(): void
     {
         $this->setUpFakeFrontEnd();
         $this->configuration->setAsBoolean('sendConfirmation', true);
