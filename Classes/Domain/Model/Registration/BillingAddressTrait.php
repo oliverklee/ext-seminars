@@ -56,7 +56,7 @@ trait BillingAddressTrait
 
     /**
      * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 32})
+     * @Extbase\Validate("StringLength", options={"maximum": 255})
      */
     protected $billingPhoneNumber = '';
 
