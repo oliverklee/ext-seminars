@@ -41,6 +41,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- CSV-export the registration date by default (#4156)
 - !!! Always include the UID in the event slugs (#4152)
 - Improve some FE labels (#4141)
 - !!! Do not localize the CSV headings anymore (#4133)
