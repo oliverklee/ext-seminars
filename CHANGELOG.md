@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Display the registration date in the registration TCEforms (#4154)
 - Include the attendance mode in the registration emails (#4148, #4151)
 - Display prices with VAT in the new plugins (#4137, #4139, #4142)
 - Allow selecting the attendance mode when registering for hybrid events (#4128)
