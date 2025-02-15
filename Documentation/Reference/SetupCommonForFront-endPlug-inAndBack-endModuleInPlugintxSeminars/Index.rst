@@ -521,7 +521,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          that will be used for CSV export
 
    Default
-         uid,price,total\_price,method\_of\_payment,interests,expectations,back
+         uid,crdate,price,total\_price,method\_of\_payment,interests,expectations,back
          ground\_knowledge,known\_from,notes
 
 
@@ -570,7 +570,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          that will be used for CLI CSV export
 
    Default
-         uid,price,total\_price,method\_of\_payment,interests,expectations,back
+         uid,crdate,price,total\_price,method\_of\_payment,interests,expectations,back
          ground\_knowledge,known\_from,notes
 
 

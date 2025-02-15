@@ -93,7 +93,7 @@ plugin.tx_seminars {
   fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
 
   # comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
-  fieldsFromAttendanceForCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
+  fieldsFromAttendanceForCsv = uid,crdate,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
   # whether to show attendances on the registration queue in the CSV export or not
   showAttendancesOnRegistrationQueueInCSV = 0
@@ -102,7 +102,7 @@ plugin.tx_seminars {
   fieldsFromFeUserForEmailCsv = name,company,address,zip,city,country,telephone,email
 
   # comma-separated list of field names from tx_seminars_attendances that will be used for CLI CSV export
-  fieldsFromAttendanceForEmailCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
+  fieldsFromAttendanceForEmailCsv = uid,crdate,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
   # whether to show attendances on the registration queue in the CLI CSV export or not
   showAttendancesOnRegistrationQueueInEmailCsv = 0
