@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Display the registration date in the registration TCEforms (#4155)
+
 ### Changed
 
 - Make the event statistics internal (#4075)
