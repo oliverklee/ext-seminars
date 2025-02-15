@@ -87,7 +87,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require TYPO3 >= 11.5.41 (#3510, #3875, #4011)
 - Allow `psr/http-message` 2.x (#3507)
 - Require Emogrifier >= 7.3.0 (#3506, #3850)
-- Require feuserextrafields >= 6.4.0 (#3505, #4010)
+- Require feuserextrafields >= 6.5.0 (#3505, #4010, #4158)
 - Drop the `ext-pdo` dependency (#3504)
 - Use short class names in type annotations (#2876)
 - Require oelib >= 6.1.1 (#3500, #3555, #3674, #4009, #4013)
