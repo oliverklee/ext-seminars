@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Calculates the statistics for events.
+ *
+ * @internal
  */
 class EventStatisticsCalculator implements SingletonInterface
 {

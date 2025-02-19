@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Domain\Model\Event;
 
 /**
- * The registration statistics for a single event.
+ * The registration statistics for an event.
+ *
+ * @internal
  */
 class EventStatistics
 {
