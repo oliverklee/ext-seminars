@@ -12,6 +12,7 @@ with this extension installed and some test records ready to go.
 References
 ==========
 
+* `Bildungszentrum Kirkel <bzk>`__
 * `Deutsche Gesellschaft für Ernährung e.V. <dge>`__
 * `Elternschule Speyer <speyer>`__
 * `GDCh-Fachgruppe Umweltchemie und Ökotoxikologie <gdch>`__
@@ -20,6 +21,7 @@ References
 * `R. STAHL Aktiengesellschaft <stahl>`__
 * `XXL-Sicherheit GmbH & CO. KG <xxl>`__
 
+.. _bzk: https://www.bildungszentrum-kirkel.de/seminare-im-bzk/seminare-im-bzk
 .. _dge: https://www.dge.de/qualifizierung/seminare/
 .. _speyer: https://www.elternschule-speyer.de/unser-kursprogramm/
 .. _gdch: https://www.fachoekotoxikologie.de/kurse
