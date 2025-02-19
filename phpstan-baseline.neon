@@ -271,6 +271,31 @@ parameters:
 			path: Classes/Domain/Model/Event/EventDate.php
 
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\EventTopic\\:\\:getEventType\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\EventType\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Event/EventTopic.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\SingleEvent\\:\\:getEventType\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\EventType\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Event/SingleEvent.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getEvent\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Event\\\\Event\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Registration/Registration.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getPaymentMethod\\(\\) should return OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\PaymentMethod\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Registration/Registration.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Domain\\\\Model\\\\Registration\\\\Registration\\:\\:getUser\\(\\) should return OliverKlee\\\\FeUserExtraFields\\\\Domain\\\\Model\\\\FrontendUser\\|null but returns object\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Model/Registration/Registration.php
+
+		-
 			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\Result\\|int\\.$#"
 			count: 1
 			path: Classes/Domain/Repository/AbstractRawDataCapableRepository.php
