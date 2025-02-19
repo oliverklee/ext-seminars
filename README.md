@@ -3,7 +3,7 @@
 [![TYPO3 V10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 V11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
 [![License](https://img.shields.io/github/license/oliverklee/ext-seminars)](https://packagist.org/packages/oliverklee/seminars)
-[![GitHub CI Status](https://github.com/oliverklee/ext-seminars/workflows/CI/badge.svg?branch=main)](https://github.com/oliverklee/ext-seminars/actions)
+[![GitHub CI Status](https://github.com/oliverklee/ext-seminars/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/oliverklee/ext-seminars/actions)
 [![Coverage Status](https://coveralls.io/repos/github/oliverklee/ext-seminars/badge.svg?branch=main)](https://coveralls.io/github/oliverklee/ext-seminars?branch=main)
 
 This TYPO3 extension allows you to create and manage a list of seminars,
