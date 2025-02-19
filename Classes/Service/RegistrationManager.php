@@ -1307,9 +1307,10 @@ class RegistrationManager
         $labelWithSalutation = LocalizationUtility::translate($key . $salutationSuffix, 'seminars');
         $labelWithoutSalutation = LocalizationUtility::translate($key, 'seminars');
 
-        $label = \is_string($labelWithSalutation) ? $labelWithSalutation : $labelWithoutSalutation;
+        $label = (\is_string($labelWithSalutation) && $labelWithSalutation !== '')
+            ? $labelWithSalutation : $labelWithoutSalutation;
 
-        return \is_string($label) ? $label : $key;
+        return (\is_string($label) && $label !== '') ? $label : $key;
     }
 
     private function nowAsTimestamp(): int
