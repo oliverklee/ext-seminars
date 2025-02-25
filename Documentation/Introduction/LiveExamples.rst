@@ -17,6 +17,7 @@ References
 * `Elternschule Speyer <speyer>`__
 * `GDCh-Fachgruppe Umweltchemie und Ökotoxikologie <gdch>`__
 * `Institut für klinische Hypnose und Ego-State-Therapie <ifhe>`__
+* `JuBi Babenhausen <jubi-babenhausen>`__
 * `Kreis Mettmann <mettmann>`__
 * `R. STAHL Aktiengesellschaft <stahl>`__
 * `XXL-Sicherheit GmbH & CO. KG <xxl>`__
@@ -26,6 +27,7 @@ References
 .. _speyer: https://www.elternschule-speyer.de/unser-kursprogramm/
 .. _gdch: https://www.fachoekotoxikologie.de/kurse
 .. _ifhe: https://www.ifhe-berlin.de/
+.. _jubi-babenhausen: https://www.jubi-babenhausen.de/
 .. _mettmann: https://www.kultur-bergischesland.de/kulturwerkstatt/jahresprogramm
 .. _stahl: https://r-stahl.com/de/global/services-und-seminare/seminare/offene-seminare/
 .. _xxl: https://www.xxl-sicherheit.de/
