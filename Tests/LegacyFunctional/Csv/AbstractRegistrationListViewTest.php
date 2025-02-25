@@ -98,7 +98,6 @@ final class AbstractRegistrationListViewTest extends FunctionalTestCase
         );
 
         $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
-        $subject->method('shouldAlsoContainRegistrationsOnQueue')->willReturn(true);
 
         $testCase = $this;
         $subject->method('getFrontEndUserFieldKeys')

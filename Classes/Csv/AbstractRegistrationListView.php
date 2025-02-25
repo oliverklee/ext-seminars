@@ -238,19 +238,11 @@ abstract class AbstractRegistrationListView
     protected function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
         $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
-        if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
-            $registrationBagBuilder->limitToRegular();
-        }
-
+        $registrationBagBuilder->limitToRegular();
         $registrationBagBuilder->limitToExistingUsers();
 
         return $registrationBagBuilder;
     }
-
-    /**
-     * Checks whether the export should also contain registrations that are on the queue.
-     */
-    abstract protected function shouldAlsoContainRegistrationsOnQueue(): bool;
 
     /**
      * Returns the list of registrations as CSV separated values.

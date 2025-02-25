@@ -76,7 +76,6 @@ final class MailNotifierTest extends FunctionalTestCase
         $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 2);
         $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'title');
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
 
         $this->eventMapper = $this->createMock(EventMapper::class);
         MapperRegistry::set(EventMapper::class, $this->eventMapper);
@@ -1130,52 +1129,9 @@ final class MailNotifierTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithRegistrationsOnQueue(): void
+    public function sendRemindersToOrganizersSendsWithCsvFileWithoutQueueAttendances(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
-        $eventUid = $this->createSeminarWithOrganizer(
-            [
-                'begin_date' => $this->now + Time::SECONDS_PER_DAY,
-                'cancelled' => EventInterface::STATUS_CONFIRMED,
-            ]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'title' => 'real registration',
-                'seminar' => $eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'title' => 'on queue',
-                'seminar' => $eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'registration_queue' => 1,
-            ]
-        );
-
-        $this->email->expects(self::once())->method('send');
-        $this->addMockedInstance(MailMessage::class, $this->email);
-
-        $this->subject->sendEventTakesPlaceReminders();
-
-        self::assertStringContainsString(
-            'on queue',
-            $this->filterEmailAttachmentsByType($this->email, 'text/csv')[0]->getBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueFalseSendsWithCsvFileWithoutQueueAttendances(): void
-    {
-        $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
 
         $eventUid = $this->createSeminarWithOrganizer(
             [

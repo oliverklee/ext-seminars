@@ -83,8 +83,6 @@ data from the corresponding FE user record.
 The columns used for the export of
 registrations is determined by the two configuration
 variables `fieldsFromFeUserForCsv` and `fieldsFromAttendanceForCsv`.
-If you want to export the registrations on the waiting queue, you have to set
-`showAttendancesOnRegistrationQueueInCSV` to `true`.
 
 The CSV export can be configured via TS Setup in plugin.tx\_seminars
 for the page where the event records are located. Please see the

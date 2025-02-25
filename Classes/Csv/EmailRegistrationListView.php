@@ -28,12 +28,4 @@ class EmailRegistrationListView extends AbstractRegistrationListView
     {
         return $this->configuration->getAsTrimmedArray('fieldsFromAttendanceForEmailCsv');
     }
-
-    /**
-     * Checks whether the export should also contain registrations that are on the queue.
-     */
-    protected function shouldAlsoContainRegistrationsOnQueue(): bool
-    {
-        return $this->configuration->getAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv');
-    }
 }

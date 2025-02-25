@@ -221,11 +221,8 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderForQueueRegistrationsNotAllowedForDownloadNotContainsRegistrationOnQueue(): void
+    public function renderForQueueRegistrationsDoesNotContainRegistrationOnQueue(): void
     {
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', false);
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
-
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
 
@@ -241,34 +238,6 @@ final class DownloadRegistrationListViewTest extends FunctionalTestCase
         );
 
         self::assertStringNotContainsString(
-            (string)$registrationUid,
-            $this->subject->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForQueueRegistrationsAllowedForDownloadNotContainsRegistrationOnQueue(): void
-    {
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', true);
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
-
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
-        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'seminar' => $this->eventUid,
-                'crdate' => (int)GeneralUtility::makeInstance(Context::class)
-                    ->getPropertyFromAspect('date', 'timestamp'),
-                'user' => $this->testingFramework->createFrontEndUser(),
-                'registration_queue' => true,
-            ]
-        );
-
-        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );

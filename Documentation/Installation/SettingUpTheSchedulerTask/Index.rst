@@ -28,10 +28,10 @@ To setup the CLI, do the following:
   about an event taking place.
 
 - In order to customize the appended CSV, the options
-  *fieldsFromFeUserForEmailCsv*,
-  *fieldsFromAttendanceForEmailCsv* and
-  *showAttendancesOnRegistrationQueueInEmailCsv* are relevant. Please
-  consider the corresponding section about CSV-File attachment for more
+  *fieldsFromFeUserForEmailCsv* and
+  *fieldsFromAttendanceForEmailCsv*
+  are relevant. Please
+  consider the corresponding section about CSV file attachment for more
   details.
 
 #. Add a seminars Scheduler task and provide UID of the page with the configuration.
@@ -44,14 +44,11 @@ The mails send via Scheduler can contain a CSV file with the registrations
 to the event the mail is sent for. To customize the contents of the
 CSV file use the following options:
 
-- “ *fieldsFromAttendanceForEmailCsv* ” and “
-  *fieldsFromFeUserForEmailCsv* ” customize the fields which are
+- *fieldsFromAttendanceForEmailCsv* and
+  *fieldsFromFeUserForEmailCsv* customize the fields which are
   exported in the CSV file. Please note that the CSV files always
   contains the columns for the data from the registration records first
   and then data from the corresponding FE user record.
-
-- “ *showAttendancesOnRegistrationQueueInEmailCsv* ” determines whether
-  registrations on the waiting list, should also be exported via CSV.
 
 
 ** Daily digest of new registrations **

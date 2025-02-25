@@ -513,22 +513,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         showAttendancesOnRegistrationQueueInCSV
-
-   Data type
-         boolean
-
-   Description
-         wether to show attendances on the registration queue in the CSV export
-         or not
-
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          fieldsFromFeUserForEmailCsv
 
    Data type
@@ -557,22 +541,6 @@ only be configured using your TypoScript setup, but not via flexforms.
    Default
          uid,crdate,price,total\_price,method\_of\_payment,interests,expectations,back
          ground\_knowledge,known\_from,notes
-
-
-.. container:: table-row
-
-   Property
-         showAttendancesOnRegistrationQueueInEmailCsv
-
-   Data type
-         boolean
-
-   Description
-         whether to show attendances on the registration queue in the CLI CSV
-         export or not
-
-   Default
-         0
 
 
 .. container:: table-row
