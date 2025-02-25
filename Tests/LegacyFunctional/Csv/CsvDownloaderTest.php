@@ -740,11 +740,9 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromConfiguration(): void
+    public function createAndOutputListOfRegistrationsForWebModeDoesNotExportWaitingListRegistrations(): void
     {
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
-        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCsv', false);
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
 
         $this->testingFramework->createRecord(

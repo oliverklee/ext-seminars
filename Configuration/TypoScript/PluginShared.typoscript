@@ -92,17 +92,11 @@ plugin.tx_seminars {
   # comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
   fieldsFromAttendanceForCsv = uid,crdate,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
-  # whether to show attendances on the registration queue in the CSV export or not
-  showAttendancesOnRegistrationQueueInCSV = 0
-
   # comma-separated list of field names from fe_users that will be used for CLI CSV export
   fieldsFromFeUserForEmailCsv = name,company,address,zip,city,country,telephone,email
 
   # comma-separated list of field names from tx_seminars_attendances that will be used for CLI CSV export
   fieldsFromAttendanceForEmailCsv = uid,crdate,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
-
-  # whether to show attendances on the registration queue in the CLI CSV export or not
-  showAttendancesOnRegistrationQueueInEmailCsv = 0
 
   # whether to add the Excel-specific "sep=;" line to the CSV
   addExcelSpecificSeparatorLineToCsv = 0

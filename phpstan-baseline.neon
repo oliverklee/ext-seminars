@@ -2652,7 +2652,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 7
+			count: 6
 			path: Tests/LegacyFunctional/Csv/DownloadRegistrationListViewTest.php
 
 		-
@@ -2662,7 +2662,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 7
+			count: 6
 			path: Tests/LegacyFunctional/Csv/EmailRegistrationListViewTest.php
 
 		-

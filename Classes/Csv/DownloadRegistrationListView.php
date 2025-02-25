@@ -28,12 +28,4 @@ class DownloadRegistrationListView extends AbstractRegistrationListView
     {
         return $this->configuration->getAsTrimmedArray('fieldsFromAttendanceForCsv');
     }
-
-    /**
-     * Checks whether the export should also contain registrations that are on the queue.
-     */
-    protected function shouldAlsoContainRegistrationsOnQueue(): bool
-    {
-        return $this->configuration->getAsBoolean('showAttendancesOnRegistrationQueueInCSV');
-    }
 }
