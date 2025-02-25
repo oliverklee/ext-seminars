@@ -32,6 +32,11 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifier extends AbstractTask
 {
     /**
+     * @var non-empty-string
+     */
+    private const CSV_FILENAME = 'registrations.csv';
+
+    /**
      * @var int<0, max>
      */
     protected int $configurationPageUid = 0;
@@ -169,8 +174,7 @@ class MailNotifier extends AbstractTask
                 ->text($this->customizeMessage($messageKey, $event, $organizer->getName()));
             $emailBuilder->replyTo($replyTo);
             if (\is_string($attachmentBody)) {
-                $fileName = $this->getConfiguration()->getAsString('filenameForRegistrationsCsv');
-                $emailBuilder->attach($attachmentBody, 'text/csv', $fileName);
+                $emailBuilder->attach($attachmentBody, 'text/csv', self::CSV_FILENAME);
             }
 
             $emailBuilder->build()->send();

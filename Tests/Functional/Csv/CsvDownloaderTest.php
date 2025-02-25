@@ -58,7 +58,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
-        $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
 
         $this->subject->createAndOutputListOfRegistrations(1);
 
@@ -75,7 +74,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
-        $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
 
         $this->subject->createAndOutputListOfRegistrations(1);
 

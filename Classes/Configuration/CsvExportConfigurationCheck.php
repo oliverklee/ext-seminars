@@ -15,21 +15,11 @@ class CsvExportConfigurationCheck extends AbstractConfigurationCheck
 {
     protected function checkAllConfigurationValues(): void
     {
-        $this->checkFilenameForRegistrationsCsv();
         $this->checkFieldsFromFeUserForCsv();
         $this->checkFieldsFromAttendanceForCsv();
         $this->checkFieldsFromFeUserForEmailCsv();
         $this->checkFieldsFromAttendanceForEmailCsv();
         $this->checkShowAttendancesOnRegistrationQueueInEmailCsv();
-    }
-
-    private function checkFilenameForRegistrationsCsv(): void
-    {
-        $this->checkForNonEmptyString(
-            'filenameForRegistrationsCsv',
-            'This value specifies the file name to suggest for the CSV export of registration records.
-            If this value is not set, an empty filename will be used for saving the CSV file which will cause problems.'
-        );
     }
 
     private function checkFieldsFromFeUserForCsv(): void
