@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Seminars\Middleware\ResponseHeadersModifier;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -17,12 +15,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CsvDownloader
 {
-    protected Configuration $configuration;
-
-    public function __construct()
-    {
-        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-    }
+    /**
+     * @var non-empty-string
+     */
+    private const CSV_FILENAME = 'registrations.csv';
 
     /**
      * Creates a CSV export.
@@ -88,9 +84,7 @@ class CsvDownloader
      */
     private function setContentTypeForRegistrationLists(): void
     {
-        $filename = $this->configuration->getAsString('filenameForRegistrationsCsv');
-
-        $this->setPageTypeAndDisposition($filename);
+        $this->setPageTypeAndDisposition(self::CSV_FILENAME);
     }
 
     /**

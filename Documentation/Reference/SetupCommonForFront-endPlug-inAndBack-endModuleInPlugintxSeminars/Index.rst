@@ -480,21 +480,6 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Property
-         filenameForRegistrationsCsv
-
-   Data type
-         string
-
-   Description
-         the filename proposed for CSV export of registration lists
-
-   Default
-         registrations.csv
-
-
-.. container:: table-row
-
-   Property
          fieldsFromFeUserForCsv
 
    Data type

@@ -96,7 +96,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- Improve some type annotations (#4014)
+- Remove the configuration for the CSV file name (#4185)
 - Drop the `strftime` date and time format configuration (#3990)
 - Drop the unused `AbstractModel::addMissingProtocolToUrl()` (#3972)
 - Drop `LegacyRegistration::commitToDatabase()` (#3971)
@@ -136,6 +136,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Improve some type annotations (#4014)
 - Make some billing address fields longer (#4143)
 - Improve display of users without a full name in the BE module (#4111)
 - Avoid crashes for deleted lazy-loaded associations (#4109, #4115)

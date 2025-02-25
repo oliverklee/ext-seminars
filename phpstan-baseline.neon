@@ -181,11 +181,6 @@ parameters:
 			path: Classes/Csv/CsvDownloader.php
 
 		-
-			message: "#^Parameter \\#1 \\$csvFileName of method OliverKlee\\\\Seminars\\\\Csv\\\\CsvDownloader\\:\\:setPageTypeAndDisposition\\(\\) expects non\\-empty\\-string, string given\\.$#"
-			count: 1
-			path: Classes/Csv/CsvDownloader.php
-
-		-
 			message: "#^Call to function is_string\\(\\) with non\\-empty\\-string will always evaluate to true\\.$#"
 			count: 1
 			path: Classes/Csv/CsvResponse.php
