@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Allow editing the FE users from the BE module (#4198)
 - Display the registration date in the registration TCEforms (#4155)
 
 ### Changed

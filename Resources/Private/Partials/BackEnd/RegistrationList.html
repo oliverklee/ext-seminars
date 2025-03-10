@@ -41,13 +41,13 @@
                         <core:iconForRecord table="{tableName}" row="{registration.rawData}"/>
                     </td>
                     <td class="col-title col-responsive">
-                        <f:if condition="{permissions.writeAccessToRegistrations}">
+                        <f:variable name="user" value="{registration.user}"/>
+                        <f:if condition="{user}">
                             <f:then>
-                                <be:link.editRecord uid="{registration.uid}" table="{tableName}"
-                                                    title="{f:translate(key: '{actionLabelPrefix}.editRegistration')}">
-                                    <f:variable name="user" value="{registration.user}"/>
-                                    <f:if condition="{user}">
-                                        <f:then>
+                                <f:if condition="{permissions.writeAccessToFrontEndUsers}">
+                                    <f:then>
+                                        <be:link.editRecord uid="{user.uid}" table="fe_users"
+                                                            title="{f:translate(key: '{actionLabelPrefix}.editFrontEndUser')}">
                                             <f:if condition="{user.name}">
                                                 <f:then>
                                                     {user.name}
@@ -60,17 +60,17 @@
                                                                  arguments="{0: user.uid}"/>
                                                 </f:else>
                                             </f:if>
-                                        </f:then>
-                                        <f:else>
-                                            <i>
-                                                <f:translate key="backEndModule.registration.noUser"/>
-                                            </i>
-                                        </f:else>
-                                    </f:if>
-                                </be:link.editRecord>
+                                        </be:link.editRecord>
+                                    </f:then>
+                                    <f:else>
+                                        {registration.user.name}
+                                    </f:else>
+                                </f:if>
                             </f:then>
                             <f:else>
-                                {registration.user.name}
+                                <i>
+                                    <f:translate key="backEndModule.registration.noUser"/>
+                                </i>
                             </f:else>
                         </f:if>
                     </td>
