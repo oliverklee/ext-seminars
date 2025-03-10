@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Improve the hover texts in the BE module (#4196)
 - Make the event statistics internal (#4075)
 - Move the webinar URL further up in the TCEforms (#3976)
 
