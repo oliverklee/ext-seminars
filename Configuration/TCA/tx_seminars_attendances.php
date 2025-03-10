@@ -75,10 +75,22 @@ $tca = [
             ],
         ],
         'registration_queue' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue',
             'config' => [
-                'type' => 'check',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'default' => \OliverKlee\Seminars\Domain\Model\Registration\Registration::STATUS_REGULAR,
+                'items' => [
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue.regular',
+                        \OliverKlee\Seminars\Domain\Model\Registration\Registration::STATUS_REGULAR,
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue.waitingList',
+                        \OliverKlee\Seminars\Domain\Model\Registration\Registration::STATUS_WAITING_LIST,
+                    ],
+                ],
             ],
         ],
         'seats' => [
