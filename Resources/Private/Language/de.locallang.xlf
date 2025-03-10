@@ -2045,33 +2045,33 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
         <source>Create event</source>
         <target state="final">Veranstaltung erstellen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.editEvent">
+      <trans-unit id="backEndModule.action.editEvent" approved="yes">
         <source>Edit event record</source>
-        <target state="needs-translation">Edit event record</target>
+        <target state="final">Veranstaltungsdatensatz bearbeiten</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.editRegistration">
+      <trans-unit id="backEndModule.action.editRegistration" approved="yes">
         <source>Edit registration record</source>
-        <target state="needs-translation">Edit registration record</target>
+        <target state="final">Anmeldungsdatensatz bearbeiten</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.hideEvent">
+      <trans-unit id="backEndModule.action.hideEvent" approved="yes">
         <source>Hide event record</source>
-        <target state="needs-translation">Hide event record</target>
+        <target state="final">Veranstaltungsdatensatz ausblenden</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.unhideEvent">
+      <trans-unit id="backEndModule.action.unhideEvent" approved="yes">
         <source>Un-hide event record</source>
-        <target state="needs-translation">Un-hide event record</target>
+        <target state="final">Veranstaltungsdatensatz einblenden</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.deleteEvent">
+      <trans-unit id="backEndModule.action.deleteEvent" approved="yes">
         <source>Delete event record</source>
-        <target state="needs-translation">Delete event record</target>
+        <target state="final">Veranstaltungsdatensatz löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.deleteRegistration">
+      <trans-unit id="backEndModule.action.deleteRegistration" approved="yes">
         <source>Delete registration record</source>
-        <target state="needs-translation">Delete registration record</target>
+        <target state="final">Anmeldungsdatensatz löschen</target>
       </trans-unit>
-      <trans-unit id="backEndModule.action.duplicateEvent">
+      <trans-unit id="backEndModule.action.duplicateEvent" approved="yes">
         <source>Duplicate event record</source>
-        <target state="needs-translation">Duplicate event record</target>
+        <target state="final">Veranstaltungsdatensatz duplizieren</target>
       </trans-unit>
       <trans-unit id="backEndModule.action.csvDownload" approved="yes">
         <source>Download as CSV file</source>
