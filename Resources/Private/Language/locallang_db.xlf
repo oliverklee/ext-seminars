@@ -193,6 +193,9 @@
 			<trans-unit id="tx_seminars_seminars.room">
 				<source>Room</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
+				<source>Information for attendees</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_seminars.divLabelLodging">
 				<source>Lodging/Food</source>
 			</trans-unit>

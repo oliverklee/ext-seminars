@@ -43,6 +43,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Move some event fields to a new tab "information for attendees" (#4201)
 - Improve the hover texts in the BE module (#4195)
 - CSV-export the registration date by default (#4156)
 - !!! Always include the UID in the event slugs (#4152)
