@@ -1527,6 +1527,9 @@ This event now has been confirmed.</source>
 			<trans-unit id="backEndModule.action.editRegistration">
 				<source>Edit registration record</source>
 			</trans-unit>
+			<trans-unit id="backEndModule.action.editFrontEndUser">
+				<source>Edit FE user record</source>
+			</trans-unit>
 			<trans-unit id="backEndModule.action.hideEvent">
 				<source>Hide event record</source>
 			</trans-unit>
