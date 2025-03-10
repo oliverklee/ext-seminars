@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Change the registration status from a checkbox to a drop-down (#4192)
 - Fix a copy'n'paste error in a label (#4127)
 - Make some billing address fields longer (#4144)
 - Improve display of users without a full name in the BE module (#4112)
