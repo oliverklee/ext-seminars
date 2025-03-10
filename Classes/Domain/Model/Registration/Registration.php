@@ -29,6 +29,16 @@ class Registration extends AbstractEntity implements RawDataInterface
     use PaymentTrait;
 
     /**
+     * @var int<0, max>
+     */
+    public const STATUS_REGULAR = 0;
+
+    /**
+     * @var int<0, max>
+     */
+    public const STATUS_WAITING_LIST = 1;
+
+    /**
      * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 255})
      */
