@@ -1522,28 +1522,28 @@ This event now has been confirmed.</source>
 				<source>Create event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.editEvent">
-				<source>Edit event record</source>
+				<source>Edit event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.editRegistration">
-				<source>Edit registration record</source>
+				<source>Edit registration</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.editFrontEndUser">
-				<source>Edit FE user record</source>
+				<source>Edit FE user</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.hideEvent">
-				<source>Hide event record</source>
+				<source>Hide event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.unhideEvent">
-				<source>Un-hide event record</source>
+				<source>Un-hide event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.deleteEvent">
-				<source>Delete event record</source>
+				<source>Delete event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.deleteRegistration">
-				<source>Delete registration record</source>
+				<source>Delete registration</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.duplicateEvent">
-				<source>Duplicate event record</source>
+				<source>Duplicate event</source>
 			</trans-unit>
 			<trans-unit id="backEndModule.action.csvDownload">
 				<source>Download as CSV file</source>
