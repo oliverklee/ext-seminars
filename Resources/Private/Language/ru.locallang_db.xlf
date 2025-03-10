@@ -255,6 +255,10 @@
         <source>Room</source>
         <target state="final">Комната</target>
       </trans-unit>
+      <trans-unit id="tx_seminars_seminars.tab.attendeeInformation">
+        <source>Information for attendees</source>
+        <target state="needs-translation">Information for attendees</target>
+      </trans-unit>
       <trans-unit id="tx_seminars_seminars.divLabelLodging" approved="yes">
         <source>Lodging/Food</source>
         <target state="final">Размещение/питание</target>
